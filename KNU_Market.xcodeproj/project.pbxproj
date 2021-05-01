@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */; };
 		7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F0263D4387000E0B7A /* AppDelegate.swift */; };
 		7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F2263D4387000E0B7A /* SceneDelegate.swift */; };
 		7CA661F5263D4387000E0B7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F4263D4387000E0B7A /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 		7CA661ED263D4387000E0B7A /* KNU_Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNU_Market.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CA661F0263D4387000E0B7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CA661F2263D4387000E0B7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +26,8 @@
 		7CA661F9263D4389000E0B7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7CA661FC263D4389000E0B7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7CA661FE263D4389000E0B7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
+		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				7CA661EF263D4387000E0B7A /* KNU_Market */,
 				7CA661EE263D4387000E0B7A /* Products */,
+				EF6E8F5DA035698264ED872C /* Pods */,
+				B9AC8E9164D1E6F43C975A72 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = KNU_Market;
 			sourceTree = "<group>";
 		};
+		B9AC8E9164D1E6F43C975A72 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF6E8F5DA035698264ED872C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */,
+				96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CA66201263D4389000E0B7A /* Build configuration list for PBXNativeTarget "KNU_Market" */;
 			buildPhases = (
+				6FBD5E8EDC477FC8E3453DD5 /* [CP] Check Pods Manifest.lock */,
 				7CA661E9263D4387000E0B7A /* Sources */,
 				7CA661EA263D4387000E0B7A /* Frameworks */,
 				7CA661EB263D4387000E0B7A /* Resources */,
+				C8A89F76B64200F61AF0A87D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6FBD5E8EDC477FC8E3453DD5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KNU_Market-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8A89F76B64200F61AF0A87D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7CA661E9263D4387000E0B7A /* Sources */ = {
@@ -283,6 +352,7 @@
 		};
 		7CA66202263D4389000E0B7A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +372,7 @@
 		};
 		7CA66203263D4389000E0B7A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

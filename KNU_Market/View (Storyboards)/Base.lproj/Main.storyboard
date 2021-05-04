@@ -21,6 +21,7 @@
                                 <rect key="frame" x="150" y="638" width="114" height="30"/>
                                 <state key="normal" title="로그인"/>
                                 <connections>
+                                    <action selector="pressedLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QA0-KE-jIF"/>
                                     <segue destination="WcB-qX-q1C" kind="show" id="qs8-ew-QKJ"/>
                                 </connections>
                             </button>
@@ -30,6 +31,7 @@
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
+                                    <action selector="pressedRegisterButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2z3-wp-63c"/>
                                     <segue destination="hKo-Es-J4q" kind="show" id="kxO-TU-zRk"/>
                                 </connections>
                             </button>
@@ -46,6 +48,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zqb-yF-zj6"/>
+                    <connections>
+                        <outlet property="loginButton" destination="X6J-cK-goV" id="BOa-D3-j0j"/>
+                        <outlet property="registerButton" destination="Cvw-NO-gHC" id="6gT-zw-ZaD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -54,7 +60,7 @@
         <!--Login View Controller-->
         <scene sceneID="Xvn-iv-zLU">
             <objects>
-                <viewController id="WcB-qX-q1C" customClass="LoginViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WcB-qX-q1C" customClass="LoginViewController" customModule="KNU_Market" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="60a-Yi-ipM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,6 +80,9 @@
                                 <state key="normal" title="로그인">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedLoginButton:" destination="WcB-qX-q1C" eventType="touchUpInside" id="Hbm-0b-wQ9"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="66W-Oo-gcL"/>
@@ -91,6 +100,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="X0G-NW-KDu"/>
+                    <connections>
+                        <outlet property="idTextField" destination="ivr-6Y-BiC" id="ysg-fa-l1B"/>
+                        <outlet property="loginButton" destination="fP6-gv-Fuk" id="7W6-3T-bvz"/>
+                        <outlet property="passwordTextField" destination="rU1-jL-NSK" id="WYk-Ry-jF9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zOi-MU-jHi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -99,7 +113,7 @@
         <!--Chat View Controller-->
         <scene sceneID="wY6-Qr-Ebn">
             <objects>
-                <viewController title="Chat View Controller" id="NqC-5r-eov" customClass="ChatViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Chat View Controller" id="NqC-5r-eov" customClass="ChatViewController" customModule="KNU_Market" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DCH-7T-fIX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,7 +146,7 @@
         <!--My Page View Controller-->
         <scene sceneID="pQm-Oj-IOH">
             <objects>
-                <viewController title="My Page View Controller" id="e6f-cq-siB" customClass="MyPageViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="My Page View Controller" id="e6f-cq-siB" customClass="MyPageViewController" customModule="KNU_Market" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dL8-d0-QzK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,7 +162,7 @@
         <!--Register View Controller-->
         <scene sceneID="BtQ-8F-euS">
             <objects>
-                <viewController id="hKo-Es-J4q" customClass="RegisterViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hKo-Es-J4q" customClass="RegisterViewController" customModule="KNU_Market" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HO8-Vh-j16">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -158,12 +172,18 @@
                                 <state key="normal" title="사진 업로드">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedImageUploadButton:" destination="hKo-Es-J4q" eventType="touchUpInside" id="i8L-2I-7xp"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6i-B0-fMG">
                                 <rect key="frame" x="100" y="322" width="214" height="30"/>
                                 <state key="normal" title="인증 메일 보내기">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedSendEmailVerificationButton:" destination="hKo-Es-J4q" eventType="touchUpInside" id="YGS-TC-csx"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y8b-32-Nqc">
                                 <rect key="frame" x="10" y="402" width="394" height="34"/>
@@ -175,6 +195,9 @@
                                 <state key="normal" title="중복 확인">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedCheckAlreadyInUseButton:" destination="hKo-Es-J4q" eventType="touchUpInside" id="Bov-nX-k0m"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XSZ-W2-cva">
                                 <rect key="frame" x="10" y="566" width="394" height="34"/>
@@ -191,6 +214,9 @@
                                 <state key="normal" title="다음">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedNextButton:" destination="hKo-Es-J4q" eventType="touchUpInside" id="w1M-CX-L10"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="학교 이메일 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rnw-Dl-cTW">
                                 <rect key="frame" x="10" y="238" width="394" height="34"/>
@@ -227,6 +253,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9M6-OD-Rfe"/>
+                    <connections>
+                        <outlet property="checkAlreadyInUseButton" destination="RvZ-Un-Cfm" id="Wet-5W-Qro"/>
+                        <outlet property="checkPasswordTextField" destination="DrZ-mi-0Us" id="Nzo-v2-P8n"/>
+                        <outlet property="emailTextField" destination="Rnw-Dl-cTW" id="NkL-9s-Gyw"/>
+                        <outlet property="imageUploadButton" destination="kFD-3h-bAB" id="k1o-zb-2Vn"/>
+                        <outlet property="nextButton" destination="fFz-r8-SHB" id="DnC-Gz-EVJ"/>
+                        <outlet property="nicknameTextField" destination="y8b-32-Nqc" id="5Mw-JV-9N1"/>
+                        <outlet property="passwordTextField" destination="XSZ-W2-cva" id="svx-Ku-i7i"/>
+                        <outlet property="sendEmailVerificationButton" destination="C6i-B0-fMG" id="gvj-H8-fM3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3tH-ia-Ml1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -256,6 +292,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="6xn-IB-eeT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="m6L-2x-406">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -272,7 +309,7 @@
     </scenes>
     <resources>
         <namedColor name="AppDefaultColor">
-            <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.47499999403953552" blue="0.47499999403953552" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

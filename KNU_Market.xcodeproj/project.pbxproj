@@ -19,6 +19,9 @@
 		7CA66234264135AA000E0B7A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66233264135AA000E0B7A /* HomeViewController.swift */; };
 		7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66236264136BF000E0B7A /* MyPageViewController.swift */; };
 		7CA6623A264136C7000E0B7A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66239264136C7000E0B7A /* ChatViewController.swift */; };
+		7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624226413C47000E0B7A /* NetworkError.swift */; };
+		7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624626413C5A000E0B7A /* UserManager.swift */; };
+		7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624B26413D05000E0B7A /* UserInputError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		7CA66233264135AA000E0B7A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7CA66236264136BF000E0B7A /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		7CA66239264136C7000E0B7A /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		7CA6624226413C47000E0B7A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		7CA6624626413C5A000E0B7A /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		7CA6624B26413D05000E0B7A /* UserInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputError.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -75,6 +81,7 @@
 			children = (
 				7CA6622226413269000E0B7A /* View (Storyboards) */,
 				7CA6622B26413302000E0B7A /* UI Related Files */,
+				7CA6624A26413CEF000E0B7A /* Error Management Group */,
 				7CA66228264132DC000E0B7A /* Network Group */,
 				7CA6622326413272000E0B7A /* Model */,
 				7CA6622A264132F3000E0B7A /* View Models */,
@@ -106,6 +113,7 @@
 		7CA66228264132DC000E0B7A /* Network Group */ = {
 			isa = PBXGroup;
 			children = (
+				7CA6624626413C5A000E0B7A /* UserManager.swift */,
 			);
 			path = "Network Group";
 			sourceTree = "<group>";
@@ -135,6 +143,15 @@
 			children = (
 			);
 			path = "UI Related Files";
+			sourceTree = "<group>";
+		};
+		7CA6624A26413CEF000E0B7A /* Error Management Group */ = {
+			isa = PBXGroup;
+			children = (
+				7CA6624226413C47000E0B7A /* NetworkError.swift */,
+				7CA6624B26413D05000E0B7A /* UserInputError.swift */,
+			);
+			path = "Error Management Group";
 			sourceTree = "<group>";
 		};
 		B9AC8E9164D1E6F43C975A72 /* Frameworks */ = {
@@ -268,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CA6622E26413597000E0B7A /* LoginViewController.swift in Sources */,
 				7CA662312641359F000E0B7A /* RegisterViewController.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatViewController.swift in Sources */,
@@ -275,6 +293,8 @@
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
+				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
+				7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */,
 				7CA66234264135AA000E0B7A /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

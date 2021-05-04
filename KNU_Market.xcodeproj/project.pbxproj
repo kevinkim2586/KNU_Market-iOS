@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -63,15 +63,63 @@
 		7CA661EF263D4387000E0B7A /* KNU_Market */ = {
 			isa = PBXGroup;
 			children = (
+				7CA6622226413269000E0B7A /* View (Storyboards) */,
+				7CA6622B26413302000E0B7A /* UI Related Files */,
+				7CA66228264132DC000E0B7A /* Network Group */,
+				7CA6622326413272000E0B7A /* Model */,
+				7CA6622A264132F3000E0B7A /* View Models */,
+				7CA66229264132E6000E0B7A /* Controllers */,
 				7CA661F0263D4387000E0B7A /* AppDelegate.swift */,
 				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
-				7CA661F4263D4387000E0B7A /* ViewController.swift */,
 				7CA661F6263D4387000E0B7A /* Main.storyboard */,
 				7CA661F9263D4389000E0B7A /* Assets.xcassets */,
 				7CA661FB263D4389000E0B7A /* LaunchScreen.storyboard */,
 				7CA661FE263D4389000E0B7A /* Info.plist */,
 			);
 			path = KNU_Market;
+			sourceTree = "<group>";
+		};
+		7CA6622226413269000E0B7A /* View (Storyboards) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View (Storyboards)";
+			sourceTree = "<group>";
+		};
+		7CA6622326413272000E0B7A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7CA66228264132DC000E0B7A /* Network Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Network Group";
+			sourceTree = "<group>";
+		};
+		7CA66229264132E6000E0B7A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7CA661F4263D4387000E0B7A /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7CA6622A264132F3000E0B7A /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		7CA6622B26413302000E0B7A /* UI Related Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "UI Related Files";
 			sourceTree = "<group>";
 		};
 		B9AC8E9164D1E6F43C975A72 /* Frameworks */ = {
@@ -88,7 +136,6 @@
 				0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */,
 				96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */; };
 		7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */; };
+		7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */; };
+		7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */; };
+		7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */; };
+		7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */; };
 		7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F0263D4387000E0B7A /* AppDelegate.swift */; };
 		7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F2263D4387000E0B7A /* SceneDelegate.swift */; };
 		7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F4263D4387000E0B7A /* InitialViewController.swift */; };
@@ -29,6 +33,10 @@
 /* Begin PBXFileReference section */
 		0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 		7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPickedItemImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemViewController.swift; sourceTree = "<group>"; };
+		7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemViewModel.swift; sourceTree = "<group>"; };
 		7CA661ED263D4387000E0B7A /* KNU_Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNU_Market.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CA661F0263D4387000E0B7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CA661F2263D4387000E0B7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +70,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C8839DB2643CADB00F9F78C /* UserPickedItemImageViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */,
+				7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */,
+			);
+			path = UserPickedItemImageViewCell;
+			sourceTree = "<group>";
+		};
 		7CA661E4263D4387000E0B7A = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +149,7 @@
 				7CA66233264135AA000E0B7A /* HomeViewController.swift */,
 				7CA66236264136BF000E0B7A /* MyPageViewController.swift */,
 				7CA66239264136C7000E0B7A /* ChatViewController.swift */,
+				7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -139,6 +157,7 @@
 		7CA6622A264132F3000E0B7A /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -146,6 +165,7 @@
 		7CA6622B26413302000E0B7A /* UI Related Files */ = {
 			isa = PBXGroup;
 			children = (
+				7C8839DB2643CADB00F9F78C /* UserPickedItemImageViewCell */,
 				7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */,
 			);
 			path = "UI Related Files";
@@ -296,13 +316,17 @@
 				7CA662312641359F000E0B7A /* RegisterViewController.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatViewController.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
+				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
+				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */,
+				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,
 				7CA66234264135AA000E0B7A /* HomeViewController.swift in Sources */,
+				7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */,
 				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

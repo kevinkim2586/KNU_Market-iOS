@@ -11,6 +11,8 @@ struct Constants {
     struct cellID {
         
         static let itemTableViewCell            = "itemTableViewCell"
+        static let addItemImageCell             = "addItemImageCell"
+        static let userPickedItemImageCell      = "userPickedItemImageCell"
     }
     
     struct Colors {

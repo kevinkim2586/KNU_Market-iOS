@@ -16,6 +16,11 @@ class HomeViewController: UIViewController {
 
     }
     
+    
+    @IBAction func pressedAddButton(_ sender: UIButton) {
+        
+        
+    }
 }
 
 
@@ -58,18 +63,7 @@ extension HomeViewController {
     
     func initialize() {
         
-//        let btn = UIButton(type: .custom)
-//        btn.frame = CGRect(x: 200, y: 485, width: 70, height: 70)
-//        btn.setTitle("+", for: .normal)
-//        btn.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-//        btn.clipsToBounds = true
-//        btn.layer.cornerRadius = btn.frame.width / 2
-//        btn.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-//        btn.layer.borderWidth = 3.0
-//        //btn.addTarget(self,action: #selector(DestinationVC.buttonTapped), for: UIControlEvent.touchUpInside)
-//        view.addSubview(btn)
 
-    
         
         initializeTableView()
         initializeAddButton()
@@ -85,7 +79,6 @@ extension HomeViewController {
     func initializeAddButton() {
         
         addButton.layer.cornerRadius = addButton.frame.width / 2
-        //addButton.setTitle("+", for: .normal)
         addButton.backgroundColor = UIColor(named: Constants.Colors.appDefaultColor)
         addButton.setImage(UIImage(systemName: "plus"), for: .normal)
     }

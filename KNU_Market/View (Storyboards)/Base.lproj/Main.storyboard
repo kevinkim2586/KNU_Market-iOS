@@ -6,6 +6,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -202,6 +203,10 @@
                                 <state key="normal" image="plus">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedAddButton:" destination="NqC-5r-eov" eventType="touchUpInside" id="AKg-Bb-diu"/>
+                                    <segue destination="Qw3-Hb-Lid" kind="show" id="6IH-jW-WFC"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JSI-0T-O9U"/>
@@ -215,11 +220,138 @@
                     <connections>
                         <outlet property="addButton" destination="tUL-GT-Cs7" id="V1j-xD-alh"/>
                         <outlet property="tableView" destination="Z18-C1-q5V" id="Gjn-8Q-rsj"/>
+                        <segue destination="Qw3-Hb-Lid" kind="show" id="DQx-ip-vA3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gG4-zx-a3T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5050.7246376811599" y="-740.625"/>
+        </scene>
+        <!--Upload Item View Controller-->
+        <scene sceneID="Fhg-FP-AKg">
+            <objects>
+                <viewController title="Upload Item View Controller" id="Qw3-Hb-Lid" customClass="UploadItemViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5XL-Dm-4gC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="N1O-BC-qdI" userLabel="Divider Line">
+                                <rect key="frame" x="0.0" y="168" width="414" height="1"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="공구 제목" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gmq-Dz-mSm">
+                                <rect key="frame" x="10" y="113" width="394" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="EM0-Oa-2Dn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uQv-9E-yvr">
+                                <rect key="frame" x="10" y="184" width="394" height="135"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="135" id="VFf-Dy-7yd"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2Ch-3f-CPa">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="addItemImageCell" id="UfP-3h-pOT" userLabel="addItemImageCell" customClass="AddImageButtonCollectionViewCell" customModule="KNU_Market" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="18.5" width="107" height="98"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Wyl-GZ-I5o">
+                                            <rect key="frame" x="0.0" y="0.0" width="107" height="98"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1R-rd-DGD" userLabel="Add Button">
+                                                    <rect key="frame" x="5" y="5" width="97" height="88"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="Nsz-pK-Vv6"/>
+                                                        <constraint firstAttribute="height" constant="80" id="mf0-2o-eyl"/>
+                                                    </constraints>
+                                                    <state key="normal" image="add button"/>
+                                                    <connections>
+                                                        <action selector="pressedAddButton:" destination="UfP-3h-pOT" eventType="touchUpInside" id="E84-D1-y6Z"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="X1R-rd-DGD" firstAttribute="leading" secondItem="Wyl-GZ-I5o" secondAttribute="leading" constant="5" id="IVl-ho-Xbp"/>
+                                                <constraint firstAttribute="trailing" secondItem="X1R-rd-DGD" secondAttribute="trailing" constant="5" id="WWG-qL-uBS"/>
+                                                <constraint firstAttribute="bottom" secondItem="X1R-rd-DGD" secondAttribute="bottom" constant="5" id="vVX-XW-X9b"/>
+                                                <constraint firstItem="X1R-rd-DGD" firstAttribute="top" secondItem="Wyl-GZ-I5o" secondAttribute="top" constant="5" id="w9z-F7-Qbc"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="107" height="98"/>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="userPickedItemImageCell" id="Mu4-9L-PxC" customClass="UserPickedItemImageCollectionViewCell" customModule="KNU_Market" customModuleProvider="target">
+                                        <rect key="frame" x="117" y="22.5" width="90" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CKN-rn-2nE">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Gh-bz-VMA">
+                                                    <rect key="frame" x="5" y="5" width="80" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="80" id="Q3t-5Z-7ap"/>
+                                                        <constraint firstAttribute="width" constant="80" id="bes-RH-lEb"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXy-M0-hP2" userLabel="Cancel Button">
+                                                    <rect key="frame" x="50" y="0.0" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="aAc-t4-ypR"/>
+                                                        <constraint firstAttribute="width" constant="40" id="lln-c7-m4R"/>
+                                                    </constraints>
+                                                    <state key="normal" image="cancel button"/>
+                                                    <connections>
+                                                        <action selector="pressedCancelButton:" destination="Mu4-9L-PxC" eventType="touchUpInside" id="uYz-K8-uQb"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="aXy-M0-hP2" firstAttribute="top" secondItem="CKN-rn-2nE" secondAttribute="top" id="CvT-LH-VN9"/>
+                                                <constraint firstItem="0Gh-bz-VMA" firstAttribute="top" secondItem="CKN-rn-2nE" secondAttribute="top" constant="5" id="HcA-VP-X44"/>
+                                                <constraint firstItem="0Gh-bz-VMA" firstAttribute="leading" secondItem="CKN-rn-2nE" secondAttribute="leading" constant="5" id="QkQ-c0-bQf"/>
+                                                <constraint firstAttribute="bottom" secondItem="0Gh-bz-VMA" secondAttribute="bottom" constant="5" id="X4V-Gu-xIQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="0Gh-bz-VMA" secondAttribute="trailing" constant="5" id="d9q-Og-Uka"/>
+                                                <constraint firstAttribute="trailing" secondItem="aXy-M0-hP2" secondAttribute="trailing" id="hSl-pB-NOv"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="cancelButton" destination="aXy-M0-hP2" id="oKp-8u-CwI"/>
+                                            <outlet property="userPickedImageView" destination="0Gh-bz-VMA" id="bbl-9a-oGN"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sdn-cC-ezK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="N1O-BC-qdI" firstAttribute="leading" secondItem="5XL-Dm-4gC" secondAttribute="leading" id="Ciy-3b-hhs"/>
+                            <constraint firstItem="uQv-9E-yvr" firstAttribute="top" secondItem="N1O-BC-qdI" secondAttribute="bottom" constant="15" id="Jd0-6i-mWu"/>
+                            <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="Gmq-Dz-mSm" secondAttribute="trailing" constant="10" id="ST4-An-oJF"/>
+                            <constraint firstItem="N1O-BC-qdI" firstAttribute="top" secondItem="Gmq-Dz-mSm" secondAttribute="bottom" constant="15" id="T55-sc-Dp2"/>
+                            <constraint firstItem="Gmq-Dz-mSm" firstAttribute="top" secondItem="sdn-cC-ezK" secondAttribute="top" constant="25" id="dUd-Jg-a3v"/>
+                            <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="uQv-9E-yvr" secondAttribute="trailing" constant="10" id="nTS-o5-1MR"/>
+                            <constraint firstItem="Gmq-Dz-mSm" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="10" id="pqg-Oa-eq8"/>
+                            <constraint firstAttribute="trailing" secondItem="N1O-BC-qdI" secondAttribute="trailing" id="rMD-s1-bRt"/>
+                            <constraint firstItem="uQv-9E-yvr" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="10" id="snt-cg-Ty5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Me3-4F-ryJ"/>
+                    <connections>
+                        <outlet property="itemImagesCollectionView" destination="uQv-9E-yvr" id="gOk-Fh-hKk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ECu-bw-Vf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5989.8550724637689" y="-741.29464285714278"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="jVb-WK-Eca">
@@ -235,7 +367,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6AA-bb-xUu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5162" y="69"/>
+            <point key="canvasLocation" x="5051" y="69"/>
         </scene>
         <!--My Page View Controller-->
         <scene sceneID="pQm-Oj-IOH">
@@ -444,8 +576,14 @@
             <point key="canvasLocation" x="4140.579710144928" y="-740.625"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="6IH-jW-WFC"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Person Icon" width="37" height="33"/>
+        <image name="add button" width="226" height="226"/>
+        <image name="cancel button" width="80" height="80"/>
+        <image name="line divider (gray)" width="374" height="1"/>
         <image name="pizza" width="220.5" height="216"/>
         <image name="plus" width="128" height="128"/>
         <namedColor name="AppDefaultColor">

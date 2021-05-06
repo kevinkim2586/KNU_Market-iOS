@@ -13,4 +13,9 @@ struct Constants {
         static let itemTableViewCell            = "itemTableViewCell"
     }
     
+    struct Colors {
+        
+        static let appDefaultColor              = "AppDefaultColor"
+    }
+    
 }

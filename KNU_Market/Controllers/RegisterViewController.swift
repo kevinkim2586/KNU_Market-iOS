@@ -14,7 +14,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      
+        initialize()
     }
     
     
@@ -32,7 +32,36 @@ class RegisterViewController: UIViewController {
         
     }
     @IBAction func pressedNextButton(_ sender: UIButton) {
+        
+        
+    }
+
+}
+
+//MARK: - UITextFieldDelegate
+
+extension RegisterViewController: UITextFieldDelegate {
+    
+    
+}
+
+
+//MARK: - UI Configuration
+
+extension RegisterViewController {
+    
+    func initialize() {
+        
+        initializeDelegates()
+        
     }
     
-
+    func initializeDelegates() {
+        
+        emailTextField.delegate = self
+        nicknameTextField.delegate = self
+        passwordTextField.delegate = self
+        checkPasswordTextField.delegate = self
+    }
+    
 }

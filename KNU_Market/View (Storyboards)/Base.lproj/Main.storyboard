@@ -128,65 +128,62 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemTableViewCell" rowHeight="132" id="8gT-0R-YZ5" customClass="ItemTableViewCell" customModule="KNU_Market" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="414" height="132"/>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemTableViewCell" rowHeight="160" id="8gT-0R-YZ5" customClass="ItemTableViewCell" customModule="KNU_Market" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="160"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8gT-0R-YZ5" id="Pqd-Px-nwu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="132"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICf-7Q-kjx">
-                                                                    <rect key="frame" x="20" y="13.5" width="105" height="105"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pizza" translatesAutoresizingMaskIntoConstraints="NO" id="ICf-7Q-kjx">
+                                                                    <rect key="frame" x="20" y="16" width="120" height="128"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="105" id="NPk-K6-CTE"/>
-                                                                        <constraint firstAttribute="height" constant="105" id="zuM-8D-BkI"/>
+                                                                        <constraint firstAttribute="width" constant="120" id="NPk-K6-CTE"/>
+                                                                        <constraint firstAttribute="height" constant="120" id="zuM-8D-BkI"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="도미노 피자 시키실 분" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCM-dd-Bdj">
-                                                                    <rect key="frame" x="140" y="16" width="244" height="20.5"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="북문" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEl-9j-7BQ">
-                                                                    <rect key="frame" x="140" y="46.5" width="26" height="18"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집 중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hex-f4-kju">
-                                                                    <rect key="frame" x="140" y="84.5" width="46" height="20"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Person Icon" translatesAutoresizingMaskIntoConstraints="NO" id="TDS-j5-mBO">
-                                                                    <rect key="frame" x="206" y="85" width="37" height="20"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="20" id="IWm-SP-ogA"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzg-Hf-sB5">
-                                                                    <rect key="frame" x="258" y="85" width="23" height="21"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Mu4-Dk-2Zo">
+                                                                    <rect key="frame" x="228.5" y="26" width="145.5" height="98.5"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="도미노 피자 시키실 분" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCM-dd-Bdj">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="145.5" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="북문" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEl-9j-7BQ">
+                                                                            <rect key="frame" x="0.0" y="20.5" width="26" height="18"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집 중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hex-f4-kju">
+                                                                            <rect key="frame" x="0.0" y="38.5" width="46" height="19.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzg-Hf-sB5">
+                                                                            <rect key="frame" x="0.0" y="58" width="22.5" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Person Icon" translatesAutoresizingMaskIntoConstraints="NO" id="TDS-j5-mBO">
+                                                                            <rect key="frame" x="0.0" y="78.5" width="37" height="20"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="20" id="IWm-SP-ogA"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                    </subviews>
+                                                                </stackView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailingMargin" secondItem="GCM-dd-Bdj" secondAttribute="trailing" constant="10" id="77c-LA-scI"/>
-                                                                <constraint firstItem="GCM-dd-Bdj" firstAttribute="top" secondItem="Pqd-Px-nwu" secondAttribute="topMargin" constant="5" id="Ane-N9-rZG"/>
-                                                                <constraint firstItem="hex-f4-kju" firstAttribute="top" secondItem="fEl-9j-7BQ" secondAttribute="bottom" constant="20" id="EM6-ma-REe"/>
-                                                                <constraint firstItem="Zzg-Hf-sB5" firstAttribute="top" secondItem="GCM-dd-Bdj" secondAttribute="bottom" constant="48.5" id="H3s-9S-1yT"/>
-                                                                <constraint firstItem="fEl-9j-7BQ" firstAttribute="top" secondItem="GCM-dd-Bdj" secondAttribute="bottom" constant="10" id="QZH-XF-w1g"/>
-                                                                <constraint firstItem="fEl-9j-7BQ" firstAttribute="leading" secondItem="ICf-7Q-kjx" secondAttribute="trailing" constant="15" id="RNu-kf-2w0"/>
-                                                                <constraint firstItem="hex-f4-kju" firstAttribute="leading" secondItem="ICf-7Q-kjx" secondAttribute="trailing" constant="15" id="Rkg-8u-vpN"/>
-                                                                <constraint firstItem="ICf-7Q-kjx" firstAttribute="leading" secondItem="Pqd-Px-nwu" secondAttribute="leadingMargin" id="ewm-pL-Kco"/>
-                                                                <constraint firstItem="GCM-dd-Bdj" firstAttribute="leading" secondItem="ICf-7Q-kjx" secondAttribute="trailing" constant="15" id="gpz-D5-Ikt"/>
-                                                                <constraint firstItem="ICf-7Q-kjx" firstAttribute="centerY" secondItem="Pqd-Px-nwu" secondAttribute="centerY" id="l1f-TV-wYT"/>
-                                                                <constraint firstItem="TDS-j5-mBO" firstAttribute="top" secondItem="GCM-dd-Bdj" secondAttribute="bottom" constant="48.5" id="smd-al-NI6"/>
-                                                                <constraint firstItem="Zzg-Hf-sB5" firstAttribute="leading" secondItem="TDS-j5-mBO" secondAttribute="trailing" constant="15" id="v9T-RE-ulT"/>
-                                                                <constraint firstItem="TDS-j5-mBO" firstAttribute="leading" secondItem="hex-f4-kju" secondAttribute="trailing" constant="20" id="zaa-4q-Zrt"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="Mu4-Dk-2Zo" secondAttribute="trailing" constant="20" id="9gb-zQ-LuS"/>
+                                                                <constraint firstItem="ICf-7Q-kjx" firstAttribute="leading" secondItem="Pqd-Px-nwu" secondAttribute="leadingMargin" id="W35-Mn-ayd"/>
+                                                                <constraint firstItem="ICf-7Q-kjx" firstAttribute="top" secondItem="Pqd-Px-nwu" secondAttribute="topMargin" constant="5" id="clM-zx-AD4"/>
+                                                                <constraint firstItem="Mu4-Dk-2Zo" firstAttribute="top" secondItem="Pqd-Px-nwu" secondAttribute="topMargin" constant="15" id="f0v-qZ-tGy"/>
+                                                                <constraint firstAttribute="bottomMargin" secondItem="ICf-7Q-kjx" secondAttribute="bottom" constant="5" id="ljW-2f-e5P"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
@@ -465,6 +462,7 @@
     </scenes>
     <resources>
         <image name="Person Icon" width="37" height="33"/>
+        <image name="pizza" width="220.5" height="216"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47499999403953552" blue="0.47499999403953552" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

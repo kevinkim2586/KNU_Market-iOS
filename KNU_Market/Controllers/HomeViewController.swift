@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 132.0
+        return 145.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,7 +34,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("Failed to dequeue cell for ItemTableViewCell")
         }
         
-        cell.imageView?.image = UIImage(named: "pizza")
+        cell.itemImageView.image = UIImage(named: "pizza")
         cell.itemTitleLabel.text = "공구 구합니다"
         cell.locationLabel.text = "북문"
         cell.gatheringLabel.text = "모집 중"
@@ -44,7 +44,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
     
     
 }

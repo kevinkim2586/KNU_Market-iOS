@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = vc
         
         UIView.transition(with: window,
-                              duration: 0.5,
-                              options: [.curveEaseIn],
+                              duration: 1,
+                              options: [.curveLinear],
                               animations: nil,
                               completion: nil)
     }
@@ -32,8 +32,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
-        window?.rootViewController = mainTabBarController
+        //let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+        //window?.rootViewController = mainTabBarController
+        
+        
+        let initialViewController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialViewController)
+        window?.rootViewController = initialViewController
+
         
         // if user is logged in before
 //        if let loggedUsername = UserDefaults.standard.string(forKey: "username") {

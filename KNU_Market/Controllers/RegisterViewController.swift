@@ -13,7 +13,7 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         initialize()
     }
     
@@ -34,8 +34,17 @@ class RegisterViewController: UIViewController {
     @IBAction func pressedNextButton(_ sender: UIButton) {
         
         
+        
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+        
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+        
     }
-
+    
+    
+    
 }
 
 //MARK: - UITextFieldDelegate

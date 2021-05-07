@@ -13,7 +13,7 @@
         <!--Initial View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Initial View Controller" id="BYZ-38-t0r" customClass="InitialViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="initialViewController" title="Initial View Controller" id="BYZ-38-t0r" customClass="InitialViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -235,8 +235,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="YZM-m2-DWl" userLabel="Divider Line">
+                                <rect key="frame" x="0.0" y="319" width="414" height="1"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="N1O-BC-qdI" userLabel="Divider Line">
-                                <rect key="frame" x="0.0" y="168" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="163" width="414" height="1"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="공구 제목" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gmq-Dz-mSm">
                                 <rect key="frame" x="10" y="113" width="394" height="40"/>
@@ -247,7 +250,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uQv-9E-yvr">
-                                <rect key="frame" x="10" y="184" width="394" height="135"/>
+                                <rect key="frame" x="10" y="174" width="394" height="135"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="135" id="VFf-Dy-7yd"/>
@@ -302,10 +305,10 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXy-M0-hP2" userLabel="Cancel Button">
-                                                    <rect key="frame" x="50" y="0.0" width="40" height="40"/>
+                                                    <rect key="frame" x="60" y="0.0" width="30" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="aAc-t4-ypR"/>
-                                                        <constraint firstAttribute="width" constant="40" id="lln-c7-m4R"/>
+                                                        <constraint firstAttribute="height" constant="30" id="aAc-t4-ypR"/>
+                                                        <constraint firstAttribute="width" constant="30" id="lln-c7-m4R"/>
                                                     </constraints>
                                                     <state key="normal" image="cancel button"/>
                                                     <connections>
@@ -329,15 +332,22 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="fJd-jf-ode">
+                                <rect key="frame" x="276" y="355" width="94" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stepper>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sdn-cC-ezK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="N1O-BC-qdI" firstAttribute="leading" secondItem="5XL-Dm-4gC" secondAttribute="leading" id="Ciy-3b-hhs"/>
-                            <constraint firstItem="uQv-9E-yvr" firstAttribute="top" secondItem="N1O-BC-qdI" secondAttribute="bottom" constant="15" id="Jd0-6i-mWu"/>
+                            <constraint firstItem="YZM-m2-DWl" firstAttribute="top" secondItem="uQv-9E-yvr" secondAttribute="bottom" constant="10" id="JQr-K3-vkI"/>
+                            <constraint firstItem="uQv-9E-yvr" firstAttribute="top" secondItem="N1O-BC-qdI" secondAttribute="bottom" constant="10" id="Jd0-6i-mWu"/>
                             <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="Gmq-Dz-mSm" secondAttribute="trailing" constant="10" id="ST4-An-oJF"/>
-                            <constraint firstItem="N1O-BC-qdI" firstAttribute="top" secondItem="Gmq-Dz-mSm" secondAttribute="bottom" constant="15" id="T55-sc-Dp2"/>
+                            <constraint firstItem="YZM-m2-DWl" firstAttribute="leading" secondItem="5XL-Dm-4gC" secondAttribute="leading" id="SxA-JB-ZZI"/>
+                            <constraint firstItem="N1O-BC-qdI" firstAttribute="top" secondItem="Gmq-Dz-mSm" secondAttribute="bottom" constant="10" id="T55-sc-Dp2"/>
                             <constraint firstItem="Gmq-Dz-mSm" firstAttribute="top" secondItem="sdn-cC-ezK" secondAttribute="top" constant="25" id="dUd-Jg-a3v"/>
+                            <constraint firstAttribute="trailing" secondItem="YZM-m2-DWl" secondAttribute="trailing" id="jLq-AT-hdX"/>
                             <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="uQv-9E-yvr" secondAttribute="trailing" constant="10" id="nTS-o5-1MR"/>
                             <constraint firstItem="Gmq-Dz-mSm" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="10" id="pqg-Oa-eq8"/>
                             <constraint firstAttribute="trailing" secondItem="N1O-BC-qdI" secondAttribute="trailing" id="rMD-s1-bRt"/>
@@ -393,9 +403,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-3h-bAB">
-                                <rect key="frame" x="150" y="114" width="114" height="30"/>
-                                <state key="normal" title="사진 업로드">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-3h-bAB">
+                                <rect key="frame" x="100" y="114" width="214" height="111"/>
+                                <state key="normal" image="Group 6825">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
@@ -403,7 +413,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6i-B0-fMG">
-                                <rect key="frame" x="100" y="278" width="214" height="30"/>
+                                <rect key="frame" x="100" y="359" width="214" height="30"/>
                                 <state key="normal" title="인증 메일 보내기">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
@@ -412,12 +422,12 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y8b-32-Nqc">
-                                <rect key="frame" x="10" y="358" width="394" height="34"/>
+                                <rect key="frame" x="10" y="439" width="394" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RvZ-Un-Cfm">
-                                <rect key="frame" x="150" y="442" width="114" height="30"/>
+                                <rect key="frame" x="150" y="523" width="114" height="30"/>
                                 <state key="normal" title="중복 확인">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
@@ -426,12 +436,12 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XSZ-W2-cva">
-                                <rect key="frame" x="10" y="522" width="394" height="34"/>
+                                <rect key="frame" x="10" y="603" width="394" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 확인" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DrZ-mi-0Us">
-                                <rect key="frame" x="10" y="606" width="394" height="34"/>
+                                <rect key="frame" x="10" y="687" width="394" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -445,7 +455,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="학교 이메일 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rnw-Dl-cTW">
-                                <rect key="frame" x="10" y="194" width="394" height="34"/>
+                                <rect key="frame" x="10" y="275" width="394" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -455,7 +465,7 @@
                         <constraints>
                             <constraint firstItem="Rnw-Dl-cTW" firstAttribute="top" secondItem="kFD-3h-bAB" secondAttribute="bottom" constant="50" id="0iB-rD-i8Y"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="y8b-32-Nqc" secondAttribute="trailing" constant="10" id="2Ir-e7-xn0"/>
-                            <constraint firstItem="kFD-3h-bAB" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="150" id="2t0-93-rNM"/>
+                            <constraint firstItem="kFD-3h-bAB" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="100" id="2t0-93-rNM"/>
                             <constraint firstItem="Rnw-Dl-cTW" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="10" id="AZa-MD-lY4"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="fFz-r8-SHB" secondAttribute="trailing" constant="50" id="C1L-V9-YAo"/>
                             <constraint firstItem="XSZ-W2-cva" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="10" id="CQ7-fe-0yU"/>
@@ -464,7 +474,7 @@
                             <constraint firstItem="RvZ-Un-Cfm" firstAttribute="top" secondItem="y8b-32-Nqc" secondAttribute="bottom" constant="50" id="MzV-Qg-uom"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="RvZ-Un-Cfm" secondAttribute="trailing" constant="150" id="StI-kq-a6Q"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="Rnw-Dl-cTW" secondAttribute="trailing" constant="10" id="VNc-nH-mIb"/>
-                            <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="kFD-3h-bAB" secondAttribute="trailing" constant="150" id="ZN2-i7-pI7"/>
+                            <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="kFD-3h-bAB" secondAttribute="trailing" constant="100" id="ZN2-i7-pI7"/>
                             <constraint firstItem="C6i-B0-fMG" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="100" id="Zbj-Qi-tbk"/>
                             <constraint firstItem="C6i-B0-fMG" firstAttribute="top" secondItem="Rnw-Dl-cTW" secondAttribute="bottom" constant="50" id="aci-KM-ZOT"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="bottom" secondItem="fFz-r8-SHB" secondAttribute="bottom" constant="50" id="ceT-dc-R5h"/>
@@ -540,6 +550,7 @@
                 <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="nmt-zS-D4g" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pwb-ed-Z2i">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -580,6 +591,7 @@
         <segue reference="6IH-jW-WFC"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Group 6825" width="111" height="111"/>
         <image name="Person Icon" width="37" height="33"/>
         <image name="add button" width="226" height="226"/>
         <image name="cancel button" width="80" height="80"/>

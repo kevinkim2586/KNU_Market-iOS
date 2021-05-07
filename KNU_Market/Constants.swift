@@ -4,6 +4,7 @@ struct Constants {
     
     struct StoryboardID {
         
+        static let initialViewController        = "initialViewController"
         static let loginNavigationController    = "LoginNavigationController"
         static let tabBarController             = "TabBarController"
     }

@@ -62,6 +62,7 @@ extension RegisterViewController {
     func initialize() {
         
         initializeDelegates()
+        initializeNextButton()
         
     }
     
@@ -71,6 +72,13 @@ extension RegisterViewController {
         nicknameTextField.delegate = self
         passwordTextField.delegate = self
         checkPasswordTextField.delegate = self
+    }
+    
+    func initializeNextButton() {
+        
+        nextButton.layer.cornerRadius = nextButton.frame.width / 2
+        nextButton.backgroundColor = UIColor(named: Constants.Colors.appDefaultColor)
+        nextButton.setImage(UIImage(systemName: "arrow.right"), for: .normal)
     }
     
 }

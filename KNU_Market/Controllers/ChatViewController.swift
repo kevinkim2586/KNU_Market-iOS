@@ -1,29 +1,64 @@
-//
-//  ChatViewController.swift
-//  KNU_Market
-//
-//  Created by Kevin Kim on 2021/05/04.
-//
-
 import UIKit
 
 class ChatViewController: UIViewController {
 
+    @IBOutlet weak var chatTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initialize()
 
-        // Do any additional setup after loading the view.
+    }
+
+
+}
+
+//MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120.0
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cellIdentifier = Constants.cellID.chatTableViewCell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ChatTableViewCell else {
+            fatalError("Failed to dequeue cell for ItemTableViewCell")
+        }
+        
+        cell.chatImageView.image = UIImage(named: "chat_bubble_icon")
+        cell.chatTitleLabel.text = "공차 시키실 분?"
+        cell.chatParticipatingCountLabel.text = "2명"
+        
+        
+        return cell
+    }
+    
+    
+}
 
+
+
+//MARK: - UI Configuration
+
+extension ChatViewController {
+    
+    func initialize() {
+        
+        initializeTableView()
+    }
+    
+    func initializeTableView() {
+        
+        chatTableView.delegate = self
+        chatTableView.dataSource = self
+    }
 }

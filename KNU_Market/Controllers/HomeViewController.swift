@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
     }
 }
 
+//MARK: -  UITableViewDelegate, UITableViewDataSource
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -64,9 +65,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController {
     
     func initialize() {
-        
-
-        
+    
         initializeTableView()
         initializeAddButton()
         

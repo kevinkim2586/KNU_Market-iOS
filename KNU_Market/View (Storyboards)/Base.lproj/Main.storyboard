@@ -165,7 +165,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Person Icon" translatesAutoresizingMaskIntoConstraints="NO" id="TDS-j5-mBO">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_icon" translatesAutoresizingMaskIntoConstraints="NO" id="TDS-j5-mBO">
                                                             <rect key="frame" x="0.0" y="78.5" width="37" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="IWm-SP-ogA"/>
@@ -370,14 +370,83 @@
                     <view key="view" contentMode="scaleToFill" id="x3o-Os-LNL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RGU-wl-clc">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chatTableViewCell" rowHeight="143" id="tbL-v7-wHo" customClass="ChatTableViewCell" customModule="KNU_Market" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="143"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tbL-v7-wHo" id="pEG-Nw-2Cy">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="143"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u7H-i2-eP8">
+                                                    <rect key="frame" x="20" y="16" width="120" height="111"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="120" id="dAe-OM-G4b"/>
+                                                        <constraint firstAttribute="width" constant="120" id="f1W-MZ-sgk"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓 전체 채팅방" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NV3-vO-Kgd">
+                                                    <rect key="frame" x="160" y="21" width="174" height="26"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_icon" translatesAutoresizingMaskIntoConstraints="NO" id="9R6-tI-C9f">
+                                                    <rect key="frame" x="160" y="97" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="QFz-9Q-98L"/>
+                                                        <constraint firstAttribute="width" constant="20" id="nOy-B3-6Jp"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBe-lF-Fpd">
+                                                    <rect key="frame" x="200" y="97" width="47" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9R6-tI-C9f" firstAttribute="leading" secondItem="u7H-i2-eP8" secondAttribute="trailing" constant="20" id="1Iq-5m-u76"/>
+                                                <constraint firstItem="lBe-lF-Fpd" firstAttribute="leading" secondItem="9R6-tI-C9f" secondAttribute="trailing" constant="20" id="4C0-Jr-1uI"/>
+                                                <constraint firstItem="9R6-tI-C9f" firstAttribute="top" secondItem="NV3-vO-Kgd" secondAttribute="bottom" constant="50" id="4LU-AP-WvO"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="u7H-i2-eP8" secondAttribute="bottom" constant="5" id="Y5s-9t-Mdd"/>
+                                                <constraint firstItem="u7H-i2-eP8" firstAttribute="leading" secondItem="pEG-Nw-2Cy" secondAttribute="leadingMargin" id="cDd-CA-he5"/>
+                                                <constraint firstItem="lBe-lF-Fpd" firstAttribute="top" secondItem="NV3-vO-Kgd" secondAttribute="bottom" constant="50" id="chG-OD-6Tn"/>
+                                                <constraint firstItem="u7H-i2-eP8" firstAttribute="top" secondItem="pEG-Nw-2Cy" secondAttribute="topMargin" constant="5" id="m0T-d9-gSg"/>
+                                                <constraint firstItem="NV3-vO-Kgd" firstAttribute="top" secondItem="pEG-Nw-2Cy" secondAttribute="topMargin" constant="10" id="nRB-XK-pfq"/>
+                                                <constraint firstItem="NV3-vO-Kgd" firstAttribute="leading" secondItem="u7H-i2-eP8" secondAttribute="trailing" constant="20" id="oH1-jT-vfe"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="chatImageView" destination="u7H-i2-eP8" id="7E9-Uc-uqh"/>
+                                            <outlet property="chatParticipatingCountLabel" destination="lBe-lF-Fpd" id="uaf-oc-lUD"/>
+                                            <outlet property="chatTitleLabel" destination="NV3-vO-Kgd" id="CCc-5L-0H4"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Fns-XP-5Tf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RGU-wl-clc" firstAttribute="leading" secondItem="Fns-XP-5Tf" secondAttribute="leading" id="LPj-yk-eUj"/>
+                            <constraint firstItem="RGU-wl-clc" firstAttribute="trailing" secondItem="Fns-XP-5Tf" secondAttribute="trailing" id="dUy-Tc-sFY"/>
+                            <constraint firstItem="RGU-wl-clc" firstAttribute="top" secondItem="Fns-XP-5Tf" secondAttribute="top" id="gOo-8a-SXo"/>
+                            <constraint firstItem="RGU-wl-clc" firstAttribute="bottom" secondItem="Fns-XP-5Tf" secondAttribute="bottom" id="owO-7o-46X"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="크누마켓 채팅" id="4sc-w2-WCM"/>
+                    <connections>
+                        <outlet property="chatTableView" destination="RGU-wl-clc" id="e1G-jF-ypx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6AA-bb-xUu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5051" y="69"/>
+            <point key="canvasLocation" x="5050.7246376811599" y="68.973214285714278"/>
         </scene>
         <!--My Page View Controller-->
         <scene sceneID="pQm-Oj-IOH">
@@ -405,7 +474,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-3h-bAB">
                                 <rect key="frame" x="100" y="114" width="214" height="111"/>
-                                <state key="normal" image="Group 6825">
+                                <state key="normal" image="pick_profile_picture">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
@@ -446,8 +515,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFz-r8-SHB">
-                                <rect key="frame" x="334" y="782" width="30" height="30"/>
-                                <state key="normal" title="다음">
+                                <rect key="frame" x="334" y="777" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="R3N-tW-0Sv"/>
+                                    <constraint firstAttribute="width" constant="60" id="Vw7-X0-z3H"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
@@ -467,7 +541,7 @@
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="y8b-32-Nqc" secondAttribute="trailing" constant="10" id="2Ir-e7-xn0"/>
                             <constraint firstItem="kFD-3h-bAB" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="100" id="2t0-93-rNM"/>
                             <constraint firstItem="Rnw-Dl-cTW" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="10" id="AZa-MD-lY4"/>
-                            <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="fFz-r8-SHB" secondAttribute="trailing" constant="50" id="C1L-V9-YAo"/>
+                            <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="fFz-r8-SHB" secondAttribute="trailing" constant="20" id="C1L-V9-YAo"/>
                             <constraint firstItem="XSZ-W2-cva" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="10" id="CQ7-fe-0yU"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="C6i-B0-fMG" secondAttribute="trailing" constant="100" id="FBB-eL-z9r"/>
                             <constraint firstItem="kFD-3h-bAB" firstAttribute="top" secondItem="iyf-iz-Vsv" secondAttribute="top" constant="70" id="GNi-8Q-p0U"/>
@@ -477,7 +551,7 @@
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="kFD-3h-bAB" secondAttribute="trailing" constant="100" id="ZN2-i7-pI7"/>
                             <constraint firstItem="C6i-B0-fMG" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="100" id="Zbj-Qi-tbk"/>
                             <constraint firstItem="C6i-B0-fMG" firstAttribute="top" secondItem="Rnw-Dl-cTW" secondAttribute="bottom" constant="50" id="aci-KM-ZOT"/>
-                            <constraint firstItem="iyf-iz-Vsv" firstAttribute="bottom" secondItem="fFz-r8-SHB" secondAttribute="bottom" constant="50" id="ceT-dc-R5h"/>
+                            <constraint firstItem="iyf-iz-Vsv" firstAttribute="bottom" secondItem="fFz-r8-SHB" secondAttribute="bottom" constant="25" id="ceT-dc-R5h"/>
                             <constraint firstItem="DrZ-mi-0Us" firstAttribute="top" secondItem="XSZ-W2-cva" secondAttribute="bottom" constant="50" id="gR0-o4-Jyg"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="XSZ-W2-cva" secondAttribute="trailing" constant="10" id="j3f-mx-Mek"/>
                             <constraint firstItem="RvZ-Un-Cfm" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="150" id="jvd-Lz-Uvg"/>
@@ -591,11 +665,11 @@
         <segue reference="6IH-jW-WFC"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Group 6825" width="111" height="111"/>
-        <image name="Person Icon" width="37" height="33"/>
         <image name="add button" width="226" height="226"/>
         <image name="cancel button" width="80" height="80"/>
         <image name="line divider (gray)" width="374" height="1"/>
+        <image name="person_icon" width="37" height="33"/>
+        <image name="pick_profile_picture" width="111" height="111"/>
         <image name="pizza" width="220.5" height="216"/>
         <image name="plus" width="128" height="128"/>
         <namedColor name="AppDefaultColor">

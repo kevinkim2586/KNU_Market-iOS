@@ -375,35 +375,35 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chatTableViewCell" rowHeight="143" id="tbL-v7-wHo" customClass="ChatTableViewCell" customModule="KNU_Market" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="143"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chatTableViewCell" rowHeight="114" id="tbL-v7-wHo" customClass="ChatTableViewCell" customModule="KNU_Market" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tbL-v7-wHo" id="pEG-Nw-2Cy">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="143"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u7H-i2-eP8">
-                                                    <rect key="frame" x="20" y="16" width="120" height="111"/>
+                                                    <rect key="frame" x="20" y="16" width="80" height="82"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="120" id="dAe-OM-G4b"/>
-                                                        <constraint firstAttribute="width" constant="120" id="f1W-MZ-sgk"/>
+                                                        <constraint firstAttribute="height" constant="80" id="dAe-OM-G4b"/>
+                                                        <constraint firstAttribute="width" constant="80" id="f1W-MZ-sgk"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓 전체 채팅방" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NV3-vO-Kgd">
-                                                    <rect key="frame" x="160" y="21" width="174" height="26"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                    <rect key="frame" x="120" y="21" width="149.5" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_icon" translatesAutoresizingMaskIntoConstraints="NO" id="9R6-tI-C9f">
-                                                    <rect key="frame" x="160" y="97" width="20" height="20"/>
+                                                    <rect key="frame" x="120" y="62.5" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="QFz-9Q-98L"/>
                                                         <constraint firstAttribute="width" constant="20" id="nOy-B3-6Jp"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBe-lF-Fpd">
-                                                    <rect key="frame" x="200" y="97" width="47" height="21"/>
+                                                    <rect key="frame" x="160" y="62.5" width="47" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -412,10 +412,10 @@
                                             <constraints>
                                                 <constraint firstItem="9R6-tI-C9f" firstAttribute="leading" secondItem="u7H-i2-eP8" secondAttribute="trailing" constant="20" id="1Iq-5m-u76"/>
                                                 <constraint firstItem="lBe-lF-Fpd" firstAttribute="leading" secondItem="9R6-tI-C9f" secondAttribute="trailing" constant="20" id="4C0-Jr-1uI"/>
-                                                <constraint firstItem="9R6-tI-C9f" firstAttribute="top" secondItem="NV3-vO-Kgd" secondAttribute="bottom" constant="50" id="4LU-AP-WvO"/>
+                                                <constraint firstItem="9R6-tI-C9f" firstAttribute="top" secondItem="NV3-vO-Kgd" secondAttribute="bottom" constant="20" id="4LU-AP-WvO"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="u7H-i2-eP8" secondAttribute="bottom" constant="5" id="Y5s-9t-Mdd"/>
                                                 <constraint firstItem="u7H-i2-eP8" firstAttribute="leading" secondItem="pEG-Nw-2Cy" secondAttribute="leadingMargin" id="cDd-CA-he5"/>
-                                                <constraint firstItem="lBe-lF-Fpd" firstAttribute="top" secondItem="NV3-vO-Kgd" secondAttribute="bottom" constant="50" id="chG-OD-6Tn"/>
+                                                <constraint firstItem="lBe-lF-Fpd" firstAttribute="top" secondItem="NV3-vO-Kgd" secondAttribute="bottom" constant="20" id="chG-OD-6Tn"/>
                                                 <constraint firstItem="u7H-i2-eP8" firstAttribute="top" secondItem="pEG-Nw-2Cy" secondAttribute="topMargin" constant="5" id="m0T-d9-gSg"/>
                                                 <constraint firstItem="NV3-vO-Kgd" firstAttribute="top" secondItem="pEG-Nw-2Cy" secondAttribute="topMargin" constant="10" id="nRB-XK-pfq"/>
                                                 <constraint firstItem="NV3-vO-Kgd" firstAttribute="leading" secondItem="u7H-i2-eP8" secondAttribute="trailing" constant="20" id="oH1-jT-vfe"/>

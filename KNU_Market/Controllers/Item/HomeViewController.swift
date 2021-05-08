@@ -4,7 +4,6 @@ import Alamofire
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var addButton: UIButton!
     
 

@@ -14,10 +14,13 @@ class ItemViewController: UIViewController {
     
     var images = ["bubble1", "bubble2", "bubble3"]
     
+    private var viewModel: ItemViewModel = ItemViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        initialize()
         configurePageControl()
     
 
@@ -25,9 +28,6 @@ class ItemViewController: UIViewController {
     }
     
     @IBAction func pageChanged(_ sender: UIPageControl) {
-        
-        print("pageChange ACTIVATED")
-        
         itemImageView.image = UIImage(named: images[pageControl.currentPage])
     }
     
@@ -65,8 +65,7 @@ extension ItemViewController {
     @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
 
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            
-
+        
             switch swipeGesture.direction {
             
             case UISwipeGestureRecognizer.Direction.left :
@@ -79,9 +78,7 @@ extension ItemViewController {
             default:
                 break
             }
-            
         }
-
     }
     
 }
@@ -89,6 +86,12 @@ extension ItemViewController {
 //MARK: - UI Configuration
 
 extension ItemViewController {
+    
+    func initialize() {
+        
+        userProfileImageView.image = viewModel.userProfileImage
+        
+    }
     
     
 }

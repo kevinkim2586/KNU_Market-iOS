@@ -46,6 +46,7 @@ class UploadItemViewModel {
     //MARK: - Conversion Methods
     
     func convertUIImagesToDataFormat() {
+        
         userSelectedImagesInDataFormat?.removeAll()
         
         userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in

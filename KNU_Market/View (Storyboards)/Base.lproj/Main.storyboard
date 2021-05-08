@@ -243,7 +243,7 @@
         <!--Item View Controller-->
         <scene sceneID="S5r-Hs-VS1">
             <objects>
-                <viewController storyboardIdentifier="itemViewController" title="Item View Controller" id="zLp-Wy-dxz" customClass="ItemViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="itemViewController" title="Item View Controller" hidesBottomBarWhenPushed="YES" id="zLp-Wy-dxz" customClass="ItemViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zCQ-KZ-2gh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -255,10 +255,13 @@
                                 </constraints>
                             </imageView>
                             <pageControl opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="JFC-KJ-6Dt">
-                                <rect key="frame" x="0.0" y="88" width="414" height="270"/>
+                                <rect key="frame" x="0.0" y="343" width="414" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="270" id="EZ0-Bk-1qE"/>
+                                    <constraint firstAttribute="height" constant="50" id="EZ0-Bk-1qE"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="pageChanged:" destination="zLp-Wy-dxz" eventType="valueChanged" id="8TR-2x-F6T"/>
+                                </connections>
                             </pageControl>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cex-lV-vkk">
                                 <rect key="frame" x="15" y="403" width="40" height="40"/>
@@ -300,12 +303,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집 중 2/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPz-Tb-uXf">
+                                <rect key="frame" x="70" y="821" width="78" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qU3-Gb-kOm">
+                                <rect key="frame" x="275" y="812" width="69" height="30"/>
+                                <state key="normal" title="채팅방 입장"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pS8-Xx-a6y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Cex-lV-vkk" firstAttribute="top" secondItem="OT7-hx-mHb" secondAttribute="bottom" constant="15" id="0WU-Xa-H2o"/>
+                            <constraint firstItem="pS8-Xx-a6y" firstAttribute="bottom" secondItem="qU3-Gb-kOm" secondAttribute="bottom" constant="20" id="68R-Jq-JDg"/>
                             <constraint firstItem="SVM-Xa-FM2" firstAttribute="top" secondItem="OT7-hx-mHb" secondAttribute="bottom" constant="25" id="6Ok-no-iI6"/>
+                            <constraint firstItem="sPz-Tb-uXf" firstAttribute="leading" secondItem="pS8-Xx-a6y" secondAttribute="leading" constant="70" id="6X2-8v-BGl"/>
                             <constraint firstItem="pS8-Xx-a6y" firstAttribute="trailing" secondItem="SVM-Xa-FM2" secondAttribute="trailing" constant="15" id="9M6-Wo-Uz5"/>
                             <constraint firstItem="OT7-hx-mHb" firstAttribute="trailing" secondItem="pS8-Xx-a6y" secondAttribute="trailing" id="9bA-mu-5gx"/>
                             <constraint firstItem="d8u-C8-bqO" firstAttribute="leading" secondItem="Cex-lV-vkk" secondAttribute="trailing" constant="10" id="BSR-w2-3Eu"/>
@@ -318,18 +333,27 @@
                             <constraint firstItem="OT7-hx-mHb" firstAttribute="leading" secondItem="pS8-Xx-a6y" secondAttribute="leading" id="fL2-ss-aFb"/>
                             <constraint firstItem="pS8-Xx-a6y" firstAttribute="trailing" secondItem="BfD-BL-Puq" secondAttribute="trailing" constant="15" id="fUL-jm-1Ur"/>
                             <constraint firstItem="Cex-lV-vkk" firstAttribute="leading" secondItem="pS8-Xx-a6y" secondAttribute="leading" constant="15" id="fdj-Ry-dDF"/>
-                            <constraint firstItem="JFC-KJ-6Dt" firstAttribute="top" secondItem="pS8-Xx-a6y" secondAttribute="top" id="jbZ-jU-qHG"/>
                             <constraint firstItem="Mrq-Ho-joG" firstAttribute="leading" secondItem="pS8-Xx-a6y" secondAttribute="leading" constant="15" id="kZo-UQ-eyM"/>
                             <constraint firstItem="BfD-BL-Puq" firstAttribute="leading" secondItem="pS8-Xx-a6y" secondAttribute="leading" constant="15" id="nHs-kK-q1V"/>
                             <constraint firstItem="Mrq-Ho-joG" firstAttribute="top" secondItem="Z68-RH-I8H" secondAttribute="bottom" constant="20" id="nPW-FW-GZW"/>
+                            <constraint firstItem="pS8-Xx-a6y" firstAttribute="trailing" secondItem="qU3-Gb-kOm" secondAttribute="trailing" constant="70" id="pr8-dN-jIf"/>
                             <constraint firstItem="BfD-BL-Puq" firstAttribute="top" secondItem="Mrq-Ho-joG" secondAttribute="bottom" constant="25" id="qxc-90-7u9"/>
+                            <constraint firstItem="Cex-lV-vkk" firstAttribute="top" secondItem="JFC-KJ-6Dt" secondAttribute="bottom" constant="10" id="tTy-1k-Oht"/>
+                            <constraint firstItem="pS8-Xx-a6y" firstAttribute="bottom" secondItem="sPz-Tb-uXf" secondAttribute="bottom" constant="20" id="uz3-ho-TEl"/>
                             <constraint firstAttribute="trailing" secondItem="Z68-RH-I8H" secondAttribute="trailing" id="vzD-Uw-zVG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9VB-qH-C9P"/>
                     <connections>
+                        <outlet property="enterChatButton" destination="qU3-Gb-kOm" id="QbU-oa-6Lu"/>
+                        <outlet property="gatheringPeopleLabel" destination="sPz-Tb-uXf" id="Fls-6h-wPF"/>
+                        <outlet property="itemExplanationLabel" destination="BfD-BL-Puq" id="UuB-ni-gQV"/>
                         <outlet property="itemImageView" destination="OT7-hx-mHb" id="I2K-7G-yMc"/>
+                        <outlet property="itemTitleLabel" destination="Mrq-Ho-joG" id="gZG-6d-UgR"/>
+                        <outlet property="locationLabel" destination="SVM-Xa-FM2" id="R6t-OZ-PdH"/>
                         <outlet property="pageControl" destination="JFC-KJ-6Dt" id="5ef-FZ-gnP"/>
+                        <outlet property="userIdLabel" destination="d8u-C8-bqO" id="6k5-lT-YwJ"/>
+                        <outlet property="userProfileImageView" destination="Cex-lV-vkk" id="FYZ-JQ-umJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jco-2d-81P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

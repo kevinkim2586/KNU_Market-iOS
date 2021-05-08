@@ -7,6 +7,7 @@ struct Constants {
         static let initialViewController        = "initialViewController"
         static let loginNavigationController    = "LoginNavigationController"
         static let tabBarController             = "TabBarController"
+        static let itemViewController           = "itemViewController"
     }
     
     struct cellID {

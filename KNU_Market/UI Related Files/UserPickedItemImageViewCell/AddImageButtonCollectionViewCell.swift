@@ -6,8 +6,6 @@ protocol AddImageDelegate {
     func didPickImagesToUpload(images: [UIImage])
 }
 
-// 리뷰 또는 신규 식당 등록 시 사용자가 이미지를 고를 수 있도록 터치하는 "+" 모양의 버튼 Cell
-
 class AddImageButtonCollectionViewCell: UICollectionViewCell {
     
     var delegate: AddImageDelegate!
@@ -22,7 +20,7 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
         userSelectedImages.removeAll()
         
         let imagePicker = ImagePickerController()
-        imagePicker.settings.selection.max = 5
+        imagePicker.settings.selection.max = 3
         imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
         
         let vc = self.window?.rootViewController

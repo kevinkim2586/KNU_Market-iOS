@@ -23,6 +23,16 @@ class HomeViewController: UIViewController {
         
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let itemVC: ItemViewController = segue.destination as? ItemViewController else {
+            return
+        }
+        
+        itemVC.hidesBottomBarWhenPushed = true
+
+    }
 }
 
 //MARK: -  UITableViewDelegate, UITableViewDataSource

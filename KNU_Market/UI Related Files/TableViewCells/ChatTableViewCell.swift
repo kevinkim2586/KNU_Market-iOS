@@ -18,6 +18,12 @@ class ChatTableViewCell: UITableViewCell {
     }
 
     
+    //
+    //    func configure(with model: []) {
+    //
+    //    }
+    
+    
     func configureImageView() {
 
         //chatImageView.layer.cornerRadius = chatImageView.frame.width / ?

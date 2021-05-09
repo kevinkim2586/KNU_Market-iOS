@@ -21,7 +21,7 @@ class ItemViewController: UIViewController {
         
         
         initialize()
-        configurePageControl()
+
     
 
  
@@ -34,7 +34,7 @@ class ItemViewController: UIViewController {
     
 }
 
-//MARK: - Page Control Configuration
+//MARK: - Page Control
 
 extension ItemViewController {
     
@@ -47,6 +47,7 @@ extension ItemViewController {
         
         pageControl.pageIndicatorTintColor = .lightGray
         pageControl.currentPageIndicatorTintColor = .white
+        // 나중에는 viewModel.images[] 이런식으로 해야할듯
         itemImageView.image = UIImage(named: images[0])
         
         let swipeLeft = UISwipeGestureRecognizer(target: self,
@@ -90,6 +91,8 @@ extension ItemViewController {
     func initialize() {
         
         userProfileImageView.image = viewModel.userProfileImage
+        
+        configurePageControl()
         
     }
     

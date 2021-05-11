@@ -10,6 +10,7 @@ target 'KNU_Market' do
   pod 'Alamofire', '~> 5.2'
   pod 'IQKeyboardManagerSwift'
   pod "BSImagePicker", "~> 3.1"
+  pod "GMStepper"
 
 
 end

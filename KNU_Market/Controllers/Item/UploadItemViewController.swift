@@ -103,10 +103,12 @@ extension UploadItemViewController {
         stepper.stepValue = 1
         stepper.buttonsTextColor = .white
         stepper.buttonsBackgroundColor = UIColor(named: "AppDefaultColor")!
-        stepper.buttonsFont = UIFont(name: "AvenirNext-Bold", size: 20.0)!
+        stepper.buttonsFont = UIFont(name: "AvenirNext-Bold", size: 15.0)!
+        stepper.labelFont = .systemFont(ofSize: 15)
         stepper.labelTextColor = UIColor(named: "AppDefaultColor")!
         stepper.labelBackgroundColor = #colorLiteral(red: 0.9050354388, green: 0.9050354388, blue: 0.9050354388, alpha: 1)
         stepper.limitHitAnimationColor = .white
+        stepper.cornerRadius = 0
      
         
     }

@@ -1,10 +1,12 @@
 import UIKit
 import Alamofire
+import GMStepper
 
 class UploadItemViewController: UIViewController {
     
+    @IBOutlet weak var itemTitleTextField: UITextField!
     @IBOutlet var itemImagesCollectionView: UICollectionView!
-    
+    @IBOutlet weak var stepper: GMStepper!
     
     var viewModel = UploadItemViewModel()
     
@@ -84,13 +86,29 @@ extension UploadItemViewController {
     func initialize() {
         
         initializeCollectionView()
-        
+        initializeStepper()
     }
     
     func initializeCollectionView() {
         
         itemImagesCollectionView.delegate = self
         itemImagesCollectionView.dataSource = self
+    }
+    
+    func initializeStepper() {
+        
+        stepper.value = 2
+        stepper.minimumValue = 2
+        stepper.maximumValue = 10
+        stepper.stepValue = 1
+        stepper.buttonsTextColor = .white
+        stepper.buttonsBackgroundColor = UIColor(named: "AppDefaultColor")!
+        stepper.buttonsFont = UIFont(name: "AvenirNext-Bold", size: 20.0)!
+        stepper.labelTextColor = UIColor(named: "AppDefaultColor")!
+        stepper.labelBackgroundColor = #colorLiteral(red: 0.9050354388, green: 0.9050354388, blue: 0.9050354388, alpha: 1)
+        stepper.limitHitAnimationColor = .white
+     
+        
     }
     
 }

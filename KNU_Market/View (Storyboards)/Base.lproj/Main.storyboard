@@ -465,10 +465,25 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="fJd-jf-ode">
-                                <rect key="frame" x="276" y="355" width="94" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </stepper>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6m-j0-iun" customClass="GMStepper" customModule="GMStepper">
+                                <rect key="frame" x="224" y="382" width="150" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="M2u-dc-zjV"/>
+                                    <constraint firstAttribute="height" constant="50" id="bd0-fB-UCV"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minimumValue">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maximumValue">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sdn-cC-ezK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -479,6 +494,8 @@
                             <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="Gmq-Dz-mSm" secondAttribute="trailing" constant="10" id="ST4-An-oJF"/>
                             <constraint firstItem="YZM-m2-DWl" firstAttribute="leading" secondItem="5XL-Dm-4gC" secondAttribute="leading" id="SxA-JB-ZZI"/>
                             <constraint firstItem="N1O-BC-qdI" firstAttribute="top" secondItem="Gmq-Dz-mSm" secondAttribute="bottom" constant="10" id="T55-sc-Dp2"/>
+                            <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="n6m-j0-iun" secondAttribute="trailing" constant="40" id="UtL-4F-EBu"/>
+                            <constraint firstItem="n6m-j0-iun" firstAttribute="top" secondItem="YZM-m2-DWl" secondAttribute="bottom" constant="62" id="YzX-fN-Mq8"/>
                             <constraint firstItem="Gmq-Dz-mSm" firstAttribute="top" secondItem="sdn-cC-ezK" secondAttribute="top" constant="25" id="dUd-Jg-a3v"/>
                             <constraint firstAttribute="trailing" secondItem="YZM-m2-DWl" secondAttribute="trailing" id="jLq-AT-hdX"/>
                             <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="uQv-9E-yvr" secondAttribute="trailing" constant="10" id="nTS-o5-1MR"/>
@@ -490,11 +507,13 @@
                     <navigationItem key="navigationItem" id="Me3-4F-ryJ"/>
                     <connections>
                         <outlet property="itemImagesCollectionView" destination="uQv-9E-yvr" id="gOk-Fh-hKk"/>
+                        <outlet property="itemTitleTextField" destination="Gmq-Dz-mSm" id="y0E-Se-AA8"/>
+                        <outlet property="stepper" destination="n6m-j0-iun" id="mUA-wv-v3s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECu-bw-Vf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6042" y="-1227"/>
+            <point key="canvasLocation" x="6040.579710144928" y="-1227.4553571428571"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="jVb-WK-Eca">

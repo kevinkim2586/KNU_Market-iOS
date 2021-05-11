@@ -483,12 +483,77 @@
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="pressedStepper:" destination="Qw3-Hb-Lid" eventType="valueChanged" id="ODS-hx-aS9"/>
+                                </connections>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="97D-ZP-C4t">
+                                <rect key="frame" x="15" y="335" width="118.5" height="44.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="8o0-HG-GME">
+                                        <rect key="frame" x="0.0" y="0.0" width="118.5" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집 인원 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enb-0v-8Ba">
+                                                <rect key="frame" x="0.0" y="0.0" width="72.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3u-lt-lGG">
+                                                <rect key="frame" x="89.5" y="0.0" width="29" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(본인 포함 최소 2명)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sba-B9-UkW">
+                                        <rect key="frame" x="0.0" y="28.5" width="118.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="거래 위치 선택 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2r5-yi-TDA">
+                                <rect key="frame" x="15" y="409.5" width="106" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="pHN-LE-zJ2">
+                                <rect key="frame" x="302" y="405" width="92" height="27"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="누리관" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l4k-QH-s3X" userLabel="장소">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="FG2-oU-r0I"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="yCa-sc-fsr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="▼" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BMM-d8-tEv" userLabel="Expand Button Text Field">
+                                        <rect key="frame" x="75" y="0.0" width="17" height="27"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="AppDefaultColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="l4k-QH-s3X" firstAttribute="leading" secondItem="pHN-LE-zJ2" secondAttribute="leading" id="CkZ-Tl-oha"/>
+                                    <constraint firstItem="l4k-QH-s3X" firstAttribute="top" secondItem="pHN-LE-zJ2" secondAttribute="top" id="Hai-Jc-RnW"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sdn-cC-ezK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="2r5-yi-TDA" firstAttribute="top" secondItem="97D-ZP-C4t" secondAttribute="bottom" constant="30" id="4ch-Ig-u9e"/>
+                            <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="pHN-LE-zJ2" secondAttribute="trailing" constant="20" id="8x2-2K-Wwc"/>
                             <constraint firstItem="N1O-BC-qdI" firstAttribute="leading" secondItem="5XL-Dm-4gC" secondAttribute="leading" id="Ciy-3b-hhs"/>
+                            <constraint firstItem="2r5-yi-TDA" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="15" id="GYH-8y-IWi"/>
                             <constraint firstItem="YZM-m2-DWl" firstAttribute="top" secondItem="uQv-9E-yvr" secondAttribute="bottom" constant="10" id="JQr-K3-vkI"/>
                             <constraint firstItem="uQv-9E-yvr" firstAttribute="top" secondItem="N1O-BC-qdI" secondAttribute="bottom" constant="10" id="Jd0-6i-mWu"/>
                             <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="Gmq-Dz-mSm" secondAttribute="trailing" constant="10" id="ST4-An-oJF"/>
@@ -496,19 +561,25 @@
                             <constraint firstItem="N1O-BC-qdI" firstAttribute="top" secondItem="Gmq-Dz-mSm" secondAttribute="bottom" constant="10" id="T55-sc-Dp2"/>
                             <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="n6m-j0-iun" secondAttribute="trailing" constant="20" id="UtL-4F-EBu"/>
                             <constraint firstItem="n6m-j0-iun" firstAttribute="top" secondItem="YZM-m2-DWl" secondAttribute="bottom" constant="20" id="YzX-fN-Mq8"/>
+                            <constraint firstItem="97D-ZP-C4t" firstAttribute="top" secondItem="YZM-m2-DWl" secondAttribute="bottom" constant="15" id="a5I-ZT-Erc"/>
                             <constraint firstItem="Gmq-Dz-mSm" firstAttribute="top" secondItem="sdn-cC-ezK" secondAttribute="top" constant="25" id="dUd-Jg-a3v"/>
                             <constraint firstAttribute="trailing" secondItem="YZM-m2-DWl" secondAttribute="trailing" id="jLq-AT-hdX"/>
                             <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="uQv-9E-yvr" secondAttribute="trailing" constant="10" id="nTS-o5-1MR"/>
                             <constraint firstItem="Gmq-Dz-mSm" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="10" id="pqg-Oa-eq8"/>
+                            <constraint firstItem="pHN-LE-zJ2" firstAttribute="top" secondItem="n6m-j0-iun" secondAttribute="bottom" constant="35" id="q3J-uo-iRu"/>
                             <constraint firstAttribute="trailing" secondItem="N1O-BC-qdI" secondAttribute="trailing" id="rMD-s1-bRt"/>
+                            <constraint firstItem="97D-ZP-C4t" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="15" id="sFB-2w-HjC"/>
                             <constraint firstItem="uQv-9E-yvr" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="10" id="snt-cg-Ty5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Me3-4F-ryJ"/>
                     <connections>
+                        <outlet property="expandButton" destination="BMM-d8-tEv" id="X42-Dd-WeY"/>
                         <outlet property="itemImagesCollectionView" destination="uQv-9E-yvr" id="gOk-Fh-hKk"/>
                         <outlet property="itemTitleTextField" destination="Gmq-Dz-mSm" id="y0E-Se-AA8"/>
                         <outlet property="stepper" destination="n6m-j0-iun" id="mUA-wv-v3s"/>
+                        <outlet property="totalGatheringPeopleLabel" destination="P3u-lt-lGG" id="1bI-mY-YBu"/>
+                        <outlet property="tradeLocationTextField" destination="l4k-QH-s3X" id="di7-gV-9gR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECu-bw-Vf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

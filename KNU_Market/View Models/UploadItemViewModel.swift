@@ -14,6 +14,16 @@ class UploadItemViewModel {
     
     var location: String
     
+    let locationArray: [String] = [
+        "북문",
+        "동문",
+        "테크노문",
+        "쪽문",
+        "정문",
+        "서문",
+        "기숙사 (아래에 명시)"
+    ]
+    
     var peopleGathering: Int
     
     var itemExplanation: String

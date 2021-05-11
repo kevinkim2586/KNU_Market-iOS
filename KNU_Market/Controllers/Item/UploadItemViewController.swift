@@ -7,6 +7,10 @@ class UploadItemViewController: UIViewController {
     @IBOutlet weak var itemTitleTextField: UITextField!
     @IBOutlet var itemImagesCollectionView: UICollectionView!
     @IBOutlet weak var stepper: GMStepper!
+    @IBOutlet weak var totalGatheringPeopleLabel: UILabel!
+    @IBOutlet weak var tradeLocationTextField: UITextField!
+    @IBOutlet weak var expandButton: UITextField!
+    
     
     var viewModel = UploadItemViewModel()
     
@@ -16,6 +20,11 @@ class UploadItemViewController: UIViewController {
         initialize()
     }
     
+    @IBAction func pressedStepper(_ sender: GMStepper) {
+
+        totalGatheringPeopleLabel.text = "\(String(Int(stepper.value))) 명"
+    
+    }
     
     
 }
@@ -76,6 +85,31 @@ extension UploadItemViewController: UICollectionViewDelegate, UICollectionViewDa
             return cell
         }
     }
+}
+
+//MARK: - UIPickerViewDataSource, UIPickerViewDelegate
+
+extension UploadItemViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return viewModel.locationArray.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return viewModel.locationArray[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        let selectedLocation = viewModel.locationArray[row]
+        viewModel.location = selectedLocation
+        
+        tradeLocationTextField.text = selectedLocation
+    }
+    
     
 }
 
@@ -87,6 +121,7 @@ extension UploadItemViewController {
         
         initializeCollectionView()
         initializeStepper()
+        initializePickerView()
     }
     
     func initializeCollectionView() {
@@ -109,7 +144,17 @@ extension UploadItemViewController {
         stepper.labelBackgroundColor = #colorLiteral(red: 0.9050354388, green: 0.9050354388, blue: 0.9050354388, alpha: 1)
         stepper.limitHitAnimationColor = .white
         stepper.cornerRadius = 0
-     
+    }
+    
+    func initializePickerView() {
+        
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        expandButton.inputView = pickerView
+        tradeLocationTextField.inputView = pickerView
+        
         
     }
     

@@ -379,7 +379,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="EM0-Oa-2Dn"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uQv-9E-yvr">
@@ -521,60 +521,77 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="pHN-LE-zJ2">
-                                <rect key="frame" x="302" y="405" width="92" height="27"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="누리관" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l4k-QH-s3X" userLabel="장소">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="27"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="FG2-oU-r0I"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="yCa-sc-fsr"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="▼" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BMM-d8-tEv" userLabel="Expand Button Text Field">
-                                        <rect key="frame" x="75" y="0.0" width="17" height="27"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="textColor" name="AppDefaultColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공구 내용" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8Y-rS-EoI">
+                                <rect key="frame" x="15" y="480" width="63.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="▼" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BMM-d8-tEv" userLabel="Expand Button Text Field">
+                                <rect key="frame" x="377" y="407" width="17" height="27"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="AppDefaultColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="누리관" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l4k-QH-s3X" userLabel="장소">
+                                <rect key="frame" x="325" y="408" width="42" height="21"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="l4k-QH-s3X" firstAttribute="leading" secondItem="pHN-LE-zJ2" secondAttribute="leading" id="CkZ-Tl-oha"/>
-                                    <constraint firstItem="l4k-QH-s3X" firstAttribute="top" secondItem="pHN-LE-zJ2" secondAttribute="top" id="Hai-Jc-RnW"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="230" id="yCa-sc-fsr"/>
                                 </constraints>
-                            </stackView>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BJM-l8-PUN">
+                                <rect key="frame" x="15" y="515.5" width="384" height="331.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sdn-cC-ezK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Q8Y-rS-EoI" firstAttribute="top" secondItem="2r5-yi-TDA" secondAttribute="bottom" constant="50" id="14o-85-hLw"/>
+                            <constraint firstItem="BJM-l8-PUN" firstAttribute="top" secondItem="Q8Y-rS-EoI" secondAttribute="bottom" constant="15" id="47C-k5-8lb"/>
                             <constraint firstItem="2r5-yi-TDA" firstAttribute="top" secondItem="97D-ZP-C4t" secondAttribute="bottom" constant="30" id="4ch-Ig-u9e"/>
-                            <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="pHN-LE-zJ2" secondAttribute="trailing" constant="20" id="8x2-2K-Wwc"/>
+                            <constraint firstItem="sdn-cC-ezK" firstAttribute="bottom" secondItem="BJM-l8-PUN" secondAttribute="bottom" constant="15" id="8Zv-gP-gws"/>
                             <constraint firstItem="N1O-BC-qdI" firstAttribute="leading" secondItem="5XL-Dm-4gC" secondAttribute="leading" id="Ciy-3b-hhs"/>
                             <constraint firstItem="2r5-yi-TDA" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="15" id="GYH-8y-IWi"/>
+                            <constraint firstItem="BJM-l8-PUN" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="15" id="HGp-SC-kce"/>
                             <constraint firstItem="YZM-m2-DWl" firstAttribute="top" secondItem="uQv-9E-yvr" secondAttribute="bottom" constant="10" id="JQr-K3-vkI"/>
                             <constraint firstItem="uQv-9E-yvr" firstAttribute="top" secondItem="N1O-BC-qdI" secondAttribute="bottom" constant="10" id="Jd0-6i-mWu"/>
                             <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="Gmq-Dz-mSm" secondAttribute="trailing" constant="10" id="ST4-An-oJF"/>
                             <constraint firstItem="YZM-m2-DWl" firstAttribute="leading" secondItem="5XL-Dm-4gC" secondAttribute="leading" id="SxA-JB-ZZI"/>
                             <constraint firstItem="N1O-BC-qdI" firstAttribute="top" secondItem="Gmq-Dz-mSm" secondAttribute="bottom" constant="10" id="T55-sc-Dp2"/>
                             <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="n6m-j0-iun" secondAttribute="trailing" constant="20" id="UtL-4F-EBu"/>
+                            <constraint firstItem="BMM-d8-tEv" firstAttribute="leading" secondItem="l4k-QH-s3X" secondAttribute="trailing" constant="10" id="XAK-s4-FP2"/>
                             <constraint firstItem="n6m-j0-iun" firstAttribute="top" secondItem="YZM-m2-DWl" secondAttribute="bottom" constant="20" id="YzX-fN-Mq8"/>
                             <constraint firstItem="97D-ZP-C4t" firstAttribute="top" secondItem="YZM-m2-DWl" secondAttribute="bottom" constant="15" id="a5I-ZT-Erc"/>
                             <constraint firstItem="Gmq-Dz-mSm" firstAttribute="top" secondItem="sdn-cC-ezK" secondAttribute="top" constant="25" id="dUd-Jg-a3v"/>
+                            <constraint firstItem="l4k-QH-s3X" firstAttribute="top" secondItem="n6m-j0-iun" secondAttribute="bottom" constant="38" id="ghc-gD-RsG"/>
+                            <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="BMM-d8-tEv" secondAttribute="trailing" constant="20" id="j9L-zs-iZ6"/>
                             <constraint firstAttribute="trailing" secondItem="YZM-m2-DWl" secondAttribute="trailing" id="jLq-AT-hdX"/>
+                            <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="BJM-l8-PUN" secondAttribute="trailing" constant="15" id="nMm-cB-pYj"/>
                             <constraint firstItem="sdn-cC-ezK" firstAttribute="trailing" secondItem="uQv-9E-yvr" secondAttribute="trailing" constant="10" id="nTS-o5-1MR"/>
                             <constraint firstItem="Gmq-Dz-mSm" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="10" id="pqg-Oa-eq8"/>
-                            <constraint firstItem="pHN-LE-zJ2" firstAttribute="top" secondItem="n6m-j0-iun" secondAttribute="bottom" constant="35" id="q3J-uo-iRu"/>
                             <constraint firstAttribute="trailing" secondItem="N1O-BC-qdI" secondAttribute="trailing" id="rMD-s1-bRt"/>
                             <constraint firstItem="97D-ZP-C4t" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="15" id="sFB-2w-HjC"/>
+                            <constraint firstItem="Q8Y-rS-EoI" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="15" id="sZ6-0I-jYj"/>
                             <constraint firstItem="uQv-9E-yvr" firstAttribute="leading" secondItem="sdn-cC-ezK" secondAttribute="leading" constant="10" id="snt-cg-Ty5"/>
+                            <constraint firstItem="BMM-d8-tEv" firstAttribute="top" secondItem="n6m-j0-iun" secondAttribute="bottom" constant="37" id="yqk-zh-Wiz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Me3-4F-ryJ"/>
+                    <navigationItem key="navigationItem" title="공구 내용 쓰기" id="Me3-4F-ryJ">
+                        <barButtonItem key="rightBarButtonItem" title="완료" id="ffN-1o-Dc7">
+                            <color key="tintColor" name="AppDefaultColor"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="expandButton" destination="BMM-d8-tEv" id="X42-Dd-WeY"/>
+                        <outlet property="itemDetailTextView" destination="BJM-l8-PUN" id="0BA-0a-Wtn"/>
                         <outlet property="itemImagesCollectionView" destination="uQv-9E-yvr" id="gOk-Fh-hKk"/>
                         <outlet property="itemTitleTextField" destination="Gmq-Dz-mSm" id="y0E-Se-AA8"/>
                         <outlet property="stepper" destination="n6m-j0-iun" id="mUA-wv-v3s"/>
@@ -865,6 +882,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Js5-51-S3r">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="AppDefaultColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" name="AppDefaultColor"/>
                         </textAttributes>
@@ -890,6 +908,9 @@
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47499999403953552" blue="0.47499999403953552" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

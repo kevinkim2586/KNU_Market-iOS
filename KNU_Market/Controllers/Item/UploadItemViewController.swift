@@ -10,7 +10,7 @@ class UploadItemViewController: UIViewController {
     @IBOutlet weak var totalGatheringPeopleLabel: UILabel!
     @IBOutlet weak var tradeLocationTextField: UITextField!
     @IBOutlet weak var expandButton: UITextField!
-    
+    @IBOutlet weak var itemDetailTextView: UITextView!
     
     var viewModel = UploadItemViewModel()
     
@@ -109,8 +109,28 @@ extension UploadItemViewController: UIPickerViewDataSource, UIPickerViewDelegate
         
         tradeLocationTextField.text = selectedLocation
     }
+}
+//MARK: - UITextViewDelegate
+
+extension UploadItemViewController: UITextViewDelegate {
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+    
+        if textView.text.isEmpty {
+            textView.text = "공구 내용을 작성해주세요. (중고 거래 또는 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.)"
+            textView.textColor = UIColor.lightGray
+            return
+        }
+        viewModel.itemDetail = textView.text
+    }
 }
 
 //MARK: - UI Configuration
@@ -122,6 +142,7 @@ extension UploadItemViewController {
         initializeCollectionView()
         initializeStepper()
         initializePickerView()
+        initializeTextView()
     }
     
     func initializeCollectionView() {
@@ -155,6 +176,17 @@ extension UploadItemViewController {
         expandButton.inputView = pickerView
         tradeLocationTextField.inputView = pickerView
         
+    }
+    
+    func initializeTextView() {
+        
+        itemDetailTextView.delegate = self
+        itemDetailTextView.layer.borderWidth = 1.0
+        itemDetailTextView.layer.cornerRadius = 10.0
+        itemDetailTextView.layer.borderColor = UIColor.lightGray.cgColor
+        itemDetailTextView.clipsToBounds = true
+        itemDetailTextView.text = "공구 내용을 작성해주세요. (중고 거래 또는 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.)"
+        itemDetailTextView.textColor = UIColor.lightGray
         
     }
     

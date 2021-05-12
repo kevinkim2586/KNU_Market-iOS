@@ -26,7 +26,7 @@ class UploadItemViewModel {
     
     var peopleGathering: Int
     
-    var itemExplanation: String
+    var itemDetail: String
     
     var userSelectedImages: [UIImage] {
         didSet { convertUIImagesToDataFormat() }
@@ -42,7 +42,7 @@ class UploadItemViewModel {
         self.itemTitle = ""
         self.location = ""
         self.peopleGathering = 0
-        self.itemExplanation = ""
+        self.itemDetail = ""
         self.userSelectedImages = [UIImage]()
     
     }

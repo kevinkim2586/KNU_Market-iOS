@@ -16,6 +16,14 @@ struct Constants {
         static let chatTableViewCell            = "chatTableViewCell"
         static let addItemImageCell             = "addItemImageCell"
         static let userPickedItemImageCell      = "userPickedItemImageCell"
+        static let sendCell                     = "sendCell"
+        static let receiveCell                  = "receiveCell"
+    }
+    
+    struct XIB {
+        
+        static let sendCell                     = "SendCell"
+        static let receiveCell                  = "ReceiveCell"
     }
     
     struct Colors {

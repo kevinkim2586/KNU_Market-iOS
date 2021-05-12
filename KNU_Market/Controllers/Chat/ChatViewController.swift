@@ -1,42 +1,50 @@
 import UIKit
+import IQKeyboardManagerSwift
 
 class ChatViewController: UIViewController {
-
+    
+    
     @IBOutlet weak var chatTableView: UITableView!
+    @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var sendButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         initialize()
-
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar = true
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar = false
+    }
+    
 
-
+    @IBAction func pressedSendButton(_ sender: UIButton) {
+        
+    }
+    
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90.0
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 15
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellIdentifier = Constants.cellID.chatTableViewCell
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ChatTableViewCell else {
-            fatalError("Failed to dequeue cell for ItemTableViewCell")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID.sendCell, for: indexPath) as? SendCell else {
+            fatalError("Failed to dequeue cell for Chat View Controller")
         }
         
-        cell.chatImageView.image = UIImage(named: "chat_bubble_icon")
-        cell.chatTitleLabel.text = "공차 시키실 분?"
-        cell.chatParticipatingCountLabel.text = "2명"
+        cell.chatMessageLabel.text = "시험입니다"
         
         
         return cell
@@ -45,8 +53,6 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-
-
 //MARK: - UI Configuration
 
 extension ChatViewController {
@@ -54,11 +60,17 @@ extension ChatViewController {
     func initialize() {
         
         initializeTableView()
+        
     }
     
     func initializeTableView() {
         
         chatTableView.delegate = self
         chatTableView.dataSource = self
+        
+        let sendCellNib = UINib(nibName: Constants.XIB.sendCell, bundle: nil)
+        let sendCellID = Constants.cellID.sendCell
+        chatTableView.register(sendCellNib, forCellReuseIdentifier: sendCellID)
     }
+    
 }

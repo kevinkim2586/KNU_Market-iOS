@@ -26,7 +26,7 @@
 		7CA662312641359F000E0B7A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA662302641359F000E0B7A /* RegisterViewController.swift */; };
 		7CA66234264135AA000E0B7A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66233264135AA000E0B7A /* HomeViewController.swift */; };
 		7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66236264136BF000E0B7A /* MyPageViewController.swift */; };
-		7CA6623A264136C7000E0B7A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66239264136C7000E0B7A /* ChatViewController.swift */; };
+		7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66239264136C7000E0B7A /* ChatListViewController.swift */; };
 		7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624226413C47000E0B7A /* NetworkError.swift */; };
 		7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624626413C5A000E0B7A /* UserManager.swift */; };
 		7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624B26413D05000E0B7A /* UserInputError.swift */; };
@@ -46,6 +46,8 @@
 		7CB8DF51264C16260001CC6D /* SendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB8DF4F264C16260001CC6D /* SendCell.xib */; };
 		7CB8DF56264C164F0001CC6D /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF54264C164F0001CC6D /* ReceiveCell.swift */; };
 		7CB8DF57264C164F0001CC6D /* ReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB8DF55264C164F0001CC6D /* ReceiveCell.xib */; };
+		7CB8DF59264C1C770001CC6D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF58264C1C770001CC6D /* Message.swift */; };
+		7CB8DF5B264C1EC60001CC6D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF5A264C1EC60001CC6D /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,7 +72,7 @@
 		7CA662302641359F000E0B7A /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7CA66233264135AA000E0B7A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7CA66236264136BF000E0B7A /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
-		7CA66239264136C7000E0B7A /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		7CA66239264136C7000E0B7A /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		7CA6624226413C47000E0B7A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7CA6624626413C5A000E0B7A /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		7CA6624B26413D05000E0B7A /* UserInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputError.swift; sourceTree = "<group>"; };
@@ -90,6 +92,8 @@
 		7CB8DF4F264C16260001CC6D /* SendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendCell.xib; sourceTree = "<group>"; };
 		7CB8DF54264C164F0001CC6D /* ReceiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
 		7CB8DF55264C164F0001CC6D /* ReceiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiveCell.xib; sourceTree = "<group>"; };
+		7CB8DF58264C1C770001CC6D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		7CB8DF5A264C1EC60001CC6D /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -184,6 +188,7 @@
 				7CB8DF3B264BB15E0001CC6D /* Request Models */,
 				7CB8DF3C264BB1640001CC6D /* Response Models */,
 				7CB8DF41264BEC870001CC6D /* User.swift */,
+				7CB8DF58264C1C770001CC6D /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,8 +218,8 @@
 		7CA6622A264132F3000E0B7A /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */,
-				7C5E21282646558600E98FE5 /* ItemViewModel.swift */,
+				7CB8DF5D264C208A0001CC6D /* ChatVM */,
+				7CB8DF5C264C207D0001CC6D /* ItemVM */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -278,6 +283,22 @@
 			path = "Chat Bubble Cells";
 			sourceTree = "<group>";
 		};
+		7CB8DF5C264C207D0001CC6D /* ItemVM */ = {
+			isa = PBXGroup;
+			children = (
+				7C5E21282646558600E98FE5 /* ItemViewModel.swift */,
+				7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */,
+			);
+			path = ItemVM;
+			sourceTree = "<group>";
+		};
+		7CB8DF5D264C208A0001CC6D /* ChatVM */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChatVM;
+			sourceTree = "<group>";
+		};
 		7CD74E0C2645981700BD2DE4 /* Login+Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,7 +312,8 @@
 		7CD74E0D2645982600BD2DE4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				7CA66239264136C7000E0B7A /* ChatViewController.swift */,
+				7CA66239264136C7000E0B7A /* ChatListViewController.swift */,
+				7CB8DF5A264C1EC60001CC6D /* ChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -450,12 +472,14 @@
 				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
+				7CB8DF5B264C1EC60001CC6D /* ChatViewController.swift in Sources */,
+				7CB8DF59264C1C770001CC6D /* Message.swift in Sources */,
 				7CB8DF44264BEF050001CC6D /* LoadOtherUserProfileModel.swift in Sources */,
 				7CA6622E26413597000E0B7A /* LoginViewController.swift in Sources */,
 				7CA662312641359F000E0B7A /* RegisterViewController.swift in Sources */,
 				7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */,
-				7CA6623A264136C7000E0B7A /* ChatViewController.swift in Sources */,
+				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
 				7CB8DF40264BB6340001CC6D /* LoadProfileModel.swift in Sources */,
 				7CB8DF4C264BF26C0001CC6D /* CheckDuplicateModel.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,

@@ -32,6 +32,14 @@
 		7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624B26413D05000E0B7A /* UserInputError.swift */; };
 		7CA6624F26413F03000E0B7A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624E26413F03000E0B7A /* Constants.swift */; };
 		7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF35264BAB760001CC6D /* UIViewController Extension.swift */; };
+		7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF37264BB0300001CC6D /* ItemManager.swift */; };
+		7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF39264BB0360001CC6D /* ChatManager.swift */; };
+		7CB8DF3E264BB1970001CC6D /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF3D264BB1970001CC6D /* RegisterModel.swift */; };
+		7CB8DF40264BB6340001CC6D /* LoadProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF3F264BB6340001CC6D /* LoadProfileModel.swift */; };
+		7CB8DF42264BEC870001CC6D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF41264BEC870001CC6D /* User.swift */; };
+		7CB8DF44264BEF050001CC6D /* LoadOtherUserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */; };
+		7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */; };
+		7CB8DF48264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +70,14 @@
 		7CA6624B26413D05000E0B7A /* UserInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputError.swift; sourceTree = "<group>"; };
 		7CA6624E26413F03000E0B7A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7CB8DF35264BAB760001CC6D /* UIViewController Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController Extension.swift"; sourceTree = "<group>"; };
+		7CB8DF37264BB0300001CC6D /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
+		7CB8DF39264BB0360001CC6D /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
+		7CB8DF3D264BB1970001CC6D /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
+		7CB8DF3F264BB6340001CC6D /* LoadProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadProfileModel.swift; sourceTree = "<group>"; };
+		7CB8DF41264BEC870001CC6D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOtherUserProfileModel.swift; sourceTree = "<group>"; };
+		7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadProfileResponseModel.swift; sourceTree = "<group>"; };
+		7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOtherUserProfileResponseModel.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -153,6 +169,9 @@
 		7CA6622326413272000E0B7A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7CB8DF3B264BB15E0001CC6D /* Request Models */,
+				7CB8DF3C264BB1640001CC6D /* Response Models */,
+				7CB8DF41264BEC870001CC6D /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -161,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				7CA6624626413C5A000E0B7A /* UserManager.swift */,
+				7CB8DF37264BB0300001CC6D /* ItemManager.swift */,
+				7CB8DF39264BB0360001CC6D /* ChatManager.swift */,
 			);
 			path = "Network Group";
 			sourceTree = "<group>";
@@ -210,6 +231,25 @@
 				7CB8DF35264BAB760001CC6D /* UIViewController Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7CB8DF3B264BB15E0001CC6D /* Request Models */ = {
+			isa = PBXGroup;
+			children = (
+				7CB8DF3D264BB1970001CC6D /* RegisterModel.swift */,
+				7CB8DF3F264BB6340001CC6D /* LoadProfileModel.swift */,
+				7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */,
+			);
+			path = "Request Models";
+			sourceTree = "<group>";
+		};
+		7CB8DF3C264BB1640001CC6D /* Response Models */ = {
+			isa = PBXGroup;
+			children = (
+				7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */,
+				7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */,
+			);
+			path = "Response Models";
 			sourceTree = "<group>";
 		};
 		7CD74E0C2645981700BD2DE4 /* Login+Register */ = {
@@ -379,13 +419,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
+				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
+				7CB8DF44264BEF050001CC6D /* LoadOtherUserProfileModel.swift in Sources */,
 				7CA6622E26413597000E0B7A /* LoginViewController.swift in Sources */,
 				7CA662312641359F000E0B7A /* RegisterViewController.swift in Sources */,
 				7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatViewController.swift in Sources */,
+				7CB8DF40264BB6340001CC6D /* LoadProfileModel.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
+				7CB8DF48264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */,
@@ -395,10 +440,13 @@
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */,
 				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,
+				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,
 				7CA66234264135AA000E0B7A /* HomeViewController.swift in Sources */,
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
+				7CB8DF3E264BB1970001CC6D /* RegisterModel.swift in Sources */,
 				7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */,
+				7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */,
 				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

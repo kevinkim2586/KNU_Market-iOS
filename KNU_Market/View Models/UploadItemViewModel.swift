@@ -21,7 +21,8 @@ class UploadItemViewModel {
         "쪽문",
         "정문",
         "서문",
-        "기숙사 (아래에 명시)"
+        "기숙사 (아래에 명시)",
+        "기타 (아래에 명시)"
     ]
     
     var peopleGathering: Int

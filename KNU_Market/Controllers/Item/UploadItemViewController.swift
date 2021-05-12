@@ -26,6 +26,16 @@ class UploadItemViewController: UIViewController {
     
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
         
+        self.presentAlert(title: "작성하신 글을 올리시겠습니까?",
+                          message: "",
+                          withCancelAction: true) { pressedOk in
+            
+            
+            //TODO: - 여기서 API Manager.upload 호출해야할듯
+
+            
+        }
+        
     }
     
     

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="KGk-i7-Jjw" customClass="SendCell" customModule="KNU_Market" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="335" height="110"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGR-8r-VRD" userLabel="Message Bubble">
+                        <rect key="frame" x="40" y="10" width="230" height="90"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ElN-Rf-Zhi">
+                                <rect key="frame" x="10" y="10" width="210" height="70"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.75478723210195109" blue="0.76021515042133858" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ElN-Rf-Zhi" secondAttribute="bottom" constant="10" id="MNW-8Y-jVk"/>
+                            <constraint firstItem="ElN-Rf-Zhi" firstAttribute="leading" secondItem="cGR-8r-VRD" secondAttribute="leading" constant="10" id="hYp-7i-y6k"/>
+                            <constraint firstItem="ElN-Rf-Zhi" firstAttribute="top" secondItem="cGR-8r-VRD" secondAttribute="top" constant="10" id="iJe-mz-swi"/>
+                            <constraint firstAttribute="trailing" secondItem="ElN-Rf-Zhi" secondAttribute="trailing" constant="10" id="sOd-Yz-LDv"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_image" translatesAutoresizingMaskIntoConstraints="NO" id="Piz-zI-Twf">
+                        <rect key="frame" x="285" y="10" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="Rpx-d4-kB9"/>
+                            <constraint firstAttribute="width" constant="40" id="vak-Yn-WTT"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cGR-8r-VRD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="4kw-g7-HJA"/>
+                    <constraint firstItem="cGR-8r-VRD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="FEG-yJ-jNi"/>
+                    <constraint firstAttribute="bottom" secondItem="cGR-8r-VRD" secondAttribute="bottom" constant="10" id="Kyz-bM-DvI"/>
+                    <constraint firstItem="Piz-zI-Twf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="QQn-Gm-izH"/>
+                    <constraint firstItem="Piz-zI-Twf" firstAttribute="leading" secondItem="cGR-8r-VRD" secondAttribute="trailing" constant="15" id="Vnd-Va-aT0"/>
+                    <constraint firstAttribute="trailing" secondItem="Piz-zI-Twf" secondAttribute="trailing" constant="10" id="Xvp-hw-x0d"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="chatMessageLabel" destination="ElN-Rf-Zhi" id="oMR-yi-cJx"/>
+                <outlet property="messageBubble" destination="cGR-8r-VRD" id="GFa-qB-HFe"/>
+                <outlet property="userProfileImage" destination="Piz-zI-Twf" id="i15-6o-2Rz"/>
+            </connections>
+            <point key="canvasLocation" x="-64.492753623188406" y="152.00892857142856"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="default_profile_image" width="56" height="56"/>
+    </resources>
+</document>

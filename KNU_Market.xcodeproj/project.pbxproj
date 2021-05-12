@@ -42,6 +42,10 @@
 		7CB8DF48264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */; };
 		7CB8DF4A264BF1440001CC6D /* ChangeProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */; };
 		7CB8DF4C264BF26C0001CC6D /* CheckDuplicateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF4B264BF26C0001CC6D /* CheckDuplicateModel.swift */; };
+		7CB8DF50264C16260001CC6D /* SendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF4E264C16260001CC6D /* SendCell.swift */; };
+		7CB8DF51264C16260001CC6D /* SendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB8DF4F264C16260001CC6D /* SendCell.xib */; };
+		7CB8DF56264C164F0001CC6D /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF54264C164F0001CC6D /* ReceiveCell.swift */; };
+		7CB8DF57264C164F0001CC6D /* ReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB8DF55264C164F0001CC6D /* ReceiveCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +86,10 @@
 		7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOtherUserProfileResponseModel.swift; sourceTree = "<group>"; };
 		7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileModel.swift; sourceTree = "<group>"; };
 		7CB8DF4B264BF26C0001CC6D /* CheckDuplicateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateModel.swift; sourceTree = "<group>"; };
+		7CB8DF4E264C16260001CC6D /* SendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCell.swift; sourceTree = "<group>"; };
+		7CB8DF4F264C16260001CC6D /* SendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendCell.xib; sourceTree = "<group>"; };
+		7CB8DF54264C164F0001CC6D /* ReceiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
+		7CB8DF55264C164F0001CC6D /* ReceiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiveCell.xib; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -214,6 +222,7 @@
 		7CA6622B26413302000E0B7A /* UI Related Files */ = {
 			isa = PBXGroup;
 			children = (
+				7CB8DF4D264C15B20001CC6D /* Chat Bubble Cells */,
 				7C4D13C5264524FA00CBB00A /* TableViewCells */,
 				7C8839DB2643CADB00F9F78C /* UserPickedItemImageViewCell */,
 			);
@@ -256,6 +265,17 @@
 				7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */,
 			);
 			path = "Response Models";
+			sourceTree = "<group>";
+		};
+		7CB8DF4D264C15B20001CC6D /* Chat Bubble Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7CB8DF4E264C16260001CC6D /* SendCell.swift */,
+				7CB8DF54264C164F0001CC6D /* ReceiveCell.swift */,
+				7CB8DF55264C164F0001CC6D /* ReceiveCell.xib */,
+				7CB8DF4F264C16260001CC6D /* SendCell.xib */,
+			);
+			path = "Chat Bubble Cells";
 			sourceTree = "<group>";
 		};
 		7CD74E0C2645981700BD2DE4 /* Login+Register */ = {
@@ -372,7 +392,9 @@
 			files = (
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
+				7CB8DF57264C164F0001CC6D /* ReceiveCell.xib in Resources */,
 				7CA661F8263D4387000E0B7A /* Main.storyboard in Resources */,
+				7CB8DF51264C16260001CC6D /* SendCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +466,7 @@
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,
+				7CB8DF50264C16260001CC6D /* SendCell.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */,
 				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,
@@ -452,6 +475,7 @@
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterModel.swift in Sources */,
+				7CB8DF56264C164F0001CC6D /* ReceiveCell.swift in Sources */,
 				7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */,
 				7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */,
 				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,

@@ -587,6 +587,9 @@
                     <navigationItem key="navigationItem" title="공구 내용 쓰기" id="Me3-4F-ryJ">
                         <barButtonItem key="rightBarButtonItem" title="완료" id="ffN-1o-Dc7">
                             <color key="tintColor" name="AppDefaultColor"/>
+                            <connections>
+                                <action selector="pressedFinishButton:" destination="Qw3-Hb-Lid" id="eFL-PK-mDd"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

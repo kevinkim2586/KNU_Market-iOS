@@ -9,8 +9,12 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var personImageView: UIImageView!
     @IBOutlet weak var currentlyGatheredPeopleLabel: UILabel!
     
+    var isGathering: Bool = true
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        initialize()
   
     }
 
@@ -21,5 +25,10 @@ class ItemTableViewCell: UITableViewCell {
     //    func configure(with model: []) {
     //
     //    }
+    
+    func initialize() {
+        
+        itemImageView.layer.cornerRadius = 10.0
+    }
 
 }

@@ -124,67 +124,66 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemTableViewCell" rowHeight="160" id="8gT-0R-YZ5" customClass="ItemTableViewCell" customModule="KNU_Market" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="160"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemTableViewCell" rowHeight="110" id="8gT-0R-YZ5" customClass="ItemTableViewCell" customModule="KNU_Market" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8gT-0R-YZ5" id="Pqd-Px-nwu">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pizza" translatesAutoresizingMaskIntoConstraints="NO" id="ICf-7Q-kjx">
-                                                    <rect key="frame" x="20" y="16" width="120" height="128"/>
+                                                    <rect key="frame" x="20" y="16" width="80" height="78"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="120" id="NPk-K6-CTE"/>
-                                                        <constraint firstAttribute="height" constant="120" id="zuM-8D-BkI"/>
+                                                        <constraint firstAttribute="width" constant="80" id="NPk-K6-CTE"/>
+                                                        <constraint firstAttribute="height" constant="80" id="zuM-8D-BkI"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="도미노 피자 시키실 분" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCM-dd-Bdj">
-                                                    <rect key="frame" x="155" y="16" width="145.5" height="20.5"/>
+                                                    <rect key="frame" x="115" y="21" width="145.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="북문" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEl-9j-7BQ">
-                                                    <rect key="frame" x="155" y="46.5" width="26" height="18"/>
+                                                    <rect key="frame" x="338" y="66" width="26" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집 중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hex-f4-kju">
-                                                    <rect key="frame" x="155" y="94.5" width="46" height="19.5"/>
+                                                    <rect key="frame" x="115" y="66.5" width="46" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_icon" translatesAutoresizingMaskIntoConstraints="NO" id="TDS-j5-mBO">
-                                                    <rect key="frame" x="251" y="93.5" width="20" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="5kG-Td-JUG"/>
-                                                        <constraint firstAttribute="height" constant="20" id="IWm-SP-ogA"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="UsI-nu-RHC"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3 명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzg-Hf-sB5">
-                                                    <rect key="frame" x="286" y="93.5" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="236" y="68.5" width="35" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_icon" translatesAutoresizingMaskIntoConstraints="NO" id="TDS-j5-mBO">
+                                                    <rect key="frame" x="201" y="66.5" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="5kG-Td-JUG"/>
+                                                        <constraint firstAttribute="height" constant="20" id="IWm-SP-ogA"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="fEl-9j-7BQ" firstAttribute="leading" secondItem="ICf-7Q-kjx" secondAttribute="trailing" constant="15" id="3TC-LD-sEU"/>
-                                                <constraint firstItem="GCM-dd-Bdj" firstAttribute="top" secondItem="Pqd-Px-nwu" secondAttribute="topMargin" constant="5" id="6U2-3e-C6b"/>
+                                                <constraint firstItem="GCM-dd-Bdj" firstAttribute="top" secondItem="Pqd-Px-nwu" secondAttribute="topMargin" constant="10" id="6U2-3e-C6b"/>
+                                                <constraint firstItem="TDS-j5-mBO" firstAttribute="leading" secondItem="hex-f4-kju" secondAttribute="trailing" constant="40" id="Mhh-wu-AbR"/>
                                                 <constraint firstItem="hex-f4-kju" firstAttribute="leading" secondItem="ICf-7Q-kjx" secondAttribute="trailing" constant="15" id="ObX-3N-ZtQ"/>
+                                                <constraint firstItem="fEl-9j-7BQ" firstAttribute="top" secondItem="Pqd-Px-nwu" secondAttribute="topMargin" constant="55" id="SLE-sf-zz0"/>
                                                 <constraint firstItem="ICf-7Q-kjx" firstAttribute="leading" secondItem="Pqd-Px-nwu" secondAttribute="leadingMargin" id="W35-Mn-ayd"/>
-                                                <constraint firstItem="fEl-9j-7BQ" firstAttribute="top" secondItem="GCM-dd-Bdj" secondAttribute="bottom" constant="10" id="XIk-LZ-Gay"/>
+                                                <constraint firstItem="hex-f4-kju" firstAttribute="top" secondItem="GCM-dd-Bdj" secondAttribute="bottom" constant="25" id="c6x-fc-VO1"/>
+                                                <constraint firstItem="Zzg-Hf-sB5" firstAttribute="top" secondItem="GCM-dd-Bdj" secondAttribute="bottom" constant="27" id="cUu-qL-2oY"/>
                                                 <constraint firstItem="ICf-7Q-kjx" firstAttribute="top" secondItem="Pqd-Px-nwu" secondAttribute="topMargin" constant="5" id="clM-zx-AD4"/>
                                                 <constraint firstItem="GCM-dd-Bdj" firstAttribute="leading" secondItem="ICf-7Q-kjx" secondAttribute="trailing" constant="15" id="fep-R2-ATQ"/>
-                                                <constraint firstItem="Zzg-Hf-sB5" firstAttribute="top" secondItem="GCM-dd-Bdj" secondAttribute="bottom" constant="57" id="lej-9T-cbG"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="ICf-7Q-kjx" secondAttribute="bottom" constant="5" id="ljW-2f-e5P"/>
-                                                <constraint firstItem="TDS-j5-mBO" firstAttribute="top" secondItem="GCM-dd-Bdj" secondAttribute="bottom" constant="57" id="mGJ-de-rWI"/>
-                                                <constraint firstItem="hex-f4-kju" firstAttribute="top" secondItem="fEl-9j-7BQ" secondAttribute="bottom" constant="30" id="pwX-xO-hKq"/>
+                                                <constraint firstItem="TDS-j5-mBO" firstAttribute="top" secondItem="GCM-dd-Bdj" secondAttribute="bottom" constant="25" id="m8Q-Ky-G2V"/>
                                                 <constraint firstItem="Zzg-Hf-sB5" firstAttribute="leading" secondItem="TDS-j5-mBO" secondAttribute="trailing" constant="15" id="rnn-IJ-xUr"/>
-                                                <constraint firstItem="TDS-j5-mBO" firstAttribute="leading" secondItem="hex-f4-kju" secondAttribute="trailing" constant="50" id="u0c-y6-alU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fEl-9j-7BQ" secondAttribute="trailing" constant="30" id="vpk-aY-Q0m"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -196,14 +195,6 @@
                                             <outlet property="personImageView" destination="TDS-j5-mBO" id="88I-j8-U4S"/>
                                             <segue destination="zLp-Wy-dxz" kind="show" id="KVO-dM-uGV"/>
                                         </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemWithoutImageTableViewCell" rowHeight="135" id="f0u-fm-r2I">
-                                        <rect key="frame" x="0.0" y="184.5" width="414" height="135"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f0u-fm-r2I" id="Naa-vA-X9i">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="135"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

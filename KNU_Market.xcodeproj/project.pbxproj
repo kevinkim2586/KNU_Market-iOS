@@ -40,6 +40,8 @@
 		7CB8DF44264BEF050001CC6D /* LoadOtherUserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */; };
 		7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */; };
 		7CB8DF48264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */; };
+		7CB8DF4A264BF1440001CC6D /* ChangeProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */; };
+		7CB8DF4C264BF26C0001CC6D /* CheckDuplicateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF4B264BF26C0001CC6D /* CheckDuplicateModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOtherUserProfileModel.swift; sourceTree = "<group>"; };
 		7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadProfileResponseModel.swift; sourceTree = "<group>"; };
 		7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOtherUserProfileResponseModel.swift; sourceTree = "<group>"; };
+		7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileModel.swift; sourceTree = "<group>"; };
+		7CB8DF4B264BF26C0001CC6D /* CheckDuplicateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateModel.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -239,6 +243,8 @@
 				7CB8DF3D264BB1970001CC6D /* RegisterModel.swift */,
 				7CB8DF3F264BB6340001CC6D /* LoadProfileModel.swift */,
 				7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */,
+				7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */,
+				7CB8DF4B264BF26C0001CC6D /* CheckDuplicateModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -429,6 +435,7 @@
 				7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatViewController.swift in Sources */,
 				7CB8DF40264BB6340001CC6D /* LoadProfileModel.swift in Sources */,
+				7CB8DF4C264BF26C0001CC6D /* CheckDuplicateModel.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				7CB8DF48264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,
@@ -448,6 +455,7 @@
 				7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */,
 				7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */,
 				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,
+				7CB8DF4A264BF1440001CC6D /* ChangeProfileModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

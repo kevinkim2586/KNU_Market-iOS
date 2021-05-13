@@ -1,10 +1,13 @@
 import UIKit
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    
+    private let spinner = JGProgressHUD(style: .light)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +24,15 @@ class LoginViewController: UIViewController {
 
     @IBAction func pressedLoginButton(_ sender: UIButton) {
         
+        spinner.show(in: view)
+        
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
         
+        spinner.dismiss()
 
     }
     

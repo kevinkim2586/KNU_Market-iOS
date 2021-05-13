@@ -11,6 +11,7 @@ target 'KNU_Market' do
   pod 'IQKeyboardManagerSwift'
   pod "BSImagePicker", "~> 3.1"
   pod "GMStepper"
-
-
+  pod "MessageKit"
+  pod 'JGProgressHUD'
+  
 end

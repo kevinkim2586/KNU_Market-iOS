@@ -18,14 +18,24 @@ class ChatViewController: UIViewController {
         super.viewDidDisappear(animated)
         IQKeyboardManager.shared.enableAutoToolbar = true
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IQKeyboardManager.shared.enableAutoToolbar = false
     }
     
+    
+    
+    
+    
+    
+    
 
     @IBAction func pressedSendButton(_ sender: UIButton) {
         
+        //TEST
+//        let indexPath = IndexPath(row: 8 - 1, section: 0)
+//        chatTableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
 }
@@ -48,6 +58,10 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     

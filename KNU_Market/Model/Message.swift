@@ -1,10 +1,10 @@
 import Foundation
+import MessageKit
 
-//MARK: - 1개의 채팅을 위한 구조체
-
-//struct Message {
-//
-//    let userID: String
-//    let chat: String
-//
-//}
+struct Message: MessageType {
+    
+    var sender: SenderType
+    var messageId: String
+    var sentDate: Date
+    var kind: MessageKind
+}

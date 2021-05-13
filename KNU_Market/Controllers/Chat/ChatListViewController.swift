@@ -11,10 +11,6 @@ class ChatListViewController: UIViewController {
 
     }
     
-
-    
-
-
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource

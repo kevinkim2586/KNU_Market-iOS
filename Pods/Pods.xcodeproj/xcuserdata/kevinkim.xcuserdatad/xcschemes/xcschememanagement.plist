@@ -39,21 +39,21 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>JGProgressHUD.xcscheme</key>
+		<key>MessageKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
-		<key>MessageKit.xcscheme</key>
+		<key>Pods-KNU_Market.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
-		<key>Pods-KNU_Market.xcscheme</key>
+		<key>ProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

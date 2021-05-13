@@ -12,6 +12,7 @@ target 'KNU_Market' do
   pod "BSImagePicker", "~> 3.1"
   pod "GMStepper"
   pod "MessageKit"
-  pod 'JGProgressHUD'
+  pod 'InputBarAccessoryView'
+  pod 'ProgressHUD'
   
 end

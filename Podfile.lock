@@ -6,18 +6,19 @@ PODS:
     - InputBarAccessoryView/Core (= 5.3.1)
   - InputBarAccessoryView/Core (5.3.1)
   - IQKeyboardManagerSwift (6.5.6)
-  - JGProgressHUD (2.2)
   - MessageKit (3.6.1):
     - InputBarAccessoryView (~> 5.3.1)
+  - ProgressHUD (13.6)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - BSImagePicker (~> 3.1)
   - GMStepper
+  - InputBarAccessoryView
   - IQKeyboardManagerSwift
-  - JGProgressHUD
   - MessageKit
+  - ProgressHUD
   - SnapKit
 
 SPEC REPOS:
@@ -27,8 +28,8 @@ SPEC REPOS:
     - GMStepper
     - InputBarAccessoryView
     - IQKeyboardManagerSwift
-    - JGProgressHUD
     - MessageKit
+    - ProgressHUD
     - SnapKit
 
 SPEC CHECKSUMS:
@@ -37,10 +38,10 @@ SPEC CHECKSUMS:
   GMStepper: 89fb106944dfcc3aa3add7164e3ebd463ea2104b
   InputBarAccessoryView: 1f75d8c9f75e5e57f3ffac36ed58635a8005e0bc
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
+  ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 06ad2b7712bb2190ddac5ab1473f5e07c13d0d82
+PODFILE CHECKSUM: 944350e21ce97291f108e21d3fa40758cf03d7ec
 
 COCOAPODS: 1.10.1

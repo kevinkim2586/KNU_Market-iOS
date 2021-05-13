@@ -1,90 +1,149 @@
 import UIKit
-import IQKeyboardManagerSwift
+import MessageKit
+import InputBarAccessoryView
 
-class ChatViewController: UIViewController {
+struct Message: MessageType {
+    
+    var sender: SenderType
+    var messageId: String
+    var sentDate: Date
+    var kind: MessageKind
+}
+
+struct Sender: SenderType {
+    
+    var photoURL: UIImage
+    var senderId: String
+    var displayName: String
+}
+
+class ChatViewController: MessagesViewController {
+    
+    var messages = [Message]()
     
     
-    @IBOutlet weak var chatTableView: UITableView!
-    @IBOutlet weak var messageTextField: UITextField!
-    @IBOutlet weak var sendButton: UIButton!
+    let selfSender = Sender(photoURL: UIImage(named: "default_profile_image")!,
+                            senderId: "2",
+                            displayName: "김영채")
     
+    let otherUser = Sender(photoURL: UIImage(named: "default_profile_image")!,
+                           senderId: "1",
+                           displayName: "강지혜")
+    let otherUser2 = Sender(photoURL: UIImage(named: "default_profile_image")!,
+                           senderId: "3",
+                           displayName: "이승준")
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        initialize()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        IQKeyboardManager.shared.enableAutoToolbar = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        IQKeyboardManager.shared.enableAutoToolbar = false
-    }
-    
-    
-    
-    
-    
-    
-    
-
-    @IBAction func pressedSendButton(_ sender: UIButton) {
         
-        //TEST
-//        let indexPath = IndexPath(row: 8 - 1, section: 0)
-//        chatTableView.scrollToRow(at: indexPath, at: .top, animated: true)
-    }
+        messageInputBar.delegate = self
     
-}
-
-//MARK: - UITableViewDelegate, UITableViewDataSource
-
-extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID.sendCell, for: indexPath) as? SendCell else {
-            fatalError("Failed to dequeue cell for Chat View Controller")
+        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+          layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+          layout.textMessageSizeCalculator.incomingAvatarSize = .zero
         }
         
-        cell.chatMessageLabel.text = "시험입니다"
-        
-        
-        return cell
+
+        messages.append(Message(sender: otherUser,
+                                messageId: "2",
+                                sentDate: Date(),
+                                kind: .text("Hello World message")))
+        messages.append(Message(sender: selfSender,
+                                messageId: "1",
+                                sentDate: Date(),
+                                kind: .text("Hello World message")))
+        messages.append(Message(sender: selfSender,
+                                messageId: "1",
+                                sentDate: Date(),
+                                kind: .text("Hello World message")))
+        messages.append(Message(sender: otherUser,
+                                messageId: "1",
+                                sentDate: Date(),
+                                kind: .text("Hello World message")))
+        messages.append(Message(sender: otherUser2,
+                                messageId: "1",
+                                sentDate: Date(),
+                                kind: .text("Hello World message")))
+        messages.append(Message(sender: otherUser2,
+                                messageId: "1",
+                                sentDate: Date(),
+                                kind: .text("Hello World message")))
+        messages.append(Message(sender: selfSender,
+                                messageId: "1",
+                                sentDate: Date(),
+                                kind: .text("Hello World messageHello World messageHello World messageHello Woage")))
+
+        messagesCollectionView.messagesDataSource = self
+        messagesCollectionView.messagesLayoutDelegate = self
+        messagesCollectionView.messagesDisplayDelegate = self
+        messagesCollectionView.messageCellDelegate = self
+        messagesCollectionView.delegate = self
+
+
+    
+    }
+     
+
+}
+
+extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
+    
+    public func currentSender() -> SenderType {
+        return selfSender
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    public func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
+        return messages[indexPath.section]
     }
     
+    public func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
+        return messages.count
+    }
+    
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+    
+        avatarView.isHidden = true
+    }
+    
+    
+    func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        return 12
+    }
+    
+    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+    
+        return NSAttributedString(string: messages[indexPath.section].sender.displayName,
+                                  attributes: [.font: UIFont.systemFont(ofSize: 12)])
+    }
+    
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        
+        if message.sender.senderId == "2" {
+            return UIColor(named: "AppDefaultColor")!
+        }
+        else {
+            return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1)
+        }
+    }
     
 }
 
-//MARK: - UI Configuration
+//MARK: - InputBarAccessoryViewDelegate
 
-extension ChatViewController {
-    
-    func initialize() {
+extension ChatViewController: InputBarAccessoryViewDelegate {
+
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+
+        messages.append(Message(sender: selfSender,
+                                messageId: "1",
+                                sentDate: Date(),
+                                kind: .text(text)))
         
-        initializeTableView()
         
+        inputBar.inputTextView.text = ""
+        messagesCollectionView.reloadData()
+        messagesCollectionView.scrollToLastItem(animated: true)
     }
-    
-    func initializeTableView() {
-        
-        chatTableView.delegate = self
-        chatTableView.dataSource = self
-        
-        let sendCellNib = UINib(nibName: Constants.XIB.sendCell, bundle: nil)
-        let sendCellID = Constants.cellID.sendCell
-        chatTableView.register(sendCellNib, forCellReuseIdentifier: sendCellID)
-    }
-    
 }

@@ -18,4 +18,7 @@ class UserPickedItemImageCollectionViewCell: UICollectionViewCell {
     @IBAction func pressedCancelButton(_ sender: UIButton) {
         delegate?.didPressDeleteImageButton(at: indexPath)
     }
+    
+    
+    
 }

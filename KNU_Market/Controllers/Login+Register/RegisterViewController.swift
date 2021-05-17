@@ -84,7 +84,7 @@ extension RegisterViewController {
     func initialize() {
         
         initializeDelegates()
-        //initializeImageView()
+        initializeImageView()
         initializeNextButton()
         
     }
@@ -101,7 +101,7 @@ extension RegisterViewController {
 
         profileImageView.contentMode = .scaleAspectFit
         profileImageView.layer.masksToBounds = true
-        profileImageView.layer.borderWidth = 2
+        profileImageView.layer.borderWidth = 1
         profileImageView.layer.borderColor = UIColor.lightGray.cgColor
     }
     

@@ -2,7 +2,7 @@ import UIKit
 
 class ItemTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var itemImageView: UIImageView!
+    @IBOutlet weak var itemImageView: ItemImageView!
     @IBOutlet weak var itemTitleLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var gatheringLabel: UILabel!

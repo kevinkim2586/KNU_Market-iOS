@@ -2,6 +2,13 @@ import Foundation
 
 struct Constants {
     
+    static let API_BASE_URL = "http://155.230.25.110:5004/api/v1/"
+    
+    struct Color {
+        
+        static let appColor = "AppDefaultColor"
+    }
+    
     struct StoryboardID {
         
         static let initialViewController        = "initialViewController"

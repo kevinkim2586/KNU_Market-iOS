@@ -727,7 +727,7 @@
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedCheckAlreadyInUseButton:" destination="hKo-Es-J4q" eventType="touchUpInside" id="Bov-nX-k0m"/>
+                                    <action selector="pressedCheckDuplicateButton:" destination="hKo-Es-J4q" eventType="touchUpInside" id="Bov-nX-k0m"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XSZ-W2-cva">

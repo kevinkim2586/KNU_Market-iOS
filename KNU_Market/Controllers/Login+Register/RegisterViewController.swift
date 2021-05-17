@@ -32,7 +32,9 @@ class RegisterViewController: UIViewController {
         
     }
     
-    @IBAction func pressedCheckAlreadyInUseButton(_ sender: UIButton) {
+    @IBAction func pressedCheckDuplicateButton(_ sender: UIButton) {
+        
+        UserManager.shared.checkDuplicate(nickname: nicknameTextField.text!)
         
     }
     @IBAction func pressedNextButton(_ sender: UIButton) {

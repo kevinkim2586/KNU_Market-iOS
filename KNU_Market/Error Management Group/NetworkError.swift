@@ -1,56 +1,46 @@
 import Foundation
+import SwiftyJSON
 
-//enum NetworkError: Error {
-//
-//    case connectionError
-//    case serverError
-//
-//
-//    var errorDescription: String {
-//
-//        switch self {
-//        case .connectionError:
-//            return "네트워크 연결 상태에 문제가 있습니다."
-//        case .serverError:
-//            return "서버 에러. 잠시 후 다시 시도해주세요."
-//        }
-//    }
-//}
-
-enum NetworkError: Error {
+enum NetworkError: String, Error {
     
     // invalid account error
-    case E101
-    case E102
-    case E103
-    case E104
-    case E105
-    case E106
-    case E107
-    case E108
-    case E109
+    case E101 = "E101"
+    case E102 = "E102"
+    case E103 = "E103"
+    case E104 = "E104"
+    case E105 = "E105"
+    case E106 = "E106"
+    case E107 = "E107"
+    case E108 = "E108"
+    case E109 = "E109"
     
     // invalid request
-    case E201
+    case E201 = "E201"
     
     // invalid grant
-    case E301
-    case E302
-    case E303
+    case E301 = "E301"
+    case E302 = "E302"
+    case E303 = "E303"
     
     // invalid form
-    case E401
-    case E402
+    case E401 = "E401"
+    case E402 = "E402"
     
     // invalid file
-    case E501
+    case E501 = "E501"
     
     // invalid post
-    case E601
+    case E601 = "E601"
+    
+    // network error
+    case E000 = "E000"
     
     var errorDescription: String {
         
         switch self {
+        
+        case .E000:
+            return "예상치 못한 오류가 발생하였습니다. 잠시 후 다시 시도해주세요."
         
         case .E101:
             return "id 또는 password가 일치하지 않습니다."
@@ -93,4 +83,16 @@ enum NetworkError: Error {
             return "존재하지 않는 글"
         }
     }
+    
+    static func returnError(json: Data) -> NetworkError {
+        
+        do {
+            let json = try JSON(data: json)
+            let errorCode = json["errorCode"].stringValue
+            return NetworkError(rawValue: errorCode)!
+        } catch {
+            return .E000
+        }
+    }
+    
 }

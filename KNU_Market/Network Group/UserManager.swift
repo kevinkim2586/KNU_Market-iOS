@@ -22,7 +22,6 @@ class UserManager {
     let userProfileUpdateURL        = "\(Constants.API_BASE_URL)auth"
     
     
-    
     //MARK: - 회원가입
     func register(with model: RegisterModel,
                   completion: @escaping ((Result<Bool, Error>) -> Void)) {
@@ -52,20 +51,12 @@ class UserManager {
             case 201:
                 completion(.success(true))
             default:
-                do {
-                    let errorJSON = try JSON(data: response.data!)
-                    let errorDescription = errorJSON["errorDescription"].stringValue
-                    let error: Error
-                    error.localizedDescription = errorDescription
-                    completion(.failure(error))
-                    
-                } catch {
-                    print("User Manager - register() catch error \(error)")
-                    completion(.failure(error))
-                }
+                let error = NetworkError.returnError(json: response.data!)
+                completion(.failure(error))
             }
         }
     }
+    
     
     //MARK: - 닉네임 중복 체크
     func checkDuplicate(nickname: String,
@@ -98,29 +89,47 @@ class UserManager {
                             
                         } catch {
                             print("UserManager - checkDuplicate() catch error: \(error)")
-                            completion(.failure(.connectionError))
+                            completion(.failure(.E000))
                         }
                     default:
-                        do {
-                            let errorJSON = try JSON(data: response.data!)
-                            let errorCode = errorJSON["errorDescription"].stringValue
-                            
-                            completion(.failure())
-                            
-                            
-                        } catch {
-                            
-                        }
-                        completion(.failure(.serverError))
+                        let error = NetworkError.returnError(json: response.data!)
+                        completion(.failure(error))
                     }
                    }
     }
-     
-    //MARK: - 로그인
-    func login() {
-        
-        
     
+    //MARK: - 로그인
+    func login(id: String, password: String) {
+        
+        //let JSONBody: JSON = [ "id":id, "password":password ]
+        
+        let parameters: Parameters = [ "id":id, "password":password ]
+        
+        let headers: HTTPHeaders = [ "Content-Type": "application/json" ]
+        
+        AF.request(loginURL,
+                   method: .post,
+                   parameters: parameters,
+                   encoding: JSONEncoding.default,
+                   headers: headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 201:
+                        print("login success")
+                    default:
+                        print("login FAILED")
+                    }
+                    
+
+                    
+                   }
+        
+        
+        
+
         
     }
     

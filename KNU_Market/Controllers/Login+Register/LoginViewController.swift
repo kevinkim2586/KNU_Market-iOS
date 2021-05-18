@@ -21,6 +21,8 @@ class LoginViewController: UIViewController {
 
     @IBAction func pressedLoginButton(_ sender: UIButton) {
         
+        UserManager.shared.login(id: "kevinkim2586@gmail.com", password: "123456789")
+        
 
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

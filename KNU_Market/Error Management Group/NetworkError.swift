@@ -43,23 +43,23 @@ enum NetworkError: String, Error {
             return "예상치 못한 오류가 발생하였습니다. 잠시 후 다시 시도해주세요."
         
         case .E101:
-            return "id 또는 password가 일치하지 않습니다."
+            return "아이디 또는 비밀번호가 일치하지 않습니다."
         case .E102:
             return "이미 존재하는 계정입니다."
         case .E103:
-            return "잘못된 아이디 형식"
+            return "잘못된 아이디 형식입니다."
         case .E104:
-            return "잘못된 비밀번호 형식"
+            return "잘못된 비밀번호 형식입니다."
         case .E105:
-            return "잘못된 이메일 형식"
+            return "잘못된 이메일 형식입니다."
         case .E106:
-            return "인증 코드가 일치하지 않음"
+            return "인증 코드가 일치하지 않습니다. 다시 입력해주세요."
         case .E107:
-            return "이메일 인증 필요"
+            return "이메일 인증이 필요합니다."
         case .E108:
-            return "존재하지 않는 계정"
+            return "존재하지 않는 계정입니다."
         case .E109:
-            return "권한 없음"
+            return "권한이 없습니다."
    
         case .E201:
             return "refresh_token 누락"
@@ -69,18 +69,18 @@ enum NetworkError: String, Error {
         case .E302:
             return "잘못되거나 만료된 access_token"
         case .E303:
-            return "중복 데이터 존재"
+            return "중복 데이터가 존재합니다."
             
         case .E401:
-            return "잘못된 형식의 요청"
+            return "잘못된 형식의 요청입니다."
         case .E402:
-            return "잘못되거나 만료된 요청"
+            return "잘못되거나 만료된 요청입니다."
             
         case .E501:
-            return "존재하지 않는 파일"
+            return "존재하지 않는 파일입니다."
             
         case .E601:
-            return "존재하지 않는 글"
+            return "존재하지 않는 글입니다."
         }
     }
     

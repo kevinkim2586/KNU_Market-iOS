@@ -24,10 +24,47 @@ class UserManager {
     
     
     //MARK: - 회원가입
-    func register(with model: RegisterModel) {
+    func register(with model: RegisterModel,
+                  completion: @escaping ((Result<Bool, Error>) -> Void)) {
         
-        
-        
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append(Data(model.id.utf8),
+                                     withName: "id")
+            multipartFormData.append(Data(model.password.utf8),
+                                     withName: "password")
+            multipartFormData.append(Data(model.nickname.utf8),
+                                     withName: "nickname")
+            
+            if let profileImage = model.image {
+                multipartFormData.append(profileImage,
+                                         withName: "media",
+                                         fileName: "userProfileImage.jpeg",
+                                         mimeType: "image/jpeg")
+            }
+            
+        }, to: registerURL,
+        headers: model.headers).responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            case 201:
+                completion(.success(true))
+            default:
+                do {
+                    let errorJSON = try JSON(data: response.data!)
+                    let errorDescription = errorJSON["errorDescription"].stringValue
+                    let error: Error
+                    error.localizedDescription = errorDescription
+                    completion(.failure(error))
+                    
+                } catch {
+                    print("User Manager - register() catch error \(error)")
+                    completion(.failure(error))
+                }
+            }
+        }
     }
     
     //MARK: - 닉네임 중복 체크
@@ -64,6 +101,16 @@ class UserManager {
                             completion(.failure(.connectionError))
                         }
                     default:
+                        do {
+                            let errorJSON = try JSON(data: response.data!)
+                            let errorCode = errorJSON["errorDescription"].stringValue
+                            
+                            completion(.failure())
+                            
+                            
+                        } catch {
+                            
+                        }
                         completion(.failure(.serverError))
                     }
                    }

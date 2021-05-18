@@ -24,14 +24,15 @@ class UserManager {
     
     
     //MARK: - 회원가입
-    func register() {
+    func register(with model: RegisterModel) {
         
         
         
     }
     
     //MARK: - 닉네임 중복 체크
-    func checkDuplicate(nickname: String) {
+    func checkDuplicate(nickname: String,
+                        completion: @escaping (Result<Bool, > ->Void)) {
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -46,24 +47,22 @@ class UserManager {
                     
                     switch statusCode {
                     case 200:
+                        
                         do {
                             let json = try JSON(data: response.data!)
-                            print(json)
-                            print(json["isDuplicate"].stringValue)
+                            let result = json["isDuplicate"].stringValue
                             
+                            if result == "true" { completion("true") }
+                            else { completion("false") }
                         } catch {
-                            print("UserManager - checkDuplicate catch statement activated")
+                            print("UserManager - checkDuplicate() catch error: \(error)")
+                            completion("error")
                         }
-                      
                     default:
-                        print("default activated")
+                        completion("error")
                     }
                    }
-        
-        
-        
     }
-    
      
     //MARK: - 로그인
     func login() {

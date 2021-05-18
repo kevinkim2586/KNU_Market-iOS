@@ -12,6 +12,7 @@
 		7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E2126264645B300E98FE5 /* ItemViewController.swift */; };
 		7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* ItemViewModel.swift */; };
 		7C6B509E265290130032328C /* ItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509D265290130032328C /* ItemImageView.swift */; };
+		7C6B50A02652B17F0032328C /* UIImage Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509F2652B17F0032328C /* UIImage Extension.swift */; };
 		7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */; };
 		7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */; };
 		7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */; };
@@ -42,7 +43,6 @@
 		7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */; };
 		7CB8DF48264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */; };
 		7CB8DF4A264BF1440001CC6D /* ChangeProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */; };
-		7CB8DF4C264BF26C0001CC6D /* CheckDuplicateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF4B264BF26C0001CC6D /* CheckDuplicateModel.swift */; };
 		7CB8DF50264C16260001CC6D /* SendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF4E264C16260001CC6D /* SendCell.swift */; };
 		7CB8DF51264C16260001CC6D /* SendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB8DF4F264C16260001CC6D /* SendCell.xib */; };
 		7CB8DF56264C164F0001CC6D /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF54264C164F0001CC6D /* ReceiveCell.swift */; };
@@ -61,6 +61,7 @@
 		7C5E2126264645B300E98FE5 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		7C6B509D265290130032328C /* ItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageView.swift; sourceTree = "<group>"; };
+		7C6B509F2652B17F0032328C /* UIImage Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Extension.swift"; sourceTree = "<group>"; };
 		7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPickedItemImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -93,7 +94,6 @@
 		7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadProfileResponseModel.swift; sourceTree = "<group>"; };
 		7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOtherUserProfileResponseModel.swift; sourceTree = "<group>"; };
 		7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileModel.swift; sourceTree = "<group>"; };
-		7CB8DF4B264BF26C0001CC6D /* CheckDuplicateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateModel.swift; sourceTree = "<group>"; };
 		7CB8DF4E264C16260001CC6D /* SendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCell.swift; sourceTree = "<group>"; };
 		7CB8DF4F264C16260001CC6D /* SendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendCell.xib; sourceTree = "<group>"; };
 		7CB8DF54264C164F0001CC6D /* ReceiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
@@ -261,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				7CB8DF35264BAB760001CC6D /* UIViewController Extension.swift */,
+				7C6B509F2652B17F0032328C /* UIImage Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -272,7 +273,6 @@
 				7CB8DF3F264BB6340001CC6D /* LoadProfileModel.swift */,
 				7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */,
 				7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */,
-				7CB8DF4B264BF26C0001CC6D /* CheckDuplicateModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -492,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C6B50A02652B17F0032328C /* UIImage Extension.swift in Sources */,
 				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
@@ -505,7 +506,6 @@
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
 				7CB8DF40264BB6340001CC6D /* LoadProfileModel.swift in Sources */,
-				7CB8DF4C264BF26C0001CC6D /* CheckDuplicateModel.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
 				7CB8DF48264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift in Sources */,

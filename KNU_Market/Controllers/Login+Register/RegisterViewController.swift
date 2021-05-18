@@ -34,7 +34,20 @@ class RegisterViewController: UIViewController {
     
     @IBAction func pressedCheckDuplicateButton(_ sender: UIButton) {
         
-        UserManager.shared.checkDuplicate(nickname: nicknameTextField.text!)
+        UserManager.shared.checkDuplicate(nickname: nicknameTextField.text!) { isDuplicate in
+            
+            switch isDuplicate {
+            case "true":
+                
+            case "false":
+                
+            // default == "error"
+            default:
+                // 다시 시도해주세요 띄우기
+                
+            }
+            
+        }
         
     }
     @IBAction func pressedNextButton(_ sender: UIButton) {
@@ -62,13 +75,10 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let originalImage: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
+        if let originalImage: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             
-        
             profileImageView.image = originalImage
             profileImageView.contentMode = .scaleAspectFit
-
-  
         }
         dismiss(animated: true, completion: nil)
     }
@@ -101,10 +111,12 @@ extension RegisterViewController {
     
     func initializeImageView() {
 
+        profileImageView.isUserInteractionEnabled = true
         profileImageView.contentMode = .scaleAspectFit
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderWidth = 1
         profileImageView.layer.borderColor = UIColor.lightGray.cgColor
+  
     }
     
     func initializeNextButton() {

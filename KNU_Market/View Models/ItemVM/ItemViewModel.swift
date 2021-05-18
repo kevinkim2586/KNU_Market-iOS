@@ -8,13 +8,13 @@ class ItemViewModel {
     
     let itemImages: [UIImage]?
     
-    let itemTitle: String
+    let itemTitle: String = ""
     
     var userProfileImage: UIImage {
         get { getUserProfileImage() }
     }
     
-    let isGathering: Bool
+    let isGathering: Bool = false
     
     
     
@@ -22,9 +22,7 @@ class ItemViewModel {
     //MARK: - Initialization
     
     init() {
-        
-        self.itemTitle = ""
-        self.isGathering = false
+ 
         self.itemImages = [UIImage]()
         
     }

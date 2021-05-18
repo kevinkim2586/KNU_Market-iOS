@@ -38,8 +38,7 @@ struct RegisterModel {
             self.image = profileImage
         } else { self.image = nil }
     }
-   
-    
+
     let headers: HTTPHeaders = [.contentType("multipart/form-data")]
     
 }

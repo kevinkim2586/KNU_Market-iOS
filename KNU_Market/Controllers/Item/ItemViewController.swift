@@ -90,9 +90,19 @@ extension ItemViewController {
     
     func initialize() {
         
-        userProfileImageView.image = viewModel.userProfileImage
+        initializeProfileImageView()
         
         configurePageControl()
+        
+    }
+    
+    func initializeProfileImageView() {
+        
+        userProfileImageView.image = viewModel.userProfileImage
+        
+        userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
+        userProfileImageView.layer.borderWidth = 1
+        userProfileImageView.layer.borderColor = UIColor.black.cgColor
         
     }
     

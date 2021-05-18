@@ -205,7 +205,7 @@
                                     <constraint firstAttribute="width" constant="70" id="fxe-xj-t6Z"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="plus">
+                                <state key="normal" image="plus" catalog="system">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -990,7 +990,7 @@
         <image name="person_icon" width="37" height="33"/>
         <image name="pick_profile_picture" width="111" height="111"/>
         <image name="pizza" width="220.5" height="216"/>
-        <image name="plus" width="128" height="128"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47499999403953552" blue="0.47499999403953552" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -21,17 +21,25 @@ class LoginViewController: UIViewController {
 
     @IBAction func pressedLoginButton(_ sender: UIButton) {
         
-        UserManager.shared.login(id: "kevinkim2586@gmail.com", password: "123456789")
+        guard let id = idTextField.text, let password = passwordTextField.text else {
+            return
+        }
+        guard id.count > 0, password.count > 0 else { return }
+    
         
-
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
-        
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-        
-
-
+        UserManager.shared.login(id: id, password: password) { result in
+            
+            switch result {
+            case .success(_):
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+                
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+                
+            case .failure(let error):
+                self.presentSimpleAlert(title: "로그인 실패", message: error.errorDescription)
+            }
+        }
     }
     
 }

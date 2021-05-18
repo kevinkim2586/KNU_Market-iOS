@@ -47,6 +47,8 @@ class UserManager {
             
             guard let statusCode = response.response?.statusCode else { return }
             
+            print(response)
+            
             switch statusCode {
             case 201:
                 completion(.success(true))
@@ -99,12 +101,10 @@ class UserManager {
     }
     
     //MARK: - 로그인
-    func login(id: String, password: String) {
-        
-        //let JSONBody: JSON = [ "id":id, "password":password ]
-        
+    func login(id: String, password: String,
+               completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
+    
         let parameters: Parameters = [ "id":id, "password":password ]
-        
         let headers: HTTPHeaders = [ "Content-Type": "application/json" ]
         
         AF.request(loginURL,
@@ -118,21 +118,30 @@ class UserManager {
                     switch statusCode {
                     
                     case 201:
-                        print("login success")
+                        do {
+                            let json = try JSON(data: response.data!)
+                            self.saveAccessTokens(from: json)
+                            print("login success")
+                            completion(.success(true))
+                        
+                        } catch {
+                            print("UserManager - login() catch error: \(error)")
+                            completion(.failure(.E000))
+                        }
                     default:
                         print("login FAILED")
+                        let error = NetworkError.returnError(json: response.data!)
+                        completion(.failure(error))
                     }
-                    
-
-                    
                    }
-        
-        
-        
-
-        
     }
     
+    
+    func saveAccessTokens(from response: JSON) {
+        
+        User.shared.accessToken = response["accessToken"].stringValue
+        User.shared.refreshToken = response["refreshToken"].stringValue
+    }
     
     
     

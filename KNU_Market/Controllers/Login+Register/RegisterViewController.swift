@@ -53,6 +53,22 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
+        
+        
+        let registerModel = RegisterModel(id: "tahwan@gmail.com", password: "123456789", nickname: "굿굿", image: nil)
+        UserManager.shared.register(with: registerModel) { result in
+            
+            switch result {
+            case .success(let isSuccess):
+                print(isSuccess)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+        
+        
+        
  
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)

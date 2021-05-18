@@ -19,8 +19,6 @@ class RegisterViewController: UIViewController {
         initialize()
     }
     
-    
-    
     //Target 으로 바꾸기
     @IBAction func pressedImageUploadButton(_ sender: UIButton) {
         initializeImagePicker()
@@ -34,22 +32,26 @@ class RegisterViewController: UIViewController {
     
     @IBAction func pressedCheckDuplicateButton(_ sender: UIButton) {
         
-        UserManager.shared.checkDuplicate(nickname: nicknameTextField.text!) { isDuplicate in
-            
-            switch isDuplicate {
-            case "true":
-                
-            case "false":
-                
-            // default == "error"
-            default:
-                // 다시 시도해주세요 띄우기
-                
-            }
-            
-        }
+        guard let nickname = nicknameTextField.text else { return }
+        guard nickname.count > 0 else { return }
         
+        UserManager.shared.checkDuplicate(nickname: nickname) { result in
+            
+            switch result {
+            case .success(let isDuplicate):
+                
+                if isDuplicate {
+                    
+                } else {
+                    
+                }
+                
+            case .failure(let error):
+                self.presentSimpleAlert(title: "에러 발생", message: error.errorDescription)
+            }
+        }
     }
+    
     @IBAction func pressedNextButton(_ sender: UIButton) {
  
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

@@ -32,7 +32,7 @@ class UserManager {
     
     //MARK: - 닉네임 중복 체크
     func checkDuplicate(nickname: String,
-                        completion: @escaping (Result<Bool, > ->Void)) {
+                        completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -47,19 +47,24 @@ class UserManager {
                     
                     switch statusCode {
                     case 200:
-                        
                         do {
+                            
                             let json = try JSON(data: response.data!)
                             let result = json["isDuplicate"].stringValue
                             
-                            if result == "true" { completion("true") }
-                            else { completion("false") }
+                            if result == "true" {
+                                completion(.success(true))
+                            }
+                            else {
+                                completion(.success(false))
+                            }
+                            
                         } catch {
                             print("UserManager - checkDuplicate() catch error: \(error)")
-                            completion("error")
+                            completion(.failure(.connectionError))
                         }
                     default:
-                        completion("error")
+                        completion(.failure(.serverError))
                     }
                    }
     }

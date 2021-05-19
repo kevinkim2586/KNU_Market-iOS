@@ -22,14 +22,12 @@ class LoginViewController: UIViewController {
 
     @IBAction func pressedLoginButton(_ sender: UIButton) {
         
-        guard let id = idTextField.text, let password = passwordTextField.text else {
-            return
-        }
+        guard let id = idTextField.text, let password = passwordTextField.text else { return }
         guard id.count > 0, password.count > 0 else { return }
         
         ProgressHUD.animationType = .circleRotateChase
         ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appColor) ?? .systemGray
-        ProgressHUD.show("로그인 중..")
+        ProgressHUD.show()
     
         UserManager.shared.login(id: id, password: password) { result in
             
@@ -43,7 +41,6 @@ class LoginViewController: UIViewController {
             case .failure(let error):
                 self.presentSimpleAlert(title: "로그인 실패", message: error.errorDescription)
             }
-            
             ProgressHUD.dismiss()
         }
     }

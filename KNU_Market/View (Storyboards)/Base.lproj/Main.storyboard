@@ -19,33 +19,49 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6J-cK-goV">
-                                <rect key="frame" x="150" y="594" width="114" height="30"/>
-                                <state key="normal" title="로그인"/>
+                                <rect key="frame" x="82" y="594" width="250" height="50"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="TYG-cE-DZl"/>
+                                    <constraint firstAttribute="height" constant="50" id="cwJ-f1-4DX"/>
+                                </constraints>
+                                <state key="normal" title="로그인">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="pressedLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QA0-KE-jIF"/>
                                     <segue destination="WcB-qX-q1C" kind="show" id="qs8-ew-QKJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cvw-NO-gHC">
-                                <rect key="frame" x="150" y="674" width="114" height="30"/>
-                                <state key="normal" title="회원가입하기">
-                                    <color key="titleColor" name="AppDefaultColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressedRegisterButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2z3-wp-63c"/>
-                                    <segue destination="hKo-Es-J4q" kind="show" id="kxO-TU-zRk"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="AdD-nZ-BEy">
+                                <rect key="frame" x="100.5" y="679" width="213.5" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아직 회원이 아니신가요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r6-BF-WCn">
+                                        <rect key="frame" x="0.0" y="0.0" width="145.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cvw-NO-gHC">
+                                        <rect key="frame" x="161.5" y="0.0" width="52" height="30"/>
+                                        <state key="normal" title="회원가입">
+                                            <color key="titleColor" name="AppDefaultColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedRegisterButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2z3-wp-63c"/>
+                                            <segue destination="hKo-Es-J4q" kind="show" id="kxO-TU-zRk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="X6J-cK-goV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="150" id="624-lX-raZ"/>
                             <constraint firstItem="X6J-cK-goV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="550" id="Opl-oC-FNg"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="X6J-cK-goV" secondAttribute="trailing" constant="150" id="R7q-PR-KLt"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Cvw-NO-gHC" secondAttribute="trailing" constant="150" id="gdX-I5-w9L"/>
-                            <constraint firstItem="Cvw-NO-gHC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="150" id="kfR-2E-Yv7"/>
-                            <constraint firstItem="Cvw-NO-gHC" firstAttribute="top" secondItem="X6J-cK-goV" secondAttribute="bottom" constant="50" id="oi7-01-vAo"/>
+                            <constraint firstItem="AdD-nZ-BEy" firstAttribute="top" secondItem="X6J-cK-goV" secondAttribute="bottom" constant="35" id="emm-T1-xjg"/>
+                            <constraint firstItem="AdD-nZ-BEy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fgu-XL-IUn"/>
+                            <constraint firstItem="X6J-cK-goV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qGH-sd-XNe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zqb-yF-zj6"/>

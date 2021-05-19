@@ -755,25 +755,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RvZ-Un-Cfm">
-                                <rect key="frame" x="150" y="419" width="114" height="29"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="중복 확인">
-                                            <attributes>
-                                                <color key="NSColor" name="AppDefaultColor"/>
-                                                <font key="NSFont" size="15" name=".AppleSDGothicNeoI-Regular"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RvZ-Un-Cfm">
+                                <rect key="frame" x="179" y="419" width="56" height="30"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <state key="normal" title="중복 확인">
+                                    <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
                                     <action selector="pressedCheckDuplicateButton:" destination="hKo-Es-J4q" eventType="touchUpInside" id="Bov-nX-k0m"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XSZ-W2-cva">
-                                <rect key="frame" x="20" y="473" width="374" height="40"/>
+                                <rect key="frame" x="20" y="474" width="374" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="qlT-gO-71R"/>
                                 </constraints>
@@ -781,7 +774,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호 확인" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DrZ-mi-0Us">
-                                <rect key="frame" x="20" y="538" width="374" height="40"/>
+                                <rect key="frame" x="20" y="539" width="374" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="1gD-Q1-D2W"/>
                                 </constraints>
@@ -828,6 +821,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="y8b-32-Nqc" secondAttribute="trailing" constant="20" id="2Ir-e7-xn0"/>
+                            <constraint firstItem="RvZ-Un-Cfm" firstAttribute="centerX" secondItem="HO8-Vh-j16" secondAttribute="centerX" id="5gp-js-Q5k"/>
                             <constraint firstItem="Rnw-Dl-cTW" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="20" id="AZa-MD-lY4"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="fFz-r8-SHB" secondAttribute="trailing" constant="20" id="C1L-V9-YAo"/>
                             <constraint firstItem="XSZ-W2-cva" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="20" id="CQ7-fe-0yU"/>
@@ -836,12 +830,10 @@
                             <constraint firstItem="RvZ-Un-Cfm" firstAttribute="top" secondItem="y8b-32-Nqc" secondAttribute="bottom" constant="20" id="MzV-Qg-uom"/>
                             <constraint firstItem="Rnw-Dl-cTW" firstAttribute="top" secondItem="zeu-pG-bo7" secondAttribute="bottom" constant="25" id="QmZ-aL-n9x"/>
                             <constraint firstItem="C6i-B0-fMG" firstAttribute="centerX" secondItem="HO8-Vh-j16" secondAttribute="centerX" id="SMP-oR-hiU"/>
-                            <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="RvZ-Un-Cfm" secondAttribute="trailing" constant="150" id="StI-kq-a6Q"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="Rnw-Dl-cTW" secondAttribute="trailing" constant="20" id="VNc-nH-mIb"/>
                             <constraint firstItem="C6i-B0-fMG" firstAttribute="top" secondItem="Rnw-Dl-cTW" secondAttribute="bottom" constant="25" id="aci-KM-ZOT"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="bottom" secondItem="fFz-r8-SHB" secondAttribute="bottom" constant="25" id="ceT-dc-R5h"/>
                             <constraint firstItem="iyf-iz-Vsv" firstAttribute="trailing" secondItem="XSZ-W2-cva" secondAttribute="trailing" constant="20" id="j3f-mx-Mek"/>
-                            <constraint firstItem="RvZ-Un-Cfm" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="150" id="jvd-Lz-Uvg"/>
                             <constraint firstItem="DrZ-mi-0Us" firstAttribute="leading" secondItem="iyf-iz-Vsv" secondAttribute="leading" constant="20" id="nvQ-9D-9ga"/>
                             <constraint firstItem="DrZ-mi-0Us" firstAttribute="top" secondItem="XSZ-W2-cva" secondAttribute="bottom" constant="25" id="oTB-7F-7Es"/>
                             <constraint firstItem="XSZ-W2-cva" firstAttribute="top" secondItem="RvZ-Un-Cfm" secondAttribute="bottom" constant="25" id="p9i-d9-rr7"/>

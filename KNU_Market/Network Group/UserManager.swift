@@ -82,6 +82,8 @@ class UserManager {
                             let json = try JSON(data: response.data!)
                             let result = json["isDuplicate"].stringValue
                             
+                            print("USER MANAGER - checkDuplicate Result: \(result)")
+                            
                             if result == "true" {
                                 completion(.success(true))
                             }

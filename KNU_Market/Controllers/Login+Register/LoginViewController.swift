@@ -25,9 +25,7 @@ class LoginViewController: UIViewController {
         guard let id = idTextField.text, let password = passwordTextField.text else { return }
         guard id.count > 0, password.count > 0 else { return }
         
-        ProgressHUD.animationType = .circleRotateChase
-        ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appColor) ?? .systemGray
-        ProgressHUD.show()
+        showProgressBar()
     
         UserManager.shared.login(id: id, password: password) { result in
             
@@ -41,7 +39,7 @@ class LoginViewController: UIViewController {
             case .failure(let error):
                 self.presentSimpleAlert(title: "로그인 실패", message: error.errorDescription)
             }
-            ProgressHUD.dismiss()
+            dismissProgressBar()
         }
     }
     
@@ -84,7 +82,6 @@ extension LoginViewController {
         passwordTextField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
         
 
-  
         
         var idImage = UIImage(named: "idImage")
         idImage = idImage?.scalePreservingAspectRatio(targetSize: CGSize(width: 25, height: 25))

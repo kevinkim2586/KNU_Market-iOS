@@ -2,7 +2,7 @@ import UIKit
 
 class RegisterViewController: UIViewController {
     
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var sendEmailVerificationButton: UIButton!
     @IBOutlet weak var nicknameTextField: UITextField!
@@ -10,8 +10,11 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var checkPasswordTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet var textFieldCollections: [UITextField]!
     
     lazy var imagePicker = UIImagePickerController()
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,8 +98,10 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         
         if let originalImage: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             
-            profileImageView.image = originalImage
-            profileImageView.contentMode = .scaleAspectFit
+            profileImageButton.setImage(originalImage, for: .normal)
+            profileImageButton.contentMode = .scaleAspectFit
+            profileImageButton.layer.borderWidth = 1
+            profileImageButton.layer.borderColor = UIColor.lightGray.cgColor
         }
         dismiss(animated: true, completion: nil)
     }
@@ -114,7 +119,9 @@ extension RegisterViewController {
     func initialize() {
         
         initializeDelegates()
-        initializeImageView()
+        initializeTextFields()
+        initializeProfileImageButton()
+        initializeEmailVerificationButton()
         initializeNextButton()
         
     }
@@ -127,14 +134,45 @@ extension RegisterViewController {
         checkPasswordTextField.delegate = self
     }
     
-    func initializeImageView() {
+    func initializeTextFields() {
+        
+        for textField in textFieldCollections {
+     
+            textField.layer.cornerRadius = 1  //textField.frame.height / 2
+            textField.layer.borderWidth = 1
+            textField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
+            
+            textField.leftView = UIView(frame: CGRect(x: 0,
+                                                      y: 0,
+                                                      width: 15,
+                                                      height: 15))
+            textField.leftViewMode = .always
+            
+            
+        }
+        
+        passwordTextField.isSecureTextEntry = true
+        checkPasswordTextField.isSecureTextEntry = true
 
-        profileImageView.isUserInteractionEnabled = true
-        profileImageView.contentMode = .scaleAspectFit
-        profileImageView.layer.masksToBounds = true
-        profileImageView.layer.borderWidth = 1
-        profileImageView.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    func initializeProfileImageButton() {
+
+        profileImageButton.isUserInteractionEnabled = true
+        profileImageButton.contentMode = .scaleAspectFit
+        profileImageButton.layer.masksToBounds = true
+        profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
   
+  
+    }
+    
+    func initializeEmailVerificationButton() {
+        
+        sendEmailVerificationButton.setTitle("인증 메일 보내기", for: .normal)
+        sendEmailVerificationButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        sendEmailVerificationButton.backgroundColor = UIColor(named: Constants.Color.appColor)
+        sendEmailVerificationButton.layer.cornerRadius  = sendEmailVerificationButton.frame.height / 2
+        sendEmailVerificationButton.addBounceAnimationWithNoFeedback()
     }
     
     func initializeNextButton() {

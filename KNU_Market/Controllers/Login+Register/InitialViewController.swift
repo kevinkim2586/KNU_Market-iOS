@@ -35,7 +35,7 @@ class InitialViewController: UIViewController {
         loginButton.setTitle("로그인", for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         loginButton.backgroundColor = UIColor(named: Constants.Color.appColor)
-        loginButton.layer.cornerRadius  = 0.5 * 50
+        loginButton.layer.cornerRadius  = loginButton.frame.height / 2
         loginButton.addBounceAnimationWithNoFeedback()
         
     }

@@ -126,11 +126,6 @@ class RegisterViewController: UIViewController {
         }
     }
     
-
-
-    
-    
-    
     func changeRootViewController() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -161,9 +156,6 @@ extension RegisterViewController: UITextFieldDelegate {
             textField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
         }
     }
-    
-    
-    
 }
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
@@ -239,7 +231,8 @@ extension RegisterViewController {
     func initializeEmailVerificationButton() {
         
         sendEmailVerificationButton.setTitle("인증 메일 보내기", for: .normal)
-        sendEmailVerificationButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        sendEmailVerificationButton.titleLabel?.font = UIFont.systemFont(ofSize: 17,
+                                                                         weight: .semibold)
         sendEmailVerificationButton.backgroundColor = UIColor(named: Constants.Color.appColor)
         sendEmailVerificationButton.layer.cornerRadius  = sendEmailVerificationButton.frame.height / 2
         sendEmailVerificationButton.addBounceAnimationWithNoFeedback()

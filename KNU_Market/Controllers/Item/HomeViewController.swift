@@ -54,12 +54,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("Failed to dequeue cell for ItemTableViewCell")
         }
         
+        cell.initialize()
+        
         cell.itemImageView.image = UIImage(named: "pizza")
         cell.itemTitleLabel.text = "공구 구합니다"
         cell.locationLabel.text = "북문"
-        cell.gatheringLabel.text = "모집 중"
+        //cell.gatheringLabel.text = "모집 중"
         cell.personImageView.image = UIImage(named: "person_icon")
-        cell.currentlyGatheredPeopleLabel.text = "1"
+        cell.currentlyGatheredPeopleLabel.text = "1" + "/" + "3 명"
 
         
         return cell

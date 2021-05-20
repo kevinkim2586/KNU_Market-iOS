@@ -767,7 +767,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개발자에게 건의사항 보내기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1D-wq-ZnW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개발팀에게 건의사항 보내기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1D-wq-ZnW">
                                 <rect key="frame" x="77" y="335" width="185.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -781,6 +781,9 @@
                                 </constraints>
                                 <color key="tintColor" name="AppDefaultColor"/>
                                 <state key="normal" image="chevron.right.circle.fill" catalog="system"/>
+                                <connections>
+                                    <segue destination="ENk-kZ-4Rz" kind="show" id="o6c-Kh-qJW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2H-7E-Wou">
                                 <rect key="frame" x="177.5" y="406" width="59" height="33"/>
@@ -821,7 +824,7 @@
                             <constraint firstItem="k1D-wq-ZnW" firstAttribute="leading" secondItem="ne5-W6-7tE" secondAttribute="trailing" constant="20" id="xf0-Zu-Cs4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="JEh-Tb-b50"/>
+                    <navigationItem key="navigationItem" title="마이페이지" id="JEh-Tb-b50"/>
                     <connections>
                         <outlet property="logOutButton" destination="m2H-7E-Wou" id="pTP-hq-vTI"/>
                         <outlet property="profileImageButton" destination="UVp-j7-EQR" id="ZiR-92-7Ot"/>
@@ -832,6 +835,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKu-zD-xvF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5050.7246376811599" y="867.85714285714278"/>
+        </scene>
+        <!--건의사항-->
+        <scene sceneID="AUy-cC-wxa">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="ENk-kZ-4Rz" customClass="SendDeveloperMessageViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PYu-pV-BXO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRY-kK-NmR">
+                                <rect key="frame" x="15" y="171" width="384" height="153"/>
+                                <string key="text">(i) 혹시 건의/제안사항이 있으신가요? 
+있으시면 편하게 아래에 적어서 “보내기"를 눌러주세요. 개발자들이 참고하여 추후 업데이트에 반영하도록 하겠습니다 :)
+
+(ii) 아니면 앱을 사용하시면서 문제가 있으셨나요? 어떤 문제든지 알려주시면 저희 크누마켓팀이 검토 후 조치하도록 하겠습니다!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개발팀에게 건의사항 보내기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sg-jH-c7r">
+                                <rect key="frame" x="15" y="108" width="206" height="23"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nKl-es-Z3H">
+                                <rect key="frame" x="15" y="359" width="384" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="sMg-pF-7xe"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1zw-ja-SIe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6sg-jH-c7r" firstAttribute="top" secondItem="1zw-ja-SIe" secondAttribute="top" constant="20" id="4Wi-qZ-bUO"/>
+                            <constraint firstItem="nKl-es-Z3H" firstAttribute="top" secondItem="HRY-kK-NmR" secondAttribute="bottom" constant="35" id="7g0-lJ-vcL"/>
+                            <constraint firstAttribute="trailing" secondItem="HRY-kK-NmR" secondAttribute="trailing" constant="15" id="CHv-eO-9WH"/>
+                            <constraint firstItem="HRY-kK-NmR" firstAttribute="leading" secondItem="1zw-ja-SIe" secondAttribute="leading" constant="15" id="Ijf-Gy-Ev1"/>
+                            <constraint firstItem="6sg-jH-c7r" firstAttribute="leading" secondItem="1zw-ja-SIe" secondAttribute="leading" constant="15" id="Krc-rH-ihp"/>
+                            <constraint firstItem="nKl-es-Z3H" firstAttribute="leading" secondItem="1zw-ja-SIe" secondAttribute="leading" constant="15" id="gCf-Cp-gvf"/>
+                            <constraint firstItem="HRY-kK-NmR" firstAttribute="top" secondItem="6sg-jH-c7r" secondAttribute="bottom" constant="40" id="z48-5x-gi6"/>
+                            <constraint firstItem="1zw-ja-SIe" firstAttribute="trailing" secondItem="nKl-es-Z3H" secondAttribute="trailing" constant="15" id="zUj-94-9Es"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="건의사항" id="pHW-tP-Gz8">
+                        <barButtonItem key="rightBarButtonItem" title="보내기" id="qS1-oz-bHq">
+                            <color key="tintColor" name="AppDefaultColor"/>
+                            <connections>
+                                <action selector="pressedSendButton:" destination="ENk-kZ-4Rz" id="GLn-Nc-awA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="messageTextView" destination="nKl-es-Z3H" id="UJn-Pv-qhX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b5h-eK-czf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5898.5507246376819" y="867.85714285714278"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="BtQ-8F-euS">
@@ -1085,6 +1152,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1nV-6b-mxx">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="AppDefaultColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

@@ -31,7 +31,8 @@ class SendDeveloperMessageViewController: UIViewController {
         messageTextView.layer.cornerRadius = 10.0
         messageTextView.layer.borderColor = UIColor.lightGray.cgColor
         messageTextView.clipsToBounds = true
-        messageTextView.text = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁)"
+        messageTextView.font = UIFont.systemFont(ofSize: 15)
+        messageTextView.text = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
         messageTextView.textColor = UIColor.lightGray
     }
 

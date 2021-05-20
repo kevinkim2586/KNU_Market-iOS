@@ -17,53 +17,54 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func presentAlert(title: String, message: String, withCancelAction: Bool, completion: @escaping ((Bool) -> Void)) {
+    func presentAlertWithCancelAction(title: String, message: String, completion: @escaping ((Bool) -> Void)) {
         
         let alertController = UIAlertController(title: title,
                                                 message: message,
                                                 preferredStyle: .alert)
         
-        if withCancelAction {
-            
-            let okAction = UIAlertAction(title: "확인",
-                                         style: .default) { pressedOk in
-                completion(true)
-            }
-            let cancelAction = UIAlertAction(title: "취소",
-                                             style: .cancel,
-                                             handler: nil)
-            
-            alertController.addAction(okAction)
-            alertController.addAction(cancelAction)
-            
-        } else {
-            let okAction = UIAlertAction(title: "확인",
-                                         style: .default,
-                                         handler: nil)
-            alertController.addAction(okAction)
+        let okAction = UIAlertAction(title: "확인",
+                                     style: .default) { pressedOk in
+            completion(true)
+        }
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel) { pressedCancel in
+            completion(false)
         }
         
-
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+    
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func showToast(message : String, font: UIFont) {
+    func showToast(message : String, font: UIFont = .systemFont(ofSize: 14.0)) {
 
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-150, width: 150, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75,
+                                               y: self.view.frame.size.height-150,
+                                               width: 150,
+                                               height: 35))
+        
+        toastLabel.backgroundColor = .white
+        toastLabel.textColor = UIColor.black
         toastLabel.font = font
         toastLabel.textAlignment = .center;
         toastLabel.text = message
         toastLabel.alpha = 1.0
         toastLabel.layer.cornerRadius = 10;
         toastLabel.clipsToBounds  =  true
+        toastLabel.layer.borderWidth = 1
+        toastLabel.layer.borderColor = UIColor.black.cgColor
+        
         self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-             toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
+        
+        UIView.animate(withDuration: 4.0,
+                       delay: 0.1,
+                       options: .curveEaseOut,
+                       animations: { toastLabel.alpha = 0.0 },
+                       completion: { isCompleted in
+                        toastLabel.removeFromSuperview()
+                       })
     }
 }
  

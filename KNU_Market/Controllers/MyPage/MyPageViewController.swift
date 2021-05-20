@@ -12,12 +12,12 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-   
         loadUserProfile()
         initialize()
-        
-        
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        loadUserProfile()
     }
 
     func loadUserProfile() {
@@ -33,7 +33,6 @@ class MyPageViewController: UIViewController {
                 OperationQueue().addOperation {
                     self.fetchProfileImage(with: model.profileImage)
                 }
-        
             case .failure(let error):
                 self.presentSimpleAlert(title: "에러 발생", message: error.errorDescription)
             }
@@ -69,11 +68,8 @@ class MyPageViewController: UIViewController {
         present(self.imagePicker, animated: true, completion: nil)
     }
     
- 
-
 
 }
-
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 
@@ -83,17 +79,30 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
         
         if let originalImage: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             
-            profileImageButton.setImage(originalImage, for: .normal)
-            profileImageButton.contentMode = .scaleAspectFit
-            profileImageButton.layer.borderWidth = 1
-            profileImageButton.layer.borderColor = UIColor.lightGray.cgColor
+            dismiss(animated: true) {
+                
+                self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
+                    
+                    if selectedOk {
+            
+                        self.updateProfileImageButton(with: originalImage)
+                        
+                        // 프로필 사진 변경 API 추가 필요
+                        
+                    } else {
+                        self.imagePickerControllerDidCancel(self.imagePicker)
+                    }
+                }
+            }
         }
-        dismiss(animated: true, completion: nil)
+        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
+
 }
 
 
@@ -103,11 +112,11 @@ extension MyPageViewController {
     
     func initialize() {
         
-        initializeImageView()
+        initializeProfileImageButton()
         initializeImagePicker()
     }
     
-    func initializeImageView() {
+    func initializeProfileImageButton() {
         
         profileImageButton.isUserInteractionEnabled = true
         profileImageButton.contentMode = .scaleAspectFit
@@ -120,6 +129,14 @@ extension MyPageViewController {
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
+    }
+    
+    func updateProfileImageButton(with image: UIImage) {
+        
+        profileImageButton.setImage(image, for: .normal)
+        profileImageButton.contentMode = .scaleAspectFit
+        profileImageButton.layer.borderWidth = 1
+        profileImageButton.layer.borderColor = UIColor.lightGray.cgColor
     }
     
 }

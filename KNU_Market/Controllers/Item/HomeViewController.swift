@@ -43,7 +43,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -58,7 +58,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.itemImageView.image = UIImage(named: "pizza")
         cell.itemTitleLabel.text = "공구 구합니다"
-        cell.locationLabel.text = "북문"
+        cell.locationLabel.text = "테크노문"
         //cell.gatheringLabel.text = "모집 중"
         cell.personImageView.image = UIImage(named: "person_icon")
         cell.currentlyGatheredPeopleLabel.text = "1" + "/" + "3 명"

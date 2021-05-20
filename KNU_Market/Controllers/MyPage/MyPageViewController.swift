@@ -8,7 +8,6 @@ class MyPageViewController: UIViewController {
     @IBOutlet weak var logOutButton: UIButton!
     
     lazy var imagePicker = UIImagePickerController()
-    var profileImageExists: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +15,8 @@ class MyPageViewController: UIViewController {
    
         loadUserProfile()
         initialize()
+        
+        
         
     }
 
@@ -54,8 +55,9 @@ class MyPageViewController: UIViewController {
                         self.profileImageButton.setImage(profileImage, for: .normal)
                     }
                 }
-            case .failure(let error):
-                self.presentSimpleAlert(title: "에러 발생", message: error.errorDescription)
+            case .failure(_):
+                self.showToast(message: "프로필 사진 가져오기 실패", font: .systemFont(ofSize: 12.0))
+                
             }
         }
     }

@@ -35,7 +35,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.chatImageView.image = UIImage(named: "chat_bubble_icon")
         cell.chatTitleLabel.text = "공차 시키실 분?"
-        cell.chatParticipatingCountLabel.text = "2명"
+        cell.chatParticipatingCountLabel.text = "2" + " 명"
         
         
         return cell

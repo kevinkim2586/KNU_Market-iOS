@@ -102,7 +102,7 @@ extension ItemViewController {
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         userProfileImageView.layer.borderWidth = 1
-        userProfileImageView.layer.borderColor = UIColor.black.cgColor
+        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
         
     }
     

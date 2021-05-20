@@ -64,7 +64,6 @@ class RegisterViewController: UIViewController {
     @IBAction func pressedNextButton(_ sender: UIButton) {
         
         if !checkIfBlankTextFieldsExists() || !checkEmailFormat() || !checkIfPasswordFieldsAreIdentical() {
-        
             return
         }
         

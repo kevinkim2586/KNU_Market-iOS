@@ -329,13 +329,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집 중 2/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPz-Tb-uXf">
-                                <rect key="frame" x="70" y="821" width="78" height="21"/>
+                                <rect key="frame" x="20" y="821" width="78" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="iat-W9-kiO"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qU3-Gb-kOm">
-                                <rect key="frame" x="275" y="812" width="69" height="30"/>
+                                <rect key="frame" x="325" y="812" width="69" height="30"/>
                                 <state key="normal" title="채팅방 입장"/>
                             </button>
                         </subviews>
@@ -345,7 +348,7 @@
                             <constraint firstItem="Cex-lV-vkk" firstAttribute="top" secondItem="OT7-hx-mHb" secondAttribute="bottom" constant="15" id="0WU-Xa-H2o"/>
                             <constraint firstItem="pS8-Xx-a6y" firstAttribute="bottom" secondItem="qU3-Gb-kOm" secondAttribute="bottom" constant="20" id="68R-Jq-JDg"/>
                             <constraint firstItem="SVM-Xa-FM2" firstAttribute="top" secondItem="OT7-hx-mHb" secondAttribute="bottom" constant="25" id="6Ok-no-iI6"/>
-                            <constraint firstItem="sPz-Tb-uXf" firstAttribute="leading" secondItem="pS8-Xx-a6y" secondAttribute="leading" constant="70" id="6X2-8v-BGl"/>
+                            <constraint firstItem="sPz-Tb-uXf" firstAttribute="leading" secondItem="pS8-Xx-a6y" secondAttribute="leading" constant="20" id="6X2-8v-BGl"/>
                             <constraint firstItem="pS8-Xx-a6y" firstAttribute="trailing" secondItem="SVM-Xa-FM2" secondAttribute="trailing" constant="15" id="9M6-Wo-Uz5"/>
                             <constraint firstItem="OT7-hx-mHb" firstAttribute="trailing" secondItem="pS8-Xx-a6y" secondAttribute="trailing" id="9bA-mu-5gx"/>
                             <constraint firstItem="d8u-C8-bqO" firstAttribute="leading" secondItem="Cex-lV-vkk" secondAttribute="trailing" constant="10" id="BSR-w2-3Eu"/>
@@ -361,7 +364,7 @@
                             <constraint firstItem="Mrq-Ho-joG" firstAttribute="leading" secondItem="pS8-Xx-a6y" secondAttribute="leading" constant="15" id="kZo-UQ-eyM"/>
                             <constraint firstItem="BfD-BL-Puq" firstAttribute="leading" secondItem="pS8-Xx-a6y" secondAttribute="leading" constant="15" id="nHs-kK-q1V"/>
                             <constraint firstItem="Mrq-Ho-joG" firstAttribute="top" secondItem="Z68-RH-I8H" secondAttribute="bottom" constant="20" id="nPW-FW-GZW"/>
-                            <constraint firstItem="pS8-Xx-a6y" firstAttribute="trailing" secondItem="qU3-Gb-kOm" secondAttribute="trailing" constant="70" id="pr8-dN-jIf"/>
+                            <constraint firstItem="pS8-Xx-a6y" firstAttribute="trailing" secondItem="qU3-Gb-kOm" secondAttribute="trailing" constant="20" id="pr8-dN-jIf"/>
                             <constraint firstItem="BfD-BL-Puq" firstAttribute="top" secondItem="Mrq-Ho-joG" secondAttribute="bottom" constant="25" id="qxc-90-7u9"/>
                             <constraint firstItem="Cex-lV-vkk" firstAttribute="top" secondItem="JFC-KJ-6Dt" secondAttribute="bottom" constant="10" id="tTy-1k-Oht"/>
                             <constraint firstItem="pS8-Xx-a6y" firstAttribute="bottom" secondItem="sPz-Tb-uXf" secondAttribute="bottom" constant="20" id="uz3-ho-TEl"/>
@@ -733,6 +736,9 @@
                                 </constraints>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="pick_profile_picture"/>
+                                <connections>
+                                    <action selector="pressedProfileImageButton:" destination="e6f-cq-siB" eventType="touchUpInside" id="SaZ-Dg-9bK"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="hF2-vq-AwF" userLabel="Divider Line">
                                 <rect key="frame" x="20" y="314" width="374" height="1"/>
@@ -1066,6 +1072,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bag-Fo-mV6">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="AppDefaultColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" name="AppDefaultColor"/>
                         </textAttributes>
@@ -1152,6 +1159,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1nV-6b-mxx">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="AppDefaultColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" name="AppDefaultColor"/>
                         </textAttributes>

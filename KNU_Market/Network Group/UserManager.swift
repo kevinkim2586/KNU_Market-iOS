@@ -18,8 +18,9 @@ class UserManager {
     let logoutURL                   = "\(Constants.API_BASE_URL)logout"
     let requestAccessTokenURL       = "\(Constants.API_BASE_URL)token"
     let findPasswordURL             = "\(Constants.API_BASE_URL)findpassword"
-    let requestUserProfileURL       = "\(Constants.API_BASE_URL)auth"
+    let loadUserProfileURL          = "\(Constants.API_BASE_URL)auth"
     let userProfileUpdateURL        = "\(Constants.API_BASE_URL)auth"
+    let requestMediaURL             = "\(Constants.API_BASE_URL)media/"
     
     
     //MARK: - 회원가입
@@ -137,6 +138,75 @@ class UserManager {
                     }
                    }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //MARK: - 프로필 조회
+    func loadUserProfile(completion: @escaping ((Result<LoadProfileResponseModel, NetworkError>) -> Void)) {
+        
+        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+        
+        AF.request(loadUserProfileURL,
+                   method: .get,
+                   headers: headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    case 201:
+                        do {
+                            
+                            let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)
+                            print("User Manager - loadUserProfile() success")
+                            completion(.success(decodedData))
+                            
+                        } catch {
+                            print("User Manager - loadUserProfile() catch error \(error)")
+                            completion(.failure(.E000))
+                        }
+                        
+                    default:
+                        print("loadUserProfile FAILED")
+                        let error = NetworkError.returnError(json: response.data!)
+                        completion(.failure(error))
+                    }
+                    
+                   }
+    }
+    
+    
+    
+    //MARK: - 파일 조회
+    func requestMedia(from urlString: String,
+                      completion: @escaping ((Result<Data?, NetworkError>) -> Void)) {
+        
+        let requestURL = requestMediaURL + urlString
+        
+        AF.request(requestURL,
+                   method: .get).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    case 200:
+                        completion(.success(response.data!))
+                    default:
+                        print("requestMedia FAILED")
+                        let error = NetworkError.returnError(json: response.data!)
+                        completion(.failure(error))
+                    }
+                   }
+    }
+    
     
     
     func saveAccessTokens(from response: JSON) {

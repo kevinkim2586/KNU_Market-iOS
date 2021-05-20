@@ -207,6 +207,19 @@ class UserManager {
                    }
     }
     
+    //MARK: - 프로필 수정
+    func updateUserProfileInfo(with newInfo: AnyObject,
+                               completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+        
+        
+        
+        
+        
+        
+    }
+    
     
     
     func saveAccessTokens(from response: JSON) {

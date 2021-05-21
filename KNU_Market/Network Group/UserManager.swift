@@ -21,6 +21,7 @@ class UserManager {
     let loadUserProfileURL          = "\(Constants.API_BASE_URL)auth"
     let userProfileUpdateURL        = "\(Constants.API_BASE_URL)auth"
     let requestMediaURL             = "\(Constants.API_BASE_URL)media/"
+    let uploadImageURL              = "\(Constants.API_BASE_URL)media"
     
     
     //MARK: - 회원가입
@@ -47,8 +48,6 @@ class UserManager {
         headers: model.headers).responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
-            
-            print(response)
             
             switch statusCode {
             case 201:
@@ -208,18 +207,80 @@ class UserManager {
     }
     
     //MARK: - 프로필 수정
-    func updateUserProfileInfo(with newInfo: AnyObject,
+    
+    
+    //TODO: - 프로필 정보 중 하나를 업데이트 하려면, 그리고 그 중에서 이미지를 업뎃하려면 uploadImage를 먼저해야함
+    func updateUserProfileInfo(with newInfo: Any,
                                completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
         
-        
-        
-        
+        // 만약 nickname 이나 password 를 변경하고자 한다면
+        if let info = newInfo as? String {
+            
+            
+        }
+        else if let image = newInfo as? UIImage {
+            
+            self.uploadImage(with: image) { result in
+                
+                switch result {
+                case .success(let imageID):
+                    
+                    print("User Manager - updateUserProfileInfo success in uploadImage")
+                    
+                case .failure(let error):
+                    print("User Manager - updateUserProfileInfo .failure ACTIVATED with \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+               
+            }
+        }
         
         
     }
     
+
+    
+    
+    //MARK: - 이미지 업로드
+    func uploadImage(with image: UIImage,
+                     completion: @escaping ((Result<String, NetworkError>) -> Void)) {
+        
+        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            let imageData = image.jpegData(compressionQuality: 1)!
+            
+            multipartFormData.append(imageData,
+                                     withName: "media",
+                                     fileName: "newUserProfileImage.jpeg",
+                                     mimeType: "image/jpeg")
+            
+        }, to: uploadImageURL,
+        headers: headers).responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            case 201:
+                
+                do {
+                    
+                    let json = try JSON(data: response.data!)
+                    let imageID = json["uid"].stringValue
+                    completion(.success(imageID))
+                    
+                } catch {
+                    print("UserManager - uploadImage() catch error \(error)")
+                    completion(.failure(.E000))
+                }
+            default: completion(.failure(.E000))
+            }
+            
+        }
+    }
     
     
     func saveAccessTokens(from response: JSON) {

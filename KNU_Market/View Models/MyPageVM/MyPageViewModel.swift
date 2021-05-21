@@ -20,7 +20,7 @@ class MyPageViewModel {
     
     var profileImage: UIImage = UIImage()
     
-    
+
     
     func loadUserProfile() {
         
@@ -37,13 +37,8 @@ class MyPageViewModel {
             
             case .failure(let error):
                 self.delegate?.failedLoadingUserProfileInfo(with: error)
-                
             }
-            
-            
         }
-        
-        
     }
     
     func fetchProfileImage(with urlString: String) {
@@ -57,9 +52,10 @@ class MyPageViewModel {
                     
                     self.profileImage = UIImage(data: imageData) ?? UIImage(named: "pick_profile_picture")!
                     self.delegate?.didFetchProfileImage()
-                    
+                } else {
+                    self.delegate?.showToastMessage(with: "프로필 사진 가져오기 실패")
                 }
-                
+
             case .failure(_):
                 self.delegate?.showToastMessage(with: "프로필 사진 가져오기 실패")
             }
@@ -68,6 +64,7 @@ class MyPageViewModel {
     
     
     func updateUserProfileToServer(with image: UIImage) {
+        
         
         
     }

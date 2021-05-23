@@ -55,16 +55,18 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
                 let imageManager = PHImageManager.default()
                 let option = PHImageRequestOptions()
                 option.isSynchronous = true
+                option.resizeMode = .exact
+                
                 var thumbnail = UIImage()
                 
                 imageManager.requestImage(for: selectedAssets[i],
-                                          targetSize: CGSize(width: 200, height: 200),
+                                          targetSize: CGSize(width: 800, height: 800),
                                           contentMode: .aspectFit,
                                           options: option) { (result, info) in
                     thumbnail = result!
                 }
                 
-                let data = thumbnail.jpegData(compressionQuality: 0.7)
+                let data = thumbnail.jpegData(compressionQuality: 1)
                 let newImage = UIImage(data: data!)
                 
                 self.userSelectedImages.append(newImage! as UIImage)

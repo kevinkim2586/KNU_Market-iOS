@@ -10,9 +10,9 @@ class UploadItemViewModel {
     //MARK: - Object Properties
     var delegate: UploadItemDelegate?
     
-    var itemTitle: String
+    var itemTitle: String = ""
     
-    var location: String
+    var location: String = ""
     
     let locationArray: [String] = [
         "북문",
@@ -22,14 +22,14 @@ class UploadItemViewModel {
         "정문",
         "서문",
         "기숙사 (아래에 명시)",
-        "기타 (아래에 명시)"
+        "협의 (아래에 명시)"
     ]
     
-    var peopleGathering: Int
+    var peopleGathering: Int = 2
     
-    var itemDetail: String
+    var itemDetail: String = ""
     
-    var userSelectedImages: [UIImage] {
+    var userSelectedImages: [UIImage] = [] {
         didSet { convertUIImagesToDataFormat() }
     }
     
@@ -39,12 +39,6 @@ class UploadItemViewModel {
     //MARK: - Initialization
     
     init() {
-        
-        self.itemTitle = ""
-        self.location = ""
-        self.peopleGathering = 0
-        self.itemDetail = ""
-        self.userSelectedImages = [UIImage]()
     
     }
     

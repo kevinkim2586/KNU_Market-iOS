@@ -92,6 +92,10 @@ extension ItemViewController {
         
         initializeProfileImageView()
         
+        
+        initializeGatheringPeopleLabel()
+        initializeEnterChatButton()
+        
         configurePageControl()
         
     }
@@ -106,5 +110,21 @@ extension ItemViewController {
         
     }
     
+    func initializeGatheringPeopleLabel() {
+        
+        gatheringPeopleLabel.clipsToBounds = true
+        gatheringPeopleLabel.backgroundColor = UIColor(named: Constants.Color.appColor)
+        gatheringPeopleLabel.layer.cornerRadius = gatheringPeopleLabel.frame.height / 2
+        
+    }
+    
+    func initializeEnterChatButton() {
+        
+        
+        enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)
+        enterChatButton.layer.cornerRadius = enterChatButton.frame.height / 2
+        
+        
+    }
     
 }

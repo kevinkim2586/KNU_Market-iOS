@@ -274,12 +274,10 @@ class UserManager {
         }
     }
     
-    
+    //MARK: - 로그아웃
     func logOut(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
-        
-        
         
         AF.request(logoutURL,
                    method: .delete,

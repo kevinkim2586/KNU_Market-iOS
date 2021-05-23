@@ -19,7 +19,16 @@ class User {
     
     var refreshToken: String = ""
     
-    var profileImage: UIImage?
+    var profileImage: UIImage? {
+        
+        didSet {
+            guard let imageData = profileImage?.jpegData(compressionQuality: 1.0) else { return }
+            self.profileImageData = imageData
+        }
+    }
+    
+    
+    var profileImageData: Data?
     
     
     

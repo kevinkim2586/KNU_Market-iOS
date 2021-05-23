@@ -27,7 +27,38 @@ class MyPageViewController: UIViewController {
         initializeImagePicker()
         present(self.imagePicker, animated: true, completion: nil)
     }
-
+    
+    
+    @IBAction func pressedLogOutButton(_ sender: UIButton) {
+        
+        UserManager.shared.logOut { result in
+            
+            switch result {
+            
+            case .success(_):
+                
+                self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
+                    
+                    if selectedOk {
+                        
+                        DispatchQueue.main.async {
+                            self.popToInitialViewController()
+                        }
+                        
+                    } else { return }
+                }
+            case .failure(let error):
+                self.presentSimpleAlert(title: "네트워크 오류", message: error.errorDescription)
+            }
+        }
+    }
+    
+    func popToInitialViewController() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialNavController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialNavigationController)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialNavController)
+    }
 }
 
 //MARK: - MyPageViewModelDelegate
@@ -57,9 +88,6 @@ extension MyPageViewController: MyPageViewModelDelegate {
     func showToastMessage(with message: String) {
         showToast(message: message)
     }
-    
-    
-    
 }
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate

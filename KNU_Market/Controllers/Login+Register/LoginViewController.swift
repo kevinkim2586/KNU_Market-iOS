@@ -26,7 +26,10 @@ class LoginViewController: UIViewController {
             
             switch result {
             case .success(_):
+                
+                self.saveLoginInfo()
                 self.changeRootViewController()
+                
             case .failure(let error):
                 self.presentSimpleAlert(title: "로그인 실패", message: error.errorDescription)
             }
@@ -40,6 +43,13 @@ class LoginViewController: UIViewController {
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+    }
+    
+    func saveLoginInfo() {
+        
+        User.shared.id = idTextField.text!
+        User.shared.password = passwordTextField.text!
+        
     }
     
 }

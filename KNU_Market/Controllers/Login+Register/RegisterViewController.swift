@@ -173,6 +173,8 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    // 아래 함수 필요없으니 없애는거 검토
+    
     func changeRootViewController() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

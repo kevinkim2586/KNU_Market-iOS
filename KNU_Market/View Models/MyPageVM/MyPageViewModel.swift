@@ -1,5 +1,8 @@
 import UIKit
 
+let profileImageCache = NSCache<AnyObject, AnyObject>()
+
+
 protocol MyPageViewModelDelegate {
     
     func didLoadUserProfileInfo()
@@ -8,8 +11,8 @@ protocol MyPageViewModelDelegate {
     
     func failedLoadingUserProfileInfo(with error: NetworkError)
     func failedUpdatingUserProfileToServer(with error: NetworkError)
-    func showToastMessage(with message: String)
     
+    func showToastMessage(with message: String)
 }
 
 class MyPageViewModel {
@@ -18,12 +21,15 @@ class MyPageViewModel {
     
     var userNickname: String = ""
     
-    var profileImage: UIImage = UIImage()
+    var profileImage: UIImage = UIImage() {
+        didSet {
+            profileImageCache.setObject(self.profileImage, forKey: "profileImageCache" as AnyObject)
+            User.shared.profileImage = self.profileImage
+        }
+    }
     
     func loadUserProfile() {
-        
-        //profileImage cache 해서 있으면 그냥 바로 self.fetchProfileImage(with: image) 이런 식으로 하기
-        
+    
         UserManager.shared.loadUserProfile { result in
             
             switch result {
@@ -31,6 +37,13 @@ class MyPageViewModel {
                 
                 self.userNickname = model.nickname
                 self.delegate?.didLoadUserProfileInfo()
+                
+                // 이미 받아온 프로필 이미지 Cache 가 있다면
+                if let imageFromCache = profileImageCache.object(forKey: "profileImageCache" as AnyObject) as? UIImage {
+                    self.profileImage = imageFromCache
+                    return
+                }
+                
                 OperationQueue().addOperation {
                     self.fetchProfileImage(with: model.profileImage)
                 }

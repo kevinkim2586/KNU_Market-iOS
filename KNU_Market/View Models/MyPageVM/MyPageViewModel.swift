@@ -20,9 +20,9 @@ class MyPageViewModel {
     
     var profileImage: UIImage = UIImage()
     
-
-    
     func loadUserProfile() {
+        
+        //profileImage cache 해서 있으면 그냥 바로 self.fetchProfileImage(with: image) 이런 식으로 하기
         
         UserManager.shared.loadUserProfile { result in
             

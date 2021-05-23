@@ -14,6 +14,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet var textFieldCollections: [UITextField]!
     
     lazy var imagePicker = UIImagePickerController()
+    
+    var didCheckNicknameDuplicate: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +50,7 @@ class RegisterViewController: UIViewController {
     
                     self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
                     self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍", for: .normal)
+                    self.didCheckNicknameDuplicate = true
        
                 } else {
         
@@ -65,7 +68,7 @@ class RegisterViewController: UIViewController {
         
         //TODO - 이메일 인증을 했는지 확인하는 로직도 있어야함. 없으면 알림
         
-        if !checkIfBlankTextFieldsExists() || !checkEmailFormat() || !checkNicknameLength() || !checkPasswordLength() || !checkPasswordLength() {
+        if !checkIfBlankTextFieldsExists() || !checkEmailFormat() || !checkNicknameLength() || !checkPasswordLength() || !checkPasswordLength() || !didCheckNicknameDuplicate {
             return
         }
         
@@ -88,8 +91,12 @@ class RegisterViewController: UIViewController {
             case .success(let isSuccess):
                 print("Register View Controller - Register Successful: \(isSuccess)")
                 
-                DispatchQueue.main.async {
-                    self.changeRootViewController()
+                self.showToast(message: "회원가입을 축하합니다! 새로 로그인해주세요.")
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+                    
+                    self.dismiss(animated: true)
+                    
                 }
             
             case .failure(let error):
@@ -148,6 +155,8 @@ class RegisterViewController: UIViewController {
         else {
             self.presentSimpleAlert(title: "비밀번호를 다시 입력해주세요.", message: "비밀번호는 8자리 이상, 15자리 이하로 입력해주세요.")
             passwordTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
+            passwordTextField.text?.removeAll()
+            checkPasswordTextField.text?.removeAll()
             return false
             
         }
@@ -164,17 +173,14 @@ class RegisterViewController: UIViewController {
         }
     }
     
-
-    
     func changeRootViewController() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-        showToast(message: "회원가입을 축하합니다!")
+        
     }
-    
     
 }
 
@@ -247,7 +253,7 @@ extension RegisterViewController {
         
         for textField in textFieldCollections {
      
-            textField.layer.cornerRadius = 1  //textField.frame.height / 2
+            textField.layer.cornerRadius = 1
             textField.layer.borderWidth = 1
             textField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
             

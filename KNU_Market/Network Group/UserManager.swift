@@ -125,7 +125,7 @@ class UserManager {
                             self.saveAccessTokens(from: json)
                             print("login success")
                             completion(.success(true))
-                        
+                            
                         } catch {
                             print("UserManager - login() catch error: \(error)")
                             completion(.failure(.E000))
@@ -137,14 +137,6 @@ class UserManager {
                     }
                    }
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -283,12 +275,38 @@ class UserManager {
     }
     
     
+    func logOut(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+        
+        
+        
+        AF.request(logoutURL,
+                   method: .delete,
+                   headers: headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 201:
+                        completion(.success(true))
+                    default:
+                        print("logout FAILED")
+                        let error = NetworkError.returnError(json: response.data!)
+                        completion(.failure(error))
+                    }
+    }
+        
+    }
+    
+    
     func saveAccessTokens(from response: JSON) {
         
         User.shared.accessToken = response["accessToken"].stringValue
         User.shared.refreshToken = response["refreshToken"].stringValue
     }
     
-    
+
     
 }

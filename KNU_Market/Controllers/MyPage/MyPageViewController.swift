@@ -90,10 +90,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
                             
                             
                         }
-                      
-                        
-                       
-        
+              
                     } else {
                         self.imagePickerControllerDidCancel(self.imagePicker)
                     }

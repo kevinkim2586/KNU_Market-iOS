@@ -37,8 +37,8 @@ class UserManager {
             multipartFormData.append(Data(model.nickname.utf8),
                                      withName: "nickname")
             
-            if let profileImage = model.image {
-                multipartFormData.append(profileImage,
+            if let profileImageData = model.imageData {
+                multipartFormData.append(profileImageData,
                                          withName: "media",
                                          fileName: "userProfileImage.jpeg",
                                          mimeType: "image/jpeg")

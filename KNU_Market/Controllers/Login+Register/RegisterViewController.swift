@@ -63,25 +63,41 @@ class RegisterViewController: UIViewController {
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
         
-        if !checkIfBlankTextFieldsExists() || !checkEmailFormat() || !checkIfPasswordFieldsAreIdentical() {
+        //TODO - 이메일 인증을 했는지 확인하는 로직도 있어야함. 없으면 알림
+        
+        if !checkIfBlankTextFieldsExists() || !checkEmailFormat() || !checkNicknameLength() || !checkPasswordLength() || !checkPasswordLength() {
             return
         }
         
         showProgressBar()
+
+        let id = emailTextField.text!
+        let password = passwordTextField.text!
+        let nickname = nicknameTextField.text!
+        var profileImageData: Data? = nil
         
-        let registerModel = RegisterModel(id: "tahwan@gmail.com", password: "123456789", nickname: "굿굿", image: nil)
+        if let image = profileImageButton.currentImage {
+            profileImageData = image.jpegData(compressionQuality: 1.0)
+        }
+        
+        let registerModel = RegisterModel(id: id, password: password, nickname: nickname, image: profileImageData)
+        
         UserManager.shared.register(with: registerModel) { result in
             
             switch result {
             case .success(let isSuccess):
-                print(isSuccess)
+                print("Register View Controller - Register Successful: \(isSuccess)")
+                
+                DispatchQueue.main.async {
+                    self.changeRootViewController()
+                }
+            
             case .failure(let error):
-                print(error.localizedDescription)
+                print("Register View Controller - Register FAILED with error: \(error.localizedDescription)")
+                
             }
+            dismissProgressBar()
         }
-        
-        changeRootViewController()
-        dismissProgressBar()
     }
     
     func checkIfBlankTextFieldsExists() -> Bool {
@@ -98,7 +114,6 @@ class RegisterViewController: UIViewController {
             self.presentSimpleAlert(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요.")
             return false
         }
-    
         return true
     }
     
@@ -114,6 +129,30 @@ class RegisterViewController: UIViewController {
         return true
     }
     
+    func checkNicknameLength() -> Bool {
+        
+        guard let nickname = nicknameTextField.text else { return false }
+        
+        if nickname.count >= 2 && nickname.count <= 10 { return true }
+        else {
+            self.presentSimpleAlert(title: "닉네임을 다시 입력해주세요.", message: "닉네임은 2글자 이상, 10자리 이하로 입력해주세요.")
+            return false
+        }
+    }
+    
+    func checkPasswordLength() -> Bool {
+        
+        guard let password = passwordTextField.text else { return false }
+        
+        if password.count >= 8 && password.count <= 15 { return true }
+        else {
+            self.presentSimpleAlert(title: "비밀번호를 다시 입력해주세요.", message: "비밀번호는 8자리 이상, 15자리 이하로 입력해주세요.")
+            passwordTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
+            return false
+            
+        }
+    }
+    
     func checkIfPasswordFieldsAreIdentical() -> Bool {
         
         if passwordTextField.text == checkPasswordTextField.text { return true }
@@ -125,12 +164,15 @@ class RegisterViewController: UIViewController {
         }
     }
     
+
+    
     func changeRootViewController() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+        showToast(message: "회원가입을 축하합니다!")
     }
     
     

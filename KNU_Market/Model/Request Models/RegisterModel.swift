@@ -26,7 +26,7 @@ struct RegisterModel {
     let id: String
     let password: String
     let nickname: String
-    let image: Data?
+    let imageData: Data?
     
     init(id: String, password: String, nickname: String, image: Data?) {
         
@@ -34,9 +34,9 @@ struct RegisterModel {
         self.password = password
         self.nickname = nickname
         
-        if let profileImage = image {
-            self.image = profileImage
-        } else { self.image = nil }
+        if let profileImageData = image {
+            self.imageData = profileImageData
+        } else { self.imageData = nil }
     }
 
     let headers: HTTPHeaders = [.contentType("multipart/form-data")]

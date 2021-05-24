@@ -436,6 +436,7 @@
                         <outlet property="itemTitleLabel" destination="H7J-Hp-GLf" id="Drs-SS-k4u"/>
                         <outlet property="locationLabel" destination="5nb-xN-9fP" id="L6M-ty-feQ"/>
                         <outlet property="pageControl" destination="9F6-rP-TyN" id="Io3-tF-JPh"/>
+                        <outlet property="scrollView" destination="Z8t-hz-Jl4" id="Ezw-9k-NC2"/>
                         <outlet property="userIdLabel" destination="5n9-MH-lIK" id="Xdn-we-1e2"/>
                         <outlet property="userProfileImageView" destination="Os2-ox-J1k" id="KCp-c2-yQR"/>
                     </connections>

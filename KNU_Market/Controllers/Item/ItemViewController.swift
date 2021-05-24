@@ -11,10 +11,13 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var itemExplanationLabel: UILabel!
     @IBOutlet weak var gatheringPeopleLabel: UILabel!
     @IBOutlet weak var enterChatButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
     
+    private let refreshControl = UIRefreshControl()
     var images = ["bubble1", "bubble2", "bubble3"]
     
     private var viewModel = ItemViewModel()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +34,18 @@ class ItemViewController: UIViewController {
         itemImageView.image = UIImage(named: images[pageControl.currentPage])
     }
     
-    
-    
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
         
         //Action Sheet - 유저 신고하기
     }
+    
+    @objc func refreshScrollView() {
+        
+        scrollView.refreshControl?.endRefreshing()
+    }
+    
+    
+    
     
 }
 
@@ -46,6 +55,8 @@ extension ItemViewController {
     
     func initialize() {
         
+        initializeScrollView()
+        
         initializeProfileImageView()
         
         initializeItemExplanationLabel()
@@ -54,6 +65,12 @@ extension ItemViewController {
         
         configurePageControl()
         
+    }
+    
+    func initializeScrollView() {
+        
+        scrollView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshScrollView), for: .valueChanged)
     }
     
     func initializeProfileImageView() {

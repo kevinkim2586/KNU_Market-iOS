@@ -6,7 +6,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     
-
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +64,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    @objc func refreshTableView() {
+        
+        tableView.reloadData()
+        tableView.refreshControl?.endRefreshing()
+        // ex
+//        viewModel.reviewList.removeAll()
+//        viewModel.needToFetchMoreData = true
+//        viewModel.isPaginating = false
+//        viewModel.fetchReviewList(of: 2)
+        
+    }
 
     
     
@@ -84,6 +96,9 @@ extension HomeViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.refreshControl = refreshControl
+        
+        refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
     
     func initializeAddButton() {

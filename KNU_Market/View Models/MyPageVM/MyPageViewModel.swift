@@ -42,6 +42,7 @@ class MyPageViewModel {
                 // 이미 받아온 프로필 이미지 Cache 가 있다면
                 if let imageFromCache = profileImageCache.object(forKey: "profileImageCache" as AnyObject) as? UIImage {
                     self.profileImage = imageFromCache
+                    self.delegate?.didFetchProfileImage()
                     return
                 }
                 
@@ -62,6 +63,8 @@ class MyPageViewModel {
             
             switch result {
             case .success(let imageData):
+                
+                print("MyPageViewModel - fetchProfileImage .success()")
                 
                 if let imageData = imageData {
                     

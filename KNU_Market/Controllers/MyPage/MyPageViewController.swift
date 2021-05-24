@@ -74,7 +74,8 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func didUpdateUserProfileToServer() {
-        
+        updateProfileImageButton(with: viewModel.profileImage)
+        showToast(message: "프로필 이미지 변경 성공")
     }
     
     func failedLoadingUserProfileInfo(with error: NetworkError) {
@@ -83,6 +84,7 @@ extension MyPageViewController: MyPageViewModelDelegate {
     
     func failedUpdatingUserProfileToServer(with error: NetworkError) {
         
+        self.presentSimpleAlert(title: "업로드 오류", message: error.errorDescription)
     }
     
     func showToastMessage(with message: String) {
@@ -112,7 +114,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
                             
                             
                             self.viewModel.updateUserProfileToServer(with: originalImage)
-                            //self.updateUserProfileToServer(with: originalImage)
+        
                         
                             dismissProgressBar()
                             

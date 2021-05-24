@@ -68,7 +68,7 @@ class RegisterViewController: UIViewController {
         
         //TODO - 이메일 인증을 했는지 확인하는 로직도 있어야함. 없으면 알림
         
-        if !checkIfBlankTextFieldsExists() || !checkEmailFormat() || !checkNicknameLength() || !checkPasswordLength() || !checkPasswordLength() || !didCheckNicknameDuplicate {
+        if !checkIfBlankTextFieldsExists() || !checkEmailFormat() || !checkNicknameLength() || !checkPasswordLength() || !checkPasswordLength() || !checkNicknameDuplicate() {
             return
         }
         
@@ -134,6 +134,12 @@ class RegisterViewController: UIViewController {
             return false
         }
         return true
+    }
+    
+    func checkNicknameDuplicate() -> Bool {
+        
+        if !didCheckNicknameDuplicate { return false}
+        else { return true }
     }
     
     func checkNicknameLength() -> Bool {

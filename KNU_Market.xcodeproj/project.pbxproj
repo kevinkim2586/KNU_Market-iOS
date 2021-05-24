@@ -37,6 +37,7 @@
 		7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624626413C5A000E0B7A /* UserManager.swift */; };
 		7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624B26413D05000E0B7A /* UserInputError.swift */; };
 		7CA6624F26413F03000E0B7A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624E26413F03000E0B7A /* Constants.swift */; };
+		7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */; };
 		7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF35264BAB760001CC6D /* UIViewController Extension.swift */; };
 		7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF37264BB0300001CC6D /* ItemManager.swift */; };
 		7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF39264BB0360001CC6D /* ChatManager.swift */; };
@@ -92,6 +93,7 @@
 		7CA6624626413C5A000E0B7A /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		7CA6624B26413D05000E0B7A /* UserInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputError.swift; sourceTree = "<group>"; };
 		7CA6624E26413F03000E0B7A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewModel.swift; sourceTree = "<group>"; };
 		7CB8DF35264BAB760001CC6D /* UIViewController Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController Extension.swift"; sourceTree = "<group>"; };
 		7CB8DF37264BB0300001CC6D /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
 		7CB8DF39264BB0360001CC6D /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		7C4D13C5264524FA00CBB00A /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */,
 				7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */,
 				7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */,
 			);
@@ -547,6 +550,7 @@
 				7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
+				7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */,
 				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7CB8DF50264C16260001CC6D /* SendCell.swift in Sources */,

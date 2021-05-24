@@ -62,7 +62,7 @@ extension ItemViewController {
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         userProfileImageView.layer.borderWidth = 1
-        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        userProfileImageView.layer.borderColor = UIColor.black.cgColor
         
     }
     
@@ -90,6 +90,8 @@ extension ItemViewController {
         
         enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)
         enterChatButton.layer.cornerRadius = enterChatButton.frame.height / 2
+        enterChatButton.setTitle("채팅방 입장 💬", for: .normal)
+        enterChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
         
         
     }

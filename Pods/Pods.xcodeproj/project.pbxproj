@@ -368,12 +368,12 @@
 		0920C6182248728362173BC726A7E87B /* AutocompleteTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutocompleteTableView.swift; path = Sources/Plugins/AutocompleteManager/Views/AutocompleteTableView.swift; sourceTree = "<group>"; };
 		09D71CB946A1DD01BA4A917C67A4D9C3 /* IQKeyboardManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardManager.swift; path = IQKeyboardManagerSwift/IQKeyboardManager.swift; sourceTree = "<group>"; };
 		0C487B9847EEE4B99F0CCF235542D057 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Photos.framework; sourceTree = DEVELOPER_DIR; };
-		0D3287058D2F13BD484A454154BEA62B /* ProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ProgressHUD.framework; path = ProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D3287058D2F13BD484A454154BEA62B /* ProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D38CAF95951C63BADE5772FF54D6B5B /* Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debugging.swift; path = Source/Debugging.swift; sourceTree = "<group>"; };
 		0E7C1C1D4CD2AEB9B0F7F8CB242F0F9B /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerFinalizable.swift; path = Source/ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
 		1138ADB05421DFA46354D6AAC6A2CDE8 /* UITextView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITextView+Extensions.swift"; path = "Sources/Extensions/UITextView+Extensions.swift"; sourceTree = "<group>"; };
 		1501B577E0085C2082A6B3C3DED7B1BD /* TextMessageSizeCalculator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextMessageSizeCalculator.swift; path = Sources/Layout/TextMessageSizeCalculator.swift; sourceTree = "<group>"; };
-		15A68A8F33BD9EB9AFD02465B0418BCF /* MessageKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MessageKit.framework; path = MessageKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		15A68A8F33BD9EB9AFD02465B0418BCF /* MessageKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MessageKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		15E08C330742FB1248C107635D7F8A54 /* AssetCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AssetCollectionViewCell.swift; path = Sources/Scene/Assets/AssetCollectionViewCell.swift; sourceTree = "<group>"; };
 		18143E1DF6199752D09D42CF1E070738 /* Alamofire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.release.xcconfig; sourceTree = "<group>"; };
 		18DCF324E880CF156646E98F52B25BEE /* InputBarAccessoryView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InputBarAccessoryView.swift; path = Sources/InputBarAccessoryView.swift; sourceTree = "<group>"; };
@@ -389,7 +389,7 @@
 		1DD067CFEB03DED9C60EA7832CD11772 /* AutocompleteManagerDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutocompleteManagerDelegate.swift; path = Sources/Plugins/AutocompleteManager/Protocols/AutocompleteManagerDelegate.swift; sourceTree = "<group>"; };
 		1DFC7F63DF62BE9BAAF9253EB1747EE2 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQNSArray+Sort.swift"; path = "IQKeyboardManagerSwift/Categories/IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		1E7090BE004C45BC6D830C7C8347417F /* Bundle+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bundle+Extensions.swift"; path = "Sources/Extensions/Bundle+Extensions.swift"; sourceTree = "<group>"; };
-		1F08AE4B81A4E4ECE65672A185E38F78 /* BSImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BSImagePicker.framework; path = BSImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F08AE4B81A4E4ECE65672A185E38F78 /* BSImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BSImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		207D1C884CFBF41486F0AC3029994AAD /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sources/Assets.xcassets; sourceTree = "<group>"; };
 		214B9EF97219A2766C4753BB36C613F4 /* BubbleCircle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleCircle.swift; path = Sources/Views/BubbleCircle.swift; sourceTree = "<group>"; };
 		216CC9092408306AE28A11E3B50E43FE /* KeyboardEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyboardEvent.swift; path = Sources/KeyboardManager/KeyboardEvent.swift; sourceTree = "<group>"; };
@@ -470,7 +470,7 @@
 		5CB268686F02DF3613CE58181B6FD426 /* TypingBubble.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TypingBubble.swift; path = Sources/Views/TypingBubble.swift; sourceTree = "<group>"; };
 		5D356DBAFB47432AB2830882EFA66112 /* ConstraintDirectionalInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsets.swift; path = Source/ConstraintDirectionalInsets.swift; sourceTree = "<group>"; };
 		5D64320815723CB1BC710D395653104E /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIEdgeInsets+Extensions.swift"; path = "Sources/Extensions/UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
-		5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E55B6A350FB51857B311202A62D9C52 /* InputBarAccessoryView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = InputBarAccessoryView.debug.xcconfig; sourceTree = "<group>"; };
 		5F0FE066518085563665D32388BAB02D /* MessageContentCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MessageContentCell.swift; path = Sources/Views/Cells/MessageContentCell.swift; sourceTree = "<group>"; };
 		5F61908D77DFB95C0803E6EC043DFA45 /* URLRequest+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Alamofire.swift"; path = "Source/URLRequest+Alamofire.swift"; sourceTree = "<group>"; };
@@ -549,12 +549,12 @@
 		9675E5AF01FDE30F407F87449DD0B999 /* AssetStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AssetStore.swift; path = Sources/Model/AssetStore.swift; sourceTree = "<group>"; };
 		969691FB669EED8A25CC51918F19307A /* MessageKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MessageKit-dummy.m"; sourceTree = "<group>"; };
 		96FCD99F7BD4CC0177AA567B627EB2EF /* LinkPreviewFonts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LinkPreviewFonts.swift; path = Sources/Models/LinkPreviewFonts.swift; sourceTree = "<group>"; };
-		979486118B3E90C08386079D57962701 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SnapKit.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		979486118B3E90C08386079D57962701 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9986DCC90527907153E971D52CA3497B /* SnapKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-umbrella.h"; sourceTree = "<group>"; };
-		9B2EABAF2EEE9F2FB3CBC600CB644427 /* GMStepper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GMStepper.framework; path = GMStepper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B2EABAF2EEE9F2FB3CBC600CB644427 /* GMStepper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMStepper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C160B83CED5A7F88284917EE3785C8A /* CGRect+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CGRect+Extensions.swift"; path = "Sources/Extensions/CGRect+Extensions.swift"; sourceTree = "<group>"; };
 		9CDB59ACECD1E97EB595DCBBFB43DFEE /* Pods-KNU_Market-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KNU_Market-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E8269A388268BF3BEFDDB7212061B29 /* DropdownAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DropdownAnimator.swift; path = Sources/Presentation/Dropdown/DropdownAnimator.swift; sourceTree = "<group>"; };
 		9EF4ED64A9A2C4950B4F4D664F8EA505 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraintItem.swift; path = Source/LayoutConstraintItem.swift; sourceTree = "<group>"; };
 		A0686EDA01578DD5EF11EA3F7240BADD /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
@@ -568,7 +568,7 @@
 		A780C969F2B2A5C70991C43BC2C30233 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A84C6AA719C04AB850A786FDD66D1BB2 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
 		A8E36201B92AEE702ADDDFA5C2F2B255 /* BSImagePicker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BSImagePicker-Info.plist"; sourceTree = "<group>"; };
-		A8E950A16D00F649C54FFB30F81D7842 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = IQKeyboardManagerSwift.framework; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8E950A16D00F649C54FFB30F81D7842 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A90A2230F66B57260B450D6C39AD7F39 /* URLEncodedFormEncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLEncodedFormEncoder.swift; path = Source/URLEncodedFormEncoder.swift; sourceTree = "<group>"; };
 		AA395A0BE6AF5AEF4AC1057A1AEFDEC2 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		AB747389408D3338180AB6F415391053 /* InputBarSendButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InputBarSendButton.swift; path = Sources/Controls/InputBarSendButton.swift; sourceTree = "<group>"; };
@@ -583,11 +583,11 @@
 		B1E3C95775505632CBD7332170BF4572 /* InsetLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InsetLabel.swift; path = Sources/Views/InsetLabel.swift; sourceTree = "<group>"; };
 		B1FA40893062BF31AF8C30953A38AFBE /* MessageKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MessageKit.modulemap; sourceTree = "<group>"; };
 		B309A66E4A306D901862775E5235D1D1 /* Pods-KNU_Market-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KNU_Market-frameworks.sh"; sourceTree = "<group>"; };
-		B406E7C01B445197BE742B85E789C862 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_KNU_Market.framework; path = "Pods-KNU_Market.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B406E7C01B445197BE742B85E789C862 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4A9CC632C3874F31D36998E76797FCE /* ConstraintDirectionalInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsetTarget.swift; path = Source/ConstraintDirectionalInsetTarget.swift; sourceTree = "<group>"; };
 		B55551ABAF68261D644B13ACE5BE4AC4 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
 		B6F9BC526DC8294EC7D426BD65B9E3A0 /* ImagePickerController+Assets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ImagePickerController+Assets.swift"; path = "Sources/Controller/ImagePickerController+Assets.swift"; sourceTree = "<group>"; };
-		B81513B0B3333500DFFB1B1B179FB571 /* InputBarAccessoryView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = InputBarAccessoryView.framework; path = InputBarAccessoryView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B81513B0B3333500DFFB1B1B179FB571 /* InputBarAccessoryView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = InputBarAccessoryView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3AE71D983253F044887BBB15E97E5C /* ImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImagePickerControllerDelegate.swift; path = Sources/Controller/ImagePickerControllerDelegate.swift; sourceTree = "<group>"; };
 		BAB081CC261BFB81FDFFAAC1127517B4 /* BSImagePicker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BSImagePicker-prefix.pch"; sourceTree = "<group>"; };
 		BAC11125313A93217DF598D4ECFF0722 /* MessagesViewController+Keyboard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "MessagesViewController+Keyboard.swift"; path = "Sources/Controllers/MessagesViewController+Keyboard.swift"; sourceTree = "<group>"; };
@@ -639,7 +639,7 @@
 		DF4F7C40BE4F924EA55D8B84F262986C /* GMStepper-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GMStepper-prefix.pch"; sourceTree = "<group>"; };
 		E18EC5C9EF5DE341C6DF4161B03D123F /* BSImagePicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BSImagePicker.release.xcconfig; sourceTree = "<group>"; };
 		E1DCB0F47641177EF6B2789339193431 /* InputBarAccessoryView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "InputBarAccessoryView-dummy.m"; sourceTree = "<group>"; };
-		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E243EF9CA1CB6A667F6E8461748001F5 /* AutocompleteCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutocompleteCell.swift; path = Sources/Plugins/AutocompleteManager/Views/AutocompleteCell.swift; sourceTree = "<group>"; };
 		E3E6F3E70B93A63B5BF3598F3A5141D0 /* IQKeyboardManagerSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = IQKeyboardManagerSwift.modulemap; sourceTree = "<group>"; };
 		E4906C4EBD243BFA0F9020AF99C44CA3 /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Source/ConstraintDescription.swift; sourceTree = "<group>"; };
@@ -846,7 +846,6 @@
 				BB8B2AE39E93B3F813A9DA34C0B997C4 /* UILayoutSupport+Extensions.swift */,
 				B13FE11D28955434E9C83F81FE88A79E /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -871,7 +870,6 @@
 				8484F8CFB32ADFCEBFD850A4EA49190F /* Core */,
 				C33EC38929CE5C0833E4F193CCD92662 /* Support Files */,
 			);
-			name = InputBarAccessoryView;
 			path = InputBarAccessoryView;
 			sourceTree = "<group>";
 		};
@@ -881,7 +879,6 @@
 				395F543C4130F5E235AF2E80B0D98285 /* ProgressHUD.swift */,
 				93701B6B9E2173683752C86F063725CA /* Support Files */,
 			);
-			name = ProgressHUD;
 			path = ProgressHUD;
 			sourceTree = "<group>";
 		};
@@ -908,7 +905,6 @@
 				5B90490514BCC3BAC253C217C4E5467A /* GMStepper.swift */,
 				B860BC548215EAAAE749B6A98FD96F3C /* Support Files */,
 			);
-			name = GMStepper;
 			path = GMStepper;
 			sourceTree = "<group>";
 		};
@@ -976,7 +972,6 @@
 				4BFC56F676AFB7E5369A4493D00D84C4 /* SwiftyJSON.swift */,
 				BFAD10F5CE7A477ED803B27B43C86007 /* Support Files */,
 			);
-			name = SwiftyJSON;
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
@@ -1072,7 +1067,6 @@
 				98728F3E9DF055C3DC7BB85020E49001 /* Resources */,
 				96F1671FDA1F8CEAA22D604868C0CAFB /* Support Files */,
 			);
-			name = MessageKit;
 			path = MessageKit;
 			sourceTree = "<group>";
 		};
@@ -1116,7 +1110,6 @@
 				B55551ABAF68261D644B13ACE5BE4AC4 /* Validation.swift */,
 				0DB526C81F105BB4C21821AB60B0C7AC /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -1211,7 +1204,6 @@
 				BAE9AD9B0FE7D49762B95683DDE07D35 /* ZoomTransitionDelegate.swift */,
 				2A154B566CACA93D53F8E6764952A6E7 /* Support Files */,
 			);
-			name = BSImagePicker;
 			path = BSImagePicker;
 			sourceTree = "<group>";
 		};
@@ -1296,7 +1288,6 @@
 				679B47207CD8FE42B42C2BC209C951C7 /* IQUIViewController+Additions.swift */,
 				30697A2F382328EC8578EC130BAF76C6 /* Support Files */,
 			);
-			name = IQKeyboardManagerSwift;
 			path = IQKeyboardManagerSwift;
 			sourceTree = "<group>";
 		};
@@ -1616,7 +1607,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					7F8FAAC04E855BC0C6EEF317DDC76ABB = {
+						LastSwiftMigration = 1250;
+					};
+				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 10.0";
@@ -2115,7 +2111,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/GMStepper/GMStepper-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/GMStepper/GMStepper-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2127,7 +2123,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2151,7 +2147,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Alamofire/Alamofire-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2219,7 +2215,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2253,7 +2249,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/GMStepper/GMStepper-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/GMStepper/GMStepper-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2265,7 +2261,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2288,7 +2284,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/BSImagePicker/BSImagePicker-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/BSImagePicker/BSImagePicker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2323,7 +2319,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2629,7 +2625,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SnapKit/SnapKit-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2664,7 +2660,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SnapKit/SnapKit-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2700,7 +2696,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/BSImagePicker/BSImagePicker-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/BSImagePicker/BSImagePicker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2735,7 +2731,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Alamofire/Alamofire-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2770,7 +2766,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2879,7 +2875,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

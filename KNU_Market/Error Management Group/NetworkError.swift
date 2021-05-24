@@ -40,7 +40,7 @@ enum NetworkError: String, Error {
         switch self {
         
         case .E000:
-            return "예상치 못한 오류가 발생하였습니다. 잠시 후 다시 시도해주세요."
+            return "개발팀도 예상치 못한 오류가 발생하였습니다 😢 잠시 후 다시 시도해주세요."
         
         case .E101:
             return "아이디 또는 비밀번호가 일치하지 않습니다."

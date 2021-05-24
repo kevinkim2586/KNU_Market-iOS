@@ -28,8 +28,9 @@ class MyPageViewModel {
         }
     }
     
+    //MARK: - 사용자 프로필 정보 불러오기
     func loadUserProfile() {
-    
+     
         UserManager.shared.loadUserProfile { result in
             
             switch result {
@@ -54,6 +55,7 @@ class MyPageViewModel {
         }
     }
     
+    //MARK: - 사용자 프로필 이미지 불러오기
     func fetchProfileImage(with urlString: String) {
         
         UserManager.shared.requestMedia(from: urlString) { result in
@@ -65,6 +67,7 @@ class MyPageViewModel {
                     
                     self.profileImage = UIImage(data: imageData) ?? UIImage(named: "pick_profile_picture")!
                     self.delegate?.didFetchProfileImage()
+                    
                 } else {
                     self.delegate?.showToastMessage(with: "프로필 사진 가져오기 실패")
                 }
@@ -78,7 +81,21 @@ class MyPageViewModel {
     
     func updateUserProfileToServer(with image: UIImage) {
         
-        
+        UserManager.shared.updateUserProfileInfo(infoType: .profileImage, info: image) { result in
+            
+            switch result {
+            
+            case .success(_):
+                
+                self.profileImage = image
+                self.delegate?.didUpdateUserProfileToServer()
+                
+                
+            case .failure(let error):
+                self.delegate?.failedUpdatingUserProfileToServer(with: error)
+                
+            }
+        }
         
     }
 }

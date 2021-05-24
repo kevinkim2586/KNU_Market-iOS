@@ -3,6 +3,13 @@ import Alamofire
 import Security
 import SwiftyJSON
 
+enum ProfileInfoType {
+    
+    case nickname
+    case password
+    case profileImage
+}
+
 class UserManager {
     
     //MARK: - Singleton
@@ -202,24 +209,39 @@ class UserManager {
     
     
     //TODO: - 프로필 정보 중 하나를 업데이트 하려면, 그리고 그 중에서 이미지를 업뎃하려면 uploadImage를 먼저해야함
-    func updateUserProfileInfo(with newInfo: Any,
+    func updateUserProfileInfo(infoType: ProfileInfoType,
+                               info: Any,
                                completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
         
+        
         // 만약 nickname 이나 password 를 변경하고자 한다면
-        if let info = newInfo as? String {
+        switch infoType {
+        
+        case .nickname:
+            print("nickname")
+        case .password:
+            print("password")
+        case .profileImage:
             
-            
-        }
-        else if let image = newInfo as? UIImage {
+            guard let image = info as? UIImage else {
+                completion(.failure(.E000))
+                return
+                
+            }
             
             self.uploadImage(with: image) { result in
                 
                 switch result {
+                
                 case .success(let imageID):
+ 
+                    print("User Manager - updateUserProfileInfo success in uploadImage, imageUID: \(imageID)")
+                
+                    // 이제 업로드도 해야함                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
                     
-                    print("User Manager - updateUserProfileInfo success in uploadImage")
+                    
                     
                 case .failure(let error):
                     print("User Manager - updateUserProfileInfo .failure ACTIVATED with \(error.errorDescription)")
@@ -227,13 +249,16 @@ class UserManager {
                 }
                
             }
+            
+            
+            
+            
         }
+
+   
         
         
     }
-    
-
-    
     
     //MARK: - 이미지 업로드
     func uploadImage(with image: UIImage,
@@ -241,9 +266,12 @@ class UserManager {
         
         let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
         
+        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+            completion(.failure(.E000))
+            return
+        }
+
         AF.upload(multipartFormData: { multipartFormData in
-            
-            let imageData = image.jpegData(compressionQuality: 1)!
             
             multipartFormData.append(imageData,
                                      withName: "media",
@@ -266,11 +294,11 @@ class UserManager {
                     
                 } catch {
                     print("UserManager - uploadImage() catch error \(error)")
-                    completion(.failure(.E000))
+                    let error = NetworkError.returnError(json: response.data!)
+                    completion(.failure(error))
                 }
             default: completion(.failure(.E000))
             }
-            
         }
     }
     

@@ -14,7 +14,7 @@ class ItemViewController: UIViewController {
     
     var images = ["bubble1", "bubble2", "bubble3"]
     
-    private var viewModel: ItemViewModel = ItemViewModel()
+    private var viewModel = ItemViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,30 +71,47 @@ extension ItemViewController {
         let labelStyle = NSMutableParagraphStyle()
         labelStyle.lineSpacing = 5
         let attributes = [NSAttributedString.Key.paragraphStyle : labelStyle]
-        itemExplanationLabel.attributedText = NSAttributedString(string: "누리관 레드돔인데 같이 시키실 분? 저녁 7시에 시킬 예정입니다.누리관 레드돔인데 같이 시키실 분? 저녁 7시에 시킬 예정입니다.누리관 레드돔인데 같이 시키실 분? 저녁 7시에 시킬레드돔인데 같이 시키실 분? 저녁 7시에 시", attributes: attributes)
+        itemExplanationLabel.attributedText = NSAttributedString(string: viewModel.itemExplanation, attributes: attributes)
         
     }
     
     func initializeGatheringPeopleLabel() {
         
+        let currentNum = viewModel.currentlyGatheredPeople
+        let total = viewModel.totalGatheringPeople
+        
+        if viewModel.isGathering {
+            gatheringPeopleLabel.text = "모집 중     \(currentNum)" + "/" + "\(total) 명"
+            gatheringPeopleLabel.backgroundColor = UIColor(named: Constants.Color.appColor)
+        } else {
+            gatheringPeopleLabel.text = "마감     \(currentNum)" + "/" + "\(total) 명"
+            gatheringPeopleLabel.backgroundColor = UIColor.lightGray
+        }
         gatheringPeopleLabel.clipsToBounds = true
-        gatheringPeopleLabel.backgroundColor = UIColor(named: Constants.Color.appColor)
         gatheringPeopleLabel.layer.cornerRadius = gatheringPeopleLabel.frame.height / 2
-        gatheringPeopleLabel.text = "모집 중    " + "2" + "/" + "3 명"
         gatheringPeopleLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
         
     }
     
     func initializeEnterChatButton() {
         
-        
-        enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)
+        if viewModel.isGathering {
+            enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)
+        } else {
+            enterChatButton.isUserInteractionEnabled = false
+            enterChatButton.backgroundColor = UIColor.lightGray
+        }
+
         enterChatButton.layer.cornerRadius = enterChatButton.frame.height / 2
         enterChatButton.setTitle("채팅방 입장 💬", for: .normal)
         enterChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-        
-        
     }
+    
+    func initializeLocationLabel() {
+        locationLabel.text = viewModel.location
+    }
+    
+
     
 }
 

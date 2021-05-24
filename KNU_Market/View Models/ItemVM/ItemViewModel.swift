@@ -4,9 +4,7 @@ import UIKit
 
 class ItemViewModel {
     
-    //MARK: - Object Properties
-    
-    let itemImages: [UIImage]?
+    let itemImages: [UIImage]? = [UIImage]()
     
     let itemTitle: String = ""
     
@@ -14,17 +12,20 @@ class ItemViewModel {
         get { getUserProfileImage() }
     }
     
-    let isGathering: Bool = false
+    let isGathering: Bool = true
     
+    var currentlyGatheredPeople: Int = 3
     
+    var totalGatheringPeople: Int = 5
     
+    var location: String = "누리관"
     
-    //MARK: - Initialization
+    var itemExplanation: String = "누리관 레드돔인데 같이 시키실 분? 저녁 7시에 시킬 예정입니다.누리관 레드돔인데 같이 시키실 분? 저녁 7시에 시킬 예정입니다.누리관 레드돔인데 같이 시키실 분? 저녁 7시에 시킬레드돔인데 같이 시키실 분? 저녁 7시에 시"
     
+
     init() {
  
-        self.itemImages = [UIImage]()
-        
+ 
     }
     
     

@@ -130,7 +130,7 @@ class UserManager {
                         do {
                             let json = try JSON(data: response.data!)
                             self.saveAccessTokens(from: json)
-                            print("login success")
+                            print("login success with API TOKEN: \(User.shared.accessToken)")
                             completion(.success(true))
                             
                         } catch {
@@ -164,6 +164,7 @@ class UserManager {
                         do {
                             
                             let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)
+                            self.saveBasicUserInfo(with: decodedData)
                             print("User Manager - loadUserProfile() success")
                             completion(.success(decodedData))
                             
@@ -205,75 +206,109 @@ class UserManager {
                    }
     }
     
-    //MARK: - 프로필 수정
-    
-    
-    //TODO: - 프로필 정보 중 하나를 업데이트 하려면, 그리고 그 중에서 이미지를 업뎃하려면 uploadImage를 먼저해야함
-    func updateUserProfileInfo(infoType: ProfileInfoType,
-                               info: Any,
-                               completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    //MARK: - 프로필 이미지 수정
+    func updateUserProfileImage(with uid: String,
+                                completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
         
+        let parameters: Parameters = [
+            "nickname": User.shared.nickname,
+            "password": User.shared.password,
+            "image": uid
+        ]
         
-        // 만약 nickname 이나 password 를 변경하고자 한다면
-        switch infoType {
         
-        case .nickname:
-            print("nickname")
-        case .password:
-            print("password")
-        case .profileImage:
-            
-            guard let image = info as? UIImage else {
-                completion(.failure(.E000))
-                return
-                
-            }
-            
-            self.uploadImage(with: image) { result in
-                
-                switch result {
-                
-                case .success(let imageID):
- 
-                    print("User Manager - updateUserProfileInfo success in uploadImage, imageUID: \(imageID)")
-                
-                    // 이제 업로드도 해야함                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+        AF.request(userProfileUpdateURL,
+                   method: .put,
+                   parameters: parameters,
+                   encoding: JSONEncoding.default,
+                   headers: headers).responseJSON { response in
                     
+                
+                    guard let statusCode = response.response?.statusCode else { return }
                     
+                    switch statusCode {
                     
-                case .failure(let error):
-                    print("User Manager - updateUserProfileInfo .failure ACTIVATED with \(error.errorDescription)")
-                    completion(.failure(error))
-                }
-               
-            }
-            
-            
-            
-            
-        }
-
-   
-        
-        
+                    case 201:
+                        print("UserManager - updateUserProfileImage success")
+                        completion(.success(true))
+                        User.shared.profileImageCode = uid
+                        
+                    default:
+                        print("UserManager - updateUserProfileImage failed default")
+                        let error = NetworkError.returnError(json: response.data!)
+                        completion(.failure(error))
+                    }
+                   }
     }
+                                                       
+                                                       
+                                                       
+    
+    
+    
+    
+    //TODO: - 프로필 정보 중 하나를 업데이트 하려면, 그리고 그 중에서 이미지를 업뎃하려면 uploadImage를 먼저해야함
+//    func updateUserProfileInfo(infoType: ProfileInfoType,
+//                               info: Any,
+//                               completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+//
+//        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+//
+//
+//        // 만약 nickname 이나 password 를 변경하고자 한다면
+//        switch infoType {
+//
+//        case .nickname:
+//            print("nickname")
+//        case .password:
+//            print("password")
+//        case .profileImage:
+//
+//            guard let image = info as? UIImage else {
+//                completion(.failure(.E000))
+//                return
+//
+//            }
+//
+//            self.uploadImage(with: image) { result in
+//
+//                switch result {
+//
+//                case .success(let imageID):
+//
+//                    print("User Manager - updateUserProfileInfo success in uploadImage, imageUID: \(imageID)")
+//
+//                    // 이제 업로드도 해야함
+//
+//                case .failure(let error):
+//                    print("User Manager - updateUserProfileInfo .failure ACTIVATED with \(error.errorDescription)")
+//                    completion(.failure(error))
+//                }
+//
+//            }
+//
+//
+//
+//
+//        }
+//
+//
+//
+//
+//    }
     
     //MARK: - 이미지 업로드
-    func uploadImage(with image: UIImage,
+    func uploadImage(with image: Data,
                      completion: @escaping ((Result<String, NetworkError>) -> Void)) {
         
         let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
         
-        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
-            completion(.failure(.E000))
-            return
-        }
 
         AF.upload(multipartFormData: { multipartFormData in
             
-            multipartFormData.append(imageData,
+            multipartFormData.append(image,
                                      withName: "media",
                                      fileName: "newUserProfileImage.jpeg",
                                      mimeType: "image/jpeg")
@@ -327,10 +362,19 @@ class UserManager {
     }
     
     
+    //MARK: - 개인정보 저장 메서드
+    
     func saveAccessTokens(from response: JSON) {
         
         User.shared.accessToken = response["accessToken"].stringValue
         User.shared.refreshToken = response["refreshToken"].stringValue
+    }
+    
+    func saveBasicUserInfo(with model: LoadProfileResponseModel) {
+        
+        User.shared.id = model.id
+        User.shared.nickname = model.nickname
+        User.shared.profileImageCode = model.profileImage
     }
     
 

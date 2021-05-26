@@ -64,7 +64,7 @@ class MyPageViewController: UIViewController {
 //MARK: - MyPageViewModelDelegate
 
 extension MyPageViewController: MyPageViewModelDelegate {
-    
+
     func didLoadUserProfileInfo() {
         userNicknameLabel.text = "\(viewModel.userNickname)님, 환영합니다! 👀"
     }
@@ -73,22 +73,40 @@ extension MyPageViewController: MyPageViewModelDelegate {
         profileImageButton.setImage(viewModel.profileImage, for: .normal)
     }
     
-    func didUpdateUserProfileToServer() {
+    func failedLoadingUserProfileInfo(with error: NetworkError) {
+        self.presentSimpleAlert(title: "프로필 정보 불러오기 실패", message: error.errorDescription)
+    }
+
+    func showToastMessage(with message: String) {
+        showToast(message: message)
+    }
+    
+    
+    func didUploadImageToServerFirst(with uid: String) {
+        
+        viewModel.updateUserProfileImage(with: uid)
+        
+        
+    }
+    
+    func failedUploadingImageToServerFirst(with error: NetworkError) {
+        self.presentSimpleAlert(title: "이미지 업로드 실패", message: error.errorDescription)
+    }
+    
+    
+    
+    
+    func didUpdateUserProfileImage() {
         updateProfileImageButton(with: viewModel.profileImage)
         showToast(message: "프로필 이미지 변경 성공")
     }
     
-    func failedLoadingUserProfileInfo(with error: NetworkError) {
-        self.presentSimpleAlert(title: "에러 발생", message: error.errorDescription)
-    }
-    
-    func failedUpdatingUserProfileToServer(with error: NetworkError) {
+    func failedUpdatingUserProfileImage(with error: NetworkError) {
         self.presentSimpleAlert(title: "업로드 오류", message: error.errorDescription)
     }
     
-    func showToastMessage(with message: String) {
-        showToast(message: message)
-    }
+    
+
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -140,8 +158,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
     }
+    
     func pushViewController(with vc: UIViewController) {
-        
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -167,7 +185,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
                         OperationQueue().addOperation {
                             
                             
-                            self.viewModel.updateUserProfileToServer(with: originalImage)
+                            //self.viewModel.updateUserProfileToServer(with: originalImage)
         
     
                             dismissProgressBar()

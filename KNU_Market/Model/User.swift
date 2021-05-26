@@ -19,6 +19,8 @@ class User {
     
     var refreshToken: String = ""
     
+    
+    //MARK: - Profile Image
     var profileImage: UIImage? {
         
         didSet {
@@ -26,9 +28,8 @@ class User {
             self.profileImageData = imageData
         }
     }
-    
-    
     var profileImageData: Data?
+    var profileImageCode: String = ""
     
     
     

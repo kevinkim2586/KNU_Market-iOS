@@ -11,7 +11,7 @@ class ChangeNicknameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         initialize()
     }
@@ -21,13 +21,13 @@ class ChangeNicknameViewController: UIViewController {
         
         checkIfDuplicate()
     }
-
+    
     @IBAction func pressedChangeButton(_ sender: UIButton) {
         
         self.view.endEditing(true)
         
         showProgressBar()
-
+        
         if !didCheckNicknameDuplicate {
             self.presentSimpleAlert(title: "닉네임 중복 확인", message: "닉네임 중복을 먼저 확인해주세요.")
             dismissProgressBar()
@@ -39,22 +39,22 @@ class ChangeNicknameViewController: UIViewController {
             return
         }
         
-//        let editUserModel = EditUserInfoModel(nickname: nickname)
-//        
-//        UserManager.shared.updateNickname(with: editUserModel) { isSuccess in
-//        
-//            if isSuccess {
-//                
-//                dismissProgressBar()
-//                self.navigationController?.popViewController(animated: true)
-//                
-//            } else {
-//                DispatchQueue.main.async {
-//                    self.presentSimpleAlert(title: "닉네임 변경 실패", message: "네트워크 오류")
-//                }
-//            }
-//            dismissProgressBar()
-//        }
+        //        let editUserModel = EditUserInfoModel(nickname: nickname)
+        //
+        //        UserManager.shared.updateNickname(with: editUserModel) { isSuccess in
+        //
+        //            if isSuccess {
+        //
+        //                dismissProgressBar()
+        //                self.navigationController?.popViewController(animated: true)
+        //
+        //            } else {
+        //                DispatchQueue.main.async {
+        //                    self.presentSimpleAlert(title: "닉네임 변경 실패", message: "네트워크 오류")
+        //                }
+        //            }
+        //            dismissProgressBar()
+        //        }
     }
     
     func checkIfDuplicate() {
@@ -76,7 +76,7 @@ class ChangeNicknameViewController: UIViewController {
                     }
                 } else {
                     DispatchQueue.main.async {
-
+                        
                         self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😅", for: .normal)
                         self.didCheckNicknameDuplicate = false
                     }
@@ -85,24 +85,25 @@ class ChangeNicknameViewController: UIViewController {
             case .failure(let error):
                 self.presentSimpleAlert(title: "에러 발생", message: error.errorDescription)
             }
-    }
-    
-    
-    func validateUserInput() -> Bool {
+        }
         
-        guard let nickname = nicknameTextField.text else {
-            return false
+        
+        func validateUserInput() -> Bool {
+            
+            guard let nickname = nicknameTextField.text else {
+                return false
+            }
+            guard !nickname.isEmpty else {
+                self.presentSimpleAlert(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요.")
+                return false
+            }
+            guard nickname.count >= 2, nickname.count <= 15 else {
+                self.presentSimpleAlert(title: "닉네임 길이 오류", message: "닉네임은 2자 이상, 15자 이하로 작성해주세요.")
+                return false
+            }
+            self.nickname = nickname
+            return true
         }
-        guard !nickname.isEmpty else {
-            self.presentSimpleAlert(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요.")
-            return false
-        }
-        guard nickname.count >= 2, nickname.count <= 10 else {
-            self.presentSimpleAlert(title: "닉네임 길이 오류", message: "닉네임은 2자 이상, 10자 이하로 작성해주세요.")
-            return false
-        }
-        self.nickname = nickname
-        return true
     }
 }
 
@@ -126,7 +127,7 @@ extension ChangeNicknameViewController: UITextFieldDelegate {
 extension ChangeNicknameViewController {
     
     func initialize() {
-    
+        
         initializeTextField()
         initializeButton()
     }

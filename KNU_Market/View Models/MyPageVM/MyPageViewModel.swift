@@ -7,10 +7,12 @@ protocol MyPageViewModelDelegate {
     
     func didLoadUserProfileInfo()
     func didFetchProfileImage()
-    func didUpdateUserProfileToServer()
+    func didUpdateUserProfileImage()
+    func didUploadImageToServerFirst(with uid: String)
     
     func failedLoadingUserProfileInfo(with error: NetworkError)
-    func failedUpdatingUserProfileToServer(with error: NetworkError)
+    func failedUploadingImageToServerFirst(with error: NetworkError)
+    func failedUpdatingUserProfileImage(with error: NetworkError)
     
     func showToastMessage(with message: String)
 }
@@ -22,6 +24,8 @@ class MyPageViewModel {
     var tableViewOptions: [String] = ["개발자에게 건의사항 보내기","설정","서비스 이용약관"]
     
     var userNickname: String = ""
+    
+    
     
     var profileImage: UIImage = UIImage() {
         didSet {
@@ -84,24 +88,64 @@ class MyPageViewModel {
         }
     }
     
-    
-    func updateUserProfileToServer(with image: UIImage) {
+    //MARK: - 프로필 이미지를 서버에 먼저 올리기 -> uid 값 반환 목적
+    func uploadImageToServerFirst(with image: UIImage) {
         
-        UserManager.shared.updateUserProfileInfo(infoType: .profileImage, info: image) { result in
+        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+            self.delegate?.failedUploadingImageToServerFirst(with: .E000)
+            return
+        }
+        
+        UserManager.shared.uploadImage(with: imageData) { result in
             
             switch result {
             
-            case .success(_):
-                
-                self.profileImage = image
-                self.delegate?.didUpdateUserProfileToServer()
-                
+            case .success(let uid):
+                self.delegate?.didUploadImageToServerFirst(with: uid)
                 
             case .failure(let error):
-                self.delegate?.failedUpdatingUserProfileToServer(with: error)
-                
+                self.delegate?.failedUploadingImageToServerFirst(with: error)
             }
+
+        }
+    }
+    
+    //MARK: - 프로필 이미지 수정 (DB상)
+    func updateUserProfileImage(with uid: String) {
+        
+        UserManager.shared.updateUserProfileImage(with: uid) { result in
+            
+            
+            
+            
         }
         
+        
+        
     }
+    
+    
+    
+
+    
+    //수정 필요
+//    func updateUserProfileToServer(with image: UIImage) {
+//
+//        UserManager.shared.updateUserProfileInfo(infoType: .profileImage, info: image) { result in
+//
+//            switch result {
+//
+//            case .success(_):
+//
+//                self.profileImage = image
+//                self.delegate?.didUploadImageToServerFirst
+//
+//
+//            case .failure(let error):
+//                self.delegate?.failedUpdatingUserProfileToServer(with: error)
+//
+//            }
+//        }
+//
+//    }
 }

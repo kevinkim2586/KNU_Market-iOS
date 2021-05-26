@@ -1247,7 +1247,6 @@
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedChangeNickname:" destination="eeV-Us-DhA" eventType="touchUpInside" id="o8f-jc-LRT"/>
                                     <segue destination="Hk3-ha-Vlo" kind="show" id="KrC-nh-l7W"/>
                                 </connections>
                             </button>
@@ -1257,7 +1256,6 @@
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedChangePassword:" destination="eeV-Us-DhA" eventType="touchUpInside" id="vA5-XC-4xT"/>
                                     <segue destination="JJB-q6-yNq" kind="show" id="T8n-10-fWf"/>
                                 </connections>
                             </button>
@@ -1284,7 +1282,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="설정" id="eS1-ZE-Yto"/>
                     <connections>
-                        <outlet property="userNicknameLabel" destination="H78-70-pRs" id="b9o-2k-oFA"/>
+                        <outlet property="userNicknameLabel" destination="H78-70-pRs" id="Xje-aX-7w0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OEE-tB-OsN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1332,7 +1330,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedChangeButton:" destination="JJB-q6-yNq" eventType="touchUpInside" id="5Jd-xJ-9hb"/>
+                                    <action selector="pressedChangeButton:" destination="JJB-q6-yNq" eventType="touchUpInside" id="TUu-Yc-QAQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1355,9 +1353,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="bkT-le-VCM"/>
                     <connections>
-                        <outlet property="changeButton" destination="MPE-c2-cyz" id="XGQ-aK-C64"/>
-                        <outlet property="checkPasswordTextField" destination="t7L-ZI-xq6" id="tIl-zi-D6X"/>
-                        <outlet property="passwordTextField" destination="yyM-X5-KbQ" id="8fY-m5-WW5"/>
+                        <outlet property="changeButton" destination="MPE-c2-cyz" id="UWJ-zS-HlK"/>
+                        <outlet property="checkPasswordTextField" destination="t7L-ZI-xq6" id="pp1-CY-vSh"/>
+                        <outlet property="passwordTextField" destination="yyM-X5-KbQ" id="UYj-TP-1mQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KG1-r7-gJ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1394,7 +1392,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedChangeButton:" destination="Hk3-ha-Vlo" eventType="touchUpInside" id="W8i-BY-4i8"/>
+                                    <action selector="pressedChangeButton:" destination="Hk3-ha-Vlo" eventType="touchUpInside" id="9bn-c6-THV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpQ-t7-c0l">
@@ -1404,7 +1402,7 @@
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedCheckDuplicateButton:" destination="Hk3-ha-Vlo" eventType="touchUpInside" id="iEe-A4-QHk"/>
+                                    <action selector="pressedCheckDuplicateButton:" destination="Hk3-ha-Vlo" eventType="touchUpInside" id="hU7-xS-929"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1424,9 +1422,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="8jY-4k-efd"/>
                     <connections>
-                        <outlet property="changeButton" destination="7le-YK-21L" id="w6I-cO-i4Q"/>
-                        <outlet property="checkAlreadyInUseButton" destination="lpQ-t7-c0l" id="ff2-LX-Vbt"/>
-                        <outlet property="nicknameTextField" destination="P8p-8P-nhO" id="3uU-UZ-djT"/>
+                        <outlet property="changeButton" destination="7le-YK-21L" id="zJd-xI-xmq"/>
+                        <outlet property="checkAlreadyInUseButton" destination="lpQ-t7-c0l" id="XGN-Py-ois"/>
+                        <outlet property="nicknameTextField" destination="P8p-8P-nhO" id="oJA-Fz-2pQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="maJ-w1-hLP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

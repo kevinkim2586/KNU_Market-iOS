@@ -39,6 +39,7 @@ class MyPageViewModel {
             case .success(let model):
                 
                 self.userNickname = model.nickname
+                User.shared.nickname = model.nickname
                 self.delegate?.didLoadUserProfileInfo()
                 
                 // 이미 받아온 프로필 이미지 Cache 가 있다면

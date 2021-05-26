@@ -10,6 +10,10 @@
 		5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */; };
 		7C132BF2265397B200BE5F40 /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF1265397B200BE5F40 /* Global Functions.swift */; };
 		7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF326552B4900BE5F40 /* UIButton Extension.swift */; };
+		7C1C1D0C265E70E000C08C66 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */; };
+		7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */; };
+		7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */; };
+		7C1C1D12265E714000C08C66 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D11265E714000C08C66 /* TermsAndConditionsViewController.swift */; };
 		7C1D829526565429006FEBDE /* SendDeveloperMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D829426565428006FEBDE /* SendDeveloperMessageViewController.swift */; };
 		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
 		7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */; };
@@ -64,6 +68,10 @@
 		0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 		7C132BF1265397B200BE5F40 /* Global Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		7C132BF326552B4900BE5F40 /* UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton Extension.swift"; sourceTree = "<group>"; };
+		7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
+		7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		7C1C1D11265E714000C08C66 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		7C1D829426565428006FEBDE /* SendDeveloperMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDeveloperMessageViewController.swift; sourceTree = "<group>"; };
 		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
@@ -386,6 +394,10 @@
 			children = (
 				7CA66236264136BF000E0B7A /* MyPageViewController.swift */,
 				7C1D829426565428006FEBDE /* SendDeveloperMessageViewController.swift */,
+				7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */,
+				7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */,
+				7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */,
+				7C1C1D11265E714000C08C66 /* TermsAndConditionsViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -532,20 +544,24 @@
 				7CA6622E26413597000E0B7A /* LoginViewController.swift in Sources */,
 				7C1D829526565429006FEBDE /* SendDeveloperMessageViewController.swift in Sources */,
 				7CA662312641359F000E0B7A /* RegisterViewController.swift in Sources */,
+				7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */,
 				7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */,
 				7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */,
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
 				7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
+				7C1C1D0C265E70E000C08C66 /* SettingsViewController.swift in Sources */,
 				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
 				7CB8DF40264BB6340001CC6D /* LoadProfileModel.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
 				7CB8DF48264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift in Sources */,
+				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,
 				7C132BF2265397B200BE5F40 /* Global Functions.swift in Sources */,
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
+				7C1C1D12265E714000C08C66 /* TermsAndConditionsViewController.swift in Sources */,
 				7C6B509E265290130032328C /* ItemImageView.swift in Sources */,
 				7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,

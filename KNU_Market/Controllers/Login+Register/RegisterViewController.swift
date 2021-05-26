@@ -59,7 +59,7 @@ class RegisterViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
-                        self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다.", for: .normal)
+                        self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😅", for: .normal)
                     }
                     
                 }

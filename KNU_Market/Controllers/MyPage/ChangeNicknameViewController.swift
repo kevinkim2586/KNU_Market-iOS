@@ -63,28 +63,30 @@ class ChangeNicknameViewController: UIViewController {
         
         if !validateUserInput() { return }
         
-//        let requestURL = UserManager.shared.checkDisplayNameDuplicateURL
-//        let checkDuplicateModel = CheckDuplicateModel(displayName: nickname!)
-//
-//        UserManager.shared.checkDuplication(with: checkDuplicateModel,
-//                                            requestURL: requestURL) { isNotDuplicate in
-//
-//            if isNotDuplicate {
-//
-//                DispatchQueue.main.async {
-//                    self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍", for: .normal)
-//                    self.didCheckNicknameDuplicate = true
-//                }
-//            } else {
-//
-//                DispatchQueue.main.async {
-//                    self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😢", for: .normal)
-//                    self.didCheckNicknameDuplicate = false
-//                }
-//            }
-//        }
-//    }
+        UserManager.shared.checkDuplicate(nickname: nickname!) { result in
+            
+            switch result {
+            
+            case .success(let isNotDuplicate):
+                
+                if isNotDuplicate {
+                    DispatchQueue.main.async {
+                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍", for: .normal)
+                        self.didCheckNicknameDuplicate = true
+                    }
+                } else {
+                    DispatchQueue.main.async {
+
+                        self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😅", for: .normal)
+                        self.didCheckNicknameDuplicate = false
+                    }
+                }
+                
+            case .failure(let error):
+                self.presentSimpleAlert(title: "에러 발생", message: error.errorDescription)
+            }
     }
+    
     
     func validateUserInput() -> Bool {
         

@@ -83,7 +83,6 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func failedUpdatingUserProfileToServer(with error: NetworkError) {
-        
         self.presentSimpleAlert(title: "업로드 오류", message: error.errorDescription)
     }
     

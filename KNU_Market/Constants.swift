@@ -12,10 +12,14 @@ struct Constants {
     
     struct StoryboardID {
         
-        static let initialViewController        = "initialViewController"
-        static let initialNavigationController    = "InitialNavigationController"
+        static let initialVC                    = "initialViewController"
+        static let initialNavigationController  = "InitialNavigationController"
         static let tabBarController             = "TabBarController"
-        static let itemViewController           = "itemViewController"
+        static let itemVC                       = "itemViewController"
+        
+        static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"
+        static let settingsVC                   = "SettingsViewController"
+        static let termsAndConditionsVC         = "TermsAndConditionViewController"
     }
     
     struct cellID {
@@ -26,6 +30,7 @@ struct Constants {
         static let userPickedItemImageCell      = "userPickedItemImageCell"
         static let sendCell                     = "sendCell"
         static let receiveCell                  = "receiveCell"
+        static let myPageCell                   = "myPageCell"
     }
     
     struct XIB {

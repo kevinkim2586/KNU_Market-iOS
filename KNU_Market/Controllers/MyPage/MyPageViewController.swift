@@ -4,8 +4,8 @@ class MyPageViewController: UIViewController {
     
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var userNicknameLabel: UILabel!
-    @IBOutlet weak var sendDeveloperMessageButton: UIButton!
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var settingsTableView: UITableView!
     
     lazy var imagePicker = UIImagePickerController()
     
@@ -66,7 +66,7 @@ class MyPageViewController: UIViewController {
 extension MyPageViewController: MyPageViewModelDelegate {
     
     func didLoadUserProfileInfo() {
-        userNicknameLabel.text = viewModel.userNickname
+        userNicknameLabel.text = "\(viewModel.userNickname)님, 환영합니다! 👀"
     }
     
     func didFetchProfileImage() {
@@ -89,6 +89,61 @@ extension MyPageViewController: MyPageViewModelDelegate {
     
     func showToastMessage(with message: String) {
         showToast(message: message)
+    }
+}
+
+//MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID.myPageCell, for: indexPath)
+        
+        cell.textLabel?.font = .systemFont(ofSize: 17)
+        
+        switch indexPath.row {
+        
+        case 0:
+            cell.textLabel?.text = viewModel.tableViewOptions[indexPath.row]
+        case 1:
+            cell.textLabel?.text = viewModel.tableViewOptions[indexPath.row]
+        case 2:
+            cell.textLabel?.text = viewModel.tableViewOptions[indexPath.row]
+        default: break
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        switch indexPath.row {
+        case 0:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageVC) else { return }
+            pushViewController(with: vc)
+        case 1:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsVC) else { return }
+            pushViewController(with: vc)
+        case 2:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.termsAndConditionsVC) else { return }
+            pushViewController(with: vc)
+        default: return
+        }
+        
+    }
+    func pushViewController(with vc: UIViewController) {
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -115,7 +170,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
                             
                             self.viewModel.updateUserProfileToServer(with: originalImage)
         
-                        
+    
                             dismissProgressBar()
                             
                             
@@ -145,8 +200,15 @@ extension MyPageViewController {
         
         viewModel.delegate = self
         
+        initializeTableView()
         initializeProfileImageButton()
         initializeImagePicker()
+    }
+    
+    func initializeTableView() {
+        
+        settingsTableView.delegate = self
+        settingsTableView.dataSource = self
     }
     
     func initializeProfileImageButton() {

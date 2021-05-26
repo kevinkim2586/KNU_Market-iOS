@@ -41,6 +41,11 @@ class ItemViewController: UIViewController {
     
     @objc func refreshScrollView() {
         
+        
+        //label 하고 버튼 둘다 회색으로 바꾸기
+        
+        
+        
         scrollView.refreshControl?.endRefreshing()
     }
     

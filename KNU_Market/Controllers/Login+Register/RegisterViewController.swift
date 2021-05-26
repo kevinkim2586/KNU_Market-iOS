@@ -48,14 +48,20 @@ class RegisterViewController: UIViewController {
                 
                 if isNotDuplicate {
     
-                    self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
-                    self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍", for: .normal)
-                    self.didCheckNicknameDuplicate = true
-       
+                    DispatchQueue.main.async {
+                        self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
+                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍", for: .normal)
+                        self.didCheckNicknameDuplicate = true
+                    }
+                    
+                    
                 } else {
-        
-                    self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
-                    self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다.", for: .normal)
+                    
+                    DispatchQueue.main.async {
+                        self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
+                        self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다.", for: .normal)
+                    }
+                    
                 }
                
             case .failure(let error):
@@ -187,7 +193,6 @@ class RegisterViewController: UIViewController {
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-        
     }
     
 }

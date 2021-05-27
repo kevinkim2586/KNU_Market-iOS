@@ -26,6 +26,11 @@ class UploadItemViewController: UIViewController {
     
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
         
+        
+        //validate user input
+        
+        if !validateUserInput() { return }
+        
         self.presentAlertWithCancelAction(title: "작성하신 글을 올리시겠습니까?", message: "") { selectedOk in
             
             
@@ -34,16 +39,52 @@ class UploadItemViewController: UIViewController {
         }
         
         
-        
-        
-        
-        
-        
-        
-  
+    
     }
     
+    func validateUserInput() -> Bool {
+        
+        do {
+            
+            try viewModel.validateUserInputs()
+            
+        } catch UserInputError.titleTooShortOrLong {
+            
+            self.presentSimpleAlert(title: "입력 오류", message: UserInputError.titleTooShortOrLong.errorDescription)
+            return false
+            
+        } catch UserInputError.detailTooShortOrLong {
+            
+            self.presentSimpleAlert(title: "입력 오류", message: UserInputError.detailTooShortOrLong.errorDescription)
+            return false
+            
+        } catch { return false }
+        
+        return true
+    }
+}
+
+//MARK: - UploadItemDelegate
+
+extension UploadItemViewController: UploadItemDelegate {
     
+    func didCompleteUpload(_ success: Bool) {
+        
+        dismissProgressBar()
+        print("UploadItemVC - didCompleteUpload: \(success)")
+        
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func failedUploading(with error: NetworkError) {
+        
+        dismissProgressBar()
+        
+        print("UploadItemVC - failedUploading: \(error.errorDescription)")
+        self.presentSimpleAlert(title: "업로드 실패", message: error.errorDescription)
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 //MARK: - UserPickedItemImageCellDelegate
@@ -155,6 +196,8 @@ extension UploadItemViewController: UITextViewDelegate {
 extension UploadItemViewController {
     
     func initialize() {
+        
+        viewModel.delegate = self
         
         initializeCollectionView()
         initializeStepper()

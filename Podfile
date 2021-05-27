@@ -15,5 +15,6 @@ target 'KNU_Market' do
   pod 'InputBarAccessoryView'
   pod 'ProgressHUD'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'SwiftMessages'
   
 end

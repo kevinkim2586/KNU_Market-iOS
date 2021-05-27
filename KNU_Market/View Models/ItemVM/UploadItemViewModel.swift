@@ -3,6 +3,7 @@ import UIKit
 
 protocol UploadItemDelegate {
     func didCompleteUpload(_ success: Bool)
+    func failedUploading(with error: NetworkError)
 }
 
 class UploadItemViewModel {
@@ -42,10 +43,30 @@ class UploadItemViewModel {
     
     }
     
+    
+    //MARK: - API
+    func uploadItem() {
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
     //MARK: - User Input Validation
     
     func validateUserInputs() throws {
         
+        guard itemTitle.count >= 3, itemTitle.count <= 30 else {
+            throw UserInputError.titleTooShortOrLong
+        }
+        
+        guard itemDetail.count >= 3, itemDetail.count <= 300 else {
+            throw UserInputError.detailTooShortOrLong
+        }
     }
     
     //MARK: - Conversion Methods

@@ -422,7 +422,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="srO-9r-rXl">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="hdD-ch-YNy">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" name="AppDefaultColor"/>
                             <connections>
                                 <action selector="pressedMoreButton:" destination="98l-Q0-qq7" id="Unh-0x-0em"/>
                             </connections>
@@ -671,7 +671,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="공구 내용 쓰기" id="Me3-4F-ryJ">
                         <barButtonItem key="rightBarButtonItem" title="완료" id="ffN-1o-Dc7">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" name="AppDefaultColor"/>
                             <connections>
                                 <action selector="pressedFinishButton:" destination="Qw3-Hb-Lid" id="eFL-PK-mDd"/>
                             </connections>
@@ -916,7 +916,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="건의사항" id="pHW-tP-Gz8">
                         <barButtonItem key="rightBarButtonItem" title="보내기" id="qS1-oz-bHq">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" name="AppDefaultColor"/>
                             <connections>
                                 <action selector="pressedSendButton:" destination="ENk-kZ-4Rz" id="GLn-Nc-awA"/>
                             </connections>
@@ -1097,9 +1097,9 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="AppDefaultColor"/>
-                        <color key="barTintColor" name="AppDefaultColor"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="AppDefaultColor"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1144,9 +1144,9 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" name="AppDefaultColor"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="AppDefaultColor"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1186,9 +1186,9 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" name="AppDefaultColor"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="AppDefaultColor"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1203,7 +1203,7 @@
         <!--Settings View Controller-->
         <scene sceneID="7c4-Re-RkU">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" title="Settings View Controller" id="eeV-Us-DhA" customClass="SettingsViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" title="Settings View Controller" id="eeV-Us-DhA" customClass="SettingsViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V5U-Iu-S6z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1292,7 +1292,7 @@
         <!--Change Password View Controller-->
         <scene sceneID="spR-Zp-vu2">
             <objects>
-                <viewController id="JJB-q6-yNq" customClass="ChangePasswordViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JJB-q6-yNq" customClass="ChangePasswordViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FVm-uj-u2e">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1365,7 +1365,7 @@
         <!--Change Nickname View Controller-->
         <scene sceneID="nBz-RZ-j85">
             <objects>
-                <viewController title="Change Nickname View Controller" id="Hk3-ha-Vlo" customClass="ChangeNicknameViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Change Nickname View Controller" id="Hk3-ha-Vlo" customClass="ChangeNicknameViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xJm-E5-vh5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1434,7 +1434,7 @@
         <!--TermsConditions View Controller-->
         <scene sceneID="79k-CE-QeV">
             <objects>
-                <viewController storyboardIdentifier="TermsAndConditionViewController" title="TermsConditions View Controller" id="jNk-uN-G1K" customClass="TermsAndConditionsViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TermsAndConditionViewController" title="TermsConditions View Controller" id="jNk-uN-G1K" customClass="TermsAndConditionsViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JsL-C2-ay9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

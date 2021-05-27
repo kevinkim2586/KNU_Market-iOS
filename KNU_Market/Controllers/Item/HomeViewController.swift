@@ -1,5 +1,6 @@
 import UIKit
 import Alamofire
+import SwiftMessages
 
 class HomeViewController: UIViewController {
 
@@ -8,15 +9,20 @@ class HomeViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
+    private var viewModel = HomeViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+    
         initialize()
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
         
@@ -32,6 +38,21 @@ class HomeViewController: UIViewController {
         itemVC.hidesBottomBarWhenPushed = true
 
     }
+}
+
+//MARK: - HomeViewModelDelegate
+
+extension HomeViewController: HomeViewModelDelegate {
+    
+    func didFetchUserProfileInfo() {
+        showSuccessCard(title: "\(User.shared.nickname)님", message: "환영합니다!", iconText: "👀")
+    }
+    
+    func failedFetchingUserProfileInfo(with error: NetworkError) {
+        showErrorCard(title: "네트워크 오류", message: "일시적인 연결 문제가 있습니다. ")
+    }
+    
+    
 }
 
 //MARK: -  UITableViewDelegate, UITableViewDataSource
@@ -86,7 +107,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController {
     
     func initialize() {
+        
+        viewModel.delegate = self
     
+        loadUserInfo()
         initializeTableView()
         initializeAddButton()
         
@@ -110,6 +134,11 @@ extension HomeViewController {
         let configuration = UIImage.SymbolConfiguration(font: font)
         let plusImage = UIImage(systemName: "plus", withConfiguration: configuration)
         addButton.setImage(plusImage, for: .normal)
+    }
+    
+    func loadUserInfo() {
+        
+        viewModel.loadUserProfile()
     }
     
 }

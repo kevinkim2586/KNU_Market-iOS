@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import SwiftMessages
 
 extension UIViewController {
     
@@ -65,6 +66,40 @@ extension UIViewController {
                        completion: { isCompleted in
                         toastLabel.removeFromSuperview()
                        })
+    }
+    
+    func showErrorCard(title: String, message: String) {
+        
+        let view = MessageView.viewFromNib(layout: .cardView)
+        view.configureTheme(.error)
+        view.configureDropShadow()
+        
+        view.button?.isHidden = true
+
+        let iconText = "ⓧ"
+        view.configureContent(title: title, body: message, iconText: iconText)
+
+        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
+
+        SwiftMessages.show(view: view)
+    }
+    
+    func showSuccessCard(title: String, message: String, iconText: String) {
+        
+        let view = MessageView.viewFromNib(layout: .cardView)
+        view.configureTheme(.success)
+        view.configureDropShadow()
+        
+        view.button?.isHidden = true
+
+        view.configureContent(title: title, body: message, iconText: iconText)
+
+        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
+
+        SwiftMessages.show(view: view)
+        
     }
 }
  

@@ -26,7 +26,8 @@ class ChangeNicknameViewController: UIViewController {
         self.view.endEditing(true)
         
         if !didCheckNicknameDuplicate {
-            self.presentSimpleAlert(title: "닉네임 중복 확인", message: "닉네임 중복을 먼저 확인해주세요.")
+            self.showErrorCard(title: "닉네임 중복 확인", message: "닉네임 중복을 먼저 확인해주세요.")
+            //self.presentSimpleAlert(title: "닉네임 중복 확인", message: "닉네임 중복을 먼저 확인해주세요.")
         
             return
         }

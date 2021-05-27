@@ -15,6 +15,7 @@
 		7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */; };
 		7C1C1D12265E714000C08C66 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D11265E714000C08C66 /* TermsAndConditionsViewController.swift */; };
 		7C1D829526565429006FEBDE /* SendDeveloperMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D829426565428006FEBDE /* SendDeveloperMessageViewController.swift */; };
+		7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* HomeViewModel.swift */; };
 		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
 		7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */; };
 		7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E2126264645B300E98FE5 /* ItemViewController.swift */; };
@@ -73,6 +74,7 @@
 		7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		7C1C1D11265E714000C08C66 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		7C1D829426565428006FEBDE /* SendDeveloperMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDeveloperMessageViewController.swift; sourceTree = "<group>"; };
+		7C3758EC265FA97A0081A85D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		7C5E2126264645B300E98FE5 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 			children = (
 				7C5E21282646558600E98FE5 /* ItemViewModel.swift */,
 				7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */,
+				7C3758EC265FA97A0081A85D /* HomeViewModel.swift */,
 			);
 			path = ItemVM;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				7C6B50A02652B17F0032328C /* UIImage Extension.swift in Sources */,
 				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
+				7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
 				7CB8DF5B264C1EC60001CC6D /* Example.swift in Sources */,
 				7CB8DF44264BEF050001CC6D /* LoadOtherUserProfileModel.swift in Sources */,

@@ -46,7 +46,7 @@ class MyPageViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                self.presentSimpleAlert(title: "네트워크 오류", message: error.errorDescription)
+                self.showErrorCard(title: "네트워크 오류", message: error.errorDescription)
             }
         }
     }
@@ -65,7 +65,7 @@ class MyPageViewController: UIViewController {
 extension MyPageViewController: MyPageViewModelDelegate {
 
     func didLoadUserProfileInfo() {
-        userNicknameLabel.text = "\(viewModel.userNickname)님, 환영합니다! 👀"
+        userNicknameLabel.text = "\(viewModel.userNickname)"
     }
     
     func didFetchProfileImage() {

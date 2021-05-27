@@ -50,11 +50,11 @@ class ChangePasswordViewController: UIViewController {
             return false
         }
         
-        guard password.count >= 4,
-              password.count < 30,
+        guard password.count >= 5,
+              password.count < 20,
               checkPassword.count >= 4,
-              checkPassword.count < 30 else {
-            self.presentSimpleAlert(title: "비밀번호 길이 오류", message: "비밀번호는 4자 이상, 30자 미만으로 입력해주세요.")
+              checkPassword.count < 20 else {
+            self.presentSimpleAlert(title: "비밀번호 길이 오류", message: "비밀번호는 5자 이상, 20자 미만으로 입력해주세요.")
             return false
         }
         return true

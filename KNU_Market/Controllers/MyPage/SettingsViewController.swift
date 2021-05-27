@@ -5,7 +5,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet var userNicknameLabel: UILabel!
     
  
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

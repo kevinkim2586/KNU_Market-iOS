@@ -2,7 +2,6 @@ import UIKit
 
 let profileImageCache = NSCache<AnyObject, AnyObject>()
 
-
 protocol MyPageViewModelDelegate {
     
     func didLoadUserProfileInfo()
@@ -24,8 +23,6 @@ class MyPageViewModel {
     var tableViewOptions: [String] = ["개발자에게 건의사항 보내기","설정","서비스 이용약관"]
     
     var userNickname: String = ""
-    
-    
     
     var profileImage: UIImage = UIImage() {
         didSet {
@@ -54,7 +51,7 @@ class MyPageViewModel {
                 }
                 
                 OperationQueue().addOperation {
-                    self.fetchProfileImage(with: model.profileImage)
+                    self.fetchProfileImage(with: model.profileImageCode)
                 }
             
             case .failure(let error):
@@ -101,6 +98,7 @@ class MyPageViewModel {
             switch result {
             
             case .success(let uid):
+                User.shared.profileImageCode = uid
                 self.delegate?.didUploadImageToServerFirst(with: uid)
                 
             case .failure(let error):
@@ -110,42 +108,21 @@ class MyPageViewModel {
         }
     }
     
-    //MARK: - 프로필 이미지 수정 (DB상)
+    //MARK: - 그 다음에 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String) {
         
         UserManager.shared.updateUserProfileImage(with: uid) { result in
             
+            switch result {
             
-            
-            
+            case .success(_):
+                profileImageCache.removeAllObjects()
+                self.delegate?.didUpdateUserProfileImage()
+            case .failure(let error):
+                self.delegate?.failedUpdatingUserProfileImage(with: error)
+            }
         }
-        
-        
-        
     }
     
-    
-    
 
-    
-    //수정 필요
-//    func updateUserProfileToServer(with image: UIImage) {
-//
-//        UserManager.shared.updateUserProfileInfo(infoType: .profileImage, info: image) { result in
-//
-//            switch result {
-//
-//            case .success(_):
-//
-//                self.profileImage = image
-//                self.delegate?.didUploadImageToServerFirst
-//
-//
-//            case .failure(let error):
-//                self.delegate?.failedUpdatingUserProfileToServer(with: error)
-//
-//            }
-//        }
-//
-//    }
 }

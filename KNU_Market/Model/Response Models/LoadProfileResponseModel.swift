@@ -4,6 +4,12 @@ struct LoadProfileResponseModel: Decodable {
     
     let id: String
     let nickname: String
-    let profileImage: String
-    // String 맞는지 체크
+    let profileImageCode: String
+
+    enum CodingKeys: String, CodingKey {
+        
+        case id
+        case nickname
+        case profileImageCode = "profileImage"
+    }
 }

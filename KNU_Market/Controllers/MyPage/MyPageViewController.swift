@@ -28,7 +28,6 @@ class MyPageViewController: UIViewController {
         present(self.imagePicker, animated: true, completion: nil)
     }
     
-    
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
         
         UserManager.shared.logOut { result in
@@ -44,8 +43,7 @@ class MyPageViewController: UIViewController {
                         DispatchQueue.main.async {
                             self.popToInitialViewController()
                         }
-                        
-                    } else { return }
+                    }
                 }
             case .failure(let error):
                 self.presentSimpleAlert(title: "네트워크 오류", message: error.errorDescription)
@@ -53,6 +51,7 @@ class MyPageViewController: UIViewController {
         }
     }
     
+    // 아래 수정 필요
     func popToInitialViewController() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -77,27 +76,18 @@ extension MyPageViewController: MyPageViewModelDelegate {
         self.presentSimpleAlert(title: "프로필 정보 불러오기 실패", message: error.errorDescription)
     }
 
-    func showToastMessage(with message: String) {
-        showToast(message: message)
-    }
-    
-    
+    //이미지 먼저 서버에 업로드
     func didUploadImageToServerFirst(with uid: String) {
-        
         viewModel.updateUserProfileImage(with: uid)
-        
-        
     }
     
     func failedUploadingImageToServerFirst(with error: NetworkError) {
         self.presentSimpleAlert(title: "이미지 업로드 실패", message: error.errorDescription)
     }
     
-    
-    
-    
+    // 프로필 사진 실제 DB상 수정
     func didUpdateUserProfileImage() {
-        updateProfileImageButton(with: viewModel.profileImage)
+        viewModel.loadUserProfile()
         showToast(message: "프로필 이미지 변경 성공")
     }
     
@@ -105,8 +95,9 @@ extension MyPageViewController: MyPageViewModelDelegate {
         self.presentSimpleAlert(title: "업로드 오류", message: error.errorDescription)
     }
     
-    
-
+    func showToastMessage(with message: String) {
+        showToast(message: message)
+    }
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -128,7 +119,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.font = .systemFont(ofSize: 17)
         
         switch indexPath.row {
-        
         case 0:
             cell.textLabel?.text = viewModel.tableViewOptions[indexPath.row]
         case 1:
@@ -183,14 +173,9 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
                         showProgressBar()
                         
                         OperationQueue().addOperation {
-                            
-                            
-                            //self.viewModel.updateUserProfileToServer(with: originalImage)
-        
-    
+                    
+                            self.viewModel.uploadImageToServerFirst(with: originalImage)
                             dismissProgressBar()
-                            
-                            
                         }
               
                     } else {

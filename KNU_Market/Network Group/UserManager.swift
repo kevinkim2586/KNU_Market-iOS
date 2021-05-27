@@ -164,6 +164,7 @@ class UserManager {
                         do {
                             
                             let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)
+                            print("UserManager - loadUserProfile decodedData: \(decodedData)")
                             self.saveBasicUserInfo(with: decodedData)
                             print("User Manager - loadUserProfile() success")
                             completion(.success(decodedData))
@@ -206,7 +207,7 @@ class UserManager {
                    }
     }
     
-    //MARK: - 프로필 이미지 수정
+    //MARK: - 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String,
                                 completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
@@ -218,6 +219,7 @@ class UserManager {
             "image": uid
         ]
         
+        print("uid: \(uid)")
         
         AF.request(userProfileUpdateURL,
                    method: .put,
@@ -225,7 +227,6 @@ class UserManager {
                    encoding: JSONEncoding.default,
                    headers: headers).responseJSON { response in
                     
-                
                     guard let statusCode = response.response?.statusCode else { return }
                     
                     switch statusCode {
@@ -236,7 +237,7 @@ class UserManager {
                         User.shared.profileImageCode = uid
                         
                     default:
-                        print("UserManager - updateUserProfileImage failed default")
+                        print("UserManager - updateUserProfileImage failed default statement")
                         let error = NetworkError.returnError(json: response.data!)
                         completion(.failure(error))
                     }
@@ -244,67 +245,12 @@ class UserManager {
     }
                                                        
                                                        
-                                                       
-    
-    
-    
-    
-    //TODO: - 프로필 정보 중 하나를 업데이트 하려면, 그리고 그 중에서 이미지를 업뎃하려면 uploadImage를 먼저해야함
-//    func updateUserProfileInfo(infoType: ProfileInfoType,
-//                               info: Any,
-//                               completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
-//
-//        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
-//
-//
-//        // 만약 nickname 이나 password 를 변경하고자 한다면
-//        switch infoType {
-//
-//        case .nickname:
-//            print("nickname")
-//        case .password:
-//            print("password")
-//        case .profileImage:
-//
-//            guard let image = info as? UIImage else {
-//                completion(.failure(.E000))
-//                return
-//
-//            }
-//
-//            self.uploadImage(with: image) { result in
-//
-//                switch result {
-//
-//                case .success(let imageID):
-//
-//                    print("User Manager - updateUserProfileInfo success in uploadImage, imageUID: \(imageID)")
-//
-//                    // 이제 업로드도 해야함
-//
-//                case .failure(let error):
-//                    print("User Manager - updateUserProfileInfo .failure ACTIVATED with \(error.errorDescription)")
-//                    completion(.failure(error))
-//                }
-//
-//            }
-//
-//
-//
-//
-//        }
-//
-//
-//
-//
-//    }
-    
+                                        
     //MARK: - 이미지 업로드
     func uploadImage(with image: Data,
                      completion: @escaping ((Result<String, NetworkError>) -> Void)) {
         
         let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
-        
 
         AF.upload(multipartFormData: { multipartFormData in
             
@@ -320,11 +266,11 @@ class UserManager {
             
             switch statusCode {
             case 201:
-                
                 do {
                     
                     let json = try JSON(data: response.data!)
                     let imageID = json["uid"].stringValue
+                    print("UserManager: newly updated profileImage UID: \(imageID)")
                     completion(.success(imageID))
                     
                 } catch {
@@ -336,6 +282,49 @@ class UserManager {
             }
         }
     }
+    
+    //MARK: - 비밀번호 변경
+    func updateUserPassword(with password: String,
+                            completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+        
+        let parameters: Parameters = [
+            "nickname": User.shared.nickname,
+            "password": password,
+            "image": User.shared.profileImageCode
+        ]
+        
+        print("new password: \(password)")
+        
+        AF.request(userProfileUpdateURL,
+                   method: .put,
+                   parameters: parameters,
+                   encoding: JSONEncoding.default,
+                   headers: headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 201:
+                        print("UserManager - updateUserPassword success")
+                        completion(.success(true))
+                        User.shared.password = password
+                        
+                    default:
+                        print("UserManager - updateUserPassword failed default statement")
+                        let error = NetworkError.returnError(json: response.data!)
+                        completion(.failure(error))
+                    }
+                   }
+    }
+    
+    
+    
+    
+    
+    
     
     //MARK: - 로그아웃
     func logOut(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
@@ -374,7 +363,7 @@ class UserManager {
         
         User.shared.id = model.id
         User.shared.nickname = model.nickname
-        User.shared.profileImageCode = model.profileImage
+        User.shared.profileImageCode = model.profileImageCode
     }
     
 

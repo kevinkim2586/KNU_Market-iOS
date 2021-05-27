@@ -99,7 +99,22 @@ extension UIViewController {
         (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
 
         SwiftMessages.show(view: view)
+    }
+    
+    func showWarningCard(title: String, message: String, iconText: String = "🤔") {
         
+        let view = MessageView.viewFromNib(layout: .cardView)
+        view.configureTheme(.warning)
+        view.configureDropShadow()
+        
+        view.button?.isHidden = true
+
+        view.configureContent(title: title, body: message, iconText: iconText)
+
+        view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        (view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
+
+        SwiftMessages.show(view: view)
     }
 }
  

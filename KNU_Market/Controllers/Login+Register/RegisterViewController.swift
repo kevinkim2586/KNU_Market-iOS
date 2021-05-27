@@ -41,7 +41,9 @@ class RegisterViewController: UIViewController {
         
         nicknameTextField.resignFirstResponder()
         
-        UserManager.shared.checkDuplicate(nickname: nickname) { result in
+        UserManager.shared.checkDuplicate(nickname: nickname) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             case .success(let isNotDuplicate):
@@ -65,7 +67,7 @@ class RegisterViewController: UIViewController {
                 }
                
             case .failure(let error):
-                self.presentSimpleAlert(title: "에러 발생", message: error.errorDescription)
+                self.showErrorCard(title: "에러 발생", message: error.errorDescription)
             }
         }
     }
@@ -91,13 +93,16 @@ class RegisterViewController: UIViewController {
         
         let registerModel = RegisterModel(id: id, password: password, nickname: nickname, image: profileImageData)
         
-        UserManager.shared.register(with: registerModel) { result in
+        UserManager.shared.register(with: registerModel) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             case .success(let isSuccess):
                 print("Register View Controller - Register Successful: \(isSuccess)")
                 
                 self.showToast(message: "회원가입을 축하합니다! 새로 로그인해주세요.")
+                self.showSuccessCard(title: "회원가입 성공!", message: "회원가입을 축하합니다!", iconText: "🎉")
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
                     
@@ -106,6 +111,7 @@ class RegisterViewController: UIViewController {
                 }
             
             case .failure(let error):
+                self.showErrorCard(title: "에러 발생", message: "일시적인 오류입니다. 나중에 다시 시도해주세요")
                 print("Register View Controller - Register FAILED with error: \(error.localizedDescription)")
                 
             }
@@ -119,12 +125,12 @@ class RegisterViewController: UIViewController {
               let nickname = nicknameTextField.text,
               let pw = passwordTextField.text,
               let pwCheck = checkPasswordTextField.text else {
-            self.presentSimpleAlert(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요.")
+            self.showWarningCard(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요")
             return false
         }
         
         guard !email.isEmpty, !nickname.isEmpty, !pw.isEmpty, !pwCheck.isEmpty else {
-            self.presentSimpleAlert(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요.")
+            self.showWarningCard(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요")
             return false
         }
         return true
@@ -135,7 +141,7 @@ class RegisterViewController: UIViewController {
         guard let email = emailTextField.text else { return false }
         
         guard email.contains("@knu.ac.kr") else {
-            self.presentSimpleAlert(title: "경북대학교 이메일로 가입하셔야 합니다.", message: "학교 이메일을 기입하셨는지 확인하시기 바랍니다.")
+            self.showWarningCard(title: "경북대학교 이메일로 가입하셔야 합니다", message: "학교 이메일을 기입하셨는지 확인하시기 바랍니다")
             emailTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
             return false
         }
@@ -154,7 +160,7 @@ class RegisterViewController: UIViewController {
         
         if nickname.count >= 2 && nickname.count <= 10 { return true }
         else {
-            self.presentSimpleAlert(title: "닉네임을 다시 입력해주세요.", message: "닉네임은 2글자 이상, 10자리 이하로 입력해주세요.")
+            self.showWarningCard(title: "닉네임을 다시 입력해주세요", message: "닉네임은 2글자 이상, 10자리 이하로 입력해주세요")
             return false
         }
     }
@@ -165,7 +171,7 @@ class RegisterViewController: UIViewController {
         
         if password.count >= 8 && password.count <= 15 { return true }
         else {
-            self.presentSimpleAlert(title: "비밀번호를 다시 입력해주세요.", message: "비밀번호는 8자리 이상, 15자리 이하로 입력해주세요.")
+            self.showWarningCard(title: "비밀번호 오류", message: "비밀번호는 8자리 이상, 15자리 이하로 입력해주세요")
             passwordTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
             passwordTextField.text?.removeAll()
             checkPasswordTextField.text?.removeAll()
@@ -178,7 +184,7 @@ class RegisterViewController: UIViewController {
         
         if passwordTextField.text == checkPasswordTextField.text { return true }
         else {
-            self.presentSimpleAlert(title: "비밀번호가 일치하지 않습니다.", message: "다시 입력해주세요.")
+            self.showWarningCard(title: "비밀번호가 일치하지 않습니다", message: "다시 입력해주세요")
             checkPasswordTextField.text?.removeAll()
             passwordTextField.becomeFirstResponder()
             return false

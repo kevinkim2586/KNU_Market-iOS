@@ -16,7 +16,9 @@ class HomeViewModel {
     
     func loadUserProfile() {
         
-        UserManager.shared.loadUserProfile { result in
+        UserManager.shared.loadUserProfile { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             case .success(let model):

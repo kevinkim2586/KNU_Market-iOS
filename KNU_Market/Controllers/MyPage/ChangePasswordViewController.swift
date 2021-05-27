@@ -28,10 +28,11 @@ class ChangePasswordViewController: UIViewController {
             switch result {
             
             case .success(_):
-                self.showToast(message: "비밀번호 변경 완료")
+                self.showSuccessCard(title: "성공", message: "비밀번호가 변경되었습니다", iconText: "☑️")
+          
                 
             case .failure(let error):
-                self.presentSimpleAlert(title: "비밀번호 변경 실패", message: error.errorDescription)
+                self.showErrorCard(title: "비밀번호 변경 실패", message: error.errorDescription)
             }
             dismissProgressBar()
         }
@@ -46,12 +47,12 @@ class ChangePasswordViewController: UIViewController {
         
         guard !password.isEmpty,
               !checkPassword.isEmpty else {
-            self.presentSimpleAlert(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요.")
+            self.showWarningCard(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요")
             return false
         }
         
         guard password == checkPassword else {
-            self.presentSimpleAlert(title: "비밀번호가 일치하지 않습니다.", message: "")
+            self.showWarningCard(title: "비밀번호가 일치하지 않습니다", message: "다시 입력해주세요")
             return false
         }
         
@@ -59,7 +60,7 @@ class ChangePasswordViewController: UIViewController {
               password.count < 20,
               checkPassword.count >= 4,
               checkPassword.count < 20 else {
-            self.presentSimpleAlert(title: "비밀번호 길이 오류", message: "비밀번호는 5자 이상, 20자 미만으로 입력해주세요.")
+            self.showWarningCard(title: "비밀번호 길이 오류", message: "비밀번호는 5자 이상, 20자 미만으로 입력해주세요")
             return false
         }
         return true

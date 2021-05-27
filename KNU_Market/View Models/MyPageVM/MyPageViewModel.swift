@@ -34,7 +34,9 @@ class MyPageViewModel {
     //MARK: - 사용자 프로필 정보 불러오기
     func loadUserProfile() {
      
-        UserManager.shared.loadUserProfile { result in
+        UserManager.shared.loadUserProfile { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             case .success(let model):
@@ -65,7 +67,9 @@ class MyPageViewModel {
     //MARK: - 사용자 프로필 이미지 불러오기
     func fetchProfileImage(with urlString: String) {
         
-        UserManager.shared.requestMedia(from: urlString) { result in
+        UserManager.shared.requestMedia(from: urlString) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             case .success(let imageData):
@@ -95,7 +99,9 @@ class MyPageViewModel {
             return
         }
         
-        UserManager.shared.uploadImage(with: imageData) { result in
+        UserManager.shared.uploadImage(with: imageData) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             
@@ -113,7 +119,9 @@ class MyPageViewModel {
     //MARK: - 그 다음에 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String) {
         
-        UserManager.shared.updateUserProfileImage(with: uid) { result in
+        UserManager.shared.updateUserProfileImage(with: uid) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             

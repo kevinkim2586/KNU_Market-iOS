@@ -26,16 +26,14 @@ class ChangeNicknameViewController: UIViewController {
         self.view.endEditing(true)
         
         if !didCheckNicknameDuplicate {
-            self.showErrorCard(title: "닉네임 중복 확인", message: "닉네임 중복을 먼저 확인해주세요.")
-            //self.presentSimpleAlert(title: "닉네임 중복 확인", message: "닉네임 중복을 먼저 확인해주세요.")
-        
+            showWarningCard(title: "중복 확인", message: "닉네임 중복을 먼저 확인해주세요")
             return
         }
         
         if !validateUserInput() { return }
         
         guard let nickname = self.nickname else {
-            self.presentSimpleAlert(title: "빈 칸 오류", message: "빈 칸이 없는지 확인해주세요.")
+            showWarningCard(title: "빈 칸 오류", message: "빈 칸이 없는지 확인해주세요")
             return
         }
         
@@ -46,10 +44,10 @@ class ChangeNicknameViewController: UIViewController {
             switch result {
             
             case .success(_):
-                self.showToast(message: "닉네임 변경 완료")
+                self.showSuccessCard(title: "변경 성공", message: "닉네임이 변경되었습니다", iconText: "😄")
                 
             case .failure(let error):
-                self.presentSimpleAlert(title: "닉네임 변경 실패", message: error.errorDescription)
+                self.showErrorCard(title: "변경 실패", message: error.errorDescription)
             }
         }
         dismissProgressBar()
@@ -83,7 +81,7 @@ class ChangeNicknameViewController: UIViewController {
                 }
                 
             case .failure(let error):
-                self.presentSimpleAlert(title: "에러 발생", message: error.errorDescription)
+                self.showErrorCard(title: "에러 발생", message: error.errorDescription)
             }
         }
     }
@@ -95,11 +93,11 @@ class ChangeNicknameViewController: UIViewController {
             return false
         }
         guard !nickname.isEmpty else {
-            self.presentSimpleAlert(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요.")
+            showWarningCard(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요")
             return false
         }
         guard nickname.count >= 2, nickname.count <= 15 else {
-            self.presentSimpleAlert(title: "닉네임 길이 오류", message: "닉네임은 2자 이상, 15자 이하로 작성해주세요.")
+            showWarningCard(title: "입력 오류", message: "닉네임은 2자 이상, 15자 이하로 작성해주세요")
             return false
         }
         self.nickname = nickname

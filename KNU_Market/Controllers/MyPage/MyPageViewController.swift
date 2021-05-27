@@ -73,7 +73,7 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func failedLoadingUserProfileInfo(with error: NetworkError) {
-        self.presentSimpleAlert(title: "프로필 정보 불러오기 실패", message: error.errorDescription)
+        showWarningCard(title: "프로필 조회 실패", message: error.errorDescription)
     }
 
     //이미지 먼저 서버에 업로드
@@ -82,17 +82,18 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func failedUploadingImageToServerFirst(with error: NetworkError) {
-        self.presentSimpleAlert(title: "이미지 업로드 실패", message: error.errorDescription)
+        showErrorCard(title: "이미지 업로드 실패", message: error.errorDescription)
     }
     
     // 프로필 사진 실제 DB상 수정
     func didUpdateUserProfileImage() {
         viewModel.loadUserProfile()
         showToast(message: "프로필 이미지 변경 성공")
+        showSuccessCard(title: "성공", message: "프로필 이미지를 변경하였습니다", iconText: "😄")
     }
     
     func failedUpdatingUserProfileImage(with error: NetworkError) {
-        self.presentSimpleAlert(title: "업로드 오류", message: error.errorDescription)
+        showErrorCard(title: "업로드 실패", message: error.errorDescription)
     }
     
     func showToastMessage(with message: String) {

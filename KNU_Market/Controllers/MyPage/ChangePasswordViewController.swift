@@ -19,17 +19,22 @@ class ChangePasswordViewController: UIViewController {
         
         if !validateUserInput() { return }
         
+        let newPassword = passwordTextField.text!
+    
+        showProgressBar()
         
-        
-        //통신
-        
-        //통신 다 하면
-        
-        
-        navigationController?.popViewController(animated: true)
-        
-        
-        // 닉네임 변경된거 다시 표시해야할듯 -> User.shared.nickname 다시 변경
+        UserManager.shared.updateUserPassword(with: newPassword) { result in
+            
+            switch result {
+            
+            case .success(_):
+                self.showToast(message: "비밀번호 변경 완료")
+                
+            case .failure(let error):
+                self.presentSimpleAlert(title: "비밀번호 변경 실패", message: error.errorDescription)
+            }
+            dismissProgressBar()
+        }
     }
     
     func validateUserInput() -> Bool {

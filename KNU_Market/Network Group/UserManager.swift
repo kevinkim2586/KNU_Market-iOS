@@ -321,10 +321,42 @@ class UserManager {
     }
     
     
-    
-    
-    
-    
+    //MARK: - 닉네임 변경
+    func updateUserNickname(with nickname: String,
+                            completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+        
+        let parameters: Parameters = [
+            "nickname": nickname,
+            "password": User.shared.password,
+            "image": User.shared.profileImageCode
+        ]
+        
+        print("new nickname: \(nickname)")
+        
+        AF.request(userProfileUpdateURL,
+                   method: .put,
+                   parameters: parameters,
+                   encoding: JSONEncoding.default,
+                   headers: headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 201:
+                        print("UserManager - updateUserNickname success")
+                        completion(.success(true))
+                        User.shared.nickname = nickname
+                        
+                    default:
+                        print("UserManager - updateUserNickname failed default statement")
+                        let error = NetworkError.returnError(json: response.data!)
+                        completion(.failure(error))
+                    }
+                   }
+    }
     
     //MARK: - 로그아웃
     func logOut(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {

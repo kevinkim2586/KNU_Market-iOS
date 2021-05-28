@@ -4,6 +4,8 @@ class ChatListViewController: UIViewController {
 
     @IBOutlet weak var chatListTableView: UITableView!
     
+    private let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +47,11 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    @objc func refreshTableView() {
+        
+        chatListTableView.reloadData()
+        chatListTableView.refreshControl?.endRefreshing()
+    }
     
 }
 
@@ -64,5 +71,9 @@ extension ChatListViewController {
         
         chatListTableView.delegate = self
         chatListTableView.dataSource = self
+        chatListTableView.refreshControl = refreshControl
+        
+        refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        
     }
 }

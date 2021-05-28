@@ -19,6 +19,4 @@ class UserPickedItemImageCollectionViewCell: UICollectionViewCell {
         delegate?.didPressDeleteImageButton(at: indexPath)
     }
     
-    
-    
 }

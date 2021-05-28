@@ -420,7 +420,7 @@
                             <constraint firstItem="tWx-lz-agE" firstAttribute="leading" secondItem="fDU-Da-Diy" secondAttribute="leading" id="e3f-EJ-ZGR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="srO-9r-rXl">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="srO-9r-rXl">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="hdD-ch-YNy">
                             <color key="tintColor" name="AppDefaultColor"/>
                             <connections>
@@ -669,7 +669,7 @@
                             <constraint firstItem="BMM-d8-tEv" firstAttribute="top" secondItem="n6m-j0-iun" secondAttribute="bottom" constant="37" id="yqk-zh-Wiz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="공구 내용 쓰기" id="Me3-4F-ryJ">
+                    <navigationItem key="navigationItem" title="공구 내용 쓰기" largeTitleDisplayMode="never" id="Me3-4F-ryJ">
                         <barButtonItem key="rightBarButtonItem" title="완료" id="ffN-1o-Dc7">
                             <color key="tintColor" name="AppDefaultColor"/>
                             <connections>
@@ -768,7 +768,7 @@
                             <constraint firstItem="RGU-wl-clc" firstAttribute="bottom" secondItem="Fns-XP-5Tf" secondAttribute="bottom" id="owO-7o-46X"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="크누마켓 채팅" id="4sc-w2-WCM"/>
+                    <navigationItem key="navigationItem" title="크누마켓 채팅" largeTitleDisplayMode="always" id="4sc-w2-WCM"/>
                     <connections>
                         <outlet property="chatListTableView" destination="RGU-wl-clc" id="e1G-jF-ypx"/>
                     </connections>
@@ -1093,8 +1093,8 @@
                         <color key="badgeColor" name="AppDefaultColor"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bag-Fo-mV6">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Bag-Fo-mV6">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="AppDefaultColor"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1140,10 +1140,10 @@
                         <color key="badgeColor" name="AppDefaultColor"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Js5-51-S3r">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Js5-51-S3r">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="AppDefaultColor"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" name="AppDefaultColor"/>
@@ -1168,7 +1168,7 @@
                         <viewLayoutGuide key="safeArea" id="IVF-kG-jqd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="TlX-nZ-jpm"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="TlX-nZ-jpm"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zOZ-hr-4UP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

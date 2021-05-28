@@ -19,8 +19,6 @@ class User {
     
     var refreshToken: String = ""
     
-    
-    //MARK: - Profile Image
     var profileImage: UIImage? {
         
         didSet {
@@ -29,8 +27,23 @@ class User {
         }
     }
     var profileImageData: Data?
+    
     var profileImageCode: String = ""
     
+    
+    func resetAllUserInfo() {
+        
+        id = ""
+        nickname = ""
+        password = ""
+        email = ""
+        accessToken = ""
+        refreshToken = ""
+        profileImage = nil
+        profileImageData = nil
+        profileImageCode = ""
+    
+    }
     
     
 }

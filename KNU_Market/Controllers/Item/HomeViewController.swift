@@ -13,6 +13,10 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Constants.Color.appColor)]
+        navigationItem.largeTitleDisplayMode = .always
+        
     
         initialize()
 
@@ -20,7 +24,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        navigationItem.largeTitleDisplayMode = .always
     }
 
     

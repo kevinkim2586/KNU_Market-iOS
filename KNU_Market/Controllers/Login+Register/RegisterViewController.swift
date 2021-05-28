@@ -101,7 +101,6 @@ class RegisterViewController: UIViewController {
             case .success(let isSuccess):
                 print("Register View Controller - Register Successful: \(isSuccess)")
                 
-                self.showToast(message: "회원가입을 축하합니다! 새로 로그인해주세요.")
                 self.showSuccessCard(title: "회원가입 성공!", message: "회원가입을 축하합니다!", iconText: "🎉")
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
@@ -141,7 +140,7 @@ class RegisterViewController: UIViewController {
         guard let email = emailTextField.text else { return false }
         
         guard email.contains("@knu.ac.kr") else {
-            self.showWarningCard(title: "경북대학교 이메일로 가입하셔야 합니다", message: "학교 이메일을 기입하셨는지 확인하시기 바랍니다")
+            self.showWarningCard(title: "이메일 오류", message: "학교 이메일을 기입하셨는지 확인하시기 바랍니다")
             emailTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
             return false
         }
@@ -150,7 +149,10 @@ class RegisterViewController: UIViewController {
     
     func checkNicknameDuplicate() -> Bool {
         
-        if !didCheckNicknameDuplicate { return false}
+        if !didCheckNicknameDuplicate {
+            self.showWarningCard(title: "닉네임 중복 확인", message: "닉네임 중복 확인을 해주세요")
+            return false
+        }
         else { return true }
     }
     

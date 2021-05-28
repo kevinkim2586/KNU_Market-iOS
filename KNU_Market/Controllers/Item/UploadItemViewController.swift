@@ -136,6 +136,7 @@ extension UploadItemViewController: UICollectionViewDelegate, UICollectionViewDa
             }
             cell.delegate = self
             cell.indexPath = indexPath.item
+       
             
             if viewModel.userSelectedImages.count > 0 {
                 cell.userPickedImageView.image = viewModel.userSelectedImages[indexPath.item - 1]

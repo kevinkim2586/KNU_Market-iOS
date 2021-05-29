@@ -70,7 +70,8 @@ class ItemTableViewCell: UITableViewCell {
             gatheringLabel.backgroundColor = UIColor.lightGray
         }
         
-        gatheringLabel.font = gatheringLabel.font.withSize(12)
+        
+        gatheringLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .semibold)
         gatheringLabel.textColor = UIColor.white
         gatheringLabel.layer.masksToBounds = true
         gatheringLabel.layer.cornerRadius = gatheringLabel.frame.height / 2
@@ -88,11 +89,9 @@ class ItemTableViewCell: UITableViewCell {
         let total = viewModel.totalGatheringPeople
         
         currentlyGatheredPeopleLabel.text = "\(currentNum)" + "/" + "\(total) 명"
+        currentlyGatheredPeopleLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
         
     }
-    
-    
-    
     
     func initializeLocationLabel() {
         

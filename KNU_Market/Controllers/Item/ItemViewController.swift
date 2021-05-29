@@ -10,10 +10,13 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var itemTitleLabel: UILabel!
     @IBOutlet weak var itemExplanationLabel: UILabel!
     @IBOutlet weak var gatheringPeopleLabel: UILabel!
+    @IBOutlet weak var gatheringPeopleImageView: UIImageView!
     @IBOutlet weak var enterChatButton: UIButton!
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     private let refreshControl = UIRefreshControl()
+    
     var images = ["bubble1", "bubble2", "bubble3"]
     
     private var viewModel = ItemViewModel()
@@ -22,6 +25,8 @@ class ItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+
         
         initialize()
 
@@ -67,7 +72,7 @@ extension ItemViewController {
         initializeItemExplanationLabel()
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
-        
+        initializeBottomView()
         configurePageControl()
         
     }
@@ -95,6 +100,7 @@ extension ItemViewController {
         let attributes = [NSAttributedString.Key.paragraphStyle : labelStyle]
         itemExplanationLabel.attributedText = NSAttributedString(string: viewModel.itemExplanation, attributes: attributes)
         
+ 
     }
     
     func initializeGatheringPeopleLabel() {
@@ -103,14 +109,13 @@ extension ItemViewController {
         let total = viewModel.totalGatheringPeople
         
         if viewModel.isGathering {
-            gatheringPeopleLabel.text = "모집 중     \(currentNum)" + "/" + "\(total) 명"
-            gatheringPeopleLabel.backgroundColor = UIColor(named: Constants.Color.appColor)
+            gatheringPeopleLabel.text = "모집 중     \(currentNum)" + "/" + "\(total)"
+     
         } else {
-            gatheringPeopleLabel.text = "마감     \(currentNum)" + "/" + "\(total) 명"
-            gatheringPeopleLabel.backgroundColor = UIColor.lightGray
+            gatheringPeopleLabel.text = "마감     \(currentNum)" + "/" + "\(total)"
+      
         }
-        gatheringPeopleLabel.clipsToBounds = true
-        gatheringPeopleLabel.layer.cornerRadius = gatheringPeopleLabel.frame.height / 2
+
         gatheringPeopleLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
         
     }
@@ -124,7 +129,7 @@ extension ItemViewController {
             enterChatButton.backgroundColor = UIColor.lightGray
         }
 
-        enterChatButton.layer.cornerRadius = enterChatButton.frame.height / 2
+        enterChatButton.layer.cornerRadius = 7 //enterChatButton.frame.height / 2
         enterChatButton.setTitle("채팅방 입장 💬", for: .normal)
         enterChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
     }
@@ -133,6 +138,11 @@ extension ItemViewController {
         locationLabel.text = viewModel.location
     }
     
+    func initializeBottomView() {
+        
+        bottomView.layer.borderWidth = 1
+        bottomView.layer.borderColor = #colorLiteral(red: 0.9119567871, green: 0.912109673, blue: 0.9119365811, alpha: 1)
+    }
 
     
 }

@@ -26,13 +26,13 @@ class UploadItemViewController: UIViewController {
     
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
         
-        
-        //validate user input
-        
         if !validateUserInput() { return }
         
         self.presentAlertWithCancelAction(title: "작성하신 글을 올리시겠습니까?", message: "") { selectedOk in
             
+            if selectedOk {
+                
+            }
             
             //TODO: - 여기서 API Manager.upload 호출해야할듯
             
@@ -44,18 +44,25 @@ class UploadItemViewController: UIViewController {
     
     func validateUserInput() -> Bool {
         
+        guard let itemTitle = itemTitleTextField.text else {
+            self.showWarningCard(title: "입력 오류", message: UserInputError.titleTooShortOrLong.errorDescription)
+            return false
+        }
+        viewModel.itemTitle = itemTitle
+        
+        
         do {
             
             try viewModel.validateUserInputs()
             
         } catch UserInputError.titleTooShortOrLong {
             
-            self.presentSimpleAlert(title: "입력 오류", message: UserInputError.titleTooShortOrLong.errorDescription)
+            self.showWarningCard(title: "입력 오류", message: UserInputError.titleTooShortOrLong.errorDescription)
             return false
             
         } catch UserInputError.detailTooShortOrLong {
             
-            self.presentSimpleAlert(title: "입력 오류", message: UserInputError.detailTooShortOrLong.errorDescription)
+            self.showWarningCard(title: "입력 오류", message: UserInputError.detailTooShortOrLong.errorDescription)
             return false
             
         } catch { return false }
@@ -82,7 +89,7 @@ extension UploadItemViewController: UploadItemDelegate {
         dismissProgressBar()
         
         print("UploadItemVC - failedUploading: \(error.errorDescription)")
-        self.presentSimpleAlert(title: "업로드 실패", message: error.errorDescription)
+        showErrorCard(title: "업로드 실패", message: error.errorDescription)
         navigationController?.popViewController(animated: true)
     }
 }
@@ -248,7 +255,6 @@ extension UploadItemViewController {
         itemDetailTextView.clipsToBounds = true
         itemDetailTextView.text = "공구 내용을 작성해주세요. (중고 거래 또는 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.)"
         itemDetailTextView.textColor = UIColor.lightGray
-        
     }
     
 }

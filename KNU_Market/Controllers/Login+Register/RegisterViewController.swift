@@ -302,7 +302,7 @@ extension RegisterViewController {
         sendEmailVerificationButton.titleLabel?.font = UIFont.systemFont(ofSize: 17,
                                                                          weight: .semibold)
         sendEmailVerificationButton.backgroundColor = UIColor(named: Constants.Color.appColor)
-        sendEmailVerificationButton.layer.cornerRadius  = sendEmailVerificationButton.frame.height / 2
+        sendEmailVerificationButton.layer.cornerRadius  = 10 //sendEmailVerificationButton.frame.height / 2
         sendEmailVerificationButton.addBounceAnimationWithNoFeedback()
     }
     

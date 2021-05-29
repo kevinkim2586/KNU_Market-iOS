@@ -6,7 +6,7 @@ class ItemTableViewModel {
     
     
     
-    var title: String = "공구 구합니다!"
+    var title: String = "6시에 피자 같아 시키실 분?"
   
     var isGathering: Bool = true
     

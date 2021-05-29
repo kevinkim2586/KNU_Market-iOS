@@ -139,7 +139,7 @@ extension LoginViewController {
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         
         loginButton.backgroundColor = UIColor(named: Constants.Color.appColor)
-        loginButton.layer.cornerRadius  = loginButton.frame.height / 2
+        loginButton.layer.cornerRadius  = 10 //loginButton.frame.height / 2
         loginButton.addBounceAnimationWithNoFeedback()
     }
 }

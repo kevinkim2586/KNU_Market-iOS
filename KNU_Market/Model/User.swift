@@ -58,7 +58,7 @@ class User {
     
     
     func resetAllUserInfo() {
-        
+
         id = ""
         nickname = ""
         password = ""
@@ -66,7 +66,10 @@ class User {
         profileImage = nil
         profileImageData = nil
         profileImageCode = ""
-    
+        
+        let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
+        let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)
+
     }
     
     

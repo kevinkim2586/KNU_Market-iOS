@@ -40,7 +40,7 @@ class MyPageViewController: UIViewController {
                     
                     if selectedOk {
                         
-                        User.shared.resetAllUserInfo()
+                        
                         
                         DispatchQueue.main.async {
                             self.popToInitialViewController()

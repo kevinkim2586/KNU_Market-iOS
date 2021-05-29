@@ -132,7 +132,7 @@ extension HomeViewController {
     func initializeAddButton() {
         
         addButton.layer.cornerRadius = addButton.frame.width / 2
-        addButton.backgroundColor = UIColor(named: Constants.Colors.appDefaultColor)
+        addButton.backgroundColor = UIColor(named: Constants.Color.appColor)
 
         let font = UIFont.systemFont(ofSize: 30)
         let configuration = UIImage.SymbolConfiguration(font: font)

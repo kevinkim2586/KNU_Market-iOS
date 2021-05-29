@@ -309,7 +309,7 @@ extension RegisterViewController {
     func initializeNextButton() {
         
         nextButton.layer.cornerRadius = nextButton.frame.width / 2
-        nextButton.backgroundColor = UIColor(named: Constants.Colors.appDefaultColor)
+        nextButton.backgroundColor = UIColor(named: Constants.Color.appColor)
         nextButton.setImage(UIImage(systemName: "arrow.right"),
                             for: .normal)
     }

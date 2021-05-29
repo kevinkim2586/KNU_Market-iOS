@@ -130,7 +130,7 @@ extension ItemViewController {
         }
 
         enterChatButton.layer.cornerRadius = 7 //enterChatButton.frame.height / 2
-        enterChatButton.setTitle("채팅방 입장 💬", for: .normal)
+        enterChatButton.setTitle("채팅방 입장", for: .normal)
         enterChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
     }
     

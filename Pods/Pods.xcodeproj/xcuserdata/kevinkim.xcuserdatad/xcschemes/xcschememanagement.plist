@@ -60,7 +60,7 @@
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
-		<key>SnapKit.xcscheme</key>
+		<key>SwiftKeychainWrapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

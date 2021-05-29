@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "SwiftKeychainWrapper.h"
 
-FOUNDATION_EXPORT double SnapKitVersionNumber;
-FOUNDATION_EXPORT const unsigned char SnapKitVersionString[];
+FOUNDATION_EXPORT double SwiftKeychainWrapperVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftKeychainWrapperVersionString[];
 

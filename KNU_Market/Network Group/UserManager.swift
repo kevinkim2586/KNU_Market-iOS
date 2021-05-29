@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
-import Security
 import SwiftyJSON
+import SwiftKeychainWrapper
 
 enum ProfileInfoType {
     
@@ -387,8 +387,14 @@ class UserManager {
     
     func saveAccessTokens(from response: JSON) {
         
-        User.shared.accessToken = response["accessToken"].stringValue
-        User.shared.refreshToken = response["refreshToken"].stringValue
+        let accessToken = response["accessToken"].stringValue
+        let refreshToken = response["refreshToken"].stringValue
+        
+        User.shared.savedAccessToken = KeychainWrapper.standard.set(accessToken, forKey: Constants.KeyChainKey.accessToken)
+        
+        
+        User.shared.savedRefreshToken = KeychainWrapper.standard.set(refreshToken, forKey: Constants.KeyChainKey.refreshToken)
+        
     }
     
     func saveBasicUserInfo(with model: LoadProfileResponseModel) {

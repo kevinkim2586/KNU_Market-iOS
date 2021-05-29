@@ -6,7 +6,6 @@ target 'KNU_Market' do
   use_frameworks!
 
   # Pods for KNU_Market
-  pod 'SnapKit'
   pod 'Alamofire', '~> 5.2'
   pod 'IQKeyboardManagerSwift'
   pod "BSImagePicker", "~> 3.1"
@@ -16,5 +15,6 @@ target 'KNU_Market' do
   pod 'ProgressHUD'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftMessages'
+  pod 'SwiftKeychainWrapper'
   
 end

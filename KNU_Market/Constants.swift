@@ -4,10 +4,17 @@ struct Constants {
     
     static let API_BASE_URL = "http://155.230.25.110:5004/api/v1/"
     
+    struct KeyChainKey {
+        
+        static let accessToken                  = "accessToken"
+        static let refreshToken                 = "refreshToken"
+        static let password                     = "password"
+    }
+    
     struct Color {
         
-        static let appColor = "AppDefaultColor"
-        static let borderColor = "borderColor"
+        static let appColor                     = "AppDefaultColor"
+        static let borderColor                  = "borderColor"
     }
     
     struct StoryboardID {
@@ -39,9 +46,8 @@ struct Constants {
         static let receiveCell                  = "ReceiveCell"
     }
     
-    struct Colors {
-        
-        static let appDefaultColor              = "AppDefaultColor"
-    }
+    
+    
+
     
 }

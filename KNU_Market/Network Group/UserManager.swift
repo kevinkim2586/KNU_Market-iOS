@@ -396,10 +396,12 @@ class UserManager {
         let accessToken = response["accessToken"].stringValue
         let refreshToken = response["refreshToken"].stringValue
         
-        User.shared.savedAccessToken = KeychainWrapper.standard.set(accessToken, forKey: Constants.KeyChainKey.accessToken)
+        User.shared.savedAccessToken = KeychainWrapper.standard.set(accessToken,
+                                                                    forKey: Constants.KeyChainKey.accessToken)
         
         
-        User.shared.savedRefreshToken = KeychainWrapper.standard.set(refreshToken, forKey: Constants.KeyChainKey.refreshToken)
+        User.shared.savedRefreshToken = KeychainWrapper.standard.set(refreshToken,
+                                                                     forKey: Constants.KeyChainKey.refreshToken)
         
     }
     

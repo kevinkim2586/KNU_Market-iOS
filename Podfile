@@ -16,5 +16,7 @@ target 'KNU_Market' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftMessages'
   pod 'SwiftKeychainWrapper'
+  pod 'SPIndicator'
+  pod 'SnackBar.swift'
   
 end

@@ -9,6 +9,10 @@ PODS:
   - MessageKit (3.6.1):
     - InputBarAccessoryView (~> 5.3.1)
   - ProgressHUD (13.6)
+  - SnackBar.swift (0.1.0):
+    - SnapKit
+  - SnapKit (5.0.1)
+  - SPIndicator (1.1.4)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftMessages (9.0.2):
     - SwiftMessages/App (= 9.0.2)
@@ -23,6 +27,8 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - MessageKit
   - ProgressHUD
+  - SnackBar.swift
+  - SPIndicator
   - SwiftKeychainWrapper
   - SwiftMessages
   - SwiftyJSON (~> 4.0)
@@ -36,6 +42,9 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - MessageKit
     - ProgressHUD
+    - SnackBar.swift
+    - SnapKit
+    - SPIndicator
     - SwiftKeychainWrapper
     - SwiftMessages
     - SwiftyJSON
@@ -48,10 +57,13 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
+  SnackBar.swift: 79ea4df13ea9e6633137dd6acbd490534d26440d
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SPIndicator: b702acd5374e2ca51e31660f454b6506402d7049
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftMessages: 77b847d1405f99046ffbd0d856bc7d73e6892686
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 553c7baf4b821946a6ce8459a5fe86c2e58bfe4a
+PODFILE CHECKSUM: f599100c31f4f923cbfdc9c58a99a3b4c9c62887
 
 COCOAPODS: 1.10.1

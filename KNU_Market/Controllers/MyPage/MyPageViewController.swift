@@ -1,4 +1,5 @@
 import UIKit
+import SPIndicator
 
 class MyPageViewController: UIViewController {
     

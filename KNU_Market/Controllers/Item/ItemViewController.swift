@@ -4,16 +4,22 @@ class ItemViewController: UIViewController {
     
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var pageControl: UIPageControl!
+    
+    @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var itemTitleLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var userIdLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var itemTitleLabel: UILabel!
+    @IBOutlet weak var locationImageView: UIImageView!
+
     @IBOutlet weak var itemExplanationLabel: UILabel!
     @IBOutlet weak var gatheringPeopleLabel: UILabel!
     @IBOutlet weak var gatheringPeopleImageView: UIImageView!
     @IBOutlet weak var enterChatButton: UIButton!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     
     private let refreshControl = UIRefreshControl()
     
@@ -25,15 +31,27 @@ class ItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    
+        navigationController?.navigationBar.isHidden = true
         
 
         
         initialize()
-
-    
-
  
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+
     
     @IBAction func pageChanged(_ sender: UIPageControl) {
         itemImageView.image = UIImage(named: images[pageControl.currentPage])
@@ -43,6 +61,12 @@ class ItemViewController: UIViewController {
         
         //Action Sheet - 유저 신고하기
     }
+    
+    @IBAction func pressedBackButton(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
     
     @objc func refreshScrollView() {
         
@@ -68,7 +92,7 @@ extension ItemViewController {
         initializeScrollView()
         
         initializeProfileImageView()
-        
+        initializeTitleView()
         initializeItemExplanationLabel()
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
@@ -88,17 +112,34 @@ extension ItemViewController {
         userProfileImageView.image = viewModel.userProfileImage
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
-        userProfileImageView.layer.borderWidth = 1
-        userProfileImageView.layer.borderColor = UIColor.black.cgColor
+//        userProfileImageView.layer.borderWidth = 1
+//        userProfileImageView.layer.borderColor = UIColor.black.cgColor
+//
+    }
+    
+    func initializeTitleView() {
+        
+        titleView.layer.cornerRadius = 10
+        titleView.backgroundColor = .white
+        
+        titleView.layer.shadowColor = UIColor.black.cgColor
+        
+        titleView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        titleView.layer.shadowOpacity = 0.2
+        titleView.layer.shadowRadius = 3
+        
+        
         
     }
+
     
     func initializeItemExplanationLabel() {
         
         let labelStyle = NSMutableParagraphStyle()
         labelStyle.lineSpacing = 5
         let attributes = [NSAttributedString.Key.paragraphStyle : labelStyle]
-        itemExplanationLabel.attributedText = NSAttributedString(string: viewModel.itemExplanation, attributes: attributes)
+        itemExplanationLabel.attributedText = NSAttributedString(string: viewModel.itemExplanation,
+                                                                 attributes: attributes)
         
  
     }
@@ -116,7 +157,8 @@ extension ItemViewController {
       
         }
 
-        gatheringPeopleLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
+        gatheringPeopleLabel.font = UIFont.systemFont(ofSize: 15.0,
+                                                      weight: .semibold)
         
     }
     
@@ -129,9 +171,10 @@ extension ItemViewController {
             enterChatButton.backgroundColor = UIColor.lightGray
         }
 
-        enterChatButton.layer.cornerRadius = 7 //enterChatButton.frame.height / 2
+        enterChatButton.layer.cornerRadius = 7
         enterChatButton.setTitle("채팅방 입장", for: .normal)
-        enterChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
+        enterChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0,
+                                                             weight: .semibold)
     }
     
     func initializeLocationLabel() {

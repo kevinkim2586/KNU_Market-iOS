@@ -22,6 +22,7 @@ struct Constants {
         static let initialVC                    = "initialViewController"
         static let initialNavigationController  = "InitialNavigationController"
         static let tabBarController             = "TabBarController"
+        static let homeVC                       = "HomeViewController"
         static let itemVC                       = "itemViewController"
         
         static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"

@@ -207,6 +207,9 @@ extension UploadItemViewController {
         
         viewModel.delegate = self
         
+        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
         initializeCollectionView()
         initializeStepper()
         initializePickerView()
@@ -230,6 +233,7 @@ extension UploadItemViewController {
         stepper.buttonsFont = UIFont(name: "AvenirNext-Bold", size: 15.0)!
         stepper.labelFont = .systemFont(ofSize: 15)
         stepper.labelTextColor = UIColor(named:Constants.Color.appColor)!
+
         stepper.labelBackgroundColor = #colorLiteral(red: 0.9050354388, green: 0.9050354388, blue: 0.9050354388, alpha: 1)
         stepper.limitHitAnimationColor = .white
         stepper.cornerRadius = 5

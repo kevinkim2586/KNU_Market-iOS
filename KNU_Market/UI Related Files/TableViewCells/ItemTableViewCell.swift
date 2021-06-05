@@ -79,7 +79,7 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializePersonImageView() {
         
-        personImageView.image = UIImage(named: "person_icon")
+        personImageView.image = UIImage(named: "people icon")
     }
     
     

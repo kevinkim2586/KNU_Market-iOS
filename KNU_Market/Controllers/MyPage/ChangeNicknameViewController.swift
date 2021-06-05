@@ -1,4 +1,5 @@
 import UIKit
+import SnackBar_swift
 
 class ChangeNicknameViewController: UIViewController {
     
@@ -26,14 +27,18 @@ class ChangeNicknameViewController: UIViewController {
         self.view.endEditing(true)
         
         if !didCheckNicknameDuplicate {
-            showWarningCard(title: "중복 확인", message: "닉네임 중복을 먼저 확인해주세요")
+            SnackBar.make(in: self.view,
+                          message: "🤔 닉네임 중복 확인을 먼저해주세요.",
+                          duration: .lengthLong).show()
             return
         }
         
         if !validateUserInput() { return }
         
         guard let nickname = self.nickname else {
-            showWarningCard(title: "빈 칸 오류", message: "빈 칸이 없는지 확인해주세요")
+            SnackBar.make(in: self.view,
+                          message: "🤔 빈 칸이 없는지 확인해주세요.",
+                          duration: .lengthLong).show()
             return
         }
         
@@ -44,10 +49,15 @@ class ChangeNicknameViewController: UIViewController {
             switch result {
             
             case .success(_):
-                self.showSuccessCard(title: "변경 성공", message: "닉네임이 변경되었습니다", iconText: "😄")
+                SnackBar.make(in: self.view,
+                              message: "닉네임이 변경되었습니다 🎉",
+                              duration: .lengthLong).show()
                 
             case .failure(let error):
-                self.showErrorCard(title: "변경 실패", message: error.errorDescription)
+                SnackBar.make(in: self.view,
+                              message: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲",
+                              duration: .lengthLong).show()
+                print("ChangeNickNameVC failed to update nickname with error: \(error.errorDescription)")
             }
         }
         dismissProgressBar()
@@ -69,19 +79,24 @@ class ChangeNicknameViewController: UIViewController {
                 
                 if isNotDuplicate {
                     DispatchQueue.main.async {
-                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍", for: .normal)
+                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 🎉",
+                                                              for: .normal)
                         self.didCheckNicknameDuplicate = true
                     }
                 } else {
                     DispatchQueue.main.async {
                         
-                        self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😅", for: .normal)
+                        self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😅",
+                                                              for: .normal)
                         self.didCheckNicknameDuplicate = false
                     }
                 }
                 
             case .failure(let error):
-                self.showErrorCard(title: "에러 발생", message: error.errorDescription)
+                SnackBar.make(in: self.view,
+                              message: "일시적인 네트워크 오류. 잠시 후 다시 시도해주세요 🥲",
+                              duration: .lengthLong).show()
+                print("Error in checking duplicate: \(error.errorDescription)")
             }
         }
     }
@@ -93,11 +108,15 @@ class ChangeNicknameViewController: UIViewController {
             return false
         }
         guard !nickname.isEmpty else {
-            showWarningCard(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요")
+            SnackBar.make(in: self.view,
+                          message: "빈 칸이 없는지 확인해주세요 🥲",
+                          duration: .lengthLong).show()
             return false
         }
         guard nickname.count >= 2, nickname.count <= 15 else {
-            showWarningCard(title: "입력 오류", message: "닉네임은 2자 이상, 15자 이하로 작성해주세요")
+            SnackBar.make(in: self.view,
+                          message: "닉네임은 2자 이상, 15자 이하로 작성해주세요❗️ ",
+                          duration: .lengthLong).show()
             return false
         }
         self.nickname = nickname

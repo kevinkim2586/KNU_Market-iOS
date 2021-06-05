@@ -1,6 +1,8 @@
 import UIKit
 import Alamofire
+import SPIndicator
 import SwiftMessages
+import SnackBar_swift
 
 class HomeViewController: UIViewController {
 
@@ -56,11 +58,16 @@ class HomeViewController: UIViewController {
 extension HomeViewController: HomeViewModelDelegate {
     
     func didFetchUserProfileInfo() {
-        showSuccessCard(title: "\(User.shared.nickname)님", message: "환영합니다!", iconText: "👀")
+        
+        SPIndicator.present(title: "\(User.shared.nickname)님",
+                            message: "환영합니다",
+                            preset: .custom(UIImage(systemName: "face.smiling")!))
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
-        showErrorCard(title: "네트워크 오류", message: "일시적인 연결 문제가 있습니다. ")
+        SnackBar.make(in: self.view,
+                      message: "일시적인 연결 문제가 있습니다. 🥲",
+                      duration: .lengthLong).show()
     }
     
     
@@ -143,7 +150,8 @@ extension HomeViewController {
 
         let font = UIFont.systemFont(ofSize: 30)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        let plusImage = UIImage(systemName: "plus", withConfiguration: configuration)
+        let plusImage = UIImage(systemName: "plus", withConfiguration:
+                                    configuration)
         addButton.setImage(plusImage, for: .normal)
     }
     

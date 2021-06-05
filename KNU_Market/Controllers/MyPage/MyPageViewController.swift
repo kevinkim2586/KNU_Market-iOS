@@ -1,5 +1,6 @@
 import UIKit
 import SPIndicator
+import SnackBar_swift
 
 class MyPageViewController: UIViewController {
     
@@ -46,7 +47,13 @@ class MyPageViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                self.showErrorCard(title: "네트워크 오류", message: error.errorDescription)
+                SnackBar.make(in: self.view,
+                              message: error.errorDescription,
+                              duration: .lengthLong).setAction(with: "재시도", action: {
+                                DispatchQueue.main.async {
+                                    self.pressedLogOutButton(self.logOutButton)
+                                }
+                              }).show()
             }
         }
     }
@@ -73,7 +80,10 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func failedLoadingUserProfileInfo(with error: NetworkError) {
-        showWarningCard(title: "프로필 조회 실패", message: error.errorDescription)
+        SnackBar.make(in: self.view,
+                      message: "프로필 정보 가져오기 실패. 잠시 후 다시 시도해주세요🥲",
+                      duration: .lengthLong).show()
+        print("failedLoadingUserProfileInfo with error: \(error.errorDescription)")
     }
 
     //이미지 먼저 서버에 업로드
@@ -82,18 +92,25 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func failedUploadingImageToServerFirst(with error: NetworkError) {
-        showErrorCard(title: "이미지 업로드 실패", message: error.errorDescription)
+        SnackBar.make(in: self.view,
+                      message: "이미지 업로드 실패. 잠시 후 다시 시도해주세요🥲",
+                      duration: .lengthLong).show()
+        print("failedUploadingImageToServerFirst with error: \(error.errorDescription)")
     }
     
     // 프로필 사진 실제 DB상 수정
     func didUpdateUserProfileImage() {
         viewModel.loadUserProfile()
-        showToast(message: "프로필 이미지 변경 성공")
-        showSuccessCard(title: "성공", message: "프로필 이미지를 변경하였습니다", iconText: "😄")
+        SnackBar.make(in: self.view,
+                      message: "프로필 이미지 변경 성공 🎉",
+                      duration: .lengthLong).show()
     }
     
     func failedUpdatingUserProfileImage(with error: NetworkError) {
-        showErrorCard(title: "업로드 실패", message: error.errorDescription)
+        SnackBar.make(in: self.view,
+                      message: "프로필 사진 변경 실패. 잠시 후 다시 시도해주세요🥲",
+                      duration: .lengthLong).show()
+        print("failedUpdatingUserProfileImage with error: \(error.errorDescription)")
     }
     
     func showToastMessage(with message: String) {

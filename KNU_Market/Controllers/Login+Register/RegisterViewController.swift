@@ -1,5 +1,6 @@
 import UIKit
 import ProgressHUD
+import SnackBar_swift
 
 class RegisterViewController: UIViewController {
     
@@ -52,7 +53,7 @@ class RegisterViewController: UIViewController {
     
                     DispatchQueue.main.async {
                         self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
-                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍", for: .normal)
+                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 🎉", for: .normal)
                         self.didCheckNicknameDuplicate = true
                     }
                     
@@ -67,7 +68,9 @@ class RegisterViewController: UIViewController {
                 }
                
             case .failure(let error):
-                self.showErrorCard(title: "에러 발생", message: error.errorDescription)
+                SnackBar.make(in: self.view,
+                              message: "에러 발생: \(error.errorDescription) 🥲",
+                              duration: .lengthLong).show()
             }
         }
     }
@@ -101,7 +104,9 @@ class RegisterViewController: UIViewController {
             case .success(let isSuccess):
                 print("Register View Controller - Register Successful: \(isSuccess)")
                 
-                self.showSuccessCard(title: "회원가입 성공!", message: "회원가입을 축하합니다!", iconText: "🎉")
+                SnackBar.make(in: self.view,
+                              message: "회원가입을 축하합니다! 🎉",
+                              duration: .lengthLong).show()
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
                     
@@ -110,7 +115,10 @@ class RegisterViewController: UIViewController {
                 }
             
             case .failure(let error):
-                self.showErrorCard(title: "에러 발생", message: "일시적인 오류입니다. 나중에 다시 시도해주세요")
+                
+                SnackBar.make(in: self.view,
+                              message: "일시적인 네트워크 문제. 잠시 후 다시 시도해주세요 🤔",
+                              duration: .lengthLong).show()
                 print("Register View Controller - Register FAILED with error: \(error.localizedDescription)")
                 
             }
@@ -124,12 +132,16 @@ class RegisterViewController: UIViewController {
               let nickname = nicknameTextField.text,
               let pw = passwordTextField.text,
               let pwCheck = checkPasswordTextField.text else {
-            self.showWarningCard(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요")
+            SnackBar.make(in: self.view,
+                          message: "빈 칸이 없는지 확인해주세요 🤔",
+                          duration: .lengthLong).show()
             return false
         }
         
         guard !email.isEmpty, !nickname.isEmpty, !pw.isEmpty, !pwCheck.isEmpty else {
-            self.showWarningCard(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요")
+            SnackBar.make(in: self.view,
+                          message: "빈 칸이 없는지 확인해주세요 🤔",
+                          duration: .lengthLong).show()
             return false
         }
         return true
@@ -140,7 +152,9 @@ class RegisterViewController: UIViewController {
         guard let email = emailTextField.text else { return false }
         
         guard email.contains("@knu.ac.kr") else {
-            self.showWarningCard(title: "이메일 오류", message: "학교 이메일을 기입하셨는지 확인하시기 바랍니다")
+            SnackBar.make(in: self.view,
+                          message: "학교 이메일을 기입하셨는지 확인하시기 바랍니다 🤔",
+                          duration: .lengthLong).show()
             emailTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
             return false
         }
@@ -150,7 +164,9 @@ class RegisterViewController: UIViewController {
     func checkNicknameDuplicate() -> Bool {
         
         if !didCheckNicknameDuplicate {
-            self.showWarningCard(title: "닉네임 중복 확인", message: "닉네임 중복 확인을 해주세요")
+            SnackBar.make(in: self.view,
+                          message: "닉네임 중복 확인을 해주세요 👀",
+                          duration: .lengthLong).show()
             return false
         }
         else { return true }
@@ -162,7 +178,9 @@ class RegisterViewController: UIViewController {
         
         if nickname.count >= 2 && nickname.count <= 10 { return true }
         else {
-            self.showWarningCard(title: "닉네임을 다시 입력해주세요", message: "닉네임은 2글자 이상, 10자리 이하로 입력해주세요")
+            SnackBar.make(in: self.view,
+                          message: "닉네임은 2글자 이상, 10자리 이하로 입력해주세요 👀",
+                          duration: .lengthLong).show()
             return false
         }
     }
@@ -173,7 +191,9 @@ class RegisterViewController: UIViewController {
         
         if password.count >= 8 && password.count <= 15 { return true }
         else {
-            self.showWarningCard(title: "비밀번호 오류", message: "비밀번호는 8자리 이상, 15자리 이하로 입력해주세요")
+            SnackBar.make(in: self.view,
+                          message: "비밀번호는 8자리 이상, 15자리 이하로 입력해주세요 🤔",
+                          duration: .lengthLong).show()
             passwordTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
             passwordTextField.text?.removeAll()
             checkPasswordTextField.text?.removeAll()
@@ -186,7 +206,9 @@ class RegisterViewController: UIViewController {
         
         if passwordTextField.text == checkPasswordTextField.text { return true }
         else {
-            self.showWarningCard(title: "비밀번호가 일치하지 않습니다", message: "다시 입력해주세요")
+            SnackBar.make(in: self.view,
+                          message: "비밀번호가 일치하지 않습니다 🤔",
+                          duration: .lengthLong).show()
             checkPasswordTextField.text?.removeAll()
             passwordTextField.becomeFirstResponder()
             return false

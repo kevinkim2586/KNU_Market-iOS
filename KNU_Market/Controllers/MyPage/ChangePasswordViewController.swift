@@ -1,4 +1,5 @@
 import UIKit
+import  SnackBar_swift
 
 class ChangePasswordViewController: UIViewController {
     
@@ -28,11 +29,15 @@ class ChangePasswordViewController: UIViewController {
             switch result {
             
             case .success(_):
-                self.showSuccessCard(title: "성공", message: "비밀번호가 변경되었습니다", iconText: "☑️")
+                SnackBar.make(in: self.view,
+                              message: "비밀번호 변경 성공 🎉",
+                              duration: .lengthLong).show()
           
-                
             case .failure(let error):
-                self.showErrorCard(title: "비밀번호 변경 실패", message: error.errorDescription)
+                SnackBar.make(in: self.view,
+                              message: "비밀번호 변경 실패. 잠시 후 다시 시도해주세요. 🥲",
+                              duration: .lengthLong).show()
+                print("Failed to update user password with error: \(error.errorDescription)")
             }
             dismissProgressBar()
         }
@@ -47,12 +52,16 @@ class ChangePasswordViewController: UIViewController {
         
         guard !password.isEmpty,
               !checkPassword.isEmpty else {
-            self.showWarningCard(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요")
+            SnackBar.make(in: self.view,
+                          message: "빈 칸이 없는지 확인해주세요 🥲",
+                          duration: .lengthLong).show()
             return false
         }
         
         guard password == checkPassword else {
-            self.showWarningCard(title: "비밀번호가 일치하지 않습니다", message: "다시 입력해주세요")
+            SnackBar.make(in: self.view,
+                          message: "비밀번호가 일치하지 않습니다 🤔",
+                          duration: .lengthLong).show()
             return false
         }
         
@@ -60,7 +69,9 @@ class ChangePasswordViewController: UIViewController {
               password.count < 20,
               checkPassword.count >= 4,
               checkPassword.count < 20 else {
-            self.showWarningCard(title: "비밀번호 길이 오류", message: "비밀번호는 5자 이상, 20자 미만으로 입력해주세요")
+            SnackBar.make(in: self.view,
+                          message: "비밀번호는 5자 이상, 30자 미만으로 입력해주세요 ❗️",
+                          duration: .lengthLong).show()
             return false
         }
         return true

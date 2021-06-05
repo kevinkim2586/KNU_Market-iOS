@@ -9,6 +9,11 @@ target 'KNU_Market' do
   pod 'Alamofire', '~> 5.2'
   pod 'IQKeyboardManagerSwift'
   pod "BSImagePicker", "~> 3.1"
+  
+  pod 'Firebase/Core'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
+  
   pod "GMStepper"
   pod "MessageKit"
   pod 'InputBarAccessoryView'

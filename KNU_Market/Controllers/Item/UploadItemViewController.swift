@@ -1,6 +1,7 @@
 import UIKit
 import Alamofire
 import GMStepper
+import SnackBar_swift
 
 class UploadItemViewController: UIViewController {
     
@@ -45,7 +46,10 @@ class UploadItemViewController: UIViewController {
     func validateUserInput() -> Bool {
         
         guard let itemTitle = itemTitleTextField.text else {
-            self.showWarningCard(title: "입력 오류", message: UserInputError.titleTooShortOrLong.errorDescription)
+            
+            SnackBar.make(in: self.view,
+                          message: UserInputError.titleTooShortOrLong.errorDescription,
+                          duration: .lengthLong).show()
             return false
         }
         viewModel.itemTitle = itemTitle
@@ -57,12 +61,15 @@ class UploadItemViewController: UIViewController {
             
         } catch UserInputError.titleTooShortOrLong {
             
-            self.showWarningCard(title: "입력 오류", message: UserInputError.titleTooShortOrLong.errorDescription)
+            SnackBar.make(in: self.view,
+                          message: UserInputError.titleTooShortOrLong.errorDescription,
+                          duration: .lengthLong).show()
             return false
             
         } catch UserInputError.detailTooShortOrLong {
-            
-            self.showWarningCard(title: "입력 오류", message: UserInputError.detailTooShortOrLong.errorDescription)
+            SnackBar.make(in: self.view,
+                          message: UserInputError.detailTooShortOrLong.errorDescription,
+                          duration: .lengthLong).show()
             return false
             
         } catch { return false }
@@ -89,7 +96,10 @@ extension UploadItemViewController: UploadItemDelegate {
         dismissProgressBar()
         
         print("UploadItemVC - failedUploading: \(error.errorDescription)")
-        showErrorCard(title: "업로드 실패", message: error.errorDescription)
+        
+        SnackBar.make(in: self.view,
+                      message: "업로드 실패: \(error.errorDescription)",
+                      duration: .lengthLong).show()
         navigationController?.popViewController(animated: true)
     }
 }

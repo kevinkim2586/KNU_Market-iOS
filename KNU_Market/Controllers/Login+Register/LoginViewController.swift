@@ -6,6 +6,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,8 @@ class LoginViewController: UIViewController {
             
             switch result {
             case .success(_):
+                
+                print("LoginViewController - login success")
                 
                 self.saveLoginInfo()
                 self.changeRootViewController()
@@ -90,11 +93,11 @@ extension LoginViewController {
     
     func initializeTextFields() {
         
-        idTextField.layer.cornerRadius = 1
+        idTextField.layer.cornerRadius = idTextField.frame.height / 2
         idTextField.layer.borderWidth = 1
         idTextField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
         
-        passwordTextField.layer.cornerRadius = 1
+        passwordTextField.layer.cornerRadius = passwordTextField.frame.height / 2
         passwordTextField.layer.borderWidth = 1
         passwordTextField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
         

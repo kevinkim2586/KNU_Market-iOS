@@ -6,6 +6,7 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var emailFormatTextField: UITextField!
     @IBOutlet weak var sendEmailVerificationButton: UIButton!
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var checkAlreadyInUseButton: UIButton!
@@ -13,6 +14,12 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var checkPasswordTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet var textFieldCollections: [UITextField]!
+    
+
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var nicknameLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var checkPasswordLabel: UILabel!
     
     lazy var imagePicker = UIImagePickerController()
     
@@ -79,15 +86,19 @@ class RegisterViewController: UIViewController {
         
         //TODO - 이메일 인증을 했는지 확인하는 로직도 있어야함. 없으면 알림
         
-        if !checkIfBlankTextFieldsExists() || !checkEmailFormat() || !checkNicknameLength() || !checkPasswordLength() || !checkPasswordLength() || !checkNicknameDuplicate() {
+        if !checkIfBlankTextFieldsExists() ||
+            !checkNicknameLength() ||
+            !checkPasswordLength() ||
+            !checkIfPasswordFieldsAreIdentical() ||
+            !checkNicknameDuplicate() {
             return
         }
         
         showProgressBar()
 
-        let id = emailTextField.text!
-        let password = passwordTextField.text!
+        let id = emailTextField.text! + "@knu.ac.kr"
         let nickname = nicknameTextField.text!
+        let password = passwordTextField.text!
         var profileImageData: Data? = nil
         
         if let image = profileImageButton.currentImage {
@@ -119,7 +130,7 @@ class RegisterViewController: UIViewController {
                 SnackBar.make(in: self.view,
                               message: "일시적인 네트워크 문제. 잠시 후 다시 시도해주세요 🤔",
                               duration: .lengthLong).show()
-                print("Register View Controller - Register FAILED with error: \(error.localizedDescription)")
+                print("Register View Controller - Register FAILED with error: \(error.errorDescription)")
                 
             }
             dismissProgressBar()
@@ -138,7 +149,10 @@ class RegisterViewController: UIViewController {
             return false
         }
         
-        guard !email.isEmpty, !nickname.isEmpty, !pw.isEmpty, !pwCheck.isEmpty else {
+        guard !email.isEmpty,
+              !nickname.isEmpty,
+              !pw.isEmpty,
+              !pwCheck.isEmpty else {
             SnackBar.make(in: self.view,
                           message: "빈 칸이 없는지 확인해주세요 🤔",
                           duration: .lengthLong).show()
@@ -147,19 +161,19 @@ class RegisterViewController: UIViewController {
         return true
     }
     
-    func checkEmailFormat() -> Bool {
-        
-        guard let email = emailTextField.text else { return false }
-        
-        guard email.contains("@knu.ac.kr") else {
-            SnackBar.make(in: self.view,
-                          message: "학교 이메일을 기입하셨는지 확인하시기 바랍니다 🤔",
-                          duration: .lengthLong).show()
-            emailTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
-            return false
-        }
-        return true
-    }
+//    func checkEmailFormat() -> Bool {
+//
+//        guard let email = emailTextField.text else { return false }
+//
+//        guard email.contains("@knu.ac.kr") else {
+//            SnackBar.make(in: self.view,
+//                          message: "학교 이메일을 기입하셨는지 확인하시기 바랍니다 🤔",
+//                          duration: .lengthLong).show()
+//            emailTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
+//            return false
+//        }
+//        return true
+//    }
     
     func checkNicknameDuplicate() -> Bool {
         
@@ -258,6 +272,7 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
             
             profileImageButton.setImage(originalImage, for: .normal)
             profileImageButton.contentMode = .scaleAspectFit
+            profileImageButton.layer.masksToBounds = true
             profileImageButton.layer.borderWidth = 1
             profileImageButton.layer.borderColor = UIColor.lightGray.cgColor
         }
@@ -269,7 +284,6 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-
 //MARK: - UI Configuration
 
 extension RegisterViewController {
@@ -277,6 +291,7 @@ extension RegisterViewController {
     func initialize() {
         
         initializeDelegates()
+        initializeLabels()
         initializeTextFields()
         initializeProfileImageButton()
         initializeEmailVerificationButton()
@@ -292,11 +307,19 @@ extension RegisterViewController {
         checkPasswordTextField.delegate = self
     }
     
+    func initializeLabels() {
+        
+        nicknameLabel.changeTextAttributes(fullText: nicknameLabel.text!, changeText: "*")
+        emailLabel.changeTextAttributes(fullText: emailLabel.text!, changeText: "*")
+        passwordLabel.changeTextAttributes(fullText: passwordLabel.text!, changeText: "*")
+        checkPasswordLabel.changeTextAttributes(fullText: checkPasswordLabel.text!, changeText: "*")
+    }
+    
     func initializeTextFields() {
         
         for textField in textFieldCollections {
      
-            textField.layer.cornerRadius = 1
+            textField.layer.cornerRadius = textField.frame.height / 2
             textField.layer.borderWidth = 1
             textField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
             
@@ -314,26 +337,19 @@ extension RegisterViewController {
 
         profileImageButton.isUserInteractionEnabled = true
         profileImageButton.contentMode = .scaleAspectFit
-        profileImageButton.layer.masksToBounds = true
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
     }
     
     func initializeEmailVerificationButton() {
         
         sendEmailVerificationButton.setTitle("인증 메일 보내기", for: .normal)
-        sendEmailVerificationButton.titleLabel?.font = UIFont.systemFont(ofSize: 17,
-                                                                         weight: .semibold)
-        sendEmailVerificationButton.backgroundColor = UIColor(named: Constants.Color.appColor)
-        sendEmailVerificationButton.layer.cornerRadius  = sendEmailVerificationButton.frame.height / 2
-        sendEmailVerificationButton.addBounceAnimationWithNoFeedback()
+        
     }
     
     func initializeNextButton() {
         
-        nextButton.layer.cornerRadius = nextButton.frame.width / 2
+        nextButton.layer.cornerRadius = nextButton.frame.height / 2
         nextButton.backgroundColor = UIColor(named: Constants.Color.appColor)
-        nextButton.setImage(UIImage(systemName: "arrow.right"),
-                            for: .normal)
     }
     
     func initializeImagePicker() {

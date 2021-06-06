@@ -69,6 +69,8 @@ class User {
         
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)
+        
+        print("resetAllUserInfo successful")
 
     }
     

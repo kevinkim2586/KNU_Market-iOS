@@ -39,6 +39,7 @@ struct RegisterModel {
         } else { self.imageData = nil }
     }
 
-    let headers: HTTPHeaders = [.contentType("multipart/form-data")]
+    let headers: HTTPHeaders = [
+        HTTPHeaderKeys.contentType.rawValue: HTTPHeaderValues.multipartFormData.rawValue]
     
 }

@@ -107,10 +107,12 @@ class MyPageViewModel {
             
             case .success(let uid):
                 User.shared.profileImageCode = uid
+                print("uploadImage success with new uid: \(uid)")
                 self.delegate?.didUploadImageToServerFirst(with: uid)
                 
             case .failure(let error):
                 self.delegate?.failedUploadingImageToServerFirst(with: error)
+                print("uploadImage failed with error: \(error.errorDescription)")
             }
 
         }

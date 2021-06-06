@@ -24,7 +24,9 @@ import Alamofire
 struct LoadOtherUserProfileModel {
     
     let headers: HTTPHeaders = [
-        .contentType("application/json"),
-        .authorization("")
+        HTTPHeaderKeys.contentType.rawValue: HTTPHeaderValues.applicationJSON.rawValue,
+        HTTPHeaderKeys.authentication.rawValue: User.shared.accessToken
+        
+  
     ]
 }

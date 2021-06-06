@@ -33,6 +33,7 @@ class UploadItemViewController: UIViewController {
             
             if selectedOk {
                 
+                self.viewModel.uploadItem()
             }
             
             //TODO: - 여기서 API Manager.upload 호출해야할듯
@@ -54,9 +55,7 @@ class UploadItemViewController: UIViewController {
         }
         viewModel.itemTitle = itemTitle
         
-        
         do {
-            
             try viewModel.validateUserInputs()
             
         } catch UserInputError.titleTooShortOrLong {

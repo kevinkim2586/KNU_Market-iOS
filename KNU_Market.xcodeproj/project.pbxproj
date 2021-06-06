@@ -18,6 +18,9 @@
 		7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* HomeViewModel.swift */; };
 		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
 		7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */; };
+		7C55545D266CDFD100C3C5B6 /* UploadItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545C266CDFD100C3C5B6 /* UploadItemModel.swift */; };
+		7C55545F266CEADF00C3C5B6 /* UILabel Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545E266CEADF00C3C5B6 /* UILabel Extension.swift */; };
+		7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */; };
 		7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E2126264645B300E98FE5 /* ItemViewController.swift */; };
 		7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* ItemViewModel.swift */; };
 		7C6B509E265290130032328C /* ItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509D265290130032328C /* ItemImageView.swift */; };
@@ -79,6 +82,9 @@
 		7C3758EC265FA97A0081A85D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		7C55545C266CDFD100C3C5B6 /* UploadItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemModel.swift; sourceTree = "<group>"; };
+		7C55545E266CEADF00C3C5B6 /* UILabel Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel Extension.swift"; sourceTree = "<group>"; };
+		7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderKeys.swift; sourceTree = "<group>"; };
 		7C5E2126264645B300E98FE5 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		7C6B509D265290130032328C /* ItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageView.swift; sourceTree = "<group>"; };
@@ -171,6 +177,15 @@
 			path = TableViewCells;
 			sourceTree = "<group>";
 		};
+		7C555460266CFBE500C3C5B6 /* Chat Models */ = {
+			isa = PBXGroup;
+			children = (
+				7CB8DF60264D02690001CC6D /* Message.swift */,
+				7CB8DF62264D02AF0001CC6D /* Sender.swift */,
+			);
+			path = "Chat Models";
+			sourceTree = "<group>";
+		};
 		7C5E21252646443900E98FE5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,11 +255,11 @@
 		7CA6622326413272000E0B7A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7C555460266CFBE500C3C5B6 /* Chat Models */,
 				7CB8DF3B264BB15E0001CC6D /* Request Models */,
 				7CB8DF3C264BB1640001CC6D /* Response Models */,
 				7CB8DF41264BEC870001CC6D /* User.swift */,
-				7CB8DF60264D02690001CC6D /* Message.swift */,
-				7CB8DF62264D02AF0001CC6D /* Sender.swift */,
+				7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -308,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				7CB8DF35264BAB760001CC6D /* UIViewController Extension.swift */,
+				7C55545E266CEADF00C3C5B6 /* UILabel Extension.swift */,
 				7C6B509F2652B17F0032328C /* UIImage Extension.swift */,
 				7C132BF326552B4900BE5F40 /* UIButton Extension.swift */,
 			);
@@ -321,6 +337,7 @@
 				7CB8DF3F264BB6340001CC6D /* LoadProfileModel.swift */,
 				7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */,
 				7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */,
+				7C55545C266CDFD100C3C5B6 /* UploadItemModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -552,6 +569,7 @@
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
+				7C55545D266CDFD100C3C5B6 /* UploadItemModel.swift in Sources */,
 				7CB8DF5B264C1EC60001CC6D /* Example.swift in Sources */,
 				7CB8DF44264BEF050001CC6D /* LoadOtherUserProfileModel.swift in Sources */,
 				7CA6622E26413597000E0B7A /* LoginViewController.swift in Sources */,
@@ -569,6 +587,7 @@
 				7CB8DF40264BB6340001CC6D /* LoadProfileModel.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
+				7C55545F266CEADF00C3C5B6 /* UILabel Extension.swift in Sources */,
 				7CB8DF48264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,
@@ -581,6 +600,7 @@
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */,
 				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,
+				7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7CB8DF50264C16260001CC6D /* SendCell.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,

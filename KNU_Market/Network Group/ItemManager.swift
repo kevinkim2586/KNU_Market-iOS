@@ -9,9 +9,12 @@ class ItemManager {
     private init() {}
     
     //MARK: - API Request URLs
+    let writePostURL                 = "\(Constants.API_BASE_URL)posts"
     
     
-    func uploadNewItem() {
+    
+    //MARK: - 공구글 업로드
+    func uploadNewItem(with model: UploadItemModel) {
         
         
     }

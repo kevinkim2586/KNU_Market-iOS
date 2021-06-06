@@ -38,7 +38,6 @@ struct ChangeProfileModel {
     }
     
     let headers: HTTPHeaders = [
-        .accept("application/json"),
-        .contentType("multipart/form-data")
+        HTTPHeaderKeys.contentType.rawValue: HTTPHeaderValues.multipartFormData.rawValue,
     ]
 }

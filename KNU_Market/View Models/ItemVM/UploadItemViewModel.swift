@@ -77,7 +77,7 @@ class UploadItemViewModel {
         
         userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
             
-            if let imageData = image.jpegData(compressionQuality: 0.5) {
+            if let imageData = image.jpegData(compressionQuality: 1.0) {
                 return imageData
             } else {
                 print("Unable to convert UIImage to Data type")

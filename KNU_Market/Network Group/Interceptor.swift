@@ -39,7 +39,7 @@ final class Interceptor: RequestInterceptor {
         case 403:
             guard !isRefreshing else { return }
             
-            refreshToken { refreshResult in
+            refreshToken() { refreshResult in
                 
                 switch refreshResult {
                 
@@ -77,6 +77,8 @@ extension Interceptor {
                     self?.isRefreshing = false
                     
                     guard let statusCode = response.response?.statusCode else { return }
+                    
+                    print("Interceptor - refreshToken() activated with statusCode: \(statusCode)")
                     
                     switch statusCode {
                     

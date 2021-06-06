@@ -21,7 +21,6 @@ class UserManager {
     let registerURL                 = "\(Constants.API_BASE_URL)auth"
     let loginURL                    = "\(Constants.API_BASE_URL)login"
     let checkDuplicateURL           = "\(Constants.API_BASE_URL)duplicate"
-    
     let logoutURL                   = "\(Constants.API_BASE_URL)logout"
     let requestAccessTokenURL       = "\(Constants.API_BASE_URL)token"
     let findPasswordURL             = "\(Constants.API_BASE_URL)findpassword"
@@ -33,7 +32,7 @@ class UserManager {
     
     //MARK: - 회원가입
     func register(with model: RegisterModel,
-                  completion: @escaping ((Result<Bool, Error>) -> Void)) {
+                  completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { multipartFormData in
             
@@ -124,6 +123,9 @@ class UserManager {
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
+                    
+                    print("UserManager - login() statusCode: \(statusCode)")
+                    
                     switch statusCode {
                     
                     case 201:
@@ -158,6 +160,8 @@ class UserManager {
                    headers: headers).responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
+                    
+
                     
                     switch statusCode {
                     case 201:
@@ -374,10 +378,11 @@ class UserManager {
                     case 201:
                         
                         User.shared.resetAllUserInfo()
+                        print("logout success")
                         completion(.success(true))
                     default:
-                        print("logout FAILED")
                         let error = NetworkError.returnError(json: response.data!)
+                        print("logout FAILED with error code: \(statusCode) and error: \(error.errorDescription)")
                         completion(.failure(error))
                     }
     }

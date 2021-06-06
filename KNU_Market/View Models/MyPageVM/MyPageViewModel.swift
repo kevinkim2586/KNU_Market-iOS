@@ -13,7 +13,7 @@ protocol MyPageViewModelDelegate {
     func failedUploadingImageToServerFirst(with error: NetworkError)
     func failedUpdatingUserProfileImage(with error: NetworkError)
     
-    func showToastMessage(with message: String)
+    func showErrorMessage(with message: String)
 }
 
 class MyPageViewModel {
@@ -82,11 +82,11 @@ class MyPageViewModel {
                     self.delegate?.didFetchProfileImage()
                     
                 } else {
-                    self.delegate?.showToastMessage(with: "프로필 사진 가져오기 실패")
+                    self.delegate?.showErrorMessage(with: "프로필 사진 불러오기 실패 😅")
                 }
 
             case .failure(_):
-                self.delegate?.showToastMessage(with: "프로필 사진 가져오기 실패")
+                self.delegate?.showErrorMessage(with: "프로필 사진 불러오기 실패 😅")
             }
         }
     }

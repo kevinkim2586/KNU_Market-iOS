@@ -14,7 +14,8 @@ struct Constants {
     struct Color {
         
         static let appColor                     = "AppDefaultColor"
-        static let borderColor                  = "borderColor"
+        static let borderColor                  = "BorderColor"
+        static let backgroundColor              = "BackgroundColor" 
     }
     
     struct StoryboardID {

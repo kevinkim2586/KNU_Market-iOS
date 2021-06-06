@@ -113,8 +113,10 @@ extension MyPageViewController: MyPageViewModelDelegate {
         print("failedUpdatingUserProfileImage with error: \(error.errorDescription)")
     }
     
-    func showToastMessage(with message: String) {
-        showToast(message: message)
+    func showErrorMessage(with message: String) {
+        SnackBar.make(in: self.view,
+                      message: message,
+                      duration: .lengthLong).show()
     }
 }
 

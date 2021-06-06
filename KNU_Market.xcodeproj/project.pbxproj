@@ -21,6 +21,8 @@
 		7C55545D266CDFD100C3C5B6 /* UploadItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545C266CDFD100C3C5B6 /* UploadItemModel.swift */; };
 		7C55545F266CEADF00C3C5B6 /* UILabel Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545E266CEADF00C3C5B6 /* UILabel Extension.swift */; };
 		7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */; };
+		7C555465266D0A1400C3C5B6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555464266D0A1400C3C5B6 /* Location.swift */; };
+		7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555466266D1A8600C3C5B6 /* MediaManager.swift */; };
 		7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E2126264645B300E98FE5 /* ItemViewController.swift */; };
 		7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* ItemViewModel.swift */; };
 		7C6B509E265290130032328C /* ItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509D265290130032328C /* ItemImageView.swift */; };
@@ -85,6 +87,8 @@
 		7C55545C266CDFD100C3C5B6 /* UploadItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemModel.swift; sourceTree = "<group>"; };
 		7C55545E266CEADF00C3C5B6 /* UILabel Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel Extension.swift"; sourceTree = "<group>"; };
 		7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderKeys.swift; sourceTree = "<group>"; };
+		7C555464266D0A1400C3C5B6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		7C555466266D1A8600C3C5B6 /* MediaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
 		7C5E2126264645B300E98FE5 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		7C6B509D265290130032328C /* ItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageView.swift; sourceTree = "<group>"; };
@@ -186,6 +190,15 @@
 			path = "Chat Models";
 			sourceTree = "<group>";
 		};
+		7C555463266D0A0300C3C5B6 /* Item Models */ = {
+			isa = PBXGroup;
+			children = (
+				7C555464266D0A1400C3C5B6 /* Location.swift */,
+				7C55545C266CDFD100C3C5B6 /* UploadItemModel.swift */,
+			);
+			path = "Item Models";
+			sourceTree = "<group>";
+		};
 		7C5E21252646443900E98FE5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +268,7 @@
 		7CA6622326413272000E0B7A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7C555463266D0A0300C3C5B6 /* Item Models */,
 				7C555460266CFBE500C3C5B6 /* Chat Models */,
 				7CB8DF3B264BB15E0001CC6D /* Request Models */,
 				7CB8DF3C264BB1640001CC6D /* Response Models */,
@@ -271,6 +285,7 @@
 				7CB8DF37264BB0300001CC6D /* ItemManager.swift */,
 				7CB8DF39264BB0360001CC6D /* ChatManager.swift */,
 				7C833685266208210032308D /* Interceptor.swift */,
+				7C555466266D1A8600C3C5B6 /* MediaManager.swift */,
 			);
 			path = "Network Group";
 			sourceTree = "<group>";
@@ -337,7 +352,6 @@
 				7CB8DF3F264BB6340001CC6D /* LoadProfileModel.swift */,
 				7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */,
 				7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */,
-				7C55545C266CDFD100C3C5B6 /* UploadItemModel.swift */,
 			);
 			path = "Request Models";
 			sourceTree = "<group>";
@@ -576,6 +590,7 @@
 				7C1D829526565429006FEBDE /* SendDeveloperMessageViewController.swift in Sources */,
 				7CA662312641359F000E0B7A /* RegisterViewController.swift in Sources */,
 				7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */,
+				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
 				7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */,
 				7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */,
@@ -603,6 +618,7 @@
 				7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7CB8DF50264C16260001CC6D /* SendCell.swift in Sources */,
+				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */,
 				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,

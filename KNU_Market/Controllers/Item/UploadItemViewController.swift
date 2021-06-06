@@ -27,6 +27,8 @@ class UploadItemViewController: UIViewController {
     
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
         
+        itemDetailTextView.resignFirstResponder()
+        
         if !validateUserInput() { return }
         
         self.presentAlertWithCancelAction(title: "작성하신 글을 올리시겠습니까?", message: "") { selectedOk in
@@ -81,10 +83,10 @@ class UploadItemViewController: UIViewController {
 
 extension UploadItemViewController: UploadItemDelegate {
     
-    func didCompleteUpload(_ success: Bool) {
+    func didCompleteUpload() {
         
         dismissProgressBar()
-        print("UploadItemVC - didCompleteUpload: \(success)")
+        print("UploadItemVC - didCompleteUpload")
         
         
         navigationController?.popViewController(animated: true)
@@ -179,10 +181,8 @@ extension UploadItemViewController: UIPickerViewDataSource, UIPickerViewDelegate
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        let selectedLocation = viewModel.locationArray[row]
-        viewModel.location = selectedLocation
-        
-        tradeLocationTextField.text = selectedLocation
+        viewModel.location = row
+        tradeLocationTextField.text = viewModel.locationArray[row]
     }
 }
 //MARK: - UITextViewDelegate

@@ -3,13 +3,6 @@ import Alamofire
 import SwiftyJSON
 import SwiftKeychainWrapper
 
-enum ProfileInfoType {
-    
-    case nickname
-    case password
-    case profileImage
-}
-
 class UserManager {
     
     //MARK: - Singleton
@@ -26,8 +19,8 @@ class UserManager {
     let findPasswordURL             = "\(Constants.API_BASE_URL)findpassword"
     let loadUserProfileURL          = "\(Constants.API_BASE_URL)auth"
     let userProfileUpdateURL        = "\(Constants.API_BASE_URL)auth"
-    let requestMediaURL             = "\(Constants.API_BASE_URL)media/"
-    let uploadImageURL              = "\(Constants.API_BASE_URL)media"
+//    let requestMediaURL             = "\(Constants.API_BASE_URL)media/"
+//    let uploadImageURL              = "\(Constants.API_BASE_URL)media"
     
     
     //MARK: - 회원가입
@@ -71,7 +64,7 @@ class UserManager {
                         completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
         let headers: HTTPHeaders = [
-            "Content-Type": "application/json",
+            HTTPHeaderKeys.contentType.rawValue : HTTPHeaderValues.applicationJSON.rawValue,
             "id": nickname
         ]
         
@@ -112,8 +105,9 @@ class UserManager {
     func login(id: String, password: String,
                completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
     
-        let parameters: Parameters = [ "id":id, "password":password ]
-        let headers: HTTPHeaders = [ "Content-Type": "application/json" ]
+        let parameters: Parameters = [ "id" : id,
+                                       "password" : password ]
+        let headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue : HTTPHeaderValues.applicationJSON.rawValue ]
         
         AF.request(loginURL,
                    method: .post,
@@ -153,7 +147,7 @@ class UserManager {
     //MARK: - 프로필 조회
     func loadUserProfile(completion: @escaping ((Result<LoadProfileResponseModel, NetworkError>) -> Void)) {
         
-        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+        let headers: HTTPHeaders = [ HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken ]
         
         AF.request(loadUserProfileURL,
                    method: .get,
@@ -190,32 +184,32 @@ class UserManager {
     
     
     //MARK: - 파일 조회
-    func requestMedia(from urlString: String,
-                      completion: @escaping ((Result<Data?, NetworkError>) -> Void)) {
-        
-        let requestURL = requestMediaURL + urlString
-        
-        AF.request(requestURL,
-                   method: .get).responseJSON { response in
-                    
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    case 200:
-                        completion(.success(response.data!))
-                    default:
-                        print("requestMedia FAILED")
-                        let error = NetworkError.returnError(json: response.data!)
-                        completion(.failure(error))
-                    }
-                   }
-    }
+//    func requestMedia(from urlString: String,
+//                      completion: @escaping ((Result<Data?, NetworkError>) -> Void)) {
+//
+//        let requestURL = requestMediaURL + urlString
+//
+//        AF.request(requestURL,
+//                   method: .get).responseJSON { response in
+//
+//                    guard let statusCode = response.response?.statusCode else { return }
+//
+//                    switch statusCode {
+//                    case 200:
+//                        completion(.success(response.data!))
+//                    default:
+//                        print("requestMedia FAILED")
+//                        let error = NetworkError.returnError(json: response.data!)
+//                        completion(.failure(error))
+//                    }
+//                   }
+//    }
     
     //MARK: - 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String,
                                 completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+        let headers: HTTPHeaders = [ HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken ]
         
         let parameters: Parameters = [
             "nickname": User.shared.nickname,
@@ -247,45 +241,45 @@ class UserManager {
                     }
                    }
     }
-                                                       
-                                                       
-                                        
+    
     //MARK: - 이미지 업로드
-    func uploadImage(with image: Data,
-                     completion: @escaping ((Result<String, NetworkError>) -> Void)) {
-        
-        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
-
-        AF.upload(multipartFormData: { multipartFormData in
-            
-            multipartFormData.append(image,
-                                     withName: "media",
-                                     fileName: "newUserProfileImage.jpeg",
-                                     mimeType: "image/jpeg")
-            
-        }, to: uploadImageURL,
-        headers: headers).responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            case 201:
-                do {
-                    
-                    let json = try JSON(data: response.data!)
-                    let imageID = json["uid"].stringValue
-                    print("UserManager: newly updated profileImage UID: \(imageID)")
-                    completion(.success(imageID))
-                    
-                } catch {
-                    print("UserManager - uploadImage() catch error \(error)")
-                    let error = NetworkError.returnError(json: response.data!)
-                    completion(.failure(error))
-                }
-            default: completion(.failure(.E000))
-            }
-        }
-    }
+//    func uploadImage(with images: [Data],
+//                     completion: @escaping ((Result<String, NetworkError>) -> Void)) {
+//        
+//        let headers: HTTPHeaders = [ HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken ]
+//
+//        AF.upload(multipartFormData: { multipartFormData in
+//            
+//            for image in images {
+//                multipartFormData.append(image,
+//                                         withName: "media",
+//                                         fileName: "\(UUID().uuidString).jpeg",
+//                                         mimeType: "image/jpeg")
+//            }
+//            
+//        }, to: uploadImageURL,
+//        headers: headers).responseJSON { response in
+//            
+//            guard let statusCode = response.response?.statusCode else { return }
+//            
+//            switch statusCode {
+//            case 201:
+//                do {
+//                    
+//                    let json = try JSON(data: response.data!)
+//                    let imageID = json["uid"].stringValue
+//                    print("UserManager: newly updated profileImage UID: \(imageID)")
+//                    completion(.success(imageID))
+//                    
+//                } catch {
+//                    print("UserManager - uploadImage() catch error \(error)")
+//                    let error = NetworkError.returnError(json: response.data!)
+//                    completion(.failure(error))
+//                }
+//            default: completion(.failure(.E000))
+//            }
+//        }
+//    }
     
     //MARK: - 비밀번호 변경
     func updateUserPassword(with password: String,
@@ -329,7 +323,7 @@ class UserManager {
     func updateUserNickname(with nickname: String,
                             completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+        let headers: HTTPHeaders = [HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken]
         
         let parameters: Parameters = [
             "nickname": nickname,
@@ -365,7 +359,7 @@ class UserManager {
     //MARK: - 로그아웃
     func logOut(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
+        let headers: HTTPHeaders = [HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken]
         
         AF.request(logoutURL,
                    method: .delete,

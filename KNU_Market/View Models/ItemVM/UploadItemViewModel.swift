@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 protocol UploadItemDelegate {
-    func didCompleteUpload(_ success: Bool)
+    func didCompleteUpload()
     func failedUploading(with error: NetworkError)
 }
 
@@ -13,19 +13,9 @@ class UploadItemViewModel {
     
     var itemTitle: String = ""
     
-    var location: String = ""
-    
-    let locationArray: [String] = [
-        "북문",
-        "동문",
-        "테크노문",
-        "쪽문",
-        "정문",
-        "서문",
-        "기숙사 (아래에 명시)",
-        "협의 (아래에 명시)"
-    ]
-    
+    var location: Int = 0
+    let locationArray: [String] = Location.list
+
     var peopleGathering: Int = 2
     
     var itemDetail: String = ""
@@ -47,9 +37,26 @@ class UploadItemViewModel {
     //MARK: - API
     func uploadItem() {
         
+        let model = UploadItemModel(title: itemTitle,
+                                    location: location,
+                                    peopleGathering: peopleGathering,
+                                    imageData: nil,
+                                    detail: itemDetail)
         
-        
-        
+        ItemManager.shared.uploadNewItem(with: model) { result in
+            
+            switch result {
+            
+            case .success(_):
+                
+                self.delegate?.didCompleteUpload()
+                
+            case .failure(let error):
+                
+                print("UploadItemViewModel - uploadItem() failed: \(error.errorDescription)")
+                self.delegate?.failedUploading(with: error)
+            }
+        }
     }
     
     

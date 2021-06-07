@@ -35,10 +35,16 @@ class UploadItemViewController: UIViewController {
             
             if selectedOk {
                 
-                self.viewModel.uploadItem()
+                if !self.viewModel.userSelectedImages.isEmpty {
+                    
+                    self.viewModel.uploadImageToServerFirst()
+                    
+                } else {
+                    self.viewModel.uploadItem()
+                }
+                
             }
             
-            //TODO: - 여기서 API Manager.upload 호출해야할듯
             
         }
         

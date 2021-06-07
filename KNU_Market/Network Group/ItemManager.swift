@@ -11,8 +11,7 @@ class ItemManager {
     //MARK: - API Request URLs
     let writePostURL                 = "\(Constants.API_BASE_URL)posts"
     
-    
-    
+
     //MARK: - 공구글 업로드
     
     //multipart이 아니라 json으로
@@ -38,8 +37,6 @@ class ItemManager {
                         print("ItemManager - uploadNewItem failed with error: \(error.errorDescription)")
                         completion(.failure(error))
                     }
-                    
-                    
                    }
         
     }

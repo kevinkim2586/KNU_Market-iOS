@@ -35,12 +35,45 @@ class UploadItemViewModel {
     
     
     //MARK: - API
+    
+    
+    func uploadImageToServerFirst() {
+        
+        guard let imageData = userSelectedImagesInDataFormat else {
+            self.delegate?.failedUploading(with: .E000)
+            return
+        }
+        
+        MediaManager.shared.uploadImage(with: imageData) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success(let uid):
+                
+            case .failure(let error):
+                
+            }
+            
+            
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     func uploadItem() {
         
         let model = UploadItemModel(title: itemTitle,
                                     location: location,
                                     peopleGathering: peopleGathering,
-                                    imageData: nil,
+                                    imageUIDs: nil,
                                     detail: itemDetail)
         
         ItemManager.shared.uploadNewItem(with: model) { result in
@@ -58,6 +91,8 @@ class UploadItemViewModel {
             }
         }
     }
+    
+
     
     
     

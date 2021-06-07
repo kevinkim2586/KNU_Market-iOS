@@ -67,7 +67,7 @@ class MyPageViewModel {
     //MARK: - 사용자 프로필 이미지 불러오기
     func fetchProfileImage(with urlString: String) {
         
-        UserManager.shared.requestMedia(from: urlString) { [weak self] result in
+        MediaManager.shared.requestMedia(from: urlString) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -99,7 +99,10 @@ class MyPageViewModel {
             return
         }
         
-        UserManager.shared.uploadImage(with: imageData) { [weak self] result in
+        var image = [Data]()
+        image.append(imageData)
+        
+        MediaManager.shared.uploadImage(with: image) { [weak self] result in
             
             guard let self = self else { return }
             

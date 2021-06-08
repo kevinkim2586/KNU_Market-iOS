@@ -83,12 +83,15 @@ class UserManager {
                             
                             print("USER MANAGER - checkDuplicate Result: \(result)")
                             
-                            if result == "true" {
-                                completion(.success(true))
-                            }
-                            else {
-                                completion(.success(false))
-                            }
+                            
+                            result == "true" ? completion(.success(true)) : completion(.success(false))
+                            
+//                            if result == "true" {
+//                                completion(.success(true))
+//                            }
+//                            else {
+//                                completion(.success(false))
+//                            }
                             
                         } catch {
                             print("UserManager - checkDuplicate() catch error: \(error)")
@@ -117,12 +120,12 @@ class UserManager {
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
-                    
                     print("UserManager - login() statusCode: \(statusCode)")
                     
                     switch statusCode {
                     
                     case 201:
+                        
                         do {
                             let json = try JSON(data: response.data!)
                             self.saveAccessTokens(from: json)

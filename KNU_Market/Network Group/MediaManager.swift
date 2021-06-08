@@ -11,6 +11,8 @@ class MediaManager {
     let uploadImageURL              = "\(Constants.API_BASE_URL)media"
     let requestMediaURL             = "\(Constants.API_BASE_URL)media/"
     
+    var imageUIDs: [String] = [String]()
+    
     //MARK: - 파일 조회
     func requestMedia(from urlString: String,
                       completion: @escaping ((Result<Data?, NetworkError>) -> Void)) {
@@ -34,7 +36,7 @@ class MediaManager {
     }
     
     //MARK: - 이미지 업로드
-    func uploadImage(with images: Data,
+    func uploadImage(with image: Data,
                      completion: @escaping ((Result<String, NetworkError>) -> Void)) {
         
         let headers: HTTPHeaders = [ HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken ]
@@ -42,7 +44,7 @@ class MediaManager {
         AF.upload(multipartFormData: { multipartFormData in
             
             
-            multipartFormData.append(images,
+            multipartFormData.append(image,
                                      withName: "media",
                                      fileName: "\(UUID().uuidString).jpeg",
                                      mimeType: "image/jpeg")

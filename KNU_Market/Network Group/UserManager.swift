@@ -29,6 +29,7 @@ class UserManager {
         
         AF.upload(multipartFormData: { multipartFormData in
             
+            
             multipartFormData.append(Data(model.id.utf8),
                                      withName: "id")
             multipartFormData.append(Data(model.password.utf8),

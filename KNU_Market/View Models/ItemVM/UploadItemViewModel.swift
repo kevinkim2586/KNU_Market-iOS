@@ -26,6 +26,8 @@ class UploadItemViewModel {
     
     var userSelectedImagesInDataFormat: [Data]?
     
+    lazy var imageUIDs: [String] = []
+    
     
     //MARK: - Initialization
     
@@ -44,36 +46,43 @@ class UploadItemViewModel {
             return
         }
         
-        MediaManager.shared.uploadImage(with: imageData) { [weak self] result in
+        let group = DispatchGroup()
+        
+        for image in imageData {
             
-            guard let self = self else { return }
+            group.enter()
+            print("group.enter() called")
             
-            switch result {
             
-            case .success(let uid):
+            MediaManager.shared.uploadImage(with: image) { result in
                 
-            case .failure(let error):
+                switch result {
                 
+                case .success(let uid):
+                    print("UploadItemVM: success in uploading image with uid: \(uid)")
+                    self.imageUIDs.append(uid)
+                case .failure(let error):
+                    print("UploadItemVM: failed uploading image with error: \(error.errorDescription)")
+                    self.delegate?.failedUploading(with: error)
+                }
+                print("group.leave() called")
+                group.leave()
             }
-            
-            
-            
+        }
+        
+        group.notify(queue: .main) {
+            print("group.notify()")
+            self.uploadItem()
         }
         
     }
-    
-    
-    
-    
-    
-    
     
     func uploadItem() {
         
         let model = UploadItemModel(title: itemTitle,
                                     location: location,
                                     peopleGathering: peopleGathering,
-                                    imageUIDs: nil,
+                                    imageUIDs: imageUIDs,
                                     detail: itemDetail)
         
         ItemManager.shared.uploadNewItem(with: model) { result in
@@ -93,11 +102,6 @@ class UploadItemViewModel {
     }
     
 
-    
-    
-    
-    
-    
     //MARK: - User Input Validation
     
     func validateUserInputs() throws {

@@ -21,6 +21,12 @@ class UploadItemViewController: UIViewController {
         initialize()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        dismissProgressBar()
+    }
+    
     @IBAction func pressedStepper(_ sender: GMStepper) {
         totalGatheringPeopleLabel.text = "\(String(Int(stepper.value))) 명"
     }
@@ -34,6 +40,9 @@ class UploadItemViewController: UIViewController {
         self.presentAlertWithCancelAction(title: "작성하신 글을 올리시겠습니까?", message: "") { selectedOk in
             
             if selectedOk {
+                
+                
+                
                 
                 if !self.viewModel.userSelectedImages.isEmpty {
                     
@@ -93,8 +102,6 @@ extension UploadItemViewController: UploadItemDelegate {
         
         dismissProgressBar()
         print("UploadItemVC - didCompleteUpload")
-        
-        
         navigationController?.popViewController(animated: true)
     }
     

@@ -42,16 +42,15 @@ class MediaManager {
         let headers: HTTPHeaders = [ HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken ]
         
         AF.upload(multipartFormData: { multipartFormData in
-            
-            
+        
             multipartFormData.append(image,
                                      withName: "media",
                                      fileName: "\(UUID().uuidString).jpeg",
                                      mimeType: "image/jpeg")
             
-            
         }, to: uploadImageURL,
-        headers: headers).responseJSON { response in
+        headers: headers)
+        .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
             
@@ -61,7 +60,7 @@ class MediaManager {
                     
                     let json = try JSON(data: response.data!)
                     let imageID = json["uid"].stringValue
-                    print("UserManager: newly updated profileImage UID: \(imageID)")
+                    print("UserManager: newly uploaded image UID: \(imageID)")
                     completion(.success(imageID))
                     
                 } catch {

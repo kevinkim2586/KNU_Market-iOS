@@ -99,10 +99,7 @@ class MyPageViewModel {
             return
         }
         
-        var image = [Data]()
-        image.append(imageData)
-        
-        MediaManager.shared.uploadImage(with: image) { [weak self] result in
+        MediaManager.shared.uploadImage(with: imageData) { [weak self] result in
             
             guard let self = self else { return }
             

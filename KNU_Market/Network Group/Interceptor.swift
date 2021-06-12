@@ -36,7 +36,7 @@ final class Interceptor: RequestInterceptor {
             completion(.doNotRetry)
             
         // TODO: 아래 status Code 수정 필요
-        case 403:
+        case 412:
             guard !isRefreshing else { return }
             
             refreshToken() { refreshResult in

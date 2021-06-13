@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Screen Shot 2021-03-27 at 3.15 1.jpg",
+      "filename" : "default item icon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Screen Shot 2021-03-27 at 3.15 1-1.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Screen Shot 2021-03-27 at 3.15 1-2.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1189,38 +1189,10 @@
                                 </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="인증">
-                                            <attributes>
-                                                <color key="NSColor" name="AppDefaultColor"/>
-                                                <font key="NSFont" size="14" name=".AppleSDGothicNeoI-Regular"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content=" ">
+                                        <fragment content="인증 메일 보내기">
                                             <attributes>
                                                 <color key="NSColor" name="AppDefaultColor"/>
                                                 <font key="NSFont" metaFont="system" size="14"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="메일">
-                                            <attributes>
-                                                <color key="NSColor" name="AppDefaultColor"/>
-                                                <font key="NSFont" size="14" name=".AppleSDGothicNeoI-Regular"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content=" ">
-                                            <attributes>
-                                                <color key="NSColor" name="AppDefaultColor"/>
-                                                <font key="NSFont" metaFont="system" size="14"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="보내기">
-                                            <attributes>
-                                                <color key="NSColor" name="AppDefaultColor"/>
-                                                <font key="NSFont" size="14" name=".AppleSDGothicNeoI-Regular"/>
                                                 <integer key="NSUnderline" value="1"/>
                                             </attributes>
                                         </fragment>
@@ -1245,24 +1217,10 @@
                                 </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="중복">
-                                            <attributes>
-                                                <color key="NSColor" name="AppDefaultColor"/>
-                                                <font key="NSFont" size="14" name=".AppleSDGothicNeoI-Regular"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content=" ">
+                                        <fragment content="중복 확인">
                                             <attributes>
                                                 <color key="NSColor" name="AppDefaultColor"/>
                                                 <font key="NSFont" metaFont="system" size="14"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="확인">
-                                            <attributes>
-                                                <color key="NSColor" name="AppDefaultColor"/>
-                                                <font key="NSFont" size="14" name=".AppleSDGothicNeoI-Regular"/>
                                                 <integer key="NSUnderline" value="1"/>
                                             </attributes>
                                         </fragment>

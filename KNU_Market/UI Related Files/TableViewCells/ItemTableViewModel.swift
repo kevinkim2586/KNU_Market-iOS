@@ -2,8 +2,11 @@ import UIKit
 
 class ItemTableViewModel {
     
-    var itemImage: UIImage? = UIImage(named: "pizza")!
+    var uuid: String = ""
     
+    var itemImage: UIImage? = UIImage(named: "default item icon")!
+    
+    var imageUIDs: String = ""
     
     
     var title: String = "6시에 피자 같아 시키실 분?"
@@ -14,7 +17,11 @@ class ItemTableViewModel {
     
     var totalGatheringPeople: Int = 4
     
-    var location: String = "테크노문"
+    var location: Int = 0
+    
+    var locationName: String {
+        get { return Location.list[location] }
+    }
     
     init() {
         

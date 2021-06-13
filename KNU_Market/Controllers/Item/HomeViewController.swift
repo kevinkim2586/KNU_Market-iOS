@@ -20,9 +20,9 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Constants.Color.appColor)!]
         navigationItem.largeTitleDisplayMode = .always
         
+        viewModel.fetchItemList()
     
         initialize()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +71,21 @@ extension HomeViewController: HomeViewModelDelegate {
                       duration: .lengthLong).show()
     }
     
+    func didFetchItemList() {
+        
+        print("HomeVC - didFetchItemList activated")
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+        tableView.tableFooterView = nil
+        
+    }
+    
+    func failedFetchingItemList(with error: NetworkError) {
+        SnackBar.make(in: self.view,
+                      message: "일시적인 연결 문제가 있습니다. 🥲",
+                      duration: .lengthLong).show()
+    }
+    
     
 }
 
@@ -83,7 +98,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return viewModel.itemList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -91,10 +106,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let cellIdentifier = Constants.cellID.itemTableViewCell
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell else {
-            fatalError("Failed to dequeue cell for ItemTableViewCell")
+            fatalError()
         }
         
-        cell.configure()
+        cell.configure(with: viewModel.itemList[indexPath.row])
 
 
     
@@ -107,14 +122,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func refreshTableView() {
         
-        tableView.reloadData()
-        tableView.refreshControl?.endRefreshing()
-        // ex
-//        viewModel.reviewList.removeAll()
-//        viewModel.needToFetchMoreData = true
-//        viewModel.isPaginating = false
-//        viewModel.fetchReviewList(of: 2)
-        
+        viewModel.itemList.removeAll()
+        viewModel.needsToFetchMoreData = true
+        viewModel.isPaginating = false
+        viewModel.fetchItemList()
     }
 
     
@@ -129,7 +140,10 @@ extension HomeViewController {
         
         viewModel.delegate = self
     
-        loadUserInfo()
+        
+        viewModel.loadUserProfile()
+        viewModel.fetchItemList()
+        
         initializeTableView()
         initializeAddButton()
         
@@ -155,10 +169,6 @@ extension HomeViewController {
                                     configuration)
         addButton.setImage(plusImage, for: .normal)
     }
-    
-    func loadUserInfo() {
-        
-        viewModel.loadUserProfile()
-    }
+
     
 }

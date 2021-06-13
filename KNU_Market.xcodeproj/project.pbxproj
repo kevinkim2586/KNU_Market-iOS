@@ -70,6 +70,7 @@
 		7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF62264D02AF0001CC6D /* Sender.swift */; };
 		7CB8DF732650E1E20001CC6D /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF722650E1E20001CC6D /* RegisterViewModel.swift */; };
 		7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */; };
+		7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +140,7 @@
 		7CB8DF62264D02AF0001CC6D /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		7CB8DF722650E1E20001CC6D /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModel.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -195,6 +197,7 @@
 			children = (
 				7C555464266D0A1400C3C5B6 /* Location.swift */,
 				7C55545C266CDFD100C3C5B6 /* UploadItemModel.swift */,
+				7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */,
 			);
 			path = "Item Models";
 			sourceTree = "<group>";
@@ -268,10 +271,9 @@
 		7CA6622326413272000E0B7A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7CCB02062674CDF200D58BC2 /* User Models */,
 				7C555463266D0A0300C3C5B6 /* Item Models */,
 				7C555460266CFBE500C3C5B6 /* Chat Models */,
-				7CB8DF3B264BB15E0001CC6D /* Request Models */,
-				7CB8DF3C264BB1640001CC6D /* Response Models */,
 				7CB8DF41264BEC870001CC6D /* User.swift */,
 				7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */,
 			);
@@ -345,26 +347,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		7CB8DF3B264BB15E0001CC6D /* Request Models */ = {
-			isa = PBXGroup;
-			children = (
-				7CB8DF3D264BB1970001CC6D /* RegisterModel.swift */,
-				7CB8DF3F264BB6340001CC6D /* LoadProfileModel.swift */,
-				7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */,
-				7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */,
-			);
-			path = "Request Models";
-			sourceTree = "<group>";
-		};
-		7CB8DF3C264BB1640001CC6D /* Response Models */ = {
-			isa = PBXGroup;
-			children = (
-				7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */,
-				7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */,
-			);
-			path = "Response Models";
-			sourceTree = "<group>";
-		};
 		7CB8DF4D264C15B20001CC6D /* Chat Bubble Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +382,19 @@
 				7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */,
 			);
 			path = "Login+RegisterVM";
+			sourceTree = "<group>";
+		};
+		7CCB02062674CDF200D58BC2 /* User Models */ = {
+			isa = PBXGroup;
+			children = (
+				7CB8DF3D264BB1970001CC6D /* RegisterModel.swift */,
+				7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */,
+				7CB8DF3F264BB6340001CC6D /* LoadProfileModel.swift */,
+				7CB8DF49264BF1440001CC6D /* ChangeProfileModel.swift */,
+				7CB8DF43264BEF050001CC6D /* LoadOtherUserProfileModel.swift */,
+				7CB8DF47264BEFF50001CC6D /* LoadOtherUserProfileResponseModel.swift */,
+			);
+			path = "User Models";
 			sourceTree = "<group>";
 		};
 		7CD74E0C2645981700BD2DE4 /* Login+Register */ = {
@@ -582,6 +577,7 @@
 				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */,
+				7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
 				7C55545D266CDFD100C3C5B6 /* UploadItemModel.swift in Sources */,
 				7CB8DF5B264C1EC60001CC6D /* Example.swift in Sources */,

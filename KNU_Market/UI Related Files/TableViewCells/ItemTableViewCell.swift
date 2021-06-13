@@ -14,7 +14,6 @@ class ItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-   
     }
     
     func resetValues() {
@@ -28,11 +27,18 @@ class ItemTableViewCell: UITableViewCell {
         
     }
     
-    func configure() {
+    func configure(with model: ItemListModel) {
 
         resetValues()
 
-
+        viewModel.uuid = model.uuid
+        viewModel.title = model.title
+        viewModel.location = model.location
+        viewModel.totalGatheringPeople = model.totalGatheringPeople
+        viewModel.imageUIDs = model.imageUIDs
+        
+        
+        
         initialize()
     }
 
@@ -95,7 +101,7 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializeLocationLabel() {
         
-        locationLabel.text = viewModel.location
+        locationLabel.text = viewModel.locationName
         
     }
     

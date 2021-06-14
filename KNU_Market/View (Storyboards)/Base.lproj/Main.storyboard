@@ -477,9 +477,9 @@
                                         </state>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people icon" translatesAutoresizingMaskIntoConstraints="NO" id="yRl-fx-1L5">
-                                        <rect key="frame" x="151" y="22" width="20" height="15"/>
+                                        <rect key="frame" x="151" y="22" width="20" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="8AF-t8-Fgx"/>
+                                            <constraint firstAttribute="height" constant="20" id="8AF-t8-Fgx"/>
                                             <constraint firstAttribute="width" constant="20" id="AQ4-wY-qCH"/>
                                         </constraints>
                                     </imageView>

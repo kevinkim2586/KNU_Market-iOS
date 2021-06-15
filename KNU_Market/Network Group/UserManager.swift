@@ -84,15 +84,7 @@ class UserManager {
                             
                             print("USER MANAGER - checkDuplicate Result: \(result)")
                             
-                            
                             result == "true" ? completion(.success(true)) : completion(.success(false))
-                            
-//                            if result == "true" {
-//                                completion(.success(true))
-//                            }
-//                            else {
-//                                completion(.success(false))
-//                            }
                             
                         } catch {
                             print("UserManager - checkDuplicate() catch error: \(error)")
@@ -159,8 +151,6 @@ class UserManager {
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
-
-                    
                     switch statusCode {
                     case 201:
                         do {
@@ -184,30 +174,6 @@ class UserManager {
                     
                    }
     }
-    
-    
-    
-    //MARK: - 파일 조회
-//    func requestMedia(from urlString: String,
-//                      completion: @escaping ((Result<Data?, NetworkError>) -> Void)) {
-//
-//        let requestURL = requestMediaURL + urlString
-//
-//        AF.request(requestURL,
-//                   method: .get).responseJSON { response in
-//
-//                    guard let statusCode = response.response?.statusCode else { return }
-//
-//                    switch statusCode {
-//                    case 200:
-//                        completion(.success(response.data!))
-//                    default:
-//                        print("requestMedia FAILED")
-//                        let error = NetworkError.returnError(json: response.data!)
-//                        completion(.failure(error))
-//                    }
-//                   }
-//    }
     
     //MARK: - 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String,
@@ -245,45 +211,6 @@ class UserManager {
                     }
                    }
     }
-    
-    //MARK: - 이미지 업로드
-//    func uploadImage(with images: [Data],
-//                     completion: @escaping ((Result<String, NetworkError>) -> Void)) {
-//
-//        let headers: HTTPHeaders = [ HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken ]
-//
-//        AF.upload(multipartFormData: { multipartFormData in
-//
-//            for image in images {
-//                multipartFormData.append(image,
-//                                         withName: "media",
-//                                         fileName: "\(UUID().uuidString).jpeg",
-//                                         mimeType: "image/jpeg")
-//            }
-//
-//        }, to: uploadImageURL,
-//        headers: headers).responseJSON { response in
-//
-//            guard let statusCode = response.response?.statusCode else { return }
-//
-//            switch statusCode {
-//            case 201:
-//                do {
-//
-//                    let json = try JSON(data: response.data!)
-//                    let imageID = json["uid"].stringValue
-//                    print("UserManager: newly updated profileImage UID: \(imageID)")
-//                    completion(.success(imageID))
-//
-//                } catch {
-//                    print("UserManager - uploadImage() catch error \(error)")
-//                    let error = NetworkError.returnError(json: response.data!)
-//                    completion(.failure(error))
-//                }
-//            default: completion(.failure(.E000))
-//            }
-//        }
-//    }
     
     //MARK: - 비밀번호 변경
     func updateUserPassword(with password: String,
@@ -383,17 +310,11 @@ class UserManager {
                         print("logout FAILED with error code: \(statusCode) and error: \(error.errorDescription)")
                         completion(.failure(error))
                     }
-    }
+                   }
         
     }
     
-
-    
-    
-    
-    
     //MARK: - 개인정보 저장 메서드
-    
     func saveAccessTokens(from response: JSON) {
         
         let accessToken = response["accessToken"].stringValue
@@ -401,8 +322,6 @@ class UserManager {
         
         User.shared.savedAccessToken = KeychainWrapper.standard.set(accessToken,
                                                                     forKey: Constants.KeyChainKey.accessToken)
-        
-        
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(refreshToken,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
         
@@ -413,8 +332,8 @@ class UserManager {
         let newAccessToken = response["accessToken"].stringValue
         
         // 확인 : 기존 accessCode 를 지우지 않고 바로 덮어씌울 수 있는지 확인해보기
-        User.shared.savedAccessToken = KeychainWrapper.standard.set(newAccessToken, forKey: Constants.KeyChainKey.accessToken)
-        
+        User.shared.savedAccessToken = KeychainWrapper.standard.set(newAccessToken,
+                                                                    forKey: Constants.KeyChainKey.accessToken)
     }
     
     func saveBasicUserInfo(with model: LoadProfileResponseModel) {
@@ -423,7 +342,4 @@ class UserManager {
         User.shared.nickname = model.nickname
         User.shared.profileImageCode = model.profileImageCode
     }
-    
-
-    
 }

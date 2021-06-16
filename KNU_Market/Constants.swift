@@ -2,13 +2,17 @@ import Foundation
 
 struct Constants {
     
-    static let API_BASE_URL = "http://155.230.25.110:5004/api/v1/"
+    static let API_BASE_URL                     = "http://155.230.25.110:5004/api/v1/"
     
     struct KeyChainKey {
         
         static let accessToken                  = "accessToken"
         static let refreshToken                 = "refreshToken"
         static let password                     = "password"
+    }
+    
+    struct SegueID {
+        static let goToItemVC                   = "goToItemVC"
     }
     
     struct Color {

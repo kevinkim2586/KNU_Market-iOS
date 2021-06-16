@@ -25,4 +25,5 @@ target 'KNU_Market' do
   pod 'SnackBar.swift'
   pod 'ViewAnimator'
   pod 'SDWebImage', '~> 5.0'
+  pod 'SkeletonView'
 end

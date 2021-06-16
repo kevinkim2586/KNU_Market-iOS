@@ -129,11 +129,6 @@ extension LoginViewController {
         //MARK: - TEST DATA
         idTextField.text = "kevinkim2586@gmail.com"
         passwordTextField.text = "123456789"
-        
-        
-        
-        
-        
     }
     
     func initializeLoginButton() {

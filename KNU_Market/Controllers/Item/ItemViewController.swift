@@ -1,4 +1,5 @@
 import UIKit
+import SkeletonView
 
 class ItemViewController: UIViewController {
     
@@ -20,13 +21,15 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dateLabel: UILabel!
     
-    
     private let refreshControl = UIRefreshControl()
     
     var images = ["bubble1", "bubble2", "bubble3"]
     
-    private var viewModel = ItemViewModel()
-
+    var viewModel = ItemViewModel()
+    
+    var pageID: String = ""
+    
+    //MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +54,9 @@ class ItemViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-
+    
+    
+    //MARK: - IBActions & Methods
     
     @IBAction func pageChanged(_ sender: UIPageControl) {
         itemImageView.image = UIImage(named: images[pageControl.currentPage])
@@ -66,20 +71,13 @@ class ItemViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    
-    
     @objc func refreshScrollView() {
         
         
         //label 하고 버튼 둘다 회색으로 바꾸기
         
-        
-        
         scrollView.refreshControl?.endRefreshing()
     }
-    
-    
-    
     
 }
 
@@ -127,9 +125,7 @@ extension ItemViewController {
         titleView.layer.shadowOffset = CGSize(width: 3, height: 3)
         titleView.layer.shadowOpacity = 0.2
         titleView.layer.shadowRadius = 3
-        
-        
-        
+    
     }
 
     
@@ -140,8 +136,6 @@ extension ItemViewController {
         let attributes = [NSAttributedString.Key.paragraphStyle : labelStyle]
         itemExplanationLabel.attributedText = NSAttributedString(string: viewModel.itemExplanation,
                                                                  attributes: attributes)
-        
- 
     }
     
     func initializeGatheringPeopleLabel() {

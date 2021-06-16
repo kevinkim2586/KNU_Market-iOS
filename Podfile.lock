@@ -92,6 +92,7 @@ PODS:
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
+  - SkeletonView (1.17.2)
   - SnackBar.swift (0.1.0):
     - SnapKit
   - SnapKit (5.0.1)
@@ -115,6 +116,7 @@ DEPENDENCIES:
   - MessageKit
   - ProgressHUD
   - SDWebImage (~> 5.0)
+  - SkeletonView
   - SnackBar.swift
   - SPIndicator
   - SwiftKeychainWrapper
@@ -144,6 +146,7 @@ SPEC REPOS:
     - ProgressHUD
     - PromisesObjC
     - SDWebImage
+    - SkeletonView
     - SnackBar.swift
     - SnapKit
     - SPIndicator
@@ -173,6 +176,7 @@ SPEC CHECKSUMS:
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SkeletonView: 7aba21d10df8d0530189379ebe02e02a192d8132
   SnackBar.swift: 79ea4df13ea9e6633137dd6acbd490534d26440d
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPIndicator: b702acd5374e2ca51e31660f454b6506402d7049
@@ -181,6 +185,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: 6e169cf72a089c90fe26f01db2cb5bf4575ea5a6
+PODFILE CHECKSUM: d28cf5f99c5e8e9b8834d675e0f244c7950cbaab
 
 COCOAPODS: 1.10.1

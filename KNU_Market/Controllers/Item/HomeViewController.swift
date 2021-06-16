@@ -40,18 +40,17 @@ class HomeViewController: UIViewController {
 
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
-        
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let itemVC: ItemViewController = segue.destination as? ItemViewController else {
-            return
-        }
+        guard let itemVC: ItemViewController = segue.destination as? ItemViewController else { return }
+
+        guard let index = tableView.indexPathForSelectedRow?.row else { return }
         
         itemVC.hidesBottomBarWhenPushed = true
-
+        itemVC.pageID = viewModel.itemList[index].uuid
+        
     }
 }
 
@@ -142,9 +141,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                         self.viewModel.fetchItemList()
                        })
     }
-
-    
-    
 }
 
 //MARK: - UI Configuration
@@ -161,7 +157,6 @@ extension HomeViewController {
         
         initializeTableView()
         initializeAddButton()
-        
     }
     
     func initializeTableView() {

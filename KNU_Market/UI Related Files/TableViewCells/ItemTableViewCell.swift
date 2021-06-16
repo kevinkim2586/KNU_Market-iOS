@@ -61,8 +61,6 @@ class ItemTableViewCell: UITableViewCell {
 
     func initializeImageView() {
         
-    
-        
         if viewModel.imageUIDs.isEmpty {
             itemImageView.image = viewModel.defaultImage
         } else {
@@ -74,9 +72,6 @@ class ItemTableViewCell: UITableViewCell {
         }
         itemImageView.contentMode = .scaleAspectFill
         itemImageView.layer.cornerRadius = 5
-        
-        
-
     }
     
     func initializeGatheringLabel() {

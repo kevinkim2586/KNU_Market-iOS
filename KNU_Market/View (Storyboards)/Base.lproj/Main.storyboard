@@ -229,7 +229,7 @@
                                             <outlet property="itemTitleLabel" destination="GCM-dd-Bdj" id="zJ6-nn-boZ"/>
                                             <outlet property="locationLabel" destination="fEl-9j-7BQ" id="adQ-21-1jU"/>
                                             <outlet property="personImageView" destination="TDS-j5-mBO" id="88I-j8-U4S"/>
-                                            <segue destination="ksz-dU-yWX" kind="show" id="3qQ-iV-AEa"/>
+                                            <segue destination="ksz-dU-yWX" kind="show" identifier="goToItemVC" id="3qQ-iV-AEa"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

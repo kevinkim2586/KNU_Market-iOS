@@ -26,18 +26,15 @@ class InitialViewController: UIViewController {
         
         initializeLoginButton()
         initializeRegisterButton()
-        
-        
     }
     
     func initializeLoginButton() {
-        
+
         loginButton.setTitle("로그인", for: .normal)
-        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         loginButton.backgroundColor = UIColor(named: Constants.Color.appColor)
         loginButton.layer.cornerRadius  = loginButton.frame.height / 2
         loginButton.addBounceAnimationWithNoFeedback()
-        
     }
     
     func initializeRegisterButton() {

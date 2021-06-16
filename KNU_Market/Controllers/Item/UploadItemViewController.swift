@@ -29,6 +29,7 @@ class UploadItemViewController: UIViewController {
     
     @IBAction func pressedStepper(_ sender: GMStepper) {
         totalGatheringPeopleLabel.text = "\(String(Int(stepper.value))) 명"
+        viewModel.peopleGathering = Int(stepper.value)
     }
     
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {

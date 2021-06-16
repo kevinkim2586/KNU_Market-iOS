@@ -6,50 +6,46 @@ protocol ItemViewModelDelegate {
     func failedFetchingPostDetails(with error: NetworkError)
 }
 
-
 class ItemViewModel {
-    
-    //TODO - 이렇게 변수 다 따로따로 하지 말고, 받아오는 정보 (JSON)에 해당하는 구조체 하나 만들어서 한꺼번에 받기
     
     var delegate: ItemViewModelDelegate?
     
+    var model: ItemDetailModel?
+    
     let itemImages: [UIImage]? = [UIImage]()
-    
-    let itemTitle: String = ""
-    
-    var userProfileImage: UIImage {
-        get { getUserProfileImage() }
-    }
-    
-    let isGathering: Bool = true
+
+    var isGathering: Bool = true
     
     var currentlyGatheredPeople: Int = 1
     
-    var totalGatheringPeople: Int = 5
-    
-    var location: String = ""
-    
-    var itemExplanation: String = ""
-    
+    var location: String {
+        return Location.listForCell[model?.location ?? Location.listForCell.count]
+    }
 
-    init() {
- 
- 
-    }
+
+    //MARK: - Methods
     
-    func fetchPostDetails() {
+    func fetchItemDetails(for uid: String) {
         
-        
-        
-    }
-    
-    
-    func getUserProfileImage() -> UIImage {
-        
-        if let defaultImage = UIImage(named: "default avatar") {
-            return defaultImage
+        ItemManager.shared.fetchItemDetails(uid: uid) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success(let fetchedModel):
+                
+                self.model = fetchedModel
+                self.delegate?.didFetchPostDetails()
+                
+            case .failure(let error):
+                
+                print("ItemViewModel - FAILED fetchItemDetails")
+                self.delegate?.failedFetchingPostDetails(with: error)
+            }
+            
         }
-        return UIImage()
+        
     }
     
 }

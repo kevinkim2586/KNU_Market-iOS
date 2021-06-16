@@ -127,7 +127,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func refreshTableView() {
-        
+         
         //사라지는 애니메이션 처리
         UIView.animate(views: self.tableView.visibleCells,
                        animations: Animations.forTableViews,

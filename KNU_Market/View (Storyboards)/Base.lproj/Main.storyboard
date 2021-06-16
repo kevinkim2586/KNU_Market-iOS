@@ -439,7 +439,7 @@
                         <outlet property="enterChatButton" destination="vnu-dP-JG9" id="HtK-Vv-abc"/>
                         <outlet property="gatheringPeopleImageView" destination="Epd-Tr-xHK" id="m2n-2k-lf4"/>
                         <outlet property="gatheringPeopleLabel" destination="GHi-e0-kSv" id="0D6-5d-qhM"/>
-                        <outlet property="itemExplanationLabel" destination="Vt7-jQ-9Tk" id="gRL-bo-IiM"/>
+                        <outlet property="itemDetailLabel" destination="Vt7-jQ-9Tk" id="gRL-bo-IiM"/>
                         <outlet property="itemImageView" destination="ZzT-qt-R2y" id="lb6-Sn-yVY"/>
                         <outlet property="itemTitleLabel" destination="H7J-Hp-GLf" id="Drs-SS-k4u"/>
                         <outlet property="locationLabel" destination="5nb-xN-9fP" id="L6M-ty-feQ"/>
@@ -663,7 +663,7 @@
                         <outlet property="enterChatButton" destination="vHO-hQ-yab" id="GYx-E2-ahV"/>
                         <outlet property="gatheringPeopleImageView" destination="yRl-fx-1L5" id="WDC-wY-SVL"/>
                         <outlet property="gatheringPeopleLabel" destination="pGY-uY-NlO" id="CKA-V5-Pdg"/>
-                        <outlet property="itemExplanationLabel" destination="cNH-EU-3H6" id="J41-cG-qrN"/>
+                        <outlet property="itemDetailLabel" destination="cNH-EU-3H6" id="J41-cG-qrN"/>
                         <outlet property="itemImageView" destination="Iy0-GA-YGl" id="Shm-9L-UIw"/>
                         <outlet property="itemTitleLabel" destination="TW6-g0-adz" id="UT3-hh-iUO"/>
                         <outlet property="locationImageView" destination="DKX-X6-ANf" id="DoS-TA-3nC"/>
@@ -1509,10 +1509,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1nV-6b-mxx">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" name="AppDefaultColor"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>

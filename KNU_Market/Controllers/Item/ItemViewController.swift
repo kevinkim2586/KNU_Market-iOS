@@ -1,5 +1,7 @@
 import UIKit
+import SnackBar_swift
 import SkeletonView
+import SDWebImage
 
 class ItemViewController: UIViewController {
     
@@ -13,7 +15,7 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var locationImageView: UIImageView!
 
-    @IBOutlet weak var itemExplanationLabel: UILabel!
+    @IBOutlet weak var itemDetailLabel: UILabel!
     @IBOutlet weak var gatheringPeopleLabel: UILabel!
     @IBOutlet weak var gatheringPeopleImageView: UIImageView!
     @IBOutlet weak var enterChatButton: UIButton!
@@ -38,6 +40,7 @@ class ItemViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
 
+        viewModel.fetchItemDetails(for: pageID)
         
         initialize()
  
@@ -71,14 +74,35 @@ class ItemViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func refreshScrollView() {
+    @objc func refreshPage() {
         
-        
-        //label 하고 버튼 둘다 회색으로 바꾸기
-        
-        scrollView.refreshControl?.endRefreshing()
+        viewModel.fetchItemDetails(for: pageID)
     }
     
+}
+
+//MARK: - ItemViewModelDelegate
+
+extension ItemViewController: ItemViewModelDelegate {
+    
+    func didFetchPostDetails() {
+        
+        print("ItemVC - didFetchPostDetails activated")
+        
+        DispatchQueue.main.async {
+            self.scrollView.refreshControl?.endRefreshing()
+            self.updateInformation()
+        }
+    }
+    
+    func failedFetchingPostDetails(with error: NetworkError) {
+        
+        print("ItemVC - failedFetchingPostDetails")
+        self.scrollView.refreshControl?.endRefreshing()
+        SnackBar.make(in: self.view,
+                      message: error.errorDescription,
+                      duration: .lengthLong).show()
+    }
 }
 
 //MARK: - UI Configuration
@@ -86,6 +110,8 @@ class ItemViewController: UIViewController {
 extension ItemViewController {
     
     func initialize() {
+        
+        viewModel.delegate = self
         
         initializeScrollView()
         
@@ -96,23 +122,45 @@ extension ItemViewController {
         initializeEnterChatButton()
         initializeBottomView()
         configurePageControl()
+    }
+    
+    func updateInformation() {
+        
+        itemTitleLabel.text = viewModel.model?.title
+    
+        let profileImageUID = viewModel.model?.profileImageUID ?? ""
+        
+        if profileImageUID.count > 1 {
+            
+            let url = URL(string: Constants.API_BASE_URL + "media/\(profileImageUID)")
+            userProfileImageView.sd_setImage(with: url,
+                                             placeholderImage: UIImage(named: "default avatar"),
+                                             options: .continueInBackground)
+        } else {
+            userProfileImageView.image = UIImage(named: "default avatar")
+        }
+        
+        locationLabel.text = viewModel.location
+        userIdLabel.text = viewModel.model?.nickname
+        itemDetailLabel.text = viewModel.model?.itemDetail
+        
+        initializeGatheringPeopleLabel()
+        initializeEnterChatButton()
+        
         
     }
     
     func initializeScrollView() {
         
         scrollView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshScrollView), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshPage), for: .valueChanged)
     }
     
     func initializeProfileImageView() {
-        
-        userProfileImageView.image = viewModel.userProfileImage
+    
+        userProfileImageView.image = UIImage(named: "default avatar")
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
-//        userProfileImageView.layer.borderWidth = 1
-//        userProfileImageView.layer.borderColor = UIColor.black.cgColor
-//
     }
     
     func initializeTitleView() {
@@ -128,32 +176,29 @@ extension ItemViewController {
     
     }
 
-    
     func initializeItemExplanationLabel() {
         
         let labelStyle = NSMutableParagraphStyle()
         labelStyle.lineSpacing = 5
         let attributes = [NSAttributedString.Key.paragraphStyle : labelStyle]
-        itemExplanationLabel.attributedText = NSAttributedString(string: viewModel.itemExplanation,
+        itemDetailLabel.attributedText = NSAttributedString(string: viewModel.model?.title ?? "",
                                                                  attributes: attributes)
     }
     
     func initializeGatheringPeopleLabel() {
         
+        // 수정 필요
         let currentNum = viewModel.currentlyGatheredPeople
-        let total = viewModel.totalGatheringPeople
+        let total = viewModel.model?.totalGatheringPeople ?? 2
         
         if viewModel.isGathering {
             gatheringPeopleLabel.text = "모집 중     \(currentNum)" + "/" + "\(total)"
      
         } else {
             gatheringPeopleLabel.text = "마감     \(currentNum)" + "/" + "\(total)"
-      
         }
-
         gatheringPeopleLabel.font = UIFont.systemFont(ofSize: 15.0,
                                                       weight: .semibold)
-        
     }
     
     func initializeEnterChatButton() {
@@ -172,7 +217,8 @@ extension ItemViewController {
     }
     
     func initializeLocationLabel() {
-        locationLabel.text = viewModel.location
+        let index = viewModel.model?.location ?? Location.listForCell.count
+        locationLabel.text = Location.listForCell[index]
     }
     
     func initializeBottomView() {
@@ -180,8 +226,6 @@ extension ItemViewController {
         bottomView.layer.borderWidth = 1
         bottomView.layer.borderColor = #colorLiteral(red: 0.9119567871, green: 0.912109673, blue: 0.9119365811, alpha: 1)
     }
-
-    
 }
 
 //MARK: - Page Control

@@ -60,7 +60,8 @@ class ItemManager {
                    method: .post,
                    parameters: model.parameters,
                    encoding: JSONEncoding.default,
-                   headers: model.headers).responseJSON { response in
+                   headers: model.headers)
+            .responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -79,6 +80,43 @@ class ItemManager {
         
     }
     
+    //MARK: - 특정 공구글 불러오기
+    func fetchItemDetails(uid: String,
+                          completion: @escaping ((Result<ItemDetailModel, NetworkError>) -> Void)) {
+        
+        let url = getPostsURL + "/\(uid)"
+        
+        AF.request(url,
+                   method: .get)
+            .validate()
+            .responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                       
+                        print("ItemManager - SUCCESS in fetchItemList")
+                        
+                        do {
+                            let decodedData = try JSONDecoder().decode(ItemDetailModel.self,
+                                                                       from: response.data!)
+                            completion(.success(decodedData))
+                            
+                        } catch {
+                            print("ItemManager - There was an error decoding JSON Data with error: \(error)")
+                            completion(.failure(.E000))
+                        }
+                        
+                    default:
+                        
+                        let error = NetworkError.returnError(json: response.data!)
+                        print("ItemManager fetchItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
+                        completion(.failure(error))
+                    }
+                   }
+    }
     
     
 }

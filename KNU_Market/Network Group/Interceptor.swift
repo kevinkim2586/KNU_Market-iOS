@@ -34,8 +34,7 @@ final class Interceptor: RequestInterceptor {
         
         case 200...299:
             completion(.doNotRetry)
-            
-        // TODO: 아래 status Code 수정 필요
+
         case 412:
             guard !isRefreshing else { return }
             

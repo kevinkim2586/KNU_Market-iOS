@@ -22,6 +22,6 @@ struct ItemDetailModel: Decodable {
         case totalGatheringPeople = "recruitment"
         case nickname
         case profileImageUID = "profileImage"
-        
     }
 }
+

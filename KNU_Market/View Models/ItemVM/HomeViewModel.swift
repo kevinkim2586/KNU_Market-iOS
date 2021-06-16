@@ -27,9 +27,9 @@ class HomeViewModel {
             guard let self = self else { return }
             
             switch result {
-            case .success(let model):
+            case .success(let fetchedModel):
                 
-                self.itemList = model
+                self.itemList = fetchedModel
                 self.delegate?.didFetchItemList()
                 
             case .failure(let error):

@@ -119,8 +119,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.configure(with: viewModel.itemList[indexPath.row])
-
-
     
         return cell
     }
@@ -130,8 +128,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func refreshTableView() {
-        
-//        viewModel.itemList.removeAll()
         
         //사라지는 애니메이션 처리
         UIView.animate(views: self.tableView.visibleCells,
@@ -145,12 +141,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                         self.viewModel.isPaginating = false
                         self.viewModel.fetchItemList()
                        })
-                       
-        
-//
-//        viewModel.needsToFetchMoreData = true
-//        viewModel.isPaginating = false
-//        viewModel.fetchItemList()
     }
 
     

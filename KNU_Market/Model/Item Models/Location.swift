@@ -13,4 +13,14 @@ struct Location {
         "협의 (아래에 명시)"
     ]
     
+    static let listForCell: [String] = [
+        "북문",
+        "동문",
+        "테크노문",
+        "쪽문",
+        "정문",
+        "서문",
+        "기숙사",
+        "협의"
+    ]
 }

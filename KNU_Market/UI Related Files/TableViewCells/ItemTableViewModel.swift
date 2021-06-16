@@ -4,30 +4,37 @@ class ItemTableViewModel {
     
     var uuid: String = ""
     
-    var itemImage: UIImage? = UIImage(named: "default item icon")!
+    var defaultImage: UIImage = UIImage(named: "default item icon")!
     
-    var imageUIDs: String = ""
+    var imageUIDs: String = "" {
+        didSet {
+            imageURL = URL(string: "\(Constants.API_BASE_URL)media/" + imageUIDs)
+        }
+    }
     
+    var imageURL: URL?
     
-    var title: String = "6시에 피자 같아 시키실 분?"
+    var title: String = ""
   
     var isGathering: Bool = true
     
-    var currentlyGatheredPeople: Int = 2
+    var currentlyGatheredPeople: Int = 1 {
+        didSet {
+            if currentlyGatheredPeople == totalGatheringPeople {
+                isGathering = false
+            }
+        }
+    }
     
     var totalGatheringPeople: Int = 4
     
     var location: Int = 0
     
     var locationName: String {
-        get { return Location.list[location] }
+        get { return Location.listForCell[location] }
     }
     
-    init() {
-        
-        
-    }
-    
+ 
     
     
 }

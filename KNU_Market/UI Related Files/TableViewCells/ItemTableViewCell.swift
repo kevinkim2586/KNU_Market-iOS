@@ -1,4 +1,6 @@
 import UIKit
+import SDWebImage
+
 
 class ItemTableViewCell: UITableViewCell {
     
@@ -36,9 +38,8 @@ class ItemTableViewCell: UITableViewCell {
         viewModel.location = model.location
         viewModel.totalGatheringPeople = model.totalGatheringPeople
         viewModel.imageUIDs = model.imageUIDs
-        
-        
-        
+        //백엔드에서 currentlyGatheredPeople 정보를 추가해야할듯
+    
         initialize()
     }
 
@@ -58,11 +59,24 @@ class ItemTableViewCell: UITableViewCell {
         itemTitleLabel.text = viewModel.title
     }
 
-    
     func initializeImageView() {
         
+    
+        
+        if viewModel.imageUIDs.isEmpty {
+            itemImageView.image = viewModel.defaultImage
+        } else {
+            itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            itemImageView.sd_setImage(with: viewModel.imageURL,
+                                      placeholderImage: UIImage(named: "default item icon"),
+                                      options: .continueInBackground,
+                                      completed: nil)
+        }
+        itemImageView.contentMode = .scaleAspectFill
         itemImageView.layer.cornerRadius = 5
-        itemImageView.image = viewModel.itemImage
+        
+        
+
     }
     
     func initializeGatheringLabel() {

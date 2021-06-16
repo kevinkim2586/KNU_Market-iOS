@@ -89,6 +89,9 @@ PODS:
   - nanopb/encode (2.30908.0)
   - ProgressHUD (13.6)
   - PromisesObjC (1.2.12)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
   - SnackBar.swift (0.1.0):
     - SnapKit
   - SnapKit (5.0.1)
@@ -111,6 +114,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - MessageKit
   - ProgressHUD
+  - SDWebImage (~> 5.0)
   - SnackBar.swift
   - SPIndicator
   - SwiftKeychainWrapper
@@ -139,6 +143,7 @@ SPEC REPOS:
     - nanopb
     - ProgressHUD
     - PromisesObjC
+    - SDWebImage
     - SnackBar.swift
     - SnapKit
     - SPIndicator
@@ -167,6 +172,7 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SnackBar.swift: 79ea4df13ea9e6633137dd6acbd490534d26440d
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPIndicator: b702acd5374e2ca51e31660f454b6506402d7049
@@ -175,6 +181,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: 0c51bbdbcd815136b9d6a75eced507c94dfeba40
+PODFILE CHECKSUM: 6e169cf72a089c90fe26f01db2cb5bf4575ea5a6
 
 COCOAPODS: 1.10.1

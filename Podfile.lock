@@ -98,6 +98,7 @@ PODS:
     - SwiftMessages/App (= 9.0.2)
   - SwiftMessages/App (9.0.2)
   - SwiftyJSON (4.3.0)
+  - ViewAnimator (3.0.2)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
@@ -115,6 +116,7 @@ DEPENDENCIES:
   - SwiftKeychainWrapper
   - SwiftMessages
   - SwiftyJSON (~> 4.0)
+  - ViewAnimator
 
 SPEC REPOS:
   trunk:
@@ -143,6 +145,7 @@ SPEC REPOS:
     - SwiftKeychainWrapper
     - SwiftMessages
     - SwiftyJSON
+    - ViewAnimator
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
@@ -170,7 +173,8 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftMessages: 77b847d1405f99046ffbd0d856bc7d73e6892686
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: 9608de343a94ee7e55d72637f9965114b5a74a1b
+PODFILE CHECKSUM: 0c51bbdbcd815136b9d6a75eced507c94dfeba40
 
 COCOAPODS: 1.10.1

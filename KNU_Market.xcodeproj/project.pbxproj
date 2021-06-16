@@ -27,6 +27,7 @@
 		7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* ItemViewModel.swift */; };
 		7C6B509E265290130032328C /* ItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509D265290130032328C /* ItemImageView.swift */; };
 		7C6B50A02652B17F0032328C /* UIImage Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509F2652B17F0032328C /* UIImage Extension.swift */; };
+		7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71996E2679CAEC000BEE64 /* Animations.swift */; };
 		7C77E23F266BA85C00680A27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C77E23E266BA85C00680A27 /* GoogleService-Info.plist */; };
 		7C833686266208210032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833685266208210032308D /* Interceptor.swift */; };
 		7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */; };
@@ -94,6 +95,7 @@
 		7C5E21282646558600E98FE5 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		7C6B509D265290130032328C /* ItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageView.swift; sourceTree = "<group>"; };
 		7C6B509F2652B17F0032328C /* UIImage Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Extension.swift"; sourceTree = "<group>"; };
+		7C71996E2679CAEC000BEE64 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		7C77E23E266BA85C00680A27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C77E240266BB55600680A27 /* KNU_Market.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNU_Market.entitlements; sourceTree = "<group>"; };
 		7C833685266208210032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				7C132BF1265397B200BE5F40 /* Global Functions.swift */,
+				7C71996E2679CAEC000BEE64 /* Animations.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
 				7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */,
 				7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */,
+				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */,
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
 				7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */,

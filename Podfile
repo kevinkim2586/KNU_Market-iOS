@@ -23,5 +23,5 @@ target 'KNU_Market' do
   pod 'SwiftKeychainWrapper'
   pod 'SPIndicator'
   pod 'SnackBar.swift'
-  
+  pod 'ViewAnimator'
 end

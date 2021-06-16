@@ -3,6 +3,7 @@ import Alamofire
 import SPIndicator
 import SwiftMessages
 import SnackBar_swift
+import ViewAnimator
 
 class HomeViewController: UIViewController {
 
@@ -78,12 +79,19 @@ extension HomeViewController: HomeViewModelDelegate {
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            UIView.animate(views: self.tableView.visibleCells,
+                           animations: Animations.forTableViews)
+        }
+        
     }
     
     func failedFetchingItemList(with error: NetworkError) {
         SnackBar.make(in: self.view,
                       message: "일시적인 연결 문제가 있습니다. 🥲",
                       duration: .lengthLong).show()
+        
     }
     
     

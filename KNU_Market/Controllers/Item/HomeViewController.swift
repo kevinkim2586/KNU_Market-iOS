@@ -60,7 +60,6 @@ class HomeViewController: UIViewController {
 extension HomeViewController: HomeViewModelDelegate {
     
     func didFetchUserProfileInfo() {
-        
         SPIndicator.present(title: "\(User.shared.nickname)님",
                             message: "환영합니다",
                             preset: .custom(UIImage(systemName: "face.smiling")!))
@@ -79,15 +78,17 @@ extension HomeViewController: HomeViewModelDelegate {
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            guard let self = self else { return }
-            UIView.animate(views: self.tableView.visibleCells,
-                           animations: Animations.forTableViews)
+        DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                UIView.animate(views: self.tableView.visibleCells,
+                               animations: Animations.forTableViews)
         }
+        
         
     }
     
     func failedFetchingItemList(with error: NetworkError) {
+        refreshControl.endRefreshing()
         SnackBar.make(in: self.view,
                       message: "일시적인 연결 문제가 있습니다. 🥲",
                       duration: .lengthLong).show()
@@ -130,10 +131,26 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func refreshTableView() {
         
-        viewModel.itemList.removeAll()
-        viewModel.needsToFetchMoreData = true
-        viewModel.isPaginating = false
-        viewModel.fetchItemList()
+//        viewModel.itemList.removeAll()
+        
+        //사라지는 애니메이션 처리
+        UIView.animate(views: self.tableView.visibleCells,
+                       animations: Animations.forTableViews,
+                       reversed: true,
+                       initialAlpha: 1.0,   // 보이다가
+                       finalAlpha: 0.0,      // 안 보이게
+                       completion: {
+                        self.viewModel.itemList.removeAll()
+                        self.viewModel.needsToFetchMoreData = true
+                        self.viewModel.isPaginating = false
+                        self.viewModel.fetchItemList()
+                       })
+                       
+        
+//
+//        viewModel.needsToFetchMoreData = true
+//        viewModel.isPaginating = false
+//        viewModel.fetchItemList()
     }
 
     
@@ -163,7 +180,8 @@ extension HomeViewController {
         tableView.dataSource = self
         tableView.refreshControl = refreshControl
         
-        refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshTableView),
+                                 for: .valueChanged)
     }
     
     func initializeAddButton() {

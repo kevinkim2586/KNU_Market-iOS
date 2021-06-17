@@ -145,8 +145,8 @@ extension ItemViewController {
         }
     
         // 사진 설정
-//        let itemImageUIDs = viewModel.model?.imageUIDs ?? []
-//        let urls = itemImageUIDs.compactMap { URL(string: $0) }
+
+        
         if !viewModel.imageURLs.isEmpty {
             configurePageControl()
         } else {

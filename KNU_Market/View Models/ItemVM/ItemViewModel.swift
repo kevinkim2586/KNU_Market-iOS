@@ -11,12 +11,9 @@ class ItemViewModel {
     var delegate: ItemViewModelDelegate?
     
     var model: ItemDetailModel? {
-        didSet {
-            let itemImageUIDs = model?.imageUIDs ?? []
-            imageURLs = itemImageUIDs.compactMap { URL(string: $0 )}
-        }
+        didSet { convertUIDsToURL() }
     }
-    
+
     var imageURLs: [URL] = [URL]()
     
     let itemImages: [UIImage]? = [UIImage]()
@@ -49,10 +46,16 @@ class ItemViewModel {
                 print("ItemViewModel - FAILED fetchItemDetails")
                 self.delegate?.failedFetchingItemDetails(with: error)
             }
-            
         }
-        
     }
     
+    func convertUIDsToURL() {
+        
+        let itemImageUIDs = model?.imageUIDs ?? []
+
+        if itemImageUIDs[0] != "" {
+            imageURLs = itemImageUIDs.compactMap { URL(string: "\(Constants.API_BASE_URL)media/" + $0) }
+        }
+    }
 }
 

@@ -30,8 +30,6 @@ class ItemTableViewCell: UITableViewCell {
     }
     
     func configure(with model: ItemListModel) {
-        
-        print("total gathering: \(model.totalGatheringPeople)")
 
         resetValues()
 

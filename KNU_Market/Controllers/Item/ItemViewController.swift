@@ -39,7 +39,6 @@ class ItemViewController: UIViewController {
     
         navigationController?.navigationBar.isHidden = true
         
-
         viewModel.fetchItemDetails(for: pageID)
         
         initialize()
@@ -51,13 +50,18 @@ class ItemViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+   
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         
         navigationController?.navigationBar.isHidden = false
     }
-    
-    
+
     
     //MARK: - IBActions & Methods
     
@@ -85,7 +89,7 @@ class ItemViewController: UIViewController {
 
 extension ItemViewController: ItemViewModelDelegate {
     
-    func didFetchPostDetails() {
+    func didFetchItemDetails() {
         
         print("ItemVC - didFetchPostDetails activated")
         
@@ -95,7 +99,7 @@ extension ItemViewController: ItemViewModelDelegate {
         }
     }
     
-    func failedFetchingPostDetails(with error: NetworkError) {
+    func failedFetchingItemDetails(with error: NetworkError) {
         
         print("ItemVC - failedFetchingPostDetails")
         self.scrollView.refreshControl?.endRefreshing()
@@ -121,15 +125,15 @@ extension ItemViewController {
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
         initializeBottomView()
-        configurePageControl()
+        //configurePageControl()
     }
     
     func updateInformation() {
         
         itemTitleLabel.text = viewModel.model?.title
     
+        // 프로필 이미지 설정
         let profileImageUID = viewModel.model?.profileImageUID ?? ""
-        
         if profileImageUID.count > 1 {
             
             let url = URL(string: Constants.API_BASE_URL + "media/\(profileImageUID)")
@@ -139,6 +143,16 @@ extension ItemViewController {
         } else {
             userProfileImageView.image = UIImage(named: "default avatar")
         }
+    
+        // 사진 설정
+//        let itemImageUIDs = viewModel.model?.imageUIDs ?? []
+//        let urls = itemImageUIDs.compactMap { URL(string: $0) }
+        if !viewModel.imageURLs.isEmpty {
+            configurePageControl()
+        } else {
+            itemImageView.image = UIImage(named: "default item image")
+        }
+        
         
         locationLabel.text = viewModel.location
         userIdLabel.text = viewModel.model?.nickname
@@ -236,14 +250,17 @@ extension ItemViewController {
         
         itemImageView.isUserInteractionEnabled = true
         
-        pageControl.numberOfPages = images.count
+        pageControl.numberOfPages = viewModel.imageURLs.count
         pageControl.currentPage = 0
         
         pageControl.pageIndicatorTintColor = .lightGray
         pageControl.currentPageIndicatorTintColor = .white
-        // 나중에는 viewModel.images[] 이런식으로 해야할듯
-        itemImageView.image = UIImage(named: images[0])
-        
+   
+        itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        itemImageView.sd_setImage(with: viewModel.imageURLs[0],
+                                  placeholderImage: nil,
+                                  options: .continueInBackground)
+
         let swipeLeft = UISwipeGestureRecognizer(target: self,
                                                  action: #selector(self.respondToSwipeGesture(_:)))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
@@ -265,11 +282,15 @@ extension ItemViewController {
             
             case UISwipeGestureRecognizer.Direction.left :
                 pageControl.currentPage += 1
-                itemImageView.image = UIImage(named: images[pageControl.currentPage])
+                itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
+                                          placeholderImage: nil,
+                                          options: .continueInBackground)
                 
             case UISwipeGestureRecognizer.Direction.right :
                 pageControl.currentPage -= 1
-                itemImageView.image = UIImage(named: images[pageControl.currentPage])
+                itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
+                                          placeholderImage: nil,
+                                          options: .continueInBackground)
             default:
                 break
             }

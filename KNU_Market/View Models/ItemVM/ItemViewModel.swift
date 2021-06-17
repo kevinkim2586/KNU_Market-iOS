@@ -2,15 +2,22 @@ import Foundation
 import UIKit
 
 protocol ItemViewModelDelegate {
-    func didFetchPostDetails()
-    func failedFetchingPostDetails(with error: NetworkError)
+    func didFetchItemDetails()
+    func failedFetchingItemDetails(with error: NetworkError)
 }
 
 class ItemViewModel {
     
     var delegate: ItemViewModelDelegate?
     
-    var model: ItemDetailModel?
+    var model: ItemDetailModel? {
+        didSet {
+            let itemImageUIDs = model?.imageUIDs ?? []
+            imageURLs = itemImageUIDs.compactMap { URL(string: $0 )}
+        }
+    }
+    
+    var imageURLs: [URL] = [URL]()
     
     let itemImages: [UIImage]? = [UIImage]()
 
@@ -21,7 +28,6 @@ class ItemViewModel {
     var location: String {
         return Location.listForCell[model?.location ?? Location.listForCell.count]
     }
-
 
     //MARK: - Methods
     
@@ -36,12 +42,12 @@ class ItemViewModel {
             case .success(let fetchedModel):
                 
                 self.model = fetchedModel
-                self.delegate?.didFetchPostDetails()
+                self.delegate?.didFetchItemDetails()
                 
             case .failure(let error):
                 
                 print("ItemViewModel - FAILED fetchItemDetails")
-                self.delegate?.failedFetchingPostDetails(with: error)
+                self.delegate?.failedFetchingItemDetails(with: error)
             }
             
         }

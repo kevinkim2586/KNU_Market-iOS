@@ -69,18 +69,38 @@ class ItemViewController: UIViewController {
         itemImageView.image = UIImage(named: images[pageControl.currentPage])
     }
     
-    @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
-        
-        //Action Sheet - 유저 신고하기
-    }
-    
     @IBAction func pressedBackButton(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
     
     @objc func refreshPage() {
-        
         viewModel.fetchItemDetails(for: pageID)
+    }
+    
+    @IBAction func pressedMoreButton(_ sender: UIButton) {
+        
+        let actionSheet = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        let reportUser = UIAlertAction(title: "게시글 신고하기",
+                                       style: .default) { alert in
+            
+            let userToReport = self.viewModel.model?.nickname ?? ""
+        
+            
+            // 신고하기 action 을 여기서 취해야함
+            //UserManager.shared.report(userID: viewModel.userID) 이런 식으로 해야할듯
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        actionSheet.addAction(reportUser)
+        actionSheet.addAction(cancelAction)
+    
+        self.present(actionSheet, animated: true)
     }
     
 }
@@ -125,7 +145,6 @@ extension ItemViewController {
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
         initializeBottomView()
-        //configurePageControl()
     }
     
     func updateInformation() {
@@ -160,8 +179,6 @@ extension ItemViewController {
         
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
-        
-        
     }
     
     func initializeScrollView() {
@@ -249,6 +266,10 @@ extension ItemViewController {
     func configurePageControl() {
         
         itemImageView.isUserInteractionEnabled = true
+        
+        if viewModel.imageURLs.count >= 2 {
+            pageControl.isHidden = false
+        }
         
         pageControl.numberOfPages = viewModel.imageURLs.count
         pageControl.currentPage = 0

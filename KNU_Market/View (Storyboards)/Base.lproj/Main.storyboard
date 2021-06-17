@@ -622,6 +622,17 @@
                                                     <action selector="pressedBackButton:" destination="ksz-dU-yWX" eventType="touchUpInside" id="zZt-xu-KrJ"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zik-ox-qIe" userLabel="Menu Button">
+                                                <rect key="frame" x="373" y="50" width="26" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="ellipsis" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="pressedMoreButton:" destination="ksz-dU-yWX" eventType="touchUpInside" id="oxN-0S-rYG"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -638,10 +649,12 @@
                                             <constraint firstAttribute="trailing" secondItem="2ho-nx-pu9" secondAttribute="trailing" id="X5y-rU-dCT"/>
                                             <constraint firstItem="uf9-jd-Pyu" firstAttribute="leading" secondItem="U3a-qJ-1Vj" secondAttribute="leading" constant="15" id="bb3-ZT-RIJ"/>
                                             <constraint firstItem="2ho-nx-pu9" firstAttribute="leading" secondItem="U3a-qJ-1Vj" secondAttribute="leading" id="cYf-vy-PfL"/>
+                                            <constraint firstItem="Zik-ox-qIe" firstAttribute="top" secondItem="U3a-qJ-1Vj" secondAttribute="top" constant="50" id="eR4-Dj-U8D"/>
                                             <constraint firstAttribute="bottom" secondItem="cNH-EU-3H6" secondAttribute="bottom" constant="15" id="kE0-fA-eXJ"/>
                                             <constraint firstItem="c3n-Ex-F0o" firstAttribute="leading" secondItem="U3a-qJ-1Vj" secondAttribute="leading" constant="60" id="m7I-V3-btc"/>
                                             <constraint firstAttribute="trailing" secondItem="cNH-EU-3H6" secondAttribute="trailing" constant="15" id="ogS-90-IPK"/>
                                             <constraint firstItem="Iy0-GA-YGl" firstAttribute="leading" secondItem="U3a-qJ-1Vj" secondAttribute="leading" id="reX-7p-2fn"/>
+                                            <constraint firstAttribute="trailing" secondItem="Zik-ox-qIe" secondAttribute="trailing" constant="15" id="uE3-XK-rl9"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -672,9 +685,6 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="BE5-CM-d1q">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="Usp-Y7-nVE">
                             <color key="tintColor" name="AppDefaultColor"/>
-                            <connections>
-                                <action selector="pressedMoreButton:" destination="ksz-dU-yWX" id="4mD-qE-0Gy"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedTopBarMetrics"/>

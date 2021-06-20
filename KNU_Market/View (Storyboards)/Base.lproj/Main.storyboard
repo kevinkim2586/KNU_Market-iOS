@@ -1805,6 +1805,73 @@
             </objects>
             <point key="canvasLocation" x="5051" y="1825"/>
         </scene>
+        <!--Report User View Controller-->
+        <scene sceneID="SSm-gQ-BzF">
+            <objects>
+                <viewController storyboardIdentifier="ReportReviewViewController" title="Report User View Controller" hidesBottomBarWhenPushed="YES" id="pMe-5n-Tni" customClass="ReportReviewViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tYy-5v-LUA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DE4-LY-HnJ">
+                                <rect key="frame" x="15" y="127" width="384" height="38.5"/>
+                                <string key="text">(i) 사기가 의심되거나 사기를 당하셨나요? 
+(ii) 부적절한 언어를 사용했나요? </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해당 사용자를 신고하시겠습니까?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAV-mY-tJf">
+                                <rect key="frame" x="15" y="64" width="249" height="23"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v7m-GD-TKZ" userLabel="Report Content Text View">
+                                <rect key="frame" x="15" y="200.5" width="384" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="M5G-vA-UBK"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Wb-RX-fou">
+                                <rect key="frame" x="157" y="515.5" width="100" height="40"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="cRJ-cn-MX4"/>
+                                    <constraint firstAttribute="width" constant="100" id="f6R-jf-g04"/>
+                                </constraints>
+                                <state key="normal" title="신고 접수">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gk7-6P-t3w"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DE4-LY-HnJ" firstAttribute="top" secondItem="OAV-mY-tJf" secondAttribute="bottom" constant="40" id="94e-0V-FWf"/>
+                            <constraint firstItem="gk7-6P-t3w" firstAttribute="trailing" secondItem="v7m-GD-TKZ" secondAttribute="trailing" constant="15" id="AjA-qW-xoD"/>
+                            <constraint firstItem="8Wb-RX-fou" firstAttribute="centerX" secondItem="tYy-5v-LUA" secondAttribute="centerX" id="FA0-3a-DqL"/>
+                            <constraint firstItem="DE4-LY-HnJ" firstAttribute="leading" secondItem="gk7-6P-t3w" secondAttribute="leading" constant="15" id="Klu-gi-YAJ"/>
+                            <constraint firstItem="OAV-mY-tJf" firstAttribute="leading" secondItem="gk7-6P-t3w" secondAttribute="leading" constant="15" id="SIb-z5-G0F"/>
+                            <constraint firstAttribute="trailing" secondItem="DE4-LY-HnJ" secondAttribute="trailing" constant="15" id="UaR-7c-U4e"/>
+                            <constraint firstItem="8Wb-RX-fou" firstAttribute="top" secondItem="v7m-GD-TKZ" secondAttribute="bottom" constant="15" id="hNN-66-1z5"/>
+                            <constraint firstItem="v7m-GD-TKZ" firstAttribute="top" secondItem="DE4-LY-HnJ" secondAttribute="bottom" constant="35" id="lt0-6Z-PIG"/>
+                            <constraint firstItem="v7m-GD-TKZ" firstAttribute="leading" secondItem="gk7-6P-t3w" secondAttribute="leading" constant="15" id="ot1-YL-uZq"/>
+                            <constraint firstItem="OAV-mY-tJf" firstAttribute="top" secondItem="gk7-6P-t3w" secondAttribute="top" constant="20" id="wbE-Nj-xSK"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="건의사항" id="CG0-p8-ZPl"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i0d-Ow-f7U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7232" y="1055"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add button" width="124" height="130"/>

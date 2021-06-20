@@ -37,21 +37,6 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Constants.Color.appColor)!]
         navigationController?.navigationBar.isHidden = false
     }
-
-    
-    @IBAction func pressedAddButton(_ sender: UIButton) {
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard let itemVC: ItemViewController = segue.destination as? ItemViewController else { return }
-
-        guard let index = tableView.indexPathForSelectedRow?.row else { return }
-        
-        itemVC.hidesBottomBarWhenPushed = true
-        itemVC.pageID = viewModel.itemList[index].uuid
-        
-    }
 }
 
 //MARK: - HomeViewModelDelegate
@@ -78,12 +63,10 @@ extension HomeViewController: HomeViewModelDelegate {
         tableView.tableFooterView = nil
         
         DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                UIView.animate(views: self.tableView.visibleCells,
-                               animations: Animations.forTableViews)
+            guard let self = self else { return }
+            UIView.animate(views: self.tableView.visibleCells,
+                           animations: Animations.forTableViews)
         }
-        
-        
     }
     
     func failedFetchingItemList(with error: NetworkError) {
@@ -91,10 +74,7 @@ extension HomeViewController: HomeViewModelDelegate {
         SnackBar.make(in: self.view,
                       message: "일시적인 연결 문제가 있습니다. 🥲",
                       duration: .lengthLong).show()
-        
     }
-    
-    
 }
 
 //MARK: -  UITableViewDelegate, UITableViewDataSource
@@ -126,6 +106,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let itemVC: ItemViewController = segue.destination as? ItemViewController else { return }
+
+        guard let index = tableView.indexPathForSelectedRow?.row else { return }
+        
+        itemVC.hidesBottomBarWhenPushed = true
+        itemVC.pageID = viewModel.itemList[index].uuid
+    }
+    
     @objc func refreshTableView() {
          
         //사라지는 애니메이션 처리
@@ -151,7 +141,6 @@ extension HomeViewController {
         
         viewModel.delegate = self
     
-        
         viewModel.loadUserProfile()
         viewModel.fetchItemList()
         
@@ -180,6 +169,4 @@ extension HomeViewController {
                                     configuration)
         addButton.setImage(plusImage, for: .normal)
     }
-
-    
 }

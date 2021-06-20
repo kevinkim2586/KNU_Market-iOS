@@ -37,6 +37,8 @@ class ItemViewController: UIViewController {
     
         navigationController?.navigationBar.isHidden = true
         
+        print("ItemVC - pageID: \(pageID)")
+        
         viewModel.fetchItemDetails(for: pageID)
         
         initialize()

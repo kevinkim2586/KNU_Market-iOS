@@ -51,9 +51,8 @@ class ItemViewModel {
     
     func convertUIDsToURL() {
         
-        let itemImageUIDs = model?.imageUIDs ?? []
-
-        if itemImageUIDs[0] != "" {
+        if let itemImageUIDs = model?.imageUIDs {
+            
             imageURLs = itemImageUIDs.compactMap { URL(string: "\(Constants.API_BASE_URL)media/" + $0) }
         }
     }

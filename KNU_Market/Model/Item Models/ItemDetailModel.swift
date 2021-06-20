@@ -5,7 +5,7 @@ import Foundation
 struct ItemDetailModel: Decodable {
     
     let title: String
-    let imageUIDs: [String]
+    let imageUIDs: [String]?
     let location: Int
     let itemDetail: String
     let totalGatheringPeople: Int

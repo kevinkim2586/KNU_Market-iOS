@@ -9,19 +9,24 @@ struct ItemDetailModel: Decodable {
     let location: Int
     let itemDetail: String
     let totalGatheringPeople: Int
+    let currentlyGatheredPeople: Int
     let nickname: String
     let profileImageUID: String
-    
+    let date: String
+    let userUID: String
     
     enum CodingKeys: String, CodingKey {
         
         case title
-        case imageUIDs = "image"
+        case imageUIDs = "images"
         case location = "spotCategory"
         case itemDetail = "content"
-        case totalGatheringPeople = "recruitment"
+        case totalGatheringPeople = "maxHeadcount"
+        case currentlyGatheredPeople = "currentHeadcount"
         case nickname
         case profileImageUID = "profileImage"
+        case date
+        case userUID = "userUid"
     }
 }
 

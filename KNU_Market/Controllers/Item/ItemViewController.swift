@@ -25,8 +25,6 @@ class ItemViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
-    var images = ["bubble1", "bubble2", "bubble3"]
-    
     var viewModel = ItemViewModel()
     
     var pageID: String = ""
@@ -66,7 +64,9 @@ class ItemViewController: UIViewController {
     //MARK: - IBActions & Methods
     
     @IBAction func pageChanged(_ sender: UIPageControl) {
-        itemImageView.image = UIImage(named: images[pageControl.currentPage])
+        itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
+                                  placeholderImage: nil,
+                                  options: .continueInBackground)
     }
     
     @IBAction func pressedBackButton(_ sender: UIButton) {

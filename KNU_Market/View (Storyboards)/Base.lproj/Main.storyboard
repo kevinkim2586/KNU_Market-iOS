@@ -610,6 +610,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="UNE-33-hgG"/>
                                                 </constraints>
+                                                <connections>
+                                                    <action selector="pageChanged:" destination="ksz-dU-yWX" eventType="valueChanged" id="2q3-uD-I1A"/>
+                                                </connections>
                                             </pageControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uf9-jd-Pyu" userLabel="Back Button">
                                                 <rect key="frame" x="15" y="50" width="27" height="24"/>

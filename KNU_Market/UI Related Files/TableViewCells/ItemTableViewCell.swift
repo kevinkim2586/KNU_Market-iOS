@@ -37,7 +37,8 @@ class ItemTableViewCell: UITableViewCell {
         viewModel.title = model.title
         viewModel.location = model.location
         viewModel.totalGatheringPeople = model.totalGatheringPeople
-        viewModel.imageUIDs = model.imageUIDs
+        viewModel.imageUID = model.imageUID ?? ""
+        viewModel.currentlyGatheredPeople = model.currentlyGatheredPeople
         //백엔드에서 currentlyGatheredPeople 정보를 추가해야할듯
     
         initialize()
@@ -61,7 +62,7 @@ class ItemTableViewCell: UITableViewCell {
 
     func initializeImageView() {
         
-        if viewModel.imageUIDs.isEmpty {
+        if viewModel.imageUID.isEmpty {
             itemImageView.image = viewModel.defaultImage
         } else {
             itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray

@@ -17,7 +17,7 @@ class ItemManager {
     
     
     //MARK: - 공구글 목록 불러오기
-    func getItemList(completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
+    func fetchItemList(completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
         
         AF.request(getPostsURL,
                    method: .get,

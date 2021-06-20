@@ -6,9 +6,9 @@ class ItemTableViewModel {
     
     var defaultImage: UIImage = UIImage(named: "default item icon")!
     
-    var imageUIDs: String = "" {
+    var imageUID: String = "" {
         didSet {
-            imageURL = URL(string: "\(Constants.API_BASE_URL)media/" + imageUIDs)
+            imageURL = URL(string: "\(Constants.API_BASE_URL)media/" + imageUID)
         }
     }
     

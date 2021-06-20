@@ -137,9 +137,6 @@ class UserManager {
                    }
     }
     
-    
-    
-    
     //MARK: - 프로필 조회
     func loadUserProfile(completion: @escaping ((Result<LoadProfileResponseModel, NetworkError>) -> Void)) {
         

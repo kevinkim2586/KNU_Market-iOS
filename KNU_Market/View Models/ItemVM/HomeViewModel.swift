@@ -22,7 +22,7 @@ class HomeViewModel {
     //MARK: - 공구글 불러오기
     func fetchItemList() {
         
-        ItemManager.shared.getItemList() { [weak self] result in
+        ItemManager.shared.fetchItemList() { [weak self] result in
             
             guard let self = self else { return }
             

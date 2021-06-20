@@ -114,7 +114,6 @@ class MyPageViewModel {
                 self.delegate?.failedUploadingImageToServerFirst(with: error)
                 print("uploadImage failed with error: \(error.errorDescription)")
             }
-
         }
     }
     

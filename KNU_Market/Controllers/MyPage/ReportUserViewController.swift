@@ -1,5 +1,6 @@
 import UIKit
 import SnackBar_swift
+import ProgressHUD
 
 class ReportUserViewController: UIViewController {
     
@@ -16,7 +17,13 @@ class ReportUserViewController: UIViewController {
     
     @IBAction func pressedSendButton(_ sender: UIButton) {
         
+        self.view.endEditing(true)
         
+        if !validateUserInput() { return }
+        
+        showProgressBar()
+        
+        //TODO: - 신고하기 기능 추가
     }
 
 }

@@ -24,11 +24,6 @@ class MyPageViewController: UIViewController {
         viewModel.loadUserProfile()
     }
     
-    @IBAction func pressedProfileImageButton(_ sender: UIButton) {
-        
-        initializeImagePicker()
-        present(self.imagePicker, animated: true, completion: nil)
-    }
     
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
         
@@ -67,6 +62,73 @@ class MyPageViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
+    }
+}
+
+//MARK: - profile image modification methods
+
+extension MyPageViewController {
+    
+    @IBAction func pressedProfileImageButton(_ sender: UIButton) {
+        
+        presentActionSheet()
+    }
+    
+    func presentActionSheet() {
+        
+        let alert = UIAlertController(title: "프로필 사진 변경",
+                                      message: "",
+                                      preferredStyle: .actionSheet)
+        let library = UIAlertAction(title: "앨범에서 선택",
+                                    style: .default) { _ in
+            
+            self.initializeImagePicker()
+            self.present(self.imagePicker, animated: true)
+        }
+        let remove = UIAlertAction(title: "프로필 사진 제거",
+                                   style: .default) { _ in
+            
+            self.presentAlertWithCancelAction(title: "프로필 사진 제거",
+                                              message: "정말로 제거하시겠습니까?") { selectedOk in
+                
+                if selectedOk { self.removeProfileImage() }
+                else { return }
+            }
+        }
+        let cancel = UIAlertAction(title: "취소",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        alert.addAction(library)
+        alert.addAction(remove)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func removeProfileImage() {
+        
+//        UserManager.shared.removeProfileImage { [weak self] result in
+//
+//            guard let self = self else { return }
+//
+//            switch result {
+//
+//            case .success(_):
+//                SnackBar.make(in: self.view,
+//                              message: "프로필 사진 제거 성공 🎉",
+//                              duration: .lengthLong).show()
+//                DispatchQueue.main.async {
+//                    self.profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
+//                    self.initializeProfileImageButton()
+//                    User.shared.profileImage = nil
+//                }
+//            case .failure(_):
+//                SnackBar.make(in: self.view,
+//                              message: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲",
+//                              duration: .lengthLong).show()
+//            }
+//        }
     }
 }
 

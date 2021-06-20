@@ -1808,7 +1808,7 @@
         <!--Report User View Controller-->
         <scene sceneID="SSm-gQ-BzF">
             <objects>
-                <viewController storyboardIdentifier="ReportReviewViewController" title="Report User View Controller" hidesBottomBarWhenPushed="YES" id="pMe-5n-Tni" customClass="ReportReviewViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReportReviewViewController" title="Report User View Controller" hidesBottomBarWhenPushed="YES" id="pMe-5n-Tni" customClass="ReportUserViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tYy-5v-LUA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1847,6 +1847,9 @@
                                 <state key="normal" title="신고 접수">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedSendButton:" destination="pMe-5n-Tni" eventType="touchUpInside" id="LXs-O3-ixM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gk7-6P-t3w"/>
@@ -1867,6 +1870,10 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="건의사항" id="CG0-p8-ZPl"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="contentTextView" destination="v7m-GD-TKZ" id="BBp-lJ-1GE"/>
+                        <outlet property="sendButton" destination="8Wb-RX-fou" id="FOq-HN-Nnx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0d-Ow-f7U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

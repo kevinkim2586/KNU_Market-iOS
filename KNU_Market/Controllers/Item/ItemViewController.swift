@@ -179,6 +179,7 @@ extension ItemViewController {
         userIdLabel.text = viewModel.model?.nickname
         itemDetailLabel.text = viewModel.model?.itemDetail
         
+        initializeDateLabel()
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
     }
@@ -206,7 +207,10 @@ extension ItemViewController {
         titleView.layer.shadowOffset = CGSize(width: 3, height: 3)
         titleView.layer.shadowOpacity = 0.2
         titleView.layer.shadowRadius = 3
+    }
     
+    func initializeDateLabel() {
+        dateLabel.text = viewModel.date
     }
 
     func initializeItemExplanationLabel() {

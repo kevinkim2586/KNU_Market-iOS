@@ -25,6 +25,14 @@ class ItemViewModel {
     var location: String {
         return Location.listForCell[model?.location ?? Location.listForCell.count]
     }
+    
+    var date: String {
+        get {
+            return formatDateForDisplay()
+        }
+    }
+    
+
 
     //MARK: - Methods
     
@@ -49,11 +57,29 @@ class ItemViewModel {
         }
     }
     
+    
+    
     func convertUIDsToURL() {
         
         if let itemImageUIDs = model?.imageUIDs {
             
             imageURLs = itemImageUIDs.compactMap { URL(string: "\(Constants.API_BASE_URL)media/" + $0) }
+        }
+    }
+    
+    func formatDateForDisplay() -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss.SSS'Z'"
+        let convertedDate = dateFormatter.date(from: model!.date)
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
+        
+        if let date = convertedDate {
+            let finalDate = dateFormatter.string(from: date)
+            return finalDate
+        } else {
+            return "날짜 표시 에러"
         }
     }
 }

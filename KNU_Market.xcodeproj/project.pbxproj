@@ -19,6 +19,7 @@
 		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
 		7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */; };
 		7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C516C3A267F48300065E30D /* ReportUserViewController.swift */; };
+		7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */; };
 		7C55545D266CDFD100C3C5B6 /* UploadItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545C266CDFD100C3C5B6 /* UploadItemModel.swift */; };
 		7C55545F266CEADF00C3C5B6 /* UILabel Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545E266CEADF00C3C5B6 /* UILabel Extension.swift */; };
 		7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */; };
@@ -89,6 +90,7 @@
 		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		7C516C3A267F48300065E30D /* ReportUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
+		7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		7C55545C266CDFD100C3C5B6 /* UploadItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemModel.swift; sourceTree = "<group>"; };
 		7C55545E266CEADF00C3C5B6 /* UILabel Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel Extension.swift"; sourceTree = "<group>"; };
 		7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderKeys.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				7CA66233264135AA000E0B7A /* HomeViewController.swift */,
+				7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */,
 				7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */,
 				7C5E2126264645B300E98FE5 /* ItemViewController.swift */,
 			);
@@ -619,6 +622,7 @@
 				7C6B509E265290130032328C /* ItemImageView.swift in Sources */,
 				7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
+				7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */,
 				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,

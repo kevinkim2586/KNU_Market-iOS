@@ -2,11 +2,12 @@ import UIKit
 import SnackBar_swift
 import SkeletonView
 import SDWebImage
+import ImageSlideshow
 
 class ItemViewController: UIViewController {
     
-    @IBOutlet weak var itemImageView: UIImageView!
-    @IBOutlet weak var pageControl: UIPageControl!
+    //@IBOutlet weak var itemImageView: UIImageView!
+    //@IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var itemTitleLabel: UILabel!
@@ -22,6 +23,10 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dateLabel: UILabel!
+    
+    
+    @IBOutlet weak var slideShow: ImageSlideshow!
+    
     
     private let refreshControl = UIRefreshControl()
     
@@ -65,11 +70,11 @@ class ItemViewController: UIViewController {
     
     //MARK: - IBActions & Methods
     
-    @IBAction func pageChanged(_ sender: UIPageControl) {
-        itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
-                                  placeholderImage: nil,
-                                  options: .continueInBackground)
-    }
+//    @IBAction func pageChanged(_ sender: UIPageControl) {
+//        itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
+//                                  placeholderImage: nil,
+//                                  options: .continueInBackground)
+//    }
     
     @IBAction func pressedBackButton(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
@@ -166,13 +171,13 @@ extension ItemViewController {
         }
     
         // 사진 설정
-
+    
+        viewModel.imageURLs.isEmpty
+            ? configureImageSlideShow(imageExists: false)
+            : configureImageSlideShow(imageExists: true)
         
-        if !viewModel.imageURLs.isEmpty {
-            configurePageControl()
-        } else {
-            itemImageView.image = UIImage(named: "default item image")
-        }
+        
+
         
         
         locationLabel.text = viewModel.location
@@ -265,62 +270,97 @@ extension ItemViewController {
     }
 }
 
-//MARK: - Page Control
+//MARK: - Image Slide Show
 
 extension ItemViewController {
     
-    func configurePageControl() {
+    func configureImageSlideShow(imageExists: Bool) {
         
-        itemImageView.isUserInteractionEnabled = true
-        
-        if viewModel.imageURLs.count >= 2 {
-            pageControl.isHidden = false
-        }
-        
-        pageControl.numberOfPages = viewModel.imageURLs.count
-        pageControl.currentPage = 0
-        
-        pageControl.pageIndicatorTintColor = .lightGray
-        pageControl.currentPageIndicatorTintColor = .white
-   
-        itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        itemImageView.sd_setImage(with: viewModel.imageURLs[0],
-                                  placeholderImage: nil,
-                                  options: .continueInBackground)
-
-        let swipeLeft = UISwipeGestureRecognizer(target: self,
-                                                 action: #selector(self.respondToSwipeGesture(_:)))
-        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self,
-                                                  action: #selector(self.respondToSwipeGesture(_:)))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-        
-        self.itemImageView.addGestureRecognizer(swipeLeft)
-        self.itemImageView.addGestureRecognizer(swipeRight)
-    }
-
-    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
-
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-        
-            switch swipeGesture.direction {
+        if imageExists {
             
-            case UISwipeGestureRecognizer.Direction.left :
-                pageControl.currentPage += 1
-                itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
-                                          placeholderImage: nil,
-                                          options: .continueInBackground)
-                
-            case UISwipeGestureRecognizer.Direction.right :
-                pageControl.currentPage -= 1
-                itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
-                                          placeholderImage: nil,
-                                          options: .continueInBackground)
-            default:
-                break
-            }
+            slideShow.setImageInputs(viewModel.imageSources)
+            let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.pressedImage))
+            slideShow.addGestureRecognizer(recognizer)
+        } else {
+            slideShow.setImageInputs([ImageSource(image: UIImage(named: "default item image")!)])
         }
     }
+    
+    @objc func pressedImage() {
+        
+        let fullScreenController = slideShow.presentFullScreenController(from: self)
+        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+    }
+    
+//    func configurePageControl() {
+//
+//        itemImageView.isUserInteractionEnabled = true
+//
+//        if viewModel.imageURLs.count >= 2 {
+//            pageControl.isHidden = false
+//        }
+//
+//        pageControl.numberOfPages = viewModel.imageURLs.count
+//        pageControl.currentPage = 0
+//
+//        pageControl.pageIndicatorTintColor = .lightGray
+//        pageControl.currentPageIndicatorTintColor = .white
+//
+//        itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+//        itemImageView.sd_setImage(with: viewModel.imageURLs[0],
+//                                  placeholderImage: nil,
+//                                  options: .continueInBackground)
+//
+//        // Tap & Swipe gesture configuration
+//
+//        let tapGesture = UITapGestureRecognizer(target: self,
+//                                                action: #selector(pressedImage))
+//        itemImageView.addGestureRecognizer(tapGesture)
+//
+//        let swipeLeft = UISwipeGestureRecognizer(target: self,
+//                                                 action: #selector(self.respondToSwipeGesture(_:)))
+//        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+//
+//
+//        let swipeRight = UISwipeGestureRecognizer(target: self,
+//                                                  action: #selector(self.respondToSwipeGesture(_:)))
+//        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+//
+//        self.itemImageView.addGestureRecognizer(swipeLeft)
+//        self.itemImageView.addGestureRecognizer(swipeRight)
+//    }
+    
+//    @objc func pressedImage() {
+//   
+//        guard let photoDetailVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.photoDetailVC) as? PhotoDetailViewController else {
+//            fatalError()
+//        }
+//        
+//        photoDetailVC.imageURLs = viewModel.imageURLs
+//        
+//        self.navigationController?.pushViewController(photoDetailVC, animated: true)
+//    }
+
+//    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
+//
+//        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+//
+//            switch swipeGesture.direction {
+//
+//            case UISwipeGestureRecognizer.Direction.left :
+//                pageControl.currentPage += 1
+//                itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
+//                                          placeholderImage: nil,
+//                                          options: .continueInBackground)
+//
+//            case UISwipeGestureRecognizer.Direction.right :
+//                pageControl.currentPage -= 1
+//                itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
+//                                          placeholderImage: nil,
+//                                          options: .continueInBackground)
+//            default:
+//                break
+//            }
+//        }
+//    }
 }

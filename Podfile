@@ -26,4 +26,6 @@ target 'KNU_Market' do
   pod 'ViewAnimator'
   pod 'SDWebImage', '~> 5.0'
   pod 'SkeletonView'
+  pod 'ImageSlideshow', '~> 1.9.0'
+  pod "ImageSlideshow/SDWebImage"
 end

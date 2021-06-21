@@ -46,7 +46,8 @@ extension HomeViewController: HomeViewModelDelegate {
     func didFetchUserProfileInfo() {
         SPIndicator.present(title: "\(User.shared.nickname)님",
                             message: "환영합니다",
-                            preset: .custom(UIImage(systemName: "face.smiling")!))
+                            preset: .custom(UIImage(systemName: "face.smiling")!
+                                                .withTintColor(UIColor(named: Constants.Color.appColor) ?? .systemBlue)))
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {

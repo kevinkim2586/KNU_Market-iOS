@@ -29,10 +29,14 @@ struct Constants {
         static let tabBarController             = "TabBarController"
         static let homeVC                       = "HomeViewController"
         static let itemVC                       = "itemViewController"
+        static let photoDetailVC                = "PhotoDetailViewController"
+        
+        
         
         static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"
         static let settingsVC                   = "SettingsViewController"
         static let termsAndConditionsVC         = "TermsAndConditionViewController"
+        
     }
     
     struct cellID {

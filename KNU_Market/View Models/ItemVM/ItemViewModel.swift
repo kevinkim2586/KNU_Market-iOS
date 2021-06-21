@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import ImageSlideshow
 
 protocol ItemViewModelDelegate {
     func didFetchItemDetails()
@@ -14,7 +15,11 @@ class ItemViewModel {
         didSet { convertUIDsToURL() }
     }
 
-    var imageURLs: [URL] = [URL]()
+    var imageURLs: [URL] = [URL]() {
+        didSet { convertURLsToImageSource() }
+    }
+    
+    var imageSources: [InputSource] = [InputSource]()
     
     let itemImages: [UIImage]? = [UIImage]()
 
@@ -64,6 +69,13 @@ class ItemViewModel {
         if let itemImageUIDs = model?.imageUIDs {
             
             imageURLs = itemImageUIDs.compactMap { URL(string: "\(Constants.API_BASE_URL)media/" + $0) }
+        }
+    }
+    
+    func convertURLsToImageSource() {
+        for url in imageURLs {
+            imageSources.append(SDWebImageSource(url: url,
+                                                 placeholder: UIImage(named: "default item image")))
         }
     }
     

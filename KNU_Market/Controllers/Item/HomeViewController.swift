@@ -20,8 +20,6 @@ class HomeViewController: UIViewController {
         
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Constants.Color.appColor)!]
         navigationItem.largeTitleDisplayMode = .always
-        
-        viewModel.fetchItemList()
     
         initialize()
     }
@@ -74,11 +72,11 @@ extension HomeViewController: HomeViewModelDelegate {
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
         
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            UIView.animate(views: self.tableView.visibleCells,
-                           animations: Animations.forTableViews)
-        }
+//        DispatchQueue.main.async { [weak self] in
+//            guard let self = self else { return }
+//            UIView.animate(views: self.tableView.visibleCells,
+//                           animations: Animations.forTableViews)
+//        }
     }
     
     func failedFetchingItemList(with error: NetworkError) {
@@ -167,16 +165,10 @@ extension HomeViewController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
    
         if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
-            
-            guard !viewModel.isPaginating else { return }
-            
-            if viewModel.needsToFetchMoreData {
-                
+        
+            if !viewModel.isFetchingData {
                 tableView.tableFooterView = createSpinnerFooter()
-                
-                viewModel.fetchItemList(pagination: true)
-                
-                tableView.tableFooterView = nil
+                viewModel.fetchItemList()
             }
         }
     }
@@ -215,8 +207,8 @@ extension HomeViewController {
 
         let font = UIFont.systemFont(ofSize: 30)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        let plusImage = UIImage(systemName: "plus", withConfiguration:
-                                    configuration)
+        let plusImage = UIImage(systemName: "plus",
+                                withConfiguration: configuration)
         addButton.setImage(plusImage, for: .normal)
     }
 }

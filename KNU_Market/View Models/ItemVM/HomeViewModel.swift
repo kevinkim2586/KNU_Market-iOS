@@ -15,42 +15,32 @@ class HomeViewModel {
     
     var itemList: [ItemListModel] = [ItemListModel]()
     
-    var needsToFetchMoreData: Bool = true
-    
-    var isPaginating: Bool = false
+    var isFetchingData: Bool = false
     
     var index: Int = 1
     
     //MARK: - 공구글 불러오기
-    func fetchItemList(pagination: Bool = false) {
+    func fetchItemList() {
         
-        if pagination {
-            isPaginating = true
-        }
+        isFetchingData = true
         
         ItemManager.shared.fetchItemList(at: self.index) { [weak self] result in
             
             guard let self = self else { return }
             
-            self.index += 1
-            
             switch result {
             case .success(let fetchedModel):
                 
                 if fetchedModel.isEmpty {
-                    self.needsToFetchMoreData = false
                     self.delegate?.didFetchItemList()
                     return
                 }
                 
+                self.index += 1
                 self.itemList.append(contentsOf: fetchedModel)
-                
-                //self.itemList = fetchedModel
-                
-                if pagination {
-                    self.isPaginating = false
-                }
-                
+            
+                self.isFetchingData = false
+            
                 self.delegate?.didFetchItemList()
                 
             case .failure(let error):
@@ -84,8 +74,7 @@ class HomeViewModel {
     func resetValues() {
         
         itemList.removeAll()
-        needsToFetchMoreData = true
-        isPaginating = false
+        isFetchingData = false
         index = 1
     }
 }

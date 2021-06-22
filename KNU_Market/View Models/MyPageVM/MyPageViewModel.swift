@@ -106,7 +106,7 @@ class MyPageViewModel {
             switch result {
             
             case .success(let uid):
-                User.shared.profileImageCode = uid
+                User.shared.profileImageUID = uid
                 print("uploadImage success with new uid: \(uid)")
                 self.delegate?.didUploadImageToServerFirst(with: uid)
                 

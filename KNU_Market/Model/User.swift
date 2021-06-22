@@ -8,9 +8,23 @@ class User {
     
     private init() {}
     
-    var id: String = ""
+    var id: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userID) ?? "표시 에러"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.userID)
+        }
+    }
     
-    var nickname: String = ""
+    var nickname: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.nickname) ?? "표시 에러"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.nickname)
+        }
+    }
     
     var password: String = ""
     
@@ -46,7 +60,6 @@ class User {
     var savedRefreshToken: Bool = false
     
     var profileImage: UIImage? {
-        
         didSet {
             guard let imageData = profileImage?.jpegData(compressionQuality: 1.0) else { return }
             self.profileImageData = imageData
@@ -54,7 +67,14 @@ class User {
     }
     var profileImageData: Data?
     
-    var profileImageCode: String = ""
+    var profileImageUID: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.profileImageUID) ?? "표시 에러"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.profileImageUID)
+        }
+    }
     
     
     func resetAllUserInfo() {
@@ -65,7 +85,11 @@ class User {
         email = ""
         profileImage = nil
         profileImageData = nil
-        profileImageCode = ""
+        profileImageUID = ""
+        
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.nickname)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userID)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.profileImageUID)
         
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)

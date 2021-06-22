@@ -7,7 +7,7 @@ class ReportUserViewController: UIViewController {
     @IBOutlet var contentTextView: UITextView!
     @IBOutlet var sendButton: UIButton!
     
-    
+    var userToReport: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()

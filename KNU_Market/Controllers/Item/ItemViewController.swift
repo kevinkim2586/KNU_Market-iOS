@@ -97,9 +97,13 @@ class ItemViewController: UIViewController {
             
             let userToReport = self.viewModel.model?.nickname ?? ""
         
+            guard let reportVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.reportUserVC) as? ReportUserViewController else {
+                return
+            }
             
-            // 신고하기 action 을 여기서 취해야함
-            //UserManager.shared.report(userID: viewModel.userID) 이런 식으로 해야할듯
+            reportVC.userToReport = userToReport
+            
+            self.present(reportVC, animated: true)
         }
         
         let cancelAction = UIAlertAction(title: "취소",

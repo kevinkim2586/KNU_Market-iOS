@@ -11,6 +11,13 @@ struct Constants {
         static let password                     = "password"
     }
     
+    struct UserDefaultsKey {
+        
+        static let userID                       = "userID"
+        static let nickname                     = "nickname"
+        static let profileImageUID              = "profileImageUID"
+    }
+    
     struct SegueID {
         static let goToItemVC                   = "goToItemVC"
     }
@@ -37,6 +44,7 @@ struct Constants {
         static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"
         static let settingsVC                   = "SettingsViewController"
         static let termsAndConditionsVC         = "TermsAndConditionViewController"
+        static let reportUserVC                 = "ReportUserViewController"
         
     }
     

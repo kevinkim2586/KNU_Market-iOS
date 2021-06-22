@@ -199,7 +199,7 @@ class UserManager {
                     case 201:
                         print("UserManager - updateUserProfileImage success")
                         completion(.success(true))
-                        User.shared.profileImageCode = uid
+                        User.shared.profileImageUID = uid
                         
                     default:
                         print("UserManager - updateUserProfileImage failed default statement")
@@ -218,7 +218,7 @@ class UserManager {
         let parameters: Parameters = [
             "nickname": User.shared.nickname,
             "password": password,
-            "image": User.shared.profileImageCode
+            "image": User.shared.profileImageUID
         ]
         
         print("new password: \(password)")
@@ -256,7 +256,7 @@ class UserManager {
         let parameters: Parameters = [
             "nickname": nickname,
             "password": User.shared.password,
-            "image": User.shared.profileImageCode
+            "image": User.shared.profileImageUID
         ]
         
         print("new nickname: \(nickname)")
@@ -337,6 +337,6 @@ class UserManager {
         
         User.shared.id = model.id
         User.shared.nickname = model.nickname
-        User.shared.profileImageCode = model.profileImageCode
+        User.shared.profileImageUID = model.profileImageCode
     }
 }

@@ -57,19 +57,25 @@ class RegisterViewController: UIViewController {
             case .success(let isNotDuplicate):
                 
                 if isNotDuplicate {
+                    
+                    SnackBar.make(in: self.view,
+                                  message: "사용하셔도 좋습니다 🎉",
+                                  duration: .lengthLong).show()
     
                     DispatchQueue.main.async {
                         self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
-                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 🎉", for: .normal)
                         self.didCheckNicknameDuplicate = true
                     }
                     
                     
                 } else {
                     
+                    SnackBar.make(in: self.view,
+                                  message: "이미 사용 중인 닉네임입니다 😅",
+                                  duration: .lengthLong).show()
+                    
                     DispatchQueue.main.async {
                         self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
-                        self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😅", for: .normal)
                     }
                     
                 }
@@ -105,7 +111,10 @@ class RegisterViewController: UIViewController {
             profileImageData = image.jpegData(compressionQuality: 1.0)
         }
         
-        let registerModel = RegisterModel(id: id, password: password, nickname: nickname, image: profileImageData)
+        let registerModel = RegisterModel(id: id,
+                                          password: password,
+                                          nickname: nickname,
+                                          image: profileImageData)
         
         UserManager.shared.register(with: registerModel) { [weak self] result in
             
@@ -248,6 +257,7 @@ extension RegisterViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField == nicknameTextField {
+            didCheckNicknameDuplicate = false
             checkAlreadyInUseButton.setTitle("중복 확인", for: .normal)
             checkAlreadyInUseButton.titleLabel?.tintColor = UIColor(named: Constants.Color.appColor)
         }

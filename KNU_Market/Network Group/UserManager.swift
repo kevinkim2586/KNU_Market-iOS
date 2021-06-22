@@ -19,8 +19,8 @@ class UserManager {
     let findPasswordURL             = "\(Constants.API_BASE_URL)findpassword"
     let loadUserProfileURL          = "\(Constants.API_BASE_URL)auth"
     let userProfileUpdateURL        = "\(Constants.API_BASE_URL)auth"
-//    let requestMediaURL             = "\(Constants.API_BASE_URL)media/"
-//    let uploadImageURL              = "\(Constants.API_BASE_URL)media"
+    
+    let interceptor = Interceptor()
     
     
     //MARK: - 회원가입
@@ -144,7 +144,8 @@ class UserManager {
         
         AF.request(loadUserProfileURL,
                    method: .get,
-                   headers: headers).responseJSON { response in
+                   headers: headers,
+                   interceptor: interceptor).responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -190,7 +191,8 @@ class UserManager {
                    method: .put,
                    parameters: parameters,
                    encoding: JSONEncoding.default,
-                   headers: headers).responseJSON { response in
+                   headers: headers,
+                   interceptor: interceptor).responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -227,7 +229,8 @@ class UserManager {
                    method: .put,
                    parameters: parameters,
                    encoding: JSONEncoding.default,
-                   headers: headers).responseJSON { response in
+                   headers: headers,
+                   interceptor: interceptor).responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -265,7 +268,8 @@ class UserManager {
                    method: .put,
                    parameters: parameters,
                    encoding: JSONEncoding.default,
-                   headers: headers).responseJSON { response in
+                   headers: headers,
+                   interceptor: interceptor).responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -291,7 +295,8 @@ class UserManager {
         
         AF.request(logoutURL,
                    method: .delete,
-                   headers: headers).responseJSON { response in
+                   headers: headers,
+                   interceptor: interceptor).responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     

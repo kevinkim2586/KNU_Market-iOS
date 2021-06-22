@@ -32,15 +32,14 @@ class HomeViewModel {
             case .success(let fetchedModel):
                 
                 if fetchedModel.isEmpty {
+                    //self.isFetchingData = false
                     self.delegate?.didFetchItemList()
                     return
                 }
                 
                 self.index += 1
                 self.itemList.append(contentsOf: fetchedModel)
-            
                 self.isFetchingData = false
-            
                 self.delegate?.didFetchItemList()
                 
             case .failure(let error):

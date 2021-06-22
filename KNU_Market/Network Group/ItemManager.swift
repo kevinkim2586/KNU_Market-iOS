@@ -63,7 +63,8 @@ class ItemManager {
                    method: .post,
                    parameters: model.parameters,
                    encoding: JSONEncoding.default,
-                   headers: model.headers)
+                   interceptor: interceptor)
+            .validate()
             .responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }

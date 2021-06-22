@@ -71,12 +71,6 @@ extension HomeViewController: HomeViewModelDelegate {
         tableView.reloadData()
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
-        
-//        DispatchQueue.main.async { [weak self] in
-//            guard let self = self else { return }
-//            UIView.animate(views: self.tableView.visibleCells,
-//                           animations: Animations.forTableViews)
-//        }
     }
     
     func failedFetchingItemList(with error: NetworkError) {

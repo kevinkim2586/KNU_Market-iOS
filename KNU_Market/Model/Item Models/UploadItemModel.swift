@@ -8,6 +8,8 @@ struct UploadItemModel {
     let peopleGathering: Int
     let imageUIDs: [String]?
     let detail: String
+
+    var parameters: Parameters = [:]
     
     init(title: String, location: Int, peopleGathering: Int, imageUIDs: [String]?, detail: String) {
         
@@ -30,8 +32,5 @@ struct UploadItemModel {
             self.imageUIDs = nil
         }
     }
-    
-    var parameters: Parameters = [:]
-    
-    let headers: HTTPHeaders = [ HTTPHeaderKeys.authentication.rawValue: User.shared.accessToken ]
+
 }

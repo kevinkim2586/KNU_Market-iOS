@@ -23,7 +23,32 @@ class ReportUserViewController: UIViewController {
         
         showProgressBar()
         
-        //TODO: - 신고하기 기능 추가
+        let model = ReportUserModel(user: userToReport,
+                                    content: contentTextView.text!)
+        
+        ReportManager.shared.reportUser(with: model) { result in
+            
+            dismissProgressBar()
+            
+            switch result {
+            
+            case .success(_):
+                
+                SnackBar.make(in: self.view,
+                              message: "신고가 정상적으로 접수되었습니다. 감사합니다 😁",
+                              duration: .lengthLong).show()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    
+                    self.dismiss(animated: true)
+                }
+                
+            case .failure(let error):
+                SnackBar.make(in: self.view,
+                              message: error.errorDescription,
+                              duration: .lengthLong).show()
+            }
+        }
     }
 
 }

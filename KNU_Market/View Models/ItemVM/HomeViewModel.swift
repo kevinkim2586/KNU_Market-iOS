@@ -19,17 +19,38 @@ class HomeViewModel {
     
     var isPaginating: Bool = false
     
+    var index: Int = 1
+    
     //MARK: - 공구글 불러오기
-    func fetchItemList() {
+    func fetchItemList(pagination: Bool = false) {
         
-        ItemManager.shared.fetchItemList() { [weak self] result in
+        if pagination {
+            isPaginating = true
+        }
+        
+        ItemManager.shared.fetchItemList(at: self.index) { [weak self] result in
             
             guard let self = self else { return }
+            
+            self.index += 1
             
             switch result {
             case .success(let fetchedModel):
                 
-                self.itemList = fetchedModel
+                if fetchedModel.isEmpty {
+                    self.needsToFetchMoreData = false
+                    self.delegate?.didFetchItemList()
+                    return
+                }
+                
+                self.itemList.append(contentsOf: fetchedModel)
+                
+                //self.itemList = fetchedModel
+                
+                if pagination {
+                    self.isPaginating = false
+                }
+                
                 self.delegate?.didFetchItemList()
                 
             case .failure(let error):
@@ -58,6 +79,14 @@ class HomeViewModel {
                 self.delegate?.failedFetchingUserProfileInfo(with: error)
             }
         }
+    }
+    
+    func resetValues() {
+        
+        itemList.removeAll()
+        needsToFetchMoreData = true
+        isPaginating = false
+        index = 1
     }
 }
 

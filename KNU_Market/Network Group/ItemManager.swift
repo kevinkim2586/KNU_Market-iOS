@@ -17,9 +17,12 @@ class ItemManager {
     
     
     //MARK: - 공구글 목록 불러오기
-    func fetchItemList(completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
+    func fetchItemList(at index: Int,
+                       completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
         
-        AF.request(getPostsURL,
+        let url = getPostsURL + "?page=\(index)"
+        
+        AF.request(url,
                    method: .get,
                    interceptor: interceptor)
             .responseJSON { response in

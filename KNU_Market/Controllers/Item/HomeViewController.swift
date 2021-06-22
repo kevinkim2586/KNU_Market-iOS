@@ -83,6 +83,7 @@ extension HomeViewController: HomeViewModelDelegate {
     
     func failedFetchingItemList(with error: NetworkError) {
         refreshControl.endRefreshing()
+        tableView.tableFooterView = nil
         SnackBar.make(in: self.view,
                       message: "일시적인 연결 문제가 있습니다. 🥲",
                       duration: .lengthLong).show()
@@ -137,11 +138,47 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                        initialAlpha: 1.0,   // 보이다가
                        finalAlpha: 0.0,      // 안 보이게
                        completion: {
-                        self.viewModel.itemList.removeAll()
-                        self.viewModel.needsToFetchMoreData = true
-                        self.viewModel.isPaginating = false
+                        self.viewModel.resetValues()
                         self.viewModel.fetchItemList()
                        })
+    }
+}
+
+//MARK: - UIScrollViewDelegate
+
+extension HomeViewController: UIScrollViewDelegate {
+    
+    func createSpinnerFooter() -> UIView {
+        
+        let footerView = UIView(frame: CGRect(x: 0,
+                                              y: 0,
+                                              width: view.frame.size.width,
+                                              height: 100))
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let position = scrollView.contentOffset.y
+   
+        if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
+            
+            guard !viewModel.isPaginating else { return }
+            
+            if viewModel.needsToFetchMoreData {
+                
+                tableView.tableFooterView = createSpinnerFooter()
+                
+                viewModel.fetchItemList(pagination: true)
+                
+                tableView.tableFooterView = nil
+            }
+        }
     }
 }
 
@@ -166,7 +203,8 @@ extension HomeViewController {
         tableView.dataSource = self
         tableView.refreshControl = refreshControl
         
-        refreshControl.addTarget(self, action: #selector(refreshTableView),
+        refreshControl.addTarget(self,
+                                 action: #selector(refreshTableView),
                                  for: .valueChanged)
     }
     

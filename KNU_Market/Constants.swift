@@ -29,6 +29,7 @@ struct Constants {
         static let tabBarController             = "TabBarController"
         static let homeVC                       = "HomeViewController"
         static let itemVC                       = "itemViewController"
+        static let uploadItemVC                 = "UploadItemViewController"
         static let photoDetailVC                = "PhotoDetailViewController"
         
         

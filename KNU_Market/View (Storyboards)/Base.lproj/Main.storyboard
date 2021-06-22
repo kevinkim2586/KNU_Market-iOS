@@ -245,8 +245,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedAddButton:" destination="NqC-5r-eov" eventType="touchUpInside" id="AKg-Bb-diu"/>
-                                    <segue destination="Qw3-Hb-Lid" kind="show" id="6IH-jW-WFC"/>
+                                    <action selector="pressedAddButton:" destination="NqC-5r-eov" eventType="touchUpInside" id="g7d-Hz-jLC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -583,7 +582,7 @@
                                         <rect key="frame" x="0.0" y="-44" width="414" height="587.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Uy-V8-wCQ" customClass="ImageSlideshow" customModule="ImageSlideshow">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="370"/>
+                                                <rect key="frame" x="0.0" y="-10" width="414" height="370"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="370" id="XJQ-CN-aZK"/>
@@ -705,7 +704,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="7Uy-V8-wCQ" secondAttribute="trailing" id="73x-aS-aD3"/>
                                             <constraint firstAttribute="trailing" secondItem="aK3-oG-MzW" secondAttribute="trailing" constant="15" id="B2T-O3-bgx"/>
-                                            <constraint firstItem="7Uy-V8-wCQ" firstAttribute="top" secondItem="3zJ-pt-53M" secondAttribute="top" id="CqZ-0s-hdO"/>
+                                            <constraint firstItem="7Uy-V8-wCQ" firstAttribute="top" secondItem="3zJ-pt-53M" secondAttribute="top" constant="-10" id="CqZ-0s-hdO"/>
                                             <constraint firstItem="W5u-pE-FLR" firstAttribute="top" secondItem="3zJ-pt-53M" secondAttribute="top" constant="315" id="OYP-ZH-IWu"/>
                                             <constraint firstItem="7Uy-V8-wCQ" firstAttribute="leading" secondItem="3zJ-pt-53M" secondAttribute="leading" id="P2u-LP-cD0"/>
                                             <constraint firstAttribute="trailing" secondItem="0km-kf-o3m" secondAttribute="trailing" constant="15" id="RPL-z9-QXu"/>
@@ -773,52 +772,22 @@
             </objects>
             <point key="canvasLocation" x="6802.898550724638" y="-711.16071428571422"/>
         </scene>
-        <!--Photo Detail View Controller-->
-        <scene sceneID="qfG-sf-5cF">
-            <objects>
-                <viewController storyboardIdentifier="PhotoDetailViewController" title="Photo Detail View Controller" id="Zqb-pn-ZgK" customClass="PhotoDetailViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="CBH-BK-YkC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCx-fQ-Let" customClass="ImageSlideshow" customModule="ImageSlideshow">
-                                <rect key="frame" x="0.0" y="194" width="414" height="518"/>
-                                <color key="backgroundColor" systemColor="systemGray2Color"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="fe8-Um-9oi"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="TCx-fQ-Let" firstAttribute="leading" secondItem="fe8-Um-9oi" secondAttribute="leading" id="DZb-Xf-KnA"/>
-                            <constraint firstItem="TCx-fQ-Let" firstAttribute="top" secondItem="fe8-Um-9oi" secondAttribute="top" constant="150" id="Ypf-CB-Mge"/>
-                            <constraint firstItem="fe8-Um-9oi" firstAttribute="bottom" secondItem="TCx-fQ-Let" secondAttribute="bottom" constant="150" id="qH1-cq-FxI"/>
-                            <constraint firstItem="TCx-fQ-Let" firstAttribute="trailing" secondItem="fe8-Um-9oi" secondAttribute="trailing" id="xoG-OZ-6rn"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="slideShow" destination="TCx-fQ-Let" id="7GZ-D8-VpI"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kr7-dG-oTA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7907" y="-711"/>
-        </scene>
         <!--Upload Item View Controller-->
         <scene sceneID="Fhg-FP-AKg">
             <objects>
-                <viewController title="Upload Item View Controller" hidesBottomBarWhenPushed="YES" id="Qw3-Hb-Lid" customClass="UploadItemViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UploadItemViewController" title="Upload Item View Controller" hidesBottomBarWhenPushed="YES" id="Qw3-Hb-Lid" customClass="UploadItemViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5XL-Dm-4gC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="YZM-m2-DWl" userLabel="Divider Line">
-                                <rect key="frame" x="0.0" y="319" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="275" width="414" height="1"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="N1O-BC-qdI" userLabel="Divider Line">
-                                <rect key="frame" x="0.0" y="163" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="119" width="414" height="1"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="공구 제목" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gmq-Dz-mSm">
-                                <rect key="frame" x="10" y="113" width="394" height="40"/>
+                                <rect key="frame" x="10" y="69" width="394" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="EM0-Oa-2Dn"/>
                                 </constraints>
@@ -826,7 +795,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uQv-9E-yvr">
-                                <rect key="frame" x="10" y="174" width="394" height="135"/>
+                                <rect key="frame" x="10" y="130" width="394" height="135"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="135" id="VFf-Dy-7yd"/>
@@ -909,7 +878,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6m-j0-iun" customClass="GMStepper" customModule="GMStepper">
-                                <rect key="frame" x="294" y="340" width="100" height="30"/>
+                                <rect key="frame" x="294" y="296" width="100" height="30"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="M2u-dc-zjV"/>
@@ -940,7 +909,7 @@
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="97D-ZP-C4t">
-                                <rect key="frame" x="15" y="335" width="118.5" height="44.5"/>
+                                <rect key="frame" x="15" y="291" width="118.5" height="44.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="8o0-HG-GME">
                                         <rect key="frame" x="0.0" y="0.0" width="118.5" height="20.5"/>
@@ -968,26 +937,26 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="거래 위치 선택 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2r5-yi-TDA">
-                                <rect key="frame" x="15" y="409.5" width="106" height="20.5"/>
+                                <rect key="frame" x="15" y="365.5" width="106" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공구 내용" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8Y-rS-EoI">
-                                <rect key="frame" x="15" y="480" width="63.5" height="20.5"/>
+                                <rect key="frame" x="15" y="436" width="63.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="▼" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BMM-d8-tEv" userLabel="Expand Button Text Field">
-                                <rect key="frame" x="377" y="407" width="17" height="27"/>
+                                <rect key="frame" x="377" y="363" width="17" height="27"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" name="AppDefaultColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="테크노문" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l4k-QH-s3X" userLabel="장소">
-                                <rect key="frame" x="311" y="408" width="56" height="21"/>
+                                <rect key="frame" x="311" y="364" width="56" height="21"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="230" id="yCa-sc-fsr"/>
@@ -996,7 +965,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BJM-l8-PUN">
-                                <rect key="frame" x="15" y="515.5" width="384" height="331.5"/>
+                                <rect key="frame" x="15" y="471.5" width="384" height="375.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1999,9 +1968,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

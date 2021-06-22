@@ -37,6 +37,17 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Constants.Color.appColor)!]
         navigationController?.navigationBar.isHidden = false
     }
+    
+    
+    @IBAction func pressedAddButton(_ sender: UIButton) {
+        
+        guard let uploadVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.uploadItemVC) as? UploadItemViewController else {
+            fatalError()
+        }
+        
+        navigationController?.pushViewController(uploadVC, animated: true)
+    }
+    
 }
 
 //MARK: - HomeViewModelDelegate

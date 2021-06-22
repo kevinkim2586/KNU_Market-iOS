@@ -62,9 +62,9 @@ class ItemViewModel {
         }
     }
     
-    
-    
     func convertUIDsToURL() {
+        
+        imageURLs.removeAll()
         
         if let itemImageUIDs = model?.imageUIDs {
             
@@ -73,6 +73,9 @@ class ItemViewModel {
     }
     
     func convertURLsToImageSource() {
+        
+        imageSources.removeAll()
+        
         for url in imageURLs {
             imageSources.append(SDWebImageSource(url: url,
                                                  placeholder: UIImage(named: "default item image")))

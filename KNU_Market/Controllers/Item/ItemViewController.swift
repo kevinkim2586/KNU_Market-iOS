@@ -6,6 +6,8 @@ import ImageSlideshow
 
 class ItemViewController: UIViewController {
     
+    @IBOutlet weak var slideShow: ImageSlideshow!
+    
     //@IBOutlet weak var itemImageView: UIImageView!
     //@IBOutlet weak var pageControl: UIPageControl!
     
@@ -25,9 +27,6 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     
     
-    @IBOutlet weak var slideShow: ImageSlideshow!
-    
-    
     private let refreshControl = UIRefreshControl()
     
     var viewModel = ItemViewModel()
@@ -38,6 +37,9 @@ class ItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        slideShow.layer.cornerRadius = 25
+        slideShow.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
     
         navigationController?.navigationBar.isHidden = true
@@ -284,6 +286,10 @@ extension ItemViewController {
         } else {
             slideShow.setImageInputs([ImageSource(image: UIImage(named: "default item image")!)])
         }
+        
+        slideShow.contentScaleMode = .scaleAspectFill
+        slideShow.slideshowInterval = 2
+        slideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 30))
     }
     
     @objc func pressedImage() {
@@ -331,13 +337,13 @@ extension ItemViewController {
 //    }
     
 //    @objc func pressedImage() {
-//   
+//
 //        guard let photoDetailVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.photoDetailVC) as? PhotoDetailViewController else {
 //            fatalError()
 //        }
-//        
+//
 //        photoDetailVC.imageURLs = viewModel.imageURLs
-//        
+//
 //        self.navigationController?.pushViewController(photoDetailVC, animated: true)
 //    }
 

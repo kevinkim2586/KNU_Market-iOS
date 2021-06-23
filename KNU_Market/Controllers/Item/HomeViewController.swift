@@ -187,6 +187,8 @@ extension HomeViewController {
     
     func initialize() {
         
+        self.navigationController?.view.backgroundColor = .white
+        
         viewModel.delegate = self
     
         viewModel.loadUserProfile()

@@ -23,46 +23,6 @@ class MyPageViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         viewModel.loadUserProfile()
     }
-    
-    
-    @IBAction func pressedLogOutButton(_ sender: UIButton) {
-        
-        UserManager.shared.logOut { result in
-            
-            switch result {
-            
-            case .success(_):
-                
-                self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
-                    
-                    if selectedOk {
-                        
-                        DispatchQueue.main.async {
-                            
-                            
-                            self.popToInitialViewController()
-                        }
-                    }
-                }
-            case .failure(let error):
-                SnackBar.make(in: self.view,
-                              message: error.errorDescription,
-                              duration: .lengthLong).setAction(with: "재시도", action: {
-                                DispatchQueue.main.async {
-                                    self.pressedLogOutButton(self.logOutButton)
-                                }
-                              }).show()
-            }
-        }
-    }
-    
-    // 아래 수정 필요
-    func popToInitialViewController() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
-    }
 }
 
 //MARK: - profile image modification methods

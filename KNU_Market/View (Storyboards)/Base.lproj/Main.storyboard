@@ -1165,22 +1165,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2H-7E-Wou">
-                                <rect key="frame" x="177.5" y="513" width="59" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="로그아웃">
-                                    <color key="titleColor" name="AppDefaultColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressedLogOutButton:" destination="e6f-cq-siB" eventType="touchUpInside" id="Ura-cL-zjf"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ri2-pH-fnf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="m2H-7E-Wou" firstAttribute="centerX" secondItem="dL8-d0-QzK" secondAttribute="centerX" id="0pK-8P-wwR"/>
-                            <constraint firstItem="m2H-7E-Wou" firstAttribute="top" secondItem="lMN-5z-sKI" secondAttribute="bottom" constant="15" id="3IW-A5-4gh"/>
                             <constraint firstItem="lMN-5z-sKI" firstAttribute="trailing" secondItem="ri2-pH-fnf" secondAttribute="trailing" id="ENk-LI-dkM"/>
                             <constraint firstItem="Vmh-ZW-9dO" firstAttribute="top" secondItem="UVp-j7-EQR" secondAttribute="bottom" constant="15" id="OI0-kF-Nvh"/>
                             <constraint firstItem="UVp-j7-EQR" firstAttribute="top" secondItem="ri2-pH-fnf" secondAttribute="top" constant="20" id="P6I-tD-A2B"/>
@@ -1192,7 +1180,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="마이페이지" id="JEh-Tb-b50"/>
                     <connections>
-                        <outlet property="logOutButton" destination="m2H-7E-Wou" id="pTP-hq-vTI"/>
                         <outlet property="profileImageButton" destination="UVp-j7-EQR" id="ZiR-92-7Ot"/>
                         <outlet property="settingsTableView" destination="lMN-5z-sKI" id="b4e-u3-nhk"/>
                         <outlet property="userNicknameLabel" destination="Vmh-ZW-9dO" id="5iv-CX-Wwr"/>
@@ -1676,11 +1663,29 @@
                                     <segue destination="JJB-q6-yNq" kind="show" id="T8n-10-fWf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ww6-J3-gEk">
+                                <rect key="frame" x="15" y="212" width="59" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="로그아웃">
+                                    <color key="titleColor" name="AppDefaultColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dl4-Tq-LcM">
+                                <rect key="frame" x="15" y="265" width="64" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="회원 탈퇴">
+                                    <color key="titleColor" name="AppDefaultColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedUnregisterButton:" destination="eeV-Us-DhA" eventType="touchUpInside" id="cdp-JW-zGM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MjF-eP-p3q"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="MjF-eP-p3q" firstAttribute="trailing" secondItem="rd2-oI-Ndc" secondAttribute="trailing" constant="15" id="0Oc-jq-n8W"/>
+                            <constraint firstItem="Dl4-Tq-LcM" firstAttribute="top" secondItem="Ww6-J3-gEk" secondAttribute="bottom" constant="20" id="3lr-OR-Mtj"/>
                             <constraint firstItem="MjF-eP-p3q" firstAttribute="trailing" secondItem="BZY-bQ-klW" secondAttribute="trailing" constant="15" id="4Mx-uo-57C"/>
                             <constraint firstItem="H78-70-pRs" firstAttribute="leading" secondItem="3WU-m7-olb" secondAttribute="trailing" constant="40" id="Ao1-Lk-Nlf"/>
                             <constraint firstItem="gz6-2Y-Ri4" firstAttribute="top" secondItem="rd2-oI-Ndc" secondAttribute="bottom" constant="25" id="DgM-v6-W03"/>
@@ -1688,17 +1693,21 @@
                             <constraint firstItem="Ka4-Qa-hRw" firstAttribute="leading" secondItem="wRo-N2-DQl" secondAttribute="trailing" constant="25" id="Jht-Ju-52J"/>
                             <constraint firstItem="3WU-m7-olb" firstAttribute="leading" secondItem="MjF-eP-p3q" secondAttribute="leading" constant="15" id="LcK-fi-QNI"/>
                             <constraint firstItem="3WU-m7-olb" firstAttribute="top" secondItem="rd2-oI-Ndc" secondAttribute="bottom" constant="30" id="R9w-9r-ZT3"/>
+                            <constraint firstItem="Ww6-J3-gEk" firstAttribute="top" secondItem="wRo-N2-DQl" secondAttribute="bottom" constant="30" id="SVW-fG-aeP"/>
                             <constraint firstItem="rd2-oI-Ndc" firstAttribute="leading" secondItem="MjF-eP-p3q" secondAttribute="leading" constant="15" id="WxO-SH-72h"/>
+                            <constraint firstItem="Dl4-Tq-LcM" firstAttribute="leading" secondItem="MjF-eP-p3q" secondAttribute="leading" constant="15" id="XtK-ZF-YXt"/>
                             <constraint firstItem="H78-70-pRs" firstAttribute="top" secondItem="rd2-oI-Ndc" secondAttribute="bottom" constant="30" id="bD7-ct-zSQ"/>
                             <constraint firstItem="MjF-eP-p3q" firstAttribute="trailing" secondItem="gz6-2Y-Ri4" secondAttribute="trailing" constant="15" id="gKJ-KQ-LA4"/>
                             <constraint firstItem="wRo-N2-DQl" firstAttribute="top" secondItem="3WU-m7-olb" secondAttribute="bottom" constant="25" id="gpB-ys-PIy"/>
                             <constraint firstItem="wRo-N2-DQl" firstAttribute="leading" secondItem="MjF-eP-p3q" secondAttribute="leading" constant="15" id="ho9-GA-XpA"/>
                             <constraint firstItem="rd2-oI-Ndc" firstAttribute="top" secondItem="MjF-eP-p3q" secondAttribute="top" constant="20" id="kyB-X4-ume"/>
                             <constraint firstItem="BZY-bQ-klW" firstAttribute="top" secondItem="gz6-2Y-Ri4" secondAttribute="bottom" constant="15" id="vkP-uy-CPJ"/>
+                            <constraint firstItem="Ww6-J3-gEk" firstAttribute="leading" secondItem="MjF-eP-p3q" secondAttribute="leading" constant="15" id="xsR-fJ-Zgp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="설정" id="eS1-ZE-Yto"/>
                     <connections>
+                        <outlet property="logOutButton" destination="Ww6-J3-gEk" id="hwN-td-St0"/>
                         <outlet property="userNicknameLabel" destination="H78-70-pRs" id="Xje-aX-7w0"/>
                     </connections>
                 </viewController>

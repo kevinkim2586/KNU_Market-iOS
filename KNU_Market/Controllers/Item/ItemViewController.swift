@@ -30,7 +30,6 @@ class ItemViewController: UIViewController {
     var pageID: String = ""
     
     //MARK: - VC Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -159,6 +158,7 @@ extension ItemViewController: ItemViewModelDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
             
+            GlobalVariable.needsToReloadData = true
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -330,7 +330,7 @@ extension ItemViewController {
         
         slideShow.contentScaleMode = .scaleAspectFill
         slideShow.slideshowInterval = 2
-        slideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 30))
+        slideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 50))
     }
     
     @objc func pressedImage() {

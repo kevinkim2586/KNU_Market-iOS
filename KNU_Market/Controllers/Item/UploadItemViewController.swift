@@ -99,10 +99,11 @@ class UploadItemViewController: UIViewController {
 
 extension UploadItemViewController: UploadItemDelegate {
     
-    func didCompleteUpload() {
+    func didCompleteUpload() { 
         
         dismissProgressBar()
         print("UploadItemVC - didCompleteUpload")
+        GlobalVariable.needsToReloadData = true
         navigationController?.popViewController(animated: true)
     }
     

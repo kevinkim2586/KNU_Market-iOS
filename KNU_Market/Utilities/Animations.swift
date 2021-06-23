@@ -7,8 +7,4 @@ struct Animations {
         AnimationType.vector(CGVector(dx: 0, dy: 50)),
         AnimationType.zoom(scale: 1)
     ]
-    
-    
-    
-    
 }

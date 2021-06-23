@@ -26,8 +26,21 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Constants.Color.appColor)!]
         navigationItem.largeTitleDisplayMode = .always
+        
+        if GlobalVariable.needsToReloadData == true {
+            print("NEEDS TO RELOAD DATA")
+            
+            let indexPath = NSIndexPath(row: NSNotFound, section: 0)
+            self.tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: false)
+
+               
+            refreshTableView()
+            GlobalVariable.needsToReloadData = false
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

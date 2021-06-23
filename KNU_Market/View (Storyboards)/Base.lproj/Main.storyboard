@@ -536,7 +536,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goH-b2-VEo" userLabel="Bottom Button View">
-                                <rect key="frame" x="0.0" y="796" width="414" height="100"/>
+                                <rect key="frame" x="0.0" y="816" width="414" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdN-yf-AY2">
                                         <rect key="frame" x="229" y="10" width="170" height="40"/>
@@ -566,7 +566,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="B8M-e9-kob"/>
+                                    <constraint firstAttribute="height" constant="80" id="B8M-e9-kob"/>
                                     <constraint firstItem="2dg-Vn-vn1" firstAttribute="top" secondItem="goH-b2-VEo" secondAttribute="top" constant="20" id="K84-fK-h6S"/>
                                     <constraint firstItem="qdN-yf-AY2" firstAttribute="top" secondItem="goH-b2-VEo" secondAttribute="top" constant="10" id="TX7-QO-GUk"/>
                                     <constraint firstItem="2dg-Vn-vn1" firstAttribute="leading" secondItem="goH-b2-VEo" secondAttribute="leading" constant="40" id="TdR-jo-JdM"/>
@@ -576,10 +576,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5wM-em-ffY">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="796"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="816"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zJ-pt-53M" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="-44" width="414" height="587.5"/>
+                                        <rect key="frame" x="0.0" y="-44" width="414" height="506.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Uy-V8-wCQ" customClass="ImageSlideshow" customModule="ImageSlideshow">
                                                 <rect key="frame" x="0.0" y="-10" width="414" height="370"/>
@@ -588,8 +588,8 @@
                                                     <constraint firstAttribute="height" constant="370" id="XJQ-CN-aZK"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="누리관 레드돔인데 같이 시키실 분? 저녁 7시에 시킬 예정입니다.누리관 레드돔인데 같이 시키실 분? 저녁 7시에 시킬 예정입니다.누리관 레드돔인데 같이 시키실 분? 저녁 7시에 시킬레드돔인데 같이 시키실 분? 저녁 7시에 시" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0km-kf-o3m">
-                                                <rect key="frame" x="15" y="471" width="384" height="101.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="표시 에러" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0km-kf-o3m">
+                                                <rect key="frame" x="15" y="471" width="384" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -611,14 +611,14 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location icon" translatesAutoresizingMaskIntoConstraints="NO" id="Yo2-vO-lfG" userLabel="Location Image View">
-                                                        <rect key="frame" x="220" y="70" width="20" height="20"/>
+                                                        <rect key="frame" x="259" y="70" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="0mZ-yN-aGk"/>
                                                             <constraint firstAttribute="height" constant="20" id="yzA-41-d4d"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LN-hg-AQp">
-                                                        <rect key="frame" x="35" y="72" width="39" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LN-hg-AQp">
+                                                        <rect key="frame" x="35" y="90" width="0.0" height="0.0"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="JZT-Ze-wKB"/>
                                                         </constraints>
@@ -629,8 +629,8 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="누리관" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nr0-hG-HIS">
-                                                        <rect key="frame" x="245" y="72" width="39" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nr0-hG-HIS">
+                                                        <rect key="frame" x="284" y="90" width="0.0" height="0.0"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="z3p-LD-pVf"/>
                                                         </constraints>

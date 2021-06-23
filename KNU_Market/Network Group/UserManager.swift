@@ -71,36 +71,39 @@ class UserManager {
         
         AF.request(checkDuplicateURL,
                    method: .get,
-                   headers: headers).responseJSON { response in
-                    
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    case 200:
-                        do {
-                            
-                            let json = try JSON(data: response.data!)
-                            let result = json["isDuplicate"].stringValue
-                            
-                            print("USER MANAGER - checkDuplicate Result: \(result)")
-                            
-                            result == "true" ? completion(.success(true)) : completion(.success(false))
-                            
-                        } catch {
-                            print("UserManager - checkDuplicate() catch error: \(error)")
-                            completion(.failure(.E000))
-                        }
-                    default:
-                        let error = NetworkError.returnError(json: response.data!)
-                        completion(.failure(error))
+                   headers: headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 200:
+                    do {
+                        
+                        let json = try JSON(data: response.data!)
+                        let result = json["isDuplicate"].stringValue
+                        
+                        print("USER MANAGER - checkDuplicate Result: \(result)")
+                        
+                        result == "true" ? completion(.success(true)) : completion(.success(false))
+                        
+                    } catch {
+                        print("UserManager - checkDuplicate() catch error: \(error)")
+                        completion(.failure(.E000))
                     }
-                   }
+                default:
+                    let error = NetworkError.returnError(json: response.data!)
+                    completion(.failure(error))
+                }
+            }
     }
     
     //MARK: - 로그인
     func login(id: String, password: String,
                completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
-    
+        
         let parameters: Parameters = [ "id" : id,
                                        "password" : password ]
         let headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue : HTTPHeaderValues.applicationJSON.rawValue ]
@@ -109,75 +112,75 @@ class UserManager {
                    method: .post,
                    parameters: parameters,
                    encoding: JSONEncoding.default,
-                   headers: headers).responseJSON { response in
+                   headers: headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                print("UserManager - login() statusCode: \(statusCode)")
+                
+                switch statusCode {
+                
+                case 201:
                     
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    print("UserManager - login() statusCode: \(statusCode)")
-                    
-                    switch statusCode {
-                    
-                    case 201:
+                    do {
+                        let json = try JSON(data: response.data!)
+                        self.saveAccessTokens(from: json)
+                        print("login success with API TOKEN: \(User.shared.accessToken)")
+                        completion(.success(true))
                         
-                        do {
-                            let json = try JSON(data: response.data!)
-                            self.saveAccessTokens(from: json)
-                            print("login success with API TOKEN: \(User.shared.accessToken)")
-                            completion(.success(true))
-                            
-                        } catch {
-                            print("UserManager - login() catch error: \(error)")
-                            completion(.failure(.E000))
-                        }
-                    default:
-                        print("login FAILED")
-                        let error = NetworkError.returnError(json: response.data!)
-                        completion(.failure(error))
+                    } catch {
+                        print("UserManager - login() catch error: \(error)")
+                        completion(.failure(.E000))
                     }
-                   }
+                default:
+                    print("login FAILED")
+                    let error = NetworkError.returnError(json: response.data!)
+                    completion(.failure(error))
+                }
+            }
     }
     
     //MARK: - 프로필 조회
     func loadUserProfile(completion: @escaping ((Result<LoadProfileResponseModel, NetworkError>) -> Void)) {
         
-        let headers: HTTPHeaders = [ HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken ]
-        
         AF.request(loadUserProfileURL,
                    method: .get,
-                   headers: headers,
-                   interceptor: interceptor).responseJSON { response in
-                    
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    case 201:
-                        do {
-                            
-                            let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)
-                            print("UserManager - loadUserProfile decodedData: \(decodedData)")
-                            self.saveBasicUserInfo(with: decodedData)
-                            print("User Manager - loadUserProfile() success")
-                            completion(.success(decodedData))
-                            
-                        } catch {
-                            print("User Manager - loadUserProfile() catch error \(error)")
-                            completion(.failure(.E000))
-                        }
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 201:
+                    do {
                         
-                    default:
-                        print("loadUserProfile FAILED")
-                        let error = NetworkError.returnError(json: response.data!)
-                        completion(.failure(error))
+                        let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)
+                        print("UserManager - loadUserProfile decodedData: \(decodedData)")
+                        self.saveBasicUserInfo(with: decodedData)
+                        print("User Manager - loadUserProfile() success")
+                        completion(.success(decodedData))
+                        
+                    } catch {
+                        print("User Manager - loadUserProfile() catch error \(error)")
+                        completion(.failure(.E000))
                     }
                     
-                   }
+                default:
+                    print("loadUserProfile FAILED")
+                    let error = NetworkError.returnError(json: response.data!)
+                    completion(.failure(error))
+                }
+                
+            }
     }
     
     //MARK: - 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String,
                                 completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
-        
-        let headers: HTTPHeaders = [ HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken ]
         
         let parameters: Parameters = [
             "nickname": User.shared.nickname,
@@ -191,31 +194,30 @@ class UserManager {
                    method: .put,
                    parameters: parameters,
                    encoding: JSONEncoding.default,
-                   headers: headers,
-                   interceptor: interceptor).responseJSON { response in
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    print("UserManager - updateUserProfileImage success")
+                    completion(.success(true))
+                    User.shared.profileImageUID = uid
                     
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    
-                    case 201:
-                        print("UserManager - updateUserProfileImage success")
-                        completion(.success(true))
-                        User.shared.profileImageUID = uid
-                        
-                    default:
-                        print("UserManager - updateUserProfileImage failed default statement")
-                        let error = NetworkError.returnError(json: response.data!)
-                        completion(.failure(error))
-                    }
-                   }
+                default:
+                    print("UserManager - updateUserProfileImage failed default statement")
+                    let error = NetworkError.returnError(json: response.data!)
+                    completion(.failure(error))
+                }
+            }
     }
     
     //MARK: - 비밀번호 변경
     func updateUserPassword(with password: String,
                             completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
-        
-        let headers: HTTPHeaders = ["authentication" : User.shared.accessToken]
         
         let parameters: Parameters = [
             "nickname": User.shared.nickname,
@@ -229,32 +231,31 @@ class UserManager {
                    method: .put,
                    parameters: parameters,
                    encoding: JSONEncoding.default,
-                   headers: headers,
-                   interceptor: interceptor).responseJSON { response in
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    print("UserManager - updateUserPassword success")
+                    completion(.success(true))
+                    User.shared.password = password
                     
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    
-                    case 201:
-                        print("UserManager - updateUserPassword success")
-                        completion(.success(true))
-                        User.shared.password = password
-                        
-                    default:
-                        print("UserManager - updateUserPassword failed default statement")
-                        let error = NetworkError.returnError(json: response.data!)
-                        completion(.failure(error))
-                    }
-                   }
+                default:
+                    print("UserManager - updateUserPassword failed default statement")
+                    let error = NetworkError.returnError(json: response.data!)
+                    completion(.failure(error))
+                }
+            }
     }
     
     
     //MARK: - 닉네임 변경
     func updateUserNickname(with nickname: String,
                             completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
-        
-        let headers: HTTPHeaders = [HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken]
         
         let parameters: Parameters = [
             "nickname": nickname,
@@ -268,51 +269,51 @@ class UserManager {
                    method: .put,
                    parameters: parameters,
                    encoding: JSONEncoding.default,
-                   headers: headers,
-                   interceptor: interceptor).responseJSON { response in
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    print("UserManager - updateUserNickname success")
+                    completion(.success(true))
+                    User.shared.nickname = nickname
                     
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    
-                    case 201:
-                        print("UserManager - updateUserNickname success")
-                        completion(.success(true))
-                        User.shared.nickname = nickname
-                        
-                    default:
-                        print("UserManager - updateUserNickname failed default statement")
-                        let error = NetworkError.returnError(json: response.data!)
-                        completion(.failure(error))
-                    }
-                   }
+                default:
+                    print("UserManager - updateUserNickname failed default statement")
+                    let error = NetworkError.returnError(json: response.data!)
+                    completion(.failure(error))
+                }
+            }
     }
     
     //MARK: - 로그아웃
     func logOut(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        let headers: HTTPHeaders = [HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken]
-        
         AF.request(logoutURL,
                    method: .delete,
-                   headers: headers,
-                   interceptor: interceptor).responseJSON { response in
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
                     
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    
-                    case 201:
-                        
-                        User.shared.resetAllUserInfo()
-                        print("logout success")
-                        completion(.success(true))
-                    default:
-                        let error = NetworkError.returnError(json: response.data!)
-                        print("logout FAILED with error code: \(statusCode) and error: \(error.errorDescription)")
-                        completion(.failure(error))
-                    }
-                   }
+                    User.shared.resetAllUserInfo()
+                    print("logout success")
+                    completion(.success(true))
+                default:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("logout FAILED with error code: \(statusCode) and error: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+            }
         
     }
     

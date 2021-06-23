@@ -12,6 +12,8 @@ final class Interceptor: RequestInterceptor {
                for session: Session,
                completion: @escaping (Result<URLRequest, Error>) -> Void) {
         
+        print("Interceptor - adapt() activated")
+        
         var request = urlRequest
         
         request.headers.update(name: "authentication", value: User.shared.accessToken)
@@ -29,6 +31,8 @@ final class Interceptor: RequestInterceptor {
             completion(.doNotRetry)
             return
         }
+        
+        print("Interceptor - adapt() activated with statusCode: \(statusCode)")
         
         switch statusCode {
         
@@ -61,6 +65,8 @@ extension Interceptor {
     typealias RefreshCompletion = (_ completion: Result<Bool, NetworkError>) -> Void
     
     func refreshToken(completion: @escaping RefreshCompletion) {
+        
+        print("Interceptor - refreshToken() activated")
         
         self.isRefreshing = true
         

@@ -26,6 +26,8 @@ class ReportUserViewController: UIViewController {
         let model = ReportUserModel(user: userToReport,
                                     content: contentTextView.text!)
         
+        print("userToReport: \(userToReport)")
+        
         ReportManager.shared.reportUser(with: model) { result in
             
             dismissProgressBar()

@@ -8,6 +8,8 @@ class MediaManager {
     
     private init() {}
     
+    let interceptor = Interceptor()
+    
     let uploadImageURL              = "\(Constants.API_BASE_URL)media"
     let requestMediaURL             = "\(Constants.API_BASE_URL)media/"
     
@@ -20,7 +22,10 @@ class MediaManager {
         let requestURL = requestMediaURL + urlString
         
         AF.request(requestURL,
-                   method: .get).responseJSON { response in
+                   method: .get,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -39,17 +44,16 @@ class MediaManager {
     func uploadImage(with image: Data,
                      completion: @escaping ((Result<String, NetworkError>) -> Void)) {
         
-        let headers: HTTPHeaders = [ HTTPHeaderKeys.authentication.rawValue : User.shared.accessToken ]
-        
         AF.upload(multipartFormData: { multipartFormData in
-        
+            
             multipartFormData.append(image,
                                      withName: "media",
                                      fileName: "\(UUID().uuidString).jpeg",
                                      mimeType: "image/jpeg")
             
         }, to: uploadImageURL,
-        headers: headers)
+        interceptor: interceptor)
+        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }

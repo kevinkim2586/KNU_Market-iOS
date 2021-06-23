@@ -25,6 +25,7 @@ class ItemManager {
         AF.request(url,
                    method: .get,
                    interceptor: interceptor)
+            .validate()
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
@@ -39,7 +40,7 @@ class ItemManager {
                         let decodedData = try JSONDecoder().decode([ItemListModel].self,
                                                                    from: response.data!)
                         completion(.success(decodedData))
-    
+                        
                     } catch {
                         print("ItemManager - There was an error decoding JSON Data with error: \(error)")
                         completion(.failure(.E000))
@@ -52,9 +53,9 @@ class ItemManager {
                 }
             }
     }
-                                            
-                                
-
+    
+    
+    
     //MARK: - 공구글 업로드
     func uploadNewItem(with model: UploadItemModel,
                        completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
@@ -66,21 +67,21 @@ class ItemManager {
                    interceptor: interceptor)
             .validate()
             .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    print("ItemManager - uploadNewItem success")
+                    completion(.success(true))
                     
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    
-                    case 201:
-                        print("ItemManager - uploadNewItem success")
-                        completion(.success(true))
-                        
-                    default:
-                        let error = NetworkError.returnError(json: response.data!)
-                        print("ItemManager - uploadNewItem failed with error: \(error.errorDescription)")
-                        completion(.failure(error))
-                    }
-                   }
+                default:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("ItemManager - uploadNewItem failed with error: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+            }
         
     }
     
@@ -91,35 +92,36 @@ class ItemManager {
         let url = getPostsURL + "/\(uid)"
         
         AF.request(url,
-                   method: .get)
+                   method: .get,
+                   interceptor: interceptor)
             .validate()
             .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 200:
                     
-                    guard let statusCode = response.response?.statusCode else { return }
+                    print("ItemManager - SUCCESS in fetchItemList")
                     
-                    switch statusCode {
-                    
-                    case 200:
-                       
-                        print("ItemManager - SUCCESS in fetchItemList")
+                    do {
+                        let decodedData = try JSONDecoder().decode(ItemDetailModel.self,
+                                                                   from: response.data!)
+                        completion(.success(decodedData))
                         
-                        do {
-                            let decodedData = try JSONDecoder().decode(ItemDetailModel.self,
-                                                                       from: response.data!)
-                            completion(.success(decodedData))
-                            
-                        } catch {
-                            print("ItemManager - There was an error decoding JSON Data with error: \(error)")
-                            completion(.failure(.E000))
-                        }
-                        
-                    default:
-                        
-                        let error = NetworkError.returnError(json: response.data!)
-                        print("ItemManager fetchItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
-                        completion(.failure(error))
+                    } catch {
+                        print("ItemManager - There was an error decoding JSON Data with error: \(error)")
+                        completion(.failure(.E000))
                     }
-                   }
+                    
+                default:
+                    
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("ItemManager fetchItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
+                    completion(.failure(error))
+                }
+            }
     }
     
     

@@ -1252,7 +1252,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="건의사항" id="pHW-tP-Gz8">
                         <barButtonItem key="rightBarButtonItem" title="보내기" id="qS1-oz-bHq">
-                            <color key="tintColor" name="AppDefaultColor"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="pressedSendButton:" destination="ENk-kZ-4Rz" id="GLn-Nc-awA"/>
                             </connections>

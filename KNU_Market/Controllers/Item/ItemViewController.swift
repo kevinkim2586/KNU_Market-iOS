@@ -14,7 +14,7 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var userIdLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var locationImageView: UIImageView!
-
+    
     @IBOutlet weak var itemDetailLabel: UILabel!
     @IBOutlet weak var gatheringPeopleLabel: UILabel!
     @IBOutlet weak var gatheringPeopleImageView: UIImageView!
@@ -34,7 +34,7 @@ class ItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
+        
         navigationController?.navigationBar.isHidden = true
         
         print("ItemVC - pageID: \(pageID)")
@@ -59,7 +59,7 @@ class ItemViewController: UIViewController {
         
         navigationController?.navigationBar.isHidden = false
     }
-
+    
     
     //MARK: - IBActions & Methods
     @IBAction func pressedBackButton(_ sender: UIButton) {
@@ -76,24 +76,7 @@ class ItemViewController: UIViewController {
                                             message: nil,
                                             preferredStyle: .actionSheet)
         
-        let reportUser = UIAlertAction(title: "게시글 신고하기",
-                                       style: .default) { alert in
-            
-            let userToReport = self.viewModel.model?.nickname ?? ""
-        
-            guard let reportVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.reportUserVC) as? ReportUserViewController else {
-                return
-            }
-            
-            reportVC.userToReport = userToReport
-            
-            self.present(reportVC, animated: true)
-        }
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel,
-                                         handler: nil)
-        
-        //본인이 작성한 글이면 Delete Action도 추가
+        //본인이 작성한 글이면 Delete Action을 추가
         if viewModel.model?.nickname == User.shared.nickname {
             
             let deleteAction = UIAlertAction(title: "글 삭제하기",
@@ -109,11 +92,30 @@ class ItemViewController: UIViewController {
                 }
                                              }
             actionSheet.addAction(deleteAction)
+            
+        }
+        // 다른 사용자 글이면 Rerpot Action 만 추가
+        else {
+            let reportAction = UIAlertAction(title: "게시글 신고하기",
+                                           style: .default) { alert in
+                
+                let userToReport = self.viewModel.model?.nickname ?? ""
+                
+                guard let reportVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.reportUserVC) as? ReportUserViewController else {
+                    return
+                }
+                
+                reportVC.userToReport = userToReport
+                
+                self.present(reportVC, animated: true)
+            }
+            actionSheet.addAction(reportAction)
         }
         
-        actionSheet.addAction(reportUser)
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel,
+                                         handler: nil)
         actionSheet.addAction(cancelAction)
-    
         self.present(actionSheet, animated: true)
     }
 }
@@ -143,7 +145,7 @@ extension ItemViewController: ItemViewModelDelegate {
         SnackBar.make(in: self.view,
                       message: "존재하지 않는 글입니다 🧐",
                       duration: .lengthLong).setAction(with: "홈으로", action: {
-                  
+                        
                         self.navigationController?.popViewController(animated: true)
                         
                       }).show()
@@ -182,7 +184,7 @@ extension ItemViewController {
     func updateInformation() {
         
         itemTitleLabel.text = viewModel.model?.title
-    
+        
         // 프로필 이미지 설정
         let profileImageUID = viewModel.model?.profileImageUID ?? ""
         if profileImageUID.count > 1 {
@@ -231,7 +233,7 @@ extension ItemViewController {
     }
     
     func initializeProfileImageView() {
-    
+        
         userProfileImageView.image = UIImage(named: "default avatar")
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
@@ -252,14 +254,14 @@ extension ItemViewController {
     func initializeDateLabel() {
         dateLabel.text = viewModel.date
     }
-
+    
     func initializeItemExplanationLabel() {
         
         let labelStyle = NSMutableParagraphStyle()
         labelStyle.lineSpacing = 5
         let attributes = [NSAttributedString.Key.paragraphStyle : labelStyle]
         itemDetailLabel.attributedText = NSAttributedString(string: viewModel.model?.title ?? "",
-                                                                 attributes: attributes)
+                                                            attributes: attributes)
     }
     
     func initializeGatheringPeopleLabel() {
@@ -270,7 +272,7 @@ extension ItemViewController {
         
         if viewModel.isGathering {
             gatheringPeopleLabel.text = "모집 중     \(currentNum)" + "/" + "\(total)"
-     
+            
         } else {
             gatheringPeopleLabel.text = "마감     \(currentNum)" + "/" + "\(total)"
         }
@@ -286,7 +288,7 @@ extension ItemViewController {
             enterChatButton.isUserInteractionEnabled = false
             enterChatButton.backgroundColor = UIColor.lightGray
         }
-
+        
         enterChatButton.layer.cornerRadius = 7
         enterChatButton.setTitle("채팅방 입장", for: .normal)
         enterChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0,
@@ -336,6 +338,4 @@ extension ItemViewController {
         let fullScreenController = slideShow.presentFullScreenController(from: self)
         fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
     }
-    
-
 }

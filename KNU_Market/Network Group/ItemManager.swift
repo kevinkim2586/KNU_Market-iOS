@@ -11,8 +11,7 @@ class ItemManager {
     private init() {}
     
     //MARK: - API Request URLs
-    let writePostURL                 = "\(Constants.API_BASE_URL)posts"
-    let getPostsURL                  = "\(Constants.API_BASE_URL)posts"
+    let baseURL                       = "\(Constants.API_BASE_URL)posts"
     
     
     
@@ -20,7 +19,7 @@ class ItemManager {
     func fetchItemList(at index: Int,
                        completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
         
-        let url = getPostsURL + "?page=\(index)"
+        let url = baseURL + "?page=\(index)"
         
         AF.request(url,
                    method: .get,
@@ -60,7 +59,7 @@ class ItemManager {
     func uploadNewItem(with model: UploadItemModel,
                        completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        AF.request(writePostURL,
+        AF.request(baseURL,
                    method: .post,
                    parameters: model.parameters,
                    encoding: JSONEncoding.default,
@@ -89,7 +88,7 @@ class ItemManager {
     func fetchItemDetails(uid: String,
                           completion: @escaping ((Result<ItemDetailModel, NetworkError>) -> Void)) {
         
-        let url = getPostsURL + "/\(uid)"
+        let url = baseURL + "/\(uid)"
         
         AF.request(url,
                    method: .get,
@@ -119,6 +118,34 @@ class ItemManager {
                     
                     let error = NetworkError.returnError(json: response.data!)
                     print("ItemManager fetchItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    //MARK: - 본인 작성 게시글 삭제하기
+    func deletePost(uid: String,
+                    completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let url = baseURL + "/\(uid)"
+        
+        AF.request(url,
+                   method: .delete,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    print("ItemManager - SUCCESS in deletePost")
+                    completion(.success(true))
+                    
+                default:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("ItemManager deletePost error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
             }

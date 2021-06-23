@@ -5,6 +5,9 @@ import ImageSlideshow
 protocol ItemViewModelDelegate {
     func didFetchItemDetails()
     func failedFetchingItemDetails(with error: NetworkError)
+    
+    func didDeletePost()
+    func failedDeletingPost(with error: NetworkError)
 }
 
 class ItemViewModel {
@@ -36,11 +39,11 @@ class ItemViewModel {
             return formatDateForDisplay()
         }
     }
-    
 
 
     //MARK: - Methods
     
+    //MARK: - 공구 상세내용 불러오기
     func fetchItemDetails(for uid: String) {
         
         ItemManager.shared.fetchItemDetails(uid: uid) { [weak self] result in
@@ -61,6 +64,28 @@ class ItemViewModel {
             }
         }
     }
+    
+    //MARK: - 본인 작성 게시글 삭제하기
+    func deletePost(for uid: String) {
+        
+        ItemManager.shared.deletePost(uid: uid) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success(_):
+                self.delegate?.didDeletePost()
+                
+            case .failure(let error):
+                print("ItemViewModel - FAILED deletePost")
+                self.delegate?.failedDeletingPost(with: error)
+            }
+        }
+    }
+    
+    
+    
     
     func convertUIDsToURL() {
         

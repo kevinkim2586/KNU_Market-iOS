@@ -41,7 +41,6 @@ enum NetworkError: String, Error {
         
         case .E000:
             return "일시적인 서비스 오류입니다 😢 잠시 후 다시 시도해주세요."
-        
         case .E101:
             return "아이디 또는 비밀번호가 일치하지 않습니다."
         case .E102:
@@ -89,7 +88,7 @@ enum NetworkError: String, Error {
         do {
             let json = try JSON(data: json)
             let errorCode = json["errorCode"].stringValue
-            return NetworkError(rawValue: errorCode)!
+            return NetworkError(rawValue: errorCode) ?? .E000
         } catch {
             return .E000
         }

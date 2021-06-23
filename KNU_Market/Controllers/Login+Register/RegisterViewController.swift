@@ -199,10 +199,10 @@ class RegisterViewController: UIViewController {
         
         guard let nickname = nicknameTextField.text else { return false }
         
-        if nickname.count >= 2 && nickname.count <= 10 { return true }
+        if nickname.count >= 2 && nickname.count <= 15 { return true }
         else {
             SnackBar.make(in: self.view,
-                          message: "닉네임은 2글자 이상, 10자리 이하로 입력해주세요 👀",
+                          message: "닉네임은 2글자 이상, 15자리 이하로 입력해주세요 👀",
                           duration: .lengthLong).show()
             return false
         }

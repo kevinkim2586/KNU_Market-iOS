@@ -5,6 +5,7 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet var userNicknameLabel: UILabel!
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var unregisterButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +33,6 @@ class SettingsViewController: UIViewController {
                     if selectedOk {
                         
                         DispatchQueue.main.async {
-                            
-                        
                             self.popToInitialViewController()
                         }
                     }

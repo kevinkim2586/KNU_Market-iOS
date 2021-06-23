@@ -6,6 +6,7 @@ import SwiftyJSON
 final class Interceptor: RequestInterceptor {
     
     private var isRefreshing: Bool = false
+    private var retryLimit = 3
     
     // 어떠한 AF request 이든지간데 중간에 가로채서 header 에 accesstoken 을 넣는 것이기에 매번 넣을 필요 X
     func adapt(_ urlRequest: URLRequest,
@@ -42,18 +43,38 @@ final class Interceptor: RequestInterceptor {
         case 412:
             guard !isRefreshing else { return }
             
-            refreshToken() { refreshResult in
+            refreshToken() { [weak self] refreshResult in
+                
+                guard let self = self else { return }
                 
                 switch refreshResult {
                 
                 case .success(_):
-                    completion(.retry)
-                case .failure(_):
-                    completion(.retryWithDelay(2))
+                    
+                    if request.retryCount < self.retryLimit {
+                        completion(.retry)
+                    } else {
+                        completion(.doNotRetry)
+                    }
+                  
+                case .failure(let error):
+                    
+                    if error == .E301 {
+                        print("Interceptor - 세션이 만료되었습니다. 다시 로그인 요망")
+                    }
+                    else {
+                        print("Interceptor - 이건 뭔 에러지?")
+                        completion(.doNotRetry)
+                    }
+                    
                 }
             }
         default:
-            completion(.retry)
+            if request.retryCount > 5 {
+                print("Interceptor retry() error: \(error)")
+                completion(.doNotRetry)
+            }
+            completion(.doNotRetry)
         
         }
     }

@@ -1669,6 +1669,9 @@
                                 <state key="normal" title="로그아웃">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedLogOutButton:" destination="eeV-Us-DhA" eventType="touchUpInside" id="VSP-aZ-x0o"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dl4-Tq-LcM">
                                 <rect key="frame" x="15" y="265" width="64" height="33"/>
@@ -1677,7 +1680,7 @@
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedUnregisterButton:" destination="eeV-Us-DhA" eventType="touchUpInside" id="cdp-JW-zGM"/>
+                                    <action selector="pressedUnregisterButton:" destination="eeV-Us-DhA" eventType="touchUpInside" id="x31-lj-pJR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1708,6 +1711,7 @@
                     <navigationItem key="navigationItem" title="설정" id="eS1-ZE-Yto"/>
                     <connections>
                         <outlet property="logOutButton" destination="Ww6-J3-gEk" id="hwN-td-St0"/>
+                        <outlet property="unregisterButton" destination="Dl4-Tq-LcM" id="ZE3-ii-yfl"/>
                         <outlet property="userNicknameLabel" destination="H78-70-pRs" id="Xje-aX-7w0"/>
                     </connections>
                 </viewController>

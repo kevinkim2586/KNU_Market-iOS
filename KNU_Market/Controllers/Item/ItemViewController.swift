@@ -8,9 +8,6 @@ class ItemViewController: UIViewController {
     
     @IBOutlet weak var slideShow: ImageSlideshow!
     
-    //@IBOutlet weak var itemImageView: UIImageView!
-    //@IBOutlet weak var pageControl: UIPageControl!
-    
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var itemTitleLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
@@ -26,7 +23,6 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dateLabel: UILabel!
     
-    
     private let refreshControl = UIRefreshControl()
     
     var viewModel = ItemViewModel()
@@ -38,9 +34,6 @@ class ItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        slideShow.layer.cornerRadius = 25
-        slideShow.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        
     
         navigationController?.navigationBar.isHidden = true
         
@@ -49,7 +42,6 @@ class ItemViewController: UIViewController {
         viewModel.fetchItemDetails(for: pageID)
         
         initialize()
- 
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +52,6 @@ class ItemViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-   
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -71,13 +62,6 @@ class ItemViewController: UIViewController {
 
     
     //MARK: - IBActions & Methods
-    
-//    @IBAction func pageChanged(_ sender: UIPageControl) {
-//        itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
-//                                  placeholderImage: nil,
-//                                  options: .continueInBackground)
-//    }
-    
     @IBAction func pressedBackButton(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
@@ -105,17 +89,33 @@ class ItemViewController: UIViewController {
             
             self.present(reportVC, animated: true)
         }
-        
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel,
                                          handler: nil)
+        
+        //본인이 작성한 글이면 Delete Action도 추가
+        if viewModel.model?.nickname == User.shared.nickname {
+            
+            let deleteAction = UIAlertAction(title: "글 삭제하기",
+                                             style: .destructive) { alert in
+                
+                self.presentAlertWithCancelAction(title: "정말 삭제하시겠습니까?",
+                                                  message: "") { selectedOk in
+                    
+                    if selectedOk {
+                        
+                        self.viewModel.deletePost(for: self.pageID)
+                    }
+                }
+                                             }
+            actionSheet.addAction(deleteAction)
+        }
         
         actionSheet.addAction(reportUser)
         actionSheet.addAction(cancelAction)
     
         self.present(actionSheet, animated: true)
     }
-    
 }
 
 //MARK: - ItemViewModelDelegate
@@ -134,31 +134,50 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func failedFetchingItemDetails(with error: NetworkError) {
         
-        print("ItemVC - failedFetchingPostDetails")
+        print("ItemVC - failedFetchingPostDetails with error: \(error.errorDescription)")
         self.scrollView.refreshControl?.endRefreshing()
+        
+        scrollView.isHidden = true
+        bottomView.isHidden = true
+        
+        SnackBar.make(in: self.view,
+                      message: "존재하지 않는 글입니다 🧐",
+                      duration: .lengthLong).setAction(with: "홈으로", action: {
+                  
+                        self.navigationController?.popViewController(animated: true)
+                        
+                      }).show()
+    }
+    
+    func didDeletePost() {
+        
+        SnackBar.make(in: self.view,
+                      message: "게시글 삭제 완료 🎉",
+                      duration: .lengthLong).show()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+            
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func failedDeletingPost(with error: NetworkError) {
+        
+        print("ItemVC - failedDeletingPost")
         SnackBar.make(in: self.view,
                       message: error.errorDescription,
-                      duration: .lengthLong).show()
+                      duration: .lengthLong).setAction(with: "재시도", action: {
+                        
+                        self.viewModel.deletePost(for: self.pageID)
+                        
+                      }).show()
     }
+    
 }
 
 //MARK: - UI Configuration
 
 extension ItemViewController {
-    
-    func initialize() {
-        
-        viewModel.delegate = self
-        
-        initializeScrollView()
-        
-        initializeProfileImageView()
-        initializeTitleView()
-        initializeItemExplanationLabel()
-        initializeGatheringPeopleLabel()
-        initializeEnterChatButton()
-        initializeBottomView()
-    }
     
     func updateInformation() {
         
@@ -175,16 +194,11 @@ extension ItemViewController {
         } else {
             userProfileImageView.image = UIImage(named: "default avatar")
         }
-    
+        
         // 사진 설정
-    
         viewModel.imageURLs.isEmpty
             ? configureImageSlideShow(imageExists: false)
             : configureImageSlideShow(imageExists: true)
-        
-        
-
-        
         
         locationLabel.text = viewModel.location
         userIdLabel.text = viewModel.model?.nickname
@@ -193,6 +207,21 @@ extension ItemViewController {
         initializeDateLabel()
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
+        initializeSlideShow()
+    }
+    
+    func initialize() {
+        
+        viewModel.delegate = self
+        
+        initializeScrollView()
+        initializeProfileImageView()
+        initializeTitleView()
+        initializeItemExplanationLabel()
+        initializeGatheringPeopleLabel()
+        initializeEnterChatButton()
+        initializeBottomView()
+        initializeSlideShow()
     }
     
     func initializeScrollView() {
@@ -274,6 +303,12 @@ extension ItemViewController {
         bottomView.layer.borderWidth = 1
         bottomView.layer.borderColor = #colorLiteral(red: 0.9119567871, green: 0.912109673, blue: 0.9119365811, alpha: 1)
     }
+    
+    func initializeSlideShow() {
+        
+        slideShow.layer.cornerRadius = 25
+        slideShow.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+    }
 }
 
 //MARK: - Image Slide Show
@@ -302,75 +337,5 @@ extension ItemViewController {
         fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
     }
     
-//    func configurePageControl() {
-//
-//        itemImageView.isUserInteractionEnabled = true
-//
-//        if viewModel.imageURLs.count >= 2 {
-//            pageControl.isHidden = false
-//        }
-//
-//        pageControl.numberOfPages = viewModel.imageURLs.count
-//        pageControl.currentPage = 0
-//
-//        pageControl.pageIndicatorTintColor = .lightGray
-//        pageControl.currentPageIndicatorTintColor = .white
-//
-//        itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//        itemImageView.sd_setImage(with: viewModel.imageURLs[0],
-//                                  placeholderImage: nil,
-//                                  options: .continueInBackground)
-//
-//        // Tap & Swipe gesture configuration
-//
-//        let tapGesture = UITapGestureRecognizer(target: self,
-//                                                action: #selector(pressedImage))
-//        itemImageView.addGestureRecognizer(tapGesture)
-//
-//        let swipeLeft = UISwipeGestureRecognizer(target: self,
-//                                                 action: #selector(self.respondToSwipeGesture(_:)))
-//        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-//
-//
-//        let swipeRight = UISwipeGestureRecognizer(target: self,
-//                                                  action: #selector(self.respondToSwipeGesture(_:)))
-//        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-//
-//        self.itemImageView.addGestureRecognizer(swipeLeft)
-//        self.itemImageView.addGestureRecognizer(swipeRight)
-//    }
-    
-//    @objc func pressedImage() {
-//
-//        guard let photoDetailVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.photoDetailVC) as? PhotoDetailViewController else {
-//            fatalError()
-//        }
-//
-//        photoDetailVC.imageURLs = viewModel.imageURLs
-//
-//        self.navigationController?.pushViewController(photoDetailVC, animated: true)
-//    }
 
-//    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
-//
-//        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-//
-//            switch swipeGesture.direction {
-//
-//            case UISwipeGestureRecognizer.Direction.left :
-//                pageControl.currentPage += 1
-//                itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
-//                                          placeholderImage: nil,
-//                                          options: .continueInBackground)
-//
-//            case UISwipeGestureRecognizer.Direction.right :
-//                pageControl.currentPage -= 1
-//                itemImageView.sd_setImage(with: viewModel.imageURLs[pageControl.currentPage],
-//                                          placeholderImage: nil,
-//                                          options: .continueInBackground)
-//            default:
-//                break
-//            }
-//        }
-//    }
 }

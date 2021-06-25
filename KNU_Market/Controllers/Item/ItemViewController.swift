@@ -23,6 +23,9 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
+    
     private let refreshControl = UIRefreshControl()
     
     var viewModel = ItemViewModel()
@@ -219,6 +222,8 @@ extension ItemViewController {
         initializeScrollView()
         initializeProfileImageView()
         initializeTitleView()
+        initializeBackButton()
+        initializeMenuButton()
         initializeItemExplanationLabel()
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
@@ -248,7 +253,27 @@ extension ItemViewController {
         
         titleView.layer.shadowOffset = CGSize(width: 3, height: 3)
         titleView.layer.shadowOpacity = 0.2
-        titleView.layer.shadowRadius = 3
+        titleView.layer.shadowRadius = 2
+    }
+    
+    func initializeBackButton() {
+        
+        backButton.layer.cornerRadius = 10
+        backButton.backgroundColor = .white
+        backButton.layer.shadowColor = UIColor.black.cgColor
+        backButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        backButton.layer.shadowOpacity = 0.2
+        backButton.layer.shadowRadius = 2
+    }
+    
+    func initializeMenuButton() {
+        
+        menuButton.layer.cornerRadius = 10
+        menuButton.backgroundColor = .white
+        menuButton.layer.shadowColor = UIColor.black.cgColor
+        menuButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        menuButton.layer.shadowOpacity = 0.2
+        backButton.layer.shadowRadius = 2
     }
     
     func initializeDateLabel() {

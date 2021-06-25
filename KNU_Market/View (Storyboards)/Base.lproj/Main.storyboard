@@ -677,10 +677,13 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Es8-Y7-fwO" userLabel="Back Button">
-                                                <rect key="frame" x="15" y="50" width="27" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Es8-Y7-fwO" userLabel="Back Button">
+                                                <rect key="frame" x="15" y="50" width="35" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="35" id="for-Xy-dWv"/>
+                                                    <constraint firstAttribute="height" constant="35" id="yMe-uC-Ak1"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="arrow.left" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23"/>
                                                 </state>
@@ -688,10 +691,13 @@
                                                     <action selector="pressedBackButton:" destination="vDx-fQ-kj2" eventType="touchUpInside" id="b5w-CE-n7n"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aK3-oG-MzW" userLabel="Menu Button">
-                                                <rect key="frame" x="373" y="50" width="26" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aK3-oG-MzW" userLabel="Menu Button">
+                                                <rect key="frame" x="364" y="50" width="35" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="nCW-wQ-Hdo"/>
+                                                    <constraint firstAttribute="width" constant="35" id="rit-yf-6W6"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="ellipsis" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23"/>
                                                 </state>
@@ -748,6 +754,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="eHi-KU-xXe"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="Es8-Y7-fwO" id="jCK-m1-Xbd"/>
                         <outlet property="bottomView" destination="goH-b2-VEo" id="93P-Mt-5sX"/>
                         <outlet property="dateLabel" destination="VTF-7A-yTO" id="WJh-jo-j41"/>
                         <outlet property="enterChatButton" destination="qdN-yf-AY2" id="QRk-o6-DHK"/>
@@ -757,6 +764,7 @@
                         <outlet property="itemTitleLabel" destination="PWp-f4-Xc4" id="Zwb-9K-PsF"/>
                         <outlet property="locationImageView" destination="Yo2-vO-lfG" id="HVs-gx-J2G"/>
                         <outlet property="locationLabel" destination="Nr0-hG-HIS" id="ZCd-lI-CCy"/>
+                        <outlet property="menuButton" destination="aK3-oG-MzW" id="gPL-LC-uPM"/>
                         <outlet property="scrollView" destination="5wM-em-ffY" id="hvX-oU-cKL"/>
                         <outlet property="slideShow" destination="7Uy-V8-wCQ" id="hb7-vR-39c"/>
                         <outlet property="titleView" destination="W5u-pE-FLR" id="E0J-0V-YcU"/>

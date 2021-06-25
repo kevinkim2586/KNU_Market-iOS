@@ -247,6 +247,8 @@ extension MyPageViewController {
         
         viewModel.delegate = self
         
+        self.navigationController?.view.backgroundColor = .white
+        
         initializeTableView()
         initializeProfileImageButton()
         initializeImagePicker()

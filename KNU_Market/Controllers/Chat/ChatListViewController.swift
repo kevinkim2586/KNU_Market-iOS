@@ -65,7 +65,8 @@ extension ChatListViewController {
     
     func initialize() {
         
-   
+        self.navigationController?.view.backgroundColor = .white
+        
         initializeTableView()
     }
     

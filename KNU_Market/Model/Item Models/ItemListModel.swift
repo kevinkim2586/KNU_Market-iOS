@@ -17,9 +17,9 @@ struct ItemListModel: Decodable {
         case uuid = "UUID"
         case title
         case imageUID = "image"
-        case location = "spotCategory"
+        case location
         case totalGatheringPeople = "maxHeadcount"
-        case currentlyGatheredPeople = "currentHeadcount"
+        case currentlyGatheredPeople = "currunHheadcount"
         case date
         
     }

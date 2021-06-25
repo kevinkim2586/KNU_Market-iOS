@@ -745,11 +745,7 @@
                             <constraint firstAttribute="bottom" secondItem="goH-b2-VEo" secondAttribute="bottom" id="u8x-BY-ST4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="eHi-KU-xXe">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="j10-qd-m9I">
-                            <color key="tintColor" name="AppDefaultColor"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="eHi-KU-xXe"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="bottomView" destination="goH-b2-VEo" id="93P-Mt-5sX"/>

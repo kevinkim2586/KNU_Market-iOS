@@ -32,8 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        //let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
-        //window?.rootViewController = mainTabBarController
+//        let initialController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
+//        window?.rootViewController = initialController
         
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
         window?.rootViewController = mainTabBarController

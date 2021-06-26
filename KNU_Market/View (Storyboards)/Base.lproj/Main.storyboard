@@ -60,15 +60,20 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="appLogoWithPhrase" translatesAutoresizingMaskIntoConstraints="NO" id="286-Rl-XaC">
-                                <rect key="frame" x="103" y="153" width="208" height="180"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogoWithPhrase" translatesAutoresizingMaskIntoConstraints="NO" id="286-Rl-XaC">
+                                <rect key="frame" x="102" y="294" width="210" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="Vhf-gj-Cb9"/>
+                                    <constraint firstAttribute="height" constant="200" id="qhn-Y3-lrp"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="kfM-0r-VwU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mtQ-Ww-SWS"/>
+                            <constraint firstItem="286-Rl-XaC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="250" id="oGb-53-KH7"/>
+                            <constraint firstItem="286-Rl-XaC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="p3n-vx-Glu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kfM-0r-VwU" secondAttribute="bottom" constant="50" id="u0l-dc-QtC"/>
                         </constraints>
                     </view>
@@ -153,9 +158,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z18-C1-q5V">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="810"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z18-C1-q5V">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemTableViewCell" rowHeight="110" id="8gT-0R-YZ5" customClass="ItemTableViewCell" customModule="KNU_Market" customModuleProvider="target">
@@ -256,9 +260,13 @@
                         <viewLayoutGuide key="safeArea" id="JSI-0T-O9U"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Z18-C1-q5V" firstAttribute="bottom" secondItem="JSI-0T-O9U" secondAttribute="bottom" id="12g-AI-axW"/>
+                            <constraint firstItem="Z18-C1-q5V" firstAttribute="leading" secondItem="JSI-0T-O9U" secondAttribute="leading" id="ASH-zE-TfY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tUL-GT-Cs7" secondAttribute="trailing" constant="5" id="DDc-L4-v3e"/>
+                            <constraint firstItem="Z18-C1-q5V" firstAttribute="top" secondItem="JSI-0T-O9U" secondAttribute="top" id="LEI-Hs-oxj"/>
                             <constraint firstItem="JSI-0T-O9U" firstAttribute="bottom" secondItem="tUL-GT-Cs7" secondAttribute="bottom" constant="20" id="npG-fc-0iW"/>
                             <constraint firstItem="JSI-0T-O9U" firstAttribute="trailing" secondItem="tUL-GT-Cs7" secondAttribute="trailing" constant="25" id="odu-CM-g9F"/>
+                            <constraint firstItem="Z18-C1-q5V" firstAttribute="trailing" secondItem="JSI-0T-O9U" secondAttribute="trailing" id="ovP-cg-Ztu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="크누마켓" id="jxR-WV-tcU"/>

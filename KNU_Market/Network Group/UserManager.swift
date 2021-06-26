@@ -85,7 +85,7 @@ class UserManager {
                         let json = try JSON(data: response.data!)
                         let result = json["isDuplicate"].stringValue
                         
-                        print("USER MANAGER - checkDuplicate Result: \(result)")
+                        print("USER MANAGER - isDuplicate Result: \(result)")
                         
                         result == "true" ? completion(.success(true)) : completion(.success(false))
                         
@@ -95,13 +95,15 @@ class UserManager {
                     }
                 default:
                     let error = NetworkError.returnError(json: response.data!)
+                    print("❗️ \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }
     }
     
     //MARK: - 로그인
-    func login(id: String, password: String,
+    func login(id: String,
+               password: String,
                completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
         let parameters: Parameters = [ "id" : id,
@@ -114,7 +116,6 @@ class UserManager {
                    encoding: JSONEncoding.default,
                    headers: headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
@@ -136,8 +137,9 @@ class UserManager {
                         completion(.failure(.E000))
                     }
                 default:
-                    print("login FAILED")
+
                     let error = NetworkError.returnError(json: response.data!)
+                    print("❗️ \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }

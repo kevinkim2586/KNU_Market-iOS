@@ -61,8 +61,6 @@ class ItemViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
- 
-    
     //MARK: - IBActions & Methods
     @IBAction func pressedBackButton(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
@@ -88,7 +86,6 @@ class ItemViewController: UIViewController {
                                                   message: "") { selectedOk in
                     
                     if selectedOk {
-                        
                         self.viewModel.deletePost(for: self.pageID)
                     }
                 }
@@ -159,7 +156,7 @@ extension ItemViewController: ItemViewModelDelegate {
                       message: "게시글 삭제 완료 🎉",
                       duration: .lengthLong).show()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
             
             GlobalVariable.needsToReloadData = true
             self.navigationController?.popViewController(animated: true)

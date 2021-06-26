@@ -35,9 +35,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
         //window?.rootViewController = mainTabBarController
         
-        
-        let initialViewController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
-        window?.rootViewController = initialViewController
+        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+        window?.rootViewController = mainTabBarController
 
         
         // if user is logged in before

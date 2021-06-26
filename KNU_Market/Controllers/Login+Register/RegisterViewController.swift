@@ -7,7 +7,6 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var emailFormatTextField: UITextField!
-    @IBOutlet weak var sendEmailVerificationButton: UIButton!
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var checkAlreadyInUseButton: UIButton!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -54,9 +53,21 @@ class RegisterViewController: UIViewController {
             guard let self = self else { return }
             
             switch result {
-            case .success(let isNotDuplicate):
+            case .success(let isDuplicate):
                 
-                if isNotDuplicate {
+                if isDuplicate {
+                    
+                    SnackBar.make(in: self.view,
+                                  message: "이미 사용 중인 닉네임입니다 😅",
+                                  duration: .lengthLong).show()
+                    
+                    DispatchQueue.main.async {
+                        self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
+                    }
+
+                    
+                    
+                } else {
                     
                     SnackBar.make(in: self.view,
                                   message: "사용하셔도 좋습니다 🎉",
@@ -65,17 +76,6 @@ class RegisterViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.borderColor)?.cgColor
                         self.didCheckNicknameDuplicate = true
-                    }
-                    
-                    
-                } else {
-                    
-                    SnackBar.make(in: self.view,
-                                  message: "이미 사용 중인 닉네임입니다 😅",
-                                  duration: .lengthLong).show()
-                    
-                    DispatchQueue.main.async {
-                        self.nicknameTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
                     }
                     
                 }
@@ -304,7 +304,7 @@ extension RegisterViewController {
         initializeLabels()
         initializeTextFields()
         initializeProfileImageButton()
-        initializeEmailVerificationButton()
+
         initializeNextButton()
         
     }
@@ -348,12 +348,6 @@ extension RegisterViewController {
         profileImageButton.isUserInteractionEnabled = true
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
-    }
-    
-    func initializeEmailVerificationButton() {
-        
-        sendEmailVerificationButton.setTitle("인증 메일 보내기", for: .normal)
-        
     }
     
     func initializeNextButton() {

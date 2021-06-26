@@ -22,35 +22,35 @@ class HomeViewModel {
     //MARK: - 공구글 불러오기
     func fetchItemList() {
         
-        
+        /* Mock Data
         itemList.append(contentsOf: itemListMockData)
         self.delegate?.didFetchItemList()
+        */
         
-        
-//        isFetchingData = true
-//
-//        ItemManager.shared.fetchItemList(at: self.index) { [weak self] result in
-//            
-//            guard let self = self else { return }
-//
-//            switch result {
-//            case .success(let fetchedModel):
-//
-//                if fetchedModel.isEmpty {
-//                    //self.isFetchingData = false
-//                    self.delegate?.didFetchItemList()
-//                    return
-//                }
-//
-//                self.index += 1
-//                self.itemList.append(contentsOf: fetchedModel)
-//                self.isFetchingData = false
-//                self.delegate?.didFetchItemList()
-//
-//            case .failure(let error):
-//                self.delegate?.failedFetchingItemList(with: error)
-//            }
-//        }
+        isFetchingData = true
+
+        ItemManager.shared.fetchItemList(at: self.index) { [weak self] result in
+            
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let fetchedModel):
+
+                if fetchedModel.isEmpty {
+                    //self.isFetchingData = false
+                    self.delegate?.didFetchItemList()
+                    return
+                }
+
+                self.index += 1
+                self.itemList.append(contentsOf: fetchedModel)
+                self.isFetchingData = false
+                self.delegate?.didFetchItemList()
+
+            case .failure(let error):
+                self.delegate?.failedFetchingItemList(with: error)
+            }
+        }
     }
 
     //MARK: - 유저 정보 불러오기

@@ -146,11 +146,11 @@
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" title="Home View Controller" id="NqC-5r-eov" customClass="HomeViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DCH-7T-fIX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z18-C1-q5V">
-                                <rect key="frame" x="0.0" y="85" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="810"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -235,7 +235,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUL-GT-Cs7">
-                                <rect key="frame" x="334" y="738" width="55" height="55"/>
+                                <rect key="frame" x="334" y="650" width="55" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="KmZ-EY-gqg"/>
                                     <constraint firstAttribute="width" constant="55" id="fxe-xj-t6Z"/>
@@ -257,7 +257,7 @@
                             <constraint firstItem="JSI-0T-O9U" firstAttribute="trailing" secondItem="tUL-GT-Cs7" secondAttribute="trailing" constant="25" id="odu-CM-g9F"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="크누마켓" largeTitleDisplayMode="always" id="jxR-WV-tcU"/>
+                    <navigationItem key="navigationItem" title="크누마켓" id="jxR-WV-tcU"/>
                     <connections>
                         <outlet property="addButton" destination="tUL-GT-Cs7" id="V1j-xD-alh"/>
                         <outlet property="tableView" destination="Z18-C1-q5V" id="Gjn-8Q-rsj"/>
@@ -265,7 +265,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gG4-zx-a3T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5051" y="-1025"/>
+            <point key="canvasLocation" x="5050.7246376811599" y="-1025.2232142857142"/>
         </scene>
         <!--Item View Controller-->
         <scene sceneID="QBn-Lc-L4j">
@@ -1108,7 +1108,7 @@
                             <constraint firstItem="RGU-wl-clc" firstAttribute="bottom" secondItem="Fns-XP-5Tf" secondAttribute="bottom" id="owO-7o-46X"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="채팅" largeTitleDisplayMode="always" id="4sc-w2-WCM"/>
+                    <navigationItem key="navigationItem" title="채팅" id="4sc-w2-WCM"/>
                     <connections>
                         <outlet property="chatListTableView" destination="RGU-wl-clc" id="e1G-jF-ypx"/>
                     </connections>
@@ -1501,8 +1501,8 @@
                         <color key="badgeColor" name="AppDefaultColor"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Bag-Fo-mV6">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bag-Fo-mV6">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="AppDefaultColor"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1549,13 +1549,16 @@
                         <color key="badgeColor" name="AppDefaultColor"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Js5-51-S3r">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Js5-51-S3r">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" name="AppDefaultColor"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>

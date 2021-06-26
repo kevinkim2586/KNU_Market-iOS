@@ -37,7 +37,6 @@ class User {
             guard let accessToken = retrievedAccessToken else {
                 return "Invalid AccessToken"
             }
-            print("User - accessToken: \(accessToken)")
             return accessToken
 
         }

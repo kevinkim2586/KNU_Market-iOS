@@ -32,14 +32,38 @@ class RegisterViewController: UIViewController {
     
     @IBAction func pressedImageUploadButton(_ sender: UIButton) {
         
-        initializeImagePicker()
+        presentActionSheet()
         present(self.imagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func pressedSendEmailVerificationButton(_ sender: UIButton) {
+    func presentActionSheet() {
         
+        let alert = UIAlertController(title: "프로필 사진 선택",
+                                      message: "",
+                                      preferredStyle: .actionSheet)
+        let library = UIAlertAction(title: "앨범에서 선택",
+                                    style: .default) { _ in
+            
+            self.initializeImagePicker()
+            self.present(self.imagePicker, animated: true)
+        }
+        let remove = UIAlertAction(title: "프로필 사진 제거",
+                                   style: .default) { _ in
+            
+            self.initializeProfileImageButton()
+            
+        }
+        let cancel = UIAlertAction(title: "취소",
+                                   style: .cancel,
+                                   handler: nil)
         
+        alert.addAction(library)
+        alert.addAction(remove)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
     }
+
     
     @IBAction func pressedCheckDuplicateButton(_ sender: UIButton) {
         
@@ -283,8 +307,8 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
             profileImageButton.setImage(originalImage, for: .normal)
             profileImageButton.contentMode = .scaleAspectFit
             profileImageButton.layer.masksToBounds = true
-            profileImageButton.layer.borderWidth = 1
-            profileImageButton.layer.borderColor = UIColor.lightGray.cgColor
+//            profileImageButton.layer.borderWidth = 1
+//            profileImageButton.layer.borderColor = UIColor.lightGray.cgColor
         }
         dismiss(animated: true, completion: nil)
     }
@@ -345,6 +369,8 @@ extension RegisterViewController {
     
     func initializeProfileImageButton() {
 
+        profileImageButton.setImage(#imageLiteral(resourceName: "pick profile image"), for: .normal)
+        profileImageButton.layer.masksToBounds = false
         profileImageButton.isUserInteractionEnabled = true
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2

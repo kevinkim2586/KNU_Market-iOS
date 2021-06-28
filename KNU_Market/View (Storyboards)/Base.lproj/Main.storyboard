@@ -225,7 +225,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="북문" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEl-9j-7BQ">
-                                                    <rect key="frame" x="303" y="76" width="26" height="18"/>
+                                                    <rect key="frame" x="323" y="76" width="26" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -269,7 +269,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="ICf-7Q-kjx" secondAttribute="bottom" constant="5" id="ljW-2f-e5P"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="GCM-dd-Bdj" secondAttribute="trailing" constant="30" id="n0k-Ls-Ym1"/>
                                                 <constraint firstItem="Zzg-Hf-sB5" firstAttribute="leading" secondItem="TDS-j5-mBO" secondAttribute="trailing" constant="10" id="rnn-IJ-xUr"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="fEl-9j-7BQ" secondAttribute="trailing" constant="30" id="vpk-aY-Q0m"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fEl-9j-7BQ" secondAttribute="trailing" constant="10" id="vpk-aY-Q0m"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -284,16 +284,19 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUL-GT-Cs7">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUL-GT-Cs7">
                                 <rect key="frame" x="295" y="499" width="55" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="KmZ-EY-gqg"/>
                                     <constraint firstAttribute="width" constant="55" id="fxe-xj-t6Z"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="plus" catalog="system">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                                <state key="normal" image="plus" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHiddenWhenSkeletonIsActive" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isUserInteractionDisabledWhenSkeletonIsActive" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="pressedAddButton:" destination="NqC-5r-eov" eventType="touchUpInside" id="g7d-Hz-jLC"/>
                                 </connections>

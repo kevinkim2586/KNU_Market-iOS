@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
         
         User.shared.id = idTextField.text!
         User.shared.password = passwordTextField.text!
-        
+        User.shared.isLoggedIn = true
     }
     
 }

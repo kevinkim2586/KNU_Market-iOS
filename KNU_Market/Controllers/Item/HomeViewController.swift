@@ -61,9 +61,8 @@ extension HomeViewController: HomeViewModelDelegate {
     
     func didFetchUserProfileInfo() {
         SPIndicator.present(title: "\(User.shared.nickname)님",
-                            message: "환영합니다",
-                            preset: .custom(UIImage(systemName: "face.smiling")!
-                                                .withTintColor(UIColor(named: Constants.Color.appColor) ?? .systemBlue)))
+                            message: "환영합니다 🎉",
+                            preset: .custom(UIImage(systemName: "face.smiling")!))
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
@@ -180,9 +179,7 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController {
     
     func initialize() {
-        
-        //self.navigationController?.view.backgroundColor = .white
-        
+
         viewModel.delegate = self
     
         viewModel.loadUserProfile()

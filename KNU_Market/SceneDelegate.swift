@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+        
         guard let window = self.window else {
             return
         }
@@ -32,23 +33,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let initialController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
-        window?.rootViewController = initialController
+        if User.shared.isLoggedIn == true {
+            
+            let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+            window?.rootViewController = mainTabBarController
         
-//        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
-//        window?.rootViewController = mainTabBarController
-
+        } else {
+            
+            let initialController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
+            window?.rootViewController = initialController
+        }
         
-        // if user is logged in before
-//        if let loggedUsername = UserDefaults.standard.string(forKey: "username") {
-//
-//            let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
-//            window?.rootViewController = mainTabBarController
-//        } else {
-//
-//            let loginNavController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.loginNavigationController)
-//            window?.rootViewController = loginNavController
-//        }
+    
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

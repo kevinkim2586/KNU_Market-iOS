@@ -39,8 +39,8 @@ class ItemTableViewCell: UITableViewCell {
         viewModel.totalGatheringPeople = model.totalGatheringPeople
         viewModel.imageUID = model.imageUID ?? ""
         viewModel.currentlyGatheredPeople = model.currentlyGatheredPeople
-        //백엔드에서 currentlyGatheredPeople 정보를 추가해야할듯
-    
+        
+        
         initialize()
     }
 

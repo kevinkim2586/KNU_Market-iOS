@@ -53,6 +53,15 @@ class User {
             
         }
     }
+    
+    var isLoggedIn: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLoggedIn)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.isLoggedIn)
+        }
+    }
         
         
     var savedAccessToken: Bool = false
@@ -90,6 +99,7 @@ class User {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.nickname)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.profileImageUID)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
         
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)

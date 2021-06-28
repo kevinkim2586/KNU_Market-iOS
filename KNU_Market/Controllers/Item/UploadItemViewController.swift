@@ -215,7 +215,7 @@ extension UploadItemViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
     
         if textView.text.isEmpty {
-            textView.text = "공구 내용을 작성해주세요. (중고 거래 또는 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.)"
+            textView.text = "공구 내용을 작성해주세요. (중고 거래 또는 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.) \n\n 게시 가능 글 종류: \n- 배달음식 공구 \n- 온라인 쇼핑 공구 \n- 물물교환 및 나눔"
             textView.textColor = UIColor.lightGray
             return
         }
@@ -253,7 +253,7 @@ extension UploadItemViewController {
         stepper.maximumValue = 10
         stepper.stepValue = 1
         stepper.buttonsTextColor = .white
-        stepper.buttonsBackgroundColor = UIColor(named: "AppDefaultColor")!
+        stepper.buttonsBackgroundColor = UIColor(named: Constants.Color.appColor)!
         stepper.buttonsFont = UIFont(name: "AvenirNext-Bold", size: 15.0)!
         stepper.labelFont = .systemFont(ofSize: 15)
         stepper.labelTextColor = UIColor(named:Constants.Color.appColor)!
@@ -281,7 +281,7 @@ extension UploadItemViewController {
         itemDetailTextView.layer.cornerRadius = 10.0
         itemDetailTextView.layer.borderColor = UIColor.lightGray.cgColor
         itemDetailTextView.clipsToBounds = true
-        itemDetailTextView.text = "공구 내용을 작성해주세요. (중고 거래 또는 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.)"
+        itemDetailTextView.text = "공구 내용을 작성해주세요. (중고 거래 또는 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.) \n\n 게시 가능 글 종류: \n- 배달음식 공구 \n- 온라인 쇼핑 공구 \n- 물물교환 및 나눔"
         itemDetailTextView.textColor = UIColor.lightGray
     }
     

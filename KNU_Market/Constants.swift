@@ -57,6 +57,7 @@ struct Constants {
         static let userID                       = "userID"
         static let nickname                     = "nickname"
         static let profileImageUID              = "profileImageUID"
+        static let isLoggedIn                   = "isLoggedIn"
     }
     
     //MARK: - UI Related Constants

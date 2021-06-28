@@ -30,10 +30,14 @@ class RegisterViewController: UIViewController {
         initialize()
     }
     
-    @IBAction func pressedImageUploadButton(_ sender: UIButton) {
+    @IBAction func pressedXButton(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
+    
+    @IBAction func pressedProfileImageButton(_ sender: UIButton) {
         
         presentActionSheet()
-        present(self.imagePicker, animated: true, completion: nil)
     }
     
     func presentActionSheet() {

@@ -11,14 +11,6 @@ class InitialViewController: UIViewController {
         initialize()
        
     }
-
-    @IBAction func pressedLoginButton(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func pressedRegisterButton(_ sender: UIButton) {
-        
-    }
     
     //MARK: - UI Configuration
     

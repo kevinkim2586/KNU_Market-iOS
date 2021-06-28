@@ -11,10 +11,14 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         initialize()
-    
     }
+    
+    @IBAction func pressedXButton(_ sender: UIButton) {
+        
+        self.dismiss(animated: true)
+    }
+    
     
     @IBAction func pressedLoginButton(_ sender: UIButton) {
         

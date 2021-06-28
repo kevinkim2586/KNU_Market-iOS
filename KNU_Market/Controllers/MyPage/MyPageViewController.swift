@@ -6,7 +6,6 @@ class MyPageViewController: UIViewController {
     
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var userNicknameLabel: UILabel!
-    @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var settingsTableView: UITableView!
     
     lazy var imagePicker = UIImagePickerController()
@@ -100,7 +99,9 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func didFetchProfileImage() {
+        
         profileImageButton.setImage(viewModel.profileImage, for: .normal)
+        profileImageButton.layer.masksToBounds = true
     }
     
     func failedLoadingUserProfileInfo(with error: NetworkError) {
@@ -279,8 +280,8 @@ extension MyPageViewController {
         
         profileImageButton.setImage(image, for: .normal)
         profileImageButton.contentMode = .scaleAspectFit
-        profileImageButton.layer.borderWidth = 1
-        profileImageButton.layer.borderColor = UIColor.lightGray.cgColor
+        profileImageButton.layer.masksToBounds = true
+
     }
     
 }

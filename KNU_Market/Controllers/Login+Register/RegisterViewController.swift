@@ -170,6 +170,7 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    //MARK: - 공백 TextField 확인
     func checkIfBlankTextFieldsExists() -> Bool {
         
         guard let email = emailTextField.text,
@@ -194,20 +195,7 @@ class RegisterViewController: UIViewController {
         return true
     }
     
-//    func checkEmailFormat() -> Bool {
-//
-//        guard let email = emailTextField.text else { return false }
-//
-//        guard email.contains("@knu.ac.kr") else {
-//            SnackBar.make(in: self.view,
-//                          message: "학교 이메일을 기입하셨는지 확인하시기 바랍니다 🤔",
-//                          duration: .lengthLong).show()
-//            emailTextField.layer.borderColor = UIColor(named: Constants.Color.appColor)?.cgColor
-//            return false
-//        }
-//        return true
-//    }
-    
+    //MARK: - 중복 확인을 하였는지 판별
     func checkNicknameDuplicate() -> Bool {
         
         if !didCheckNicknameDuplicate {
@@ -219,6 +207,7 @@ class RegisterViewController: UIViewController {
         else { return true }
     }
     
+    //MARK: - 닉네임 길이 체크
     func checkNicknameLength() -> Bool {
         
         guard let nickname = nicknameTextField.text else { return false }
@@ -232,6 +221,7 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    //MARK: - 비밀번호 길이 체크
     func checkPasswordLength() -> Bool {
         
         guard let password = passwordTextField.text else { return false }
@@ -249,6 +239,7 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    //MARK: - 비밀번호 2개가 일치하는지도 확인
     func checkIfPasswordFieldsAreIdentical() -> Bool {
         
         if passwordTextField.text == checkPasswordTextField.text { return true }
@@ -261,17 +252,6 @@ class RegisterViewController: UIViewController {
             return false
         }
     }
-    
-    // 아래 함수 필요없으니 없애는거 검토
-    
-    func changeRootViewController() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
-        
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-    }
-    
 }
 
 //MARK: - UITextFieldDelegate

@@ -54,6 +54,7 @@ class MyPageViewModel {
                     return
                 }
                 
+                // 없다면 DB에서 받아오기
                 OperationQueue().addOperation {
                     self.fetchProfileImage(with: model.profileImageCode)
                 }

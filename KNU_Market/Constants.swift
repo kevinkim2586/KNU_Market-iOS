@@ -16,6 +16,8 @@ struct Constants {
         // Register  & Login
         static let initialVC                    = "initialViewController"
         static let initialNavigationController  = "InitialNavigationController"
+        static let loginVC                      = "LoginViewController"
+        static let registerVC                   = "RegisterViewController"
         
         
         static let tabBarController             = "TabBarController"

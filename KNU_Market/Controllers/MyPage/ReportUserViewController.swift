@@ -15,6 +15,10 @@ class ReportUserViewController: UIViewController {
         initialize()
     }
     
+    @IBAction func pressedXButton(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
     @IBAction func pressedSendButton(_ sender: UIButton) {
         
         self.view.endEditing(true)

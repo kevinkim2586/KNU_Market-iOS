@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nmt-zS-D4g">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2jK-st-yaV">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -321,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gG4-zx-a3T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5050.7246376811599" y="-1025.2232142857142"/>
+            <point key="canvasLocation" x="5989.6000000000004" y="-1025.9370314842579"/>
         </scene>
         <!--Item View Controller-->
         <scene sceneID="QBn-Lc-L4j">
@@ -581,7 +581,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XVe-K3-eCq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7648" y="-719"/>
+            <point key="canvasLocation" x="8586.3999999999996" y="-719.19040479760122"/>
         </scene>
         <!--Item View Controller-->
         <scene sceneID="jCJ-Gb-A9e">
@@ -830,7 +830,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ccc-xY-NpQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6041" y="-719"/>
+            <point key="canvasLocation" x="6980" y="-719.19040479760122"/>
         </scene>
         <!--Upload Item View Controller-->
         <scene sceneID="Fhg-FP-AKg">
@@ -1085,7 +1085,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECu-bw-Vf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6041" y="-1418"/>
+            <point key="canvasLocation" x="6980" y="-1418.1409295352325"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="jVb-WK-Eca">
@@ -1171,7 +1171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6AA-bb-xUu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5050.7246376811599" y="68.973214285714278"/>
+            <point key="canvasLocation" x="5989.6000000000004" y="68.815592203898049"/>
         </scene>
         <!--My Page View Controller-->
         <scene sceneID="pQm-Oj-IOH">
@@ -1199,12 +1199,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lMN-5z-sKI">
-                                <rect key="frame" x="0.0" y="234" width="375" height="220"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lMN-5z-sKI">
+                                <rect key="frame" x="0.0" y="234" width="375" height="384"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="220" id="EaX-ux-VKA"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="myPageCell" textLabel="pdk-Rt-EIL" rowHeight="57" style="IBUITableViewCellStyleDefault" id="gth-74-Fua">
                                         <rect key="frame" x="0.0" y="24.5" width="375" height="57"/>
@@ -1234,6 +1231,7 @@
                             <constraint firstItem="UVp-j7-EQR" firstAttribute="top" secondItem="ri2-pH-fnf" secondAttribute="top" constant="20" id="P6I-tD-A2B"/>
                             <constraint firstItem="lMN-5z-sKI" firstAttribute="top" secondItem="Vmh-ZW-9dO" secondAttribute="bottom" constant="15" id="ZTS-ZO-nfi"/>
                             <constraint firstItem="Vmh-ZW-9dO" firstAttribute="centerX" secondItem="dL8-d0-QzK" secondAttribute="centerX" id="iF5-GJ-2fo"/>
+                            <constraint firstItem="ri2-pH-fnf" firstAttribute="bottom" secondItem="lMN-5z-sKI" secondAttribute="bottom" id="jYd-oT-f52"/>
                             <constraint firstItem="UVp-j7-EQR" firstAttribute="centerX" secondItem="dL8-d0-QzK" secondAttribute="centerX" id="qrB-ig-xKZ"/>
                             <constraint firstItem="lMN-5z-sKI" firstAttribute="leading" secondItem="ri2-pH-fnf" secondAttribute="leading" id="rlb-CW-l9I"/>
                         </constraints>
@@ -1247,7 +1245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKu-zD-xvF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5051" y="1055"/>
+            <point key="canvasLocation" x="5989.6000000000004" y="1054.7226386806597"/>
         </scene>
         <!--건의사항-->
         <scene sceneID="AUy-cC-wxa">
@@ -1312,7 +1310,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b5h-eK-czf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6323" y="1055"/>
+            <point key="canvasLocation" x="7261.6000000000004" y="1054.7226386806597"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="BtQ-8F-euS">
@@ -1540,7 +1538,7 @@
         <scene sceneID="ctY-6B-EF8">
             <objects>
                 <navigationController title="ChatNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="dnX-sc-2Ow" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="채팅" image="message" catalog="system" selectedImage="message.fill" id="dKJ-f9-Edw">
+                    <tabBarItem key="tabBarItem" title="" image="chat_unselected" selectedImage="chat_selected" id="dKJ-f9-Edw">
                         <color key="badgeColor" name="AppDefaultColor"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -1560,36 +1558,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WwS-ki-Nl6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4141" y="69"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="Teb-6j-bt7">
-            <objects>
-                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="nmt-zS-D4g" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pwb-ed-Z2i">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="EqL-Ul-2NX" kind="relationship" relationship="viewControllers" id="lyR-o5-vKX"/>
-                        <segue destination="dnX-sc-2Ow" kind="relationship" relationship="viewControllers" id="UHC-rD-ij4"/>
-                        <segue destination="Pwd-rp-1hX" kind="relationship" relationship="viewControllers" id="CR6-T9-c6v"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zSa-DX-45R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2813" y="69"/>
+            <point key="canvasLocation" x="5079.1999999999998" y="68.815592203898049"/>
         </scene>
         <!--HomeNavigationController-->
         <scene sceneID="3L5-zp-COK">
             <objects>
                 <navigationController title="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="EqL-Ul-2NX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="홈화면" image="testImage" selectedImage="testImage" id="qi5-aD-5Vc">
-                        <color key="badgeColor" name="AppDefaultColor"/>
+                    <tabBarItem key="tabBarItem" title="" image="home_unselected" selectedImage="home_selected" id="qi5-aD-5Vc">
+                        <color key="badgeColor" red="0.53725490200000003" green="0.69019607839999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Js5-51-S3r">
@@ -1611,7 +1587,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tTE-wV-HBU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4141" y="-1025"/>
+            <point key="canvasLocation" x="5079.1999999999998" y="-1025.0374812593705"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="KfN-qL-ktP">
@@ -1627,13 +1603,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zOZ-hr-4UP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6041" y="69"/>
+            <point key="canvasLocation" x="6980" y="68.815592203898049"/>
         </scene>
         <!--MyPageNavigationController-->
         <scene sceneID="Q6F-T8-BR9">
             <objects>
                 <navigationController title="MyPageNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Pwd-rp-1hX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="마이페이지" image="person" catalog="system" selectedImage="person.fill" id="l1U-79-unT">
+                    <tabBarItem key="tabBarItem" title="" image="mypage_unselected" selectedImage="mypage_selected" id="l1U-79-unT">
                         <color key="badgeColor" name="AppDefaultColor"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -1653,7 +1629,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LoH-pF-Hg7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4141" y="1056"/>
+            <point key="canvasLocation" x="5079.1999999999998" y="1055.6221889055473"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="7c4-Re-RkU">
@@ -2013,27 +1989,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0d-Ow-f7U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7232" y="1055"/>
+            <point key="canvasLocation" x="8170.3999999999996" y="1054.7226386806597"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="f1k-s8-Jvd">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="2jK-st-yaV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mfB-fI-ivU">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="AppDefaultColor"/>
+                        <color key="selectedImageTintColor" name="AppDefaultColor"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="EqL-Ul-2NX" kind="relationship" relationship="viewControllers" id="6hS-gp-sOu"/>
+                        <segue destination="dnX-sc-2Ow" kind="relationship" relationship="viewControllers" id="QX6-A2-YxS"/>
+                        <segue destination="Pwd-rp-1hX" kind="relationship" relationship="viewControllers" id="uOm-Nu-ex4"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iAz-12-GYd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3748" y="69"/>
         </scene>
     </scenes>
     <resources>
         <image name="add button" width="124" height="130"/>
         <image name="appLogo" width="1301" height="1345"/>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
+        <image name="chat_selected" width="25" height="25"/>
+        <image name="chat_unselected" width="25" height="25"/>
         <image name="default avatar" width="38" height="38"/>
         <image name="default item icon" width="148" height="151"/>
         <image name="delete button" width="79" height="79"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="home_selected" width="25" height="25"/>
+        <image name="home_unselected" width="25" height="25"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="location icon" width="38" height="38"/>
-        <image name="message" catalog="system" width="128" height="113"/>
-        <image name="message.fill" catalog="system" width="128" height="113"/>
+        <image name="mypage_selected" width="25" height="25"/>
+        <image name="mypage_unselected" width="25" height="25"/>
         <image name="people icon" width="52" height="52"/>
-        <image name="person" catalog="system" width="128" height="117"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="pick profile image" width="195" height="195"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="testImage" width="35" height="35.5"/>
         <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

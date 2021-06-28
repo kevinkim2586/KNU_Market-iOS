@@ -8,6 +8,7 @@ class User {
     
     private init() {}
     
+    //MARK: - Properties
     var id: String {
         get {
             return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userID) ?? "표시 에러"
@@ -29,6 +30,28 @@ class User {
     var password: String = ""
     
     var email: String = ""
+
+    
+    var isLoggedIn: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLoggedIn)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.isLoggedIn)
+        }
+    }
+    
+    // 이메일 인증 완료 판별
+    var hasVerifiedEmail: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.hasVerifiedEmail)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.hasVerifiedEmail)
+        }
+    }
+    
+    //MARK: - Access Token Related Properties
     
     var accessToken: String {
         
@@ -38,7 +61,6 @@ class User {
                 return "Invalid AccessToken"
             }
             return accessToken
-
         }
     }
     
@@ -50,23 +72,13 @@ class User {
                 return "Invalid RefreshToken"
             }
             return refreshToken
-            
         }
     }
-    
-    var isLoggedIn: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLoggedIn)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.isLoggedIn)
-        }
-    }
-        
         
     var savedAccessToken: Bool = false
-    
     var savedRefreshToken: Bool = false
+    
+    //MARK: - User Profile Image Related Properties
     
     var profileImage: UIImage? {
         didSet {
@@ -85,7 +97,8 @@ class User {
         }
     }
     
-    
+    //MARK: - Methods
+
     func resetAllUserInfo() {
 
         id = ""
@@ -104,7 +117,7 @@ class User {
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)
         
-        print("resetAllUserInfo successful")
+        print("✏️ resetAllUserInfo successful")
 
     }
     

@@ -60,6 +60,7 @@ struct Constants {
         static let nickname                     = "nickname"
         static let profileImageUID              = "profileImageUID"
         static let isLoggedIn                   = "isLoggedIn"
+        static let hasVerifiedEmail             = "hasVerifiedEmail"
     }
     
     //MARK: - UI Related Constants
@@ -89,6 +90,7 @@ struct Constants {
         static let pickProfileImage             = "pick profile image"
         
         // Tab Bar Icons
+        
         
         
         // Item View Controller Images

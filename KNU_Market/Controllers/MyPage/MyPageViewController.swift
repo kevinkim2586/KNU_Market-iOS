@@ -68,27 +68,26 @@ extension MyPageViewController {
     
     func removeProfileImage() {
         
-//        UserManager.shared.removeProfileImage { [weak self] result in
-//
-//            guard let self = self else { return }
-//
-//            switch result {
-//
-//            case .success(_):
-//                SnackBar.make(in: self.view,
-//                              message: "프로필 사진 제거 성공 🎉",
-//                              duration: .lengthLong).show()
-//                DispatchQueue.main.async {
-//                    self.profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
-//                    self.initializeProfileImageButton()
-//                    User.shared.profileImage = nil
-//                }
-//            case .failure(_):
-//                SnackBar.make(in: self.view,
-//                              message: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲",
-//                              duration: .lengthLong).show()
-//            }
-//        }
+        UserManager.shared.updateUserProfileImage(with: "default") { [weak self] result in
+
+            guard let self = self else { return }
+
+            switch result {
+
+            case .success(_):
+                SnackBar.make(in: self.view,
+                              message: "프로필 사진 제거 성공 🎉",
+                              duration: .lengthLong).show()
+                DispatchQueue.main.async {
+                    self.initializeProfileImageButton()
+                    User.shared.profileImage = nil
+                }
+            case .failure(_):
+                SnackBar.make(in: self.view,
+                              message: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲",
+                              duration: .lengthLong).show()
+            }
+        }
     }
 }
 
@@ -262,9 +261,10 @@ extension MyPageViewController {
     
     func initializeProfileImageButton() {
         
+        profileImageButton.setImage(#imageLiteral(resourceName: "pick profile image"), for: .normal)
+        profileImageButton.layer.masksToBounds = false
         profileImageButton.isUserInteractionEnabled = true
         profileImageButton.contentMode = .scaleAspectFit
-        profileImageButton.layer.masksToBounds = true
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
     }
     

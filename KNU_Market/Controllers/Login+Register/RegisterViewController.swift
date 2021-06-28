@@ -307,8 +307,7 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
             profileImageButton.setImage(originalImage, for: .normal)
             profileImageButton.contentMode = .scaleAspectFit
             profileImageButton.layer.masksToBounds = true
-//            profileImageButton.layer.borderWidth = 1
-//            profileImageButton.layer.borderColor = UIColor.lightGray.cgColor
+
         }
         dismiss(animated: true, completion: nil)
     }

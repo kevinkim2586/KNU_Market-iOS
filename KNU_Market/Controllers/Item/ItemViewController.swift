@@ -191,10 +191,10 @@ extension ItemViewController {
             
             let url = URL(string: Constants.API_BASE_URL + "media/\(profileImageUID)")
             userProfileImageView.sd_setImage(with: url,
-                                             placeholderImage: UIImage(named: "default avatar"),
+                                             placeholderImage: UIImage(named: Constants.Images.defaultAvatar),
                                              options: .continueInBackground)
         } else {
-            userProfileImageView.image = UIImage(named: "default avatar")
+            userProfileImageView.image = UIImage(named: Constants.Images.defaultAvatar)
         }
         
         // 사진 설정
@@ -236,7 +236,7 @@ extension ItemViewController {
     
     func initializeProfileImageView() {
         
-        userProfileImageView.image = UIImage(named: "default avatar")
+        userProfileImageView.image = UIImage(named: Constants.Images.defaultAvatar)
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
     }
@@ -347,7 +347,7 @@ extension ItemViewController {
             let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.pressedImage))
             slideShow.addGestureRecognizer(recognizer)
         } else {
-            slideShow.setImageInputs([ImageSource(image: UIImage(named: "default item image")!)])
+            slideShow.setImageInputs([ImageSource(image: UIImage(named: Constants.Images.defaultItemImage)!)])
         }
         
         slideShow.contentScaleMode = .scaleAspectFill

@@ -75,20 +75,22 @@ class ChangeNicknameViewController: UIViewController {
             
             switch result {
             
-            case .success(let isNotDuplicate):
+            case .success(let isDuplicate):
                 
-                if isNotDuplicate {
-                    DispatchQueue.main.async {
-                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 🎉",
-                                                              for: .normal)
-                        self.didCheckNicknameDuplicate = true
-                    }
-                } else {
+                if isDuplicate {
+                    
                     DispatchQueue.main.async {
                         
                         self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😅",
                                                               for: .normal)
                         self.didCheckNicknameDuplicate = false
+                    }
+
+                } else {
+                    DispatchQueue.main.async {
+                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 🎉",
+                                                              for: .normal)
+                        self.didCheckNicknameDuplicate = true
                     }
                 }
                 

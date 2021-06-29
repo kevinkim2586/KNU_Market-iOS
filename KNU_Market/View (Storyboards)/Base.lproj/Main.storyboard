@@ -139,7 +139,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YqV-Rj-NfZ">
-                                <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                <rect key="frame" x="20" y="15" width="20" height="20"/>
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="xmark.circle" catalog="system"/>
                                 <connections>
@@ -176,7 +176,7 @@
                             <constraint firstItem="JuZ-r3-thW" firstAttribute="top" secondItem="66W-Oo-gcL" secondAttribute="top" constant="92" id="d2p-zy-4qY"/>
                             <constraint firstItem="jzc-Dq-xC0" firstAttribute="top" secondItem="YqV-Rj-NfZ" secondAttribute="bottom" constant="30" id="gal-nZ-CWY"/>
                             <constraint firstItem="fP6-gv-Fuk" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="65" id="qEQ-8j-yXj"/>
-                            <constraint firstItem="YqV-Rj-NfZ" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="15" id="rCZ-Ky-UTo"/>
+                            <constraint firstItem="YqV-Rj-NfZ" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="20" id="rCZ-Ky-UTo"/>
                             <constraint firstItem="rU1-jL-NSK" firstAttribute="top" secondItem="ivr-6Y-BiC" secondAttribute="bottom" constant="30" id="soM-Kh-4Hu"/>
                             <constraint firstItem="66W-Oo-gcL" firstAttribute="trailing" secondItem="fP6-gv-Fuk" secondAttribute="trailing" constant="65" id="udn-PC-6j8"/>
                         </constraints>
@@ -197,7 +197,7 @@
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" title="Home View Controller" id="NqC-5r-eov" customClass="HomeViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DCH-7T-fIX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z18-C1-q5V">
@@ -592,7 +592,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goH-b2-VEo" userLabel="Bottom Button View">
-                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="538" width="375" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdN-yf-AY2">
                                         <rect key="frame" x="190" y="10" width="170" height="40"/>
@@ -632,7 +632,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5wM-em-ffY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zJ-pt-53M" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="-44" width="375" height="506.5"/>
@@ -1996,10 +1996,12 @@
             <objects>
                 <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="2jK-st-yaV" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mfB-fI-ivU">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="mfB-fI-ivU">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="AppDefaultColor"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" name="AppDefaultColor"/>
                     </tabBar>
                     <connections>

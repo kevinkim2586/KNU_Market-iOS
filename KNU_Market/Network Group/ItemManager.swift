@@ -53,8 +53,6 @@ class ItemManager {
             }
     }
     
-    
-    
     //MARK: - 공구글 업로드
     func uploadNewItem(with model: UploadItemModel,
                        completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {

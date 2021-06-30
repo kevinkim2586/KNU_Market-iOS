@@ -61,6 +61,9 @@ final class Interceptor: RequestInterceptor {
                     
                     if error == .E301 {
                         print("Interceptor - 세션이 만료되었습니다. 다시 로그인 요망")
+                        
+                        //TODO: - change root view controller!
+                        
                     }
                     else {
                         print("Interceptor - 이건 뭔 에러지?")

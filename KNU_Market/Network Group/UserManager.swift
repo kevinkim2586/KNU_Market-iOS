@@ -85,7 +85,7 @@ class UserManager {
                         let json = try JSON(data: response.data!)
                         let result = json["isDuplicate"].stringValue
                         
-                        print("USER MANAGER - isDuplicate Result: \(result)")
+                        print("✏️ USER MANAGER - isDuplicate Result: \(result)")
                         
                         result == "true" ? completion(.success(true)) : completion(.success(false))
                         
@@ -119,8 +119,8 @@ class UserManager {
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
-                
-                print("UserManager - login() statusCode: \(statusCode)")
+
+                print("✏️ UserManager - login() statusCode: \(statusCode)")
                 
                 switch statusCode {
                 
@@ -161,9 +161,8 @@ class UserManager {
                     do {
                         
                         let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)
-                        print("UserManager - loadUserProfile decodedData: \(decodedData)")
                         self.saveBasicUserInfo(with: decodedData)
-                        print("User Manager - loadUserProfile() success")
+                        print("✏️ User Manager - loadUserProfile() success")
                         completion(.success(decodedData))
                         
                     } catch {

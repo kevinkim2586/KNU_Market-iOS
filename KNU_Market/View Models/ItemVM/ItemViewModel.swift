@@ -39,9 +39,6 @@ class ItemViewModel {
             return formatDateForDisplay()
         }
     }
-
-
-    //MARK: - Methods
     
     //MARK: - 공구 상세내용 불러오기
     func fetchItemDetails(for uid: String) {
@@ -78,7 +75,7 @@ class ItemViewModel {
                 self.delegate?.didDeletePost()
                 
             case .failure(let error):
-                print("ItemViewModel - FAILED deletePost")
+                print("❗️ ItemViewModel - FAILED deletePost")
                 self.delegate?.failedDeletingPost(with: error)
             }
         }

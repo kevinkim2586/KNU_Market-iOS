@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5Y5-bE-XKa">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Chat View Controller-->
+        <scene sceneID="rnx-zs-TJT">
+            <objects>
+                <viewController title="Chat View Controller" id="0Xt-JH-qCD" customClass="ChatListViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7BK-OP-4jl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ayy-uV-gJx">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="chatTableViewCell" rowHeight="114" id="ZoP-y6-O2i" customClass="ChatTableViewCell" customModule="KNU_Market" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="114"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZoP-y6-O2i" id="Ppa-qv-5Xr">
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="114"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yOa-j2-ueu">
+                                                    <rect key="frame" x="20" y="16" width="60" height="82"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="3ju-dw-Ujw"/>
+                                                        <constraint firstAttribute="height" constant="60" id="W5M-Zq-pFv"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓 전체 채팅방" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAl-6a-f1l">
+                                                    <rect key="frame" x="100" y="11" width="133" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people icon" translatesAutoresizingMaskIntoConstraints="NO" id="I3B-Zq-RT9">
+                                                    <rect key="frame" x="100" y="40.5" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="9gC-di-jnD"/>
+                                                        <constraint firstAttribute="width" constant="20" id="YcL-BW-hoZ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRz-jJ-bml">
+                                                    <rect key="frame" x="135" y="41.5" width="42" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="I3B-Zq-RT9" firstAttribute="top" secondItem="kAl-6a-f1l" secondAttribute="bottom" constant="10" id="2w3-zc-CA0"/>
+                                                <constraint firstItem="kAl-6a-f1l" firstAttribute="top" secondItem="Ppa-qv-5Xr" secondAttribute="topMargin" id="53X-PF-hHG"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="yOa-j2-ueu" secondAttribute="bottom" constant="5" id="Ify-0d-h9Z"/>
+                                                <constraint firstItem="SRz-jJ-bml" firstAttribute="leading" secondItem="I3B-Zq-RT9" secondAttribute="trailing" constant="15" id="JgS-0o-Ihu"/>
+                                                <constraint firstItem="SRz-jJ-bml" firstAttribute="top" secondItem="kAl-6a-f1l" secondAttribute="bottom" constant="11" id="QEr-fC-xD2"/>
+                                                <constraint firstItem="yOa-j2-ueu" firstAttribute="leading" secondItem="Ppa-qv-5Xr" secondAttribute="leadingMargin" id="Upo-Tr-rg7"/>
+                                                <constraint firstItem="I3B-Zq-RT9" firstAttribute="leading" secondItem="yOa-j2-ueu" secondAttribute="trailing" constant="20" id="hOy-13-iMS"/>
+                                                <constraint firstItem="yOa-j2-ueu" firstAttribute="top" secondItem="Ppa-qv-5Xr" secondAttribute="topMargin" constant="5" id="jPK-qC-i0R"/>
+                                                <constraint firstItem="kAl-6a-f1l" firstAttribute="leading" secondItem="yOa-j2-ueu" secondAttribute="trailing" constant="20" id="wzg-Cm-Dj1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="chatImageView" destination="yOa-j2-ueu" id="Xzs-fO-vdu"/>
+                                            <outlet property="chatParticipatingCountLabel" destination="SRz-jJ-bml" id="fJv-hb-EYn"/>
+                                            <outlet property="chatTitleLabel" destination="kAl-6a-f1l" id="oNh-CL-bCh"/>
+                                            <segue destination="lXd-Xv-MXM" kind="show" id="jJ1-CQ-PFs"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="EPK-yi-3tt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ayy-uV-gJx" firstAttribute="trailing" secondItem="EPK-yi-3tt" secondAttribute="trailing" id="3Ye-kI-01Q"/>
+                            <constraint firstItem="Ayy-uV-gJx" firstAttribute="bottom" secondItem="EPK-yi-3tt" secondAttribute="bottom" id="P6b-Qu-xym"/>
+                            <constraint firstItem="Ayy-uV-gJx" firstAttribute="top" secondItem="EPK-yi-3tt" secondAttribute="top" id="Zgd-mu-wZ3"/>
+                            <constraint firstItem="Ayy-uV-gJx" firstAttribute="leading" secondItem="EPK-yi-3tt" secondAttribute="leading" id="chv-vP-FHm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="채팅" id="O2J-8u-uax"/>
+                    <connections>
+                        <outlet property="chatListTableView" destination="Ayy-uV-gJx" id="5Uy-LL-1Tu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Si-o4-jgg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5989.6000000000004" y="68.815592203898049"/>
+        </scene>
+        <!--ChatNavigationController-->
+        <scene sceneID="qIP-Vz-OnT">
+            <objects>
+                <navigationController title="ChatNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="5Y5-bE-XKa" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="chat_unselected" selectedImage="chat_selected" id="7Aa-B7-hrf"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uXF-zE-LKh">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="AppDefaultColor"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="AppDefaultColor"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0Xt-JH-qCD" kind="relationship" relationship="rootViewController" id="fAh-sL-fWu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W3O-dt-CVb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5079.1999999999998" y="68.815592203898049"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="rzT-yg-m5k">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="lXd-Xv-MXM" customClass="ChatViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SAU-4t-K4v">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="4jS-Jk-TDA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="5ba-T3-DXv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I85-zi-DyV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6980" y="68.815592203898049"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chat_selected" width="25" height="25"/>
+        <image name="chat_unselected" width="25" height="25"/>
+        <image name="people icon" width="52" height="52"/>
+        <namedColor name="AppDefaultColor">
+            <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

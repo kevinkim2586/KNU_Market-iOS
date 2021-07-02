@@ -93,7 +93,7 @@ class ItemViewController: UIViewController {
             actionSheet.addAction(deleteAction)
             
         }
-        // 다른 사용자 글이면 Rerpot Action 만 추가
+        // 다른 사용자 글이면 Report Action 만 추가
         else {
             let reportAction = UIAlertAction(title: "게시글 신고하기",
                                            style: .default) { alert in
@@ -105,6 +105,7 @@ class ItemViewController: UIViewController {
                 }
                 
                 reportVC.userToReport = userToReport
+                reportVC.modalPresentationStyle = .fullScreen
                 
                 self.present(reportVC, animated: true)
             }
@@ -141,20 +142,24 @@ extension ItemViewController: ItemViewModelDelegate {
         scrollView.isHidden = true
         bottomView.isHidden = true
         
-        SnackBar.make(in: self.view,
-                      message: "존재하지 않는 글입니다 🧐",
-                      duration: .lengthLong).setAction(with: "홈으로", action: {
-                        
-                        self.navigationController?.popViewController(animated: true)
-                        
-                      }).show()
+        self.showSimpleBottomAlertWithAction(message: "존재하지 않는 글입니다 🧐",
+                                             buttonTitle: "홈으로",
+                                             action: {
+                                                self.navigationController?.popViewController(animated: true)
+                                             })
+        
+//        SnackBar.make(in: self.view,
+//                      message: "존재하지 않는 글입니다 🧐",
+//                      duration: .lengthLong).setAction(with: "홈으로", action: {
+//
+//                        self.navigationController?.popViewController(animated: true)
+//
+//                      }).show()
     }
     
     func didDeletePost() {
         
-        SnackBar.make(in: self.view,
-                      message: "게시글 삭제 완료 🎉",
-                      duration: .lengthLong).show()
+        showSimpleBottomAlert(with: "게시글 삭제 완료 🎉")
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
             
@@ -166,13 +171,19 @@ extension ItemViewController: ItemViewModelDelegate {
     func failedDeletingPost(with error: NetworkError) {
         
         print("ItemVC - failedDeletingPost")
-        SnackBar.make(in: self.view,
-                      message: error.errorDescription,
-                      duration: .lengthLong).setAction(with: "재시도", action: {
-                        
-                        self.viewModel.deletePost(for: self.pageID)
-                        
-                      }).show()
+        
+        showSimpleBottomAlertWithAction(message: error.errorDescription,
+                                        buttonTitle: "재시도") {
+            self.viewModel.deletePost(for: self.pageID)
+        }
+        
+//        SnackBar.make(in: self.view,
+//                      message: error.errorDescription,
+//                      duration: .lengthLong).setAction(with: "재시도", action: {
+//
+//                        self.viewModel.deletePost(for: self.pageID)
+//
+//                      }).show()
     }
     
 }

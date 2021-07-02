@@ -29,7 +29,8 @@ class PhotoDetailViewController: UIViewController {
         for url in imageURLs {
             
             imageSources.append(SDWebImageSource(url: url,
-                                                 placeholder: UIImage(named: "default item image")))
+                                                 placeholder: UIImage(named: Constants.Images.defaultItemImage)))
+            
         }
     }
     

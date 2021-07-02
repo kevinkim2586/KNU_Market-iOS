@@ -47,5 +47,33 @@ extension UIViewController {
         let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
     }
+    
+    
+    // SnackBar 라이브러리의 message 띄우기
+    func showSimpleBottomAlert(with message: String) {
+        SnackBar.make(in: self.view,
+                      message: message,
+                      duration: .lengthLong).show()
+    }
+    
+    // SnackBar 라이브러리의 액션이 추가된 message 띄우기
+    func showSimpleBottomAlertWithAction(message: String,
+                                         buttonTitle: String,
+                                         action: (() -> Void)? = nil) {
+        SnackBar.make(in: self.view,
+                      message: message,
+                      duration: .lengthLong).setAction(
+                        with: buttonTitle,
+                        action: {
+                            action?()
+                        }).show()
+        
+    }
+    
+    
+    
 }
+
+
+
  

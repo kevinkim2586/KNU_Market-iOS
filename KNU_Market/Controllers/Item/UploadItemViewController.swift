@@ -41,10 +41,6 @@ class UploadItemViewController: UIViewController {
         self.presentAlertWithCancelAction(title: "작성하신 글을 올리시겠습니까?", message: "") { selectedOk in
             
             if selectedOk {
-                
-                
-                
-                
                 if !self.viewModel.userSelectedImages.isEmpty {
                     
                     self.viewModel.uploadImageToServerFirst()
@@ -52,23 +48,15 @@ class UploadItemViewController: UIViewController {
                 } else {
                     self.viewModel.uploadItem()
                 }
-                
             }
-            
-            
         }
-        
-        
-    
     }
     
     func validateUserInput() -> Bool {
         
         guard let itemTitle = itemTitleTextField.text else {
             
-            SnackBar.make(in: self.view,
-                          message: UserInputError.titleTooShortOrLong.errorDescription,
-                          duration: .lengthLong).show()
+            self.showSimpleBottomAlert(with: UserInputError.titleTooShortOrLong.errorDescription)
             return false
         }
         viewModel.itemTitle = itemTitle
@@ -78,15 +66,12 @@ class UploadItemViewController: UIViewController {
             
         } catch UserInputError.titleTooShortOrLong {
             
-            SnackBar.make(in: self.view,
-                          message: UserInputError.titleTooShortOrLong.errorDescription,
-                          duration: .lengthLong).show()
+            self.showSimpleBottomAlert(with: UserInputError.titleTooShortOrLong.errorDescription)
             return false
             
         } catch UserInputError.detailTooShortOrLong {
-            SnackBar.make(in: self.view,
-                          message: UserInputError.detailTooShortOrLong.errorDescription,
-                          duration: .lengthLong).show()
+            
+            self.showSimpleBottomAlert(with: UserInputError.detailTooShortOrLong.errorDescription)
             return false
             
         } catch { return false }
@@ -112,10 +97,7 @@ extension UploadItemViewController: UploadItemDelegate {
         dismissProgressBar()
         
         print("UploadItemVC - failedUploading: \(error.errorDescription)")
-        
-        SnackBar.make(in: self.view,
-                      message: "업로드 실패: \(error.errorDescription)",
-                      duration: .lengthLong).show()
+        self.showSimpleBottomAlert(with: "업로드 실패: \(error.errorDescription)")
         navigationController?.popViewController(animated: true)
     }
 }
@@ -157,7 +139,7 @@ extension UploadItemViewController: UICollectionViewDelegate, UICollectionViewDa
         if indexPath.item == 0 {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addImageButtonID, for: indexPath) as? AddImageButtonCollectionViewCell else {
-                fatalError("Failed to dequeue cell for AddImageButtonCollectionViewCell")
+                fatalError()
             }
             cell.delegate = self
             return cell
@@ -165,7 +147,7 @@ extension UploadItemViewController: UICollectionViewDelegate, UICollectionViewDa
         else {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: newItemImageID, for: indexPath) as? UserPickedItemImageCollectionViewCell else {
-                fatalError("Failed to dequeue cell for UserPickedFoodImageCollectionViewCell")
+                fatalError()
             }
             cell.delegate = self
             cell.indexPath = indexPath.item

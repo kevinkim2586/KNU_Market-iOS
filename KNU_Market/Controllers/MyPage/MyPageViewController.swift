@@ -74,17 +74,13 @@ extension MyPageViewController {
             switch result {
 
             case .success(_):
-                SnackBar.make(in: self.view,
-                              message: "프로필 사진 제거 성공 🎉",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
                 DispatchQueue.main.async {
                     self.initializeProfileImageButton()
                     User.shared.profileImage = nil
                 }
             case .failure(_):
-                SnackBar.make(in: self.view,
-                              message: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲")
             }
         }
     }
@@ -105,9 +101,7 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func failedLoadingUserProfileInfo(with error: NetworkError) {
-        SnackBar.make(in: self.view,
-                      message: "프로필 정보 가져오기 실패. 잠시 후 다시 시도해주세요🥲",
-                      duration: .lengthLong).show()
+        self.showSimpleBottomAlert(with: "프로필 정보 가져오기 실패. 잠시 후 다시 시도해주세요 🥲")
         print("failedLoadingUserProfileInfo with error: \(error.errorDescription)")
     }
 
@@ -117,31 +111,23 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func failedUploadingImageToServerFirst(with error: NetworkError) {
-        SnackBar.make(in: self.view,
-                      message: "이미지 업로드 실패. 잠시 후 다시 시도해주세요🥲",
-                      duration: .lengthLong).show()
+        self.showSimpleBottomAlert(with: "이미지 업로드 실패. 잠시 후 다시 시도해주세요 🥲")
         print("failedUploadingImageToServerFirst with error: \(error.errorDescription)")
     }
     
     // 프로필 사진 실제 DB상 수정
     func didUpdateUserProfileImage() {
         viewModel.loadUserProfile()
-        SnackBar.make(in: self.view,
-                      message: "프로필 이미지 변경 성공 🎉",
-                      duration: .lengthLong).show()
+        self.showSimpleBottomAlert(with: "프로필 이미지 변경 성공 🎉")
     }
     
     func failedUpdatingUserProfileImage(with error: NetworkError) {
-        SnackBar.make(in: self.view,
-                      message: "프로필 사진 변경 실패. 잠시 후 다시 시도해주세요🥲",
-                      duration: .lengthLong).show()
+        self.showSimpleBottomAlert(with: "프로필 사진 변경 실패. 잠시 후 다시 시도해주세요 🥲")
         print("failedUpdatingUserProfileImage with error: \(error.errorDescription)")
     }
     
     func showErrorMessage(with message: String) {
-        SnackBar.make(in: self.view,
-                      message: message,
-                      duration: .lengthLong).show()
+        self.showSimpleBottomAlert(with: message)
     }
 }
 

@@ -37,8 +37,6 @@ class UploadItemViewModel {
     
     
     //MARK: - API
-    
-    
     func uploadImageToServerFirst() {
         
         guard let imageData = userSelectedImagesInDataFormat else {
@@ -71,7 +69,7 @@ class UploadItemViewModel {
         }
         
         group.notify(queue: .main) {
-            print("group.notify()")
+            print("✏️ Dispatch Group has ended.")
             self.uploadItem()
         }
         

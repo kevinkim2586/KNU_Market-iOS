@@ -674,6 +674,90 @@
             </objects>
             <point key="canvasLocation" x="5079.1999999999998" y="-1025.0374812593705"/>
         </scene>
+        <!--Report User View Controller-->
+        <scene sceneID="orC-JX-8zg">
+            <objects>
+                <viewController storyboardIdentifier="ReportUserViewController" title="Report User View Controller" hidesBottomBarWhenPushed="YES" id="Xx8-jm-qDb" customClass="ReportUserViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fsC-WF-uZV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gap-Bf-ncW">
+                                <rect key="frame" x="15" y="152" width="384" height="38.5"/>
+                                <string key="text">(i) 사기가 의심되거나 사기를 당하셨나요? 
+(ii) 부적절한 언어를 사용했나요? </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해당 사용자를 신고하시겠습니까?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5r-qC-HuW">
+                                <rect key="frame" x="15" y="89" width="249" height="23"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iNE-YI-u05" userLabel="Report Content Text View">
+                                <rect key="frame" x="15" y="225.5" width="384" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="XGc-yY-De9"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="085-xC-0hc">
+                                <rect key="frame" x="157" y="540.5" width="100" height="40"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="0Xh-tc-wyy"/>
+                                    <constraint firstAttribute="height" constant="40" id="Cmh-uu-y8J"/>
+                                </constraints>
+                                <state key="normal" title="신고 접수">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedSendButton:" destination="Xx8-jm-qDb" eventType="touchUpInside" id="hBY-m1-rlh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FiV-1V-n4d">
+                                <rect key="frame" x="15" y="59" width="20" height="20"/>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="xmark.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="pressedXButton:" destination="Xx8-jm-qDb" eventType="touchUpInside" id="FSD-nJ-vfX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3QM-Nq-AfM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Gap-Bf-ncW" firstAttribute="leading" secondItem="3QM-Nq-AfM" secondAttribute="leading" constant="15" id="1mh-V3-2Vt"/>
+                            <constraint firstItem="085-xC-0hc" firstAttribute="centerX" secondItem="fsC-WF-uZV" secondAttribute="centerX" id="2Fd-DT-xTs"/>
+                            <constraint firstItem="Gap-Bf-ncW" firstAttribute="top" secondItem="i5r-qC-HuW" secondAttribute="bottom" constant="40" id="5Yn-hB-jsm"/>
+                            <constraint firstItem="085-xC-0hc" firstAttribute="top" secondItem="iNE-YI-u05" secondAttribute="bottom" constant="15" id="Gr1-ST-GMu"/>
+                            <constraint firstItem="i5r-qC-HuW" firstAttribute="leading" secondItem="3QM-Nq-AfM" secondAttribute="leading" constant="15" id="IBo-va-vOe"/>
+                            <constraint firstItem="FiV-1V-n4d" firstAttribute="leading" secondItem="3QM-Nq-AfM" secondAttribute="leading" constant="15" id="Kki-HX-u91"/>
+                            <constraint firstItem="iNE-YI-u05" firstAttribute="leading" secondItem="3QM-Nq-AfM" secondAttribute="leading" constant="15" id="SfL-67-BFp"/>
+                            <constraint firstItem="i5r-qC-HuW" firstAttribute="top" secondItem="FiV-1V-n4d" secondAttribute="bottom" constant="10" id="UeG-T7-63W"/>
+                            <constraint firstItem="iNE-YI-u05" firstAttribute="top" secondItem="Gap-Bf-ncW" secondAttribute="bottom" constant="35" id="ZlJ-HW-1Ie"/>
+                            <constraint firstAttribute="trailing" secondItem="Gap-Bf-ncW" secondAttribute="trailing" constant="15" id="dHH-99-lfD"/>
+                            <constraint firstItem="FiV-1V-n4d" firstAttribute="top" secondItem="3QM-Nq-AfM" secondAttribute="top" constant="15" id="dSJ-y8-Kt7"/>
+                            <constraint firstItem="3QM-Nq-AfM" firstAttribute="trailing" secondItem="iNE-YI-u05" secondAttribute="trailing" constant="15" id="yZi-89-FME"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="건의사항" id="AYg-aS-59T"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="contentTextView" destination="iNE-YI-u05" id="lHu-cZ-ppf"/>
+                        <outlet property="sendButton" destination="085-xC-0hc" id="gmi-VO-Wmi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RPc-iZ-XiR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7994" y="-719"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add button" width="124" height="130"/>
@@ -688,6 +772,7 @@
         <image name="location icon" width="38" height="38"/>
         <image name="people icon" width="52" height="52"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

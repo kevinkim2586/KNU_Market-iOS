@@ -27,18 +27,14 @@ class ChangeNicknameViewController: UIViewController {
         self.view.endEditing(true)
         
         if !didCheckNicknameDuplicate {
-            SnackBar.make(in: self.view,
-                          message: "🤔 닉네임 중복 확인을 먼저해주세요.",
-                          duration: .lengthLong).show()
+            self.showSimpleBottomAlert(with: "🤔 닉네임 중복 확인을 먼저해주세요.")
             return
         }
         
         if !validateUserInput() { return }
         
         guard let nickname = self.nickname else {
-            SnackBar.make(in: self.view,
-                          message: "🤔 빈 칸이 없는지 확인해주세요.",
-                          duration: .lengthLong).show()
+            self.showSimpleBottomAlert(with: "🤔 빈 칸이 없는지 확인해주세요.")
             return
         }
         
@@ -49,13 +45,11 @@ class ChangeNicknameViewController: UIViewController {
             switch result {
             
             case .success(_):
-                SnackBar.make(in: self.view,
-                              message: "닉네임이 변경되었습니다 🎉",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "닉네임이 변경되었습니다 🎉")
                 
             case .failure(let error):
-                SnackBar.make(in: self.view,
-                              message: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲",
+                self.showSimpleBottomAlert(with: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲")
+
                               duration: .lengthLong).show()
                 print("ChangeNickNameVC failed to update nickname with error: \(error.errorDescription)")
             }
@@ -95,9 +89,7 @@ class ChangeNicknameViewController: UIViewController {
                 }
                 
             case .failure(let error):
-                SnackBar.make(in: self.view,
-                              message: "일시적인 네트워크 오류. 잠시 후 다시 시도해주세요 🥲",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "일시적인 네트워크 오류. 잠시 후 다시 시도해주세요 🥲")
                 print("Error in checking duplicate: \(error.errorDescription)")
             }
         }
@@ -110,15 +102,11 @@ class ChangeNicknameViewController: UIViewController {
             return false
         }
         guard !nickname.isEmpty else {
-            SnackBar.make(in: self.view,
-                          message: "빈 칸이 없는지 확인해주세요 🥲",
-                          duration: .lengthLong).show()
+            self.showSimpleBottomAlert(with: "빈 칸이 없는지 확인해주세요 🥲")
             return false
         }
         guard nickname.count >= 2, nickname.count <= 15 else {
-            SnackBar.make(in: self.view,
-                          message: "닉네임은 2자 이상, 15자 이하로 작성해주세요❗️ ",
-                          duration: .lengthLong).show()
+            self.showSimpleBottomAlert(with: "닉네임은 2자 이상, 15자 이하로 작성해주세요❗️")
             return false
         }
         self.nickname = nickname

@@ -66,9 +66,7 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
-        SnackBar.make(in: self.view,
-                      message: "일시적인 연결 문제가 있습니다. 🥲",
-                      duration: .lengthLong).show()
+        showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
     }
     
     func didFetchItemList() {
@@ -82,9 +80,7 @@ extension HomeViewController: HomeViewModelDelegate {
     func failedFetchingItemList(with error: NetworkError) {
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
-        SnackBar.make(in: self.view,
-                      message: "일시적인 연결 문제가 있습니다. 🥲",
-                      duration: .lengthLong).show()
+        self.showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
     }
 }
 

@@ -17,6 +17,12 @@ class ChangeNicknameViewController: UIViewController {
         initialize()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        dismissProgressBar()
+    }
+    
+    
     @IBAction func pressedCheckDuplicateButton(_ sender: UIButton) {
         
         checkIfDuplicate()
@@ -49,8 +55,6 @@ class ChangeNicknameViewController: UIViewController {
                 
             case .failure(let error):
                 self.showSimpleBottomAlert(with: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲")
-
-                              duration: .lengthLong).show()
                 print("ChangeNickNameVC failed to update nickname with error: \(error.errorDescription)")
             }
         }

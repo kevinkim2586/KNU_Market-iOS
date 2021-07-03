@@ -15,6 +15,12 @@ class ReportUserViewController: UIViewController {
         initialize()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        dismissProgressBar()
+    }
+    
+    
     @IBAction func pressedXButton(_ sender: UIButton) {
         self.dismiss(animated: true)
     }

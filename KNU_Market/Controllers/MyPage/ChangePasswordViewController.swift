@@ -13,6 +13,12 @@ class ChangePasswordViewController: UIViewController {
         initialize()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        dismissProgressBar()
+    }
+    
+    
     
     @IBAction func pressedChangeButton(_ sender: UIButton) {
         

@@ -1,5 +1,6 @@
 import UIKit
 import Alamofire
+import ProgressHUD
 
 class SendDeveloperMessageViewController: UIViewController {
     
@@ -9,8 +10,13 @@ class SendDeveloperMessageViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        dismissProgressBar()
+    }
+    
     
     @IBAction func pressedSendButton(_ sender: UIBarButtonItem) {
         

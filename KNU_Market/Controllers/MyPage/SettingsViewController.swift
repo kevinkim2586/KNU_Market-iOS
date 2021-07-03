@@ -18,6 +18,12 @@ class SettingsViewController: UIViewController {
         
         initialize()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        dismissProgressBar()
+    }
+    
 
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
         

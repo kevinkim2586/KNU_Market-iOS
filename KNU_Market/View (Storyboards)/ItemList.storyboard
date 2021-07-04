@@ -766,8 +766,8 @@
         <image name="default item icon" width="148" height="151"/>
         <image name="delete button" width="79" height="79"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="home_selected" width="25" height="25"/>
-        <image name="home_unselected" width="25" height="25"/>
+        <image name="home_selected" width="25.5" height="25.5"/>
+        <image name="home_unselected" width="25.5" height="25.5"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="location icon" width="38" height="38"/>
         <image name="people icon" width="52" height="52"/>

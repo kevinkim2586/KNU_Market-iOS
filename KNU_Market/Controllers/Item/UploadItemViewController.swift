@@ -41,6 +41,9 @@ class UploadItemViewController: UIViewController {
         self.presentAlertWithCancelAction(title: "작성하신 글을 올리시겠습니까?", message: "") { selectedOk in
             
             if selectedOk {
+                
+                showProgressBar()
+                
                 if !self.viewModel.userSelectedImages.isEmpty {
                     
                     self.viewModel.uploadImageToServerFirst()

@@ -240,6 +240,13 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		7C6D253C269037750030F9A1 /* DTO (Data Transfer Object) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "DTO (Data Transfer Object)";
+			sourceTree = "<group>";
+		};
 		7C815221268590B30041EC47 /* Mock Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +291,7 @@
 				7CA6622B26413302000E0B7A /* UI Related Files */,
 				7CA6624A26413CEF000E0B7A /* Error Management Group */,
 				7CA66228264132DC000E0B7A /* Network Group */,
+				7C6D253C269037750030F9A1 /* DTO (Data Transfer Object) */,
 				7CA6622326413272000E0B7A /* Model */,
 				7CA6622A264132F3000E0B7A /* View Models */,
 				7CA66229264132E6000E0B7A /* Controllers */,

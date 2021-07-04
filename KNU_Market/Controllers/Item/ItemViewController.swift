@@ -86,6 +86,8 @@ class ItemViewController: UIViewController {
                                                   message: "") { selectedOk in
                     
                     if selectedOk {
+                        
+                        showProgressBar()
                         self.viewModel.deletePost(for: self.pageID)
                     }
                 }
@@ -159,6 +161,8 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func didDeletePost() {
         
+        dismissProgressBar()
+        
         showSimpleBottomAlert(with: "게시글 삭제 완료 🎉")
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
@@ -171,6 +175,8 @@ extension ItemViewController: ItemViewModelDelegate {
     func failedDeletingPost(with error: NetworkError) {
         
         print("ItemVC - failedDeletingPost")
+        
+        dismissProgressBar()
         
         showSimpleBottomAlertWithAction(message: error.errorDescription,
                                         buttonTitle: "재시도") {
@@ -266,7 +272,7 @@ extension ItemViewController {
     
     func initializeBackButton() {
         
-        backButton.layer.cornerRadius = 10
+        backButton.layer.cornerRadius = backButton.frame.height / 2
         backButton.backgroundColor = .white
         backButton.layer.shadowColor = UIColor.black.cgColor
         backButton.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -276,7 +282,7 @@ extension ItemViewController {
     
     func initializeMenuButton() {
         
-        menuButton.layer.cornerRadius = 10
+        menuButton.layer.cornerRadius = menuButton.frame.height / 2
         menuButton.backgroundColor = .white
         menuButton.layer.shadowColor = UIColor.black.cgColor
         menuButton.layer.shadowOffset = CGSize(width: 2, height: 2)

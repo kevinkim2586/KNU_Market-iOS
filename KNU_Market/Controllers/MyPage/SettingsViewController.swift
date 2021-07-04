@@ -49,13 +49,7 @@ class SettingsViewController: UIViewController {
                         self.pressedLogOutButton(self.logOutButton)
                     }
                 }
-//                SnackBar.make(in: self.view,
-//                              message: error.errorDescription,
-//                              duration: .lengthLong).setAction(with: "재시도", action: {
-//                                DispatchQueue.main.async {
-//                                    self.pressedLogOutButton(self.logOutButton)
-//                                }
-//                              }).show()
+
             }
         }
     }

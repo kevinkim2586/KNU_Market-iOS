@@ -108,8 +108,6 @@ class RegisterViewController: UIViewController {
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
         
-        //TODO - 이메일 인증을 했는지 확인하는 로직도 있어야함. 없으면 알림
-        
         if  !checkIfBlankTextFieldsExists() ||
             !checkNicknameLength() ||
             !checkPasswordLength() ||

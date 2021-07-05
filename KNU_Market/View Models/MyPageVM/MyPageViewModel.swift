@@ -2,7 +2,7 @@ import UIKit
 
 let profileImageCache = NSCache<AnyObject, AnyObject>()
 
-protocol MyPageViewModelDelegate {
+protocol MyPageViewModelDelegate: AnyObject {
     
     func didLoadUserProfileInfo()
     func didFetchProfileImage()
@@ -18,7 +18,7 @@ protocol MyPageViewModelDelegate {
 
 class MyPageViewModel {
     
-    var delegate: MyPageViewModelDelegate?
+    weak var delegate: MyPageViewModelDelegate?
     
     var tableViewOptions: [String] = ["개발자에게 건의사항 보내기","설정","서비스 이용약관", "개발자 정보", "오픈 소스 라이센스"]
     

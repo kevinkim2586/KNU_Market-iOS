@@ -13,8 +13,6 @@ class ItemManager {
     //MARK: - API Request URLs
     let baseURL                       = "\(Constants.API_BASE_URL)posts"
     
-    
-    
     //MARK: - 공구글 목록 불러오기
     func fetchItemList(at index: Int,
                        completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {

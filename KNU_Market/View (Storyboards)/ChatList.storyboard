@@ -124,7 +124,7 @@
         <!--Chat View Controller-->
         <scene sceneID="rzT-yg-m5k">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="lXd-Xv-MXM" customClass="ChatViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" hidesBottomBarWhenPushed="YES" id="lXd-Xv-MXM" customClass="ChatViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SAU-4t-K4v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

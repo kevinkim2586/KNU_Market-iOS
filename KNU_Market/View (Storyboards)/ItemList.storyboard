@@ -164,6 +164,9 @@
                                         <state key="normal" title="채팅방 입장 ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pressedEnterChatButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="Uu7-xp-MBW"/>
+                                        </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people icon" translatesAutoresizingMaskIntoConstraints="NO" id="a6p-aL-Wtz">
                                         <rect key="frame" x="151" y="20" width="20" height="20"/>
@@ -756,7 +759,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RPc-iZ-XiR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7994" y="-719"/>
+            <point key="canvasLocation" x="7955" y="-49"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="vOv-0c-aPq">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewController" hidesBottomBarWhenPushed="YES" id="LL5-Cp-G4K" customClass="ChatViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mfk-d2-rDc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="k9R-t8-WFI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="kmI-XC-beC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UFw-6d-aSp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7954" y="-719"/>
         </scene>
     </scenes>
     <resources>

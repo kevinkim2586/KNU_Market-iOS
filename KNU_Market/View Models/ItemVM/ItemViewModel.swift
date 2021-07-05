@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import ImageSlideshow
 
-protocol ItemViewModelDelegate {
+protocol ItemViewModelDelegate: AnyObject {
     func didFetchItemDetails()
     func failedFetchingItemDetails(with error: NetworkError)
     
@@ -12,7 +12,7 @@ protocol ItemViewModelDelegate {
 
 class ItemViewModel {
     
-    var delegate: ItemViewModelDelegate?
+    weak var delegate: ItemViewModelDelegate?
     
     var model: ItemDetailModel? {
         didSet { convertUIDsToURL() }

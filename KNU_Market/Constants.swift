@@ -3,6 +3,7 @@ import Foundation
 struct Constants {
     
     static let API_BASE_URL                     = "http://155.230.25.110:5004/api/v1/"
+    static let WEB_SOCKET_URL                   = "ws://155.230.25.110:5005"
     
     //MARK: - Identifiers
     
@@ -26,7 +27,9 @@ struct Constants {
         static let uploadItemVC                 = "UploadItemViewController"
         static let photoDetailVC                = "PhotoDetailViewController"
         
-    
+        static let chatVC                       = "ChatViewController"
+        
+        
         static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"
         static let settingsVC                   = "SettingsViewController"
         static let termsAndConditionsVC         = "TermsAndConditionViewController"

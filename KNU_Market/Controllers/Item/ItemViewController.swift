@@ -53,7 +53,6 @@ class ItemViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -64,6 +63,14 @@ class ItemViewController: UIViewController {
     //MARK: - IBActions & Methods
     @IBAction func pressedBackButton(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func pressedEnterChatButton(_ sender: UIButton) {
+        
+        guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { fatalError() }
+        
+        vc.room = pageID
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func refreshPage() {
@@ -86,7 +93,7 @@ class ItemViewController: UIViewController {
                                                   message: "") { selectedOk in
                     
                     if selectedOk {
-                        
+
                         showProgressBar()
                         self.viewModel.deletePost(for: self.pageID)
                     }

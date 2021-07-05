@@ -1,6 +1,6 @@
 import Foundation
 
-protocol HomeViewModelDelegate {
+protocol HomeViewModelDelegate: AnyObject {
     
     func didFetchUserProfileInfo()
     func failedFetchingUserProfileInfo(with error: NetworkError)
@@ -11,7 +11,7 @@ protocol HomeViewModelDelegate {
 
 class HomeViewModel {
     
-    var delegate: HomeViewModelDelegate?
+    weak var delegate: HomeViewModelDelegate?
     
     var itemList: [ItemListModel] = [ItemListModel]()
     
@@ -65,8 +65,8 @@ class HomeViewModel {
                 
                 print("HomeViewModel - fetched user info: \(model.id), \(model.nickname), \(model.profileImageCode)")
                 
-                User.shared.id = model.id
-                User.shared.nickname = model.nickname
+//                User.shared.id = model.id
+//                User.shared.nickname = model.nickname
                 self.delegate?.didFetchUserProfileInfo()
                 
             case .failure(let error):

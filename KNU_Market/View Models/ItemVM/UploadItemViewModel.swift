@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-protocol UploadItemDelegate {
+protocol UploadItemDelegate: AnyObject {
     func didCompleteUpload()
     func failedUploading(with error: NetworkError)
 }
@@ -9,7 +9,7 @@ protocol UploadItemDelegate {
 class UploadItemViewModel {
     
     //MARK: - Object Properties
-    var delegate: UploadItemDelegate?
+    weak var delegate: UploadItemDelegate?
     
     var itemTitle: String = ""
     

@@ -131,7 +131,13 @@
                         <viewLayoutGuide key="safeArea" id="4jS-Jk-TDA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="5ba-T3-DXv"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="5ba-T3-DXv">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="JxK-aG-FWj">
+                            <connections>
+                                <action selector="pressedMoreButton:" destination="lXd-Xv-MXM" id="UAk-Kd-IiI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I85-zi-DyV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -141,6 +147,7 @@
     <resources>
         <image name="chat_selected" width="25.5" height="25.5"/>
         <image name="chat_unselected" width="25.5" height="25.5"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="people icon" width="52" height="52"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

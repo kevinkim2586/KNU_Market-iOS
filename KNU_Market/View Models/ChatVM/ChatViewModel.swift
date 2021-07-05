@@ -25,7 +25,9 @@ class ChatViewModel: WebSocketDelegate {
     
     var messages = [Message]()
     var mySelf = Sender(senderId: User.shared.id,
-                            displayName: User.shared.nickname)
+                        displayName: User.shared.nickname)
+    var otherParticipant: [Sender]?
+    
     
     // Delegate
     weak var delegate: ChatViewDelegate?
@@ -66,6 +68,10 @@ class ChatViewModel: WebSocketDelegate {
             
         case .text(let text):
             // JSON parsing 이루어져야할듯
+            
+            
+            
+            
             self.delegate?.didReceiveChat(text)
             print("Received text: \(text)")
             
@@ -74,6 +80,7 @@ class ChatViewModel: WebSocketDelegate {
             
         case .error(_):
             isConnected = false
+            print("❗️ Error in didReceive")
             self.delegate?.failedConnection(with: .E000)
             
         default:
@@ -87,6 +94,7 @@ class ChatViewModel: WebSocketDelegate {
         let convertedText = convertToJSONString(text: originalText)
         socket.write(string: convertedText) {
             
+            print("✏️ sendText completed")
             self.messages.append(
                 Message(
                     sender: self.mySelf,
@@ -103,7 +111,7 @@ class ChatViewModel: WebSocketDelegate {
         
         let json: JSON = [
             "id": User.shared.id,
-            "uid": room,
+            "room": room,
             "comment": text
         ]
     

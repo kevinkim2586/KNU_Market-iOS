@@ -38,6 +38,33 @@ class ChatViewController: MessagesViewController {
         
         initialize()
     }
+    
+    @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
+        
+        let actionSheet = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        let exitAction = UIAlertAction(title: "채팅방 나가기",
+                                       style: .destructive) { alert in
+            
+            self.presentAlertWithCancelAction(title: "정말 나가시겠습니까?",
+                                              message: "") { selectedOk in
+                if selectedOk {
+                    
+                    // 채팅방 나가기
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        actionSheet.addAction(exitAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true)
+    }
+    
 }
 
 //MARK: - Initialization
@@ -82,7 +109,7 @@ extension ChatViewController {
 extension ChatViewController: ChatViewDelegate {
     
     func didConnect() {
-        viewModel.sendText("\(User.shared.nickname)님이 채팅방에 입장하셨습니다. 🎉")
+        viewModel.sendText("\(User.shared.nickname)님이 채팅방에 입장하셨습니다.")
         messagesCollectionView.reloadData()
     }
     
@@ -158,3 +185,5 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         messagesCollectionView.scrollToLastItem(animated: true)
     }
 }
+
+

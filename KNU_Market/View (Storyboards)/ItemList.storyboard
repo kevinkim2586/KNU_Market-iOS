@@ -762,18 +762,24 @@
             <point key="canvasLocation" x="7955" y="-49"/>
         </scene>
         <!--Chat View Controller-->
-        <scene sceneID="vOv-0c-aPq">
+        <scene sceneID="Giy-31-f9I">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" hidesBottomBarWhenPushed="YES" id="LL5-Cp-G4K" customClass="ChatViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mfk-d2-rDc">
+                <viewController storyboardIdentifier="ChatViewController" hidesBottomBarWhenPushed="YES" id="u2z-XF-waH" customClass="ChatViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4oM-aV-MxU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="k9R-t8-WFI"/>
+                        <viewLayoutGuide key="safeArea" id="FtH-B7-tIL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="kmI-XC-beC"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="cza-F3-2mL">
+                        <barButtonItem key="rightBarButtonItem" image="ellipsis" catalog="system" id="GQq-0e-phK">
+                            <connections>
+                                <action selector="pressedMoreButton:" destination="u2z-XF-waH" id="lBj-Vy-PaD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UFw-6d-aSp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="raj-IV-RtR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7954" y="-719"/>
         </scene>

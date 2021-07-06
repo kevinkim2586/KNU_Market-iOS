@@ -30,7 +30,6 @@
 		7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E2126264645B300E98FE5 /* ItemViewController.swift */; };
 		7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* ItemViewModel.swift */; };
 		7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */; };
-		7C6B509E265290130032328C /* ItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509D265290130032328C /* ItemImageView.swift */; };
 		7C6B50A02652B17F0032328C /* UIImage Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509F2652B17F0032328C /* UIImage Extension.swift */; };
 		7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6D2536268DD6710030F9A1 /* ItemList.storyboard */; };
 		7C6D2539268DD6830030F9A1 /* ChatList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6D2538268DD6830030F9A1 /* ChatList.storyboard */; };
@@ -108,7 +107,6 @@
 		7C5E2126264645B300E98FE5 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
-		7C6B509D265290130032328C /* ItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageView.swift; sourceTree = "<group>"; };
 		7C6B509F2652B17F0032328C /* UIImage Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Extension.swift"; sourceTree = "<group>"; };
 		7C6D2536268DD6710030F9A1 /* ItemList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ItemList.storyboard; sourceTree = "<group>"; };
 		7C6D2538268DD6830030F9A1 /* ChatList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatList.storyboard; sourceTree = "<group>"; };
@@ -376,7 +374,6 @@
 				7CB8DF4D264C15B20001CC6D /* Chat Bubble Cells */,
 				7C4D13C5264524FA00CBB00A /* TableViewCells */,
 				7C8839DB2643CADB00F9F78C /* UserPickedItemImageViewCell */,
-				7C6B509D265290130032328C /* ItemImageView.swift */,
 			);
 			path = "UI Related Files";
 			sourceTree = "<group>";
@@ -670,7 +667,6 @@
 				7C132BF2265397B200BE5F40 /* Global Methods + Variables.swift in Sources */,
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7C1C1D12265E714000C08C66 /* TermsAndConditionsViewController.swift in Sources */,
-				7C6B509E265290130032328C /* ItemImageView.swift in Sources */,
 				7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
 				7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */,

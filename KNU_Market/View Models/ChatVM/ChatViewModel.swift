@@ -50,7 +50,6 @@ class ChatViewModel: WebSocketDelegate {
     func disconnect() {
         
         let exitText = convertToJSONString(text: "\(User.shared.id)님이 채팅방에서 나갔습니다.")
-        
         socket.write(string: exitText) {
             self.socket.disconnect()
         }
@@ -60,17 +59,16 @@ class ChatViewModel: WebSocketDelegate {
         
         switch event {
         
-        case .connected(let headers):
+        case .connected(_):
             isConnected = true
             self.delegate?.didConnect()
-            print("websocket is connected: \(headers)")
+            print("✏️ WebSocket has been Connected!")
             
         case .disconnected(let reason, let code):
             isConnected = false
             self.delegate?.didDisconnect()
             
             print("❗️ WebSocket has been Disconnected: \(reason) with code: \(code)")
-
             
         case .text(let text):
             

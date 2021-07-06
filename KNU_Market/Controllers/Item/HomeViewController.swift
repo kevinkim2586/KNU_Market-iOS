@@ -34,7 +34,9 @@ class HomeViewController: UIViewController {
             print("NEEDS TO RELOAD DATA")
             
             let indexPath = NSIndexPath(row: NSNotFound, section: 0)
-            self.tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: false)
+            self.tableView.scrollToRow(at: indexPath as IndexPath,
+                                       at: .top,
+                                       animated: false)
             refreshTableView()
             GlobalVariable.needsToReloadData = false
         }
@@ -124,7 +126,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func refreshTableView() {
-         
+        
         //사라지는 애니메이션 처리
         UIView.animate(views: self.tableView.visibleCells,
                        animations: Animations.forTableViews,

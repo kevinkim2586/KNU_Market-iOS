@@ -12,11 +12,6 @@ class ChatViewController: MessagesViewController {
     var room: String = ""
     var chatRoomTitle: String = ""
     
-    let otherUser = Sender(senderId: "1",
-                           displayName: "강지혜")
-    let otherUser2 = Sender(senderId: "3",
-                            displayName: "이승준")
-    
     deinit {
         print("❗️   has been DEINITIALIZED")
     }
@@ -116,7 +111,7 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func didDisconnect() {
-        
+        navigationController?.popViewController(animated: true)
     }
     
     func didReceiveChat() {

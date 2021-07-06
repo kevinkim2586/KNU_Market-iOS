@@ -2,13 +2,13 @@ import UIKit
 import BSImagePicker
 import Photos
 
-protocol AddImageDelegate {
+protocol AddImageDelegate: AnyObject {
     func didPickImagesToUpload(images: [UIImage])
 }
 
 class AddImageButtonCollectionViewCell: UICollectionViewCell {
     
-    var delegate: AddImageDelegate!
+    weak var delegate: AddImageDelegate!
     
     var selectedAssets: [PHAsset] = [PHAsset]()
     var userSelectedImages: [UIImage] = [UIImage]()

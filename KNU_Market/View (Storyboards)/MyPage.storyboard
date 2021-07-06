@@ -75,7 +75,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="G9k-qM-hbA">
                         <barButtonItem key="leftBarButtonItem" title="마이페이지" style="done" id="VnP-0V-f5S">
-                            <color key="tintColor" name="AppDefaultColor"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

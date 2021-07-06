@@ -33,7 +33,7 @@ final class Interceptor: RequestInterceptor {
             return
         }
         
-        print("Interceptor - adapt() activated with statusCode: \(statusCode)")
+        print("Interceptor - retry() activated with statusCode: \(statusCode)")
         
         switch statusCode {
         

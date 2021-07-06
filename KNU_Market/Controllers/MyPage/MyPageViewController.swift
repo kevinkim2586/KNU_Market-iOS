@@ -95,9 +95,16 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func didFetchProfileImage() {
-        
-        profileImageButton.setImage(viewModel.profileImage, for: .normal)
-        profileImageButton.layer.masksToBounds = true
+    
+        if viewModel.profileImage != nil {
+            profileImageButton.setImage(viewModel.profileImage,
+                                        for: .normal)
+            profileImageButton.layer.masksToBounds = true
+        } else {
+            profileImageButton.setImage(UIImage(named: Constants.Images.pickProfileImage),
+                                        for: .normal)
+            profileImageButton.layer.masksToBounds = false
+        }
     }
     
     func failedLoadingUserProfileInfo(with error: NetworkError) {

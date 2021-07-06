@@ -31,9 +31,14 @@ class MediaManager {
                     
                     switch statusCode {
                     case 200:
-                        completion(.success(response.data!))
+                        
+                        if let fetchedData = response.data {
+                            completion(.success(fetchedData))
+                        } else {
+                            completion(.success(nil))
+                        }
                     default:
-                        print("requestMedia FAILED")
+                        print("❗️ MediaManager -requestMedia FAILED ")
                         let error = NetworkError.returnError(json: response.data!)
                         completion(.failure(error))
                     }

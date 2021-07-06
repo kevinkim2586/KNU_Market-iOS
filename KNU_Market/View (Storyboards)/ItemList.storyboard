@@ -134,7 +134,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="u8c-O5-aS3">
                         <barButtonItem key="leftBarButtonItem" title="크누마켓" style="done" id="dfO-jU-h20">
-                            <color key="tintColor" name="AppDefaultColor"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -582,8 +582,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="테크노문" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wm2-Nw-XXU" userLabel="장소">
-                                <rect key="frame" x="311" y="364" width="56" height="21"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="북문" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wm2-Nw-XXU" userLabel="장소">
+                                <rect key="frame" x="339" y="364" width="28" height="21"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="230" id="EOr-JA-Cvt"/>

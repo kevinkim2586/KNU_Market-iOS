@@ -88,6 +88,10 @@ enum NetworkError: String, Error {
         do {
             let json = try JSON(data: json)
             let errorCode = json["errorCode"].stringValue
+            let errorMessage = json["errorMessage"].stringValue
+            let errorDescription = json["errorDescription"].stringValue
+            print("❗️ NetworkError - errorMessage: \(errorMessage)")
+            print("❗️ NetworkError - errorDescription: \(errorDescription)")
             return NetworkError(rawValue: errorCode) ?? .E000
         } catch {
             return .E000

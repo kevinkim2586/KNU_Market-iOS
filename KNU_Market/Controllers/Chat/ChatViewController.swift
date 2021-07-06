@@ -24,7 +24,7 @@ class ChatViewController: MessagesViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         IQKeyboardManager.shared.enable = false
-        viewModel.connect()
+        
     }
     
     override func viewDidLoad() {
@@ -35,6 +35,7 @@ class ChatViewController: MessagesViewController {
         viewModel = ChatViewModel(room: room)
         
         initialize()
+        viewModel.connect()
     }
     
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {

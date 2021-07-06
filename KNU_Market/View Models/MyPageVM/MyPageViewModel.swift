@@ -24,10 +24,12 @@ class MyPageViewModel {
     
     var userNickname: String = ""
     
-    var profileImage: UIImage = UIImage() {
+    var profileImage: UIImage? {
         didSet {
-            profileImageCache.setObject(self.profileImage, forKey: "profileImageCache" as AnyObject)
-            User.shared.profileImage = self.profileImage
+            if profileImage != nil {
+                profileImageCache.setObject(self.profileImage!, forKey: "profileImageCache" as AnyObject)
+                User.shared.profileImage = self.profileImage
+            }
         }
     }
     
@@ -54,6 +56,8 @@ class MyPageViewModel {
                     return
                 }
                 
+                if model.profileImageCode == "default" { return }
+                
                 // 없다면 DB에서 받아오기
                 OperationQueue().addOperation {
                     self.fetchProfileImage(with: model.profileImageCode)
@@ -79,11 +83,14 @@ class MyPageViewModel {
                 
                 if let imageData = imageData {
                     
-                    self.profileImage = UIImage(data: imageData) ?? UIImage(named: "pick_profile_picture")!
+                    self.profileImage = UIImage(data: imageData) ?? nil
                     self.delegate?.didFetchProfileImage()
                     
+                // 그냥 이미지를 애초에 사용자가 안 올린 경우에
                 } else {
-                    self.delegate?.showErrorMessage(with: "프로필 사진 불러오기 실패 😅")
+                    
+                    self.profileImage = nil
+                    self.delegate?.didFetchProfileImage()
                 }
 
             case .failure(_):

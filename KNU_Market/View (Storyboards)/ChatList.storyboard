@@ -89,7 +89,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="O2J-8u-uax">
                         <barButtonItem key="leftBarButtonItem" title="채팅" style="done" id="xS7-7M-eYA">
-                            <color key="tintColor" name="AppDefaultColor"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

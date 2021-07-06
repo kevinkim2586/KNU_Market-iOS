@@ -9,6 +9,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var titleBarButtonItem: UIBarButtonItem!
     
     private let refreshControl = UIRefreshControl()
     
@@ -16,9 +17,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-    
+
         initialize()
     }
     

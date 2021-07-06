@@ -13,7 +13,7 @@ class ChatViewController: MessagesViewController {
     var chatRoomTitle: String = ""
     
     deinit {
-        print("❗️   has been DEINITIALIZED")
+        print("❗️ ChatViewController has been DEINITIALIZED")
     }
     
     

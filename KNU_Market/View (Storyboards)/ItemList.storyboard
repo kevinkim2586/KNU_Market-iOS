@@ -132,10 +132,15 @@
                             <constraint firstItem="xlJ-AN-tLG" firstAttribute="trailing" secondItem="gZb-xN-M8C" secondAttribute="trailing" constant="25" id="kcj-bA-3ph"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="크누마켓" id="u8c-O5-aS3"/>
+                    <navigationItem key="navigationItem" id="u8c-O5-aS3">
+                        <barButtonItem key="leftBarButtonItem" title="크누마켓" style="done" id="dfO-jU-h20">
+                            <color key="tintColor" name="AppDefaultColor"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="gZb-xN-M8C" id="crE-lW-xdg"/>
                         <outlet property="tableView" destination="hzd-Db-6UH" id="gDm-kb-1Do"/>
+                        <outlet property="titleBarButtonItem" destination="dfO-jU-h20" id="EEk-bK-6pP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rfg-G6-cij" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -87,7 +87,11 @@
                             <constraint firstItem="Ayy-uV-gJx" firstAttribute="leading" secondItem="EPK-yi-3tt" secondAttribute="leading" id="chv-vP-FHm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="채팅" id="O2J-8u-uax"/>
+                    <navigationItem key="navigationItem" id="O2J-8u-uax">
+                        <barButtonItem key="leftBarButtonItem" title="채팅" style="done" id="xS7-7M-eYA">
+                            <color key="tintColor" name="AppDefaultColor"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="chatListTableView" destination="Ayy-uV-gJx" id="5Uy-LL-1Tu"/>
                     </connections>

@@ -73,7 +73,11 @@
                             <constraint firstItem="VRd-Gq-AZE" firstAttribute="leading" secondItem="lpo-Nv-BeT" secondAttribute="leading" id="ueG-Kc-97D"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="마이페이지" id="G9k-qM-hbA"/>
+                    <navigationItem key="navigationItem" id="G9k-qM-hbA">
+                        <barButtonItem key="leftBarButtonItem" title="마이페이지" style="done" id="VnP-0V-f5S">
+                            <color key="tintColor" name="AppDefaultColor"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="profileImageButton" destination="miz-im-SLu" id="9Hf-me-6l3"/>
                         <outlet property="settingsTableView" destination="VRd-Gq-AZE" id="u0e-IN-SaN"/>
@@ -452,8 +456,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mypage_selected" width="28" height="28"/>
-        <image name="mypage_unselected" width="28" height="28"/>
+        <image name="mypage_selected" width="25.5" height="25.5"/>
+        <image name="mypage_unselected" width="25.5" height="25.5"/>
         <image name="pick profile image" width="195" height="195"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

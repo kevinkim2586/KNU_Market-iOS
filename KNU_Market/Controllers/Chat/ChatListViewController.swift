@@ -8,9 +8,7 @@ class ChatListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Constants.Color.appColor)]
-        
+
         initialize()
 
     }
@@ -34,7 +32,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         let cellIdentifier = Constants.cellID.chatTableViewCell
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ChatTableViewCell else {
-            fatalError("Failed to dequeue cell for ItemTableViewCell")
+            fatalError()
         }
         
         cell.chatImageView.image = UIImage(named: "chat_bubble_icon")

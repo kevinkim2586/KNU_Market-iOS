@@ -15,7 +15,11 @@ class UserPickedItemImageCollectionViewCell: UICollectionViewCell {
     
     var indexPath: Int = 0
     
-    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        userPickedImageView.layer.cornerRadius = 5
+    }
     
     @IBAction func pressedCancelButton(_ sender: UIButton) {
         delegate?.didPressDeleteImageButton(at: indexPath)

@@ -22,6 +22,14 @@ class MyPageViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         viewModel.loadUserProfile()
     }
+    
+    
+    @IBAction func pressedSettingsBarButtonItem(_ sender: UIBarButtonItem) {
+        
+        guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsVC) as? SettingsViewController
+        else { fatalError() }
+        pushViewController(with: vc)
+    }
 }
 
 //MARK: - profile image modification methods
@@ -163,13 +171,15 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         return 10
     }
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID.myPageCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID.myPageCell,
+                                                 for: indexPath)
         
         cell.textLabel?.font = .systemFont(ofSize: 17)
         
@@ -187,32 +197,16 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-//        switch indexPath.section {
-//
-//        case 0:
-//
-//        case 1:
-//
-//        default: break
-//        }
-//
-        
-        
-        
-        
-        switch indexPath.row {
+        switch indexPath.section {
+
         case 0:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageVC) else { return }
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSections_1[indexPath.row]) else { return }
             pushViewController(with: vc)
         case 1:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsVC) else { return }
-            pushViewController(with: vc)
-        case 2:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.termsAndConditionsVC) else { return }
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSections_2[indexPath.row]) else { return }
             pushViewController(with: vc)
         default: return
         }
-        
     }
     
     func pushViewController(with vc: UIViewController) {
@@ -279,7 +273,6 @@ extension MyPageViewController {
         
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
-        settingsTableView.separatorColor = self.settingsTableView.backgroundColor
     }
     
     func initializeProfileImageButton() {

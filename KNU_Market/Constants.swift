@@ -20,21 +20,32 @@ struct Constants {
         static let loginVC                      = "LoginViewController"
         static let registerVC                   = "RegisterViewController"
         
-        
+        // Home & Item Tab
         static let tabBarController             = "TabBarController"
         static let homeVC                       = "HomeViewController"
         static let itemVC                       = "itemViewController"
         static let uploadItemVC                 = "UploadItemViewController"
         static let photoDetailVC                = "PhotoDetailViewController"
         
+        // Chat Tab
         static let chatVC                       = "ChatViewController"
         
+        // My Page Tab
+        static let myPostsVC                      = "MyPostsViewController"
+        static let settingsVC                   = "SettingsViewController"
         
         static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"
-        static let settingsVC                   = "SettingsViewController"
         static let termsAndConditionsVC         = "TermsAndConditionViewController"
+        static let developerInfoVC              = "DeveloperInfoViewController"
+        static let openSourceLicenseVC          = "OpenSourceLicenseViewController"
+        
+        // Others
         static let reportUserVC                 = "ReportUserViewController"
         
+        
+        // StoryBoard ID Array
+        static let myPageSections_1             = [myPostsVC, settingsVC]
+        static let myPageSections_2             = [sendDeveloperMessageVC, termsAndConditionsVC, developerInfoVC, openSourceLicenseVC]
     }
     
     struct cellID {

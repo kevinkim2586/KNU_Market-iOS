@@ -77,6 +77,12 @@
                         <barButtonItem key="leftBarButtonItem" title="마이페이지" style="done" id="VnP-0V-f5S">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" image="gearshape" catalog="system" id="7Ox-f0-X1v">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="pressedSettingsBarButtonItem:" destination="D1U-6p-iqG" id="9IN-8v-W6k"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="profileImageButton" destination="miz-im-SLu" id="9Hf-me-6l3"/>
@@ -151,7 +157,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JFD-oF-trw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7309" y="15"/>
+            <point key="canvasLocation" x="8314" y="-482"/>
+        </scene>
+        <!--OpenSourceLicenseViewController-->
+        <scene sceneID="Ak5-xg-G32">
+            <objects>
+                <viewController storyboardIdentifier="OpenSourceLicenseViewController" id="XN0-kh-aAN" userLabel="OpenSourceLicenseViewController" customClass="OpenSourceInfoViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xEQ-xg-ATq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="16q-Eh-cuz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g7p-RU-q9P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9151" y="-482"/>
+        </scene>
+        <!--DeveloperInfoViewController-->
+        <scene sceneID="NKi-kv-aez">
+            <objects>
+                <viewController storyboardIdentifier="DeveloperInfoViewController" id="ItE-EJ-YgV" userLabel="DeveloperInfoViewController" customClass="DeveloperInfoViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LaY-J2-KuX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="sfQ-HU-pWA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AhL-eD-w13" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8315" y="250"/>
         </scene>
         <!--MyPageNavigationController-->
         <scene sceneID="Ye4-E7-4u8">
@@ -369,6 +405,21 @@
             </objects>
             <point key="canvasLocation" x="8557" y="1729"/>
         </scene>
+        <!--MyPostsViewController-->
+        <scene sceneID="RK9-bN-jLe">
+            <objects>
+                <viewController storyboardIdentifier="MyPostsViewController" id="uXb-OZ-i1f" userLabel="MyPostsViewController" customClass="MyPostsViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F45-kg-eKI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="fda-xS-IsI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZyX-Zn-ane" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9151" y="250"/>
+        </scene>
         <!--Change Nickname View Controller-->
         <scene sceneID="Xf1-sR-fDv">
             <objects>
@@ -456,6 +507,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="mypage_selected" width="25.5" height="25.5"/>
         <image name="mypage_unselected" width="25.5" height="25.5"/>
         <image name="pick profile image" width="195" height="195"/>

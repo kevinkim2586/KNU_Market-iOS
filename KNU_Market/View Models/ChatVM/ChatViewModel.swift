@@ -8,7 +8,7 @@ protocol ChatViewDelegate: AnyObject {
     
     func didConnect()
     func didDisconnect()
-    func didReceiveChat(_ text: String)
+    func didReceiveChat()
     
     func reconnectSuggested()
     func failedConnection(with error: NetworkError)
@@ -26,9 +26,7 @@ class ChatViewModel: WebSocketDelegate {
     var messages = [Message]()
     var mySelf = Sender(senderId: User.shared.id,
                         displayName: User.shared.nickname)
-    var otherParticipant: [Sender]?
-    
-    
+
     // Delegate
     weak var delegate: ChatViewDelegate?
 
@@ -36,8 +34,6 @@ class ChatViewModel: WebSocketDelegate {
         
         self.room = room
     }
-    
-    
     
     //MARK: - Methods
     
@@ -51,6 +47,14 @@ class ChatViewModel: WebSocketDelegate {
         socket.connect()
     }
     
+    func disconnect() {
+        
+        let exitText = convertToJSONString(text: "\(User.shared.id)님이 채팅방에서 나갔습니다.")
+        
+        socket.write(string: exitText) {
+            self.socket.disconnect()
+        }
+    }
     
     func didReceive(event: WebSocketEvent, client: WebSocket) {
         
@@ -64,16 +68,33 @@ class ChatViewModel: WebSocketDelegate {
         case .disconnected(let reason, let code):
             isConnected = false
             self.delegate?.didDisconnect()
-            print("websocket is disconnected: \(reason) with code: \(code)")
+            
+            print("❗️ WebSocket has been Disconnected: \(reason) with code: \(code)")
+
             
         case .text(let text):
-            // JSON parsing 이루어져야할듯
             
+            print("✏️ Received Text: \(text)")
             
+            let receivedTextInJSON = JSON(parseJSON: text)
             
+            let userID = receivedTextInJSON["id"].stringValue
+            let chatText = receivedTextInJSON["comment"].stringValue
             
-            self.delegate?.didReceiveChat(text)
-            print("Received text: \(text)")
+            if !checkIfIDIsUsersOwn(id: userID) { break }
+            
+            let others = Sender(senderId: userID,
+                                displayName: userID)
+            
+            self.messages.append(
+                Message(
+                    sender: others,
+                    messageId: UUID().uuidString,
+                    sentDate: Date(),
+                    kind: .text(chatText))
+            )
+            self.delegate?.didReceiveChat()
+         
             
         case .reconnectSuggested(_):
             self.delegate?.reconnectSuggested()
@@ -92,9 +113,8 @@ class ChatViewModel: WebSocketDelegate {
     func sendText(_ originalText: String) {
         
         let convertedText = convertToJSONString(text: originalText)
+        
         socket.write(string: convertedText) {
-            
-            print("✏️ sendText completed")
             self.messages.append(
                 Message(
                     sender: self.mySelf,
@@ -117,9 +137,15 @@ class ChatViewModel: WebSocketDelegate {
     
         guard let JSONString = json.rawString() else { fatalError() }
         
-        print("✏️ JSONString: \(JSONString)")
+        print("✏️ Converted JSONString: \(JSONString)")
         return JSONString
     }
-    
+
+    func checkIfIDIsUsersOwn(id: String) -> Bool {
+        
+        if id == User.shared.id { return false }
+        else { return true }
+    }
+
 }
 

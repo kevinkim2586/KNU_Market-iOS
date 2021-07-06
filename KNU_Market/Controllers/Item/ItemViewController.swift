@@ -70,6 +70,7 @@ class ItemViewController: UIViewController {
         guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { fatalError() }
         
         vc.room = pageID
+        vc.chatRoomTitle = viewModel.model?.title ?? ""
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -93,7 +94,7 @@ class ItemViewController: UIViewController {
                                                   message: "") { selectedOk in
                     
                     if selectedOk {
-
+            
                         showProgressBar()
                         self.viewModel.deletePost(for: self.pageID)
                     }

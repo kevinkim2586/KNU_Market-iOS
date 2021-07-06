@@ -10,6 +10,7 @@ class ChatViewController: MessagesViewController {
     private var viewModel: ChatViewModel!
     
     var room: String = ""
+    var chatRoomTitle: String = ""
     
     let otherUser = Sender(senderId: "1",
                            displayName: "강지혜")
@@ -17,7 +18,7 @@ class ChatViewController: MessagesViewController {
                             displayName: "이승준")
     
     deinit {
-        print("❗️ ChatViewController has been DEINITIALIZED")
+        print("❗️   has been DEINITIALIZED")
     }
     
     
@@ -33,6 +34,8 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = chatRoomTitle
         
         viewModel = ChatViewModel(room: room)
         
@@ -52,7 +55,7 @@ class ChatViewController: MessagesViewController {
                                               message: "") { selectedOk in
                 if selectedOk {
                     
-                    // 채팅방 나가기
+                    self.viewModel.disconnect()
                 }
             }
         }
@@ -95,7 +98,6 @@ extension ChatViewController {
             layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left, textInsets: .init(top: 10, left: 10, bottom: 10, right: 10)))
             layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right, textInsets: .init(top: 10, left: 10, bottom: 10, right: 10)))
         }
-        
     }
     
     func initializeInputBar() {
@@ -114,19 +116,19 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func didDisconnect() {
-        //
+        
     }
     
-    func didReceiveChat(_ text: String) {
-        //
+    func didReceiveChat() {
+        messagesCollectionView.reloadData()
     }
     
     func reconnectSuggested() {
-        //
+        // snackbar 사용하면 가려보임
     }
     
     func failedConnection(with error: NetworkError) {
-        //
+
     }
     
     

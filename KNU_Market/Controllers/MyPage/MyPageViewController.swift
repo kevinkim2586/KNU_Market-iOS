@@ -143,7 +143,24 @@ extension MyPageViewController: MyPageViewModelDelegate {
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.tableViewOptions.count
+        
+        switch section {
+        case 0:
+            return viewModel.tableViewSection_1.count
+        case 1:
+            return viewModel.tableViewSection_2.count
+        default:
+            return 0
+        }
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -156,17 +173,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.textLabel?.font = .systemFont(ofSize: 17)
         
-        switch indexPath.row {
+        switch indexPath.section {
         case 0:
-            cell.textLabel?.text = viewModel.tableViewOptions[indexPath.row]
+            cell.textLabel?.text = viewModel.tableViewSection_1[indexPath.row]
         case 1:
-            cell.textLabel?.text = viewModel.tableViewOptions[indexPath.row]
-        case 2:
-            cell.textLabel?.text = viewModel.tableViewOptions[indexPath.row]
-        case 3:
-            cell.textLabel?.text = viewModel.tableViewOptions[indexPath.row]
-        case 4:
-            cell.textLabel?.text = viewModel.tableViewOptions[indexPath.row]
+            cell.textLabel?.text = viewModel.tableViewSection_2[indexPath.row]
         default: break
         }
         return cell
@@ -175,6 +186,19 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+//        switch indexPath.section {
+//
+//        case 0:
+//
+//        case 1:
+//
+//        default: break
+//        }
+//
+        
+        
+        
         
         switch indexPath.row {
         case 0:
@@ -255,6 +279,7 @@ extension MyPageViewController {
         
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
+        settingsTableView.separatorColor = self.settingsTableView.backgroundColor
     }
     
     func initializeProfileImageButton() {

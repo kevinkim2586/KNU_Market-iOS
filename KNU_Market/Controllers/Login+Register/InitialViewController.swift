@@ -32,7 +32,7 @@ class InitialViewController: UIViewController {
         ) as? RegisterViewController else {
             return
         }
-        registerVC.modalPresentationStyle = .fullScreen
+        //registerVC.modalPresentationStyle = .fullScreen
         self.present(registerVC, animated: true, completion: nil)
     }
     

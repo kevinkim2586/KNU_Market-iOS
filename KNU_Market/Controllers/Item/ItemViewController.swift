@@ -26,6 +26,8 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
     
+    @IBOutlet weak var slideShowHeight: NSLayoutConstraint!
+    
     private let refreshControl = UIRefreshControl()
     
     var viewModel = ItemViewModel()
@@ -39,6 +41,8 @@ class ItemViewController: UIViewController {
         print("ItemVC - pageID: \(pageID)")
         
         viewModel.fetchItemDetails(for: pageID)
+        
+        slideShowHeight.constant = view.bounds.height / 2.5
         
         initialize()
     }
@@ -157,14 +161,6 @@ extension ItemViewController: ItemViewModelDelegate {
                                              action: {
                                                 self.navigationController?.popViewController(animated: true)
                                              })
-        
-//        SnackBar.make(in: self.view,
-//                      message: "존재하지 않는 글입니다 🧐",
-//                      duration: .lengthLong).setAction(with: "홈으로", action: {
-//
-//                        self.navigationController?.popViewController(animated: true)
-//
-//                      }).show()
     }
     
     func didDeletePost() {
@@ -190,14 +186,7 @@ extension ItemViewController: ItemViewModelDelegate {
                                         buttonTitle: "재시도") {
             self.viewModel.deletePost(for: self.pageID)
         }
-        
-//        SnackBar.make(in: self.view,
-//                      message: error.errorDescription,
-//                      duration: .lengthLong).setAction(with: "재시도", action: {
-//
-//                        self.viewModel.deletePost(for: self.pageID)
-//
-//                      }).show()
+    
     }
     
 }
@@ -273,7 +262,7 @@ extension ItemViewController {
         
         titleView.layer.shadowColor = UIColor.black.cgColor
         
-        titleView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        titleView.layer.shadowOffset = CGSize(width: 2, height: 2)
         titleView.layer.shadowOpacity = 0.2
         titleView.layer.shadowRadius = 2
     }
@@ -355,7 +344,7 @@ extension ItemViewController {
     
     func initializeSlideShow() {
         
-        slideShow.layer.cornerRadius = 25
+        slideShow.layer.cornerRadius = 15
         slideShow.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
 }
@@ -376,8 +365,8 @@ extension ItemViewController {
         }
         
         slideShow.contentScaleMode = .scaleAspectFill
-        slideShow.slideshowInterval = 2
-        slideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 50))
+        slideShow.slideshowInterval = 5
+        slideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 60))
     }
     
     @objc func pressedImage() {

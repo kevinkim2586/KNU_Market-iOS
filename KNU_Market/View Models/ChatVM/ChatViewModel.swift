@@ -65,10 +65,11 @@ class ChatViewModel: WebSocketDelegate {
             print("✏️ WebSocket has been Connected!")
             
         case .disconnected(let reason, let code):
+            print("❗️ WebSocket has been Disconnected: \(reason) with code: \(code)")
             isConnected = false
             self.delegate?.didDisconnect()
             
-            print("❗️ WebSocket has been Disconnected: \(reason) with code: \(code)")
+            
             
         case .text(let text):
             
@@ -80,7 +81,10 @@ class ChatViewModel: WebSocketDelegate {
             let chatText = receivedTextInJSON["comment"].stringValue
             let nickname = receivedTextInJSON["nickname"].stringValue
             
-            if !isFromCurrentSender(id: userID) { return }
+            if !isFromCurrentSender(id: userID) {
+                self.delegate?.didReceiveChat()
+                return
+            }
             
             let others = Sender(senderId: userID,
                                 displayName: nickname)
@@ -98,9 +102,9 @@ class ChatViewModel: WebSocketDelegate {
         case .reconnectSuggested(_):
             self.delegate?.reconnectSuggested()
             
-        case .error(_):
+        case .error(let reason):
             isConnected = false
-            print("❗️ Error in didReceive")
+            print("❗️ Error in didReceive: \(reason?.localizedDescription)")
             self.delegate?.failedConnection(with: .E000)
             
         default:

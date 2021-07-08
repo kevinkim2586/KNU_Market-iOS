@@ -76,8 +76,9 @@ extension ChatViewController {
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.delegate = self
+        messagesCollectionView.backgroundColor = .white
+        self.scrollsToLastItemOnKeyboardBeginsEditing = true
         
-
         
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
             
@@ -111,6 +112,7 @@ extension ChatViewController {
                                       )
         
         messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
+        
     }
 }
 
@@ -134,11 +136,13 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func reconnectSuggested() {
-        self.presentSimpleAlert(title: "채팅방에서 나가셨습니다 🤔", message: "나갔다가 다시 채팅방으로 접속하시기 바랍니다.")
+        self.presentSimpleAlert(title: "일시적은 연결 오류입니다 🤔", message: "나갔다가 다시 채팅방으로 접속하시기 바랍니다.")
+        navigationController?.popViewController(animated: true)
     }
     
     func failedConnection(with error: NetworkError) {
-
+        self.presentSimpleAlert(title: "채팅방에서 나가셨습니다 🤔", message: "채팅방을 나가고 다시 접속하시기 바랍니다.")
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -193,6 +197,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1)
         }
     }
+    
+  
 }
 
 //MARK: - InputBarAccessoryViewDelegate

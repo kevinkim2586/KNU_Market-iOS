@@ -5,7 +5,6 @@ import SwiftyJSON
 
 protocol ChatViewDelegate: AnyObject {
     
-    
     func didConnect()
     func didDisconnect()
     func didReceiveChat()
@@ -78,11 +77,12 @@ class ChatViewModel: WebSocketDelegate {
             
             let userID = receivedTextInJSON["id"].stringValue
             let chatText = receivedTextInJSON["comment"].stringValue
+            let nickname = receivedTextInJSON["nickname"].stringValue
             
             if !checkIfIDIsUsersOwn(id: userID) { break }
             
             let others = Sender(senderId: userID,
-                                displayName: userID)
+                                displayName: nickname)
             
             self.messages.append(
                 Message(
@@ -130,7 +130,8 @@ class ChatViewModel: WebSocketDelegate {
         let json: JSON = [
             "id": User.shared.id,
             "room": room,
-            "comment": text
+            "comment": text,
+            "nickname": User.shared.nickname
         ]
     
         guard let JSONString = json.rawString() else { fatalError() }

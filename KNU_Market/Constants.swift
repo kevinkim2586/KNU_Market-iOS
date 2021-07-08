@@ -103,6 +103,8 @@ struct Constants {
         static let defaultItemImage             = "default item image"
         static let pickProfileImage             = "pick profile image"
         
+        static let cameraIcon                   = "camera icon"
+        
         // Tab Bar Icons
         
         
@@ -112,6 +114,7 @@ struct Constants {
         
         
         // Other
+        
         
     }
     

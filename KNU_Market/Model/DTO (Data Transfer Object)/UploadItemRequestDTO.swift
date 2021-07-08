@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 
-struct UploadItemModel {
+struct UploadItemRequestDTO {
     
     let title: String
     let location: Int

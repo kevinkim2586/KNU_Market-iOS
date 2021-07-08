@@ -52,7 +52,7 @@ class ItemManager {
     }
     
     //MARK: - 공구글 업로드
-    func uploadNewItem(with model: UploadItemModel,
+    func uploadNewItem(with model: UploadItemRequestDTO,
                        completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.request(baseURL,

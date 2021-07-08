@@ -33,7 +33,7 @@ class ReportUserViewController: UIViewController {
         
         showProgressBar()
         
-        let model = ReportUserModel(user: userToReport,
+        let model = ReportUserRequestDTO(user: userToReport,
                                     content: contentTextView.text!)
         
         print("userToReport: \(userToReport)")

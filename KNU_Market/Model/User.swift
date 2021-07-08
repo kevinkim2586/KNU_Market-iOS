@@ -83,7 +83,10 @@ class User {
     
     var profileImage: UIImage? {
         didSet {
-            guard let imageData = profileImage?.jpegData(compressionQuality: 1.0) else { return }
+            guard let imageData = profileImage?.jpegData(compressionQuality: 1.0) else {
+                profileImageCache.removeAllObjects()
+                return
+            }
             self.profileImageData = imageData
         }
     }

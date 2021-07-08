@@ -28,7 +28,6 @@ class UploadItemViewModel {
     
     lazy var imageUIDs: [String] = []
     
-    
     //MARK: - Initialization
     
     init() {
@@ -77,7 +76,7 @@ class UploadItemViewModel {
     
     func uploadItem() {
         
-        let model = UploadItemModel(title: itemTitle,
+        let model = UploadItemRequestDTO(title: itemTitle,
                                     location: location,
                                     peopleGathering: peopleGathering,
                                     imageUIDs: imageUIDs,

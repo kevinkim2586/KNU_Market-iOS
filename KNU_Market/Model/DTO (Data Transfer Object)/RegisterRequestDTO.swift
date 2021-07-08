@@ -21,7 +21,7 @@ import Alamofire
  "errorDescription" : "string"
  */
 
-struct RegisterModel {
+struct RegisterRequestDTO {
     
     let id: String
     let password: String

@@ -16,7 +16,7 @@ class ReportManager {
     let interceptor = Interceptor()
     
     //MARK: - 사용자 신고
-    func reportUser(with model: ReportUserModel,
+    func reportUser(with model: ReportUserRequestDTO,
                     completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.request(reportUserURL,

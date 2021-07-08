@@ -24,7 +24,7 @@ class UserManager {
     
     
     //MARK: - 회원가입
-    func register(with model: RegisterModel,
+    func register(with model: RegisterRequestDTO,
                   completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { multipartFormData in

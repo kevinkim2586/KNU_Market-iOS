@@ -12,7 +12,6 @@ enum UserInputError: Error {
             return "제목은 3글자 이상, 30자 이하로 작성해주세요 🤔"
         case .detailTooShortOrLong:
             return "공구 내용을 3글자 이상, 300자 이하로 작성해주세요 🤔"
-        
         }
     }
 }

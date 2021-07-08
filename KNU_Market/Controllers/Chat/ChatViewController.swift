@@ -16,7 +16,6 @@ class ChatViewController: MessagesViewController {
         print("❗️ ChatViewController has been DEINITIALIZED")
     }
     
-    
     override func viewWillDisappear(_ animated: Bool) {
         IQKeyboardManager.shared.enable = true
     }
@@ -107,7 +106,7 @@ extension ChatViewController {
 extension ChatViewController: ChatViewDelegate {
     
     func didConnect() {
-        viewModel.sendText("\(User.shared.nickname)님이 채팅방에 입장하셨습니다.")
+        viewModel.sendText("\(User.shared.nickname)님이 채팅방에 입장하셨습니다 🎉")
         messagesCollectionView.reloadData()
     }
     

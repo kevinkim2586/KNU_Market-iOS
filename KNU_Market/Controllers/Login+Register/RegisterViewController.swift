@@ -127,7 +127,7 @@ class RegisterViewController: UIViewController {
             profileImageData = image.jpegData(compressionQuality: 1.0)
         }
         
-        let registerModel = RegisterModel(id: id,
+        let registerModel = RegisterRequestDTO(id: id,
                                           password: password,
                                           nickname: nickname,
                                           image: profileImageData)

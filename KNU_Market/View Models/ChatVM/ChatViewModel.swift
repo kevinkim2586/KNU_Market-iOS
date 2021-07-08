@@ -48,7 +48,7 @@ class ChatViewModel: WebSocketDelegate {
     
     func disconnect() {
         
-        let exitText = convertToJSONString(text: "\(User.shared.id)님이 채팅방에서 나갔습니다 🧐")
+        let exitText = convertToJSONString(text: "\(User.shared.nickname)님이 채팅방에서 나갔습니다 🧐")
         socket.write(string: exitText) {
             self.socket.disconnect()
         }
@@ -57,6 +57,7 @@ class ChatViewModel: WebSocketDelegate {
     func didReceive(event: WebSocketEvent, client: WebSocket) {
         
         switch event {
+        
         
         case .connected(_):
             isConnected = true
@@ -79,7 +80,7 @@ class ChatViewModel: WebSocketDelegate {
             let chatText = receivedTextInJSON["comment"].stringValue
             let nickname = receivedTextInJSON["nickname"].stringValue
             
-            if !checkIfIDIsUsersOwn(id: userID) { break }
+            if !isFromCurrentSender(id: userID) { return }
             
             let others = Sender(senderId: userID,
                                 displayName: nickname)
@@ -110,6 +111,11 @@ class ChatViewModel: WebSocketDelegate {
 
     func sendText(_ originalText: String) {
         
+        guard isConnected else {
+            self.delegate?.reconnectSuggested()
+            return
+        }
+        
         let convertedText = convertToJSONString(text: originalText)
         
         socket.write(string: convertedText) {
@@ -135,12 +141,10 @@ class ChatViewModel: WebSocketDelegate {
         ]
     
         guard let JSONString = json.rawString() else { fatalError() }
-        
-        print("✏️ Converted JSONString: \(JSONString)")
         return JSONString
     }
 
-    func checkIfIDIsUsersOwn(id: String) -> Bool {
+    func isFromCurrentSender(id: String) -> Bool {
         
         if id == User.shared.id { return false }
         else { return true }

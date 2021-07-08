@@ -43,7 +43,6 @@ class ChatViewController: MessagesViewController {
             self.presentAlertWithCancelAction(title: "정말 나가시겠습니까?",
                                               message: "") { selectedOk in
                 if selectedOk {
-                    
                     self.viewModel.disconnect()
                 }
             }
@@ -78,6 +77,8 @@ extension ChatViewController {
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.delegate = self
         
+
+        
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
             
             layout.setMessageIncomingAvatarSize(.zero)
@@ -100,6 +101,16 @@ extension ChatViewController {
     func initializeInputBar() {
         
         messageInputBar.delegate = self
+        messageInputBar.sendButton.title = nil
+        let configuration = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular)
+        let color = UIColor(named: Constants.Color.appColor)
+        let sendButtonImage = UIImage(systemName: "arrow.up.circle.fill",
+                                      withConfiguration: configuration)?.withTintColor(
+                                        color ?? .systemPink,
+                                        renderingMode: .alwaysOriginal
+                                      )
+        
+        messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
     }
 }
 
@@ -113,6 +124,7 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func didDisconnect() {
+        print("✏️ ChatVC - didDisconnect delegate activated")
         navigationController?.popViewController(animated: true)
     }
     
@@ -122,7 +134,7 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func reconnectSuggested() {
-        // snackbar 사용하면 가려보임
+        self.presentSimpleAlert(title: "채팅방에서 나가셨습니다 🤔", message: "나갔다가 다시 채팅방으로 접속하시기 바랍니다.")
     }
     
     func failedConnection(with error: NetworkError) {

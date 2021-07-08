@@ -59,7 +59,7 @@ class LoginViewController: UIViewController {
     func saveLoginInfo() {
         
         User.shared.id = idTextField.text!
-        User.shared.password = passwordTextField.text!
+        UserManager.shared.savePassword(passwordTextField.text!)
         User.shared.isLoggedIn = true
     }
     

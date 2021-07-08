@@ -129,7 +129,7 @@ class UserManager {
                     do {
                         let json = try JSON(data: response.data!)
                         self.saveAccessTokens(from: json)
-                        print("login success with API TOKEN: \(User.shared.accessToken)")
+                        self.savePassword(password)
                         completion(.success(true))
                         
                     } catch {
@@ -182,6 +182,10 @@ class UserManager {
     //MARK: - 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String,
                                 completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        print("✏️ \(User.shared.nickname)")
+        print("✏️ \(User.shared.password)")
+        print("✏️ \(uid)")
         
         let parameters: Parameters = [
             "nickname": User.shared.nickname,
@@ -243,7 +247,7 @@ class UserManager {
                 case 201:
                     print("UserManager - updateUserPassword success")
                     completion(.success(true))
-                    User.shared.password = password
+                    self.savePassword(password)
                     
                 default:
                     print("UserManager - updateUserPassword failed default statement")
@@ -317,8 +321,12 @@ class UserManager {
             }
         
     }
+}
+
+//MARK: - 개인정보 저장 메서드
+
+extension UserManager {
     
-    //MARK: - 개인정보 저장 메서드
     func saveAccessTokens(from response: JSON) {
         
         let accessToken = response["accessToken"].stringValue
@@ -345,5 +353,11 @@ class UserManager {
         User.shared.id = model.id
         User.shared.nickname = model.nickname
         User.shared.profileImageUID = model.profileImageCode
+    }
+    
+    func savePassword(_ password: String) {
+        
+        User.shared.savedPassword = KeychainWrapper.standard.set(password,
+                                                                     forKey: Constants.KeyChainKey.refreshToken)
     }
 }

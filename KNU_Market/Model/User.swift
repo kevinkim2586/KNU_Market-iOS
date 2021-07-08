@@ -27,7 +27,16 @@ class User {
         }
     }
     
-    var password: String = ""
+    var password: String {
+        get {
+            let retrievedPassword: String? = KeychainWrapper.standard.string(forKey: Constants.KeyChainKey.password)
+            guard let password = retrievedPassword else {
+                return "❗️ Invalid Password"
+            }
+            print("✏️ Password: \(password)")
+            return password
+        }
+    }
     
     var email: String = ""
 
@@ -58,7 +67,7 @@ class User {
         get {
             let retrievedAccessToken: String? = KeychainWrapper.standard.string(forKey: Constants.KeyChainKey.accessToken)
             guard let accessToken = retrievedAccessToken else {
-                return "Invalid AccessToken"
+                return "❗️ Invalid AccessToken"
             }
             print("✏️ AccessToken: \(accessToken)")
             return accessToken
@@ -70,7 +79,7 @@ class User {
         get {
             let retrievedRefreshToken: String? = KeychainWrapper.standard.string(forKey: Constants.KeyChainKey.refreshToken)
             guard let refreshToken = retrievedRefreshToken else {
-                return "Invalid RefreshToken"
+                return "❗️ Invalid RefreshToken"
             }
             return refreshToken
         }
@@ -78,6 +87,7 @@ class User {
         
     var savedAccessToken: Bool = false
     var savedRefreshToken: Bool = false
+    var savedPassword: Bool = false
     
     //MARK: - User Profile Image Related Properties
     
@@ -107,7 +117,6 @@ class User {
 
         id = ""
         nickname = ""
-        password = ""
         email = ""
         profileImage = nil
         profileImageData = nil
@@ -120,6 +129,7 @@ class User {
         
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)
+        let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.password)
         
         profileImageCache.removeAllObjects()
         

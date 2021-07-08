@@ -16,9 +16,7 @@ final class Interceptor: RequestInterceptor {
         print("Interceptor - adapt() activated")
         
         var request = urlRequest
-        
         request.headers.update(name: "authentication", value: User.shared.accessToken)
-        
         completion(.success(request))
     }
     

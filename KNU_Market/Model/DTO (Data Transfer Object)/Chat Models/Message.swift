@@ -7,4 +7,12 @@ struct Message: MessageType {
     var messageId: String
     var sentDate: Date
     var kind: MessageKind
+    var date: String {
+        get {
+            
+            
+            
+            return "sd"
+        }
+    }
 }

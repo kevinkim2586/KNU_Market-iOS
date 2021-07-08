@@ -16,15 +16,6 @@ class ChatViewController: MessagesViewController {
         print("❗️ ChatViewController has been DEINITIALIZED")
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        IQKeyboardManager.shared.enable = true
-//    }
-//
-//    override func viewWillAppear(_ animated: Bool) {
-//
-//        IQKeyboardManager.shared.enable = false
-//    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -35,9 +26,7 @@ class ChatViewController: MessagesViewController {
         super.viewDidLoad()
         
         self.title = chatRoomTitle
-        
         viewModel = ChatViewModel(room: room)
-        
         initialize()
         viewModel.connect()
     }
@@ -161,6 +150,11 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         
         return NSAttributedString(string: viewModel.messages[indexPath.section].sender.displayName,
+                                  attributes: [.font: UIFont.systemFont(ofSize: 12)])
+    }
+    
+    func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        return NSAttributedString(string: viewModel.messages[indexPath.section].sentDate,
                                   attributes: [.font: UIFont.systemFont(ofSize: 12)])
     }
     

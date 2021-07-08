@@ -16,14 +16,19 @@ class ChatViewController: MessagesViewController {
         print("❗️ ChatViewController has been DEINITIALIZED")
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        IQKeyboardManager.shared.enable = true
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        IQKeyboardManager.shared.enable = true
+//    }
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//
+//        IQKeyboardManager.shared.enable = false
+//    }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        IQKeyboardManager.shared.enable = false
-        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewDidLoad() {

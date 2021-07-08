@@ -105,7 +105,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError()
         }
         cell.configure(with: viewModel.itemList[indexPath.row])
-    
         return cell
     }
     

@@ -179,15 +179,17 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID.myPageCell,
-                                                 for: indexPath)
+                                                 for: indexPath) as! MyPageTableViewCell
         
-        cell.textLabel?.font = .systemFont(ofSize: 17)
+        cell.leftImageView.tintColor = .black
         
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = viewModel.tableViewSection_1[indexPath.row]
+            cell.settingsTitleLabel.text = viewModel.tableViewSection_1[indexPath.row]
+            cell.leftImageView.image = UIImage(systemName: Constants.Images.myPageSection_1_Images[indexPath.row])
         case 1:
-            cell.textLabel?.text = viewModel.tableViewSection_2[indexPath.row]
+            cell.settingsTitleLabel.text = viewModel.tableViewSection_2[indexPath.row]
+            cell.leftImageView.image = UIImage(systemName: Constants.Images.myPageSection_2_Images[indexPath.row])
         default: break
         }
         return cell
@@ -198,12 +200,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {
-
         case 0:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSections_1[indexPath.row]) else { return }
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSection_1_Options[indexPath.row]) else { return }
             pushViewController(with: vc)
         case 1:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSections_2[indexPath.row]) else { return }
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSection_2_Options[indexPath.row]) else { return }
             pushViewController(with: vc)
         default: return
         }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */; };
+		7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */; };
 		7C132BF2265397B200BE5F40 /* Global Methods + Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */; };
 		7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF326552B4900BE5F40 /* UIButton Extension.swift */; };
 		7C1C1D0C265E70E000C08C66 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */; };
@@ -69,10 +70,6 @@
 		7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF3D264BB1970001CC6D /* RegisterRequestDTO.swift */; };
 		7CB8DF42264BEC870001CC6D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF41264BEC870001CC6D /* User.swift */; };
 		7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */; };
-		7CB8DF50264C16260001CC6D /* SendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF4E264C16260001CC6D /* SendCell.swift */; };
-		7CB8DF51264C16260001CC6D /* SendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB8DF4F264C16260001CC6D /* SendCell.xib */; };
-		7CB8DF56264C164F0001CC6D /* ReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF54264C164F0001CC6D /* ReceiveCell.swift */; };
-		7CB8DF57264C164F0001CC6D /* ReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB8DF55264C164F0001CC6D /* ReceiveCell.xib */; };
 		7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */; };
 		7CB8DF61264D02690001CC6D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF60264D02690001CC6D /* Message.swift */; };
 		7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF62264D02AF0001CC6D /* Sender.swift */; };
@@ -83,6 +80,7 @@
 
 /* Begin PBXFileReference section */
 		0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
+		7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Methods + Variables.swift"; sourceTree = "<group>"; };
 		7C132BF326552B4900BE5F40 /* UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton Extension.swift"; sourceTree = "<group>"; };
 		7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -147,10 +145,6 @@
 		7CB8DF3D264BB1970001CC6D /* RegisterRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRequestDTO.swift; sourceTree = "<group>"; };
 		7CB8DF41264BEC870001CC6D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7CB8DF45264BEFEC0001CC6D /* LoadProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadProfileResponseModel.swift; sourceTree = "<group>"; };
-		7CB8DF4E264C16260001CC6D /* SendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCell.swift; sourceTree = "<group>"; };
-		7CB8DF4F264C16260001CC6D /* SendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendCell.xib; sourceTree = "<group>"; };
-		7CB8DF54264C164F0001CC6D /* ReceiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCell.swift; sourceTree = "<group>"; };
-		7CB8DF55264C164F0001CC6D /* ReceiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiveCell.xib; sourceTree = "<group>"; };
 		7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		7CB8DF60264D02690001CC6D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7CB8DF62264D02AF0001CC6D /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
@@ -222,6 +216,7 @@
 				7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */,
 				7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */,
 				7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */,
+				7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -394,7 +389,6 @@
 		7CA6622B26413302000E0B7A /* UI Related Files */ = {
 			isa = PBXGroup;
 			children = (
-				7CB8DF4D264C15B20001CC6D /* Chat Bubble Cells */,
 				7C4D13C5264524FA00CBB00A /* TableViewCells */,
 				7C8839DB2643CADB00F9F78C /* UserPickedItemImageViewCell */,
 			);
@@ -419,17 +413,6 @@
 				7C132BF326552B4900BE5F40 /* UIButton Extension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		7CB8DF4D264C15B20001CC6D /* Chat Bubble Cells */ = {
-			isa = PBXGroup;
-			children = (
-				7CB8DF4E264C16260001CC6D /* SendCell.swift */,
-				7CB8DF54264C164F0001CC6D /* ReceiveCell.swift */,
-				7CB8DF55264C164F0001CC6D /* ReceiveCell.xib */,
-				7CB8DF4F264C16260001CC6D /* SendCell.xib */,
-			);
-			path = "Chat Bubble Cells";
 			sourceTree = "<group>";
 		};
 		7CB8DF5C264C207D0001CC6D /* ItemVM */ = {
@@ -582,10 +565,8 @@
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
 				7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */,
-				7CB8DF57264C164F0001CC6D /* ReceiveCell.xib in Resources */,
 				7C6D253B268DD68A0030F9A1 /* MyPage.storyboard in Resources */,
 				7CA661F8263D4387000E0B7A /* Main.storyboard in Resources */,
-				7CB8DF51264C16260001CC6D /* SendCell.xib in Resources */,
 				7C6D2539268DD6830030F9A1 /* ChatList.storyboard in Resources */,
 				7C77E23F266BA85C00680A27 /* GoogleService-Info.plist in Resources */,
 			);
@@ -659,6 +640,7 @@
 				7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */,
+				7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */,
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
 				7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
@@ -683,7 +665,6 @@
 				7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */,
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
-				7CB8DF50264C16260001CC6D /* SendCell.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */,
@@ -698,7 +679,6 @@
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
-				7CB8DF56264C164F0001CC6D /* ReceiveCell.swift in Sources */,
 				7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */,
 				7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */,
 				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,

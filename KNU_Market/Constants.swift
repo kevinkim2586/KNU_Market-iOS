@@ -44,8 +44,8 @@ struct Constants {
         
         
         // StoryBoard ID Array
-        static let myPageSections_1             = [myPostsVC, settingsVC]
-        static let myPageSections_2             = [sendDeveloperMessageVC, termsAndConditionsVC, developerInfoVC, openSourceLicenseVC]
+        static let myPageSection_1_Options             = [myPostsVC, settingsVC]
+        static let myPageSection_2_Options             = [sendDeveloperMessageVC, termsAndConditionsVC, developerInfoVC, openSourceLicenseVC]
     }
     
     struct cellID {
@@ -114,8 +114,18 @@ struct Constants {
         
         
         // Other
+        static let myPageSection_1_Images         = [
+                                                    "tray.full",
+                                                    "gear",
+                                                    ]
         
-        
+        static let myPageSection_2_Images         = [
+                                                   "paperplane",
+                                                   "doc.text",
+                                                   "info.circle",
+                                                   "book.closed"
+                                                    ]
+//
     }
     
 

@@ -3,8 +3,8 @@ import UIKit
 class ItemTableViewModel {
     
     var uuid: String = ""
-    
-    var defaultImage: UIImage = UIImage(named: "default item icon")!
+
+    var defaultImage: UIImage = UIImage(named: Constants.Images.defaultItemIcon)!
     
     var imageUID: String = "" {
         didSet {

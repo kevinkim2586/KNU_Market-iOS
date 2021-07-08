@@ -67,7 +67,7 @@ class ItemTableViewCell: UITableViewCell {
         } else {
             itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             itemImageView.sd_setImage(with: viewModel.imageURL,
-                                      placeholderImage: UIImage(named: "default item icon"),
+                                      placeholderImage: UIImage(named: Constants.Images.defaultItemIcon),
                                       options: .continueInBackground,
                                       completed: nil)
         }

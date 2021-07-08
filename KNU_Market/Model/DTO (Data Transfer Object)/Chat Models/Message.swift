@@ -9,10 +9,7 @@ struct Message: MessageType {
     var kind: MessageKind
     var date: String {
         get {
-            
-            
-            
-            return "sd"
+            return sentDate.formatToString()
         }
     }
 }

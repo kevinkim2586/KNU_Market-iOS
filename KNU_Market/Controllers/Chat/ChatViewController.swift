@@ -72,7 +72,6 @@ extension ChatViewController {
     
     func initializeCollectionView() {
         
-
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
@@ -84,8 +83,17 @@ extension ChatViewController {
             layout.setMessageIncomingAvatarSize(.zero)
             layout.setMessageOutgoingAvatarSize(.zero)
             
-            layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left, textInsets: .init(top: 10, left: 10, bottom: 10, right: 10)))
-            layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right, textInsets: .init(top: 10, left: 10, bottom: 10, right: 10)))
+            layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left,
+                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+            layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
+                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+     
+            
+            layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .left,
+                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+            layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .right,
+                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+            
         }
     }
     
@@ -110,6 +118,7 @@ extension ChatViewController: ChatViewDelegate {
     
     func didReceiveChat() {
         messagesCollectionView.reloadData()
+       
     }
     
     func reconnectSuggested() {
@@ -143,6 +152,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         avatarView.isHidden = true
     }
     
+    // Top Label
     func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 12
     }
@@ -153,9 +163,14 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                                   attributes: [.font: UIFont.systemFont(ofSize: 12)])
     }
     
+    // Bottom Label
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        return NSAttributedString(string: viewModel.messages[indexPath.section].sentDate,
-                                  attributes: [.font: UIFont.systemFont(ofSize: 12)])
+        return NSAttributedString(string: viewModel.messages[indexPath.section].date,
+                                  attributes: [.font: UIFont.systemFont(ofSize: 10), .foregroundColor: UIColor.lightGray])
+    }
+    
+    func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        return 10
     }
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
@@ -178,7 +193,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         
         inputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
-        messagesCollectionView.scrollToLastItem(animated: true)
+        messagesCollectionView.scrollToLastItem()
     }
 }
 

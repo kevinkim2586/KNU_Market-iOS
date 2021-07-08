@@ -136,7 +136,7 @@ extension LoginViewController {
         idTextField.text = "kevinkim2586@gmail.com"
         passwordTextField.text = "11111111"
         
-//        idTextField.text = "alexding@knu.ac.kr"
+//        idTextField.text = "alexding2586@knu.ac.kr"
 //        passwordTextField.text = "123456789"
     }
     

@@ -48,7 +48,7 @@ class ChatViewModel: WebSocketDelegate {
     
     func disconnect() {
         
-        let exitText = convertToJSONString(text: "\(User.shared.id)님이 채팅방에서 나갔습니다.")
+        let exitText = convertToJSONString(text: "\(User.shared.id)님이 채팅방에서 나갔습니다 🧐")
         socket.write(string: exitText) {
             self.socket.disconnect()
         }

@@ -31,4 +31,17 @@ extension UIImage {
         
         return scaledImage
     }
+    
+    // UIBarButton 이미지 적용을 위한 resize method
+    func resizeImage(size: CGSize) -> UIImage {
+        
+      let originalSize = self.size
+        
+      let ratio: CGFloat = {
+          return originalSize.width > originalSize.height ? 1 / (size.width / originalSize.width) :
+                                                            1 / (size.height / originalSize.height)
+      }()
+
+      return UIImage(cgImage: self.cgImage!, scale: self.scale * ratio, orientation: self.imageOrientation)
+    }
 }

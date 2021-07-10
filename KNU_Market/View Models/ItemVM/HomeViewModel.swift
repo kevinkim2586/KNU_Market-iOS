@@ -1,9 +1,12 @@
 import Foundation
+import UIKit
 
 protocol HomeViewModelDelegate: AnyObject {
     
     func didFetchUserProfileInfo()
     func failedFetchingUserProfileInfo(with error: NetworkError)
+    
+    func didFetchUserProfileImage()
     
     func didFetchItemList()
     func failedFetchingItemList(with error: NetworkError)
@@ -18,6 +21,7 @@ class HomeViewModel {
     var isFetchingData: Bool = false
     
     var index: Int = 1
+    
     
     //MARK: - 공구글 불러오기
     func fetchItemList() {
@@ -37,7 +41,6 @@ class HomeViewModel {
             case .success(let fetchedModel):
 
                 if fetchedModel.isEmpty {
-                    //self.isFetchingData = false
                     self.delegate?.didFetchItemList()
                     return
                 }
@@ -53,7 +56,8 @@ class HomeViewModel {
         }
     }
 
-    //MARK: - 유저 정보 불러오기
+    //MARK: - 사용자 프로필 정보 불러오기
+    //TODO: - 아래 함수는 MyPageViewModel 이랑 중복되는데 이걸 Observer Pattern 으로 변경하기
     func loadUserProfile() {
         
         UserManager.shared.loadUserProfile { [weak self] result in
@@ -63,10 +67,7 @@ class HomeViewModel {
             switch result {
             case .success(let model):
                 
-                print("HomeViewModel - fetched user info: \(model.id), \(model.nickname), \(model.profileImageCode)")
-                
-//                User.shared.id = model.id
-//                User.shared.nickname = model.nickname
+                self.fetchProfileImage(with: model.profileImageCode)
                 self.delegate?.didFetchUserProfileInfo()
                 
             case .failure(let error):
@@ -74,6 +75,34 @@ class HomeViewModel {
             }
         }
     }
+    
+    
+    func fetchProfileImage(with imageUID: String) {
+        
+        MediaManager.shared.requestMedia(from: imageUID) { result in
+            
+            switch result {
+            case .success(let imageData):
+                
+                print("✏️ UserManager - fetchProfileImage SUCCESS")
+                
+                if let imageData = imageData {
+                    User.shared.profileImage = UIImage(data: imageData) ?? nil
+                } else {
+                    User.shared.profileImage = nil
+                }
+                
+                self.delegate?.didFetchUserProfileImage()
+            
+            case .failure(_):
+                print("❗️ UserManager - Failed to fetchProfileImage")
+                User.shared.profileImage = nil
+            }
+        }
+        
+    }
+    
+   
     
     func resetValues() {
         

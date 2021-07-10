@@ -141,8 +141,9 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func failedConnection(with error: NetworkError) {
-        self.presentSimpleAlert(title: "채팅방에서 나가셨습니다 🤔", message: "채팅방을 나가고 다시 접속하시기 바랍니다.")
-        navigationController?.popViewController(animated: true)
+//        self.presentSimpleAlert(title: "채팅방에서 나가셨습니다 🤔", message: "채팅방을 나가고 다시 접속하시기 바랍니다.")
+        
+        //navigationController?.popViewController(animated: true)
     }
     
     

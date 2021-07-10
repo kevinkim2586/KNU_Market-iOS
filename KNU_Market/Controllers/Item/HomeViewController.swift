@@ -19,6 +19,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         initialize()
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,13 +63,22 @@ class HomeViewController: UIViewController {
 extension HomeViewController: HomeViewModelDelegate {
     
     func didFetchUserProfileInfo() {
+        
         SPIndicator.present(title: "\(User.shared.nickname)님",
                             message: "환영합니다 🎉",
                             preset: .custom(UIImage(systemName: "face.smiling")!))
+     
+        let image = User.shared.profileImage == nil ? UIImage(named: Constants.Images.defaultProfileImage)!
+                                                    : User.shared.profileImage!
+        initializeBarButtonItem(with: image)
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
         showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
+    }
+    
+    func didFetchUserProfileImage() {
+        initializeBarButtonItem(with: User.shared.profileImage ?? UIImage(named: Constants.Images.defaultProfileImage)!)
     }
     
     func didFetchItemList() {
@@ -90,7 +101,8 @@ extension HomeViewController: HomeViewModelDelegate {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110.0
+        //return 110.0
+        return 130.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,20 +153,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController: UIScrollViewDelegate {
     
-    func createSpinnerFooter() -> UIView {
-        
-        let footerView = UIView(frame: CGRect(x: 0,
-                                              y: 0,
-                                              width: view.frame.size.width,
-                                              height: 100))
-        
-        let spinner = UIActivityIndicatorView()
-        spinner.center = footerView.center
-        footerView.addSubview(spinner)
-        spinner.startAnimating()
-        return footerView
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let position = scrollView.contentOffset.y
@@ -162,7 +160,7 @@ extension HomeViewController: UIScrollViewDelegate {
         if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
         
             if !viewModel.isFetchingData {
-                tableView.tableFooterView = createSpinnerFooter()
+                tableView.tableFooterView = createSpinnerFooterView()
                 viewModel.fetchItemList()
             }
         }
@@ -193,6 +191,17 @@ extension HomeViewController {
         refreshControl.addTarget(self,
                                  action: #selector(refreshTableView),
                                  for: .valueChanged)
+    }
+    
+    func initializeBarButtonItem(with image: UIImage = UIImage(named: Constants.Images.defaultProfileImage)!) {
+        
+        let scaledImage = image.resizeImage(size: CGSize(width: 26, height: 26))
+        let imageView = UIImageView(image: scaledImage)
+        imageView.frame = CGRect(origin: .zero, size: scaledImage.size)
+        imageView.layer.cornerRadius = imageView.frame.size.width / 2
+        imageView.clipsToBounds = true
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: imageView)
     }
     
     func initializeAddButton() {

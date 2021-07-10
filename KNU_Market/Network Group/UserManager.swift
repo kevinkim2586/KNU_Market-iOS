@@ -157,12 +157,15 @@ class UserManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
+                
                 case 201:
                     do {
-                        
-                        let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)
+                        let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)  
                         self.saveBasicUserInfo(with: decodedData)
+        
+                        
                         print("✏️ User Manager - loadUserProfile() success")
+                        
                         completion(.success(decodedData))
                         
                     } catch {
@@ -182,10 +185,6 @@ class UserManager {
     //MARK: - 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String,
                                 completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
-        
-        print("✏️ \(User.shared.nickname)")
-        print("✏️ \(User.shared.password)")
-        print("✏️ \(uid)")
         
         let parameters: Parameters = [
             "nickname": User.shared.nickname,
@@ -319,8 +318,8 @@ class UserManager {
                     completion(.failure(error))
                 }
             }
-        
     }
+    
 }
 
 //MARK: - 개인정보 저장 메서드
@@ -359,5 +358,20 @@ extension UserManager {
         
         User.shared.savedPassword = KeychainWrapper.standard.set(password,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
+    }
+}
+
+
+//MARK: - Validation Methods
+
+extension UserManager {
+    
+    func checkIfProfileImageIsInCache() -> Bool {
+        
+        if let imageFromCache = profileImageCache.object(forKey: "profileImageCache" as AnyObject) as? UIImage {
+            User.shared.profileImage = imageFromCache
+            return true
+        }
+        return false
     }
 }

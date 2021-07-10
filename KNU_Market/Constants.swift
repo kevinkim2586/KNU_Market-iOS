@@ -1,5 +1,8 @@
 import Foundation
 
+//MARK: - Caches
+let profileImageCache = NSCache<AnyObject, AnyObject>()
+
 struct Constants {
     
     static let API_BASE_URL                     = "http://155.230.25.110:5004/api/v1/"
@@ -101,6 +104,7 @@ struct Constants {
         static let defaultAvatar                = "default avatar"
         static let defaultItemIcon              = "default item icon"
         static let defaultItemImage             = "default item image"
+        static let defaultProfileImage          = "default_profile_image"
         static let pickProfileImage             = "pick profile image"
         
         static let cameraIcon                   = "camera icon"

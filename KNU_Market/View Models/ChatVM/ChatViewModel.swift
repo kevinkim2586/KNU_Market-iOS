@@ -57,8 +57,7 @@ class ChatViewModel: WebSocketDelegate {
     func didReceive(event: WebSocketEvent, client: WebSocket) {
         
         switch event {
-        
-        
+    
         case .connected(_):
             isConnected = true
             self.delegate?.didConnect()
@@ -108,6 +107,7 @@ class ChatViewModel: WebSocketDelegate {
             self.delegate?.failedConnection(with: .E000)
             
         default:
+            //Default 가 뭐지? 다른 switch case 문 다 실험해보기
             self.delegate?.failedConnection(with: .E000)
          
         }

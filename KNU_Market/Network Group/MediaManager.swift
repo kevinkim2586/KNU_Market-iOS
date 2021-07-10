@@ -16,10 +16,10 @@ class MediaManager {
     var imageUIDs: [String] = [String]()
     
     //MARK: - 파일 조회
-    func requestMedia(from urlString: String,
+    func requestMedia(from imageUID: String,
                       completion: @escaping ((Result<Data?, NetworkError>) -> Void)) {
         
-        let requestURL = requestMediaURL + urlString
+        let requestURL = requestMediaURL + imageUID
         
         AF.request(requestURL,
                    method: .get,

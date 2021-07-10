@@ -1,6 +1,5 @@
 import UIKit
 
-let profileImageCache = NSCache<AnyObject, AnyObject>()
 
 protocol MyPageViewModelDelegate: AnyObject {
     
@@ -23,10 +22,9 @@ class MyPageViewModel {
     var tableViewSection_1: [String] = ["내가 올린 글", "설정"]
     var tableViewSection_2: [String] = ["개발자에게 건의사항 보내기", "서비스 이용약관", "개발자 정보", "오픈 소스 라이센스"]
 
-    
-  
-    
-    var userNickname: String = ""
+    var userNickname: String {
+        return User.shared.nickname
+    }
     
     var profileImage: UIImage? {
         didSet {
@@ -48,9 +46,7 @@ class MyPageViewModel {
             case .success(let model):
                 
                 print("MyPageViewModel - fetched user info: \(model.id), \(model.nickname), \(model.profileImageCode)")
-                
-                self.userNickname = model.nickname
-                User.shared.nickname = model.nickname
+        
                 self.delegate?.didLoadUserProfileInfo()
                 
                 // 이미 받아온 프로필 이미지 Cache 가 있다면

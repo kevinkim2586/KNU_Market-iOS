@@ -171,7 +171,7 @@ extension ItemViewController: ItemViewModelDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
             
-            GlobalVariable.needsToReloadData = true
+            Settings.needsToReloadData = true
             self.navigationController?.popViewController(animated: true)
         }
     }

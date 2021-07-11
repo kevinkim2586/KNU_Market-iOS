@@ -10,6 +10,7 @@
 		5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */; };
 		7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */; };
 		7C036AB82696BE4C00F6C29B /* Date Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C036AB72696BE4C00F6C29B /* Date Extension.swift */; };
+		7C036ABE269AB7CC00F6C29B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */; };
 		7C132BF2265397B200BE5F40 /* Global Methods + Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */; };
 		7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF326552B4900BE5F40 /* UIButton Extension.swift */; };
 		7C1C1D0C265E70E000C08C66 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */; };
@@ -41,7 +42,6 @@
 		7C6D253B268DD68A0030F9A1 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */; };
 		7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71996E2679CAEC000BEE64 /* Animations.swift */; };
 		7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C719970267A1678000BEE64 /* ItemDetailModel.swift */; };
-		7C77E23F266BA85C00680A27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C77E23E266BA85C00680A27 /* GoogleService-Info.plist */; };
 		7C815223268590D70041EC47 /* ItemListMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C815222268590D70041EC47 /* ItemListMockData.swift */; };
 		7C833686266208210032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833685266208210032308D /* Interceptor.swift */; };
 		7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */; };
@@ -83,6 +83,7 @@
 		0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 		7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		7C036AB72696BE4C00F6C29B /* Date Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date Extension.swift"; sourceTree = "<group>"; };
+		7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "APN Key/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Methods + Variables.swift"; sourceTree = "<group>"; };
 		7C132BF326552B4900BE5F40 /* UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton Extension.swift"; sourceTree = "<group>"; };
 		7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -114,7 +115,6 @@
 		7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		7C71996E2679CAEC000BEE64 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		7C719970267A1678000BEE64 /* ItemDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailModel.swift; sourceTree = "<group>"; };
-		7C77E23E266BA85C00680A27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C77E240266BB55600680A27 /* KNU_Market.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNU_Market.entitlements; sourceTree = "<group>"; };
 		7C815222268590D70041EC47 /* ItemListMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListMockData.swift; sourceTree = "<group>"; };
 		7C833685266208210032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
@@ -323,7 +323,7 @@
 				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
 				7CA661FB263D4389000E0B7A /* LaunchScreen.storyboard */,
 				7CA661FE263D4389000E0B7A /* Info.plist */,
-				7C77E23E266BA85C00680A27 /* GoogleService-Info.plist */,
+				7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */,
 			);
 			path = KNU_Market;
 			sourceTree = "<group>";
@@ -571,7 +571,7 @@
 				7C6D253B268DD68A0030F9A1 /* MyPage.storyboard in Resources */,
 				7CA661F8263D4387000E0B7A /* Main.storyboard in Resources */,
 				7C6D2539268DD6830030F9A1 /* ChatList.storyboard in Resources */,
-				7C77E23F266BA85C00680A27 /* GoogleService-Info.plist in Resources */,
+				7C036ABE269AB7CC00F6C29B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

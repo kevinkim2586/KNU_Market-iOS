@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
               
-        if GlobalVariable.needsToReloadData == true {
+        if Settings.needsToReloadData == true {
             print("NEEDS TO RELOAD DATA")
             
             let indexPath = NSIndexPath(row: NSNotFound, section: 0)
@@ -39,20 +39,16 @@ class HomeViewController: UIViewController {
                                        at: .top,
                                        animated: false)
             refreshTableView()
-            GlobalVariable.needsToReloadData = false
+            Settings.needsToReloadData = false
         }
         
     }
     
-
-    
-    
     @IBAction func pressedAddButton(_ sender: UIButton) {
         
         guard let uploadVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.uploadItemVC) as? UploadItemViewController else {
-            fatalError()
+            return
         }
-        
         navigationController?.pushViewController(uploadVC, animated: true)
     }
     
@@ -102,7 +98,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //return 110.0
-        return 130.0
+        return 120.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

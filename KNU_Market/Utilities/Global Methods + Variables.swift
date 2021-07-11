@@ -14,7 +14,8 @@ func dismissProgressBar() {
 }
 
 
-struct GlobalVariable {
+struct Settings {
     
+    // HomeViewController의 UITableView가 로딩이 다시 필요한지 판별 
     static var needsToReloadData: Bool = false
 }

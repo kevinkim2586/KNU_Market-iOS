@@ -6,14 +6,12 @@ import FirebaseMessaging
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    let gcmMessageIDKey = "gcm.message_id"
-
+    let gcmMessageIDKey = "gcm.message_id2"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
-        Messaging.messaging().delegate = self
-        UNUserNotificationCenter.current().delegate = self
+
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -29,7 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        
         application.registerForRemoteNotifications()
+        
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("❗️ Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                print("✏️ FCM Registration Token: \(token)")
+            }
+        }
         
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
@@ -72,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // TODO: Handle data of notification
 
       // With swizzling disabled you must let Messaging know about the message, for Analytics
-      // Messaging.messaging().appDidReceiveMessage(userInfo)
+        Messaging.messaging().appDidReceiveMessage(userInfo)
 
       // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {
@@ -81,6 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
       // Print full message.
       print(userInfo)
+        
+        
 
       completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -103,7 +114,7 @@ extension AppDelegate: MessagingDelegate {
       Messaging.messaging().apnsToken = deviceToken
     }
     
-    
+
 }
 
 @available(iOS 10, *)
@@ -125,7 +136,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     print(userInfo)
 
     // Change this to your preferred presentation option
-    completionHandler([[.alert, .sound]])
+    completionHandler([[.alert, .sound, .badge]])
   }
 
   func userNotificationCenter(_ center: UNUserNotificationCenter,

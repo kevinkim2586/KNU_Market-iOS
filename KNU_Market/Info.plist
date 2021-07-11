@@ -23,7 +23,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.967342735537-2s64qgcu3c6ua4bsejrv9cm9a21ccmgs</string>
+				<string>com.googleusercontent.apps.618002217971-u10e6vg828g6hlc5riu19hc3rccpd6if</string>
 			</array>
 		</dict>
 	</array>
@@ -54,6 +54,12 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

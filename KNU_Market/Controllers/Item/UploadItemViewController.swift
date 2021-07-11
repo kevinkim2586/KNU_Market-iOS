@@ -91,7 +91,7 @@ extension UploadItemViewController: UploadItemDelegate {
         
         dismissProgressBar()
         print("UploadItemVC - didCompleteUpload")
-        GlobalVariable.needsToReloadData = true
+        Settings.needsToReloadData = true
         navigationController?.popViewController(animated: true)
     }
     

@@ -34,6 +34,8 @@ class ItemTableViewModel {
         get { return Location.listForCell[location] }
     }
     
+    var date: String
+    
  
     
     

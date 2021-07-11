@@ -74,7 +74,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07/06 12:32" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gO1-A5-TTh">
-                                                    <rect key="frame" x="115" y="63" width="68" height="15"/>
+                                                    <rect key="frame" x="115" y="61.5" width="68" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -91,8 +91,8 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="0AQ-Qj-iwp" secondAttribute="bottom" constant="6" id="aJj-aP-An1"/>
                                                 <constraint firstItem="wz9-6A-udF" firstAttribute="top" secondItem="Dxa-sV-ZHx" secondAttribute="topMargin" constant="5" id="dff-xo-dkU"/>
                                                 <constraint firstItem="wz9-6A-udF" firstAttribute="leading" secondItem="Dxa-sV-ZHx" secondAttribute="leadingMargin" id="e5A-Um-aiV"/>
+                                                <constraint firstItem="gO1-A5-TTh" firstAttribute="top" secondItem="HQ0-sF-Iyo" secondAttribute="bottom" constant="5" id="g5v-Nf-Bqh"/>
                                                 <constraint firstItem="gO1-A5-TTh" firstAttribute="leading" secondItem="wz9-6A-udF" secondAttribute="trailing" constant="15" id="nxS-zN-86A"/>
-                                                <constraint firstItem="Vpi-m3-Hp1" firstAttribute="top" secondItem="gO1-A5-TTh" secondAttribute="bottom" constant="5" id="pWm-wp-Uuz"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="HQ0-sF-Iyo" secondAttribute="trailing" constant="30" id="r1O-yp-qfb"/>
                                                 <constraint firstItem="0AQ-Qj-iwp" firstAttribute="leading" secondItem="8On-4j-2KU" secondAttribute="trailing" constant="10" id="t3q-Bt-tUj"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="mtw-Zg-c6v" secondAttribute="trailing" constant="10" id="vkT-bX-eSf"/>

@@ -107,6 +107,7 @@ struct Constants {
         static let defaultItemImage             = "default item image"
         static let defaultProfileImage          = "default_profile_image"
         static let pickProfileImage             = "pick profile image"
+        static let peopleIcon                   = "people icon"
         
         static let cameraIcon                   = "camera icon"
         

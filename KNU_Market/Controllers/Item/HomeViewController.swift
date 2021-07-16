@@ -60,19 +60,12 @@ extension HomeViewController: HomeViewModelDelegate {
         SPIndicator.present(title: "\(User.shared.nickname)님",
                             message: "환영합니다 🎉",
                             preset: .custom(UIImage(systemName: "face.smiling")!))
-     
-        let image = User.shared.profileImage == nil ? UIImage(named: Constants.Images.defaultProfileImage)!
-                                                    : User.shared.profileImage!
-        initializeBarButtonItem(with: image)
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
         showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
     }
-    
-    func didFetchUserProfileImage() {
-        initializeBarButtonItem(with: User.shared.profileImage ?? UIImage(named: Constants.Images.defaultProfileImage)!)
-    }
+  
     
     func didFetchItemList() {
         

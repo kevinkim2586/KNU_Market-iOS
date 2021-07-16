@@ -6,8 +6,6 @@ protocol HomeViewModelDelegate: AnyObject {
     func didFetchUserProfileInfo()
     func failedFetchingUserProfileInfo(with error: NetworkError)
     
-    func didFetchUserProfileImage()
-    
     func didFetchItemList()
     func failedFetchingItemList(with error: NetworkError)
 }
@@ -65,9 +63,7 @@ class HomeViewModel {
             guard let self = self else { return }
             
             switch result {
-            case .success(let model):
-                
-                self.fetchProfileImage(with: model.profileImageCode)
+            case .success(_):
                 self.delegate?.didFetchUserProfileInfo()
                 
             case .failure(let error):
@@ -76,31 +72,6 @@ class HomeViewModel {
         }
     }
     
-    
-    func fetchProfileImage(with imageUID: String) {
-        
-        MediaManager.shared.requestMedia(from: imageUID) { result in
-            
-            switch result {
-            case .success(let imageData):
-                
-                print("✏️ UserManager - fetchProfileImage SUCCESS")
-                
-                if let imageData = imageData {
-                    User.shared.profileImage = UIImage(data: imageData) ?? nil
-                } else {
-                    User.shared.profileImage = nil
-                }
-                
-                self.delegate?.didFetchUserProfileImage()
-            
-            case .failure(_):
-                print("❗️ UserManager - Failed to fetchProfileImage")
-                User.shared.profileImage = nil
-            }
-        }
-        
-    }
     
     func resetValues() {
         

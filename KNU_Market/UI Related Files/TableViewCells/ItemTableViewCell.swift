@@ -1,7 +1,6 @@
 import UIKit
 import SDWebImage
 
-
 class ItemTableViewCell: UITableViewCell {
     
     @IBOutlet weak var itemImageView: UIImageView!
@@ -96,7 +95,7 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializePersonImageView() {
         
-        personImageView.image = UIImage(named: "people icon")
+        personImageView.image = UIImage(named: Constants.Images.peopleIcon)
     }
     
     

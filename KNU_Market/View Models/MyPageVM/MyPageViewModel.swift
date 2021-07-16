@@ -45,7 +45,7 @@ class MyPageViewModel {
             switch result {
             case .success(let model):
                 
-                print("MyPageViewModel - fetched user info: \(model.id), \(model.nickname), \(model.profileImageCode)")
+                print("MyPageViewModel - fetched user info: \(model.uid), \(model.nickname), \(model.profileImageCode)")
         
                 self.delegate?.didLoadUserProfileInfo()
                 

@@ -1,5 +1,4 @@
 import UIKit
-import Alamofire
 import SPIndicator
 import SwiftMessages
 import SnackBar_swift
@@ -25,7 +24,6 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -97,7 +95,6 @@ extension HomeViewController: HomeViewModelDelegate {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //return 110.0
         return 120.0
     }
     

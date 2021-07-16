@@ -731,6 +731,7 @@
                                     <constraint firstAttribute="width" constant="100" id="0Xh-tc-wyy"/>
                                     <constraint firstAttribute="height" constant="40" id="Cmh-uu-y8J"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="신고 접수">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>

@@ -2,13 +2,15 @@ import Foundation
 
 struct LoadProfileResponseModel: Decodable {
     
-    let id: String
+    let email: String
+    let uid: String
     let nickname: String
     let profileImageCode: String
 
     enum CodingKeys: String, CodingKey {
         
-        case id
+        case email
+        case uid
         case nickname
         case profileImageCode = "profileImage"
     }

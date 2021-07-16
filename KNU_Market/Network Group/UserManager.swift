@@ -345,7 +345,8 @@ extension UserManager {
     
     func saveBasicUserInfo(with model: LoadProfileResponseModel) {
         
-        User.shared.id = model.id
+        User.shared.userUID = model.uid
+        User.shared.email = model.email
         User.shared.nickname = model.nickname
         User.shared.profileImageUID = model.profileImageCode
     }

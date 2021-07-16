@@ -24,7 +24,7 @@ class HomeViewModel {
     
     
     //MARK: - 공구글 불러오기
-    func fetchItemList() {
+    func fetchItemList(fetchCurrentUsers: Bool = false) {
         
         /* Mock Data
         itemList.append(contentsOf: itemListMockData)
@@ -33,7 +33,7 @@ class HomeViewModel {
         
         isFetchingData = true
 
-        ItemManager.shared.fetchItemList(at: self.index) { [weak self] result in
+        ItemManager.shared.fetchItemList(at: self.index, fetchCurrentUsers: fetchCurrentUsers) { [weak self] result in
             
             guard let self = self else { return }
 
@@ -101,8 +101,6 @@ class HomeViewModel {
         }
         
     }
-    
-   
     
     func resetValues() {
         

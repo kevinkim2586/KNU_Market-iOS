@@ -73,6 +73,7 @@ struct Constants {
     
     struct UserDefaultsKey {
         
+        static let userUID                      = "userUID"
         static let userID                       = "userID"
         static let nickname                     = "nickname"
         static let profileImageUID              = "profileImageUID"

@@ -9,9 +9,20 @@ class User {
     private init() {}
     
     //MARK: - Properties
+    
+    var userUID: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userUID) ?? "userUID 에러"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.userUID)
+        }
+    }
+    
+    // 아래 없애는거 고려
     var id: String {
         get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userID) ?? "표시 에러"
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userID) ?? "id 에러"
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.userID)
@@ -20,7 +31,7 @@ class User {
     
     var nickname: String {
         get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.nickname) ?? "표시 에러"
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.nickname) ?? "nickname 에러"
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.nickname)

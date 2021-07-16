@@ -15,9 +15,10 @@ class ItemManager {
     
     //MARK: - 공구글 목록 불러오기
     func fetchItemList(at index: Int,
+                       fetchCurrentUsers: Bool = false,
                        completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
         
-        let url = baseURL + "?page=\(index)"
+        let url = fetchCurrentUsers ? baseURL + "/me" : baseURL + "?page=\(index)"
         
         AF.request(url,
                    method: .get,

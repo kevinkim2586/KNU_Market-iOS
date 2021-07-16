@@ -10,6 +10,7 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var personImageView: UIImageView!
     @IBOutlet weak var currentlyGatheredPeopleLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     private var viewModel = ItemTableViewModel()
     
@@ -39,7 +40,7 @@ class ItemTableViewCell: UITableViewCell {
         viewModel.totalGatheringPeople = model.totalGatheringPeople
         viewModel.imageUID = model.imageUID ?? ""
         viewModel.currentlyGatheredPeople = model.currentlyGatheredPeople
-        
+        viewModel.date = model.date
         
         initialize()
     }
@@ -52,7 +53,7 @@ class ItemTableViewCell: UITableViewCell {
         initializePersonImageView()
         initializeCurrentlyGatheredPeopleLabel()
         initializeLocationLabel()
-    
+        initializeDateLabel()
     }
     
     func initializeTitleLabel() {
@@ -113,6 +114,11 @@ class ItemTableViewCell: UITableViewCell {
         
         locationLabel.text = viewModel.locationName
         
+    }
+    
+    func initializeDateLabel() {
+        
+        dateLabel.text = viewModel.date
     }
     
     

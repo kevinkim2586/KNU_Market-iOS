@@ -107,10 +107,10 @@ class ItemViewModel {
     func formatDateForDisplay() -> String {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss.SSS'Z'"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         let convertedDate = dateFormatter.date(from: model!.date)
         
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         
         if let date = convertedDate {
             let finalDate = dateFormatter.string(from: date)

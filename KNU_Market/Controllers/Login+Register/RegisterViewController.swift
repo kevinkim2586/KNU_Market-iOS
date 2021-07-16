@@ -76,7 +76,7 @@ class RegisterViewController: UIViewController {
         
         nicknameTextField.resignFirstResponder()
         
-        UserManager.shared.checkDuplicate(nickname: nickname) { [weak self] result in
+        UserManager.shared.checkNicknameDuplicate(nickname: nickname) { [weak self] result in
             
             guard let self = self else { return }
             

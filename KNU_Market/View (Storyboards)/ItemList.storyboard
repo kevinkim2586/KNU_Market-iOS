@@ -31,14 +31,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default item icon" translatesAutoresizingMaskIntoConstraints="NO" id="wz9-6A-udF" customClass="ItemImageView" customModule="KNU_Market" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="16" width="80" height="88"/>
+                                                    <rect key="frame" x="20" y="16" width="90" height="88"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="7ju-t2-D1F"/>
-                                                        <constraint firstAttribute="height" constant="80" id="BCX-Lo-SB4"/>
+                                                        <constraint firstAttribute="width" constant="90" id="7ju-t2-D1F"/>
+                                                        <constraint firstAttribute="height" constant="90" id="BCX-Lo-SB4"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="도미노 피자 시키실 분도미노 피자 시키실 분" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQ0-sF-Iyo">
-                                                    <rect key="frame" x="115" y="18" width="249" height="38.5"/>
+                                                    <rect key="frame" x="125" y="18" width="239" height="38.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -50,7 +50,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집 중" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vpi-m3-Hp1">
-                                                    <rect key="frame" x="115" y="83" width="70" height="20"/>
+                                                    <rect key="frame" x="125" y="83" width="70" height="20"/>
                                                     <color key="backgroundColor" name="AppDefaultColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Lzj-Ex-wdR"/>
@@ -61,20 +61,20 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3 명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0AQ-Qj-iwp">
-                                                    <rect key="frame" x="240" y="86" width="35" height="17"/>
+                                                    <rect key="frame" x="250" y="86" width="35" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people icon" translatesAutoresizingMaskIntoConstraints="NO" id="8On-4j-2KU">
-                                                    <rect key="frame" x="210" y="84" width="20" height="20"/>
+                                                    <rect key="frame" x="220" y="84" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="FAQ-3f-370"/>
                                                         <constraint firstAttribute="width" constant="20" id="sqv-ax-1lD"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07/06 12:32" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gO1-A5-TTh">
-                                                    <rect key="frame" x="115" y="61.5" width="68" height="15"/>
+                                                    <rect key="frame" x="125" y="61.5" width="68" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -101,6 +101,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="currentlyGatheredPeopleLabel" destination="0AQ-Qj-iwp" id="AP7-nu-kb1"/>
+                                            <outlet property="dateLabel" destination="gO1-A5-TTh" id="EC5-G3-hVy"/>
                                             <outlet property="gatheringLabel" destination="Vpi-m3-Hp1" id="FO7-gE-m09"/>
                                             <outlet property="itemImageView" destination="wz9-6A-udF" id="hpJ-Sl-b1Z"/>
                                             <outlet property="itemTitleLabel" destination="HQ0-sF-Iyo" id="dvg-oj-wr5"/>

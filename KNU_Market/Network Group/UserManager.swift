@@ -13,7 +13,7 @@ class UserManager {
     //MARK: - API Request URLs
     let registerURL                 = "\(Constants.API_BASE_URL)auth"
     let loginURL                    = "\(Constants.API_BASE_URL)login"
-    let checkDuplicateURL           = "\(Constants.API_BASE_URL)duplicate"
+    let checkNicknameDuplicateURL   = "\(Constants.API_BASE_URL)duplicate/nickname"
     let logoutURL                   = "\(Constants.API_BASE_URL)logout"
     let requestAccessTokenURL       = "\(Constants.API_BASE_URL)token"
     let findPasswordURL             = "\(Constants.API_BASE_URL)findpassword"
@@ -61,17 +61,13 @@ class UserManager {
     
     
     //MARK: - 닉네임 중복 체크
-    func checkDuplicate(nickname: String,
-                        completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
+    func checkNicknameDuplicate(nickname: String,
+                                completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
-        let headers: HTTPHeaders = [
-            HTTPHeaderKeys.contentType.rawValue : HTTPHeaderValues.applicationJSON.rawValue,
-            "id": nickname
-        ]
+        let url = checkNicknameDuplicateURL + "?nickname=\(nickname)"
         
-        AF.request(checkDuplicateURL,
+        AF.request(url,
                    method: .get,
-                   headers: headers,
                    interceptor: interceptor)
             .validate()
             .responseJSON { response in
@@ -83,7 +79,7 @@ class UserManager {
                     do {
                         
                         let json = try JSON(data: response.data!)
-                        let result = json["isDuplicate"].stringValue
+                        let result = json["duplicateNickname"].stringValue
                         
                         print("✏️ USER MANAGER - isDuplicate Result: \(result)")
                         

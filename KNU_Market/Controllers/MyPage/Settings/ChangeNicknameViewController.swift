@@ -69,7 +69,7 @@ class ChangeNicknameViewController: UIViewController {
         
         if !validateUserInput() { return }
         
-        UserManager.shared.checkDuplicate(nickname: nickname!) { result in
+        UserManager.shared.checkNicknameDuplicate(nickname: nickname!) { result in
             
             switch result {
             

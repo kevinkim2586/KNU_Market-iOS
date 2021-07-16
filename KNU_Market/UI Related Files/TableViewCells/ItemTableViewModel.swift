@@ -34,7 +34,26 @@ class ItemTableViewModel {
         get { return Location.listForCell[location] }
     }
     
-    var date: String
+    private var formattedDate: String = ""
+    var date: String {
+        get {
+            return formattedDate
+        }
+        set {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            let convertedDate = dateFormatter.date(from: newValue)
+            
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            
+            if let date = convertedDate {
+                let finalDate = dateFormatter.string(from: date)
+                formattedDate = finalDate
+            }
+            formattedDate = "날짜 표시 에러"
+            
+        }
+    }
     
  
     

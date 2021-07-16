@@ -316,6 +316,30 @@ class UserManager {
             }
     }
     
+    //MARK: - 비밀번호 찾기
+    func findPassword(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        AF.request(findPasswordURL,
+                   method: .post)
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    
+
+                    completion(.success(true))
+                    
+                default:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("❗️ UserManager findPassword error statusCode: \(statusCode) and error: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+            }
+    }
+    
 }
 
 //MARK: - 개인정보 저장 메서드

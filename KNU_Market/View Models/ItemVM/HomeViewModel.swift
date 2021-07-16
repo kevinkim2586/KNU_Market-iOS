@@ -105,6 +105,7 @@ class HomeViewModel {
     func resetValues() {
         
         itemList.removeAll()
+        print("✏️ itemList count: \(itemList.count)")
         isFetchingData = false
         index = 1
     }

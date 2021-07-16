@@ -6,10 +6,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var findPasswordButton: UIButton!
     
     private var viewModel: LoginViewModel = LoginViewModel()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +46,12 @@ class LoginViewController: UIViewController {
             }
             dismissProgressBar()
         }
+    }
+    
+    
+    @IBAction func pressedFindPasswordButton(_ sender: UIButton) {
+        
+        
     }
     
     func changeRootViewController() {

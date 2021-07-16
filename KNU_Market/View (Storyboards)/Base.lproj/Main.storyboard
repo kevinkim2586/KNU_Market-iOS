@@ -108,7 +108,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="아이디 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ivr-6Y-BiC">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="학교 이메일 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ivr-6Y-BiC">
                                 <rect key="frame" x="20" y="165" width="335" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="AWj-1Y-CvY"/>
@@ -125,7 +125,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fP6-gv-Fuk">
-                                <rect key="frame" x="65" y="325" width="245" height="50"/>
+                                <rect key="frame" x="65" y="335" width="245" height="50"/>
                                 <color key="backgroundColor" name="AppDefaultColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="T6p-A8-dRA"/>
@@ -158,22 +158,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrB-Jn-ziO">
+                                <rect key="frame" x="151.5" y="405" width="72" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="비밀번호 찾기">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedFindPasswordButton:" destination="WcB-qX-q1C" eventType="touchUpInside" id="6AE-3D-Lho"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="66W-Oo-gcL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fP6-gv-Fuk" firstAttribute="top" secondItem="rU1-jL-NSK" secondAttribute="bottom" constant="50" id="07J-wk-qVI"/>
                             <constraint firstItem="rU1-jL-NSK" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="20" id="16s-1Z-neB"/>
                             <constraint firstItem="66W-Oo-gcL" firstAttribute="trailing" secondItem="rU1-jL-NSK" secondAttribute="trailing" constant="20" id="1gi-Q1-dob"/>
                             <constraint firstItem="ivr-6Y-BiC" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="20" id="7AS-Qt-dwD"/>
                             <constraint firstItem="JuZ-r3-thW" firstAttribute="leading" secondItem="jzc-Dq-xC0" secondAttribute="trailing" constant="15" id="8Ep-X9-eXr"/>
+                            <constraint firstItem="zrB-Jn-ziO" firstAttribute="centerX" secondItem="60a-Yi-ipM" secondAttribute="centerX" id="ACh-18-1RF"/>
                             <constraint firstItem="ivr-6Y-BiC" firstAttribute="top" secondItem="jzc-Dq-xC0" secondAttribute="bottom" constant="30" id="GVq-LF-NjR"/>
                             <constraint firstItem="jzc-Dq-xC0" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="20" id="KzP-pK-N2b"/>
                             <constraint firstItem="66W-Oo-gcL" firstAttribute="trailing" secondItem="ivr-6Y-BiC" secondAttribute="trailing" constant="20" id="TCi-NN-Efb"/>
+                            <constraint firstItem="fP6-gv-Fuk" firstAttribute="top" secondItem="rU1-jL-NSK" secondAttribute="bottom" constant="60" id="VXi-dF-2g5"/>
                             <constraint firstItem="YqV-Rj-NfZ" firstAttribute="top" secondItem="66W-Oo-gcL" secondAttribute="top" constant="15" id="YFJ-zj-Jzx"/>
                             <constraint firstItem="fP6-gv-Fuk" firstAttribute="centerX" secondItem="60a-Yi-ipM" secondAttribute="centerX" id="bJE-c6-6mt"/>
                             <constraint firstItem="JuZ-r3-thW" firstAttribute="top" secondItem="66W-Oo-gcL" secondAttribute="top" constant="92" id="d2p-zy-4qY"/>
                             <constraint firstItem="jzc-Dq-xC0" firstAttribute="top" secondItem="YqV-Rj-NfZ" secondAttribute="bottom" constant="30" id="gal-nZ-CWY"/>
+                            <constraint firstItem="zrB-Jn-ziO" firstAttribute="top" secondItem="fP6-gv-Fuk" secondAttribute="bottom" constant="20" id="kAJ-v1-HQS"/>
                             <constraint firstItem="fP6-gv-Fuk" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="65" id="qEQ-8j-yXj"/>
                             <constraint firstItem="YqV-Rj-NfZ" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="20" id="rCZ-Ky-UTo"/>
                             <constraint firstItem="rU1-jL-NSK" firstAttribute="top" secondItem="ivr-6Y-BiC" secondAttribute="bottom" constant="30" id="soM-Kh-4Hu"/>
@@ -182,6 +194,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="X0G-NW-KDu"/>
                     <connections>
+                        <outlet property="findPasswordButton" destination="zrB-Jn-ziO" id="PW7-kv-ocP"/>
                         <outlet property="idTextField" destination="ivr-6Y-BiC" id="ysg-fa-l1B"/>
                         <outlet property="loginButton" destination="fP6-gv-Fuk" id="7W6-3T-bvz"/>
                         <outlet property="passwordTextField" destination="rU1-jL-NSK" id="WYk-Ry-jF9"/>

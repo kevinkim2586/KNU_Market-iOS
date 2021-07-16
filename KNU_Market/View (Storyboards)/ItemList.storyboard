@@ -593,12 +593,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="북문" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wm2-Nw-XXU" userLabel="장소">
-                                <rect key="frame" x="339" y="364" width="28" height="21"/>
+                                <rect key="frame" x="341" y="364" width="26" height="19.5"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="230" id="EOr-JA-Cvt"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="j7P-dO-aHZ">
@@ -668,7 +668,9 @@
         <scene sceneID="e3x-qg-hIx">
             <objects>
                 <navigationController title="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="YMW-jm-5lr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="home_unselected" selectedImage="home_selected" id="NVS-f0-mJn"/>
+                    <tabBarItem key="tabBarItem" title="" image="home_unselected" selectedImage="home_selected" id="NVS-f0-mJn">
+                        <color key="badgeColor" name="AppDefaultColor"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Bj3-Rg-zky">

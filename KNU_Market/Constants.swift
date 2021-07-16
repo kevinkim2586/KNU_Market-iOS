@@ -111,6 +111,12 @@ struct Constants {
         static let cameraIcon                   = "camera icon"
         
         // Tab Bar Icons
+        static let chatUnselected               = "chat_unselected"
+        static let chatSelected                 = "chat_selected"
+        static let homeUnselected               = "home_unselected"
+        static let homeSelected                 = "home_selected"
+        static let myPageUnselected             = "mypage_unselected"
+        static let myPageSelected               = "mypage_selected"
         
         
         

@@ -10,7 +10,6 @@ class ChatListViewController: UIViewController {
         super.viewDidLoad()
 
         initialize()
-
     }
     
 }
@@ -64,6 +63,8 @@ extension ChatListViewController {
     func initialize() {
         
         self.navigationController?.view.backgroundColor = .white
+        self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
+        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.chatSelected)?.withRenderingMode(.alwaysOriginal)
         
         initializeTableView()
     }

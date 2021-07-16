@@ -165,7 +165,10 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController {
     
     func initialize() {
-
+        
+        self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
+        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysOriginal)
+        
         viewModel.delegate = self
     
         viewModel.loadUserProfile()

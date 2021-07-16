@@ -467,6 +467,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="AppDefaultColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="7XM-Mv-QaD" kind="relationship" relationship="viewControllers" id="EeF-sS-y6y"/>

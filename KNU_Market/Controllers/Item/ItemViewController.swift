@@ -119,7 +119,7 @@ class ItemViewController: UIViewController {
                 }
                 
                 reportVC.userToReport = userToReport
-                reportVC.modalPresentationStyle = .fullScreen
+                //reportVC.modalPresentationStyle = .fullScreen
                 
                 self.present(reportVC, animated: true)
             }

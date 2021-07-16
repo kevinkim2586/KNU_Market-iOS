@@ -79,7 +79,7 @@ extension ReportUserViewController {
         contentTextView.layer.borderColor = UIColor.lightGray.cgColor
         contentTextView.clipsToBounds = true
         contentTextView.font = UIFont.systemFont(ofSize: 15)
-        contentTextView.text = "신고 내용을 적어주세요 🤔"
+        contentTextView.text = "신고 내용을 적어주세요❗️"
         contentTextView.textColor = UIColor.lightGray
     }
     
@@ -119,7 +119,7 @@ extension ReportUserViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
     
         if textView.text.isEmpty {
-            textView.text = "신고 내용을 적어주세요 🤔"
+            textView.text = "신고 내용을 적어주세요❗️"
             textView.textColor = UIColor.lightGray
             return
         }

@@ -8,8 +8,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var titleBarButtonItem: UIBarButtonItem!
-    
+  
     private let refreshControl = UIRefreshControl()
     
     private var viewModel = HomeViewModel()
@@ -189,16 +188,16 @@ extension HomeViewController {
                                  for: .valueChanged)
     }
     
-    func initializeBarButtonItem(with image: UIImage = UIImage(named: Constants.Images.defaultProfileImage)!) {
-        
-        let scaledImage = image.resizeImage(size: CGSize(width: 26, height: 26))
-        let imageView = UIImageView(image: scaledImage)
-        imageView.frame = CGRect(origin: .zero, size: scaledImage.size)
-        imageView.layer.cornerRadius = imageView.frame.size.width / 2
-        imageView.clipsToBounds = true
-
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: imageView)
-    }
+//    func initializeBarButtonItem(with image: UIImage = UIImage(named: Constants.Images.defaultProfileImage)!) {
+//
+//        let scaledImage = image.resizeImage(size: CGSize(width: 26, height: 26))
+//        let imageView = UIImageView(image: scaledImage)
+//        imageView.frame = CGRect(origin: .zero, size: scaledImage.size)
+//        imageView.layer.cornerRadius = imageView.frame.size.width / 2
+//        imageView.clipsToBounds = true
+//
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: imageView)
+//    }
     
     func initializeAddButton() {
         

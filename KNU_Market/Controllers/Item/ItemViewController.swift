@@ -119,7 +119,7 @@ class ItemViewController: UIViewController {
                 }
                 
                 reportVC.userToReport = userToReport
-                //reportVC.modalPresentationStyle = .fullScreen
+                reportVC.modalPresentationStyle = .overFullScreen
                 
                 self.present(reportVC, animated: true)
             }
@@ -263,8 +263,8 @@ extension ItemViewController {
         titleView.layer.shadowColor = UIColor.black.cgColor
         
         titleView.layer.shadowOffset = CGSize(width: 2, height: 2)
-        titleView.layer.shadowOpacity = 0.2
-        titleView.layer.shadowRadius = 2
+        titleView.layer.shadowOpacity = 0.15
+        titleView.layer.shadowRadius = 1
     }
     
     func initializeBackButton() {

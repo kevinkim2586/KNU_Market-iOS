@@ -41,6 +41,7 @@ class ItemManager {
                         
                     } catch {
                         print("ItemManager - There was an error decoding JSON Data with error: \(error)")
+                        print("❗️ data is empty: ")
                         completion(.failure(.E000))
                     }
                     

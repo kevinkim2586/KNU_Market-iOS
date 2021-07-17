@@ -362,8 +362,7 @@ extension UserManager {
     func saveRefreshedAccessToken(from response: JSON) {
         
         let newAccessToken = response["accessToken"].stringValue
-        
-        // 확인 : 기존 accessCode 를 지우지 않고 바로 덮어씌울 수 있는지 확인해보기
+   
         User.shared.savedAccessToken = KeychainWrapper.standard.set(newAccessToken,
                                                                     forKey: Constants.KeyChainKey.accessToken)
     }

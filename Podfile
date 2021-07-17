@@ -30,4 +30,6 @@ target 'KNU_Market' do
   pod 'ImageSlideshow', '~> 1.9.0'
   pod "ImageSlideshow/SDWebImage"
   pod 'Starscream', '~> 4.0.0'
+  pod 'HGPlaceholders'
+  
 end

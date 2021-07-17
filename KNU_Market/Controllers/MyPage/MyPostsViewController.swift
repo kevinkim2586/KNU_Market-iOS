@@ -1,9 +1,10 @@
 import UIKit
 import SDWebImage
+import HGPlaceholders
 
 class MyPostsViewController: UIViewController {
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var tableView: TableView!
     
     private let refreshControl = UIRefreshControl()
     
@@ -14,10 +15,9 @@ class MyPostsViewController: UIViewController {
 
         initialize()
     }
-    
-
 
 }
+
 //MARK: - HomeViewModelDelegate
 
 extension MyPostsViewController: HomeViewModelDelegate {
@@ -41,6 +41,7 @@ extension MyPostsViewController: HomeViewModelDelegate {
     }
     
     func failedFetchingItemList(with error: NetworkError) {
+        tableView.showNoResultsPlaceholder()
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
         self.showSimpleBottomAlert(with: error.errorDescription)

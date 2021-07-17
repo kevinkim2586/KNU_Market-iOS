@@ -3,10 +3,11 @@ import SPIndicator
 import SwiftMessages
 import SnackBar_swift
 import ViewAnimator
+import HGPlaceholders
 
 class HomeViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: TableView!
     @IBOutlet weak var addButton: UIButton!
   
     private let refreshControl = UIRefreshControl()
@@ -15,9 +16,11 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         initialize()
-        
+     
 
     }
     
@@ -179,6 +182,8 @@ extension HomeViewController {
         refreshControl.addTarget(self,
                                  action: #selector(refreshTableView),
                                  for: .valueChanged)
+        
+        tableView.showLoadingPlaceholder()
     }
     
 //    func initializeBarButtonItem(with image: UIImage = UIImage(named: Constants.Images.defaultProfileImage)!) {

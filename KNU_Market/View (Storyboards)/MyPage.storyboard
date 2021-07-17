@@ -408,6 +408,7 @@
                                     <constraint firstAttribute="height" constant="40" id="K0D-f1-z0X"/>
                                     <constraint firstAttribute="width" constant="100" id="tsn-n9-4n8"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="변경하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -448,7 +449,7 @@
         <scene sceneID="RK9-bN-jLe">
             <objects>
                 <viewController storyboardIdentifier="MyPostsViewController" id="uXb-OZ-i1f" userLabel="MyPostsViewController" customClass="MyPostsViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="d24-Bv-Qpa">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="d24-Bv-Qpa" customClass="TableView" customModule="HGPlaceholders">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -575,6 +576,7 @@
                                     <constraint firstAttribute="width" constant="100" id="BKM-oT-jmM"/>
                                     <constraint firstAttribute="height" constant="40" id="gb4-oW-cbZ"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="변경하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -586,7 +588,7 @@
                                 <rect key="frame" x="179" y="140" width="56" height="30"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <state key="normal" title="중복 확인">
-                                    <color key="titleColor" name="AppDefaultColor"/>
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="pressedCheckDuplicateButton:" destination="80b-1b-I2a" eventType="touchUpInside" id="BcC-Y4-uLe"/>

@@ -76,6 +76,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.3.1):
     - GoogleUtilities/Logger
+  - HGPlaceholders (0.5.0)
   - ImageSlideshow (1.9.2):
     - ImageSlideshow/Core (= 1.9.2)
   - ImageSlideshow/Core (1.9.2)
@@ -118,6 +119,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - GMStepper
+  - HGPlaceholders
   - ImageSlideshow (~> 1.9.0)
   - ImageSlideshow/SDWebImage
   - InputBarAccessoryView
@@ -149,6 +151,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - HGPlaceholders
     - ImageSlideshow
     - InputBarAccessoryView
     - IQKeyboardManagerSwift
@@ -181,6 +184,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 1c863b1161fc3c8cf614a7460d1be6a7c262aab3
   GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
+  HGPlaceholders: cbf8caed8360fc2ab5e8a4610cce61f76fbd2c37
   ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
   InputBarAccessoryView: 1f75d8c9f75e5e57f3ffac36ed58635a8005e0bc
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
@@ -199,6 +203,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: 3bc11bc96d404bc1e1050c24aeda74dc7a364229
+PODFILE CHECKSUM: bf6647c9bf25841e979e6fd73053d1651440a9c5
 
 COCOAPODS: 1.10.1

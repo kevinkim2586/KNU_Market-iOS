@@ -21,7 +21,6 @@ class HomeViewController: UIViewController {
 
         initialize()
      
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,13 +65,11 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
-        showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
+        showSimpleBottomAlert(with: error.errorDescription)
     }
   
-    
     func didFetchItemList() {
         
-        print("HomeVC - didFetchItemList activated")
         tableView.reloadData()
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
@@ -99,6 +96,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // 아래 코드 더 수정 고민
+        if indexPath.row > viewModel.itemList.count - 1 {
+            print("❗️ Index Out Of Range -- indexPathRow: \(indexPath.row), reviewList count: \(viewModel.itemList.count)")
+            return UITableViewCell()
+        }
+        
         let cellIdentifier = Constants.cellID.itemTableViewCell
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell else {
@@ -123,6 +126,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func refreshTableView() {
+        
+        //tableView.showLoadingPlaceholder()
+//        self.viewModel.resetValues()
+//        self.viewModel.fetchItemList()
         
         //사라지는 애니메이션 처리
         UIView.animate(views: self.tableView.visibleCells,
@@ -204,8 +211,8 @@ extension HomeViewController {
 
         let font = UIFont.systemFont(ofSize: 20)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        let plusImage = UIImage(systemName: "plus",
+        let buttonImage = UIImage(systemName: "pencil",
                                 withConfiguration: configuration)
-        addButton.setImage(plusImage, for: .normal)
+        addButton.setImage(buttonImage, for: .normal)
     }
 }

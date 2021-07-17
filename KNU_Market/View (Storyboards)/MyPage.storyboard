@@ -68,6 +68,9 @@
                                             <constraint firstAttribute="height" constant="120" id="GNE-30-jY7"/>
                                         </constraints>
                                         <state key="normal" image="pick profile image"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="pressedProfileImageButton:" destination="D1U-6p-iqG" eventType="touchUpInside" id="BGT-RL-nj9"/>
                                         </connections>
@@ -79,11 +82,14 @@
                                             <constraint firstAttribute="height" constant="30" id="nV1-uS-CB2"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자 닉네임" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eu9-gu-QD1">
-                                        <rect key="frame" x="50" y="130" width="214" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eu9-gu-QD1">
+                                        <rect key="frame" x="50" y="130" width="214" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -201,7 +207,7 @@
         <!--OpenSourceLicenseViewController-->
         <scene sceneID="Ak5-xg-G32">
             <objects>
-                <viewController storyboardIdentifier="OpenSourceLicenseViewController" id="XN0-kh-aAN" userLabel="OpenSourceLicenseViewController" customClass="OpenSourceInfoViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OpenSourceLicenseViewController" hidesBottomBarWhenPushed="YES" id="XN0-kh-aAN" userLabel="OpenSourceLicenseViewController" customClass="OpenSourceInfoViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xEQ-xg-ATq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -216,7 +222,7 @@
         <!--DeveloperInfoViewController-->
         <scene sceneID="NKi-kv-aez">
             <objects>
-                <viewController storyboardIdentifier="DeveloperInfoViewController" id="ItE-EJ-YgV" userLabel="DeveloperInfoViewController" customClass="DeveloperInfoViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeveloperInfoViewController" hidesBottomBarWhenPushed="YES" id="ItE-EJ-YgV" userLabel="DeveloperInfoViewController" customClass="DeveloperInfoViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LaY-J2-KuX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -448,7 +454,7 @@
         <!--MyPostsViewController-->
         <scene sceneID="RK9-bN-jLe">
             <objects>
-                <viewController storyboardIdentifier="MyPostsViewController" id="uXb-OZ-i1f" userLabel="MyPostsViewController" customClass="MyPostsViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyPostsViewController" hidesBottomBarWhenPushed="YES" id="uXb-OZ-i1f" userLabel="MyPostsViewController" customClass="MyPostsViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="d24-Bv-Qpa" customClass="TableView" customModule="HGPlaceholders">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

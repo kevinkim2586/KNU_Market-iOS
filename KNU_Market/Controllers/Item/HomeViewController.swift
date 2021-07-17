@@ -183,6 +183,7 @@ extension HomeViewController {
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysOriginal)
         
         viewModel.delegate = self
+        tableView.placeholderDelegate = self
     
         viewModel.loadUserProfile()
         viewModel.fetchItemList()

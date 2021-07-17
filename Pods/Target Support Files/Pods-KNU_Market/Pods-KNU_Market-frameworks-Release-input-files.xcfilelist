@@ -14,6 +14,7 @@ ${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
 ${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework
 ${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework
 ${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework
+${BUILT_PRODUCTS_DIR}/PanModal/PanModal.framework
 ${BUILT_PRODUCTS_DIR}/ProgressHUD/ProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework

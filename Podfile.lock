@@ -94,6 +94,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - PanModal (1.2.7)
   - ProgressHUD (13.6)
   - PromisesObjC (1.2.12)
   - SDWebImage (5.11.1):
@@ -125,6 +126,7 @@ DEPENDENCIES:
   - InputBarAccessoryView
   - IQKeyboardManagerSwift
   - MessageKit
+  - PanModal
   - ProgressHUD
   - SDWebImage (~> 5.0)
   - SkeletonView
@@ -157,6 +159,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - MessageKit
     - nanopb
+    - PanModal
     - ProgressHUD
     - PromisesObjC
     - SDWebImage
@@ -190,6 +193,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
@@ -203,6 +207,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: bf6647c9bf25841e979e6fd73053d1651440a9c5
+PODFILE CHECKSUM: b131c506159ce15850643d59a982ffdccab7bd73
 
 COCOAPODS: 1.10.1

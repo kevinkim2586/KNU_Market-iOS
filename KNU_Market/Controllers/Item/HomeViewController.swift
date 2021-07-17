@@ -76,6 +76,7 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func failedFetchingItemList(with error: NetworkError) {
+        tableView.showErrorPlaceholder()
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
         self.showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
@@ -159,6 +160,16 @@ extension HomeViewController: UIScrollViewDelegate {
                 viewModel.fetchItemList()
             }
         }
+    }
+}
+
+//MARK: - Placeholder Delegate
+
+extension HomeViewController: PlaceholderDelegate {
+    
+    func view(_ view: Any, actionButtonTappedFor placeholder: Placeholder) {
+        self.viewModel.resetValues()
+        self.viewModel.fetchItemList()
     }
 }
 

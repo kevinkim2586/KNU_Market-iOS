@@ -6,7 +6,7 @@ import HGPlaceholders
 
 class HomeViewController: UIViewController {
 
-    @IBOutlet weak var tableView: TableView!
+    @IBOutlet weak var itemTableView: TableView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         
+     
 
         initialize()
      
@@ -34,7 +35,7 @@ class HomeViewController: UIViewController {
             print("NEEDS TO RELOAD DATA")
             
             let indexPath = NSIndexPath(row: NSNotFound, section: 0)
-            self.tableView.scrollToRow(at: indexPath as IndexPath,
+            self.itemTableView.scrollToRow(at: indexPath as IndexPath,
                                        at: .top,
                                        animated: false)
             refreshTableView()
@@ -74,15 +75,15 @@ extension HomeViewController: HomeViewModelDelegate {
   
     func didFetchItemList() {
         
-        tableView.reloadData()
+        itemTableView.reloadData()
         refreshControl.endRefreshing()
-        tableView.tableFooterView = nil
+        itemTableView.tableFooterView = nil
     }
     
     func failedFetchingItemList(with error: NetworkError) {
-        tableView.showErrorPlaceholder()
+        itemTableView.showErrorPlaceholder()
         refreshControl.endRefreshing()
-        tableView.tableFooterView = nil
+        itemTableView.tableFooterView = nil
         self.showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
     }
 }
@@ -118,17 +119,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let itemVC: ItemViewController = segue.destination as? ItemViewController else { return }
-
-        guard let index = tableView.indexPathForSelectedRow?.row else { return }
+        guard let itemVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
         
         itemVC.hidesBottomBarWhenPushed = true
-        itemVC.pageID = viewModel.itemList[index].uuid
+        itemVC.pageID = viewModel.itemList[indexPath.row].uuid
+        
+        self.navigationController?.pushViewController(itemVC, animated: true)
     }
+
     
     @objc func refreshTableView() {
         
@@ -137,7 +136,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 //        self.viewModel.fetchItemList()
         
         //사라지는 애니메이션 처리
-        UIView.animate(views: self.tableView.visibleCells,
+        UIView.animate(views: self.itemTableView.visibleCells,
                        animations: Animations.forTableViews,
                        reversed: true,
                        initialAlpha: 1.0,   // 보이다가
@@ -157,10 +156,10 @@ extension HomeViewController: UIScrollViewDelegate {
         
         let position = scrollView.contentOffset.y
    
-        if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
+        if position > (itemTableView.contentSize.height - 80 - scrollView.frame.size.height) {
         
             if !viewModel.isFetchingData {
-                tableView.tableFooterView = createSpinnerFooterView()
+                itemTableView.tableFooterView = createSpinnerFooterView()
                 viewModel.fetchItemList()
             }
         }
@@ -177,6 +176,23 @@ extension HomeViewController: PlaceholderDelegate {
     }
 }
 
+//MARK: - UITabBarControllerDelegate
+
+extension HomeViewController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        let selectedIndex = tabBarController.selectedIndex
+        
+        switch selectedIndex {
+        case 0:
+            let topRow = IndexPath(row: 0, section: 0)
+            self.itemTableView.scrollToRow(at: topRow, at: .top, animated: true)
+        default: return
+        }
+    }
+}
+
 //MARK: - UI Configuration
 
 extension HomeViewController {
@@ -186,8 +202,10 @@ extension HomeViewController {
         self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysOriginal)
         
+        self.tabBarController?.delegate = self
+        
         viewModel.delegate = self
-        tableView.placeholderDelegate = self
+        itemTableView.placeholderDelegate = self
     
         viewModel.loadUserProfile()
         viewModel.fetchItemList()
@@ -198,15 +216,18 @@ extension HomeViewController {
     
     func initializeTableView() {
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.refreshControl = refreshControl
+        itemTableView.delegate = self
+        itemTableView.dataSource = self
+        itemTableView.refreshControl = refreshControl
+        
+        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
+        itemTableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
         
         refreshControl.addTarget(self,
                                  action: #selector(refreshTableView),
                                  for: .valueChanged)
         
-        tableView.showLoadingPlaceholder()
+        itemTableView.showLoadingPlaceholder()
     }
     
 //    func initializeBarButtonItem(with image: UIImage = UIImage(named: Constants.Images.defaultProfileImage)!) {

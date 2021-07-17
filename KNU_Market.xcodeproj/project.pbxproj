@@ -22,7 +22,6 @@
 		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
 		7C436B5826820E5200943069 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5726820E5200943069 /* ReportManager.swift */; };
 		7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */; };
-		7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */; };
 		7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C516C3A267F48300065E30D /* ReportUserViewController.swift */; };
 		7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */; };
 		7C55545D266CDFD100C3C5B6 /* UploadItemRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545C266CDFD100C3C5B6 /* UploadItemRequestDTO.swift */; };
@@ -44,7 +43,6 @@
 		7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C719970267A1678000BEE64 /* ItemDetailModel.swift */; };
 		7C815223268590D70041EC47 /* ItemListMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C815222268590D70041EC47 /* ItemListMockData.swift */; };
 		7C833686266208210032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833685266208210032308D /* Interceptor.swift */; };
-		7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */; };
 		7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */; };
 		7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */; };
 		7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */; };
@@ -78,6 +76,10 @@
 		7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */; };
 		7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */; };
 		7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */; };
+		7CCDB1EA26A2BCD30092F28D /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */; };
+		7CCDB1EF26A2BD0C0092F28D /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1ED26A2BD0C0092F28D /* ItemTableViewCell.swift */; };
+		7CCDB1F026A2BD0C0092F28D /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCDB1EE26A2BD0C0092F28D /* ItemTableViewCell.xib */; };
+		7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,7 +98,6 @@
 		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7C436B5726820E5200943069 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
 		7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserRequestDTO.swift; sourceTree = "<group>"; };
-		7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		7C516C3A267F48300065E30D /* ReportUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
 		7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		7C55545C266CDFD100C3C5B6 /* UploadItemRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemRequestDTO.swift; sourceTree = "<group>"; };
@@ -119,7 +120,6 @@
 		7C77E240266BB55600680A27 /* KNU_Market.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNU_Market.entitlements; sourceTree = "<group>"; };
 		7C815222268590D70041EC47 /* ItemListMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListMockData.swift; sourceTree = "<group>"; };
 		7C833685266208210032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
-		7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPickedItemImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +155,10 @@
 		7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModel.swift; sourceTree = "<group>"; };
 		7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewController.swift; sourceTree = "<group>"; };
+		7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		7CCDB1ED26A2BD0C0092F28D /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		7CCDB1EE26A2BD0C0092F28D /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
+		7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -217,10 +221,11 @@
 		7C4D13C5264524FA00CBB00A /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */,
 				7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */,
-				7C8839D82643B2AD00F9F78C /* ItemTableViewCell.swift */,
-				7C4D13C62645253700CBB00A /* ChatTableViewCell.swift */,
 				7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */,
+				7CCDB1ED26A2BD0C0092F28D /* ItemTableViewCell.swift */,
+				7CCDB1EE26A2BD0C0092F28D /* ItemTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				7C5E21282646558600E98FE5 /* ItemViewModel.swift */,
 				7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */,
 				7C3758EC265FA97A0081A85D /* HomeViewModel.swift */,
+				7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */,
 			);
 			path = ItemVM;
 			sourceTree = "<group>";
@@ -568,6 +574,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CCDB1F026A2BD0C0092F28D /* ItemTableViewCell.xib in Resources */,
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
 				7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */,
@@ -641,12 +648,12 @@
 				7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */,
 				7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */,
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
-				7C4D13C72645253700CBB00A /* ChatTableViewCell.swift in Sources */,
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,
 				7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */,
 				7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */,
+				7CCDB1EF26A2BD0C0092F28D /* ItemTableViewCell.swift in Sources */,
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
 				7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
@@ -663,10 +670,10 @@
 				7C132BF2265397B200BE5F40 /* Global Methods + Variables.swift in Sources */,
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7C1C1D12265E714000C08C66 /* TermsAndConditionsViewController.swift in Sources */,
-				7C8839D92643B2AD00F9F78C /* ItemTableViewCell.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
 				7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
+				7CCDB1EA26A2BCD30092F28D /* ChatTableViewCell.swift in Sources */,
 				7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */,
 				7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */,
 				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,
@@ -687,6 +694,7 @@
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
+				7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */,
 				7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */,
 				7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */,
 				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,

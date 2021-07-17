@@ -118,7 +118,7 @@ extension MyPostsViewController: UIScrollViewDelegate {
     }
 }
 
-//MARK: - UI Configuration
+//MARK: - Initialization & UI Configuration 
 
 extension MyPostsViewController {
     
@@ -135,6 +135,9 @@ extension MyPostsViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.refreshControl = refreshControl
+        
+        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
         
         refreshControl.addTarget(self,
                                  action: #selector(refreshTableView),

@@ -10,7 +10,6 @@ class ChatTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         //configureImageView()
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

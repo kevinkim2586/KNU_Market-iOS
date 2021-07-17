@@ -26,7 +26,7 @@ struct Constants {
         // Home & Item Tab
         static let tabBarController             = "TabBarController"
         static let homeVC                       = "HomeViewController"
-        static let itemVC                       = "itemViewController"
+        static let itemVC                       = "ItemViewController"
         static let uploadItemVC                 = "UploadItemViewController"
         static let photoDetailVC                = "PhotoDetailViewController"
         static let searchItemVC                 = "SearchPostViewController"
@@ -88,6 +88,7 @@ struct Constants {
         
         static let sendCell                     = "SendCell"
         static let receiveCell                  = "ReceiveCell"
+        static let itemTableViewCell            = "ItemTableViewCell"
     }
     
     struct Color {

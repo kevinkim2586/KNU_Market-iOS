@@ -1,9 +1,3 @@
-//
-//  SceneDelegate.swift
-//  KNU_Market
-//
-//  Created by Kevin Kim on 2021/05/01.
-//
 
 import UIKit
 
@@ -18,12 +12,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         window.rootViewController = vc
-        
-        UIView.transition(with: window,
-                              duration: 1,
-                              options: [.curveLinear],
-                              animations: nil,
-                              completion: nil)
     }
 
 

@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
                 print("LoginViewController - login success")
                 
                 self.saveLoginInfo()
-                self.changeRootViewController()
+                self.goToHomeScreen()
                 
             case .failure(let error):
                 self.presentSimpleAlert(title: "로그인 실패", message: error.errorDescription)
@@ -52,14 +52,6 @@ class LoginViewController: UIViewController {
     @IBAction func pressedFindPasswordButton(_ sender: UIButton) {
         
         
-    }
-    
-    func changeRootViewController() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
-        
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }
     
     func saveLoginInfo() {
@@ -139,10 +131,8 @@ extension LoginViewController {
         
         
         //MARK: - TEST DATA
-//        idTextField.text = "kevinkim2586@gmail.com"
-//        passwordTextField.text = "11111111"
         
-        idTextField.text = "alexding2586@knu.ac.kr"
+        idTextField.text = "kevinkim2222@knu.ac.kr"
         passwordTextField.text = "123456789"
     }
     

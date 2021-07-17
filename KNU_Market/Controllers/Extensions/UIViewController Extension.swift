@@ -3,9 +3,11 @@ import UIKit
 import SwiftMessages
 import SnackBar_swift
 
+//MARK: - Alert Methods
+
 extension UIViewController {
     
-    //MARK: - 가장 기본적인 Alert Message
+    // 가장 기본적인 Alert Message
     func presentSimpleAlert(title: String, message: String) {
         
         let alertController = UIAlertController(title: title,
@@ -19,7 +21,7 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    //MARK: - Completion Handler가 포함되어 있는 Alert Message
+    // Completion Handler가 포함되어 있는 Alert Message
     func presentAlertWithCancelAction(title: String, message: String, completion: @escaping ((Bool) -> Void)) {
         
         let alertController = UIAlertController(title: title,
@@ -40,15 +42,7 @@ extension UIViewController {
     
         self.present(alertController, animated: true, completion: nil)
     }
- 
-    //MARK: - Initial VC로 돌아가는 메서드
-    func popToInitialViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
-    }
-    
-    
+
     // SnackBar 라이브러리의 message 띄우기
     func showSimpleBottomAlert(with message: String) {
         SnackBar.make(in: self.view,
@@ -67,10 +61,37 @@ extension UIViewController {
                         action: {
                             action?()
                         }).show()
-        
+    }
+}
+
+//MARK: - VC Router
+
+extension UIViewController {
+    
+    // Initial VC로 돌아가는 메서드 (로그아웃, 회원 탈퇴, refreshToken 만료 등의 상황에 쓰임)
+    func popToInitialViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
     }
     
+    // 로그인 or 회원가입 성공 시 홈화면 전환 시 사용되는 함수
+    func goToHomeScreen() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+        
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+    }
+}
 
+
+//MARK: - UI Related
+
+extension UIViewController {
+    
+    
+    // UITableView 가 Fetching Data 중일 때 나타나는 Activity Indicator
     func createSpinnerFooterView() -> UIView {
         
         let footerView = UIView(frame: CGRect(x: 0,
@@ -85,10 +106,4 @@ extension UIViewController {
         return footerView
     }
     
-    
-    
 }
-
-
-
- 

@@ -1,7 +1,6 @@
 import UIKit
 import SPIndicator
 import SwiftMessages
-import SnackBar_swift
 import ViewAnimator
 import HGPlaceholders
 
@@ -9,7 +8,8 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: TableView!
     @IBOutlet weak var addButton: UIButton!
-  
+    @IBOutlet weak var searchButton: UIBarButtonItem!
+    
     private let refreshControl = UIRefreshControl()
     
     private var viewModel = HomeViewModel()
@@ -51,6 +51,10 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(uploadVC, animated: true)
     }
     
+    @IBAction func pressedSearchButton(_ sender: UIBarButtonItem) {
+        
+        
+    }
 }
 
 //MARK: - HomeViewModelDelegate

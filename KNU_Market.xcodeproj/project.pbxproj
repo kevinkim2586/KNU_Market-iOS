@@ -77,6 +77,7 @@
 		7CB8DF732650E1E20001CC6D /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF722650E1E20001CC6D /* RegisterViewModel.swift */; };
 		7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */; };
 		7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */; };
+		7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,6 +154,7 @@
 		7CB8DF722650E1E20001CC6D /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModel.swift; sourceTree = "<group>"; };
+		7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewController.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -471,6 +473,7 @@
 				7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */,
 				7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */,
 				7C5E2126264645B300E98FE5 /* ItemViewController.swift */,
+				7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 				7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */,
+				7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */,
 				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,
 				7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */,
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,

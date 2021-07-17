@@ -145,9 +145,17 @@
                         <barButtonItem key="leftBarButtonItem" title="크누마켓" style="done" id="dfO-jU-h20">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="PLB-Zm-cbs">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="pressedSearchButton:" destination="w55-ty-Qef" id="b7r-9F-VOa"/>
+                                <segue destination="sl8-el-jcF" kind="show" id="97N-CM-JL3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="gZb-xN-M8C" id="crE-lW-xdg"/>
+                        <outlet property="searchButton" destination="PLB-Zm-cbs" id="tEd-bo-ajS"/>
                         <outlet property="tableView" destination="hzd-Db-6UH" id="gDm-kb-1Do"/>
                     </connections>
                 </viewController>
@@ -407,6 +415,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bv-RB-JDl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6980" y="-719.19040479760122"/>
+        </scene>
+        <!--Search Post View Controller-->
+        <scene sceneID="npF-aS-ae2">
+            <objects>
+                <viewController storyboardIdentifier="SearchPostViewController" hidesBottomBarWhenPushed="YES" id="sl8-el-jcF" customClass="SearchPostViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="J1f-1V-8qb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <searchBar key="tableFooterView" contentMode="redraw" id="eD1-PD-bD0">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="PZx-RI-jvo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fqw-Ry-i6T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5988" y="-1742"/>
         </scene>
         <!--Upload Item View Controller-->
         <scene sceneID="e6U-fI-7ug">
@@ -849,6 +877,7 @@ IAo
         <image name="home_unselected" width="25.5" height="25.5"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="location icon" width="38" height="38"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="people icon" width="52" height="52"/>
         <image name="xmark.circle" catalog="system" width="128" height="121"/>

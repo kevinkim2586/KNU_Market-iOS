@@ -44,7 +44,6 @@ extension MyPostsViewController: HomeViewModelDelegate {
         tableView.showNoResultsPlaceholder()
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
-        self.showSimpleBottomAlert(with: error.errorDescription)
     }
 }
 

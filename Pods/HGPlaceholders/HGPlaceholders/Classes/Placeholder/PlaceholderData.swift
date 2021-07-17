@@ -40,9 +40,9 @@ public struct PlaceholderData {
     public static var noResults: PlaceholderData {
         var noResultsStyle = PlaceholderData()
         noResultsStyle.image = PlaceholdersProvider.image(named: "hg_default-no_results")
-        noResultsStyle.title = NSLocalizedString("No results founds", comment: "")
-        noResultsStyle.subtitle = NSLocalizedString("We can’t find what\nyou’re looking for.", comment: "")
-        noResultsStyle.action = NSLocalizedString("Try Again!", comment: "")
+        noResultsStyle.title = NSLocalizedString("아직 작성하신 공동구매 글이 없습니다.", comment: "")
+        noResultsStyle.subtitle = NSLocalizedString("", comment: "")
+        //noResultsStyle.action = NSLocalizedString("", comment: "")
         
         return noResultsStyle
     }
@@ -51,9 +51,9 @@ public struct PlaceholderData {
     public static var loading: PlaceholderData {
         var loadingStyle = PlaceholderData()
         loadingStyle.image = PlaceholdersProvider.image(named: "hg_default-loading")
-        loadingStyle.title = NSLocalizedString("Loading...", comment: "")
-        loadingStyle.action = NSLocalizedString("Cancel", comment: "")
-        loadingStyle.subtitle = NSLocalizedString("The bits are flowing\nslowly today", comment: "")
+        loadingStyle.title = NSLocalizedString("로딩 중...", comment: "")
+        loadingStyle.subtitle = NSLocalizedString("조금만 기다려주세요!", comment: "")
+        //loadingStyle.action = NSLocalizedString("Cancel", comment: "")
         loadingStyle.showsLoading = true
         
         return loadingStyle
@@ -63,9 +63,9 @@ public struct PlaceholderData {
     public static var error: PlaceholderData {
         var errorStyle = PlaceholderData()
         errorStyle.image = PlaceholdersProvider.image(named: "hg_default-error")
-        errorStyle.title = NSLocalizedString("Whoops!", comment: "")
-        errorStyle.subtitle = NSLocalizedString("We tried, but something went\nteriblly wrong", comment: "")
-        errorStyle.action = NSLocalizedString("Try Again!", comment: "")
+        errorStyle.title = NSLocalizedString("어잌후!", comment: "")
+        errorStyle.subtitle = NSLocalizedString("예상치 못한 오류가 발생했습니다!\n나중에 다시 시도해주세요.", comment: "")
+        //errorStyle.action = NSLocalizedString("Try Again!", comment: "")
         
         return errorStyle
     }

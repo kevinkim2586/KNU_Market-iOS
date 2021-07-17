@@ -48,7 +48,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
+    // 아래 구현하기
     @IBAction func pressedFindPasswordButton(_ sender: UIButton) {
         
         
@@ -57,7 +57,7 @@ class LoginViewController: UIViewController {
     func saveLoginInfo() {
         
         User.shared.id = idTextField.text!
-        UserManager.shared.savePassword(passwordTextField.text!)
+        User.shared.password = passwordTextField.text!
         User.shared.isLoggedIn = true
     }
     

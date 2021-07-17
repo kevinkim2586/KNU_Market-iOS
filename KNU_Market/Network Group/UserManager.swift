@@ -115,7 +115,7 @@ class UserManager {
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
-
+                
                 print("✏️ UserManager - login() statusCode: \(statusCode)")
                 
                 switch statusCode {
@@ -125,7 +125,8 @@ class UserManager {
                     do {
                         let json = try JSON(data: response.data!)
                         self.saveAccessTokens(from: json)
-                        self.savePassword(password)
+                        User.shared.password = password
+                        
                         completion(.success(true))
                         
                     } catch {
@@ -133,7 +134,7 @@ class UserManager {
                         completion(.failure(.E000))
                     }
                 default:
-
+                    
                     let error = NetworkError.returnError(json: response.data!)
                     print("❗️ \(error.errorDescription)")
                     completion(.failure(error))
@@ -157,8 +158,8 @@ class UserManager {
                 case 201:
                     do {
                         let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)  
-                        self.saveBasicUserInfo(with: decodedData)
-        
+                        self.saveUserLoginInfo(with: decodedData)
+                        
                         
                         print("✏️ User Manager - loadUserProfile() success")
                         
@@ -242,7 +243,7 @@ class UserManager {
                 case 201:
                     print("UserManager - updateUserPassword success")
                     completion(.success(true))
-                    self.savePassword(password)
+                    User.shared.password = password
                     
                 default:
                     print("UserManager - updateUserPassword failed default statement")
@@ -329,7 +330,7 @@ class UserManager {
                 
                 case 201:
                     
-
+                    
                     completion(.success(true))
                     
                 default:
@@ -367,19 +368,14 @@ extension UserManager {
                                                                     forKey: Constants.KeyChainKey.accessToken)
     }
     
-    func saveBasicUserInfo(with model: LoadProfileResponseModel) {
+    func saveUserLoginInfo(with model: LoadProfileResponseModel) {
         
         User.shared.userUID = model.uid
         User.shared.email = model.email
         User.shared.nickname = model.nickname
         User.shared.profileImageUID = model.profileImageCode
     }
-    
-    func savePassword(_ password: String) {
-        
-        User.shared.savedPassword = KeychainWrapper.standard.set(password,
-                                                                     forKey: Constants.KeyChainKey.refreshToken)
-    }
+
 }
 
 

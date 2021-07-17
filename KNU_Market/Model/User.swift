@@ -47,6 +47,9 @@ class User {
             print("✏️ Password: \(password)")
             return password
         }
+        set {
+            self.savedPassword = KeychainWrapper.standard.set(newValue, forKey: Constants.KeyChainKey.password)
+        }
     }
     
     var email: String = ""

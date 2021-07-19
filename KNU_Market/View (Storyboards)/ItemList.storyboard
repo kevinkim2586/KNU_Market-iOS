@@ -60,7 +60,7 @@
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="pressedSearchButton:" destination="w55-ty-Qef" id="b7r-9F-VOa"/>
-                                <segue destination="sl8-el-jcF" kind="show" id="97N-CM-JL3"/>
+                                <segue destination="wk6-z2-Neg" kind="show" id="aJU-LT-cZF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -329,14 +329,51 @@
             <point key="canvasLocation" x="6980" y="-719.19040479760122"/>
         </scene>
         <!--Search Post View Controller-->
-        <scene sceneID="npF-aS-ae2">
+        <scene sceneID="l8L-1q-BEG">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fqw-Ry-i6T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="SearchPostViewController" hidesBottomBarWhenPushed="YES" id="sl8-el-jcF" customClass="SearchPostViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="PZx-RI-jvo"/>
+                <viewController hidesBottomBarWhenPushed="YES" id="wk6-z2-Neg" customClass="SearchPostViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lSa-8B-eVL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q4S-Ux-Edq" customClass="TableView" customModule="HGPlaceholders">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="lrR-UV-AU1">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="lSt-Ye-2kA">
+                                        <rect key="frame" x="0.0" y="68.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lSt-Ye-2kA" id="WfS-OO-muF">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="F2a-3m-agv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="F2a-3m-agv" firstAttribute="bottom" secondItem="Q4S-Ux-Edq" secondAttribute="bottom" id="CYo-x5-RzY"/>
+                            <constraint firstItem="F2a-3m-agv" firstAttribute="trailing" secondItem="Q4S-Ux-Edq" secondAttribute="trailing" id="YLB-2U-x7W"/>
+                            <constraint firstItem="Q4S-Ux-Edq" firstAttribute="top" secondItem="F2a-3m-agv" secondAttribute="top" id="ht0-uj-kri"/>
+                            <constraint firstItem="Q4S-Ux-Edq" firstAttribute="leading" secondItem="F2a-3m-agv" secondAttribute="leading" id="kKP-hT-DQa"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="m0f-Ah-9Ka"/>
+                    <connections>
+                        <outlet property="searchBar" destination="lrR-UV-AU1" id="K2E-Nl-PjL"/>
+                        <outlet property="tableView" destination="Q4S-Ux-Edq" id="2EJ-gj-x2y"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="arQ-cL-DlS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5988" y="-1742"/>
+            <point key="canvasLocation" x="6003" y="-1728"/>
         </scene>
         <!--Upload Item View Controller-->
         <scene sceneID="e6U-fI-7ug">

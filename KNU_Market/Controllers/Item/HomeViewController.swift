@@ -81,6 +81,7 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func failedFetchingItemList(with error: NetworkError) {
+        
         itemTableView.showErrorPlaceholder()
         refreshControl.endRefreshing()
         itemTableView.tableFooterView = nil
@@ -102,7 +103,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row > viewModel.itemList.count - 1 { return UITableViewCell() }
+        if indexPath.row > viewModel.itemList.count { return UITableViewCell() }
         
         let cellIdentifier = Constants.cellID.itemTableViewCell
         
@@ -114,6 +115,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let itemVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }

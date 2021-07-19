@@ -1,10 +1,12 @@
 import UIKit
+import HGPlaceholders
 
 class SearchPostViewController: UIViewController {
 
-    //@IBOutlet var tableView: UITableView!
+    @IBOutlet var tableView: TableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
-    let searchController = UISearchController()
+    private var viewModel = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,7 +15,32 @@ class SearchPostViewController: UIViewController {
     }
     
 
+}
 
+//MARK: - HomeViewModelDelegate
+
+extension SearchPostViewController: HomeViewModelDelegate {
+    
+    func didFetchUserProfileInfo() {
+        //
+    }
+    
+    func failedFetchingUserProfileInfo(with error: NetworkError) {
+        //
+    }
+    
+    func didFetchItemList() {
+        
+        tableView.reloadData()
+        tableView.tableFooterView = nil
+    }
+    
+    func failedFetchingItemList(with error: NetworkError) {
+        
+        tableView.showErrorPlaceholder()
+        tableView.tableFooterView = nil
+        self.showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
+    }
 }
 
 //MARK: - UISearchBarDelegate
@@ -53,21 +80,63 @@ extension SearchPostViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return viewModel.itemList.count
     }
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        
+        if indexPath.row > viewModel.itemList.count { return UITableViewCell() }
+        
+        let cellIdentifier = Constants.cellID.itemTableViewCell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell else {
+            fatalError()
+        }
+        cell.configure(with: viewModel.itemList[indexPath.row])
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let itemVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
+        
+        itemVC.hidesBottomBarWhenPushed = true
+        itemVC.pageID = viewModel.itemList[indexPath.row].uuid
+        
+        self.navigationController?.pushViewController(itemVC, animated: true)
     }
-
-
 }
 
+//MARK: - UIScrollViewDelegate
+
+extension SearchPostViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let position = scrollView.contentOffset.y
+   
+        if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
+        
+            if !viewModel.isFetchingData {
+                tableView.tableFooterView = createSpinnerFooterView()
+                viewModel.fetchItemList()
+            }
+        }
+    }
+}
+
+//MARK: - Placeholder Delegate
+
+extension SearchPostViewController: PlaceholderDelegate {
+    
+    func view(_ view: Any, actionButtonTappedFor placeholder: Placeholder) {
+        self.viewModel.resetValues()
+        self.viewModel.fetchItemList()
+    }
+}
 
 //MARK: - Initialization & UI Configuration
 
@@ -75,44 +144,29 @@ extension SearchPostViewController {
     
     func initialize() {
         
+        viewModel.delegate = self
+        
         initializeSearchBar()
-        //initializeTableView()
+        initializeTableView()
         
     }
     
-//    func initializeTableView() {
-//
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//
-//        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
-//        tableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
-//
-//    }
+    func initializeTableView() {
+
+        tableView.placeholderDelegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
+
+    }
     
     func initializeSearchBar() {
-        
-        view.backgroundColor = .white
-        navigationController?.navigationBar.backgroundColor = .white
-        
-        self.navigationItem.searchController = searchController
 
-//        let cancel = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"),
-//                                     style: .plain,
-//                                     target: self,
-//                                     action: #selector(goBackToHome))
-//        self.navigationItem.leftBarButtonItem = cancel
-//
-//        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width - cancel.width - 70, height: 0))
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBar)
-//
-//
-//
-//        searchBar.delegate = self
-//        searchBar.placeholder = "검색어 입력"
+        searchBar.delegate = self
+        searchBar.placeholder = "검색어 입력"
     }
     
-    @objc func goBackToHome() {
-        navigationController?.popViewController(animated: true)
-    }
+    
 }

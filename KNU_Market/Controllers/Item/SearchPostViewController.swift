@@ -3,10 +3,10 @@ import HGPlaceholders
 
 class SearchPostViewController: UIViewController {
 
-    @IBOutlet var tableView: TableView!
+    @IBOutlet var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    private var viewModel = HomeViewModel()
+    private var viewModel = SearchPostViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,27 +17,21 @@ class SearchPostViewController: UIViewController {
 
 }
 
-//MARK: - HomeViewModelDelegate
+//MARK: - SearchPostViewModelDelegate
 
-extension SearchPostViewController: HomeViewModelDelegate {
-    
-    func didFetchUserProfileInfo() {
-        //
-    }
-    
-    func failedFetchingUserProfileInfo(with error: NetworkError) {
-        //
-    }
-    
-    func didFetchItemList() {
+extension SearchPostViewController: SearchPostViewModelDelegate {
+
+    func didFetchSearchList() {
         
+        print("✏️ SearchPostVC - didFetchSearchList")
         tableView.reloadData()
         tableView.tableFooterView = nil
     }
     
-    func failedFetchingItemList(with error: NetworkError) {
+    func failedFetchingSearchList(with error: NetworkError) {
         
-        tableView.showErrorPlaceholder()
+        print("✏️ SearchPostVC - failedFetchingSearchList")
+        //tableView.showErrorPlaceholder()
         tableView.tableFooterView = nil
         self.showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
     }
@@ -65,8 +59,12 @@ extension SearchPostViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        guard let searchKeyword = searchBar.text else { return }
+        guard let searchKey = searchBar.text else { return }
         
+        print("✏️ searchKey: \(searchKey)")
+        
+        viewModel.searchKeyword = searchKey
+        viewModel.fetchSearchResults()
         
     }
 }
@@ -80,6 +78,7 @@ extension SearchPostViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+   
         return viewModel.itemList.count
     }
 
@@ -122,7 +121,7 @@ extension SearchPostViewController: UIScrollViewDelegate {
         
             if !viewModel.isFetchingData {
                 tableView.tableFooterView = createSpinnerFooterView()
-                viewModel.fetchItemList()
+                viewModel.fetchSearchResults()
             }
         }
     }
@@ -134,7 +133,7 @@ extension SearchPostViewController: PlaceholderDelegate {
     
     func view(_ view: Any, actionButtonTappedFor placeholder: Placeholder) {
         self.viewModel.resetValues()
-        self.viewModel.fetchItemList()
+        self.viewModel.fetchSearchResults()
     }
 }
 
@@ -151,9 +150,15 @@ extension SearchPostViewController {
         
     }
     
+    func initializeSearchBar() {
+
+        searchBar.delegate = self
+        searchBar.placeholder = "검색어 입력"
+    }
+    
     func initializeTableView() {
 
-        tableView.placeholderDelegate = self
+        //tableView.placeholderDelegate = self
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -162,11 +167,7 @@ extension SearchPostViewController {
 
     }
     
-    func initializeSearchBar() {
 
-        searchBar.delegate = self
-        searchBar.placeholder = "검색어 입력"
-    }
     
     
 }

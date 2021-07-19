@@ -54,7 +54,8 @@ class HomeViewController: UIViewController {
     
     @IBAction func pressedSearchButton(_ sender: UIBarButtonItem) {
         
-        
+        let searchVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.searchPostVC) as! SearchPostViewController
+        self.navigationController?.pushViewController(searchVC, animated: true)
     }
 }
 

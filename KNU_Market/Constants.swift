@@ -29,7 +29,7 @@ struct Constants {
         static let itemVC                       = "ItemViewController"
         static let uploadItemVC                 = "UploadItemViewController"
         static let photoDetailVC                = "PhotoDetailViewController"
-        static let searchItemVC                 = "SearchPostViewController"
+        static let searchPostVC                 = "SearchPostViewController"
         
         // Chat Tab
         static let chatVC                       = "ChatViewController"

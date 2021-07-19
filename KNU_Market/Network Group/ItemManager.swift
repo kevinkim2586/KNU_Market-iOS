@@ -12,6 +12,7 @@ class ItemManager {
     
     //MARK: - API Request URLs
     let baseURL                       = "\(Constants.API_BASE_URL)posts"
+    let searchURL                     = "\(Constants.API_BASE_URL)search"
     
     //MARK: - 공구글 목록 불러오기
     func fetchItemList(at index: Int,
@@ -19,7 +20,7 @@ class ItemManager {
                        completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
         
         let url = fetchCurrentUsers ? baseURL + "/me" : baseURL + "?page=\(index)"
-        
+
         AF.request(url,
                    method: .get,
                    interceptor: interceptor)
@@ -41,7 +42,6 @@ class ItemManager {
                         
                     } catch {
                         print("ItemManager - There was an error decoding JSON Data with error: \(error)")
-                        print("❗️ data is empty: ")
                         completion(.failure(.E000))
                     }
                     
@@ -144,6 +144,49 @@ class ItemManager {
                 default:
                     let error = NetworkError.returnError(json: response.data!)
                     print("ItemManager deletePost error: \(error.errorDescription) and statusCode: \(statusCode)")
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    //MARK: - 검색 결과 불러오기
+    func fetchSearchResults(at index: Int,
+                            keyword: String,
+                            completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
+        
+//        let url = searchURL + "?keyword=\(keyword)&page=\(index)"
+        var parameters: Parameters = [:]
+        parameters["keyword"] = keyword
+        parameters["page"] = index
+        
+        AF.request(searchURL,
+                   method: .get,
+                   parameters: parameters,
+                   encoding: URLEncoding.queryString,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 200:
+                    
+                    print("✏️ ItemManager - fetchSearchResults SUCCESS")
+                    
+                    do {
+                        let decodedData = try JSONDecoder().decode([ItemListModel].self,
+                                                                   from: response.data!)
+                        completion(.success(decodedData))
+                    
+                    } catch {
+                        print("ItemManager - There was an error decoding JSON Data with error: \(error)")
+                        completion(.failure(.E000))
+                    }
+                default:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("❗️ ItemManager - fetchSearchResults error: \(error.errorDescription) with statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
             }

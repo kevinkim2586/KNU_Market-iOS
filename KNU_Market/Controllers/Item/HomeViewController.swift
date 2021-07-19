@@ -102,11 +102,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // 아래 코드 더 수정 고민
-        if indexPath.row > viewModel.itemList.count - 1 {
-            print("❗️ Index Out Of Range -- indexPathRow: \(indexPath.row), reviewList count: \(viewModel.itemList.count)")
-            return UITableViewCell()
-        }
+        if indexPath.row > viewModel.itemList.count - 1 { return UITableViewCell() }
         
         let cellIdentifier = Constants.cellID.itemTableViewCell
         
@@ -130,10 +126,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
     
     @objc func refreshTableView() {
-        
-        //tableView.showLoadingPlaceholder()
-//        self.viewModel.resetValues()
-//        self.viewModel.fetchItemList()
         
         //사라지는 애니메이션 처리
         UIView.animate(views: self.itemTableView.visibleCells,

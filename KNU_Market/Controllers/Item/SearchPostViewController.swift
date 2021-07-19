@@ -2,8 +2,9 @@ import UIKit
 
 class SearchPostViewController: UIViewController {
 
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    //@IBOutlet var tableView: UITableView!
+    
+    let searchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,23 +75,44 @@ extension SearchPostViewController {
     
     func initialize() {
         
+        initializeSearchBar()
+        //initializeTableView()
         
-        initializeTableView()
     }
     
-    func initializeTableView() {
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
-        tableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
-        
-    }
+//    func initializeTableView() {
+//
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//
+//        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
+//        tableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
+//
+//    }
     
     func initializeSearchBar() {
         
-        searchBar.delegate = self
-        searchBar.placeholder = "검색어 입력"
+        view.backgroundColor = .white
+        navigationController?.navigationBar.backgroundColor = .white
+        
+        self.navigationItem.searchController = searchController
+
+//        let cancel = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"),
+//                                     style: .plain,
+//                                     target: self,
+//                                     action: #selector(goBackToHome))
+//        self.navigationItem.leftBarButtonItem = cancel
+//
+//        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width - cancel.width - 70, height: 0))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBar)
+//
+//
+//
+//        searchBar.delegate = self
+//        searchBar.placeholder = "검색어 입력"
+    }
+    
+    @objc func goBackToHome() {
+        navigationController?.popViewController(animated: true)
     }
 }

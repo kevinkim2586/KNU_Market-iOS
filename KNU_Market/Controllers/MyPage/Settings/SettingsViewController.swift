@@ -24,38 +24,68 @@ class SettingsViewController: UIViewController {
         dismissProgressBar()
     }
     
-
+    
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
         
-        UserManager.shared.logOut { result in
+        self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?",
+                                          message: "") { selectedOk in
             
-            switch result {
-            
-            case .success(_):
+            if selectedOk {
                 
-                self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
+                UserManager.shared.logOut { [weak self] result in
                     
-                    if selectedOk {
-                        
+                    guard let self = self else { return }
+                    
+                    switch result {
+                    
+                    case .success(_):
                         DispatchQueue.main.async {
                             self.popToInitialViewController()
                         }
+                        
+                    case .failure(let error):
+                        self.showSimpleBottomAlertWithAction(message: error.errorDescription,
+                                                             buttonTitle: "재시도") {
+                            DispatchQueue.main.async {
+                                self.pressedLogOutButton(self.logOutButton)
+                            }
+                        }
                     }
                 }
-            case .failure(let error):
-                self.showSimpleBottomAlertWithAction(message: error.errorDescription,
-                                                     buttonTitle: "재시도") {
-                    DispatchQueue.main.async {
-                        self.pressedLogOutButton(self.logOutButton)
-                    }
-                }
-
             }
         }
     }
 
     @IBAction func pressedUnregisterButton(_ sender: UIButton) {
-    
+        
+        self.presentAlertWithCancelAction(title: "정말 회원탈퇴를 하시겠습니까?",
+                                          message: "") { selectedOk in
+            
+            if selectedOk {
+                
+                UserManager.shared.unregisterUser { [weak self] result in
+                    
+                    guard let self = self else { return }
+                    
+                    switch result {
+                    
+                    case .success(_):
+                        DispatchQueue.main.async {
+                            self.popToInitialViewController()
+                        }
+                        
+                    case .failure(let error):
+                        self.showSimpleBottomAlertWithAction(message: error.errorDescription,
+                                                             buttonTitle: "재시도") {
+                            DispatchQueue.main.async {
+                                self.pressedUnregisterButton(self.unregisterButton)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         
     }
 

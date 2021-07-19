@@ -19,6 +19,7 @@ class UserManager {
     let findPasswordURL             = "\(Constants.API_BASE_URL)findpassword"
     let loadUserProfileURL          = "\(Constants.API_BASE_URL)auth"
     let userProfileUpdateURL        = "\(Constants.API_BASE_URL)auth"
+    let unregisterURL               = "\(Constants.API_BASE_URL)auth"
     
     let interceptor = Interceptor()
     
@@ -339,6 +340,35 @@ class UserManager {
                     completion(.failure(error))
                 }
             }
+    }
+    
+    //MARK: - 회원 탈퇴
+    func unregisterUser(completion: @escaping((Result<Bool, NetworkError>) -> Void)) {
+        
+        AF.request(unregisterURL,
+                   method: .delete,
+                   interceptor: interceptor)
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    
+                    User.shared.resetAllUserInfo()
+                    print("✏️ unregisterUser SUCCESS")
+                    completion(.success(true))
+                    
+                default:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("❗️ unregisterUser failed with error code: \(statusCode), and error: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+                
+            }
+        
+        
     }
     
 }

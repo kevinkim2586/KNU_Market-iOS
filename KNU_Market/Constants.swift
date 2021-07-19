@@ -82,6 +82,8 @@ struct Constants {
         static let hasVerifiedEmail             = "hasVerifiedEmail"
     }
     
+    static let entireChatRoomUID                = "__entireRoomPid"
+    
     //MARK: - UI Related Constants
     
     struct XIB {

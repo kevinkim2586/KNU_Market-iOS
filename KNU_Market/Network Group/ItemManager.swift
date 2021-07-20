@@ -154,7 +154,6 @@ class ItemManager {
                             keyword: String,
                             completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
         
-//        let url = searchURL + "?keyword=\(keyword)&page=\(index)"
         var parameters: Parameters = [:]
         parameters["keyword"] = keyword
         parameters["page"] = index
@@ -162,8 +161,7 @@ class ItemManager {
         AF.request(searchURL,
                    method: .get,
                    parameters: parameters,
-                   encoding: URLEncoding.queryString,
-                   interceptor: interceptor)
+                   encoding: URLEncoding.queryString)
             .validate()
             .responseJSON { response in
                 

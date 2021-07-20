@@ -26,14 +26,20 @@ extension SearchPostViewController: SearchPostViewModelDelegate {
         print("✏️ SearchPostVC - didFetchSearchList")
         tableView.reloadData()
         tableView.tableFooterView = nil
+        tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func failedFetchingSearchList(with error: NetworkError) {
         
         print("✏️ SearchPostVC - failedFetchingSearchList")
-        //tableView.showErrorPlaceholder()
         tableView.tableFooterView = nil
-        self.showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
+        tableView.tableFooterView = UIView(frame: .zero)
+        
+        if error == .E401 {
+            self.showSimpleBottomAlert(with: "검색어는 2 글자 이상이어야 합니다. 👀")
+        } else {
+            self.showSimpleBottomAlert(with: error.errorDescription)
+        }
     }
 }
 
@@ -59,9 +65,10 @@ extension SearchPostViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        guard let searchKey = searchBar.text else { return }
+        searchBar.resignFirstResponder()
+        viewModel.resetValues()
         
-        print("✏️ searchKey: \(searchKey)")
+        guard let searchKey = searchBar.text else { return }
         
         viewModel.searchKeyword = searchKey
         viewModel.fetchSearchResults()
@@ -78,7 +85,6 @@ extension SearchPostViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-   
         return viewModel.itemList.count
     }
 
@@ -117,7 +123,7 @@ extension SearchPostViewController: UIScrollViewDelegate {
         
         let position = scrollView.contentOffset.y
    
-        if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
+        if position > (tableView.contentSize.height - 20 - scrollView.frame.size.height) {
         
             if !viewModel.isFetchingData {
                 tableView.tableFooterView = createSpinnerFooterView()
@@ -145,6 +151,8 @@ extension SearchPostViewController {
         
         viewModel.delegate = self
         
+        self.title = "공구 글 검색"
+        
         initializeSearchBar()
         initializeTableView()
         
@@ -157,7 +165,8 @@ extension SearchPostViewController {
     }
     
     func initializeTableView() {
-
+        
+        tableView.tableFooterView = UIView(frame: .zero)
         //tableView.placeholderDelegate = self
         tableView.delegate = self
         tableView.dataSource = self

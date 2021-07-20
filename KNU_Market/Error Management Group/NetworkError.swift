@@ -83,6 +83,7 @@ enum NetworkError: String, Error {
         }
     }
     
+    
     static func returnError(json: Data) -> NetworkError {
         
         do {
@@ -92,6 +93,7 @@ enum NetworkError: String, Error {
             let errorDescription = json["errorDescription"].stringValue
             print("❗️ NetworkError - errorMessage: \(errorMessage)")
             print("❗️ NetworkError - errorDescription: \(errorDescription)")
+            print("❗️ NetworkError - errorCode: \(NetworkError(rawValue: errorCode))")
             return NetworkError(rawValue: errorCode) ?? .E000
         } catch {
             return .E000

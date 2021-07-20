@@ -71,7 +71,11 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        performSegue(withIdentifier: Constants.SegueID.goToItemVCFromMyPosts, sender: self)
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -85,8 +89,7 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func refreshTableView() {
-        
-        //사라지는 애니메이션 처리
+    
         UIView.animate(views: self.tableView.visibleCells,
                        animations: Animations.forTableViews,
                        reversed: true,

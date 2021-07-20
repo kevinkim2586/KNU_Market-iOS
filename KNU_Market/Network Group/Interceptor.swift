@@ -8,7 +8,6 @@ final class Interceptor: RequestInterceptor {
     private var isRefreshing: Bool = false
     private var retryLimit = 3
     
-    // 어떠한 AF request 이든지간데 중간에 가로채서 header 에 accesstoken 을 넣는 것이기에 매번 넣을 필요 X
     func adapt(_ urlRequest: URLRequest,
                for session: Session,
                completion: @escaping (Result<URLRequest, Error>) -> Void) {
@@ -61,6 +60,8 @@ final class Interceptor: RequestInterceptor {
                         print("Interceptor - 세션이 만료되었습니다. 다시 로그인 요망")
                         
                         //TODO: - change root view controller!
+                        // 바로 self.poptoroot 이런건 안 될테니
+                        // observer 패턴으로 해야할듯
                         
                     }
                     else {
@@ -71,7 +72,7 @@ final class Interceptor: RequestInterceptor {
                 }
             }
         default:
-            if request.retryCount > 5 {
+            if request.retryCount > self.retryLimit {
                 print("Interceptor retry() error: \(error)")
                 completion(.doNotRetry)
             }

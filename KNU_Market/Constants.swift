@@ -13,6 +13,7 @@ struct Constants {
     struct SegueID {
         
         static let goToItemVC                   = "goToItemVC"
+        static let goToItemVCFromMyPosts        = "goToItemVCFromMyPosts"
     }
     
     struct StoryboardID {

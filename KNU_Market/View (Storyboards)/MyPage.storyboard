@@ -462,11 +462,22 @@
                     </tableView>
                     <connections>
                         <outlet property="tableView" destination="d24-Bv-Qpa" id="E39-3k-W87"/>
+                        <segue destination="ALz-o0-JOT" kind="show" identifier="goToItemVCFromMyPosts" id="O6m-a7-UYh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZyX-Zn-ane" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9151" y="250"/>
+        </scene>
+        <!--ItemViewController-->
+        <scene sceneID="Z5G-XI-dcH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ItemList" referencedIdentifier="ItemViewController" id="ALz-o0-JOT" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="LHN-8m-Iqr"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="piO-av-g17" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9960" y="250"/>
         </scene>
         <!--Change Nickname View Controller-->
         <scene sceneID="Xf1-sR-fDv">

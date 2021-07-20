@@ -19,8 +19,13 @@ class ItemManager {
                        fetchCurrentUsers: Bool = false,
                        completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
         
-        let url = fetchCurrentUsers ? baseURL + "/me" : baseURL + "?page=\(index)"
+        
+        let url = fetchCurrentUsers == true
+            ? baseURL + "/me?page=\(index)"
+            : baseURL + "?page=\(index)"
 
+        print("✏️ url: \(url)")
+        
         AF.request(url,
                    method: .get,
                    interceptor: interceptor)
@@ -33,7 +38,7 @@ class ItemManager {
                 
                 case 200:
                     
-                    print("ItemManager - SUCCESS in getItemList")
+                    print("ItemManager - SUCCESS in fetchItemList")
                     
                     do {
                         let decodedData = try JSONDecoder().decode([ItemListModel].self,
@@ -47,7 +52,7 @@ class ItemManager {
                     
                 default:
                     let error = NetworkError.returnError(json: response.data!)
-                    print("ItemManager getItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
+                    print("ItemManager fetchItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
             }

@@ -10,6 +10,8 @@ class MyPostsViewController: UIViewController {
     
     private var viewModel = HomeViewModel()
     
+    private var selectedIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,12 +40,15 @@ extension MyPostsViewController: HomeViewModelDelegate {
         tableView.reloadData()
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
+        tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func failedFetchingItemList(with error: NetworkError) {
+        
         tableView.showNoResultsPlaceholder()
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
+        tableView.tableFooterView = UIView(frame: .zero)
     }
 }
 
@@ -73,6 +78,7 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        self.selectedIndex = indexPath.row
         
         performSegue(withIdentifier: Constants.SegueID.goToItemVCFromMyPosts, sender: self)
     
@@ -81,8 +87,8 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let itemVC: ItemViewController = segue.destination as? ItemViewController else { return }
-
-        guard let index = tableView.indexPathForSelectedRow?.row else { return }
+        
+        guard let index = selectedIndex else { return }
         
         itemVC.hidesBottomBarWhenPushed = true
         itemVC.pageID = viewModel.itemList[index].uuid
@@ -137,7 +143,10 @@ extension MyPostsViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+
+        
         tableView.refreshControl = refreshControl
+        tableView.tableFooterView = UIView(frame: .zero)
         
         let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)

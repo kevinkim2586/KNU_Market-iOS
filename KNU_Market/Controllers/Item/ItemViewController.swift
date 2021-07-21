@@ -67,9 +67,6 @@ class ItemViewController: UIViewController {
     }
     
     //MARK: - IBActions & Methods
-    @IBAction func pressedBackButton(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
-    }
     
     @IBAction func pressedEnterChatButton(_ sender: UIButton) {
         
@@ -84,15 +81,17 @@ class ItemViewController: UIViewController {
         viewModel.fetchItemDetails(for: pageID)
     }
     
+    @IBAction func pressedBackButton(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func pressedMoreButton(_ sender: UIButton) {
         
         let actionSheet = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: .actionSheet)
         
-        //본인이 작성한 글이면 Delete Action을 추가
-        if viewModel.model?.nickname == User.shared.nickname {
-            
+        if postIsUserUploaded() {
             let deleteAction = UIAlertAction(title: "글 삭제하기",
                                              style: .destructive) { alert in
                 
@@ -107,10 +106,8 @@ class ItemViewController: UIViewController {
                 }
                                              }
             actionSheet.addAction(deleteAction)
+        } else {
             
-        }
-        // 다른 사용자 글이면 Report Action 만 추가
-        else {
             let reportAction = UIAlertAction(title: "게시글 신고하기",
                                            style: .default) { alert in
                 
@@ -133,6 +130,22 @@ class ItemViewController: UIViewController {
                                          handler: nil)
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true)
+    }
+    
+    @IBAction func pressedCheckButton(_ sender: UIButton) {
+        
+        print("✏️ check button pressed!")
+        
+        if postIsUserUploaded() {
+        }
+        
+        
+    }
+    
+    func postIsUserUploaded() -> Bool {
+        
+        let isUsers = viewModel.model?.nickname == User.shared.nickname ? true : false
+        return isUsers
     }
 }
 
@@ -190,7 +203,6 @@ extension ItemViewController: ItemViewModelDelegate {
         }
     
     }
-    
 }
 
 //MARK: - UI Configuration
@@ -223,6 +235,7 @@ extension ItemViewController {
         itemDetailLabel.text = viewModel.model?.itemDetail
         
         initializeDateLabel()
+        initializeCheckButton()
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
         initializeSlideShow()
@@ -300,6 +313,12 @@ extension ItemViewController {
     }
     
     func initializeCheckButton() {
+        
+        if postIsUserUploaded() {
+            checkButton.isHidden = false
+        } else {
+            checkButton.isHidden = true
+        }
         
         let font = UIFont.systemFont(ofSize: 15)
         let configuration = UIImage.SymbolConfiguration(font: font)

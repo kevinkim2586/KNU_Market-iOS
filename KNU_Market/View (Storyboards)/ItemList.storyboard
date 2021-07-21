@@ -265,6 +265,9 @@
                                                 <state key="normal" image="checkmark.circle" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pressedCheckButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="JVa-AG-V7S"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

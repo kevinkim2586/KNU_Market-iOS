@@ -25,6 +25,8 @@ class ItemViewController: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet var topBarButtons: [UIButton]!
     
     @IBOutlet weak var slideShowHeight: NSLayoutConstraint!
     
@@ -233,8 +235,10 @@ extension ItemViewController {
         initializeScrollView()
         initializeProfileImageView()
         initializeTitleView()
+        initializeTopBarButtons()
         initializeBackButton()
         initializeMenuButton()
+        initializeCheckButton()
         initializeItemExplanationLabel()
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
@@ -251,7 +255,6 @@ extension ItemViewController {
     func initializeProfileImageView() {
         
         userProfileImageView.image = UIImage(named: Constants.Images.defaultAvatar)
-        
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
     }
     
@@ -267,26 +270,44 @@ extension ItemViewController {
         titleView.layer.shadowRadius = 1
     }
     
-    func initializeBackButton() {
+    func initializeTopBarButtons() {
         
-        backButton.layer.cornerRadius = backButton.frame.height / 2
-        backButton.backgroundColor = .white
-        backButton.layer.shadowColor = UIColor.black.cgColor
-        backButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        backButton.layer.shadowOpacity = 0.2
-        backButton.layer.shadowRadius = 2
+        topBarButtons.forEach { buttons in
+            
+            buttons.layer.cornerRadius = menuButton.frame.height / 2
+            buttons.backgroundColor = .white
+            buttons.layer.shadowColor = UIColor.black.cgColor
+            buttons.layer.shadowOffset = CGSize(width: 2, height: 2)
+            buttons.layer.shadowOpacity = 0.2
+            buttons.layer.shadowRadius = 2
+        }
+    }
+    
+    func initializeBackButton() {
+
+        let font = UIFont.systemFont(ofSize: 15)
+        let configuration = UIImage.SymbolConfiguration(font: font)
+        let buttonImage = UIImage(systemName: "arrow.left", withConfiguration: configuration)
+        backButton.setImage(buttonImage, for: .normal)
     }
     
     func initializeMenuButton() {
-        
-        menuButton.layer.cornerRadius = menuButton.frame.height / 2
-        menuButton.backgroundColor = .white
-        menuButton.layer.shadowColor = UIColor.black.cgColor
-        menuButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        menuButton.layer.shadowOpacity = 0.2
-        backButton.layer.shadowRadius = 2
+
+        let font = UIFont.systemFont(ofSize: 15)
+        let configuration = UIImage.SymbolConfiguration(font: font)
+        let buttonImage = UIImage(systemName: "ellipsis", withConfiguration: configuration)
+        menuButton.setImage(buttonImage, for: .normal)
     }
     
+    func initializeCheckButton() {
+        
+        let font = UIFont.systemFont(ofSize: 15)
+        let configuration = UIImage.SymbolConfiguration(font: font)
+        let buttonImage = UIImage(systemName: "checkmark.circle", withConfiguration: configuration)
+        checkButton.setImage(buttonImage, for: .normal)
+    }
+    
+
     func initializeDateLabel() {
         dateLabel.text = viewModel.date
     }

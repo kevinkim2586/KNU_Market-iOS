@@ -18,6 +18,7 @@
 		7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */; };
 		7C1C1D12265E714000C08C66 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D11265E714000C08C66 /* TermsAndConditionsViewController.swift */; };
 		7C1D829526565429006FEBDE /* SendDeveloperMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D829426565428006FEBDE /* SendDeveloperMessageViewController.swift */; };
+		7C1EEE4E26A68FB700775B11 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EEE4D26A68FB700775B11 /* MainTabBarViewController.swift */; };
 		7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* HomeViewModel.swift */; };
 		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
 		7C436B5826820E5200943069 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5726820E5200943069 /* ReportManager.swift */; };
@@ -94,6 +95,7 @@
 		7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		7C1C1D11265E714000C08C66 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		7C1D829426565428006FEBDE /* SendDeveloperMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDeveloperMessageViewController.swift; sourceTree = "<group>"; };
+		7C1EEE4D26A68FB700775B11 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		7C3758EC265FA97A0081A85D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7C436B5726820E5200943069 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 		7CA66229264132E6000E0B7A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7C1EEE4D26A68FB700775B11 /* MainTabBarViewController.swift */,
 				7CD74E0C2645981700BD2DE4 /* Login+Register */,
 				7CD74E0E2645983000BD2DE4 /* Item */,
 				7CD74E0D2645982600BD2DE4 /* Chat */,
@@ -654,6 +657,7 @@
 				7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */,
 				7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */,
 				7CCDB1EF26A2BD0C0092F28D /* ItemTableViewCell.swift in Sources */,
+				7C1EEE4E26A68FB700775B11 /* MainTabBarViewController.swift in Sources */,
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
 				7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,

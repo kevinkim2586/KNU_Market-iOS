@@ -105,5 +105,4 @@ extension UIViewController {
         spinner.startAnimating()
         return footerView
     }
-    
 }

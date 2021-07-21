@@ -181,8 +181,16 @@ extension HomeViewController: UITabBarControllerDelegate {
         
         switch selectedIndex {
         case 0:
-            let topRow = IndexPath(row: 0, section: 0)
-            self.itemTableView.scrollToRow(at: topRow, at: .top, animated: true)
+            
+            if (itemTableView.contentOffset.y == 0) {
+                print("✏️ TOPTOPTOPTOP")
+            }
+            
+            
+//            let topRow = IndexPath(row: 0, section: 0)
+//            self.itemTableView.scrollToRow(at: topRow, at: .top, animated: true)
+//            
+            
         default: return
         }
     }
@@ -225,17 +233,6 @@ extension HomeViewController {
         itemTableView.showLoadingPlaceholder()
     }
     
-//    func initializeBarButtonItem(with image: UIImage = UIImage(named: Constants.Images.defaultProfileImage)!) {
-//
-//        let scaledImage = image.resizeImage(size: CGSize(width: 26, height: 26))
-//        let imageView = UIImageView(image: scaledImage)
-//        imageView.frame = CGRect(origin: .zero, size: scaledImage.size)
-//        imageView.layer.cornerRadius = imageView.frame.size.width / 2
-//        imageView.clipsToBounds = true
-//
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: imageView)
-//    }
-    
     func initializeAddButton() {
         
         addButton.layer.cornerRadius = addButton.frame.width / 2
@@ -243,7 +240,7 @@ extension HomeViewController {
 
         let font = UIFont.systemFont(ofSize: 20)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        let buttonImage = UIImage(systemName: "pencil",
+        let buttonImage = UIImage(systemName: "square.and.pencil",
                                 withConfiguration: configuration)
         addButton.setImage(buttonImage, for: .normal)
     }

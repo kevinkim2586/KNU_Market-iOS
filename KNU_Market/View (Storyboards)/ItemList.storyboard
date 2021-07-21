@@ -255,6 +255,17 @@
                                                     <action selector="pressedMoreButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="kAs-ok-GUJ"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhE-cq-yzN" userLabel="Check Button">
+                                                <rect key="frame" x="309" y="50" width="35" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="3ZM-Ea-J1D"/>
+                                                    <constraint firstAttribute="width" constant="35" id="vUE-kP-qf6"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="checkmark.circle" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -265,11 +276,13 @@
                                             <constraint firstItem="nr4-zF-a7J" firstAttribute="top" secondItem="9fa-0F-i3c" secondAttribute="bottom" constant="-50" id="Ere-vW-NET"/>
                                             <constraint firstAttribute="trailing" secondItem="XBx-ma-qzB" secondAttribute="trailing" constant="15" id="Hzr-CA-Ist"/>
                                             <constraint firstAttribute="bottom" secondItem="XBx-ma-qzB" secondAttribute="bottom" constant="15" id="I81-a3-BEv"/>
+                                            <constraint firstItem="fhE-cq-yzN" firstAttribute="top" secondItem="kng-gU-n1q" secondAttribute="top" constant="50" id="K4h-RM-7ig"/>
                                             <constraint firstItem="9fa-0F-i3c" firstAttribute="leading" secondItem="kng-gU-n1q" secondAttribute="leading" id="RkK-5H-GtM"/>
                                             <constraint firstItem="AXT-NJ-LVv" firstAttribute="top" secondItem="kng-gU-n1q" secondAttribute="top" constant="50" id="ScK-el-61A"/>
                                             <constraint firstItem="nr4-zF-a7J" firstAttribute="leading" secondItem="kng-gU-n1q" secondAttribute="leading" constant="60" id="TEy-eI-amA"/>
                                             <constraint firstItem="hcd-qL-JkQ" firstAttribute="top" secondItem="nr4-zF-a7J" secondAttribute="bottom" constant="15" id="ZEt-kI-F9X"/>
                                             <constraint firstItem="XBx-ma-qzB" firstAttribute="top" secondItem="hcd-qL-JkQ" secondAttribute="bottom" constant="20" id="c8x-tO-U5j"/>
+                                            <constraint firstItem="vDL-C0-E7h" firstAttribute="leading" secondItem="fhE-cq-yzN" secondAttribute="trailing" constant="20" id="d3G-Nd-bMT"/>
                                             <constraint firstAttribute="trailing" secondItem="nr4-zF-a7J" secondAttribute="trailing" constant="60" id="gCr-MW-eAI"/>
                                             <constraint firstAttribute="trailing" secondItem="9fa-0F-i3c" secondAttribute="trailing" id="orJ-6Z-DpG"/>
                                             <constraint firstItem="XBx-ma-qzB" firstAttribute="leading" secondItem="kng-gU-n1q" secondAttribute="leading" constant="15" id="pku-IJ-b1Z"/>
@@ -306,6 +319,7 @@
                     <connections>
                         <outlet property="backButton" destination="AXT-NJ-LVv" id="TPI-0n-FQZ"/>
                         <outlet property="bottomView" destination="orm-c8-QOs" id="Jdg-j8-Nuc"/>
+                        <outlet property="checkButton" destination="fhE-cq-yzN" id="n5E-mk-jhS"/>
                         <outlet property="dateLabel" destination="hcd-qL-JkQ" id="dUt-6d-LFb"/>
                         <outlet property="enterChatButton" destination="WaJ-YY-p1J" id="ffc-Bn-6uE"/>
                         <outlet property="gatheringPeopleImageView" destination="a6p-aL-Wtz" id="LDS-eq-ipW"/>
@@ -321,6 +335,9 @@
                         <outlet property="titleView" destination="nr4-zF-a7J" id="hl2-Ul-OaJ"/>
                         <outlet property="userIdLabel" destination="zUH-wb-RPm" id="Fml-oI-ZFO"/>
                         <outlet property="userProfileImageView" destination="RbW-Q3-7k4" id="ps2-8m-PRG"/>
+                        <outletCollection property="topBarButtons" destination="AXT-NJ-LVv" collectionClass="NSMutableArray" id="c30-u8-91f"/>
+                        <outletCollection property="topBarButtons" destination="fhE-cq-yzN" collectionClass="NSMutableArray" id="Sll-ZL-iVc"/>
+                        <outletCollection property="topBarButtons" destination="vDL-C0-E7h" collectionClass="NSMutableArray" id="s47-LD-JWR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bv-RB-JDl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -802,6 +819,7 @@ IAo
     <resources>
         <image name="add button" width="124" height="130"/>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="default avatar" width="38" height="38"/>
         <image name="delete button" width="79" height="79"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>

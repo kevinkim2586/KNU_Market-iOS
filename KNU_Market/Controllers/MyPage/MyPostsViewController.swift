@@ -87,7 +87,6 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let itemVC: ItemViewController = segue.destination as? ItemViewController else { return }
-        
         guard let index = selectedIndex else { return }
         
         itemVC.hidesBottomBarWhenPushed = true

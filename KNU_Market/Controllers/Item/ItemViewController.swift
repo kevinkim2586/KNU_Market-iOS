@@ -134,7 +134,7 @@ class ItemViewController: UIViewController {
     
     @IBAction func pressedCheckButton(_ sender: UIButton) {
         
-        let actionSheet = UIAlertController(title: "공구 모집 완료",
+        let actionSheet = UIAlertController(title: "상태 변경",
                                             message: nil,
                                             preferredStyle: .actionSheet)
         

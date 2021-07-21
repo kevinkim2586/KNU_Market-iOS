@@ -32,5 +32,8 @@ target 'KNU_Market' do
   pod 'Starscream', '~> 4.0.0'
   pod 'HGPlaceholders'
   pod 'PanModal'
+  pod 'TextFieldEffects'
+  pod 'lottie-ios'
+
   
 end

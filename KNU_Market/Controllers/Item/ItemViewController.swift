@@ -134,12 +134,21 @@ class ItemViewController: UIViewController {
     
     @IBAction func pressedCheckButton(_ sender: UIButton) {
         
-        print("✏️ check button pressed!")
+        let actionSheet = UIAlertController(title: "공구 모집 완료",
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
         
-        if postIsUserUploaded() {
+        let checkAction = UIAlertAction(title: "모집완료",
+                                        style: .default) { alert in
+            //API 통신
         }
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel,
+                                         handler: nil)
         
-        
+        actionSheet.addAction(checkAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true)
     }
     
     func postIsUserUploaded() -> Bool {
@@ -201,8 +210,17 @@ extension ItemViewController: ItemViewModelDelegate {
                                         buttonTitle: "재시도") {
             self.viewModel.deletePost(for: self.pageID)
         }
-    
     }
+    
+    func didMarkPostDone() {
+        
+        //checkmark.circle.fill
+    }
+    
+    func failedMarkingPostDone(with error: NetworkError) {
+        
+    }
+    
 }
 
 //MARK: - UI Configuration

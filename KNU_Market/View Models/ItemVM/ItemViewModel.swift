@@ -8,6 +8,9 @@ protocol ItemViewModelDelegate: AnyObject {
     
     func didDeletePost()
     func failedDeletingPost(with error: NetworkError)
+    
+    func didMarkPostDone()
+    func failedMarkingPostDone(with error: NetworkError)
 }
 
 class ItemViewModel {
@@ -81,8 +84,20 @@ class ItemViewModel {
         }
     }
     
+    //MARK: - 공구글 완료 표시
+    func markPostDone(for uid: String) {
+        
+        
+        
+    }
     
     
+
+}
+
+//MARK: - Conversion Methods
+
+extension ItemViewModel {
     
     func convertUIDsToURL() {
         

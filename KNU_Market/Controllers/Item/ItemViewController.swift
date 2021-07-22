@@ -91,7 +91,7 @@ class ItemViewController: UIViewController {
                                             message: nil,
                                             preferredStyle: .actionSheet)
         
-        if postIsUserUploaded() {
+        if viewModel.postIsUserUploaded {
             let deleteAction = UIAlertAction(title: "글 삭제하기",
                                              style: .destructive) { alert in
                 
@@ -111,16 +111,20 @@ class ItemViewController: UIViewController {
             let reportAction = UIAlertAction(title: "게시글 신고하기",
                                            style: .default) { alert in
                 
-                let userToReport = self.viewModel.model?.nickname ?? ""
+                self.performSegue(withIdentifier: Constants.SegueID.goToReportVC, sender: self)
                 
-                guard let reportVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.reportUserVC) as? ReportUserViewController else {
-                    return
-                }
-                
-                reportVC.userToReport = userToReport
-                reportVC.modalPresentationStyle = .overFullScreen
-                
-                self.present(reportVC, animated: true)
+//                let userToReport = self.viewModel.model?.nickname ?? ""
+//
+//
+//
+//                guard let reportVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.reportUserVC) as? ReportUserViewController else {
+//                    return
+//                }
+//
+//                reportVC.userToReport = userToReport
+//                reportVC.modalPresentationStyle = .overFullScreen
+//
+//                self.present(reportVC, animated: true)
             }
             actionSheet.addAction(reportAction)
         }
@@ -151,10 +155,14 @@ class ItemViewController: UIViewController {
         self.present(actionSheet, animated: true)
     }
     
-    func postIsUserUploaded() -> Bool {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let isUsers = viewModel.model?.nickname == User.shared.nickname ? true : false
-        return isUsers
+        guard let reportVC = segue.destination as? ReportUserViewController else { fatalError() }
+        
+        reportVC.userToReport = self.viewModel.model?.nickname ?? ""
+        reportVC.modalPresentationStyle = .overFullScreen
+        
+        
     }
 }
 
@@ -256,6 +264,7 @@ extension ItemViewController {
         initializeCheckButton()
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
+        initializeLocationLabel()
         initializeSlideShow()
     }
     
@@ -273,6 +282,7 @@ extension ItemViewController {
         initializeItemExplanationLabel()
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
+        initializeLocationLabel()
         initializeBottomView()
         initializeSlideShow()
     }
@@ -332,7 +342,7 @@ extension ItemViewController {
     
     func initializeCheckButton() {
         
-        if postIsUserUploaded() {
+        if viewModel.postIsUserUploaded {
             checkButton.isHidden = false
         } else {
             checkButton.isHidden = true
@@ -393,8 +403,7 @@ extension ItemViewController {
     }
     
     func initializeLocationLabel() {
-        let index = viewModel.model?.location ?? Location.listForCell.count
-        locationLabel.text = Location.listForCell[index]
+        locationLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
     }
     
     func initializeBottomView() {

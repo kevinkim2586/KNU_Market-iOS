@@ -16,22 +16,18 @@ class ItemTableViewModel {
     
     var title: String = ""
   
-    var isGathering: Bool = true
-    
-    var currentlyGatheredPeople: Int = 1 {
-        didSet {
-            if currentlyGatheredPeople == totalGatheringPeople {
-                isGathering = false
-            }
-        }
+    var isGathering: Bool {
+        return currentlyGatheredPeople != totalGatheringPeople
     }
+    
+    var currentlyGatheredPeople: Int = 1
     
     var totalGatheringPeople: Int = 4
     
     var location: Int = 0
     
     var locationName: String {
-        get { return Location.listForCell[location] }
+        return Location.listForCell[location]
     }
     
     private var formattedDate: String = ""
@@ -54,7 +50,6 @@ class ItemTableViewModel {
             } else {
                 formattedDate = "날짜 표시 에러"
             }
-            
         }
     }
     

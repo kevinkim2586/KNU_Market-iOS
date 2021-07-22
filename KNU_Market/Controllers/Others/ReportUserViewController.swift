@@ -8,12 +8,16 @@ class ReportUserViewController: UIViewController {
     @IBOutlet var sendButton: UIButton!
     
     var userToReport: String = ""
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+
         initialize()
     }
+    
+
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -21,8 +25,8 @@ class ReportUserViewController: UIViewController {
     }
     
     
-    @IBAction func pressedXButton(_ sender: UIButton) {
-        self.dismiss(animated: true)
+    @objc func dismissVC() {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func pressedSendButton(_ sender: UIButton) {
@@ -69,6 +73,7 @@ extension ReportUserViewController {
         
         initializeTextView()
         initializeButton()
+        initializeNavigationBar()
     }
     
     func initializeTextView() {
@@ -86,6 +91,27 @@ extension ReportUserViewController {
     func initializeButton() {
         sendButton.layer.cornerRadius = 10
     }
+    
+    func initializeNavigationBar() {
+        
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 150
+        
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: statusBarHeight,
+                                                          width: view.bounds.size.width, height: 50))
+        navigationBar.tintColor = .lightGray
+        navigationBar.setBackgroundImage(UIImage(),
+                                         for: .default)
+        navigationBar.shadowImage = UIImage()
+        self.view.addSubview(navigationBar)
+        
+        let navItem = UINavigationItem(title: "")
+        let navBarButton = UIBarButtonItem(barButtonSystemItem: .close,
+                                           target: self,
+                                           action: #selector(dismissVC))
+        navItem.leftBarButtonItem = navBarButton
+        navigationBar.items = [navItem]
+    }
 }
 
 //MARK: - Input Validation
@@ -94,6 +120,10 @@ extension ReportUserViewController {
     
     func validateUserInput() -> Bool {
         
+        guard contentTextView.text != "신고 내용을 적어주세요❗️" else {
+            self.showSimpleBottomAlert(with: "신고 내용을 3글자 이상 적어주세요 👀")
+            return false
+        }
         guard let content = contentTextView.text else { return false }
         
         if content.count >= 3 { return true }
@@ -117,8 +147,9 @@ extension ReportUserViewController: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-    
+
         if textView.text.isEmpty {
+            
             textView.text = "신고 내용을 적어주세요❗️"
             textView.textColor = UIColor.lightGray
             return

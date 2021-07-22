@@ -49,6 +49,10 @@ class ItemViewModel {
         return formatDateForDisplay()
     }
     
+    var postIsUserUploaded: Bool {
+        return model?.nickname == User.shared.nickname
+    }
+    
     //MARK: - 공구 상세내용 불러오기
     func fetchItemDetails(for uid: String) {
         

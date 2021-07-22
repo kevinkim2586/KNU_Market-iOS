@@ -23,6 +23,7 @@ struct Constants {
         static let goToItemVC                   = "goToItemVC"
         static let goToItemVCFromMyPosts        = "goToItemVCFromMyPosts"
         
+        static let goToReportVC                 = "goToReportVC"
         
     }
     

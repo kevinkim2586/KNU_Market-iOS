@@ -56,39 +56,6 @@ class SettingsViewController: UIViewController {
         }
     }
 
-    @IBAction func pressedUnregisterButton(_ sender: UIButton) {
-        
-        self.presentAlertWithCancelAction(title: "정말 회원탈퇴를 하시겠습니까?",
-                                          message: "") { selectedOk in
-            
-            if selectedOk {
-                
-                UserManager.shared.unregisterUser { [weak self] result in
-                    
-                    guard let self = self else { return }
-                    
-                    switch result {
-                    
-                    case .success(_):
-                        DispatchQueue.main.async {
-                            self.popToInitialViewController()
-                        }
-                        
-                    case .failure(let error):
-                        self.showSimpleBottomAlertWithAction(message: error.errorDescription,
-                                                             buttonTitle: "재시도") {
-                            DispatchQueue.main.async {
-                                self.pressedUnregisterButton(self.unregisterButton)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        
-    }
-
     func initialize() {
         
         userNicknameLabel.text = User.shared.nickname

@@ -29,18 +29,24 @@ class ItemViewModel {
     
     let itemImages: [UIImage]? = [UIImage]()
 
-    var isGathering: Bool = true
+    var isGathering: Bool {
+        return self.model?.currentlyGatheredPeople != self.model?.totalGatheringPeople
+    }
     
-    var currentlyGatheredPeople: Int = 1
+    var currentlyGatheredPeople: Int {
+        return self.model?.currentlyGatheredPeople ?? 1
+    }
+    
+    var totalGatheringPeople: Int {
+        return self.model?.totalGatheringPeople ?? 2
+    }
     
     var location: String {
         return Location.listForCell[model?.location ?? Location.listForCell.count]
     }
     
     var date: String {
-        get {
-            return formatDateForDisplay()
-        }
+        return formatDateForDisplay()
     }
     
     //MARK: - 공구 상세내용 불러오기

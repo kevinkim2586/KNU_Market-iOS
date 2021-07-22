@@ -304,6 +304,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szr-uk-1ec">
                                 <rect key="frame" x="369" y="66" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="변경">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
@@ -313,6 +314,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GnU-nI-UbE">
                                 <rect key="frame" x="369" y="111" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="변경">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
@@ -337,7 +339,6 @@
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedUnregisterButton:" destination="UbG-yZ-LxV" eventType="touchUpInside" id="zqQ-mk-mCR"/>
                                     <segue destination="oLN-g9-ehY" kind="show" id="Inr-xN-FH7"/>
                                 </connections>
                             </button>
@@ -452,6 +453,7 @@
                         <outlet property="detailLineLabel" destination="slb-NM-8ga" id="hSG-dU-KTT"/>
                         <outlet property="firstLineLabel" destination="ReL-Qf-dzm" id="ZIm-9C-e6Y"/>
                         <outlet property="passwordTextField" destination="0Zf-cd-zcc" id="jfo-aN-43T"/>
+                        <segue destination="IPd-GZ-Ey7" kind="show" id="Dom-UQ-dy2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yut-Y8-hnx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -461,17 +463,65 @@
         <!--Unregister User Input Suggestion View Controller-->
         <scene sceneID="QgN-sM-33h">
             <objects>
-                <viewController id="IPd-GZ-Ey7" customClass="UnregisterUser_InputSuggestionViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UnregisterUser_InputSuggestionViewController" hidesBottomBarWhenPushed="YES" id="IPd-GZ-Ey7" customClass="UnregisterUser_InputSuggestionViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uaq-ao-9hp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOK-KI-TsL">
+                                <rect key="frame" x="20" y="60" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="피드백을 반영하여 적극적으로 개선하겠습니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zX-zN-z3X">
+                                <rect key="frame" x="20" y="110.5" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xCw-zI-8UF">
+                                <rect key="frame" x="20" y="181" width="374" height="493"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut lrunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Fbn-H9-XVU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Fbn-H9-XVU" firstAttribute="trailing" secondItem="xCw-zI-8UF" secondAttribute="trailing" constant="20" id="3Zj-4Z-fJ5"/>
+                            <constraint firstItem="7zX-zN-z3X" firstAttribute="top" secondItem="rOK-KI-TsL" secondAttribute="bottom" constant="30" id="3vH-9f-fTb"/>
+                            <constraint firstItem="Fbn-H9-XVU" firstAttribute="bottom" secondItem="xCw-zI-8UF" secondAttribute="bottom" constant="100" id="Drr-LS-w9e"/>
+                            <constraint firstItem="Fbn-H9-XVU" firstAttribute="trailing" secondItem="rOK-KI-TsL" secondAttribute="trailing" constant="20" id="G3j-7f-wvS"/>
+                            <constraint firstItem="xCw-zI-8UF" firstAttribute="leading" secondItem="Fbn-H9-XVU" secondAttribute="leading" constant="20" id="Sv5-sZ-dgI"/>
+                            <constraint firstItem="7zX-zN-z3X" firstAttribute="leading" secondItem="Fbn-H9-XVU" secondAttribute="leading" constant="20" id="WM4-UB-RyN"/>
+                            <constraint firstItem="Fbn-H9-XVU" firstAttribute="trailing" secondItem="7zX-zN-z3X" secondAttribute="trailing" constant="20" id="gJf-Ac-UK5"/>
+                            <constraint firstItem="rOK-KI-TsL" firstAttribute="top" secondItem="Fbn-H9-XVU" secondAttribute="top" constant="60" id="oXh-9w-YaI"/>
+                            <constraint firstItem="rOK-KI-TsL" firstAttribute="leading" secondItem="Uaq-ao-9hp" secondAttribute="leading" constant="20" id="pgZ-HN-rQS"/>
+                            <constraint firstItem="xCw-zI-8UF" firstAttribute="top" secondItem="7zX-zN-z3X" secondAttribute="bottom" constant="50" id="wCS-36-jIM"/>
+                        </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="XMe-9m-oZl">
+                        <barButtonItem key="rightBarButtonItem" title="완료" style="done" id="mp7-Np-UW6">
+                            <connections>
+                                <action selector="pressedDoneButton:" destination="IPd-GZ-Ey7" id="B4d-fr-OPl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="detailLineLabel" destination="7zX-zN-z3X" id="0ic-BF-erg"/>
+                        <outlet property="firstLineLabel" destination="rOK-KI-TsL" id="9QZ-3h-3gZ"/>
+                        <outlet property="userInputTextView" destination="xCw-zI-8UF" id="3L6-Hf-pHy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rlK-pO-dBq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8367" y="2479"/>
+            <point key="canvasLocation" x="9196" y="1760"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="j2u-FM-iJE">

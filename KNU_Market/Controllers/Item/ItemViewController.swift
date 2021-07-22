@@ -360,9 +360,8 @@ extension ItemViewController {
     
     func initializeGatheringPeopleLabel() {
         
-        // 수정 필요
         let currentNum = viewModel.currentlyGatheredPeople
-        let total = viewModel.model?.totalGatheringPeople ?? 2
+        let total = viewModel.totalGatheringPeople
         
         if viewModel.isGathering {
             gatheringPeopleLabel.text = "모집 중     \(currentNum)" + "/" + "\(total)"
@@ -377,16 +376,20 @@ extension ItemViewController {
     func initializeEnterChatButton() {
         
         if viewModel.isGathering {
+            enterChatButton.isUserInteractionEnabled = true
             enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)
+            enterChatButton.setTitle("채팅방 입장", for: .normal)
+            
         } else {
             enterChatButton.isUserInteractionEnabled = false
+            enterChatButton.setTitle("마감", for: .normal)
             enterChatButton.backgroundColor = UIColor.lightGray
         }
         
         enterChatButton.layer.cornerRadius = 7
-        enterChatButton.setTitle("채팅방 입장", for: .normal)
         enterChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0,
                                                              weight: .semibold)
+        enterChatButton.titleLabel?.textColor = UIColor.white
     }
     
     func initializeLocationLabel() {

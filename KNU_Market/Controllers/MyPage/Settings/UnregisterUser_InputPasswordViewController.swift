@@ -11,7 +11,8 @@ class UnregisterUser_InputPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        initialize()
     }
     
     @IBAction func pressedNextButton(_ sender: UIBarButtonItem) {
@@ -53,14 +54,11 @@ extension UnregisterUser_InputPasswordViewController {
         initializeTextFields()
     }
     
-    
     func initializeLabels() {
         
         firstLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         firstLineLabel.textColor = .darkGray
-
         firstLineLabel.text = "회원탈퇴라니요..\n한 번만 더 생각해 주세요. 😥"
-        firstLineLabel.changeTextAttributeColor(fullText: firstLineLabel.text!, changeText: "\(UserRegisterValues.shared.nickname)님")
         
         detailLineLabel.text = "회원 탈퇴를 위해 비밀번호를 입력해 주세요."
         detailLineLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -70,6 +68,7 @@ extension UnregisterUser_InputPasswordViewController {
     
     func initializeTextFields() {
         
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.addTarget(self,
                                     action: #selector(textFieldDidChange(_:)),
                                     for: .editingChanged)

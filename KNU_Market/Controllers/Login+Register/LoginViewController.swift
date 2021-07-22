@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         
         showProgressBar()
     
-        UserManager.shared.login(id: id, password: password) { [weak self] result in
+        UserManager.shared.login(email: id, password: password) { [weak self] result in
             
             guard let self = self else { return }
             

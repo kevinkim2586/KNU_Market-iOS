@@ -22,7 +22,7 @@ import Alamofire
  */
 
 struct RegisterRequestDTO {
-    
+     
     let id: String
     let password: String
     let nickname: String

@@ -49,9 +49,9 @@ struct Constants {
         static let chatVC                       = "ChatViewController"
         
         // My Page Tab
-        static let myPostsVC                      = "MyPostsViewController"
+        static let myPostsVC                    = "MyPostsViewController"
         static let settingsVC                   = "SettingsViewController"
-        
+        static let unregisterUserInputSuggestVC = "UnregisterUser_InputSuggestionViewController"
         static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"
         static let termsAndConditionsVC         = "TermsAndConditionViewController"
         static let developerInfoVC              = "DeveloperInfoViewController"

@@ -52,9 +52,11 @@ class UserManager {
             
             switch statusCode {
             case 201:
+                print("✏️ UserManager - register SUCCESS")
                 completion(.success(true))
             default:
                 let error = NetworkError.returnError(json: response.data!)
+                print("❗️ UserManager - register FAILED")
                 completion(.failure(error))
             }
         }
@@ -99,11 +101,11 @@ class UserManager {
     }
     
     //MARK: - 로그인
-    func login(id: String,
+    func login(email: String,
                password: String,
                completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
-        let parameters: Parameters = [ "id" : id,
+        let parameters: Parameters = [ "id" : email,
                                        "password" : password ]
         let headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue : HTTPHeaderValues.applicationJSON.rawValue ]
         

@@ -34,6 +34,8 @@ class EmailInputViewController: UIViewController {
         
         showProgressBar()
         
+        print("✏️ image: \(UserRegisterValues.shared.profileImage)")
+        
         let model = RegisterRequestDTO(id: UserRegisterValues.shared.email,
                                        password: UserRegisterValues.shared.password,
                                        nickname: UserRegisterValues.shared.nickname,

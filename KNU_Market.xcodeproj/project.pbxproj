@@ -29,6 +29,8 @@
 		7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */; };
 		7C3B4FF726A92C6C00E2CA8F /* UserRegisterValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF626A92C6C00E2CA8F /* UserRegisterValues.swift */; };
 		7C3B4FFA26A93CFE00E2CA8F /* congratulate.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF926A93CFE00E2CA8F /* congratulate.json */; };
+		7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */; };
+		7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */; };
 		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
 		7C436B5826820E5200943069 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5726820E5200943069 /* ReportManager.swift */; };
 		7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */; };
@@ -115,6 +117,8 @@
 		7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulateUserViewController.swift; sourceTree = "<group>"; };
 		7C3B4FF626A92C6C00E2CA8F /* UserRegisterValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterValues.swift; sourceTree = "<group>"; };
 		7C3B4FF926A93CFE00E2CA8F /* congratulate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congratulate.json; sourceTree = "<group>"; };
+		7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_InputPasswordViewController.swift; sourceTree = "<group>"; };
+		7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_InputSuggestionViewController.swift; sourceTree = "<group>"; };
 		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7C436B5726820E5200943069 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
 		7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserRequestDTO.swift; sourceTree = "<group>"; };
@@ -294,6 +298,8 @@
 				7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */,
 				7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */,
 				7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */,
+				7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */,
+				7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -710,11 +716,13 @@
 				7C1EEE4E26A68FB700775B11 /* MainTabBarViewController.swift in Sources */,
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
 				7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */,
+				7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
 				7C1C1D0C265E70E000C08C66 /* SettingsViewController.swift in Sources */,
 				7C036AB82696BE4C00F6C29B /* Date Extension.swift in Sources */,
 				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
+				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel Extension.swift in Sources */,

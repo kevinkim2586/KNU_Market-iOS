@@ -297,10 +297,10 @@ extension RegisterViewController {
     
     func initializeLabels() {
         
-        nicknameLabel.changeTextAttributes(fullText: nicknameLabel.text!, changeText: "*")
-        emailLabel.changeTextAttributes(fullText: emailLabel.text!, changeText: "*")
-        passwordLabel.changeTextAttributes(fullText: passwordLabel.text!, changeText: "*")
-        checkPasswordLabel.changeTextAttributes(fullText: checkPasswordLabel.text!, changeText: "*")
+        nicknameLabel.changeTextAttributeColor(fullText: nicknameLabel.text!, changeText: "*")
+        emailLabel.changeTextAttributeColor(fullText: emailLabel.text!, changeText: "*")
+        passwordLabel.changeTextAttributeColor(fullText: passwordLabel.text!, changeText: "*")
+        checkPasswordLabel.changeTextAttributeColor(fullText: checkPasswordLabel.text!, changeText: "*")
     }
     
     func initializeTextFields() {

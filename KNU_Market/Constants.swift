@@ -12,8 +12,18 @@ struct Constants {
     
     struct SegueID {
         
+        // UserRegister Segues
+        static let goToRegister                 = "goToRegister"
+        static let goToPasswordInputVC          = "goToPasswordInputVC"
+        static let goToProfilePictureVC         = "goToProfilePictureVC"
+        static let goToEmailInputVC             = "goToEmailInputVC"
+        static let goToCheckEmailVC             = "goToCheckEmailVC"
+        
+        
         static let goToItemVC                   = "goToItemVC"
         static let goToItemVCFromMyPosts        = "goToItemVCFromMyPosts"
+        
+        
     }
     
     struct StoryboardID {
@@ -23,6 +33,9 @@ struct Constants {
         static let initialNavigationController  = "InitialNavigationController"
         static let loginVC                      = "LoginViewController"
         static let registerVC                   = "RegisterViewController"
+        static let congratulateUserVC           = "CongratulateViewController"
+        static let registerNavigationController = "RegisterNavigationController"
+    
         
         // Home & Item Tab
         static let tabBarController             = "TabBarController"

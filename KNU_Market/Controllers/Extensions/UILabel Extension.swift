@@ -2,7 +2,7 @@ import UIKit
 
 extension UILabel {
     
-    func changeTextAttributes(fullText : String , changeText : String ) {
+    func changeTextAttributeColor(fullText : String , changeText : String ) {
         let strNumber: NSString = fullText as NSString
         let range = (strNumber).range(of: changeText)
         let attribute = NSMutableAttributedString.init(string: fullText)

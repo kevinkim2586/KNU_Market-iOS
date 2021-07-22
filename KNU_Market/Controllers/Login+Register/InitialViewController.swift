@@ -27,13 +27,7 @@ class InitialViewController: UIViewController {
     
     @IBAction func pressedRegisterButton(_ sender: UIButton) {
         
-        guard let registerVC = self.storyboard?.instantiateViewController(
-                identifier: Constants.StoryboardID.registerVC
-        ) as? RegisterViewController else {
-            return
-        }
-        //registerVC.modalPresentationStyle = .fullScreen
-        self.present(registerVC, animated: true, completion: nil)
+        performSegue(withIdentifier: Constants.SegueID.goToRegister, sender: self)
     }
     
     //MARK: - UI Configuration

@@ -1,8 +1,10 @@
-//
-//  ChatRooms.swift
-//  KNU_Market
-//
-//  Created by Kevin Kim on 2021/07/23.
-//
-
 import Foundation
+
+struct ChatRooms: Decodable {
+    
+    let postUID: String
+    
+    enum CodingKeys: String, CodingKey {
+        case postUID = "postUid"
+    }
+}

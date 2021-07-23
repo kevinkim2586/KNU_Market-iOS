@@ -2,15 +2,18 @@ import Foundation
 import Starscream
 import MessageKit
 import SwiftyJSON
+import Alamofire
 
 protocol ChatViewDelegate: AnyObject {
     
+    // WebSocket
     func didConnect()
     func didDisconnect()
     func didReceiveChat()
-    
     func reconnectSuggested()
     func failedConnection(with error: NetworkError)
+    
+
 }
 
 class ChatViewModel: WebSocketDelegate {
@@ -30,11 +33,13 @@ class ChatViewModel: WebSocketDelegate {
     weak var delegate: ChatViewDelegate?
 
     init(room: String) {
-        
         self.room = room
     }
-    
-    //MARK: - Methods
+}
+
+//MARK: - WebSocket Methods
+
+extension ChatViewModel {
     
     func connect() {
         
@@ -112,7 +117,8 @@ class ChatViewModel: WebSocketDelegate {
          
         }
     }
-
+    
+    // 채팅 보내기
     func sendText(_ originalText: String) {
         
         guard isConnected else {
@@ -132,8 +138,61 @@ class ChatViewModel: WebSocketDelegate {
             )
         }
     }
+}
+
+//MARK: - API Methods
+
+extension ChatViewModel {
     
+    // 공구 글 참가
+    func joinPost() {
+        
+        ChatManager.shared.joinPost(pid: self.room) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success:
+                
+                self.connect()
+                
+            case .failure(let error):
+                
+                // 이미 참여하고 있는 채팅방이면 기존의 메시지를 불러와야 함
+                if error == .E108 {
+                    
+                    // 이미 참여하고 있는 채팅방의 최신 메시지 받아오기
+                    
+                    //getChatList
+                    
+                } else {
+                    self.delegate?.failedConnection(with: error)
+                }
+                
+                
+            }
+        }
+    }
+        
     
+    func exitPost() {
+        
+        
+    }
+    
+    // 채팅 받아오기
+    func getChatList() {
+        
+        
+        
+    }
+}
+
+
+//MARK: - Utility Methods
+
+extension ChatViewModel {
     
     func convertToJSONString(text: String) -> String {
         
@@ -153,6 +212,6 @@ class ChatViewModel: WebSocketDelegate {
         if id == User.shared.id { return false }
         else { return true }
     }
-
+    
 }
 

@@ -18,7 +18,6 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -28,7 +27,10 @@ class ChatViewController: MessagesViewController {
         self.title = chatRoomTitle
         viewModel = ChatViewModel(room: room)
         initialize()
-        viewModel.connect()
+        
+        
+        // joinPost 해보고 문제 없으면 connect 해야 함.
+        viewModel.joinPost()
     }
     
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
@@ -95,7 +97,6 @@ extension ChatViewController {
                                                                                   textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
             layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .right,
                                                                                   textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
-            
         }
     }
     
@@ -141,6 +142,8 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func failedConnection(with error: NetworkError) {
+        
+        self.showSimpleBottomAlert(with: error.errorDescription)
 //        self.presentSimpleAlert(title: "채팅방에서 나가셨습니다 🤔", message: "채팅방을 나가고 다시 접속하시기 바랍니다.")
         
         //navigationController?.popViewController(animated: true)

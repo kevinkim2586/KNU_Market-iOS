@@ -92,6 +92,9 @@
 		7CCDB1EF26A2BD0C0092F28D /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1ED26A2BD0C0092F28D /* ItemTableViewCell.swift */; };
 		7CCDB1F026A2BD0C0092F28D /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCDB1EE26A2BD0C0092F28D /* ItemTableViewCell.xib */; };
 		7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */; };
+		7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */; };
+		7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */; };
+		7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -183,6 +186,9 @@
 		7CCDB1ED26A2BD0C0092F28D /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		7CCDB1EE26A2BD0C0092F28D /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
 		7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
+		7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
+		7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
+		7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -202,6 +208,7 @@
 		7C036AB12696A90500F6C29B /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
+				7CD1522526AA99DA00F2C466 /* Chat Models */,
 				7C036AB32696AAA000F6C29B /* User Models */,
 				7C036AB22696AA8B00F6C29B /* Item Models */,
 			);
@@ -491,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */,
+				7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */,
 			);
 			path = ChatVM;
 			sourceTree = "<group>";
@@ -502,6 +510,15 @@
 				7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */,
 			);
 			path = "Login+RegisterVM";
+			sourceTree = "<group>";
+		};
+		7CD1522526AA99DA00F2C466 /* Chat Models */ = {
+			isa = PBXGroup;
+			children = (
+				7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */,
+				7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */,
+			);
+			path = "Chat Models";
 			sourceTree = "<group>";
 		};
 		7CD74E0C2645981700BD2DE4 /* Login+Register */ = {
@@ -692,6 +709,7 @@
 				7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */,
 				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
 				7C60DC7626944C8E001DEA9A /* DeveloperInfoViewController.swift in Sources */,
+				7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
 				7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */,
@@ -709,6 +727,7 @@
 				7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */,
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,
 				7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */,
+				7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController Extension.swift in Sources */,
 				7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */,
@@ -721,6 +740,7 @@
 				7C1C1D0C265E70E000C08C66 /* SettingsViewController.swift in Sources */,
 				7C036AB82696BE4C00F6C29B /* Date Extension.swift in Sources */,
 				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
+				7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,

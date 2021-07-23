@@ -9,18 +9,27 @@ class ChatTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        //configureImageView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
     
-    //
-    //    func configure(with model: []) {
-    //
-    //    }
+    func resetValues() {
+        
+        chatTitleLabel.text = nil
+        chatImageView.image = nil
+        chatParticipatingCountLabel.text = nil
+    }
+
+
+    func configure(with pid: String) {
+        
+        resetValues()
+        
+        
+        
+    }
     
     
     func configureImageView() {

@@ -56,7 +56,7 @@ enum NetworkError: String, Error {
         case .E107:
             return "이메일 인증이 필요합니다."
         case .E108:
-            return "존재하지 않는 계정입니다."
+            return "이미 참여하고 있는 공구입니다."
         case .E109:
             return "권한이 없습니다."
    

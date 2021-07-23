@@ -48,9 +48,6 @@ class UploadItemViewModel {
         for image in imageData {
             
             group.enter()
-            print("group.enter() called")
-            
-            
             MediaManager.shared.uploadImage(with: image) { result in
                 
                 switch result {

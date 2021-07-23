@@ -24,8 +24,6 @@ class ItemManager {
             ? baseURL + "/me?page=\(index)"
             : baseURL + "?page=\(index)"
 
-        print("✏️ url: \(url)")
-        
         AF.request(url,
                    method: .get,
                    interceptor: interceptor)

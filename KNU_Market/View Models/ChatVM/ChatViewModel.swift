@@ -13,6 +13,9 @@ protocol ChatViewDelegate: AnyObject {
     func reconnectSuggested()
     func failedConnection(with error: NetworkError)
     
+    // 공구글 참여 취소
+    func didExitPost()
+    
 
 }
 
@@ -51,6 +54,7 @@ extension ChatViewModel {
         socket.connect()
     }
     
+    // 수정 필요
     func disconnect() {
         
         let exitText = convertToJSONString(text: "\(User.shared.nickname)님이 채팅방에서 나갔습니다 🧐")
@@ -147,14 +151,14 @@ extension ChatViewModel {
     // 공구 글 참가
     func joinPost() {
         
-        ChatManager.shared.joinPost(pid: self.room) { [weak self] result in
+        ChatManager.shared.changeJoinStatus(status: .join,
+                                            pid: self.room) { [weak self] result in
             
             guard let self = self else { return }
             
             switch result {
             
             case .success:
-                
                 self.connect()
                 
             case .failure(let error):
@@ -165,7 +169,6 @@ extension ChatViewModel {
                     // 이미 참여하고 있는 채팅방의 최신 메시지 받아오기
                     
                     //getChatList
-                    
                 } else {
                     self.delegate?.failedConnection(with: error)
                 }
@@ -173,13 +176,31 @@ extension ChatViewModel {
                 
             }
         }
-    }
         
+   
+    }
     
     func exitPost() {
         
+        ChatManager.shared.changeJoinStatus(status: .exit,
+                                            pid: self.room) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success:
+          
+                self.delegate?.didExitPost()
+                
+                
+            case .failure(let error):
+                self.delegate?.failedConnection(with: error)
+            }
+        }
         
     }
+        
     
     // 채팅 받아오기
     func getChatList() {

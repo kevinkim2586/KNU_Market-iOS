@@ -45,7 +45,8 @@ class ChatViewController: MessagesViewController {
             self.presentAlertWithCancelAction(title: "정말 나가시겠습니까?",
                                               message: "") { selectedOk in
                 if selectedOk {
-                    self.viewModel.disconnect()
+                    
+                    self.viewModel.exitPost()
                 }
             }
         }

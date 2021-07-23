@@ -1,6 +1,11 @@
 import Foundation
 import Alamofire
 
+enum PostJoinStatus {
+    case join
+    case exit
+}
+
 class ChatManager {
     
     static let shared: ChatManager = ChatManager()
@@ -12,14 +17,16 @@ class ChatManager {
     //MARK: - API Request URLs
     let baseURL     = "\(Constants.API_BASE_URL)room/"
     
-    //MARK: - 공구 참여하기
-    func joinPost(pid: String,
-                  completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    //MARK: - 공구 참여 or 나가기
+    func changeJoinStatus(status: PostJoinStatus,
+                          pid: String,
+                          completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         
         let requestURL = baseURL + pid
+        let method: HTTPMethod = status == .join ? .post : .delete
         
         AF.request(requestURL,
-                   method: .post,
+                   method: method,
                    interceptor: interceptor)
             .validate()
             .responseData { response in
@@ -40,14 +47,21 @@ class ChatManager {
     }
     
     
+    func joinPost(pid: String,
+                  completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+        
+        let requestURL = baseURL + pid
+        
+
+    }
+    
+    
     func getResponse<T: Decodable>(method: HTTPMethod,
                                    pid: String?,
                                    expectedModel: T.Type,
                                    completion: @escaping (Result<T, NetworkError>) -> Void) {
         
         let requestURL = pid == nil ? baseURL : baseURL + pid!
-        
-        print("✏️ requestURL: \(requestURL)")
         
         AF.request(requestURL,
                    method: method,

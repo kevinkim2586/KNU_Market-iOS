@@ -50,7 +50,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("✏️ viewModel.chatList.count: \(viewModel.chatList.count)")
         return viewModel.chatList.count
     }
     

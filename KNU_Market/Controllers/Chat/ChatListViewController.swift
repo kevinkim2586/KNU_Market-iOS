@@ -5,6 +5,7 @@ class ChatListViewController: UIViewController {
     @IBOutlet weak var chatListTableView: UITableView!
     
     private let refreshControl = UIRefreshControl()
+    private let viewModel = ChatListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,6 +13,32 @@ class ChatListViewController: UIViewController {
         initialize()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.fetchChatList()
+    }
+    
+}
+//MARK: - ChatListViewModelDelegate
+
+extension ChatListViewController: ChatListViewModelDelegate {
+    
+    func didFetchChatList() {
+     
+        chatListTableView.refreshControl?.endRefreshing()
+        chatListTableView.reloadData()
+    }
+    
+    func failedFetchingChatList(with error: NetworkError) {
+        
+        chatListTableView.refreshControl?.endRefreshing()
+        showSimpleBottomAlertWithAction(message: "채팅 목록을 불러오지 못했습니다 😥",
+                                        buttonTitle: "재시도") {
+            self.chatListTableView.refreshControl?.beginRefreshing()
+            self.viewModel.fetchChatList()
+        }
+    }
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -23,10 +50,13 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        print("✏️ viewModel.chatList.count: \(viewModel.chatList.count)")
+        return viewModel.chatList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row > viewModel.chatList.count { return UITableViewCell() }
         
         let cellIdentifier = Constants.cellID.chatTableViewCell
         
@@ -46,10 +76,11 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    
+    
     @objc func refreshTableView() {
         
-        chatListTableView.reloadData()
-        chatListTableView.refreshControl?.endRefreshing()
+        viewModel.fetchChatList()
     }
     
 }
@@ -61,6 +92,8 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 extension ChatListViewController {
     
     func initialize() {
+        
+        viewModel.delegate = self
         
         self.navigationController?.view.backgroundColor = .white
         self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
@@ -76,6 +109,5 @@ extension ChatListViewController {
         chatListTableView.refreshControl = refreshControl
         
         refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
-        
     }
 }

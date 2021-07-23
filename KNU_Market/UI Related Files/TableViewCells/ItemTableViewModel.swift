@@ -41,10 +41,9 @@ class ItemTableViewModel {
             dateFormatter.locale = Locale(identifier:"ko_KR")
             let convertedDate = dateFormatter.date(from: newValue)
            
-            dateFormatter.dateFormat = "MM/dd HH:mm"
+            dateFormatter.dateFormat = "MM/dd\nHH:mm"
             
             if let date = convertedDate {
-    
                 let finalDate = dateFormatter.string(from: date)
                 formattedDate = finalDate
             } else {

@@ -84,7 +84,7 @@ extension NickNameInputViewController {
         
         if nickname.count >= 2 && nickname.count <= 15 { return true }
         else {
-            showErrorMessage(message: "닉네임은 2자 이상, 10자 이하로 적어주세요.")
+            showErrorMessage(message: "닉네임은 2자 이상, 15자 이하로 적어주세요.")
             return false
         }
     }

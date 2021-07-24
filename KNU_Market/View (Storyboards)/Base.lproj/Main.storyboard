@@ -148,14 +148,6 @@
                                     <action selector="pressedLoginButton:" destination="WcB-qX-q1C" eventType="touchUpInside" id="Hbm-0b-wQ9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YqV-Rj-NfZ">
-                                <rect key="frame" x="20" y="15" width="20" height="20"/>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="xmark.circle" catalog="system"/>
-                                <connections>
-                                    <action selector="pressedXButton:" destination="WcB-qX-q1C" eventType="touchUpInside" id="L5U-RP-oJ6"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo" translatesAutoresizingMaskIntoConstraints="NO" id="jzc-Dq-xC0">
                                 <rect key="frame" x="20" y="65" width="70" height="70"/>
                                 <constraints>
@@ -192,13 +184,11 @@
                             <constraint firstItem="jzc-Dq-xC0" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="20" id="KzP-pK-N2b"/>
                             <constraint firstItem="66W-Oo-gcL" firstAttribute="trailing" secondItem="ivr-6Y-BiC" secondAttribute="trailing" constant="20" id="TCi-NN-Efb"/>
                             <constraint firstItem="fP6-gv-Fuk" firstAttribute="top" secondItem="rU1-jL-NSK" secondAttribute="bottom" constant="60" id="VXi-dF-2g5"/>
-                            <constraint firstItem="YqV-Rj-NfZ" firstAttribute="top" secondItem="66W-Oo-gcL" secondAttribute="top" constant="15" id="YFJ-zj-Jzx"/>
                             <constraint firstItem="fP6-gv-Fuk" firstAttribute="centerX" secondItem="60a-Yi-ipM" secondAttribute="centerX" id="bJE-c6-6mt"/>
                             <constraint firstItem="JuZ-r3-thW" firstAttribute="top" secondItem="66W-Oo-gcL" secondAttribute="top" constant="92" id="d2p-zy-4qY"/>
-                            <constraint firstItem="jzc-Dq-xC0" firstAttribute="top" secondItem="YqV-Rj-NfZ" secondAttribute="bottom" constant="30" id="gal-nZ-CWY"/>
                             <constraint firstItem="zrB-Jn-ziO" firstAttribute="top" secondItem="fP6-gv-Fuk" secondAttribute="bottom" constant="20" id="kAJ-v1-HQS"/>
+                            <constraint firstItem="jzc-Dq-xC0" firstAttribute="top" secondItem="66W-Oo-gcL" secondAttribute="top" constant="65" id="lh2-N2-JWC"/>
                             <constraint firstItem="fP6-gv-Fuk" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="65" id="qEQ-8j-yXj"/>
-                            <constraint firstItem="YqV-Rj-NfZ" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="20" id="rCZ-Ky-UTo"/>
                             <constraint firstItem="rU1-jL-NSK" firstAttribute="top" secondItem="ivr-6Y-BiC" secondAttribute="bottom" constant="30" id="soM-Kh-4Hu"/>
                             <constraint firstItem="66W-Oo-gcL" firstAttribute="trailing" secondItem="fP6-gv-Fuk" secondAttribute="trailing" constant="65" id="udn-PC-6j8"/>
                         </constraints>
@@ -346,7 +336,6 @@
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="xmark.circle" catalog="system"/>
                                 <connections>
-                                    <action selector="pressedXButton:" destination="WcB-qX-q1C" eventType="touchUpInside" id="FRo-ao-7Rz"/>
                                     <action selector="pressedXButton:" destination="hKo-Es-J4q" eventType="touchUpInside" id="XhB-en-vd7"/>
                                 </connections>
                             </button>

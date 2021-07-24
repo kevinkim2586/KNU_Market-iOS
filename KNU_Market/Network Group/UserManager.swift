@@ -67,10 +67,14 @@ class UserManager {
     func checkNicknameDuplicate(nickname: String,
                                 completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
-        let url = checkNicknameDuplicateURL + "?nickname=\(nickname)"
+        let parameters: Parameters = ["nickname": nickname]
+        let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded"]
         
-        AF.request(url,
+        AF.request(checkNicknameDuplicateURL,
                    method: .get,
+                   parameters: parameters,
+                   encoding: URLEncoding.queryString,
+                   headers: headers,
                    interceptor: interceptor)
             .validate()
             .responseJSON { response in

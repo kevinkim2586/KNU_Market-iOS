@@ -1,9 +1,12 @@
 import Foundation
 import Alamofire
 
-enum PostJoinStatus {
+enum ChatFunction {
     case join
     case exit
+    case getRoom
+    case getRoomInfo
+    case getChat
 }
 
 class ChatManager {
@@ -18,12 +21,12 @@ class ChatManager {
     let baseURL     = "\(Constants.API_BASE_URL)room/"
     
     //MARK: - 공구 참여 or 나가기
-    func changeJoinStatus(status: PostJoinStatus,
+    func changeJoinStatus(function: ChatFunction,
                           pid: String,
                           completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         
-        let requestURL = baseURL + pid
-        let method: HTTPMethod = status == .join ? .post : .delete
+        let requestURL = generateURLString(for: function, pid: pid)
+        let method: HTTPMethod = function == .join ? .post : .delete
         
         AF.request(requestURL,
                    method: method,
@@ -46,22 +49,15 @@ class ChatManager {
             }
     }
     
-    
-    func joinPost(pid: String,
-                  completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    func getResponseModel<T: Decodable>(function: ChatFunction,
+                                        method: HTTPMethod,
+                                        pid: String?,
+                                        index: Int?,
+                                        expectedModel: T.Type,
+                                        completion: @escaping (Result<T, NetworkError>) -> Void) {
         
-        let requestURL = baseURL + pid
-        
-
-    }
-    
-    
-    func getResponse<T: Decodable>(method: HTTPMethod,
-                                   pid: String?,
-                                   expectedModel: T.Type,
-                                   completion: @escaping (Result<T, NetworkError>) -> Void) {
-        
-        let requestURL = pid == nil ? baseURL : baseURL + pid!
+        //        let requestURL = pid == nil ? baseURL : baseURL + pid!
+        let requestURL = generateURLString(for: function, pid: pid, index: index)
         
         AF.request(requestURL,
                    method: method,
@@ -89,37 +85,32 @@ class ChatManager {
                     print("❗️ ChatManager - getResponse ERROR with code: \(response.response!.statusCode) and error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
-        }
-        
-        
-        
-        
+            }
     }
     
-    
-//    func getResponse(url: String,
-//                     method: HTTPMethod) {
-//
-//        AF.request(url,
-//                   method: method,
-//                   interceptor: interceptor)
-//            .validate()
-//            .responseData { response in
-//
-//                switch response.result {
-//
-//                case .success:
-//
-//                case .failure:
-//                    let error = NetworkError.returnError(json: response.data!)
-//                }
-//
-//
-//
-//            }
-//    }
-//
     
 }
 
 
+
+//MARK: - Utility Method
+
+extension ChatManager {
+    
+    // 채팅 API 요청 시 필요한 URL 생성 함수
+    func generateURLString(for function: ChatFunction, pid: String?, index: Int? = nil) -> String {
+        
+        switch function {
+        
+        case .join, .exit, .getRoomInfo:
+            guard let pid = pid else { fatalError() }
+            return baseURL + pid
+        case .getRoom:
+            return baseURL
+        case .getChat:
+            guard let page = index, let pid = pid else { fatalError() }
+            return baseURL + pid + "\(page)"
+        }
+    }
+    
+}

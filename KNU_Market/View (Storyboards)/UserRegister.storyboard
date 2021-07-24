@@ -92,10 +92,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="a2e-1v-2Un">
-                        <barButtonItem key="leftBarButtonItem" image="\" id="n56-4T-TqO">
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="gg2-73-Era">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="pressedDismissButton:" destination="cvm-nx-wio" id="gsY-ab-wOh"/>
+                                <action selector="pressedDismissButton:" destination="cvm-nx-wio" id="A0g-9Y-7ot"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="lLs-gd-zjW">
@@ -657,7 +657,6 @@
         </designable>
     </designables>
     <resources>
-        <image name="\" width="128" height="128"/>
         <image name="camera icon" width="55" height="57"/>
         <image name="pick profile image" width="195" height="195"/>
         <namedColor name="AppDefaultColor">

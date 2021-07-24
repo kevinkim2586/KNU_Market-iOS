@@ -55,6 +55,9 @@
                     <navigationItem key="navigationItem" id="u8c-O5-aS3">
                         <barButtonItem key="leftBarButtonItem" title="크누마켓" style="done" id="dfO-jU-h20">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="pressedLeftBarButton:" destination="w55-ty-Qef" id="zeT-lL-xRD"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="PLB-Zm-cbs">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

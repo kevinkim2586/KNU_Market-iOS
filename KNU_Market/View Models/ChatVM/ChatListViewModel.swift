@@ -24,9 +24,11 @@ extension ChatListViewModel {
     func fetchChatList() {
         
         self.chatList.removeAll()
-    
-        ChatManager.shared.getResponse(method: .get,
+        
+        ChatManager.shared.getResponseModel(function: .getRoom,
+                                       method: .get,
                                        pid: nil,
+                                       index: nil,
                                        expectedModel: [ChatRooms].self) { [weak self] result in
             
             guard let self = self else { return }

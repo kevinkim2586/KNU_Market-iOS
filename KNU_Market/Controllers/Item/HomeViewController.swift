@@ -57,6 +57,12 @@ class HomeViewController: UIViewController {
         let searchVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.searchPostVC) as! SearchPostViewController
         self.navigationController?.pushViewController(searchVC, animated: true)
     }
+    
+    @IBAction func pressedLeftBarButton(_ sender: UIBarButtonItem) {
+        
+        let topRow = IndexPath(row: 0, section: 0)
+        self.itemTableView.scrollToRow(at: topRow, at: .top, animated: true)
+    }
 }
 
 //MARK: - HomeViewModelDelegate
@@ -179,20 +185,8 @@ extension HomeViewController: UITabBarControllerDelegate {
         
         let selectedIndex = tabBarController.selectedIndex
         
-        switch selectedIndex {
-        case 0:
-            
-            if (itemTableView.contentOffset.y == 0) {
-                print("✏️ TOPTOPTOPTOP")
-            }
-            
-            
-//            let topRow = IndexPath(row: 0, section: 0)
-//            self.itemTableView.scrollToRow(at: topRow, at: .top, animated: true)
-//            
-            
-        default: return
-        }
+
+        
     }
 }
 

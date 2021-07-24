@@ -3,13 +3,12 @@ import MessageKit
 
 struct Message: MessageType {
     
+//    var chat: Chat
     var sender: SenderType
     var messageId: String
     var sentDate: Date
     var kind: MessageKind
     var date: String {
-        get {
-            return sentDate.formatToString()
-        }
+        return self.sentDate.formatToString()
     }
 }

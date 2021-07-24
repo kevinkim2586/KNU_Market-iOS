@@ -13,10 +13,13 @@ protocol ChatViewDelegate: AnyObject {
     func reconnectSuggested()
     func failedConnection(with error: NetworkError)
     
-    // 공구글 참여 취소
+    // API
     func didExitPost()
     
+    func didFetchChats()
+    func failedFetchingChats(with error: NetworkError)
 
+    
 }
 
 class ChatViewModel: WebSocketDelegate {
@@ -31,6 +34,10 @@ class ChatViewModel: WebSocketDelegate {
     var messages = [Message]()
     var mySelf = Sender(senderId: User.shared.id,
                         displayName: User.shared.nickname)
+    
+    var chats = [ChatResponseModel]()
+    var index: Int = 1
+    var isFetchingData: Bool = false
 
     // Delegate
     weak var delegate: ChatViewDelegate?
@@ -148,10 +155,10 @@ extension ChatViewModel {
 
 extension ChatViewModel {
     
-    // 공구 글 참가
+    // 공구글 참가
     func joinPost() {
         
-        ChatManager.shared.changeJoinStatus(status: .join,
+        ChatManager.shared.changeJoinStatus(function: .join,
                                             pid: self.room) { [weak self] result in
             
             guard let self = self else { return }
@@ -166,23 +173,21 @@ extension ChatViewModel {
                 // 이미 참여하고 있는 채팅방이면 기존의 메시지를 불러와야 함
                 if error == .E108 {
                     
+                    self.getChatList()
                     // 이미 참여하고 있는 채팅방의 최신 메시지 받아오기
                     
                     //getChatList
                 } else {
                     self.delegate?.failedConnection(with: error)
                 }
-                
-                
             }
         }
-        
-   
     }
     
+    // 공구글 나오기
     func exitPost() {
         
-        ChatManager.shared.changeJoinStatus(status: .exit,
+        ChatManager.shared.changeJoinStatus(function: .exit,
                                             pid: self.room) { [weak self] result in
             
             guard let self = self else { return }
@@ -205,6 +210,30 @@ extension ChatViewModel {
     // 채팅 받아오기
     func getChatList() {
         
+        isFetchingData = true
+        
+        ChatManager.shared.getResponseModel(function: .getChat,
+                                            method: .get,
+                                            pid: self.room,
+                                            index: self.index,
+                                            expectedModel: [ChatResponseModel].self) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let chatModel):
+                
+                self.isFetchingData = false
+                self.index += 1
+                self.chats.append(contentsOf: chatModel)
+                self.delegate?.didFetchChats()
+            
+            case .failure(let error):
+                
+                self.delegate?.failedFetchingChats(with: error)
+                
+            }
+        }
         
         
     }

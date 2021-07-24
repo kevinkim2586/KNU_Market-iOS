@@ -150,6 +150,18 @@ extension ChatViewController: ChatViewDelegate {
         //navigationController?.popViewController(animated: true)
     }
     
+    func didExitPost() {
+        print("✏️ 성공적으로 채팅방에서 나갔습니다.")
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func didFetchChats() {
+        
+    }
+    
+    func failedFetchingChats(with error: NetworkError) {
+        
+    }
     
 }
 

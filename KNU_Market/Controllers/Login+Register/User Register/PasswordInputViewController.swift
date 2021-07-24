@@ -81,7 +81,7 @@ extension PasswordInputViewController {
         
         if password.count >= 8 && password.count <= 20 { return true }
         else {
-            showErrorMessage(message: "4자 이상, 30자 이하로 적어주세요. 🤔")
+            showErrorMessage(message: "8자 이상, 30자 이하로 적어주세요. 🤔")
             return false
         }
     }

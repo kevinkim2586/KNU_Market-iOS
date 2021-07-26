@@ -19,6 +19,7 @@ struct Constants {
         static let goToEmailInputVC             = "goToEmailInputVC"
         static let goToCheckEmailVC             = "goToCheckEmailVC"
         
+        static let presentChatMemberVC          = "presentChatMemberVC"
         
         static let goToItemVC                   = "goToItemVC"
         static let goToItemVCFromMyPosts        = "goToItemVCFromMyPosts"
@@ -48,6 +49,7 @@ struct Constants {
         
         // Chat Tab
         static let chatVC                       = "ChatViewController"
+        static let chatMemberVC                 = "ChatMemberViewController"
         
         // My Page Tab
         static let myPostsVC                    = "MyPostsViewController"
@@ -76,6 +78,7 @@ struct Constants {
         static let sendCell                     = "sendCell"
         static let receiveCell                  = "receiveCell"
         static let myPageCell                   = "myPageCell"
+        static let chatMemberCell               = "chatMemberCell"
     }
     
     //MARK: - Keys

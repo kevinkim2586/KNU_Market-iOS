@@ -31,33 +31,45 @@ class ChatViewController: MessagesViewController {
         
         // joinPost 해보고 문제 없으면 connect 해야 함.
         viewModel.joinPost()
+        viewModel.getRoomInfo()
     }
-    
+
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
         
-        let actionSheet = UIAlertController(title: nil,
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
+        guard let chatMemberVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatMemberVC) as? ChatMemberViewController else { return }
         
-        let exitAction = UIAlertAction(title: "채팅방 나가기",
-                                       style: .destructive) { alert in
-            
-            self.presentAlertWithCancelAction(title: "정말 나가시겠습니까?",
-                                              message: "") { selectedOk in
-                if selectedOk {
-                    
-                    self.viewModel.exitPost()
-                }
-            }
-        }
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel,
-                                         handler: nil)
+        chatMemberVC.roomInfo = viewModel.roomInfo
         
-        actionSheet.addAction(exitAction)
-        actionSheet.addAction(cancelAction)
-        self.present(actionSheet, animated: true)
+        presentPanModal(chatMemberVC)
+        
     }
+    
+
+        
+        
+//        let actionSheet = UIAlertController(title: nil,
+//                                            message: nil,
+//                                            preferredStyle: .actionSheet)
+//
+//        let exitAction = UIAlertAction(title: "채팅방 나가기",
+//                                       style: .destructive) { alert in
+//
+//            self.presentAlertWithCancelAction(title: "정말 나가시겠습니까?",
+//                                              message: "") { selectedOk in
+//                if selectedOk {
+//
+//                    self.viewModel.exitPost()
+//                }
+//            }
+//        }
+//        let cancelAction = UIAlertAction(title: "취소",
+//                                         style: .cancel,
+//                                         handler: nil)
+//
+//        actionSheet.addAction(exitAction)
+//        actionSheet.addAction(cancelAction)
+//        self.present(actionSheet, animated: true)
+ 
     
 }
 
@@ -66,7 +78,8 @@ class ChatViewController: MessagesViewController {
 extension ChatViewController {
     
     func initialize() {
-        
+       
+
         viewModel.delegate = self
         initializeInputBar()
         initializeCollectionView()
@@ -191,7 +204,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     }
     
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        
         return NSAttributedString(string: viewModel.messages[indexPath.section].sender.displayName,
                                   attributes: [.font: UIFont.systemFont(ofSize: 12)])
     }
@@ -215,6 +227,10 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         }
     }
     
+    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
+        let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
+        return .bubbleTail(corner, .curved)
+    }
   
 }
 

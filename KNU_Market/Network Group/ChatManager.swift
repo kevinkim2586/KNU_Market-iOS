@@ -37,11 +37,11 @@ class ChatManager {
                 switch response.result {
                 
                 case .success:
-                    print("✏️ ChatManager - joinPost SUCCESS")
+                    print("✏️ ChatManager - changeJoinStatus SUCCESS")
                     completion(.success(true))
                 case .failure:
                     let error = NetworkError.returnError(json: response.data!)
-                    print("❗️ ChatManager - joinPost error with code: \(response.response!.statusCode) and error: \(error.errorDescription)")
+                    print("❗️ ChatManager - changeJoinStatus error with code: \(response.response!.statusCode) and error: \(error.errorDescription)")
                     completion(.failure(error))
                     
                     
@@ -68,7 +68,6 @@ class ChatManager {
                 switch response.result {
                 
                 case .success:
-                    
                     do {
                         let decodedData = try JSONDecoder().decode(expectedModel,
                                                                    from: response.data!)
@@ -76,7 +75,8 @@ class ChatManager {
                         completion(.success(decodedData))
                         
                     } catch {
-                        print("❗️ ChatManager - getResponse catch error: \(error.localizedDescription)")
+                        print("❗️ ChatManager - getResponse decoding error: \(error) for function: \(function)")
+                        
                         completion(.failure(.E000))
                     }
                     
@@ -112,5 +112,4 @@ extension ChatManager {
             return baseURL + pid + "\(page)"
         }
     }
-    
 }

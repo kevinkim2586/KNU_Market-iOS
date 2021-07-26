@@ -68,7 +68,7 @@ class UserManager {
                                 completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
         let parameters: Parameters = ["nickname": nickname]
-        let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded"]
+        let headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue: HTTPHeaderValues.urlEncoded.rawValue]
         
         AF.request(checkNicknameDuplicateURL,
                    method: .get,

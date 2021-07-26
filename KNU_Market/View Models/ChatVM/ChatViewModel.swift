@@ -25,19 +25,22 @@ protocol ChatViewDelegate: AnyObject {
 class ChatViewModel: WebSocketDelegate {
     
     // Socket
-    var socket: WebSocket!
-    var isConnected = false
-    let server =  WebSocketServer()
+    private var socket: WebSocket!
+    private var isConnected = false
+    private let server =  WebSocketServer()
     
-    var room: String = ""
+    private var room: String = ""
     
     var messages = [Message]()
     var mySelf = Sender(senderId: User.shared.id,
                         displayName: User.shared.nickname)
     
-    var chats = [ChatResponseModel]()
+    var chatModel = [ChatResponseModel]()
     var index: Int = 1
     var isFetchingData: Bool = false
+    
+    // Room Info
+    var roomInfo: RoomInfo?
 
     // Delegate
     weak var delegate: ChatViewDelegate?
@@ -170,6 +173,8 @@ extension ChatViewModel {
                 
             case .failure(let error):
                 
+                print("❗️ ChatViewModel - joinPost error: \(error)")
+                
                 // 이미 참여하고 있는 채팅방이면 기존의 메시지를 불러와야 함
                 if error == .E108 {
                     
@@ -225,7 +230,8 @@ extension ChatViewModel {
                 
                 self.isFetchingData = false
                 self.index += 1
-                self.chats.append(contentsOf: chatModel)
+//                self.chatModel.append(contentsOf: chatModel)
+//                self.chatModel.insert(contentsOf: chatModel, at: 0)
                 self.delegate?.didFetchChats()
             
             case .failure(let error):
@@ -233,6 +239,31 @@ extension ChatViewModel {
                 self.delegate?.failedFetchingChats(with: error)
                 
             }
+        }
+        
+        
+    }
+    
+    // 채팅 참여 인원 정보 불러오기
+    func getRoomInfo() {
+        
+        ChatManager.shared.getResponseModel(function: .getRoomInfo,
+                                            method: .get,
+                                            pid: self.room,
+                                            index: nil,
+                                            expectedModel: RoomInfo.self) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success(let roomInfoModel):
+                print("✏️ ChatViewModel - getRoomInfo SUCCESS")
+                self.roomInfo = roomInfoModel
+            case .failure(let error):
+                print("✏️ ChatViewModel - getRoomInfo FAILED with error: \(error.errorDescription)")
+            }
+            
         }
         
         

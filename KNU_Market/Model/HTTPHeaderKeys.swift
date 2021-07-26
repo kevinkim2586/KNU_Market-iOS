@@ -10,4 +10,5 @@ enum HTTPHeaderValues: String {
     
     case applicationJSON = "application/json"
     case multipartFormData = "multipart/form-data"
+    case urlEncoded = "application/x-www-form-urlencoded"
 }

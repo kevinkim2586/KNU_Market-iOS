@@ -77,7 +77,7 @@ extension LoginViewController: UITextFieldDelegate {
     }
 }
 
-//MARK: - UI Configuration
+//MARK: - UI Configuration & Initialization
 
 extension LoginViewController {
     

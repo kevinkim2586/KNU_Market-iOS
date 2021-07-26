@@ -112,19 +112,6 @@ class ItemViewController: UIViewController {
                                            style: .default) { alert in
                 
                 self.performSegue(withIdentifier: Constants.SegueID.goToReportVC, sender: self)
-                
-//                let userToReport = self.viewModel.model?.nickname ?? ""
-//
-//
-//
-//                guard let reportVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.reportUserVC) as? ReportUserViewController else {
-//                    return
-//                }
-//
-//                reportVC.userToReport = userToReport
-//                reportVC.modalPresentationStyle = .overFullScreen
-//
-//                self.present(reportVC, animated: true)
             }
             actionSheet.addAction(reportAction)
         }

@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 class ChatMemberTableViewCell: UITableViewCell {
 
@@ -8,12 +9,24 @@ class ChatMemberTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-  
+    }
+    
+    func configure(with userUID: String) {
+        
+        resetValues()
+        
+        
+    }
+    
+    func resetValues() {
+        
+        profileImageView.image = nil
+        nicknameLabel.text = nil
     }
 
 }

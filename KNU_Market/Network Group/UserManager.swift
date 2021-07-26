@@ -149,8 +149,42 @@ class UserManager {
             }
     }
     
+    func loadOtherUsersProfile(userUID: String,
+                               completion: @escaping (Result<LoadOtherUserProfileModel, NetworkError>) -> Void) {
+        
+        let url = loadUserProfileURL + "/\(userUID)"
+        
+        AF.request(url,
+                   method: .get,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    
+                    do {
+                        let decodedData = try JSONDecoder().decode(LoadOtherUserProfileModel.self, from: response.data!)
+                        print("✏️ User Manager - loadOtherUsersProfile() success")
+                        completion(.success(decodedData))
+                    } catch {
+                        print("❗️ User Manager - loadOtherUsersProfile() decoding error \(error) ")
+                        completion(.failure(.E000))
+                    }
+                    
+                default:
+                    print("❗️ loadOtherUsersProfile FAILED ")
+                    let error = NetworkError.returnError(json: response.data!)
+                    completion(.failure(error))
+                }
+            }
+    }
+    
     //MARK: - 프로필 조회
-    func loadUserProfile(completion: @escaping ((Result<LoadProfileResponseModel, NetworkError>) -> Void)) {
+    func loadUserProfile(completion: @escaping (Result<LoadProfileResponseModel, NetworkError>) -> Void) {
         
         AF.request(loadUserProfileURL,
                    method: .get,
@@ -336,8 +370,6 @@ class UserManager {
                 switch statusCode {
                 
                 case 201:
-                    
-                    
                     completion(.success(true))
                     
                 default:

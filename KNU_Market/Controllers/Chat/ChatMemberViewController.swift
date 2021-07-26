@@ -33,18 +33,15 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? ChatMemberTableViewCell else { return UITableViewCell() }
         
-        let cellVM = self.roomInfo?.member[indexPath.row]
-        
-        if roomInfo?.member.count != 0 {
+        if let cellVM = self.roomInfo?.member[indexPath.row] {
             
-            cell.nicknameLabel.text = cellVM?.userUID
-            cell.profileImageView.image = UIImage(named: Constants.Images.defaultProfileImage)
-            
+            cell.configure(with: cellVM.userUID)
+             
         } else {
-            
             cell.nicknameLabel.text = "ERROR"
-        
         }
+        
+
         tableView.tableFooterView = UIView(frame: .zero)
         return cell
     }

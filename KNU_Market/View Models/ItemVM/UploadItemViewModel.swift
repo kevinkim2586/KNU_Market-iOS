@@ -48,7 +48,9 @@ class UploadItemViewModel {
         for image in imageData {
             
             group.enter()
-            MediaManager.shared.uploadImage(with: image) { result in
+            MediaManager.shared.uploadImage(with: image) { [weak self] result in
+                
+                guard let self = self else { return }
                 
                 switch result {
                 
@@ -79,7 +81,9 @@ class UploadItemViewModel {
                                     imageUIDs: imageUIDs,
                                     detail: itemDetail)
         
-        ItemManager.shared.uploadNewItem(with: model) { result in
+        ItemManager.shared.uploadNewItem(with: model) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             

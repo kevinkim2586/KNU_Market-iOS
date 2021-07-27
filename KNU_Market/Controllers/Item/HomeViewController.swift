@@ -117,6 +117,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell else {
             fatalError()
         }
+
         cell.configure(with: viewModel.itemList[indexPath.row])
         return cell
     }

@@ -40,6 +40,8 @@ class ChatViewController: MessagesViewController {
         
         chatMemberVC.roomInfo = viewModel.roomInfo
         
+        print("✏️ roominfo member count: \(viewModel.roomInfo?.member.count)")
+        
         presentPanModal(chatMemberVC)
         
     }

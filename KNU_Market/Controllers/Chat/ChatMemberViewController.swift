@@ -77,7 +77,6 @@ extension ChatMemberViewController {
     
     func initializeTopView() {
         
-        postTitleLabel.text = self.roomInfo?.post.title ?? "표시 에러"
         postMemberCountLabel.text = "\(self.roomInfo?.post.currentlyGatheredPeople ?? 0)"
     }
     

@@ -9,6 +9,6 @@ struct Message: MessageType {
     var sentDate: Date
     var kind: MessageKind
     var date: String {
-        return self.sentDate.formatToString()
+        return self.sentDate.getFormattedDate()
     }
 }

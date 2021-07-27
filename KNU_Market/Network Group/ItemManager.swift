@@ -13,6 +13,7 @@ class ItemManager {
     //MARK: - API Request URLs
     let baseURL                       = "\(Constants.API_BASE_URL)posts"
     let searchURL                     = "\(Constants.API_BASE_URL)search"
+    let markCompleteURL               = "\(Constants.API_BASE_URL)posts/complete/"
     
     //MARK: - 공구글 목록 불러오기
     func fetchItemList(at index: Int,
@@ -194,4 +195,36 @@ class ItemManager {
     }
     
     
+    //MARK: - 공구글 완료 표시
+    func markPostDone(uid: String,
+                      completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let url = markCompleteURL + uid
+        
+        AF.request(url,
+                   method: .put,
+                   interceptor: interceptor)
+            .validate()
+            .responseData { response in
+                
+                switch response.result {
+                
+                case .success:
+                    
+                    print("✏️ ItemManager - markPostDone SUCCESS")
+                    completion(.success(true))
+                    
+                case .failure:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("❗️ ItemManager - markPostDone FAILED with error: \(error.errorDescription) and statusCode: \(response.response?.statusCode)")
+                    completion(.failure(error))
+                    
+                }
+                
+            }
+        
+        
+    }
+    
 }
+    

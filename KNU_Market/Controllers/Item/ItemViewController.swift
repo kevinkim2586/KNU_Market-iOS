@@ -131,7 +131,9 @@ class ItemViewController: UIViewController {
         
         let checkAction = UIAlertAction(title: "모집완료",
                                         style: .default) { alert in
-            //API 통신
+            
+            self.viewModel.markPostDone(for: self.pageID)
+            
         }
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel,
@@ -209,10 +211,14 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func didMarkPostDone() {
         
+        dismissProgressBar()
+        
         //checkmark.circle.fill
     }
     
     func failedMarkingPostDone(with error: NetworkError) {
+        
+        dismissProgressBar()
         
     }
     

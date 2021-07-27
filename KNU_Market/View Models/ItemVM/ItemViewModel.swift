@@ -97,6 +97,19 @@ class ItemViewModel {
     //MARK: - 공구글 완료 표시
     func markPostDone(for uid: String) {
         
+        ItemManager.shared.markPostDone(uid: uid) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
+                self.delegate?.didMarkPostDone()
+                
+            case .failure(let error):
+                self.delegate?.failedMarkingPostDone(with: error)
+            }
+        }
+        
         
         
     }

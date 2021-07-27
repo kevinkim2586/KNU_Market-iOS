@@ -3,7 +3,7 @@ import Foundation
 extension Date {
     
     // Chat Bubble용 format 방법
-    func formatToString() -> String {
+    func getFormattedDate() -> String {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd HH:mm"
@@ -11,4 +11,3 @@ extension Date {
         return date
     }
 }
-

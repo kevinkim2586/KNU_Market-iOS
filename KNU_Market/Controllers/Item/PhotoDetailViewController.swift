@@ -45,7 +45,6 @@ class PhotoDetailViewController: UIViewController {
     
     @objc func didTap() {
         let fullScreenController = slideShow.presentFullScreenController(from: self)
-
         fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
     }
     

@@ -803,7 +803,7 @@ IAo
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="cza-F3-2mL">
-                        <barButtonItem key="rightBarButtonItem" image="ellipsis" catalog="system" id="GQq-0e-phK">
+                        <barButtonItem key="rightBarButtonItem" image="info.circle" catalog="system" id="GQq-0e-phK">
                             <connections>
                                 <action selector="pressedMoreButton:" destination="u2z-XF-waH" id="lBj-Vy-PaD"/>
                             </connections>
@@ -825,21 +825,21 @@ IAo
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TW4-BN-090" userLabel="Top View">
                                 <rect key="frame" x="0.0" y="44" width="414" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="글 제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqb-bs-lLj">
-                                        <rect key="frame" x="10" y="10" width="45.5" height="19.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="참여 중인 사용자" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqb-bs-lLj">
+                                        <rect key="frame" x="20" y="20" width="105" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people icon" translatesAutoresizingMaskIntoConstraints="NO" id="LcC-K9-ahj">
-                                        <rect key="frame" x="10" y="39.5" width="20" height="20"/>
+                                        <rect key="frame" x="145" y="20" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="1kF-sc-e3g"/>
                                             <constraint firstAttribute="height" constant="20" id="wZ3-vP-HIP"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlE-Sa-2zo">
-                                        <rect key="frame" x="40" y="40.5" width="10" height="18"/>
+                                        <rect key="frame" x="172" y="21" width="10" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -847,13 +847,13 @@ IAo
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="tlE-Sa-2zo" firstAttribute="leading" secondItem="LcC-K9-ahj" secondAttribute="trailing" constant="10" id="0y4-D6-ntY"/>
                                     <constraint firstAttribute="height" constant="60" id="6JN-9L-QOU"/>
-                                    <constraint firstItem="lqb-bs-lLj" firstAttribute="leading" secondItem="TW4-BN-090" secondAttribute="leading" constant="10" id="GZZ-ng-hq4"/>
-                                    <constraint firstItem="LcC-K9-ahj" firstAttribute="top" secondItem="lqb-bs-lLj" secondAttribute="bottom" constant="10" id="auN-Kg-o8h"/>
-                                    <constraint firstItem="lqb-bs-lLj" firstAttribute="top" secondItem="TW4-BN-090" secondAttribute="top" constant="10" id="jDW-25-4jS"/>
-                                    <constraint firstItem="tlE-Sa-2zo" firstAttribute="top" secondItem="lqb-bs-lLj" secondAttribute="bottom" constant="11" id="pHv-M9-3ed"/>
-                                    <constraint firstItem="LcC-K9-ahj" firstAttribute="leading" secondItem="TW4-BN-090" secondAttribute="leading" constant="10" id="sMh-V5-uCo"/>
+                                    <constraint firstItem="lqb-bs-lLj" firstAttribute="leading" secondItem="TW4-BN-090" secondAttribute="leading" constant="20" id="GZZ-ng-hq4"/>
+                                    <constraint firstItem="tlE-Sa-2zo" firstAttribute="leading" secondItem="LcC-K9-ahj" secondAttribute="trailing" constant="7" id="ICl-1R-898"/>
+                                    <constraint firstItem="tlE-Sa-2zo" firstAttribute="top" secondItem="TW4-BN-090" secondAttribute="top" constant="21" id="QAg-YD-Rgl"/>
+                                    <constraint firstItem="LcC-K9-ahj" firstAttribute="leading" secondItem="lqb-bs-lLj" secondAttribute="trailing" constant="20" id="TdP-Oh-xav"/>
+                                    <constraint firstItem="LcC-K9-ahj" firstAttribute="top" secondItem="TW4-BN-090" secondAttribute="top" constant="20" id="YgS-Io-bRG"/>
+                                    <constraint firstItem="lqb-bs-lLj" firstAttribute="top" secondItem="TW4-BN-090" secondAttribute="top" constant="20" id="jDW-25-4jS"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kJw-6o-Io2">
@@ -928,6 +928,7 @@ IAo
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="home_selected" width="25.5" height="25.5"/>
         <image name="home_unselected" width="25.5" height="25.5"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="location icon" width="38" height="38"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>

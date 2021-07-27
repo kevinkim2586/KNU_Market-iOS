@@ -178,10 +178,13 @@ extension ChatViewModel {
                 // 이미 참여하고 있는 채팅방이면 기존의 메시지를 불러와야 함
                 if error == .E108 {
                     
+                    //TODO: connect를 하고 getChatList?
+                    
                     self.getChatList()
                     // 이미 참여하고 있는 채팅방의 최신 메시지 받아오기
                     
                     //getChatList
+                    
                 } else {
                     self.delegate?.failedConnection(with: error)
                 }

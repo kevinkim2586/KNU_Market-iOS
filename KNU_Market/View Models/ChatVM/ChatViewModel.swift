@@ -283,10 +283,10 @@ extension ChatViewModel {
     func convertToJSONString(text: String) -> String {
         
         let json: JSON = [
-            "id": User.shared.id,
+            "id": User.shared.nickname,
+            "uuid": User.shared.id,
             "room": room,
-            "comment": text,
-            "nickname": User.shared.nickname
+            "comment": text
         ]
     
         guard let JSONString = json.rawString() else { fatalError() }

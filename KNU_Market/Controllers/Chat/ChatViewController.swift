@@ -31,7 +31,8 @@ class ChatViewController: MessagesViewController {
         
         // joinPost 해보고 문제 없으면 connect 해야 함.
         viewModel.joinPost()
-        viewModel.getRoomInfo()
+        viewModel.connect()
+
     }
 
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {

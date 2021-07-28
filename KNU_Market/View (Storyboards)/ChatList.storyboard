@@ -73,7 +73,6 @@
                                             <outlet property="chatImageView" destination="yOa-j2-ueu" id="Xzs-fO-vdu"/>
                                             <outlet property="chatParticipatingCountLabel" destination="SRz-jJ-bml" id="fJv-hb-EYn"/>
                                             <outlet property="chatTitleLabel" destination="kAl-6a-f1l" id="oNh-CL-bCh"/>
-                                            <segue destination="lXd-Xv-MXM" kind="show" id="jJ1-CQ-PFs"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

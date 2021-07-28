@@ -19,7 +19,9 @@ struct Constants {
         static let goToEmailInputVC             = "goToEmailInputVC"
         static let goToCheckEmailVC             = "goToCheckEmailVC"
         
+        // Chat
         static let presentChatMemberVC          = "presentChatMemberVC"
+
         
         static let goToItemVC                   = "goToItemVC"
         static let goToItemVCFromMyPosts        = "goToItemVCFromMyPosts"

@@ -68,7 +68,20 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let chatVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
+        
+        chatVC.room = viewModel.roomList[indexPath.row].uuid
+        chatVC.chatRoomTitle = viewModel.roomList[indexPath.row].title
+        navigationController?.pushViewController(chatVC, animated: true)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
     }
     
     

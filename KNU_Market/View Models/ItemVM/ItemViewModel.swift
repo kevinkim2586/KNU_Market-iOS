@@ -31,6 +31,7 @@ class ItemViewModel {
 
     var isGathering: Bool {
         return self.model?.currentlyGatheredPeople != self.model?.totalGatheringPeople
+        //TODO: - 나중에는 이걸로 비교하면 안 되고, isArchived == true 로 판단해야할듯
     }
     
     var currentlyGatheredPeople: Int {

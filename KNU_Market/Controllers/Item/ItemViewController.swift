@@ -220,6 +220,8 @@ extension ItemViewController: ItemViewModelDelegate {
         self.checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"),
                                   for: .normal)
         
+        //
+        
     }
     
     func failedMarkingPostDone(with error: NetworkError) {

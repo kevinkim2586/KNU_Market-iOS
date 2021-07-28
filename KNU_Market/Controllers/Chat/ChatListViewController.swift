@@ -50,12 +50,12 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.chatList.count
+        return viewModel.roomList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row > viewModel.chatList.count { return UITableViewCell() }
+        if indexPath.row > viewModel.roomList.count { return UITableViewCell() }
         
         let cellIdentifier = Constants.cellID.chatTableViewCell
         

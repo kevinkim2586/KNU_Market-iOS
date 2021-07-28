@@ -13,6 +13,7 @@
 		7C036ABE269AB7CC00F6C29B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */; };
 		7C132BF2265397B200BE5F40 /* Global Methods + Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */; };
 		7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF326552B4900BE5F40 /* UIButton Extension.swift */; };
+		7C184B8326B103F1006C0FAD /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C184B8226B103F1006C0FAD /* Room.swift */; };
 		7C1C1D0C265E70E000C08C66 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */; };
 		7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */; };
 		7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */; };
@@ -108,6 +109,7 @@
 		7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "APN Key/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Methods + Variables.swift"; sourceTree = "<group>"; };
 		7C132BF326552B4900BE5F40 /* UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton Extension.swift"; sourceTree = "<group>"; };
+		7C184B8226B103F1006C0FAD /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 				7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */,
 				7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */,
 				7C3D985D26AE793D005DFAE0 /* RoomInfo.swift */,
+				7C184B8226B103F1006C0FAD /* Room.swift */,
 			);
 			path = "Chat Models";
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,
 				7C815223268590D70041EC47 /* ItemListMockData.swift in Sources */,
 				7C132BF2265397B200BE5F40 /* Global Methods + Variables.swift in Sources */,
+				7C184B8326B103F1006C0FAD /* Room.swift in Sources */,
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7C1C1D12265E714000C08C66 /* TermsAndConditionsViewController.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,

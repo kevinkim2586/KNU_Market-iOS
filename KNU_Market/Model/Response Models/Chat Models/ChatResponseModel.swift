@@ -11,7 +11,7 @@ struct ChatResponseModel: Decodable {
     enum CodingKeys: String, CodingKey {
         
         case totalPage
-        case currentPage
+        case currentPage = "curruntPage"
         case chat
     }
 }

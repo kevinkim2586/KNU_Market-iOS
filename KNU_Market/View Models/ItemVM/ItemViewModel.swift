@@ -109,9 +109,6 @@ class ItemViewModel {
                 self.delegate?.failedMarkingPostDone(with: error)
             }
         }
-        
-        
-        
     }
     
     

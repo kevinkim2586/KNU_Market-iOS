@@ -131,6 +131,8 @@ struct Constants {
         static let pickProfileImage             = "pick profile image"
         static let peopleIcon                   = "people icon"
         
+        static let chatBubbleIcon               = "chat_bubble_icon"
+        
         static let cameraIcon                   = "camera icon"
         
         // Tab Bar Icons

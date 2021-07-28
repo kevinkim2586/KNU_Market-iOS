@@ -13,8 +13,6 @@ class ChatListViewModel {
     
     var roomList: [Room] = [Room]()
     
-    var 
-
 }
 
 //MARK: - API Methods

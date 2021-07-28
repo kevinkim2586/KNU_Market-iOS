@@ -60,14 +60,10 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         let cellIdentifier = Constants.cellID.chatTableViewCell
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ChatTableViewCell else {
-            fatalError()
+            return UITableViewCell()
         }
         
-        cell.chatImageView.image = UIImage(named: "chat_bubble_icon")
-        cell.chatTitleLabel.text = "공차 시키실 분?"
-        cell.chatParticipatingCountLabel.text = "2" + " 명"
-        
-        
+        cell.configure(with: self.viewModel.roomList[indexPath.row])
         return cell
     }
     

@@ -56,7 +56,6 @@ class ChatManager {
                                         expectedModel: T.Type,
                                         completion: @escaping (Result<T, NetworkError>) -> Void) {
         
-        //        let requestURL = pid == nil ? baseURL : baseURL + pid!
         let requestURL = generateURLString(for: function, pid: pid, index: index)
         
         AF.request(requestURL,
@@ -87,8 +86,39 @@ class ChatManager {
                 }
             }
     }
-    
-    
+//
+//    func testGetChat(pid: String, index: Int) {
+//
+//        let url = baseURL + pid + "\(index)"
+//
+//        AF.request(url,
+//                   method: .get,
+//                   interceptor: interceptor)
+//            .validate()
+//            .responseJSON { response in
+//
+//                guard let statusCode = response.response?.statusCode else { return
+//                }
+//
+//                switch statusCode {
+//
+//                case 200:
+//
+//                    do {
+//                        let decodedData = try JSONDecoder().decode(ChatResponseModel.self, from: response.data!)
+//                        print("decodedData: \(decodedData)")
+//
+//                     }catch {
+//                        print("❗️ ChatManager - getResponse decoding error: \(error)")
+//
+//                    }
+//
+//                default:
+//                    print("❗️ default ")
+//
+//                }
+//            }
+//    }
 }
 
 

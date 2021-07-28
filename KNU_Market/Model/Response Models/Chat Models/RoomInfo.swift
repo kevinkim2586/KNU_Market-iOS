@@ -23,7 +23,7 @@ struct Post: Decodable {
         case uuid = "UUID"
         case title, content, location
         case totalGatheringPeople = "maxHeadcount"
-        case currentlyGatheredPeople = "currunHheadcount"
+        case currentlyGatheredPeople = "currenHheadcount"
         case isArchived, date
         
     }

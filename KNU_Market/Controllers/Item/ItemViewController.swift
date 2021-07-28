@@ -133,6 +133,9 @@ class ItemViewController: UIViewController {
                                         style: .default) { alert in
             
             self.viewModel.markPostDone(for: self.pageID)
+            DispatchQueue.main.async {
+                self.checkButton.isUserInteractionEnabled = false
+            }
             
         }
         let cancelAction = UIAlertAction(title: "취소",
@@ -212,13 +215,19 @@ extension ItemViewController: ItemViewModelDelegate {
     func didMarkPostDone() {
         
         dismissProgressBar()
+        self.checkButton.isUserInteractionEnabled = true
         
-        //checkmark.circle.fill
+        self.checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"),
+                                  for: .normal)
+        
     }
     
     func failedMarkingPostDone(with error: NetworkError) {
         
         dismissProgressBar()
+        self.checkButton.isUserInteractionEnabled = true
+
+        self.showSimpleBottomAlert(with: error.errorDescription)
         
     }
     

@@ -37,7 +37,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓 전체 채팅방" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAl-6a-f1l">
-                                                    <rect key="frame" x="100" y="11" width="133" height="19.5"/>
+                                                    <rect key="frame" x="100" y="11" width="261.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -50,7 +50,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRz-jJ-bml">
-                                                    <rect key="frame" x="135" y="41.5" width="42" height="18"/>
+                                                    <rect key="frame" x="130" y="41.5" width="42" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -60,9 +60,10 @@
                                                 <constraint firstItem="I3B-Zq-RT9" firstAttribute="top" secondItem="kAl-6a-f1l" secondAttribute="bottom" constant="10" id="2w3-zc-CA0"/>
                                                 <constraint firstItem="kAl-6a-f1l" firstAttribute="top" secondItem="Ppa-qv-5Xr" secondAttribute="topMargin" id="53X-PF-hHG"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="yOa-j2-ueu" secondAttribute="bottom" constant="5" id="Ify-0d-h9Z"/>
-                                                <constraint firstItem="SRz-jJ-bml" firstAttribute="leading" secondItem="I3B-Zq-RT9" secondAttribute="trailing" constant="15" id="JgS-0o-Ihu"/>
+                                                <constraint firstItem="SRz-jJ-bml" firstAttribute="leading" secondItem="I3B-Zq-RT9" secondAttribute="trailing" constant="10" id="JgS-0o-Ihu"/>
                                                 <constraint firstItem="SRz-jJ-bml" firstAttribute="top" secondItem="kAl-6a-f1l" secondAttribute="bottom" constant="11" id="QEr-fC-xD2"/>
                                                 <constraint firstItem="yOa-j2-ueu" firstAttribute="leading" secondItem="Ppa-qv-5Xr" secondAttribute="leadingMargin" id="Upo-Tr-rg7"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="kAl-6a-f1l" secondAttribute="trailing" constant="15" id="YYh-Dm-Gqh"/>
                                                 <constraint firstItem="I3B-Zq-RT9" firstAttribute="leading" secondItem="yOa-j2-ueu" secondAttribute="trailing" constant="20" id="hOy-13-iMS"/>
                                                 <constraint firstItem="yOa-j2-ueu" firstAttribute="top" secondItem="Ppa-qv-5Xr" secondAttribute="topMargin" constant="5" id="jPK-qC-i0R"/>
                                                 <constraint firstItem="kAl-6a-f1l" firstAttribute="leading" secondItem="yOa-j2-ueu" secondAttribute="trailing" constant="20" id="wzg-Cm-Dj1"/>

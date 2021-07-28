@@ -220,17 +220,19 @@ extension ChatViewModel {
         
         isFetchingData = true
         
+  
+        
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,
                                             pid: self.room,
                                             index: self.index,
-                                            expectedModel: [ChatResponseModel].self) { [weak self] result in
-            
+                                            expectedModel: ChatResponseModel.self) { [weak self] result in
+
             guard let self = self else { return }
-            
+
             switch result {
             case .success(let chatModel):
-                
+
                 self.isFetchingData = false
                 self.index += 1
 //                self.chatModel.append(contentsOf: chatModel)
@@ -238,9 +240,9 @@ extension ChatViewModel {
                 self.delegate?.didFetchChats()
             
             case .failure(let error):
-                
+
                 self.delegate?.failedFetchingChats(with: error)
-                
+
             }
         }
         

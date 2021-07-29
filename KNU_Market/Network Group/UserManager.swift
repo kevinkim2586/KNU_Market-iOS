@@ -132,7 +132,10 @@ class UserManager {
                     do {
                         let json = try JSON(data: response.data!)
                         self.saveAccessTokens(from: json)
+                        
+                        User.shared.id = email
                         User.shared.password = password
+                        User.shared.isLoggedIn = true
                         
                         completion(.success(true))
                         

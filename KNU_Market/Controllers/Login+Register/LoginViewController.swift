@@ -31,8 +31,6 @@ class LoginViewController: UIViewController {
             case .success(_):
                 
                 print("LoginViewController - login success")
-                
-                self.saveLoginInfo()
                 self.goToHomeScreen()
                 
             case .failure(let error):
@@ -52,14 +50,7 @@ class LoginViewController: UIViewController {
         
         self.dismiss(animated: true)
     }
-    
-    func saveLoginInfo() {
-        
-        User.shared.id = idTextField.text!
-        User.shared.password = passwordTextField.text!
-        User.shared.isLoggedIn = true
-    }
-    
+
 }
 
 //MARK: - UITextFieldDelegate

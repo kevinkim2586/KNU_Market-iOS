@@ -14,6 +14,7 @@
 		7C132BF2265397B200BE5F40 /* Global Methods + Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */; };
 		7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF326552B4900BE5F40 /* UIButton Extension.swift */; };
 		7C184B8326B103F1006C0FAD /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C184B8226B103F1006C0FAD /* Room.swift */; };
+		7C184B8526B27B8B006C0FAD /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C184B8426B27B8B006C0FAD /* Chat.storyboard */; };
 		7C1C1D0C265E70E000C08C66 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */; };
 		7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */; };
 		7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */; };
@@ -110,6 +111,7 @@
 		7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Methods + Variables.swift"; sourceTree = "<group>"; };
 		7C132BF326552B4900BE5F40 /* UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton Extension.swift"; sourceTree = "<group>"; };
 		7C184B8226B103F1006C0FAD /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		7C184B8426B27B8B006C0FAD /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */,
 				7C6D2536268DD6710030F9A1 /* ItemList.storyboard */,
 				7C6D2538268DD6830030F9A1 /* ChatList.storyboard */,
+				7C184B8426B27B8B006C0FAD /* Chat.storyboard */,
 				7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */,
 			);
 			path = "View (Storyboards)";
@@ -659,6 +662,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CCDB1F026A2BD0C0092F28D /* ItemTableViewCell.xib in Resources */,
+				7C184B8526B27B8B006C0FAD /* Chat.storyboard in Resources */,
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
 				7C3B4FE826A923AB00E2CA8F /* UserRegister.storyboard in Resources */,

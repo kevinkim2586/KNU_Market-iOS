@@ -3,12 +3,34 @@ import MessageKit
 
 struct Message: MessageType {
     
-//    var chat: Chat
+    var chat: Chat
     var sender: SenderType
-    var messageId: String
     var sentDate: Date
     var kind: MessageKind
+    
+    var messageId: String {
+        return String(self.chat.chat_uid)
+    }
+    
     var date: String {
         return self.sentDate.getFormattedDate()
     }
+    
+    // 채팅 내
+    var usernickname: String {
+        return self.chat.chat_username
+    }
+
+    var userUID: String {
+        return self.chat.chat_userUID
+    }
+    
+    var chatRoomUID: String {
+        return self.chat.chat_roomUID
+    }
+    
+    var chatContent: String {
+        return self.chat.chat_content
+    }
+    
 }

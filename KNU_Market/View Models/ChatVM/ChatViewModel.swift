@@ -18,7 +18,6 @@ protocol ChatViewDelegate: AnyObject {
     
     func didFetchChats()
     func failedFetchingChats(with error: NetworkError)
-
     
 }
 
@@ -32,7 +31,7 @@ class ChatViewModel: WebSocketDelegate {
     private var room: String = ""
     
     var messages = [Message]()
-    var mySelf = Sender(senderId: User.shared.id,
+    var mySelf = Sender(senderId: User.shared.userUID,
                         displayName: User.shared.nickname)
     
     var chatModel = [ChatResponseModel]()
@@ -95,25 +94,36 @@ extension ChatViewModel {
             
             let receivedTextInJSON = JSON(parseJSON: text)
             
-            let userID = receivedTextInJSON["id"].stringValue
+            let nickname = receivedTextInJSON["id"].stringValue
+            let userUID = receivedTextInJSON["uuid"].stringValue
+            let roomUID = receivedTextInJSON["room"].stringValue
             let chatText = receivedTextInJSON["comment"].stringValue
-            let nickname = receivedTextInJSON["nickname"].stringValue
-            
-            if !isFromCurrentSender(id: userID) {
+        
+            if !isFromCurrentSender(uuid: userUID) {
                 self.delegate?.didReceiveChat()
                 return
             }
             
-            let others = Sender(senderId: userID,
+            // 그리고 받은 text 가 중복인지 아닌지 확인해서 중복이면 띄우지 말아야함
+            // 중복인지 아닌지는 chat_uid 를 확인하면 될듯하다
+            
+            let others = Sender(senderId: userUID,
                                 displayName: nickname)
             
+            let chat = Chat(chat_uid: Int.random(in: 0...1000),
+                            chat_userUID: userUID,
+                            chat_username: nickname,
+                            chat_roomUID: roomUID,
+                            chat_content: chatText,
+                            chat_date: Date().getFormattedDate())
+            
             self.messages.append(
-                Message(
-                    sender: others,
-                    messageId: UUID().uuidString,
-                    sentDate: Date(),
-                    kind: .text(chatText))
+                Message(chat: chat,
+                        sender: others,
+                        sentDate: Date(),
+                        kind: .text(chatText))
             )
+            
             self.delegate?.didReceiveChat()
          
             
@@ -142,13 +152,21 @@ extension ChatViewModel {
         
         let convertedText = convertToJSONString(text: originalText)
         
+
         socket.write(string: convertedText) {
+            
+            let chat = Chat(chat_uid: Int.random(in: 0...1000),
+                            chat_userUID: User.shared.userUID,
+                            chat_username: User.shared.nickname,
+                            chat_roomUID: self.room,
+                            chat_content: convertedText,
+                            chat_date: Date().getFormattedDate())
+            
             self.messages.append(
-                Message(
-                    sender: self.mySelf,
-                    messageId: UUID().uuidString,
-                    sentDate: Date(),
-                    kind: .text(originalText))
+                Message(chat: chat,
+                        sender: self.mySelf,
+                        sentDate: Date(),
+                        kind: .text(originalText))
             )
         }
     }
@@ -220,8 +238,6 @@ extension ChatViewModel {
         
         isFetchingData = true
         
-  
-        
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,
                                             pid: self.room,
@@ -231,13 +247,27 @@ extension ChatViewModel {
             guard let self = self else { return }
 
             switch result {
-            case .success(let chatModel):
+            case .success(let chatResponseModel):
 
                 self.isFetchingData = false
                 self.index += 1
-//                self.chatModel.append(contentsOf: chatModel)
-//                self.chatModel.insert(contentsOf: chatModel, at: 0)
-                self.delegate?.didFetchChats()
+//                
+//                let chatArray = chatResponseModel.chat
+//          
+//                self.messages
+//                
+//                chatResponseModel.chat.forEach { chat in
+//                    
+//                    self.messages[0].chat = chat
+//                }
+//                
+//                
+//                
+//                
+//                
+//                
+//                self.messages.insert(contentsOf: chatModel.chat, at: 0)
+//                self.delegate?.didFetchChats()
             
             case .failure(let error):
 
@@ -284,7 +314,7 @@ extension ChatViewModel {
         
         let json: JSON = [
             "id": User.shared.nickname,
-            "uuid": User.shared.id,
+            "uuid": User.shared.userUID,
             "room": room,
             "comment": text
         ]
@@ -293,10 +323,12 @@ extension ChatViewModel {
         return JSONString
     }
 
-    func isFromCurrentSender(id: String) -> Bool {
+    func isFromCurrentSender(uuid: String) -> Bool {
         
-        if id == User.shared.id { return false }
-        else { return true }
+       return uuid == User.shared.userUID ? false : true
+        
+//        if uuid == User.shared.userUID { return false }
+//        else { return true }
     }
     
 }

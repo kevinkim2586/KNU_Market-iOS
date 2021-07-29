@@ -34,6 +34,7 @@ class ChatViewController: MessagesViewController {
         viewModel.connect()
 
     }
+    
 
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
         
@@ -139,6 +140,8 @@ extension ChatViewController {
 extension ChatViewController: ChatViewDelegate {
     
     func didConnect() {
+        
+        // Connect 했다가 바로 아래 phrase 보내지말고 내 pid 목록 비교해서 없으면 보내는 로직으로 수정
         viewModel.sendText("\(User.shared.nickname)님이 채팅방에 입장하셨습니다 🎉")
         messagesCollectionView.reloadData()
     }

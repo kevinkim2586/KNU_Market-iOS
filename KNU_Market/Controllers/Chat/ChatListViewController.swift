@@ -39,6 +39,15 @@ extension ChatListViewController: ChatListViewModelDelegate {
             self.viewModel.fetchChatList()
         }
     }
+    
+    func didExitPost() {
+        refreshTableView()
+    }
+    
+    func failedExitingPost(with error: NetworkError) {
+        
+        self.showSimpleBottomAlert(with: error.errorDescription)
+    }
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -80,12 +89,34 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            self.viewModel.exitPost(at: indexPath.row) { result in
+                
+                switch result {
+                
+                case .success:
+                    
+                    DispatchQueue.main.async {
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    }
+                    
+                    
+                case .failure(let error):
+                    
+                    self.showSimpleBottomAlert(with: error.errorDescription)
+                    
+                }
+            }
+        }
+    }
+
     
     @objc func refreshTableView() {
         
@@ -117,6 +148,7 @@ extension ChatListViewController {
         chatListTableView.delegate = self
         chatListTableView.dataSource = self
         chatListTableView.refreshControl = refreshControl
+
         
         refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }

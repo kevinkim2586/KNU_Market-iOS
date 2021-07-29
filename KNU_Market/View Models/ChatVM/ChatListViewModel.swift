@@ -5,6 +5,9 @@ protocol ChatListViewModelDelegate: AnyObject {
     
     func didFetchChatList()
     func failedFetchingChatList(with error: NetworkError)
+    
+    func didExitPost()
+    func failedExitingPost(with error: NetworkError)
 }
 
 class ChatListViewModel {
@@ -45,6 +48,32 @@ extension ChatListViewModel {
                 self.delegate?.failedFetchingChatList(with: error)
             }
         }
+    }
+    
+    func exitPost(at index: Int,
+                  completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+        
+        let roomPID = self.roomList[index].uuid
+        
+            ChatManager.shared.changeJoinStatus(function: .exit,
+                                                pid: roomPID) { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success:
+                    
+                    self.roomList.remove(at: index)
+                    completion(.success(true))
+                    
+//                    self.delegate?.didExitPost()
+                    
+                case .failure(let error):
+                    
+                    completion(.failure(error))
+//                    self.delegate?.failedExitingPost(with: error)
+                }
+            }
+        
     }
     
 }

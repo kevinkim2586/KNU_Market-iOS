@@ -91,8 +91,9 @@ extension UploadItemViewController: UploadItemDelegate {
         
         dismissProgressBar()
         print("UploadItemVC - didCompleteUpload")
-        Settings.needsToReloadData = true
         navigationController?.popViewController(animated: true)
+        let name = Notification.Name(rawValue: Constants.NotificationKey.updateItemList)
+        NotificationCenter.default.post(name: name, object: nil)
     }
     
     func failedUploading(with error: NetworkError) {

@@ -71,7 +71,8 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let chatVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
+        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+        guard let chatVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
         
         chatVC.room = viewModel.roomList[indexPath.row].uuid
         chatVC.chatRoomTitle = viewModel.roomList[indexPath.row].title
@@ -108,6 +109,7 @@ extension ChatListViewController {
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.chatSelected)?.withRenderingMode(.alwaysOriginal)
         
         initializeTableView()
+
     }
     
     func initializeTableView() {
@@ -118,4 +120,6 @@ extension ChatListViewController {
         
         refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
+    
+
 }

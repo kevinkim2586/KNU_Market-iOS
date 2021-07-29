@@ -199,9 +199,10 @@ extension ChatViewModel {
                     //TODO: connect를 하고 getChatList?
                     
                     self.getChatList()
+                    self.getRoomInfo()
                     // 이미 참여하고 있는 채팅방의 최신 메시지 받아오기
                     
-                    //getChatList
+          
                     
                 } else {
                     self.delegate?.failedConnection(with: error)
@@ -221,10 +222,7 @@ extension ChatViewModel {
             switch result {
             
             case .success:
-          
                 self.delegate?.didExitPost()
-                
-                
             case .failure(let error):
                 self.delegate?.failedConnection(with: error)
             }

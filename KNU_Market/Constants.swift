@@ -102,6 +102,12 @@ struct Constants {
         static let hasVerifiedEmail             = "hasVerifiedEmail"
     }
     
+    struct NotificationKey {
+        
+        static let updateChatList               = "co.wim.updateChatList"
+        static let updateItemList               = "co.wim.updateItemList"
+    }
+    
     static let entireChatRoomUID                = "__entireRoomPid"
     
     //MARK: - UI Related Constants

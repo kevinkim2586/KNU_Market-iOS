@@ -70,7 +70,8 @@ class ItemViewController: UIViewController {
     
     @IBAction func pressedEnterChatButton(_ sender: UIButton) {
         
-        guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { fatalError() }
+        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
         
         vc.room = pageID
         vc.chatRoomTitle = viewModel.model?.title ?? ""
@@ -195,8 +196,10 @@ extension ItemViewController: ItemViewModelDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
             
-            Settings.needsToReloadData = true
             self.navigationController?.popViewController(animated: true)
+            let name = Notification.Name(rawValue: Constants.NotificationKey.updateItemList)
+            NotificationCenter.default.post(name: name, object: nil)
+            
         }
     }
     

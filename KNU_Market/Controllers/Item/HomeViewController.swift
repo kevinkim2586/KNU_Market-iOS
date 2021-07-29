@@ -30,17 +30,6 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
               
-        if Settings.needsToReloadData == true {
-            print("NEEDS TO RELOAD DATA")
-            
-            let indexPath = NSIndexPath(row: NSNotFound, section: 0)
-            self.itemTableView.scrollToRow(at: indexPath as IndexPath,
-                                       at: .top,
-                                       animated: false)
-            refreshTableView()
-            Settings.needsToReloadData = false
-        }
-        
     }
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
@@ -209,6 +198,8 @@ extension HomeViewController {
         
         initializeTableView()
         initializeAddButton()
+        
+        createObservers()
     }
     
     func initializeTableView() {
@@ -238,4 +229,17 @@ extension HomeViewController {
                                 withConfiguration: configuration)
         addButton.setImage(buttonImage, for: .normal)
     }
+    
+    func createObservers() {
+        
+        let name = Notification.Name(rawValue: Constants.NotificationKey.updateItemList)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(refreshTableView),
+                                               name: name,
+                                               object: nil)
+        
+    }
+    
+    
 }

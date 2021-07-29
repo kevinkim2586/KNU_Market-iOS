@@ -4,13 +4,14 @@ import InputBarAccessoryView
 import IQKeyboardManagerSwift
 import SwiftyJSON
 
-
 class ChatViewController: MessagesViewController {
     
     private var viewModel: ChatViewModel!
     
     var room: String = ""
     var chatRoomTitle: String = ""
+    
+    var chatMemberViewDelegate: ChatMemberViewDelegate?
     
     deinit {
         print("❗️ ChatViewController has been DEINITIALIZED")
@@ -40,41 +41,10 @@ class ChatViewController: MessagesViewController {
         
         guard let chatMemberVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatMemberVC) as? ChatMemberViewController else { return }
         
+        chatMemberVC.delegate = self
         chatMemberVC.roomInfo = viewModel.roomInfo
-        
-        print("✏️ roominfo member count: \(viewModel.roomInfo?.member.count)")
-        
         presentPanModal(chatMemberVC)
-        
     }
-    
-
-        
-        
-//        let actionSheet = UIAlertController(title: nil,
-//                                            message: nil,
-//                                            preferredStyle: .actionSheet)
-//
-//        let exitAction = UIAlertAction(title: "채팅방 나가기",
-//                                       style: .destructive) { alert in
-//
-//            self.presentAlertWithCancelAction(title: "정말 나가시겠습니까?",
-//                                              message: "") { selectedOk in
-//                if selectedOk {
-//
-//                    self.viewModel.exitPost()
-//                }
-//            }
-//        }
-//        let cancelAction = UIAlertAction(title: "취소",
-//                                         style: .cancel,
-//                                         handler: nil)
-//
-//        actionSheet.addAction(exitAction)
-//        actionSheet.addAction(cancelAction)
-//        self.present(actionSheet, animated: true)
- 
-    
 }
 
 //MARK: - Initialization
@@ -83,8 +53,9 @@ extension ChatViewController {
     
     func initialize() {
        
-
         viewModel.delegate = self
+        chatMemberViewDelegate = self
+        
         initializeInputBar()
         initializeCollectionView()
     }
@@ -170,6 +141,7 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func didExitPost() {
+        
         print("✏️ 성공적으로 채팅방에서 나갔습니다.")
         navigationController?.popViewController(animated: true)
     }
@@ -181,7 +153,17 @@ extension ChatViewController: ChatViewDelegate {
     func failedFetchingChats(with error: NetworkError) {
         
     }
+}
+
+//MARK: - ChatMemberViewDelegate - for PanModal
+
+extension ChatViewController: ChatMemberViewDelegate {
     
+    func didChooseToExitPost() {
+       
+        viewModel.exitPost()
+    }
+
 }
 
 //MARK: - MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate

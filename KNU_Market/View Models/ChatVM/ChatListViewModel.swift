@@ -5,9 +5,7 @@ protocol ChatListViewModelDelegate: AnyObject {
     
     func didFetchChatList()
     func failedFetchingChatList(with error: NetworkError)
-    
-    func didExitPost()
-    func failedExitingPost(with error: NetworkError)
+  
 }
 
 class ChatListViewModel {
@@ -64,13 +62,11 @@ extension ChatListViewModel {
                     
                     self.roomList.remove(at: index)
                     completion(.success(true))
-                    
-//                    self.delegate?.didExitPost()
-                    
+                
                 case .failure(let error):
                     
                     completion(.failure(error))
-//                    self.delegate?.failedExitingPost(with: error)
+
                 }
             }
         

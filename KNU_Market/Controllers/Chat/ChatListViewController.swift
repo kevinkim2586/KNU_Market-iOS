@@ -40,14 +40,7 @@ extension ChatListViewController: ChatListViewModelDelegate {
         }
     }
     
-    func didExitPost() {
-        refreshTableView()
-    }
-    
-    func failedExitingPost(with error: NetworkError) {
-        
-        self.showSimpleBottomAlert(with: error.errorDescription)
-    }
+
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource

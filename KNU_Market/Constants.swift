@@ -5,7 +5,7 @@ let profileImageCache = NSCache<AnyObject, AnyObject>()
 
 struct Constants {
     
-    static let API_BASE_URL                     = "http://155.230.25.110:5004/api/v1/"
+    static let API_BASE_URL                     = "https://knumarket.kro.kr:5004/api/v1/"
     static let WEB_SOCKET_URL                   = "ws://155.230.25.110:5005"
     
     //MARK: - Identifiers
@@ -67,8 +67,8 @@ struct Constants {
         
         
         // StoryBoard ID Array
-        static let myPageSection_1_Options             = [myPostsVC, settingsVC]
-        static let myPageSection_2_Options             = [sendDeveloperMessageVC, termsAndConditionsVC, developerInfoVC, openSourceLicenseVC]
+        static let myPageSection_1_Options      = [myPostsVC, settingsVC]
+        static let myPageSection_2_Options      = [sendDeveloperMessageVC, termsAndConditionsVC, developerInfoVC, openSourceLicenseVC]
     }
     
     struct cellID {

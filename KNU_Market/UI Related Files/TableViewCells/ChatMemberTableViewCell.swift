@@ -31,9 +31,7 @@ class ChatMemberTableViewCell: UITableViewCell {
         
         fetchUserProfileInfo(userUID: userUID)
         initializeUI()
-        
     }
-
 
     func fetchUserProfileInfo(userUID: String) {
         

@@ -7,8 +7,6 @@ class ChatTableViewCell: UITableViewCell {
     @IBOutlet weak var chatImageView: UIImageView!
     @IBOutlet weak var chatParticipatingCountLabel: UILabel!
     
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -25,8 +23,6 @@ class ChatTableViewCell: UITableViewCell {
         chatImageView.image = nil
         chatParticipatingCountLabel.text = nil
     }
-    
-
 
     func configure(with model: Room) {
                 

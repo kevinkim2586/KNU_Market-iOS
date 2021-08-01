@@ -26,9 +26,9 @@ class ChatTableViewCell: UITableViewCell {
 
     func configure(with model: Room) {
                 
-        if let imageCode = model.imageCode {
+        if let imageCodes = model.imageCodes {
             
-            let imageURL = URL(string: "\(Constants.API_BASE_URL)media/\(imageCode)")
+            let imageURL = URL(string: "\(Constants.API_BASE_URL)media/\(imageCodes[0])")
             chatImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             chatImageView.sd_setImage(with: imageURL,
                                       placeholderImage: UIImage(named: Constants.Images.chatBubbleIcon),

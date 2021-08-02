@@ -146,7 +146,7 @@ extension HomeViewController: UIScrollViewDelegate {
         
         let position = scrollView.contentOffset.y
    
-        if position > (itemTableView.contentSize.height - 80 - scrollView.frame.size.height) {
+        if position > (itemTableView.contentSize.height - 50 - scrollView.frame.size.height) {
         
             if !viewModel.isFetchingData {
                 itemTableView.tableFooterView = createSpinnerFooterView()

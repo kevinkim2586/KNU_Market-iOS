@@ -7,6 +7,7 @@ import SwiftyJSON
 class ChatViewController: MessagesViewController {
     
     private var viewModel: ChatViewModel!
+    private var refreshControl = UIRefreshControl()
     
     var room: String = ""
     var chatRoomTitle: String = ""
@@ -47,64 +48,6 @@ class ChatViewController: MessagesViewController {
     }
 }
 
-//MARK: - Initialization
-
-extension ChatViewController {
-    
-    func initialize() {
-       
-        viewModel.delegate = self
-        chatMemberViewDelegate = self
-        
-        initializeInputBar()
-        initializeCollectionView()
-    }
-    
-    func initializeCollectionView() {
-        
-        messagesCollectionView.messagesDataSource = self
-        messagesCollectionView.messagesLayoutDelegate = self
-        messagesCollectionView.messagesDisplayDelegate = self
-        messagesCollectionView.messageCellDelegate = self
-        messagesCollectionView.delegate = self
-        messagesCollectionView.backgroundColor = .white
-        self.scrollsToLastItemOnKeyboardBeginsEditing = true
-        
-        
-        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
-            
-            layout.setMessageIncomingAvatarSize(.zero)
-            layout.setMessageOutgoingAvatarSize(.zero)
-            
-            layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left,
-                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
-            layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
-                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
-     
-            
-            layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .left,
-                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
-            layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .right,
-                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
-        }
-    }
-    
-    func initializeInputBar() {
-        
-        messageInputBar.delegate = self
-        messageInputBar.sendButton.title = nil
-        let configuration = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular)
-        let color = UIColor(named: Constants.Color.appColor)
-        let sendButtonImage = UIImage(systemName: "arrow.up.circle.fill",
-                                      withConfiguration: configuration)?.withTintColor(
-                                        color ?? .systemPink,
-                                        renderingMode: .alwaysOriginal
-                                      )
-        
-        messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
-        
-    }
-}
 
 //MARK: - ChatViewDelegate
 
@@ -113,7 +56,7 @@ extension ChatViewController: ChatViewDelegate {
     func didConnect() {
         
         // Connect 했다가 바로 아래 phrase 보내지말고 내 pid 목록 비교해서 없으면 보내는 로직으로 수정
-        viewModel.sendText("\(User.shared.nickname)님이 채팅방에 입장하셨습니다 🎉")
+        viewModel.sendText("\(User.shared.nickname) 님이 채팅방에 입장하셨습니다.")
         messagesCollectionView.reloadData()
     }
     
@@ -148,9 +91,15 @@ extension ChatViewController: ChatViewDelegate {
     
     func didFetchChats() {
         
+        refreshControl.endRefreshing()
+        messagesCollectionView.reloadDataAndKeepOffset()
+        
+        
     }
     
     func failedFetchingChats(with error: NetworkError) {
+        
+        refreshControl.endRefreshing()
         
     }
 }
@@ -219,6 +168,26 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
         return .bubbleTail(corner, .curved)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        print("✏️ scrollViewDidScroll ACTIVATED")
+        
+        
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        
+        print("✏️ scrollViewDidScrollToTop ACTIVATED")
+    }
+    
+    
+    
+    @objc func refreshCollectionView() {
+        
+        self.viewModel.getChatList()
+        messagesCollectionView.reloadData()
+    }
   
 }
 
@@ -236,4 +205,67 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     }
 }
 
+//MARK: - Initialization & UI Configuration
 
+extension ChatViewController {
+    
+    func initialize() {
+       
+        viewModel.delegate = self
+        chatMemberViewDelegate = self
+        
+        initializeInputBar()
+        initializeCollectionView()
+    }
+    
+    func initializeCollectionView() {
+        
+        messagesCollectionView.refreshControl = self.refreshControl
+        
+        refreshControl.addTarget(self,
+                                 action: #selector(refreshCollectionView),
+                                 for: .valueChanged)
+        
+        messagesCollectionView.messagesDataSource = self
+        messagesCollectionView.messagesLayoutDelegate = self
+        messagesCollectionView.messagesDisplayDelegate = self
+        messagesCollectionView.messageCellDelegate = self
+        messagesCollectionView.delegate = self
+        messagesCollectionView.backgroundColor = .white
+        self.scrollsToLastItemOnKeyboardBeginsEditing = true
+        
+        
+        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+            
+            layout.setMessageIncomingAvatarSize(.zero)
+            layout.setMessageOutgoingAvatarSize(.zero)
+            
+            layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left,
+                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+            layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
+                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+     
+            
+            layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .left,
+                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+            layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .right,
+                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+        }
+    }
+    
+    func initializeInputBar() {
+        
+        messageInputBar.delegate = self
+        messageInputBar.sendButton.title = nil
+        let configuration = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular)
+        let color = UIColor(named: Constants.Color.appColor)
+        let sendButtonImage = UIImage(systemName: "arrow.up.circle.fill",
+                                      withConfiguration: configuration)?.withTintColor(
+                                        color ?? .systemPink,
+                                        renderingMode: .alwaysOriginal
+                                      )
+        
+        messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
+        
+    }
+}

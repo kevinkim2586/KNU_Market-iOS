@@ -16,7 +16,6 @@ struct Message: MessageType {
         return self.sentDate.getFormattedDate()
     }
     
-    // 채팅 내
     var usernickname: String {
         return self.chat.chat_username
     }

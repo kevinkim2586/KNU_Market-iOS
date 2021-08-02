@@ -6,7 +6,7 @@ struct ChatResponseModel: Decodable {
     
     let totalPage: String
     let currentPage: String
-    let chat: [Chat]
+    var chat: [Chat]
     
     enum CodingKeys: String, CodingKey {
         

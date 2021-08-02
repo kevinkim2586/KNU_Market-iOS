@@ -1,5 +1,6 @@
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 enum ChatFunction {
     case join
@@ -58,6 +59,8 @@ class ChatManager {
         
         let requestURL = generateURLString(for: function, pid: pid, index: index)
         
+        print("✏️ requestURL: \(requestURL)")
+        
         AF.request(requestURL,
                    method: method,
                    interceptor: interceptor)
@@ -70,7 +73,7 @@ class ChatManager {
                     do {
                         let decodedData = try JSONDecoder().decode(expectedModel,
                                                                    from: response.data!)
-                        print("✏️ ChatManager - getResponse SUCCESS")
+                        print("✏️ ChatManager - getResponse SUCCESS for function: \(function)")
                         completion(.success(decodedData))
                         
                     } catch {
@@ -117,7 +120,7 @@ class ChatManager {
 //                    print("❗️ default ")
 //
 //                }
-//            }
+//        ch    }
 //    }
 }
 
@@ -139,7 +142,7 @@ extension ChatManager {
             return baseURL
         case .getChat:
             guard let page = index, let pid = pid else { fatalError() }
-            return baseURL + pid + "\(page)"
+            return baseURL + pid + "/" + String(page)
         }
     }
 }

@@ -34,11 +34,15 @@ class ChatViewModel: WebSocketDelegate {
     var mySelf = Sender(senderId: User.shared.userUID,
                         displayName: User.shared.nickname)
     
-    var chatModel = [ChatResponseModel]()
+    
+    
+    var chatModel: ChatResponseModel?
     var index: Int = 1
+    
+    
     var isFetchingData: Bool = false
     
-    // Room Info
+    // Room Info (해당 방에 참여하고 있는 멤버 정보 등)
     var roomInfo: RoomInfo?
 
     // Delegate
@@ -152,7 +156,6 @@ extension ChatViewModel {
         
         let convertedText = convertToJSONString(text: originalText)
         
-
         socket.write(string: convertedText) {
             
             let chat = Chat(chat_uid: Int.random(in: 0...1000),
@@ -175,6 +178,63 @@ extension ChatViewModel {
 //MARK: - API Methods
 
 extension ChatViewModel {
+    
+    // 채팅 받아오기
+    func getChatList() {
+        
+        isFetchingData = true
+        
+        ChatManager.shared.getResponseModel(function: .getChat,
+                                            method: .get,
+                                            pid: self.room,
+                                            index: self.index,
+                                            expectedModel: ChatResponseModel.self) { [weak self] result in
+
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let chatResponseModel):
+
+                self.isFetchingData = false
+                self.index += 1
+                
+                self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
+                
+                
+                chatResponseModel.chat.forEach { chat in
+                
+                    // 내 채팅이 아니면
+                    if chat.chat_userUID != User.shared.userUID {
+                        
+                        let others = Sender(senderId: chat.chat_userUID,
+                                            displayName: chat.chat_username)
+                        
+                        self.messages.insert(Message(chat: chat,
+                                                     sender: others,
+                                                     sentDate: Date(),
+                                                     kind: .text(chat.chat_content)),
+                                             at: 0)
+                    } else {
+                        
+                        self.messages.insert(Message(chat: chat,
+                                                     sender: self.mySelf,
+                                                     sentDate: Date(),
+                                                     kind: .text(chat.chat_content)),
+                                             at: 0)
+                    }
+                }
+                
+                self.delegate?.didFetchChats()
+            
+            case .failure(let error):
+
+                self.delegate?.failedFetchingChats(with: error)
+
+            }
+        }
+        
+        
+    }
     
     // 공구글 참가
     func joinPost() {
@@ -227,54 +287,6 @@ extension ChatViewModel {
                 self.delegate?.failedConnection(with: error)
             }
         }
-        
-    }
-        
-    
-    // 채팅 받아오기
-    func getChatList() {
-        
-        isFetchingData = true
-        
-        ChatManager.shared.getResponseModel(function: .getChat,
-                                            method: .get,
-                                            pid: self.room,
-                                            index: self.index,
-                                            expectedModel: ChatResponseModel.self) { [weak self] result in
-
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let chatResponseModel):
-
-                self.isFetchingData = false
-                self.index += 1
-//                
-//                let chatArray = chatResponseModel.chat
-//          
-//                self.messages
-//                
-//                chatResponseModel.chat.forEach { chat in
-//                    
-//                    self.messages[0].chat = chat
-//                }
-//                
-//                
-//                
-//                
-//                
-//                
-//                self.messages.insert(contentsOf: chatModel.chat, at: 0)
-//                self.delegate?.didFetchChats()
-            
-            case .failure(let error):
-
-                self.delegate?.failedFetchingChats(with: error)
-
-            }
-        }
-        
-        
     }
     
     // 채팅 참여 인원 정보 불러오기

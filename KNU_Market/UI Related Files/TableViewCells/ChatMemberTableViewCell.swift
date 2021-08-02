@@ -11,9 +11,11 @@ class ChatMemberTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nicknameLabel: UILabel!
+    @IBOutlet weak var reportUserButton: UIButton!
     
     private var imageCode: String?
     private var nickname: String?
+    private var userUID: String?
     
     weak var delegate: ChatMemberTableViewCellDelegate?
     
@@ -55,6 +57,8 @@ class ChatMemberTableViewCell: UITableViewCell {
             case .success(let profileModel):
                 
                 self?.nickname = profileModel.nickname
+                self?.userUID = profileModel.uid
+                
                 self?.nicknameLabel.text = profileModel.nickname
                 let imageURL = URL(string: "\(Constants.API_BASE_URL)media/\(profileModel.profileImageCode)")
                 self?.profileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -62,6 +66,13 @@ class ChatMemberTableViewCell: UITableViewCell {
                                                    placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
                                                    options: .continueInBackground,
                                                    completed: nil)
+                
+                // 만약 본인 Cell 이면 신고하기 버튼 숨김 처리
+                DispatchQueue.main.async {
+                    if self?.userUID == User.shared.userUID {
+                        self?.reportUserButton.isHidden = true
+                    }
+                }
             case .failure:
                 return
             }
@@ -69,6 +80,7 @@ class ChatMemberTableViewCell: UITableViewCell {
     }
 
     func initializeUI() {
+        
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
     }
 }

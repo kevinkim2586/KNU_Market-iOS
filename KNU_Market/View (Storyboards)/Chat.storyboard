@@ -62,7 +62,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebw-gr-n6t" userLabel="Settings Button">
-                                        <rect key="frame" x="373" y="20" width="21" height="22"/>
+                                        <rect key="frame" x="378" y="20" width="21" height="22"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="gearshape" catalog="system"/>
                                         <connections>
@@ -75,7 +75,7 @@
                                     <constraint firstItem="EUt-jz-nLn" firstAttribute="top" secondItem="1ms-Ke-ZGP" secondAttribute="top" constant="20" id="3p0-Op-FHU"/>
                                     <constraint firstItem="8SQ-NK-alB" firstAttribute="leading" secondItem="EUt-jz-nLn" secondAttribute="trailing" constant="7" id="5dm-P3-n9O"/>
                                     <constraint firstItem="ebw-gr-n6t" firstAttribute="top" secondItem="1ms-Ke-ZGP" secondAttribute="top" constant="20" id="6Nv-oK-pYP"/>
-                                    <constraint firstAttribute="trailing" secondItem="ebw-gr-n6t" secondAttribute="trailing" constant="20" id="OJb-Ut-vlt"/>
+                                    <constraint firstAttribute="trailing" secondItem="ebw-gr-n6t" secondAttribute="trailing" constant="15" id="OJb-Ut-vlt"/>
                                     <constraint firstItem="EUt-jz-nLn" firstAttribute="leading" secondItem="S5r-no-X8b" secondAttribute="trailing" constant="20" id="PGH-Uc-Zrm"/>
                                     <constraint firstItem="S5r-no-X8b" firstAttribute="top" secondItem="1ms-Ke-ZGP" secondAttribute="top" constant="20" id="Tkb-C1-ADt"/>
                                     <constraint firstItem="S5r-no-X8b" firstAttribute="leading" secondItem="1ms-Ke-ZGP" secondAttribute="leading" constant="20" id="ueH-pg-uZ0"/>
@@ -128,6 +128,7 @@
                                         <connections>
                                             <outlet property="nicknameLabel" destination="4Og-yq-8WS" id="Kqm-WY-9q1"/>
                                             <outlet property="profileImageView" destination="lOw-v5-Moh" id="sc3-d4-Nv5"/>
+                                            <outlet property="reportUserButton" destination="q73-il-DEI" id="WHJ-YA-uLP"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

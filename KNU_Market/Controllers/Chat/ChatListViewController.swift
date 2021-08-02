@@ -66,6 +66,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.configure(with: self.viewModel.roomList[indexPath.row])
+        tableView.tableFooterView = UIView(frame: .zero)
         return cell
     }
     

@@ -14,6 +14,7 @@ class UploadItemViewController: UIViewController {
     @IBOutlet weak var itemDetailTextView: UITextView!
     
     var viewModel = UploadItemViewModel()
+    var editModel: EditPostModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,10 @@ class UploadItemViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         dismissProgressBar()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @IBAction func pressedStepper(_ sender: GMStepper) {
@@ -209,7 +214,7 @@ extension UploadItemViewController: UITextViewDelegate {
     }
 }
 
-//MARK: - UI Configuration
+//MARK: - UI Configuration & Initialization
 
 extension UploadItemViewController {
     
@@ -224,6 +229,10 @@ extension UploadItemViewController {
         initializeStepper()
         initializePickerView()
         initializeTextView()
+        
+        if self.editModel != nil {
+            configurePageWithPriorData()
+        }
     }
     
     func initializeCollectionView() {
@@ -269,6 +278,22 @@ extension UploadItemViewController {
         itemDetailTextView.clipsToBounds = true
         itemDetailTextView.text = "공구 내용을 작성해주세요. (중고 거래 또는 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.) \n\n 게시 가능 글 종류: \n- 배달음식 공구 \n- 온라인 쇼핑 공구 \n- 물물교환 및 나눔"
         itemDetailTextView.textColor = UIColor.lightGray
+    }
+
+    
+    func configurePageWithPriorData() {
+        
+        print("✏️ configurePageWithPriorData ACTIVATED")
+      
+        itemTitleTextField.text = editModel!.title
+        
+        stepper.minimumValue = Double(editModel!.currentlyGatheredPeople)
+        totalGatheringPeopleLabel.text = String(editModel!.totalGatheringPeople)
+        tradeLocationTextField.text = self.viewModel.locationArray[editModel!.location]
+        
+        itemDetailTextView.text = editModel!.itemDetail
+        itemDetailTextView.textColor = UIColor.black
+        
     }
     
 }

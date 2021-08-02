@@ -10,7 +10,7 @@ struct Room: Decodable {
     let currentlyGatheredPeople: Int
     let isArchived: Int
     let date: String
-    let imageCodes: [String]?
+    let imageCodes: [String]
     let userUID: String
     
     enum CodingKeys: String, CodingKey {

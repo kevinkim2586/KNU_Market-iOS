@@ -92,6 +92,7 @@
 		7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF62264D02AF0001CC6D /* Sender.swift */; };
 		7CB8DF732650E1E20001CC6D /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF722650E1E20001CC6D /* RegisterViewModel.swift */; };
 		7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */; };
+		7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC05E9926B6D91800BE9288 /* EditPostModel.swift */; };
 		7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */; };
 		7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */; };
 		7CCDB1EA26A2BCD30092F28D /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */; };
@@ -192,6 +193,7 @@
 		7CB8DF62264D02AF0001CC6D /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		7CB8DF722650E1E20001CC6D /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		7CC05E9926B6D91800BE9288 /* EditPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostModel.swift; sourceTree = "<group>"; };
 		7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModel.swift; sourceTree = "<group>"; };
 		7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewController.swift; sourceTree = "<group>"; };
 		7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 		7C6D253C269037750030F9A1 /* DTO (Data Transfer Object) */ = {
 			isa = PBXGroup;
 			children = (
+				7CC05E9826B6D90800BE9288 /* Item Models */,
 				7C555460266CFBE500C3C5B6 /* Chat Models */,
 				7CB8DF3D264BB1970001CC6D /* RegisterRequestDTO.swift */,
 				7C55545C266CDFD100C3C5B6 /* UploadItemRequestDTO.swift */,
@@ -525,6 +528,14 @@
 				7CB8DF742650E1EB0001CC6D /* LoginViewModel.swift */,
 			);
 			path = "Login+RegisterVM";
+			sourceTree = "<group>";
+		};
+		7CC05E9826B6D90800BE9288 /* Item Models */ = {
+			isa = PBXGroup;
+			children = (
+				7CC05E9926B6D91800BE9288 /* EditPostModel.swift */,
+			);
+			path = "Item Models";
 			sourceTree = "<group>";
 		};
 		7CD1522526AA99DA00F2C466 /* Chat Models */ = {
@@ -733,6 +744,7 @@
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
 				7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */,
+				7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */,
 				7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */,
 				7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,

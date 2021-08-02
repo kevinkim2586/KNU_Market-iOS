@@ -106,6 +106,7 @@ struct Constants {
         
         static let updateChatList               = "co.wim.updateChatList"
         static let updateItemList               = "co.wim.updateItemList"
+        
     }
     
     static let entireChatRoomUID                = "__entireRoomPid"

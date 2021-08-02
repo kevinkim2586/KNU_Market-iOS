@@ -26,9 +26,9 @@ class ChatTableViewCell: UITableViewCell {
 
     func configure(with model: Room) {
                 
-        if let imageCodes = model.imageCodes {
+        if !model.imageCodes.isEmpty {
             
-            let imageURL = URL(string: "\(Constants.API_BASE_URL)media/\(imageCodes[0])")
+            let imageURL = URL(string: "\(Constants.API_BASE_URL)media/\(model.imageCodes[0])")
             chatImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             chatImageView.sd_setImage(with: imageURL,
                                       placeholderImage: UIImage(named: Constants.Images.chatBubbleIcon),
@@ -48,7 +48,6 @@ class ChatTableViewCell: UITableViewCell {
     
     func configureImageView() {
         
-
         chatImageView.contentMode = .scaleAspectFit
         chatImageView.layer.cornerRadius = chatImageView.frame.height / 2
         

@@ -54,6 +54,18 @@ class ItemViewModel {
         return model?.nickname == User.shared.nickname
     }
     
+    var modelForEdit: EditPostModel {
+        let editPostModel = EditPostModel(title: self.model?.title ?? "",
+                                          imageURLs: self.imageURLs,
+                                          totalGatheringPeople: self.totalGatheringPeople,
+                                          currentlyGatheredPeople: self.currentlyGatheredPeople,
+                                          location: self.model?.location ?? 0,
+                                          itemDetail: self.model?.itemDetail ?? "")
+        return editPostModel
+    }
+    
+
+    
     //MARK: - 공구 상세내용 불러오기
     func fetchItemDetails(for uid: String) {
         
@@ -122,21 +134,21 @@ extension ItemViewModel {
     
     func convertUIDsToURL() {
         
-        imageURLs.removeAll()
+        self.imageURLs.removeAll()
         
         if let itemImageUIDs = model?.imageUIDs {
             
-            imageURLs = itemImageUIDs.compactMap { URL(string: "\(Constants.API_BASE_URL)media/" + $0) }
+            self.imageURLs = itemImageUIDs.compactMap { URL(string: "\(Constants.API_BASE_URL)media/" + $0) }
         }
     }
     
     func convertURLsToImageSource() {
         
-        imageSources.removeAll()
+        self.imageSources.removeAll()
         
-        for url in imageURLs {
+        for url in self.imageURLs {
             imageSources.append(SDWebImageSource(url: url,
-                                                 placeholder: UIImage(named: "default item image")))
+                                                 placeholder: UIImage(named: Constants.Images.defaultItemImage)))
         }
     }
     

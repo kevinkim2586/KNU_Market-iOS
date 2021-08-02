@@ -63,6 +63,8 @@ class ItemViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        dismissProgressBar()
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -86,6 +88,7 @@ class ItemViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    // 더보기 버튼
     @IBAction func pressedMoreButton(_ sender: UIButton) {
         
         let actionSheet = UIAlertController(title: nil,
@@ -100,13 +103,33 @@ class ItemViewController: UIViewController {
                                                   message: "") { selectedOk in
                     
                     if selectedOk {
-            
+                        
                         showProgressBar()
                         self.viewModel.deletePost(for: self.pageID)
                     }
                 }
                                              }
+            
+            let editAction = UIAlertAction(title: "글 수정하기",
+                                           style: .default) { alert in
+            
+                DispatchQueue.main.async {
+                    
+                    guard let editVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.uploadItemVC) as? UploadItemViewController else { return }
+                    
+                    editVC.editModel = self.viewModel.modelForEdit
+                    
+                    self.navigationController?.pushViewController(editVC, animated: true)
+
+                    
+                }
+                
+                
+            }
+            
+            actionSheet.addAction(editAction)
             actionSheet.addAction(deleteAction)
+            
         } else {
             
             let reportAction = UIAlertAction(title: "게시글 신고하기",
@@ -124,6 +147,7 @@ class ItemViewController: UIViewController {
         self.present(actionSheet, animated: true)
     }
     
+    // 내가 작성한 글일 경우 check 버튼 활성화
     @IBAction func pressedCheckButton(_ sender: UIButton) {
         
         let actionSheet = UIAlertController(title: "상태 변경",
@@ -435,7 +459,8 @@ extension ItemViewController {
         if imageExists {
             
             slideShow.setImageInputs(viewModel.imageSources)
-            let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.pressedImage))
+            let recognizer = UITapGestureRecognizer(target: self,
+                                                    action: #selector(self.pressedImage))
             slideShow.addGestureRecognizer(recognizer)
         } else {
             slideShow.setImageInputs([ImageSource(image: UIImage(named: Constants.Images.defaultItemImage)!)])

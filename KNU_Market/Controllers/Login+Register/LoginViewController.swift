@@ -150,7 +150,7 @@ extension LoginViewController {
         
         //MARK: - TEST DATA
         
-        idTextField.text = "kimyoungchae@knu.ac.kr"
+        idTextField.text = "kevinkim9987@hotmail.com"
         passwordTextField.text = "123456789"
     }
     

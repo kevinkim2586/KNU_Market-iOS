@@ -107,12 +107,12 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q73-il-DEI">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q73-il-DEI" userLabel="Report User Button">
                                                     <rect key="frame" x="379" y="14" width="20" height="22"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" image="flag" catalog="system"/>
                                                     <connections>
-                                                        <action selector="pressedReportUserButton:" destination="lrS-OG-5FG" eventType="touchUpInside" id="xfs-wO-ykd"/>
+                                                        <action selector="pressedReportUserButton:" destination="ziR-hQ-GLM" eventType="touchUpInside" id="bV6-e5-Z4m"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

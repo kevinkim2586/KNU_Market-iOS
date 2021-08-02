@@ -54,12 +54,6 @@ class ChatMemberViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    @IBAction func pressedReportUserButton(_ sender: UIButton) {
-        
-        self.presentReportUserVC(userToReport: "")
-        
-    }
-    
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -78,6 +72,7 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let cellVM = self.roomInfo?.member[indexPath.row] {
             
+            cell.delegate = self
             cell.configure(with: cellVM.userUID)
              
         } else {
@@ -99,6 +94,19 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
         return 65
     }
     
+}
+
+//MARK: - ChatMemberTableViewCellDelegate
+
+extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
+    
+    func presentUserReportVC(userToReport: String) {
+        self.presentReportUserVC(userToReport: userToReport)
+    }
+    
+    func failedPresentingUserReportVC() {
+        self.showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요 😥")
+    }
 }
 
 //MARK: - UI Configuration & Initialization

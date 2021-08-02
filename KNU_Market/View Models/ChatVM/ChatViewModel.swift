@@ -199,10 +199,9 @@ extension ChatViewModel {
                 self.index += 1
                 
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
-                
-                
+
                 chatResponseModel.chat.forEach { chat in
-                
+                    
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {
                         
@@ -211,21 +210,21 @@ extension ChatViewModel {
                         
                         self.messages.insert(Message(chat: chat,
                                                      sender: others,
-                                                     sentDate: Date(),
+                                                     sentDate: chat.chat_date.convertStringToDate(),
                                                      kind: .text(chat.chat_content)),
                                              at: 0)
                     } else {
                         
                         self.messages.insert(Message(chat: chat,
                                                      sender: self.mySelf,
-                                                     sentDate: Date(),
+                                                     sentDate: chat.chat_date.convertStringToDate(),
                                                      kind: .text(chat.chat_content)),
                                              at: 0)
                     }
                 }
                 
                 self.delegate?.didFetchChats()
-            
+                
             case .failure(let error):
 
                 self.delegate?.failedFetchingChats(with: error)

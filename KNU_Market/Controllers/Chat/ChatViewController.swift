@@ -7,7 +7,8 @@ import SwiftyJSON
 class ChatViewController: MessagesViewController {
     
     private var viewModel: ChatViewModel!
-    private var refreshControl = UIRefreshControl()
+    
+    private let headerSpinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     
     var room: String = ""
     var chatRoomTitle: String = ""
@@ -30,13 +31,18 @@ class ChatViewController: MessagesViewController {
         viewModel = ChatViewModel(room: room)
         initialize()
         
+   
+        
+        messagesCollectionView.register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Header")
+        (messagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = CGSize(width: messagesCollectionView.bounds.width, height: 50)
+        
+        
         
         // joinPost 해보고 문제 없으면 connect 해야 함.
         viewModel.joinPost()
         viewModel.connect()
 
     }
-    
 
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
         
@@ -46,6 +52,19 @@ class ChatViewController: MessagesViewController {
         chatMemberVC.roomInfo = viewModel.roomInfo
         presentPanModal(chatMemberVC)
     }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if kind == UICollectionView.elementKindSectionHeader {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
+            header.addSubview(headerSpinner)
+            headerSpinner.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
+            return header
+        }
+        return UICollectionReusableView()
+    }
+    
 }
 
 
@@ -91,7 +110,7 @@ extension ChatViewController: ChatViewDelegate {
     
     func didFetchChats() {
         
-        refreshControl.endRefreshing()
+        headerSpinner.stopAnimating()
         messagesCollectionView.reloadDataAndKeepOffset()
         
         
@@ -99,7 +118,8 @@ extension ChatViewController: ChatViewDelegate {
     
     func failedFetchingChats(with error: NetworkError) {
         
-        refreshControl.endRefreshing()
+        headerSpinner.stopAnimating()
+        
         
     }
 }
@@ -157,7 +177,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
     
-        if viewModel.messages[indexPath.section].sender.senderId == User.shared.id {
+        if viewModel.messages[indexPath.section].chat.chat_userUID == User.shared.id {
             return UIColor(named: Constants.Color.appColor)!
         } else {
             return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1)
@@ -169,26 +189,17 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         return .bubbleTail(corner, .curved)
     }
     
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        print("✏️ scrollViewDidScroll ACTIVATED")
-        
-        
+        if scrollView.contentOffset.y <= 0 {
+            
+            if !viewModel.isFetchingData {
+                headerSpinner.startAnimating()
+                self.viewModel.getChatList()
+            }
+        }
     }
-    
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        
-        print("✏️ scrollViewDidScrollToTop ACTIVATED")
-    }
-    
-    
-    
-    @objc func refreshCollectionView() {
-        
-        self.viewModel.getChatList()
-        messagesCollectionView.reloadData()
-    }
-  
 }
 
 //MARK: - InputBarAccessoryViewDelegate
@@ -219,13 +230,7 @@ extension ChatViewController {
     }
     
     func initializeCollectionView() {
-        
-        messagesCollectionView.refreshControl = self.refreshControl
-        
-        refreshControl.addTarget(self,
-                                 action: #selector(refreshCollectionView),
-                                 for: .valueChanged)
-        
+                
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
@@ -267,5 +272,16 @@ extension ChatViewController {
         
         messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
         
+    }
+}
+
+
+public class CollectionViewFooterView: UICollectionReusableView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

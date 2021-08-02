@@ -107,12 +107,22 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q73-il-DEI">
+                                                    <rect key="frame" x="379" y="14" width="20" height="22"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" image="flag" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="pressedReportUserButton:" destination="lrS-OG-5FG" eventType="touchUpInside" id="xfs-wO-ykd"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="4Og-yq-8WS" firstAttribute="centerY" secondItem="CFb-SS-R2J" secondAttribute="centerY" id="FhE-Wm-Zsv"/>
                                                 <constraint firstItem="lOw-v5-Moh" firstAttribute="top" secondItem="CFb-SS-R2J" secondAttribute="topMargin" id="FxH-Zn-MOU"/>
                                                 <constraint firstItem="4Og-yq-8WS" firstAttribute="leading" secondItem="lOw-v5-Moh" secondAttribute="trailing" constant="15" id="QdD-Pn-dBG"/>
+                                                <constraint firstAttribute="trailing" secondItem="q73-il-DEI" secondAttribute="trailing" constant="15" id="ZZj-fW-IjA"/>
                                                 <constraint firstItem="lOw-v5-Moh" firstAttribute="leading" secondItem="CFb-SS-R2J" secondAttribute="leadingMargin" id="aRd-oO-6t3"/>
+                                                <constraint firstItem="q73-il-DEI" firstAttribute="centerY" secondItem="CFb-SS-R2J" secondAttribute="centerY" id="e9M-VI-D83"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -147,6 +157,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="flag" catalog="system" width="128" height="121"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="people icon" width="52" height="52"/>

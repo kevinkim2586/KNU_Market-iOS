@@ -120,13 +120,8 @@ class ItemViewController: UIViewController {
                     editVC.editModel = self.viewModel.modelForEdit
                     
                     self.navigationController?.pushViewController(editVC, animated: true)
-
-                    
                 }
-                
-                
             }
-            
             actionSheet.addAction(editAction)
             actionSheet.addAction(deleteAction)
             
@@ -135,7 +130,8 @@ class ItemViewController: UIViewController {
             let reportAction = UIAlertAction(title: "게시글 신고하기",
                                            style: .default) { alert in
                 
-                self.performSegue(withIdentifier: Constants.SegueID.goToReportVC, sender: self)
+                self.presentReportUserVC(userToReport: self.viewModel.model?.nickname ?? "")
+
             }
             actionSheet.addAction(reportAction)
         }
@@ -170,16 +166,6 @@ class ItemViewController: UIViewController {
         actionSheet.addAction(checkAction)
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard let reportVC = segue.destination as? ReportUserViewController else { fatalError() }
-        
-        reportVC.userToReport = self.viewModel.model?.nickname ?? ""
-        reportVC.modalPresentationStyle = .overFullScreen
-        
-        
     }
 }
 

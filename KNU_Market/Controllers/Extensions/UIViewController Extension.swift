@@ -83,6 +83,20 @@ extension UIViewController {
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }
+    
+    // 유저 신고하기 VC
+    func presentReportUserVC(userToReport: String) {
+        
+        let storyboard = UIStoryboard(name: "Report", bundle: nil)
+        
+        guard let reportVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.reportUserVC) as? ReportUserViewController else { return }
+        
+        reportVC.userToReport = userToReport
+        reportVC.modalPresentationStyle = .overFullScreen
+      
+        self.present(reportVC, animated: true)
+        
+    }
 }
 
 

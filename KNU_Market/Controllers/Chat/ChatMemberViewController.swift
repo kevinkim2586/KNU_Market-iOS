@@ -54,6 +54,12 @@ class ChatMemberViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
+    @IBAction func pressedReportUserButton(_ sender: UIButton) {
+        
+        self.presentReportUserVC(userToReport: "")
+        
+    }
+    
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource

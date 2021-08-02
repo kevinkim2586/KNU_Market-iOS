@@ -28,10 +28,6 @@ class UploadItemViewController: UIViewController {
         dismissProgressBar()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     @IBAction func pressedStepper(_ sender: GMStepper) {
         totalGatheringPeopleLabel.text = "\(String(Int(stepper.value))) 명"
         viewModel.peopleGathering = Int(stepper.value)

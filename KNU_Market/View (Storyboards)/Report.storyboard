@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uak-oy-CzP">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Report User View Controller-->
+        <scene sceneID="KYM-Hh-Got">
+            <objects>
+                <viewController storyboardIdentifier="ReportUserViewController" title="Report User View Controller" hidesBottomBarWhenPushed="YES" id="uak-oy-CzP" customClass="ReportUserViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2lY-yE-t4W">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRy-qI-jxx">
+                                <rect key="frame" x="15" y="187" width="384" height="78.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">🥷🏻 사기가 의심되거나 사기를 당하셨나요? 
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="🤬 부적절한 언어를 사용했나요?">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacingBefore="10" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+IAo
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacingBefore="10" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="🤔">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacingBefore="10" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" 아래에 신고 사유를 적어서 보내주세요. ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="AppleSDGothicNeo-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacingBefore="10" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해당 사용자를 신고하시겠습니까?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tx4-UM-Klg">
+                                <rect key="frame" x="15" y="124" width="249" height="23"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7yi-Xe-pq6" userLabel="Report Content Text View">
+                                <rect key="frame" x="15" y="300.5" width="384" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="d0v-v7-Hrb"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Wp-5h-dFr">
+                                <rect key="frame" x="157" y="615.5" width="100" height="40"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="6T2-gd-HNg"/>
+                                    <constraint firstAttribute="height" constant="40" id="DZW-3B-gHD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="신고 접수">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedSendButton:" destination="uak-oy-CzP" eventType="touchUpInside" id="g6i-pJ-4lU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bV5-uA-KvB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gRy-qI-jxx" firstAttribute="top" secondItem="tx4-UM-Klg" secondAttribute="bottom" constant="40" id="1Db-be-UWF"/>
+                            <constraint firstItem="7yi-Xe-pq6" firstAttribute="top" secondItem="gRy-qI-jxx" secondAttribute="bottom" constant="35" id="HfR-Sd-1mD"/>
+                            <constraint firstItem="gRy-qI-jxx" firstAttribute="leading" secondItem="bV5-uA-KvB" secondAttribute="leading" constant="15" id="La3-t4-Y9V"/>
+                            <constraint firstAttribute="trailing" secondItem="gRy-qI-jxx" secondAttribute="trailing" constant="15" id="Pny-If-bA9"/>
+                            <constraint firstItem="6Wp-5h-dFr" firstAttribute="centerX" secondItem="2lY-yE-t4W" secondAttribute="centerX" id="QcU-ha-mAi"/>
+                            <constraint firstItem="bV5-uA-KvB" firstAttribute="trailing" secondItem="7yi-Xe-pq6" secondAttribute="trailing" constant="15" id="Ufo-1n-fLj"/>
+                            <constraint firstItem="7yi-Xe-pq6" firstAttribute="leading" secondItem="bV5-uA-KvB" secondAttribute="leading" constant="15" id="V3t-2g-Zev"/>
+                            <constraint firstItem="tx4-UM-Klg" firstAttribute="top" secondItem="bV5-uA-KvB" secondAttribute="top" constant="80" id="hYb-vB-MBx"/>
+                            <constraint firstItem="6Wp-5h-dFr" firstAttribute="top" secondItem="7yi-Xe-pq6" secondAttribute="bottom" constant="15" id="i6F-rr-Jx3"/>
+                            <constraint firstItem="tx4-UM-Klg" firstAttribute="leading" secondItem="bV5-uA-KvB" secondAttribute="leading" constant="15" id="mzL-g1-dPN"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="건의사항" id="Btt-vZ-q6W"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="contentTextView" destination="7yi-Xe-pq6" id="3la-jh-hF9"/>
+                        <outlet property="sendButton" destination="6Wp-5h-dFr" id="y5S-9m-f9u"/>
+                        <outlet property="titleLabel" destination="tx4-UM-Klg" id="W1m-re-I8O"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l1k-Ex-pbG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7954" y="42"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="AppDefaultColor">
+            <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

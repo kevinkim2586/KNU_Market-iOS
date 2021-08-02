@@ -20,6 +20,10 @@ class ItemTableViewModel {
         return currentlyGatheredPeople != totalGatheringPeople
     }
     
+//    var isDoneGathering: Bool {
+//
+//    }
+    
     var currentlyGatheredPeople: Int = 1
     
     var totalGatheringPeople: Int = 4

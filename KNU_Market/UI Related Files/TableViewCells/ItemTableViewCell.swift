@@ -77,6 +77,7 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializeGatheringLabel() {
         
+        
         if viewModel.isGathering {
             gatheringLabel.text = "모집 중"
             gatheringLabel.backgroundColor = UIColor(named: Constants.Color.appColor)

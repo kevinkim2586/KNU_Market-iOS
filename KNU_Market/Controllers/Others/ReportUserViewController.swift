@@ -4,6 +4,7 @@ import ProgressHUD
 
 class ReportUserViewController: UIViewController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet var contentTextView: UITextView!
     @IBOutlet var sendButton: UIButton!
     
@@ -12,12 +13,8 @@ class ReportUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-
         initialize()
     }
-    
-
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -71,9 +68,16 @@ extension ReportUserViewController {
     
     func initialize() {
         
+        initializeTitleLabel()
         initializeTextView()
         initializeButton()
         initializeNavigationBar()
+    }
+    
+    func initializeTitleLabel() {
+        
+        titleLabel.text = "\(userToReport)를 신고하시겠습니까?"
+        
     }
     
     func initializeTextView() {

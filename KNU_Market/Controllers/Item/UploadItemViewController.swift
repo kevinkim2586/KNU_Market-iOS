@@ -253,7 +253,7 @@ extension UploadItemViewController {
         stepper.labelFont = .systemFont(ofSize: 15)
         stepper.labelTextColor = UIColor(named:Constants.Color.appColor)!
 
-        stepper.labelBackgroundColor = #colorLiteral(red: 0.9050354388, green: 0.9050354388, blue: 0.9050354388, alpha: 1)
+        stepper.labelBackgroundColor = UIColor.systemGray6
         stepper.limitHitAnimationColor = .white
         stepper.cornerRadius = 5
     }
@@ -287,12 +287,21 @@ extension UploadItemViewController {
       
         itemTitleTextField.text = editModel!.title
         
-        stepper.minimumValue = Double(editModel!.currentlyGatheredPeople)
+        // 현재 모집된 인원이 1명이면, 최소 모집 인원인 2명으로 자동 설정할 수 있게끔 실행
+        stepper.minimumValue = editModel!.currentlyGatheredPeople == 1 ? 2 : Double(editModel!.currentlyGatheredPeople)
+        stepper.value = Double(editModel!.currentlyGatheredPeople)
+        
         totalGatheringPeopleLabel.text = String(editModel!.totalGatheringPeople)
         tradeLocationTextField.text = self.viewModel.locationArray[editModel!.location]
         
         itemDetailTextView.text = editModel!.itemDetail
         itemDetailTextView.textColor = UIColor.black
+        
+        // 이미지 url 이 있으면 실행
+        if let imageURLs = editModel!.imageURLs {
+            self.viewModel.editImageURLs = imageURLs
+        }
+       
         
     }
     

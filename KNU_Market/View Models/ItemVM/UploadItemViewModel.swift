@@ -28,6 +28,10 @@ class UploadItemViewModel {
     
     lazy var imageUIDs: [String] = []
     
+    lazy var editImageURLs: [URL] = [] {
+        didSet { convertImageURLsToUIImage() }
+    }
+    
     //MARK: - Initialization
     
     init() {
@@ -127,6 +131,15 @@ class UploadItemViewModel {
                 print("Unable to convert UIImage to Data type")
                 return Data()
             }
+        })
+    }
+    
+    func convertImageURLsToUIImage() {
+        
+        userSelectedImages = editImageURLs.compactMap({ url in
+        
+            let imageData = try? Data(contentsOf: url)
+            return UIImage(data: imageData ?? Data())
         })
     }
     

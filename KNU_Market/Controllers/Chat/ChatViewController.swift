@@ -102,13 +102,26 @@ extension ChatViewController: ChatViewDelegate {
     
     func didFetchChats() {
         
+        print("✏️ didFetchChats")
+        
         headerSpinner.stopAnimating()
         
         if viewModel.isFirstViewLaunch {
+            print("✏️ isFirstViewLaunch")
             viewModel.isFirstViewLaunch = false
+            messagesCollectionView.scrollToLastItem()
             messagesCollectionView.reloadData()
-            messagesCollectionView.scrollToLastItem(at: .bottom, animated: true)
 //            messagesCollectionView.scrollToLastItem()
+            
+
+//            let lastSection = messagesCollectionView.numberOfSections - 1
+//
+//            let lastRow = messagesCollectionView.numberOfItems(inSection: lastSection)
+//
+//            let indexPath = IndexPath(row: lastRow - 1, section: lastSection)
+//
+//            self.messagesCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+            
         } else {
             messagesCollectionView.reloadDataAndKeepOffset()
         }
@@ -193,7 +206,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         
         if scrollView.contentOffset.y <= 20 {
             
-            if !viewModel.isFetchingData {
+            if !viewModel.isFetchingData && viewModel.needsToFetchMoreData {
                 headerSpinner.startAnimating()
                 self.viewModel.getChatList()
             }

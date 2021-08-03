@@ -7,7 +7,7 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd HH:mm"
         let date: Date = dateFormatter.date(from: self) ?? Date()
-        print("✏️ date: \(date)")
+//        print("✏️ date: \(date)")
         return date
     }
 }

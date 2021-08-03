@@ -41,6 +41,7 @@ class ChatViewModel: WebSocketDelegate {
     
     
     var isFetchingData: Bool = false
+    var needsToFetchMoreData: Bool = true
     
     // ChatVC 의 첫 viewDidLoad 이면 collectionView.scrollToLastItem 실행하게끔 위함
     var isFirstViewLaunch: Bool = true
@@ -201,6 +202,12 @@ extension ChatViewModel {
 
                 self.isFetchingData = false
                 self.index += 1
+                
+                // 빈 배열인지 확인
+                if chatResponseModel.chat.isEmpty {
+                    self.needsToFetchMoreData = false
+                    self.delegate?.didFetchChats()
+                }
                 
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
 

@@ -20,7 +20,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="kqW-gJ-74p">
-                        <barButtonItem key="rightBarButtonItem" image="info.circle" catalog="system" id="8tH-be-UnH">
+                        <barButtonItem key="rightBarButtonItem" image="person" catalog="system" id="8tH-be-UnH">
                             <connections>
                                 <action selector="pressedMoreButton:" destination="tbQ-17-sKV" id="jYz-gE-SBZ"/>
                             </connections>
@@ -160,8 +160,8 @@
     <resources>
         <image name="flag" catalog="system" width="128" height="121"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
-        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="people icon" width="52" height="52"/>
+        <image name="person" catalog="system" width="128" height="117"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

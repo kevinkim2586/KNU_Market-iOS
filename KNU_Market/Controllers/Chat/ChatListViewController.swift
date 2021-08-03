@@ -91,21 +91,22 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         
         if editingStyle == .delete {
             
-            self.viewModel.exitPost(at: indexPath.row) { result in
+            self.presentAlertWithCancelAction(title: "정말 채팅방을 나가시겠습니까?",
+                                              message: "채팅방을 나가면 대화 내용이 삭제되며 공구에서 나가기 처리됩니다.") { selectedOk in
                 
-                switch result {
-                
-                case .success:
+                if selectedOk {
                     
-                    DispatchQueue.main.async {
-                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.viewModel.exitPost(at: indexPath.row) { result in
+                        
+                        switch result {
+                        case .success:
+                            DispatchQueue.main.async {
+                                tableView.deleteRows(at: [indexPath], with: .fade)
+                            }
+                        case .failure(let error):
+                            self.showSimpleBottomAlert(with: error.errorDescription)
+                        }
                     }
-                    
-                    
-                case .failure(let error):
-                    
-                    self.showSimpleBottomAlert(with: error.errorDescription)
-                    
                 }
             }
         }

@@ -189,7 +189,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
     
-        if viewModel.messages[indexPath.section].chat.chat_userUID == User.shared.id {
+        if viewModel.messages[indexPath.section].chat.chat_userUID == User.shared.userUID {
             return UIColor(named: Constants.Color.appColor)!
         } else {
             return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1)

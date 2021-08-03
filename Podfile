@@ -20,13 +20,11 @@ target 'KNU_Market' do
   pod 'InputBarAccessoryView'
   pod 'ProgressHUD'
   pod 'SwiftyJSON', '~> 4.0'
-  pod 'SwiftMessages'
   pod 'SwiftKeychainWrapper'
   pod 'SPIndicator'
   pod 'SnackBar.swift'
   pod 'ViewAnimator'
   pod 'SDWebImage', '~> 5.0'
-  pod 'SkeletonView'
   pod 'ImageSlideshow', '~> 1.9.0'
   pod "ImageSlideshow/SDWebImage"
   pod 'Starscream', '~> 4.0.0'
@@ -34,6 +32,7 @@ target 'KNU_Market' do
   pod 'PanModal'
   pod 'TextFieldEffects'
   pod 'lottie-ios'
+  pod 'MHLoadingButton'
 
   
 end

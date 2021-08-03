@@ -59,8 +59,6 @@ class ChatManager {
         
         let requestURL = generateURLString(for: function, pid: pid, index: index)
         
-        print("✏️ requestURL: \(requestURL)")
-        
         AF.request(requestURL,
                    method: method,
                    interceptor: interceptor)

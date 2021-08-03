@@ -34,9 +34,7 @@ class ChatViewController: MessagesViewController {
         
         print("✏️ pageID: \(room)")
 
-        // joinPost 해보고 문제 없으면 connect 해야 함.
         viewModel.joinPost()
-        viewModel.connect()
 
     }
 
@@ -71,8 +69,15 @@ extension ChatViewController: ChatViewDelegate {
     
     func didConnect() {
         
+        print("✏️ isFirstEntranceToChat: \(viewModel.isFirstEntranceToChat)")
+        
         // Connect 했다가 바로 아래 phrase 보내지말고 내 pid 목록 비교해서 없으면 보내는 로직으로 수정
-        viewModel.sendText("\(User.shared.nickname) 님이 채팅방에 입장하셨습니다.")
+        
+        if viewModel.isFirstEntranceToChat {
+            viewModel.sendText("\(User.shared.nickname) 님이 채팅방에 입장하셨습니다.")
+            viewModel.sendText("테스트테스트")
+        }
+        
         messagesCollectionView.reloadDataAndKeepOffset()
         messagesCollectionView.scrollToLastItem()
     }

@@ -35,8 +35,6 @@ class ChatViewModel: WebSocketDelegate {
     var mySelf = Sender(senderId: User.shared.userUID,
                         displayName: User.shared.nickname)
     
-    
-    
     var chatModel: ChatResponseModel?
     var index: Int = 1
     
@@ -46,6 +44,8 @@ class ChatViewModel: WebSocketDelegate {
     
     // ChatVC 의 첫 viewDidLoad 이면 collectionView.scrollToLastItem 실행하게끔 위함
     var isFirstViewLaunch: Bool = true
+    
+    var isFirstEntranceToChat: Bool = true
     
     
     // Room Info (해당 방에 참여하고 있는 멤버 정보 등)
@@ -99,9 +99,7 @@ extension ChatViewModel {
             
             
         case .text(let text):
-            
-            print("✏️ Received Text: \(text)")
-            
+        
             let receivedTextInJSON = JSON(parseJSON: text)
             
             let nickname = receivedTextInJSON["id"].stringValue
@@ -142,13 +140,22 @@ extension ChatViewModel {
             
         case .error(let reason):
             isConnected = false
-            print("❗️ Error in didReceive: \(reason?.localizedDescription)")
+            print("❗️ Error in didReceive: \(String(describing: reason?.localizedDescription))")
             self.delegate?.failedConnection(with: .E000)
             
+        case .binary(_):
+            print("❗️ ChatViewModel - didReceive binary error")
+        case .pong(_):
+            print("❗️ ChatViewModel - didReceive pong error")
+        case .ping(_):
+            print("❗️ ChatViewModel - didReceive ping error")
+        case .viabilityChanged(_):
+            print("❗️ ChatViewModel - didReceive viabilityChanged error")
+        case .cancelled:
+            print("❗️ ChatViewModel - didReceive cancelled error")
         default:
-            //Default 가 뭐지? 다른 switch case 문 다 실험해보기
+            print("❗️ ChatViewModel - didReceive DEFAULT ERROR ")
             self.delegate?.failedConnection(with: .E000)
-         
         }
     }
     
@@ -264,18 +271,17 @@ extension ChatViewModel {
                 
                 print("❗️ ChatViewModel - joinPost error: \(error)")
                 
-                // 이미 참여하고 있는 채팅방이면 기존의 메시지를 불러와야 함
+                // 이미 참여하고 있는 채팅방이면 기존의 메시지를 불러와야함
                 if error == .E108 {
-                    
-                    //TODO: connect를 하고 getChatList?
-                    
+                
+                    self.isFirstEntranceToChat = false
                     self.getChatList()
+                    self.connect()
                     self.getRoomInfo()
-                    // 이미 참여하고 있는 채팅방의 최신 메시지 받아오기
                     
-          
-                    
+
                 } else {
+                    print("❗️ ChatViewModel - joinPost ERROR")
                     self.delegate?.failedConnection(with: error)
                 }
             }

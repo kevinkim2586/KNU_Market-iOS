@@ -31,6 +31,7 @@ class ChatViewController: MessagesViewController {
         viewModel = ChatViewModel(room: room)
         initialize()
         
+        print("✏️ pageID: \(room)")
 
         // joinPost 해보고 문제 없으면 connect 해야 함.
         viewModel.joinPost()

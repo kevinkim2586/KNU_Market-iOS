@@ -23,7 +23,7 @@ class ChatTableViewCell: UITableViewCell {
         chatImageView.image = nil
         chatParticipatingCountLabel.text = nil
     }
-
+    
     func configure(with model: Room) {
                 
         if !model.imageCodes.isEmpty {
@@ -48,9 +48,11 @@ class ChatTableViewCell: UITableViewCell {
     
     func configureImageView() {
         
-        chatImageView.contentMode = .scaleAspectFit
-        chatImageView.layer.cornerRadius = chatImageView.frame.height / 2
-        
+        chatImageView.contentMode = .scaleToFill
+        chatImageView.layer.borderWidth = 1
+        chatImageView.layer.borderColor = UIColor.clear.cgColor
+        chatImageView.layer.cornerRadius = chatImageView.bounds.height / 2
+     
     }
     
     func configureTitleLabel() {

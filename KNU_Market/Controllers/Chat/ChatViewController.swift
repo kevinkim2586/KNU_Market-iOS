@@ -31,13 +31,7 @@ class ChatViewController: MessagesViewController {
         viewModel = ChatViewModel(room: room)
         initialize()
         
-   
-        
-        messagesCollectionView.register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Header")
-        (messagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = CGSize(width: messagesCollectionView.bounds.width, height: 50)
-        
-        
-        
+
         // joinPost 해보고 문제 없으면 connect 해야 함.
         viewModel.joinPost()
         viewModel.connect()
@@ -76,7 +70,8 @@ extension ChatViewController: ChatViewDelegate {
         
         // Connect 했다가 바로 아래 phrase 보내지말고 내 pid 목록 비교해서 없으면 보내는 로직으로 수정
         viewModel.sendText("\(User.shared.nickname) 님이 채팅방에 입장하셨습니다.")
-        messagesCollectionView.reloadData()
+        messagesCollectionView.reloadDataAndKeepOffset()
+        messagesCollectionView.scrollToLastItem()
     }
     
     func didDisconnect() {
@@ -85,7 +80,7 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func didReceiveChat() {
-        messagesCollectionView.reloadData()
+        messagesCollectionView.reloadDataAndKeepOffset()
        
     }
     
@@ -97,9 +92,6 @@ extension ChatViewController: ChatViewDelegate {
     func failedConnection(with error: NetworkError) {
         
         self.showSimpleBottomAlert(with: error.errorDescription)
-//        self.presentSimpleAlert(title: "채팅방에서 나가셨습니다 🤔", message: "채팅방을 나가고 다시 접속하시기 바랍니다.")
-        
-        //navigationController?.popViewController(animated: true)
     }
     
     func didExitPost() {
@@ -111,9 +103,16 @@ extension ChatViewController: ChatViewDelegate {
     func didFetchChats() {
         
         headerSpinner.stopAnimating()
-        messagesCollectionView.reloadDataAndKeepOffset()
         
-        
+        if viewModel.isFirstViewLaunch {
+            viewModel.isFirstViewLaunch = false
+            messagesCollectionView.reloadData()
+            messagesCollectionView.scrollToLastItem(at: .bottom, animated: true)
+//            messagesCollectionView.scrollToLastItem()
+        } else {
+            messagesCollectionView.reloadDataAndKeepOffset()
+        }
+    
     }
     
     func failedFetchingChats(with error: NetworkError) {
@@ -192,7 +191,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if scrollView.contentOffset.y <= 0 {
+        if scrollView.contentOffset.y <= 20 {
             
             if !viewModel.isFetchingData {
                 headerSpinner.startAnimating()
@@ -211,7 +210,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         viewModel.sendText(text)
         
         inputBar.inputTextView.text = ""
-        messagesCollectionView.reloadData()
+        messagesCollectionView.reloadDataAndKeepOffset()
         messagesCollectionView.scrollToLastItem()
     }
 }
@@ -230,7 +229,10 @@ extension ChatViewController {
     }
     
     func initializeCollectionView() {
-                
+        
+        messagesCollectionView.register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Header")
+        (messagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = CGSize(width: messagesCollectionView.bounds.width, height: 50)
+    
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self

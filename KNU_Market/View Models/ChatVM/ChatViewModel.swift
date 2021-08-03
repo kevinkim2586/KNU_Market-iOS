@@ -42,6 +42,10 @@ class ChatViewModel: WebSocketDelegate {
     
     var isFetchingData: Bool = false
     
+    // ChatVC 의 첫 viewDidLoad 이면 collectionView.scrollToLastItem 실행하게끔 위함
+    var isFirstViewLaunch: Bool = true
+    
+    
     // Room Info (해당 방에 참여하고 있는 멤버 정보 등)
     var roomInfo: RoomInfo?
 
@@ -182,14 +186,14 @@ extension ChatViewModel {
     // 채팅 받아오기
     func getChatList() {
         
-        isFetchingData = true
+        self.isFetchingData = true
         
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,
                                             pid: self.room,
                                             index: self.index,
                                             expectedModel: ChatResponseModel.self) { [weak self] result in
-
+            
             guard let self = self else { return }
 
             switch result {

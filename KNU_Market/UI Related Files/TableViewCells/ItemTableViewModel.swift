@@ -43,15 +43,22 @@ class ItemTableViewModel {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
             dateFormatter.locale = Locale(identifier:"ko_KR")
-            let convertedDate = dateFormatter.date(from: newValue)
-           
-            dateFormatter.dateFormat = "MM/dd\nHH:mm"
-            
-            if let date = convertedDate {
-                let finalDate = dateFormatter.string(from: date)
-                formattedDate = finalDate
-            } else {
+            guard let convertedDate = dateFormatter.date(from: newValue) else {
                 formattedDate = "날짜 표시 에러"
+                return
+            }
+            
+            let calendar = Calendar.current
+            
+            if calendar.isDateInToday(convertedDate) {
+                dateFormatter.dateFormat = "오늘\nHH:mm"
+                formattedDate = dateFormatter.string(from: convertedDate)
+            } else if calendar.isDateInYesterday(convertedDate) {
+                dateFormatter.dateFormat = "어제\nHH:mm"
+                formattedDate = dateFormatter.string(from: convertedDate)
+            } else {
+                dateFormatter.dateFormat = "MM/dd\nHH:mm"
+                formattedDate = dateFormatter.string(from: convertedDate)
             }
         }
     }

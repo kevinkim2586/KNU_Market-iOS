@@ -120,6 +120,7 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializeDateLabel() {
         dateLabel.text = viewModel.date
+        dateLabel.textAlignment = .right
     }
     
     

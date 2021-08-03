@@ -17,8 +17,8 @@ protocol ChatViewDelegate: AnyObject {
     func didExitPost()
     func didDeletePost()
     
-    func didFetchChats()
-    func failedFetchingChats(with error: NetworkError)
+    func didFetchPreviousChats()
+    func failedFetchingPreviousChats(with error: NetworkError)
     
 }
 
@@ -202,7 +202,7 @@ extension ChatViewModel {
                 // 빈 배열인지 확인
                 if chatResponseModel.chat.isEmpty {
                     self.needsToFetchMoreData = false
-                    self.delegate?.didFetchChats()
+                    self.delegate?.didFetchPreviousChats()
                 }
                 
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
@@ -230,11 +230,11 @@ extension ChatViewModel {
                     }
                 }
                 
-                self.delegate?.didFetchChats()
+                self.delegate?.didFetchPreviousChats()
                 
             case .failure(let error):
 
-                self.delegate?.failedFetchingChats(with: error)
+                self.delegate?.failedFetchingPreviousChats(with: error)
 
             }
         }

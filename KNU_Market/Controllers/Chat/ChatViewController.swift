@@ -1,8 +1,8 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
-import IQKeyboardManagerSwift
 import SwiftyJSON
+import IQKeyboardManagerSwift
 
 class ChatViewController: MessagesViewController {
     
@@ -20,11 +20,6 @@ class ChatViewController: MessagesViewController {
         print("❗️ ChatViewController has been DEINITIALIZED")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +32,26 @@ class ChatViewController: MessagesViewController {
         viewModel.joinPost()
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        messagesCollectionView.scrollToLastItem()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enable = false
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        IQKeyboardManager.shared.enable = true
+        
+    }
 
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
         
@@ -48,7 +63,7 @@ class ChatViewController: MessagesViewController {
         presentPanModal(chatMemberVC)
     }
     
-    
+    // Spinner HeaderView
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if kind == UICollectionView.elementKindSectionHeader {
@@ -70,15 +85,12 @@ extension ChatViewController: ChatViewDelegate {
     func didConnect() {
         
         print("✏️ isFirstEntranceToChat: \(viewModel.isFirstEntranceToChat)")
-        
-        // Connect 했다가 바로 아래 phrase 보내지말고 내 pid 목록 비교해서 없으면 보내는 로직으로 수정
-        
+    
         if viewModel.isFirstEntranceToChat {
             viewModel.sendText("\(User.shared.nickname) 님이 채팅방에 입장하셨습니다.")
-            viewModel.sendText("테스트테스트")
         }
         
-        messagesCollectionView.reloadDataAndKeepOffset()
+        messagesCollectionView.reloadData()
         messagesCollectionView.scrollToLastItem()
     }
     
@@ -99,7 +111,6 @@ extension ChatViewController: ChatViewDelegate {
     
     func failedConnection(with error: NetworkError) {
         self.presentSimpleAlert(title: "일시적인 연결 문제 발생", message: error.errorDescription)
-//        self.showSimpleBottomAlert(with: error.errorDescription)
     }
 }
 
@@ -119,7 +130,7 @@ extension ChatViewController {
         NotificationCenter.default.post(name: name, object: nil)
     }
     
-    func didFetchChats() {
+    func didFetchPreviousChats() {
         
         headerSpinner.stopAnimating()
         
@@ -133,7 +144,7 @@ extension ChatViewController {
         }
     }
     
-    func failedFetchingChats(with error: NetworkError) {
+    func failedFetchingPreviousChats(with error: NetworkError) {
         
         headerSpinner.stopAnimating()
         
@@ -229,7 +240,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         viewModel.sendText(text)
         
         inputBar.inputTextView.text = ""
-        messagesCollectionView.reloadDataAndKeepOffset()
         messagesCollectionView.scrollToLastItem()
     }
 }

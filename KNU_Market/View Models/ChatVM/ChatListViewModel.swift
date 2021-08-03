@@ -37,7 +37,9 @@ extension ChatListViewModel {
             
             case .success(let chatRoom):
         
-                // 빈 배열인지 확인해야 하나?
+                chatRoom.forEach { chat in
+                    User.shared.joinedChatRoomPIDs.append(chat.uuid)
+                }
                 
                 self.roomList.append(contentsOf: chatRoom)
                 self.delegate?.didFetchChatList()

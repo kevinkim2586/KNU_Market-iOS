@@ -1,6 +1,5 @@
 import UIKit
 import SnackBar_swift
-import SkeletonView
 import SDWebImage
 import ImageSlideshow
 
@@ -34,7 +33,9 @@ class ItemViewController: UIViewController {
     
     var viewModel = ItemViewModel()
     
-    var pageID: String = ""
+    var pageID: String = "" {
+        didSet { viewModel.pageID = pageID }
+    }
     
     //MARK: - VC Lifecycle
     override func viewDidLoad() {
@@ -72,12 +73,15 @@ class ItemViewController: UIViewController {
     
     @IBAction func pressedEnterChatButton(_ sender: UIButton) {
         
+        enterChatButton.loadingIndicator(true)
+        
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
         guard let vc = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
         
         vc.room = pageID
         vc.chatRoomTitle = viewModel.model?.title ?? ""
         navigationController?.pushViewController(vc, animated: true)
+        enterChatButton.loadingIndicator(false)
     }
     
     @objc func refreshPage() {
@@ -402,7 +406,10 @@ extension ItemViewController {
     
     func initializeEnterChatButton() {
         
-        if viewModel.isGathering {
+        print("✏️ user uploaded? \(viewModel.postIsUserUploaded)")
+        print("✏️ already joined? \(viewModel.userAlreadyJoinedPost)")
+        
+        if viewModel.isGathering || viewModel.postIsUserUploaded || viewModel.userAlreadyJoinedPost {
             enterChatButton.isUserInteractionEnabled = true
             enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)
             enterChatButton.setTitle("채팅방 입장", for: .normal)

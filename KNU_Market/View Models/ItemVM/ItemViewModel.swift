@@ -17,6 +17,8 @@ class ItemViewModel {
     
     weak var delegate: ItemViewModelDelegate?
     
+    var pageID: String?
+    
     var model: ItemDetailModel? {
         didSet { convertUIDsToURL() }
     }
@@ -52,6 +54,13 @@ class ItemViewModel {
     
     var postIsUserUploaded: Bool {
         return model?.nickname == User.shared.nickname
+    }
+
+    var userAlreadyJoinedPost: Bool {
+        if User.shared.joinedChatRoomPIDs.contains(self.pageID ?? "") {
+            return true
+        }
+        return false
     }
     
     var modelForEdit: EditPostModel {

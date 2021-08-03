@@ -1,6 +1,5 @@
 import UIKit
 import SPIndicator
-import SwiftMessages
 import ViewAnimator
 import HGPlaceholders
 
@@ -16,8 +15,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         
         initialize()
      
@@ -82,6 +79,12 @@ extension HomeViewController: HomeViewModelDelegate {
         itemTableView.tableFooterView = nil
         self.showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
     }
+    
+    func failedFetchingRoomPIDInfo(with error: NetworkError) {
+        
+        self.showSimpleBottomAlert(with: error.errorDescription)
+    }
+    
 }
 
 //MARK: -  UITableViewDelegate, UITableViewDataSource
@@ -193,6 +196,7 @@ extension HomeViewController {
         viewModel.delegate = self
         itemTableView.placeholderDelegate = self
     
+        viewModel.fetchEnteredRoomInfo()
         viewModel.loadUserProfile()
         viewModel.fetchItemList()
         

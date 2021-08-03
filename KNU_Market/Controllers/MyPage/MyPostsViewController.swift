@@ -48,6 +48,11 @@ extension MyPostsViewController: HomeViewModelDelegate {
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
     }
+    
+    func failedFetchingRoomPIDInfo(with error: NetworkError) {
+        //
+    }
+    
 }
 
 //MARK: -  UITableViewDelegate, UITableViewDataSource

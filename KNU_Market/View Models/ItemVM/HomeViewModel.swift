@@ -8,6 +8,8 @@ protocol HomeViewModelDelegate: AnyObject {
     
     func didFetchItemList()
     func failedFetchingItemList(with error: NetworkError)
+    
+    func failedFetchingRoomPIDInfo(with error: NetworkError)
 }
 
 class HomeViewModel {
@@ -56,7 +58,6 @@ class HomeViewModel {
     }
 
     //MARK: - 사용자 프로필 정보 불러오기
-    //TODO: - 아래 함수는 MyPageViewModel 이랑 중복되는데 이걸 Observer Pattern 으로 변경하기
     func loadUserProfile() {
         
         UserManager.shared.loadUserProfile { [weak self] result in
@@ -69,6 +70,32 @@ class HomeViewModel {
                 
             case .failure(let error):
                 self.delegate?.failedFetchingUserProfileInfo(with: error)
+            }
+        }
+    }
+    
+    //MARK: - 내가 참여하고 있는 Room PID 배열 불러오기
+    func fetchEnteredRoomInfo() {
+        
+        ChatManager.shared.getResponseModel(function: .getRoom,
+                                       method: .get,
+                                       pid: nil,
+                                       index: nil,
+                                       expectedModel: [Room].self) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success(let chatRoom):
+        
+                chatRoom.forEach { chat in
+                    User.shared.joinedChatRoomPIDs.append(chat.uuid)
+                }
+
+                
+            case .failure(let error):
+                self.delegate?.failedFetchingRoomPIDInfo(with: error)
             }
         }
     }

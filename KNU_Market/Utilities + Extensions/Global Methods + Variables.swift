@@ -4,8 +4,10 @@ import SnackBar_swift
 
 //MARK: - Progress Bar related methods
 func showProgressBar() {
-    ProgressHUD.animationType = .circleRotateChase
+    ProgressHUD.animationType = .horizontalCirclesPulse
     ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appColor) ?? .systemGray
+    ProgressHUD.colorBackground = .clear
+    ProgressHUD.colorHUD = .clear
     ProgressHUD.show()
 }
 

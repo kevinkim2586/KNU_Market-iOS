@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-import SwiftMessages
 import SnackBar_swift
 
 //MARK: - Alert Methods

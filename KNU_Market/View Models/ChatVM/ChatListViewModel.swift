@@ -47,7 +47,9 @@ extension ChatListViewModel {
             }
         }
     }
+
     
+    // 공구 나가기
     func exitPost(at index: Int,
                   completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         

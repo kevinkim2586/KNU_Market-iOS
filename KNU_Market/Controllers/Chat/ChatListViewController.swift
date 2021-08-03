@@ -75,6 +75,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         
         chatVC.room = viewModel.roomList[indexPath.row].uuid
         chatVC.chatRoomTitle = viewModel.roomList[indexPath.row].title
+        chatVC.postUploaderUID = viewModel.roomList[indexPath.row].userUID
         navigationController?.pushViewController(chatVC, animated: true)
         
     }

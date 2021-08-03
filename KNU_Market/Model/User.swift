@@ -125,7 +125,20 @@ class User {
         }
     }
     
-    //MARK: - Methods
+    
+    // 내가 직접 올린 공구글 PID 배열
+    var userUploadedRoomPIDs: [String] = []
+    
+    // 내가 참여하고 있는 채팅방 PID 배열
+    var joinedChatRoomPIDs: [String] = [ "__entireRoomPid" ]
+
+    
+    
+}
+
+//MARK: - Methods
+
+extension User {
 
     func resetAllUserInfo() {
 
@@ -150,6 +163,5 @@ class User {
         print("✏️ resetAllUserInfo successful")
 
     }
-    
     
 }

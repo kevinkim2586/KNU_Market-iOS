@@ -12,6 +12,7 @@ class ChatViewController: MessagesViewController {
     
     var room: String = ""
     var chatRoomTitle: String = ""
+    var postUploaderUID: String = ""
     
     var chatMemberViewDelegate: ChatMemberViewDelegate?
     
@@ -45,6 +46,7 @@ class ChatViewController: MessagesViewController {
         
         chatMemberVC.delegate = self
         chatMemberVC.roomInfo = viewModel.roomInfo
+        chatMemberVC.postUploaderUID = self.postUploaderUID
         presentPanModal(chatMemberVC)
     }
     
@@ -63,7 +65,7 @@ class ChatViewController: MessagesViewController {
 }
 
 
-//MARK: - ChatViewDelegate
+//MARK: - ChatViewDelegate - Socket Delegate Methods
 
 extension ChatViewController: ChatViewDelegate {
     
@@ -91,48 +93,44 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func failedConnection(with error: NetworkError) {
-        
-        self.showSimpleBottomAlert(with: error.errorDescription)
+        self.presentSimpleAlert(title: "일시적인 연결 문제 발생", message: error.errorDescription)
+//        self.showSimpleBottomAlert(with: error.errorDescription)
     }
+}
+
+//MARK: - ChatViewDelegate - API Delegate Methods
+
+extension ChatViewController {
     
     func didExitPost() {
-        
-        print("✏️ 성공적으로 채팅방에서 나갔습니다.")
         navigationController?.popViewController(animated: true)
+    }
+    
+    func didDeletePost() {
+        
+        navigationController?.popViewController(animated: true)
+       
+        let name = Notification.Name(rawValue: Constants.NotificationKey.updateItemList)
+        NotificationCenter.default.post(name: name, object: nil)
     }
     
     func didFetchChats() {
         
-        print("✏️ didFetchChats")
-        
         headerSpinner.stopAnimating()
         
         if viewModel.isFirstViewLaunch {
-            print("✏️ isFirstViewLaunch")
             viewModel.isFirstViewLaunch = false
             messagesCollectionView.scrollToLastItem()
             messagesCollectionView.reloadData()
-//            messagesCollectionView.scrollToLastItem()
-            
-
-//            let lastSection = messagesCollectionView.numberOfSections - 1
-//
-//            let lastRow = messagesCollectionView.numberOfItems(inSection: lastSection)
-//
-//            let indexPath = IndexPath(row: lastRow - 1, section: lastSection)
-//
-//            self.messagesCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
             
         } else {
             messagesCollectionView.reloadDataAndKeepOffset()
         }
-    
     }
     
     func failedFetchingChats(with error: NetworkError) {
         
         headerSpinner.stopAnimating()
-        
         
     }
 }
@@ -142,10 +140,12 @@ extension ChatViewController: ChatViewDelegate {
 extension ChatViewController: ChatMemberViewDelegate {
     
     func didChooseToExitPost() {
-       
         viewModel.exitPost()
     }
-
+    
+    func didChooseToDeletePost() {
+        viewModel.deletePost(for: self.room)
+    }
 }
 
 //MARK: - MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate

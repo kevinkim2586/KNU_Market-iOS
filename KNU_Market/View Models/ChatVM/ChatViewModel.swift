@@ -15,6 +15,7 @@ protocol ChatViewDelegate: AnyObject {
     
     // API
     func didExitPost()
+    func didDeletePost()
     
     func didFetchChats()
     func failedFetchingChats(with error: NetworkError)
@@ -319,6 +320,23 @@ extension ChatViewModel {
                 print("✏️ ChatViewModel - getRoomInfo FAILED with error: \(error.errorDescription)")
             }
             
+        }
+    }
+    
+    // 글 작성자가 ChatVC 내에서 공구글을 삭제하고자 할 때 실행
+    func deletePost(for uid: String) {
+        
+        ItemManager.shared.deletePost(uid: uid) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success:
+                self.delegate?.didDeletePost()
+            case .failure(let error):
+                self.delegate?.failedConnection(with: error)
+            }
         }
         
         

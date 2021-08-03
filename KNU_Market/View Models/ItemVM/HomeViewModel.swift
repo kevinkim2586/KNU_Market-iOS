@@ -31,7 +31,8 @@ class HomeViewModel {
         
         isFetchingData = true
 
-        ItemManager.shared.fetchItemList(at: self.index, fetchCurrentUsers: fetchCurrentUsers) { [weak self] result in
+        ItemManager.shared.fetchItemList(at: self.index,
+                                         fetchCurrentUsers: fetchCurrentUsers) { [weak self] result in
             
             guard let self = self else { return }
 

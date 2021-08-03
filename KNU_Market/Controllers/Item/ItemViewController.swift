@@ -96,7 +96,7 @@ class ItemViewController: UIViewController {
                                             preferredStyle: .actionSheet)
         
         if viewModel.postIsUserUploaded {
-            let deleteAction = UIAlertAction(title: "글 삭제하기",
+            let deleteAction = UIAlertAction(title: "공구 삭제하기",
                                              style: .destructive) { alert in
                 
                 self.presentAlertWithCancelAction(title: "정말 삭제하시겠습니까?",

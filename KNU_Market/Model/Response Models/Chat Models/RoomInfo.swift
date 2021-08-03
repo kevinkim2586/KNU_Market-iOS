@@ -17,7 +17,6 @@ struct Post: Decodable {
     let isArchived: Bool
     let date: String
     
-    
     enum CodingKeys: String, CodingKey {
         
         case uuid = "UUID"

@@ -58,6 +58,7 @@ class ItemTableViewCell: UITableViewCell {
     func initializeTitleLabel() {
         
         itemTitleLabel.text = viewModel.title
+        itemTitleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
     }
 
     func initializeImageView() {
@@ -105,6 +106,7 @@ class ItemTableViewCell: UITableViewCell {
         let currentNum = viewModel.currentlyGatheredPeople
         let total = viewModel.totalGatheringPeople
         
+        currentlyGatheredPeopleLabel.textColor = UIColor.darkGray
         currentlyGatheredPeopleLabel.text = "\(currentNum)" + "/" + "\(total) 명"
         currentlyGatheredPeopleLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
         

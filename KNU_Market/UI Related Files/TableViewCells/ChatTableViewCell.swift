@@ -57,11 +57,13 @@ class ChatTableViewCell: UITableViewCell {
     
     func configureTitleLabel() {
         
+        chatTitleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
     }
     
     func configureChatParticipatingCountLabel() {
         
-        chatParticipatingCountLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        chatParticipatingCountLabel.textColor = UIColor.darkGray
+        chatParticipatingCountLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         
     }
 }

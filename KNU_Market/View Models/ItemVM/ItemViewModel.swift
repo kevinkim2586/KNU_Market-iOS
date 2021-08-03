@@ -101,7 +101,6 @@ class ItemViewModel {
                 self.delegate?.didDeletePost()
                 
             case .failure(let error):
-                print("❗️ ItemViewModel - FAILED deletePost")
                 self.delegate?.failedDeletingPost(with: error)
             }
         }

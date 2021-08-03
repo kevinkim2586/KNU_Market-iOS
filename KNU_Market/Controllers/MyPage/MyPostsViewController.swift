@@ -7,17 +7,15 @@ class MyPostsViewController: UIViewController {
     @IBOutlet var tableView: TableView!
     
     private let refreshControl = UIRefreshControl()
+    private var selectedIndex: Int?
     
     private var viewModel = HomeViewModel()
-    
-    private var selectedIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initialize()
     }
-
 }
 
 //MARK: - HomeViewModelDelegate

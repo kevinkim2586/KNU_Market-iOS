@@ -93,7 +93,7 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func reconnectSuggested() {
-        self.presentSimpleAlert(title: "일시적은 연결 오류입니다 🤔", message: "나갔다가 다시 채팅방으로 접속하시기 바랍니다.")
+        self.presentSimpleAlert(title: "네트워크가 현재 불안정합니다. 🧐", message: "네트워크 상태를 확인해주세요.")
         navigationController?.popViewController(animated: true)
     }
     

@@ -143,19 +143,7 @@ extension ChatViewModel {
             print("❗️ Error in didReceive: \(String(describing: reason?.localizedDescription))")
             self.delegate?.failedConnection(with: .E000)
             
-        case .binary(_):
-            print("❗️ ChatViewModel - didReceive binary error")
-        case .pong(_):
-            print("❗️ ChatViewModel - didReceive pong error")
-        case .ping(_):
-            print("❗️ ChatViewModel - didReceive ping error")
-        case .viabilityChanged(_):
-            print("❗️ ChatViewModel - didReceive viabilityChanged error")
-        case .cancelled:
-            print("❗️ ChatViewModel - didReceive cancelled error")
-        default:
-            print("❗️ ChatViewModel - didReceive DEFAULT ERROR ")
-            self.delegate?.failedConnection(with: .E000)
+        default: break
         }
     }
     

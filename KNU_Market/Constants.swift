@@ -65,6 +65,7 @@ struct Constants {
         
         // Others
         static let reportUserVC                 = "ReportUserViewController"
+        static let verifyEmailVC                = "VerifyEmailViewController"
         
         
         // StoryBoard ID Array
@@ -171,9 +172,6 @@ struct Constants {
                                                    "info.circle",
                                                    "book.closed"
                                                     ]
-//
-    }
-    
 
-    
+    }
 }

@@ -14,6 +14,9 @@
 		7C0E2DDD26B7B62600BB37FF /* Report.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C0E2DDC26B7B62600BB37FF /* Report.storyboard */; };
 		7C0E2DDF26B7D92800BB37FF /* String Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E2DDE26B7D92800BB37FF /* String Extension.swift */; };
 		7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */; };
+		7C0F1CB626BA64840068FF45 /* VerifyEmail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */; };
+		7C0F1CB826BA64B50068FF45 /* VerifyEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB726BA64B50068FF45 /* VerifyEmailViewController.swift */; };
+		7C0F1CBA26BA6B310068FF45 /* NotificationName Extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB926BA6B310068FF45 /* NotificationName Extension .swift */; };
 		7C132BF2265397B200BE5F40 /* Global Methods + Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */; };
 		7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF326552B4900BE5F40 /* UIButton Extension.swift */; };
 		7C184B8326B103F1006C0FAD /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C184B8226B103F1006C0FAD /* Room.swift */; };
@@ -115,6 +118,9 @@
 		7C0E2DDC26B7B62600BB37FF /* Report.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Report.storyboard; sourceTree = "<group>"; };
 		7C0E2DDE26B7D92800BB37FF /* String Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String Extension.swift"; sourceTree = "<group>"; };
 		7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
+		7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerifyEmail.storyboard; sourceTree = "<group>"; };
+		7C0F1CB726BA64B50068FF45 /* VerifyEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailViewController.swift; sourceTree = "<group>"; };
+		7C0F1CB926BA6B310068FF45 /* NotificationName Extension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName Extension .swift"; sourceTree = "<group>"; };
 		7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Methods + Variables.swift"; sourceTree = "<group>"; };
 		7C132BF326552B4900BE5F40 /* UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton Extension.swift"; sourceTree = "<group>"; };
 		7C184B8226B103F1006C0FAD /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
@@ -338,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				7C516C3A267F48300065E30D /* ReportUserViewController.swift */,
+				7C0F1CB726BA64B50068FF45 /* VerifyEmailViewController.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -424,6 +431,7 @@
 				7C184B8426B27B8B006C0FAD /* Chat.storyboard */,
 				7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */,
 				7C0E2DDC26B7B62600BB37FF /* Report.storyboard */,
+				7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */,
 			);
 			path = "View (Storyboards)";
 			sourceTree = "<group>";
@@ -505,6 +513,7 @@
 				7C132BF326552B4900BE5F40 /* UIButton Extension.swift */,
 				7C036AB72696BE4C00F6C29B /* Date Extension.swift */,
 				7C0E2DDE26B7D92800BB37FF /* String Extension.swift */,
+				7C0F1CB926BA6B310068FF45 /* NotificationName Extension .swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -683,6 +692,7 @@
 			files = (
 				7CCDB1F026A2BD0C0092F28D /* ItemTableViewCell.xib in Resources */,
 				7C184B8526B27B8B006C0FAD /* Chat.storyboard in Resources */,
+				7C0F1CB626BA64840068FF45 /* VerifyEmail.storyboard in Resources */,
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
 				7C3B4FE826A923AB00E2CA8F /* UserRegister.storyboard in Resources */,
@@ -756,6 +766,7 @@
 				7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */,
 				7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */,
 				7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */,
+				7C0F1CBA26BA6B310068FF45 /* NotificationName Extension .swift in Sources */,
 				7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
 				7C55545D266CDFD100C3C5B6 /* UploadItemRequestDTO.swift in Sources */,
@@ -821,6 +832,7 @@
 				7C60DC7426944C82001DEA9A /* OpenSourceInfoViewController.swift in Sources */,
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */,
+				7C0F1CB826BA64B50068FF45 /* VerifyEmailViewController.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
 				7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */,

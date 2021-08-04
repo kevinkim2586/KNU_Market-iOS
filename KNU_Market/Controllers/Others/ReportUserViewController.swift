@@ -1,6 +1,4 @@
 import UIKit
-import SnackBar_swift
-import ProgressHUD
 
 class ReportUserViewController: UIViewController {
     
@@ -62,7 +60,7 @@ class ReportUserViewController: UIViewController {
 }
 
 
-//MARK: - Initialization
+//MARK: - Initialization & UI Configuration
 
 extension ReportUserViewController {
     
@@ -93,7 +91,7 @@ extension ReportUserViewController {
     }
     
     func initializeButton() {
-        sendButton.layer.cornerRadius = 10
+        sendButton.layer.cornerRadius = 5
     }
     
     func initializeNavigationBar() {
@@ -110,7 +108,7 @@ extension ReportUserViewController {
         self.view.addSubview(navigationBar)
         
         let navItem = UINavigationItem(title: "")
-        let navBarButton = UIBarButtonItem(barButtonSystemItem: .close,
+        let navBarButton = UIBarButtonItem(barButtonSystemItem: .stop,
                                            target: self,
                                            action: #selector(dismissVC))
         navItem.leftBarButtonItem = navBarButton

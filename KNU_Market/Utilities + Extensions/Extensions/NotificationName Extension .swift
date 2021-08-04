@@ -1,8 +1,14 @@
-//
-//  NotificationName Extension .swift
-//  KNU_Market
-//
-//  Created by Kevin Kim on 2021/08/04.
-//
+import UIKit
 
-import Foundation
+extension Notification.Name {
+    
+    static let presentVerifyEmailVC = Notification.Name("co.wim.presentVerifyEmailVC")
+    
+    
+    static let updateChatList = Notification.Name("co.wim.updateChatList")
+    
+    
+    static let updateItemList = Notification.Name("co.wim.updateItemList")
+    
+
+}

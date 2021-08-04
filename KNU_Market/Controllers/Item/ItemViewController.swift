@@ -406,9 +406,6 @@ extension ItemViewController {
     
     func initializeEnterChatButton() {
         
-        print("✏️ user uploaded? \(viewModel.postIsUserUploaded)")
-        print("✏️ already joined? \(viewModel.userAlreadyJoinedPost)")
-        
         if viewModel.isGathering || viewModel.postIsUserUploaded || viewModel.userAlreadyJoinedPost {
             enterChatButton.isUserInteractionEnabled = true
             enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)

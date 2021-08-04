@@ -362,10 +362,15 @@ class UserManager {
     }
     
     //MARK: - 비밀번호 찾기
-    func findPassword(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func findPassword(email: String,
+                      completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let parameters: Parameters = [ "id" : email ]
         
         AF.request(findPasswordURL,
-                   method: .post)
+                   method: .post,
+                   parameters: parameters,
+                   encoding: JSONEncoding.default    )
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
@@ -373,6 +378,7 @@ class UserManager {
                 switch statusCode {
                 
                 case 201:
+                    print("✏️ UserManager - findPassword SUCCESS")
                     completion(.success(true))
                     
                 default:

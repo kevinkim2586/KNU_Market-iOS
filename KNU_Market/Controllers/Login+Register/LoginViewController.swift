@@ -1,5 +1,5 @@
 import UIKit
-import ProgressHUD
+import PanModal
 
 class LoginViewController: UIViewController {
 
@@ -48,14 +48,23 @@ class LoginViewController: UIViewController {
     // 아래 구현하기
     @IBAction func pressedFindPasswordButton(_ sender: UIButton) {
         
+        guard let findPasswordVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.findPasswordVC) as? FindPasswordViewController else { return }
         
+        findPasswordVC.delegate = self
+        
+        presentPanModal(findPasswordVC)
     }
     
     @objc func dismissVC() {
-        
         self.dismiss(animated: true)
     }
+}
 
+extension LoginViewController: FindPasswordDelegate {
+    
+    func didSendFindPasswordEmail() {
+        self.showSimpleBottomAlert(with: "발급받은 임시 비밀번호로 로그인해 주세요. 🎉")
+    }
 }
 
 //MARK: - UITextFieldDelegate

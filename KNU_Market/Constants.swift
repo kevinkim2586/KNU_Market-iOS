@@ -39,6 +39,7 @@ struct Constants {
         static let registerVC                   = "RegisterViewController"
         static let congratulateUserVC           = "CongratulateViewController"
         static let registerNavigationController = "RegisterNavigationController"
+        static let findPasswordVC               = "FindPasswordViewController"
     
         
         // Home & Item Tab

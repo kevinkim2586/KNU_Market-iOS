@@ -9,6 +9,7 @@ class VerifyEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        initialize()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -19,6 +20,7 @@ class VerifyEmailViewController: UIViewController {
 
     @IBAction func pressedResendEmailButton(_ sender: UIButton) {
         
+        //API 구현 예정
         
     }
     
@@ -51,6 +53,7 @@ extension VerifyEmailViewController {
     func initializeResendEmailButton() {
         
         resendEmailButton.layer.cornerRadius = resendEmailButton.frame.height / 2
+        resendEmailButton.addBounceAnimationWithNoFeedback()
     }
     
     func initializeNavigationBar() {
@@ -67,7 +70,7 @@ extension VerifyEmailViewController {
         self.view.addSubview(navigationBar)
         
         let navItem = UINavigationItem(title: "")
-        let navBarButton = UIBarButtonItem(barButtonSystemItem: .cancel,
+        let navBarButton = UIBarButtonItem(barButtonSystemItem: .stop,
                                            target: self,
                                            action: #selector(dismissVC))
         navItem.leftBarButtonItem = navBarButton

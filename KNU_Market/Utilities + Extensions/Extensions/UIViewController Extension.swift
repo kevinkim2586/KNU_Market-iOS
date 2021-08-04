@@ -61,6 +61,8 @@ extension UIViewController {
                             action?()
                         }).show()
     }
+    
+  
 }
 
 //MARK: - VC Router
@@ -96,8 +98,19 @@ extension UIViewController {
         self.present(reportVC, animated: true)
         
     }
+    
+    // 이메일 인증하기 VC
+    @objc func presentVerifyEmailVC() {
+        
+        let storyboard = UIStoryboard(name: "VerifyEmail", bundle: nil)
+        
+        guard let verifyEmailVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.verifyEmailVC) as? VerifyEmailViewController else { return }
+        
+        verifyEmailVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(verifyEmailVC, animated: true)
+    }
 }
-
 
 //MARK: - UI Related
 

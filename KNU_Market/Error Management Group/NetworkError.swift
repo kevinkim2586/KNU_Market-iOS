@@ -89,13 +89,21 @@ enum NetworkError: String, Error {
         do {
             let json = try JSON(data: json)
             let errorCode = json["errorCode"].stringValue
-            let errorMessage = json["errorMessage"].stringValue
+            _ = json["errorMessage"].stringValue
             let errorDescription = json["errorDescription"].stringValue
-            print("❗️ NetworkError - errorMessage: \(errorMessage)")
             print("❗️ NetworkError - errorDescription: \(errorDescription)")
-            print("❗️ NetworkError - errorCode: \(NetworkError(rawValue: errorCode))")
+            print("❗️ NetworkError - errorCode: \(String(describing: NetworkError(rawValue: errorCode)))")
+        
+            if errorCode == "E109" {
+                
+                print("✏️ NotificationCenter POST- presentVerifyEmailVC ACTIVATED")
+                NotificationCenter.default.post(name: Notification.Name.presentVerifyEmailVC, object: nil)
+            }
+            
+    
             return NetworkError(rawValue: errorCode) ?? .E000
         } catch {
+            print("❗️ NetworkError - catch has been ACTIVATED")
             return .E000
         }
     }

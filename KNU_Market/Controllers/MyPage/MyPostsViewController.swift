@@ -134,10 +134,12 @@ extension MyPostsViewController: UIScrollViewDelegate {
 extension MyPostsViewController {
     
     func initialize() {
-
+        
+        createObservers()
         viewModel.delegate = self
         viewModel.fetchItemList(fetchCurrentUsers: true)
         initializeTableView()
+        
 
     }
     
@@ -158,4 +160,8 @@ extension MyPostsViewController {
                                  for: .valueChanged)
     }
     
+    func createObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(presentVerifyEmailVC), name: Notification.Name.presentVerifyEmailVC, object: nil)
+    }
 }

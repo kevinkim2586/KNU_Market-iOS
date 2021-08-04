@@ -261,6 +261,8 @@ extension MyPageViewController {
     
     func initialize() {
         
+        createObservers()
+        
         viewModel.delegate = self
         
         self.navigationController?.view.backgroundColor = .white
@@ -300,6 +302,11 @@ extension MyPageViewController {
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.masksToBounds = true
 
+    }
+    
+    func createObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(presentVerifyEmailVC), name: Notification.Name.presentVerifyEmailVC, object: nil)
     }
     
 }

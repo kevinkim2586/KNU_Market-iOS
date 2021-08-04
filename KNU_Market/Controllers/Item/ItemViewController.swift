@@ -75,13 +75,7 @@ class ItemViewController: UIViewController {
         
         enterChatButton.loadingIndicator(true)
         
-        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-        guard let vc = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
-        
-        vc.room = pageID
-        vc.chatRoomTitle = viewModel.model?.title ?? ""
-        navigationController?.pushViewController(vc, animated: true)
-        enterChatButton.loadingIndicator(false)
+        viewModel.joinPost()
     }
     
     @objc func refreshPage() {
@@ -250,9 +244,30 @@ extension ItemViewController: ItemViewModelDelegate {
         
     }
     
+    func didEnterChat() {
+        
+        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
+        
+        vc.room = pageID
+        vc.chatRoomTitle = viewModel.model?.title ?? ""
+        
+        
+        
+        navigationController?.pushViewController(vc, animated: true)
+        enterChatButton.loadingIndicator(false)
+        
+    }
+    
+    func failedJoiningChat(with error: NetworkError) {
+        
+        self.showSimpleBottomAlert(with: error.errorDescription)
+        enterChatButton.loadingIndicator(false)
+    }
+    
 }
 
-//MARK: - UI Configuration
+//MARK: - UI Configuration & Initialization
 
 extension ItemViewController {
     

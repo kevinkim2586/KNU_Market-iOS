@@ -224,6 +224,7 @@ extension UploadItemViewController {
         initializeStepper()
         initializePickerView()
         initializeTextView()
+        createObservers()
         
         if self.editModel != nil {
             configurePageWithPriorData()
@@ -296,8 +297,11 @@ extension UploadItemViewController {
         if let imageURLs = editModel!.imageURLs {
             self.viewModel.editImageURLs = imageURLs
         }
-       
+    }
+    
+    func createObservers() {
         
+        NotificationCenter.default.addObserver(self, selector: #selector(presentVerifyEmailVC), name: Notification.Name.presentVerifyEmailVC, object: nil)
     }
     
 }

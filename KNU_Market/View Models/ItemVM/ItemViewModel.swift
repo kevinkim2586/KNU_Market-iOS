@@ -11,6 +11,9 @@ protocol ItemViewModelDelegate: AnyObject {
     
     func didMarkPostDone()
     func failedMarkingPostDone(with error: NetworkError)
+    
+    func didEnterChat()
+    func failedJoiningChat(with error: NetworkError)
 }
 
 class ItemViewModel {
@@ -128,6 +131,36 @@ class ItemViewModel {
                 
             case .failure(let error):
                 self.delegate?.failedMarkingPostDone(with: error)
+            }
+        }
+    }
+    
+    func joinPost() {
+        
+        ChatManager.shared.changeJoinStatus(function: .join,
+                                            pid: self.pageID ?? "error") { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success:
+                
+                self.delegate?.didEnterChat()
+                
+            case .failure(let error):
+                
+                print("❗️ ItemViewModel - joinPost error: \(error)")
+                
+                // 이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
+                if error == .E108 {
+                    
+                    self.delegate?.didEnterChat()
+         
+                
+                } else {
+                    self.delegate?.failedJoiningChat(with: error)
+                }
             }
         }
     }

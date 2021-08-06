@@ -23,7 +23,7 @@ class ChatListViewController: UIViewController {
 //MARK: - ChatListViewModelDelegate
 
 extension ChatListViewController: ChatListViewModelDelegate {
-    
+
     func didFetchChatList() {
      
         chatListTableView.refreshControl?.endRefreshing()
@@ -40,6 +40,21 @@ extension ChatListViewController: ChatListViewModelDelegate {
         }
     }
     
+    func didExitPost() {
+        
+    }
+    
+    func failedExitingPost(with error: NetworkError) {
+        
+    }
+    
+    func didDeleteAndExitPost() {
+        
+    }
+    
+    func failedDeletingAndExitingPost(with error: NetworkError) {
+        
+    }
 
 }
 
@@ -88,6 +103,25 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         
         if editingStyle == .delete {
             
+            if viewModel.currentRoomIsUserUploaded(at: indexPath.row) {
+                
+                print("✏️ currentRoomIsUserUploaded - TRUE")
+                
+                // TODO: - 수정 필요
+                //deleteAndExitPost()
+                
+                
+            } else {
+                
+                print("✏️ currentRoomIsUserUploaded - FALSE")
+                // exitPost
+                
+            }
+    
+            
+            
+            
+            
             self.presentAlertWithCancelAction(title: "정말 채팅방을 나가시겠습니까?",
                                               message: "채팅방을 나가면 대화 내용이 삭제되며 공구에서 나가기 처리됩니다.") { selectedOk in
                 
@@ -108,10 +142,14 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
+    func deleteCell(at indexPath: IndexPath) {
+        
+        
+    }
 
     
     @objc func refreshTableView() {
-        
         viewModel.fetchChatList()
     }
     
@@ -119,7 +157,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 
-//MARK: - UI Configuration
+//MARK: - UI Configuration & Initialization
 
 extension ChatListViewController {
     

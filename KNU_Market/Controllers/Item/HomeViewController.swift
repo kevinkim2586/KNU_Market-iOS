@@ -235,12 +235,10 @@ extension HomeViewController {
     }
     
     func createObservers() {
-        
-        let name = Notification.Name(rawValue: Constants.NotificationKey.updateItemList)
-        
+    
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(refreshTableView),
-                                               name: name,
+                                               name: Notification.Name.updateItemList,
                                                object: nil)
         
     }

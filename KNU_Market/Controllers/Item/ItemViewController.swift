@@ -205,8 +205,7 @@ extension ItemViewController: ItemViewModelDelegate {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
             
             self.navigationController?.popViewController(animated: true)
-            let name = Notification.Name(rawValue: Constants.NotificationKey.updateItemList)
-            NotificationCenter.default.post(name: name, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.updateItemList, object: nil)
             
         }
     }

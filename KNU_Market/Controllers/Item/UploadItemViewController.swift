@@ -93,8 +93,7 @@ extension UploadItemViewController: UploadItemDelegate {
         dismissProgressBar()
         print("✏️ UploadItemVC - didCompleteUpload")
         navigationController?.popViewController(animated: true)
-        let name = Notification.Name(rawValue: Constants.NotificationKey.updateItemList)
-        NotificationCenter.default.post(name: name, object: nil)
+        NotificationCenter.default.post(name: Notification.Name.updateItemList, object: nil)
     }
     
     func failedUploading(with error: NetworkError) {

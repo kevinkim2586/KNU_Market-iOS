@@ -42,6 +42,8 @@ extension ChatListViewController: ChatListViewModelDelegate {
     
     func didExitPost(at indexPath: IndexPath) {
         chatListTableView.deleteRows(at: [indexPath], with: .fade)
+        NotificationCenter.default.post(name: Notification.Name.updateItemList,
+                                        object: nil)
     }
     
     func failedExitingPost(with error: NetworkError) {
@@ -50,6 +52,8 @@ extension ChatListViewController: ChatListViewModelDelegate {
     
     func didDeleteAndExitPost(at indexPath: IndexPath) {
         chatListTableView.deleteRows(at: [indexPath], with: .fade)
+        NotificationCenter.default.post(name: Notification.Name.updateItemList,
+                                        object: nil)
     }
     
     func failedDeletingAndExitingPost(with error: NetworkError) {

@@ -7,6 +7,9 @@ struct Message: MessageType {
     var sender: SenderType
     var sentDate: Date
     var kind: MessageKind
+}
+
+extension Message {
     
     var messageId: String {
         return String(self.chat.chat_uid)

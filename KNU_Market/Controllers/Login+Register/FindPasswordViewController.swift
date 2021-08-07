@@ -75,11 +75,7 @@ extension FindPasswordViewController: PanModalPresentable {
         return nil
     }
     
-    var shortFormHeight: PanModalHeight {
-        return .contentHeight(view.bounds.height / 2)
-    }
-    
     var longFormHeight: PanModalHeight {
-        return .maxHeightWithTopInset(50)
+        return .maxHeightWithTopInset(view.bounds.height / 2)
     }
 }

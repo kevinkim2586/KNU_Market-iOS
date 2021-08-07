@@ -44,9 +44,7 @@ class ChatViewModel: WebSocketDelegate {
     
     // ChatVC 의 첫 viewDidLoad 이면 collectionView.scrollToLastItem 실행하게끔 위함
     var isFirstViewLaunch: Bool = true
-    
     var isFirstEntranceToChat: Bool = true
-    
     
     // Room Info (해당 방에 참여하고 있는 멤버 정보 등)
     var roomInfo: RoomInfo?
@@ -140,7 +138,12 @@ extension ChatViewModel {
             
         case .error(let reason):
             isConnected = false
-            print("❗️ Error in didReceive: \(String(describing: reason?.localizedDescription))")
+            print("❗️ Error in didReceive .error: \(String(describing: reason?.localizedDescription))")
+            
+            // 다시 한 번 소켓 연결 시도해보고 -> 되면 delegate 호출 X
+            
+            
+            
             self.delegate?.failedConnection(with: .E000)
             
         default: break

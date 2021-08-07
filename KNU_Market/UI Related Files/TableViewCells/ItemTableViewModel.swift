@@ -41,7 +41,7 @@ class ItemTableViewModel {
         }
         set {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             dateFormatter.locale = Locale(identifier:"ko_KR")
             guard let convertedDate = dateFormatter.date(from: newValue) else {
                 formattedDate = "날짜 표시 에러"

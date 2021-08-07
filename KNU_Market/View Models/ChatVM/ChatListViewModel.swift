@@ -6,10 +6,10 @@ protocol ChatListViewModelDelegate: AnyObject {
     func didFetchChatList()
     func failedFetchingChatList(with error: NetworkError)
     
-    func didExitPost()
+    func didExitPost(at indexPath: IndexPath)
     func failedExitingPost(with error: NetworkError)
     
-    func didDeleteAndExitPost()
+    func didDeleteAndExitPost(at indexPath: IndexPath)
     func failedDeletingAndExitingPost(with error: NetworkError)
   
 }
@@ -58,11 +58,10 @@ extension ChatListViewModel {
 
     
     // 공구 나가기
-    // 수정: completion handler 말고 delegate 으로 하기 
-    func exitPost(at index: Int,
-                  completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    // 수정: completion handler 말고 delegate 으로 하기
+    func exitPost(at indexPath: IndexPath) {
         
-        let roomPID = self.roomList[index].uuid
+        let roomPID = self.roomList[indexPath.row].uuid
         
             ChatManager.shared.changeJoinStatus(function: .exit,
                                                 pid: roomPID) { [weak self] result in
@@ -70,12 +69,13 @@ extension ChatListViewModel {
                 
                 switch result {
                 case .success:
-                    self.roomList.remove(at: index)
-                    completion(.success(true))
+                    self.roomList.remove(at: indexPath.row)
+                    self.delegate?.didExitPost(at: indexPath)
                 
                 case .failure(let error):
                     
-                    completion(.failure(error))
+                    self.delegate?.failedExitingPost(with: error)
+               
 
                 }
             }
@@ -83,7 +83,27 @@ extension ChatListViewModel {
     }
     
     // 공구 삭제 -> 내가 작성한 공구글이면 삭제와 동시에 채팅방도 모두 폭파
-    func deleteAndExitPost() {
+    func deleteMyPostAndExit(at indexPath: IndexPath) {
+        
+        let roomPID = self.roomList[indexPath.row].uuid
+        
+        ItemManager.shared.deletePost(uid: roomPID) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success:
+                
+                self.roomList.remove(at: indexPath.row)
+                self.delegate?.didDeleteAndExitPost(at: indexPath)
+                
+            case .failure(let error):
+                
+                self.delegate?.failedDeletingAndExitingPost(with: error)
+            }
+        }
+        
         
         
     }

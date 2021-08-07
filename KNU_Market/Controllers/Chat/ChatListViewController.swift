@@ -40,20 +40,20 @@ extension ChatListViewController: ChatListViewModelDelegate {
         }
     }
     
-    func didExitPost() {
-        
+    func didExitPost(at indexPath: IndexPath) {
+        chatListTableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     func failedExitingPost(with error: NetworkError) {
-        
+        self.showSimpleBottomAlert(with: "채팅방 나가기에 실패했습니다. 나중에 다시 시도해주세요.😥")
     }
     
-    func didDeleteAndExitPost() {
-        
+    func didDeleteAndExitPost(at indexPath: IndexPath) {
+        chatListTableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     func failedDeletingAndExitingPost(with error: NetworkError) {
-        
+        self.showSimpleBottomAlert(with: "공구 삭제 및 채팅방 나가기에 실패했습니다. 나중에 다시 시도해주세요.😥")
     }
 
 }
@@ -107,48 +107,30 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 print("✏️ currentRoomIsUserUploaded - TRUE")
                 
-                // TODO: - 수정 필요
-                //deleteAndExitPost()
+                self.presentAlertWithCancelAction(title: "",
+                                                  message: "") { selectedOk in
+                    
+                    if selectedOk {
+                        self.viewModel.deleteMyPostAndExit(at: indexPath)
+                    }
+                }
+                
                 
                 
             } else {
-                
                 print("✏️ currentRoomIsUserUploaded - FALSE")
-                // exitPost
-                
-            }
-    
-            
-            
-            
-            
-            self.presentAlertWithCancelAction(title: "정말 채팅방을 나가시겠습니까?",
-                                              message: "채팅방을 나가면 대화 내용이 삭제되며 공구에서 나가기 처리됩니다.") { selectedOk in
-                
-                if selectedOk {
+                self.presentAlertWithCancelAction(title: "채팅방에서 나가시겠습니까?",
+                                                  message: "'확인'을 누르시면 채팅방에서 나가기 처리됩니다.") { selectedOk in
                     
-                    self.viewModel.exitPost(at: indexPath.row) { result in
-                        
-                        switch result {
-                        case .success:
-                            DispatchQueue.main.async {
-                                tableView.deleteRows(at: [indexPath], with: .fade)
-                            }
-                        case .failure(let error):
-                            self.showSimpleBottomAlert(with: error.errorDescription)
-                        }
+                    if selectedOk {
+                        self.viewModel.exitPost(at: indexPath)
                     }
                 }
+                
             }
         }
     }
-    
-    func deleteCell(at indexPath: IndexPath) {
-        
-        
-    }
 
-    
     @objc func refreshTableView() {
         viewModel.fetchChatList()
     }

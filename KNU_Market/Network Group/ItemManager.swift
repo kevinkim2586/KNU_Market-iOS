@@ -45,7 +45,7 @@ class ItemManager {
                         completion(.success(decodedData))
                         
                     } catch {
-                        print("ItemManager - There was an error decoding JSON Data with error: \(error)")
+                        print("❗️ ItemManager - There was an error decoding JSON Data with error: \(error)")
                         completion(.failure(.E000))
                     }
                     

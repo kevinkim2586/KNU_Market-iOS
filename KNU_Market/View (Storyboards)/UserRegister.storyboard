@@ -405,7 +405,7 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="학교 이메일 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ezu-AL-VlM" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="학교 이메일 입력 @knu.ac.kr" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ezu-AL-VlM" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="20" y="304.5" width="294" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="oQO-YA-i7M"/>
@@ -653,7 +653,7 @@
             <size key="intrinsicContentSize" width="98" height="22"/>
         </designable>
         <designable name="ezu-AL-VlM">
-            <size key="intrinsicContentSize" width="118" height="23"/>
+            <size key="intrinsicContentSize" width="217" height="23"/>
         </designable>
     </designables>
     <resources>

@@ -67,7 +67,7 @@ class UserManager {
     func checkNicknameDuplicate(nickname: String,
                                 completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
-        let parameters: Parameters = ["nickname": nickname]
+        let parameters: Parameters = ["name": nickname]
         let headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue: HTTPHeaderValues.urlEncoded.rawValue]
         
         AF.request(checkNicknameDuplicateURL,
@@ -86,11 +86,13 @@ class UserManager {
                     do {
                         
                         let json = try JSON(data: response.data!)
-                        let result = json["duplicateNickname"].stringValue
+                        let result = json["isDuplicate"].boolValue
                         
                         print("✏️ USER MANAGER - duplicateNickname Result: \(result)")
                         
-                        result == "false" ? completion(.success(true)) : completion(.success(false))
+                        result == false ? completion(.success(true)) : completion(.success(false))
+                        
+//                        result == "false" ? completion(.success(true)) : completion(.success(false))
                         
                     } catch {
                         print("UserManager - checkDuplicate() catch error: \(error)")

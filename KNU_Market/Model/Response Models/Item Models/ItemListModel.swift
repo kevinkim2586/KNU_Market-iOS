@@ -6,22 +6,38 @@ struct ItemListModel: Decodable {
     
     let uuid: String
     let title: String
-    let imageUID: String?
     let location: Int
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
+    let isFull: Bool
+    let isCompletelyDone: Bool
     let date: String
-    
+    let imageUIDs: [Media]
+
     enum CodingKeys: String, CodingKey {
         
         case uuid = "UUID"
         case title
-        case imageUID = "image"
-        case location = "spotCategory"
+        case location
         case totalGatheringPeople = "maxHeadcount"
         case currentlyGatheredPeople = "currentHeadcount"
-        case date
-        
+        case isFull = "isHeadcountArchived"
+        case isCompletelyDone = "isArchived"
+        case date = "createDate"
+        case imageUIDs = "medias"
     }
+}
 
+struct Media: Decodable {
+    
+    let uid: String
+    let path: String
+    let userUID: String
+    let date: String
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case uid, path, date
+        case userUID = "userUid"
+    }
 }

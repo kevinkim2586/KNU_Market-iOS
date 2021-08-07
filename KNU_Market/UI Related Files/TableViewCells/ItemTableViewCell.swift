@@ -37,7 +37,7 @@ class ItemTableViewCell: UITableViewCell {
         viewModel.title = model.title
         viewModel.location = model.location
         viewModel.totalGatheringPeople = model.totalGatheringPeople
-        viewModel.imageUID = model.imageUID ?? ""
+        viewModel.imageUID = model.imageUIDs[0].uid
         viewModel.currentlyGatheredPeople = model.currentlyGatheredPeople
         viewModel.date = model.date
         
@@ -122,8 +122,4 @@ class ItemTableViewCell: UITableViewCell {
         dateLabel.text = viewModel.date
         dateLabel.textAlignment = .right
     }
-    
-    
-    
-    
 }

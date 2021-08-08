@@ -41,7 +41,7 @@ class ItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("ItemVC - pageID: \(pageID)")
+        print("✏️ ItemVC - pageID: \(pageID)")
         
         viewModel.fetchItemDetails(for: pageID)
         
@@ -250,8 +250,6 @@ extension ItemViewController: ItemViewModelDelegate {
         
         vc.room = pageID
         vc.chatRoomTitle = viewModel.model?.title ?? ""
-        
-        
         
         navigationController?.pushViewController(vc, animated: true)
         enterChatButton.loadingIndicator(false)

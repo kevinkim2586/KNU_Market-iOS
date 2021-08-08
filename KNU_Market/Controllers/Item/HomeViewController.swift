@@ -62,7 +62,7 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
-        showSimpleBottomAlert(with: error.errorDescription)
+        showSimpleBottomAlert(with: "사용자 정보 불러오기에 실패하였습니다. 로그아웃 후 다시 이용해 주세요.😥")
     }
   
     func didFetchItemList() {
@@ -74,10 +74,9 @@ extension HomeViewController: HomeViewModelDelegate {
     
     func failedFetchingItemList(with error: NetworkError) {
         
-        itemTableView.showErrorPlaceholder()
+//        itemTableView.showErrorPlaceholder()
         refreshControl.endRefreshing()
         itemTableView.tableFooterView = nil
-        self.showSimpleBottomAlert(with: "일시적인 연결 문제가 있습니다. 🥲")
     }
     
     func failedFetchingRoomPIDInfo(with error: NetworkError) {

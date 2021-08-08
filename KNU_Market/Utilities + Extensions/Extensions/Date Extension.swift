@@ -8,6 +8,7 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         
+        
         if self.compare(.isToday) {
             
             dateFormatter.dateFormat = "HH:mm"

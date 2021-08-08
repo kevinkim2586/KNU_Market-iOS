@@ -6,9 +6,12 @@ class ItemTableViewModel {
 
     var defaultImage: UIImage = UIImage(named: Constants.Images.defaultItemIcon)!
     
-    var imageUID: String = "" {
+    var imageUID: String? {
         didSet {
-            imageURL = URL(string: "\(Constants.API_BASE_URL)media/" + imageUID)
+            if let imageUID = imageUID {
+                imageURL = URL(string: "\(Constants.API_BASE_URL)media/" + imageUID)
+            }
+            
         }
     }
     
@@ -16,13 +19,9 @@ class ItemTableViewModel {
     
     var title: String = ""
   
-    var isGathering: Bool {
-        return currentlyGatheredPeople != totalGatheringPeople
-    }
+    var isFull: Bool = false
     
-//    var isDoneGathering: Bool {
-//
-//    }
+    var isCompletelyDone: Bool = false
     
     var currentlyGatheredPeople: Int = 1
     
@@ -47,7 +46,6 @@ class ItemTableViewModel {
                 formattedDate = "날짜 표시 에러"
                 return
             }
-            
             let calendar = Calendar.current
             
             if calendar.isDateInToday(convertedDate) {

@@ -37,9 +37,12 @@ class ItemTableViewCell: UITableViewCell {
         viewModel.title = model.title
         viewModel.location = model.location
         viewModel.totalGatheringPeople = model.totalGatheringPeople
-        viewModel.imageUID = model.imageUIDs[0].uid
         viewModel.currentlyGatheredPeople = model.currentlyGatheredPeople
+        viewModel.isFull = model.isFull
+        viewModel.isCompletelyDone = model.isCompletelyDone
         viewModel.date = model.date
+        
+        viewModel.imageUID = model.imageUIDs.isEmpty ? nil : model.imageUIDs[0].uid
         
         initialize()
     }
@@ -63,14 +66,15 @@ class ItemTableViewCell: UITableViewCell {
 
     func initializeImageView() {
         
-        if viewModel.imageUID.isEmpty {
-            itemImageView.image = viewModel.defaultImage
-        } else {
+        if viewModel.imageUID != nil {
+       
             itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             itemImageView.sd_setImage(with: viewModel.imageURL,
                                       placeholderImage: UIImage(named: Constants.Images.defaultItemIcon),
                                       options: .continueInBackground,
                                       completed: nil)
+        } else {
+            itemImageView.image = viewModel.defaultImage
         }
         itemImageView.contentMode = .scaleAspectFill
         itemImageView.layer.cornerRadius = 5
@@ -78,16 +82,21 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializeGatheringLabel() {
         
-        
-        if viewModel.isGathering {
+        if viewModel.isCompletelyDone {
+            
+            gatheringLabel.text = "공구 마감"
+            gatheringLabel.backgroundColor = UIColor.lightGray
+            
+        } else if viewModel.isFull {
+            
+            gatheringLabel.text = "모집 중"
+            gatheringLabel.backgroundColor = UIColor.lightGray
+            
+        } else {
+            
             gatheringLabel.text = "모집 중"
             gatheringLabel.backgroundColor = UIColor(named: Constants.Color.appColor)
-        
-        } else {
-            gatheringLabel.text = "마감"
-            gatheringLabel.backgroundColor = UIColor.lightGray
         }
-        
         
         gatheringLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .semibold)
         gatheringLabel.textColor = UIColor.white

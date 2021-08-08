@@ -157,8 +157,9 @@ class UserManager {
     func loadOtherUsersProfile(userUID: String,
                                completion: @escaping (Result<LoadOtherUserProfileModel, NetworkError>) -> Void) {
         
+
         let url = loadUserProfileURL + "/\(userUID)"
-        
+
         AF.request(url,
                    method: .get,
                    interceptor: interceptor)
@@ -201,7 +202,7 @@ class UserManager {
                 
                 switch statusCode {
                 
-                case 201:
+                case 200:
                     do {
                         let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)  
                         self.saveUserLoginInfo(with: decodedData)
@@ -212,12 +213,12 @@ class UserManager {
                         completion(.success(decodedData))
                         
                     } catch {
-                        print("User Manager - loadUserProfile() catch error \(error)")
+                        print("❗️ User Manager - loadUserProfile() catch error \(error)")
                         completion(.failure(.E000))
                     }
                     
                 default:
-                    print("loadUserProfile FAILED")
+                    print("❗️ loadUserProfile FAILED with statusCode: \(statusCode)")
                     let error = NetworkError.returnError(json: response.data!)
                     completion(.failure(error))
                 }
@@ -357,6 +358,7 @@ class UserManager {
                     completion(.success(true))
                 default:
                     let error = NetworkError.returnError(json: response.data!)
+                    print("error message: \(JSON(response.data!))")
                     print("logout FAILED with error code: \(statusCode) and error: \(error.errorDescription)")
                     completion(.failure(error))
                 }

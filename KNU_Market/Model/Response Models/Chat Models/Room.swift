@@ -8,7 +8,7 @@ struct Room: Decodable {
     let location: Int
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
-    let isArchived: Int
+    let isCompletelyDone: Int
     let date: String
     let imageCodes: [String]
     let userUID: String
@@ -18,8 +18,9 @@ struct Room: Decodable {
         case uuid = "UUID"
         case title, content, location
         case totalGatheringPeople = "maxHeadcount"
-        case currentlyGatheredPeople = "currenHheadcount"
-        case isArchived, date
+        case currentlyGatheredPeople = "currentHeadcount"
+        case isCompletelyDone = "isArchived"
+        case date
         case imageCodes = "images"
         case userUID = "userUid"
     }

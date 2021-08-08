@@ -33,20 +33,27 @@ class ChatManager {
                    method: method,
                    interceptor: interceptor)
             .validate()
-            .responseData { response in
+            .responseJSON { response in
                 
-                switch response.result {
+                guard let statusCode = response.response?.statusCode else { return }
                 
-                case .success:
+                switch statusCode {
+                
+                case 200:
                     print("✏️ ChatManager - changeJoinStatus SUCCESS")
                     completion(.success(true))
-                case .failure:
+                
+//                case 403:
+//                    print("✏️ ChatManager - 이미 참여하고 있는 공구")
+//                    completion(.success(true))
+                    
+                default:
                     let error = NetworkError.returnError(json: response.data!)
                     print("❗️ ChatManager - changeJoinStatus error with code: \(response.response!.statusCode) and error: \(error.errorDescription)")
                     completion(.failure(error))
-                    
-                    
                 }
+                
+
             }
     }
     

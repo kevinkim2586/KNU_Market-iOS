@@ -57,11 +57,11 @@ class ChatViewController: MessagesViewController {
         
         guard let chatMemberVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatMemberVC) as? ChatMemberViewController else { return }
         
-        print("✏️ postUploaderUID: \(postUploaderUID)")
+        print("✏️ postUploaderUID: \(viewModel.postUploaderUID)")
         
         chatMemberVC.delegate = self
         chatMemberVC.roomInfo = viewModel.roomInfo
-        chatMemberVC.postUploaderUID = self.postUploaderUID
+        chatMemberVC.postUploaderUID = viewModel.postUploaderUID
         presentPanModal(chatMemberVC)
     }
     

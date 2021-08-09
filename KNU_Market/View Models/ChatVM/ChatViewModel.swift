@@ -366,5 +366,8 @@ extension ChatViewModel {
 //        else { return true }
     }
     
+    var postUploaderUID: String {
+        return self.roomInfo?.post.user.uid ?? ""
+    }
 }
 

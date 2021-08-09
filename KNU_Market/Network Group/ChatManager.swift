@@ -39,13 +39,9 @@ class ChatManager {
                 
                 switch statusCode {
                 
-                case 200:
+                case 201:
                     print("✏️ ChatManager - changeJoinStatus SUCCESS")
                     completion(.success(true))
-                
-//                case 403:
-//                    print("✏️ ChatManager - 이미 참여하고 있는 공구")
-//                    completion(.success(true))
                     
                 default:
                     let error = NetworkError.returnError(json: response.data!)

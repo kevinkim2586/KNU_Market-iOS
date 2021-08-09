@@ -98,8 +98,7 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
             cell.nicknameLabel.text = "사용자 정보 불러오기에 실패했습니다. 🧐"
             cell.reportUserButton.isHidden = true
         }
-        
-
+    
         tableView.tableFooterView = UIView(frame: .zero)
         return cell
     }

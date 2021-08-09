@@ -21,7 +21,6 @@ struct Post: Decodable {
     let medias: [Media]
     let user: UploaderInfo
     
-    
     enum CodingKeys: String, CodingKey {
         
         case uuid = "UUID"

@@ -59,7 +59,6 @@ class ChangeNicknameViewController: UIViewController {
             }
         }
         dismissProgressBar()
-        
 
     }
     
@@ -76,9 +75,7 @@ class ChangeNicknameViewController: UIViewController {
             case .success(let isDuplicate):
                 
                 if isDuplicate {
-                    
                     DispatchQueue.main.async {
-                        
                         self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😅",
                                                               for: .normal)
                         self.didCheckNicknameDuplicate = false
@@ -92,13 +89,11 @@ class ChangeNicknameViewController: UIViewController {
                     }
                 }
                 
-            case .failure(let error):
+            case .failure(_):
                 self.showSimpleBottomAlert(with: "일시적인 네트워크 오류. 잠시 후 다시 시도해주세요 🥲")
-                print("Error in checking duplicate: \(error.errorDescription)")
             }
         }
     }
-    
     
     func validateUserInput() -> Bool {
         
@@ -117,7 +112,6 @@ class ChangeNicknameViewController: UIViewController {
         return true
     }
 }
-
 
 //MARK: - UITextFieldDelegate
 

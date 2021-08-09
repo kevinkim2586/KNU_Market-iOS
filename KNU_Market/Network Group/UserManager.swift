@@ -13,7 +13,7 @@ class UserManager {
     //MARK: - API Request URLs
     let registerURL                 = "\(Constants.API_BASE_URL)auth"
     let loginURL                    = "\(Constants.API_BASE_URL)login"
-    let checkNicknameDuplicateURL   = "\(Constants.API_BASE_URL)duplicate/nickname"
+    let checkNicknameDuplicateURL   = "\(Constants.API_BASE_URL)duplicate"
     let logoutURL                   = "\(Constants.API_BASE_URL)logout"
     let requestAccessTokenURL       = "\(Constants.API_BASE_URL)token"
     let findPasswordURL             = "\(Constants.API_BASE_URL)findpassword"
@@ -90,9 +90,7 @@ class UserManager {
                         
                         print("✏️ USER MANAGER - duplicateNickname Result: \(result)")
                         
-                        result == false ? completion(.success(true)) : completion(.success(false))
-                        
-//                        result == "false" ? completion(.success(true)) : completion(.success(false))
+                        result == false ? completion(.success(false)) : completion(.success(true))
                         
                     } catch {
                         print("UserManager - checkDuplicate() catch error: \(error)")
@@ -170,7 +168,7 @@ class UserManager {
                 
                 switch statusCode {
                 
-                case 201:
+                case 200:
                     
                     do {
                         let decodedData = try JSONDecoder().decode(LoadOtherUserProfileModel.self, from: response.data!)
@@ -182,7 +180,7 @@ class UserManager {
                     }
                     
                 default:
-                    print("❗️ loadOtherUsersProfile FAILED ")
+                    print("❗️ loadOtherUsersProfile FAILED with statusCode: \(statusCode)")
                     let error = NetworkError.returnError(json: response.data!)
                     completion(.failure(error))
                 }
@@ -333,33 +331,6 @@ class UserManager {
                 default:
                     print("UserManager - updateUserNickname failed default statement")
                     let error = NetworkError.returnError(json: response.data!)
-                    completion(.failure(error))
-                }
-            }
-    }
-    
-    //MARK: - 로그아웃
-    func logOut(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
-        
-        AF.request(logoutURL,
-                   method: .delete,
-                   interceptor: interceptor)
-            .validate()
-            .responseJSON { response in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                
-                case 201:
-                    
-                    User.shared.resetAllUserInfo()
-                    print("logout success")
-                    completion(.success(true))
-                default:
-                    let error = NetworkError.returnError(json: response.data!)
-                    print("error message: \(JSON(response.data!))")
-                    print("logout FAILED with error code: \(statusCode) and error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }

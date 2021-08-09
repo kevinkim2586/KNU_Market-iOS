@@ -32,25 +32,8 @@ class SettingsViewController: UIViewController {
             
             if selectedOk {
                 
-                UserManager.shared.logOut { [weak self] result in
-                    
-                    guard let self = self else { return }
-                    
-                    switch result {
-                    
-                    case .success(_):
-                        DispatchQueue.main.async {
-                            self.popToInitialViewController()
-                        }
-                        
-                    case .failure(let error):
-                        self.showSimpleBottomAlertWithAction(message: error.errorDescription,
-                                                             buttonTitle: "재시도") {
-                            DispatchQueue.main.async {
-                                self.pressedLogOutButton(self.logOutButton)
-                            }
-                        }
-                    }
+                DispatchQueue.main.async {
+                    self.popToInitialViewController()
                 }
             }
         }

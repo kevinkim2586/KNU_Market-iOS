@@ -11,6 +11,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        
+        // Observer for refresh token expiration
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(refreshTokenHasExpired),
+                                               name: Notification.Name.refreshTokenExpired,
+                                               object: nil)
+    
 
         
         if #available(iOS 10.0, *) {
@@ -155,4 +162,21 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
     completionHandler()
   }
+}
+
+//MARK: - Observers
+
+extension AppDelegate {
+    
+    @objc func refreshTokenHasExpired() {
+        
+        guard let keywindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
+              let rootVC = keywindow.rootViewController else {
+            return
+        }
+        
+        rootVC.presentSimpleAlert(title: "로그인 세션 만료 🤔", message: "세션이 만료되었습니다. 다시 로그인해 주세요.")
+        rootVC.popToInitialViewController()
+    }
+
 }

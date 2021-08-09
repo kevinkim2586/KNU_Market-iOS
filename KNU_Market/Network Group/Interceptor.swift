@@ -57,15 +57,14 @@ final class Interceptor: RequestInterceptor {
                 case .failure(let error):
                     
                     if error == .E301 {
-                        print("Interceptor - 세션이 만료되었습니다. 다시 로그인 요망")
-                        
-                        //TODO: - change root view controller!
-                        // 바로 self.poptoroot 이런건 안 될테니
-                        // observer 패턴으로 해야할듯
+                    
+                        print("❗️ Interceptor - 세션이 만료되었습니다. 다시 로그인 요망 ")
+                        NotificationCenter.default.post(name: Notification.Name.refreshTokenExpired,
+                                                        object: nil)
                         
                     }
                     else {
-                        print("Interceptor - 이건 뭔 에러지?")
+                        print("❗️ Interceptor - 이건 뭔 에러지?")
                         completion(.doNotRetry)
                     }
                     
@@ -77,7 +76,6 @@ final class Interceptor: RequestInterceptor {
                 completion(.doNotRetry)
             }
             completion(.doNotRetry)
-        
         }
     }
     

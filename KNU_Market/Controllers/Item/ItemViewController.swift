@@ -305,6 +305,7 @@ extension ItemViewController {
         
         viewModel.delegate = self
         
+        createObservers()
         initializeScrollView()
         initializeProfileImageView()
         initializeTitleView()
@@ -318,6 +319,14 @@ extension ItemViewController {
         initializeLocationLabel()
         initializeBottomView()
         initializeSlideShow()
+    }
+    
+    func createObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(refreshPage),
+                                               name: Notification.Name.didUpdatePost,
+                                               object: nil)
     }
     
     func initializeScrollView() {

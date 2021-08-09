@@ -14,6 +14,7 @@ class ItemManager {
     let baseURL                       = "\(Constants.API_BASE_URL)posts"
     let searchURL                     = "\(Constants.API_BASE_URL)search"
     let markCompleteURL               = "\(Constants.API_BASE_URL)posts/complete/"
+
     
     //MARK: - 공구글 목록 불러오기
     func fetchItemList(at index: Int,
@@ -79,11 +80,40 @@ class ItemManager {
                     
                 default:
                     let error = NetworkError.returnError(json: response.data!)
-                    print("ItemManager - uploadNewItem failed with error: \(error.errorDescription)")
+                    print("❗️ ItemManager - uploadNewItem failed with error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }
+    }
+    
+    //MARK: - 공구글 수정
+    func updatePost(uid: String,
+                  with model: UpdatePostRequestDTO,
+                  completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         
+        let url = baseURL + "/\(uid)"
+        
+        AF.request(url,
+                   method: .put,
+                   parameters: model.parameters,
+                   encoding: JSONEncoding.default,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    print("✏️ ItemManager - editPost SUCCESS")
+                    completion(.success(true))
+                default:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("❗️ ItemManager - editPost FAILED with statusCode: \(statusCode) and reason: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+            }
     }
     
     //MARK: - 특정 공구글 불러오기
@@ -147,7 +177,7 @@ class ItemManager {
                     
                 default:
                     let error = NetworkError.returnError(json: response.data!)
-                    print("ItemManager deletePost error: \(error.errorDescription) and statusCode: \(statusCode)")
+                    print("❗️ ItemManager deletePost error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
             }
@@ -216,15 +246,11 @@ class ItemManager {
                     
                 case .failure:
                     let error = NetworkError.returnError(json: response.data!)
-                    print("❗️ ItemManager - markPostDone FAILED with error: \(error.errorDescription) and statusCode: \(response.response?.statusCode)")
+                    print("❗️ ItemManager - markPostDone FAILED with error: \(error.errorDescription) and statusCode: \(String(describing: response.response?.statusCode))")
                     completion(.failure(error))
                     
                 }
-                
             }
-        
-        
     }
-    
 }
     

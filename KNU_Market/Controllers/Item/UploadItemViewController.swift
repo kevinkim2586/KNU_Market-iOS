@@ -24,7 +24,6 @@ class UploadItemViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         dismissProgressBar()
     }
     
@@ -39,16 +38,24 @@ class UploadItemViewController: UIViewController {
         
         if !validateUserInput() { return }
         
+        if self.editModel != nil {
+            askToUpdatePost()
+        } else {
+            askToUploadPost()
+        }
+        
+
+    }
+
+    func askToUploadPost() {
+        
         self.presentAlertWithCancelAction(title: "작성하신 글을 올리시겠습니까?", message: "") { selectedOk in
             
             if selectedOk {
-                
                 showProgressBar()
                 
                 if !self.viewModel.userSelectedImages.isEmpty {
-                    
                     self.viewModel.uploadImageToServerFirst()
-                    
                 } else {
                     self.viewModel.uploadItem()
                 }
@@ -56,6 +63,24 @@ class UploadItemViewController: UIViewController {
         }
     }
     
+    func askToUpdatePost() {
+        
+        self.presentAlertWithCancelAction(title: "수정하시겠습니까?",
+                                          message: "") { selectedOk in
+            
+            if selectedOk {
+                showProgressBar()
+                
+                if !self.viewModel.userSelectedImages.isEmpty {
+                    self.viewModel.deletePriorImagesInServerFirst()
+                } else {
+                    self.viewModel.updatePost()
+                }
+            }
+        }
+    }
+    
+
     func validateUserInput() -> Bool {
         
         guard let itemTitle = itemTitleTextField.text else {
@@ -90,17 +115,32 @@ extension UploadItemViewController: UploadItemDelegate {
     
     func didCompleteUpload() { 
         
-        dismissProgressBar()
         print("✏️ UploadItemVC - didCompleteUpload")
+        dismissProgressBar()
         navigationController?.popViewController(animated: true)
         NotificationCenter.default.post(name: Notification.Name.updateItemList, object: nil)
     }
     
     func failedUploading(with error: NetworkError) {
         
-        dismissProgressBar()
         print("✏️ UploadItemVC - failedUploading: \(error.errorDescription)")
+        dismissProgressBar()
         self.showSimpleBottomAlert(with: "업로드 실패: \(error.errorDescription)")
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func didUpdatePost() {
+        
+        print("✏️ UploadItemVC - didUpdatePost")
+        dismissProgressBar()
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func failedUpdatingPost(with error: NetworkError) {
+
+        print("✏️ UploadItemVC - failedUpdatingPost: \(error.errorDescription)")
+        dismissProgressBar()
+        self.showSimpleBottomAlert(with: NetworkError.E000.errorDescription)
         navigationController?.popViewController(animated: true)
     }
 }
@@ -279,23 +319,33 @@ extension UploadItemViewController {
     func configurePageWithPriorData() {
         
         print("✏️ configurePageWithPriorData ACTIVATED")
-      
+        
+        viewModel.editPostModel = editModel
+        
+        viewModel.itemTitle = editModel!.title
+        viewModel.location = editModel!.location
+        viewModel.peopleGathering = editModel!.totalGatheringPeople
+        viewModel.itemDetail = editModel!.itemDetail
+        viewModel.currentlyGatheredPeople = editModel!.currentlyGatheredPeople
+        
+        // 이미지 url 이 있으면 실행
+        if let imageURLs = editModel!.imageURLs, let imageUIDs = editModel!.imageUIDs {
+            self.viewModel.priorImageURLs = imageURLs
+            self.viewModel.priorImageUIDs = imageUIDs
+        }
+    
         itemTitleTextField.text = editModel!.title
         
         // 현재 모집된 인원이 1명이면, 최소 모집 인원인 2명으로 자동 설정할 수 있게끔 실행
         stepper.minimumValue = editModel!.currentlyGatheredPeople == 1 ? 2 : Double(editModel!.currentlyGatheredPeople)
         stepper.value = Double(editModel!.currentlyGatheredPeople)
         
-        totalGatheringPeopleLabel.text = String(editModel!.totalGatheringPeople)
+        totalGatheringPeopleLabel.text = String(editModel!.totalGatheringPeople) + " 명"
         tradeLocationTextField.text = self.viewModel.locationArray[editModel!.location]
         
         itemDetailTextView.text = editModel!.itemDetail
         itemDetailTextView.textColor = UIColor.black
-        
-        // 이미지 url 이 있으면 실행
-        if let imageURLs = editModel!.imageURLs {
-            self.viewModel.editImageURLs = imageURLs
-        }
+    
     }
     
     func createObservers() {

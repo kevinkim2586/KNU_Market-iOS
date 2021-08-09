@@ -4,7 +4,7 @@ import TextFieldEffects
 class EmailInputViewController: UIViewController {
     
     @IBOutlet weak var firstLineLabel: UILabel!
-
+    
     @IBOutlet weak var secondLineLabel: UILabel!
     @IBOutlet weak var thirdLineLabel: UILabel!
     @IBOutlet weak var fourthLineLabel: UILabel!
@@ -25,6 +25,8 @@ class EmailInputViewController: UIViewController {
         
         if !checkIfValidEmail() { return }
         
+        emailTextField.resignFirstResponder()
+        
         UserRegisterValues.shared.email = emailTextField.text!
         
         registerUser()
@@ -33,8 +35,6 @@ class EmailInputViewController: UIViewController {
     func registerUser() {
         
         showProgressBar()
-        
-        print("✏️ image: \(UserRegisterValues.shared.profileImage)")
         
         let model = RegisterRequestDTO(id: UserRegisterValues.shared.email,
                                        password: UserRegisterValues.shared.password,
@@ -49,7 +49,6 @@ class EmailInputViewController: UIViewController {
             
             switch result {
             case .success:
-                
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: Constants.SegueID.goToCheckEmailVC, sender: self)
                 }
@@ -74,8 +73,8 @@ extension EmailInputViewController {
     func initializeTextFields() {
         
         emailTextField.addTarget(self,
-                              action: #selector(textFieldDidChange(_:)),
-                              for: .editingChanged)
+                                 action: #selector(textFieldDidChange(_:)),
+                                 for: .editingChanged)
     }
     
     func initializeLabels() {
@@ -97,7 +96,7 @@ extension EmailInputViewController {
             label.textColor = .lightGray
         }
     }
-
+    
 }
 
 //MARK: - User Input Validation
@@ -115,10 +114,10 @@ extension EmailInputViewController {
             return false
         }
         
-//        guard email.contains("@knu.ac.kr") else {
-//            showErrorMessage(message: "경북대학교 이메일이 맞는지 확인해 주세요. 🧐")
-//            return false
-//        }
+        //        guard email.contains("@knu.ac.kr") else {
+        //            showErrorMessage(message: "경북대학교 이메일이 맞는지 확인해 주세요. 🧐")
+        //            return false
+        //        }
         
         guard email.count > 10 else {
             showErrorMessage(message: "유효한 이메일인지 확인해 주세요. 👀")

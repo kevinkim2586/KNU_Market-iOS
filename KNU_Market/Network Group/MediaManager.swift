@@ -12,6 +12,7 @@ class MediaManager {
     
     let uploadImageURL              = "\(Constants.API_BASE_URL)media"
     let requestMediaURL             = "\(Constants.API_BASE_URL)media/"
+    let deleteMediaURL              = "\(Constants.API_BASE_URL)media/"
     
     var imageUIDs: [String] = [String]()
     
@@ -82,5 +83,30 @@ class MediaManager {
         }
     }
     
-    
+    //MARK: - 이미지 삭제
+    func deleteImage(uid: String,
+                     completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+        
+        let url = deleteMediaURL + uid
+        
+        AF.request(url,
+                   method: .delete,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    print("✏️ MediaManager - deleteImage SUCCESS for uid: \(uid)")
+                    completion(.success(true))
+                default:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("❗️ MediaManager - deleteImage FAILED with statusCode: \(statusCode) and reason: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+            }
+    }
 }

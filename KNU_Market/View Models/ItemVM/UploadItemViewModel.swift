@@ -4,11 +4,14 @@ import UIKit
 protocol UploadItemDelegate: AnyObject {
     func didCompleteUpload()
     func failedUploading(with error: NetworkError)
+    
+    func didUpdatePost()
+    func failedUpdatingPost(with error: NetworkError)
 }
 
 class UploadItemViewModel {
     
-    //MARK: - Object Properties
+    //MARK: - Properties
     weak var delegate: UploadItemDelegate?
     
     var itemTitle: String = ""
@@ -28,16 +31,19 @@ class UploadItemViewModel {
     
     lazy var imageUIDs: [String] = []
     
-    lazy var editImageURLs: [URL] = [] {
-        didSet { convertImageURLsToUIImage() }
+    //MARK: - Properties for updating post
+    var editPostModel: EditPostModel?
+    
+    lazy var priorImageURLs: [URL] = [] {
+        didSet {
+            convertImageURLsToUIImage()
+            convertUIImagesToDataFormat()
+        }
     }
     
-    //MARK: - Initialization
+    lazy var priorImageUIDs: [String] = []
     
-    init() {
-    
-    }
-    
+    lazy var currentlyGatheredPeople: Int = 1
     
     //MARK: - API
     func uploadImageToServerFirst() {
@@ -57,15 +63,14 @@ class UploadItemViewModel {
                 guard let self = self else { return }
                 
                 switch result {
-                
                 case .success(let uid):
-                    print("UploadItemVM: success in uploading image with uid: \(uid)")
+                    print("✏️ UploadItemVM: success in uploading image with uid: \(uid)")
                     self.imageUIDs.append(uid)
                 case .failure(let error):
-                    print("UploadItemVM: failed uploading image with error: \(error.errorDescription)")
+                    print("✏️ UploadItemVM: failed uploading image with error: \(error.errorDescription)")
                     self.delegate?.failedUploading(with: error)
                 }
-                print("group.leave() called")
+                print("✏️ group.leave() called")
                 group.leave()
             }
         }
@@ -80,10 +85,10 @@ class UploadItemViewModel {
     func uploadItem() {
         
         let model = UploadItemRequestDTO(title: itemTitle,
-                                    location: location,
-                                    peopleGathering: peopleGathering,
-                                    imageUIDs: imageUIDs,
-                                    detail: itemDetail)
+                                         location: location,
+                                         peopleGathering: peopleGathering,
+                                         imageUIDs: imageUIDs,
+                                         detail: itemDetail)
         
         ItemManager.shared.uploadNewItem(with: model) { [weak self] result in
             
@@ -92,13 +97,60 @@ class UploadItemViewModel {
             switch result {
             
             case .success(_):
-                
                 self.delegate?.didCompleteUpload()
-                
             case .failure(let error):
-                
                 print("UploadItemViewModel - uploadItem() failed: \(error.errorDescription)")
                 self.delegate?.failedUploading(with: error)
+            }
+        }
+    }
+    
+    func deletePriorImagesInServerFirst() {
+        
+        let group = DispatchGroup()
+        
+        for imageUID in self.priorImageUIDs {
+            
+            group.enter()
+            MediaManager.shared.deleteImage(uid: imageUID) { result in
+    
+                switch result {
+                case .success: break
+                case .failure(let error):
+                    print("❗️ UploadItemViewModel - deletePriorImagesInServerFirst error: \(error.errorDescription)")
+                }
+                print("✏️ group.leave() called")
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            print("✏️ Dispatch Group has ended.")
+            self.updatePost()
+        }
+        
+    }
+    
+    func updatePost() {
+        
+        let model = UpdatePostRequestDTO(title: itemTitle,
+                                         location: location,
+                                         detail: itemDetail,
+                                         imageUIDs: priorImageUIDs,
+                                         totalGatheringPeople: peopleGathering,
+                                         currentlyGatheredPeople: currentlyGatheredPeople)
+        
+        ItemManager.shared.updatePost(uid: self.editPostModel?.pageUID ?? "",
+                                      with: model) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(_):
+                self.delegate?.didUpdatePost()
+                NotificationCenter.default.post(name: Notification.Name.didUpdatePost, object: nil)
+            case .failure(let error):
+                self.delegate?.failedUpdatingPost(with: error)
             }
         }
     }
@@ -128,7 +180,7 @@ class UploadItemViewModel {
             if let imageData = image.jpegData(compressionQuality: 1.0) {
                 return imageData
             } else {
-                print("Unable to convert UIImage to Data type")
+                print("❗️ Unable to convert UIImage to Data type")
                 return Data()
             }
         })
@@ -136,11 +188,10 @@ class UploadItemViewModel {
     
     func convertImageURLsToUIImage() {
         
-        userSelectedImages = editImageURLs.compactMap({ url in
+        userSelectedImages = priorImageURLs.compactMap ({ url in
         
             let imageData = try? Data(contentsOf: url)
             return UIImage(data: imageData ?? Data())
         })
     }
-    
 }

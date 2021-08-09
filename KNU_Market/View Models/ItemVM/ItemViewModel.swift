@@ -48,7 +48,7 @@ class ItemViewModel {
     }
     
     var location: String {
-        return Location.listForCell[model?.location ?? Location.listForCell.count]
+        return Location.listForCell[model?.location ?? Location.listForCell.count - 1]
     }
     
     var date: String {
@@ -69,10 +69,12 @@ class ItemViewModel {
     var modelForEdit: EditPostModel {
         let editPostModel = EditPostModel(title: self.model?.title ?? "",
                                           imageURLs: self.imageURLs,
+                                          imageUIDs: self.model?.imageUIDs,
                                           totalGatheringPeople: self.totalGatheringPeople,
                                           currentlyGatheredPeople: self.currentlyGatheredPeople,
                                           location: self.model?.location ?? 0,
-                                          itemDetail: self.model?.itemDetail ?? "")
+                                          itemDetail: self.model?.itemDetail ?? "",
+                                          pageUID: self.pageID ?? "")
         return editPostModel
     }
     
@@ -89,12 +91,13 @@ class ItemViewModel {
             
             case .success(let fetchedModel):
                 
+                print("✏️ model: \(fetchedModel.location)")
                 self.model = fetchedModel
                 self.delegate?.didFetchItemDetails()
                 
             case .failure(let error):
                 
-                print("ItemViewModel - FAILED fetchItemDetails")
+                print("❗️ ItemViewModel - FAILED fetchItemDetails")
                 self.delegate?.failedFetchingItemDetails(with: error)
             }
         }

@@ -106,7 +106,7 @@ extension PasswordInputViewController {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         
-        thirdLineLabel.text = "4자 이상, 30자 이하로 적어주세요."
+        thirdLineLabel.text = "8자 이상, 30자 이하로 적어주세요."
         thirdLineLabel.textColor = .lightGray
     }
 }

@@ -12,5 +12,7 @@ extension Notification.Name {
     
     static let refreshTokenExpired = Notification.Name("co.wim.refreshTokenExpired")
     
+    static let didUpdatePost = Notification.Name("co.wim.didUpdatePost")
+    
 
 }

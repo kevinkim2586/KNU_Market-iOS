@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--건의사항-->
+        <!--Verify Email-->
         <scene sceneID="JoG-Qm-do4">
             <objects>
-                <viewController storyboardIdentifier="VerifyEmailViewController" hidesBottomBarWhenPushed="YES" id="K3x-GW-o9z" customClass="VerifyEmailViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VerifyEmailViewController" hidesBottomBarWhenPushed="YES" id="K3x-GW-o9z" userLabel="Verify Email" customClass="VerifyEmailViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wu8-2p-4XO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

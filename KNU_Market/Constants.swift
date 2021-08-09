@@ -174,4 +174,11 @@ struct Constants {
                                                     ]
 
     }
+    
+    //MARK: - Others
+    
+    struct DateFormat {
+        
+        static let defaultFormat                = "yyyy-MM-dd HH:mm:ss"
+    }
 }

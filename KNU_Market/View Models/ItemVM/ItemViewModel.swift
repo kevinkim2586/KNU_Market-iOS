@@ -188,7 +188,6 @@ extension ItemViewModel {
     func convertURLsToImageSource() {
         
         self.imageSources.removeAll()
-        
         for url in self.imageURLs {
             imageSources.append(SDWebImageSource(url: url,
                                                  placeholder: UIImage(named: Constants.Images.defaultItemImage)))
@@ -198,16 +197,24 @@ extension ItemViewModel {
     func formatDateForDisplay() -> String {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        let convertedDate = dateFormatter.date(from: model!.date)
+        dateFormatter.dateFormat = Constants.DateFormat.defaultFormat
+        dateFormatter.locale = Locale(identifier:"ko_KR")
         
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        
-        if let date = convertedDate {
-            let finalDate = dateFormatter.string(from: date)
-            return finalDate
-        } else {
+        guard let convertedDate = dateFormatter.date(from: model!.date) else {
             return "날짜 표시 에러"
+        }
+        
+        let calendar = Calendar.current
+        
+        if calendar.isDateInToday(convertedDate) {
+            dateFormatter.dateFormat = "오늘\nHH:mm"
+            return dateFormatter.string(from: convertedDate)
+        } else if calendar.isDateInYesterday(convertedDate) {
+            dateFormatter.dateFormat = "어제\nHH:mm"
+            return dateFormatter.string(from: convertedDate)
+        } else {
+            dateFormatter.dateFormat = "MM/dd\nHH:mm"
+            return dateFormatter.string(from: convertedDate)
         }
     }
 }

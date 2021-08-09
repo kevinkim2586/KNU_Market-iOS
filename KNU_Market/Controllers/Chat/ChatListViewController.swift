@@ -108,29 +108,19 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             
             if viewModel.currentRoomIsUserUploaded(at: indexPath.row) {
-                
-                print("✏️ currentRoomIsUserUploaded - TRUE")
-                
-                self.presentAlertWithCancelAction(title: "",
-                                                  message: "") { selectedOk in
-                    
+                self.presentAlertWithCancelAction(title: "공구를 삭제하시겠습니까?",
+                                                  message: "'확인'을 누르시면 공구가 삭제되고 모든 참여자가 채팅방에서 나가기 처리가 됩니다. 그래도 삭제하시겠습니까?") { selectedOk in
                     if selectedOk {
                         self.viewModel.deleteMyPostAndExit(at: indexPath)
                     }
                 }
-                
-                
-                
             } else {
-                print("✏️ currentRoomIsUserUploaded - FALSE")
                 self.presentAlertWithCancelAction(title: "채팅방에서 나가시겠습니까?",
                                                   message: "'확인'을 누르시면 채팅방에서 나가기 처리됩니다.") { selectedOk in
-                    
                     if selectedOk {
                         self.viewModel.exitPost(at: indexPath)
                     }
                 }
-                
             }
         }
     }

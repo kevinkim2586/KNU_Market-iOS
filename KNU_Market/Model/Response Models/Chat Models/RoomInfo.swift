@@ -14,18 +14,31 @@ struct Post: Decodable {
     let location: Int
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
-    let isArchived: Bool
+    let isFull: Bool
+    let isCompletelyDone: Bool
     let date: String
+    
+    let medias: [Media]
+    let user: UploaderInfo
+    
     
     enum CodingKeys: String, CodingKey {
         
         case uuid = "UUID"
         case title, content, location
         case totalGatheringPeople = "maxHeadcount"
-        case currentlyGatheredPeople = "currenHheadcount"
-        case isArchived, date
+        case currentlyGatheredPeople = "currentHeadcount"
+        case isFull = "isHeadcountArchived"
+        case isCompletelyDone = "isArchived"
+        case date = "createDate"
+        case medias, user
         
     }
+}
+
+struct UploaderInfo: Decodable {
+    
+    let uid: String
 }
 
 struct Member: Decodable {
@@ -33,6 +46,8 @@ struct Member: Decodable {
     let uid: Int
     let userUID: String
     let postUID: String
+    let isBanned: Bool
+    let banCount: Bool
     let date: String
     
     enum CodingKeys: String, CodingKey {
@@ -40,6 +55,8 @@ struct Member: Decodable {
         case uid
         case userUID = "userUid"
         case postUID = "postUid"
+        case isBanned = "isbanned"
+        case banCount
         case date
     }
 }

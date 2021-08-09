@@ -105,14 +105,16 @@ extension NickNameInputViewController {
             guard let self = self else { return }
             
             switch result {
-            case .success(let notDuplicate):
+            case .success(let isDuplicate):
                 
-                if notDuplicate {
+                if isDuplicate {
+                    self.showErrorMessage(message: "이미 사용 중인 닉네임입니다. 🥲")
+                }
+                else {
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: Constants.SegueID.goToPasswordInputVC, sender: self)
                     }
                 }
-                else { self.showErrorMessage(message: "이미 사용 중인 닉네임입니다. 🥲") }
                 
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)

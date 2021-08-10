@@ -20,6 +20,7 @@ class UserManager {
     let loadUserProfileURL          = "\(Constants.API_BASE_URL)auth"
     let userProfileUpdateURL        = "\(Constants.API_BASE_URL)auth"
     let unregisterURL               = "\(Constants.API_BASE_URL)auth"
+    let sendEmailURL                = "\(Constants.API_BASE_URL)verification"
     
     let interceptor = Interceptor()
     
@@ -112,7 +113,7 @@ class UserManager {
         let parameters: Parameters = [ "id" : email,
                                        "password" : password ]
         let headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue : HTTPHeaderValues.applicationJSON.rawValue ]
-    
+        
         AF.request(loginURL,
                    method: .post,
                    parameters: parameters,
@@ -126,14 +127,15 @@ class UserManager {
                 print("✏️ UserManager - login() statusCode: \(statusCode)")
                 
                 switch statusCode {
-    
-                case 201:
                 
+                case 201:
+                    
                     do {
                         let json = try JSON(data: response.data!)
                         self.saveAccessTokens(from: json)
                         
                         User.shared.id = email
+                        User.shared.email = email
                         User.shared.password = password
                         User.shared.isLoggedIn = true
                         
@@ -364,8 +366,34 @@ class UserManager {
             }
     }
     
+    //MARK: - 인증 메일 다시 보내기
+    func resendVerificationEmail(completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    
+        let headers: HTTPHeaders = ["id" : User.shared.email]
+        
+        AF.request(sendEmailURL,
+                   method: .post,
+                   headers: headers)
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    print("✏️ UserManager - resendVerificationEmail SUCCESS")
+                    completion(.success(true))
+                    
+                default:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("❗️ UserManager - resendVerificationEmail statusCode: \(statusCode), reason: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+            }
+    }
+    
     //MARK: - 회원 탈퇴
-    func unregisterUser(completion: @escaping((Result<Bool, NetworkError>) -> Void)) {
+    func unregisterUser(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.request(unregisterURL,
                    method: .delete,
@@ -389,10 +417,8 @@ class UserManager {
                 }
                 
             }
-        
-        
     }
-    
+
 }
 
 //MARK: - 개인정보 저장 메서드

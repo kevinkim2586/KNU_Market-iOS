@@ -20,7 +20,19 @@ class VerifyEmailViewController: UIViewController {
 
     @IBAction func pressedResendEmailButton(_ sender: UIButton) {
         
-        //API 구현 예정
+        UserManager.shared.resendVerificationEmail { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success(_):
+                self.showSimpleBottomAlert(with: "인증 메일 보내기 성공 🎉 메일함을 확인해 주세요!")
+                
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
+            }
+        }
         
     }
     

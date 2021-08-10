@@ -33,11 +33,6 @@ class ItemViewModel {
     var imageSources: [InputSource] = [InputSource]()
     
     let itemImages: [UIImage]? = [UIImage]()
-
-    var isGathering: Bool {
-        return self.model?.currentlyGatheredPeople != self.model?.totalGatheringPeople
-        //TODO: - 나중에는 이걸로 비교하면 안 되고, isArchived == true 로 판단해야할듯
-    }
     
     var currentlyGatheredPeople: Int {
         return self.model?.currentlyGatheredPeople ?? 1
@@ -55,16 +50,39 @@ class ItemViewModel {
         return formatDateForDisplay()
     }
     
+    // 내가 올린 공구인지
     var postIsUserUploaded: Bool {
         return model?.nickname == User.shared.nickname
     }
 
+    // 이미 참여하고 있는 공구인지
     var userAlreadyJoinedPost: Bool {
         if User.shared.joinedChatRoomPIDs.contains(self.pageID ?? "") {
             return true
         }
         return false
     }
+    
+    // 공구 자체가 다 마감이 됐는지
+    var isFull: Bool {
+        return model?.isFull ?? true
+    }
+    
+    // 인원이 다 찼는지
+    var isCompletelyDone: Bool {
+        return model?.isCompletelyDone ?? true
+    }
+    
+    var isGathering: Bool {
+        
+        if isFull || isCompletelyDone {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    
     
     var modelForEdit: EditPostModel {
         let editPostModel = EditPostModel(title: self.model?.title ?? "",
@@ -91,7 +109,6 @@ class ItemViewModel {
             
             case .success(let fetchedModel):
                 
-                print("✏️ model: \(fetchedModel.location)")
                 self.model = fetchedModel
                 self.delegate?.didFetchItemDetails()
                 
@@ -210,13 +227,13 @@ extension ItemViewModel {
         let calendar = Calendar.current
         
         if calendar.isDateInToday(convertedDate) {
-            dateFormatter.dateFormat = "오늘\nHH:mm"
+            dateFormatter.dateFormat = "오늘 HH:mm"
             return dateFormatter.string(from: convertedDate)
         } else if calendar.isDateInYesterday(convertedDate) {
-            dateFormatter.dateFormat = "어제\nHH:mm"
+            dateFormatter.dateFormat = "어제 HH:mm"
             return dateFormatter.string(from: convertedDate)
         } else {
-            dateFormatter.dateFormat = "MM/dd\nHH:mm"
+            dateFormatter.dateFormat = "MM/dd HH:mm"
             return dateFormatter.string(from: convertedDate)
         }
     }

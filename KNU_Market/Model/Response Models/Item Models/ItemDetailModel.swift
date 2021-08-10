@@ -10,6 +10,8 @@ struct ItemDetailModel: Decodable {
     let itemDetail: String
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
+    let isFull: Bool
+    let isCompletelyDone: Bool
     let nickname: String
     let profileImageUID: String
     let date: String
@@ -23,6 +25,8 @@ struct ItemDetailModel: Decodable {
         case itemDetail = "content"
         case totalGatheringPeople = "maxHeadcount"
         case currentlyGatheredPeople = "currentHeadcount"
+        case isFull = "isHeadcountArchived"
+        case isCompletelyDone = "isArchived"
         case nickname
         case profileImageUID = "profileImage"
         case date

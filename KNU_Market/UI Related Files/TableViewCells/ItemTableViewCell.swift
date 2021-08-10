@@ -89,7 +89,7 @@ class ItemTableViewCell: UITableViewCell {
             
         } else if viewModel.isFull {
             
-            gatheringLabel.text = "모집 중"
+            gatheringLabel.text = "인원 꽉 참"
             gatheringLabel.backgroundColor = UIColor.lightGray
             
         } else {

@@ -20,7 +20,7 @@ class MyPageViewModel {
     weak var delegate: MyPageViewModelDelegate?
     
     var tableViewSection_1: [String] = ["내가 올린 글", "설정"]
-    var tableViewSection_2: [String] = ["개발자에게 건의사항 보내기", "서비스 이용약관", "개발자 정보", "오픈 소스 라이센스"]
+    var tableViewSection_2: [String] = ["개발자에게 건의사항 보내기", "서비스 이용약관", "개인정보 처리방침", "개발자 정보", "오픈 소스 라이센스"]
 
     var userNickname: String {
         return User.shared.nickname
@@ -44,9 +44,6 @@ class MyPageViewModel {
             
             switch result {
             case .success(let model):
-                
-                print("MyPageViewModel - fetched user info: userID: \(model.uid), nickname: \(model.nickname), profileImageCode: \(model.profileImageCode)")
-        
                 self.delegate?.didLoadUserProfileInfo()
                 
                 // 이미 받아온 프로필 이미지 Cache 가 있다면

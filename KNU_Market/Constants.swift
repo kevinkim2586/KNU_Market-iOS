@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 //MARK: - Caches
 let profileImageCache = NSCache<AnyObject, AnyObject>()
@@ -68,9 +68,10 @@ struct Constants {
         static let verifyEmailVC                = "VerifyEmailViewController"
         
         
-        // StoryBoard ID Array
+        // My Page UITableView ID Array
         static let myPageSection_1_Options      = [myPostsVC, settingsVC]
         static let myPageSection_2_Options      = [sendDeveloperMessageVC, termsAndConditionsVC, developerInfoVC, openSourceLicenseVC]
+
     }
     
     struct cellID {
@@ -169,6 +170,7 @@ struct Constants {
         static let myPageSection_2_Images         = [
                                                    "paperplane",
                                                    "doc.text",
+                                                    "hand.raised",
                                                    "info.circle",
                                                    "book.closed"
                                                     ]
@@ -180,5 +182,10 @@ struct Constants {
     struct DateFormat {
         
         static let defaultFormat                = "yyyy-MM-dd HH:mm:ss"
+    }
+    
+    struct URL {
+        
+
     }
 }

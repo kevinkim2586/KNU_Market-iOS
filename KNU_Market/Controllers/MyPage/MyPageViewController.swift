@@ -201,11 +201,27 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
+
             guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSection_1_Options[indexPath.row]) else { return }
             pushViewController(with: vc)
         case 1:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSection_2_Options[indexPath.row]) else { return }
-            pushViewController(with: vc)
+            
+            switch indexPath.row {
+            
+            case 1:
+                let url = URL(string: "https://linen-twister-e2b.notion.site/b02ec80599d14452aefff7e0dcfcf4ff")!
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        
+            case 2:
+                let url = URL(string: "https://linen-twister-e2b.notion.site/6554bde75b2c49bfb617b04f526aad6e")!
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                
+            default:
+                guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSection_2_Options[indexPath.row]) else { return }
+                pushViewController(with: vc)
+            }
+   
+
         default: return
         }
     }

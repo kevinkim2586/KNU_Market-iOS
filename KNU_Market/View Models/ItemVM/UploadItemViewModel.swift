@@ -136,9 +136,6 @@ class UploadItemViewModel {
     
     func updatePost() {
         
-        print("✏️ totalGatheringPeople: \(totalPeopleGathering)")
-        print("✏️ currentlyGatheredPeople: \(currentlyGatheredPeople)")
-        
         let model = UpdatePostRequestDTO(title: itemTitle,
                                          location: location,
                                          detail: itemDetail,

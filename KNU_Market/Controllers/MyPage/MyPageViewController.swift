@@ -220,8 +220,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSection_2_Options[indexPath.row]) else { return }
                 pushViewController(with: vc)
             }
-   
-
         default: return
         }
     }

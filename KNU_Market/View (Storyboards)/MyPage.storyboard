@@ -226,9 +226,24 @@
                     <view key="view" contentMode="scaleToFill" id="LaY-J2-KuX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="추후 작성 예정입니다 👻" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dsc-gN-KfU">
+                                <rect key="frame" x="123" y="437.5" width="168.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="sfQ-HU-pWA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Dsc-gN-KfU" firstAttribute="centerX" secondItem="LaY-J2-KuX" secondAttribute="centerX" id="Ipe-Is-12z"/>
+                            <constraint firstItem="Dsc-gN-KfU" firstAttribute="centerY" secondItem="LaY-J2-KuX" secondAttribute="centerY" id="L1o-gg-v3Y"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="detailLabel" destination="Dsc-gN-KfU" id="96l-7R-vzO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AhL-eD-w13" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

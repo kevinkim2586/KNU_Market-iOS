@@ -26,11 +26,6 @@ class HomeViewModel {
     //MARK: - 공구글 불러오기
     func fetchItemList(fetchCurrentUsers: Bool = false) {
         
-        /* Mock Data
-        itemList.append(contentsOf: itemListMockData)
-        self.delegate?.didFetchItemList()
-        */
-        
         isFetchingData = true
 
         ItemManager.shared.fetchItemList(at: self.index,

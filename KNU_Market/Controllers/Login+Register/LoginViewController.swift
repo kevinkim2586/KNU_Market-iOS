@@ -156,11 +156,6 @@ extension LoginViewController {
         passwordTextField.leftViewMode = .always
         passwordTextField.isSecureTextEntry = true
         
-        
-        //MARK: - TEST DATA
-        
-        idTextField.text = "kevinkim2586@gmail.com"
-        passwordTextField.text = "11111111"
     }
     
     func initializeLoginButton() {

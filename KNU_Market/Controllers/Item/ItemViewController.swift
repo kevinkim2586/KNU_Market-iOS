@@ -212,8 +212,6 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func failedDeletingPost(with error: NetworkError) {
         
-        print("ItemVC - failedDeletingPost")
-        
         dismissProgressBar()
         
         showSimpleBottomAlertWithAction(message: error.errorDescription,
@@ -226,12 +224,8 @@ extension ItemViewController: ItemViewModelDelegate {
         
         dismissProgressBar()
         self.checkButton.isUserInteractionEnabled = true
-        
         self.checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"),
                                   for: .normal)
-        
-        //
-        
     }
     
     func failedMarkingPostDone(with error: NetworkError) {
@@ -383,19 +377,34 @@ extension ItemViewController {
     }
     
     func initializeCheckButton() {
-        
+
         if viewModel.postIsUserUploaded {
+            
             checkButton.isHidden = false
+            let font = UIFont.systemFont(ofSize: 15)
+            let configuration = UIImage.SymbolConfiguration(font: font)
+            
+            if let isCompletelyDone = viewModel.model?.isCompletelyDone {
+                
+                if isCompletelyDone {
+                    
+                    let buttonImage = UIImage(systemName: "checkmark.circle.fill",
+                                              withConfiguration: configuration)
+                    self.checkButton.setImage(buttonImage,
+                                              for: .normal)
+                } else {
+                    
+                    let buttonImage = UIImage(systemName: "checkmark.circle",
+                                              withConfiguration: configuration)
+                    checkButton.setImage(buttonImage,
+                                         for: .normal)
+                }
+            }
+            
         } else {
             checkButton.isHidden = true
         }
-        
-        let font = UIFont.systemFont(ofSize: 15)
-        let configuration = UIImage.SymbolConfiguration(font: font)
-        let buttonImage = UIImage(systemName: "checkmark.circle", withConfiguration: configuration)
-        checkButton.setImage(buttonImage, for: .normal)
     }
-    
 
     func initializeDateLabel() {
         dateLabel.text = viewModel.date

@@ -70,6 +70,7 @@ class ItemViewModel {
     
     // 인원이 다 찼는지
     var isCompletelyDone: Bool {
+       
         return model?.isCompletelyDone ?? true
     }
     
@@ -81,9 +82,6 @@ class ItemViewModel {
             return true
         }
     }
-    
-    
-    
     var modelForEdit: EditPostModel {
         let editPostModel = EditPostModel(title: self.model?.title ?? "",
                                           imageURLs: self.imageURLs,
@@ -147,7 +145,10 @@ class ItemViewModel {
             
             switch result {
             case .success:
+                
                 self.delegate?.didMarkPostDone()
+                NotificationCenter.default.post(name: Notification.Name.updateItemList,
+                                                object: nil)
                 
             case .failure(let error):
                 self.delegate?.failedMarkingPostDone(with: error)

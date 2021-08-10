@@ -70,7 +70,7 @@ struct Constants {
         
         // My Page UITableView ID Array
         static let myPageSection_1_Options      = [myPostsVC, settingsVC]
-        static let myPageSection_2_Options      = [sendDeveloperMessageVC, termsAndConditionsVC, developerInfoVC, openSourceLicenseVC]
+        static let myPageSection_2_Options      = [sendDeveloperMessageVC, termsAndConditionsVC, openSourceLicenseVC, developerInfoVC]
 
     }
     

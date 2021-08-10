@@ -112,7 +112,7 @@ class UserManager {
         let parameters: Parameters = [ "id" : email,
                                        "password" : password ]
         let headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue : HTTPHeaderValues.applicationJSON.rawValue ]
-        
+    
         AF.request(loginURL,
                    method: .post,
                    parameters: parameters,

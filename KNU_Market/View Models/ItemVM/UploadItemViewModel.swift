@@ -19,7 +19,7 @@ class UploadItemViewModel {
     var location: Int = 0
     let locationArray: [String] = Location.list
 
-    var peopleGathering: Int = 2
+    var totalPeopleGathering: Int = 2
     
     var itemDetail: String = ""
     
@@ -77,16 +77,20 @@ class UploadItemViewModel {
         
         group.notify(queue: .main) {
             print("✏️ Dispatch Group has ended.")
-            self.uploadItem()
+            
+            if self.editPostModel != nil {
+                self.updatePost()
+            } else {
+                self.uploadItem()
+            }
         }
-        
     }
     
     func uploadItem() {
         
         let model = UploadItemRequestDTO(title: itemTitle,
                                          location: location,
-                                         peopleGathering: peopleGathering,
+                                         peopleGathering: totalPeopleGathering,
                                          imageUIDs: imageUIDs,
                                          detail: itemDetail)
         
@@ -126,18 +130,20 @@ class UploadItemViewModel {
         
         group.notify(queue: .main) {
             print("✏️ Dispatch Group has ended.")
-            self.updatePost()
         }
         
     }
     
     func updatePost() {
         
+        print("✏️ totalGatheringPeople: \(totalPeopleGathering)")
+        print("✏️ currentlyGatheredPeople: \(currentlyGatheredPeople)")
+        
         let model = UpdatePostRequestDTO(title: itemTitle,
                                          location: location,
                                          detail: itemDetail,
-                                         imageUIDs: priorImageUIDs,
-                                         totalGatheringPeople: peopleGathering,
+                                         imageUIDs: imageUIDs,
+                                         totalGatheringPeople: totalPeopleGathering,
                                          currentlyGatheredPeople: currentlyGatheredPeople)
         
         ItemManager.shared.updatePost(uid: self.editPostModel?.pageUID ?? "",

@@ -29,7 +29,7 @@ class UploadItemViewController: UIViewController {
     
     @IBAction func pressedStepper(_ sender: GMStepper) {
         totalGatheringPeopleLabel.text = "\(String(Int(stepper.value))) 명"
-        viewModel.peopleGathering = Int(stepper.value)
+        viewModel.totalPeopleGathering = Int(stepper.value)
     }
     
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
@@ -73,6 +73,7 @@ class UploadItemViewController: UIViewController {
                 
                 if !self.viewModel.userSelectedImages.isEmpty {
                     self.viewModel.deletePriorImagesInServerFirst()
+                    self.viewModel.uploadImageToServerFirst()
                 } else {
                     self.viewModel.updatePost()
                 }
@@ -324,7 +325,7 @@ extension UploadItemViewController {
         
         viewModel.itemTitle = editModel!.title
         viewModel.location = editModel!.location
-        viewModel.peopleGathering = editModel!.totalGatheringPeople
+        viewModel.totalPeopleGathering = editModel!.totalGatheringPeople
         viewModel.itemDetail = editModel!.itemDetail
         viewModel.currentlyGatheredPeople = editModel!.currentlyGatheredPeople
         
@@ -350,7 +351,10 @@ extension UploadItemViewController {
     
     func createObservers() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(presentVerifyEmailVC), name: Notification.Name.presentVerifyEmailVC, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(presentVerifyEmailVC),
+                                               name: Notification.Name.presentVerifyEmailVC,
+                                               object: nil)
     }
     
 }

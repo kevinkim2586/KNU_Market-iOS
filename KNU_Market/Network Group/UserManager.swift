@@ -31,13 +31,14 @@ class UserManager {
         
         AF.upload(multipartFormData: { multipartFormData in
             
-            
             multipartFormData.append(Data(model.id.utf8),
                                      withName: "id")
             multipartFormData.append(Data(model.password.utf8),
                                      withName: "password")
             multipartFormData.append(Data(model.nickname.utf8),
                                      withName: "nickname")
+            multipartFormData.append(Data(model.fcmToken.utf8)
+                                     ,withName: "fcmToken")
             
             if let profileImageData = model.imageData {
                 multipartFormData.append(profileImageData,

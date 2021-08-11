@@ -148,20 +148,35 @@ class ItemViewController: UIViewController {
                                             message: nil,
                                             preferredStyle: .actionSheet)
         
-        let checkAction = UIAlertAction(title: "모집완료",
-                                        style: .default) { alert in
+        
+        if let isCompletelyDone = viewModel.model?.isCompletelyDone {
             
-            self.viewModel.markPostDone(for: self.pageID)
-            DispatchQueue.main.async {
-                self.checkButton.isUserInteractionEnabled = false
+            if isCompletelyDone {
+                
+                let cancelMarkDoneAction = UIAlertAction(title: "공구 마감 해제하기",
+                                                         style: .default) { alert in
+                    
+                    self.viewModel.cancelMarkPostDone(for: self.pageID)
+                    
+                }
+                actionSheet.addAction(cancelMarkDoneAction)
+                
+            } else {
+                let doneAction = UIAlertAction(title: "공구 마감하기",
+                                               style: .default) { alert in
+                    
+                    self.viewModel.markPostDone(for: self.pageID)
+      
+                }
+                actionSheet.addAction(doneAction)
             }
             
         }
+        
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel,
                                          handler: nil)
         
-        actionSheet.addAction(checkAction)
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true)
     }
@@ -222,28 +237,45 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func didMarkPostDone() {
         
-        dismissProgressBar()
-        self.checkButton.isUserInteractionEnabled = true
-        self.checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"),
-                                  for: .normal)
+        
+        refreshPage()
+        //        self.checkButton.isUserInteractionEnabled = true
+        //        self.checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"),
+        //                                  for: .normal)
     }
     
     func failedMarkingPostDone(with error: NetworkError) {
         
         dismissProgressBar()
-        self.checkButton.isUserInteractionEnabled = true
 
         self.showSimpleBottomAlert(with: error.errorDescription)
+    }
+    
+    func didCancelMarkPostDone() {
+        
+        refreshPage()
+        
+//        self.checkButton.setImage(UIImage(systemName: "checkmark.circle"),
+//                                  for: .normal)
+//        self.checkButton.isUserInteractionEnabled = true
         
     }
     
-    func didEnterChat() {
+    func failedCancelMarkPostDone(with error: NetworkError) {
+        
+   
+        self.showSimpleBottomAlert(with: error.errorDescription)
+    }
+    
+    func didEnterChat(isFirstEntrance: Bool) {
         
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
         guard let vc = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
         
         vc.room = pageID
         vc.chatRoomTitle = viewModel.model?.title ?? ""
+        
+        vc.isFirstEntrance = isFirstEntrance ? true : false
         
         navigationController?.pushViewController(vc, animated: true)
         enterChatButton.loadingIndicator(false)
@@ -377,6 +409,8 @@ extension ItemViewController {
     }
     
     func initializeCheckButton() {
+        
+        print("✏️ model is done: \(viewModel.model?.isCompletelyDone)")
 
         if viewModel.postIsUserUploaded {
             
@@ -435,6 +469,9 @@ extension ItemViewController {
     }
     
     func initializeEnterChatButton() {
+        
+//        내가 올린가면 마감이더라도 채팅 입장할 수 있도록 수정 
+        
         
         if viewModel.isGathering {
             enterChatButton.isUserInteractionEnabled = true

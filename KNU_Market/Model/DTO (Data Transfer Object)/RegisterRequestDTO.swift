@@ -27,12 +27,14 @@ struct RegisterRequestDTO {
     let password: String
     let nickname: String
     let imageData: Data?
+    let fcmToken: String
     
-    init(id: String, password: String, nickname: String, image: Data?) {
+    init(id: String, password: String, nickname: String, image: Data?, fcmToken: String) {
         
         self.id = id
         self.password = password
         self.nickname = nickname
+        self.fcmToken = fcmToken
         
         if let profileImageData = image {
             self.imageData = profileImageData

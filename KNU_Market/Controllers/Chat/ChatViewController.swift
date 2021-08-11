@@ -13,6 +13,7 @@ class ChatViewController: MessagesViewController {
     var room: String = ""
     var chatRoomTitle: String = ""
     var postUploaderUID: String = ""
+    var isFirstEntrance: Bool = false
     
     var chatMemberViewDelegate: ChatMemberViewDelegate?
     
@@ -24,7 +25,9 @@ class ChatViewController: MessagesViewController {
         super.viewDidLoad()
         
         self.title = chatRoomTitle
-        viewModel = ChatViewModel(room: room)
+        viewModel = ChatViewModel(room: room,
+                                  isFirstEntrance: isFirstEntrance)
+    
         initialize()
         
         print("✏️ pageID: \(room)")
@@ -220,11 +223,12 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if scrollView.contentOffset.y <= 20 {
+              
+        if scrollView.contentOffset.y <= 10 {
             
             if !viewModel.isFetchingData && viewModel.needsToFetchMoreData {
                 headerSpinner.startAnimating()
+
                 self.viewModel.getChatList()
             }
         }
@@ -252,6 +256,8 @@ extension ChatViewController {
        
         viewModel.delegate = self
         chatMemberViewDelegate = self
+        
+        messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
         
         initializeInputBar()
         initializeCollectionView()

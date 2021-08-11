@@ -121,6 +121,8 @@ class RegisterViewController: UIViewController {
         let id = emailTextField.text! + "@knu.ac.kr"
         let nickname = nicknameTextField.text!
         let password = passwordTextField.text!
+        let fcmToken = UserRegisterValues.shared.fcmToken
+        
         var profileImageData: Data? = nil
         
         if let image = profileImageButton.currentImage {
@@ -130,7 +132,8 @@ class RegisterViewController: UIViewController {
         let registerModel = RegisterRequestDTO(id: id,
                                           password: password,
                                           nickname: nickname,
-                                          image: profileImageData)
+                                          image: profileImageData,
+                                          fcmToken: fcmToken)
         
         UserManager.shared.register(with: registerModel) { [weak self] result in
             

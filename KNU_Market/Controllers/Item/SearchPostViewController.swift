@@ -23,6 +23,11 @@ extension SearchPostViewController: SearchPostViewModelDelegate {
 
     func didFetchSearchList() {
         
+        if viewModel.itemList.count == 0 {
+            
+            tableView.showEmptyView(with: "검색 결과가 없습니다.🤔")
+        }
+        
         print("✏️ SearchPostVC - didFetchSearchList")
         tableView.reloadData()
         tableView.tableFooterView = nil
@@ -65,10 +70,10 @@ extension SearchPostViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
+        guard let searchKey = searchBar.text else { return }
+        
         searchBar.resignFirstResponder()
         viewModel.resetValues()
-        
-        guard let searchKey = searchBar.text else { return }
         
         viewModel.searchKeyword = searchKey
         viewModel.fetchSearchResults()
@@ -94,6 +99,8 @@ extension SearchPostViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row > viewModel.itemList.count { return UITableViewCell() }
         
         let cellIdentifier = Constants.cellID.itemTableViewCell
+        
+        tableView.restoreEmptyView()
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell else {
             fatalError()
@@ -175,8 +182,5 @@ extension SearchPostViewController {
         tableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
 
     }
-    
-
-    
     
 }

@@ -12,7 +12,14 @@ extension UITableView {
         noDataLabel.text          = message
         noDataLabel.textColor     = UIColor.black
         noDataLabel.textAlignment = .center
+        noDataLabel.font          = UIFont.systemFont(ofSize: 17, weight: .semibold)
         self.backgroundView  = noDataLabel
         self.separatorStyle  = .none
+    }
+    
+    func restoreEmptyView() {
+        
+        self.backgroundView = nil
+        self.separatorStyle = .singleLine
     }
 }

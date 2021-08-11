@@ -39,7 +39,8 @@ class EmailInputViewController: UIViewController {
         let model = RegisterRequestDTO(id: UserRegisterValues.shared.email,
                                        password: UserRegisterValues.shared.password,
                                        nickname: UserRegisterValues.shared.nickname,
-                                       image: UserRegisterValues.shared.profileImage)
+                                       image: UserRegisterValues.shared.profileImage,
+                                       fcmToken: UserRegisterValues.shared.fcmToken)
         
         UserManager.shared.register(with: model) { [weak self] result in
             

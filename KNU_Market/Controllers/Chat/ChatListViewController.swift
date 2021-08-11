@@ -25,8 +25,13 @@ class ChatListViewController: UIViewController {
 extension ChatListViewController: ChatListViewModelDelegate {
 
     func didFetchChatList() {
-     
+        
         chatListTableView.refreshControl?.endRefreshing()
+        
+        if viewModel.roomList.count == 0 {
+            chatListTableView.showEmptyView(with: "참여 중인 공구가 없습니다.🧐")
+        }
+        
         chatListTableView.reloadData()
     }
     
@@ -73,8 +78,10 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row > viewModel.roomList.count { return UITableViewCell() }
-        
+
         let cellIdentifier = Constants.cellID.chatTableViewCell
+        
+        tableView.restoreEmptyView()
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ChatTableViewCell else {
             return UITableViewCell()
@@ -83,6 +90,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: self.viewModel.roomList[indexPath.row])
         tableView.tableFooterView = UIView(frame: .zero)
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

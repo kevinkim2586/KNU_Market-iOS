@@ -10,4 +10,5 @@ class UserRegisterValues {
     var password: String = ""
     var profileImage: Data?
     var email: String = ""
+    var fcmToken: String = ""
 }

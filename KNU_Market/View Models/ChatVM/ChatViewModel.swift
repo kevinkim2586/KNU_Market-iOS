@@ -38,13 +38,12 @@ class ChatViewModel: WebSocketDelegate {
     var chatModel: ChatResponseModel?
     var index: Int = 1
     
-    
     var isFetchingData: Bool = false
     var needsToFetchMoreData: Bool = true
     
     // ChatVC 의 첫 viewDidLoad 이면 collectionView.scrollToLastItem 실행하게끔 위함
     var isFirstViewLaunch: Bool = true
-    var isFirstEntranceToChat: Bool = true
+    var isFirstEntranceToChat: Bool
     
     // Room Info (해당 방에 참여하고 있는 멤버 정보 등)
     var roomInfo: RoomInfo?
@@ -52,8 +51,11 @@ class ChatViewModel: WebSocketDelegate {
     // Delegate
     weak var delegate: ChatViewDelegate?
 
-    init(room: String) {
+    init(room: String, isFirstEntrance: Bool) {
+        
         self.room = room
+        self.isFirstEntranceToChat = isFirstEntrance
+        
     }
 }
 
@@ -137,6 +139,9 @@ extension ChatViewModel {
             self.delegate?.reconnectSuggested()
             
         case .error(let reason):
+            
+            // garbage data -> __EMPTY_SUFFIX 한 번 보내보고 connect 되는지
+            
             isConnected = false
             print("❗️ Error in didReceive .error: \(String(describing: reason?.localizedDescription))")
             
@@ -185,6 +190,8 @@ extension ChatViewModel {
     
     // 채팅 받아오기
     func getChatList() {
+        
+        print("✏️ getChatList has been CALLED index: \(index)")
         
         self.isFetchingData = true
         
@@ -265,12 +272,10 @@ extension ChatViewModel {
                 // 이미 참여하고 있는 채팅방이면 기존의 메시지를 불러와야함
                 if error == .E108 {
                 
-                    self.isFirstEntranceToChat = false
-                    self.getChatList()
+//                    self.getChatList()
                     self.connect()
                     self.getRoomInfo()
-                    
-
+                
                 } else {
                     print("❗️ ChatViewModel - joinPost ERROR")
                     self.delegate?.failedConnection(with: error)

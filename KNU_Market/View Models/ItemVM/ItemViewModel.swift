@@ -12,7 +12,10 @@ protocol ItemViewModelDelegate: AnyObject {
     func didMarkPostDone()
     func failedMarkingPostDone(with error: NetworkError)
     
-    func didEnterChat()
+    func didCancelMarkPostDone()
+    func failedCancelMarkPostDone(with error: NetworkError)
+    
+    func didEnterChat(isFirstEntrance: Bool)
     func failedJoiningChat(with error: NetworkError)
 }
 
@@ -43,7 +46,8 @@ class ItemViewModel {
     }
     
     var location: String {
-        return Location.listForCell[model?.location ?? Location.listForCell.count - 1]
+        let index = (model?.location ?? Location.listForCell.count - 1)
+        return Location.listForCell[index]
     }
     
     var date: String {
@@ -82,6 +86,7 @@ class ItemViewModel {
             return true
         }
     }
+    
     var modelForEdit: EditPostModel {
         let editPostModel = EditPostModel(title: self.model?.title ?? "",
                                           imageURLs: self.imageURLs,
@@ -106,7 +111,7 @@ class ItemViewModel {
             switch result {
             
             case .success(let fetchedModel):
-                
+                print("✏️ fetchedModel: \(fetchedModel.isCompletelyDone)")
                 self.model = fetchedModel
                 self.delegate?.didFetchItemDetails()
                 
@@ -156,6 +161,35 @@ class ItemViewModel {
         }
     }
     
+    func cancelMarkPostDone(for uid: String) {
+        
+        let model = UpdatePostRequestDTO(title: self.model?.title ?? "",
+                                         location: self.model?.location ?? 0,
+                                         detail: self.model?.itemDetail ?? "",
+                                         imageUIDs: self.model?.imageUIDs ?? [],
+                                         totalGatheringPeople: self.totalGatheringPeople,
+                                         currentlyGatheredPeople: self.currentlyGatheredPeople,
+                                         isCompletelyDone: false)
+        
+        ItemManager.shared.updatePost(uid: uid, with: model) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
+                
+                self.delegate?.didCancelMarkPostDone()
+                NotificationCenter.default.post(name: Notification.Name.updateItemList,
+                                                object: nil)
+                
+            case .failure(let error):
+                
+                self.delegate?.failedCancelMarkPostDone(with: error)
+            }
+        }
+        
+    }
+    
     func joinPost() {
         
         print("✏️ pageID: \(self.pageID)")
@@ -169,7 +203,7 @@ class ItemViewModel {
             
             case .success:
                 
-                self.delegate?.didEnterChat()
+                self.delegate?.didEnterChat(isFirstEntrance: true)
                 
             case .failure(let error):
                 
@@ -178,7 +212,7 @@ class ItemViewModel {
                 // 이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
                 if error == .E108 {
                     
-                    self.delegate?.didEnterChat()
+                    self.delegate?.didEnterChat(isFirstEntrance: false)
          
                 
                 } else {

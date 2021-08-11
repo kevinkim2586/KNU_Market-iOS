@@ -44,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("❗️ Error fetching FCM registration token: \(error)")
             } else if let token = token {
                 print("✏️ FCM Registration Token: \(token)")
+                UserRegisterValues.shared.fcmToken = token
+                print("✏️ UserRegisterValues fcmToken: \(UserRegisterValues.shared.fcmToken)")
             }
         }
         
@@ -96,7 +98,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
 
       // Print full message.
-      print(userInfo)
+
+
+   
+        print("✏️ userInfo: \(userInfo)")
+
         
         
 
@@ -140,7 +146,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     // ...
 
     // Print full message.
-    print(userInfo)
+    print("✏️ willPresent userInfo: \(userInfo)")
+
 
     // Change this to your preferred presentation option
     completionHandler([[.alert, .sound, .badge]])
@@ -158,7 +165,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     // Messaging.messaging().appDidReceiveMessage(userInfo)
 
     // Print full message.
-    print(userInfo)
+    print("✏️ didReceive: \(userInfo)")
 
     completionHandler()
   }

@@ -30,7 +30,8 @@ class ItemTableViewModel {
     var location: Int = 0
     
     var locationName: String {
-        return Location.listForCell[location]
+        let index = location
+        return Location.listForCell[index]
     }
     
     private var formattedDate: String = ""

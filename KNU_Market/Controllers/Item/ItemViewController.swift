@@ -409,9 +409,7 @@ extension ItemViewController {
     }
     
     func initializeCheckButton() {
-        
-        print("✏️ model is done: \(viewModel.model?.isCompletelyDone)")
-
+    
         if viewModel.postIsUserUploaded {
             
             checkButton.isHidden = false

@@ -96,7 +96,7 @@ extension ChatViewModel {
             self.delegate?.didConnect()
             print("✏️ WebSocket has been Connected!")
             
-            self.sendText("__EMPTY_SUFFIX")         // Garbage Data 보내기
+            self.sendText(Constants.ChatSuffix.emptySuffix)         // Garbage Data 보내기
             
         case .disconnected(let reason, let code):
             
@@ -116,7 +116,7 @@ extension ChatViewModel {
             print("✏️ receivedText: \(chatText)")
             
             //__EMPTY_SUFFIX 체크
-            guard chatText != "__EMPTY_SUFFIX" else { return }
+            guard chatText != Constants.ChatSuffix.emptySuffix else { return }
         
             if !isFromCurrentSender(uuid: userUID) {
                 self.delegate?.didReceiveChat()
@@ -187,7 +187,7 @@ extension ChatViewModel {
         
         socket.write(string: convertedText) {
             
-            guard originalText != "__EMPTY_SUFFIX" else { return }
+            guard originalText != Constants.ChatSuffix.emptySuffix else { return }
 
             let chat = Chat(chat_uid: Int.random(in: 0...1000),
                             chat_userUID: User.shared.userUID,
@@ -238,6 +238,8 @@ extension ChatViewModel {
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
 
                 chatResponseModel.chat.forEach { chat in
+                    
+                    guard chat.chat_content != Constants.ChatSuffix.emptySuffix else { return }
                     
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {

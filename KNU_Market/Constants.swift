@@ -189,4 +189,12 @@ struct Constants {
         
 
     }
+    
+    struct ChatSuffix {
+        
+        static let emptySuffix                  = "__EMPTY_SUFFIX"
+        static let enterSuffix                  = "__ENTER_SUFFIX"
+        static let leaveSuffix                  = ""
+        
+    }
 }

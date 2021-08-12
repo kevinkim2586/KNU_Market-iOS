@@ -24,6 +24,8 @@ class ChatViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        IQKeyboardManager.shared.enable = false
+        
         self.title = chatRoomTitle
         viewModel = ChatViewModel(room: room,
                                   isFirstEntrance: isFirstEntrance)
@@ -31,7 +33,6 @@ class ChatViewController: MessagesViewController {
         initialize()
         
         print("✏️ pageID: \(room)")
-
         viewModel.joinPost()
 
     }
@@ -45,8 +46,6 @@ class ChatViewController: MessagesViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        IQKeyboardManager.shared.enable = false
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -265,7 +264,11 @@ extension ChatViewController {
     func initializeCollectionView() {
         
         messagesCollectionView.register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Header")
-        (messagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = CGSize(width: messagesCollectionView.bounds.width, height: 50)
+        (messagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize =
+            CGSize(width: messagesCollectionView.bounds.width, height: 50)
+        
+        self.messagesCollectionView.contentInset.top = 20
+        
     
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -285,7 +288,6 @@ extension ChatViewController {
                                                                                   textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
             layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
                                                                                   textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
-     
             
             layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .left,
                                                                                   textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))

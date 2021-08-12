@@ -458,11 +458,12 @@ extension ItemViewController {
         let currentNum = viewModel.currentlyGatheredPeople
         let total = viewModel.totalGatheringPeople
         
-        if viewModel.isGathering {
-            gatheringPeopleLabel.text = "모집 중     \(currentNum)" + "/" + "\(total)"
-            
+        if viewModel.isCompletelyDone {
+            gatheringPeopleLabel.text = "공구 마감     \(currentNum)" + "/" + "\(total)"
+        } else if viewModel.isFull {
+            gatheringPeopleLabel.text = "모집 완료     \(currentNum)" + "/" + "\(total)"
         } else {
-            gatheringPeopleLabel.text = "마감     \(currentNum)" + "/" + "\(total)"
+            gatheringPeopleLabel.text = "모집 중     \(currentNum)" + "/" + "\(total)"
         }
         gatheringPeopleLabel.font = UIFont.systemFont(ofSize: 15.0,
                                                       weight: .semibold)
@@ -470,10 +471,8 @@ extension ItemViewController {
     
     func initializeEnterChatButton() {
         
-//        내가 올린가면 마감이더라도 채팅 입장할 수 있도록 수정 
-        
-        
-        if viewModel.isGathering {
+
+        if viewModel.postIsUserUploaded || viewModel.isGathering {
             enterChatButton.isUserInteractionEnabled = true
             enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)
             enterChatButton.setTitle("채팅방 입장", for: .normal)

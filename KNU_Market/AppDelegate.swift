@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         Messaging.messaging().delegate = self
-        UNUserNotificationCenter.current().delegate = self
+
         
         application.registerForRemoteNotifications()
         
@@ -45,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if let token = token {
                 print("✏️ FCM Registration Token: \(token)")
                 UserRegisterValues.shared.fcmToken = token
-                print("✏️ UserRegisterValues fcmToken: \(UserRegisterValues.shared.fcmToken)")
             }
         }
         
@@ -85,30 +84,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-      // If you are receiving a notification message while your app is in the background,
-      // this callback will not be fired till the user taps on the notification launching the application.
-      // TODO: Handle data of notification
-
-      // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
         Messaging.messaging().appDidReceiveMessage(userInfo)
-
-      // Print message ID.
-      if let messageID = userInfo[gcmMessageIDKey] {
-        print("Message ID: \(messageID)")
-      }
-
-      // Print full message.
-
-
-   
-        print("✏️ userInfo: \(userInfo)")
-
         
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
         
-
-      completionHandler(UIBackgroundFetchResult.newData)
+        // Print full message.
+        print("✏️ receivedMessage: \(userInfo)")
+    
+        completionHandler(UIBackgroundFetchResult.newData)
     }
-
+    
 }
 
 extension AppDelegate: MessagingDelegate {
@@ -147,8 +140,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
     // Print full message.
     print("✏️ willPresent userInfo: \(userInfo)")
-
-
     // Change this to your preferred presentation option
     completionHandler([[.alert, .sound, .badge]])
   }
@@ -159,8 +150,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     
     let userInfo = response.notification.request.content.userInfo
 
-    // ...
-
+    
     // With swizzling disabled you must let Messaging know about the message, for Analytics
     // Messaging.messaging().appDidReceiveMessage(userInfo)
 

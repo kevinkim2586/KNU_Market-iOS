@@ -24,13 +24,11 @@ protocol ChatViewDelegate: AnyObject {
 
 class ChatViewModel: WebSocketDelegate {
     
-    // Socket
-    private var socket: WebSocket!
-    private var isConnected = false
-    private let server =  WebSocketServer()
-    
+    // Properties
     private var room: String = ""
     
+    // Room Info (해당 방에 참여하고 있는 멤버 정보 등)
+    var roomInfo: RoomInfo?
     var messages = [Message]()
     var mySelf = Sender(senderId: User.shared.userUID,
                         displayName: User.shared.nickname)
@@ -41,12 +39,18 @@ class ChatViewModel: WebSocketDelegate {
     var isFetchingData: Bool = false
     var needsToFetchMoreData: Bool = true
     
+    // Socket
+    private var socket: WebSocket!
+    private let server =  WebSocketServer()
+    private var isConnected = false
+    private var connectRetryLimit = 5
+    private var connectRetryCount = 0
+    
+
     // ChatVC 의 첫 viewDidLoad 이면 collectionView.scrollToLastItem 실행하게끔 위함
     var isFirstViewLaunch: Bool = true
     var isFirstEntranceToChat: Bool
-    
-    // Room Info (해당 방에 참여하고 있는 멤버 정보 등)
-    var roomInfo: RoomInfo?
+
 
     // Delegate
     weak var delegate: ChatViewDelegate?
@@ -67,36 +71,38 @@ extension ChatViewModel {
         
         var request = URLRequest(url: URL(string: Constants.WEB_SOCKET_URL)!)
         
-        request.timeoutInterval = 10
-        socket = WebSocket(request: request)
+        request.timeoutInterval = 5
+        
+        let pinner = FoundationSecurity(allowSelfSigned: true)
+        socket = WebSocket(request: request, certPinner: pinner)
         socket.delegate = self
-        socket.connect()
+        socket.connect() 
+        connectRetryCount += 1
     }
     
-    // 수정 필요
     func disconnect() {
         
-        let exitText = convertToJSONString(text: "\(User.shared.nickname)님이 채팅방에서 나갔습니다 🧐")
-        socket.write(string: exitText) {
-            self.socket.disconnect()
-        }
+        socket.disconnect()
     }
-    
+
     func didReceive(event: WebSocketEvent, client: WebSocket) {
         
         switch event {
     
         case .connected(_):
+            
+            connectRetryCount = 0
             isConnected = true
             self.delegate?.didConnect()
             print("✏️ WebSocket has been Connected!")
             
+            self.sendText("__EMPTY_SUFFIX")         // Garbage Data 보내기
+            
         case .disconnected(let reason, let code):
+            
             print("❗️ WebSocket has been Disconnected: \(reason) with code: \(code)")
             isConnected = false
             self.delegate?.didDisconnect()
-            
-            
             
         case .text(let text):
         
@@ -106,14 +112,16 @@ extension ChatViewModel {
             let userUID = receivedTextInJSON["uuid"].stringValue
             let roomUID = receivedTextInJSON["room"].stringValue
             let chatText = receivedTextInJSON["comment"].stringValue
+            
+            print("✏️ receivedText: \(chatText)")
+            
+            //__EMPTY_SUFFIX 체크
+            guard chatText != "__EMPTY_SUFFIX" else { return }
         
             if !isFromCurrentSender(uuid: userUID) {
                 self.delegate?.didReceiveChat()
                 return
             }
-            
-            // 그리고 받은 text 가 중복인지 아닌지 확인해서 중복이면 띄우지 말아야함
-            // 중복인지 아닌지는 chat_uid 를 확인하면 될듯하다
             
             let others = Sender(senderId: userUID,
                                 displayName: nickname)
@@ -125,33 +133,45 @@ extension ChatViewModel {
                             chat_content: chatText,
                             chat_date: Date().getFormattedDate())
             
-            self.messages.append(
-                Message(chat: chat,
-                        sender: others,
-                        sentDate: Date(),
-                        kind: .text(chatText))
-            )
-            
+            self.messages.append(Message(chat: chat,
+                                         sender: others,
+                                         sentDate: Date(),
+                                         kind: .text(chatText)))
+        
             self.delegate?.didReceiveChat()
-         
             
         case .reconnectSuggested(_):
+            
+            print("❗️ ChatViewModel - Reconnect Suggested")
             self.delegate?.reconnectSuggested()
             
         case .error(let reason):
             
-            // garbage data -> __EMPTY_SUFFIX 한 번 보내보고 connect 되는지
+            print("❗️ ChatViewModel - Error in didReceive .error: \(String(describing: reason?.localizedDescription))")
             
-            isConnected = false
-            print("❗️ Error in didReceive .error: \(String(describing: reason?.localizedDescription))")
+            guard connectRetryCount < connectRetryLimit else {
+                print("❗️ ChatViewModel - connectRetryCount == 5")
+                isConnected = false
+                self.delegate?.failedConnection(with: .E000)
+                return
+            }
             
-            // 다시 한 번 소켓 연결 시도해보고 -> 되면 delegate 호출 X
+            self.connect()
+
+        case .viabilityChanged(_):
             
+            //the viability (connection status) of the connection has updated
+            //e.g. connection is down, connection came back up, etc
             
+            print("❗️ Viability Changed")
             
-            self.delegate?.failedConnection(with: .E000)
+        case .cancelled:
+            print("❗️ Cancelled")
+            self.disconnect()
             
-        default: break
+        default:
+            print("❗️ ChatViewModel - didReceive default ACTIVATED")
+            break
         }
     }
     
@@ -167,6 +187,8 @@ extension ChatViewModel {
         
         socket.write(string: convertedText) {
             
+            guard originalText != "__EMPTY_SUFFIX" else { return }
+
             let chat = Chat(chat_uid: Int.random(in: 0...1000),
                             chat_userUID: User.shared.userUID,
                             chat_username: User.shared.nickname,
@@ -190,9 +212,7 @@ extension ChatViewModel {
     
     // 채팅 받아오기
     func getChatList() {
-        
-        print("✏️ getChatList has been CALLED index: \(index)")
-        
+                
         self.isFetchingData = true
         
         ChatManager.shared.getResponseModel(function: .getChat,
@@ -272,7 +292,6 @@ extension ChatViewModel {
                 // 이미 참여하고 있는 채팅방이면 기존의 메시지를 불러와야함
                 if error == .E108 {
                 
-//                    self.getChatList()
                     self.connect()
                     self.getRoomInfo()
                 
@@ -286,6 +305,9 @@ extension ChatViewModel {
     
     // 공구글 나오기
     func exitPost() {
+        
+        let exitText = convertToJSONString(text: "\(User.shared.nickname)님이 채팅방에서 나가셨습니다.")
+        socket.write(string: exitText)
         
         ChatManager.shared.changeJoinStatus(function: .exit,
                                             pid: self.room) { [weak self] result in
@@ -366,9 +388,6 @@ extension ChatViewModel {
     func isFromCurrentSender(uuid: String) -> Bool {
         
        return uuid == User.shared.userUID ? false : true
-        
-//        if uuid == User.shared.userUID { return false }
-//        else { return true }
     }
     
     var postUploaderUID: String {

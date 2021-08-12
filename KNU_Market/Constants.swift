@@ -5,8 +5,8 @@ let profileImageCache = NSCache<AnyObject, AnyObject>()
 
 struct Constants {
     
-    static let API_BASE_URL                     = "https://knumarket.kro.kr:5004/api/v1/"
-    static let WEB_SOCKET_URL                   = "ws://155.230.25.110:5005"
+    static let API_BASE_URL                     = "https://knumarket.kro.kr:5051/api/v1/"
+    static let WEB_SOCKET_URL                   = "wss://knumarket.kro.kr:5052"
     
     //MARK: - Identifiers
     
@@ -103,6 +103,7 @@ struct Constants {
         static let profileImageUID              = "profileImageUID"
         static let isLoggedIn                   = "isLoggedIn"
         static let hasVerifiedEmail             = "hasVerifiedEmail"
+        static let fcmToken                     = "fcmToken"
     }
     
     struct NotificationKey {

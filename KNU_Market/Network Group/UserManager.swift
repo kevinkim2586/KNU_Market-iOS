@@ -56,6 +56,7 @@ class UserManager {
             case 201:
                 print("✏️ UserManager - register SUCCESS")
                 completion(.success(true))
+                User.shared.fcmToken = model.fcmToken
             default:
                 let error = NetworkError.returnError(json: response.data!)
                 print("❗️ UserManager - register FAILED")
@@ -234,7 +235,8 @@ class UserManager {
         let parameters: Parameters = [
             "nickname": User.shared.nickname,
             "password": User.shared.password,
-            "image": uid
+            "image": uid,
+            "fcmToken" : User.shared.fcmToken
         ]
         
         print("uid: \(uid)")
@@ -271,7 +273,8 @@ class UserManager {
         let parameters: Parameters = [
             "nickname": User.shared.nickname,
             "password": password,
-            "image": User.shared.profileImageUID
+            "image": User.shared.profileImageUID,
+            "fcmToken" : User.shared.fcmToken
         ]
         
         print("new password: \(password)")
@@ -309,7 +312,8 @@ class UserManager {
         let parameters: Parameters = [
             "nickname": nickname,
             "password": User.shared.password,
-            "image": User.shared.profileImageUID
+            "image": User.shared.profileImageUID,
+            "fcmToken" : User.shared.fcmToken
         ]
         
         print("new nickname: \(nickname)")
@@ -452,8 +456,8 @@ extension UserManager {
         User.shared.email = model.email
         User.shared.nickname = model.nickname
         User.shared.profileImageUID = model.profileImageCode
+        User.shared.hasVerifiedEmail = model.isVerified
     }
-
 }
 
 

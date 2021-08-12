@@ -75,8 +75,6 @@ extension ChatListViewModel {
                 case .failure(let error):
                     
                     self.delegate?.failedExitingPost(with: error)
-               
-
                 }
             }
         

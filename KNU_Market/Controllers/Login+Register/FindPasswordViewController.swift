@@ -18,15 +18,23 @@ class FindPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         initialize()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        dismissProgressBar()
     }
 
     @IBAction func pressedSendEmailButton(_ sender: UIButton) {
         
         guard let email = emailTextField.text else { return }
         
+        showProgressBar()
+        
         UserManager.shared.findPassword(email: email) { [weak self] result in
+            
+            dismissProgressBar()
             
             guard let self = self else { return }
             

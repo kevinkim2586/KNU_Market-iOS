@@ -54,9 +54,12 @@ class ChatViewController: MessagesViewController {
         
         IQKeyboardManager.shared.enable = true
         
+        viewModel.disconnect()
     }
 
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
+        
+        viewModel.getRoomInfo()
         
         guard let chatMemberVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatMemberVC) as? ChatMemberViewController else { return }
         
@@ -79,7 +82,6 @@ class ChatViewController: MessagesViewController {
         }
         return UICollectionReusableView()
     }
-    
 }
 
 
@@ -106,11 +108,10 @@ extension ChatViewController: ChatViewDelegate {
     
     func didReceiveChat() {
         messagesCollectionView.reloadDataAndKeepOffset()
-       
     }
     
     func reconnectSuggested() {
-        self.presentSimpleAlert(title: "네트워크가 현재 불안정합니다. 🧐", message: "네트워크 상태를 확인해주세요.")
+        self.presentSimpleAlert(title: "네트워크가 현재 불안정합니다. 🧐", message: "채팅방을 나갔다가 다시 들어와 주세요.")
         navigationController?.popViewController(animated: true)
     }
     
@@ -256,9 +257,7 @@ extension ChatViewController {
        
         viewModel.delegate = self
         chatMemberViewDelegate = self
-        
-        messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
-        
+
         initializeInputBar()
         initializeCollectionView()
     }

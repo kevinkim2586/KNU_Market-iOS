@@ -7,7 +7,7 @@ extension UILabel {
         let range = (strNumber).range(of: changeText)
         let attribute = NSMutableAttributedString.init(string: fullText)
         attribute.addAttribute(NSAttributedString.Key.foregroundColor,
-                               value: UIColor(named: Constants.Color.appColor) ,
+                               value: UIColor(named: Constants.Color.appColor)! ,
                                range: range)
         self.attributedText = attribute
     }

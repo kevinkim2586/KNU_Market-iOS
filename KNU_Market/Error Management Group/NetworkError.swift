@@ -91,9 +91,7 @@ enum NetworkError: String, Error {
             print("❗️ NetworkError - error JSON: \(json)")
             let errorCode = json["errorCode"].stringValue
             let errorDescription = json["errorDescription"].stringValue
-            print("❗️ NetworkError - errorDescription: \(errorDescription)")
-            print("❗️ NetworkError - errorCode: \(String(describing: NetworkError(rawValue: errorCode)))")
-        
+ 
             if errorCode == "E109" {
                 
                 print("✏️ NotificationCenter POST- presentVerifyEmailVC ACTIVATED")

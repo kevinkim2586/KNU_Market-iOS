@@ -52,6 +52,15 @@ class User {
         }
     }
     
+    var fcmToken: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.fcmToken) ?? "fcmToken 에러"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.fcmToken)
+        }
+    }
+    
     var email: String = ""
 
     

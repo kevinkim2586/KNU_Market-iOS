@@ -12,8 +12,6 @@ final class Interceptor: RequestInterceptor {
                for session: Session,
                completion: @escaping (Result<URLRequest, Error>) -> Void) {
         
-        print("Interceptor - adapt() activated")
-        
         var request = urlRequest
         request.headers.update(name: "authentication", value: User.shared.accessToken)
         completion(.success(request))

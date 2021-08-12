@@ -81,8 +81,8 @@ extension ReportUserViewController {
     func initializeTextView() {
         
         contentTextView.delegate = self
-        contentTextView.layer.borderWidth = 1.0
-        contentTextView.layer.cornerRadius = 10.0
+        contentTextView.layer.borderWidth = 0.7
+        contentTextView.layer.cornerRadius = 5
         contentTextView.layer.borderColor = UIColor.lightGray.cgColor
         contentTextView.clipsToBounds = true
         contentTextView.font = UIFont.systemFont(ofSize: 15)

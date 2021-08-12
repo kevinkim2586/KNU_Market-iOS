@@ -20,6 +20,7 @@ protocol ChatViewDelegate: AnyObject {
     func didFetchPreviousChats()
     func failedFetchingPreviousChats(with error: NetworkError)
 
+    func didSendText()
     
 }
 
@@ -190,7 +191,9 @@ extension ChatViewModel {
         
         socket.write(string: convertedText) {
             
-            guard originalText != Constants.ChatSuffix.emptySuffix else { return }
+            guard originalText != Constants.ChatSuffix.emptySuffix else {
+                return
+            }
 
             let chat = Chat(chat_uid: Int.random(in: 0...1000),
                             chat_userUID: User.shared.userUID,
@@ -199,12 +202,12 @@ extension ChatViewModel {
                             chat_content: convertedText,
                             chat_date: Date().getFormattedDate())
             
-            self.messages.append(
-                Message(chat: chat,
-                        sender: self.mySelf,
-                        sentDate: Date(),
-                        kind: .text(originalText))
-            )
+            self.messages.append(Message(chat: chat,
+                                         sender: self.mySelf,
+                                         sentDate: Date(),
+                                         kind: .text(originalText)))
+            
+            self.delegate?.didSendText()
         }
     }
 }
@@ -217,6 +220,8 @@ extension ChatViewModel {
     func getChatList() {
                 
         self.isFetchingData = true
+        
+        print("✏️ getChatList...isFetching Data..")
         
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,

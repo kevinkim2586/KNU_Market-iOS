@@ -90,6 +90,35 @@ class ChatManager {
                 }
             }
     }
+    
+    func banUser(userUID: String,
+                 in room: String,
+                 completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+        
+        let url = baseURL + room + "/\(userUID)"
+        
+        print("✏️ banUser url: \(url)")
+        
+        AF.request(url,
+                   method: .delete,
+                   interceptor: interceptor)
+            .validate()
+            .responseData { response in
+                
+                switch response.result {
+                
+                case .success:
+                    
+                    print("✏️ ChatManager - banUser SUCCESS")
+                    completion(.success(true))
+                    
+                case .failure:
+                    let error = NetworkError.returnError(json: response.data!)
+                    print("❗️ ChatManager - banUser ERROR with code: \(response.response!.statusCode) and reason: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+            }
+    }
 
 }
 
@@ -112,6 +141,7 @@ extension ChatManager {
         case .getChat:
             guard let page = index, let pid = pid else { fatalError() }
             return baseURL + pid + "/" + String(page)
+            
         }
     }
 }

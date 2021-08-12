@@ -8,7 +8,7 @@ class ChatViewController: MessagesViewController {
     
     private var viewModel: ChatViewModel!
     
-    private let headerSpinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+    @objc private let refreshControl = UIRefreshControl()
     
     var room: String = ""
     var chatRoomTitle: String = ""
@@ -27,8 +27,12 @@ class ChatViewController: MessagesViewController {
         IQKeyboardManager.shared.enable = false
         
         self.title = chatRoomTitle
+    
         viewModel = ChatViewModel(room: room,
                                   isFirstEntrance: isFirstEntrance)
+        
+        messagesCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(getChatList), for: .valueChanged)
     
         initialize()
         
@@ -36,6 +40,10 @@ class ChatViewController: MessagesViewController {
         print("✏️ title: \(chatRoomTitle)")
         viewModel.joinPost()
 
+    }
+    
+    @objc func getChatList() {
+        viewModel.getChatList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,7 +61,6 @@ class ChatViewController: MessagesViewController {
         super.viewDidDisappear(animated)
         
         IQKeyboardManager.shared.enable = true
-        
         viewModel.disconnect()
     }
 
@@ -70,20 +77,9 @@ class ChatViewController: MessagesViewController {
         chatMemberVC.postUploaderUID = viewModel.postUploaderUID
         presentPanModal(chatMemberVC)
     }
-    
-    // Spinner HeaderView
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        if kind == UICollectionView.elementKindSectionHeader {
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
-            header.addSubview(headerSpinner)
-            headerSpinner.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 50)
-            return header
-        }
-        return UICollectionReusableView()
-    }
-}
 
+}
+   
 
 //MARK: - ChatViewDelegate - Socket Delegate Methods
 
@@ -98,8 +94,6 @@ extension ChatViewController: ChatViewDelegate {
         }
   
         viewModel.getChatList()
-        
-//        messagesCollectionView.reloadData()
         messagesCollectionView.scrollToLastItem()
     }
     
@@ -120,6 +114,17 @@ extension ChatViewController: ChatViewDelegate {
     func failedConnection(with error: NetworkError) {
         self.presentSimpleAlert(title: "일시적인 연결 문제 발생", message: error.errorDescription)
     }
+    
+    func didSendText() {
+        
+        print("✏️ didSendText ACTIVATED")
+        
+        DispatchQueue.main.async {
+            self.messageInputBar.inputTextView.text = ""
+            self.messagesCollectionView.scrollToLastItem()
+        }
+        
+    }
 
 }
 
@@ -139,10 +144,11 @@ extension ChatViewController {
     
     func didFetchPreviousChats() {
         
-        headerSpinner.stopAnimating()
+        refreshControl.endRefreshing()
+
+        
+//        headerSpinner.stopAnimating()
     
-        print("✏️ MESSAGE COUNT: \(viewModel.messages.count)")
-        print("✏️ isFirstViewLaunch: \(viewModel.isFirstViewLaunch)")
         
         if viewModel.messages.count == 0 {
             viewModel.getChatList()
@@ -163,8 +169,7 @@ extension ChatViewController {
     }
     
     func failedFetchingPreviousChats(with error: NetworkError) {
-        
-        headerSpinner.stopAnimating()
+        refreshControl.endRefreshing()
         
     }
 }
@@ -185,6 +190,8 @@ extension ChatViewController: ChatMemberViewDelegate {
 //MARK: - MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate
 
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
+    
+
     
     public func currentSender() -> SenderType {
         return viewModel.mySelf
@@ -242,12 +249,14 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         if scrollView.contentOffset.y <= 10 {
             
             if !viewModel.isFetchingData && viewModel.needsToFetchMoreData {
-                headerSpinner.startAnimating()
-
+                
+                refreshControl.beginRefreshing()
                 self.viewModel.getChatList()
             }
         }
     }
+    
+
 }
 
 //MARK: - InputBarAccessoryViewDelegate
@@ -257,9 +266,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         
         viewModel.sendText(text)
-        
-        inputBar.inputTextView.text = ""
-        messagesCollectionView.scrollToLastItem()
     }
 }
 
@@ -278,12 +284,9 @@ extension ChatViewController {
     
     func initializeCollectionView() {
         
-        messagesCollectionView.register(CollectionViewFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Header")
-        (messagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize =
-            CGSize(width: messagesCollectionView.bounds.width, height: 50)
-        
+
         messagesCollectionView.contentInset.top = 20
-    
+
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
@@ -324,16 +327,5 @@ extension ChatViewController {
         
         messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
         
-    }
-}
-
-
-public class CollectionViewFooterView: UICollectionReusableView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -101,16 +101,16 @@
                                                         <constraint firstAttribute="width" constant="45" id="SLy-dX-cTK"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Og-yq-8WS" userLabel="Nickname Label">
-                                                    <rect key="frame" x="80" y="30.5" width="42" height="19.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로딩 중.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Og-yq-8WS" userLabel="Nickname Label">
+                                                    <rect key="frame" x="80" y="30.5" width="55" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q73-il-DEI" userLabel="Report User Button">
-                                                    <rect key="frame" x="379" y="29" width="20" height="22"/>
+                                                    <rect key="frame" x="375.5" y="29" width="23.5" height="22"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" image="flag" catalog="system"/>
+                                                    <state key="normal" image="megaphone" catalog="system"/>
                                                     <connections>
                                                         <action selector="pressedReportUserButton:" destination="ziR-hQ-GLM" eventType="touchUpInside" id="bV6-e5-Z4m"/>
                                                     </connections>
@@ -158,8 +158,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="flag" catalog="system" width="128" height="121"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
+        <image name="megaphone" catalog="system" width="128" height="111"/>
         <image name="people icon" width="52" height="52"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <systemColor name="systemBackgroundColor">

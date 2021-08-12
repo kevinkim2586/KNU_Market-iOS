@@ -60,12 +60,17 @@ class ChatMemberTableViewCell: UITableViewCell {
                 self?.userUID = profileModel.uid
                 
                 self?.nicknameLabel.text = profileModel.nickname
+                
                 let imageURL = URL(string: "\(Constants.API_BASE_URL)media/\(profileModel.profileImageCode)")
                 self?.profileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                                
                 self?.profileImageView.sd_setImage(with: imageURL,
-                                                   placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
+                                                   placeholderImage: UIImage(named: Constants.Images.chatMemberDefaultImage),
                                                    options: .continueInBackground,
                                                    completed: nil)
+                self?.profileImageView.contentMode = .scaleAspectFit
+//                self?.profileImageView.layer.borderWidth = 1
+//                self?.profileImageView.layer.borderColor = UIColor.black.cgColor
                 
                 // 만약 본인 Cell 이면 신고하기 버튼 숨김 처리
                 DispatchQueue.main.async {

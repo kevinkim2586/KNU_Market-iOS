@@ -143,6 +143,10 @@ struct Constants {
         static let defaultProfileImage          = "default_profile_image"
         static let pickProfileImage             = "pick profile image"
         static let peopleIcon                   = "people icon"
+        static let chatMemberDefaultImage       = "chatMemberDefaultImage"
+        
+        
+        
         
         static let chatBubbleIcon               = "chat_bubble_icon"
         

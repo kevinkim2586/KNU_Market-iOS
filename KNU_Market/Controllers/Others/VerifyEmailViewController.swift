@@ -85,7 +85,7 @@ extension VerifyEmailViewController {
         let navBarButton = UIBarButtonItem(barButtonSystemItem: .stop,
                                            target: self,
                                            action: #selector(dismissVC))
-        navItem.leftBarButtonItem = navBarButton
+        navItem.rightBarButtonItem = navBarButton
         navigationBar.items = [navItem]
         
     }

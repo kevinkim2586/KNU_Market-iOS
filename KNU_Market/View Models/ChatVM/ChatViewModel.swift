@@ -19,6 +19,7 @@ protocol ChatViewDelegate: AnyObject {
     
     func didFetchPreviousChats()
     func failedFetchingPreviousChats(with error: NetworkError)
+
     
 }
 
@@ -50,6 +51,8 @@ class ChatViewModel: WebSocketDelegate {
     // ChatVC 의 첫 viewDidLoad 이면 collectionView.scrollToLastItem 실행하게끔 위함
     var isFirstViewLaunch: Bool = true
     var isFirstEntranceToChat: Bool
+    
+    var isDoneLoadingInitialChatData: Bool = false
 
 
     // Delegate
@@ -236,10 +239,10 @@ extension ChatViewModel {
                 }
                 
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
-
-                chatResponseModel.chat.forEach { chat in
+                
+                for chat in chatResponseModel.chat {
                     
-                    guard chat.chat_content != Constants.ChatSuffix.emptySuffix else { return }
+                    guard chat.chat_content != Constants.ChatSuffix.emptySuffix else { continue }
                     
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {
@@ -260,8 +263,9 @@ extension ChatViewModel {
                                                      kind: .text(chat.chat_content)),
                                              at: 0)
                     }
+                    
                 }
-                
+     
                 self.delegate?.didFetchPreviousChats()
                 
             case .failure(let error):
@@ -285,7 +289,9 @@ extension ChatViewModel {
             switch result {
             
             case .success:
+                
                 self.connect()
+                self.getRoomInfo()
                 
             case .failure(let error):
                 

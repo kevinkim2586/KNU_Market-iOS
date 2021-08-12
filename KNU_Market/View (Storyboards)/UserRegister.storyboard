@@ -445,12 +445,19 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIO-6h-mw7">
+                                <rect key="frame" x="20" y="422.5" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GDe-w2-7ft"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="b0s-BS-3AN" firstAttribute="leading" secondItem="GDe-w2-7ft" secondAttribute="leading" constant="20" id="1Gq-9s-Py0"/>
                             <constraint firstItem="IAz-AC-zbf" firstAttribute="leading" secondItem="GDe-w2-7ft" secondAttribute="leading" constant="20" id="3P3-Ii-ebN"/>
+                            <constraint firstItem="GDe-w2-7ft" firstAttribute="trailing" secondItem="KIO-6h-mw7" secondAttribute="trailing" constant="20" id="5Fm-db-UgY"/>
                             <constraint firstItem="YUh-qt-Bus" firstAttribute="top" secondItem="epa-Nb-erc" secondAttribute="bottom" constant="10" id="5xM-Ik-mhh"/>
                             <constraint firstItem="epa-Nb-erc" firstAttribute="leading" secondItem="GDe-w2-7ft" secondAttribute="leading" constant="20" id="8gU-BP-El0"/>
                             <constraint firstItem="IAz-AC-zbf" firstAttribute="top" secondItem="ezu-AL-VlM" secondAttribute="bottom" constant="20" id="9x7-8Y-dEP"/>
@@ -458,9 +465,11 @@
                             <constraint firstItem="GDe-w2-7ft" firstAttribute="trailing" secondItem="b0s-BS-3AN" secondAttribute="trailing" constant="20" id="F3t-1T-qDM"/>
                             <constraint firstItem="GDe-w2-7ft" firstAttribute="trailing" secondItem="epa-Nb-erc" secondAttribute="trailing" constant="20" id="FvW-MM-fx9"/>
                             <constraint firstItem="ezu-AL-VlM" firstAttribute="leading" secondItem="GDe-w2-7ft" secondAttribute="leading" constant="20" id="MLn-tS-fuH"/>
+                            <constraint firstItem="KIO-6h-mw7" firstAttribute="top" secondItem="IAz-AC-zbf" secondAttribute="bottom" constant="20" id="NPF-hN-zzs"/>
                             <constraint firstItem="b0s-BS-3AN" firstAttribute="top" secondItem="YUh-qt-Bus" secondAttribute="bottom" constant="10" id="RHB-qc-MSb"/>
                             <constraint firstItem="GDe-w2-7ft" firstAttribute="trailing" secondItem="IAz-AC-zbf" secondAttribute="trailing" constant="150" id="Ytl-ta-pk6"/>
                             <constraint firstItem="GDe-w2-7ft" firstAttribute="trailing" secondItem="ezu-AL-VlM" secondAttribute="trailing" constant="100" id="dhG-8c-qJw"/>
+                            <constraint firstItem="KIO-6h-mw7" firstAttribute="leading" secondItem="GDe-w2-7ft" secondAttribute="leading" constant="20" id="iiS-ls-9N4"/>
                             <constraint firstItem="ezu-AL-VlM" firstAttribute="top" secondItem="b0s-BS-3AN" secondAttribute="bottom" constant="30" id="jh7-Ws-mDK"/>
                             <constraint firstItem="ezu-AL-VlM" firstAttribute="leading" secondItem="GDe-w2-7ft" secondAttribute="leading" constant="20" id="kTF-FF-riS"/>
                             <constraint firstItem="frZ-Pr-2xl" firstAttribute="leading" secondItem="GDe-w2-7ft" secondAttribute="leading" constant="20" id="mnA-jP-tL8"/>
@@ -479,6 +488,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="checkSpamMailLabel" destination="KIO-6h-mw7" id="Nch-bV-tH8"/>
                         <outlet property="emailTextField" destination="ezu-AL-VlM" id="EoE-hD-wcR"/>
                         <outlet property="errorLabel" destination="IAz-AC-zbf" id="unz-7T-Ynn"/>
                         <outlet property="firstLineLabel" destination="frZ-Pr-2xl" id="exo-aw-bdF"/>
@@ -488,6 +498,7 @@
                         <outletCollection property="detailLabels" destination="epa-Nb-erc" collectionClass="NSMutableArray" id="CwR-Ds-HuZ"/>
                         <outletCollection property="detailLabels" destination="YUh-qt-Bus" collectionClass="NSMutableArray" id="nSh-wr-9eP"/>
                         <outletCollection property="detailLabels" destination="b0s-BS-3AN" collectionClass="NSMutableArray" id="oQt-5M-fAX"/>
+                        <outletCollection property="detailLabels" destination="KIO-6h-mw7" collectionClass="NSMutableArray" id="tq2-Ek-gYl"/>
                         <segue destination="RdA-8i-zHk" kind="show" identifier="goToCheckEmailVC" id="EPk-Ai-4c6"/>
                     </connections>
                 </viewController>

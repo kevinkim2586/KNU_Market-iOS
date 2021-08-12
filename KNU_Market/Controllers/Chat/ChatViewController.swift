@@ -33,6 +33,7 @@ class ChatViewController: MessagesViewController {
         initialize()
         
         print("✏️ pageID: \(room)")
+        print("✏️ title: \(chatRoomTitle)")
         viewModel.joinPost()
 
     }
@@ -41,11 +42,11 @@ class ChatViewController: MessagesViewController {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         messagesCollectionView.scrollToLastItem()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -95,8 +96,10 @@ extension ChatViewController: ChatViewDelegate {
         if viewModel.isFirstEntranceToChat {
             viewModel.sendText("\(User.shared.nickname) 님이 채팅방에 입장하셨습니다.")
         }
+  
+        viewModel.getChatList()
         
-        messagesCollectionView.reloadData()
+//        messagesCollectionView.reloadData()
         messagesCollectionView.scrollToLastItem()
     }
     
@@ -117,6 +120,7 @@ extension ChatViewController: ChatViewDelegate {
     func failedConnection(with error: NetworkError) {
         self.presentSimpleAlert(title: "일시적인 연결 문제 발생", message: error.errorDescription)
     }
+
 }
 
 //MARK: - ChatViewDelegate - API Delegate Methods
@@ -136,15 +140,26 @@ extension ChatViewController {
     func didFetchPreviousChats() {
         
         headerSpinner.stopAnimating()
+    
+        print("✏️ MESSAGE COUNT: \(viewModel.messages.count)")
+        print("✏️ isFirstViewLaunch: \(viewModel.isFirstViewLaunch)")
         
+        if viewModel.messages.count == 0 {
+            viewModel.getChatList()
+        }
+
+
         if viewModel.isFirstViewLaunch {
+
             viewModel.isFirstViewLaunch = false
+
             messagesCollectionView.scrollToLastItem()
             messagesCollectionView.reloadData()
-            
+
         } else {
             messagesCollectionView.reloadDataAndKeepOffset()
         }
+
     }
     
     func failedFetchingPreviousChats(with error: NetworkError) {
@@ -267,8 +282,7 @@ extension ChatViewController {
         (messagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize =
             CGSize(width: messagesCollectionView.bounds.width, height: 50)
         
-        self.messagesCollectionView.contentInset.top = 20
-        
+        messagesCollectionView.contentInset.top = 20
     
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self

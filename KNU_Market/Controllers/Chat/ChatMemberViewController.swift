@@ -5,6 +5,8 @@ protocol ChatMemberViewDelegate: AnyObject {
     
     func didChooseToExitPost()
     func didChooseToDeletePost()
+    
+    func didDismissPanModal()
 }
 
 class ChatMemberViewController: UIViewController {
@@ -17,6 +19,10 @@ class ChatMemberViewController: UIViewController {
     var postUploaderUID: String?
     
     weak var delegate: ChatMemberViewDelegate?
+    
+    deinit {
+        print("❗️ ChatMemberVC has been DEINITIALIZED")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +30,16 @@ class ChatMemberViewController: UIViewController {
         initialize()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.delegate?.didDismissPanModal()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         dismissProgressBar()
     }
+
     
 
     @IBAction func pressedSettingsButton(_ sender: UIButton) {
@@ -64,7 +76,6 @@ class ChatMemberViewController: UIViewController {
                     if selectedOk {
                         self.delegate?.didChooseToExitPost()
                         self.dismiss(animated: true)
-                   
                     }
                 }
             }

@@ -40,11 +40,11 @@ class ChatManager {
                 switch statusCode {
                 
                 case 201:
-                    print("✏️ ChatManager - changeJoinStatus SUCCESS")
+                    print("✏️ ChatManager - changeJoinStatus SUCCESS for function: \(function)")
                     completion(.success(true))
                     
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ ChatManager - changeJoinStatus error with code: \(response.response!.statusCode) and error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
@@ -73,7 +73,7 @@ class ChatManager {
                 case .success:
                     do {
                         let decodedData = try JSONDecoder().decode(expectedModel,
-                                                                   from: response.data!)
+                                                                   from: response.data ?? Data())
                         print("✏️ ChatManager - getResponse SUCCESS for function: \(function)")
                         completion(.success(decodedData))
                         
@@ -84,7 +84,7 @@ class ChatManager {
                     }
                     
                 case .failure:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ ChatManager - getResponse ERROR with code: \(response.response!.statusCode) and error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
@@ -113,7 +113,7 @@ class ChatManager {
                     completion(.success(true))
                     
                 case .failure:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ ChatManager - banUser ERROR with code: \(response.response!.statusCode) and reason: \(error.errorDescription)")
                     completion(.failure(error))
                 }

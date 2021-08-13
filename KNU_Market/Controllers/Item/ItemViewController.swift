@@ -470,7 +470,7 @@ extension ItemViewController {
     func initializeEnterChatButton() {
         
 
-        if viewModel.postIsUserUploaded || viewModel.isGathering {
+        if viewModel.postIsUserUploaded || viewModel.isGathering || viewModel.userAlreadyJoinedPost {
             enterChatButton.isUserInteractionEnabled = true
             enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)
             enterChatButton.setTitle("채팅방 입장", for: .normal)

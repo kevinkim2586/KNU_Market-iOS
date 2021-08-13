@@ -42,7 +42,7 @@ class ItemManager {
                     
                     do {
                         let decodedData = try JSONDecoder().decode([ItemListModel].self,
-                                                                   from: response.data!)
+                                                                   from: response.data ?? Data())
                         completion(.success(decodedData))
                         
                     } catch {
@@ -51,7 +51,7 @@ class ItemManager {
                     }
                     
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("ItemManager fetchItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
@@ -79,7 +79,7 @@ class ItemManager {
                     completion(.success(true))
                     
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ ItemManager - uploadNewItem failed with error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
@@ -109,7 +109,7 @@ class ItemManager {
                     print("✏️ ItemManager - editPost SUCCESS")
                     completion(.success(true))
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ ItemManager - editPost FAILED with statusCode: \(statusCode) and reason: \(error.errorDescription)")
                     completion(.failure(error))
                 }
@@ -138,7 +138,7 @@ class ItemManager {
                     
                     do {
                         let decodedData = try JSONDecoder().decode(ItemDetailModel.self,
-                                                                   from: response.data!)
+                                                                   from: response.data ?? Data())
                         completion(.success(decodedData))
                         
                     } catch {
@@ -148,7 +148,7 @@ class ItemManager {
                     
                 default:
                     
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("ItemManager fetchItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
@@ -176,7 +176,7 @@ class ItemManager {
                     completion(.success(true))
                     
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ ItemManager deletePost error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
@@ -209,7 +209,7 @@ class ItemManager {
                     
                     do {
                         let decodedData = try JSONDecoder().decode([ItemListModel].self,
-                                                                   from: response.data!)
+                                                                   from: response.data ?? Data())
                         completion(.success(decodedData))
                     
                     } catch {
@@ -217,7 +217,7 @@ class ItemManager {
                         completion(.failure(.E000))
                     }
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ ItemManager - fetchSearchResults error: \(error.errorDescription) with statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
@@ -245,7 +245,7 @@ class ItemManager {
                     completion(.success(true))
                     
                 case .failure:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ ItemManager - markPostDone FAILED with error: \(error.errorDescription) and statusCode: \(String(describing: response.response?.statusCode))")
                     completion(.failure(error))
                     

@@ -58,7 +58,7 @@ class UserManager {
                 completion(.success(true))
                 User.shared.fcmToken = model.fcmToken
             default:
-                let error = NetworkError.returnError(json: response.data!)
+                let error = NetworkError.returnError(json: response.data ?? Data())
                 print("❗️ UserManager - register FAILED")
                 completion(.failure(error))
             }
@@ -88,7 +88,7 @@ class UserManager {
                 case 200:
                     do {
                         
-                        let json = try JSON(data: response.data!)
+                        let json = try JSON(data: response.data ?? Data())
                         let result = json["isDuplicate"].boolValue
                         
                         print("✏️ USER MANAGER - duplicateNickname Result: \(result)")
@@ -100,7 +100,7 @@ class UserManager {
                         completion(.failure(.E000))
                     }
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ \(error.errorDescription)")
                     completion(.failure(error))
                 }
@@ -149,7 +149,7 @@ class UserManager {
                     }
                 default:
                     
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ \(error.errorDescription)")
                     completion(.failure(error))
                 }
@@ -185,7 +185,7 @@ class UserManager {
                     
                 default:
                     print("❗️ loadOtherUsersProfile FAILED with statusCode: \(statusCode)")
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     completion(.failure(error))
                 }
             }
@@ -221,7 +221,7 @@ class UserManager {
                     
                 default:
                     print("❗️ loadUserProfile FAILED with statusCode: \(statusCode)")
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     completion(.failure(error))
                 }
                 
@@ -260,7 +260,7 @@ class UserManager {
                     
                 default:
                     print("UserManager - updateUserProfileImage failed default statement")
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     completion(.failure(error))
                 }
             }
@@ -298,7 +298,7 @@ class UserManager {
                     
                 default:
                     print("UserManager - updateUserPassword failed default statement")
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     completion(.failure(error))
                 }
             }
@@ -337,7 +337,7 @@ class UserManager {
                     
                 default:
                     print("UserManager - updateUserNickname failed default statement")
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     completion(.failure(error))
                 }
             }
@@ -364,7 +364,7 @@ class UserManager {
                     completion(.success(true))
                     
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ UserManager findPassword error statusCode: \(statusCode) and error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
@@ -390,7 +390,7 @@ class UserManager {
                     completion(.success(true))
                     
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ UserManager - resendVerificationEmail statusCode: \(statusCode), reason: \(error.errorDescription)")
                     completion(.failure(error))
                 }
@@ -416,7 +416,7 @@ class UserManager {
                     completion(.success(true))
                     
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ unregisterUser failed with error code: \(statusCode), and error: \(error.errorDescription)")
                     completion(.failure(error))
                 }

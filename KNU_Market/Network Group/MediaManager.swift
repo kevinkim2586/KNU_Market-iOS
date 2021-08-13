@@ -40,7 +40,7 @@ class MediaManager {
                         }
                     default:
                         print("❗️ MediaManager -requestMedia FAILED ")
-                        let error = NetworkError.returnError(json: response.data!)
+                        let error = NetworkError.returnError(json: response.data ?? Data())
                         completion(.failure(error))
                     }
                    }
@@ -68,14 +68,14 @@ class MediaManager {
             case 201:
                 do {
                     
-                    let json = try JSON(data: response.data!)
+                    let json = try JSON(data: response.data ?? Data())
                     let imageID = json["uid"].stringValue
                     print("UserManager: newly uploaded image UID: \(imageID)")
                     completion(.success(imageID))
                     
                 } catch {
                     print("UserManager - uploadImage() catch error \(error)")
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     completion(.failure(error))
                 }
             default: completion(.failure(.E000))
@@ -103,7 +103,7 @@ class MediaManager {
                     print("✏️ MediaManager - deleteImage SUCCESS for uid: \(uid)")
                     completion(.success(true))
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ MediaManager - deleteImage FAILED with statusCode: \(statusCode) and reason: \(error.errorDescription)")
                     completion(.failure(error))
                 }

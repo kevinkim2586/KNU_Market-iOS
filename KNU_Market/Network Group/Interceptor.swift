@@ -110,7 +110,7 @@ extension Interceptor {
                         
                         do {
                             
-                            let json = try JSON(data: response.data!)
+                            let json = try JSON(data: response.data ?? Data())
                             UserManager.shared.saveRefreshedAccessToken(from: json)
                             print("successfully refreshed NEW token: \(User.shared.accessToken)")
                             completion(.success(true))
@@ -121,7 +121,7 @@ extension Interceptor {
                         
                     default:
                         print("Interceptor - refreshToken() failed default")
-                        let error = NetworkError.returnError(json: response.data!)
+                        let error = NetworkError.returnError(json: response.data ?? Data())
                         completion(.failure(error))
                     
                     }

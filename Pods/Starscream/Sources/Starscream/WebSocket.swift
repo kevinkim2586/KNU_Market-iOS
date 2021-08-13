@@ -87,7 +87,7 @@ public enum WebSocketEvent {
     case cancelled
 }
 
-public protocol WebSocketDelegate: class {
+public protocol WebSocketDelegate: AnyObject {
     func didReceive(event: WebSocketEvent, client: WebSocket)
 }
 

@@ -78,6 +78,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row > viewModel.roomList.count { return UITableViewCell() }
+        if self.viewModel.roomList.count == 0 { return UITableViewCell() }
 
         let cellIdentifier = Constants.cellID.chatTableViewCell
         
@@ -96,6 +97,8 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if viewModel.roomList.count == 0 { return }
         
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
         guard let chatVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }

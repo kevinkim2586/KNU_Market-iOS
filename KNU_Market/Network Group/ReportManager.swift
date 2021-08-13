@@ -36,7 +36,7 @@ class ReportManager {
                 case 201:
                     completion(.success(true))
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(json: response.data ?? Data())
                     print("ReportManager - reportUser() failed with error: \(error.errorDescription)")
                     completion(.failure(error))
 

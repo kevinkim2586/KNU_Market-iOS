@@ -30,16 +30,17 @@ class ChatViewController: MessagesViewController {
     
         viewModel = ChatViewModel(room: room,
                                   isFirstEntrance: isFirstEntrance)
-        
-        messagesCollectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(getChatList), for: .valueChanged)
     
         initialize()
         
         print("✏️ pageID: \(room)")
         print("✏️ title: \(chatRoomTitle)")
-        viewModel.joinPost()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.connect()
     }
 
     
@@ -47,13 +48,13 @@ class ChatViewController: MessagesViewController {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         messagesCollectionView.scrollToLastItem()
-        viewModel.connect()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
     }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -67,7 +68,6 @@ class ChatViewController: MessagesViewController {
         viewModel.getRoomInfo()
         
         guard let chatMemberVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatMemberVC) as? ChatMemberViewController else { return }
-        
         
         chatMemberVC.delegate = self
         chatMemberVC.roomInfo = viewModel.roomInfo
@@ -87,38 +87,47 @@ class ChatViewController: MessagesViewController {
 extension ChatViewController: ChatViewDelegate {
     
     func didConnect() {
+        dismissProgressBar()
         
-        print("✏️ isFirstEntranceToChat: \(viewModel.isFirstEntranceToChat)")
-    
+        messagesCollectionView.scrollToLastItem()
+        
         if viewModel.isFirstEntranceToChat {
-            viewModel.sendText("\(User.shared.nickname) 님이 채팅방에 입장하셨습니다.")
+            
+            viewModel.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.enterSuffix)")
+            viewModel.isFirstEntranceToChat = false
         }
   
         viewModel.getChatList()
-        messagesCollectionView.scrollToLastItem()
+        
     }
     
     func didDisconnect() {
+        dismissProgressBar()
         print("✏️ ChatVC - didDisconnect delegate activated")
         navigationController?.popViewController(animated: true)
     }
     
     func didReceiveChat() {
+        dismissProgressBar()
         messagesCollectionView.reloadDataAndKeepOffset()
     }
     
     func reconnectSuggested() {
+        dismissProgressBar()
+        
+        viewModel.connect()
         self.presentSimpleAlert(title: "네트워크가 현재 불안정합니다. 🧐", message: "채팅방을 나갔다가 다시 들어와 주세요.")
-        navigationController?.popViewController(animated: true)
     }
     
     func failedConnection(with error: NetworkError) {
+        dismissProgressBar()
         self.presentSimpleAlert(title: "일시적인 연결 문제 발생", message: error.errorDescription)
     }
     
     func didSendText() {
+        dismissProgressBar()
         
-        print("✏️ didSendText ACTIVATED")
+        print("✏️ ChatVC - didSendText ACTIVATED")
         
         DispatchQueue.main.async {
             self.messageInputBar.inputTextView.text = ""
@@ -144,17 +153,13 @@ extension ChatViewController {
     }
     
     func didFetchPreviousChats() {
+        dismissProgressBar()
         
         refreshControl.endRefreshing()
 
-        
-//        headerSpinner.stopAnimating()
-    
-        
         if viewModel.messages.count == 0 {
             viewModel.getChatList()
         }
-
 
         if viewModel.isFirstViewLaunch {
 
@@ -170,6 +175,7 @@ extension ChatViewController {
     }
     
     func failedFetchingPreviousChats(with error: NetworkError) {
+        dismissProgressBar()
         refreshControl.endRefreshing()
         
     }
@@ -180,19 +186,33 @@ extension ChatViewController {
 extension ChatViewController: ChatMemberViewDelegate {
     
     func didChooseToExitPost() {
+        print("✏️ didChooseToExitPost")
         viewModel.exitPost()
     }
     
     func didChooseToDeletePost() {
         viewModel.deletePost(for: self.room)
     }
+    
+    func didDismissPanModal() {
+        viewModel.getChatList(isFromBeginning: true)
+    }
 }
+
+//MARK: - InputBarAccessoryViewDelegate
+
+extension ChatViewController: InputBarAccessoryViewDelegate {
+    
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        
+        viewModel.sendText(text)
+    }
+}
+
 
 //MARK: - MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate
 
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
-    
-
     
     public func currentSender() -> SenderType {
         return viewModel.mySelf
@@ -260,16 +280,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 
 }
 
-//MARK: - InputBarAccessoryViewDelegate
-
-extension ChatViewController: InputBarAccessoryViewDelegate {
-    
-    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-        
-        viewModel.sendText(text)
-    }
-}
-
 //MARK: - Initialization & UI Configuration
 
 extension ChatViewController {
@@ -279,8 +289,17 @@ extension ChatViewController {
         viewModel.delegate = self
         chatMemberViewDelegate = self
 
+        initializeRefreshControl()
         initializeInputBar()
         initializeCollectionView()
+    }
+    
+    func initializeRefreshControl() {
+        
+        messagesCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self,
+                                 action: #selector(getChatList),
+                                 for: .valueChanged)
     }
     
     func initializeCollectionView() {
@@ -296,7 +315,7 @@ extension ChatViewController {
         messagesCollectionView.backgroundColor = .white
         self.scrollsToLastItemOnKeyboardBeginsEditing = true
         
-        
+
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
             
             layout.setMessageIncomingAvatarSize(.zero)

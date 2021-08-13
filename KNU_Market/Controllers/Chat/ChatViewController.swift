@@ -15,7 +15,7 @@ class ChatViewController: MessagesViewController {
     var postUploaderUID: String = ""
     var isFirstEntrance: Bool = false
     
-    var chatMemberViewDelegate: ChatMemberViewDelegate?
+    weak var chatMemberViewDelegate: ChatMemberViewDelegate?
     
     deinit {
         print("❗️ ChatViewController has been DEINITIALIZED")
@@ -47,7 +47,8 @@ class ChatViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        messagesCollectionView.scrollToLastItem()
+//        viewModel.connect()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -267,10 +268,11 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
               
-        if scrollView.contentOffset.y <= 10 {
+        if scrollView.contentOffset.y <= 30 {
             
-            if !viewModel.isFetchingData && viewModel.needsToFetchMoreData {
+            if !viewModel.isFetchingData && viewModel.needsToFetchMoreData && !viewModel.isFirstViewLaunch {
                 
+
                 refreshControl.beginRefreshing()
                 self.viewModel.getChatList()
             }

@@ -64,12 +64,15 @@ class ChatViewModel: WebSocketDelegate {
         self.room = room
         self.isFirstEntranceToChat = isFirstEntrance
         
+        resetMessages()
+        
         scheduleSendingGarbageTextWithTimeInterval()
         
     }
     
     deinit {
         if timer != nil {
+            print("✏️ Timer has been invalidated")
             timer?.invalidate()
             timer = nil
         }
@@ -77,7 +80,8 @@ class ChatViewModel: WebSocketDelegate {
     
     func scheduleSendingGarbageTextWithTimeInterval() {
         
-        timer =  Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { (timer) in
+        timer =  Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { (timer) in
+
             self.sendText(Constants.ChatSuffix.emptySuffix)
         }
     }

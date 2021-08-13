@@ -74,18 +74,21 @@ extension ChatViewModel {
     func connect() {
         
         var request = URLRequest(url: URL(string: Constants.WEB_SOCKET_URL)!)
-        
-        request.timeoutInterval = 5
+        request.timeoutInterval = 1000
         
         let pinner = FoundationSecurity(allowSelfSigned: true)
+        
         socket = WebSocket(request: request, certPinner: pinner)
         socket.delegate = self
         socket.connect() 
         connectRetryCount += 1
+        
+        
     }
     
     func disconnect() {
         
+        print("✏️ ChatViewModel - disconnect CALLED")
         socket.disconnect()
     }
 
@@ -172,6 +175,7 @@ extension ChatViewModel {
         case .cancelled:
             print("❗️ Cancelled")
             self.disconnect()
+      
             
         default:
             print("❗️ ChatViewModel - didReceive default ACTIVATED")
@@ -217,9 +221,13 @@ extension ChatViewModel {
 extension ChatViewModel {
     
     // 채팅 받아오기
-    func getChatList() {
+    func getChatList(isFromBeginning: Bool = false) {
                 
         self.isFetchingData = true
+        
+        if isFromBeginning {
+            self.index = 1
+        }
         
         print("✏️ getChatList...isFetching Data..")
         

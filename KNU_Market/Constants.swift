@@ -197,8 +197,8 @@ struct Constants {
     struct ChatSuffix {
         
         static let emptySuffix                  = "__EMPTY_SUFFIX"
-        static let enterSuffix                  = "__ENTER_SUFFIX"
-        static let leaveSuffix                  = ""
+        static let enterSuffix                  = "님이 채팅방에 입장했습니다.__ENTER_SUFFIX"
+        static let exitSuffix                   = "님이 채팅방을 나가셨습니다__EXIT_SUFFIX"
         
     }
 }

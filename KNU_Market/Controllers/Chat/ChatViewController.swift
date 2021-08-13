@@ -41,15 +41,13 @@ class ChatViewController: MessagesViewController {
         viewModel.joinPost()
 
     }
-    
-    @objc func getChatList() {
-        viewModel.getChatList()
-    }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         messagesCollectionView.scrollToLastItem()
+        viewModel.connect()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,12 +68,15 @@ class ChatViewController: MessagesViewController {
         
         guard let chatMemberVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatMemberVC) as? ChatMemberViewController else { return }
         
-        print("✏️ postUploaderUID: \(viewModel.postUploaderUID)")
         
         chatMemberVC.delegate = self
         chatMemberVC.roomInfo = viewModel.roomInfo
         chatMemberVC.postUploaderUID = viewModel.postUploaderUID
         presentPanModal(chatMemberVC)
+    }
+    
+    @objc func getChatList() {
+        viewModel.getChatList()
     }
 
 }

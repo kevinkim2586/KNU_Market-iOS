@@ -171,7 +171,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8자 이상, 15자 이하로 적어주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKw-9w-XDd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8자 이상, 20자 이하로 적어주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKw-9w-XDd">
                                 <rect key="frame" x="20" y="199" width="374" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -676,7 +676,7 @@
                                     <action selector="pressedGoHomeButton:" destination="a9J-MQ-vnv" eventType="touchUpInside" id="6GN-2f-Izf"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="5cQ-cr-Dv2" customClass="AnimationView" customModule="Lottie">
+                            <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="5cQ-cr-Dv2" customClass="AnimationView" customModule="KNU_Market">
                                 <rect key="frame" x="0.0" y="44" width="414" height="638"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -720,7 +720,6 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="5cQ-cr-Dv2"/>
         <designable name="QdO-Vc-EUe">
             <size key="intrinsicContentSize" width="82.5" height="23"/>
         </designable>

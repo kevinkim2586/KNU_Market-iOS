@@ -280,20 +280,20 @@ extension ChatViewModel {
                 
         self.isFetchingData = true
         
-        
-        print("✏️ dateHeader: \(String(describing: dateHeader["date"]))")
-        print("✏️ lastUsedDateHeader: \(lastUsedDateHeader)")
-        
-        
-        if dateHeader["date"] == lastUsedDateHeader {
-            print("❗️ 마지막으로 사용한 dateHeader랑 겹침!")
-            return
-        }
+    
+//        print("✏️ dateHeader: \(String(describing: dateHeader["date"]))")
+//        print("✏️ lastUsedDateHeader: \(lastUsedDateHeader)")
+//
+//
+//        if dateHeader["date"] == lastUsedDateHeader {
+//            print("❗️ 마지막으로 사용한 dateHeader랑 겹침!")
+//            return
+//        }
         
         
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,
-                                            headers: dateHeader,
+//                                            headers: dateHeader,
                                             pid: self.room,
                                             index: self.index,
                                             expectedModel: ChatResponseModel.self) { [weak self] result in
@@ -308,9 +308,7 @@ extension ChatViewModel {
                     self.needsToFetchMoreData = false
                     self.delegate?.didFetchEmptyChat()
                 }
-                
-                print("✏️ ChatResponseModel: \(chatResponseModel.chat)")
-
+            
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
 
                 for chat in chatResponseModel.chat {

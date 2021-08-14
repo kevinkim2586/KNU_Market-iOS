@@ -139,14 +139,14 @@ extension EmailInputViewController {
     func checkIfValidEmail() -> Bool {
         
         guard let email = emailTextField.text else {
-            showErrorMessage(message: "빈 칸이 없는지 확인해 주세요. 🤔")
+            showErrorMessage(message: "빈 칸이 없는지 확인해 주세요.🤔")
             return false
         }
         
-        //        guard email.contains("@knu.ac.kr") else {
-        //            showErrorMessage(message: "경북대학교 이메일이 맞는지 확인해 주세요. 🧐")
-        //            return false
-        //        }
+        guard email.contains("@knu.ac.kr") else {
+            showErrorMessage(message: "경북대학교 이메일이 맞는지 확인해 주세요.🧐")
+            return false
+        }
         
         guard email.count > 10 else {
             showErrorMessage(message: "유효한 이메일인지 확인해 주세요. 👀")

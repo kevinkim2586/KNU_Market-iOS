@@ -271,17 +271,23 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
               
-//        if scrollView.contentOffset.y <= 10 {
-//            self.refreshControl.beginRefreshing()
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
-//                if !self.viewModel.isFetchingData && self.viewModel.needsToFetchMoreData && !self.viewModel.isFirstViewLaunch {
-//                    print("✏️ getChatList in scrollviewdidscroll")
-//                    self.viewModel.getChatList()
-//                } else {
-//                    self.refreshControl.endRefreshing()
-//                }
-//            }
-//        }
+        if scrollView.contentOffset.y <= 10 {
+            
+            self.refreshControl.beginRefreshing()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
+                
+                if !self.viewModel.isFetchingData &&
+                    self.viewModel.needsToFetchMoreData &&
+                    !self.viewModel.isFirstViewLaunch {
+                    print("✏️ getChatList in scrollviewdidscroll")
+                    self.viewModel.getChatList()
+                    
+                } else {
+                    self.refreshControl.endRefreshing()
+                }
+            }
+        }
     }
 }
 

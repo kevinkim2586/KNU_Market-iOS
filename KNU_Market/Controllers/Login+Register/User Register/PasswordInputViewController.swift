@@ -19,8 +19,6 @@ class PasswordInputViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-        
-
     }
     
     @objc func keyboardDidShow(notification: Notification) {
@@ -39,7 +37,7 @@ class PasswordInputViewController: UIViewController {
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
         
-        if !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
+        if !validpassword() || !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
         performSegue(withIdentifier: Constants.SegueID.goToProfilePictureVC, sender: self)
     }
     
@@ -95,6 +93,25 @@ extension PasswordInputViewController {
 
 extension PasswordInputViewController {
     
+    // 숫자+문자 포함해서 8~20글자 사이의 text 체크하는 정규표현식
+    func validpassword() -> Bool {
+        
+        guard let userPW = passwordTextField.text else {
+            showErrorMessage(message: "빈 칸이 없는지 확인해 주세요. 🧐")
+            return false
+        }
+        
+        let passwordREGEX = ("(?=.*[A-Za-z])(?=.*[0-9]).{8,20}")
+        let passwordTesting = NSPredicate(format: "SELF MATCHES %@", passwordREGEX)
+        
+        if passwordTesting.evaluate(with: userPW) == true {
+            return true
+        } else {
+            showErrorMessage(message: "8자 이상, 20자 이하로 적어주세요. 🤔")
+            return false
+        }
+    }
+    
     func checkPasswordLengthIsValid() -> Bool {
         
         guard let password = passwordTextField.text, let _ = checkPasswordTextField.text else {
@@ -105,7 +122,7 @@ extension PasswordInputViewController {
         
         if password.count >= 8 && password.count <= 20 { return true }
         else {
-            showErrorMessage(message: "8자 이상, 30자 이하로 적어주세요. 🤔")
+            showErrorMessage(message: "8자 이상, 20자 이하로 적어주세요. 🤔")
             return false
         }
     }
@@ -130,7 +147,7 @@ extension PasswordInputViewController {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         
-        thirdLineLabel.text = "8자 이상, 30자 이하로 적어주세요."
+        thirdLineLabel.text = "8자 이상, 20자 이하로 적어주세요."
         thirdLineLabel.textColor = .lightGray
     }
 }

@@ -142,10 +142,9 @@ extension ChatManager {
             return baseURL
         case .getChat:
             guard let page = index, let pid = pid else { fatalError() }
-//            return baseURL + pid + "/" + String(page)
-            return baseURL + pid + "/\(1)"
-            #warning("API 수정하면 위 url도 수정 필요")
-            
+            return baseURL + pid + "/" + String(page)
+//            return baseURL + pid + "/\(1)"
+//            #warning("API 수정하면 위 url도 수정 필요")
         }
     }
 }

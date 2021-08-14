@@ -3,7 +3,7 @@ import Foundation
 extension Date {
     
     // Chat Bubble용 format 방법
-    func getFormattedDate() -> String {
+    func getDateStringForChatBottomLabel() -> String {
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
@@ -25,4 +25,13 @@ extension Date {
             return dateFormatter.string(from: self)
         }
     }
+    
+    func getDateStringForGetChatListHeader() -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.string(from: self)
+    }
+    
 }

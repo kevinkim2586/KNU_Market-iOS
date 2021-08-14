@@ -10,6 +10,11 @@ class ProfilePictureInputViewController: UIViewController {
     
     @IBOutlet weak var skipButton: UIButton!
     
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
+    @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
+    
+    
     lazy var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -18,9 +23,10 @@ class ProfilePictureInputViewController: UIViewController {
         initialize()
     }
     
-    @IBAction func pressedNextButton(_ sender: UIBarButtonItem) {
+    @IBAction func pressedNextButton(_ sender: UIButton) {
         performSegue(withIdentifier: Constants.SegueID.goToEmailInputVC, sender: self)
     }
+    
     
     @IBAction func pressedSkipButton(_ sender: UIButton) {
         

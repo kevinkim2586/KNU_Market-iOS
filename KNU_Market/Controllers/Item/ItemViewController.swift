@@ -237,11 +237,8 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func didMarkPostDone() {
         
-        
+        self.showSimpleBottomAlert(with: "공구 마감을 축하합니다.🎉")
         refreshPage()
-        //        self.checkButton.isUserInteractionEnabled = true
-        //        self.checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"),
-        //                                  for: .normal)
     }
     
     func failedMarkingPostDone(with error: NetworkError) {
@@ -348,6 +345,11 @@ extension ItemViewController {
     }
     
     func createObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(presentVerifyEmailVC),
+                                               name: Notification.Name.presentVerifyEmailVC,
+                                               object: nil)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(refreshPage),
@@ -502,6 +504,7 @@ extension ItemViewController {
         slideShow.layer.cornerRadius = 15
         slideShow.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
+
 }
 
 //MARK: - Image Slide Show

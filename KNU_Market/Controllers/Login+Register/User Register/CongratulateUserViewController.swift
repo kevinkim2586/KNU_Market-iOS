@@ -14,6 +14,7 @@ class CongratulateUserViewController: UIViewController {
 
         initialize()
         playAnimation()
+        removeAllPreviousObservers()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.goHomeButton.isHidden = false
@@ -80,5 +81,14 @@ class CongratulateUserViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+    }
+    
+    func removeAllPreviousObservers() {
+        
+        NotificationCenter.default.removeObserver(NickNameInputViewController.self)
+        NotificationCenter.default.removeObserver(PasswordInputViewController.self)
+        NotificationCenter.default.removeObserver(ProfilePictureInputViewController.self)
+        NotificationCenter.default.removeObserver(EmailInputViewController.self)
+        NotificationCenter.default.removeObserver(CheckEmailViewController.self)
     }
 }

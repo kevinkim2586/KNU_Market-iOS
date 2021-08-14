@@ -55,15 +55,17 @@ class ChatManager {
     
     func getResponseModel<T: Decodable>(function: ChatFunction,
                                         method: HTTPMethod,
+                                        headers: HTTPHeaders? = nil,
                                         pid: String?,
                                         index: Int?,
                                         expectedModel: T.Type,
                                         completion: @escaping (Result<T, NetworkError>) -> Void) {
         
         let requestURL = generateURLString(for: function, pid: pid, index: index)
-        
+    
         AF.request(requestURL,
                    method: method,
+                   headers: headers,
                    interceptor: interceptor)
             .validate()
             .responseData { response in
@@ -140,7 +142,9 @@ extension ChatManager {
             return baseURL
         case .getChat:
             guard let page = index, let pid = pid else { fatalError() }
-            return baseURL + pid + "/" + String(page)
+//            return baseURL + pid + "/" + String(page)
+            return baseURL + pid + "/\(1)"
+            #warning("API 수정하면 위 url도 수정 필요")
             
         }
     }

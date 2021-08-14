@@ -18,6 +18,7 @@ protocol ChatViewDelegate: AnyObject {
     func didDeletePost()
     
     func didFetchPreviousChats()
+    func didFetchEmptyChat()
     func failedFetchingPreviousChats(with error: NetworkError)
 
     func didSendText()
@@ -58,6 +59,9 @@ class ChatViewModel: WebSocketDelegate {
 
     // Delegate
     weak var delegate: ChatViewDelegate?
+    
+    
+    private var lastUsedDateHeader: String = ""
 
     init(room: String, isFirstEntrance: Bool) {
         
@@ -65,26 +69,18 @@ class ChatViewModel: WebSocketDelegate {
         self.isFirstEntranceToChat = isFirstEntrance
         
         resetMessages()
-        
         scheduleSendingGarbageTextWithTimeInterval()
-        
     }
     
     deinit {
+        print("❗️ ChatViewModel - DEINITIALIZED")
+        socket.disconnect()
         if timer != nil {
-            print("✏️ Timer has been invalidated")
             timer?.invalidate()
             timer = nil
         }
     }
-    
-    func scheduleSendingGarbageTextWithTimeInterval() {
-        
-        timer =  Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { (timer) in
 
-            self.sendText(Constants.ChatSuffix.emptySuffix)
-        }
-    }
 }
 
 //MARK: - WebSocket Methods
@@ -167,7 +163,7 @@ extension ChatViewModel {
                             chat_username: nickname,
                             chat_roomUID: roomUID,
                             chat_content: chatText,
-                            chat_date: Date().getFormattedDate())
+                            chat_date: Date().getDateStringForChatBottomLabel())
             
             self.messages.append(Message(chat: chat,
                                          sender: others,
@@ -252,7 +248,7 @@ extension ChatViewModel {
                             chat_username: User.shared.nickname,
                             chat_roomUID: self.room,
                             chat_content: convertedText,
-                            chat_date: Date().getFormattedDate())
+                            chat_date: Date().getDateStringForChatBottomLabel())
             
             self.messages.append(Message(chat: chat,
                                          sender: self.mySelf,
@@ -268,51 +264,60 @@ extension ChatViewModel {
 
 extension ChatViewModel {
     
+    private var dateHeader: HTTPHeaders {
+        
+        if chatModel == nil {
+            return ["date": Date().getDateStringForGetChatListHeader()]
+        } else {
+            return ["date": chatModel?.chat[0].chat_date ?? ""]
+        }
+        
+    }
+
+    
     // 채팅 받아오기
     func getChatList(isFromBeginning: Bool = false) {
                 
         self.isFetchingData = true
         
-        if isFromBeginning {
-            self.index = 1
+        
+        print("✏️ dateHeader: \(String(describing: dateHeader["date"]))")
+        print("✏️ lastUsedDateHeader: \(lastUsedDateHeader)")
+        
+        
+        if dateHeader["date"] == lastUsedDateHeader {
+            print("❗️ 마지막으로 사용한 dateHeader랑 겹침!")
+            return
         }
+        
         
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,
+                                            headers: dateHeader,
                                             pid: self.room,
                                             index: self.index,
                                             expectedModel: ChatResponseModel.self) { [weak self] result in
             
             guard let self = self else { return }
-
+        
             switch result {
             case .success(let chatResponseModel):
-
-                self.isFetchingData = false
-                self.index += 1
                 
-                // 빈 배열인지 확인
                 if chatResponseModel.chat.isEmpty {
+                    print("❗️ChatViewModel - chatResponseModel is Empty!")
                     self.needsToFetchMoreData = false
-                    self.delegate?.didFetchPreviousChats()
+                    self.delegate?.didFetchEmptyChat()
                 }
+                
+                print("✏️ ChatResponseModel: \(chatResponseModel.chat)")
 
-                //TODO: - 수정
-//                if isFromBeginning {
-//
-//                    self.chatModel?.chat.append(contentsOf: chatResponseModel.chat)
-//
-//                } else {
-//                    self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
-//                }
-                
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
-            
-                
+
                 for chat in chatResponseModel.chat {
                     
                     guard chat.chat_content != Constants.ChatSuffix.emptySuffix else { continue }
                     
+
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {
                         
@@ -334,11 +339,14 @@ extension ChatViewModel {
                     }
                     
                 }
-     
+                
+                self.isFetchingData = false
+                self.lastUsedDateHeader = self.dateHeader["date"] ?? "error"
+                self.index += 1
                 self.delegate?.didFetchPreviousChats()
                 
             case .failure(let error):
-
+                
                 self.delegate?.failedFetchingPreviousChats(with: error)
 
             }
@@ -447,6 +455,13 @@ extension ChatViewModel {
 //MARK: - Utility Methods
 
 extension ChatViewModel {
+    
+    func scheduleSendingGarbageTextWithTimeInterval() {
+        
+        timer =  Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] timer in
+            self?.sendText(Constants.ChatSuffix.emptySuffix)
+        }
+    }
     
     func convertToJSONString(text: String) -> String {
         

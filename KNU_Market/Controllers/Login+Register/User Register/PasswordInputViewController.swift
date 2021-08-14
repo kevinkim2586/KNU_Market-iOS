@@ -10,13 +10,34 @@ class PasswordInputViewController: UIViewController {
     @IBOutlet weak var passwordTextField: HoshiTextField!
     @IBOutlet weak var checkPasswordTextField: HoshiTextField!
     
+    
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
+    @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialize()
+        
+
     }
     
-    @IBAction func pressedNext(_ sender: UIBarButtonItem) {
+    @objc func keyboardDidShow(notification: Notification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            nextButtonBottomAnchor.constant = keyboardSize.height
+            nextButtonHeight.constant = 60
+        }
+    }
+
+    @objc func keyboardWillHide(notification: Notification) {
+        nextButtonBottomAnchor.constant = 0
+        nextButtonHeight.constant = 80
+    }
+    
+    @IBAction func pressedNextButton(_ sender: UIButton) {
         
         if !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
         performSegue(withIdentifier: Constants.SegueID.goToProfilePictureVC, sender: self)
@@ -27,12 +48,15 @@ class PasswordInputViewController: UIViewController {
     }
 }
 
-
 //MARK: - UI Configuration & Initialization
 
 extension PasswordInputViewController {
 
     func initialize() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification , object: nil)
+        
         
         initializeLabels()
         initializeTextFields()

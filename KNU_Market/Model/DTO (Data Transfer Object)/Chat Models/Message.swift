@@ -16,7 +16,7 @@ extension Message {
     }
     
     var date: String {
-        return self.sentDate.getFormattedDate()
+        return self.sentDate.getDateStringForChatBottomLabel()
     }
     
     var usernickname: String {

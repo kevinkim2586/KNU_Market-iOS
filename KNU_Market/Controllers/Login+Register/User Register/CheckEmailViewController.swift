@@ -8,13 +8,36 @@ class CheckEmailViewController: UIViewController {
     @IBOutlet weak var fourthLineLabel: UILabel!
     @IBOutlet var detailLabels: [UILabel]!
     
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
+    
+    @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initialize()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification , object: nil)
+        
+    }
+    
+    @objc func keyboardDidShow(notification: Notification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            nextButtonBottomAnchor.constant = keyboardSize.height
+            nextButtonHeight.constant = 60
+        }
     }
 
-    @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
+    @objc func keyboardWillHide(notification: Notification) {
+        nextButtonBottomAnchor.constant = 0
+        nextButtonHeight.constant = 80
+    }
+    
+    @IBAction func pressedNextButton(_ sender: UIButton) {
         
         guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.congratulateUserVC)
                 as? CongratulateUserViewController else { return }
@@ -22,6 +45,7 @@ class CheckEmailViewController: UIViewController {
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true)
     }
+
 }
 
 //MARK: - UI Configuration & Initialization
@@ -29,6 +53,10 @@ class CheckEmailViewController: UIViewController {
 extension CheckEmailViewController {
     
     func initialize() {
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification , object: nil)
         
         initializeLabels()
     }

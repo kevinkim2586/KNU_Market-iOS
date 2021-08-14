@@ -98,13 +98,13 @@ extension ChatViewController: ChatViewDelegate {
             viewModel.isFirstEntranceToChat = false
         }
   
+        print("✏️ getChatList in didConnect")
         viewModel.getChatList()
         
     }
     
     func didDisconnect() {
         dismissProgressBar()
-        print("✏️ ChatVC - didDisconnect delegate activated")
         navigationController?.popViewController(animated: true)
     }
     
@@ -156,23 +156,26 @@ extension ChatViewController {
     func didFetchPreviousChats() {
         dismissProgressBar()
         
+        print("✏️ isFirstViewLaunch: \(viewModel.isFirstViewLaunch)")
+        
         refreshControl.endRefreshing()
 
-        if viewModel.messages.count == 0 {
-            viewModel.getChatList()
-        }
 
         if viewModel.isFirstViewLaunch {
-
+            
             viewModel.isFirstViewLaunch = false
 
-            messagesCollectionView.scrollToLastItem()
             messagesCollectionView.reloadData()
+            messagesCollectionView.scrollToLastItem()
 
         } else {
             messagesCollectionView.reloadDataAndKeepOffset()
         }
 
+    }
+    
+    func didFetchEmptyChat() {
+        refreshControl.endRefreshing()
     }
     
     func failedFetchingPreviousChats(with error: NetworkError) {
@@ -238,7 +241,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         return NSAttributedString(string: viewModel.messages[indexPath.section].sender.displayName,
-                                  attributes: [.font: UIFont.systemFont(ofSize: 12)])
+                                  attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .medium)])
     }
     
     // Bottom Label
@@ -268,18 +271,18 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
               
-        if scrollView.contentOffset.y <= 30 {
-            
-            if !viewModel.isFetchingData && viewModel.needsToFetchMoreData && !viewModel.isFirstViewLaunch {
-                
-
-                refreshControl.beginRefreshing()
-                self.viewModel.getChatList()
-            }
-        }
+//        if scrollView.contentOffset.y <= 10 {
+//            self.refreshControl.beginRefreshing()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
+//                if !self.viewModel.isFetchingData && self.viewModel.needsToFetchMoreData && !self.viewModel.isFirstViewLaunch {
+//                    print("✏️ getChatList in scrollviewdidscroll")
+//                    self.viewModel.getChatList()
+//                } else {
+//                    self.refreshControl.endRefreshing()
+//                }
+//            }
+//        }
     }
-    
-
 }
 
 //MARK: - Initialization & UI Configuration
@@ -317,7 +320,7 @@ extension ChatViewController {
         messagesCollectionView.backgroundColor = .white
         self.scrollsToLastItemOnKeyboardBeginsEditing = true
         
-
+        
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
             
             layout.setMessageIncomingAvatarSize(.zero)
@@ -329,9 +332,9 @@ extension ChatViewController {
                                                                                   textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
             
             layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .left,
-                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+                                                                                     textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
             layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .right,
-                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+                                                                                     textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
         }
     }
     

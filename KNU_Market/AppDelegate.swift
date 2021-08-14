@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                selector: #selector(refreshTokenHasExpired),
                                                name: Notification.Name.refreshTokenExpired,
                                                object: nil)
-    
-
+        
+        
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -51,6 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
+        IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self, NickNameInputViewController.self, PasswordInputViewController.self, ProfilePictureInputViewController.self, EmailInputViewController.self, CheckEmailViewController.self]
         
         IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatViewController.self)
         
@@ -119,7 +121,9 @@ extension AppDelegate: MessagingDelegate {
     
     func application(application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-      Messaging.messaging().apnsToken = deviceToken
+        
+        print("✏️ deviceToken: \(deviceToken)")
+        Messaging.messaging().apnsToken = deviceToken
     }
     
 

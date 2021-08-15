@@ -153,7 +153,7 @@ class ItemViewController: UIViewController {
             
             if isCompletelyDone {
                 
-                let cancelMarkDoneAction = UIAlertAction(title: "공구 마감 해제하기",
+                let cancelMarkDoneAction = UIAlertAction(title: "다시 모집하기",
                                                          style: .default) { alert in
                     
                     self.viewModel.cancelMarkPostDone(for: self.pageID)
@@ -162,7 +162,7 @@ class ItemViewController: UIViewController {
                 actionSheet.addAction(cancelMarkDoneAction)
                 
             } else {
-                let doneAction = UIAlertAction(title: "공구 마감하기",
+                let doneAction = UIAlertAction(title: "모집 완료하기",
                                                style: .default) { alert in
                     
                     self.viewModel.markPostDone(for: self.pageID)
@@ -236,8 +236,7 @@ extension ItemViewController: ItemViewModelDelegate {
     }
     
     func didMarkPostDone() {
-        
-        self.showSimpleBottomAlert(with: "공구 마감을 축하합니다.🎉")
+        self.showSimpleBottomAlert(with: "모집 완료를 축하합니다.🎉")
         refreshPage()
     }
     
@@ -251,16 +250,10 @@ extension ItemViewController: ItemViewModelDelegate {
     func didCancelMarkPostDone() {
         
         refreshPage()
-        
-//        self.checkButton.setImage(UIImage(systemName: "checkmark.circle"),
-//                                  for: .normal)
-//        self.checkButton.isUserInteractionEnabled = true
-        
     }
     
     func failedCancelMarkPostDone(with error: NetworkError) {
-        
-   
+    
         self.showSimpleBottomAlert(with: error.errorDescription)
     }
     
@@ -458,12 +451,12 @@ extension ItemViewController {
         let currentNum = viewModel.currentlyGatheredPeople
         let total = viewModel.totalGatheringPeople
         
-        if viewModel.isCompletelyDone {
-            gatheringPeopleLabel.text = "공구 마감     \(currentNum)" + "/" + "\(total)"
-        } else if viewModel.isFull {
-            gatheringPeopleLabel.text = "모집 완료     \(currentNum)" + "/" + "\(total)"
+        if viewModel.isCompletelyDone || viewModel.isFull {
+            gatheringPeopleLabel.text = "모집 완료"
+            gatheringPeopleImageView.isHidden = true
         } else {
             gatheringPeopleLabel.text = "모집 중     \(currentNum)" + "/" + "\(total)"
+            gatheringPeopleImageView.isHidden = false
         }
         gatheringPeopleLabel.font = UIFont.systemFont(ofSize: 15.0,
                                                       weight: .semibold)
@@ -471,7 +464,6 @@ extension ItemViewController {
     
     func initializeEnterChatButton() {
         
-
         if viewModel.postIsUserUploaded || viewModel.isGathering || viewModel.userAlreadyJoinedPost {
             enterChatButton.isUserInteractionEnabled = true
             enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)
@@ -479,7 +471,7 @@ extension ItemViewController {
             
         } else {
             enterChatButton.isUserInteractionEnabled = false
-            enterChatButton.setTitle("마감", for: .normal)
+            enterChatButton.setTitle("모집 완료", for: .normal)
             enterChatButton.backgroundColor = UIColor.lightGray
         }
         

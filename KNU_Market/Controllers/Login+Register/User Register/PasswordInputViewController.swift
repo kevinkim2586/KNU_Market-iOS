@@ -107,7 +107,7 @@ extension PasswordInputViewController {
         if passwordTesting.evaluate(with: userPW) == true {
             return true
         } else {
-            showErrorMessage(message: "8자 이상, 20자 이하로 적어주세요. 🤔")
+            showErrorMessage(message: "숫자와 문자를 조합하여 8자 이상, 20자 이하로 적어주세요.🤔")
             return false
         }
     }

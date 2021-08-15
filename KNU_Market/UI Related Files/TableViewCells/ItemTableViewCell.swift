@@ -82,20 +82,19 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializeGatheringLabel() {
         
-        if viewModel.isCompletelyDone {
-            
-            gatheringLabel.text = "공구 마감"
-            gatheringLabel.backgroundColor = UIColor.lightGray
-            
-        } else if viewModel.isFull {
+        if viewModel.isCompletelyDone || viewModel.isFull {
             
             gatheringLabel.text = "모집 완료"
             gatheringLabel.backgroundColor = UIColor.lightGray
+            currentlyGatheredPeopleLabel.isHidden = true
+            personImageView.isHidden = true
             
-        } else {
-            
+        }  else {
+    
             gatheringLabel.text = "모집 중"
             gatheringLabel.backgroundColor = UIColor(named: Constants.Color.appColor)
+            currentlyGatheredPeopleLabel.isHidden = false
+            personImageView.isHidden = false
         }
         
         gatheringLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .semibold)

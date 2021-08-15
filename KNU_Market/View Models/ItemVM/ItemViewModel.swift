@@ -74,7 +74,6 @@ class ItemViewModel {
     
     // 인원이 다 찼는지
     var isCompletelyDone: Bool {
-       
         return model?.isCompletelyDone ?? true
     }
     

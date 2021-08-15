@@ -208,7 +208,6 @@ extension ChatViewModel {
             
             disconnect()
       
-            
         case .ping(_):
             print("❗️ PING ACTIVATED")
             
@@ -279,18 +278,7 @@ extension ChatViewModel {
     func getChatList(isFromBeginning: Bool = false) {
                 
         self.isFetchingData = true
-        
     
-//        print("✏️ dateHeader: \(String(describing: dateHeader["date"]))")
-//        print("✏️ lastUsedDateHeader: \(lastUsedDateHeader)")
-//
-//
-//        if dateHeader["date"] == lastUsedDateHeader {
-//            print("❗️ 마지막으로 사용한 dateHeader랑 겹침!")
-//            return
-//        }
-        
-        
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,
 //                                            headers: dateHeader,
@@ -315,7 +303,6 @@ extension ChatViewModel {
                     
                     guard chat.chat_content != Constants.ChatSuffix.emptySuffix else { continue }
                     
-
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {
                         

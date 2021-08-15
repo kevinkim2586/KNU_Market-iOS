@@ -18,8 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                name: Notification.Name.refreshTokenExpired,
                                                object: nil)
         
-        
-        
+
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self

@@ -52,12 +52,15 @@ class UserManager {
             
             guard let statusCode = response.response?.statusCode else { return }
             
+            print("✏️ register response: \(response)")
+            
             switch statusCode {
             case 201:
                 print("✏️ UserManager - register SUCCESS")
                 completion(.success(true))
                 User.shared.fcmToken = model.fcmToken
             default:
+                print("❗️ response.data: \(response.data!)")
                 let error = NetworkError.returnError(json: response.data ?? Data())
                 print("❗️ UserManager - register FAILED")
                 completion(.failure(error))

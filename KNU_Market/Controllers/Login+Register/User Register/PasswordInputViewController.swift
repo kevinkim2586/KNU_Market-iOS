@@ -84,6 +84,7 @@ extension PasswordInputViewController {
         secondLineLabel.text = "사용하실 비밀번호를 입력해 주세요!"
         secondLineLabel.changeTextAttributeColor(fullText: secondLineLabel.text!, changeText: "비밀번호")
     
+        thirdLineLabel.text = "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요."
         thirdLineLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         thirdLineLabel.textColor = .lightGray
     }
@@ -107,7 +108,7 @@ extension PasswordInputViewController {
         if passwordTesting.evaluate(with: userPW) == true {
             return true
         } else {
-            showErrorMessage(message: "숫자와 문자를 조합하여 8자 이상, 20자 이하로 적어주세요.🤔")
+            showErrorMessage(message: "숫자와 문자를 조합하여\n 8자 이상, 20자 이하로 적어주세요.🤔")
             return false
         }
     }
@@ -122,7 +123,7 @@ extension PasswordInputViewController {
         
         if password.count >= 8 && password.count <= 20 { return true }
         else {
-            showErrorMessage(message: "8자 이상, 20자 이하로 적어주세요. 🤔")
+            showErrorMessage(message: "숫자와 문자를 조합하여\n 8자 이상, 20자 이하로 적어주세요.🤔")
             return false
         }
     }
@@ -147,7 +148,7 @@ extension PasswordInputViewController {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         
-        thirdLineLabel.text = "8자 이상, 20자 이하로 적어주세요."
+        thirdLineLabel.text = "숫자와 문자를 조합하여\n 8자 이상, 20자 이하로 적어주세요."
         thirdLineLabel.textColor = .lightGray
     }
 }

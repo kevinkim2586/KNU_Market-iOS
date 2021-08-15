@@ -97,8 +97,6 @@ enum NetworkError: String, Error {
                 print("✏️ NotificationCenter POST- presentVerifyEmailVC ACTIVATED")
                 NotificationCenter.default.post(name: Notification.Name.presentVerifyEmailVC, object: nil)
             }
-            
-    
             return NetworkError(rawValue: errorCode) ?? .E000
         } catch {
             print("❗️ NetworkError - catch has been ACTIVATED")

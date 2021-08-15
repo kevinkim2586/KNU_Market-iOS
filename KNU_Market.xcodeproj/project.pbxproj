@@ -36,9 +36,9 @@
 		7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF126A928D300E2CA8F /* CheckEmailViewController.swift */; };
 		7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */; };
 		7C3B4FF726A92C6C00E2CA8F /* UserRegisterValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF626A92C6C00E2CA8F /* UserRegisterValues.swift */; };
-		7C3B4FFA26A93CFE00E2CA8F /* congratulate.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF926A93CFE00E2CA8F /* congratulate.json */; };
 		7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */; };
 		7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */; };
+		7C3D541D26C90B4900AE3E55 /* congratulate1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C3D541A26C90B4900AE3E55 /* congratulate1.json */; };
 		7C3D985E26AE793D005DFAE0 /* RoomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D985D26AE793D005DFAE0 /* RoomInfo.swift */; };
 		7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D985F26AE89B4005DFAE0 /* ChatMemberTableViewCell.swift */; };
 		7C3D986226AE8A42005DFAE0 /* ChatMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */; };
@@ -142,9 +142,9 @@
 		7C3B4FF126A928D300E2CA8F /* CheckEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailViewController.swift; sourceTree = "<group>"; };
 		7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulateUserViewController.swift; sourceTree = "<group>"; };
 		7C3B4FF626A92C6C00E2CA8F /* UserRegisterValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterValues.swift; sourceTree = "<group>"; };
-		7C3B4FF926A93CFE00E2CA8F /* congratulate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congratulate.json; sourceTree = "<group>"; };
 		7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_InputPasswordViewController.swift; sourceTree = "<group>"; };
 		7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_InputSuggestionViewController.swift; sourceTree = "<group>"; };
+		7C3D541A26C90B4900AE3E55 /* congratulate1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congratulate1.json; sourceTree = "<group>"; };
 		7C3D985D26AE793D005DFAE0 /* RoomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInfo.swift; sourceTree = "<group>"; };
 		7C3D985F26AE89B4005DFAE0 /* ChatMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberTableViewCell.swift; sourceTree = "<group>"; };
 		7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberViewController.swift; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 		7C3B4FF826A93CF100E2CA8F /* Lottie Files */ = {
 			isa = PBXGroup;
 			children = (
-				7C3B4FF926A93CFE00E2CA8F /* congratulate.json */,
+				7C3D541A26C90B4900AE3E55 /* congratulate1.json */,
 			);
 			path = "Lottie Files";
 			sourceTree = "<group>";
@@ -690,11 +690,11 @@
 			files = (
 				7CCDB1F026A2BD0C0092F28D /* ItemTableViewCell.xib in Resources */,
 				7C184B8526B27B8B006C0FAD /* Chat.storyboard in Resources */,
+				7C3D541D26C90B4900AE3E55 /* congratulate1.json in Resources */,
 				7C0F1CB626BA64840068FF45 /* VerifyEmail.storyboard in Resources */,
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
 				7C3B4FE826A923AB00E2CA8F /* UserRegister.storyboard in Resources */,
-				7C3B4FFA26A93CFE00E2CA8F /* congratulate.json in Resources */,
 				7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */,
 				7C6D253B268DD68A0030F9A1 /* MyPage.storyboard in Resources */,
 				7C0E2DDD26B7B62600BB37FF /* Report.storyboard in Resources */,

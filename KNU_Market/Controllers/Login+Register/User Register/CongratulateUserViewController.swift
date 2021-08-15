@@ -51,6 +51,7 @@ class CongratulateUserViewController: UIViewController {
     
     func initializeButton() {
         
+        goHomeButton.addBounceAnimationWithNoFeedback()
         goHomeButton.isHidden = true
         goHomeButton.isUserInteractionEnabled = false
         goHomeButton.layer.cornerRadius = goHomeButton.frame.height / 2
@@ -60,7 +61,7 @@ class CongratulateUserViewController: UIViewController {
     func initializeLabel() {
         
         congratulateLabel.text = "크누마켓 회원가입을 축하합니다!"
-        congratulateLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        congratulateLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         congratulateLabel.textColor = .darkGray
         congratulateLabel.changeTextAttributeColor(fullText: congratulateLabel.text!, changeText: "크누마켓")
     }

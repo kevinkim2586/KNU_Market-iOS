@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="guK-Eh-cRd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a9J-MQ-vnv">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -171,14 +171,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8자 이상, 20자 이하로 적어주세요" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKw-9w-XDd">
-                                <rect key="frame" x="20" y="199" width="374" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="숫자와 문자를 조합하여\n 8자 이상, 20자 이하로 적어주세요." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKw-9w-XDd">
+                                <rect key="frame" x="20" y="199" width="374" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R38-pp-F5V" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="248.5" width="244" height="60"/>
+                                <rect key="frame" x="20" y="267.5" width="244" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="fOY-kM-ozM"/>
                                 </constraints>
@@ -206,7 +206,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호 확인" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aIg-qM-TBj" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="328.5" width="244" height="60"/>
+                                <rect key="frame" x="20" y="347.5" width="244" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Ga3-hD-aeI"/>
                                 </constraints>
@@ -653,7 +653,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓 회원가입을 축하합니다!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkn-dx-XJ8">
-                                <rect key="frame" x="30" y="732" width="354" height="20"/>
+                                <rect key="frame" x="30" y="707" width="354" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="SfM-kO-I7m"/>
                                 </constraints>
@@ -662,7 +662,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VP1-X0-SLi">
-                                <rect key="frame" x="122" y="777" width="170" height="50"/>
+                                <rect key="frame" x="122" y="752" width="170" height="50"/>
                                 <color key="backgroundColor" name="AppDefaultColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="kzh-wI-zSo"/>
@@ -676,22 +676,22 @@
                                     <action selector="pressedGoHomeButton:" destination="a9J-MQ-vnv" eventType="touchUpInside" id="6GN-2f-Izf"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="5cQ-cr-Dv2" customClass="AnimationView" customModule="KNU_Market">
-                                <rect key="frame" x="0.0" y="44" width="414" height="638"/>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="5cQ-cr-Dv2" customClass="AnimationView" customModule="Lottie">
+                                <rect key="frame" x="0.0" y="44" width="414" height="593"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="D1c-HE-o0L"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="D1c-HE-o0L" firstAttribute="bottom" secondItem="VP1-X0-SLi" secondAttribute="bottom" constant="35" id="0bJ-EE-G0w"/>
+                            <constraint firstItem="D1c-HE-o0L" firstAttribute="bottom" secondItem="VP1-X0-SLi" secondAttribute="bottom" constant="60" id="0bJ-EE-G0w"/>
                             <constraint firstItem="5cQ-cr-Dv2" firstAttribute="top" secondItem="D1c-HE-o0L" secondAttribute="top" id="6Bd-dv-6PM"/>
                             <constraint firstItem="zkn-dx-XJ8" firstAttribute="centerX" secondItem="Mkd-uR-0O8" secondAttribute="centerX" id="EWa-2W-OtR"/>
                             <constraint firstItem="5cQ-cr-Dv2" firstAttribute="leading" secondItem="D1c-HE-o0L" secondAttribute="leading" id="F62-Aa-sKW"/>
                             <constraint firstItem="VP1-X0-SLi" firstAttribute="top" secondItem="zkn-dx-XJ8" secondAttribute="bottom" constant="25" id="IiX-gn-bu6"/>
                             <constraint firstItem="zkn-dx-XJ8" firstAttribute="leading" secondItem="D1c-HE-o0L" secondAttribute="leading" constant="30" id="OrG-Jf-std"/>
                             <constraint firstItem="5cQ-cr-Dv2" firstAttribute="trailing" secondItem="D1c-HE-o0L" secondAttribute="trailing" id="bxn-EP-Iw2"/>
-                            <constraint firstItem="zkn-dx-XJ8" firstAttribute="top" secondItem="5cQ-cr-Dv2" secondAttribute="bottom" constant="50" id="p0m-Fv-AzW"/>
+                            <constraint firstItem="zkn-dx-XJ8" firstAttribute="top" secondItem="5cQ-cr-Dv2" secondAttribute="bottom" constant="70" id="p0m-Fv-AzW"/>
                             <constraint firstItem="VP1-X0-SLi" firstAttribute="centerX" secondItem="Mkd-uR-0O8" secondAttribute="centerX" id="pAa-SJ-6In"/>
                             <constraint firstItem="D1c-HE-o0L" firstAttribute="trailing" secondItem="zkn-dx-XJ8" secondAttribute="trailing" constant="30" id="sqd-B2-6xs"/>
                         </constraints>

@@ -531,14 +531,14 @@
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hVn-GJ-e4k">
-                                <rect key="frame" x="15" y="291" width="118.5" height="44.5"/>
+                                <rect key="frame" x="15" y="291" width="118.5" height="45.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="yXm-Ty-hTj">
                                         <rect key="frame" x="0.0" y="0.0" width="118.5" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집 인원 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATq-EE-3xP">
                                                 <rect key="frame" x="0.0" y="0.0" width="72.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -550,23 +550,23 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(본인 포함 최소 2명)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAX-13-Lch">
-                                        <rect key="frame" x="0.0" y="28.5" width="118.5" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✻ 본인 포함" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAX-13-Lch">
+                                        <rect key="frame" x="0.0" y="28.5" width="118.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="거래 위치 선택 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiS-VY-LgS">
-                                <rect key="frame" x="15" y="365.5" width="106" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="15" y="366.5" width="106" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공구 내용" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkh-sr-GTY">
-                                <rect key="frame" x="15" y="436" width="63.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="15" y="422" width="63.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -587,7 +587,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="j7P-dO-aHZ">
-                                <rect key="frame" x="15" y="471.5" width="384" height="375.5"/>
+                                <rect key="frame" x="15" y="457.5" width="384" height="389.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -599,7 +599,7 @@
                         <constraints>
                             <constraint firstItem="oUu-zu-n3O" firstAttribute="top" secondItem="r89-gd-YxT" secondAttribute="bottom" constant="10" id="0XG-By-u56"/>
                             <constraint firstItem="og0-Zz-Dv5" firstAttribute="leading" secondItem="wm2-Nw-XXU" secondAttribute="trailing" constant="10" id="1Ce-V0-jpB"/>
-                            <constraint firstItem="gkh-sr-GTY" firstAttribute="top" secondItem="aiS-VY-LgS" secondAttribute="bottom" constant="50" id="3Fg-YC-Nfz"/>
+                            <constraint firstItem="gkh-sr-GTY" firstAttribute="top" secondItem="aiS-VY-LgS" secondAttribute="bottom" constant="35" id="3Fg-YC-Nfz"/>
                             <constraint firstItem="gkh-sr-GTY" firstAttribute="leading" secondItem="AUS-3e-I0w" secondAttribute="leading" constant="15" id="6wb-A2-Lie"/>
                             <constraint firstItem="AUS-3e-I0w" firstAttribute="trailing" secondItem="og0-Zz-Dv5" secondAttribute="trailing" constant="20" id="B7d-tS-FOV"/>
                             <constraint firstItem="hVn-GJ-e4k" firstAttribute="top" secondItem="8aE-jw-DZf" secondAttribute="bottom" constant="15" id="Crb-UI-7go"/>

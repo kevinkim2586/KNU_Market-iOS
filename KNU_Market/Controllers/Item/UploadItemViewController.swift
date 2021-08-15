@@ -285,7 +285,7 @@ extension UploadItemViewController {
         stepper.stepValue = 1
         stepper.buttonsTextColor = .white
         stepper.buttonsBackgroundColor = UIColor(named: Constants.Color.appColor)!
-        stepper.buttonsFont = UIFont(name: "AvenirNext-Bold", size: 15.0)!
+        stepper.buttonsFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
         stepper.labelFont = .systemFont(ofSize: 15)
         stepper.labelTextColor = UIColor(named:Constants.Color.appColor)!
 
@@ -308,8 +308,8 @@ extension UploadItemViewController {
     func initializeTextView() {
         
         itemDetailTextView.delegate = self
-        itemDetailTextView.layer.borderWidth = 1.0
-        itemDetailTextView.layer.cornerRadius = 10.0
+        itemDetailTextView.layer.borderWidth = 0.7
+        itemDetailTextView.layer.cornerRadius = 5.0
         itemDetailTextView.layer.borderColor = UIColor.lightGray.cgColor
         itemDetailTextView.clipsToBounds = true
         itemDetailTextView.text = "공구 내용을 작성해주세요. (중고 거래 또는 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.) \n\n 게시 가능 글 종류: \n- 배달음식 공구 \n- 온라인 쇼핑 공구 \n- 물물교환 및 나눔"
@@ -319,8 +319,7 @@ extension UploadItemViewController {
     
     func configurePageWithPriorData() {
         
-        print("✏️ configurePageWithPriorData ACTIVATED")
-        
+ 
         viewModel.editPostModel = editModel
         
         viewModel.itemTitle = editModel!.title

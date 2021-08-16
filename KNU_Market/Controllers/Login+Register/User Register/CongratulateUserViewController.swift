@@ -68,7 +68,7 @@ class CongratulateUserViewController: UIViewController {
     
     func playAnimation() {
         
-        animationView.animation = Animation.named("congratulate")
+        animationView.animation = Animation.named("congratulate1")
         
         animationView.backgroundColor = .white
         animationView.frame = view.bounds

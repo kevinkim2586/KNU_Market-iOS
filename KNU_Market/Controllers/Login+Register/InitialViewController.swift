@@ -114,9 +114,7 @@ extension InitialViewController {
         
         registerButton.setTitle("회원가입", for: .normal)
         registerButton.setTitleColor(UIColor(named: Constants.Color.appColor), for: .normal)
-        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         registerButton.addBounceAnimationWithNoFeedback()
-        
     }
-    
 }

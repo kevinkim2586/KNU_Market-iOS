@@ -378,8 +378,8 @@ extension ChatViewModel {
 
         let exitText = convertToJSONString(text: "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
 
-        
         socket.write(string: exitText)
+        
         ChatManager.shared.changeJoinStatus(function: .exit,
                                             pid: self.room) { [weak self] result in
             

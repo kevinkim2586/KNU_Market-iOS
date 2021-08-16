@@ -10,7 +10,7 @@ class ChatViewController: MessagesViewController {
     
     @objc private let refreshControl = UIRefreshControl()
     
-    var room: String = ""
+    var roomUID: String = ""
     var chatRoomTitle: String = ""
     var postUploaderUID: String = ""
     var isFirstEntrance: Bool = false
@@ -26,16 +26,29 @@ class ChatViewController: MessagesViewController {
         
         IQKeyboardManager.shared.enable = false
         
-        self.title = chatRoomTitle
-    
-        viewModel = ChatViewModel(room: room,
+        viewModel = ChatViewModel(room: roomUID,
                                   isFirstEntrance: isFirstEntrance)
     
         initialize()
         
-        print("✏️ pageID: \(room)")
+        print("✏️ pageID: \(roomUID)")
         print("✏️ title: \(chatRoomTitle)")
 
+    }
+    
+    @objc func pressedTitle() {
+        print("✏️ pressedTitle")
+        
+        let storyboard = UIStoryboard(name: "ItemList", bundle: nil)
+        
+        guard let itemVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
+        
+        itemVC.hidesBottomBarWhenPushed = true
+        itemVC.pageID = roomUID
+        itemVC.isFromChatVC = true
+        
+        self.navigationController?.pushViewController(itemVC, animated: true)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,8 +60,6 @@ class ChatViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-//        viewModel.connect()
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -116,8 +127,11 @@ extension ChatViewController: ChatViewDelegate {
     func reconnectSuggested() {
         dismissProgressBar()
         
+        print("❗️ ChatVC - reconnectSuggested")
+        
+        viewModel.resetMessages()
         viewModel.connect()
-        self.presentSimpleAlert(title: "네트워크가 현재 불안정합니다. 🧐", message: "채팅방을 나갔다가 다시 들어와 주세요.")
+//        self.presentSimpleAlert(title: "네트워크가 현재 불안정합니다. 🧐", message: "채팅방을 나갔다가 다시 들어와 주세요.")
     }
     
     func failedConnection(with error: NetworkError) {
@@ -195,7 +209,7 @@ extension ChatViewController: ChatMemberViewDelegate {
     }
     
     func didChooseToDeletePost() {
-        viewModel.deletePost(for: self.room)
+        viewModel.deletePost(for: self.roomUID)
     }
     
     func didDismissPanModal() {
@@ -223,6 +237,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     }
 
     public func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
+
         return viewModel.messages[indexPath.section]
     }
     
@@ -280,7 +295,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                 if !self.viewModel.isFetchingData &&
                     self.viewModel.needsToFetchMoreData &&
                     !self.viewModel.isFirstViewLaunch {
-                    print("✏️ getChatList in scrollviewdidscroll")
                     self.viewModel.getChatList()
                     
                 } else {
@@ -300,9 +314,22 @@ extension ChatViewController {
         viewModel.delegate = self
         chatMemberViewDelegate = self
 
+        initializeNavigationItemTitle()
         initializeRefreshControl()
         initializeInputBar()
         initializeCollectionView()
+    }
+    
+    func initializeNavigationItemTitle() {
+    
+        let titleButton = UIButton()
+        titleButton.setTitle(chatRoomTitle, for: .normal)
+    
+        titleButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        titleButton.setTitleColor(.black, for: .normal)
+        titleButton.addTarget(self, action: #selector(pressedTitle), for: .touchUpInside)
+        
+        navigationItem.titleView = titleButton
     }
     
     func initializeRefreshControl() {

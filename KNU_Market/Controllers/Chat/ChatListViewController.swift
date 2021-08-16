@@ -103,7 +103,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
         guard let chatVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
         
-        chatVC.room = viewModel.roomList[indexPath.row].uuid
+        chatVC.roomUID = viewModel.roomList[indexPath.row].uuid
         chatVC.chatRoomTitle = viewModel.roomList[indexPath.row].title
         chatVC.postUploaderUID = viewModel.roomList[indexPath.row].userUID
         navigationController?.pushViewController(chatVC, animated: true)

@@ -37,6 +37,8 @@ class ItemViewController: UIViewController {
         didSet { viewModel.pageID = pageID }
     }
     
+    var isFromChatVC: Bool = false
+    
     //MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +76,10 @@ class ItemViewController: UIViewController {
     @IBAction func pressedEnterChatButton(_ sender: UIButton) {
         
         enterChatButton.loadingIndicator(true)
+        
+        if isFromChatVC {
+            navigationController?.popViewController(animated: true)
+        }
         
         viewModel.joinPost()
     }
@@ -262,7 +268,7 @@ extension ItemViewController: ItemViewModelDelegate {
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
         guard let vc = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
         
-        vc.room = pageID
+        vc.roomUID = pageID
         vc.chatRoomTitle = viewModel.model?.title ?? ""
         
         vc.isFirstEntrance = isFirstEntrance ? true : false
@@ -367,9 +373,9 @@ extension ItemViewController {
         titleView.layer.cornerRadius = 10
         titleView.backgroundColor = .white
         
-        titleView.layer.shadowColor = UIColor.black.cgColor
+        titleView.layer.shadowColor = UIColor.darkGray.cgColor
         
-        titleView.layer.shadowOffset = CGSize(width: 2, height: 2)
+        titleView.layer.shadowOffset = CGSize(width: 1, height: 1)
         titleView.layer.shadowOpacity = 0.15
         titleView.layer.shadowRadius = 1
     }
@@ -479,6 +485,7 @@ extension ItemViewController {
         enterChatButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0,
                                                              weight: .semibold)
         enterChatButton.titleLabel?.textColor = UIColor.white
+        enterChatButton.addBounceAnimation()
     }
     
     func initializeLocationLabel() {

@@ -89,7 +89,6 @@ extension ChatViewModel {
     
     func connect() {
         
-        
         print("✏️ Trying to connect WebSocket...")
         
         var request = URLRequest(url: URL(string: Constants.WEB_SOCKET_URL)!)
@@ -117,12 +116,10 @@ extension ChatViewModel {
         case .connected(_):
             print("✏️ WebSocket has been Connected!")
             
-            
             isConnected = true
             
             getRoomInfo()
             
-  
             connectRetryCount = 0
 
             self.delegate?.didConnect()
@@ -263,25 +260,15 @@ extension ChatViewModel {
 
 extension ChatViewModel {
     
-    private var dateHeader: HTTPHeaders {
-        
-        if chatModel == nil {
-            return ["date": Date().getDateStringForGetChatListHeader()]
-        } else {
-            return ["date": chatModel?.chat[0].chat_date ?? ""]
-        }
-        
-    }
-
-    
     // 채팅 받아오기
     func getChatList(isFromBeginning: Bool = false) {
                 
         self.isFetchingData = true
+        
+        if isFromBeginning { index = 1 }
     
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,
-//                                            headers: dateHeader,
                                             pid: self.room,
                                             index: self.index,
                                             expectedModel: ChatResponseModel.self) { [weak self] result in
@@ -299,8 +286,6 @@ extension ChatViewModel {
             
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
                 
-                print("✏️ Chat Index: \(self.index)")
-
                 for chat in chatResponseModel.chat {
                     
 //                    guard chat.chat_content != Constants.ChatSuffix.emptySuffix else { continue }
@@ -328,7 +313,6 @@ extension ChatViewModel {
                 }
                 
                 self.isFetchingData = false
-                self.lastUsedDateHeader = self.dateHeader["date"] ?? "error"
                 self.index += 1
                 self.delegate?.didFetchPreviousChats()
                 
@@ -459,7 +443,7 @@ extension ChatViewModel {
             "comment": text
         ]
     
-        guard let JSONString = json.rawString() else { fatalError() }
+        guard let JSONString = json.rawString() else { return Constants.ChatSuffix.emptySuffix }
         return JSONString
     }
 
@@ -469,12 +453,13 @@ extension ChatViewModel {
     }
     
     var postUploaderUID: String {
-        return self.roomInfo?.post.user.uid ?? ""
+        return roomInfo?.post.user.uid ?? ""
     }
     
     func resetMessages() {
-        self.chatModel = nil
-        self.messages.removeAll()
+        chatModel = nil
+        messages.removeAll()
+        index = 1
     }
 }
 

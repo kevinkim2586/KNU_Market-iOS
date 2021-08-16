@@ -111,10 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
-    
-        
         switch application.applicationState {
-        
         case .active:
             print("❗️ ACTIVE")
         
@@ -123,10 +120,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         case .inactive:
             print("❗️ INACTIVE")
-            
-        }
-        
 
+        }
+    
         // Print message ID
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")

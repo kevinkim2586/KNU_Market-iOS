@@ -20,7 +20,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="kqW-gJ-74p">
-                        <barButtonItem key="rightBarButtonItem" image="person" catalog="system" id="8tH-be-UnH">
+                        <barButtonItem key="rightBarButtonItem" image="line.horizontal.3" catalog="system" id="8tH-be-UnH">
                             <connections>
                                 <action selector="pressedMoreButton:" destination="tbQ-17-sKV" id="jYz-gE-SBZ"/>
                             </connections>
@@ -159,9 +159,9 @@
     </scenes>
     <resources>
         <image name="gearshape" catalog="system" width="128" height="121"/>
+        <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <image name="megaphone" catalog="system" width="128" height="111"/>
         <image name="people icon" width="52" height="52"/>
-        <image name="person" catalog="system" width="128" height="117"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

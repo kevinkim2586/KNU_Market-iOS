@@ -24,7 +24,6 @@ extension SearchPostViewController: SearchPostViewModelDelegate {
     func didFetchSearchList() {
         
         if viewModel.itemList.count == 0 {
-            
             tableView.showEmptyView(with: "검색 결과가 없습니다.🤔")
         }
         
@@ -40,11 +39,7 @@ extension SearchPostViewController: SearchPostViewModelDelegate {
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
         
-        if error == .E401 {
-            self.showSimpleBottomAlert(with: "검색어는 2 글자 이상이어야 합니다. 👀")
-        } else {
-            self.showSimpleBottomAlert(with: error.errorDescription)
-        }
+        tableView.showEmptyView(with: "검색 결과 불러오기에 실패했습니다. 다시 시도해 주세요.😥")
     }
 }
 

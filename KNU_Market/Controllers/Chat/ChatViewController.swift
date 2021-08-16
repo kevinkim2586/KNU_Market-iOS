@@ -212,7 +212,7 @@ extension ChatViewController: ChatMemberViewDelegate {
     }
     
     func didDismissPanModal() {
-        viewModel.getChatList(isFromBeginning: true)
+        viewModel.getChatList()
     }
 }
 

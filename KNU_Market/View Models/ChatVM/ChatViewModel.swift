@@ -73,7 +73,6 @@ class ChatViewModel: WebSocketDelegate {
     }
     
     deinit {
-        print("❗️ ChatViewModel - DEINITIALIZED")
         socket.disconnect()
         if timer != nil {
             timer?.invalidate()
@@ -264,6 +263,8 @@ extension ChatViewModel {
     
     // 채팅 받아오기
     func getChatList(isFromBeginning: Bool = false) {
+        
+        print("✏️ getChat INDEX: \(index)")
                 
         self.isFetchingData = true
         
@@ -282,8 +283,10 @@ extension ChatViewModel {
                 
                 if chatResponseModel.chat.isEmpty {
                     print("❗️ChatViewModel - chatResponseModel is Empty!")
+                    self.isFetchingData = false
                     self.needsToFetchMoreData = false
                     self.delegate?.didFetchEmptyChat()
+                    return
                 }
             
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
@@ -323,7 +326,6 @@ extension ChatViewModel {
                 self.delegate?.didFetchPreviousChats()
                 
             case .failure(let error):
-                
                 self.delegate?.failedFetchingPreviousChats(with: error)
 
             }

@@ -647,7 +647,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1V-p4-nop" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6980" y="-1418.1409295352325"/>
+            <point key="canvasLocation" x="8567" y="-1418"/>
         </scene>
         <!--HomeNavigationController-->
         <scene sceneID="e3x-qg-hIx">
@@ -694,11 +694,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="공구 제목" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="87V-HD-0yh">
-                                                <rect key="frame" x="10" y="15" width="394" height="40"/>
+                                                <rect key="frame" x="15" y="15" width="384" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="uzT-pk-0Ur"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2Q8-mq-Uqx">
@@ -848,6 +848,7 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="pressedStepper:" destination="dpV-fI-E4J" eventType="valueChanged" id="YQM-om-IFC"/>
+                                                    <action selector="pressedStepper:" destination="hiX-Wx-OiP" eventType="valueChanged" id="dCV-hV-dR2"/>
                                                 </connections>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="거래 위치 선택 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Sx-lN-RNP">
@@ -903,7 +904,7 @@
                                             <constraint firstItem="krb-1T-Sc5" firstAttribute="leading" secondItem="jk6-NB-I4s" secondAttribute="trailing" constant="10" id="Umm-dt-FdF"/>
                                             <constraint firstItem="0cu-js-dvW" firstAttribute="top" secondItem="3D1-5O-t3S" secondAttribute="bottom" constant="15" id="Vtw-8Y-JQC"/>
                                             <constraint firstItem="ABI-8d-4O1" firstAttribute="leading" secondItem="PrR-fM-15R" secondAttribute="leading" constant="15" id="Yhm-mf-6xj"/>
-                                            <constraint firstItem="87V-HD-0yh" firstAttribute="leading" secondItem="PrR-fM-15R" secondAttribute="leading" constant="10" id="aGv-QD-rGt"/>
+                                            <constraint firstItem="87V-HD-0yh" firstAttribute="leading" secondItem="PrR-fM-15R" secondAttribute="leading" constant="15" id="aGv-QD-rGt"/>
                                             <constraint firstAttribute="trailing" secondItem="nvh-9f-wjt" secondAttribute="trailing" id="cK0-Fj-03e"/>
                                             <constraint firstItem="3D1-5O-t3S" firstAttribute="top" secondItem="2Q8-mq-Uqx" secondAttribute="bottom" constant="10" id="ekx-el-wj0"/>
                                             <constraint firstItem="krb-1T-Sc5" firstAttribute="top" secondItem="kAG-kT-Z1c" secondAttribute="bottom" constant="37" id="fGL-M1-Bpz"/>
@@ -913,7 +914,7 @@
                                             <constraint firstItem="kAG-kT-Z1c" firstAttribute="top" secondItem="3D1-5O-t3S" secondAttribute="bottom" constant="20" id="kxA-gU-kXd"/>
                                             <constraint firstAttribute="trailing" secondItem="ABI-8d-4O1" secondAttribute="trailing" constant="15" id="mPR-Xb-KDk"/>
                                             <constraint firstItem="8Sx-lN-RNP" firstAttribute="leading" secondItem="PrR-fM-15R" secondAttribute="leading" constant="15" id="mdl-CD-Eh6"/>
-                                            <constraint firstAttribute="trailing" secondItem="87V-HD-0yh" secondAttribute="trailing" constant="10" id="uOs-bm-AFJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="87V-HD-0yh" secondAttribute="trailing" constant="15" id="uOs-bm-AFJ"/>
                                             <constraint firstItem="87V-HD-0yh" firstAttribute="top" secondItem="PrR-fM-15R" secondAttribute="top" constant="15" id="vwd-oX-RP4"/>
                                             <constraint firstItem="ABI-8d-4O1" firstAttribute="top" secondItem="tl0-VS-eOF" secondAttribute="bottom" constant="15" id="weJ-YB-3wU"/>
                                         </constraints>
@@ -943,6 +944,9 @@
                     <navigationItem key="navigationItem" title="신규 매장 등록" id="Ci2-Q3-cfM">
                         <barButtonItem key="rightBarButtonItem" title="올리기" id="d3s-vo-dny">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="pressedFinishButton:" destination="hiX-Wx-OiP" id="HsS-1F-ck2"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -957,7 +961,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TaB-Id-IIe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7707" y="-1418"/>
+            <point key="canvasLocation" x="6980" y="-1418"/>
         </scene>
     </scenes>
     <resources>

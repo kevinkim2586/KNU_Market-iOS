@@ -236,6 +236,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     }
 
     public func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
+        
+        if viewModel.messages.count == 0 { return Message.defaultValue }
 
         return viewModel.messages[indexPath.section]
     }
@@ -289,7 +291,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             
             self.refreshControl.beginRefreshing()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                 
                 if !self.viewModel.isFetchingData &&
                     self.viewModel.needsToFetchMoreData &&

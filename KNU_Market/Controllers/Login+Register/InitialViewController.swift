@@ -1,9 +1,13 @@
 import UIKit
+import PanModal
 
 class InitialViewController: UIViewController {
-    
+
+
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var idTextField: UITextField!
+    @IBOutlet weak var pwTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,13 +20,28 @@ class InitialViewController: UIViewController {
     
     @IBAction func pressedLoginButton(_ sender: UIButton) {
         
-        guard let loginVC = self.storyboard?.instantiateViewController(
-                identifier: Constants.StoryboardID.loginVC
-        ) as? LoginViewController else {
-            return
+        guard let id = idTextField.text, let password = pwTextField.text else { return }
+        guard id.count > 0, password.count > 0 else { return }
+        
+        showProgressBar()
+    
+        UserManager.shared.login(email: id, password: password) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(_):
+                
+                print("LoginViewController - login success")
+                self.goToHomeScreen()
+                
+            case .failure(let error):
+                self.presentSimpleAlert(title: "로그인 실패", message: error.errorDescription)
+            }
+            dismissProgressBar()
         }
-        loginVC.modalPresentationStyle = .fullScreen
-        self.present(loginVC, animated: true, completion: nil)
+        
+        
     }
     
     @IBAction func pressedRegisterButton(_ sender: UIButton) {
@@ -30,12 +49,56 @@ class InitialViewController: UIViewController {
         performSegue(withIdentifier: Constants.SegueID.goToRegister, sender: self)
     }
     
-    //MARK: - UI Configuration
+    @IBAction func pressedFindPWButton(_ sender: UIButton) {
+        
+        guard let findPasswordVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.findPasswordVC) as? FindPasswordViewController else { return }
+        
+        findPasswordVC.delegate = self
+        presentPanModal(findPasswordVC)
+    }
+}
+
+extension InitialViewController: FindPasswordDelegate {
     
+    func didSendFindPasswordEmail() {
+        self.showSimpleBottomAlert(with: "발급받은 임시 비밀번호로 로그인해 주세요. 🎉")
+    }
+}
+
+//MARK: - UI Configuration & Initialization
+extension InitialViewController {
+   
     func initialize() {
         
+        initializeTextFields()
         initializeLoginButton()
         initializeRegisterButton()
+    }
+    
+    func initializeTextFields() {
+        
+        idTextField.borderStyle = .none
+        idTextField.backgroundColor = .systemGray6
+        idTextField.layer.cornerRadius = idTextField.frame.height / 2
+        idTextField.textAlignment = .center
+        idTextField.adjustsFontSizeToFitWidth = true
+        idTextField.minimumFontSize = 12
+        idTextField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        
+        
+        idTextField.placeholder = "아이디 입력"
+        
+        pwTextField.borderStyle = .none
+        pwTextField.backgroundColor = .systemGray6
+        pwTextField.layer.cornerRadius = idTextField.frame.height / 2
+        pwTextField.textAlignment = .center
+        pwTextField.adjustsFontSizeToFitWidth = true
+        pwTextField.minimumFontSize = 12
+        pwTextField.isSecureTextEntry = true
+        pwTextField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        
+        pwTextField.placeholder = "비밀번호 입력"
+        
     }
     
     func initializeLoginButton() {
@@ -55,5 +118,5 @@ class InitialViewController: UIViewController {
         registerButton.addBounceAnimationWithNoFeedback()
         
     }
+    
 }
-

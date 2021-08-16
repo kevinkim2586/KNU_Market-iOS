@@ -169,7 +169,6 @@ extension User {
         profileImageCache.removeAllObjects()
         
         print("✏️ resetAllUserInfo successful")
-
     }
     
 }

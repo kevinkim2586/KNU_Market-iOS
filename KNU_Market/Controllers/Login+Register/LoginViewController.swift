@@ -7,8 +7,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var findPasswordButton: UIButton!
-    
-    private var viewModel: LoginViewModel = LoginViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()

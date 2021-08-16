@@ -298,10 +298,12 @@ extension ChatViewModel {
                 }
             
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
+                
+                print("✏️ Chat Index: \(self.index)")
 
                 for chat in chatResponseModel.chat {
                     
-                    guard chat.chat_content != Constants.ChatSuffix.emptySuffix else { continue }
+//                    guard chat.chat_content != Constants.ChatSuffix.emptySuffix else { continue }
                     
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {

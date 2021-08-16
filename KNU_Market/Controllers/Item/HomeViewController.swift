@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-     
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

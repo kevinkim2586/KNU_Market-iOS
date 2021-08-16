@@ -2,15 +2,19 @@ import UIKit
 import IQKeyboardManagerSwift
 import Firebase
 import FirebaseMessaging
+import UserNotificationsUI
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id2"
 
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        print("✏️ didFinishLaunchingWithOptions")
         FirebaseApp.configure()
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
         
         // Observer for refresh token expiration
         NotificationCenter.default.addObserver(self,
@@ -25,18 +29,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
+                options: authOptions) { [weak self] granted, _ in
+                guard granted else { return }
+                self?.getNotificationSettings()
+            }
+            
+            
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
         
-        Messaging.messaging().delegate = self
-
         
         application.registerForRemoteNotifications()
+      
+        Messaging.messaging().delegate = self
+
         
         Messaging.messaging().token { token, error in
             if let error = error {
@@ -59,26 +68,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-          // Convert token to string (디바이스 토큰 값을 가져옵니다.)
-          let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-          
-          // Print it to console(토큰 값을 콘솔창에 보여줍니다. 이 토큰값으로 푸시를 전송할 대상을 정합니다.)
-          print("APNs device token: \(deviceTokenString)")
-          
-          Messaging.messaging().apnsToken = deviceToken
-          
-          // Persist it in your backend in case it's new
-      }
-
-
+        print("✏️ didRegisterForRemoteNotificationsWithDeviceToken")
+        // Convert token to string (디바이스 토큰 값을 가져옵니다.)
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        
+        // Print it to console(토큰 값을 콘솔창에 보여줍니다. 이 토큰값으로 푸시를 전송할 대상을 정합니다.)
+        print("APNs device token: \(deviceTokenString)")
+        
+        Messaging.messaging().apnsToken = deviceToken
+        
+        // Persist it in your backend in case it's new
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("❗️ Failed to register: \(error)")
+    }
+    
+    
     // MARK: UISceneSession Lifecycle
-
+    
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        print("✏️ configurationForConnecting")
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
@@ -87,22 +102,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+
+        print("✏️ didReceiveRemoteNotification")
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
         // TODO: Handle data of notification
-        
+
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
-        // Print message ID.
+    
+        
+        switch application.applicationState {
+        
+        case .active:
+            print("❗️ ACTIVE")
+        
+        case .background:
+            print("❗️ BACKGROUND")
+            
+        case .inactive:
+            print("❗️ INACTIVE")
+            
+        }
+        
+
+        // Print message ID
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
         
         // Print full message.
         print("✏️ receivedMessage: \(userInfo)")
-    
-        completionHandler(UIBackgroundFetchResult.newData)
+ 
+        completionHandler(.newData)
     }
     
 }
@@ -130,40 +163,44 @@ extension AppDelegate: MessagingDelegate {
 
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
-
-  // Receive displayed notifications for iOS 10 devices.
-  func userNotificationCenter(_ center: UNUserNotificationCenter,
-                              willPresent notification: UNNotification,
-    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
     
-    let userInfo = notification.request.content.userInfo
-
-    // With swizzling disabled you must let Messaging know about the message, for Analytics
-    // Messaging.messaging().appDidReceiveMessage(userInfo)
-
-    // ...
-
-    // Print full message.
-    print("✏️ willPresent userInfo: \(userInfo)")
-    // Change this to your preferred presentation option
-    completionHandler([[.alert, .sound, .badge]])
-  }
-
-  func userNotificationCenter(_ center: UNUserNotificationCenter,
-                              didReceive response: UNNotificationResponse,
-                              withCompletionHandler completionHandler: @escaping () -> Void) {
+    // Receive displayed notifications for iOS 10 devices.
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        print("✏️ userNotificationCenter willPresent")
+        
+        
+        let userInfo = notification.request.content.userInfo
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        
+        print("✏️ willPresent userInfo: \(userInfo)")
+        // Change this to your preferred presentation option
+        completionHandler([[.alert, .sound, .badge]])
+    }
     
-    let userInfo = response.notification.request.content.userInfo
-
-    
-    // With swizzling disabled you must let Messaging know about the message, for Analytics
-    // Messaging.messaging().appDidReceiveMessage(userInfo)
-
-    // Print full message.
-    print("✏️ didReceive: \(userInfo)")
-
-    completionHandler()
-  }
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print("✏️ userNotificationCenter didReceive")
+        
+        let userInfo = response.notification.request.content.userInfo
+        
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        // Print full message.
+        print("✏️ didReceive: \(userInfo)")
+        
+        completionHandler()
+    }
 }
 
 //MARK: - Observers
@@ -180,5 +217,13 @@ extension AppDelegate {
         rootVC.presentSimpleAlert(title: "로그인 세션 만료 🤔", message: "세션이 만료되었습니다. 다시 로그인해 주세요.")
         rootVC.popToInitialViewController()
     }
-
+    
+    func getNotificationSettings() {
+      UNUserNotificationCenter.current().getNotificationSettings { settings in
+        print("Notification settings: \(settings)")
+        DispatchQueue.main.async {
+          UIApplication.shared.registerForRemoteNotifications()
+        }
+      }
+    }
 }

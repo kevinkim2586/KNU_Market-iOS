@@ -39,6 +39,7 @@
 		7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */; };
 		7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */; };
 		7C3D541D26C90B4900AE3E55 /* congratulate1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C3D541A26C90B4900AE3E55 /* congratulate1.json */; };
+		7C3D541F26CA722B00AE3E55 /* CALayer Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D541E26CA722B00AE3E55 /* CALayer Extension.swift */; };
 		7C3D985E26AE793D005DFAE0 /* RoomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D985D26AE793D005DFAE0 /* RoomInfo.swift */; };
 		7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D985F26AE89B4005DFAE0 /* ChatMemberTableViewCell.swift */; };
 		7C3D986226AE8A42005DFAE0 /* ChatMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */; };
@@ -145,6 +146,7 @@
 		7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_InputPasswordViewController.swift; sourceTree = "<group>"; };
 		7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_InputSuggestionViewController.swift; sourceTree = "<group>"; };
 		7C3D541A26C90B4900AE3E55 /* congratulate1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congratulate1.json; sourceTree = "<group>"; };
+		7C3D541E26CA722B00AE3E55 /* CALayer Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer Extension.swift"; sourceTree = "<group>"; };
 		7C3D985D26AE793D005DFAE0 /* RoomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInfo.swift; sourceTree = "<group>"; };
 		7C3D985F26AE89B4005DFAE0 /* ChatMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberTableViewCell.swift; sourceTree = "<group>"; };
 		7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberViewController.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 				7C0F1CB926BA6B310068FF45 /* NotificationName Extension .swift */,
 				7CDADA0626BE623100F7F58F /* DateHelper Extension.swift */,
 				7C9BBB4026C27BD0001C54E6 /* UITableView Extension.swift */,
+				7C3D541E26CA722B00AE3E55 /* CALayer Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -819,6 +822,7 @@
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
 				7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
+				7C3D541F26CA722B00AE3E55 /* CALayer Extension.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */,
 				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,
 				7CB8DF732650E1E20001CC6D /* RegisterViewModel.swift in Sources */,

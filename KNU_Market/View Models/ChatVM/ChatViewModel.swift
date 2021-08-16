@@ -238,18 +238,20 @@ extension ChatViewModel {
             guard originalText != Constants.ChatSuffix.emptySuffix else {
                 return
             }
-
+            
+            let chatMessage = self.filterChat(text: originalText)
+            
             let chat = Chat(chat_uid: Int.random(in: 0...1000),
                             chat_userUID: User.shared.userUID,
                             chat_username: User.shared.nickname,
                             chat_roomUID: self.room,
-                            chat_content: convertedText,
+                            chat_content: chatMessage,
                             chat_date: Date().getDateStringForChatBottomLabel())
             
             self.messages.append(Message(chat: chat,
                                          sender: self.mySelf,
                                          sentDate: Date(),
-                                         kind: .text(originalText)))
+                                         kind: .text(chatMessage)))
             
             self.delegate?.didSendText()
         }
@@ -288,6 +290,10 @@ extension ChatViewModel {
                 
                 for chat in chatResponseModel.chat {
                     
+        
+                    let chatMessage = self.filterChat(text: chat.chat_content)
+           
+                    
 //                    guard chat.chat_content != Constants.ChatSuffix.emptySuffix else { continue }
                     
                     // 내 채팅이 아니면
@@ -299,14 +305,14 @@ extension ChatViewModel {
                         self.messages.insert(Message(chat: chat,
                                                      sender: others,
                                                      sentDate: chat.chat_date.convertStringToDate(),
-                                                     kind: .text(chat.chat_content)),
+                                                     kind: .text(chatMessage)),
                                              at: 0)
                     } else {
                         
                         self.messages.insert(Message(chat: chat,
                                                      sender: self.mySelf,
                                                      sentDate: chat.chat_date.convertStringToDate(),
-                                                     kind: .text(chat.chat_content)),
+                                                     kind: .text(chatMessage)),
                                              at: 0)
                     }
                     
@@ -454,6 +460,23 @@ extension ChatViewModel {
     
     var postUploaderUID: String {
         return roomInfo?.post.user.uid ?? ""
+    }
+    
+    func filterChat(text: String) -> String {
+        
+        if text.contains(Constants.ChatSuffix.enterSuffix) {
+            
+            return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
+            
+        } else if text.contains(Constants.ChatSuffix.exitSuffix) {
+            
+            return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: " 🎉")
+            
+        } else {
+            return text
+        }
+        
+        
     }
     
     func resetMessages() {

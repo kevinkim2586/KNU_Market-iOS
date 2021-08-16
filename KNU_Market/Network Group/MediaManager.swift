@@ -70,15 +70,19 @@ class MediaManager {
                     
                     let json = try JSON(data: response.data ?? Data())
                     let imageID = json["uid"].stringValue
-                    print("UserManager: newly uploaded image UID: \(imageID)")
+                    print("MediaManager: newly uploaded image UID: \(imageID)")
                     completion(.success(imageID))
                     
                 } catch {
-                    print("UserManager - uploadImage() catch error \(error)")
+                    print("MediaManager - uploadImage() catch error \(error)")
                     let error = NetworkError.returnError(json: response.data ?? Data())
                     completion(.failure(error))
                 }
-            default: completion(.failure(.E000))
+            default:
+                let error = NetworkError.returnError(json: response.data ?? Data())
+                print("❗️ MediaManager - uploadImage failed with statusCode: \(statusCode) and reason: \(error.errorDescription)")
+                
+                completion(.failure(error))
             }
         }
     }

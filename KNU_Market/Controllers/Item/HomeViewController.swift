@@ -34,6 +34,7 @@ class HomeViewController: UIViewController {
         guard let uploadVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.uploadItemVC) as? UploadItemViewController else {
             return
         }
+        uploadVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(uploadVC, animated: true)
     }
     
@@ -89,6 +90,10 @@ extension HomeViewController: HomeViewModelDelegate {
 //MARK: -  UITableViewDelegate, UITableViewDataSource
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120.0

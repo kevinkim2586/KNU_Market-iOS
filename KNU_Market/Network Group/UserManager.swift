@@ -235,6 +235,8 @@ class UserManager {
     func updateUserProfileImage(with uid: String,
                                 completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
+        print("✏️ fcmToken : \(User.shared.fcmToken)")
+        
         let parameters: Parameters = [
             "nickname": User.shared.nickname,
             "password": User.shared.password,

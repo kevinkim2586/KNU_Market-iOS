@@ -140,8 +140,7 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func didSendText() {
-        dismissProgressBar()
-        
+
         print("✏️ ChatVC - didSendText ACTIVATED")
         
         DispatchQueue.main.async {

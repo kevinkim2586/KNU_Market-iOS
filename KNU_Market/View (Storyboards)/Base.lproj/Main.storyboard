@@ -148,7 +148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="215.94202898550725" y="68.973214285714278"/>
+            <point key="canvasLocation" x="450" y="-47"/>
         </scene>
         <!--UserRegister-->
         <scene sceneID="vfV-iJ-ZVG">
@@ -159,100 +159,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GFL-2E-Vss" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="451" y="554"/>
-        </scene>
-        <!--Login View Controller-->
-        <scene sceneID="Xvn-iv-zLU">
-            <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="WcB-qX-q1C" customClass="LoginViewController" customModule="KNU_Market" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="60a-Yi-ipM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="학교 이메일 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ivr-6Y-BiC">
-                                <rect key="frame" x="20" y="165" width="335" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="AWj-1Y-CvY"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rU1-jL-NSK">
-                                <rect key="frame" x="20" y="235" width="335" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="oUh-mQ-qnc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fP6-gv-Fuk">
-                                <rect key="frame" x="65" y="335" width="245" height="50"/>
-                                <color key="backgroundColor" name="AppDefaultColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="T6p-A8-dRA"/>
-                                </constraints>
-                                <state key="normal" title="로그인">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressedLoginButton:" destination="WcB-qX-q1C" eventType="touchUpInside" id="Hbm-0b-wQ9"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo" translatesAutoresizingMaskIntoConstraints="NO" id="jzc-Dq-xC0">
-                                <rect key="frame" x="20" y="65" width="70" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="XEQ-JZ-dKg"/>
-                                    <constraint firstAttribute="height" constant="70" id="YBN-qa-cpW"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JuZ-r3-thW">
-                                <rect key="frame" x="105" y="92" width="94" height="33"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="27"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrB-Jn-ziO">
-                                <rect key="frame" x="151.5" y="405" width="72" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="비밀번호 찾기">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressedFindPasswordButton:" destination="WcB-qX-q1C" eventType="touchUpInside" id="6AE-3D-Lho"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="66W-Oo-gcL"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="rU1-jL-NSK" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="20" id="16s-1Z-neB"/>
-                            <constraint firstItem="66W-Oo-gcL" firstAttribute="trailing" secondItem="rU1-jL-NSK" secondAttribute="trailing" constant="20" id="1gi-Q1-dob"/>
-                            <constraint firstItem="ivr-6Y-BiC" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="20" id="7AS-Qt-dwD"/>
-                            <constraint firstItem="JuZ-r3-thW" firstAttribute="leading" secondItem="jzc-Dq-xC0" secondAttribute="trailing" constant="15" id="8Ep-X9-eXr"/>
-                            <constraint firstItem="zrB-Jn-ziO" firstAttribute="centerX" secondItem="60a-Yi-ipM" secondAttribute="centerX" id="ACh-18-1RF"/>
-                            <constraint firstItem="ivr-6Y-BiC" firstAttribute="top" secondItem="jzc-Dq-xC0" secondAttribute="bottom" constant="30" id="GVq-LF-NjR"/>
-                            <constraint firstItem="jzc-Dq-xC0" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="20" id="KzP-pK-N2b"/>
-                            <constraint firstItem="66W-Oo-gcL" firstAttribute="trailing" secondItem="ivr-6Y-BiC" secondAttribute="trailing" constant="20" id="TCi-NN-Efb"/>
-                            <constraint firstItem="fP6-gv-Fuk" firstAttribute="top" secondItem="rU1-jL-NSK" secondAttribute="bottom" constant="60" id="VXi-dF-2g5"/>
-                            <constraint firstItem="fP6-gv-Fuk" firstAttribute="centerX" secondItem="60a-Yi-ipM" secondAttribute="centerX" id="bJE-c6-6mt"/>
-                            <constraint firstItem="JuZ-r3-thW" firstAttribute="top" secondItem="66W-Oo-gcL" secondAttribute="top" constant="92" id="d2p-zy-4qY"/>
-                            <constraint firstItem="zrB-Jn-ziO" firstAttribute="top" secondItem="fP6-gv-Fuk" secondAttribute="bottom" constant="20" id="kAJ-v1-HQS"/>
-                            <constraint firstItem="jzc-Dq-xC0" firstAttribute="top" secondItem="66W-Oo-gcL" secondAttribute="top" constant="65" id="lh2-N2-JWC"/>
-                            <constraint firstItem="fP6-gv-Fuk" firstAttribute="leading" secondItem="66W-Oo-gcL" secondAttribute="leading" constant="65" id="qEQ-8j-yXj"/>
-                            <constraint firstItem="rU1-jL-NSK" firstAttribute="top" secondItem="ivr-6Y-BiC" secondAttribute="bottom" constant="30" id="soM-Kh-4Hu"/>
-                            <constraint firstItem="66W-Oo-gcL" firstAttribute="trailing" secondItem="fP6-gv-Fuk" secondAttribute="trailing" constant="65" id="udn-PC-6j8"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="X0G-NW-KDu"/>
-                    <connections>
-                        <outlet property="findPasswordButton" destination="zrB-Jn-ziO" id="PW7-kv-ocP"/>
-                        <outlet property="idTextField" destination="ivr-6Y-BiC" id="ysg-fa-l1B"/>
-                        <outlet property="loginButton" destination="fP6-gv-Fuk" id="7W6-3T-bvz"/>
-                        <outlet property="passwordTextField" destination="rU1-jL-NSK" id="WYk-Ry-jF9"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zOi-MU-jHi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1202" y="-375"/>
         </scene>
         <!--Find Password View Controller-->
         <scene sceneID="S3Y-uQ-MfF">
@@ -333,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AZE-mh-lzk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2127" y="-641"/>
+            <point key="canvasLocation" x="1418" y="-776"/>
         </scene>
         <!--ItemList-->
         <scene sceneID="CbI-xy-zPP">
@@ -343,7 +249,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G7k-lV-f4C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2443" y="515"/>
+            <point key="canvasLocation" x="973" y="515"/>
         </scene>
         <!--ChatList-->
         <scene sceneID="qvE-5T-7qT">
@@ -353,7 +259,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBR-7e-cPk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2678" y="515"/>
+            <point key="canvasLocation" x="1417" y="515"/>
         </scene>
         <!--MyPage-->
         <scene sceneID="CwZ-dE-Pac">
@@ -363,7 +269,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1o-Ow-95h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2930" y="515"/>
+            <point key="canvasLocation" x="1776" y="515"/>
         </scene>
         <!--Main Tab Bar View Controller-->
         <scene sceneID="f1k-s8-Jvd">
@@ -386,7 +292,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iAz-12-GYd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2678" y="27"/>
+            <point key="canvasLocation" x="1417" y="-47"/>
         </scene>
     </scenes>
     <designables>

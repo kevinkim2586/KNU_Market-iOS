@@ -19,6 +19,8 @@ class UploadItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "공구 올리기"
+        
         initialize()
     }
     

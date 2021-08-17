@@ -288,6 +288,7 @@ extension ChatViewModel {
                     self.delegate?.didFetchEmptyChat()
                     return
                 }
+                
             
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
                 

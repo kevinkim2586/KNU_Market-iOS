@@ -151,7 +151,7 @@ class UploadItemViewModel {
             switch result {
             case .success(_):
                 self.delegate?.didUpdatePost()
-                NotificationCenter.default.post(name: Notification.Name.didUpdatePost, object: nil)
+                NotificationCenter.default.post(name: .didUpdatePost, object: nil)
             case .failure(let error):
                 self.delegate?.failedUpdatingPost(with: error)
             }

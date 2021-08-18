@@ -37,8 +37,7 @@ class ChatViewController: MessagesViewController {
     }
     
     @objc func pressedTitle() {
-        print("✏️ pressedTitle")
-        
+
         let storyboard = UIStoryboard(name: "ItemList", bundle: nil)
         
         guard let itemVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
@@ -48,7 +47,6 @@ class ChatViewController: MessagesViewController {
         itemVC.isFromChatVC = true
         
         self.navigationController?.pushViewController(itemVC, animated: true)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +54,6 @@ class ChatViewController: MessagesViewController {
         viewModel.connect()
     }
 
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -137,6 +134,9 @@ extension ChatViewController: ChatViewDelegate {
         print("✏️ ChatVC - didReceiveBanNotification")
         messageInputBar.isUserInteractionEnabled = false
         viewModel.disconnect()
+        viewModel.resetMessages()
+        
+        messagesCollectionView.isScrollEnabled = false
         self.presentSimpleAlert(title: "방장으로부터 강퇴 처리를 당하셨습니다.🤔", message: "")
         navigationController?.popViewController(animated: true)
     }
@@ -153,7 +153,7 @@ extension ChatViewController {
     func didDeletePost() {
         
         navigationController?.popViewController(animated: true)
-        NotificationCenter.default.post(name: Notification.Name.updateItemList, object: nil)
+        NotificationCenter.default.post(name: .updateItemList, object: nil)
     }
     
     func didFetchPreviousChats() {

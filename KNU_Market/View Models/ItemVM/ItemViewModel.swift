@@ -151,7 +151,7 @@ class ItemViewModel {
             case .success:
                 
                 self.delegate?.didMarkPostDone()
-                NotificationCenter.default.post(name: Notification.Name.updateItemList,
+                NotificationCenter.default.post(name: .updateItemList,
                                                 object: nil)
                 
             case .failure(let error):
@@ -178,7 +178,7 @@ class ItemViewModel {
             case .success:
                 
                 self.delegate?.didCancelMarkPostDone()
-                NotificationCenter.default.post(name: Notification.Name.updateItemList,
+                NotificationCenter.default.post(name: .updateItemList,
                                                 object: nil)
                 
             case .failure(let error):

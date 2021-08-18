@@ -47,7 +47,7 @@ extension ChatListViewController: ChatListViewModelDelegate {
     
     func didExitPost(at indexPath: IndexPath) {
         chatListTableView.deleteRows(at: [indexPath], with: .fade)
-        NotificationCenter.default.post(name: Notification.Name.updateItemList,
+        NotificationCenter.default.post(name: .updateItemList,
                                         object: nil)
     }
     
@@ -57,7 +57,7 @@ extension ChatListViewController: ChatListViewModelDelegate {
     
     func didDeleteAndExitPost(at indexPath: IndexPath) {
         chatListTableView.deleteRows(at: [indexPath], with: .fade)
-        NotificationCenter.default.post(name: Notification.Name.updateItemList,
+        NotificationCenter.default.post(name: .updateItemList,
                                         object: nil)
     }
     

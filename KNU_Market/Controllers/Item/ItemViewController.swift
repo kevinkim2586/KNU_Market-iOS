@@ -223,7 +223,7 @@ extension ItemViewController: ItemViewModelDelegate {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
             
             self.navigationController?.popViewController(animated: true)
-            NotificationCenter.default.post(name: Notification.Name.updateItemList, object: nil)
+            NotificationCenter.default.post(name: .updateItemList, object: nil)
             
         }
     }
@@ -344,12 +344,12 @@ extension ItemViewController {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(presentVerifyEmailVC),
-                                               name: Notification.Name.presentVerifyEmailVC,
+                                               name: .presentVerifyEmailVC,
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(refreshPage),
-                                               name: Notification.Name.didUpdatePost,
+                                               name: .didUpdatePost,
                                                object: nil)
     }
     

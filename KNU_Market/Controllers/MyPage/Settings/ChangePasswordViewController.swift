@@ -99,7 +99,7 @@ extension ChangePasswordViewController {
 
     func createObservers() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(presentVerifyEmailVC), name: Notification.Name.presentVerifyEmailVC, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(presentVerifyEmailVC), name: .presentVerifyEmailVC, object: nil)
     }
     
 }

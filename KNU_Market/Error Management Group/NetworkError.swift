@@ -95,7 +95,7 @@ enum NetworkError: String, Error {
             if errorCode == "E109" {
                 
                 print("✏️ NotificationCenter POST- presentVerifyEmailVC ACTIVATED")
-                NotificationCenter.default.post(name: Notification.Name.presentVerifyEmailVC, object: nil)
+                NotificationCenter.default.post(name: .presentVerifyEmailVC, object: nil)
             }
             return NetworkError(rawValue: errorCode) ?? .E000
         } catch {

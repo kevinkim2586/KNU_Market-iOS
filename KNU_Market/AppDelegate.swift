@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Observer for refresh token expiration
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(refreshTokenHasExpired),
-                                               name: Notification.Name.refreshTokenExpired,
+                                               name: .refreshTokenExpired,
                                                object: nil)
         
 

@@ -20,7 +20,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="kqW-gJ-74p">
-                        <barButtonItem key="rightBarButtonItem" image="line.horizontal.3" catalog="system" id="8tH-be-UnH">
+                        <barButtonItem key="rightBarButtonItem" image="line.horizontal.3" catalog="system" id="8tH-be-UnH" userLabel="More Bar Button Item">
                             <connections>
                                 <action selector="pressedMoreButton:" destination="tbQ-17-sKV" id="jYz-gE-SBZ"/>
                             </connections>

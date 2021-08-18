@@ -119,7 +119,7 @@ extension UploadItemViewController: UploadItemDelegate {
         print("✏️ UploadItemVC - didCompleteUpload")
         dismissProgressBar()
         navigationController?.popViewController(animated: true)
-        NotificationCenter.default.post(name: Notification.Name.updateItemList, object: nil)
+        NotificationCenter.default.post(name: .updateItemList, object: nil)
     }
     
     func failedUploading(with error: NetworkError) {
@@ -352,7 +352,7 @@ extension UploadItemViewController {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(presentVerifyEmailVC),
-                                               name: Notification.Name.presentVerifyEmailVC,
+                                               name: .presentVerifyEmailVC,
                                                object: nil)
     }
     

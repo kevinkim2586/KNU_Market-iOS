@@ -151,27 +151,6 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        
-        guard let postUploader = roomInfo?.post.user.uid else { return }   // 글 작성자가 누구인지 판단
-        
-        if User.shared.userUID != postUploader { return }                       // 방장이 아닌 경우 그냥 바로 deselectRow
-        
-        guard let selectedUser = self.roomInfo?.member[indexPath.row].userUID else {
-            self.showSimpleBottomAlert(with: "현재 강퇴 기능을 사용을 할 수 없습니다. 불편을 드려 죄송합니다.😥")
-            return
-        }
-        
-        if selectedUser == User.shared.userUID { return }
-    
-        presentAlertWithCancelAction(title: "해당 사용자를 강퇴 시키시겠습니까?🧐",
-                                     message: "강퇴를 시키면 다시는 채팅방에 들어오지 못합니다.") { selectedOk in
-            
-            if selectedOk {
-                self.banUser(uid: selectedUser)
-            }
-        }
-
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

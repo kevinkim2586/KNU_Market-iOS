@@ -53,7 +53,6 @@ class ChatMemberTableViewCell: UITableViewCell {
         guard let userUID = userUID else { return }
 
         if postUploaderUID == User.shared.userUID {
-            
             self.delegate?.presentPostUploaderActionSheet(userUID: userUID, nickname: nickname)
         } else {
             self.delegate?.presentUserReportVC(userToReport: nickname)

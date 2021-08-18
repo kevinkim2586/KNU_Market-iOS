@@ -131,7 +131,6 @@ extension ChatViewController: ChatViewDelegate {
         
         viewModel.resetMessages()
         viewModel.connect()
-//        self.presentSimpleAlert(title: "네트워크가 현재 불안정합니다. 🧐", message: "채팅방을 나갔다가 다시 들어와 주세요.")
     }
     
     func failedConnection(with error: NetworkError) {

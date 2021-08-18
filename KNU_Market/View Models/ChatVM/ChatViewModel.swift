@@ -60,8 +60,6 @@ class ChatViewModel: WebSocketDelegate {
     // Delegate
     weak var delegate: ChatViewDelegate?
     
-    
-    private var lastUsedDateHeader: String = ""
 
     init(room: String, isFirstEntrance: Bool) {
         
@@ -79,7 +77,6 @@ class ChatViewModel: WebSocketDelegate {
             timer = nil
         }
     }
-
 }
 
 //MARK: - WebSocket Methods
@@ -88,7 +85,7 @@ extension ChatViewModel {
     
     func connect() {
         
-        print("✏️ Trying to connect WebSocket...")
+        print("✏️ Trying to connect to WebSocket...")
         
         var request = URLRequest(url: URL(string: Constants.WEB_SOCKET_URL)!)
         request.timeoutInterval = 1000
@@ -113,41 +110,35 @@ extension ChatViewModel {
         switch event {
     
         case .connected(_):
+            
             print("✏️ WebSocket has been Connected!")
              
             isConnected = true
-            
             getRoomInfo()
-            
             connectRetryCount = 0
-
             self.delegate?.didConnect()
-
             sendText(Constants.ChatSuffix.emptySuffix)
             
         case .disconnected(let reason, let code):
             print("❗️ WebSocket has been Disconnected: \(reason) with code: \(code)")
             
             isConnected = false
-            
             self.delegate?.didDisconnect()
             
         case .text(let text):
         
             let receivedTextInJSON = JSON(parseJSON: text)
-            
             let nickname = receivedTextInJSON["id"].stringValue
             let userUID = receivedTextInJSON["uuid"].stringValue
             let roomUID = receivedTextInJSON["room"].stringValue
             let chatText = receivedTextInJSON["comment"].stringValue
-            
-            print("✏️ receivedText: \(chatText)")
-            
-            //__EMPTY_SUFFIX 체크
-            guard chatText != Constants.ChatSuffix.emptySuffix else { return }
-            
+        
+
             let chatMessage = filterChat(text: chatText)
+            print("✏️ receivedText: \(chatMessage)")
             
+            guard chatMessage != Constants.ChatSuffix.emptySuffix else { return }
+        
             if isFromCurrentSender(uuid: userUID) {
                 self.delegate?.didReceiveChat()
                 return
@@ -163,7 +154,7 @@ extension ChatViewModel {
                             chat_content: chatMessage,
                             chat_date: Date().getDateStringForChatBottomLabel())
             
-            self.messages.append(Message(chat: chat,
+            messages.append(Message(chat: chat,
                                          sender: others,
                                          sentDate: Date(),
                                          kind: .text(chatMessage)))
@@ -223,6 +214,8 @@ extension ChatViewModel {
     
     // 채팅 보내기
     func sendText(_ originalText: String) {
+        
+        print("✏️ originalText: \(originalText)")
     
         socket.write(ping: Data())
         
@@ -265,8 +258,6 @@ extension ChatViewModel {
     
     // 채팅 받아오기
     func getChatList(isFromBeginning: Bool = false) {
-        
-        print("✏️ getChat INDEX: \(index)")
                 
         self.isFetchingData = true
         
@@ -370,15 +361,36 @@ extension ChatViewModel {
     
     // 공구글 나오기
     func exitPost() {
-
-        let exitText = convertToJSONString(text: "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
-
-        socket.write(string: exitText)
         
+        sendText("\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
+//
+//        let exitText = convertToJSONString(text: "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
+//
+//        socket.write(string: exitText)
+        
+//        ChatManager.shared.changeJoinStatus(function: .exit,
+//                                            pid: self.room) { [weak self] result in
+//
+//            guard let self = self else { return }
+//
+//            switch result {
+//
+//            case .success:
+//                self.delegate?.didExitPost()
+//            case .failure(let error):
+//                self.delegate?.failedConnection(with: error)
+//            }
+//        }
+    }
+    
+    func outPost() {
+        print("❗️ outPost Activated")
         ChatManager.shared.changeJoinStatus(function: .exit,
                                             pid: self.room) { [weak self] result in
             
             guard let self = self else { return }
+            
+            print("✏️ outPost RESULT")
             
             switch result {
             
@@ -473,15 +485,18 @@ extension ChatViewModel {
             
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
             
-        } else if text.contains(Constants.ChatSuffix.exitSuffix) {
+        } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" {
+
+           outPost()
+           return Constants.ChatSuffix.emptySuffix
+            
+       } else if text.contains(Constants.ChatSuffix.exitSuffix) {
             
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: " 🎉")
             
         } else {
             return text
         }
-        
-        
     }
     
     func resetMessages() {

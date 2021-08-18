@@ -95,5 +95,6 @@ class ChatMemberTableViewCell: UITableViewCell {
     func initializeUI() {
         
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+        profileImageView.contentMode = .scaleAspectFill
     }
 }

@@ -87,7 +87,7 @@ class ChatManager {
                     
                 case .failure:
                     let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("❗️ ChatManager - getResponse ERROR with code: \(response.response!.statusCode) and error: \(error.errorDescription)")
+                    print("❗️ ChatManager - getResponse ERROR with code: \(response.response?.statusCode) and error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }

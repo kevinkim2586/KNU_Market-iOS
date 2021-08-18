@@ -11,7 +11,6 @@ protocol ChatListViewModelDelegate: AnyObject {
     
     func didDeleteAndExitPost(at indexPath: IndexPath)
     func failedDeletingAndExitingPost(with error: NetworkError)
-  
 }
 
 class ChatListViewModel {
@@ -58,7 +57,6 @@ extension ChatListViewModel {
 
     
     // 공구 나가기
-    // 수정: completion handler 말고 delegate 으로 하기
     func exitPost(at indexPath: IndexPath) {
         
         let roomPID = self.roomList[indexPath.row].uuid

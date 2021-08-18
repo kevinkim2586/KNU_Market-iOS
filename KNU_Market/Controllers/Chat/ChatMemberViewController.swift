@@ -20,9 +20,6 @@ class ChatMemberViewController: UIViewController {
     
     weak var delegate: ChatMemberViewDelegate?
     
-    deinit {
-        print("❗️ ChatMemberVC has been DEINITIALIZED")
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +91,7 @@ class ChatMemberViewController: UIViewController {
         showProgressBar()
         
         guard let roomUID = self.roomInfo?.post.uuid else {
-            self.showSimpleBottomAlert(with: NetworkError.E000.errorDescription)
+            showSimpleBottomAlert(with: NetworkError.E000.errorDescription)
             return
         }
         
@@ -135,10 +132,12 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? ChatMemberTableViewCell else { return UITableViewCell() }
         
-        if let cellVM = self.roomInfo?.member[indexPath.row] {
+        if let cellVM = roomInfo?.member[indexPath.row] {
+            
+            guard let postUploaderUID = postUploaderUID else { return UITableViewCell() }
             
             cell.delegate = self
-            cell.configure(with: cellVM.userUID)
+            cell.configure(with: cellVM.userUID, postUploaderUID: postUploaderUID)
              
         } else {
             cell.nicknameLabel.text = "사용자 정보 불러오기에 실패했습니다.🧐"
@@ -154,7 +153,7 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         
-        guard let postUploader = self.roomInfo?.post.user.uid else { return }   // 글 작성자가 누구인지 판단
+        guard let postUploader = roomInfo?.post.user.uid else { return }   // 글 작성자가 누구인지 판단
         
         if User.shared.userUID != postUploader { return }                       // 방장이 아닌 경우 그냥 바로 deselectRow
         
@@ -166,7 +165,7 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
         if selectedUser == User.shared.userUID { return }
     
         presentAlertWithCancelAction(title: "해당 사용자를 강퇴 시키시겠습니까?🧐",
-                                     message: "강퇴를 2번 이상 시키면 다시는 채팅방에 들어오지 못합니다.") { selectedOk in
+                                     message: "강퇴를 시키면 다시는 채팅방에 들어오지 못합니다.") { selectedOk in
             
             if selectedOk {
                 self.banUser(uid: selectedUser)
@@ -186,12 +185,49 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
 extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
     
     func presentUserReportVC(userToReport: String) {
-        self.presentReportUserVC(userToReport: userToReport)
+        presentReportUserVC(userToReport: userToReport)
     }
     
     func failedPresentingUserReportVC() {
-        self.showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요 😥")
+        showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요 😥")
     }
+    
+    func didChooseToBanUser(userUID: String) {
+        banUser(uid: userUID)
+    }
+    
+    func presentPostUploaderActionSheet(userUID: String, nickname: String) {
+        
+        let actionSheet = UIAlertController(title: "\(nickname)님",
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        let banAction = UIAlertAction(title: "강퇴하기",
+                                      style: .default) { alert in
+            
+            self.presentAlertWithCancelAction(title: "정말 강퇴 시키시겠습니까?",
+                                              message: "강퇴를 시키면 다시는 채팅방에 들어오지 못합니다.") { selectedOk in
+                if selectedOk {
+                    self.banUser(uid: userUID)
+                }
+            }
+                                      }
+        let reportAction = UIAlertAction(title: "신고하기",
+                                         style: .default) { alert in
+            
+            self.presentReportUserVC(userToReport: nickname)
+            
+        }
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel,
+                                         handler: nil)
+        actionSheet.addAction(banAction)
+        actionSheet.addAction(reportAction)
+        actionSheet.addAction(cancelAction)
+        present(actionSheet, animated: true)
+        
+    }
+    
 }
 
 //MARK: - UI Configuration & Initialization
@@ -212,7 +248,6 @@ extension ChatMemberViewController {
     }
     
     func initializeTopView() {
-        
         postMemberCountLabel.text = "\(self.roomInfo?.post.currentlyGatheredPeople ?? 0)"
     }
     

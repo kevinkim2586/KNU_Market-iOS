@@ -45,25 +45,13 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo" translatesAutoresizingMaskIntoConstraints="NO" id="286-Rl-XaC">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo2" translatesAutoresizingMaskIntoConstraints="NO" id="286-Rl-XaC">
                                 <rect key="frame" x="127.5" y="110" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="Vhf-gj-Cb9"/>
                                     <constraint firstAttribute="height" constant="120" id="qhn-Y3-lrp"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiC-of-WWx">
-                                <rect key="frame" x="127" y="245" width="121.5" height="42"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="35"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="같이 사면 더 저렴해진다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aer-2w-N3M">
-                                <rect key="frame" x="105" y="302" width="165" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6J-cK-goV">
                                 <rect key="frame" x="70" y="517" width="235" height="50"/>
                                 <color key="backgroundColor" name="AppDefaultColor"/>
@@ -120,14 +108,10 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0vi-xp-EMA" secondAttribute="trailing" constant="70" id="7SR-bj-isA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="X6J-cK-goV" secondAttribute="trailing" constant="70" id="Hsj-XI-szG"/>
                             <constraint firstItem="ihx-1m-86D" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="PIv-mG-Uzb"/>
-                            <constraint firstItem="BiC-of-WWx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sss-lK-8QW"/>
                             <constraint firstItem="B89-Fh-cNR" firstAttribute="top" secondItem="kfM-0r-VwU" secondAttribute="bottom" constant="5" id="ah4-7r-rDa"/>
-                            <constraint firstItem="BiC-of-WWx" firstAttribute="top" secondItem="286-Rl-XaC" secondAttribute="bottom" constant="15" id="cns-mK-yP9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ihx-1m-86D" secondAttribute="trailing" constant="70" id="gRu-NK-pRx"/>
-                            <constraint firstItem="Aer-2w-N3M" firstAttribute="top" secondItem="BiC-of-WWx" secondAttribute="bottom" constant="15" id="gY7-HV-OHo"/>
                             <constraint firstItem="X6J-cK-goV" firstAttribute="top" secondItem="0vi-xp-EMA" secondAttribute="bottom" constant="15" id="ibM-nX-ooR"/>
                             <constraint firstItem="0vi-xp-EMA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="jOl-ba-QIV"/>
-                            <constraint firstItem="Aer-2w-N3M" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mfI-4J-Jf5"/>
                             <constraint firstItem="kfM-0r-VwU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mtQ-Ww-SWS"/>
                             <constraint firstItem="286-Rl-XaC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="110" id="oGb-53-KH7"/>
                             <constraint firstItem="kfM-0r-VwU" firstAttribute="top" secondItem="X6J-cK-goV" secondAttribute="bottom" constant="15" id="ogY-sn-TqL"/>
@@ -301,7 +285,7 @@
         </designable>
     </designables>
     <resources>
-        <image name="appLogo" width="1301" height="1345"/>
+        <image name="appLogo2" width="3200.5" height="3200.5"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

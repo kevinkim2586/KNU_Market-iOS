@@ -86,7 +86,7 @@ extension InitialViewController {
         idTextField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         
         
-        idTextField.placeholder = "아이디 입력"
+        idTextField.placeholder = "학교 이메일 입력"
         
         pwTextField.borderStyle = .none
         pwTextField.backgroundColor = .systemGray6

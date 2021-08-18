@@ -242,17 +242,12 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
                 self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
                     
                     if selectedOk {
-            
                         self.updateProfileImageButton(with: originalImage)
-                        
                         showProgressBar()
-                        
                         OperationQueue().addOperation {
-                    
                             self.viewModel.uploadImageToServerFirst(with: originalImage)
                             dismissProgressBar()
                         }
-              
                     } else {
                         self.imagePickerControllerDidCancel(self.imagePicker)
                     }
@@ -264,10 +259,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-
 }
-
 
 //MARK: - UI Configuration
 
@@ -315,7 +307,6 @@ extension MyPageViewController {
         profileImageButton.setImage(image, for: .normal)
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.masksToBounds = true
-
     }
     
     func createObservers() {

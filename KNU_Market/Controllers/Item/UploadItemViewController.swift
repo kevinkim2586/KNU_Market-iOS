@@ -45,8 +45,6 @@ class UploadItemViewController: UIViewController {
         } else {
             askToUploadPost()
         }
-        
-
     }
 
     func askToUploadPost() {

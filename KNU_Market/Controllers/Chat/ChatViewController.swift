@@ -149,6 +149,13 @@ extension ChatViewController: ChatViewDelegate {
         }
         
     }
+    
+    func didReceiveBanNotification() {
+        
+        messageInputBar.isUserInteractionEnabled = false
+        viewModel.disconnect()
+        self.presentSimpleAlert(title: "방장으로부터 강퇴 처리를 당하셨습니다.🤔", message: "")
+    }
 
 }
 
@@ -256,12 +263,18 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     }
     
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        
+        if viewModel.messages.count == 0 { return nil }
+        
         return NSAttributedString(string: viewModel.messages[indexPath.section].usernickname,
                                   attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .medium)])
     }
     
     // Bottom Label
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        
+        if viewModel.messages.count == 0 { return nil }
+        
         return NSAttributedString(string: viewModel.messages[indexPath.section].date,
                                   attributes: [.font: UIFont.systemFont(ofSize: 10), .foregroundColor: UIColor.lightGray])
     }
@@ -271,6 +284,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     }
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        
+        if viewModel.messages.count == 0 { return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1) }
     
         if viewModel.messages[indexPath.section].userUID == User.shared.userUID {
             return UIColor(named: Constants.Color.appColor)!
@@ -283,10 +298,10 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
         return .bubbleTail(corner, .curved)
     }
-    
+
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-              
+        
         if scrollView.contentOffset.y <= 10 {
             
             self.refreshControl.beginRefreshing()
@@ -300,6 +315,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                     
                 } else {
                     self.refreshControl.endRefreshing()
+                    self.messagesCollectionView.refreshControl = nil
                 }
             }
         }
@@ -373,6 +389,7 @@ extension ChatViewController {
     }
     
     func initializeInputBar() {
+        
         
         messageInputBar.delegate = self
         messageInputBar.sendButton.title = nil

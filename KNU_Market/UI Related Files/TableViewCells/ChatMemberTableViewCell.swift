@@ -5,6 +5,9 @@ protocol ChatMemberTableViewCellDelegate: AnyObject {
     
     func presentUserReportVC(userToReport: String)
     func failedPresentingUserReportVC()
+    
+    func presentPostUploaderActionSheet(userUID: String, nickname: String)
+    func didChooseToBanUser(userUID: String)
 }
 
 class ChatMemberTableViewCell: UITableViewCell {
@@ -16,6 +19,8 @@ class ChatMemberTableViewCell: UITableViewCell {
     private var imageCode: String?
     private var nickname: String?
     private var userUID: String?
+    private var postUploaderUID: String?
+
     
     weak var delegate: ChatMemberTableViewCellDelegate?
     
@@ -34,21 +39,27 @@ class ChatMemberTableViewCell: UITableViewCell {
         nicknameLabel.text = nil
     }
     
-    @IBAction func pressedReportUserButton(_ sender: UIButton) {
+    func configure(with userUID: String, postUploaderUID: String) {
         
-        guard let nickname = self.nickname else {
-            self.delegate?.failedPresentingUserReportVC()
-            return
-        }
-        self.delegate?.presentUserReportVC(userToReport: nickname)
-    }
-    
-    func configure(with userUID: String) {
-        
+        self.postUploaderUID = postUploaderUID
         fetchUserProfileInfo(userUID: userUID)
         initializeUI()
     }
+    
+    @IBAction func pressedReportUserButton(_ sender: UIButton) {
+        
+        guard let postUploaderUID = postUploaderUID else { return }
+        guard let nickname = nickname else { return }
+        guard let userUID = userUID else { return }
 
+        if postUploaderUID == User.shared.userUID {
+            
+            self.delegate?.presentPostUploaderActionSheet(userUID: userUID, nickname: nickname)
+        } else {
+            self.delegate?.presentUserReportVC(userToReport: nickname)
+        }
+    }
+    
     func fetchUserProfileInfo(userUID: String) {
         
         UserManager.shared.loadOtherUsersProfile(userUID: userUID) { [weak self] result in
@@ -69,8 +80,6 @@ class ChatMemberTableViewCell: UITableViewCell {
                                                    options: .continueInBackground,
                                                    completed: nil)
                 self?.profileImageView.contentMode = .scaleAspectFit
-//                self?.profileImageView.layer.borderWidth = 1
-//                self?.profileImageView.layer.borderColor = UIColor.black.cgColor
                 
                 // 만약 본인 Cell 이면 신고하기 버튼 숨김 처리
                 DispatchQueue.main.async {

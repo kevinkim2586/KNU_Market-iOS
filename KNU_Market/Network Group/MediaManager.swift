@@ -54,7 +54,7 @@ class MediaManager {
             
             multipartFormData.append(image,
                                      withName: "media",
-                                     fileName: "\(UUID().uuidString).jpeg",
+                                     fileName: "newImage.jpeg",
                                      mimeType: "image/jpeg")
             
         }, to: uploadImageURL,

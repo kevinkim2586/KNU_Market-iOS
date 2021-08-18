@@ -12,6 +12,8 @@ protocol ChatViewDelegate: AnyObject {
     func didReceiveChat()
     func reconnectSuggested()
     func failedConnection(with error: NetworkError)
+    func didSendText()
+    func didReceiveBanNotification()
     
     // API
     func didExitPost()
@@ -21,8 +23,6 @@ protocol ChatViewDelegate: AnyObject {
     func didFetchEmptyChat()
     func failedFetchingPreviousChats(with error: NetworkError)
 
-    func didSendText()
-    
 }
 
 class ChatViewModel: WebSocketDelegate {
@@ -114,7 +114,7 @@ extension ChatViewModel {
     
         case .connected(_):
             print("✏️ WebSocket has been Connected!")
-            
+             
             isConnected = true
             
             getRoomInfo()
@@ -146,6 +146,8 @@ extension ChatViewModel {
             //__EMPTY_SUFFIX 체크
             guard chatText != Constants.ChatSuffix.emptySuffix else { return }
             
+            let chatMessage = filterChat(text: chatText)
+            
             if isFromCurrentSender(uuid: userUID) {
                 self.delegate?.didReceiveChat()
                 return
@@ -158,13 +160,13 @@ extension ChatViewModel {
                             chat_userUID: userUID,
                             chat_username: nickname,
                             chat_roomUID: roomUID,
-                            chat_content: chatText,
+                            chat_content: chatMessage,
                             chat_date: Date().getDateStringForChatBottomLabel())
             
             self.messages.append(Message(chat: chat,
                                          sender: others,
                                          sentDate: Date(),
-                                         kind: .text(chatText)))
+                                         kind: .text(chatMessage)))
         
             self.delegate?.didReceiveChat()
             

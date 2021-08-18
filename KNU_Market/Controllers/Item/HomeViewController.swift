@@ -17,7 +17,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -242,7 +241,7 @@ extension HomeViewController {
     
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(refreshTableView),
-                                               name: Notification.Name.updateItemList,
+                                               name: .updateItemList,
                                                object: nil)
         
     }

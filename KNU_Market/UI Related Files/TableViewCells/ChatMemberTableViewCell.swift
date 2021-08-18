@@ -7,7 +7,6 @@ protocol ChatMemberTableViewCellDelegate: AnyObject {
     func failedPresentingUserReportVC()
     
     func presentPostUploaderActionSheet(userUID: String, nickname: String)
-    func didChooseToBanUser(userUID: String)
 }
 
 class ChatMemberTableViewCell: UITableViewCell {

@@ -1,13 +1,13 @@
 import UIKit
 import PanModal
 
-protocol ChatMemberViewDelegate: AnyObject {
-    
-    func didChooseToExitPost()
-    func didChooseToDeletePost()
-    
-    func didDismissPanModal()
-}
+//protocol ChatMemberViewDelegate: AnyObject {
+//
+//    func didChooseToExitPost()
+//    func didChooseToDeletePost()
+//    func didBanUser(uid: String, nickname: String)
+//    func didDismissPanModal()
+//}
 
 class ChatMemberViewController: UIViewController {
     
@@ -18,7 +18,7 @@ class ChatMemberViewController: UIViewController {
     var roomInfo: RoomInfo?
     var postUploaderUID: String?
     
-    weak var delegate: ChatMemberViewDelegate?
+//    weak var delegate: ChatMemberViewDelegate?
     
 
     override func viewDidLoad() {
@@ -29,15 +29,14 @@ class ChatMemberViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.delegate?.didDismissPanModal()
+        NotificationCenter.default.post(name: .didDismissPanModal, object: nil)
+//        self.delegate?.didDismissPanModal()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         dismissProgressBar()
     }
-
-    
 
     @IBAction func pressedSettingsButton(_ sender: UIButton) {
 
@@ -55,7 +54,8 @@ class ChatMemberViewController: UIViewController {
                                                   message: "글 작성자가 삭제하면 공구가 삭제되고 참여자 전원이 채팅방에서 나가게 됩니다. 신중히 생각 후 삭제해주세요. 🤔") { selectedOk in
                     
                     if selectedOk {
-                        self.delegate?.didChooseToDeletePost()
+                        NotificationCenter.default.post(name: .didChooseToDeletePost, object: nil)
+//                        self.delegate?.didChooseToDeletePost()
                         self.dismiss(animated: true)
                     }
                 }
@@ -71,7 +71,8 @@ class ChatMemberViewController: UIViewController {
                                                   message: "") { selectedOk in
                     
                     if selectedOk {
-                        self.delegate?.didChooseToExitPost()
+                        NotificationCenter.default.post(name: .didChooseToExitPost, object: nil)
+//                        self.delegate?.didChooseToExitPost()
                         self.dismiss(animated: true)
                     }
                 }
@@ -86,7 +87,7 @@ class ChatMemberViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    func banUser(uid: String) {
+    func banUser(uid: String, nickname: String) {
         
         showProgressBar()
         
@@ -102,20 +103,20 @@ class ChatMemberViewController: UIViewController {
             dismissProgressBar()
             
             switch result {
-            
             case .success(_):
-                
                 self.dismiss(animated: true) {
-                    self.showSimpleBottomAlert(with: "강퇴 성공 🎉")
+                    self.showSimpleBottomAlert(with: "내보내기에 성공했습니다.👀")
                 }
                 
+                let userInfo: [String : String] = ["uid" : uid, "nickname" : nickname]
+                NotificationCenter.default.post(name: .didBanUser, object: userInfo)
+                
+//                self.delegate?.didBanUser(uid: uid, nickname: nickname)
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
         }
-        
     }
-    
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -169,10 +170,6 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
         showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요 😥")
     }
     
-    func didChooseToBanUser(userUID: String) {
-        banUser(uid: userUID)
-    }
-    
     func presentPostUploaderActionSheet(userUID: String, nickname: String) {
         
         let actionSheet = UIAlertController(title: "\(nickname)님",
@@ -185,7 +182,7 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
             self.presentAlertWithCancelAction(title: "정말 강퇴 시키시겠습니까?",
                                               message: "강퇴를 시키면 다시는 채팅방에 들어오지 못합니다.") { selectedOk in
                 if selectedOk {
-                    self.banUser(uid: userUID)
+                    self.banUser(uid: userUID, nickname: nickname)
                 }
             }
                                       }

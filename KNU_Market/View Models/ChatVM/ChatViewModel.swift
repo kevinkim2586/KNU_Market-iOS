@@ -68,6 +68,7 @@ class ChatViewModel: WebSocketDelegate {
         
         resetMessages()
         scheduleSendingGarbageTextWithTimeInterval()
+        createObservers()
     }
     
     deinit {
@@ -133,8 +134,7 @@ extension ChatViewModel {
             let roomUID = receivedTextInJSON["room"].stringValue
             let chatText = receivedTextInJSON["comment"].stringValue
         
-
-            let chatMessage = filterChat(text: chatText)
+            let chatMessage = filterChat(text: chatText, isFromSocket: true)
             print("✏️ receivedText: \(chatMessage)")
             
             guard chatMessage != Constants.ChatSuffix.emptySuffix else { return }
@@ -204,8 +204,6 @@ extension ChatViewModel {
             print("❗️ PONG ACTIVATED")
             
             isConnected = true
-            
-            
         default:
             print("❗️ ChatViewModel - didReceive default ACTIVATED")
             break
@@ -214,8 +212,6 @@ extension ChatViewModel {
     
     // 채팅 보내기
     func sendText(_ originalText: String) {
-        
-        print("✏️ originalText: \(originalText)")
     
         socket.write(ping: Data())
         
@@ -257,12 +253,10 @@ extension ChatViewModel {
 extension ChatViewModel {
     
     // 채팅 받아오기
-    func getChatList(isFromBeginning: Bool = false) {
+    @objc func getChatList() {
                 
         self.isFetchingData = true
         
-        if isFromBeginning { index = 1 }
-    
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,
                                             pid: self.room,
@@ -275,14 +269,12 @@ extension ChatViewModel {
             case .success(let chatResponseModel):
                 
                 if chatResponseModel.chat.isEmpty {
-                    print("❗️ChatViewModel - chatResponseModel is Empty!")
                     self.isFetchingData = false
                     self.needsToFetchMoreData = false
                     self.delegate?.didFetchEmptyChat()
                     return
                 }
                 
-            
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
                 
                 for chat in chatResponseModel.chat {
@@ -321,7 +313,6 @@ extension ChatViewModel {
                 
             case .failure(let error):
                 self.delegate?.failedFetchingPreviousChats(with: error)
-
             }
         }
     }
@@ -331,26 +322,16 @@ extension ChatViewModel {
         
         ChatManager.shared.changeJoinStatus(function: .join,
                                             pid: self.room) { [weak self] result in
-            
             guard let self = self else { return }
-            
             switch result {
-            
             case .success:
-                
                 self.connect()
                 self.getRoomInfo()
-                
             case .failure(let error):
-                
-                print("❗️ ChatViewModel - joinPost error: \(error)")
-                
                 // 이미 참여하고 있는 채팅방이면 기존의 메시지를 불러와야함
                 if error == .E108 {
-                
                     self.connect()
                     self.getRoomInfo()
-                
                 } else {
                     print("❗️ ChatViewModel - joinPost ERROR")
                     self.delegate?.failedConnection(with: error)
@@ -360,44 +341,33 @@ extension ChatViewModel {
     }
     
     // 공구글 나오기
-    func exitPost() {
-        
+    @objc func exitPost() {
         sendText("\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
-//
-//        let exitText = convertToJSONString(text: "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
-//
-//        socket.write(string: exitText)
-        
-//        ChatManager.shared.changeJoinStatus(function: .exit,
-//                                            pid: self.room) { [weak self] result in
-//
-//            guard let self = self else { return }
-//
-//            switch result {
-//
-//            case .success:
-//                self.delegate?.didExitPost()
-//            case .failure(let error):
-//                self.delegate?.failedConnection(with: error)
-//            }
-//        }
     }
     
     func outPost() {
-        print("❗️ outPost Activated")
         ChatManager.shared.changeJoinStatus(function: .exit,
                                             pid: self.room) { [weak self] result in
             
             guard let self = self else { return }
-            
-            print("✏️ outPost RESULT")
-            
+
             switch result {
             
             case .success:
                 self.delegate?.didExitPost()
             case .failure(let error):
                 self.delegate?.failedConnection(with: error)
+            }
+        }
+    }
+    
+    
+    @objc func sendBanMessageToSocket(notification: Notification) {
+        
+        print("✏️ sendBanMessageToSocket ACTIVATED")
+        if let object = notification.object as? [String : String] {
+            if let uid = object["uid"], let nickname = object["nickname"] {
+                sendText("\(nickname)님이 퇴장 당했습니다\(uid)\(Constants.ChatSuffix.rawBanSuffix)")
             }
         }
     }
@@ -416,19 +386,18 @@ extension ChatViewModel {
             switch result {
             
             case .success(let roomInfoModel):
-                print("✏️ ChatViewModel - getRoomInfo SUCCESS")
                 self.roomInfo = roomInfoModel
             case .failure(let error):
-                print("✏️ ChatViewModel - getRoomInfo FAILED with error: \(error.errorDescription)")
+                print("❗️ChatViewModel - getRoomInfo FAILED with error: \(error.errorDescription)")
             }
             
         }
     }
     
     // 글 작성자가 ChatVC 내에서 공구글을 삭제하고자 할 때 실행
-    func deletePost(for uid: String) {
+    @objc func deletePost() {
         
-        ItemManager.shared.deletePost(uid: uid) { [weak self] result in
+        ItemManager.shared.deletePost(uid: room) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -440,8 +409,6 @@ extension ChatViewModel {
                 self.delegate?.failedConnection(with: error)
             }
         }
-        
-        
     }
 }
 
@@ -479,14 +446,14 @@ extension ChatViewModel {
         return roomInfo?.post.user.uid ?? ""
     }
     
-    func filterChat(text: String) -> String {
+    func filterChat(text: String, isFromSocket: Bool = false) -> String {
         
         if text.contains(Constants.ChatSuffix.enterSuffix) {
             
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
             
-        } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" {
-
+        } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)"  && isFromSocket {
+            
            outPost()
            return Constants.ChatSuffix.emptySuffix
             
@@ -494,7 +461,9 @@ extension ChatViewModel {
             
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: " 🎉")
             
-        } else {
+       }
+       
+       else {
             return text
         }
     }
@@ -503,6 +472,26 @@ extension ChatViewModel {
         chatModel = nil
         messages.removeAll()
         index = 1
+    }
+    
+    func createObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(exitPost),
+                                               name: .didChooseToExitPost,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(deletePost),
+                                               name: .didChooseToDeletePost,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(sendBanMessageToSocket),
+                                               name: .didBanUser,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(getChatList),
+                                               name: .didDismissPanModal,
+                                               object: nil)
     }
 }
 

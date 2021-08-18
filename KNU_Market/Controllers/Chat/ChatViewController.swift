@@ -15,7 +15,7 @@ class ChatViewController: MessagesViewController {
     var postUploaderUID: String = ""
     var isFirstEntrance: Bool = false
     
-    weak var chatMemberViewDelegate: ChatMemberViewDelegate?
+//    weak var chatMemberViewDelegate: ChatMemberViewDelegate?
     
     deinit {
         print("❗️ ChatViewController has been DEINITIALIZED")
@@ -81,16 +81,11 @@ class ChatViewController: MessagesViewController {
         
         guard let chatMemberVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatMemberVC) as? ChatMemberViewController else { return }
         
-        chatMemberVC.delegate = self
+//        chatMemberVC.delegate = self
         chatMemberVC.roomInfo = viewModel.roomInfo
         chatMemberVC.postUploaderUID = viewModel.postUploaderUID
         presentPanModal(chatMemberVC)
     }
-    
-    @objc func getChatList() {
-        viewModel.getChatList()
-    }
-
 }
    
 
@@ -104,14 +99,10 @@ extension ChatViewController: ChatViewDelegate {
         messagesCollectionView.scrollToLastItem()
         
         if viewModel.isFirstEntranceToChat {
-            
             viewModel.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.enterSuffix)")
             viewModel.isFirstEntranceToChat = false
         }
-  
-        print("✏️ getChatList in didConnect")
         viewModel.getChatList()
-        
     }
     
     func didDisconnect() {
@@ -126,9 +117,6 @@ extension ChatViewController: ChatViewDelegate {
     
     func reconnectSuggested() {
         dismissProgressBar()
-        
-        print("❗️ ChatVC - reconnectSuggested")
-        
         viewModel.resetMessages()
         viewModel.connect()
     }
@@ -139,14 +127,10 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func didSendText() {
-
-        print("✏️ ChatVC - didSendText ACTIVATED")
-        
         DispatchQueue.main.async {
             self.messageInputBar.inputTextView.text = ""
             self.messagesCollectionView.scrollToLastItem()
         }
-        
     }
     
     func didReceiveBanNotification() {
@@ -174,12 +158,8 @@ extension ChatViewController {
     
     func didFetchPreviousChats() {
         dismissProgressBar()
-        
-        print("✏️ isFirstViewLaunch: \(viewModel.isFirstViewLaunch)")
-        
+
         refreshControl.endRefreshing()
-
-
         if viewModel.isFirstViewLaunch {
             
             viewModel.isFirstViewLaunch = false
@@ -204,30 +184,53 @@ extension ChatViewController {
     }
 }
 
-//MARK: - ChatMemberViewDelegate - for PanModal
-
-extension ChatViewController: ChatMemberViewDelegate {
-    
-    func didChooseToExitPost() {
-        print("✏️ didChooseToExitPost")
-        viewModel.exitPost()
-    }
-    
-    func didChooseToDeletePost() {
-        viewModel.deletePost(for: self.roomUID)
-    }
-    
-    func didDismissPanModal() {
-        viewModel.getChatList()
-    }
-}
+////MARK: - ChatMemberViewDelegate - for PanModal
+//
+//extension ChatViewController: ChatMemberViewDelegate {
+//
+////    @objc func exitPost() {
+////        viewModel.exitPost()
+////
+////    }
+////
+////    @objc func deletePost() {
+////
+////    }
+////
+////    @objc func sendBanMessageToSocket(notification: Notification) {
+////
+////    }
+////
+////
+////    @objc func getChatList() {
+////        viewModel.getChatList()
+////    }
+//
+//
+//
+////    func didChooseToExitPost() {
+////        print("✏️ didChooseToExitPost")
+////        viewModel.exitPost()
+////    }
+////
+////    func didChooseToDeletePost() {
+////        viewModel.deletePost(for: self.roomUID)
+////    }
+////
+////    func didBanUser(uid: String, nickname: String) {
+////        viewModel.sendBanMessageToSocket(uid: uid, nickname: nickname)
+////    }
+////
+////    func didDismissPanModal() {
+////        viewModel.getChatList()
+////    }
+//}
 
 //MARK: - InputBarAccessoryViewDelegate
 
 extension ChatViewController: InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-        
         viewModel.sendText(text)
     }
 }
@@ -328,7 +331,7 @@ extension ChatViewController {
     func initialize() {
        
         viewModel.delegate = self
-        chatMemberViewDelegate = self
+//        chatMemberViewDelegate = self
 
         initializeNavigationItemTitle()
         initializeRefreshControl()
@@ -352,7 +355,7 @@ extension ChatViewController {
         
         messagesCollectionView.refreshControl = refreshControl
         refreshControl.addTarget(self,
-                                 action: #selector(getChatList),
+                                 action: #selector(viewModel.getChatList),
                                  for: .valueChanged)
     }
     
@@ -401,6 +404,6 @@ extension ChatViewController {
                                       )
         
         messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
-        
     }
+
 }

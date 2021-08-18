@@ -367,7 +367,7 @@ extension ChatViewModel {
         print("✏️ sendBanMessageToSocket ACTIVATED")
         if let object = notification.object as? [String : String] {
             if let uid = object["uid"], let nickname = object["nickname"] {
-                sendText("\(nickname)님이 퇴장 당했습니다\(uid)\(Constants.ChatSuffix.rawBanSuffix)")
+                sendText("\(nickname)님이 퇴장 당했습니다.\(uid)\(Constants.ChatSuffix.rawBanSuffix)")
             }
         }
     }
@@ -410,6 +410,8 @@ extension ChatViewModel {
             }
         }
     }
+    
+
 }
 
 
@@ -452,18 +454,22 @@ extension ChatViewModel {
             
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
             
-        } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)"  && isFromSocket {
+        } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" && isFromSocket {
             
            outPost()
            return Constants.ChatSuffix.emptySuffix
             
-       } else if text.contains(Constants.ChatSuffix.exitSuffix) {
+        } else if text.contains(Constants.ChatSuffix.exitSuffix) {
             
-            return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: " 🎉")
+            return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: " 🏃")
             
-       }
-       
-       else {
+        } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)") {
+            
+            self.delegate?.didReceiveBanNotification()
+            return Constants.ChatSuffix.emptySuffix
+        }
+        
+        else {
             return text
         }
     }

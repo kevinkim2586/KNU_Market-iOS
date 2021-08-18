@@ -134,12 +134,12 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func didReceiveBanNotification() {
-        
+        print("✏️ ChatVC - didReceiveBanNotification")
         messageInputBar.isUserInteractionEnabled = false
         viewModel.disconnect()
         self.presentSimpleAlert(title: "방장으로부터 강퇴 처리를 당하셨습니다.🤔", message: "")
+        navigationController?.popViewController(animated: true)
     }
-
 }
 
 //MARK: - ChatViewDelegate - API Delegate Methods

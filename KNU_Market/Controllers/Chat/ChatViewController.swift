@@ -137,8 +137,13 @@ extension ChatViewController: ChatViewDelegate {
         viewModel.resetMessages()
         
         messagesCollectionView.isScrollEnabled = false
-        presentKMAlertOnMainThread(title: "강퇴 당하셨습니다.", message: "방장으로부터 강퇴 처리를 당하셨습니다.🤔 더 이상 채팅에 참여가 불가능합니다.", buttonTitle: "확인")
-        navigationController?.popViewController(animated: true)
+        
+        
+        presentKMAlertOnMainThread(title: "강퇴 당하셨습니다.", message: "방장에 의해 강퇴되었습니다. 더 이상 채팅에 참여가 불가능합니다.🤔", buttonTitle: "확인")
+       
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

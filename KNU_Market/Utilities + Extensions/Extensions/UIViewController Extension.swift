@@ -6,6 +6,15 @@ import SnackBar_swift
 
 extension UIViewController {
     
+    func presentKMAlertOnMainThread(title: String, message: String, buttonTitle: String) {
+        DispatchQueue.main.async {
+            let alertVC = AlertViewController(title: title, message: message, buttonTitle: buttonTitle)
+            alertVC.modalPresentationStyle = .overFullScreen
+            alertVC.modalTransitionStyle = .crossDissolve
+            self.present(alertVC, animated: true, completion: nil)
+        }
+    }
+    
     // 가장 기본적인 Alert Message
     func presentSimpleAlert(title: String, message: String) {
         

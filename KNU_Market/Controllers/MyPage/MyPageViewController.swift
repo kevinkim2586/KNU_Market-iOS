@@ -273,7 +273,7 @@ extension MyPageViewController {
         
         self.navigationController?.view.backgroundColor = .white
         self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
-        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.myPageSelected)?.withRenderingMode(.alwaysOriginal)
+        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
         
         initializeTableView()
         initializeProfileImageButton()

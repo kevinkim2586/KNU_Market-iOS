@@ -104,7 +104,7 @@
         <scene sceneID="qIP-Vz-OnT">
             <objects>
                 <navigationController title="ChatNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="5Y5-bE-XKa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="chat_unselected" selectedImage="chat_selected" id="7Aa-B7-hrf"/>
+                    <tabBarItem key="tabBarItem" title="" image="grey chat" selectedImage="chat" id="7Aa-B7-hrf"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uXF-zE-LKh">
@@ -127,8 +127,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chat_selected" width="25.5" height="25.5"/>
-        <image name="chat_unselected" width="25.5" height="25.5"/>
+        <image name="chat" width="25" height="25"/>
+        <image name="grey chat" width="25" height="25"/>
         <image name="people icon" width="52" height="52"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

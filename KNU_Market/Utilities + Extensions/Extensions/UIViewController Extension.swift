@@ -83,7 +83,6 @@ extension UIViewController {
         
         User.shared.resetAllUserInfo()
         
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)

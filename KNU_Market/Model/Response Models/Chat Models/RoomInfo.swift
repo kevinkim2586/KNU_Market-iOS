@@ -46,7 +46,6 @@ struct Member: Decodable {
     let userUID: String
     let postUID: String
     let isBanned: Bool
-    let banCount: Bool
     let date: String
     
     enum CodingKeys: String, CodingKey {
@@ -55,7 +54,6 @@ struct Member: Decodable {
         case userUID = "userUid"
         case postUID = "postUid"
         case isBanned = "isbanned"
-        case banCount
         case date
     }
 }

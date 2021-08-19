@@ -111,7 +111,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모집 중  2 / 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdv-gM-GsY">
-                                        <rect key="frame" x="40" y="29" width="91" height="21"/>
+                                        <rect key="frame" x="40" y="29.5" width="91" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -175,7 +175,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="F9h-kZ-TFL"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -196,7 +196,7 @@
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOo-JX-QJV">
                                                         <rect key="frame" x="10" y="0.0" width="354" height="60"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -244,6 +244,42 @@
                                                     <action selector="pressedBackButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="CrR-mZ-lnC"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJW-ki-gZr" userLabel="Complete View">
+                                                <rect key="frame" x="244" y="50" width="100" height="35"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S1e-BW-IA9">
+                                                        <rect key="frame" x="18.5" y="3" width="63.5" height="29"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Wt-UX-8Q5">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="29"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                                <state key="normal" title="모집 중">
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="pressedCheckButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="fgF-0O-LhA"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nnB-xe-oQM">
+                                                                <rect key="frame" x="45" y="0.0" width="18.5" height="29"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" image="checkmark" catalog="system"/>
+                                                                <connections>
+                                                                    <action selector="pressedCheckButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="mJb-6Q-kAu"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="S1e-BW-IA9" firstAttribute="centerY" secondItem="rJW-ki-gZr" secondAttribute="centerY" id="1wH-vc-v7G"/>
+                                                    <constraint firstAttribute="height" constant="35" id="89X-Rr-fgQ"/>
+                                                    <constraint firstAttribute="width" constant="100" id="TkD-JJ-Tbr"/>
+                                                    <constraint firstItem="S1e-BW-IA9" firstAttribute="centerX" secondItem="rJW-ki-gZr" secondAttribute="centerX" id="mx3-AV-VHO"/>
+                                                </constraints>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDL-C0-E7h" userLabel="Menu Button">
                                                 <rect key="frame" x="364" y="50" width="35" height="35"/>
                                                 <constraints>
@@ -258,20 +294,6 @@
                                                     <action selector="pressedMoreButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="kAs-ok-GUJ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhE-cq-yzN" userLabel="Check Button">
-                                                <rect key="frame" x="309" y="50" width="35" height="35"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="35" id="3ZM-Ea-J1D"/>
-                                                    <constraint firstAttribute="width" constant="35" id="vUE-kP-qf6"/>
-                                                </constraints>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" image="checkmark.circle" catalog="system">
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="pressedCheckButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="JVa-AG-V7S"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -282,14 +304,14 @@
                                             <constraint firstItem="nr4-zF-a7J" firstAttribute="top" secondItem="9fa-0F-i3c" secondAttribute="bottom" constant="-50" id="Ere-vW-NET"/>
                                             <constraint firstAttribute="trailing" secondItem="XBx-ma-qzB" secondAttribute="trailing" constant="20" id="Hzr-CA-Ist"/>
                                             <constraint firstAttribute="bottom" secondItem="XBx-ma-qzB" secondAttribute="bottom" constant="15" id="I81-a3-BEv"/>
-                                            <constraint firstItem="fhE-cq-yzN" firstAttribute="top" secondItem="kng-gU-n1q" secondAttribute="top" constant="50" id="K4h-RM-7ig"/>
+                                            <constraint firstItem="vDL-C0-E7h" firstAttribute="leading" secondItem="rJW-ki-gZr" secondAttribute="trailing" constant="20" id="JNJ-bZ-Kmb"/>
                                             <constraint firstItem="9fa-0F-i3c" firstAttribute="leading" secondItem="kng-gU-n1q" secondAttribute="leading" id="RkK-5H-GtM"/>
                                             <constraint firstItem="AXT-NJ-LVv" firstAttribute="top" secondItem="kng-gU-n1q" secondAttribute="top" constant="50" id="ScK-el-61A"/>
                                             <constraint firstItem="nr4-zF-a7J" firstAttribute="leading" secondItem="kng-gU-n1q" secondAttribute="leading" constant="20" id="TEy-eI-amA"/>
                                             <constraint firstItem="hcd-qL-JkQ" firstAttribute="top" secondItem="nr4-zF-a7J" secondAttribute="bottom" constant="15" id="ZEt-kI-F9X"/>
                                             <constraint firstItem="XBx-ma-qzB" firstAttribute="top" secondItem="hcd-qL-JkQ" secondAttribute="bottom" constant="20" id="c8x-tO-U5j"/>
-                                            <constraint firstItem="vDL-C0-E7h" firstAttribute="leading" secondItem="fhE-cq-yzN" secondAttribute="trailing" constant="20" id="d3G-Nd-bMT"/>
                                             <constraint firstAttribute="trailing" secondItem="nr4-zF-a7J" secondAttribute="trailing" constant="20" id="gCr-MW-eAI"/>
+                                            <constraint firstItem="rJW-ki-gZr" firstAttribute="top" secondItem="kng-gU-n1q" secondAttribute="top" constant="50" id="lMU-5G-Wiy"/>
                                             <constraint firstAttribute="trailing" secondItem="9fa-0F-i3c" secondAttribute="trailing" id="orJ-6Z-DpG"/>
                                             <constraint firstItem="XBx-ma-qzB" firstAttribute="leading" secondItem="kng-gU-n1q" secondAttribute="leading" constant="20" id="pku-IJ-b1Z"/>
                                             <constraint firstItem="vDL-C0-E7h" firstAttribute="top" secondItem="kng-gU-n1q" secondAttribute="top" constant="50" id="uLp-uz-v7t"/>
@@ -327,7 +349,9 @@
                     <connections>
                         <outlet property="backButton" destination="AXT-NJ-LVv" id="TPI-0n-FQZ"/>
                         <outlet property="bottomView" destination="orm-c8-QOs" id="Jdg-j8-Nuc"/>
-                        <outlet property="checkButton" destination="fhE-cq-yzN" id="n5E-mk-jhS"/>
+                        <outlet property="checkButton" destination="nnB-xe-oQM" id="F7M-xs-szF"/>
+                        <outlet property="checkButtonDetail" destination="8Wt-UX-8Q5" id="Qrf-46-YlQ"/>
+                        <outlet property="checkView" destination="rJW-ki-gZr" id="2fa-DX-hNf"/>
                         <outlet property="dateLabel" destination="hcd-qL-JkQ" id="dUt-6d-LFb"/>
                         <outlet property="enterChatButton" destination="WaJ-YY-p1J" id="ffc-Bn-6uE"/>
                         <outlet property="gatheringPeopleImageView" destination="a6p-aL-Wtz" id="LDS-eq-ipW"/>
@@ -344,13 +368,12 @@
                         <outlet property="userIdLabel" destination="zUH-wb-RPm" id="Fml-oI-ZFO"/>
                         <outlet property="userProfileImageView" destination="RbW-Q3-7k4" id="ps2-8m-PRG"/>
                         <outletCollection property="topBarButtons" destination="AXT-NJ-LVv" collectionClass="NSMutableArray" id="c30-u8-91f"/>
-                        <outletCollection property="topBarButtons" destination="fhE-cq-yzN" collectionClass="NSMutableArray" id="Sll-ZL-iVc"/>
                         <outletCollection property="topBarButtons" destination="vDL-C0-E7h" collectionClass="NSMutableArray" id="s47-LD-JWR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bv-RB-JDl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6980" y="-719.19040479760122"/>
+            <point key="canvasLocation" x="6979.7101449275369" y="-719.19642857142856"/>
         </scene>
         <!--공동구매 글 검색-->
         <scene sceneID="l8L-1q-BEG">
@@ -653,7 +676,7 @@
         <scene sceneID="e3x-qg-hIx">
             <objects>
                 <navigationController title="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="YMW-jm-5lr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="home_unselected" selectedImage="home_selected" id="NVS-f0-mJn">
+                    <tabBarItem key="tabBarItem" title="" image="grey house" selectedImage="house" id="NVS-f0-mJn">
                         <color key="badgeColor" name="AppDefaultColor"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -967,12 +990,12 @@
     <resources>
         <image name="add button" width="124" height="130"/>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
-        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="default avatar" width="38" height="38"/>
         <image name="delete button" width="79" height="79"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="home_selected" width="25.5" height="25.5"/>
-        <image name="home_unselected" width="25.5" height="25.5"/>
+        <image name="grey house" width="30" height="30"/>
+        <image name="house" width="30" height="30"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="location icon" width="38" height="38"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>

@@ -24,7 +24,11 @@ class ItemViewController: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
+    
+    @IBOutlet weak var checkView: UIView!
+    @IBOutlet weak var checkButtonDetail: UIButton!
     @IBOutlet weak var checkButton: UIButton!
+    
     @IBOutlet var topBarButtons: [UIButton]!
     
     @IBOutlet weak var slideShowHeight: NSLayoutConstraint!
@@ -388,6 +392,13 @@ extension ItemViewController {
             buttons.layer.shadowOpacity = 0.2
             buttons.layer.shadowRadius = 2
         }
+        
+        checkView.layer.cornerRadius = menuButton.frame.height / 2
+        checkView.backgroundColor = .white
+        checkView.layer.shadowColor = UIColor.black.cgColor
+        checkView.layer.shadowOffset = CGSize(width: 2, height: 2)
+        checkView.layer.shadowOpacity = 0.2
+        checkView.layer.shadowRadius = 2
     }
     
     func initializeBackButton() {
@@ -407,32 +418,35 @@ extension ItemViewController {
     }
     
     func initializeCheckButton() {
-    
+        
         if viewModel.postIsUserUploaded {
             
-            checkButton.isHidden = false
+            checkView.isHidden = false
             let font = UIFont.systemFont(ofSize: 15)
             let configuration = UIImage.SymbolConfiguration(font: font)
+            let color = UIColor(named: Constants.Color.appColor)
             
             if let isCompletelyDone = viewModel.model?.isCompletelyDone {
                 
                 if isCompletelyDone {
                     
-                    let buttonImage = UIImage(systemName: "checkmark.circle.fill",
-                                              withConfiguration: configuration)
+                    checkButtonDetail.setTitle("모집 완료", for: .normal)
+                    let buttonImage = UIImage(systemName: "checkmark",
+                                              withConfiguration: configuration)?.withTintColor(color ?? .systemPink, renderingMode: .alwaysOriginal)
                     self.checkButton.setImage(buttonImage,
                                               for: .normal)
                 } else {
                     
-                    let buttonImage = UIImage(systemName: "checkmark.circle",
-                                              withConfiguration: configuration)
+                    checkButtonDetail.setTitle("모집 중", for: .normal)
+                    let buttonImage = UIImage(systemName: "checkmark",
+                                              withConfiguration: configuration)?.withTintColor(.black, renderingMode: .alwaysOriginal)
                     checkButton.setImage(buttonImage,
                                          for: .normal)
                 }
             }
             
         } else {
-            checkButton.isHidden = true
+            checkView.isHidden = true
         }
     }
 

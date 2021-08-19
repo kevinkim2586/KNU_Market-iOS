@@ -80,15 +80,14 @@ class HomeViewModel {
             
             guard let self = self else { return }
             
-            switch result {
             
+            switch result {
             case .success(let chatRoom):
         
                 chatRoom.forEach { chat in
                     User.shared.joinedChatRoomPIDs.append(chat.uuid)
                 }
 
-                
             case .failure(let error):
                 self.delegate?.failedFetchingRoomPIDInfo(with: error)
             }

@@ -62,7 +62,10 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
-        showSimpleBottomAlert(with: "사용자 정보 불러오기에 실패하였습니다. 로그아웃 후 다시 이용해 주세요.😥")
+        showSimpleBottomAlertWithAction(message: "사용자 정보 불러오기에 실패하였습니다. 로그아웃 후 다시 이용해 주세요.😥",
+                                        buttonTitle: "로그아웃") {
+            self.popToInitialViewController()
+        }
     }
   
     func didFetchItemList() {
@@ -74,7 +77,6 @@ extension HomeViewController: HomeViewModelDelegate {
     
     func failedFetchingItemList(with error: NetworkError) {
         
-//        itemTableView.showErrorPlaceholder()
         refreshControl.endRefreshing()
         itemTableView.tableFooterView = nil
     }
@@ -192,7 +194,7 @@ extension HomeViewController {
     func initialize() {
         
         self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
-        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysOriginal)
+        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
         
         self.tabBarController?.delegate = self
         

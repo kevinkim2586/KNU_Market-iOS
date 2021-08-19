@@ -253,7 +253,7 @@
         <scene sceneID="Ye4-E7-4u8">
             <objects>
                 <navigationController title="MyPageNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Fb9-6l-yCk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="mypage_unselected" selectedImage="mypage_selected" id="xUl-VZ-9af">
+                    <tabBarItem key="tabBarItem" title="" image="grey my" selectedImage="my" id="xUl-VZ-9af">
                         <color key="badgeColor" name="AppDefaultColor"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -735,8 +735,8 @@
     <resources>
         <image name="camera icon" width="55" height="57"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
-        <image name="mypage_selected" width="25.5" height="25.5"/>
-        <image name="mypage_unselected" width="25.5" height="25.5"/>
+        <image name="grey my" width="25" height="25"/>
+        <image name="my" width="25" height="25"/>
         <image name="pick profile image" width="195" height="195"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

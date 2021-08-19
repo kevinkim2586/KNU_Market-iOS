@@ -46,7 +46,7 @@ class FindPasswordViewController: UIViewController {
                 self.delegate?.didSendFindPasswordEmail()
             
             case .failure(let error):
-                self.presentSimpleAlert(title: "이메일 전송 실패", message: error.errorDescription)
+                self.presentKMAlertOnMainThread(title: "이메일 전송 실패", message: error.errorDescription, buttonTitle: "확인")
             }
         }
     }

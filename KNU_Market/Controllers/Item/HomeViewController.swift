@@ -25,7 +25,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presentKMAlertOnMainThread(title: "안됩니다!", message: "안된다고", buttonTitle: "확인")
               
     }
     

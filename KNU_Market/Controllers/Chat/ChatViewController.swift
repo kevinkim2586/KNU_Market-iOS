@@ -120,7 +120,7 @@ extension ChatViewController: ChatViewDelegate {
     
     func failedConnection(with error: NetworkError) {
         dismissProgressBar()
-        self.presentSimpleAlert(title: "일시적인 연결 문제 발생", message: error.errorDescription)
+        presentKMAlertOnMainThread(title: "일시적인 연결 문제 발생", message: error.errorDescription, buttonTitle: "확인")
     }
     
     func didSendText() {
@@ -137,7 +137,7 @@ extension ChatViewController: ChatViewDelegate {
         viewModel.resetMessages()
         
         messagesCollectionView.isScrollEnabled = false
-        self.presentSimpleAlert(title: "방장으로부터 강퇴 처리를 당하셨습니다.🤔", message: "")
+        presentKMAlertOnMainThread(title: "강퇴 당하셨습니다.", message: "방장으로부터 강퇴 처리를 당하셨습니다.🤔 더 이상 채팅에 참여가 불가능합니다.", buttonTitle: "확인")
         navigationController?.popViewController(animated: true)
     }
 }

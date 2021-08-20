@@ -421,9 +421,6 @@ extension ItemViewController {
         if viewModel.postIsUserUploaded {
             
             checkView.isHidden = false
-            let font = UIFont.systemFont(ofSize: 15)
-            let configuration = UIImage.SymbolConfiguration(font: font)
-            let color = UIColor(named: Constants.Color.appColor)
             
             if let isCompletelyDone = viewModel.model?.isCompletelyDone {
                 

@@ -319,7 +319,6 @@ extension UploadItemViewController {
     
     func configurePageWithPriorData() {
         
- 
         viewModel.editPostModel = editModel
         
         viewModel.itemTitle = editModel!.title
@@ -341,7 +340,7 @@ extension UploadItemViewController {
         stepper.value = Double(editModel!.currentlyGatheredPeople)
         
         totalGatheringPeopleLabel.text = String(editModel!.totalGatheringPeople) + " 명"
-        tradeLocationTextField.text = self.viewModel.locationArray[editModel!.location]
+        tradeLocationTextField.text = self.viewModel.locationArray[editModel!.location - 1]
         
         itemDetailTextView.text = editModel!.itemDetail
         itemDetailTextView.textColor = UIColor.black

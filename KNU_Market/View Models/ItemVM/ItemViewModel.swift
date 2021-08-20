@@ -47,7 +47,7 @@ class ItemViewModel {
     
     var location: String {
         let index = (model?.location ?? Location.listForCell.count - 1)
-        return Location.listForCell[index]
+        return Location.listForCell[index - 1]
     }
     
     var date: String {
@@ -110,7 +110,6 @@ class ItemViewModel {
             switch result {
             
             case .success(let fetchedModel):
-                print("✏️ fetchedModel: \(fetchedModel.isCompletelyDone)")
                 self.model = fetchedModel
                 self.delegate?.didFetchItemDetails()
                 

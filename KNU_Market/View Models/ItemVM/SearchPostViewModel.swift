@@ -23,9 +23,7 @@ class SearchPostViewModel {
         isFetchingData = true
         
         guard let keyword = self.searchKeyword else { return }
-        
-        print("✏️ searchKey: \(keyword)")
-        
+                
         ItemManager.shared.fetchSearchResults(at: self.index,
                                               keyword: keyword) { [weak self] result in
             
@@ -35,10 +33,7 @@ class SearchPostViewModel {
             
             case .success(let fetchedModel):
                 
-                print("✏️ fetchedModel count: \(fetchedModel.count)")
-                
                 if fetchedModel.isEmpty {
-//                    self.itemList.removeAll()
                     self.delegate?.didFetchSearchList()
                     return
                 }

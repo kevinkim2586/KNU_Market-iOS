@@ -96,7 +96,7 @@ class HomeViewModel {
     
     
     func resetValues() {
-        
+         
         itemList.removeAll()
         isFetchingData = false
         index = 1

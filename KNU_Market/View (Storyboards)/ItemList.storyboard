@@ -247,37 +247,23 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJW-ki-gZr" userLabel="Complete View">
                                                 <rect key="frame" x="244" y="50" width="100" height="35"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S1e-BW-IA9">
-                                                        <rect key="frame" x="18.5" y="3" width="63.5" height="29"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Wt-UX-8Q5">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="29"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                                <state key="normal" title="모집 중">
-                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="pressedCheckButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="fgF-0O-LhA"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nnB-xe-oQM">
-                                                                <rect key="frame" x="45" y="0.0" width="18.5" height="29"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" image="checkmark" catalog="system"/>
-                                                                <connections>
-                                                                    <action selector="pressedCheckButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="mJb-6Q-kAu"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Wt-UX-8Q5">
+                                                        <rect key="frame" x="30" y="3" width="40" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                        <state key="normal" title="모집 중">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="pressedCheckButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="fgF-0O-LhA"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="S1e-BW-IA9" firstAttribute="centerY" secondItem="rJW-ki-gZr" secondAttribute="centerY" id="1wH-vc-v7G"/>
                                                     <constraint firstAttribute="height" constant="35" id="89X-Rr-fgQ"/>
+                                                    <constraint firstItem="8Wt-UX-8Q5" firstAttribute="centerX" secondItem="rJW-ki-gZr" secondAttribute="centerX" id="Kf9-Vy-2qe"/>
                                                     <constraint firstAttribute="width" constant="100" id="TkD-JJ-Tbr"/>
-                                                    <constraint firstItem="S1e-BW-IA9" firstAttribute="centerX" secondItem="rJW-ki-gZr" secondAttribute="centerX" id="mx3-AV-VHO"/>
+                                                    <constraint firstItem="8Wt-UX-8Q5" firstAttribute="centerY" secondItem="rJW-ki-gZr" secondAttribute="centerY" id="ZkV-ku-s81"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDL-C0-E7h" userLabel="Menu Button">
@@ -349,7 +335,6 @@
                     <connections>
                         <outlet property="backButton" destination="AXT-NJ-LVv" id="TPI-0n-FQZ"/>
                         <outlet property="bottomView" destination="orm-c8-QOs" id="Jdg-j8-Nuc"/>
-                        <outlet property="checkButton" destination="nnB-xe-oQM" id="F7M-xs-szF"/>
                         <outlet property="checkButtonDetail" destination="8Wt-UX-8Q5" id="Qrf-46-YlQ"/>
                         <outlet property="checkView" destination="rJW-ki-gZr" id="2fa-DX-hNf"/>
                         <outlet property="dateLabel" destination="hcd-qL-JkQ" id="dUt-6d-LFb"/>
@@ -990,7 +975,6 @@
     <resources>
         <image name="add button" width="124" height="130"/>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
-        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="default avatar" width="38" height="38"/>
         <image name="delete button" width="79" height="79"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>

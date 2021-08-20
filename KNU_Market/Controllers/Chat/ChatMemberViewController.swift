@@ -71,6 +71,7 @@ class ChatMemberViewController: UIViewController {
                                                   message: "") { selectedOk in
                     
                     if selectedOk {
+                        showProgressBar()
                         NotificationCenter.default.post(name: .didChooseToExitPost, object: nil)
 //                        self.delegate?.didChooseToExitPost()
                         self.dismiss(animated: true)

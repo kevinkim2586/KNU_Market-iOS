@@ -108,9 +108,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q73-il-DEI" userLabel="Report User Button">
-                                                    <rect key="frame" x="375.5" y="29" width="23.5" height="22"/>
+                                                    <rect key="frame" x="378" y="29" width="21" height="22"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" image="megaphone" catalog="system"/>
+                                                    <state key="normal" image="exclamationmark.octagon" catalog="system"/>
                                                     <connections>
                                                         <action selector="pressedReportUserButton:" destination="ziR-hQ-GLM" eventType="touchUpInside" id="bV6-e5-Z4m"/>
                                                     </connections>
@@ -158,9 +158,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="exclamationmark.octagon" catalog="system" width="128" height="112"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
-        <image name="megaphone" catalog="system" width="128" height="111"/>
         <image name="people icon" width="52" height="52"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -213,7 +213,7 @@ extension ChatViewModel {
     func sendText(_ originalText: String) {
     
         socket.write(ping: Data())
-        
+
         guard isConnected else {
             print("❗️ ChatViewModel - sendText() - not Connected!")
             self.delegate?.reconnectSuggested()
@@ -277,13 +277,9 @@ extension ChatViewModel {
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
                 
                 for chat in chatResponseModel.chat {
-                    
-        
+                
                     let chatMessage = self.filterChat(text: chat.chat_content)
-           
-                    
-//                    guard chat.chat_content != Constants.ChatSuffix.emptySuffix else { continue }
-                    
+                
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {
                         
@@ -341,7 +337,13 @@ extension ChatViewModel {
     
     // 공구글 나오기
     @objc func exitPost() {
-        sendText("\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
+        
+        sendText(Constants.ChatSuffix.emptySuffix)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            self.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
+            dismissProgressBar()
+        }
     }
     
     func outPost() {

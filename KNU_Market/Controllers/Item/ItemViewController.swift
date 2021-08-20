@@ -27,7 +27,6 @@ class ItemViewController: UIViewController {
     
     @IBOutlet weak var checkView: UIView!
     @IBOutlet weak var checkButtonDetail: UIButton!
-    @IBOutlet weak var checkButton: UIButton!
     
     @IBOutlet var topBarButtons: [UIButton]!
     
@@ -430,18 +429,14 @@ extension ItemViewController {
                 
                 if isCompletelyDone {
                     
+                    checkView.backgroundColor = .lightGray
+                    checkButtonDetail.setTitleColor(.white, for: .normal)
                     checkButtonDetail.setTitle("모집 완료", for: .normal)
-                    let buttonImage = UIImage(systemName: "checkmark",
-                                              withConfiguration: configuration)?.withTintColor(color ?? .systemPink, renderingMode: .alwaysOriginal)
-                    self.checkButton.setImage(buttonImage,
-                                              for: .normal)
+                  
                 } else {
+                    checkView.backgroundColor = UIColor(named: Constants.Color.appColor)
                     
                     checkButtonDetail.setTitle("모집 중", for: .normal)
-                    let buttonImage = UIImage(systemName: "checkmark",
-                                              withConfiguration: configuration)?.withTintColor(.black, renderingMode: .alwaysOriginal)
-                    checkButton.setImage(buttonImage,
-                                         for: .normal)
                 }
             }
             

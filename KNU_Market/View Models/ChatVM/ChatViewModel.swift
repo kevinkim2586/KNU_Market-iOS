@@ -102,7 +102,7 @@ extension ChatViewModel {
     
     func disconnect() {
         
-        print("✏️ ChatViewModel - disconnect CALLED")
+
         socket.disconnect()
     }
 
@@ -202,7 +202,6 @@ extension ChatViewModel {
             
         case .pong(_):
             print("❗️ PONG ACTIVATED")
-            
             isConnected = true
         default:
             print("❗️ ChatViewModel - didReceive default ACTIVATED")
@@ -364,10 +363,15 @@ extension ChatViewModel {
     
     @objc func sendBanMessageToSocket(notification: Notification) {
         
-        print("✏️ sendBanMessageToSocket ACTIVATED")
-        if let object = notification.object as? [String : String] {
-            if let uid = object["uid"], let nickname = object["nickname"] {
-                sendText("\(nickname)님이 퇴장 당했습니다.\(uid)\(Constants.ChatSuffix.rawBanSuffix)")
+        sendText(Constants.ChatSuffix.emptySuffix)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            
+            dismissProgressBar()
+            if let object = notification.object as? [String : String] {
+                if let uid = object["uid"], let nickname = object["nickname"] {
+                    self.sendText("\(nickname)님이 퇴장 당했습니다.\(uid)\(Constants.ChatSuffix.rawBanSuffix)")
+                }
             }
         }
     }
@@ -463,12 +467,14 @@ extension ChatViewModel {
             
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: " 🏃")
             
-        } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)") {
+        } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)\(Constants.ChatSuffix.rawBanSuffix)") {
             
             self.delegate?.didReceiveBanNotification()
             return Constants.ChatSuffix.emptySuffix
+            
+        } else if text.contains(Constants.ChatSuffix.rawBanSuffix) {
+            return Constants.ChatSuffix.emptySuffix
         }
-        
         else {
             return text
         }

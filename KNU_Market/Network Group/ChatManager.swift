@@ -40,7 +40,6 @@ class ChatManager {
                 switch statusCode {
                 
                 case 201:
-                    print("✏️ ChatManager - changeJoinStatus SUCCESS for function: \(function)")
                     completion(.success(true))
                     
                 default:
@@ -76,7 +75,6 @@ class ChatManager {
                     do {
                         let decodedData = try JSONDecoder().decode(expectedModel,
                                                                    from: response.data ?? Data())
-                        print("✏️ ChatManager - getResponse SUCCESS for function: \(function)")
                         completion(.success(decodedData))
                         
                     } catch {
@@ -110,7 +108,6 @@ class ChatManager {
                 switch response.result {
                 
                 case .success:
-                    
                     print("✏️ ChatManager - banUser SUCCESS")
                     completion(.success(true))
                     

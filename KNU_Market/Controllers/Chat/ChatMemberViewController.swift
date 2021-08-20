@@ -109,6 +109,7 @@ class ChatMemberViewController: UIViewController {
                 }
                 
                 let userInfo: [String : String] = ["uid" : uid, "nickname" : nickname]
+                showProgressBar()
                 NotificationCenter.default.post(name: .didBanUser, object: userInfo)
                 
 //                self.delegate?.didBanUser(uid: uid, nickname: nickname)

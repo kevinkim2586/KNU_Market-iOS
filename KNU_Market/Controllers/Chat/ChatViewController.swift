@@ -36,19 +36,7 @@ class ChatViewController: MessagesViewController {
 
     }
     
-    @objc func pressedTitle() {
 
-        let storyboard = UIStoryboard(name: "ItemList", bundle: nil)
-        
-        guard let itemVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
-        
-        itemVC.hidesBottomBarWhenPushed = true
-        itemVC.pageID = roomUID
-        itemVC.isFromChatVC = true
-        
-        self.navigationController?.pushViewController(itemVC, animated: true)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.connect()
@@ -71,6 +59,20 @@ class ChatViewController: MessagesViewController {
         IQKeyboardManager.shared.enable = true
         viewModel.disconnect()
     }
+    
+    @objc func pressedTitle() {
+
+        let storyboard = UIStoryboard(name: "ItemList", bundle: nil)
+        
+        guard let itemVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
+        
+        itemVC.hidesBottomBarWhenPushed = true
+        itemVC.pageID = roomUID
+        itemVC.isFromChatVC = true
+        
+        self.navigationController?.pushViewController(itemVC, animated: true)
+    }
+    
 
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
         
@@ -183,9 +185,9 @@ extension ChatViewController {
     }
     
     func failedFetchingPreviousChats(with error: NetworkError) {
+        print("❗️ ChatVC - failedFetchingPreviousChats")
         dismissProgressBar()
         refreshControl.endRefreshing()
-        
     }
 }
 

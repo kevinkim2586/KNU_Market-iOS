@@ -1,6 +1,6 @@
 import UIKit
-import SPIndicator
-import SnackBar_swift
+import Photos
+import BSImagePicker
 
 class MyPageViewController: UIViewController {
     
@@ -49,8 +49,9 @@ extension MyPageViewController {
         let library = UIAlertAction(title: "앨범에서 선택",
                                     style: .default) { _ in
             
+            
             self.initializeImagePicker()
-            self.present(self.imagePicker, animated: true)
+            
         }
         let remove = UIAlertAction(title: "프로필 사진 제거",
                                    style: .default) { _ in
@@ -227,6 +228,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func pushViewController(with vc: UIViewController) {
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+
 }
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
@@ -235,25 +238,53 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let originalImage: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            
-            dismiss(animated: true) {
+        guard let phAsset = info[.phAsset] as? PHAsset else {
+            return
+        }
+        // size doesn't matter, because resizeMode = .none
+        let size = CGSize(width: 32, height: 32)
+        let options = PHImageRequestOptions()
+        options.version = .original
+        options.deliveryMode = .highQualityFormat
+        options.resizeMode = .none
+        options.isNetworkAccessAllowed = true
+        PHImageManager.default().requestImage(for: phAsset, targetSize: size, contentMode: .aspectFit, options: options) { [weak self] (image, info) in
+            guard let self = self else {return}
+            if let finalImage = image {
+                // use this image
                 
-                self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
+                
+                DispatchQueue.main.async {
                     
-                    if selectedOk {
-                        self.updateProfileImageButton(with: originalImage)
-                        showProgressBar()
-                        OperationQueue().addOperation {
-                            self.viewModel.uploadImageToServerFirst(with: originalImage)
-                            dismissProgressBar()
+                    self.dismiss(animated: true) {
+                        
+                        print("✏️ finalImage: \(finalImage)")
+                        
+                        self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
+                            
+                            if selectedOk {
+                                self.updateProfileImageButton(with: finalImage)
+                                showProgressBar()
+                                OperationQueue().addOperation {
+                                    self.viewModel.uploadImageToServerFirst(with: finalImage)
+                                    dismissProgressBar()
+                                }
+                            } else {
+                                self.imagePickerControllerDidCancel(self.imagePicker)
+                            }
                         }
-                    } else {
-                        self.imagePickerControllerDidCancel(self.imagePicker)
                     }
+                    
                 }
             }
         }
+        
+        
+        
+        
+        
+
+
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -277,7 +308,7 @@ extension MyPageViewController {
         
         initializeTableView()
         initializeProfileImageButton()
-        initializeImagePicker()
+//        initializeImagePicker()
     }
     
     func initializeTableView() {
@@ -298,8 +329,48 @@ extension MyPageViewController {
     func initializeImagePicker() {
         
         imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
+        imagePicker.sourceType = .savedPhotosAlbum
+        
+        self.present(self.imagePicker, animated: true)
+        
+//        var selectedAsset: [PHAsset] = []
+//        var selectedImage: [UIImage] = []
+//
+//
+//        let imagePicker = ImagePickerController()
+//        imagePicker.settings.selection.max = 1
+//        imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
+//
+//
+//        self.presentImagePicker(imagePicker, select: { asset in
+//
+//        }, deselect: { asset in
+//
+//        }, cancel: { asset in
+//
+//        }, finish: { asset in
+//
+//            selectedAsset = asset
+//            selectedImage = self.convertAssetToUIImages(selectedAssets: selectedAsset)
+//
+//
+//            DispatchQueue.main.async {
+//
+//                self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
+//
+//                    if selectedOk {
+//                        self.updateProfileImageButton(with: selectedImage[0])
+//                        showProgressBar()
+//
+//                        OperationQueue().addOperation {
+//                            self.viewModel.uploadImageToServerFirst(with: selectedImage[0])
+//                            dismissProgressBar()
+//                        }
+//                    }
+//                }
+//            }
+//        })
     }
     
     func updateProfileImageButton(with image: UIImage) {
@@ -313,5 +384,6 @@ extension MyPageViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(presentVerifyEmailVC), name: .presentVerifyEmailVC, object: nil)
     }
+    
     
 }

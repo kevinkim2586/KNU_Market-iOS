@@ -1,8 +1,5 @@
 import UIKit
 
-//MARK: - Caches
-let profileImageCache = NSCache<AnyObject, AnyObject>()
-
 struct Constants {
     
     static let API_BASE_URL                     = "https://knumarket.kro.kr:5051/api/v1/"
@@ -198,10 +195,19 @@ struct Constants {
         static let emptySuffix                  = "__EMPTY_SUFFIX"
         static let enterSuffix                  = "님이 채팅방에 입장했습니다.__ENTER_SUFFIX"
         static let exitSuffix                   = "님이 채팅방에서 나가셨습니다.__EXIT_SUFFIX"
-//        static let banSuffix                    = "님이 퇴장 당했습니다"
         
         static let rawBanSuffix                 = "__BAN_SUFFIX"
         static let rawEnterSuffix               = "__ENTER_SUFFIX"
         static let rawExitSuffix                = "__EXIT_SUFFIX"
     }
+}
+
+//MARK: - Caches
+let profileImageCache = NSCache<AnyObject, AnyObject>()
+
+//MARK: - Notifications
+
+struct ChatNotifications {
+    
+    static var list: [String] = [String]()
 }

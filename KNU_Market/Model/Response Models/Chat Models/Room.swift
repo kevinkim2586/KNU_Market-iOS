@@ -24,5 +24,4 @@ struct Room: Decodable {
         case imageCodes = "images"
         case userUID = "userUid"
     }
-    
 }

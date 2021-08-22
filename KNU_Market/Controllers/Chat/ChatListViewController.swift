@@ -9,14 +9,17 @@ class ChatListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         initialize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        UIApplication.shared.applicationIconBadgeNumber = 0
         viewModel.fetchChatList()
+        
+        print("✏️ ChatNotification List: \(ChatNotifications.list)")
     }
     
 }
@@ -108,6 +111,9 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         chatVC.postUploaderUID = viewModel.roomList[indexPath.row].userUID
         navigationController?.pushViewController(chatVC, animated: true)
         
+        if let index = ChatNotifications.list.firstIndex(of: viewModel.roomList[indexPath.row].uuid) {
+            ChatNotifications.list.remove(at: index)
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

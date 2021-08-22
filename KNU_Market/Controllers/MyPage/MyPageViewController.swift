@@ -245,15 +245,13 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
         let size = CGSize(width: 32, height: 32)
         let options = PHImageRequestOptions()
         options.version = .original
-        options.deliveryMode = .highQualityFormat
-        options.resizeMode = .none
+        options.deliveryMode = .fastFormat
+        options.resizeMode = .fast
         options.isNetworkAccessAllowed = true
         PHImageManager.default().requestImage(for: phAsset, targetSize: size, contentMode: .aspectFit, options: options) { [weak self] (image, info) in
             guard let self = self else {return}
             if let finalImage = image {
-                // use this image
-                
-                
+         
                 DispatchQueue.main.async {
                     
                     self.dismiss(animated: true) {
@@ -278,13 +276,6 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
                 }
             }
         }
-        
-        
-        
-        
-        
-
-
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

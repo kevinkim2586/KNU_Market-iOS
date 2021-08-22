@@ -18,7 +18,6 @@ class ChatListViewModel {
     weak var delegate: ChatListViewModelDelegate?
     
     var roomList: [Room] = [Room]()
-    
 }
 
 //MARK: - API Methods
@@ -99,14 +98,7 @@ extension ChatListViewModel {
                 self.delegate?.failedDeletingAndExitingPost(with: error)
             }
         }
-        
-        
-        
     }
-    
- 
-    
-    
 }
 
 //MARK: - Utility Methods

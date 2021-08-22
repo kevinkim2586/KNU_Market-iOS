@@ -166,34 +166,41 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         print("✏️ userNotificationCenter willPresent")
-        
-        
+    
         let userInfo = notification.request.content.userInfo
-        
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
-        
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
         
         print("✏️ willPresent userInfo: \(userInfo)")
-        // Change this to your preferred presentation option
+        
+        if let postUID = userInfo["postUid"] as? String {
+     
+            
+            if !ChatNotifications.list.contains(postUID) {
+                ChatNotifications.list.append(postUID)
+            }
+        }
+
         completionHandler([[.alert, .sound, .badge]])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        print("✏️ userNotificationCenter didReceive")
-        
+    
         let userInfo = response.notification.request.content.userInfo
-        
-        
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
-        // Print full message.
         print("✏️ didReceive: \(userInfo)")
+        
+        if let postUID = userInfo["postUid"] as? String {
+         
+            if !ChatNotifications.list.contains(postUID) {
+                ChatNotifications.list.append(postUID)
+            }
+        }
+
+        
         
         completionHandler()
     }
@@ -209,7 +216,6 @@ extension AppDelegate {
               let rootVC = keywindow.rootViewController else {
             return
         }
-        
         rootVC.presentKMAlertOnMainThread(title: "로그인 세션 만료 🤔", message: "세션이 만료되었습니다. 다시 로그인해 주세요.", buttonTitle: "확인")
         rootVC.popToInitialViewController()
     }

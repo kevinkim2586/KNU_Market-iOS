@@ -735,8 +735,8 @@
     <resources>
         <image name="camera icon" width="55" height="57"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
-        <image name="grey my" width="25" height="25"/>
-        <image name="my" width="25" height="25"/>
+        <image name="grey my" width="30" height="30"/>
+        <image name="my" width="30" height="30"/>
         <image name="pick profile image" width="195" height="195"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

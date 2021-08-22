@@ -12,25 +12,45 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
         super.viewDidLoad()
 
         initialize()
-        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        dismissProgressBar()
     }
     
     @IBAction func pressedDoneButton(_ sender: UIBarButtonItem) {
         
         showProgressBar()
-        //건의사항 보내기 API 먼저 보내기 실행 (Dispatch Group 으로 해결)
+        let feedback = "회원 탈퇴 사유: \(userInputTextView.text ?? "(따로 기입하지 않음)")"
         
-        UserManager.shared.unregisterUser { [weak self] result in
-            
-            dismissProgressBar()
+        let group = DispatchGroup()
+        group.enter()
+        UserManager.shared.sendFeedback(content: feedback) { [weak self] result in
             
             guard let self = self else { return }
             
             switch result {
-            case .success:
-                self.popToInitialViewController()
+            case .success: break
             case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
+                self.showSimpleBottomAlert(with: "피드백 보내기에 실패하였습니다.")
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            UserManager.shared.unregisterUser { [weak self] result in
+                
+                dismissProgressBar()
+                
+                guard let self = self else { return }
+                
+                switch result {
+                case .success:
+                    self.popToInitialViewController()
+                case .failure(let error):
+                    self.showSimpleBottomAlert(with: error.errorDescription)
+                }
             }
         }
     }
@@ -93,5 +113,4 @@ extension UnregisterUser_InputSuggestionViewController: UITextViewDelegate {
             return
         }
     }
-    
 }

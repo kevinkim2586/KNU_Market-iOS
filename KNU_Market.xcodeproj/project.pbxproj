@@ -359,10 +359,6 @@
 			children = (
 				7C516C3A267F48300065E30D /* ReportUserViewController.swift */,
 				7C0F1CB726BA64B50068FF45 /* VerifyEmailViewController.swift */,
-				7CA78FF526CDFC510019B06F /* AlertViewController.swift */,
-				7CA78FF726CE02D10019B06F /* KMBodyLabel.swift */,
-				7CA78FFB26CE03260019B06F /* KMButton.swift */,
-				7CA78FF926CE02EC0019B06F /* KMTitleLabel.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -497,6 +493,7 @@
 		7CA6622B26413302000E0B7A /* UI Related Files */ = {
 			isa = PBXGroup;
 			children = (
+				7CC1B59126D225BE0007F99B /* Custom Alerts */,
 				7C4D13C5264524FA00CBB00A /* TableViewCells */,
 				7C8839DB2643CADB00F9F78C /* UserPickedItemImageViewCell */,
 			);
@@ -566,6 +563,17 @@
 				7CC05E9926B6D91800BE9288 /* EditPostModel.swift */,
 			);
 			path = "Item Models";
+			sourceTree = "<group>";
+		};
+		7CC1B59126D225BE0007F99B /* Custom Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				7CA78FF526CDFC510019B06F /* AlertViewController.swift */,
+				7CA78FF726CE02D10019B06F /* KMBodyLabel.swift */,
+				7CA78FFB26CE03260019B06F /* KMButton.swift */,
+				7CA78FF926CE02EC0019B06F /* KMTitleLabel.swift */,
+			);
+			path = "Custom Alerts";
 			sourceTree = "<group>";
 		};
 		7CD1522526AA99DA00F2C466 /* Chat Models */ = {

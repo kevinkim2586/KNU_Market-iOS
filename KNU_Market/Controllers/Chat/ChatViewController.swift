@@ -80,7 +80,6 @@ class ChatViewController: MessagesViewController {
         
         guard let chatMemberVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatMemberVC) as? ChatMemberViewController else { return }
         
-//        chatMemberVC.delegate = self
         chatMemberVC.roomInfo = viewModel.roomInfo
         chatMemberVC.postUploaderUID = viewModel.postUploaderUID
         presentPanModal(chatMemberVC)

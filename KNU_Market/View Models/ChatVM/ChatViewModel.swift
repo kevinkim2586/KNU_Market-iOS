@@ -467,7 +467,7 @@ extension ChatViewModel {
             
         } else if text.contains(Constants.ChatSuffix.exitSuffix) {
             
-            return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: " 🏃")
+            return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: "🏃")
             
         } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)\(Constants.ChatSuffix.rawBanSuffix)") {
             

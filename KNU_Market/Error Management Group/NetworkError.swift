@@ -13,6 +13,7 @@ enum NetworkError: String, Error {
     case E107 = "E107"
     case E108 = "E108"
     case E109 = "E109"
+    case E112 = "E112"
     
     // invalid request
     case E201 = "E201"
@@ -62,6 +63,10 @@ enum NetworkError: String, Error {
             return "이미 참여하고 있는 공구입니다."
         case .E109:
             return "권한이 없습니다."
+            
+        case .E112:
+            return "방장으로부터 강퇴를 당한 방입니다."
+            
    
         case .E201:
             return "refresh_token 누락"

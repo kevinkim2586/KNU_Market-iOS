@@ -8,19 +8,22 @@ class ChatMemberViewController: UIViewController {
     @IBOutlet weak var memberTableView: UITableView!
     
     var roomInfo: RoomInfo?
+    var filteredMembers: [Member]?
     var postUploaderUID: String?
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initialize()
+        
+        guard let members = roomInfo?.member else { return }
+        filteredMembers = members.filter { $0.isBanned == false }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.post(name: .didDismissPanModal, object: nil)
-
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -115,16 +118,15 @@ class ChatMemberViewController: UIViewController {
 extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return roomInfo?.member.count ?? 1
+        return filteredMembers?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellID = Constants.cellID.chatMemberCell
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? ChatMemberTableViewCell else { return UITableViewCell() }
         
-        if let cellVM = roomInfo?.member[indexPath.row] {
+        if let cellVM = filteredMembers?[indexPath.row] {
             
             guard let postUploaderUID = postUploaderUID else { return UITableViewCell() }
             
@@ -132,7 +134,7 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configure(with: cellVM.userUID, postUploaderUID: postUploaderUID)
              
         } else {
-            cell.nicknameLabel.text = "사용자 정보 불러오기에 실패했습니다.🧐"
+            cell.nicknameLabel.text = "사용자 정보 불러오기 실패🧐"
             cell.reportUserButton.isHidden = true
         }
     
@@ -203,7 +205,6 @@ extension ChatMemberViewController {
         
         initializeTableView()
         initializeTopView()
-        
     }
     
     func initializeTableView() {
@@ -215,7 +216,6 @@ extension ChatMemberViewController {
     func initializeTopView() {
         postMemberCountLabel.text = "\(self.roomInfo?.post.currentlyGatheredPeople ?? 0)"
     }
-    
 }
 
 //MARK: - PanModalPresentable
@@ -233,5 +233,4 @@ extension ChatMemberViewController: PanModalPresentable {
     var longFormHeight: PanModalHeight {
         return .maxHeightWithTopInset(50)
     }
-    
 }

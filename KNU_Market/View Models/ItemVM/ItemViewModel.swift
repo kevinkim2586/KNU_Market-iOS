@@ -194,8 +194,7 @@ class ItemViewModel {
             self.delegate?.failedJoiningChat(with: .E001)
             return
         }
-        
-                
+
         print("✏️ pageID: \(self.pageID)")
         
         ChatManager.shared.changeJoinStatus(function: .join,
@@ -204,11 +203,8 @@ class ItemViewModel {
             guard let self = self else { return }
             
             switch result {
-            
             case .success:
-                
                 self.delegate?.didEnterChat(isFirstEntrance: true)
-                
             case .failure(let error):
                 
                 print("❗️ ItemViewModel - joinPost error: \(error)")
@@ -216,11 +212,13 @@ class ItemViewModel {
                 // 이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
                 if error == .E108 {
             
-            
-                    
                     self.delegate?.didEnterChat(isFirstEntrance: false)
                 
-                } else {
+                // 강퇴를 당한 적이 있는 경우
+                } else if error == .E112 {
+                    self.delegate?.failedJoiningChat(with: error)
+                }
+                else {
                     self.delegate?.failedJoiningChat(with: error)
                 }
             }

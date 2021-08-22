@@ -31,7 +31,6 @@ struct Post: Decodable {
         case isCompletelyDone = "isArchived"
         case date = "createDate"
         case medias, user
-        
     }
 }
 

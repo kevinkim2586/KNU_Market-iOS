@@ -35,6 +35,9 @@ enum NetworkError: String, Error {
     // network error
     case E000 = "E000"
     
+    // client custom error
+    case E001 = "E001"
+    
     var errorDescription: String {
         
         switch self {
@@ -80,6 +83,9 @@ enum NetworkError: String, Error {
             
         case .E601:
             return "존재하지 않는 글입니다.🧐"
+            
+        case .E001:
+            return "방 인원이 모두 찼습니다! 나중에 다시 시도해주세요.🧐"
         }
     }
     

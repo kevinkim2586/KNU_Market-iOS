@@ -79,7 +79,7 @@ class ItemViewModel {
     
     var isGathering: Bool {
         
-        if isFull || isCompletelyDone {
+        if isCompletelyDone {
             return false
         } else {
             return true
@@ -190,6 +190,11 @@ class ItemViewModel {
     
     func joinPost() {
         
+        if currentlyGatheredPeople == totalGatheringPeople {
+            self.delegate?.failedJoiningChat(with: .E001)
+            return
+        }
+        
         print("✏️ pageID: \(self.pageID)")
         
         ChatManager.shared.changeJoinStatus(function: .join,
@@ -211,7 +216,6 @@ class ItemViewModel {
                 if error == .E108 {
                     
                     self.delegate?.didEnterChat(isFirstEntrance: false)
-         
                 
                 } else {
                     self.delegate?.failedJoiningChat(with: error)

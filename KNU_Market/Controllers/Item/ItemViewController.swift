@@ -280,7 +280,10 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func failedJoiningChat(with error: NetworkError) {
         
-        self.showSimpleBottomAlert(with: error.errorDescription)
+        presentKMAlertOnMainThread(title: "채팅방 참여 불가",
+                                   message: error.errorDescription,
+                                   buttonTitle: "확인")
+
         enterChatButton.loadingIndicator(false)
     }
     
@@ -460,7 +463,7 @@ extension ItemViewController {
         let currentNum = viewModel.currentlyGatheredPeople
         let total = viewModel.totalGatheringPeople
         
-        if viewModel.isCompletelyDone || viewModel.isFull {
+        if viewModel.isCompletelyDone {
             gatheringPeopleLabel.text = "모집 완료"
             gatheringPeopleImageView.isHidden = true
         } else {

@@ -82,7 +82,7 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializeGatheringLabel() {
         
-        if viewModel.isCompletelyDone || viewModel.isFull {
+        if viewModel.isCompletelyDone {
             
             gatheringLabel.text = "모집 완료"
             gatheringLabel.backgroundColor = UIColor.lightGray

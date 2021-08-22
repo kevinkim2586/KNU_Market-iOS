@@ -21,10 +21,14 @@ class SendDeveloperMessageViewController: UIViewController {
     @IBAction func pressedSendButton(_ sender: UIBarButtonItem) {
         
         guard let content = messageTextView.text else { return }
+            
+        showProgressBar()
         
         UserManager.shared.sendFeedback(content: content) { [weak self] result in
             
             guard let self = self else { return }
+            
+            dismissProgressBar()
             
             switch result {
             case .success:

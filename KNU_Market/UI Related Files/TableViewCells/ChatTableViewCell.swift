@@ -34,8 +34,10 @@ class ChatTableViewCell: UITableViewCell {
                                       placeholderImage: UIImage(named: Constants.Images.chatBubbleIcon),
                                       options: .continueInBackground,
                                       completed: nil)
+            chatImageView.contentMode = .scaleToFill
         } else {
             chatImageView.image = UIImage(named: Constants.Images.chatBubbleIcon)
+            chatImageView.contentMode = .scaleAspectFit
         }
         
         chatTitleLabel.text = model.title
@@ -47,8 +49,7 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     func configureImageView() {
-        
-        chatImageView.contentMode = .scaleToFill
+
         chatImageView.layer.borderWidth = 1
         chatImageView.layer.borderColor = UIColor.clear.cgColor
         chatImageView.layer.cornerRadius = chatImageView.bounds.height / 2

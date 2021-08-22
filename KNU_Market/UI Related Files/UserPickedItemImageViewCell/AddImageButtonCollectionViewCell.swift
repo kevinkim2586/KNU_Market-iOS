@@ -60,7 +60,7 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
                 var thumbnail = UIImage()
                 
                 imageManager.requestImage(for: selectedAssets[i],
-                                          targetSize: CGSize(width: 1000, height: 1000),
+                                          targetSize: CGSize(width: 600, height: 600),
                                           contentMode: .aspectFit,
                                           options: option) { (result, info) in
                     thumbnail = result!

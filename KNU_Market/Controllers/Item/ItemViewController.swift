@@ -367,6 +367,7 @@ extension ItemViewController {
     
     func initializeProfileImageView() {
         
+        userProfileImageView.contentMode = .scaleAspectFill
         userProfileImageView.image = UIImage(named: Constants.Images.defaultAvatar)
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
     }

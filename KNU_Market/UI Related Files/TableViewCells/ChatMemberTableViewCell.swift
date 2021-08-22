@@ -77,7 +77,7 @@ class ChatMemberTableViewCell: UITableViewCell {
                                                    placeholderImage: UIImage(named: Constants.Images.chatMemberDefaultImage),
                                                    options: .continueInBackground,
                                                    completed: nil)
-                self?.profileImageView.contentMode = .scaleAspectFit
+                self?.profileImageView.contentMode = .scaleToFill
                 
                 // 만약 본인 Cell 이면 신고하기 버튼 숨김 처리
                 DispatchQueue.main.async {
@@ -86,6 +86,7 @@ class ChatMemberTableViewCell: UITableViewCell {
                     }
                 }
             case .failure:
+                self?.nicknameLabel.text = "정보 불러오기 실패"
                 return
             }
         }
@@ -94,6 +95,6 @@ class ChatMemberTableViewCell: UITableViewCell {
     func initializeUI() {
         
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-        profileImageView.contentMode = .scaleAspectFill
+//        profileImageView.contentMode = .scaleAspectFill
     }
 }

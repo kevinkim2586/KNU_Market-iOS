@@ -21,6 +21,7 @@ class UserManager {
     let userProfileUpdateURL        = "\(Constants.API_BASE_URL)auth"
     let unregisterURL               = "\(Constants.API_BASE_URL)auth"
     let sendEmailURL                = "\(Constants.API_BASE_URL)verification"
+    let sendFeedbackURL             = "\(Constants.API_BASE_URL)report"
     
     let interceptor = Interceptor()
     
@@ -357,7 +358,7 @@ class UserManager {
         AF.request(findPasswordURL,
                    method: .post,
                    parameters: parameters,
-                   encoding: JSONEncoding.default    )
+                   encoding: JSONEncoding.default)
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
@@ -375,6 +376,35 @@ class UserManager {
                 }
             }
     }
+    
+    //MARK: - 건의사항 보내기 (유저 피드백)
+    func sendFeedback(content: String,
+                      completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let parameters: Parameters = [ "content" : content ]
+        
+        AF.request(sendFeedbackURL,
+                   method: .post,
+                   parameters: parameters,
+                   encoding: JSONEncoding.default,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 201:
+                    completion(.success(true))
+                default:
+                    let error = NetworkError.returnError(json: response.data ?? Data())
+                    print("❗️ UserManager - sendFeedback statusCode: \(statusCode), reason: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    
     
     //MARK: - 인증 메일 다시 보내기
     func resendVerificationEmail(completion: @escaping (Result<Bool, NetworkError>) -> Void) {

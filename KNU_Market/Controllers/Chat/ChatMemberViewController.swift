@@ -1,14 +1,6 @@
 import UIKit
 import PanModal
 
-//protocol ChatMemberViewDelegate: AnyObject {
-//
-//    func didChooseToExitPost()
-//    func didChooseToDeletePost()
-//    func didBanUser(uid: String, nickname: String)
-//    func didDismissPanModal()
-//}
-
 class ChatMemberViewController: UIViewController {
     
     @IBOutlet weak var postTitleLabel: UILabel!
@@ -17,8 +9,6 @@ class ChatMemberViewController: UIViewController {
     
     var roomInfo: RoomInfo?
     var postUploaderUID: String?
-    
-//    weak var delegate: ChatMemberViewDelegate?
     
 
     override func viewDidLoad() {
@@ -30,7 +20,7 @@ class ChatMemberViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.post(name: .didDismissPanModal, object: nil)
-//        self.delegate?.didDismissPanModal()
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -55,7 +45,6 @@ class ChatMemberViewController: UIViewController {
                     
                     if selectedOk {
                         NotificationCenter.default.post(name: .didChooseToDeletePost, object: nil)
-//                        self.delegate?.didChooseToDeletePost()
                         self.dismiss(animated: true)
                     }
                 }

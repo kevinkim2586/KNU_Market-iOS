@@ -19,6 +19,11 @@ class MyPageViewController: UIViewController {
         initialize()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         viewModel.loadUserProfile()
     }
@@ -271,6 +276,7 @@ extension MyPageViewController {
     func initialize() {
         
         createObserversForPresentingEmailVerification()
+        createObserversForGettingBadgeValue()
         
         viewModel.delegate = self
         
@@ -280,7 +286,6 @@ extension MyPageViewController {
         
         initializeTableView()
         initializeProfileImageButton()
-//        initializeImagePicker()
     }
     
     func initializeTableView() {
@@ -305,44 +310,7 @@ extension MyPageViewController {
         imagePicker.sourceType = .savedPhotosAlbum
         
         self.present(self.imagePicker, animated: true)
-        
-//        var selectedAsset: [PHAsset] = []
-//        var selectedImage: [UIImage] = []
-//
-//
-//        let imagePicker = ImagePickerController()
-//        imagePicker.settings.selection.max = 1
-//        imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
-//
-//
-//        self.presentImagePicker(imagePicker, select: { asset in
-//
-//        }, deselect: { asset in
-//
-//        }, cancel: { asset in
-//
-//        }, finish: { asset in
-//
-//            selectedAsset = asset
-//            selectedImage = self.convertAssetToUIImages(selectedAssets: selectedAsset)
-//
-//
-//            DispatchQueue.main.async {
-//
-//                self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
-//
-//                    if selectedOk {
-//                        self.updateProfileImageButton(with: selectedImage[0])
-//                        showProgressBar()
-//
-//                        OperationQueue().addOperation {
-//                            self.viewModel.uploadImageToServerFirst(with: selectedImage[0])
-//                            dismissProgressBar()
-//                        }
-//                    }
-//                }
-//            }
-//        })
+      
     }
     
     func updateProfileImageButton(with image: UIImage) {

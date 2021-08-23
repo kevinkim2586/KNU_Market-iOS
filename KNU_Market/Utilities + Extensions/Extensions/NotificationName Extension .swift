@@ -19,7 +19,7 @@ extension Notification.Name {
 
     static let getChat                  = Notification.Name("co.wim.getChat")
     static let getChatList              = Notification.Name("co.wim.getChatList")
-    
+    static let getBadgeValue            = Notification.Name("co.wim.getBadgeValue")
     
 
 }

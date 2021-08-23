@@ -47,26 +47,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                         object: nil)
         NotificationCenter.default.post(name: .getChatList,
                                         object: nil)
+        NotificationCenter.default.post(name: .getBadgeValue,
+                                        object: nil)
         
         ChatNotifications.list = UserDefaults.standard.stringArray(forKey: Constants.UserDefaultsKey.notificationList) ?? [String]()
         
+        getDeliveredNotifications()
         
-        let center = UNUserNotificationCenter.current()
         
-        center.getDeliveredNotifications { notificationList in
-            
-            for notification in notificationList {
-                
-                let userInfo = notification.request.content.userInfo
-                
-                if let postUID = userInfo["postUid"] as? String {
-                    
-                    if !User.shared.chatNotificationList.contains(postUID) {
-                        ChatNotifications.list.append(postUID)
-                    }
-                }
-            }
-        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -87,7 +75,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+}
 
-
+extension SceneDelegate {
+    
+    
+    func getDeliveredNotifications() {
+        
+        let center = UNUserNotificationCenter.current()
+        
+        center.getDeliveredNotifications { notificationList in
+            for notification in notificationList {
+                let userInfo = notification.request.content.userInfo
+                if let postUID = userInfo["postUid"] as? String {
+                    if !User.shared.chatNotificationList.contains(postUID) {
+                        ChatNotifications.list.append(postUID)
+                    }
+                }
+            }
+        }
+    }
+    
 }
 

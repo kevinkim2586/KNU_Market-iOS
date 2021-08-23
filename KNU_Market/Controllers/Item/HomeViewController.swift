@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
         
     }
     
@@ -195,7 +195,6 @@ extension HomeViewController {
     
     func initialize() {
 
-        
         self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
         
@@ -248,6 +247,7 @@ extension HomeViewController {
                                                selector: #selector(refreshTableView),
                                                name: .updateItemList,
                                                object: nil)
+        createObserversForGettingBadgeValue()
         
     }
     

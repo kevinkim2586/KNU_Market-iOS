@@ -21,6 +21,8 @@ class ChatListViewController: UIViewController {
         
         let center = UNUserNotificationCenter.current()
         center.removeAllDeliveredNotifications()
+        
+        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
         viewModel.fetchChatList()
     }
     
@@ -158,6 +160,7 @@ extension ChatListViewController {
     
     func initialize() {
         
+        createObserversForGettingBadgeValue()
         viewModel.delegate = self
         
         self.navigationController?.view.backgroundColor = .white

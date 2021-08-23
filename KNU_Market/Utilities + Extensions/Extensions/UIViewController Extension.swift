@@ -172,6 +172,14 @@ extension UIViewController {
                                                name: .presentVerifyEmailVC,
                                                object: nil)
     }
+    
+    func createObserversForGettingBadgeValue() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(getChatTabBadgeValue),
+                                               name: .getBadgeValue,
+                                               object: nil)
+    }
 }
 
 //MARK: - PHAsset Conversion
@@ -213,13 +221,8 @@ extension UIViewController {
 //MARK: - Notification Badge
 
 extension UIViewController {
-    
-    func getChatTabBadgeValue() {
-        
-        
-    }
-    
-    func setChatTabBadgeValue() {
+
+    @objc func getChatTabBadgeValue() {
         
         if let tabItems = tabBarController?.tabBar.items {
             
@@ -230,11 +233,6 @@ extension UIViewController {
             } else {
                 chatTabBarItem.badgeValue = "\(User.shared.chatNotificationList.count)"
             }
-            
-            UserDefaults.standard.set(User.shared.chatNotificationList.count,
-                                      forKey: "noti")
-            
-            
         }
     }
 }

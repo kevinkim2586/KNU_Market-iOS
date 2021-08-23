@@ -177,14 +177,14 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print("✏️ willPresent userInfo: \(userInfo)")
         
         if let postUID = userInfo["postUid"] as? String {
-            
             if !User.shared.chatNotificationList.contains(postUID) {
                 ChatNotifications.list.append(postUID)
             }
         }
         
         NotificationCenter.default.post(name: .getChatList, object: nil)
- 
+        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+        
         completionHandler([[.alert, .sound, .badge]])
     }
     

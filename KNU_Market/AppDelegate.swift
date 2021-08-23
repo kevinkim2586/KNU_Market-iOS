@@ -192,14 +192,11 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print("✏️ didReceive: \(userInfo)")
         
         if let postUID = userInfo["postUid"] as? String {
-         
             if !ChatNotifications.list.contains(postUID) {
                 ChatNotifications.list.append(postUID)
             }
         }
 
-        
-        
         completionHandler()
     }
 }

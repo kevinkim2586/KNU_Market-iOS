@@ -492,6 +492,7 @@ extension UserManager {
         User.shared.nickname = model.nickname
         User.shared.profileImageUID = model.profileImageCode
         User.shared.hasVerifiedEmail = model.isVerified
+        User.shared.fcmToken = model.fcmToken
     }
 }
 

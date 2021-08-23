@@ -7,6 +7,7 @@ struct LoadProfileResponseModel: Decodable {
     let nickname: String
     let profileImageCode: String
     let isVerified: Bool
+    let fcmToken: String
 
     enum CodingKeys: String, CodingKey {
         
@@ -15,6 +16,7 @@ struct LoadProfileResponseModel: Decodable {
         case nickname
         case profileImageCode = "profileImage"
         case isVerified
+        case fcmToken = "fcm"
     }
 }
 

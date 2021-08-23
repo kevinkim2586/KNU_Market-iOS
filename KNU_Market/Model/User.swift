@@ -138,10 +138,15 @@ class User {
     var userUploadedRoomPIDs: [String] = []
     
     // 내가 참여하고 있는 채팅방 PID 배열
-    var joinedChatRoomPIDs: [String] = [ "__entireRoomPid" ]
+    var joinedChatRoomPIDs: [String] = []
 
     
-    
+    var chatNotificationList: [String] {
+        get {
+            let list = UserDefaults.standard.stringArray(forKey: "notiList") ?? [String]()
+            return list
+        }
+    }
 }
 
 //MARK: - Methods
@@ -161,6 +166,10 @@ extension User {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.profileImageUID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.fcmToken)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userUID)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.hasVerifiedEmail)
+
         
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)

@@ -209,5 +209,9 @@ let profileImageCache = NSCache<AnyObject, AnyObject>()
 
 struct ChatNotifications {
     
-    static var list: [String] = [String]()
+    static var list: [String] = [String]() {
+        didSet {
+            UserDefaults.standard.set(list, forKey: "notiList")
+        }
+    }
 }

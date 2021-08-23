@@ -177,9 +177,14 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print("✏️ willPresent userInfo: \(userInfo)")
         
         if let postUID = userInfo["postUid"] as? String {
-            if !ChatNotifications.list.contains(postUID) {
+            
+            if !User.shared.chatNotificationList.contains(postUID) {
                 ChatNotifications.list.append(postUID)
             }
+            
+//            if !ChatNotifications.list.contains(postUID) {
+//                ChatNotifications.list.append(postUID)
+//            }
         }
 
         completionHandler([[.alert, .sound, .badge]])
@@ -195,9 +200,16 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print("✏️ didReceive: \(userInfo)")
         
         if let postUID = userInfo["postUid"] as? String {
-            if !ChatNotifications.list.contains(postUID) {
+            
+            
+            if !User.shared.chatNotificationList.contains(postUID) {
                 ChatNotifications.list.append(postUID)
             }
+            
+            
+//            if !ChatNotifications.list.contains(postUID) {
+//                ChatNotifications.list.append(postUID)
+//            }
         }
 
         completionHandler()

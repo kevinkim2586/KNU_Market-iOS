@@ -18,8 +18,6 @@ class ChatListViewController: UIViewController {
         
         UIApplication.shared.applicationIconBadgeNumber = 0
         viewModel.fetchChatList()
-        
-        print("✏️ ChatNotification List: \(ChatNotifications.list)")
     }
     
 }
@@ -172,7 +170,9 @@ extension ChatListViewController {
         chatListTableView.refreshControl = refreshControl
 
         
-        refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        refreshControl.addTarget(self,
+                                 action: #selector(refreshTableView),
+                                 for: .valueChanged)
     }
 
 }

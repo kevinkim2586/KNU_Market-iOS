@@ -52,7 +52,11 @@ class ChatTableViewCell: UITableViewCell {
         configureChatParticipatingCountLabel()
         configureNotificationImageView()
         
-        if ChatNotifications.list.contains(model.uuid) {
+//        if ChatNotifications.list.contains(model.uuid) {
+//            configureUIWithNotification()
+//        }
+        
+        if User.shared.chatNotificationList.contains(model.uuid) {
             configureUIWithNotification()
         }
      

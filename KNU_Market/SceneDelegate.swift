@@ -46,8 +46,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         print("✏️ sceneDidBecomeActive")
 
-        NotificationCenter.default.post(name: .fetchChatList,
+        NotificationCenter.default.post(name: .getChat,
                                         object: nil)
+        NotificationCenter.default.post(name: .getChatList,
+                                        object: nil)
+        
+        
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

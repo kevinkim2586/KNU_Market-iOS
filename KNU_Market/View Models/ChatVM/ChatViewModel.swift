@@ -515,7 +515,7 @@ extension ChatViewModel {
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(resetAndReconnect),
-                                               name: .fetchChatList,
+                                               name: .getChat,
                                                object: nil)
         
     }

@@ -163,7 +163,6 @@ extension ChatListViewController {
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
         
         initializeTableView()
-
     }
     
     func initializeTableView() {
@@ -175,6 +174,5 @@ extension ChatListViewController {
         
         refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
-    
 
 }

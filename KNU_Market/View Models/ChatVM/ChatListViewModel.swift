@@ -18,6 +18,10 @@ class ChatListViewModel {
     weak var delegate: ChatListViewModelDelegate?
     
     var roomList: [Room] = [Room]()
+    
+    init() {
+        createObservers()
+    }
 }
 
 //MARK: - API Methods
@@ -25,7 +29,7 @@ class ChatListViewModel {
 extension ChatListViewModel {
     
     // 전체 채팅 목록 불러오기
-    func fetchChatList() {
+    @objc func fetchChatList() {
         
         self.roomList.removeAll()
         
@@ -112,6 +116,15 @@ extension ChatListViewModel {
         } else {
             return false
         }
+    }
+    
+    func createObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(fetchChatList),
+                                               name: .getChatList,
+                                               object: nil)
+        
     }
     
 }

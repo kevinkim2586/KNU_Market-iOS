@@ -17,7 +17,9 @@ extension Notification.Name {
     static let didBanUser               = Notification.Name("co.wim.didBanUser")
     static let didDismissPanModal       = Notification.Name("co.wim.didDismissPanModal")
 
-    static let fetchChatList            = Notification.Name("co.wim.fetchChatList")
+    static let getChat                  = Notification.Name("co.wim.getChat")
+    static let getChatList              = Notification.Name("co.wim.getChatList")
+    
     
 
 }

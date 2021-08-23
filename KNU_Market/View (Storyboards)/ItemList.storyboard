@@ -978,8 +978,8 @@
         <image name="default avatar" width="38" height="38"/>
         <image name="delete button" width="79" height="79"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="grey house" width="30" height="30"/>
-        <image name="house" width="30" height="30"/>
+        <image name="grey house" width="27" height="27"/>
+        <image name="house" width="27" height="27"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="location icon" width="38" height="38"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>

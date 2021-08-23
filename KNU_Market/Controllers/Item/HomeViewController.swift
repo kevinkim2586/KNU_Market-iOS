@@ -15,12 +15,13 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -142,6 +143,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                        completion: {
                         self.viewModel.resetValues()
                         self.viewModel.fetchItemList()
+                        self.viewModel.fetchEnteredRoomInfo()
                        })
     }
 }
@@ -192,6 +194,7 @@ extension HomeViewController: UITabBarControllerDelegate {
 extension HomeViewController {
     
     func initialize() {
+
         
         self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)

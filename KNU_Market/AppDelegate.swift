@@ -8,8 +8,9 @@ import UserNotificationsUI
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let gcmMessageIDKey = "gcm.message_id2"
-
-
+    
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         print("✏️ didFinishLaunchingWithOptions")
@@ -43,9 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         application.registerForRemoteNotifications()
+        
       
         Messaging.messaging().delegate = self
-
         
         Messaging.messaging().token { token, error in
             if let error = error {
@@ -173,7 +174,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         let userInfo = notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
-        
         print("✏️ willPresent userInfo: \(userInfo)")
         
         if let postUID = userInfo["postUid"] as? String {
@@ -181,12 +181,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             if !User.shared.chatNotificationList.contains(postUID) {
                 ChatNotifications.list.append(postUID)
             }
-            
-//            if !ChatNotifications.list.contains(postUID) {
-//                ChatNotifications.list.append(postUID)
-//            }
         }
-
+        
+        NotificationCenter.default.post(name: .getChatList, object: nil)
+ 
         completionHandler([[.alert, .sound, .badge]])
     }
     
@@ -200,18 +198,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print("✏️ didReceive: \(userInfo)")
         
         if let postUID = userInfo["postUid"] as? String {
-            
-            
             if !User.shared.chatNotificationList.contains(postUID) {
                 ChatNotifications.list.append(postUID)
             }
-            
-            
-//            if !ChatNotifications.list.contains(postUID) {
-//                ChatNotifications.list.append(postUID)
-//            }
         }
-
         completionHandler()
     }
 }
@@ -239,8 +229,4 @@ extension AppDelegate {
         }
     }
     
-    func updateUserFCMToken() {
-        
-        
-    }
 }

@@ -195,6 +195,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         viewModel.sendText(text)
+        messagesCollectionView.scrollToLastItem()
     }
 }
 
@@ -210,7 +211,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     public func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         
         if viewModel.messages.count == 0 { return Message.defaultValue }
-
         return viewModel.messages[indexPath.section]
     }
     
@@ -224,22 +224,26 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     // Top Label
     func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return 12
+        
+        if viewModel.messages[indexPath.section].userUID == User.shared.userUID { return 0 }
+        else { return 12 }
     }
     
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         
         if viewModel.messages.count == 0 { return nil }
-        
-        return NSAttributedString(string: viewModel.messages[indexPath.section].usernickname,
-                                  attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .medium)])
+        if viewModel.messages[indexPath.section].userUID == User.shared.userUID { return nil }
+        else {
+            return NSAttributedString(string: viewModel.messages[indexPath.section].usernickname,
+                                      attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .medium),
+                                                   .foregroundColor : UIColor.darkGray])
+        }
     }
     
     // Bottom Label
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         
         if viewModel.messages.count == 0 { return nil }
-        
         return NSAttributedString(string: viewModel.messages[indexPath.section].date,
                                   attributes: [.font: UIFont.systemFont(ofSize: 10), .foregroundColor: UIColor.lightGray])
     }
@@ -247,11 +251,10 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 10
     }
-    
+
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
         
         if viewModel.messages.count == 0 { return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1) }
-    
         if viewModel.messages[indexPath.section].userUID == User.shared.userUID {
             return UIColor(named: Constants.Color.appColor)!
         } else {
@@ -264,18 +267,16 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         return .bubbleTail(corner, .curved)
     }
 
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if scrollView.contentOffset.y <= 10 {
-            
-            self.refreshControl.beginRefreshing()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                 
                 if !self.viewModel.isFetchingData &&
                     self.viewModel.needsToFetchMoreData &&
                     !self.viewModel.isFirstViewLaunch {
+                    self.refreshControl.beginRefreshing()
                     self.viewModel.getChatList()
                     
                 } else {
@@ -294,7 +295,6 @@ extension ChatViewController {
     func initialize() {
        
         viewModel.delegate = self
-//        chatMemberViewDelegate = self
 
         initializeNavigationItemTitle()
         initializeRefreshControl()
@@ -324,7 +324,6 @@ extension ChatViewController {
     
     func initializeCollectionView() {
         
-
         messagesCollectionView.contentInset.top = 20
 
         messagesCollectionView.messagesDataSource = self
@@ -335,26 +334,28 @@ extension ChatViewController {
         messagesCollectionView.backgroundColor = .white
         self.scrollsToLastItemOnKeyboardBeginsEditing = true
         
-        
+     
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
             
             layout.setMessageIncomingAvatarSize(.zero)
             layout.setMessageOutgoingAvatarSize(.zero)
             
             layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left,
-                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+                                                                                  textInsets: .init(top: 30, left: 15, bottom: 30, right: 10)))
             layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
                                                                                   textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
             
             layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .left,
-                                                                                     textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+                                                                                     textInsets: .init(top: 20, left: 15, bottom: 20, right: 10)))
             layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .right,
-                                                                                     textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+                                                                                     textInsets: .init(top: 20, left: 10, bottom: 20, right: 15)))
+          
+         
         }
+        
     }
     
     func initializeInputBar() {
-        
         
         messageInputBar.delegate = self
         messageInputBar.sendButton.title = nil

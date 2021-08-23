@@ -101,6 +101,7 @@ struct Constants {
         static let isLoggedIn                   = "isLoggedIn"
         static let hasVerifiedEmail             = "hasVerifiedEmail"
         static let fcmToken                     = "fcmToken"
+        static let notificationList             = "notificationList"
     }
     
     struct NotificationKey {
@@ -211,7 +212,9 @@ struct ChatNotifications {
     
     static var list: [String] = [String]() {
         didSet {
-            UserDefaults.standard.set(list, forKey: "notiList")
+            UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.notificationList)
+            UserDefaults.standard.set(list,
+                                      forKey: Constants.UserDefaultsKey.notificationList)
         }
     }
 }

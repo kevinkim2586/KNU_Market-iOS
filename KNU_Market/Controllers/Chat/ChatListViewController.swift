@@ -10,13 +10,17 @@ class ChatListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         initialize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UIApplication.shared.applicationIconBadgeNumber = 0
+        UIApplication.shared.applicationIconBadgeNumber = User.shared.chatNotificationList.count
+        
+        let center = UNUserNotificationCenter.current()
+        center.removeAllDeliveredNotifications()
         viewModel.fetchChatList()
     }
     
@@ -32,7 +36,7 @@ extension ChatListViewController: ChatListViewModelDelegate {
         if viewModel.roomList.count == 0 {
             chatListTableView.showEmptyView(with: "참여 중인 공구가 없습니다.🧐")
         }
-        
+
         chatListTableView.reloadData()
     }
     

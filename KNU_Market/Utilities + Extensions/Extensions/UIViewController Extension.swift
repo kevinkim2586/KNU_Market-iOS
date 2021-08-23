@@ -209,3 +209,32 @@ extension UIViewController {
         return userSelectedImages
     }
 }
+
+//MARK: - Notification Badge
+
+extension UIViewController {
+    
+    func getChatTabBadgeValue() {
+        
+        
+    }
+    
+    func setChatTabBadgeValue() {
+        
+        if let tabItems = tabBarController?.tabBar.items {
+            
+            let chatTabBarItem = tabItems[1]
+            
+            if User.shared.chatNotificationList.count == 0 {
+                chatTabBarItem.badgeValue = nil
+            } else {
+                chatTabBarItem.badgeValue = "\(User.shared.chatNotificationList.count)"
+            }
+            
+            UserDefaults.standard.set(User.shared.chatNotificationList.count,
+                                      forKey: "noti")
+            
+            
+        }
+    }
+}

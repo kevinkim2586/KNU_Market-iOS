@@ -17,10 +17,6 @@ class CheckEmailViewController: UIViewController {
         super.viewDidLoad()
 
         initialize()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification , object: nil)
-        
     }
     
     @objc func keyboardDidShow(notification: Notification) {
@@ -54,14 +50,11 @@ extension CheckEmailViewController {
     
     func initialize() {
         
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification , object: nil)
         
         initializeLabels()
     }
-    
-
     
     func initializeLabels() {
         

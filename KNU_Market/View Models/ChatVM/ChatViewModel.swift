@@ -253,9 +253,7 @@ extension ChatViewModel {
     
     // 채팅 받아오기
     @objc func getChatList() {
-        
-        print("✏️ getChatList at index: \(index)")
-                
+    
         self.isFetchingData = true
         
         ChatManager.shared.getResponseModel(function: .getChat,

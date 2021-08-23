@@ -42,7 +42,6 @@ class CongratulateUserViewController: UIViewController {
         }
     }
     
-    
     func initialize() {
         
         initializeButton()

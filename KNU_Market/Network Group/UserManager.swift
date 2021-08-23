@@ -145,6 +145,8 @@ class UserManager {
                         User.shared.password = password
                         User.shared.isLoggedIn = true
                         
+                     
+                        
                         completion(.success(true))
                         
                     } catch {

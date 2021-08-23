@@ -143,7 +143,7 @@ class User {
     
     var chatNotificationList: [String] {
         get {
-            let list = UserDefaults.standard.stringArray(forKey: "notiList") ?? [String]()
+            let list = UserDefaults.standard.stringArray(forKey: Constants.UserDefaultsKey.notificationList) ?? [String]()
             return list
         }
     }
@@ -174,6 +174,8 @@ extension User {
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.password)
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         profileImageCache.removeAllObjects()
         

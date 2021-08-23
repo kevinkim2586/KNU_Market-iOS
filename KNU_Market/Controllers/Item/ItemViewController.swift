@@ -503,7 +503,7 @@ extension ItemViewController {
     
     func initializeSlideShow() {
         
-        slideShowHeight.constant = view.bounds.height / 2.5
+        slideShowHeight.constant = view.bounds.height / 2.2
         slideShow.layer.cornerRadius = 15
         slideShow.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }

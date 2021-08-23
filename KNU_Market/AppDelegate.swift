@@ -52,7 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("❗️ Error fetching FCM registration token: \(error)")
             } else if let token = token {
                 print("✏️ FCM Registration Token: \(token)")
+                
                 UserRegisterValues.shared.fcmToken = token
+                UserManager.shared.updateUserFCMToken(with: token)
             }
         }
         
@@ -64,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatViewController.self)
         
+     
         return true
     }
     
@@ -216,11 +219,16 @@ extension AppDelegate {
     }
     
     func getNotificationSettings() {
-      UNUserNotificationCenter.current().getNotificationSettings { settings in
-        print("Notification settings: \(settings)")
-        DispatchQueue.main.async {
-          UIApplication.shared.registerForRemoteNotifications()
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            print("Notification settings: \(settings)")
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
         }
-      }
+    }
+    
+    func updateUserFCMToken() {
+        
+        
     }
 }

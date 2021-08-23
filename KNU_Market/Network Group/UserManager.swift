@@ -236,8 +236,6 @@ class UserManager {
     func updateUserProfileImage(with uid: String,
                                 completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        print("✏️ fcmToken : \(User.shared.fcmToken)")
-        
         let parameters: Parameters = [
             "nickname": User.shared.nickname,
             "password": User.shared.password,
@@ -345,6 +343,38 @@ class UserManager {
                     print("UserManager - updateUserNickname failed default statement")
                     let error = NetworkError.returnError(json: response.data ?? Data())
                     completion(.failure(error))
+                }
+            }
+    }
+    
+    //MARK: - 사용자 FCM Token 업데이트
+    func updateUserFCMToken(with token: String) {
+        
+        let parameters: Parameters = [
+            "nickname": User.shared.nickname,
+            "password": User.shared.password,
+            "image": User.shared.profileImageUID,
+            "fcmToken" : token
+        ]
+        
+        AF.request(userProfileUpdateURL,
+                   method: .put,
+                   parameters: parameters,
+                   encoding: JSONEncoding.default,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 201:
+                    print("✏️ UserManager - updateUserFCMToken SUCCESS")
+                    User.shared.fcmToken = token
+                    
+                default:
+                    print("❗️ UserManager - updateUserFCMToken FAILED")
                 }
             }
     }

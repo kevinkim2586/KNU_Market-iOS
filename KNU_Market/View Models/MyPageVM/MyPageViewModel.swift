@@ -99,7 +99,7 @@ class MyPageViewModel {
     //MARK: - 프로필 이미지를 서버에 먼저 올리기 -> uid 값 반환 목적
     func uploadImageToServerFirst(with image: UIImage) {
         
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
             self.delegate?.failedUploadingImageToServerFirst(with: .E000)
             return
         }

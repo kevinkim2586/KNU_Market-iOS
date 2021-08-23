@@ -78,6 +78,11 @@ class MediaManager {
                     let error = NetworkError.returnError(json: response.data ?? Data())
                     completion(.failure(error))
                 }
+            // 너무 큰 용량의 사진
+            case 413:
+                let error = NetworkError.E413
+                completion(.failure(error))
+                
             default:
                 let error = NetworkError.returnError(json: response.data ?? Data())
                 print("❗️ MediaManager - uploadImage failed with statusCode: \(statusCode) and reason: \(error.errorDescription)")

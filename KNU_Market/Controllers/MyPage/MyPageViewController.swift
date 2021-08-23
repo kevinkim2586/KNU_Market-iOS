@@ -123,7 +123,6 @@ extension MyPageViewController: MyPageViewModelDelegate {
     
     func failedLoadingUserProfileInfo(with error: NetworkError) {
         self.showSimpleBottomAlert(with: "프로필 정보 가져오기 실패. 잠시 후 다시 시도해주세요 🥲")
-        print("failedLoadingUserProfileInfo with error: \(error.errorDescription)")
     }
 
     //이미지 먼저 서버에 업로드
@@ -132,8 +131,8 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func failedUploadingImageToServerFirst(with error: NetworkError) {
-        self.showSimpleBottomAlert(with: "이미지 업로드 실패. 잠시 후 다시 시도해주세요 🥲")
-        print("failedUploadingImageToServerFirst with error: \(error.errorDescription)")
+        self.showSimpleBottomAlert(with: error.errorDescription)
+
     }
     
     // 프로필 사진 실제 DB상 수정
@@ -143,8 +142,7 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func failedUpdatingUserProfileImage(with error: NetworkError) {
-        self.showSimpleBottomAlert(with: "프로필 사진 변경 실패. 잠시 후 다시 시도해주세요 🥲")
-        print("failedUpdatingUserProfileImage with error: \(error.errorDescription)")
+        self.showSimpleBottomAlert(with: error.errorDescription)
     }
     
     func showErrorMessage(with message: String) {

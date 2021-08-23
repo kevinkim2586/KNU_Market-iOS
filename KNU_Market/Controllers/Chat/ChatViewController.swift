@@ -52,10 +52,9 @@ class ChatViewController: MessagesViewController {
         dismissProgressBar()
     }
     
-    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+        print("✏️ viewDidDisappear")
         IQKeyboardManager.shared.enable = true
         viewModel.disconnect()
     }
@@ -189,48 +188,6 @@ extension ChatViewController {
         refreshControl.endRefreshing()
     }
 }
-
-////MARK: - ChatMemberViewDelegate - for PanModal
-//
-//extension ChatViewController: ChatMemberViewDelegate {
-//
-////    @objc func exitPost() {
-////        viewModel.exitPost()
-////
-////    }
-////
-////    @objc func deletePost() {
-////
-////    }
-////
-////    @objc func sendBanMessageToSocket(notification: Notification) {
-////
-////    }
-////
-////
-////    @objc func getChatList() {
-////        viewModel.getChatList()
-////    }
-//
-//
-//
-////    func didChooseToExitPost() {
-////        print("✏️ didChooseToExitPost")
-////        viewModel.exitPost()
-////    }
-////
-////    func didChooseToDeletePost() {
-////        viewModel.deletePost(for: self.roomUID)
-////    }
-////
-////    func didBanUser(uid: String, nickname: String) {
-////        viewModel.sendBanMessageToSocket(uid: uid, nickname: nickname)
-////    }
-////
-////    func didDismissPanModal() {
-////        viewModel.getChatList()
-////    }
-//}
 
 //MARK: - InputBarAccessoryViewDelegate
 
@@ -411,5 +368,4 @@ extension ChatViewController {
         
         messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
     }
-
 }

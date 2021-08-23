@@ -44,7 +44,7 @@ class User {
             guard let password = retrievedPassword else {
                 return "❗️ Invalid Password"
             }
-            print("✏️ Password: \(password)")
+            
             return password
         }
         set {

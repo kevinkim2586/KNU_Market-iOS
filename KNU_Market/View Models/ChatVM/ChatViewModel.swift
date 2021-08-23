@@ -253,6 +253,8 @@ extension ChatViewModel {
     
     // 채팅 받아오기
     @objc func getChatList() {
+        
+        print("✏️ getChatList at index: \(index)")
                 
         self.isFetchingData = true
         
@@ -446,7 +448,6 @@ extension ChatViewModel {
     }
 
     func isFromCurrentSender(uuid: String) -> Bool {
-        
        return uuid == User.shared.userUID ? true : false
     }
     
@@ -488,6 +489,12 @@ extension ChatViewModel {
         index = 1
     }
     
+    @objc func resetAndReconnect() {
+        print("✏️ ChatViewModel - resetAndReconnect ACTIVATED")
+        resetMessages()
+        connect()
+    }
+    
     func createObservers() {
         
         NotificationCenter.default.addObserver(self,
@@ -506,6 +513,11 @@ extension ChatViewModel {
                                                selector: #selector(getChatList),
                                                name: .didDismissPanModal,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(resetAndReconnect),
+                                               name: .fetchChatList,
+                                               object: nil)
+        
     }
 }
 

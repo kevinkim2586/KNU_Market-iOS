@@ -135,7 +135,7 @@ extension MyPostsViewController {
     
     func initialize() {
         
-        createObservers()
+        createObserversForPresentingEmailVerification()
         viewModel.delegate = self
         viewModel.fetchItemList(fetchCurrentUsers: true)
         initializeTableView()
@@ -158,10 +158,5 @@ extension MyPostsViewController {
         refreshControl.addTarget(self,
                                  action: #selector(refreshTableView),
                                  for: .valueChanged)
-    }
-    
-    func createObservers() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(presentVerifyEmailVC), name: .presentVerifyEmailVC, object: nil)
     }
 }

@@ -83,7 +83,7 @@ extension ChangePasswordViewController {
         
         initializeTextFields()
         initializeButton()
-        createObservers()
+        createObserversForPresentingEmailVerification()
     }
     
     func initializeTextFields() {
@@ -96,10 +96,4 @@ extension ChangePasswordViewController {
         
         changeButton.layer.cornerRadius = 10
     }
-
-    func createObservers() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(presentVerifyEmailVC), name: .presentVerifyEmailVC, object: nil)
-    }
-    
 }

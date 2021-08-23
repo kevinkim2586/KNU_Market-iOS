@@ -161,6 +161,19 @@ extension UIViewController {
     }
 }
 
+//MARK: - Observers
+
+extension UIViewController {
+    
+    func createObserversForPresentingEmailVerification() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(presentVerifyEmailVC),
+                                               name: .presentVerifyEmailVC,
+                                               object: nil)
+    }
+}
+
 //MARK: - PHAsset Conversion
 
 extension UIViewController {

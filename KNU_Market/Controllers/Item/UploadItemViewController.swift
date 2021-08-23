@@ -264,7 +264,7 @@ extension UploadItemViewController {
         initializeStepper()
         initializePickerView()
         initializeTextView()
-        createObservers()
+        createObserversForPresentingEmailVerification()
         
         if self.editModel != nil {
             configurePageWithPriorData()
@@ -345,14 +345,6 @@ extension UploadItemViewController {
         itemDetailTextView.text = editModel!.itemDetail
         itemDetailTextView.textColor = UIColor.black
     
-    }
-    
-    func createObservers() {
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(presentVerifyEmailVC),
-                                               name: .presentVerifyEmailVC,
-                                               object: nil)
     }
     
 }

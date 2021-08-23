@@ -133,7 +133,7 @@ extension ChangeNicknameViewController {
     
     func initialize() {
         
-        createObservers()
+        createObserversForPresentingEmailVerification()
         initializeTextField()
         initializeButton()
     }
@@ -145,9 +145,5 @@ extension ChangeNicknameViewController {
     
     func initializeButton() {
         changeButton.layer.cornerRadius = 10
-    }
-    
-    func createObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(presentVerifyEmailVC), name: .presentVerifyEmailVC, object: nil)
     }
 }

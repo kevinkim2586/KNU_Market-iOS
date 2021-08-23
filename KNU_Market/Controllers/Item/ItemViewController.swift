@@ -348,10 +348,7 @@ extension ItemViewController {
     
     func createObservers() {
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(presentVerifyEmailVC),
-                                               name: .presentVerifyEmailVC,
-                                               object: nil)
+        createObserversForPresentingEmailVerification()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(refreshPage),

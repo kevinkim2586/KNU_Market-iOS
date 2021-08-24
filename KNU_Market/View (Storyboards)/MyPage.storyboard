@@ -139,7 +139,7 @@
             </objects>
             <point key="canvasLocation" x="6028.985507246377" y="1032.5892857142858"/>
         </scene>
-        <!--건의사항-->
+        <!--Send Developer Message View Controller-->
         <scene sceneID="PJq-Q2-oUe">
             <objects>
                 <viewController storyboardIdentifier="SendDeveloperMessageViewController" hidesBottomBarWhenPushed="YES" id="Nop-xb-tmw" customClass="SendDeveloperMessageViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
@@ -148,11 +148,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lcu-yl-fBl">
-                                <rect key="frame" x="15" y="83" width="384" height="153"/>
+                                <rect key="frame" x="15" y="83" width="384" height="95.5"/>
                                 <string key="text">(i) 혹시 건의/제안사항이 있으신가요? 
 있으시면 편하게 아래에 적어서 “보내기"를 눌러주세요. 개발자들이 참고하여 추후 업데이트에 반영하도록 하겠습니다 :)
-
-(ii) 아니면 앱을 사용하시면서 문제가 있으셨나요? 어떤 문제든지 알려주시면 저희 크누마켓팀이 검토 후 조치하도록 하겠습니다!</string>
+</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -164,7 +163,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WRU-bl-EJx">
-                                <rect key="frame" x="15" y="271" width="384" height="300"/>
+                                <rect key="frame" x="15" y="213.5" width="384" height="300"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="EpZ-tY-UQJ"/>
@@ -187,9 +186,9 @@
                             <constraint firstItem="Z2m-Mk-cpY" firstAttribute="top" secondItem="Asa-ej-Kwl" secondAttribute="top" constant="20" id="rbC-5Z-rcX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="건의사항" id="Qxc-u5-3EP">
-                        <barButtonItem key="rightBarButtonItem" title="보내기" id="NYA-Ut-g6V">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <navigationItem key="navigationItem" id="Qxc-u5-3EP">
+                        <barButtonItem key="rightBarButtonItem" image="paperplane" catalog="system" id="NYA-Ut-g6V">
+                            <color key="tintColor" name="AppDefaultColor"/>
                             <connections>
                                 <action selector="pressedSendButton:" destination="Nop-xb-tmw" id="D0Z-XG-X5X"/>
                             </connections>
@@ -197,6 +196,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="infoLabel" destination="Lcu-yl-fBl" id="RDI-uh-2R3"/>
                         <outlet property="messageTextView" destination="WRU-bl-EJx" id="F6b-SY-t29"/>
                     </connections>
                 </viewController>
@@ -737,6 +737,7 @@
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="grey my" width="27" height="27"/>
         <image name="my" width="27" height="27"/>
+        <image name="paperplane" catalog="system" width="128" height="118"/>
         <image name="pick profile image" width="195" height="195"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

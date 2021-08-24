@@ -28,6 +28,12 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     func configure(with model: Room) {
+        
+        notificationImageView.isHidden = true
+        configureImageView()
+        configureTitleLabel()
+        configureChatParticipatingCountLabel()
+        configureNotificationImageView()
                 
         if !model.imageCodes.isEmpty {
             
@@ -38,6 +44,7 @@ class ChatTableViewCell: UITableViewCell {
                                       options: .continueInBackground,
                                       completed: nil)
             chatImageView.contentMode = .scaleToFill
+            chatImageView.layer.borderWidth = 0
         } else {
             chatImageView.image = UIImage(named: Constants.Images.chatBubbleIcon)
             chatImageView.contentMode = .scaleAspectFit
@@ -46,11 +53,7 @@ class ChatTableViewCell: UITableViewCell {
         chatTitleLabel.text = model.title
         chatParticipatingCountLabel.text = "\(model.currentlyGatheredPeople)" + "/\(model.totalGatheringPeople) 명"
         
-        notificationImageView.isHidden = true
-        configureImageView()
-        configureTitleLabel()
-        configureChatParticipatingCountLabel()
-        configureNotificationImageView()
+
         
         if User.shared.chatNotificationList.contains(model.uuid) {
             configureUIWithNotification()
@@ -59,8 +62,8 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     func configureImageView() {
-        chatImageView.layer.borderWidth = 1
-        chatImageView.layer.borderColor = UIColor.clear.cgColor
+        chatImageView.layer.borderWidth = 0.5
+        chatImageView.layer.borderColor = UIColor.lightGray.cgColor
         chatImageView.layer.cornerRadius = chatImageView.bounds.height / 2
     }
     

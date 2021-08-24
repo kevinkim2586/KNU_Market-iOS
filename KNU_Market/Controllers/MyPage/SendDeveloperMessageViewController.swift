@@ -4,6 +4,7 @@ import ProgressHUD
 
 class SendDeveloperMessageViewController: UIViewController {
     
+    @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var messageTextView: UITextView!
   
     override func viewDidLoad() {
@@ -47,7 +48,15 @@ class SendDeveloperMessageViewController: UIViewController {
     
     func initialize() {
         
+        initializeInfoLabel()
         initializeTextView()
+    }
+    
+    func initializeInfoLabel() {
+        
+        infoLabel.text = "✻ 혹시 건의/제안사항이 있으신가요?\n있으시면 편하게 아래에 적어서 보내주세요.\n개발자들이 참고하여 추후 업데이트에 반영하도록 하겠습니다."
+        infoLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        infoLabel.textColor = .darkGray
     }
     
     func initializeTextView() {
@@ -59,7 +68,7 @@ class SendDeveloperMessageViewController: UIViewController {
         messageTextView.clipsToBounds = true
         messageTextView.font = UIFont.systemFont(ofSize: 15)
         messageTextView.text = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
-        messageTextView.textColor = UIColor.lightGray
+        messageTextView.textColor = .lightGray
     }
 
 }

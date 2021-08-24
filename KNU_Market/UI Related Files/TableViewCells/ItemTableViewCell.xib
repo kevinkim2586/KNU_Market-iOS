@@ -108,7 +108,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="default item icon" width="148" height="151"/>
+        <image name="default item icon" width="400" height="400"/>
         <image name="people icon" width="52" height="52"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -493,6 +493,7 @@
 		7CA6622B26413302000E0B7A /* UI Related Files */ = {
 			isa = PBXGroup;
 			children = (
+				7CC1B59426D4B28F0007F99B /* Empty States */,
 				7CC1B59126D225BE0007F99B /* Custom Alerts */,
 				7C4D13C5264524FA00CBB00A /* TableViewCells */,
 				7C8839DB2643CADB00F9F78C /* UserPickedItemImageViewCell */,
@@ -574,6 +575,13 @@
 				7CA78FF926CE02EC0019B06F /* KMTitleLabel.swift */,
 			);
 			path = "Custom Alerts";
+			sourceTree = "<group>";
+		};
+		7CC1B59426D4B28F0007F99B /* Empty States */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Empty States";
 			sourceTree = "<group>";
 		};
 		7CD1522526AA99DA00F2C466 /* Chat Models */ = {

@@ -13,8 +13,6 @@ class SearchPostViewController: UIViewController {
 
         initialize()
     }
-    
-
 }
 
 //MARK: - SearchPostViewModelDelegate
@@ -169,7 +167,6 @@ extension SearchPostViewController {
     func initializeTableView() {
         
         tableView.tableFooterView = UIView(frame: .zero)
-        //tableView.placeholderDelegate = self
         tableView.delegate = self
         tableView.dataSource = self
 

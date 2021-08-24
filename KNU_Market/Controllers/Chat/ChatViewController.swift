@@ -138,8 +138,8 @@ extension ChatViewController: ChatViewDelegate {
     }
     
     func didReceiveBanNotification() {
-        print("✏️ ChatVC - didReceiveBanNotification")
         messageInputBar.isUserInteractionEnabled = false
+        messageInputBar.isHidden = true
         viewModel.disconnect()
         viewModel.resetMessages()
         

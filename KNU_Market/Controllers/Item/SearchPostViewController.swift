@@ -70,7 +70,6 @@ extension SearchPostViewController: UISearchBarDelegate {
                                                  text: "이모티콘 검색은 지원하지 않습니다!")
             return
         }
-        
         searchBar.resignFirstResponder()
         viewModel.resetValues()
         viewModel.searchKeyword = searchKey

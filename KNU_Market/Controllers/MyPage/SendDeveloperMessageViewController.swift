@@ -6,6 +6,8 @@ class SendDeveloperMessageViewController: UIViewController {
     
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var messageTextView: UITextView!
+    
+    private let textViewPlaceholder = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,8 @@ class SendDeveloperMessageViewController: UIViewController {
     @IBAction func pressedSendButton(_ sender: UIBarButtonItem) {
         
         guard let content = messageTextView.text else { return }
+        
+        guard content != textViewPlaceholder else { return }
             
         showProgressBar()
         
@@ -67,7 +71,7 @@ class SendDeveloperMessageViewController: UIViewController {
         messageTextView.layer.borderColor = UIColor.lightGray.cgColor
         messageTextView.clipsToBounds = true
         messageTextView.font = UIFont.systemFont(ofSize: 15)
-        messageTextView.text = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
+        messageTextView.text = textViewPlaceholder
         messageTextView.textColor = .lightGray
     }
 
@@ -88,7 +92,7 @@ extension SendDeveloperMessageViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
     
         if textView.text.isEmpty {
-            textView.text = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
+            textView.text = textViewPlaceholder
             textView.textColor = UIColor.lightGray
             return
         }

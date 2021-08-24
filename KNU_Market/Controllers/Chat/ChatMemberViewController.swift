@@ -97,15 +97,13 @@ class ChatMemberViewController: UIViewController {
             
             switch result {
             case .success(_):
-                self.dismiss(animated: true) {
-                    self.showSimpleBottomAlert(with: "내보내기에 성공했습니다.👀")
-                }
+                self.dismiss(animated: true)
+                self.presentKMAlertOnMainThread(title: "강퇴 성공", message: "해당 사용자 내보내기에 성공하였습니다.", buttonTitle: "확인")
                 
                 let userInfo: [String : String] = ["uid" : uid, "nickname" : nickname]
                 showProgressBar()
                 NotificationCenter.default.post(name: .didBanUser, object: userInfo)
                 
-//                self.delegate?.didBanUser(uid: uid, nickname: nickname)
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }

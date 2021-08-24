@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmptySearchView" customModule="KNU_Market" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmptyView" customModule="KNU_Market" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="2Ek-hi-5m1"/>
                 <outlet property="imageView" destination="yCE-x5-llE" id="pkE-8s-gjX"/>
@@ -22,10 +22,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="search placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="yCE-x5-llE">
-                    <rect key="frame" x="7" y="248" width="400" height="400"/>
+                    <rect key="frame" x="57" y="298" width="300" height="300"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="irk-X6-0aj"/>
+                        <constraint firstAttribute="width" constant="300" id="kdm-nR-mr0"/>
+                    </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색 기록" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzx-o4-crs">
-                    <rect key="frame" x="177.5" y="228.5" width="59.5" height="19.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색 기록" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzx-o4-crs" userLabel="titleLabel">
+                    <rect key="frame" x="177.5" y="278.5" width="59.5" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -34,12 +38,12 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="yCE-x5-llE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0ku-Fc-p8M"/>
                 <constraint firstItem="kzx-o4-crs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="92p-4p-QIC"/>
                 <constraint firstItem="yCE-x5-llE" firstAttribute="top" secondItem="kzx-o4-crs" secondAttribute="bottom" id="H6U-7O-7fV"/>
-                <constraint firstItem="yCE-x5-llE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dZq-fv-3vq"/>
+                <constraint firstItem="yCE-x5-llE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="sQw-ws-mom"/>
+                <constraint firstItem="yCE-x5-llE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="z3C-Tc-KWr"/>
             </constraints>
-            <point key="canvasLocation" x="-109.42028985507247" y="-266.51785714285711"/>
+            <point key="canvasLocation" x="-110.14492753623189" y="-266.51785714285711"/>
         </view>
     </objects>
     <resources>

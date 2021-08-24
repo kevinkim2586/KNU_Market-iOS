@@ -35,7 +35,6 @@ class ChatViewController: MessagesViewController {
         print("✏️ title: \(chatRoomTitle)")
 
     }
-    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -95,6 +94,14 @@ extension ChatViewController: ChatViewDelegate {
         
         messagesCollectionView.scrollToLastItem()
         
+        if viewModel.messages.count == 0 {
+            
+            let emptyImageView = UIImageView()
+            emptyImageView.image = UIImage(named: "empty_chat_1")
+            emptyImageView.contentMode = .scaleAspectFit
+            messagesCollectionView.backgroundView = emptyImageView
+        }
+
         if viewModel.isFirstEntranceToChat {
             viewModel.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.enterSuffix)")
             viewModel.isFirstEntranceToChat = false
@@ -163,7 +170,7 @@ extension ChatViewController {
     
     func didFetchPreviousChats() {
         dismissProgressBar()
-
+ 
         refreshControl.endRefreshing()
         if viewModel.isFirstViewLaunch {
             
@@ -196,6 +203,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         viewModel.sendText(text)
         messagesCollectionView.scrollToLastItem()
+        
     }
 }
 
@@ -204,13 +212,17 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
     
+    
     public func currentSender() -> SenderType {
         return viewModel.mySelf
     }
-
+    
     public func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         
-        if viewModel.messages.count == 0 { return Message.defaultValue }
+        if viewModel.messages.count == 0 {
+
+            return Message.defaultValue
+        }
         return viewModel.messages[indexPath.section]
     }
     
@@ -352,7 +364,6 @@ extension ChatViewController {
           
          
         }
-        
     }
     
     func initializeInputBar() {

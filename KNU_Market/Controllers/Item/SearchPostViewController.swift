@@ -22,10 +22,10 @@ extension SearchPostViewController: SearchPostViewModelDelegate {
     func didFetchSearchList() {
         
         if viewModel.itemList.count == 0 {
-            tableView.showEmptyView(with: "검색 결과가 없습니다.🤔")
+            tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
+                                    text: "검색 결과가 없습니다.")
         }
-        
-        print("✏️ SearchPostVC - didFetchSearchList")
+  
         tableView.reloadData()
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
@@ -33,11 +33,11 @@ extension SearchPostViewController: SearchPostViewModelDelegate {
     
     func failedFetchingSearchList(with error: NetworkError) {
         
-        print("✏️ SearchPostVC - failedFetchingSearchList")
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
         
-        tableView.showEmptyView(with: "검색 결과 불러오기에 실패했습니다. 다시 시도해 주세요.😥")
+        tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
+                                text: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.")
     }
 }
 
@@ -155,7 +155,7 @@ extension SearchPostViewController {
         
         initializeSearchBar()
         initializeTableView()
-        
+//        searchBar.becomeFirstResponder()
     }
     
     func initializeSearchBar() {

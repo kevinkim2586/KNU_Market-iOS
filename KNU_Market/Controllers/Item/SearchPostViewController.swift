@@ -23,7 +23,7 @@ extension SearchPostViewController: SearchPostViewModelDelegate {
         
         if viewModel.itemList.count == 0 {
             tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
-                                    text: "검색 결과가 없습니다.")
+                                    text: Constants.placeHolderTitle.emptySearchTitleList.randomElement()!)
         }
   
         tableView.reloadData()

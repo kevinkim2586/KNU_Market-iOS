@@ -36,7 +36,9 @@ extension ChatListViewController: ChatListViewModelDelegate {
         chatListTableView.refreshControl?.endRefreshing()
         
         if viewModel.roomList.count == 0 {
-            chatListTableView.showEmptyView(with: "참여 중인 공구가 없습니다.🧐")
+            chatListTableView.showEmptyView(imageName: Constants.Images.emptyChatList,
+                                            text: "아직 작성하신 공구글이 없네요!")
+            chatListTableView.tableFooterView = UIView(frame: .zero)
         }
 
         chatListTableView.reloadData()

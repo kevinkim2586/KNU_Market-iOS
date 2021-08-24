@@ -1,10 +1,9 @@
 import UIKit
 import SDWebImage
-import HGPlaceholders
 
 class MyPostsViewController: UIViewController {
     
-    @IBOutlet var tableView: TableView!
+    @IBOutlet var tableView: UITableView!
     
     private let refreshControl = UIRefreshControl()
     private var selectedIndex: Int?
@@ -39,11 +38,17 @@ extension MyPostsViewController: HomeViewModelDelegate {
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        if viewModel.itemList.count == 0 {
+            tableView.showEmptyView(imageName: Constants.Images.emptyChatList,
+                                    text: "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!")
+        }
     }
     
     func failedFetchingItemList(with error: NetworkError) {
         
-        tableView.showNoResultsPlaceholder()
+        tableView.showEmptyView(imageName: Constants.Images.emptyChatList,
+                                text: "오류가 발생했습니다!\n잠시 후 다시 시도해주세요.")
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)

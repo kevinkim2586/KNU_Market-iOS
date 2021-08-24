@@ -616,7 +616,7 @@
         <scene sceneID="RK9-bN-jLe">
             <objects>
                 <viewController storyboardIdentifier="MyPostsViewController" hidesBottomBarWhenPushed="YES" id="uXb-OZ-i1f" userLabel="MyPostsViewController" customClass="MyPostsViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="d24-Bv-Qpa" customClass="TableView" customModule="HGPlaceholders">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="d24-Bv-Qpa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

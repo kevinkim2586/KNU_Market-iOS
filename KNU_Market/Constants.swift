@@ -187,12 +187,7 @@ struct Constants {
         
         static let defaultFormat                = "yyyy-MM-dd HH:mm:ss"
     }
-    
-    struct URL {
         
-
-    }
-    
     struct ChatSuffix {
         
         static let emptySuffix                  = "__EMPTY_SUFFIX"
@@ -202,6 +197,15 @@ struct Constants {
         static let rawBanSuffix                 = "__BAN_SUFFIX"
         static let rawEnterSuffix               = "__ENTER_SUFFIX"
         static let rawExitSuffix                = "__EXIT_SUFFIX"
+    }
+    
+    struct placeHolderTitle {
+        
+        static let emptySearchTitleList         = ["지금 당신이 공구하고 싶은 것은?",
+                                                   "지금 호반우가 공구하고 싶은 것은...?",
+                                                   "검색 결과가 없네요!\n지금 무엇이 필요하신가요?",
+                                                   "검색 결과가 없네요!\n지금 공구하고 싶은게 뭔가요?"]
+        
     }
 }
 

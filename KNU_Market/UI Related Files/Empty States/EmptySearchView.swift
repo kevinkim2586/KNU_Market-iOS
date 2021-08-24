@@ -32,7 +32,7 @@ class EmptySearchView: UIView {
     func configureTitleLabel() {
         
         titleLabel.text = "검색 결과가 없습니다."
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        titleLabel.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
         titleLabel.textColor = .darkGray
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 2

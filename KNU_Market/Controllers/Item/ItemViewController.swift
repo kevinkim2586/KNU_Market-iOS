@@ -48,7 +48,6 @@ class ItemViewController: UIViewController {
         
         print("✏️ ItemVC - pageID: \(pageID)")
         
-        viewModel.fetchItemDetails(for: pageID)
         initialize()
     }
     
@@ -210,7 +209,7 @@ extension ItemViewController: ItemViewModelDelegate {
         scrollView.isHidden = true
         bottomView.isHidden = true
         
-        self.showSimpleBottomAlertWithAction(message: "존재하지 않는 글입니다 🧐",
+        showSimpleBottomAlertWithAction(message: "존재하지 않는 글입니다 🧐",
                                              buttonTitle: "홈으로",
                                              action: {
                                                 self.navigationController?.popViewController(animated: true)
@@ -242,7 +241,7 @@ extension ItemViewController: ItemViewModelDelegate {
     }
     
     func didMarkPostDone() {
-        self.showSimpleBottomAlert(with: "모집 완료를 축하합니다.🎉")
+        showSimpleBottomAlert(with: "모집 완료를 축하합니다.🎉")
         refreshPage()
     }
     
@@ -250,7 +249,7 @@ extension ItemViewController: ItemViewModelDelegate {
         
         dismissProgressBar()
 
-        self.showSimpleBottomAlert(with: error.errorDescription)
+        showSimpleBottomAlert(with: error.errorDescription)
     }
     
     func didCancelMarkPostDone() {
@@ -260,7 +259,7 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func failedCancelMarkPostDone(with error: NetworkError) {
     
-        self.showSimpleBottomAlert(with: error.errorDescription)
+        showSimpleBottomAlert(with: error.errorDescription)
     }
     
     func didEnterChat(isFirstEntrance: Bool) {
@@ -285,6 +284,10 @@ extension ItemViewController: ItemViewModelDelegate {
                                    buttonTitle: "확인")
 
         enterChatButton.loadingIndicator(false)
+    }
+    
+    func failedLoadingData(with error: NetworkError) {
+        showSimpleBottomAlert(with: error.errorDescription)
     }
     
 }
@@ -327,6 +330,9 @@ extension ItemViewController {
     }
     
     func initialize() {
+        
+        viewModel.fetchItemDetails(for: pageID)
+        viewModel.fetchEnteredRoomInfo()
         
         viewModel.delegate = self
         

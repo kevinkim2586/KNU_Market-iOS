@@ -80,7 +80,6 @@ class HomeViewModel {
             
             guard let self = self else { return }
             
-            
             switch result {
             case .success(let chatRoom):
         
@@ -94,9 +93,9 @@ class HomeViewModel {
         }
     }
     
-    
     func resetValues() {
          
+        User.shared.joinedChatRoomPIDs.removeAll()
         itemList.removeAll()
         isFetchingData = false
         index = 1

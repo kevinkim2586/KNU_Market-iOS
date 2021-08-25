@@ -1,14 +1,15 @@
 import UIKit
 
 class DeveloperInfoViewController: UIViewController {
-    
-    @IBOutlet weak var detailLabel: UILabel!
 
+    @IBOutlet weak var developerInfoImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        detailLabel.text = "추후 작성 예정입니다 👻"
-
+        self.title = "팀 정보"
+        
+        developerInfoImageView.contentMode = .scaleAspectFit
     }
     
 

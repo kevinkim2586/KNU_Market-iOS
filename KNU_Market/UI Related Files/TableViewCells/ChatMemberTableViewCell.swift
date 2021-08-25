@@ -92,6 +92,7 @@ class ChatMemberTableViewCell: UITableViewCell {
                 self?.profileImageView.image = UIImage(named: Constants.Images.chatMemberDefaultImage)
                 self?.nicknameLabel.text = "정보 불러오기 실패"
                 self?.crownImageView.isHidden = true
+                self?.reportUserButton.isHidden = true
                 return
             }
         }

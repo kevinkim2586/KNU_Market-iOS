@@ -130,8 +130,10 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configure(with: cellVM.userUID, postUploaderUID: postUploaderUID)
              
         } else {
-            cell.nicknameLabel.text = "사용자 정보 불러오기 실패🧐"
+            cell.nicknameLabel.text = "사용자 정보 불러오기 실패 🧐"
             cell.reportUserButton.isHidden = true
+            cell.crownImageView.isHidden = true
+            cell.profileImageView.image = UIImage(named: Constants.Images.chatMemberDefaultImage)
         }
     
         tableView.tableFooterView = UIView(frame: .zero)

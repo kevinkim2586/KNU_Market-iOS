@@ -153,13 +153,18 @@ extension SearchPostViewController {
     
     func initialize() {
         
+        
+        tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
+                                text: "지금 당신이 공구하고 싶은 것은?")
+        
+        
+        
         viewModel.delegate = self
         
         self.title = "공구 글 검색"
         
         initializeSearchBar()
         initializeTableView()
-//        searchBar.becomeFirstResponder()
     }
     
     func initializeSearchBar() {

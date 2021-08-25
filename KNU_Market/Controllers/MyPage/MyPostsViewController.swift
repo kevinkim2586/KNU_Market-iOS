@@ -140,12 +140,12 @@ extension MyPostsViewController {
     
     func initialize() {
         
+        self.title = "내가 올린 공구"
+        
         createObserversForPresentingEmailVerification()
         viewModel.delegate = self
         viewModel.fetchItemList(fetchCurrentUsers: true)
         initializeTableView()
-        
-
     }
     
     func initializeTableView() {

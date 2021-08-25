@@ -88,9 +88,10 @@ class ChatMemberTableViewCell: UITableViewCell {
                 
                 
         
-            case .failure:
+            case .failure(let error):
+                
+                self?.nicknameLabel.text = error == .E108 ? "탈퇴한 유저" : "정보 불러오기 실패"
                 self?.profileImageView.image = UIImage(named: Constants.Images.chatMemberDefaultImage)
-                self?.nicknameLabel.text = "정보 불러오기 실패"
                 self?.crownImageView.isHidden = true
                 self?.reportUserButton.isHidden = true
                 return

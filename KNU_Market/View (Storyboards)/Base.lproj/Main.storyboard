@@ -101,11 +101,26 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxM-on-3oq">
+                                <rect key="frame" x="141" y="235" width="93.5" height="32.5"/>
+                                <color key="tintColor" red="0.69638150929999998" green="0.34167456629999998" blue="0.32939994340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="27"/>
+                                <color key="textColor" red="0.69638150929999998" green="0.34167456629999998" blue="0.32939994340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="우리가 함께 사는 곳" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kif-x2-Kgv">
+                                <rect key="frame" x="126" y="272.5" width="123" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <color key="textColor" red="0.7784514427" green="0.34576368330000001" blue="0.32939559219999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bxM-on-3oq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2lS-aI-61g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0vi-xp-EMA" secondAttribute="trailing" constant="70" id="7SR-bj-isA"/>
+                            <constraint firstItem="bxM-on-3oq" firstAttribute="top" secondItem="286-Rl-XaC" secondAttribute="bottom" constant="5" id="HDc-2G-8wq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="X6J-cK-goV" secondAttribute="trailing" constant="70" id="Hsj-XI-szG"/>
                             <constraint firstItem="ihx-1m-86D" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="PIv-mG-Uzb"/>
                             <constraint firstItem="B89-Fh-cNR" firstAttribute="top" secondItem="kfM-0r-VwU" secondAttribute="bottom" constant="5" id="ah4-7r-rDa"/>
@@ -120,6 +135,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="B89-Fh-cNR" secondAttribute="bottom" constant="20" id="qkh-uY-GdF"/>
                             <constraint firstItem="B89-Fh-cNR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rLp-g1-0VP"/>
                             <constraint firstItem="0vi-xp-EMA" firstAttribute="top" secondItem="ihx-1m-86D" secondAttribute="bottom" constant="15" id="unn-DH-hHO"/>
+                            <constraint firstItem="kif-x2-Kgv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xPE-gZ-hN9"/>
+                            <constraint firstItem="kif-x2-Kgv" firstAttribute="top" secondItem="bxM-on-3oq" secondAttribute="bottom" constant="5" id="yCW-WK-WhB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zqb-yF-zj6"/>

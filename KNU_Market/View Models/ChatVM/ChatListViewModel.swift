@@ -47,9 +47,14 @@ extension ChatListViewModel {
         
                 chatRoom.forEach { chat in
                     User.shared.joinedChatRoomPIDs.append(chat.uuid)
+                    
+                    if User.shared.chatNotificationList.contains(chat.uuid) {
+                        self.roomList.insert(chat, at: 0)
+                    } else {
+                        self.roomList.append(chat)
+                    }
                 }
                 
-                self.roomList.append(contentsOf: chatRoom)
                 self.delegate?.didFetchChatList()
                 
             case .failure(let error):

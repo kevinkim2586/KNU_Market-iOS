@@ -534,8 +534,9 @@ extension ItemViewController {
         
         slideShow.contentScaleMode = .scaleAspectFill
         slideShow.slideshowInterval = 5
-        slideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 60))
+        slideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: 50))
     }
+    
     
     @objc func pressedImage() {
         

@@ -199,14 +199,11 @@ extension HomeViewController {
         
         viewModel.delegate = self
         itemTableView.placeholderDelegate = self
-    
-        viewModel.fetchEnteredRoomInfo()
-        viewModel.loadUserProfile()
-        viewModel.fetchItemList()
         
+        viewModel.loadInitialMethods()
+
         initializeTableView()
         initializeAddButton()
-        
         createObservers()
     }
     

@@ -35,17 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self?.getNotificationSettings()
             }
             
-            
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
         
+        if User.shared.isLoggedIn {
+            application.registerForRemoteNotifications()
+        }
         
-        application.registerForRemoteNotifications()
-        
-      
         Messaging.messaging().delegate = self
         
         Messaging.messaging().token { token, error in
@@ -54,8 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if let token = token {
                 print("✏️ FCM Registration Token: \(token)")
                 
+                // 아래는 로그인이 되어 있는 경우에만 실행될 수 있도록 변경
                 UserRegisterValues.shared.fcmToken = token
-                UserManager.shared.updateUserFCMToken(with: token)
             }
         }
         
@@ -171,6 +170,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         print("✏️ userNotificationCenter willPresent")
     
+        if !User.shared.isLoggedIn { return }
+        
+        
+        
         let userInfo = notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
@@ -227,6 +230,11 @@ extension AppDelegate {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
+    }
+    
+    func unregisterFromReceivingPushNotifications() {
+        
+        
     }
     
 }

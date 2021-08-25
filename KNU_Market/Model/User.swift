@@ -154,6 +154,8 @@ class User {
 extension User {
 
     func resetAllUserInfo() {
+        
+        UIApplication.shared.unregisterForRemoteNotifications()
 
         id = ""
         nickname = ""

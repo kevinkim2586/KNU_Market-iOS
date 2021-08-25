@@ -214,6 +214,7 @@ class UserManager {
                     do {
                         let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)  
                         self.saveUserLoginInfo(with: decodedData)
+                        self.updateUserFCMToken(with: decodedData.fcmToken)
                         
                         
                         print("✏️ User Manager - loadUserProfile() success")
@@ -376,7 +377,8 @@ class UserManager {
                     User.shared.fcmToken = token
                     
                 default:
-                    print("❗️ UserManager - updateUserFCMToken FAILED")
+                    let error = NetworkError.returnError(json: response.data ?? Data())
+                    print("❗️ UserManager - updateUserFCMToken FAILED with error: \(error.errorDescription) and statusCode: \(statusCode)")
                 }
             }
     }

@@ -740,14 +740,6 @@
                             <constraint firstItem="2la-rv-qFn" firstAttribute="leading" secondItem="rKQ-SO-F9v" secondAttribute="leading" id="ptk-uY-n72"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="신규 매장 등록" id="uHR-gQ-oS8">
-                        <barButtonItem key="rightBarButtonItem" title="올리기" id="n2W-F0-iDg">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="pressedFinishButton:" destination="h2g-qB-gMC" id="i1y-iH-nV6"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="developerInfoImageView" destination="6zm-kM-PjQ" id="PbY-Y7-nvf"/>
                     </connections>

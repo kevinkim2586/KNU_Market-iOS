@@ -148,7 +148,6 @@ struct Constants {
         static let emptyChatRandomImage         = ["empty_chat_1","empty_chat_2"]
         static let emptyChatList                = "empty_chatList"
         
-        
         static let chatBubbleIcon               = "chat_bubble_icon"
         
         static let cameraIcon                   = "camera icon"
@@ -206,6 +205,8 @@ struct Constants {
                                                    "지금 호반우가 공구하고 싶은 것은...?",
                                                    "검색 결과가 없네요!\n지금 무엇이 필요하신가요?",
                                                    "검색 결과가 없네요!\n지금 공구하고 싶은게 뭔가요?"]
+        static let emptyChatRandomTitle         = ["개인정보 보호를 위해 카카오톡 ID,\n전화번호 등의 정보는 공개하지 않는\n것을 권장합니다!",
+                                                   "소누 거래물품 들고 달려가는 중~!"]
         
     }
 }

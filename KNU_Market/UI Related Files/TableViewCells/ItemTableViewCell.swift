@@ -76,6 +76,7 @@ class ItemTableViewCell: UITableViewCell {
         } else {
             itemImageView.image = viewModel.defaultImage
         }
+    
         itemImageView.contentMode = .scaleAspectFill
         itemImageView.layer.cornerRadius = 5
     }

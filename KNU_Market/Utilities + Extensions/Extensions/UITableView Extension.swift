@@ -4,10 +4,9 @@ extension UITableView {
     
     func showEmptyView(imageName: String, text: String) {
         
-        let emptySearchView = EmptyView()
-        emptySearchView.configure(imageName: imageName, text: text)
-
-        self.backgroundView = emptySearchView
+        let emptyView = EmptyView()
+        emptyView.configure(imageName: imageName, text: text)
+        self.backgroundView = emptyView
     }
     
     func restoreEmptyView() {

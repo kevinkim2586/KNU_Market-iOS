@@ -528,6 +528,7 @@ extension ItemViewController {
             let recognizer = UITapGestureRecognizer(target: self,
                                                     action: #selector(self.pressedImage))
             slideShow.addGestureRecognizer(recognizer)
+            slideShow.contentMode = .scaleAspectFit
         } else {
             slideShow.setImageInputs([ImageSource(image: UIImage(named: Constants.Images.defaultItemImage)!)])
         }
@@ -541,6 +542,6 @@ extension ItemViewController {
     @objc func pressedImage() {
         
         let fullScreenController = slideShow.presentFullScreenController(from: self)
-        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .gray, color: nil)
     }
 }

@@ -94,14 +94,8 @@ extension ChatViewController: ChatViewDelegate {
         
         messagesCollectionView.scrollToLastItem()
         
-        if viewModel.messages.count == 0 {
-            
-            let emptyImageView = UIImageView()
-            emptyImageView.image = UIImage(named: Constants.Images.emptyChatRandomImage.randomElement()!)
-            emptyImageView.contentMode = .scaleAspectFit
-//            messagesCollectionView.backgroundView = emptyImageView
-        }
-
+        print("✏️ viewModel.MessageCount: \(viewModel.messages.count)")
+        
         if viewModel.isFirstEntranceToChat {
             viewModel.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.enterSuffix)")
             viewModel.isFirstEntranceToChat = false
@@ -170,6 +164,8 @@ extension ChatViewController {
     
     func didFetchPreviousChats() {
         dismissProgressBar()
+        
+        messagesCollectionView.backgroundView = nil
  
         refreshControl.endRefreshing()
         if viewModel.isFirstViewLaunch {
@@ -187,6 +183,7 @@ extension ChatViewController {
     
     func didFetchEmptyChat() {
         refreshControl.endRefreshing()
+        messagesCollectionView.showEmptyChatView()
     }
     
     func failedFetchingPreviousChats(with error: NetworkError) {
@@ -219,10 +216,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     public func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         
-        if viewModel.messages.count == 0 {
-
-            return Message.defaultValue
-        }
+        if viewModel.messages.count == 0 { return Message.defaultValue }
         return viewModel.messages[indexPath.section]
     }
     
@@ -236,6 +230,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     // Top Label
     func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        
+        if viewModel.messages.count == 0 { return 0 }
         
         if viewModel.messages[indexPath.section].userUID == User.shared.userUID { return 0 }
         else { return 12 }

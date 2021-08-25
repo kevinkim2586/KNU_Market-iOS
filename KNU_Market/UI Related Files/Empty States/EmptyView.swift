@@ -31,17 +31,15 @@ class EmptyView: UIView {
     
     func configureTitleLabel() {
         
-        titleLabel.text = "검색 결과가 없습니다."
         titleLabel.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
         titleLabel.textColor = .darkGray
         titleLabel.textAlignment = .center
-        titleLabel.numberOfLines = 2
+        titleLabel.numberOfLines = 3
         titleLabel.sizeToFit()
     }
     
     func configureImageView() {
         
-        imageView.image = UIImage(named: "search")
         imageView.contentMode = .scaleAspectFit
     }
     

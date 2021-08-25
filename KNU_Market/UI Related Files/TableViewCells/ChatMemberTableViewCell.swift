@@ -14,12 +14,12 @@ class ChatMemberTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var reportUserButton: UIButton!
+    @IBOutlet weak var crownImageView: UIImageView!
     
     private var imageCode: String?
     private var nickname: String?
     private var userUID: String?
     private var postUploaderUID: String?
-
     
     weak var delegate: ChatMemberTableViewCellDelegate?
     
@@ -80,11 +80,14 @@ class ChatMemberTableViewCell: UITableViewCell {
                 self?.profileImageView.contentMode = .scaleToFill
                 
                 // 만약 본인 Cell 이면 신고하기 버튼 숨김 처리
-                DispatchQueue.main.async {
-                    if self?.userUID == User.shared.userUID {
-                        self?.reportUserButton.isHidden = true
-                    }
+                if self?.userUID == User.shared.userUID {
+                    self?.reportUserButton.isHidden = true
                 }
+                
+                self?.crownImageView.isHidden = self?.userUID == self?.postUploaderUID ? false : true
+                
+                
+        
             case .failure:
                 self?.nicknameLabel.text = "정보 불러오기 실패"
                 return
@@ -95,6 +98,5 @@ class ChatMemberTableViewCell: UITableViewCell {
     func initializeUI() {
         
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-//        profileImageView.contentMode = .scaleAspectFill
     }
 }

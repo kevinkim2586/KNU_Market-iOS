@@ -6,7 +6,7 @@ class ChatMemberViewController: UIViewController {
     @IBOutlet weak var postTitleLabel: UILabel!
     @IBOutlet weak var postMemberCountLabel: UILabel!
     @IBOutlet weak var memberTableView: UITableView!
-    
+  
     var roomInfo: RoomInfo?
     var filteredMembers: [Member]?
     var postUploaderUID: String?
@@ -65,7 +65,6 @@ class ChatMemberViewController: UIViewController {
                     if selectedOk {
                         showProgressBar()
                         NotificationCenter.default.post(name: .didChooseToExitPost, object: nil)
-//                        self.delegate?.didChooseToExitPost()
                         self.dismiss(animated: true)
                     }
                 }
@@ -88,7 +87,6 @@ class ChatMemberViewController: UIViewController {
             showSimpleBottomAlert(with: NetworkError.E000.errorDescription)
             return
         }
-        
         ChatManager.shared.banUser(userUID: uid, in: roomUID) { [weak self] result in
             
             guard let self = self else { return }

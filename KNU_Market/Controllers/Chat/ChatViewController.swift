@@ -97,9 +97,9 @@ extension ChatViewController: ChatViewDelegate {
         if viewModel.messages.count == 0 {
             
             let emptyImageView = UIImageView()
-            emptyImageView.image = UIImage(named: "empty_chat_1")
+            emptyImageView.image = UIImage(named: Constants.Images.emptyChatRandomImage.randomElement()!)
             emptyImageView.contentMode = .scaleAspectFit
-            messagesCollectionView.backgroundView = emptyImageView
+//            messagesCollectionView.backgroundView = emptyImageView
         }
 
         if viewModel.isFirstEntranceToChat {

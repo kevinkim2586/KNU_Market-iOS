@@ -8,6 +8,8 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
     @IBOutlet weak var detailLineLabel: UILabel!
     @IBOutlet weak var userInputTextView: UITextView!
     
+    private let textViewPlaceholder = "✏️ 개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요."
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,8 +23,11 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
     
     @IBAction func pressedDoneButton(_ sender: UIBarButtonItem) {
         
+        guard var feedback = userInputTextView.text else { return }
+        guard feedback != textViewPlaceholder else { return }
+        
         showProgressBar()
-        let feedback = "회원 탈퇴 사유: \(userInputTextView.text ?? "(따로 기입하지 않음)")"
+        feedback = "회원 탈퇴 사유: \(feedback))"
         
         let group = DispatchGroup()
         group.enter()
@@ -32,8 +37,8 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
             
             switch result {
             case .success: break
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: "피드백 보내기에 실패하였습니다.")
+            case .failure(_):
+                self.showSimpleBottomAlert(with: "피드백 보내기에 실패하였습니다. 잠시 후 다시 시도해주세요.")
             }
             group.leave()
         }
@@ -54,7 +59,6 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
             }
         }
     }
-    
 }
 
 //MARK: - UI Configuration & Initialization
@@ -88,7 +92,7 @@ extension UnregisterUser_InputSuggestionViewController {
         userInputTextView.layer.borderColor = UIColor.lightGray.cgColor
         userInputTextView.clipsToBounds = true
         userInputTextView.font = UIFont.systemFont(ofSize: 15)
-        userInputTextView.text = "✏️ 개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요."
+        userInputTextView.text = textViewPlaceholder
         userInputTextView.textColor = UIColor.lightGray
     }
 }
@@ -108,7 +112,7 @@ extension UnregisterUser_InputSuggestionViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
     
         if textView.text.isEmpty {
-            textView.text = "✏️ 개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요."
+            textView.text = textViewPlaceholder
             textView.textColor = UIColor.lightGray
             return
         }

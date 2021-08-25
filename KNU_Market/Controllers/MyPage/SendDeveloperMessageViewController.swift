@@ -46,10 +46,8 @@ class SendDeveloperMessageViewController: UIViewController {
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
         }
-        
     }
-    
-    
+
     func initialize() {
         
         initializeInfoLabel()

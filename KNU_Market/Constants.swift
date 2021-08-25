@@ -145,6 +145,7 @@ struct Constants {
         static let emptySearchPlaceholder       = "search placeholder"
         static let emptyChat_1                  = "empty_chat_1"
         static let emptyChat_2                  = "empty_chat_2"
+        static let emptyChatRandomImage         = ["empty_chat_1","empty_chat_2"]
         static let emptyChatList                = "empty_chatList"
         
         

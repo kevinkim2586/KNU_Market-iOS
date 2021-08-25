@@ -26,7 +26,12 @@ class ChatListViewController: UIViewController {
         viewModel.fetchChatList()
     }
     
+    @IBAction func pressedLeftBarButton(_ sender: UIBarButtonItem) {
+        let topRow = IndexPath(row: 0, section: 0)
+        self.chatListTableView.scrollToRow(at: topRow, at: .top, animated: true)
+    }
 }
+
 //MARK: - ChatListViewModelDelegate
 
 extension ChatListViewController: ChatListViewModelDelegate {

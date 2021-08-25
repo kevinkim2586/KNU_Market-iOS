@@ -15,8 +15,6 @@ class ChatViewController: MessagesViewController {
     var postUploaderUID: String = ""
     var isFirstEntrance: Bool = false
     
-//    weak var chatMemberViewDelegate: ChatMemberViewDelegate?
-    
     deinit {
         print("❗️ ChatViewController has been DEINITIALIZED")
     }
@@ -94,8 +92,6 @@ extension ChatViewController: ChatViewDelegate {
         
         messagesCollectionView.scrollToLastItem()
         
-        print("✏️ viewModel.MessageCount: \(viewModel.messages.count)")
-        
         if viewModel.isFirstEntranceToChat {
             viewModel.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.enterSuffix)")
             viewModel.isFirstEntranceToChat = false
@@ -139,7 +135,6 @@ extension ChatViewController: ChatViewDelegate {
         
         messagesCollectionView.isScrollEnabled = false
         
-        
         presentKMAlertOnMainThread(title: "강퇴 당하셨습니다.", message: "방장에 의해 강퇴되었습니다. 더 이상 채팅에 참여가 불가능합니다.🤔", buttonTitle: "확인")
        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -163,15 +158,14 @@ extension ChatViewController {
     }
     
     func didFetchPreviousChats() {
-        dismissProgressBar()
         
+        dismissProgressBar()
         messagesCollectionView.backgroundView = nil
- 
         refreshControl.endRefreshing()
+        
         if viewModel.isFirstViewLaunch {
             
             viewModel.isFirstViewLaunch = false
-
             messagesCollectionView.reloadData()
             messagesCollectionView.scrollToLastItem()
 
@@ -179,15 +173,21 @@ extension ChatViewController {
             messagesCollectionView.reloadDataAndKeepOffset()
         }
 
+        if viewModel.messages.count == 0 {
+            messagesCollectionView.showEmptyChatView()
+        }
     }
     
     func didFetchEmptyChat() {
         refreshControl.endRefreshing()
-        messagesCollectionView.showEmptyChatView()
+        
+        if viewModel.messages.count == 0 {
+            messagesCollectionView.showEmptyChatView()
+        }
     }
     
     func failedFetchingPreviousChats(with error: NetworkError) {
-        print("❗️ ChatVC - failedFetchingPreviousChats")
+        presentKMAlertOnMainThread(title: "서비스 오류 발생", message: error.errorDescription, buttonTitle: "확인")
         dismissProgressBar()
         refreshControl.endRefreshing()
     }

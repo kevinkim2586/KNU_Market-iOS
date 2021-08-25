@@ -181,10 +181,7 @@ extension HomeViewController: PlaceholderDelegate {
 extension HomeViewController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        
-        let selectedIndex = tabBarController.selectedIndex
-        
-
+     
         
     }
 }

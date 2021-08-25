@@ -102,6 +102,9 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="8Bu-j3-Ooa"/>
                         <barButtonItem key="leftBarButtonItem" title="채팅" style="done" id="xS7-7M-eYA">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="pressedLeftBarButton:" destination="0Xt-JH-qCD" id="LqJ-9d-oSN"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -141,8 +144,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chat" width="28" height="28"/>
-        <image name="grey chat" width="28" height="28"/>
+        <image name="chat" width="27" height="27"/>
+        <image name="grey chat" width="27" height="27"/>
         <image name="people icon" width="52" height="52"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -153,9 +153,8 @@ extension SearchPostViewController {
     
     func initialize() {
         
-        
         tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
-                                text: "지금 당신이 공구하고 싶은 것은?")
+                                text: Constants.placeHolderTitle.prepareSearchTitleList.randomElement()!)
         
         
         

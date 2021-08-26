@@ -93,12 +93,6 @@ class HomeViewModel {
         }
     }
     
-    //MARK: - 매번 앱 킬 때마다 사용자 FCM Token 최신화
-    func updateUserFCMToken() {
-        
-        UserManager.shared.updateUserFCMToken(with: UserRegisterValues.shared.fcmToken)
-    }
-    
     func loadInitialMethods() {
         
         fetchEnteredRoomInfo()

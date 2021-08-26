@@ -21,6 +21,7 @@ class ChatListViewModel {
     
     init() {
         createObservers()
+        updateUserFCMToken()
     }
 }
 
@@ -46,27 +47,25 @@ extension ChatListViewModel {
             
             case .success(let chatRoom):
                 
-                var array: [String] = []
-        
+                var count = 0
+            
                 chatRoom.forEach { chat in
                     User.shared.joinedChatRoomPIDs.append(chat.uuid)
                     
                     if User.shared.chatNotificationList.contains(chat.uuid) {
                         self.roomList.insert(chat, at: 0)
+                        count += 1
                     } else {
                         self.roomList.append(chat)
                     }
-                    
-                    array.append(chat.uuid)
-                    
+                }
+
+                // 알림 숫자가 안 맞을 시 그냥 초기화
+                if count != User.shared.chatNotificationList.count {
+                    ChatNotifications.list.removeAll()
                 }
                 
-                
-                
-                
-                
-                
-                
+
                 self.delegate?.didFetchChatList()
                 
             case .failure(let error):
@@ -79,7 +78,7 @@ extension ChatListViewModel {
     // 공구 나가기
     func exitPost(at indexPath: IndexPath) {
         
-        let roomPID = self.roomList[indexPath.row].uuid
+        let roomPID = roomList[indexPath.row].uuid
         
             ChatManager.shared.changeJoinStatus(function: .exit,
                                                 pid: roomPID) { [weak self] result in
@@ -91,7 +90,6 @@ extension ChatListViewModel {
                     self.delegate?.didExitPost(at: indexPath)
                 
                 case .failure(let error):
-                    
                     self.delegate?.failedExitingPost(with: error)
                 }
             }
@@ -128,7 +126,7 @@ extension ChatListViewModel {
 
     func currentRoomIsUserUploaded(at index: Int) -> Bool {
         
-        if self.roomList[index].userUID == User.shared.userUID {
+        if roomList[index].userUID == User.shared.userUID {
             return true
         } else {
             return false
@@ -141,7 +139,10 @@ extension ChatListViewModel {
                                                selector: #selector(fetchChatList),
                                                name: .getChatList,
                                                object: nil)
-        
+
     }
     
+    func updateUserFCMToken() {
+        UserManager.shared.updateUserFCMToken(with: User.shared.fcmToken)
+    }
 }

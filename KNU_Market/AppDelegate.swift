@@ -52,9 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("❗️ Error fetching FCM registration token: \(error)")
             } else if let token = token {
                 print("✏️ FCM Registration Token: \(token)")
-                
+
                 // 아래는 로그인이 되어 있는 경우에만 실행될 수 있도록 변경
-                UserRegisterValues.shared.fcmToken = token
+                User.shared.fcmToken = token
             }
         }
         

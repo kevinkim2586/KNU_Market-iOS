@@ -16,7 +16,6 @@ extension Message {
     }
     
     var date: String {
-        print("✏️ dateBefore: \(self.sentDate)")
         return self.sentDate.getDateStringForChatBottomLabel()
     }
     

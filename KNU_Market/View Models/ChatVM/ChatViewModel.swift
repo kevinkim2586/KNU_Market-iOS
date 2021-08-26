@@ -135,7 +135,6 @@ extension ChatViewModel {
             let chatText = receivedTextInJSON["comment"].stringValue
 
             let chatMessage = filterChat(text: chatText, isFromSocket: true)
-            print("✏️ receivedText: \(chatMessage)")
 
             guard chatMessage != Constants.ChatSuffix.emptySuffix else { return }
         

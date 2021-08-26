@@ -248,7 +248,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         
         if viewModel.messages.count == 0 { return nil }
-        print("✏️ date: \(viewModel.messages[indexPath.section].date)")
         return NSAttributedString(string: viewModel.messages[indexPath.section].date,
                                   attributes: [.font: UIFont.systemFont(ofSize: 10), .foregroundColor: UIColor.lightGray])
     }

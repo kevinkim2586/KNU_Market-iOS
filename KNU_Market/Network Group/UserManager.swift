@@ -212,9 +212,10 @@ class UserManager {
                     do {
                         let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)  
                         self.saveUserLoginInfo(with: decodedData)
-                        self.updateUserFCMToken(with: decodedData.fcmToken)
                         
-                        print("✏️ User Manager - loadUserProfile() success")
+                        
+                        print("✏️ UserManager - loadUserProfile() success")
+                        print("✏️ UserManager - loadUserProfile FCM TOKEN: \(decodedData.fcmToken)")
                         completion(.success(decodedData))
                         
                     } catch {
@@ -367,9 +368,8 @@ class UserManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
                 case 201:
-                    print("✏️ UserManager - updateUserFCMToken SUCCESS")
+                    print("✏️ UserManager - updateUserFCMToken SUCCESS with token: \(token)")
                     User.shared.fcmToken = token
                     
                 default:
@@ -517,7 +517,7 @@ extension UserManager {
     
     func saveUserLoginInfo(with model: LoadProfileResponseModel) {
         
-        print("✏️ nickname: \(model.nickname)")
+
         
         User.shared.userUID = model.uid
         User.shared.email = model.email

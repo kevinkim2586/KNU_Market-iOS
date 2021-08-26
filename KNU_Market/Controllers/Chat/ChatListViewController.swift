@@ -9,17 +9,13 @@ class ChatListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("✏️ noti: \(User.shared.chatNotificationList)")
-        
         UIApplication.shared.applicationIconBadgeNumber = User.shared.chatNotificationList.count
-        
         let center = UNUserNotificationCenter.current()
         center.removeAllDeliveredNotifications()
         
@@ -38,6 +34,8 @@ class ChatListViewController: UIViewController {
 extension ChatListViewController: ChatListViewModelDelegate {
 
     func didFetchChatList() {
+        
+        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
         
         chatListTableView.refreshControl?.endRefreshing()
         
@@ -150,6 +148,9 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
                         self.viewModel.exitPost(at: indexPath)
                     }
                 }
+            }
+            if let index = ChatNotifications.list.firstIndex(of: viewModel.roomList[indexPath.row].uuid) {
+                ChatNotifications.list.remove(at: index)
             }
         }
     }

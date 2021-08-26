@@ -52,6 +52,15 @@
                                     <constraint firstAttribute="height" constant="120" id="qhn-Y3-lrp"/>
                                 </constraints>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ihx-1m-86D">
+                                <rect key="frame" x="70" y="387" width="235" height="50"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="dJN-bE-3q6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6J-cK-goV">
                                 <rect key="frame" x="70" y="517" width="235" height="50"/>
                                 <color key="backgroundColor" name="AppDefaultColor"/>
@@ -92,15 +101,6 @@
                                     <action selector="pressedFindPWButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cfp-kS-yHx"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ihx-1m-86D">
-                                <rect key="frame" x="70" y="387" width="235" height="50"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="dJN-bE-3q6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxM-on-3oq">
                                 <rect key="frame" x="141" y="235" width="93.5" height="32.5"/>
                                 <color key="tintColor" red="0.69638150929999998" green="0.34167456629999998" blue="0.32939994340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

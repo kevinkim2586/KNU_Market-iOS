@@ -27,7 +27,6 @@ class ProfilePictureInputViewController: UIViewController {
     }
     
     @IBAction func pressedSkipButton(_ sender: UIButton) {
-        
         UserRegisterValues.shared.profileImage = nil
         performSegue(withIdentifier: Constants.SegueID.goToEmailInputVC, sender: self)
     }

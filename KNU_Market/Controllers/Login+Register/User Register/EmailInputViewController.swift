@@ -89,7 +89,6 @@ extension EmailInputViewController {
     
     func initialize() {
         
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification , object: nil)
         
@@ -120,10 +119,10 @@ extension EmailInputViewController {
         
         detailLabels.forEach { label in
             label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-            label.textColor = .lightGray
+            label.textColor = .darkGray
         }
         
-        checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 스팸 메일함을 확인해주세요."
+        checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 스팸 메일함을 확인해주세요!"
     }
     
 }
@@ -143,10 +142,10 @@ extension EmailInputViewController {
             return false
         }
         
-        guard email.contains("@knu.ac.kr") else {
-            showErrorMessage(message: "경북대학교 이메일이 맞는지 확인해 주세요.🧐")
-            return false
-        }
+//        guard email.contains("@knu.ac.kr") else {
+//            showErrorMessage(message: "경북대학교 이메일이 맞는지 확인해 주세요.🧐")
+//            return false
+//        }
         
         guard email.count > 10 else {
             showErrorMessage(message: "유효한 이메일인지 확인해 주세요. 👀")

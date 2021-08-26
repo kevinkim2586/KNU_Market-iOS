@@ -15,10 +15,6 @@ class ChatViewController: MessagesViewController {
     var postUploaderUID: String = ""
     var isFirstEntrance: Bool = false
     
-    deinit {
-        print("❗️ ChatViewController has been DEINITIALIZED")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -251,7 +247,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     // Bottom Label
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         
-        if viewModel.messages.count == 0 { return nil }
+//        if viewModel.messages.count == 0 { return nil }
+        print("✏️ date: \(viewModel.messages[indexPath.section].date)")
         return NSAttributedString(string: viewModel.messages[indexPath.section].date,
                                   attributes: [.font: UIFont.systemFont(ofSize: 10), .foregroundColor: UIColor.lightGray])
     }

@@ -16,6 +16,8 @@ class ChatListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        print("✏️ noti: \(User.shared.chatNotificationList)")
+        
         UIApplication.shared.applicationIconBadgeNumber = User.shared.chatNotificationList.count
         
         let center = UNUserNotificationCenter.current()

@@ -14,7 +14,6 @@ class ProfilePictureInputViewController: UIViewController {
     @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
     @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
     
-    
     lazy var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -26,7 +25,6 @@ class ProfilePictureInputViewController: UIViewController {
     @IBAction func pressedNextButton(_ sender: UIButton) {
         performSegue(withIdentifier: Constants.SegueID.goToEmailInputVC, sender: self)
     }
-    
     
     @IBAction func pressedSkipButton(_ sender: UIButton) {
         
@@ -44,7 +42,6 @@ extension ProfilePictureInputViewController {
         initializeLabels()
         initializeProfileImageButton()
         initializeImagePicker()
-        
         
     }
 
@@ -69,7 +66,6 @@ extension ProfilePictureInputViewController {
         profileImageButton.layer.masksToBounds = false
         profileImageButton.isUserInteractionEnabled = true
         profileImageButton.contentMode = .scaleAspectFit
-//        profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
     }
     
     func updateProfileImageButton(with image: UIImage) {
@@ -78,7 +74,7 @@ extension ProfilePictureInputViewController {
         profileImageButton.setImage(image, for: .normal)
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.masksToBounds = true
-        UserRegisterValues.shared.profileImage = image.jpegData(compressionQuality: 1.0)
+        UserRegisterValues.shared.profileImage = image.jpegData(compressionQuality: 0.6)
     }
     
     func initializeImagePicker() {

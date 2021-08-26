@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8T-y6-j2r">
-                                <rect key="frame" x="100" y="267.5" width="214" height="50"/>
+                                <rect key="frame" x="100" y="318" width="214" height="50"/>
                                 <color key="backgroundColor" name="AppDefaultColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mdT-lq-qQy"/>
@@ -44,16 +44,25 @@
                                     <action selector="pressedResendEmailButton:" destination="K3x-GW-o9z" eventType="touchUpInside" id="sRz-hQ-hkC"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvj-6Q-Ybh">
+                                <rect key="frame" x="15" y="227.5" width="384" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f8i-NO-FLs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="L8T-y6-j2r" firstAttribute="top" secondItem="lvj-6Q-Ybh" secondAttribute="bottom" constant="70" id="364-zW-fBA"/>
                             <constraint firstItem="f8i-NO-FLs" firstAttribute="trailing" secondItem="L8T-y6-j2r" secondAttribute="trailing" constant="100" id="4Zp-S9-R9i"/>
                             <constraint firstItem="L8T-y6-j2r" firstAttribute="centerX" secondItem="Wu8-2p-4XO" secondAttribute="centerX" id="5jT-03-jIj"/>
+                            <constraint firstItem="lvj-6Q-Ybh" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="15" id="7PU-Fh-qld"/>
                             <constraint firstItem="9ID-yW-1zt" firstAttribute="top" secondItem="TKu-ck-5f5" secondAttribute="bottom" constant="30" id="Ew4-cS-hri"/>
+                            <constraint firstItem="lvj-6Q-Ybh" firstAttribute="top" secondItem="9ID-yW-1zt" secondAttribute="bottom" constant="30" id="Mks-am-hHK"/>
+                            <constraint firstItem="f8i-NO-FLs" firstAttribute="trailing" secondItem="lvj-6Q-Ybh" secondAttribute="trailing" constant="15" id="ajF-ML-kbU"/>
                             <constraint firstItem="L8T-y6-j2r" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="100" id="cTJ-o9-FdJ"/>
                             <constraint firstItem="f8i-NO-FLs" firstAttribute="trailing" secondItem="9ID-yW-1zt" secondAttribute="trailing" constant="15" id="fGN-36-bcW"/>
-                            <constraint firstItem="L8T-y6-j2r" firstAttribute="top" secondItem="9ID-yW-1zt" secondAttribute="bottom" constant="70" id="mmL-G8-9I8"/>
                             <constraint firstItem="TKu-ck-5f5" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="15" id="n9i-jG-mK3"/>
                             <constraint firstItem="TKu-ck-5f5" firstAttribute="top" secondItem="f8i-NO-FLs" secondAttribute="top" constant="80" id="wFm-O2-HI0"/>
                             <constraint firstItem="9ID-yW-1zt" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="15" id="wwE-Gt-YQk"/>
@@ -63,6 +72,7 @@
                     <navigationItem key="navigationItem" title="건의사항" id="oYs-dv-kGf"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="checkSpamMailLabel" destination="lvj-6Q-Ybh" id="dZO-OU-ApG"/>
                         <outlet property="detailLabel" destination="9ID-yW-1zt" id="JRX-O4-LvY"/>
                         <outlet property="resendEmailButton" destination="L8T-y6-j2r" id="C1x-AE-uvP"/>
                         <outlet property="titleLabel" destination="TKu-ck-5f5" id="HHX-fw-ADJ"/>

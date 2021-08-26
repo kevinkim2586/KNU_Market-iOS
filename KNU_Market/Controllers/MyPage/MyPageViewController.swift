@@ -53,10 +53,7 @@ extension MyPageViewController {
                                       preferredStyle: .actionSheet)
         let library = UIAlertAction(title: "앨범에서 선택",
                                     style: .default) { _ in
-            
-            
             self.initializeImagePicker()
-            
         }
         let remove = UIAlertAction(title: "프로필 사진 제거",
                                    style: .default) { _ in
@@ -132,7 +129,7 @@ extension MyPageViewController: MyPageViewModelDelegate {
     
     func failedUploadingImageToServerFirst(with error: NetworkError) {
         self.showSimpleBottomAlert(with: error.errorDescription)
-
+        initializeProfileImageButton()
     }
     
     // 프로필 사진 실제 DB상 수정

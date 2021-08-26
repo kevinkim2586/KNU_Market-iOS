@@ -18,13 +18,11 @@ class ChangePasswordViewController: UIViewController {
         dismissProgressBar()
     }
     
-    
-    
     @IBAction func pressedChangeButton(_ sender: UIButton) {
         
         self.view.endEditing(true)
         
-        if !validateUserInput() { return }
+        if !validPassword() || !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
         
         let newPassword = passwordTextField.text!
     
@@ -45,34 +43,48 @@ class ChangePasswordViewController: UIViewController {
         }
     }
     
-    func validateUserInput() -> Bool {
+    func validPassword() -> Bool {
         
-        guard let password = passwordTextField.text,
-              let checkPassword = checkPasswordTextField.text else {
+        guard let userPW = passwordTextField.text else {
+            showSimpleBottomAlert(with: "빈 칸이 없는지 확인해 주세요. 🧐")
             return false
         }
         
-        guard !password.isEmpty,
-              !checkPassword.isEmpty else {
-            self.showSimpleBottomAlert(with: "빈 칸이 없는지 확인해주세요 🥲")
-            return false
-        }
+        let passwordREGEX = ("(?=.*[A-Za-z])(?=.*[0-9]).{8,20}")
+        let passwordTesting = NSPredicate(format: "SELF MATCHES %@", passwordREGEX)
         
-        guard password == checkPassword else {
-            self.showSimpleBottomAlert(with: "비밀번호가 일치하지 않습니다 🤔")
+        if passwordTesting.evaluate(with: userPW) == true {
+            return true
+        } else {
+            showSimpleBottomAlert(with: "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요.🤔")
             return false
         }
-        
-        guard password.count >= 5,
-              password.count < 20,
-              checkPassword.count >= 4,
-              checkPassword.count < 20 else {
-            self.showSimpleBottomAlert(with: "비밀번호는 5자 이상, 30자 미만으로 입력해주세요 ❗️")
-            return false
-        }
-        return true
     }
     
+    func checkPasswordLengthIsValid() -> Bool {
+        
+        guard let password = passwordTextField.text, let _ = checkPasswordTextField.text else {
+            showSimpleBottomAlert(with: "빈 칸이 없는지 확인해 주세요. 🧐")
+            return false
+        }
+        
+        if password.count >= 8 && password.count <= 20 { return true }
+        else {
+            showSimpleBottomAlert(with: "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요.🤔")
+            return false
+        }
+    }
+    
+    func checkIfPasswordFieldsAreIdentical() -> Bool {
+        
+        if passwordTextField.text == checkPasswordTextField.text { return true }
+        else {
+            showSimpleBottomAlert(with: "비밀번호가 일치하지 않습니다. 🤔")
+            checkPasswordTextField.text?.removeAll()
+            passwordTextField.becomeFirstResponder()
+            return false
+        }
+    }
 }
 
 //MARK: - UI Configuration

@@ -27,7 +27,7 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
         guard feedback != textViewPlaceholder else { return }
         
         showProgressBar()
-        feedback = "회원 탈퇴 사유: \(feedback))"
+        feedback = "회원 탈퇴 사유: \(feedback)"
         
         let group = DispatchGroup()
         group.enter()

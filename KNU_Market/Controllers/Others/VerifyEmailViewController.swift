@@ -4,6 +4,7 @@ class VerifyEmailViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var checkSpamMailLabel: UILabel!
     @IBOutlet weak var resendEmailButton: UIButton!
     
     override func viewDidLoad() {
@@ -20,20 +21,22 @@ class VerifyEmailViewController: UIViewController {
 
     @IBAction func pressedResendEmailButton(_ sender: UIButton) {
         
+        showProgressBar()
         UserManager.shared.resendVerificationEmail { [weak self] result in
+            
+            dismissProgressBar()
             
             guard let self = self else { return }
             
             switch result {
             
-            case .success(_):
+            case .success:
                 self.showSimpleBottomAlert(with: "인증 메일 보내기 성공 🎉 메일함을 확인해 주세요!")
                 
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
         }
-        
     }
     
     @objc func dismissVC() {
@@ -60,6 +63,9 @@ extension VerifyEmailViewController {
         detailLabel.adjustsFontSizeToFitWidth = true
         detailLabel.changeTextAttributeColor(fullText: detailLabel.text!, changeText: User.shared.email)
         
+        checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 스팸 메일함을 확인해주세요!"
+        checkSpamMailLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        checkSpamMailLabel.textColor = .lightGray
     }
     
     func initializeResendEmailButton() {

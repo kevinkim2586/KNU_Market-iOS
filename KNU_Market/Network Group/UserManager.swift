@@ -61,7 +61,6 @@ class UserManager {
                 completion(.success(true))
                 User.shared.fcmToken = model.fcmToken
             default:
-                print("❗️ response.data: \(response.data!)")
                 let error = NetworkError.returnError(json: response.data ?? Data())
                 print("❗️ UserManager - register FAILED")
                 completion(.failure(error))
@@ -144,8 +143,7 @@ class UserManager {
                         User.shared.email = email
                         User.shared.password = password
                         User.shared.isLoggedIn = true
-                        
-                     
+                        UIApplication.shared.registerForRemoteNotifications()
                         
                         completion(.success(true))
                         
@@ -216,9 +214,7 @@ class UserManager {
                         self.saveUserLoginInfo(with: decodedData)
                         self.updateUserFCMToken(with: decodedData.fcmToken)
                         
-                        
                         print("✏️ User Manager - loadUserProfile() success")
-                        
                         completion(.success(decodedData))
                         
                     } catch {
@@ -520,6 +516,8 @@ extension UserManager {
     }
     
     func saveUserLoginInfo(with model: LoadProfileResponseModel) {
+        
+        print("✏️ nickname: \(model.nickname)")
         
         User.shared.userUID = model.uid
         User.shared.email = model.email

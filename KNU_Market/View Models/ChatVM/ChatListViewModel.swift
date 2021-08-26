@@ -31,7 +31,8 @@ extension ChatListViewModel {
     // 전체 채팅 목록 불러오기
     @objc func fetchChatList() {
         
-        self.roomList.removeAll()
+        roomList.removeAll()
+        User.shared.joinedChatRoomPIDs.removeAll()
         
         ChatManager.shared.getResponseModel(function: .getRoom,
                                        method: .get,
@@ -44,6 +45,8 @@ extension ChatListViewModel {
             switch result {
             
             case .success(let chatRoom):
+                
+                var array: [String] = []
         
                 chatRoom.forEach { chat in
                     User.shared.joinedChatRoomPIDs.append(chat.uuid)
@@ -53,7 +56,16 @@ extension ChatListViewModel {
                     } else {
                         self.roomList.append(chat)
                     }
+                    
+                    array.append(chat.uuid)
+                    
                 }
+                
+                
+                
+                
+                
+                
                 
                 self.delegate?.didFetchChatList()
                 

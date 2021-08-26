@@ -37,7 +37,7 @@ class PasswordInputViewController: UIViewController {
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
         
-        if !validpassword() || !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
+        if !validPassword() || !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
         performSegue(withIdentifier: Constants.SegueID.goToProfilePictureVC, sender: self)
     }
     
@@ -95,7 +95,7 @@ extension PasswordInputViewController {
 extension PasswordInputViewController {
     
     // 숫자+문자 포함해서 8~20글자 사이의 text 체크하는 정규표현식
-    func validpassword() -> Bool {
+    func validPassword() -> Bool {
         
         guard let userPW = passwordTextField.text else {
             showErrorMessage(message: "빈 칸이 없는지 확인해 주세요. 🧐")
@@ -108,7 +108,7 @@ extension PasswordInputViewController {
         if passwordTesting.evaluate(with: userPW) == true {
             return true
         } else {
-            showErrorMessage(message: "숫자와 문자를 조합하여\n 8자 이상, 20자 이하로 적어주세요.🤔")
+            showErrorMessage(message: "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요.🤔")
             return false
         }
     }
@@ -123,7 +123,7 @@ extension PasswordInputViewController {
         
         if password.count >= 8 && password.count <= 20 { return true }
         else {
-            showErrorMessage(message: "숫자와 문자를 조합하여\n 8자 이상, 20자 이하로 적어주세요.🤔")
+            showErrorMessage(message: "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요.🤔")
             return false
         }
     }
@@ -148,7 +148,7 @@ extension PasswordInputViewController {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         
-        thirdLineLabel.text = "숫자와 문자를 조합하여\n 8자 이상, 20자 이하로 적어주세요."
+        thirdLineLabel.text = "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요."
         thirdLineLabel.textColor = .lightGray
     }
 }

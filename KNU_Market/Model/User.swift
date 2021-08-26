@@ -22,7 +22,7 @@ class User {
     // 아래 없애는거 고려
     var id: String {
         get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userID) ?? "id 에러"
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userID) ?? "아이디 에러"
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.userID)
@@ -31,7 +31,7 @@ class User {
     
     var nickname: String {
         get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.nickname) ?? "nickname 에러"
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.nickname) ?? "닉네임 표시 에러"
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.nickname)
@@ -171,8 +171,9 @@ extension User {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.fcmToken)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userUID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.hasVerifiedEmail)
-
         
+        ChatNotifications.list.removeAll()
+
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.password)

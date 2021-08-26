@@ -8,9 +8,8 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         
-        
         if self.compare(.isToday) {
-            
+ 
             dateFormatter.dateFormat = "HH:mm"
             return dateFormatter.string(from: self)
             
@@ -20,8 +19,7 @@ extension Date {
             return dateFormatter.string(from: self)
             
         } else {
-            
-            dateFormatter.date(from: "MM/dd HH:mm")
+            dateFormatter.dateFormat = "MM/dd HH:mm"
             return dateFormatter.string(from: self)
         }
     }

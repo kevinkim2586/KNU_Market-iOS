@@ -197,6 +197,8 @@ struct Constants {
         static let rawBanSuffix                 = "__BAN_SUFFIX"
         static let rawEnterSuffix               = "__ENTER_SUFFIX"
         static let rawExitSuffix                = "__EXIT_SUFFIX"
+        
+        static let usedBanSuffix                = "방장이 강퇴 기능을 사용했습니다!🪄"
     }
     
     struct placeHolderTitle {

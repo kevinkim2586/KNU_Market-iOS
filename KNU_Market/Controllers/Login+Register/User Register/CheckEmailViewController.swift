@@ -6,6 +6,7 @@ class CheckEmailViewController: UIViewController {
     @IBOutlet weak var secondLineLabel: UILabel!
     @IBOutlet weak var thirdLineLabel: UILabel!
     @IBOutlet weak var fourthLineLabel: UILabel!
+    @IBOutlet weak var checkSpamMailLabel: UILabel!
     @IBOutlet var detailLabels: [UILabel]!
     
     @IBOutlet weak var nextButton: UIButton!
@@ -71,6 +72,8 @@ extension CheckEmailViewController {
             label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
             label.textColor = .lightGray
         }
+        
+        checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 스팸 메일함을 확인해주세요!"
     }
 
 }

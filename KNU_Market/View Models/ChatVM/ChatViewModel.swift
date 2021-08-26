@@ -133,10 +133,10 @@ extension ChatViewModel {
             let userUID = receivedTextInJSON["uuid"].stringValue
             let roomUID = receivedTextInJSON["room"].stringValue
             let chatText = receivedTextInJSON["comment"].stringValue
-        
+
             let chatMessage = filterChat(text: chatText, isFromSocket: true)
             print("✏️ receivedText: \(chatMessage)")
-            
+
             guard chatMessage != Constants.ChatSuffix.emptySuffix else { return }
         
             if isFromCurrentSender(uuid: userUID) {
@@ -201,7 +201,6 @@ extension ChatViewModel {
             print("❗️ PING ACTIVATED")
             
         case .pong(_):
-            print("❗️ PONG ACTIVATED")
             isConnected = true
         default:
             print("❗️ ChatViewModel - didReceive default ACTIVATED")
@@ -456,25 +455,21 @@ extension ChatViewModel {
     func filterChat(text: String, isFromSocket: Bool = false) -> String {
         
         if text.contains(Constants.ChatSuffix.enterSuffix) {
-            
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
             
         } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" && isFromSocket {
-            
            outPost()
            return Constants.ChatSuffix.emptySuffix
             
         } else if text.contains(Constants.ChatSuffix.exitSuffix) {
-            
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: "🏃")
             
         } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)\(Constants.ChatSuffix.rawBanSuffix)") {
-            
             self.delegate?.didReceiveBanNotification()
             return Constants.ChatSuffix.emptySuffix
-            
+
         } else if text.contains(Constants.ChatSuffix.rawBanSuffix) {
-            return Constants.ChatSuffix.emptySuffix
+            return Constants.ChatSuffix.usedBanSuffix
         }
         else {
             return text
@@ -488,7 +483,6 @@ extension ChatViewModel {
     }
     
     @objc func resetAndReconnect() {
-        print("✏️ ChatViewModel - resetAndReconnect ACTIVATED")
         resetMessages()
         connect()
     }

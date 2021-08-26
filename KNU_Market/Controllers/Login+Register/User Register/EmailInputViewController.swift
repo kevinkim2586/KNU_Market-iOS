@@ -19,14 +19,9 @@ class EmailInputViewController: UIViewController {
     @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
     @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
-
-        
     }
     
     @objc func keyboardDidShow(notification: Notification) {
@@ -142,10 +137,10 @@ extension EmailInputViewController {
             return false
         }
         
-//        guard email.contains("@knu.ac.kr") else {
-//            showErrorMessage(message: "경북대학교 이메일이 맞는지 확인해 주세요.🧐")
-//            return false
-//        }
+        guard email.contains("@knu.ac.kr") else {
+            showErrorMessage(message: "경북대학교 이메일이 맞는지 확인해 주세요.🧐")
+            return false
+        }
         
         guard email.count > 10 else {
             showErrorMessage(message: "유효한 이메일인지 확인해 주세요. 👀")

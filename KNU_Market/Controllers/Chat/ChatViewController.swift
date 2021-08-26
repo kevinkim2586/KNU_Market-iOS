@@ -102,6 +102,7 @@ extension ChatViewController: ChatViewDelegate {
     
     func didReceiveChat() {
         dismissProgressBar()
+        messagesCollectionView.backgroundView = nil
         messagesCollectionView.reloadDataAndKeepOffset()
     }
     
@@ -205,7 +206,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
     
-    
     public func currentSender() -> SenderType {
         return viewModel.mySelf
     }
@@ -247,7 +247,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     // Bottom Label
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         
-//        if viewModel.messages.count == 0 { return nil }
+        if viewModel.messages.count == 0 { return nil }
         print("✏️ date: \(viewModel.messages[indexPath.section].date)")
         return NSAttributedString(string: viewModel.messages[indexPath.section].date,
                                   attributes: [.font: UIFont.systemFont(ofSize: 10), .foregroundColor: UIColor.lightGray])

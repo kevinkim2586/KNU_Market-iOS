@@ -7,6 +7,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var unregisterButton: UIButton!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +41,19 @@ class SettingsViewController: UIViewController {
         }
     }
 
+    @IBAction func pressedInfoButton(_ sender: UIButton) {
+        
+        presentAlertWithCancelAction(title: "알림이 오지 않나요?",
+                                     message: "설정으로 이동 후 알림 받기가 꺼져있지는 않은지 확인해 주세요. 그래도 안 되면 어플 재설치를 부탁드립니다.") { selectedOk in
+            
+            if selectedOk {
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
+                                          options: [:],
+                                          completionHandler: nil)
+            }
+        }
+    }
+    
     func initialize() {
         
         userNicknameLabel.text = User.shared.nickname

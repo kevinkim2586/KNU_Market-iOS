@@ -1,6 +1,5 @@
 import UIKit
 import Photos
-import BSImagePicker
 
 class MyPageViewController: UIViewController {
     
@@ -17,6 +16,7 @@ class MyPageViewController: UIViewController {
 
         viewModel.loadUserProfile()
         initialize()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

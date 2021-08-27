@@ -21,7 +21,6 @@ class ChatListViewModel {
     
     init() {
         createObservers()
-        updateUserFCMToken()
     }
 }
 
@@ -141,8 +140,5 @@ extension ChatListViewModel {
                                                object: nil)
 
     }
-    
-    func updateUserFCMToken() {
-        UserManager.shared.updateUserFCMToken(with: User.shared.fcmToken)
-    }
+
 }

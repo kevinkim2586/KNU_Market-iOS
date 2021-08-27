@@ -23,8 +23,15 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
     
     @IBAction func pressedDoneButton(_ sender: UIBarButtonItem) {
         
+        userInputTextView.resignFirstResponder()
+        
         guard var feedback = userInputTextView.text else { return }
-        guard feedback != textViewPlaceholder else { return }
+        guard feedback != textViewPlaceholder else {
+            presentKMAlertOnMainThread(title: "회원 탈퇴 사유 입력",
+                                       message: "회원 탈퇴 사유를 입력해 주세요. 짧게라도 작성해주시면 감사하겠습니다 :)",
+                                       buttonTitle: "확인")
+            return
+        }
         
         showProgressBar()
         feedback = "회원 탈퇴 사유: \(feedback)"
@@ -54,7 +61,10 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
                 case .success:
                     self.popToInitialViewController()
                 case .failure(let error):
-                    self.showSimpleBottomAlert(with: error.errorDescription)
+                    
+                    self.presentKMAlertOnMainThread(title: "회원 탈퇴 실패",
+                                                    message: error.errorDescription,
+                                                    buttonTitle: "확인")
                 }
             }
         }

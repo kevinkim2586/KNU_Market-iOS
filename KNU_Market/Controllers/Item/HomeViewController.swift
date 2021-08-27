@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+        print("✏️ MYFMC: \(User.shared.fcmToken)")
     }
     
     override func viewWillAppear(_ animated: Bool) {

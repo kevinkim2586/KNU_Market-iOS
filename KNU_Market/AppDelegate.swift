@@ -47,21 +47,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("❗️ Error fetching FCM registration token: \(error)")
             } else if let token = token {
                 print("✏️ FCM Registration Token: \(token)")
-
                 // 아래는 로그인이 되어 있는 경우에만 실행될 수 있도록 변경
                 User.shared.fcmToken = token
+                
+                if User.shared.isLoggedIn {
+                        
+                    UserManager.shared.updateUserFCMToken(with: token)
+                }
             }
         }
         
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableAutoToolbar = true
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        
-        IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self, NickNameInputViewController.self, PasswordInputViewController.self, ProfilePictureInputViewController.self, EmailInputViewController.self, CheckEmailViewController.self]
-        
-        IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatViewController.self)
-        
-     
+        configureIQKeyboardManager()
+    
         return true
     }
     
@@ -102,25 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
         print("✏️ didReceiveRemoteNotification")
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
 
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
-        switch application.applicationState {
-        case .active:
-            print("❗️ ACTIVE")
-        
-        case .background:
-            print("❗️ BACKGROUND")
-            
-        case .inactive:
-            print("❗️ INACTIVE")
-
-        }
-    
         // Print message ID
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
@@ -225,6 +206,22 @@ extension AppDelegate {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
+    }
+    
+    func configureIQKeyboardManager() {
+        
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
+        IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self,
+                                                           NickNameInputViewController.self,
+                                                           PasswordInputViewController.self,
+                                                           ProfilePictureInputViewController.self,
+                                                           EmailInputViewController.self,
+                                                           CheckEmailViewController.self]
+        
+        IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatViewController.self)
     }
 
     

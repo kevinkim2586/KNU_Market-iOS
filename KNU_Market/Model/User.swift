@@ -19,16 +19,6 @@ class User {
         }
     }
     
-    // 아래 없애는거 고려
-    var id: String {
-        get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userID) ?? "아이디 에러"
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.userID)
-        }
-    }
-    
     var nickname: String {
         get {
             return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.nickname) ?? "닉네임 에러 (설정에서 변경 바람)"
@@ -157,7 +147,7 @@ extension User {
         
         UIApplication.shared.unregisterForRemoteNotifications()
 
-        id = ""
+        
         nickname = ""
         email = ""
         profileImage = nil
@@ -165,7 +155,6 @@ extension User {
         profileImageUID = ""
         
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.nickname)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.profileImageUID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.fcmToken)

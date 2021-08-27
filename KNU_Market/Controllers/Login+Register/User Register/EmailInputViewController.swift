@@ -42,11 +42,16 @@ class EmailInputViewController: UIViewController {
         
         if !checkIfValidEmail() { return }
         
-        emailTextField.resignFirstResponder()
         
-        UserRegisterValues.shared.email = emailTextField.text!
-        
-        registerUser()
+        presentAlertWithCancelAction(title: emailTextField.text!,
+                                     message: "위 이메일이 맞나요? 마지막으로 한 번 더 확인해 주세요.") { selectedOk in
+            
+            if selectedOk {
+                self.emailTextField.resignFirstResponder()
+                UserRegisterValues.shared.email = self.emailTextField.text!
+                self.registerUser()
+            }
+        }
     }
     
     func registerUser() {

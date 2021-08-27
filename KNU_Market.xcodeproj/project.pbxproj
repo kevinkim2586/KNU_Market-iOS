@@ -45,6 +45,8 @@
 		7C3D986226AE8A42005DFAE0 /* ChatMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */; };
 		7C3D986426AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D986326AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift */; };
 		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
+		7C43355826D89AC200A044CD /* wimLogo_Launchscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */; };
+		7C43355A26D89AD100A044CD /* appLogo_LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C43355926D89AD100A044CD /* appLogo_LaunchScreen.png */; };
 		7C436B5826820E5200943069 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5726820E5200943069 /* ReportManager.swift */; };
 		7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */; };
 		7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C516C3A267F48300065E30D /* ReportUserViewController.swift */; };
@@ -55,8 +57,6 @@
 		7C555465266D0A1400C3C5B6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555464266D0A1400C3C5B6 /* Location.swift */; };
 		7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555466266D1A8600C3C5B6 /* MediaManager.swift */; };
 		7C5A1F2B26D6174F0041885B /* UICollectionView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A1F2A26D6174F0041885B /* UICollectionView Extension.swift */; };
-		7C5A1F3626D7A5950041885B /* appLogo_Launchscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C5A1F3526D7A5950041885B /* appLogo_Launchscreen.png */; };
-		7C5A1F3826D7A6210041885B /* wimLogo_Launchscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C5A1F3726D7A6200041885B /* wimLogo_Launchscreen.png */; };
 		7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E2126264645B300E98FE5 /* ItemViewController.swift */; };
 		7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* ItemViewModel.swift */; };
 		7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */; };
@@ -162,6 +162,8 @@
 		7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberViewController.swift; sourceTree = "<group>"; };
 		7C3D986326AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOtherUserProfileModel.swift; sourceTree = "<group>"; };
 		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wimLogo_Launchscreen.png; sourceTree = "<group>"; };
+		7C43355926D89AD100A044CD /* appLogo_LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appLogo_LaunchScreen.png; sourceTree = "<group>"; };
 		7C436B5726820E5200943069 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
 		7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserRequestDTO.swift; sourceTree = "<group>"; };
 		7C516C3A267F48300065E30D /* ReportUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
@@ -172,8 +174,6 @@
 		7C555464266D0A1400C3C5B6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7C555466266D1A8600C3C5B6 /* MediaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
 		7C5A1F2A26D6174F0041885B /* UICollectionView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView Extension.swift"; sourceTree = "<group>"; };
-		7C5A1F3526D7A5950041885B /* appLogo_Launchscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appLogo_Launchscreen.png; sourceTree = "<group>"; };
-		7C5A1F3726D7A6200041885B /* wimLogo_Launchscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wimLogo_Launchscreen.png; sourceTree = "<group>"; };
 		7C5E2126264645B300E98FE5 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -429,9 +429,9 @@
 				7C3B4FF826A93CF100E2CA8F /* Lottie Files */,
 				7C5E21252646443900E98FE5 /* Assets */,
 				7CA661F0263D4387000E0B7A /* AppDelegate.swift */,
-				7C5A1F3526D7A5950041885B /* appLogo_Launchscreen.png */,
+				7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */,
+				7C43355926D89AD100A044CD /* appLogo_LaunchScreen.png */,
 				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
-				7C5A1F3726D7A6200041885B /* wimLogo_Launchscreen.png */,
 				7CA661FB263D4389000E0B7A /* LaunchScreen.storyboard */,
 				7CA661FE263D4389000E0B7A /* Info.plist */,
 				7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */,
@@ -739,12 +739,12 @@
 			files = (
 				7CCDB1F026A2BD0C0092F28D /* ItemTableViewCell.xib in Resources */,
 				7C184B8526B27B8B006C0FAD /* Chat.storyboard in Resources */,
-				7C5A1F3626D7A5950041885B /* appLogo_Launchscreen.png in Resources */,
-				7C5A1F3826D7A6210041885B /* wimLogo_Launchscreen.png in Resources */,
+				7C43355826D89AC200A044CD /* wimLogo_Launchscreen.png in Resources */,
 				7C3D541D26C90B4900AE3E55 /* congratulate1.json in Resources */,
 				7C0F1CB626BA64840068FF45 /* VerifyEmail.storyboard in Resources */,
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
+				7C43355A26D89AD100A044CD /* appLogo_LaunchScreen.png in Resources */,
 				7C3B4FE826A923AB00E2CA8F /* UserRegister.storyboard in Resources */,
 				7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */,
 				7C6D253B268DD68A0030F9A1 /* MyPage.storyboard in Resources */,

@@ -139,11 +139,12 @@ class UserManager {
                         let json = try JSON(data: response.data!)
                         self.saveAccessTokens(from: json)
                         
-                        User.shared.id = email
                         User.shared.email = email
                         User.shared.password = password
                         User.shared.isLoggedIn = true
                         UIApplication.shared.registerForRemoteNotifications()
+                        
+                        self.loadUserProfile { _ in }
                         
                         completion(.success(true))
                         
@@ -212,7 +213,6 @@ class UserManager {
                     do {
                         let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)  
                         self.saveUserLoginInfo(with: decodedData)
-                        
                         
                         print("✏️ UserManager - loadUserProfile() success")
                         print("✏️ UserManager - loadUserProfile FCM TOKEN: \(decodedData.fcmToken)")
@@ -480,6 +480,9 @@ class UserManager {
                     print("✏️ unregisterUser SUCCESS")
                     completion(.success(true))
                     
+                case 403:
+                    print("❗️ 아직 참여 중인 공구가 존재")
+                    completion(.failure(NetworkError.E403))
                 default:
                     let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ unregisterUser failed with error code: \(statusCode), and error: \(error.errorDescription)")
@@ -516,15 +519,12 @@ extension UserManager {
     }
     
     func saveUserLoginInfo(with model: LoadProfileResponseModel) {
-        
-
-        
+    
         User.shared.userUID = model.uid
         User.shared.email = model.email
         User.shared.nickname = model.nickname
         User.shared.profileImageUID = model.profileImageCode
         User.shared.hasVerifiedEmail = model.isVerified
-        User.shared.fcmToken = model.fcmToken
     }
 }
 

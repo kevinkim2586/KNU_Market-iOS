@@ -10,8 +10,6 @@ class CongratulateUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
         initialize()
         playAnimation()
         removeAllPreviousObservers()

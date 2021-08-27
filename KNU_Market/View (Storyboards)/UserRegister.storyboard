@@ -473,8 +473,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAz-AC-zbf">
-                                <rect key="frame" x="20" y="354.5" width="244" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAz-AC-zbf">
+                                <rect key="frame" x="20" y="354.5" width="374" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -524,7 +524,7 @@
                             <constraint firstItem="KIO-6h-mw7" firstAttribute="top" secondItem="IAz-AC-zbf" secondAttribute="bottom" constant="20" id="NPF-hN-zzs"/>
                             <constraint firstItem="b0s-BS-3AN" firstAttribute="top" secondItem="YUh-qt-Bus" secondAttribute="bottom" constant="10" id="RHB-qc-MSb"/>
                             <constraint firstAttribute="bottom" secondItem="fAE-gj-ICe" secondAttribute="bottom" id="STa-h5-k5L"/>
-                            <constraint firstItem="GDe-w2-7ft" firstAttribute="trailing" secondItem="IAz-AC-zbf" secondAttribute="trailing" constant="150" id="Ytl-ta-pk6"/>
+                            <constraint firstItem="GDe-w2-7ft" firstAttribute="trailing" secondItem="IAz-AC-zbf" secondAttribute="trailing" constant="20" id="Ytl-ta-pk6"/>
                             <constraint firstItem="GDe-w2-7ft" firstAttribute="trailing" secondItem="ezu-AL-VlM" secondAttribute="trailing" constant="100" id="dhG-8c-qJw"/>
                             <constraint firstItem="KIO-6h-mw7" firstAttribute="leading" secondItem="GDe-w2-7ft" secondAttribute="leading" constant="20" id="iiS-ls-9N4"/>
                             <constraint firstItem="ezu-AL-VlM" firstAttribute="top" secondItem="b0s-BS-3AN" secondAttribute="bottom" constant="30" id="jh7-Ws-mDK"/>
@@ -731,6 +731,7 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="5cQ-cr-Dv2"/>
         <designable name="QdO-Vc-EUe">
             <size key="intrinsicContentSize" width="82.5" height="23"/>
         </designable>

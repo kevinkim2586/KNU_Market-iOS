@@ -52,7 +52,6 @@ class User {
     }
     
     var email: String = ""
-
     
     var isLoggedIn: Bool {
         get {
@@ -61,6 +60,16 @@ class User {
         set {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.isLoggedIn)
         }
+    }
+    
+    var hasAllowedForNotification: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.hasAllowedForNotification)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.hasAllowedForNotification)
+        }
+        
     }
     
     // 이메일 인증 완료 판별
@@ -147,7 +156,6 @@ extension User {
         
         UIApplication.shared.unregisterForRemoteNotifications()
 
-        
         nickname = ""
         email = ""
         profileImage = nil
@@ -157,7 +165,6 @@ extension User {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.nickname)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.profileImageUID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.fcmToken)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userUID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.hasVerifiedEmail)
         

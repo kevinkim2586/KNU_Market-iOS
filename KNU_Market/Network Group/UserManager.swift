@@ -215,7 +215,11 @@ class UserManager {
                         self.saveUserLoginInfo(with: decodedData)
                         
                         print("✏️ UserManager - loadUserProfile() success")
-                        print("✏️ UserManager - loadUserProfile FCM TOKEN: \(decodedData.fcmToken)")
+                        print("✏️ UserManager - DB FCM TOKEN: \(decodedData.fcmToken)")
+                        
+                        
+                        self.updateUserFCMToken(with: UserRegisterValues.shared.fcmToken)
+                        
                         completion(.success(decodedData))
                         
                     } catch {
@@ -370,8 +374,15 @@ class UserManager {
                 switch statusCode {
                 case 201:
                     print("✏️ UserManager - updateUserFCMToken SUCCESS with token: \(token)")
-                    User.shared.fcmToken = token
                     
+                    if token != UserRegisterValues.shared.fcmToken {
+                        
+                        print("❗️ TOKEN DOES NOT MATCH, reupdating token")
+                        self.updateUserFCMToken(with: UserRegisterValues.shared.fcmToken)
+                        
+                    } else {
+                        User.shared.fcmToken = token
+                    }
                 default:
                     let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ UserManager - updateUserFCMToken FAILED with error: \(error.errorDescription) and statusCode: \(statusCode)")

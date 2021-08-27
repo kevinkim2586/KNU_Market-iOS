@@ -27,13 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 10.0, *) {
   
             UNUserNotificationCenter.current().delegate = self
-            
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { [weak self] granted, _ in
-                
-                guard granted else { return }
-                self?.getNotificationSettings()
-            }
+//
+//            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+//            UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { [weak self] granted, _ in
+//                
+//                guard granted else { return }
+//                self?.getNotificationSettings()
+//            }
             
         } else {
             let settings: UIUserNotificationSettings =
@@ -48,17 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if let token = token {
                 print("✏️ FCM Registration Token: \(token)")
                 // 아래는 로그인이 되어 있는 경우에만 실행될 수 있도록 변경
+                UserRegisterValues.shared.fcmToken = token
                 User.shared.fcmToken = token
-                
                 if User.shared.isLoggedIn {
-                        
                     UserManager.shared.updateUserFCMToken(with: token)
                 }
             }
         }
-        
         configureIQKeyboardManager()
-    
         return true
     }
     
@@ -144,11 +141,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        print("✏️ userNotificationCenter willPresent")
-    
         if !User.shared.isLoggedIn { return }
-        
-        
         
         let userInfo = notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
@@ -173,8 +166,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     
         let userInfo = response.notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        
-        print("✏️ didReceive: \(userInfo)")
         
         if let postUID = userInfo["postUid"] as? String {
             if !User.shared.chatNotificationList.contains(postUID) {

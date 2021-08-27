@@ -16,7 +16,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
-        print("✏️ MYFMC: \(User.shared.fcmToken)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -192,6 +191,8 @@ extension HomeViewController: UITabBarControllerDelegate {
 extension HomeViewController {
     
     func initialize() {
+        
+        askForNotificationPermission()
 
         self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
         self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)

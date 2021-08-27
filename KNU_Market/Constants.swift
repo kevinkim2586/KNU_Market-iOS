@@ -102,6 +102,7 @@ struct Constants {
         static let hasVerifiedEmail             = "hasVerifiedEmail"
         static let fcmToken                     = "fcmToken"
         static let notificationList             = "notificationList"
+        static let hasAllowedForNotification    = "hasAllowedForNotification"
     }
     
     struct NotificationKey {

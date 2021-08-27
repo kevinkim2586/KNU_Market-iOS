@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo_LaunchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="G25-cS-KEJ" userLabel="appLogo_LaunchScreen">
+                            <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLogo_LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="G25-cS-KEJ" userLabel="appLogo_LaunchScreen">
                                 <rect key="frame" x="147" y="133.5" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="Y19-Ge-I6U"/>
@@ -68,7 +68,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="appLogo_LaunchScreen.png" width="1536.239990234375" height="1536.239990234375"/>
+        <image name="appLogo_LaunchScreen" width="300" height="300"/>
         <image name="wimLogo_Launchscreen.png" width="137" height="99"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

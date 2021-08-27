@@ -46,7 +46,7 @@
 		7C3D986426AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D986326AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift */; };
 		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
 		7C43355826D89AC200A044CD /* wimLogo_Launchscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */; };
-		7C43355A26D89AD100A044CD /* appLogo_LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C43355926D89AD100A044CD /* appLogo_LaunchScreen.png */; };
+		7C43355C26D8BD8000A044CD /* appLogo_LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C43355B26D8BD8000A044CD /* appLogo_LaunchScreen.png */; };
 		7C436B5826820E5200943069 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5726820E5200943069 /* ReportManager.swift */; };
 		7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */; };
 		7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C516C3A267F48300065E30D /* ReportUserViewController.swift */; };
@@ -163,7 +163,7 @@
 		7C3D986326AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOtherUserProfileModel.swift; sourceTree = "<group>"; };
 		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wimLogo_Launchscreen.png; sourceTree = "<group>"; };
-		7C43355926D89AD100A044CD /* appLogo_LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appLogo_LaunchScreen.png; sourceTree = "<group>"; };
+		7C43355B26D8BD8000A044CD /* appLogo_LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appLogo_LaunchScreen.png; sourceTree = "<group>"; };
 		7C436B5726820E5200943069 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
 		7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserRequestDTO.swift; sourceTree = "<group>"; };
 		7C516C3A267F48300065E30D /* ReportUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
@@ -430,8 +430,8 @@
 				7C5E21252646443900E98FE5 /* Assets */,
 				7CA661F0263D4387000E0B7A /* AppDelegate.swift */,
 				7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */,
-				7C43355926D89AD100A044CD /* appLogo_LaunchScreen.png */,
 				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
+				7C43355B26D8BD8000A044CD /* appLogo_LaunchScreen.png */,
 				7CA661FB263D4389000E0B7A /* LaunchScreen.storyboard */,
 				7CA661FE263D4389000E0B7A /* Info.plist */,
 				7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */,
@@ -744,7 +744,7 @@
 				7C0F1CB626BA64840068FF45 /* VerifyEmail.storyboard in Resources */,
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
-				7C43355A26D89AD100A044CD /* appLogo_LaunchScreen.png in Resources */,
+				7C43355C26D8BD8000A044CD /* appLogo_LaunchScreen.png in Resources */,
 				7C3B4FE826A923AB00E2CA8F /* UserRegister.storyboard in Resources */,
 				7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */,
 				7C6D253B268DD68A0030F9A1 /* MyPage.storyboard in Resources */,

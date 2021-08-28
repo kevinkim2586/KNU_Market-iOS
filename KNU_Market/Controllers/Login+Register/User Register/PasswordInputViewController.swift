@@ -10,14 +10,12 @@ class PasswordInputViewController: UIViewController {
     @IBOutlet weak var passwordTextField: HoshiTextField!
     @IBOutlet weak var checkPasswordTextField: HoshiTextField!
     
-    
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
     @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
     }
     
@@ -68,7 +66,6 @@ extension PasswordInputViewController {
         checkPasswordTextField.addTarget(self,
                               action: #selector(textFieldDidChange(_:)),
                               for: .editingChanged)
-     
     }
     
     func initializeLabels() {

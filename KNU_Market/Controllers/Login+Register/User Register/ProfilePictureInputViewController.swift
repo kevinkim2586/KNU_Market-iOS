@@ -18,7 +18,6 @@ class ProfilePictureInputViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
     }
     

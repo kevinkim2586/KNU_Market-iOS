@@ -16,9 +16,7 @@ class NickNameInputViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
-            
     }
     
     @objc func keyboardDidShow(notification: Notification) {

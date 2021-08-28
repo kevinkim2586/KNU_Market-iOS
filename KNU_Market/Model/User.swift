@@ -21,7 +21,7 @@ class User {
     
     var nickname: String {
         get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.nickname) ?? "닉네임 에러 (설정에서 변경 바람)"
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.nickname) ?? "닉네임 표시 에러"
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.nickname)

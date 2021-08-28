@@ -12,8 +12,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var checkPasswordTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet var textFieldCollections: [UITextField]!
     
+    @IBOutlet var textFieldCollections: [UITextField]!
 
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
@@ -26,7 +26,6 @@ class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
     }
     
@@ -34,9 +33,7 @@ class RegisterViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
-        
         presentActionSheet()
     }
     

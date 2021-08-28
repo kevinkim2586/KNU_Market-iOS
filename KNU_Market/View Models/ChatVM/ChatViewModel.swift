@@ -338,7 +338,7 @@ extension ChatViewModel {
         
         sendText(Constants.ChatSuffix.emptySuffix)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
             dismissProgressBar()
         }

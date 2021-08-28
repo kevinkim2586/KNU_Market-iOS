@@ -430,11 +430,11 @@
 				7C5E21252646443900E98FE5 /* Assets */,
 				7CA661F0263D4387000E0B7A /* AppDelegate.swift */,
 				7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */,
-				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
 				7C43355B26D8BD8000A044CD /* appLogo_LaunchScreen.png */,
 				7CA661FB263D4389000E0B7A /* LaunchScreen.storyboard */,
 				7CA661FE263D4389000E0B7A /* Info.plist */,
 				7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */,
+				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
 			);
 			path = KNU_Market;
 			sourceTree = "<group>";
@@ -1057,10 +1057,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1078,10 +1079,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

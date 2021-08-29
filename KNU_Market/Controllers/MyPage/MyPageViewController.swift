@@ -210,11 +210,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             switch indexPath.row {
             
             case 1:
-                let url = URL(string: "https://linen-twister-e2b.notion.site/b02ec80599d14452aefff7e0dcfcf4ff")!
+                let url = URL(string: Constants.URL.termsAndConditionNotionURL)!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
         
             case 2:
-                let url = URL(string: "https://linen-twister-e2b.notion.site/6554bde75b2c49bfb617b04f526aad6e")!
+                let url = URL(string: Constants.URL.privacyInfoConditionNotionURL)!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 
             default:

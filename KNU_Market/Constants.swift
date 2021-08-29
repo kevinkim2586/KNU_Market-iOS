@@ -211,8 +211,15 @@ struct Constants {
                                                    "검색 결과가 없네요!\n지금 공구하고 싶은게 뭔가요?"]
         
         static let emptyChatRandomTitle         = ["개인정보 보호를 위해 카카오톡 ID,\n전화번호 등의 정보는 공개하지 않는\n것을 권장합니다!",
-                                                   "소누 거래물품 들고 달려가는 중~!"]
+                                                   "소누 거래물품 들고 달려가는 중~!",
+                                                    "부적절하거나 불쾌감을 줄 수 있는 대화는 삼가 부탁드립니다."]
         
+    }
+    
+    struct URL {
+        
+        static let termsAndConditionNotionURL       = "https://linen-twister-e2b.notion.site/b02ec80599d14452aefff7e0dcfcf4ff"
+        static let privacyInfoConditionNotionURL    = "https://linen-twister-e2b.notion.site/6554bde75b2c49bfb617b04f526aad6e"
     }
 }
 

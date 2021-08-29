@@ -44,9 +44,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>사진 업로드를 위해 접근 허가가 필요합니다.</string>
+	<string>공동구매 글 작성 시 어떤 품목을 구매하는지 사용자에게 자세히 보여주기 위해 사용됩니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>사진 업로드를 위해 접근 허가가 필요합니다.</string>
+	<string>공동구매 글 작성 시 어떤 품목을 구매하는지 사용자에게 자세히 보여주기 위해 사용됩니다.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

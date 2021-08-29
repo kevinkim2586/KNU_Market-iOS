@@ -74,6 +74,7 @@ extension CheckEmailViewController {
         }
         
         checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 스팸 메일함을 확인해주세요!"
+        checkSpamMailLabel.textColor = UIColor(named: Constants.Color.appColor)
     }
 
 }

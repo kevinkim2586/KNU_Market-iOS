@@ -7,7 +7,6 @@ class CongratulateUserViewController: UIViewController {
     @IBOutlet weak var congratulateLabel: UILabel!
     @IBOutlet weak var goHomeButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -39,6 +38,20 @@ class CongratulateUserViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func pressedSeeTermsAndConditionsButton(_ sender:
+                                                        UIButton) {
+        let url = URL(string: Constants.URL.termsAndConditionNotionURL)!
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    
+    
+    @IBAction func pressedSeePrivacyInfoButton(_ sender: UIButton) {
+        let url = URL(string: Constants.URL.privacyInfoConditionNotionURL)!
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
     
     func initialize() {
         

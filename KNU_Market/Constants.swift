@@ -103,6 +103,8 @@ struct Constants {
         static let fcmToken                     = "fcmToken"
         static let notificationList             = "notificationList"
         static let hasAllowedForNotification    = "hasAllowedForNotification"
+        static let bannedPostUploaders          = "bannedPostUploaders"
+        static let bannedChatUsers              = "bannedChatUsers"
     }
     
     struct NotificationKey {
@@ -212,8 +214,7 @@ struct Constants {
         
         static let emptyChatRandomTitle         = ["개인정보 보호를 위해 카카오톡 ID,\n전화번호 등의 정보는 공개하지 않는\n것을 권장합니다!",
                                                    "소누 거래물품 들고 달려가는 중~!",
-                                                    "부적절하거나 불쾌감을 줄 수 있는 대화는 삼가 부탁드립니다."]
-        
+                                                    "부적절하거나 불쾌감을\n줄 수 있는 대화는 삼가 부탁드립니다."]
     }
     
     struct URL {

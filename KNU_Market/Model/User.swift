@@ -146,6 +146,15 @@ class User {
             return list
         }
     }
+    
+    var bannedPostUploaders: [String] {
+        get {
+            return UserDefaults.standard.stringArray(forKey: Constants.UserDefaultsKey.bannedPostUploaders) ?? [String]()
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.bannedPostUploaders)
+        }
+    }
 }
 
 //MARK: - Methods

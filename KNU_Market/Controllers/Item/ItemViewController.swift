@@ -132,11 +132,14 @@ class ItemViewController: UIViewController {
             
             let reportAction = UIAlertAction(title: "게시글 신고하기",
                                            style: .default) { alert in
-                
                 self.presentReportUserVC(userToReport: self.viewModel.model?.nickname ?? "")
-
+            }
+            let blockAction = UIAlertAction(title: "이 사용자의 글 보지 않기",
+                                            style: .default) { alert in
+                self.askToBlockUser()
             }
             actionSheet.addAction(reportAction)
+            actionSheet.addAction(blockAction)
         }
         
         let cancelAction = UIAlertAction(title: "취소",
@@ -185,6 +188,28 @@ class ItemViewController: UIViewController {
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true)
     }
+    
+    func askToBlockUser() {
+        
+        guard let reportNickname = viewModel.model?.nickname,
+              let reportUID = viewModel.model?.userUID else {
+            showSimpleBottomAlert(with: "현재 해당 기능을 사용할 수 없습니다.😥")
+            return
+        }
+        
+        guard !User.shared.bannedPostUploaders.contains(reportUID) else {
+            showSimpleBottomAlert(with: "이미 \(reportNickname)의 글을 안 보기 처리하였습니다.🧐")
+            return
+        }
+        
+        presentAlertWithCancelAction(title: "\(reportNickname)님의 글 보지 않기",
+                                          message: "홈화면에서 위 사용자의 게시글이 더는 보이지 않도록 설정하시겠습니까? 한 번 설정하면 해제할 수 없습니다.") { selectedOk in
+            if selectedOk {
+                self.viewModel.blockUser(userUID: reportUID)
+            }
+        }
+    }
+    
 }
 
 //MARK: - ItemViewModelDelegate
@@ -253,7 +278,6 @@ extension ItemViewController: ItemViewModelDelegate {
     }
     
     func didCancelMarkPostDone() {
-        
         refreshPage()
     }
     
@@ -284,6 +308,10 @@ extension ItemViewController: ItemViewModelDelegate {
                                    buttonTitle: "확인")
 
         enterChatButton.loadingIndicator(false)
+    }
+    
+    func didBlockUser() {
+        showSimpleBottomAlert(with: "앞으로 \(viewModel.model?.nickname ?? "해당 유저")의 게시글이 목록에서 보이지 않습니다.")
     }
     
     func failedLoadingData(with error: NetworkError) {

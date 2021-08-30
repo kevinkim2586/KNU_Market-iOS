@@ -18,6 +18,8 @@ protocol ItemViewModelDelegate: AnyObject {
     func didEnterChat(isFirstEntrance: Bool)
     func failedJoiningChat(with error: NetworkError)
     
+    func didBlockUser()
+    
     func failedLoadingData(with error: NetworkError)
 }
 
@@ -40,11 +42,11 @@ class ItemViewModel {
     let itemImages: [UIImage]? = [UIImage]()
     
     var currentlyGatheredPeople: Int {
-        return self.model?.currentlyGatheredPeople ?? 1
+        return model?.currentlyGatheredPeople ?? 1
     }
     
     var totalGatheringPeople: Int {
-        return self.model?.totalGatheringPeople ?? 2
+        return model?.totalGatheringPeople ?? 2
     }
     
     var location: String {
@@ -63,7 +65,7 @@ class ItemViewModel {
 
     // 이미 참여하고 있는 공구인지
     var userAlreadyJoinedPost: Bool {
-        if User.shared.joinedChatRoomPIDs.contains(self.pageID ?? "") {
+        if User.shared.joinedChatRoomPIDs.contains(pageID ?? "") {
             return true
         }
         return false
@@ -80,23 +82,18 @@ class ItemViewModel {
     }
     
     var isGathering: Bool {
-        
-        if isCompletelyDone {
-            return false
-        } else {
-            return true
-        }
+        return isCompletelyDone ? false : true
     }
     
     var modelForEdit: EditPostModel {
-        let editPostModel = EditPostModel(title: self.model?.title ?? "",
-                                          imageURLs: self.imageURLs,
-                                          imageUIDs: self.model?.imageUIDs,
-                                          totalGatheringPeople: self.totalGatheringPeople,
-                                          currentlyGatheredPeople: self.currentlyGatheredPeople,
-                                          location: self.model?.location ?? 0,
-                                          itemDetail: self.model?.itemDetail ?? "",
-                                          pageUID: self.pageID ?? "")
+        let editPostModel = EditPostModel(title: model?.title ?? "",
+                                          imageURLs: imageURLs,
+                                          imageUIDs: model?.imageUIDs,
+                                          totalGatheringPeople: totalGatheringPeople,
+                                          currentlyGatheredPeople: currentlyGatheredPeople,
+                                          location: model?.location ?? 0,
+                                          itemDetail: model?.itemDetail ?? "",
+                                          pageUID: pageID ?? "")
         return editPostModel
     }
     
@@ -161,6 +158,7 @@ class ItemViewModel {
         }
     }
     
+    //MARK: - 공구글 완료 표시 해제하기
     func cancelMarkPostDone(for uid: String) {
         
         let model = UpdatePostRequestDTO(title: self.model?.title ?? "",
@@ -190,6 +188,7 @@ class ItemViewModel {
         
     }
     
+    //MARK: - 채팅방 참가하기
     func joinPost() {
         
         if currentlyGatheredPeople == totalGatheringPeople && !postIsUserUploaded && !userAlreadyJoinedPost {
@@ -249,6 +248,14 @@ class ItemViewModel {
                 self.delegate?.failedLoadingData(with: error)
             }
         }
+    }
+    
+    func blockUser(userUID: String) {
+        
+        User.shared.bannedPostUploaders.append(userUID)
+        self.delegate?.didBlockUser()
+        print("✏️ bannedUsers: \(User.shared.bannedPostUploaders)")
+    
     }
 
 }

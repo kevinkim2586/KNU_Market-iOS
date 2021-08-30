@@ -80,7 +80,7 @@ class AlertViewController: UIViewController {
     func configureMessageLabel() {
         containerView.addSubview(messageLabel)
         messageLabel.text = message ?? "표시 오류"
-        messageLabel.numberOfLines = 4
+        messageLabel.numberOfLines = 5
         
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),

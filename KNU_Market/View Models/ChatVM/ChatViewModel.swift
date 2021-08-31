@@ -38,8 +38,8 @@ class ChatViewModel: WebSocketDelegate {
     var mySelf = Sender(senderId: User.shared.userUID,
                         displayName: User.shared.nickname)
     
-    var chatModel: ChatResponseModel?
-    var index: Int = 1
+    private var chatModel: ChatResponseModel?
+    private var index: Int = 1
     
     var isFetchingData: Bool = false
     var needsToFetchMoreData: Bool = true
@@ -414,8 +414,6 @@ extension ChatViewModel {
             }
         }
     }
-    
-
 }
 
 

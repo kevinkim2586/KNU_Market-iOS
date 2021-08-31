@@ -155,6 +155,15 @@ class User {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.bannedPostUploaders)
         }
     }
+    
+    var bannedChatMembers: [String] {
+        get {
+            return UserDefaults.standard.stringArray(forKey: Constants.UserDefaultsKey.bannedChatUsers) ?? [String]()
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.bannedChatUsers)
+        }
+    }
 }
 
 //MARK: - Methods
@@ -176,6 +185,10 @@ extension User {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userUID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.hasVerifiedEmail)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.bannedPostUploaders)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.bannedChatUsers)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.notificationList)
+    
         
         ChatNotifications.list.removeAll()
 

@@ -3,10 +3,8 @@ import SDWebImage
 
 protocol ChatMemberTableViewCellDelegate: AnyObject {
     
-    func presentUserReportVC(userToReport: String)
-    func failedPresentingUserReportVC()
-    
-    func presentPostUploaderActionSheet(userUID: String, nickname: String)
+    func presentActionSheetForMembers(blockUID: String, reportNickname: String)
+    func presentActionSheetForPostUploader(userUID: String, nickname: String)
 }
 
 class ChatMemberTableViewCell: UITableViewCell {
@@ -52,9 +50,9 @@ class ChatMemberTableViewCell: UITableViewCell {
         guard let userUID = userUID else { return }
 
         if postUploaderUID == User.shared.userUID {
-            self.delegate?.presentPostUploaderActionSheet(userUID: userUID, nickname: nickname)
+            self.delegate?.presentActionSheetForPostUploader(userUID: userUID, nickname: nickname)
         } else {
-            self.delegate?.presentUserReportVC(userToReport: nickname)
+            self.delegate?.presentActionSheetForMembers(blockUID: userUID, reportNickname: nickname)
         }
     }
     

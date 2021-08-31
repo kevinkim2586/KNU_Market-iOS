@@ -17,8 +17,12 @@ class ChatMemberViewController: UIViewController {
         initialize()
         
         guard let members = roomInfo?.member else { return }
-        filteredMembers = members.filter { $0.isBanned == false }
-        
+        filteredMembers = members.filter {
+            
+            if User.shared.bannedChatMembers.contains($0.userUID) { return false }
+            if !$0.isBanned { return true }
+            return false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -107,6 +111,24 @@ class ChatMemberViewController: UIViewController {
             }
         }
     }
+    
+    func blockUser(uid: String, nickname: String) {
+        
+        guard !User.shared.bannedChatMembers.contains(uid) else {
+            presentKMAlertOnMainThread(title: "이미 차단한 사용자입니다.",
+                                       message: "이미 차단 목록에 추가된 사용자입니다!",
+                                       buttonTitle: "확인")
+            return
+        }
+        
+        User.shared.bannedChatMembers.append(uid)
+        print("✏️ bannedChatMembers: \(User.shared.bannedChatMembers)")
+        
+        presentKMAlertOnMainThread(title: "차단 완료!",
+                                   message: "\(nickname)님의 채팅이 더 이상 화면에 나타나지 않습니다.",
+                                   buttonTitle: "확인")
+        
+    }
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -153,15 +175,47 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
     
-    func presentUserReportVC(userToReport: String) {
-        presentReportUserVC(userToReport: userToReport)
+    func presentActionSheetForMembers(blockUID: String, reportNickname: String) {
+        
+        
+        let actionSheet = UIAlertController(title: "\(reportNickname)님",
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        let reportAction = UIAlertAction(title: "신고하기",
+                                         style: .default) { alert in
+            
+            self.presentReportUserVC(userToReport: reportNickname)
+        }
+        
+        let banAction = UIAlertAction(title: "차단하기",
+                                      style: .default) { alert in
+            
+            self.presentAlertWithCancelAction(title: "\(reportNickname)님을 차단하시겠습니까?",
+                                              message: "한 번 차단하면 해당 사용자의 채팅이 화면에 더 이상 보이지 않으며, 복구할 수 없습니다. 진행하시겠습니까? ") { selectedOk in
+                if selectedOk {
+                    self.blockUser(uid: blockUID, nickname: reportNickname)
+                }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        actionSheet.addAction(reportAction)
+        actionSheet.addAction(banAction)
+        actionSheet.addAction(cancelAction)
+        present(actionSheet, animated: true)
+        
+
     }
     
     func failedPresentingUserReportVC() {
         showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요 😥")
     }
     
-    func presentPostUploaderActionSheet(userUID: String, nickname: String) {
+    func presentActionSheetForPostUploader(userUID: String, nickname: String) {
         
         let actionSheet = UIAlertController(title: "\(nickname)님",
                                             message: nil,
@@ -190,7 +244,7 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
         actionSheet.addAction(reportAction)
         actionSheet.addAction(cancelAction)
         present(actionSheet, animated: true)
-        
+    
     }
     
 }

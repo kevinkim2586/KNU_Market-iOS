@@ -42,6 +42,13 @@ class HomeViewModel {
                 }
 
                 self.index += 1
+                
+                fetchedModel.forEach { model in
+                    
+//                    if model.u
+                }
+                
+                
                 self.itemList.append(contentsOf: fetchedModel)
                 self.isFetchingData = false
                 self.delegate?.didFetchItemList()

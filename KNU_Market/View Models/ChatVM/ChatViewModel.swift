@@ -456,12 +456,13 @@ extension ChatViewModel {
     
     func filterChat(text: String, userUID: String? = nil, isFromSocket: Bool = false) -> String {
         
-        if userUID != nil{
+        if userUID != nil {
             if User.shared.bannedChatMembers.contains(userUID!) {
                 return Constants.ChatSuffix.emptySuffix
             }
             
-        } else if text.contains(Constants.ChatSuffix.enterSuffix)   {
+        }
+        if text.contains(Constants.ChatSuffix.enterSuffix)   {
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
             
         } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" && isFromSocket {
@@ -480,7 +481,6 @@ extension ChatViewModel {
         } else {
             return text
         }
-        return text
     }
     
     func resetMessages() {

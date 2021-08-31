@@ -134,7 +134,7 @@ extension ChatViewModel {
             let roomUID = receivedTextInJSON["room"].stringValue
             let chatText = receivedTextInJSON["comment"].stringValue
 
-            let chatMessage = filterChat(text: chatText, isFromSocket: true)
+            let chatMessage = filterChat(text: chatText, userUID: userUID, isFromSocket: true)
 
             guard chatMessage != Constants.ChatSuffix.emptySuffix else { return }
         
@@ -275,8 +275,13 @@ extension ChatViewModel {
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
                 
                 for chat in chatResponseModel.chat {
+                    
+                    let chatText = chat.chat_content
+                    let senderUID = chat.chat_userUID
                 
-                    let chatMessage = self.filterChat(text: chat.chat_content)
+                    let chatMessage = self.filterChat(text: chatText, userUID: senderUID)
+                    
+                    guard chatMessage != Constants.ChatSuffix.emptySuffix else { continue }
                 
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {
@@ -449,14 +454,19 @@ extension ChatViewModel {
         return roomInfo?.post.user.uid ?? ""
     }
     
-    func filterChat(text: String, isFromSocket: Bool = false) -> String {
+    func filterChat(text: String, userUID: String? = nil, isFromSocket: Bool = false) -> String {
         
-        if text.contains(Constants.ChatSuffix.enterSuffix) {
+        if userUID != nil{
+            if User.shared.bannedChatMembers.contains(userUID!) {
+                return Constants.ChatSuffix.emptySuffix
+            }
+            
+        } else if text.contains(Constants.ChatSuffix.enterSuffix)   {
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
             
         } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" && isFromSocket {
-           outPost()
-           return Constants.ChatSuffix.emptySuffix
+            outPost()
+            return Constants.ChatSuffix.emptySuffix
             
         } else if text.contains(Constants.ChatSuffix.exitSuffix) {
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: "🏃")
@@ -467,10 +477,10 @@ extension ChatViewModel {
 
         } else if text.contains(Constants.ChatSuffix.rawBanSuffix) {
             return Constants.ChatSuffix.usedBanSuffix
-        }
-        else {
+        } else {
             return text
         }
+        return text
     }
     
     func resetMessages() {
@@ -506,7 +516,6 @@ extension ChatViewModel {
                                                selector: #selector(resetAndReconnect),
                                                name: .getChat,
                                                object: nil)
-        
     }
 }
 

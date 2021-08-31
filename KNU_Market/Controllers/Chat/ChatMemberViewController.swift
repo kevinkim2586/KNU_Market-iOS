@@ -17,12 +17,7 @@ class ChatMemberViewController: UIViewController {
         initialize()
         
         guard let members = roomInfo?.member else { return }
-        filteredMembers = members.filter {
-            
-            if User.shared.bannedChatMembers.contains($0.userUID) { return false }
-            if !$0.isBanned { return true }
-            return false
-        }
+        filteredMembers = members.filter { $0.isBanned == false }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -100,7 +95,9 @@ class ChatMemberViewController: UIViewController {
             switch result {
             case .success(_):
                 self.dismiss(animated: true)
-                self.presentKMAlertOnMainThread(title: "강퇴 성공", message: "해당 사용자 내보내기에 성공하였습니다.", buttonTitle: "확인")
+                self.presentKMAlertOnMainThread(title: "강퇴 성공",
+                                                message: "해당 사용자 내보내기에 성공하였습니다.",
+                                                buttonTitle: "확인")
                 
                 let userInfo: [String : String] = ["uid" : uid, "nickname" : nickname]
                 showProgressBar()
@@ -123,11 +120,12 @@ class ChatMemberViewController: UIViewController {
         
         User.shared.bannedChatMembers.append(uid)
         print("✏️ bannedChatMembers: \(User.shared.bannedChatMembers)")
-        
-        presentKMAlertOnMainThread(title: "차단 완료!",
-                                   message: "\(nickname)님의 채팅이 더 이상 화면에 나타나지 않습니다.",
-                                   buttonTitle: "확인")
-        
+        dismiss(animated: true) {
+            NotificationCenter.default.post(name: .didBlockUser,
+                                            object: nil)
+            NotificationCenter.default.post(name: .getChat,
+                                            object: nil)
+        }
     }
 }
 
@@ -192,7 +190,7 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
                                       style: .default) { alert in
             
             self.presentAlertWithCancelAction(title: "\(reportNickname)님을 차단하시겠습니까?",
-                                              message: "한 번 차단하면 해당 사용자의 채팅이 화면에 더 이상 보이지 않으며, 복구할 수 없습니다. 진행하시겠습니까? ") { selectedOk in
+                                              message: "한 번 차단하면 해당 사용자의 채팅이 모든 채팅방에서 더 이상 보이지 않으며, 복구할 수 없습니다. 진행하시겠습니까? ") { selectedOk in
                 if selectedOk {
                     self.blockUser(uid: blockUID, nickname: reportNickname)
                 }

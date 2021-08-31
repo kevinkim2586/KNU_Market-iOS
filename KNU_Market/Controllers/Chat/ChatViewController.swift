@@ -313,6 +313,7 @@ extension ChatViewController {
         initializeRefreshControl()
         initializeInputBar()
         initializeCollectionView()
+        createObservers()
     }
     
     func initializeNavigationItemTitle() {
@@ -377,5 +378,20 @@ extension ChatViewController {
                                       )
         
         messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
+    }
+    
+    @objc func didBlockUser() {
+        presentKMAlertOnMainThread(title: "차단 완료!",
+                                   message: "해당 사용자의 채팅이 더 이상 화면에 나타나지 않습니다.",
+                                   buttonTitle: "확인")
+        
+    }
+    
+    func createObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didBlockUser),
+                                               name: .didBlockUser,
+                                               object: nil)
     }
 }

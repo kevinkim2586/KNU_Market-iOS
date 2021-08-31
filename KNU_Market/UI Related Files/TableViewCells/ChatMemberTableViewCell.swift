@@ -62,11 +62,10 @@ class ChatMemberTableViewCell: UITableViewCell {
             
             switch result {
             case .success(let profileModel):
-                
-                self?.nickname = profileModel.nickname
+            
+                self?.nickname = User.shared.bannedChatMembers.contains(profileModel.uid) ? "내가 차단한 유저" : profileModel.nickname
                 self?.userUID = profileModel.uid
-                
-                self?.nicknameLabel.text = profileModel.nickname
+                self?.nicknameLabel.text = self?.nickname
                 
                 let imageURL = URL(string: "\(Constants.API_BASE_URL)media/\(profileModel.profileImageCode)")
                 self?.profileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -78,13 +77,11 @@ class ChatMemberTableViewCell: UITableViewCell {
                 self?.profileImageView.contentMode = .scaleToFill
                 
                 // 만약 본인 Cell 이면 신고하기 버튼 숨김 처리
-                if self?.userUID == User.shared.userUID {
+                if self?.userUID == User.shared.userUID || User.shared.bannedChatMembers.contains(profileModel.uid) {
                     self?.reportUserButton.isHidden = true
                 }
                 
                 self?.crownImageView.isHidden = self?.userUID == self?.postUploaderUID ? false : true
-                
-                
         
             case .failure(let error):
                 

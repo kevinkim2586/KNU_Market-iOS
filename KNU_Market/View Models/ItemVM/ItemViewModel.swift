@@ -254,8 +254,7 @@ class ItemViewModel {
         
         User.shared.bannedPostUploaders.append(userUID)
         self.delegate?.didBlockUser()
-        print("✏️ bannedUsers: \(User.shared.bannedPostUploaders)")
-    
+        NotificationCenter.default.post(name: .updateItemList, object: nil)
     }
 
 }

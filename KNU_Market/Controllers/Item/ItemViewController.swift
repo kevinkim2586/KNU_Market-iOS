@@ -196,11 +196,12 @@ class ItemViewController: UIViewController {
             showSimpleBottomAlert(with: "현재 해당 기능을 사용할 수 없습니다.😥")
             return
         }
-        
+    
         guard !User.shared.bannedPostUploaders.contains(reportUID) else {
             showSimpleBottomAlert(with: "이미 \(reportNickname)의 글을 안 보기 처리하였습니다.🧐")
             return
         }
+    
         
         presentAlertWithCancelAction(title: "\(reportNickname)님의 글 보지 않기",
                                           message: "홈화면에서 위 사용자의 게시글이 더는 보이지 않도록 설정하시겠습니까? 한 번 설정하면 해제할 수 없습니다.") { selectedOk in

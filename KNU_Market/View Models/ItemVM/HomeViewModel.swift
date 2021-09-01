@@ -49,8 +49,6 @@ class HomeViewModel {
                     }
                     self.itemList.append(model)
                 }
-                
-//                self.itemList.append(contentsOf: fetchedModel)
                 self.isFetchingData = false
                 self.delegate?.didFetchItemList()
                 

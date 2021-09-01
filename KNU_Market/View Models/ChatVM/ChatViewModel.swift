@@ -460,7 +460,6 @@ extension ChatViewModel {
             if User.shared.bannedChatMembers.contains(userUID!) {
                 return Constants.ChatSuffix.emptySuffix
             }
-            
         }
         if text.contains(Constants.ChatSuffix.enterSuffix)   {
             return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")

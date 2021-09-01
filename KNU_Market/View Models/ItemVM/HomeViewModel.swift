@@ -43,15 +43,18 @@ class HomeViewModel {
 
                 self.index += 1
                 
-                fetchedModel.forEach { model in
-                    
-//                    if model.u
+                for model in fetchedModel {
+                    if User.shared.bannedPostUploaders.contains(model.userInfo.userUID) {
+                        continue
+                    }
+                    self.itemList.append(model)
                 }
                 
-                
-                self.itemList.append(contentsOf: fetchedModel)
+//                self.itemList.append(contentsOf: fetchedModel)
                 self.isFetchingData = false
                 self.delegate?.didFetchItemList()
+                
+                print("✏️ bannedPostUploaders: \(User.shared.bannedPostUploaders)")
 
             case .failure(let error):
                 self.delegate?.failedFetchingItemList(with: error)

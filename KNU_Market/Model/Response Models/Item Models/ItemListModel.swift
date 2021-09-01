@@ -13,6 +13,7 @@ struct ItemListModel: Decodable {
     let isCompletelyDone: Bool
     let date: String
     let imageUIDs: [Media]
+    let userInfo: UserInfo
 
     enum CodingKeys: String, CodingKey {
         
@@ -25,6 +26,7 @@ struct ItemListModel: Decodable {
         case isCompletelyDone = "isArchived"
         case date = "createDate"
         case imageUIDs = "medias"
+        case userInfo = "user"
     }
 }
 
@@ -39,5 +41,14 @@ struct Media: Decodable {
         
         case uid, path, date
         case userUID = "userUid"
+    }
+}
+
+struct UserInfo: Decodable {
+    
+    let userUID: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userUID = "uid"
     }
 }

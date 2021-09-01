@@ -128,7 +128,7 @@ extension UploadItemViewController: UploadItemDelegate {
         
         print("✏️ UploadItemVC - failedUploading: \(error.errorDescription)")
         dismissProgressBar()
-        self.showSimpleBottomAlert(with: "업로드 실패: \(error.errorDescription)")
+        showSimpleBottomAlert(with: "업로드 실패: \(error.errorDescription)")
         navigationController?.popViewController(animated: true)
     }
     
@@ -143,7 +143,7 @@ extension UploadItemViewController: UploadItemDelegate {
 
         print("✏️ UploadItemVC - failedUpdatingPost: \(error.errorDescription)")
         dismissProgressBar()
-        self.showSimpleBottomAlert(with: NetworkError.E000.errorDescription)
+        showSimpleBottomAlert(with: NetworkError.E000.errorDescription)
         navigationController?.popViewController(animated: true)
     }
 }
@@ -268,7 +268,7 @@ extension UploadItemViewController {
         initializeTextView()
         createObserversForPresentingEmailVerification()
         
-        if self.editModel != nil {
+        if editModel != nil {
             configurePageWithPriorData()
         }
     }
@@ -332,8 +332,8 @@ extension UploadItemViewController {
         
         // 이미지 url 이 있으면 실행
         if let imageURLs = editModel!.imageURLs, let imageUIDs = editModel!.imageUIDs {
-            self.viewModel.priorImageURLs = imageURLs
-            self.viewModel.priorImageUIDs = imageUIDs
+            viewModel.priorImageURLs = imageURLs
+            viewModel.priorImageUIDs = imageUIDs
         }
     
         itemTitleTextField.text = editModel!.title

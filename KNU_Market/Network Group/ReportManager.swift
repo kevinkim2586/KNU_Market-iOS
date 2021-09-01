@@ -19,7 +19,9 @@ class ReportManager {
     func reportUser(with model: ReportUserRequestDTO,
                     completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        AF.request(reportUserURL,
+        let url = reportUserURL + "/\(model.postUID)"
+        
+        AF.request(url,
                    method: .post,
                    parameters: model.parameters,
                    encoding: JSONEncoding.default,

@@ -132,8 +132,16 @@ class ItemViewController: UIViewController {
             
             let reportAction = UIAlertAction(title: "게시글 신고하기",
                                            style: .default) { alert in
-                self.presentReportUserVC(userToReport: self.viewModel.model?.nickname ?? "")
+                
+                guard let nickname = self.viewModel.model?.nickname,
+                      let postUID = self.viewModel.pageID else {
+                    return
+                }
+            
+                self.presentReportUserVC(userToReport: nickname,
+                                         postUID: postUID)
             }
+            
             let blockAction = UIAlertAction(title: "이 사용자의 글 보지 않기",
                                             style: .default) { alert in
                 self.askToBlockUser()
@@ -313,6 +321,7 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func didBlockUser() {
         showSimpleBottomAlert(with: "앞으로 \(viewModel.model?.nickname ?? "해당 유저")의 게시글이 목록에서 보이지 않습니다.")
+        navigationController?.popViewController(animated: true)
     }
     
     func failedLoadingData(with error: NetworkError) {

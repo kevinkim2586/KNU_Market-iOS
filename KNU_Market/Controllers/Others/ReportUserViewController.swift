@@ -7,10 +7,10 @@ class ReportUserViewController: UIViewController {
     @IBOutlet var sendButton: UIButton!
     
     var userToReport: String = ""
+    var postUID: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
     }
     
@@ -33,24 +33,24 @@ class ReportUserViewController: UIViewController {
         showProgressBar()
         
         let model = ReportUserRequestDTO(user: userToReport,
-                                    content: contentTextView.text!)
+                                         content: contentTextView.text!,
+                                         postUID: postUID)
         
-        print("userToReport: \(userToReport)")
+        print("✏️ postUID: \(postUID)")
         
         ReportManager.shared.reportUser(with: model) { result in
-            
+
             dismissProgressBar()
-            
+
             switch result {
-            
+
             case .success(_):
-                
-                self.showSimpleBottomAlert(with: "신고가 정상적으로 접수되었습니다. 감사합니다 😁")
+
+                self.showSimpleBottomAlert(with: "신고가 정상적으로 접수되었습니다. 감사합니다.😁")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    
                     self.dismiss(animated: true)
                 }
-                
+
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }

@@ -175,7 +175,6 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
     
     func presentActionSheetForMembers(blockUID: String, reportNickname: String) {
         
-        
         let actionSheet = UIAlertController(title: "\(reportNickname)님",
                                             message: nil,
                                             preferredStyle: .actionSheet)
@@ -183,7 +182,9 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
         let reportAction = UIAlertAction(title: "신고하기",
                                          style: .default) { alert in
             
-            self.presentReportUserVC(userToReport: reportNickname)
+            guard let postUID = self.roomInfo?.post.uuid else { return }
+            
+            self.presentReportUserVC(userToReport: reportNickname, postUID: postUID)
         }
         
         let banAction = UIAlertAction(title: "차단하기",
@@ -232,7 +233,9 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
         let reportAction = UIAlertAction(title: "신고하기",
                                          style: .default) { alert in
             
-            self.presentReportUserVC(userToReport: nickname)
+            guard let postUID = self.roomInfo?.post.uuid else { return }
+            
+            self.presentReportUserVC(userToReport: nickname, postUID: postUID)
             
         }
         let cancelAction = UIAlertAction(title: "취소",

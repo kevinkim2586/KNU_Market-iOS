@@ -100,17 +100,17 @@ extension UIViewController {
     }
     
     // 유저 신고하기 VC
-    func presentReportUserVC(userToReport: String) {
+    func presentReportUserVC(userToReport: String, postUID: String) {
         
         let storyboard = UIStoryboard(name: "Report", bundle: nil)
         
         guard let reportVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.reportUserVC) as? ReportUserViewController else { return }
         
         reportVC.userToReport = userToReport
+        reportVC.postUID = postUID
         reportVC.modalPresentationStyle = .overFullScreen
       
         self.present(reportVC, animated: true)
-        
     }
     
     // 이메일 인증하기 VC

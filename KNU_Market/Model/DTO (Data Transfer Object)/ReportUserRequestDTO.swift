@@ -4,10 +4,12 @@ import Alamofire
 struct ReportUserRequestDTO {
     
     var parameters: Parameters = [:]
+    var postUID: String
     
-    init(user: String, content: String) {
+    init(user: String, content: String, postUID: String) {
     
-        parameters["title"] = user
+        parameters["userName"] = user
         parameters["content"] = content
+        self.postUID = postUID
     }
 }

@@ -70,8 +70,7 @@ enum NetworkError: String, Error {
             
         case .E112:
             return "방장으로부터 강퇴를 당한 방입니다."
-            
-   
+
         case .E201:
             return "refresh_token 누락"
             
@@ -93,7 +92,6 @@ enum NetworkError: String, Error {
             
         case .E501:
             return "존재하지 않는 파일입니다."
-            
         case .E601:
             return "존재하지 않는 글입니다.🧐"
 

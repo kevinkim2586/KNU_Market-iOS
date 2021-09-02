@@ -9,6 +9,8 @@ class ReportUserViewController: UIViewController {
     var userToReport: String = ""
     var postUID: String = ""
     
+    private let textViewPlaceholder: String = "신고 내용을 적어주세요❗️"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -35,8 +37,6 @@ class ReportUserViewController: UIViewController {
         let model = ReportUserRequestDTO(user: userToReport,
                                          content: contentTextView.text!,
                                          postUID: postUID)
-        
-        print("✏️ postUID: \(postUID)")
         
         ReportManager.shared.reportUser(with: model) { result in
 
@@ -75,7 +75,6 @@ extension ReportUserViewController {
     func initializeTitleLabel() {
         
         titleLabel.text = "\(userToReport)를 신고하시겠습니까?"
-        
     }
     
     func initializeTextView() {
@@ -86,7 +85,7 @@ extension ReportUserViewController {
         contentTextView.layer.borderColor = UIColor.lightGray.cgColor
         contentTextView.clipsToBounds = true
         contentTextView.font = UIFont.systemFont(ofSize: 15)
-        contentTextView.text = "신고 내용을 적어주세요❗️"
+        contentTextView.text = textViewPlaceholder
         contentTextView.textColor = UIColor.lightGray
     }
     
@@ -122,7 +121,7 @@ extension ReportUserViewController {
     
     func validateUserInput() -> Bool {
         
-        guard contentTextView.text != "신고 내용을 적어주세요❗️" else {
+        guard contentTextView.text != textViewPlaceholder else {
             self.showSimpleBottomAlert(with: "신고 내용을 3글자 이상 적어주세요 👀")
             return false
         }
@@ -152,7 +151,7 @@ extension ReportUserViewController: UITextViewDelegate {
 
         if textView.text.isEmpty {
             
-            textView.text = "신고 내용을 적어주세요❗️"
+            textView.text = textViewPlaceholder
             textView.textColor = UIColor.lightGray
             return
         }

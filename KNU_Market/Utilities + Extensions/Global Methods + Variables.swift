@@ -1,7 +1,6 @@
 import Foundation
 import ProgressHUD
 
-
 //MARK: - Progress Bar related methods
 
 func showProgressBar() {

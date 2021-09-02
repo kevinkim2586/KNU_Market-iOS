@@ -324,19 +324,6 @@
 			path = MyPageVM;
 			sourceTree = "<group>";
 		};
-		7C4D13C5264524FA00CBB00A /* TableViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */,
-				7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */,
-				7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */,
-				7CCDB1ED26A2BD0C0092F28D /* ItemTableViewCell.swift */,
-				7CCDB1EE26A2BD0C0092F28D /* ItemTableViewCell.xib */,
-				7C3D985F26AE89B4005DFAE0 /* ChatMemberTableViewCell.swift */,
-			);
-			path = TableViewCells;
-			sourceTree = "<group>";
-		};
 		7C555460266CFBE500C3C5B6 /* Chat Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,13 +373,61 @@
 			path = "DTO (Data Transfer Object)";
 			sourceTree = "<group>";
 		};
-		7C8839DB2643CADB00F9F78C /* UserPickedItemImageViewCell */ = {
+		7C79E10C26E0C1F50004508A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7CA661F6263D4387000E0B7A /* Main.storyboard */,
+				7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */,
+				7C6D2536268DD6710030F9A1 /* ItemList.storyboard */,
+				7C6D2538268DD6830030F9A1 /* ChatList.storyboard */,
+				7C184B8426B27B8B006C0FAD /* Chat.storyboard */,
+				7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */,
+				7C0E2DDC26B7B62600BB37FF /* Report.storyboard */,
+				7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7C79E10D26E0C20B0004508A /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */,
+				7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */,
+				7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */,
+				7CCDB1ED26A2BD0C0092F28D /* ItemTableViewCell.swift */,
+				7CCDB1EE26A2BD0C0092F28D /* ItemTableViewCell.xib */,
+				7C3D985F26AE89B4005DFAE0 /* ChatMemberTableViewCell.swift */,
+			);
+			path = UITableViewCells;
+			sourceTree = "<group>";
+		};
+		7C79E10E26E0C24E0004508A /* UICollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
 				7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */,
 				7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */,
 			);
-			path = UserPickedItemImageViewCell;
+			path = UICollectionViewCells;
+			sourceTree = "<group>";
+		};
+		7C79E10F26E0C2630004508A /* Custom Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				7CA78FF726CE02D10019B06F /* KMBodyLabel.swift */,
+				7CA78FFB26CE03260019B06F /* KMButton.swift */,
+				7CA78FF926CE02EC0019B06F /* KMTitleLabel.swift */,
+				7CA78FF526CDFC510019B06F /* AlertViewController.swift */,
+			);
+			path = "Custom Alerts";
+			sourceTree = "<group>";
+		};
+		7C79E11026E0C27B0004508A /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				7CC1B59726D4C7000007F99B /* EmptyView.swift */,
+				7CC1B59926D4CB1E0007F99B /* EmptyView.xib */,
+			);
+			path = UIView;
 			sourceTree = "<group>";
 		};
 		7CA661E4263D4387000E0B7A = {
@@ -418,8 +453,7 @@
 			children = (
 				7C77E240266BB55600680A27 /* KNU_Market.entitlements */,
 				7CA6624E26413F03000E0B7A /* Constants.swift */,
-				7CA6622226413269000E0B7A /* View (Storyboards) */,
-				7CA6622B26413302000E0B7A /* UI Related Files */,
+				7CA6622226413269000E0B7A /* Views */,
 				7CA6624A26413CEF000E0B7A /* Error Management Group */,
 				7CA66228264132DC000E0B7A /* Network Group */,
 				7CA6622326413272000E0B7A /* Model */,
@@ -439,19 +473,16 @@
 			path = KNU_Market;
 			sourceTree = "<group>";
 		};
-		7CA6622226413269000E0B7A /* View (Storyboards) */ = {
+		7CA6622226413269000E0B7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7CA661F6263D4387000E0B7A /* Main.storyboard */,
-				7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */,
-				7C6D2536268DD6710030F9A1 /* ItemList.storyboard */,
-				7C6D2538268DD6830030F9A1 /* ChatList.storyboard */,
-				7C184B8426B27B8B006C0FAD /* Chat.storyboard */,
-				7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */,
-				7C0E2DDC26B7B62600BB37FF /* Report.storyboard */,
-				7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */,
+				7C79E11026E0C27B0004508A /* UIView */,
+				7C79E10F26E0C2630004508A /* Custom Alerts */,
+				7C79E10E26E0C24E0004508A /* UICollectionViewCells */,
+				7C79E10C26E0C1F50004508A /* Storyboards */,
+				7C79E10D26E0C20B0004508A /* UITableViewCells */,
 			);
-			path = "View (Storyboards)";
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7CA6622326413272000E0B7A /* Model */ = {
@@ -502,17 +533,6 @@
 				7CB8DF5C264C207D0001CC6D /* ItemVM */,
 			);
 			path = "View Models";
-			sourceTree = "<group>";
-		};
-		7CA6622B26413302000E0B7A /* UI Related Files */ = {
-			isa = PBXGroup;
-			children = (
-				7CC1B59426D4B28F0007F99B /* Empty States */,
-				7CC1B59126D225BE0007F99B /* Custom Alerts */,
-				7C4D13C5264524FA00CBB00A /* TableViewCells */,
-				7C8839DB2643CADB00F9F78C /* UserPickedItemImageViewCell */,
-			);
-			path = "UI Related Files";
 			sourceTree = "<group>";
 		};
 		7CA6624A26413CEF000E0B7A /* Error Management Group */ = {
@@ -580,26 +600,6 @@
 				7CC05E9926B6D91800BE9288 /* EditPostModel.swift */,
 			);
 			path = "Item Models";
-			sourceTree = "<group>";
-		};
-		7CC1B59126D225BE0007F99B /* Custom Alerts */ = {
-			isa = PBXGroup;
-			children = (
-				7CA78FF526CDFC510019B06F /* AlertViewController.swift */,
-				7CA78FF726CE02D10019B06F /* KMBodyLabel.swift */,
-				7CA78FFB26CE03260019B06F /* KMButton.swift */,
-				7CA78FF926CE02EC0019B06F /* KMTitleLabel.swift */,
-			);
-			path = "Custom Alerts";
-			sourceTree = "<group>";
-		};
-		7CC1B59426D4B28F0007F99B /* Empty States */ = {
-			isa = PBXGroup;
-			children = (
-				7CC1B59726D4C7000007F99B /* EmptyView.swift */,
-				7CC1B59926D4CB1E0007F99B /* EmptyView.xib */,
-			);
-			path = "Empty States";
 			sourceTree = "<group>";
 		};
 		7CD1522526AA99DA00F2C466 /* Chat Models */ = {
@@ -1051,14 +1051,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.3;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1074,14 +1074,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.3;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -599,6 +599,10 @@ extension ChatViewController {
         dismissProgressBar()
         refreshControl.endRefreshing()
     }
+    
+    func failedUploadingImageToServer() {
+        
+    }
 }
 
 //MARK: - InputBarAccessoryViewDelegate

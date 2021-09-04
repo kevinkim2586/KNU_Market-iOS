@@ -6,7 +6,8 @@ class ChatMemberViewController: UIViewController {
     @IBOutlet weak var postTitleLabel: UILabel!
     @IBOutlet weak var postMemberCountLabel: UILabel!
     @IBOutlet weak var memberTableView: UITableView!
-  
+    @IBOutlet weak var exitButton: UIButton!
+    
     var roomInfo: RoomInfo?
     var filteredMembers: [Member]?
     var postUploaderUID: String?
@@ -30,52 +31,29 @@ class ChatMemberViewController: UIViewController {
         dismissProgressBar()
     }
 
-    @IBAction func pressedSettingsButton(_ sender: UIButton) {
-
-        let alert = UIAlertController(title: nil,
-                                      message: nil,
-                                      preferredStyle: .actionSheet)
+    @IBAction func pressedExitButton(_ sender: UIButton) {
         
-        // 내가 올린 공구글이라면 채팅방 나가기가 아닌 공구글 자체 삭제
-        if self.postUploaderUID == User.shared.userUID {
+        if postUploaderUID == User.shared.userUID {
             
-            let deleteChatRoom = UIAlertAction(title: "공구 삭제하기",
-                                               style: .destructive) { _ in
+            self.presentAlertWithCancelAction(title: "본인이 방장으로 있는 채팅방입니다.",
+                                              message: "글 작성자가 삭제하면 공구가 삭제되고 참여자 전원이 채팅방에서 나가게 됩니다. 신중히 생각 후 삭제해주세요. 🤔") { selectedOk in
                 
-                self.presentAlertWithCancelAction(title: "정말 삭제하시겠습니까?",
-                                                  message: "글 작성자가 삭제하면 공구가 삭제되고 참여자 전원이 채팅방에서 나가게 됩니다. 신중히 생각 후 삭제해주세요. 🤔") { selectedOk in
-                    
-                    if selectedOk {
-                        NotificationCenter.default.post(name: .didChooseToDeletePost, object: nil)
-                        self.dismiss(animated: true)
-                    }
+                if selectedOk {
+                    NotificationCenter.default.post(name: .didChooseToDeletePost, object: nil)
+                    self.dismiss(animated: true)
                 }
             }
-            
-            alert.addAction(deleteChatRoom)
-    
         } else {
-            let exitChatRoom = UIAlertAction(title: "채팅방 나가기",
-                                             style: .default) { _ in
+            self.presentAlertWithCancelAction(title: "해당 공구에서 나가시겠습니까?",
+                                              message: "") { selectedOk in
                 
-                self.presentAlertWithCancelAction(title: "해당 공구에서 나가시겠습니까?",
-                                                  message: "") { selectedOk in
-                    
-                    if selectedOk {
-                        showProgressBar()
-                        NotificationCenter.default.post(name: .didChooseToExitPost, object: nil)
-                        self.dismiss(animated: true)
-                    }
+                if selectedOk {
+                    showProgressBar()
+                    NotificationCenter.default.post(name: .didChooseToExitPost, object: nil)
+                    self.dismiss(animated: true)
                 }
             }
-            alert.addAction(exitChatRoom)
         }
-        
-        let cancel = UIAlertAction(title: "취소",
-                                   style: .cancel,
-                                   handler: nil)
-        alert.addAction(cancel)
-        self.present(alert, animated: true)
     }
     
     func banUser(uid: String, nickname: String) {
@@ -258,6 +236,7 @@ extension ChatMemberViewController {
         
         initializeTableView()
         initializeTopView()
+        initializeExitButton()
     }
     
     func initializeTableView() {
@@ -268,6 +247,13 @@ extension ChatMemberViewController {
     
     func initializeTopView() {
         postMemberCountLabel.text = "\(self.roomInfo?.post.currentlyGatheredPeople ?? 0)"
+    }
+    
+    func initializeExitButton() {
+        
+        exitButton.layer.cornerRadius = 6
+        exitButton.addBounceAnimationWithNoFeedback()
+        
     }
 }
 

@@ -13,7 +13,7 @@ struct ItemListModel: Decodable {
     let isCompletelyDone: Bool
     let date: String
     let imageUIDs: [Media]
-    let userInfo: UserInfo
+    let userInfo: UserInfo?
 
     enum CodingKeys: String, CodingKey {
         

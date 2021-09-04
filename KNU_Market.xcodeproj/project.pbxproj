@@ -337,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				7CA661F9263D4389000E0B7A /* Assets.xcassets */,
+				7C79E11126E0EDFA0004508A /* LaunchScreen Assets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -430,6 +431,15 @@
 			path = UIView;
 			sourceTree = "<group>";
 		};
+		7C79E11126E0EDFA0004508A /* LaunchScreen Assets */ = {
+			isa = PBXGroup;
+			children = (
+				7C43355B26D8BD8000A044CD /* appLogo_LaunchScreen.png */,
+				7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */,
+			);
+			path = "LaunchScreen Assets";
+			sourceTree = "<group>";
+		};
 		7CA661E4263D4387000E0B7A = {
 			isa = PBXGroup;
 			children = (
@@ -463,12 +473,10 @@
 				7C3B4FF826A93CF100E2CA8F /* Lottie Files */,
 				7C5E21252646443900E98FE5 /* Assets */,
 				7CA661F0263D4387000E0B7A /* AppDelegate.swift */,
-				7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */,
-				7C43355B26D8BD8000A044CD /* appLogo_LaunchScreen.png */,
+				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
 				7CA661FB263D4389000E0B7A /* LaunchScreen.storyboard */,
 				7CA661FE263D4389000E0B7A /* Info.plist */,
 				7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */,
-				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
 			);
 			path = KNU_Market;
 			sourceTree = "<group>";
@@ -1051,14 +1059,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3;
+				CURRENT_PROJECT_VERSION = 1.5;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1074,14 +1082,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3;
+				CURRENT_PROJECT_VERSION = 1.5;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

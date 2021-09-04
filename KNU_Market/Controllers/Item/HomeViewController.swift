@@ -57,9 +57,11 @@ extension HomeViewController: HomeViewModelDelegate {
     
     func didFetchUserProfileInfo() {
         
+        guard let defaultImage = UIImage(systemName: "checkmark.circle") else { return }
+    
         SPIndicator.present(title: "\(User.shared.nickname)님",
                             message: "환영합니다 🎉",
-                            preset: .custom(UIImage(systemName: "face.smiling")!))
+                            preset: .custom(UIImage(systemName: "face.smiling") ?? defaultImage))
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {

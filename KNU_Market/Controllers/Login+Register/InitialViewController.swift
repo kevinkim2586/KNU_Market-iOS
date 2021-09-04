@@ -81,8 +81,8 @@ extension InitialViewController {
         idTextField.textAlignment = .center
         idTextField.adjustsFontSizeToFitWidth = true
         idTextField.minimumFontSize = 12
+        idTextField.layer.masksToBounds = true
         idTextField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        
         
         idTextField.placeholder = "학교 이메일 입력 (@knu.ac.kr)"
         
@@ -93,10 +93,10 @@ extension InitialViewController {
         pwTextField.adjustsFontSizeToFitWidth = true
         pwTextField.minimumFontSize = 12
         pwTextField.isSecureTextEntry = true
+        pwTextField.layer.masksToBounds = true
         pwTextField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         
         pwTextField.placeholder = "비밀번호 입력"
-        
     }
     
     func initializeLoginButton() {

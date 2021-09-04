@@ -52,16 +52,16 @@ extension MyPageViewController {
                                       message: "",
                                       preferredStyle: .actionSheet)
         let library = UIAlertAction(title: "앨범에서 선택",
-                                    style: .default) { _ in
-            self.initializeImagePicker()
+                                    style: .default) { [weak self] _ in
+            self?.initializeImagePicker()
         }
         let remove = UIAlertAction(title: "프로필 사진 제거",
-                                   style: .default) { _ in
+                                   style: .default) { [weak self] _ in
             
-            self.presentAlertWithCancelAction(title: "프로필 사진 제거",
+            self?.presentAlertWithCancelAction(title: "프로필 사진 제거",
                                               message: "정말로 제거하시겠습니까?") { selectedOk in
                 
-                if selectedOk { self.removeProfileImage() }
+                if selectedOk { self?.removeProfileImage() }
                 else { return }
             }
         }

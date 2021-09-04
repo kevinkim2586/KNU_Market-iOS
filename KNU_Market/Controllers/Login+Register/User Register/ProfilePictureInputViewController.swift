@@ -89,7 +89,7 @@ extension ProfilePictureInputViewController {
                                       preferredStyle: .actionSheet)
         let library = UIAlertAction(title: "앨범에서 선택",
                                     style: .default) { _ in
-            
+
             self.initializeImagePicker()
             self.present(self.imagePicker, animated: true)
         }

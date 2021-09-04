@@ -100,13 +100,13 @@ class ItemViewController: UIViewController {
         
         if viewModel.postIsUserUploaded {
             let deleteAction = UIAlertAction(title: "공구 삭제하기",
-                                             style: .destructive) { alert in
+                                             style: .destructive) { [weak self] _ in
+                
+                guard let self = self else { return }
                 
                 self.presentAlertWithCancelAction(title: "정말 삭제하시겠습니까?",
                                                   message: "") { selectedOk in
-                    
                     if selectedOk {
-                        
                         showProgressBar()
                         self.viewModel.deletePost(for: self.pageID)
                     }
@@ -114,7 +114,9 @@ class ItemViewController: UIViewController {
                                              }
             
             let editAction = UIAlertAction(title: "글 수정하기",
-                                           style: .default) { alert in
+                                           style: .default) { [weak self] _ in
+                
+                guard let self = self else { return }
             
                 DispatchQueue.main.async {
                     
@@ -131,7 +133,9 @@ class ItemViewController: UIViewController {
         } else {
             
             let reportAction = UIAlertAction(title: "게시글 신고하기",
-                                           style: .default) { alert in
+                                           style: .default) { [weak self] _ in
+                
+                guard let self = self else { return }
                 
                 guard let nickname = self.viewModel.model?.nickname,
                       let postUID = self.viewModel.pageID else {
@@ -143,7 +147,9 @@ class ItemViewController: UIViewController {
             }
             
             let blockAction = UIAlertAction(title: "이 사용자의 글 보지 않기",
-                                            style: .default) { alert in
+                                            style: .default) { [weak self] _ in
+                
+                guard let self = self else { return }
                 self.askToBlockUser()
             }
             actionSheet.addAction(reportAction)
@@ -179,16 +185,15 @@ class ItemViewController: UIViewController {
                 
             } else {
                 let doneAction = UIAlertAction(title: "모집 완료하기",
-                                               style: .default) { alert in
+                                               style: .default) { [weak self] _ in
+                    guard let self = self else { return }
                     
                     self.viewModel.markPostDone(for: self.pageID)
       
                 }
                 actionSheet.addAction(doneAction)
             }
-            
         }
-        
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel,
                                          handler: nil)

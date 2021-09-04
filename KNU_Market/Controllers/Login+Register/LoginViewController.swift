@@ -52,10 +52,7 @@ class LoginViewController: UIViewController {
         
         presentPanModal(findPasswordVC)
     }
-    
-    @objc func dismissVC() {
-        self.dismiss(animated: true)
-    }
+ 
 }
 
 extension LoginViewController: FindPasswordDelegate {
@@ -87,7 +84,7 @@ extension LoginViewController {
     func initialize() {
         
         initializeDelegates()
-        initializeNavigationBar()
+        addDismissButtonToRightNavBar()
         initializeTextFields()
         initializeLoginButton()
     }
@@ -96,28 +93,6 @@ extension LoginViewController {
         
         idTextField.delegate = self
         passwordTextField.delegate = self
-    }
-    
-    func initializeNavigationBar() {
-        
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 150
-        
-        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: statusBarHeight,
-                                                          width: view.bounds.size.width, height: 50))
-        navigationBar.tintColor = .lightGray
-        navigationBar.setBackgroundImage(UIImage(),
-                                         for: .default)
-        navigationBar.shadowImage = UIImage()
-        self.view.addSubview(navigationBar)
-        
-        let navItem = UINavigationItem(title: "")
-        let navBarButton = UIBarButtonItem(barButtonSystemItem: .stop,
-                                           target: self,
-                                           action: #selector(dismissVC))
-        navBarButton.tintColor = .black
-        navItem.leftBarButtonItem = navBarButton
-        navigationBar.items = [navItem]
     }
     
     func initializeTextFields() {

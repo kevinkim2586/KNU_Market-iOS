@@ -18,6 +18,9 @@ target 'KNU_Market' do
   pod "GMStepper"
   pod "MessageKit"
   pod 'InputBarAccessoryView'
+  pod 'MessageInputBar'
+
+  
   pod 'ProgressHUD'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftKeychainWrapper'

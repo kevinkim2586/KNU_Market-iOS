@@ -25,6 +25,8 @@ class ChatViewController: MessagesViewController {
     
         initialize()
         
+    
+        
         print("✏️ pageID: \(roomUID)")
         print("✏️ title: \(chatRoomTitle)")
 
@@ -367,6 +369,7 @@ extension ChatViewController {
     
     func initializeInputBar() {
         
+        
         messageInputBar.delegate = self
         messageInputBar.sendButton.title = nil
         let configuration = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular)
@@ -378,6 +381,7 @@ extension ChatViewController {
                                       )
         
         messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
+
     }
     
     @objc func didBlockUser() {

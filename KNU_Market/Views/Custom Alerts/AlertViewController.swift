@@ -90,10 +90,4 @@ class AlertViewController: UIViewController {
         ])
         
     }
-    
-    @objc func dismissVC() {
-        dismiss(animated: true, completion: nil)
-    }
-
-
 }

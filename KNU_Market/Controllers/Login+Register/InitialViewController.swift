@@ -56,10 +56,28 @@ class InitialViewController: UIViewController {
     }
 }
 
+//MARK: - FindPasswordDelegate
+
 extension InitialViewController: FindPasswordDelegate {
     
     func didSendFindPasswordEmail() {
         self.showSimpleBottomAlert(with: "발급받은 임시 비밀번호로 로그인해 주세요. 🎉")
+    }
+}
+
+//MARK: - UITextField Delegate
+
+extension InitialViewController: UITextFieldDelegate {
+    
+    @objc func textFieldChanged(textField: UITextField) {
+
+//        
+//        guard let text = idTextField.text?.replacingOccurrences(of: "@knu.ac.kr", with: "") else { return }
+//        
+//        if textField.text != "" {
+//            textField.text = text + "@knu.ac.kr"
+//        }
+        
     }
 }
 
@@ -83,7 +101,9 @@ extension InitialViewController {
         idTextField.minimumFontSize = 12
         idTextField.layer.masksToBounds = true
         idTextField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        
+        idTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        idTextField.delegate = self
+        idTextField.tintColor = .clear
         idTextField.placeholder = "학교 이메일 입력 (@knu.ac.kr)"
         
         pwTextField.borderStyle = .none

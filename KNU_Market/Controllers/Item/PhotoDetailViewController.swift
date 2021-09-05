@@ -12,12 +12,9 @@ class PhotoDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         initialize()
     }
-    
-    
+
     func initialize() {
         
         initializeImageSources()
@@ -27,7 +24,6 @@ class PhotoDetailViewController: UIViewController {
     func initializeImageSources() {
         
         for url in imageURLs {
-            
             imageSources.append(SDWebImageSource(url: url,
                                                  placeholder: UIImage(named: Constants.Images.defaultItemImage)))
             

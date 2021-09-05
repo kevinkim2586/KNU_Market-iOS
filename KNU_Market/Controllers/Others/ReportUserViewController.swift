@@ -21,11 +21,6 @@ class ReportUserViewController: UIViewController {
         dismissProgressBar()
     }
     
-    
-    @objc func dismissVC() {
-        dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func pressedSendButton(_ sender: UIButton) {
         
         self.view.endEditing(true)
@@ -69,7 +64,7 @@ extension ReportUserViewController {
         initializeTitleLabel()
         initializeTextView()
         initializeButton()
-        initializeNavigationBar()
+        addDismissButtonToRightNavBar()
     }
     
     func initializeTitleLabel() {
@@ -91,27 +86,6 @@ extension ReportUserViewController {
     
     func initializeButton() {
         sendButton.layer.cornerRadius = 5
-    }
-    
-    func initializeNavigationBar() {
-        
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 150
-        
-        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: statusBarHeight,
-                                                          width: view.bounds.size.width, height: 50))
-        navigationBar.tintColor = .lightGray
-        navigationBar.setBackgroundImage(UIImage(),
-                                         for: .default)
-        navigationBar.shadowImage = UIImage()
-        self.view.addSubview(navigationBar)
-        
-        let navItem = UINavigationItem(title: "")
-        let navBarButton = UIBarButtonItem(barButtonSystemItem: .stop,
-                                           target: self,
-                                           action: #selector(dismissVC))
-        navItem.rightBarButtonItem = navBarButton
-        navigationBar.items = [navItem]
     }
 }
 

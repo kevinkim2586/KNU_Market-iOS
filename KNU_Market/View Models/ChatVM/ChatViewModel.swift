@@ -23,6 +23,7 @@ protocol ChatViewDelegate: AnyObject {
     func didFetchEmptyChat()
     func failedFetchingPreviousChats(with error: NetworkError)
 
+    func failedUploadingImageToServer()
 }
 
 class ChatViewModel: WebSocketDelegate {
@@ -418,6 +419,13 @@ extension ChatViewModel {
                 self.delegate?.failedConnection(with: error)
             }
         }
+    }
+    
+    func uploadImage(imageData: Data) {
+        
+        
+        
+        
     }
 }
 

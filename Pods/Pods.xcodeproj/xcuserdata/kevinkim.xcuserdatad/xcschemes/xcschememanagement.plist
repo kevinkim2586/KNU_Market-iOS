@@ -130,6 +130,11 @@
 			<key>orderHint</key>
 			<integer>19</integer>
 		</dict>
+		<key>MessageInputBar.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>34</integer>
+		</dict>
 		<key>MessageKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>

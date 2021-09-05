@@ -97,5 +97,14 @@ class ChatMemberTableViewCell: UITableViewCell {
     func initializeUI() {
         
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+        
+        if #available(iOS 14.0, *) {
+            crownImageView.image = UIImage(systemName: "crown.fill")
+            crownImageView.image?.withTintColor(.systemYellow)
+        } else {
+            crownImageView.image = UIImage(systemName: "checkmark.circle")
+            crownImageView.image?.withTintColor(UIColor(named: Constants.Color.appColor) ?? .black)
+        }
     }
 }
+

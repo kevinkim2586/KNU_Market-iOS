@@ -178,8 +178,7 @@ struct Constants {
                                                    "paperplane",
                                                    "doc.text",
                                                     "hand.raised",
-                                                   "info.circle",
-                                                   "book.closed"
+                                                   "info.circle"
                                                     ]
 
     }

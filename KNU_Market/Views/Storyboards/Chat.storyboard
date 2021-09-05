@@ -115,8 +115,8 @@
                                                         <action selector="pressedReportUserButton:" destination="ziR-hQ-GLM" eventType="touchUpInside" id="bV6-e5-Z4m"/>
                                                     </connections>
                                                 </button>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crown.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8yj-IL-boa">
-                                                    <rect key="frame" x="150" y="30" width="25.5" height="18.5"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8yj-IL-boa">
+                                                    <rect key="frame" x="150" y="30.5" width="20" height="19"/>
                                                     <color key="tintColor" systemColor="systemYellowColor"/>
                                                 </imageView>
                                             </subviews>
@@ -165,7 +165,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="crown.fill" catalog="system" width="128" height="92"/>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="exclamationmark.octagon" catalog="system" width="128" height="112"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>

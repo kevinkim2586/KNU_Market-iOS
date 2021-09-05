@@ -149,8 +149,7 @@ class ItemViewModel {
             case .success:
                 
                 self.delegate?.didMarkPostDone()
-                NotificationCenter.default.post(name: .updateItemList,
-                                                object: nil)
+                NotificationCenter.default.post(name: .updateItemList, object: nil)
                 
             case .failure(let error):
                 self.delegate?.failedMarkingPostDone(with: error)
@@ -177,8 +176,7 @@ class ItemViewModel {
             case .success:
                 
                 self.delegate?.didCancelMarkPostDone()
-                NotificationCenter.default.post(name: .updateItemList,
-                                                object: nil)
+                NotificationCenter.default.post(name: .updateItemList, object: nil)
                 
             case .failure(let error):
                 
@@ -212,8 +210,8 @@ class ItemViewModel {
                 
                 // 이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
                 if error == .E108 {
-            
                     self.delegate?.didEnterChat(isFirstEntrance: false)
+                    NotificationCenter.default.post(name: .updateItemList, object: nil)
                 
                 // 강퇴를 당한 적이 있는 경우
                 } else if error == .E112 {

@@ -217,7 +217,6 @@ class UserManager {
                         print("✏️ UserManager - loadUserProfile() success")
                         print("✏️ UserManager - DB FCM TOKEN: \(decodedData.fcmToken)")
                         
-                        
                         self.updateUserFCMToken(with: UserRegisterValues.shared.fcmToken)
                         
                         completion(.success(decodedData))

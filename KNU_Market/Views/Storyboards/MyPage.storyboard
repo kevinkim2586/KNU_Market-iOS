@@ -328,7 +328,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bNH-zB-57W">
-                                <rect key="frame" x="17" y="160" width="209" height="30"/>
+                                <rect key="frame" x="17" y="160" width="179" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNa-3f-7Wh">
                                         <rect key="frame" x="0.0" y="0.0" width="179" height="30"/>
@@ -340,16 +340,18 @@
                                             <action selector="pressedInfoButton:" destination="UbG-yZ-LxV" eventType="touchUpInside" id="D7u-Tt-DEk"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aj-aN-dIk" userLabel="Info Button">
-                                        <rect key="frame" x="189" y="0.0" width="20" height="30"/>
-                                        <color key="tintColor" name="AppDefaultColor"/>
-                                        <state key="normal" image="info.circle" catalog="system"/>
-                                        <connections>
-                                            <action selector="pressedInfoButton:" destination="UbG-yZ-LxV" eventType="touchUpInside" id="A5b-J4-NMt"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfE-5t-CgK">
+                                <rect key="frame" x="17" y="210" width="129" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="인증 메일 다시 보내기">
+                                    <color key="titleColor" name="AppDefaultColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedResendEmailButton:" destination="UbG-yZ-LxV" eventType="touchUpInside" id="bFx-uC-I24"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5Af-5c-Olx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -363,6 +365,7 @@
                             <constraint firstItem="UWa-dq-hbG" firstAttribute="top" secondItem="dW0-is-03W" secondAttribute="bottom" constant="18" id="C3a-lm-Zrn"/>
                             <constraint firstItem="5Af-5c-Olx" firstAttribute="trailing" secondItem="szr-uk-1ec" secondAttribute="trailing" constant="15" id="DfW-FO-Hyk"/>
                             <constraint firstItem="UWa-dq-hbG" firstAttribute="leading" secondItem="nCe-OE-OSW" secondAttribute="trailing" constant="15" id="Dsb-gn-zLL"/>
+                            <constraint firstItem="VfE-5t-CgK" firstAttribute="top" secondItem="bNH-zB-57W" secondAttribute="bottom" constant="20" id="Gxh-Gd-soC"/>
                             <constraint firstItem="bNH-zB-57W" firstAttribute="top" secondItem="UWa-dq-hbG" secondAttribute="bottom" constant="30" id="HXC-Kd-04Y"/>
                             <constraint firstItem="5Af-5c-Olx" firstAttribute="trailing" secondItem="Pd5-DZ-kVf" secondAttribute="trailing" constant="15" id="O4l-Sl-U6S"/>
                             <constraint firstItem="GnU-nI-UbE" firstAttribute="top" secondItem="szr-uk-1ec" secondAttribute="bottom" constant="5" id="UK6-eC-0Ea"/>
@@ -375,6 +378,7 @@
                             <constraint firstItem="Pd5-DZ-kVf" firstAttribute="leading" secondItem="5Af-5c-Olx" secondAttribute="leading" constant="15" id="rjP-HO-9mw"/>
                             <constraint firstItem="5Af-5c-Olx" firstAttribute="trailing" secondItem="GnU-nI-UbE" secondAttribute="trailing" constant="15" id="sPy-dc-qy6"/>
                             <constraint firstItem="szr-uk-1ec" firstAttribute="top" secondItem="Pd5-DZ-kVf" secondAttribute="bottom" constant="25" id="ubn-aF-ogT"/>
+                            <constraint firstItem="VfE-5t-CgK" firstAttribute="leading" secondItem="5Af-5c-Olx" secondAttribute="leading" constant="17" id="yBW-VY-RtG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="설정" id="Npe-8S-ft0"/>
@@ -784,7 +788,6 @@
         <image name="developer_info" width="1110" height="2342"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="grey my" width="27" height="27"/>
-        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="my" width="27" height="27"/>
         <image name="paperplane" catalog="system" width="128" height="118"/>
         <image name="pick profile image" width="195" height="195"/>

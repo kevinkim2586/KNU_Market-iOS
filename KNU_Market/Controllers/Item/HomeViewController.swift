@@ -234,7 +234,7 @@ extension HomeViewController {
 
         let font = UIFont.systemFont(ofSize: 20)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        let buttonImage = UIImage(systemName: "square.and.pencil",
+        let buttonImage = UIImage(systemName: "plus",
                                 withConfiguration: configuration)
         addButton.setImage(buttonImage, for: .normal)
     }

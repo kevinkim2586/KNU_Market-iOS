@@ -3,10 +3,9 @@ import UIKit
 class CheckEmailViewController: UIViewController {
 
     @IBOutlet weak var firstLineLabel: UILabel!
-    @IBOutlet weak var secondLineLabel: UILabel!
-    @IBOutlet weak var thirdLineLabel: UILabel!
     @IBOutlet weak var fourthLineLabel: UILabel!
     @IBOutlet weak var checkSpamMailLabel: UILabel!
+    @IBOutlet weak var checkAfterSomeTimeLabel: UILabel!
     @IBOutlet var detailLabels: [UILabel]!
     
     @IBOutlet weak var nextButton: UIButton!
@@ -59,14 +58,12 @@ extension CheckEmailViewController {
     
     func initializeLabels() {
         
-        firstLineLabel.text = "\(UserRegisterValues.shared.email)로 발송된\n이메일을 확인해 주세요!"
+        firstLineLabel.text = "\(UserRegisterValues.shared.email)\n위의 메일로 인증 메일이 전송되었습니다."
         firstLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         firstLineLabel.textColor = .darkGray
         firstLineLabel.changeTextAttributeColor(fullText: firstLineLabel.text!, changeText: "\(UserRegisterValues.shared.email)")
-        
-        secondLineLabel.text = "발송된 메일 내의 링크를 클릭해야지만 이메일 인증이"
-        thirdLineLabel.text = "최종적으로 완료가 됩니다."
-        fourthLineLabel.text = "인증을 하지 않으면 일부 기능이 제한될 수 있습니다."
+
+        fourthLineLabel.text = "인증을 하지 않아도 가입은 되지만, 일부 기능이 제한될 수 있습니다."
     
         detailLabels.forEach { label in
             label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -75,6 +72,10 @@ extension CheckEmailViewController {
         
         checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 스팸 메일함을 확인해주세요!"
         checkSpamMailLabel.textColor = UIColor(named: Constants.Color.appColor)
+        
+        checkAfterSomeTimeLabel.text = "✻ 인증 메일 전송이 최대 3시간 이상 지연되는 문제가 있을 수 있습니다. 미리 양해 부탁드리겠습니다.😢"
+        checkAfterSomeTimeLabel.textColor = UIColor(named: Constants.Color.appColor)
     }
 
 }
+

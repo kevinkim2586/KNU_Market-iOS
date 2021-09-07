@@ -8,6 +8,7 @@ class EmailInputViewController: UIViewController {
     @IBOutlet weak var secondLineLabel: UILabel!
     @IBOutlet weak var thirdLineLabel: UILabel!
     @IBOutlet weak var fourthLineLabel: UILabel!
+    @IBOutlet weak var fifthLineLabel: UILabel!
     @IBOutlet var detailLabels: [UILabel]!
     @IBOutlet weak var checkSpamMailLabel: UILabel!
     
@@ -107,20 +108,24 @@ extension EmailInputViewController {
         
         errorLabel.isHidden = true
         
-        firstLineLabel.text = "마지막으로 학교 이메일 인증을 해주세요!"
+        firstLineLabel.text = "마지막으로 학교 이메일 입력을 해주세요!"
         firstLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         firstLineLabel.textColor = .darkGray
-        firstLineLabel.changeTextAttributeColor(fullText: firstLineLabel.text!, changeText: "학교 이메일 인증")
+        firstLineLabel.changeTextAttributeColor(fullText: firstLineLabel.text!, changeText: "학교 이메일")
         
         secondLineLabel.text = "크누마켓은 경북대학교 학생들을 위한 공동구매 앱입니다."
         secondLineLabel.changeTextAttributeColor(fullText: secondLineLabel.text!, changeText: "크누마켓")
         thirdLineLabel.text = "앱의 모든 기능을 사용하기 위해서는 반드시 이메일 인증을"
         fourthLineLabel.text = "하셔야 합니다."
+        fifthLineLabel.text = "학교 이메일은 로그인 시 아이디로 사용됩니다."
+
         
         detailLabels.forEach { label in
             label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
             label.textColor = .darkGray
         }
+        
+        fifthLineLabel.changeTextAttributeColor(fullText: fifthLineLabel.text!, changeText: "아이디")
         
         checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 스팸 메일함을 확인해주세요!"
     }

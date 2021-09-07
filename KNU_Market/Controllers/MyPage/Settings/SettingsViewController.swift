@@ -54,9 +54,13 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func pressedResendEmailButton(_ sender: UIButton) {
+        
+        presentVerifyEmailVC()
+    }
+    
     func initialize() {
-        
         userNicknameLabel.text = User.shared.nickname
-        
     }
 }

@@ -57,9 +57,12 @@ class ChatViewModel: WebSocketDelegate {
     var isFirstViewLaunch: Bool = true
     var isFirstEntranceToChat: Bool
 
-
     // Delegate
     weak var delegate: ChatViewDelegate?
+    
+    // Image Size
+    private let imageWidth = 250
+    private let imageHeight = 200
     
 
     init(room: String, isFirstEntrance: Bool) {
@@ -102,8 +105,6 @@ extension ChatViewModel {
     }
     
     func disconnect() {
-        
-
         socket.disconnect()
     }
 
@@ -135,9 +136,9 @@ extension ChatViewModel {
             let roomUID = receivedTextInJSON["room"].stringValue
             let chatText = receivedTextInJSON["comment"].stringValue
 
-            let chatMessage = filterChat(text: chatText, userUID: userUID, isFromSocket: true)
+            let filteredChat = filterChat(text: chatText, userUID: userUID, isFromSocket: true)
 
-            guard chatMessage != Constants.ChatSuffix.emptySuffix else { return }
+            guard filteredChat.chatMessage != Constants.ChatSuffix.emptySuffix else { return }
         
             if isFromCurrentSender(uuid: userUID) {
                 self.delegate?.didReceiveChat()
@@ -151,13 +152,28 @@ extension ChatViewModel {
                             chat_userUID: userUID,
                             chat_username: nickname,
                             chat_roomUID: roomUID,
-                            chat_content: chatMessage,
+                            chat_content: filteredChat.chatMessage,
                             chat_date: Date().getDateStringForChatBottomLabel())
             
-            messages.append(Message(chat: chat,
-                                         sender: others,
-                                         sentDate: Date(),
-                                         kind: .text(chatMessage)))
+            if filteredChat.chatType == .text {
+                messages.append(Message(chat: chat,
+                                             sender: others,
+                                             sentDate: Date(),
+                                             kind: .text(filteredChat.chatMessage)))
+            } else {
+                messages.append(Message(chat: chat,
+                                             sender: others,
+                                             sentDate: Date(),
+                                             kind: .photo(ImageItem(url: nil,
+                                                                    image: self.getImageFromURL(with: filteredChat.chatMessage),
+                                                                    placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                                    size: CGSize(width: imageWidth, height: imageHeight)))))
+            }
+            
+//            messages.append(Message(chat: chat,
+//                                         sender: others,
+//                                         sentDate: Date(),
+//                                         kind: .text(filteredChat.chatMessage)))
         
             self.delegate?.didReceiveChat()
             
@@ -227,19 +243,35 @@ extension ChatViewModel {
                 return
             }
             
-            let chatMessage = self.filterChat(text: originalText)
+            let filteredChat = self.filterChat(text: originalText)
             
             let chat = Chat(chat_uid: Int.random(in: 0...1000),
                             chat_userUID: User.shared.userUID,
                             chat_username: User.shared.nickname,
                             chat_roomUID: self.room,
-                            chat_content: chatMessage,
+                            chat_content: filteredChat.chatMessage,
                             chat_date: Date().getDateStringForChatBottomLabel())
             
-            self.messages.append(Message(chat: chat,
-                                         sender: self.mySelf,
-                                         sentDate: Date(),
-                                         kind: .text(chatMessage)))
+            
+            if filteredChat.chatType == .text {
+                self.messages.append(Message(chat: chat,
+                                        sender: self.mySelf,
+                                        sentDate: Date(),
+                                        kind: .text(filteredChat.chatMessage)))
+            } else {
+                self.messages.append(Message(chat: chat,
+                                        sender: self.mySelf,
+                                        sentDate: Date(),
+                                        kind: .photo(ImageItem(url: nil,
+                                                               image: self.getImageFromURL(with: filteredChat.chatMessage),
+                                                               placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                               size: CGSize(width: self.imageWidth, height: self.imageHeight)))))
+            }
+            
+//            self.messages.append(Message(chat: chat,
+//                                         sender: self.mySelf,
+//                                         sentDate: Date(),
+//                                         kind: .text(filteredChat.chatMessage)))
             
             self.delegate?.didSendText()
         }
@@ -280,9 +312,9 @@ extension ChatViewModel {
                     let chatText = chat.chat_content
                     let senderUID = chat.chat_userUID
                 
-                    let chatMessage = self.filterChat(text: chatText, userUID: senderUID)
+                    let filteredChat = self.filterChat(text: chatText, userUID: senderUID)
                     
-                    guard chatMessage != Constants.ChatSuffix.emptySuffix else { continue }
+                    guard filteredChat.chatMessage != Constants.ChatSuffix.emptySuffix else { continue }
                 
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {
@@ -290,18 +322,57 @@ extension ChatViewModel {
                         let others = Sender(senderId: chat.chat_userUID,
                                             displayName: chat.chat_username)
                         
-                        self.messages.insert(Message(chat: chat,
-                                                     sender: others,
-                                                     sentDate: chat.chat_date.convertStringToDate(),
-                                                     kind: .text(chatMessage)),
-                                             at: 0)
-                    } else {
                         
-                        self.messages.insert(Message(chat: chat,
-                                                     sender: self.mySelf,
-                                                     sentDate: chat.chat_date.convertStringToDate(),
-                                                     kind: .text(chatMessage)),
-                                             at: 0)
+                        if filteredChat.chatType == .text {
+                            self.messages.insert(Message(chat: chat,
+                                                         sender: others,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .text(filteredChat.chatMessage)),
+                                                 at: 0)
+                        } else {
+                            self.messages.insert(Message(chat: chat,
+                                                         sender: others,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .photo(ImageItem(url: nil,
+                                                                                image: self.getImageFromURL(with: filteredChat.chatMessage),
+                                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight)))),
+                                                 at: 0)
+                        }
+                        
+//
+//                        self.messages.insert(Message(chat: chat,
+//                                                     sender: others,
+//                                                     sentDate: chat.chat_date.convertStringToDate(),
+//                                                     kind: .text(filteredChat.chatMessage)),
+//                                             at: 0)
+                    }
+                    
+                    // 내 채팅이면
+                    else {
+                        
+                        if filteredChat.chatType == .text {
+                            self.messages.insert(Message(chat: chat,
+                                                         sender: self.mySelf,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .text(filteredChat.chatMessage)),
+                                                 at: 0)
+                        } else {
+                            self.messages.insert(Message(chat: chat,
+                                                         sender: self.mySelf,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .photo(ImageItem(url: nil,
+                                                                                image: self.getImageFromURL(with: filteredChat.chatMessage),
+                                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight)))),
+                                                 at: 0)
+                        }
+                        
+//                        self.messages.insert(Message(chat: chat,
+//                                                     sender: self.mySelf,
+//                                                     sentDate: chat.chat_date.convertStringToDate(),
+//                                                     kind: .text(filteredChat.chatMessage)),
+//                                             at: 0)
                     }
                     
                 }
@@ -423,6 +494,21 @@ extension ChatViewModel {
     
     func uploadImage(imageData: Data) {
         
+        MediaManager.shared.uploadImage(with: imageData) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success(let imageUID):
+                
+                self.sendText("\(imageUID)" + Constants.ChatSuffix.imageSuffix)
+                
+            case .failure(_):
+                self.delegate?.failedUploadingImageToServer()
+            }
+            
+        }
         
         
         
@@ -462,33 +548,90 @@ extension ChatViewModel {
         return roomInfo?.post.user.uid ?? ""
     }
     
-    func filterChat(text: String, userUID: String? = nil, isFromSocket: Bool = false) -> String {
+    func getImageFromURL(with imageUID: String) -> UIImage? {
+        
+        guard let imageURL = URL(string: Constants.MEDIA_REQUEST_URL + imageUID) else {
+            return nil
+        }
+        guard let imageData = try? Data(contentsOf: imageURL) else {
+            return nil
+        }
+        guard let image = UIImage(data: imageData) else {
+            return nil
+        }
+        return image
+    }
+    
+    func filterChat(text: String, userUID: String? = nil, isFromSocket: Bool = false) -> FilteredChat {
         
         if userUID != nil {
             if User.shared.bannedChatMembers.contains(userUID!) {
-                return Constants.ChatSuffix.emptySuffix
+                return FilteredChat(chatMessage: Constants.ChatSuffix.emptySuffix, chatType: .text)
             }
         }
-        if text.contains(Constants.ChatSuffix.enterSuffix)   {
-            return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
+        if text.contains(Constants.ChatSuffix.enterSuffix) {
+            return FilteredChat(chatMessage: text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉"), chatType: .text)
+       
             
         } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" && isFromSocket {
             outPost()
-            return Constants.ChatSuffix.emptySuffix
+            return FilteredChat(chatMessage: Constants.ChatSuffix.emptySuffix, chatType: .text)
             
         } else if text.contains(Constants.ChatSuffix.exitSuffix) {
-            return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: "🏃")
+            return FilteredChat(chatMessage: text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: "🏃"), chatType: .text)
             
         } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)\(Constants.ChatSuffix.rawBanSuffix)") {
             self.delegate?.didReceiveBanNotification()
-            return Constants.ChatSuffix.emptySuffix
+            return FilteredChat(chatMessage: Constants.ChatSuffix.emptySuffix, chatType: .text)
 
         } else if text.contains(Constants.ChatSuffix.rawBanSuffix) {
-            return Constants.ChatSuffix.usedBanSuffix
+            return FilteredChat(chatMessage: Constants.ChatSuffix.usedBanSuffix, chatType: .text)
+            
+        } else if text.contains(Constants.ChatSuffix.imageSuffix) {
+            
+            let imageUID = text[0..<22]
+            print("✏️ imageUID Received: \(imageUID)")
+            return FilteredChat(chatMessage: imageUID, chatType: .photo)
+            
         } else {
-            return text
+            return FilteredChat(chatMessage: text, chatType: .text)
         }
     }
+    
+//    func filterChat(text: String, userUID: String? = nil, isFromSocket: Bool = false) -> String {
+//
+//        if userUID != nil {
+//            if User.shared.bannedChatMembers.contains(userUID!) {
+//                return Constants.ChatSuffix.emptySuffix
+//            }
+//        }
+//        if text.contains(Constants.ChatSuffix.enterSuffix)   {
+//            return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
+//
+//        } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" && isFromSocket {
+//            outPost()
+//            return Constants.ChatSuffix.emptySuffix
+//
+//        } else if text.contains(Constants.ChatSuffix.exitSuffix) {
+//            return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: "🏃")
+//
+//        } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)\(Constants.ChatSuffix.rawBanSuffix)") {
+//            self.delegate?.didReceiveBanNotification()
+//            return Constants.ChatSuffix.emptySuffix
+//
+//        } else if text.contains(Constants.ChatSuffix.rawBanSuffix) {
+//            return Constants.ChatSuffix.usedBanSuffix
+//
+//        } else if text.contains(Constants.ChatSuffix.imageSuffix) {
+//
+//            let imageUID = text[0..<22]
+//            print("✏️ imageUID Received: \(imageUID)")
+//            return imageUID
+//
+//        } else {
+//            return text
+//        }
+//    }
     
     func resetMessages() {
         chatModel = nil
@@ -524,5 +667,5 @@ extension ChatViewModel {
                                                name: .getChat,
                                                object: nil)
     }
-}
 
+}

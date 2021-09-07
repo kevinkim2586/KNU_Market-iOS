@@ -51,6 +51,9 @@ class ItemViewModel {
     
     var location: String {
         let index = (model?.location ?? Location.listForCell.count - 1)
+        guard index != Location.listForCell.count + 1 else {
+            return Location.listForCell[Location.listForCell.count - 1]
+        }
         return Location.listForCell[index - 1]
     }
     

@@ -74,6 +74,9 @@
 		7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */; };
 		7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */; };
 		7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */; };
+		7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668626E746DD0060F37B /* ImageItem.swift */; };
+		7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668826E756B30060F37B /* FilteredChat.swift */; };
+		7C8E668B26E756C00060F37B /* ChatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668A26E756C00060F37B /* ChatType.swift */; };
 		7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */; };
 		7C9BBB4126C27BD1001C54E6 /* UITableView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB4026C27BD0001C54E6 /* UITableView Extension.swift */; };
 		7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F0263D4387000E0B7A /* AppDelegate.swift */; };
@@ -192,6 +195,9 @@
 		7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPickedItemImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemViewController.swift; sourceTree = "<group>"; };
 		7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemViewModel.swift; sourceTree = "<group>"; };
+		7C8E668626E746DD0060F37B /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
+		7C8E668826E756B30060F37B /* FilteredChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredChat.swift; sourceTree = "<group>"; };
+		7C8E668A26E756C00060F37B /* ChatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatType.swift; sourceTree = "<group>"; };
 		7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostRequestDTO.swift; sourceTree = "<group>"; };
 		7C9BBB4026C27BD0001C54E6 /* UITableView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView Extension.swift"; sourceTree = "<group>"; };
 		7CA661ED263D4387000E0B7A /* KNU_Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNU_Market.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,8 +333,11 @@
 		7C555460266CFBE500C3C5B6 /* Chat Models */ = {
 			isa = PBXGroup;
 			children = (
+				7C8E668626E746DD0060F37B /* ImageItem.swift */,
 				7CB8DF60264D02690001CC6D /* Message.swift */,
 				7CB8DF62264D02AF0001CC6D /* Sender.swift */,
+				7C8E668826E756B30060F37B /* FilteredChat.swift */,
+				7C8E668A26E756C00060F37B /* ChatType.swift */,
 			);
 			path = "Chat Models";
 			sourceTree = "<group>";
@@ -859,10 +868,12 @@
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
+				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel Extension.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,
 				7C132BF2265397B200BE5F40 /* Global Methods + Variables.swift in Sources */,
+				7C8E668B26E756C00060F37B /* ChatType.swift in Sources */,
 				7C184B8326B103F1006C0FAD /* Room.swift in Sources */,
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7CA78FF626CDFC510019B06F /* AlertViewController.swift in Sources */,
@@ -885,6 +896,7 @@
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer Extension.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */,
+				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,
 				7CA78FF826CE02D10019B06F /* KMBodyLabel.swift in Sources */,
 				7CB8DF732650E1E20001CC6D /* RegisterViewModel.swift in Sources */,

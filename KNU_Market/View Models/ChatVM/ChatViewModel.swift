@@ -590,7 +590,6 @@ extension ChatViewModel {
         } else if text.contains(Constants.ChatSuffix.imageSuffix) {
             
             let imageUID = text[0..<22]
-            print("✏️ imageUID Received: \(imageUID)")
             return FilteredChat(chatMessage: imageUID, chatType: .photo)
             
         } else {

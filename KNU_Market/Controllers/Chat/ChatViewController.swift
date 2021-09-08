@@ -409,7 +409,7 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
-//import MessageInputBar
+import SafariServices
 import SwiftyJSON
 import IQKeyboardManagerSwift
 
@@ -629,7 +629,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
 //MARK: - MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate
 
-extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
+extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate {
 
     public func currentSender() -> SenderType {
         return viewModel.mySelf
@@ -717,6 +717,29 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     }
 }
 
+//MARK: - MessageCellDelegate
+
+extension ChatViewController: MessageCellDelegate {
+    
+    func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedString.Key : Any] {
+        
+        switch detector {
+        case .url:
+            return [.foregroundColor: UIColor.white,  .underlineStyle: NSUnderlineStyle.single.rawValue]
+        default:
+            return MessageLabel.defaultAttributes
+        }
+    }
+    
+    func enabledDetectors(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> [DetectorType] {
+        return [.url]
+    }
+    
+    func didSelectURL(_ url: URL) {
+        presentSafariView(with: url)
+    }
+}
+
 //MARK: - Initialization & UI Configuration
 
 extension ChatViewController {
@@ -762,6 +785,7 @@ extension ChatViewController {
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.delegate = self
         messagesCollectionView.backgroundColor = .white
+        messagesCollectionView.messageCellDelegate = self
         scrollsToLastItemOnKeyboardBeginsEditing = true
 
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
@@ -801,8 +825,9 @@ extension ChatViewController {
 
         let button = InputBarButtonItem(type: .custom)
         button.setSize(CGSize(width: 35, height: 35), animated: false)
-        button.setImage(UIImage(systemName: "plus")?.withTintColor(UIColor(named: Constants.Color.appColor) ?? .black),
+        button.setImage(UIImage(systemName: "plus"),
                         for: .normal)
+        button.tintColor = UIColor(named: Constants.Color.appColor) ?? .black
         button.onTouchUpInside { [weak self] _ in
             self?.presentInputActionSheet()
         }

@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import SnackBar_swift
 import BSImagePicker
+import SafariServices
 import Photos
 
 //MARK: - Alert Methods
@@ -123,6 +124,12 @@ extension UIViewController {
         verifyEmailVC.modalPresentationStyle = .overFullScreen
         
         self.present(verifyEmailVC, animated: true)
+    }
+    
+    func presentSafariView(with url: URL) {
+        let config = SFSafariViewController.Configuration()
+        let vc = SFSafariViewController(url: url, configuration: config)
+        present(vc, animated: true)
     }
 }
 

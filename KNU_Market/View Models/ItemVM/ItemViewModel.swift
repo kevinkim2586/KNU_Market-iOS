@@ -197,7 +197,7 @@ class ItemViewModel {
             return
         }
 
-        print("✏️ pageID: \(self.pageID)")
+       print("✏️ pageID: \(self.pageID)")
         
         ChatManager.shared.changeJoinStatus(function: .join,
                                             pid: self.pageID ?? "error") { [weak self] result in

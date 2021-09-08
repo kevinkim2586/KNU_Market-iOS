@@ -1,6 +1,7 @@
 import Foundation
 import Starscream
 import MessageKit
+import SDWebImage
 import SwiftyJSON
 import Alamofire
 
@@ -164,17 +165,12 @@ extension ChatViewModel {
                 messages.append(Message(chat: chat,
                                              sender: others,
                                              sentDate: Date(),
-                                             kind: .photo(ImageItem(url: nil,
-                                                                    image: self.getImageFromURL(with: filteredChat.chatMessage),
+                                             kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                                    image: nil,
                                                                     placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                     size: CGSize(width: imageWidth, height: imageHeight)))))
             }
             
-//            messages.append(Message(chat: chat,
-//                                         sender: others,
-//                                         sentDate: Date(),
-//                                         kind: .text(filteredChat.chatMessage)))
-        
             self.delegate?.didReceiveChat()
             
         case .reconnectSuggested(_):
@@ -262,8 +258,8 @@ extension ChatViewModel {
                 self.messages.append(Message(chat: chat,
                                         sender: self.mySelf,
                                         sentDate: Date(),
-                                        kind: .photo(ImageItem(url: nil,
-                                                               image: self.getImageFromURL(with: filteredChat.chatMessage),
+                                        kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                               image: nil,
                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight)))))
             }
@@ -333,19 +329,13 @@ extension ChatViewModel {
                             self.messages.insert(Message(chat: chat,
                                                          sender: others,
                                                          sentDate: chat.chat_date.convertStringToDate(),
-                                                         kind: .photo(ImageItem(url: nil,
-                                                                                image: self.getImageFromURL(with: filteredChat.chatMessage),
+                                                         kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                                                image: nil,
                                                                                 placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                                 size: CGSize(width: self.imageWidth, height: self.imageHeight)))),
                                                  at: 0)
                         }
-                        
-//
-//                        self.messages.insert(Message(chat: chat,
-//                                                     sender: others,
-//                                                     sentDate: chat.chat_date.convertStringToDate(),
-//                                                     kind: .text(filteredChat.chatMessage)),
-//                                             at: 0)
+
                     }
                     
                     // 내 채팅이면
@@ -361,20 +351,13 @@ extension ChatViewModel {
                             self.messages.insert(Message(chat: chat,
                                                          sender: self.mySelf,
                                                          sentDate: chat.chat_date.convertStringToDate(),
-                                                         kind: .photo(ImageItem(url: nil,
-                                                                                image: self.getImageFromURL(with: filteredChat.chatMessage),
+                                                         kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                                                image: nil,
                                                                                 placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                                 size: CGSize(width: self.imageWidth, height: self.imageHeight)))),
                                                  at: 0)
                         }
-                        
-//                        self.messages.insert(Message(chat: chat,
-//                                                     sender: self.mySelf,
-//                                                     sentDate: chat.chat_date.convertStringToDate(),
-//                                                     kind: .text(filteredChat.chatMessage)),
-//                                             at: 0)
                     }
-                    
                 }
                 
                 self.isFetchingData = false
@@ -548,19 +531,19 @@ extension ChatViewModel {
         return roomInfo?.post.user.uid ?? ""
     }
     
-    func getImageFromURL(with imageUID: String) -> UIImage? {
-        
-        guard let imageURL = URL(string: Constants.MEDIA_REQUEST_URL + imageUID) else {
-            return nil
-        }
-        guard let imageData = try? Data(contentsOf: imageURL) else {
-            return nil
-        }
-        guard let image = UIImage(data: imageData) else {
-            return nil
-        }
-        return image
-    }
+//    func getImageFromURL(with imageUID: String) -> UIImage? {
+//        
+//        guard let imageURL = URL(string: Constants.MEDIA_REQUEST_URL + imageUID) else {
+//            return nil
+//        }
+//        guard let imageData = try? Data(contentsOf: imageURL) else {
+//            return nil
+//        }
+//        guard let image = UIImage(data: imageData) else {
+//            return nil
+//        }
+//        return image
+//    }
     
     func filterChat(text: String, userUID: String? = nil, isFromSocket: Bool = false) -> FilteredChat {
         

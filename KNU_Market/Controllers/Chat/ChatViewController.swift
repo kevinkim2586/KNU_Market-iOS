@@ -411,6 +411,7 @@ import MessageKit
 import InputBarAccessoryView
 import SafariServices
 import SwiftyJSON
+import SDWebImage
 import IQKeyboardManagerSwift
 
 class ChatViewController: MessagesViewController {
@@ -695,6 +696,22 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
         return .bubbleTail(corner, .curved)
     }
+    
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        
+        guard let message = message as? Message else { return }
+        let chatMessage = message.chatContent
+        let filteredChat = viewModel.filterChat(text: chatMessage)
+        guard let url = URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage) else { return }
+    
+        imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        imageView.sd_setImage(with: url,
+                              placeholderImage: nil,
+                              options: .continueInBackground,
+                              completed: nil)
+
+
+    }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
@@ -868,11 +885,6 @@ extension ChatViewController {
         actionSheet.addAction(albumAction)
         actionSheet.addAction(cancelAction)
         present(actionSheet, animated: true)
-    }
-
-
-    func presentPhotoInputActionSheet() {
-
     }
 
     @objc func didBlockUser() {

@@ -477,12 +477,12 @@ extension ItemViewController {
                     
                     checkView.backgroundColor = .lightGray
                     checkButtonDetail.setTitleColor(.white, for: .normal)
-                    checkButtonDetail.setTitle("모집 완료", for: .normal)
+                    checkButtonDetail.setTitle("모집 완료  ⌵", for: .normal)
                   
                 } else {
                     checkView.backgroundColor = UIColor(named: Constants.Color.appColor)
                     
-                    checkButtonDetail.setTitle("모집 중", for: .normal)
+                    checkButtonDetail.setTitle("모집 중  ⌵", for: .normal)
                 }
             }
             

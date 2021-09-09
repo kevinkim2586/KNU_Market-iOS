@@ -27,6 +27,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8zX-7x-QBA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -185,6 +188,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5P-aB-TpU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="647.82608695652175" y="756.69642857142856"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="Qzu-av-T3K">
+            <objects>
+                <viewController storyboardIdentifier="ImageViewController" id="mTe-O9-MOG" customClass="ImageViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iwP-wC-N00">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qig-AH-Pth">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Y2P-ol-5pu"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="qig-AH-Pth" secondAttribute="bottom" id="Axd-jV-VGl"/>
+                            <constraint firstItem="qig-AH-Pth" firstAttribute="top" secondItem="iwP-wC-N00" secondAttribute="top" id="eLx-8y-V4A"/>
+                            <constraint firstAttribute="trailing" secondItem="qig-AH-Pth" secondAttribute="trailing" id="fOB-mG-cS2"/>
+                            <constraint firstItem="qig-AH-Pth" firstAttribute="leading" secondItem="iwP-wC-N00" secondAttribute="leading" id="lyn-jx-4Lb"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="LAw-Ao-O1u" appends="YES" id="0qP-0w-nKA"/>
+                        </connections>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="imageView" destination="qig-AH-Pth" id="Jxo-ZW-YSe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h1Y-xq-O9J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="LAw-Ao-O1u">
+                    <connections>
+                        <action selector="handlePanGesture:" destination="mTe-O9-MOG" id="5Yj-yF-ofW"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1435" y="86"/>
         </scene>
     </scenes>
     <resources>

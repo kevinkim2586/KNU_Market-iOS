@@ -7,6 +7,7 @@ struct Message: MessageType {
     var sender: SenderType
     var sentDate: Date
     var kind: MessageKind
+    var heroID: String = ""
 }
 
 extension Message {
@@ -34,6 +35,12 @@ extension Message {
     var chatContent: String {
         return self.chat.chat_content
     }
+    
+//
+//    var heroID: String {
+//        return "\(Int.random(in: 0...1000))"
+//    }
+
 }
 
 extension Message {

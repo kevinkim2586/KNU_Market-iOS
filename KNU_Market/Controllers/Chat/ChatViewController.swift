@@ -414,8 +414,7 @@ import SwiftyJSON
 import SDWebImage
 import IQKeyboardManagerSwift
 import ImageSlideshow
-import SnapKit
-
+import Hero
 
 class ChatViewController: MessagesViewController {
     
@@ -717,7 +716,11 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         guard let message = message as? Message else { return }
         let filteredChat = viewModel.filterChat(text: message.chatContent)
         guard let url = URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage) else { return }
+        
+        let heroID = String(Int.random(in: 0...1000))
     
+        viewModel.messages[indexPath.section].heroID = heroID
+        imageView.heroID = heroID
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         imageView.sd_setImage(with: url,
                               placeholderImage: nil,
@@ -781,11 +784,12 @@ extension ChatViewController: MessageCellDelegate {
         
         guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
         let message = messageForItem(at: indexPath, in: messagesCollectionView)
-   
+        let heroID = viewModel.messages[indexPath.section].heroID
+    
         switch message.kind {
             case .photo(let photoItem):
                 if let url = photoItem.url {
-                    presentImageVC(url: url)
+                    presentImageVC(url: url, heroID: heroID)
                 } else {
                     self.presentKMAlertOnMainThread(title: "오류 발생",
                                                     message: "유효하지 않은 사진이거나 요청을 처리하지 못했습니다. 불편을 드려 죄송합니다.😥",
@@ -795,13 +799,15 @@ extension ChatViewController: MessageCellDelegate {
         }
     }
   
-    func presentImageVC(url: URL) {
+    func presentImageVC(url: URL, heroID: String) {
         
-        guard let imageVC = storyboard?.instantiateViewController(identifier: Constants.StoryboardID.imageZoomVC) as? ImageZoomViewController else {
+        guard let imageVC = storyboard?.instantiateViewController(identifier: Constants.StoryboardID.imageVC) as? ImageViewController else {
             return
         }
+        imageVC.modalPresentationStyle = .overFullScreen
         imageVC.imageURL = url
-//        imageVC.modalPresentationStyle = .overFullScreen
+        imageVC.heroID = heroID
+
         present(imageVC, animated: true)
     }
 

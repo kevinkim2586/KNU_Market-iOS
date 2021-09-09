@@ -52,6 +52,7 @@ struct Constants {
         static let chatVC                       = "ChatViewController"
         static let chatMemberVC                 = "ChatMemberViewController"
         static let imageZoomVC                  = "ImageZoomViewController"
+        static let imageVC                      = "ImageViewController"
         
         // My Page Tab
         static let myPostsVC                    = "MyPostsViewController"
@@ -83,6 +84,11 @@ struct Constants {
         static let receiveCell                  = "receiveCell"
         static let myPageCell                   = "myPageCell"
         static let chatMemberCell               = "chatMemberCell"
+    }
+    
+    struct HeroID {
+        
+
     }
     
     //MARK: - Keys

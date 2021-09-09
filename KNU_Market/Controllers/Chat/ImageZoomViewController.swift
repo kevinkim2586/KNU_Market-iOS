@@ -55,6 +55,7 @@ class ImageZoomViewController: UIViewController {
     
     func configureImageView() {
         
+
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         imageView.sd_setImage(with: imageURL,
                               placeholderImage: nil,
@@ -62,6 +63,7 @@ class ImageZoomViewController: UIViewController {
                               completed: nil)
         imageView.contentMode = .scaleAspectFit
         imageView.addGestureRecognizer(swipeRecognizer)
+        
 
         
         imageView.snp.makeConstraints { make in
@@ -72,7 +74,6 @@ class ImageZoomViewController: UIViewController {
     }
     
     @objc func swipeAction(_ sender: UISwipeGestureRecognizer) {
-        print("✏️ swipeAction")
         dismiss(animated: true, completion: nil)
     }
 }

@@ -418,7 +418,7 @@ import SnapKit
 
 
 class ChatViewController: MessagesViewController {
-
+    
     private var viewModel: ChatViewModel!
 
     @objc private let refreshControl = UIRefreshControl()
@@ -486,7 +486,18 @@ class ChatViewController: MessagesViewController {
         chatMemberVC.postUploaderUID = viewModel.postUploaderUID
         presentPanModal(chatMemberVC)
     }
+    
+    @objc func pressedCheckButton() {
 
+        let actionSheet = UIAlertController(title: "모집 상태 변경",
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        
+        
+        present(actionSheet, animated: true)
+    }
+    
     func showChatPrecautionMessage() {
 
         presentKMAlertOnMainThread(title: "채팅 에티켓 공지!",
@@ -797,8 +808,6 @@ extension ChatViewController: MessageCellDelegate {
 
 }
 
-
-
 //MARK: - Initialization & UI Configuration
 
 extension ChatViewController {
@@ -808,6 +817,7 @@ extension ChatViewController {
         viewModel.delegate = self
 
         initializeNavigationItemTitle()
+//        initializeCheckBarButtonItem()
         initializeRefreshControl()
         initializeInputBar()
         initializeCollectionView()
@@ -824,6 +834,26 @@ extension ChatViewController {
         titleButton.addTarget(self, action: #selector(pressedTitle), for: .touchUpInside)
 
         navigationItem.titleView = titleButton
+    }
+    
+    func initializeCheckBarButtonItem() {
+        
+        if postUploaderUID == User.shared.userUID {
+            
+            let checkBarButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle"),
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(pressedCheckButton))
+            checkBarButton.tintColor = .black
+            checkBarButton.isEnabled = true
+            navigationItem.rightBarButtonItems?.insert(checkBarButton, at: 1)
+            
+        
+            
+        } else {
+            
+        }
+
     }
 
     func initializeRefreshControl() {

@@ -20,9 +20,7 @@ class UploadItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "공구 올리기"
-        
         initialize()
     }
     
@@ -41,12 +39,8 @@ class UploadItemViewController: UIViewController {
         itemDetailTextView.resignFirstResponder()
         
         if !validateUserInput() { return }
-        
-        if self.editModel != nil {
-            askToUpdatePost()
-        } else {
-            askToUploadPost()
-        }
+
+        editModel != nil ? askToUpdatePost() : askToUploadPost()
     }
 
     func askToUploadPost() {

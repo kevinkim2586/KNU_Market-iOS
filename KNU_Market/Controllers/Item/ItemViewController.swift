@@ -166,7 +166,7 @@ class ItemViewController: UIViewController {
     // 내가 작성한 글일 경우 check 버튼 활성화
     @IBAction func pressedCheckButton(_ sender: UIButton) {
         
-        let actionSheet = UIAlertController(title: "상태 변경",
+        let actionSheet = UIAlertController(title: "모집 상태 변경",
                                             message: nil,
                                             preferredStyle: .actionSheet)
         

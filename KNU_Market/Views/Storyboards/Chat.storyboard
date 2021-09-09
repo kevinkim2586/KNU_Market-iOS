@@ -30,7 +30,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8zX-7x-QBA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077" y="80"/>
+            <point key="canvasLocation" x="657" y="86"/>
         </scene>
         <!--Chat Member View Controller-->
         <scene sceneID="6Qy-DP-Nhy">

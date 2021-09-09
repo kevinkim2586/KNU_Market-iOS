@@ -64,25 +64,17 @@ class UploadItemViewModel {
                 
                 switch result {
                 case .success(let uid):
-                    print("✏️ UploadItemVM: success in uploading image with uid: \(uid)")
                     self.imageUIDs.append(uid)
                 case .failure(let error):
-                    print("✏️ UploadItemVM: failed uploading image with error: \(error.errorDescription)")
                     self.delegate?.failedUploading(with: error)
                 }
-                print("✏️ group.leave() called")
                 group.leave()
             }
         }
         
         group.notify(queue: .main) {
             print("✏️ Dispatch Group has ended.")
-            
-            if self.editPostModel != nil {
-                self.updatePost()
-            } else {
-                self.uploadItem()
-            }
+            self.editPostModel != nil ? self.updatePost() : self.uploadItem()
         }
     }
     
@@ -102,6 +94,7 @@ class UploadItemViewModel {
             
             case .success(_):
                 self.delegate?.didCompleteUpload()
+                NotificationCenter.default.post(name: .updateItemList, object: nil)
             case .failure(let error):
                 print("UploadItemViewModel - uploadItem() failed: \(error.errorDescription)")
                 self.delegate?.failedUploading(with: error)
@@ -145,9 +138,9 @@ class UploadItemViewModel {
         
         ItemManager.shared.updatePost(uid: self.editPostModel?.pageUID ?? "",
                                       with: model) { [weak self] result in
-            
+
             guard let self = self else { return }
-            
+
             switch result {
             case .success(_):
                 self.delegate?.didUpdatePost()

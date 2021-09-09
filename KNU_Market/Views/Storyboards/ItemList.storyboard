@@ -248,9 +248,9 @@
                                                 <rect key="frame" x="244" y="50" width="100" height="35"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Wt-UX-8Q5">
-                                                        <rect key="frame" x="30" y="3" width="40" height="29"/>
+                                                        <rect key="frame" x="22" y="3" width="56" height="29"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                        <state key="normal" title="모집 중">
+                                                        <state key="normal" title="모집 중  ⌵">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>

@@ -51,6 +51,7 @@ struct Constants {
         // Chat Tab
         static let chatVC                       = "ChatViewController"
         static let chatMemberVC                 = "ChatMemberViewController"
+        static let imageZoomVC                  = "ImageZoomViewController"
         
         // My Page Tab
         static let myPostsVC                    = "MyPostsViewController"

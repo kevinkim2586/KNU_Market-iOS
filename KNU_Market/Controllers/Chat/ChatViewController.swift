@@ -413,6 +413,9 @@ import SafariServices
 import SwiftyJSON
 import SDWebImage
 import IQKeyboardManagerSwift
+import ImageSlideshow
+import SnapKit
+
 
 class ChatViewController: MessagesViewController {
 
@@ -699,9 +702,9 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         
+        if viewModel.messages.count == 0 { return }
         guard let message = message as? Message else { return }
-        let chatMessage = message.chatContent
-        let filteredChat = viewModel.filterChat(text: chatMessage)
+        let filteredChat = viewModel.filterChat(text: message.chatContent)
         guard let url = URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage) else { return }
     
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -709,8 +712,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                               placeholderImage: nil,
                               options: .continueInBackground,
                               completed: nil)
-
-
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -718,13 +719,15 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         if scrollView.contentOffset.y <= 10 {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-
-                if !self.viewModel.isFetchingData &&
+                
+                if
+                    !self.viewModel.isFetchingData &&
                     self.viewModel.needsToFetchMoreData &&
                     !self.viewModel.isFirstViewLaunch {
-                    self.refreshControl.beginRefreshing()
-                    self.viewModel.getChatList()
-
+                    
+                        self.refreshControl.beginRefreshing()
+                        self.viewModel.getChatList()
+                    
                 } else {
                     self.refreshControl.endRefreshing()
                     self.messagesCollectionView.refreshControl = nil
@@ -740,9 +743,16 @@ extension ChatViewController: MessageCellDelegate {
     
     func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedString.Key : Any] {
         
+        if viewModel.messages.count == 0 { return [:] }
         switch detector {
         case .url:
-            return [.foregroundColor: UIColor.white,  .underlineStyle: NSUnderlineStyle.single.rawValue]
+            
+            if viewModel.messages[indexPath.section].userUID == User.shared.userUID {
+                return [.foregroundColor: UIColor.white,  .underlineStyle: NSUnderlineStyle.single.rawValue]
+            } else {
+                return [.foregroundColor: UIColor.black, .underlineStyle: NSUnderlineStyle.single.rawValue]
+            }
+            
         default:
             return MessageLabel.defaultAttributes
         }
@@ -755,7 +765,39 @@ extension ChatViewController: MessageCellDelegate {
     func didSelectURL(_ url: URL) {
         presentSafariView(with: url)
     }
+    
+    func didTapImage(in cell: MessageCollectionViewCell) {
+        
+        guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
+        let message = messageForItem(at: indexPath, in: messagesCollectionView)
+   
+        switch message.kind {
+            case .photo(let photoItem):
+                if let url = photoItem.url {
+                    presentImageVC(url: url)
+                } else {
+                    self.presentKMAlertOnMainThread(title: "오류 발생",
+                                                    message: "유효하지 않은 사진이거나 요청을 처리하지 못했습니다. 불편을 드려 죄송합니다.😥",
+                                                    buttonTitle: "확인")
+                }
+            default: break
+        }
+    }
+  
+    func presentImageVC(url: URL) {
+        
+        guard let imageVC = storyboard?.instantiateViewController(identifier: Constants.StoryboardID.imageZoomVC) as? ImageZoomViewController else {
+            return
+        }
+        imageVC.imageURL = url
+//        imageVC.modalPresentationStyle = .overFullScreen
+        present(imageVC, animated: true)
+    }
+
+
 }
+
+
 
 //MARK: - Initialization & UI Configuration
 
@@ -901,6 +943,7 @@ extension ChatViewController {
                                                name: .didBlockUser,
                                                object: nil)
     }
+
 }
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate

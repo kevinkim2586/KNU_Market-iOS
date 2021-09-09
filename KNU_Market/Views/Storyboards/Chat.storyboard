@@ -169,7 +169,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bF6-QS-jBs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1963.7681159420292" y="79.6875"/>
+            <point key="canvasLocation" x="1435" y="757"/>
+        </scene>
+        <!--Image Zoom View Controller-->
+        <scene sceneID="NqN-1p-Org">
+            <objects>
+                <viewController storyboardIdentifier="ImageZoomViewController" id="2sA-HV-eBL" customClass="ImageZoomViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lXj-OC-wnF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="V6r-5W-U4V"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F5P-aB-TpU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="647.82608695652175" y="756.69642857142856"/>
         </scene>
     </scenes>
     <resources>

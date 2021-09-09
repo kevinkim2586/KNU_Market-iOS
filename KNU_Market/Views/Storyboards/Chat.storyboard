@@ -188,6 +188,18 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vrQ-9n-5d2">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuH-Uc-QfB" userLabel="Dismiss Button">
+                                        <rect key="frame" x="364" y="50" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="EzM-8q-juM"/>
+                                            <constraint firstAttribute="height" constant="30" id="zMX-SY-cqD"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="xmark" catalog="system"/>
+                                        <connections>
+                                            <action selector="pressedDismissButton:" destination="LTj-Vy-cKY" eventType="touchUpInside" id="GnF-u0-z5w"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="vrQ-9n-5d2" firstAttribute="width" secondItem="KBq-oM-2iD" secondAttribute="width" id="56Z-OQ-pFx"/>
@@ -195,9 +207,11 @@
                                     <constraint firstAttribute="trailing" secondItem="vrQ-9n-5d2" secondAttribute="trailing" id="6fj-NF-Qs3"/>
                                     <constraint firstItem="vrQ-9n-5d2" firstAttribute="top" secondItem="JbA-sF-drR" secondAttribute="top" id="9Dt-2y-rjD"/>
                                     <constraint firstItem="vrQ-9n-5d2" firstAttribute="leading" secondItem="KBq-oM-2iD" secondAttribute="leading" id="B2W-g8-Xld"/>
+                                    <constraint firstItem="JbA-sF-drR" firstAttribute="trailing" secondItem="wuH-Uc-QfB" secondAttribute="trailing" constant="20" id="Iap-tg-ot6"/>
                                     <constraint firstAttribute="bottom" secondItem="vrQ-9n-5d2" secondAttribute="bottom" id="Wk0-Bo-cR3"/>
                                     <constraint firstItem="vrQ-9n-5d2" firstAttribute="height" secondItem="KBq-oM-2iD" secondAttribute="height" id="asT-ms-7nb"/>
                                     <constraint firstItem="vrQ-9n-5d2" firstAttribute="leading" secondItem="JbA-sF-drR" secondAttribute="leading" id="lnl-KD-0bj"/>
+                                    <constraint firstItem="wuH-Uc-QfB" firstAttribute="top" secondItem="JbA-sF-drR" secondAttribute="top" constant="50" id="sds-4M-WOg"/>
                                     <constraint firstItem="JbA-sF-drR" firstAttribute="trailing" secondItem="vrQ-9n-5d2" secondAttribute="trailing" id="txA-gA-w6h"/>
                                     <constraint firstItem="JbA-sF-drR" firstAttribute="bottom" secondItem="vrQ-9n-5d2" secondAttribute="bottom" id="z1a-nt-1mE"/>
                                 </constraints>
@@ -241,6 +255,7 @@
         <image name="exclamationmark.octagon" catalog="system" width="128" height="112"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <image name="people icon" width="52" height="52"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -18,6 +18,10 @@ class ImageViewController: UIViewController {
         configureImageView()
     }
     
+    @IBAction func pressedDismissButton(_ sender: UIButton) {
+        hero.dismissViewController()
+    }
+    
     func configureScrollView() {
         
         imageScrollView.delegate = self

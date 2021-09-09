@@ -19,6 +19,8 @@ class ChatListViewModel {
     
     var roomList: [Room] = [Room]()
     
+    private var isFetchingData: Bool = false
+    
     init() {
         createObservers()
     }
@@ -30,6 +32,10 @@ extension ChatListViewModel {
     
     // 전체 채팅 목록 불러오기
     @objc func fetchChatList() {
+        
+        if isFetchingData { return }
+        
+        isFetchingData = true
         
         roomList.removeAll()
         User.shared.joinedChatRoomPIDs.removeAll()
@@ -47,7 +53,6 @@ extension ChatListViewModel {
             case .success(let chatRoom):
                 
                 var count = 0
-            
                 chatRoom.forEach { chat in
                     User.shared.joinedChatRoomPIDs.append(chat.uuid)
                     
@@ -63,6 +68,9 @@ extension ChatListViewModel {
                 if count != User.shared.chatNotificationList.count {
                     ChatNotifications.list.removeAll()
                 }
+                
+                print("✏️ chat list count: \(self.roomList.count)")
+                self.isFetchingData = false
                 self.delegate?.didFetchChatList()
                 
             case .failure(let error):

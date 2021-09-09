@@ -78,7 +78,6 @@
 		7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668826E756B30060F37B /* FilteredChat.swift */; };
 		7C8E668B26E756C00060F37B /* ChatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668A26E756C00060F37B /* ChatType.swift */; };
 		7C8E668D26E875A00060F37B /* UIImageView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668C26E875A00060F37B /* UIImageView Extension.swift */; };
-		7C8E668F26E88D6A0060F37B /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668E26E88D690060F37B /* ImageZoomViewController.swift */; };
 		7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9871D526E9BCEA009BD195 /* ImageViewController.swift */; };
 		7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */; };
 		7C9BBB4126C27BD1001C54E6 /* UITableView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB4026C27BD0001C54E6 /* UITableView Extension.swift */; };
@@ -202,7 +201,6 @@
 		7C8E668826E756B30060F37B /* FilteredChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredChat.swift; sourceTree = "<group>"; };
 		7C8E668A26E756C00060F37B /* ChatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatType.swift; sourceTree = "<group>"; };
 		7C8E668C26E875A00060F37B /* UIImageView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView Extension.swift"; sourceTree = "<group>"; };
-		7C8E668E26E88D690060F37B /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		7C9871D526E9BCEA009BD195 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostRequestDTO.swift; sourceTree = "<group>"; };
 		7C9BBB4026C27BD0001C54E6 /* UITableView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView Extension.swift"; sourceTree = "<group>"; };
@@ -656,7 +654,6 @@
 				7C9871D526E9BCEA009BD195 /* ImageViewController.swift */,
 				7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */,
 				7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */,
-				7C8E668E26E88D690060F37B /* ImageZoomViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -858,7 +855,6 @@
 				7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */,
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,
 				7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */,
-				7C8E668F26E88D6A0060F37B /* ImageZoomViewController.swift in Sources */,
 				7CB8DF752650E1EB0001CC6D /* LoginViewModel.swift in Sources */,
 				7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,

@@ -4,14 +4,25 @@ import Hero
 
 class ImageViewController: UIViewController {
 
+    @IBOutlet weak var imageScrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
-    
+
     var imageURL: URL?
     var heroID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .black
+        configureScrollView()
         configureImageView()
+    }
+    
+    func configureScrollView() {
+        
+        imageScrollView.delegate = self
+        imageScrollView.minimumZoomScale = 1.0
+        imageScrollView.maximumZoomScale = 3.0
     }
     
     func configureImageView() {
@@ -52,4 +63,13 @@ class ImageViewController: UIViewController {
     }
     
  
+}
+
+//MARK: - UIScrollViewDelegate
+
+extension ImageViewController: UIScrollViewDelegate {
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
 }

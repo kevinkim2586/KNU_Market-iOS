@@ -24,6 +24,8 @@ class ChatListViewController: UIViewController {
     }
     
     @IBAction func pressedLeftBarButton(_ sender: UIBarButtonItem) {
+        
+        if viewModel.roomList.count == 0 { return }
         let topRow = IndexPath(row: 0, section: 0)
         self.chatListTableView.scrollToRow(at: topRow, at: .top, animated: true)
     }
@@ -125,35 +127,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
             ChatNotifications.list.remove(at: index)
         }
     }
-    
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//        if editingStyle == .delete {
-//
-//            if viewModel.currentRoomIsUserUploaded(at: indexPath.row) {
-//                self.presentAlertWithCancelAction(title: "본인이 방장으로 있는 채팅방입니다.",
-//                                                  message: "채팅방을 나가면 공구 글이 삭제되고 모든 참여자가 채팅방에서 나가기 처리가 됩니다. 삭제하시겠습니까?") { selectedOk in
-//                    if selectedOk {
-//                        self.viewModel.deleteMyPostAndExit(at: indexPath)
-//                    }
-//                }
-//            } else {
-//                self.presentAlertWithCancelAction(title: "채팅방에서 나가시겠습니까?",
-//                                                  message: "'확인'을 누르시면 채팅방에서 나가기 처리됩니다.") { selectedOk in
-//                    if selectedOk {
-//                        self.viewModel.exitPost(at: indexPath)
-//                    }
-//                }
-//            }
-//            if let index = ChatNotifications.list.firstIndex(of: viewModel.roomList[indexPath.row].uuid) {
-//                ChatNotifications.list.remove(at: index)
-//            }
-//        }
-//    }
 
     @objc func refreshTableView() {
         viewModel.fetchChatList()

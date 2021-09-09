@@ -174,47 +174,6 @@
             </objects>
             <point key="canvasLocation" x="1435" y="757"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Qzu-av-T3K">
-            <objects>
-                <viewController id="mTe-O9-MOG" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="iwP-wC-N00">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qig-AH-Pth">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Y2P-ol-5pu"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="qig-AH-Pth" secondAttribute="bottom" id="Axd-jV-VGl"/>
-                            <constraint firstItem="qig-AH-Pth" firstAttribute="top" secondItem="iwP-wC-N00" secondAttribute="top" id="eLx-8y-V4A"/>
-                            <constraint firstAttribute="trailing" secondItem="qig-AH-Pth" secondAttribute="trailing" id="fOB-mG-cS2"/>
-                            <constraint firstItem="qig-AH-Pth" firstAttribute="leading" secondItem="iwP-wC-N00" secondAttribute="leading" id="lyn-jx-4Lb"/>
-                        </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="LAw-Ao-O1u" appends="YES" id="0qP-0w-nKA"/>
-                        </connections>
-                    </view>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <outlet property="imageView" destination="qig-AH-Pth" id="Jxo-ZW-YSe"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h1Y-xq-O9J" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="LAw-Ao-O1u">
-                    <connections>
-                        <action selector="handlePanGesture:" destination="mTe-O9-MOG" id="5Yj-yF-ofW"/>
-                    </connections>
-                </panGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="657" y="763"/>
-        </scene>
         <!--Image View Controller-->
         <scene sceneID="eWF-5O-aa2">
             <objects>
@@ -274,7 +233,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-62.318840579710148" y="762.72321428571422"/>
+            <point key="canvasLocation" x="657" y="757"/>
         </scene>
     </scenes>
     <resources>

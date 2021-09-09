@@ -63,8 +63,6 @@ extension ChatListViewModel {
                 if count != User.shared.chatNotificationList.count {
                     ChatNotifications.list.removeAll()
                 }
-                
-
                 self.delegate?.didFetchChatList()
                 
             case .failure(let error):

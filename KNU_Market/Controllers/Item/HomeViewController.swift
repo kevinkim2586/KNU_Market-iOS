@@ -232,7 +232,7 @@ extension HomeViewController {
         addButton.layer.cornerRadius = addButton.frame.width / 2
         addButton.backgroundColor = UIColor(named: Constants.Color.appColor)
 
-        let font = UIFont.systemFont(ofSize: 20)
+        let font = UIFont.systemFont(ofSize: 23, weight: .medium)
         let configuration = UIImage.SymbolConfiguration(font: font)
         let buttonImage = UIImage(systemName: "plus",
                                 withConfiguration: configuration)
@@ -246,8 +246,5 @@ extension HomeViewController {
                                                name: .updateItemList,
                                                object: nil)
         createObserversForGettingBadgeValue()
-        
     }
-    
-    
 }

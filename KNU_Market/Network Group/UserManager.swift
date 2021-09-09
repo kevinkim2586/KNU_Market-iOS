@@ -129,8 +129,6 @@ class UserManager {
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 
-                print("✏️ UserManager - login() statusCode: \(statusCode)")
-                
                 switch statusCode {
                 
                 case 201:
@@ -149,7 +147,6 @@ class UserManager {
                         completion(.success(true))
                         
                     } catch {
-                        print("UserManager - login() catch error: \(error)")
                         completion(.failure(.E000))
                     }
                 default:

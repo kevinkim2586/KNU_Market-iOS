@@ -855,9 +855,8 @@ extension ChatViewController {
             navigationItem.rightBarButtonItems?.insert(checkBarButton, at: 1)
             
         
-            
         } else {
-            
+             
         }
 
     }

@@ -521,6 +521,7 @@ extension ChatViewController: ChatViewDelegate {
             viewModel.isFirstEntranceToChat = false
             showChatPrecautionMessage()
         }
+    
         viewModel.getChatList()
     }
 

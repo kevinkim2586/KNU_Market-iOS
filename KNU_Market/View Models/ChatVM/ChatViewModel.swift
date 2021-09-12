@@ -263,12 +263,6 @@ extension ChatViewModel {
                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight)))))
             }
-            
-//            self.messages.append(Message(chat: chat,
-//                                         sender: self.mySelf,
-//                                         sentDate: Date(),
-//                                         kind: .text(filteredChat.chatMessage)))
-            
             self.delegate?.didSendText()
         }
     }
@@ -492,9 +486,6 @@ extension ChatViewModel {
             }
             
         }
-        
-        
-        
     }
 }
 
@@ -531,20 +522,6 @@ extension ChatViewModel {
         return roomInfo?.post.user.uid ?? ""
     }
     
-//    func getImageFromURL(with imageUID: String) -> UIImage? {
-//        
-//        guard let imageURL = URL(string: Constants.MEDIA_REQUEST_URL + imageUID) else {
-//            return nil
-//        }
-//        guard let imageData = try? Data(contentsOf: imageURL) else {
-//            return nil
-//        }
-//        guard let image = UIImage(data: imageData) else {
-//            return nil
-//        }
-//        return image
-//    }
-    
     func filterChat(text: String, userUID: String? = nil, isFromSocket: Bool = false) -> FilteredChat {
         
         if userUID != nil {
@@ -553,9 +530,8 @@ extension ChatViewModel {
             }
         }
         if text.contains(Constants.ChatSuffix.enterSuffix) {
-            return FilteredChat(chatMessage: text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉"), chatType: .text)
+            return FilteredChat(chatMessage: text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: "🎉"), chatType: .text)
        
-            
         } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" && isFromSocket {
             outPost()
             return FilteredChat(chatMessage: Constants.ChatSuffix.emptySuffix, chatType: .text)

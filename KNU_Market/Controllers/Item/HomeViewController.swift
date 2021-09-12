@@ -208,6 +208,7 @@ extension HomeViewController {
 
         initializeTableView()
         initializeAddButton()
+        initializeBarButtonItem()
         createObservers()
     }
     
@@ -237,6 +238,50 @@ extension HomeViewController {
         let buttonImage = UIImage(systemName: "plus",
                                 withConfiguration: configuration)
         addButton.setImage(buttonImage, for: .normal)
+    }
+    
+    func initializeBarButtonItem() {
+        
+        let settingsBarButton = UIBarButtonItem(image: UIImage(named: Constants.Images.homeMenuIcon) ?? UIImage(systemName: "gear"),
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(pressedSettingsButton))
+        
+        settingsBarButton.tintColor = .black
+        navigationItem.rightBarButtonItems?.insert(settingsBarButton, at: 0)
+    
+    }
+    
+    @objc func pressedSettingsButton() {
+        
+        let actionSheet = UIAlertController(title: "글 정렬 기준",
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        let title: String?
+        switch viewModel.currentlySelectedFilterIndex {
+        case 0:
+            title = "모집 중인 공구만 보기"
+        default:
+            title = "모든 공구 보기"
+        }
+        
+        guard let title = title else {
+            showSimpleBottomAlert(with: "일시적인 오류입니다.😥")
+            return
+        }
+        
+        actionSheet.addAction(UIAlertAction(title: title,
+                                            style: .default) { [weak self] _ in
+            
+            
+            
+        })
+        actionSheet.addAction(UIAlertAction(title: "취소",
+                                            style: .cancel,
+                                            handler: nil))
+        
+        present(actionSheet, animated: true)
     }
     
     func createObservers() {

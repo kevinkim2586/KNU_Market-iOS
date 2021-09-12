@@ -161,6 +161,7 @@ struct Constants {
         static let chatBubbleIcon               = "chat_bubble_icon"
         
         static let cameraIcon                   = "camera icon"
+        static let homeMenuIcon                 = "menu"
         
         // Tab Bar Icons
         static let chatUnselected               = "grey chat"

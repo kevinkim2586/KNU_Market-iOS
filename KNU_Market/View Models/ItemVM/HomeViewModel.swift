@@ -19,8 +19,8 @@ class HomeViewModel {
     var itemList: [ItemListModel] = [ItemListModel]()
     
     var isFetchingData: Bool = false
-    
     var index: Int = 1
+    var currentlySelectedFilterIndex: Int = 0
     
     
     //MARK: - 공구글 불러오기
@@ -98,6 +98,9 @@ class HomeViewModel {
             }
         }
     }
+    
+    
+    
     
     func loadInitialMethods() {
         

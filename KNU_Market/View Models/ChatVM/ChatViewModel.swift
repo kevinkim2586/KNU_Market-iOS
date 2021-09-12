@@ -529,6 +529,7 @@ extension ChatViewModel {
                 return FilteredChat(chatMessage: Constants.ChatSuffix.emptySuffix, chatType: .text)
             }
         }
+        
         if text.contains(Constants.ChatSuffix.enterSuffix) {
             return FilteredChat(chatMessage: text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: "🎉"), chatType: .text)
        
@@ -551,7 +552,11 @@ extension ChatViewModel {
             let imageUID = text[0..<22]
             return FilteredChat(chatMessage: imageUID, chatType: .photo)
             
-        } else {
+        } else if text.contains("_SUFFIX") {
+            return FilteredChat(chatMessage: "[아직 지원하지 않는 형식의 메시지입니다. 확인하시려면 앱을 최신 버전으로 업데이트 해주세요.]", chatType: .text)
+        }
+        
+        else {
             return FilteredChat(chatMessage: text, chatType: .text)
         }
     }

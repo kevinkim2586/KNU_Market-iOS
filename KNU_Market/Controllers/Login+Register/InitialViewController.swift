@@ -103,7 +103,7 @@ extension InitialViewController {
         idTextField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         idTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         idTextField.delegate = self
-        idTextField.tintColor = .clear
+
         idTextField.placeholder = "학교 이메일 입력 (@knu.ac.kr)"
         
         pwTextField.borderStyle = .none

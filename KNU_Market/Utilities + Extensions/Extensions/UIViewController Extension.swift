@@ -212,6 +212,7 @@ extension UIViewController {
                                                name: .getBadgeValue,
                                                object: nil)
     }
+    
 }
 
 //MARK: - PHAsset Conversion

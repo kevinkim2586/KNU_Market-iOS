@@ -10,7 +10,6 @@ class CheckEmailViewController: UIViewController {
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
-    
     @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {

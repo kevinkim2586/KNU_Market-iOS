@@ -55,7 +55,6 @@ class SendDeveloperMessageViewController: UIViewController {
         
         let url = URL(string: Constants.URL.kakaoHelpChannel)!
         UIApplication.shared.open(url, options: [:])
-        
     }
     
     func initialize() {

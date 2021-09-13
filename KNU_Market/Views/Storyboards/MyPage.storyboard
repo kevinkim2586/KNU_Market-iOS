@@ -524,27 +524,59 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xCw-zI-8UF">
-                                <rect key="frame" x="20" y="181" width="374" height="493"/>
+                                <rect key="frame" x="20" y="266" width="374" height="408"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut lrunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7jA-t9-RGD">
+                                <rect key="frame" x="20" y="151" width="374" height="41"/>
+                                <string key="text">웹메일 인증과 관련된 문의는 카카오채널을
+통해 실시간으로 도와드리겠습니다.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yQh-UF-aaL">
+                                <rect key="frame" x="20" y="207" width="187" height="29"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="https://pf.kakao.com/_PjLHs">
+                                            <attributes>
+                                                <color key="NSColor" systemColor="systemBlueColor"/>
+                                                <font key="NSFont" size="15" name="ArialMT"/>
+                                                <font key="NSOriginalFont" metaFont="system" size="15"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="pressedKakaoLink:" destination="Nop-xb-tmw" eventType="touchUpInside" id="Jub-OH-cNB"/>
+                                    <action selector="pressedKakaoLinkButton:" destination="IPd-GZ-Ey7" eventType="touchUpInside" id="T0I-tp-gB5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Fbn-H9-XVU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Fbn-H9-XVU" firstAttribute="trailing" secondItem="xCw-zI-8UF" secondAttribute="trailing" constant="20" id="3Zj-4Z-fJ5"/>
                             <constraint firstItem="7zX-zN-z3X" firstAttribute="top" secondItem="rOK-KI-TsL" secondAttribute="bottom" constant="30" id="3vH-9f-fTb"/>
+                            <constraint firstItem="Fbn-H9-XVU" firstAttribute="trailing" secondItem="7jA-t9-RGD" secondAttribute="trailing" constant="20" id="AHR-e4-cGd"/>
                             <constraint firstItem="Fbn-H9-XVU" firstAttribute="bottom" secondItem="xCw-zI-8UF" secondAttribute="bottom" constant="100" id="Drr-LS-w9e"/>
                             <constraint firstItem="Fbn-H9-XVU" firstAttribute="trailing" secondItem="rOK-KI-TsL" secondAttribute="trailing" constant="20" id="G3j-7f-wvS"/>
+                            <constraint firstItem="xCw-zI-8UF" firstAttribute="top" secondItem="yQh-UF-aaL" secondAttribute="bottom" constant="30" id="Jjc-e3-uDd"/>
+                            <constraint firstItem="7jA-t9-RGD" firstAttribute="leading" secondItem="Fbn-H9-XVU" secondAttribute="leading" constant="20" id="PIV-n2-mDO"/>
+                            <constraint firstItem="yQh-UF-aaL" firstAttribute="top" secondItem="7jA-t9-RGD" secondAttribute="bottom" constant="15" id="Q8m-W6-aV4"/>
                             <constraint firstItem="xCw-zI-8UF" firstAttribute="leading" secondItem="Fbn-H9-XVU" secondAttribute="leading" constant="20" id="Sv5-sZ-dgI"/>
+                            <constraint firstItem="7jA-t9-RGD" firstAttribute="top" secondItem="7zX-zN-z3X" secondAttribute="bottom" constant="20" id="TFu-Eg-FVK"/>
                             <constraint firstItem="7zX-zN-z3X" firstAttribute="leading" secondItem="Fbn-H9-XVU" secondAttribute="leading" constant="20" id="WM4-UB-RyN"/>
                             <constraint firstItem="Fbn-H9-XVU" firstAttribute="trailing" secondItem="7zX-zN-z3X" secondAttribute="trailing" constant="20" id="gJf-Ac-UK5"/>
+                            <constraint firstItem="yQh-UF-aaL" firstAttribute="leading" secondItem="Fbn-H9-XVU" secondAttribute="leading" constant="20" id="lBj-63-PaB"/>
                             <constraint firstItem="rOK-KI-TsL" firstAttribute="top" secondItem="Fbn-H9-XVU" secondAttribute="top" constant="60" id="oXh-9w-YaI"/>
                             <constraint firstItem="rOK-KI-TsL" firstAttribute="leading" secondItem="Uaq-ao-9hp" secondAttribute="leading" constant="20" id="pgZ-HN-rQS"/>
-                            <constraint firstItem="xCw-zI-8UF" firstAttribute="top" secondItem="7zX-zN-z3X" secondAttribute="bottom" constant="50" id="wCS-36-jIM"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -558,13 +590,14 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="detailLineLabel" destination="7zX-zN-z3X" id="0ic-BF-erg"/>
+                        <outlet property="emailHelpLabel" destination="7jA-t9-RGD" id="VAe-Cs-ESL"/>
                         <outlet property="firstLineLabel" destination="rOK-KI-TsL" id="9QZ-3h-3gZ"/>
                         <outlet property="userInputTextView" destination="xCw-zI-8UF" id="3L6-Hf-pHy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rlK-pO-dBq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9196" y="1760"/>
+            <point key="canvasLocation" x="9195.652173913044" y="1759.8214285714284"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="j2u-FM-iJE">

@@ -6,8 +6,10 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
 
     @IBOutlet weak var firstLineLabel: UILabel!
     @IBOutlet weak var detailLineLabel: UILabel!
+    @IBOutlet weak var emailHelpLabel: UILabel!
     @IBOutlet weak var userInputTextView: UITextView!
     
+    private let emailHelpLabelText = "웹메일 인증과 관련된 문의는 카카오채널을\n통해 실시간으로 도와드리겠습니다."
     private let textViewPlaceholder = "✏️ 개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요."
     
     override func viewDidLoad() {
@@ -19,6 +21,12 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         dismissProgressBar()
+    }
+    
+    @IBAction func pressedKakaoLinkButton(_ sender: UIButton) {
+        
+        let url = URL(string: Constants.URL.kakaoHelpChannel)!
+        UIApplication.shared.open(url, options: [:])
     }
     
     @IBAction func pressedDoneButton(_ sender: UIBarButtonItem) {
@@ -92,6 +100,11 @@ extension UnregisterUser_InputSuggestionViewController {
         detailLineLabel.text = "피드백을 반영하여 적극적으로 개선하겠습니다."
         detailLineLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         detailLineLabel.textColor = .lightGray
+        
+        emailHelpLabel.text = emailHelpLabelText
+        emailHelpLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        emailHelpLabel.textColor = .darkGray
+        emailHelpLabel.changeTextAttributeColor(fullText: emailHelpLabelText, changeText: "웹메일 인증과 관련된 문의")
     }
     
     func initializeTextView() {

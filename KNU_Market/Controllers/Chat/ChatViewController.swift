@@ -712,7 +712,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     }
     
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        
+         
         if viewModel.messages.count == 0 { return }
         guard let message = message as? Message else { return }
         let filteredChat = viewModel.filterChat(text: message.chatContent)

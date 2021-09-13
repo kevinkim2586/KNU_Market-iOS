@@ -147,11 +147,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lcu-yl-fBl">
-                                <rect key="frame" x="15" y="83" width="384" height="95.5"/>
-                                <string key="text">(i) 혹시 건의/제안사항이 있으신가요? 
-있으시면 편하게 아래에 적어서 “보내기"를 눌러주세요. 개발자들이 참고하여 추후 업데이트에 반영하도록 하겠습니다 :)
-</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✻ 건의/제안 사항을 보내주시면 참고하여,추후 업데이트에 반영하겠습니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lcu-yl-fBl">
+                                <rect key="frame" x="15" y="168" width="384" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -163,7 +160,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WRU-bl-EJx">
-                                <rect key="frame" x="15" y="213.5" width="384" height="300"/>
+                                <rect key="frame" x="15" y="236.5" width="384" height="300"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="EpZ-tY-UQJ"/>
@@ -172,17 +169,48 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2qU-24-FRd">
+                                <rect key="frame" x="15" y="58" width="384" height="41"/>
+                                <string key="text">웹메일 인증과 관련된 문의는 카카오채널을
+통해 실시간으로 도와드리겠습니다.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I4X-s9-kwN">
+                                <rect key="frame" x="15" y="114" width="187" height="29"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="https://pf.kakao.com/_PjLHs">
+                                            <attributes>
+                                                <color key="NSColor" systemColor="systemBlueColor"/>
+                                                <font key="NSFont" size="15" name="ArialMT"/>
+                                                <font key="NSOriginalFont" metaFont="system" size="15"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="pressedKakaoLink:" destination="Nop-xb-tmw" eventType="touchUpInside" id="6Fw-M2-YpD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Asa-ej-Kwl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Lcu-yl-fBl" firstAttribute="top" secondItem="I4X-s9-kwN" secondAttribute="bottom" constant="25" id="59W-8O-do0"/>
                             <constraint firstAttribute="trailing" secondItem="Lcu-yl-fBl" secondAttribute="trailing" constant="15" id="5hr-BX-eBs"/>
-                            <constraint firstItem="WRU-bl-EJx" firstAttribute="top" secondItem="Lcu-yl-fBl" secondAttribute="bottom" constant="35" id="6LC-f6-5U3"/>
+                            <constraint firstItem="Asa-ej-Kwl" firstAttribute="trailing" secondItem="2qU-24-FRd" secondAttribute="trailing" constant="15" id="8zE-Xd-rjf"/>
+                            <constraint firstItem="2qU-24-FRd" firstAttribute="leading" secondItem="Asa-ej-Kwl" secondAttribute="leading" constant="15" id="K5c-ir-yyh"/>
+                            <constraint firstItem="I4X-s9-kwN" firstAttribute="leading" secondItem="Asa-ej-Kwl" secondAttribute="leading" constant="15" id="Kpt-X4-eYE"/>
                             <constraint firstItem="Asa-ej-Kwl" firstAttribute="trailing" secondItem="WRU-bl-EJx" secondAttribute="trailing" constant="15" id="NUb-Od-4Ai"/>
+                            <constraint firstItem="I4X-s9-kwN" firstAttribute="top" secondItem="2qU-24-FRd" secondAttribute="bottom" constant="15" id="QB6-kN-0Mk"/>
+                            <constraint firstItem="WRU-bl-EJx" firstAttribute="top" secondItem="Lcu-yl-fBl" secondAttribute="bottom" constant="30" id="RFp-cs-8kW"/>
+                            <constraint firstItem="2qU-24-FRd" firstAttribute="top" secondItem="Z2m-Mk-cpY" secondAttribute="bottom" constant="15" id="dHr-jq-fa6"/>
                             <constraint firstItem="WRU-bl-EJx" firstAttribute="leading" secondItem="Asa-ej-Kwl" secondAttribute="leading" constant="15" id="hRd-n8-VgJ"/>
                             <constraint firstItem="Z2m-Mk-cpY" firstAttribute="leading" secondItem="Asa-ej-Kwl" secondAttribute="leading" constant="15" id="iNc-FG-7gM"/>
                             <constraint firstItem="Lcu-yl-fBl" firstAttribute="leading" secondItem="Asa-ej-Kwl" secondAttribute="leading" constant="15" id="k8z-SP-IuJ"/>
-                            <constraint firstItem="Lcu-yl-fBl" firstAttribute="top" secondItem="Z2m-Mk-cpY" secondAttribute="bottom" constant="40" id="qHb-Te-Yqz"/>
                             <constraint firstItem="Z2m-Mk-cpY" firstAttribute="top" secondItem="Asa-ej-Kwl" secondAttribute="top" constant="20" id="rbC-5Z-rcX"/>
                         </constraints>
                     </view>
@@ -196,13 +224,14 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
-                        <outlet property="infoLabel" destination="Lcu-yl-fBl" id="RDI-uh-2R3"/>
+                        <outlet property="emailHelpLabel" destination="2qU-24-FRd" id="Oyo-eZ-qOM"/>
+                        <outlet property="feedbackLabel" destination="Lcu-yl-fBl" id="RDI-uh-2R3"/>
                         <outlet property="messageTextView" destination="WRU-bl-EJx" id="F6b-SY-t29"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JFD-oF-trw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8314" y="-482"/>
+            <point key="canvasLocation" x="8313.04347826087" y="-482.14285714285711"/>
         </scene>
         <!--OpenSourceLicenseViewController-->
         <scene sceneID="Ak5-xg-G32">
@@ -799,6 +828,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

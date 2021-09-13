@@ -233,6 +233,8 @@ struct Constants {
         
         static let termsAndConditionNotionURL       = "https://linen-twister-e2b.notion.site/b02ec80599d14452aefff7e0dcfcf4ff"
         static let privacyInfoConditionNotionURL    = "https://linen-twister-e2b.notion.site/6554bde75b2c49bfb617b04f526aad6e"
+        
+        static let kakaoHelpChannel                 = "https://pf.kakao.com/_PjLHs"
     }
 }
 

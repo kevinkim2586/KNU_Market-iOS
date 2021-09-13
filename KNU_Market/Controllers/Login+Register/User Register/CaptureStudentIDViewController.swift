@@ -16,6 +16,7 @@ class CaptureStudentIDViewController: UIViewController {
     private var didCheckDuplicate: Bool = false
     
     private var imageData: Data?
+    private let alertMessage: String = "학생증 사진은 입력하신 내용(학번, 생년월일)과 대조를 위해서만 사용되며, 절대 수집하지 않습니다. 입력하신 내용과 학생증 사진이 일치하지 않을 시, 제재 대상이 될 수 있음을 알려드립니다."
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +34,13 @@ class CaptureStudentIDViewController: UIViewController {
     
     @IBAction func pressedAddImageButton(_ sender: UIButton) {
         
-        present(imagePicker, animated: true)
-        
+        presentAlertWithCancelAction(title: "주의사항",
+                                     message: alertMessage) { selectedOk in
+            
+            if selectedOk {
+                self.present(self.imagePicker, animated: true)
+            }
+        }
         
         
     }

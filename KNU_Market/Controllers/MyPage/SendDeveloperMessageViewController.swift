@@ -1,13 +1,16 @@
 import UIKit
 import Alamofire
-import ProgressHUD
 
 class SendDeveloperMessageViewController: UIViewController {
     
-    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var emailHelpLabel: UILabel!
+    @IBOutlet weak var feedbackLabel: UILabel!
     @IBOutlet weak var messageTextView: UITextView!
     
+    private let emailHelpLabelText = "웹메일 인증과 관련된 문의는 카카오채널을 통해 실시간으로 도와드리겠습니다."
+    private let feedbackLabelText = "✻ 건의/제안 사항을 보내주시면 참고하여,\n추후 업데이트에 반영하겠습니다."
     private let textViewPlaceholder = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
+    
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,17 +51,30 @@ class SendDeveloperMessageViewController: UIViewController {
         }
     }
 
+    @IBAction func pressedKakaoLink(_ sender: UIButton) {
+        
+        let url = URL(string: Constants.URL.kakaoHelpChannel)!
+        UIApplication.shared.open(url, options: [:])
+        
+    }
+    
     func initialize() {
         
-        initializeInfoLabel()
+        initializeLabels()
         initializeTextView()
     }
     
-    func initializeInfoLabel() {
+    func initializeLabels() {
         
-        infoLabel.text = "✻ 혹시 건의/제안사항이 있으신가요?\n있으시면 편하게 아래에 적어서 보내주세요.\n개발자들이 참고하여 추후 업데이트에 반영하도록 하겠습니다."
-        infoLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        infoLabel.textColor = .darkGray
+        emailHelpLabel.text = emailHelpLabelText
+        emailHelpLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        emailHelpLabel.textColor = .darkGray
+        emailHelpLabel.changeTextAttributeColor(fullText: emailHelpLabelText, changeText: "웹메일 인증과 관련된 문의")
+        
+        
+        feedbackLabel.text = feedbackLabelText
+        feedbackLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        feedbackLabel.textColor = .darkGray
     }
     
     func initializeTextView() {

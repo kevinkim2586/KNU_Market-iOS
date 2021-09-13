@@ -101,14 +101,16 @@ extension UIViewController {
     }
     
     // 유저 신고하기 VC
-    func presentReportUserVC(userToReport: String, postUID: String) {
+    func presentReportUserVC(userToReport: String, postUID: String? = nil) {
         
         let storyboard = UIStoryboard(name: "Report", bundle: nil)
         
-        guard let reportVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.reportUserVC) as? ReportUserViewController else { return }
+        guard let reportVC = storyboard.instantiateViewController(
+                identifier: Constants.StoryboardID.reportUserVC
+        ) as? ReportUserViewController else { return }
         
         reportVC.userToReport = userToReport
-        reportVC.postUID = postUID
+        reportVC.postUID = postUID ?? ""
         reportVC.modalPresentationStyle = .overFullScreen
       
         self.present(reportVC, animated: true)

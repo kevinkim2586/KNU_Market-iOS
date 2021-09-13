@@ -561,41 +561,6 @@ extension ChatViewModel {
         }
     }
     
-//    func filterChat(text: String, userUID: String? = nil, isFromSocket: Bool = false) -> String {
-//
-//        if userUID != nil {
-//            if User.shared.bannedChatMembers.contains(userUID!) {
-//                return Constants.ChatSuffix.emptySuffix
-//            }
-//        }
-//        if text.contains(Constants.ChatSuffix.enterSuffix)   {
-//            return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
-//
-//        } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" && isFromSocket {
-//            outPost()
-//            return Constants.ChatSuffix.emptySuffix
-//
-//        } else if text.contains(Constants.ChatSuffix.exitSuffix) {
-//            return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: "🏃")
-//
-//        } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)\(Constants.ChatSuffix.rawBanSuffix)") {
-//            self.delegate?.didReceiveBanNotification()
-//            return Constants.ChatSuffix.emptySuffix
-//
-//        } else if text.contains(Constants.ChatSuffix.rawBanSuffix) {
-//            return Constants.ChatSuffix.usedBanSuffix
-//
-//        } else if text.contains(Constants.ChatSuffix.imageSuffix) {
-//
-//            let imageUID = text[0..<22]
-//            print("✏️ imageUID Received: \(imageUID)")
-//            return imageUID
-//
-//        } else {
-//            return text
-//        }
-//    }
-    
     func resetMessages() {
         chatModel = nil
         messages.removeAll()

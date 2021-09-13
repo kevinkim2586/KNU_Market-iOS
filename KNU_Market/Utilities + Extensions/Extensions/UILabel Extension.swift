@@ -48,4 +48,6 @@ extension UILabel {
           // textContainer내에서 newPoint 위치의 glyph index를 반환합니다
           return layoutManager.glyphIndex(for: newPoint, in: textContainer)
       }
+    
+
 }

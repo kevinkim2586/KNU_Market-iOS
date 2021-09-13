@@ -208,7 +208,7 @@ extension HomeViewController {
 
         initializeTableView()
         initializeAddButton()
-        initializeBarButtonItem()
+//        initializeBarButtonItem()
         createObservers()
     }
     

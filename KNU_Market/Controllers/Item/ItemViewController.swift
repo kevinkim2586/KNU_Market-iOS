@@ -1,7 +1,7 @@
 import UIKit
-import SnackBar_swift
 import SDWebImage
 import ImageSlideshow
+import SafariServices
 
 class ItemViewController: UIViewController {
     
@@ -45,18 +45,14 @@ class ItemViewController: UIViewController {
     //MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         print("✏️ ItemVC - pageID: \(pageID)")
-        
         initialize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         navigationController?.setNavigationBarHidden(true, animated: true)
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,21 +61,23 @@ class ItemViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         dismissProgressBar()
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    @objc private func pressedURLLabel() {
+        guard let url = viewModel.userIncludedURL else { return }
+        presentSafariView(with: url)
     }
     
     //MARK: - IBActions & Methods
     
     @IBAction func pressedEnterChatButton(_ sender: UIButton) {
-        
         enterChatButton.loadingIndicator(true)
         
         if isFromChatVC {
             navigationController?.popViewController(animated: true)
         }
-        
         viewModel.joinPost()
     }
     
@@ -93,7 +91,6 @@ class ItemViewController: UIViewController {
     
     // 더보기 버튼
     @IBAction func pressedMoreButton(_ sender: UIButton) {
-        
         let actionSheet = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: .actionSheet)
@@ -328,6 +325,12 @@ extension ItemViewController: ItemViewModelDelegate {
         navigationController?.popViewController(animated: true)
     }
     
+    func didDetectURL(with string: NSMutableAttributedString) {
+        itemDetailLabel.attributedText = string
+        itemDetailLabel.isUserInteractionEnabled = true
+        itemDetailLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pressedURLLabel)))
+    }
+    
     func failedLoadingData(with error: NetworkError) {
         showSimpleBottomAlert(with: error.errorDescription)
     }
@@ -369,6 +372,7 @@ extension ItemViewController {
         initializeEnterChatButton()
         initializeLocationLabel()
         initializeSlideShow()
+        viewModel.detectURL()
     }
     
     func initialize() {
@@ -502,6 +506,7 @@ extension ItemViewController {
         let attributes = [NSAttributedString.Key.paragraphStyle : labelStyle]
         itemDetailLabel.attributedText = NSAttributedString(string: viewModel.model?.title ?? "",
                                                             attributes: attributes)
+        
     }
     
     func initializeGatheringPeopleLabel() {

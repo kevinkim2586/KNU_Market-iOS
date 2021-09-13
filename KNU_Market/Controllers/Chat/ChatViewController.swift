@@ -756,6 +756,15 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 
 extension ChatViewController: MessageCellDelegate {
     
+//    func didTapMessage(in cell: MessageCollectionViewCell) {
+//
+//        guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
+//        let message = messageForItem(at: indexPath, in: messagesCollectionView)
+//
+//        #warning("수정 ")
+//
+//    }
+    
     func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedString.Key : Any] {
         
         if viewModel.messages.count == 0 { return [:] }
@@ -913,7 +922,7 @@ extension ChatViewController {
                                       )
 
         messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
-        initializeInputBarButton()
+//        initializeInputBarButton()
     }
 
     func initializeInputBarButton() {

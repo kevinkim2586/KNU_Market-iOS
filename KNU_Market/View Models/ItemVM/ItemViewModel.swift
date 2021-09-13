@@ -19,6 +19,7 @@ protocol ItemViewModelDelegate: AnyObject {
     func failedJoiningChat(with error: NetworkError)
     
     func didBlockUser()
+    func didDetectURL(with string: NSMutableAttributedString)
     
     func failedLoadingData(with error: NetworkError)
 }
@@ -100,6 +101,7 @@ class ItemViewModel {
         return editPostModel
     }
     
+    var userIncludedURL: URL?
 
     
     //MARK: - 공구 상세내용 불러오기
@@ -257,7 +259,39 @@ class ItemViewModel {
         self.delegate?.didBlockUser()
         NotificationCenter.default.post(name: .updateItemList, object: nil)
     }
+    
+    func detectURL() {
+        
+        var detectedURLString: String?
+        
+        guard let itemDetail = model?.itemDetail else { return }
+        
+        guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else { return }
+        let matches = detector.matches(
+            in: itemDetail,
+            options: [],
+            range: NSRange(location: 0, length: itemDetail.utf16.count)
+        )
 
+        for match in matches {
+            guard let range = Range(match.range, in: itemDetail) else { continue }
+            let url = itemDetail[range]
+            detectedURLString = String(url)
+        }
+        
+        guard
+            let urlString = detectedURLString,
+            let url = URL(string: urlString)
+        else { return }
+        
+        userIncludedURL = url
+        
+        let attributedString = NSMutableAttributedString(string: urlString, attributes:[NSAttributedString.Key.link: url])
+        let substring = itemDetail.replacingOccurrences(of: urlString, with: "")
+        attributedString.append(NSMutableAttributedString(string: substring))
+        
+        delegate?.didDetectURL(with: attributedString)
+    }
 }
 
 //MARK: - Conversion Methods

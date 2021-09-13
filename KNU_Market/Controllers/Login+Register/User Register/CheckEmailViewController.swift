@@ -5,8 +5,8 @@ class CheckEmailViewController: UIViewController {
     @IBOutlet weak var firstLineLabel: UILabel!
     @IBOutlet weak var fourthLineLabel: UILabel!
     @IBOutlet weak var checkSpamMailLabel: UILabel!
-    @IBOutlet weak var checkAfterSomeTimeLabel: UILabel!
     @IBOutlet var detailLabels: [UILabel]!
+    @IBOutlet weak var emailHelpLabel: UILabel!
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
@@ -41,6 +41,12 @@ class CheckEmailViewController: UIViewController {
         self.present(vc, animated: true)
     }
 
+    @IBAction func pressedKakaoLinkButton(_ sender: UIButton) {
+        
+        let url = URL(string: Constants.URL.kakaoHelpChannel)!
+        UIApplication.shared.open(url, options: [:])
+    }
+    
 }
 
 //MARK: - UI Configuration & Initialization
@@ -72,8 +78,8 @@ extension CheckEmailViewController {
         checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 스팸 메일함을 확인해주세요!"
         checkSpamMailLabel.textColor = UIColor(named: Constants.Color.appColor)
         
-        checkAfterSomeTimeLabel.text = "✻ 인증 메일 전송이 최대 3시간 이상 지연되는 문제가 있을 수 있습니다. 미리 양해 부탁드리겠습니다.😢"
-        checkAfterSomeTimeLabel.textColor = UIColor(named: Constants.Color.appColor)
+        emailHelpLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+        emailHelpLabel.textColor = .darkGray
     }
 
 }

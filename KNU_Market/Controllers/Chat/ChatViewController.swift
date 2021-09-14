@@ -664,13 +664,13 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         avatarView.isHidden = true
     }
 
-    // Top Label
+    // Message Top Label
     func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
 
         if viewModel.messages.count == 0 { return 0 }
 
         if viewModel.messages[indexPath.section].userUID == User.shared.userUID { return 0 }
-        else { return 12 }
+        else { return 20 }
     }
 
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
@@ -756,14 +756,24 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 
 extension ChatViewController: MessageCellDelegate {
     
-    func didTapMessage(in cell: MessageCollectionViewCell) {
+    func didTapMessageTopLabel(in cell: MessageCollectionViewCell) {
+        print("✏️ didTapMessageTopLabel")
         guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
         guard let message = messageForItem(
                 at: indexPath,
                 in: messagesCollectionView
         ) as? Message else { return }
-        presentReportUserVC(userToReport: message.usernickname)
+        
+        let nickname = message.usernickname
+        
+        presentAlertWithCancelAction(
+            title: "\(nickname)을 신고하시겠습니까?",
+            message: ""
+        ) { selectedOk in
+            if selectedOk { self.presentReportUserVC(userToReport: nickname) }
+        }
     }
+
     
     func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedString.Key : Any] {
         
@@ -891,22 +901,22 @@ extension ChatViewController {
         messagesCollectionView.backgroundColor = .white
         messagesCollectionView.messageCellDelegate = self
         scrollsToLastItemOnKeyboardBeginsEditing = true
+        
+        guard let layout = messagesCollectionView.collectionViewLayout
+                as? MessagesCollectionViewFlowLayout else { return }
+        
+        layout.setMessageIncomingAvatarSize(.zero)
+        layout.setMessageOutgoingAvatarSize(.zero)
 
-        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+        layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left,
+                                                                              textInsets: .init(top: 30, left: 15, bottom: 30, right: 10)))
+        layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
+                                                                              textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
 
-            layout.setMessageIncomingAvatarSize(.zero)
-            layout.setMessageOutgoingAvatarSize(.zero)
-
-            layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left,
-                                                                                  textInsets: .init(top: 30, left: 15, bottom: 30, right: 10)))
-            layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
-                                                                                  textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
-
-            layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .left,
-                                                                                     textInsets: .init(top: 20, left: 15, bottom: 20, right: 10)))
-            layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .right,
-                                                                                     textInsets: .init(top: 20, left: 10, bottom: 20, right: 15)))
-        }
+        layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .left,
+                                                                                 textInsets: .init(top: 20, left: 15, bottom: 20, right: 10)))
+        layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .right,
+                                                                                 textInsets: .init(top: 20, left: 10, bottom: 20, right: 15)))
     }
 
     func initializeInputBar() {

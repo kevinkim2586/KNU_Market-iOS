@@ -684,18 +684,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         }
     }
 
-    // Bottom Label
-    func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-
-        if viewModel.messages.count == 0 { return nil }
-        return NSAttributedString(string: viewModel.messages[indexPath.section].date,
-                                  attributes: [.font: UIFont.systemFont(ofSize: 10), .foregroundColor: UIColor.lightGray])
-    }
-
-    func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return 10
-    }
-
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
 
         if viewModel.messages.count == 0 { return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1) }
@@ -705,6 +693,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1)
         }
     }
+    
+    // Message Style
 
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
         let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
@@ -728,6 +718,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                               options: .continueInBackground,
                               completed: nil)
     }
+    
+    // UIScrollView Methods
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
@@ -750,6 +742,18 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             }
         }
     }
+    
+    func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+ 
+        accessoryView.subviews.forEach { $0.removeFromSuperview() }
+        accessoryView.backgroundColor = .clear
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 10, weight: .medium)
+        label.textColor = .lightGray
+        label.text = viewModel.messages[indexPath.section].date
+        accessoryView.addSubview(label)
+        label.frame = accessoryView.bounds
+    }
 }
 
 //MARK: - MessageCellDelegate
@@ -757,7 +761,9 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 extension ChatViewController: MessageCellDelegate {
     
     func didTapMessageTopLabel(in cell: MessageCollectionViewCell) {
-        print("✏️ didTapMessageTopLabel")
+        
+        if viewModel.messages.count == 0 { return }
+        
         guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
         guard let message = messageForItem(
                 at: indexPath,
@@ -907,16 +913,22 @@ extension ChatViewController {
         
         layout.setMessageIncomingAvatarSize(.zero)
         layout.setMessageOutgoingAvatarSize(.zero)
+        
+        
 
+        layout.setMessageIncomingAccessoryViewSize(CGSize(width: 50, height: 10))
+        layout.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 0))
+        layout.setMessageIncomingAccessoryViewPosition(.messageBottom)
+        layout.setMessageOutgoingAccessoryViewSize(CGSize(width: 50, height: 10))
+        layout.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 0))
+        layout.setMessageOutgoingAccessoryViewPosition(.messageBottom)
+
+        
         layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left,
                                                                               textInsets: .init(top: 30, left: 15, bottom: 30, right: 10)))
         layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
                                                                               textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
 
-        layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .left,
-                                                                                 textInsets: .init(top: 20, left: 15, bottom: 20, right: 10)))
-        layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment.init(textAlignment: .right,
-                                                                                 textInsets: .init(top: 20, left: 10, bottom: 20, right: 15)))
     }
 
     func initializeInputBar() {

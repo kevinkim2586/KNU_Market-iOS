@@ -195,7 +195,7 @@ class ItemViewModel {
     func joinPost() {
         
         if currentlyGatheredPeople == totalGatheringPeople && !postIsUserUploaded && !userAlreadyJoinedPost {
-            self.delegate?.failedJoiningChat(with: .E001)
+            delegate?.failedJoiningChat(with: .E001)
             return
         }
 
@@ -283,12 +283,26 @@ class ItemViewModel {
             let urlString = detectedURLString,
             let url = URL(string: urlString)
         else { return }
-        
+    
         userIncludedURL = url
         
-        let attributedString = NSMutableAttributedString(string: urlString, attributes:[NSAttributedString.Key.link: url])
-        let substring = itemDetail.replacingOccurrences(of: urlString, with: "")
-        attributedString.append(NSMutableAttributedString(string: substring))
+        let attributedString = NSMutableAttributedString(string: itemDetail)
+        
+        
+        if let range: Range<String.Index> = itemDetail.range(of: "http") {
+            let index: Int = itemDetail.distance(
+                from: itemDetail.startIndex,
+                to: range.lowerBound
+            )
+            
+            attributedString.addAttribute(
+                .link,
+                value: urlString,
+                range: NSRange(location: index, length: urlString.count)
+            )
+        }
+        
+
         
         delegate?.didDetectURL(with: attributedString)
     }

@@ -319,10 +319,11 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func failedJoiningChat(with error: NetworkError) {
         
-        presentKMAlertOnMainThread(title: "채팅방 참여 불가",
-                                   message: error.errorDescription,
-                                   buttonTitle: "확인")
-
+        presentKMAlertOnMainThread(
+            title: "채팅방 참여 불가",
+            message: error.errorDescription,
+            buttonTitle: "확인"
+        )
         enterChatButton.loadingIndicator(false)
     }
     
@@ -333,6 +334,8 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func didDetectURL(with string: NSMutableAttributedString) {
         itemDetailLabel.attributedText = string
+        
+
         itemDetailLabel.isUserInteractionEnabled = true
         itemDetailLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pressedURLLabel)))
     }

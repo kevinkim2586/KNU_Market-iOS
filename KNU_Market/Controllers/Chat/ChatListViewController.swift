@@ -23,6 +23,11 @@ class ChatListViewController: UIViewController {
         viewModel.fetchChatList()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        refreshControl.endRefreshing()
+    }
+    
     @IBAction func pressedLeftBarButton(_ sender: UIBarButtonItem) {
         
         if viewModel.roomList.count == 0 { return }

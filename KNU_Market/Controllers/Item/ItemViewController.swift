@@ -117,9 +117,15 @@ class ItemViewController: UIViewController {
             
                 DispatchQueue.main.async {
                     
-                    guard let editVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.uploadItemVC) as? UploadItemViewController else { return }
+                    showProgressBar()
+                    
+                    guard let editVC = self.storyboard?.instantiateViewController(
+                            identifier: Constants.StoryboardID.uploadItemVC
+                    ) as? UploadItemViewController else { return }
                     
                     editVC.editModel = self.viewModel.modelForEdit
+                    
+                    dismissProgressBar()
                     
                     self.navigationController?.pushViewController(editVC, animated: true)
                 }

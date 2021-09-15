@@ -130,7 +130,7 @@ class UploadItemViewModel {
     func updatePost() {
 
         let model = UpdatePostRequestDTO(title: itemTitle,
-                                         location: location,
+                                         location: location + 1,
                                          detail: itemDetail,
                                          imageUIDs: imageUIDs,
                                          totalGatheringPeople: totalPeopleGathering,

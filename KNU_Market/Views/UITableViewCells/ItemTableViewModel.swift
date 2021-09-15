@@ -32,7 +32,7 @@ class ItemTableViewModel {
     var locationName: String {
         
         let index = location - 1
-        guard index != Location.list.count else {
+        guard index != Location.list.count || index >= Location.list.count else {
             return Location.listForCell[Location.listForCell.count - 1]
         }
         return Location.listForCell[index]

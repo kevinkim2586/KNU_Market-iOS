@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일 인증을 먼저 해주세요. 👀" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKu-ck-5f5">
-                                <rect key="frame" x="15" y="124" width="244.5" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일 인증을 해주세요. 👀" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKu-ck-5f5">
+                                <rect key="frame" x="15" y="124" width="207.5" height="23"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -30,8 +30,40 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvj-6Q-Ybh">
+                                <rect key="frame" x="15" y="227.5" width="384" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zO-Ra-hoT">
+                                <rect key="frame" x="15" y="288" width="384" height="41"/>
+                                <string key="text">웹메일 인증과 관련된 문의는 카카오채널을
+통해 실시간으로 도와드리겠습니다.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3HF-Hv-QA7">
+                                <rect key="frame" x="15" y="344" width="187" height="29"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="https://pf.kakao.com/_PjLHs">
+                                            <attributes>
+                                                <color key="NSColor" systemColor="systemBlueColor"/>
+                                                <font key="NSFont" size="15" name="ArialMT"/>
+                                                <font key="NSOriginalFont" metaFont="system" size="15"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="pressedKakaoLinkLabel:" destination="K3x-GW-o9z" eventType="touchUpInside" id="87x-YG-7yp"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8T-y6-j2r">
-                                <rect key="frame" x="100" y="323.5" width="214" height="50"/>
+                                <rect key="frame" x="100" y="413" width="214" height="50"/>
                                 <color key="backgroundColor" name="AppDefaultColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mdT-lq-qQy"/>
@@ -44,24 +76,12 @@
                                     <action selector="pressedResendEmailButton:" destination="K3x-GW-o9z" eventType="touchUpInside" id="sRz-hQ-hkC"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvj-6Q-Ybh">
-                                <rect key="frame" x="15" y="227.5" width="384" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiz-AC-nah">
-                                <rect key="frame" x="15" y="263" width="384" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f8i-NO-FLs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="f8i-NO-FLs" firstAttribute="trailing" secondItem="qiz-AC-nah" secondAttribute="trailing" constant="15" id="0vZ-2X-OaA"/>
-                            <constraint firstItem="qiz-AC-nah" firstAttribute="top" secondItem="lvj-6Q-Ybh" secondAttribute="bottom" constant="15" id="1He-fv-vWX"/>
+                            <constraint firstItem="3HF-Hv-QA7" firstAttribute="top" secondItem="6zO-Ra-hoT" secondAttribute="bottom" constant="15" id="09y-Ej-I7H"/>
+                            <constraint firstItem="6zO-Ra-hoT" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="15" id="0Zg-nA-hxw"/>
                             <constraint firstItem="f8i-NO-FLs" firstAttribute="trailing" secondItem="L8T-y6-j2r" secondAttribute="trailing" constant="100" id="4Zp-S9-R9i"/>
                             <constraint firstItem="L8T-y6-j2r" firstAttribute="centerX" secondItem="Wu8-2p-4XO" secondAttribute="centerX" id="5jT-03-jIj"/>
                             <constraint firstItem="lvj-6Q-Ybh" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="15" id="7PU-Fh-qld"/>
@@ -69,10 +89,12 @@
                             <constraint firstItem="lvj-6Q-Ybh" firstAttribute="top" secondItem="9ID-yW-1zt" secondAttribute="bottom" constant="30" id="Mks-am-hHK"/>
                             <constraint firstItem="f8i-NO-FLs" firstAttribute="trailing" secondItem="lvj-6Q-Ybh" secondAttribute="trailing" constant="15" id="ajF-ML-kbU"/>
                             <constraint firstItem="L8T-y6-j2r" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="100" id="cTJ-o9-FdJ"/>
-                            <constraint firstItem="qiz-AC-nah" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="15" id="dad-p7-xpx"/>
+                            <constraint firstItem="3HF-Hv-QA7" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="15" id="eJS-ft-9Jd"/>
                             <constraint firstItem="f8i-NO-FLs" firstAttribute="trailing" secondItem="9ID-yW-1zt" secondAttribute="trailing" constant="15" id="fGN-36-bcW"/>
+                            <constraint firstItem="L8T-y6-j2r" firstAttribute="top" secondItem="3HF-Hv-QA7" secondAttribute="bottom" constant="40" id="gGJ-yP-p2O"/>
+                            <constraint firstItem="f8i-NO-FLs" firstAttribute="trailing" secondItem="6zO-Ra-hoT" secondAttribute="trailing" constant="15" id="glf-Gq-kBT"/>
+                            <constraint firstItem="6zO-Ra-hoT" firstAttribute="top" secondItem="lvj-6Q-Ybh" secondAttribute="bottom" constant="40" id="hE9-QE-4w8"/>
                             <constraint firstItem="TKu-ck-5f5" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="15" id="n9i-jG-mK3"/>
-                            <constraint firstItem="L8T-y6-j2r" firstAttribute="top" secondItem="qiz-AC-nah" secondAttribute="bottom" constant="40" id="rXt-MN-M87"/>
                             <constraint firstItem="TKu-ck-5f5" firstAttribute="top" secondItem="f8i-NO-FLs" secondAttribute="top" constant="80" id="wFm-O2-HI0"/>
                             <constraint firstItem="9ID-yW-1zt" firstAttribute="leading" secondItem="f8i-NO-FLs" secondAttribute="leading" constant="15" id="wwE-Gt-YQk"/>
                         </constraints>
@@ -81,9 +103,9 @@
                     <navigationItem key="navigationItem" title="건의사항" id="oYs-dv-kGf"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="checkAfterSomeTimeLabel" destination="qiz-AC-nah" id="gnb-El-haM"/>
                         <outlet property="checkSpamMailLabel" destination="lvj-6Q-Ybh" id="dZO-OU-ApG"/>
                         <outlet property="detailLabel" destination="9ID-yW-1zt" id="JRX-O4-LvY"/>
+                        <outlet property="emailGuideLabel" destination="6zO-Ra-hoT" id="1PS-Yy-1gP"/>
                         <outlet property="resendEmailButton" destination="L8T-y6-j2r" id="C1x-AE-uvP"/>
                         <outlet property="titleLabel" destination="TKu-ck-5f5" id="HHX-fw-ADJ"/>
                     </connections>
@@ -99,6 +121,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -5,7 +5,7 @@ class VerifyEmailViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var checkSpamMailLabel: UILabel!
-    @IBOutlet weak var checkAfterSomeTimeLabel: UILabel!
+    @IBOutlet weak var emailGuideLabel: UILabel!
     @IBOutlet weak var resendEmailButton: UIButton!
     
     override func viewDidLoad() {
@@ -18,6 +18,10 @@ class VerifyEmailViewController: UIViewController {
         dismissProgressBar()
     }
     
+    @IBAction func pressedKakaoLinkLabel(_ sender: UIButton) {
+        let url = URL(string: Constants.URL.kakaoHelpChannel)!
+        UIApplication.shared.open(url, options: [:])
+    }
     
     @IBAction func pressedResendEmailButton(_ sender: UIButton) {
         
@@ -69,11 +73,16 @@ extension VerifyEmailViewController {
         
         checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 스팸 메일함을 확인해주세요!"
         checkSpamMailLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        checkSpamMailLabel.textColor = .lightGray
+        checkSpamMailLabel.textColor = .darkGray
+        checkSpamMailLabel.changeTextAttributeColor(
+            fullText: checkSpamMailLabel.text!,
+            changeText: "스팸 메일함"
+        )
         
-        checkAfterSomeTimeLabel.text = "✻ 인증 메일 전송이 최대 3시간 이상 지연되는 문제가 있을 수 있습니다. 미리 양해 부탁드리겠습니다.😢"
-        checkAfterSomeTimeLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        checkAfterSomeTimeLabel.textColor = .lightGray
+        emailGuideLabel.text = "웹메일 인증과 관련된 문의는 카카오채널을\n통해 실시간으로 도와드리겠습니다."
+        emailGuideLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        emailGuideLabel.textColor = .darkGray
+        
     }
     
     func initializeResendEmailButton() {

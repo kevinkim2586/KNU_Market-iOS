@@ -78,6 +78,7 @@
 		7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668826E756B30060F37B /* FilteredChat.swift */; };
 		7C8E668B26E756C00060F37B /* ChatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668A26E756C00060F37B /* ChatType.swift */; };
 		7C8E668D26E875A00060F37B /* UIImageView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668C26E875A00060F37B /* UIImageView Extension.swift */; };
+		7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */; };
 		7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9871D526E9BCEA009BD195 /* ImageViewController.swift */; };
 		7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */; };
 		7C9BBB4126C27BD1001C54E6 /* UITableView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB4026C27BD0001C54E6 /* UITableView Extension.swift */; };
@@ -203,6 +204,7 @@
 		7C8E668826E756B30060F37B /* FilteredChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredChat.swift; sourceTree = "<group>"; };
 		7C8E668A26E756C00060F37B /* ChatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatType.swift; sourceTree = "<group>"; };
 		7C8E668C26E875A00060F37B /* UIImageView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView Extension.swift"; sourceTree = "<group>"; };
+		7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOptionViewController.swift; sourceTree = "<group>"; };
 		7C9871D526E9BCEA009BD195 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostRequestDTO.swift; sourceTree = "<group>"; };
 		7C9BBB4026C27BD0001C54E6 /* UITableView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView Extension.swift"; sourceTree = "<group>"; };
@@ -686,6 +688,7 @@
 				7C60DC7326944C82001DEA9A /* OpenSourceInfoViewController.swift */,
 				7C60DC7526944C8E001DEA9A /* DeveloperInfoViewController.swift */,
 				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
+				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -846,6 +849,7 @@
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
 				7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */,
 				7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */,
+				7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */,
 				7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */,
 				7C0F1CBA26BA6B310068FF45 /* NotificationName Extension .swift in Sources */,
 				7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */,

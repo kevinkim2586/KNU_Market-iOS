@@ -32,10 +32,10 @@ class ItemTableViewModel {
     var locationName: String {
         
         let index = location - 1
-        guard index != Location.list.count + 1 else {
+        guard index != Location.list.count else {
             return Location.listForCell[Location.listForCell.count - 1]
         }
-        return Location.listForCell[location - 1]
+        return Location.listForCell[index]
     }
     
     private var formattedDate: String = ""

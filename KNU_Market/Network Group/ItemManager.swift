@@ -88,8 +88,8 @@ class ItemManager {
     
     //MARK: - 공구글 수정
     func updatePost(uid: String,
-                  with model: UpdatePostRequestDTO,
-                  completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+                    with model: UpdatePostRequestDTO,
+                    completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         
         let url = baseURL + "/\(uid)"
         

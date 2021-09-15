@@ -19,7 +19,7 @@ class MyPageViewModel {
     
     weak var delegate: MyPageViewModelDelegate?
     
-    var tableViewSection_1: [String] = ["내가 올린 글", "설정"]
+    var tableViewSection_1: [String] = ["내가 올린 글", "설정", "웹메일/학생증 인증"]
     var tableViewSection_2: [String] = ["개발자에게 건의사항 보내기", "서비스 이용약관", "개인정보 처리방침", "개발자 정보"]
 
     var userNickname: String {

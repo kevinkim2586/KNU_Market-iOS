@@ -217,7 +217,6 @@ extension UploadItemViewController: UIPickerViewDataSource, UIPickerViewDelegate
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         viewModel.location = row
         tradeLocationTextField.text = viewModel.locationArray[row]
     }

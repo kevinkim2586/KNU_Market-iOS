@@ -7,11 +7,15 @@ class MyPageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        configure()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    private func configure() {
+        settingsTitleLabel.font = .systemFont(ofSize: 16, weight: .medium)
     }
 
 }

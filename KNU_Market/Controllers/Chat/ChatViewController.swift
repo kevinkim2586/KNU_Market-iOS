@@ -694,6 +694,20 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         }
     }
     
+    // Message Accessory View
+    
+    func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+ 
+        accessoryView.subviews.forEach { $0.removeFromSuperview() }
+        accessoryView.backgroundColor = .clear
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 10, weight: .medium)
+        label.textColor = .lightGray
+        label.text = viewModel.messages[indexPath.section].date
+        accessoryView.addSubview(label)
+        label.frame = accessoryView.bounds
+    }
+    
     // Message Style
 
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
@@ -743,17 +757,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         }
     }
     
-    func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
- 
-        accessoryView.subviews.forEach { $0.removeFromSuperview() }
-        accessoryView.backgroundColor = .clear
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 10, weight: .medium)
-        label.textColor = .lightGray
-        label.text = viewModel.messages[indexPath.section].date
-        accessoryView.addSubview(label)
-        label.frame = accessoryView.bounds
-    }
 }
 
 //MARK: - MessageCellDelegate

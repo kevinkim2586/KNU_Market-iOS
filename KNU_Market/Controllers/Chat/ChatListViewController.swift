@@ -99,7 +99,10 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.restoreEmptyView()
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ChatTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: cellIdentifier,
+                for: indexPath
+        ) as? ChatTableViewCell else {
             return UITableViewCell()
         }
         
@@ -133,8 +136,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-
-
 
 //MARK: - UI Configuration & Initialization
 

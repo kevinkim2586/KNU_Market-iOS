@@ -11,7 +11,11 @@ extension UIViewController {
     
     func presentKMAlertOnMainThread(title: String, message: String, buttonTitle: String) {
         DispatchQueue.main.async {
-            let alertVC = AlertViewController(title: title, message: message, buttonTitle: buttonTitle)
+            let alertVC = AlertViewController(
+                title: title,
+                message: message,
+                buttonTitle: buttonTitle
+            )
             alertVC.modalPresentationStyle = .overFullScreen
             alertVC.modalTransitionStyle = .crossDissolve
             self.present(alertVC, animated: true, completion: nil)
@@ -21,12 +25,16 @@ extension UIViewController {
     // 가장 기본적인 Alert Message
     func presentSimpleAlert(title: String, message: String) {
         
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
         
-        let okAction = UIAlertAction(title: "확인",
-                                     style: .default)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default
+        )
         
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
@@ -35,16 +43,22 @@ extension UIViewController {
     // Completion Handler가 포함되어 있는 Alert Message
     func presentAlertWithCancelAction(title: String, message: String, completion: @escaping ((Bool) -> Void)) {
         
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .alert)
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
         
-        let okAction = UIAlertAction(title: "확인",
-                                     style: .default) { pressedOk in
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default
+        ) { pressedOk in
             completion(true)
         }
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel) { pressedCancel in
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel
+        ) { pressedCancel in
             completion(false)
         }
         
@@ -65,13 +79,15 @@ extension UIViewController {
     func showSimpleBottomAlertWithAction(message: String,
                                          buttonTitle: String,
                                          action: (() -> Void)? = nil) {
-        SnackBar.make(in: self.view,
-                      message: message,
-                      duration: .lengthLong).setAction(
-                        with: buttonTitle,
-                        action: {
-                            action?()
-                        }).show()
+        SnackBar.make(
+            in: self.view,
+            message: message,
+            duration: .lengthLong
+        ).setAction(
+            with: buttonTitle,
+            action: {
+                action?()
+            }).show()
     }
     
   
@@ -106,7 +122,7 @@ extension UIViewController {
         let storyboard = UIStoryboard(name: "Report", bundle: nil)
         
         guard let reportVC = storyboard.instantiateViewController(
-                identifier: Constants.StoryboardID.reportUserVC
+            identifier: Constants.StoryboardID.reportUserVC
         ) as? ReportUserViewController else { return }
         
         reportVC.userToReport = userToReport
@@ -121,7 +137,9 @@ extension UIViewController {
         
         let storyboard = UIStoryboard(name: "VerifyEmail", bundle: nil)
         
-        guard let verifyEmailVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.verifyEmailVC) as? VerifyEmailViewController else { return }
+        guard let verifyEmailVC = storyboard.instantiateViewController(
+                identifier: Constants.StoryboardID.verifyEmailVC
+        ) as? VerifyEmailViewController else { return }
         
         verifyEmailVC.modalPresentationStyle = .overFullScreen
         

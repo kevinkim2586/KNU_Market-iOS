@@ -29,13 +29,12 @@ class StudentIDGuideViewController: UIViewController {
 extension StudentIDGuideViewController {
     
     func initialize() {
-        
         title = "모바일 학생증 인증"
         initializeTitleLabel()
     }
     
     func initializeTitleLabel() {
-        
+        titleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         titleLabel.text = "아래와 같이 학번, 생년월일이 보이게 캡쳐해주세요!"
         titleLabel.textColor = .darkGray
         titleLabel.changeTextAttributeColor(fullText: titleLabel.text!, changeText: "학번, 생년월일이 보이게")

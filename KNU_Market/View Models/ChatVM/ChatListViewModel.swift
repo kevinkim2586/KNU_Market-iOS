@@ -68,8 +68,6 @@ extension ChatListViewModel {
                 if count != User.shared.chatNotificationList.count {
                     ChatNotifications.list.removeAll()
                 }
-                
-                print("✏️ chat list count: \(self.roomList.count)")
                 self.isFetchingData = false
                 self.delegate?.didFetchChatList()
                 
@@ -85,19 +83,19 @@ extension ChatListViewModel {
         
         let roomPID = roomList[indexPath.row].uuid
         
-            ChatManager.shared.changeJoinStatus(function: .exit,
-                                                pid: roomPID) { [weak self] result in
-                guard let self = self else { return }
+        ChatManager.shared.changeJoinStatus(function: .exit,
+                                            pid: roomPID) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
+                self.roomList.remove(at: indexPath.row)
+                self.delegate?.didExitPost(at: indexPath)
                 
-                switch result {
-                case .success:
-                    self.roomList.remove(at: indexPath.row)
-                    self.delegate?.didExitPost(at: indexPath)
-                
-                case .failure(let error):
-                    self.delegate?.failedExitingPost(with: error)
-                }
+            case .failure(let error):
+                self.delegate?.failedExitingPost(with: error)
             }
+        }
         
     }
     

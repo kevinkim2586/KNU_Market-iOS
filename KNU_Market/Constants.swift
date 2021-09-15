@@ -58,6 +58,7 @@ struct Constants {
         // My Page Tab
         static let myPostsVC                    = "MyPostsViewController"
         static let settingsVC                   = "SettingsViewController"
+        static let verifyVC                     = "VerificationViewController"
         static let unregisterUserInputSuggestVC = "UnregisterUser_InputSuggestionViewController"
         static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"
         static let termsAndConditionsVC         = "TermsAndConditionViewController"
@@ -70,7 +71,7 @@ struct Constants {
         
         
         // My Page UITableView ID Array
-        static let myPageSection_1_Options      = [myPostsVC, settingsVC]
+        static let myPageSection_1_Options      = [myPostsVC, settingsVC, verifyVC]
         static let myPageSection_2_Options      = [sendDeveloperMessageVC, termsAndConditionsVC, openSourceLicenseVC, developerInfoVC]
 
     }
@@ -182,6 +183,7 @@ struct Constants {
         static let myPageSection_1_Images         = [
                                                     "tray.full",
                                                     "gear",
+                                                    "checkmark.circle"
                                                     ]
         
         static let myPageSection_2_Images         = [

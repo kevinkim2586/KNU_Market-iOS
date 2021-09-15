@@ -127,10 +127,8 @@ extension CaptureStudentIDViewController {
     }
     
     func initializeTitleLabels() {
-        
         titleLabels.forEach { label in
-            
-            label.font = .systemFont(ofSize: 25, weight: .semibold)
+            label.font = .systemFont(ofSize: 19, weight: .semibold)
             label.textColor = UIColor(named: Constants.Color.appColor)
         }
         
@@ -146,7 +144,7 @@ extension CaptureStudentIDViewController {
     
     func initializeCheckDuplicateButton() {
             
-        checkDuplicateButton.layer.cornerRadius = checkDuplicateButton.frame.height / 2
+        checkDuplicateButton.layer.cornerRadius = 10
         
     }
     

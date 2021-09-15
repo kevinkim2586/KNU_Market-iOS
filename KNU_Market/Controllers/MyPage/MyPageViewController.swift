@@ -179,8 +179,10 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellID.myPageCell,
-                                                 for: indexPath) as! MyPageTableViewCell
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.cellID.myPageCell,
+            for: indexPath
+        ) as! MyPageTableViewCell
         
         cell.leftImageView.tintColor = .black
         

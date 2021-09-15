@@ -7,14 +7,15 @@ class CheckEmailViewController: UIViewController {
     @IBOutlet weak var checkSpamMailLabel: UILabel!
     @IBOutlet var detailLabels: [UILabel]!
     @IBOutlet weak var emailHelpLabel: UILabel!
+    @IBOutlet weak var webMailLabel: UILabel!
     
+    @IBOutlet weak var verifyUsingStudentIDButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
     @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
     }
     
@@ -31,6 +32,15 @@ class CheckEmailViewController: UIViewController {
         nextButtonBottomAnchor.constant = 0
         nextButtonHeight.constant = 80
     }
+    
+    @IBAction func pressedVerifyUsingStudentIDButton(_ sender: UIButton) {
+        guard let vc = storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.studentIDGuideVC
+        ) as? StudentIDGuideViewController else { return }
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
         
@@ -59,6 +69,7 @@ extension CheckEmailViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification , object: nil)
         
         initializeLabels()
+        initializeVerifyUsingStudentIDButton()
     }
     
     func initializeLabels() {
@@ -80,6 +91,16 @@ extension CheckEmailViewController {
         
         emailHelpLabel.font = .systemFont(ofSize: 15, weight: .semibold)
         emailHelpLabel.textColor = .darkGray
+        
+        webMailLabel.text = "웹메일 인증이 어려우시다면\n모바일 학생증으로도 인증 가능합니다."
+        webMailLabel.changeTextAttributeColor(fullText: webMailLabel.text!, changeText: "모바일 학생증으로도 인증 가능")
+        
+    }
+    
+    func initializeVerifyUsingStudentIDButton() {
+        
+        verifyUsingStudentIDButton.layer.cornerRadius = 10
+        verifyUsingStudentIDButton.addBounceAnimationWithNoFeedback()
     }
 
 }

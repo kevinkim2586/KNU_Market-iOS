@@ -17,6 +17,7 @@ ${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework
 ${BUILT_PRODUCTS_DIR}/MHLoadingButton/MHLoadingButton.framework
 ${BUILT_PRODUCTS_DIR}/MessageInputBar/MessageInputBar.framework
 ${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework
+${BUILT_PRODUCTS_DIR}/PMAlertController/PMAlertController.framework
 ${BUILT_PRODUCTS_DIR}/PanModal/PanModal.framework
 ${BUILT_PRODUCTS_DIR}/ProgressHUD/ProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework

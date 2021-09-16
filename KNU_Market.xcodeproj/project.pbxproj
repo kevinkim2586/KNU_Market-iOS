@@ -400,15 +400,13 @@
 		7C79E10C26E0C1F50004508A /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				7C8189D526F32422006AE474 /* UserRegister & Verification */,
 				7CA661F6263D4387000E0B7A /* Main.storyboard */,
-				7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */,
 				7C6D2536268DD6710030F9A1 /* ItemList.storyboard */,
 				7C6D2538268DD6830030F9A1 /* ChatList.storyboard */,
 				7C184B8426B27B8B006C0FAD /* Chat.storyboard */,
-				7C8189D326F31BAB006AE474 /* VerifyStudentID.storyboard */,
 				7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */,
 				7C0E2DDC26B7B62600BB37FF /* Report.storyboard */,
-				7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -462,6 +460,16 @@
 				7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */,
 			);
 			path = "LaunchScreen Assets";
+			sourceTree = "<group>";
+		};
+		7C8189D526F32422006AE474 /* UserRegister & Verification */ = {
+			isa = PBXGroup;
+			children = (
+				7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */,
+				7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */,
+				7C8189D326F31BAB006AE474 /* VerifyStudentID.storyboard */,
+			);
+			path = "UserRegister & Verification";
 			sourceTree = "<group>";
 		};
 		7CA661E4263D4387000E0B7A = {

@@ -25,30 +25,30 @@ class VerifyEmailViewController: UIViewController {
     
     @IBAction func pressedResendEmailButton(_ sender: UIButton) {
         
-        presentAlertWithCancelAction(
-            title: "인증 메일을 다시 보내시겠습니까?",
-            message: ""
-        ) { selectedOk in
-            if selectedOk {
-                showProgressBar()
-                UserManager.shared.resendVerificationEmail { [weak self] result in
-                    
-                    dismissProgressBar()
-                    
-                    guard let self = self else { return }
-                    
-                    switch result {
-                    
-                    case .success:
-                        self.showSimpleBottomAlert(with: "인증 메일 보내기 성공 🎉 메일함을 확인해 주세요!")
-                        
-                    case .failure(let error):
-                        self.showSimpleBottomAlert(with: error.errorDescription)
-                    }
-                }
-            }
-        }
-        
+//        presentAlertWithCancelAction(
+//            title: "인증 메일을 다시 보내시겠습니까?",
+//            message: ""
+//        ) { selectedOk in
+//            if selectedOk {
+//                showProgressBar()
+//                UserManager.shared.sendVerificationEmail(){ [weak self] result in
+//
+//                    dismissProgressBar()
+//
+//                    guard let self = self else { return }
+//
+//                    switch result {
+//
+//                    case .success:
+//                        self.showSimpleBottomAlert(with: "인증 메일 보내기 성공 🎉 메일함을 확인해 주세요!")
+//
+//                    case .failure(let error):
+//                        self.showSimpleBottomAlert(with: error.errorDescription)
+//                    }
+//                }
+//            }
+//        }
+//
     }
     
 }

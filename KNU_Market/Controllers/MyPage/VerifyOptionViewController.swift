@@ -18,11 +18,14 @@ class VerifyOptionViewController: UIViewController {
         ) as? StudentIDGuideViewController else { return }
         
         navigationController?.pushViewController(vc, animated: true)
-    
     }
     
-    @IBAction func pressedResendEmailButton(_ sender: UIButton) {
-        presentVerifyEmailVC()
+    @IBAction func pressedVerifyUsingEmail(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "VerifyEmail", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(
+            identifier: Constants.StoryboardID.emailInputVC
+        ) as? EmailInputViewController else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func configure() {

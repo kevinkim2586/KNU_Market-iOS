@@ -4,18 +4,19 @@ import TextFieldEffects
 class EmailInputViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var checkSpamMailLabel: UILabel!
     @IBOutlet weak var idInfoLabel: UILabel!
     @IBOutlet var labels: [UILabel]!
     
     @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var checkSpamMailLabel: UILabel!
-    
+
     @IBOutlet weak var emailTextField: HoshiTextField!
 
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
     @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
+    
+    private var email: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,49 +37,76 @@ class EmailInputViewController: UIViewController {
         nextButtonHeight.constant = 80
     }
     
-    @IBAction func pressedNextButton(_ sender: UIButton) {
-        
+    @IBAction func pressedSendEmailButton(_ sender: UIButton) {
         if !checkIfValidEmail() { return }
-        
-        
         presentAlertWithCancelAction(title: emailTextField.text!,
                                      message: "위 이메일이 맞나요? 마지막으로 한 번 더 확인해 주세요.") { selectedOk in
             
             if selectedOk {
                 self.emailTextField.resignFirstResponder()
-                UserRegisterValues.shared.email = self.emailTextField.text!
-                self.registerUser()
+        
+                guard let email = self.emailTextField.text?.trimmingCharacters(in: .whitespaces) else {
+                    self.showSimpleBottomAlert(with: "올바른 이메일 형식인지 다시 한 번 확인해주세요.")
+                    return
+                }
+                self.email = email
+                self.sendVerificationEmail(to: email)
             }
         }
     }
     
-    func registerUser() {
-        
+    func sendVerificationEmail(to email: String) {
         showProgressBar()
-        
-        let model = RegisterRequestDTO(id: UserRegisterValues.shared.email,
-                                       password: UserRegisterValues.shared.password,
-                                       nickname: UserRegisterValues.shared.nickname,
-                                       image: UserRegisterValues.shared.profileImage,
-                                       fcmToken: UserRegisterValues.shared.fcmToken)
-        
-        UserManager.shared.register(with: model) { [weak self] result in
-            
-            guard let self = self else { return }
-            
+        UserManager.shared.sendVerificationEmail(email: email) { [weak self] result in
             dismissProgressBar()
-            
+            guard let self = self else { return }
             switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: Constants.SegueID.goToCheckEmailVC, sender: self)
-                }
+            case .success(_):
+                self.goToCheckEmailVC()
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
-                
             }
         }
     }
+    
+    func goToCheckEmailVC() {
+        guard let vc = storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.checkEmailVC
+        ) as? CheckEmailViewController else { return }
+        
+        guard let email = email else { return }
+        
+        vc.email = email
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+//    func registerUser() {
+//
+//        showProgressBar()
+//
+//        let model = RegisterRequestDTO(id: UserRegisterValues.shared.email,
+//                                       password: UserRegisterValues.shared.password,
+//                                       nickname: UserRegisterValues.shared.nickname,
+//                                       image: UserRegisterValues.shared.profileImage,
+//                                       fcmToken: UserRegisterValues.shared.fcmToken)
+//
+//        UserManager.shared.register(with: model) { [weak self] result in
+//
+//            guard let self = self else { return }
+//
+//            dismissProgressBar()
+//
+//            switch result {
+//            case .success:
+//                DispatchQueue.main.async {
+//                    self.performSegue(withIdentifier: Constants.SegueID.goToCheckEmailVC, sender: self)
+//                }
+//            case .failure(let error):
+//                self.showSimpleBottomAlert(with: error.errorDescription)
+//
+//            }
+//        }
+//    }
 }
 
 //MARK: - UI Configuration & Initialization
@@ -87,8 +115,20 @@ extension EmailInputViewController {
     
     func initialize() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification , object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardDidShow),
+            name: UIResponder.keyboardDidShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification ,
+            object: nil
+        )
+        
+        title = "웹메일 인증"
         
         initializeLabels()
         initializeTextFields()
@@ -105,28 +145,33 @@ extension EmailInputViewController {
         
         errorLabel.isHidden = true
         
-        titleLabel.text = "마지막으로 학교 이메일 입력을 해주세요!"
+        titleLabel.text = "웹메일(@knu.ac.kr)을 입력해주세요."
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         titleLabel.textColor = .black
-        titleLabel.changeTextAttributeColor(fullText: titleLabel.text!, changeText: "학교 이메일")
+        titleLabel.changeTextAttributeColor(
+            fullText: titleLabel.text!,
+            changeText: "웹메일(@knu.ac.kr)을 입력"
+        )
     
         
-        detailLabel.text = "학교 이메일은 로그인 시 아이디로 사용됩니다."
-        idInfoLabel.text = "웹메일 ID는 yes 포털 ID와 동일합니다."
+        checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 반드시 스팸 메일함을\n확인해주세요."
+        idInfoLabel.text = "웹메일 ID는 yes 포털 아이디와 동일합니다."
         
 
-        
         labels.forEach { label in
             label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             label.textColor = .darkGray
         }
         
-        detailLabel.changeTextAttributeColor(fullText: detailLabel.text!, changeText: "아이디")
-        idInfoLabel.changeTextAttributeColor(fullText: idInfoLabel.text!, changeText: "yes 포털 ID와 동일")
-        
-        checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 스팸 메일함을 확인해주세요!"
+        checkSpamMailLabel.changeTextAttributeColor(
+            fullText: checkSpamMailLabel.text!,
+            changeText: "반드시 스팸 메일함을\n확인"
+        )
+        idInfoLabel.changeTextAttributeColor(
+            fullText: idInfoLabel.text!,
+            changeText: "yes 포털 아이디와 동일"
+        )
     }
-    
 }
 
 //MARK: - User Input Validation

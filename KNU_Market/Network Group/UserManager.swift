@@ -444,9 +444,10 @@ class UserManager {
     
     
     //MARK: - 인증 메일 다시 보내기
-    func resendVerificationEmail(completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    func sendVerificationEmail(email: String,
+                               completion: @escaping (Result<Bool, NetworkError>) -> Void) {
     
-        let headers: HTTPHeaders = ["id" : User.shared.email]
+        let headers: HTTPHeaders = ["id" : email]
         
         AF.request(sendEmailURL,
                    method: .post,

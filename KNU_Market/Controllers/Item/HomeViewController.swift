@@ -74,22 +74,20 @@ extension HomeViewController: HomeViewModelDelegate {
     }
   
     func didFetchItemList() {
-        
         itemTableView.reloadData()
         refreshControl.endRefreshing()
         itemTableView.tableFooterView = nil
     }
     
     func failedFetchingItemList(with error: NetworkError) {
-        
         refreshControl.endRefreshing()
         itemTableView.tableFooterView = nil
-        itemTableView.showErrorPlaceholder()
-        
+        if error != .E601 {
+            itemTableView.showErrorPlaceholder()
+        }
     }
     
     func failedFetchingRoomPIDInfo(with error: NetworkError) {
-        
         self.showSimpleBottomAlert(with: error.errorDescription)
     }
     

@@ -101,6 +101,7 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PanModal (1.2.7)
+  - PMAlertController (4.0.1)
   - ProgressHUD (13.6)
   - PromisesObjC (1.2.12)
   - SDWebImage (5.11.1):
@@ -134,6 +135,7 @@ DEPENDENCIES:
   - MessageKit
   - MHLoadingButton
   - PanModal
+  - PMAlertController
   - ProgressHUD
   - SDWebImage (~> 5.0)
   - SnackBar.swift
@@ -170,6 +172,7 @@ SPEC REPOS:
     - MHLoadingButton
     - nanopb
     - PanModal
+    - PMAlertController
     - ProgressHUD
     - PromisesObjC
     - SDWebImage
@@ -207,6 +210,7 @@ SPEC CHECKSUMS:
   MHLoadingButton: 13bab47a3ce9d88df15638b7a5b73a8ac9f21077
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
+  PMAlertController: ab5fcf4d085b7878c9451466d701449c4bf6efb8
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
@@ -219,6 +223,6 @@ SPEC CHECKSUMS:
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: 8fd0c176b24ff80bc90c9d34e2cd57a38a5ada78
+PODFILE CHECKSUM: 3edb7d58c29edbd293c03a81fc397cb2dfdffc26
 
 COCOAPODS: 1.10.1

@@ -135,15 +135,26 @@ extension UIViewController {
     // 이메일 인증하기 VC
     @objc func presentVerifyEmailVC() {
         
-        let storyboard = UIStoryboard(name: "VerifyEmail", bundle: nil)
+        presentKMAlertOnMainThread(
+            title: "인증이 필요합니다!",
+            message: "앱 설정에서 웹메일 또는 학생증 인증을 마친 뒤 사용이 가능합니다.👀",
+            buttonTitle: "확인"
+        )
         
-        guard let verifyEmailVC = storyboard.instantiateViewController(
-                identifier: Constants.StoryboardID.verifyEmailVC
-        ) as? VerifyEmailViewController else { return }
-        
-        verifyEmailVC.modalPresentationStyle = .overFullScreen
-        
-        self.present(verifyEmailVC, animated: true)
+//        let storyboard = UIStoryboard(name: "VerifyEmail", bundle: nil)
+//
+//        guard let verifyEmailVC = storyboard.instantiateViewController(
+//                identifier: Constants.StoryboardID.verifyEmailVC
+//        ) as? VerifyEmailViewController else { return }
+//
+//        verifyEmailVC.modalPresentationStyle = .overFullScreen
+//
+//        self.present(verifyEmailVC, animated: true)
+    }
+    
+    func popVCs(count: Int) {
+        let viewControllers : [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        navigationController?.popToViewController(viewControllers[viewControllers.count - (count + 1) ], animated: false)
     }
     
     func presentSafariView(with url: URL) {

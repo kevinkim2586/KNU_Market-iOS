@@ -270,9 +270,10 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         if viewModel.messages.count == 0 { return nil }
         if viewModel.messages[indexPath.section].userUID == User.shared.userUID { return nil }
         else {
-            return NSAttributedString(string: viewModel.messages[indexPath.section].usernickname,
-                                      attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .medium),
-                                                   .foregroundColor : UIColor.darkGray])
+            return NSAttributedString(
+                string: viewModel.messages[indexPath.section].usernickname,
+                attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .medium),
+                             .foregroundColor : UIColor.darkGray])
         }
     }
 
@@ -519,6 +520,7 @@ extension ChatViewController {
         layout.setMessageIncomingAccessoryViewSize(CGSize(width: 70, height: 10))
         layout.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 0))
         layout.setMessageIncomingAccessoryViewPosition(.messageBottom)
+        
         layout.setMessageOutgoingAccessoryViewSize(CGSize(width: 70, height: 10))
         layout.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 0))
         layout.setMessageOutgoingAccessoryViewPosition(.messageBottom)
@@ -527,7 +529,7 @@ extension ChatViewController {
         layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left,
                                                                               textInsets: .init(top: 30, left: 15, bottom: 30, right: 10)))
         layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
-                                                                              textInsets: .init(top: 20, left: 10, bottom: 20, right: 10)))
+                                                                              textInsets: .init(top: 30, left: 10, bottom: 20, right: 10)))
 
     }
 

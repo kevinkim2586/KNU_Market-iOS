@@ -34,6 +34,8 @@ struct Constants {
         static let initialVC                    = "initialViewController"
         static let initialNavigationController  = "InitialNavigationController"
         static let loginVC                      = "LoginViewController"
+        static let emailInputVC                 = "EmailInputViewController"
+        static let checkEmailVC                 = "CheckEmailViewController"
         static let registerVC                   = "RegisterViewController"
         static let congratulateUserVC           = "CongratulateViewController"
         static let registerNavigationController = "RegisterNavigationController"

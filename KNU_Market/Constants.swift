@@ -115,6 +115,7 @@ struct Constants {
         static let hasAllowedForNotification    = "hasAllowedForNotification"
         static let bannedPostUploaders          = "bannedPostUploaders"
         static let bannedChatUsers              = "bannedChatUsers"
+        static let isAbsoluteFirstAppLaunch     = "isAbsoluteFirstAppLaunch"
     }
     
     struct NotificationKey {

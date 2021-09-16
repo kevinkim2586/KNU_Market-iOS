@@ -82,6 +82,15 @@ class User {
         }
     }
     
+    var isAbsoluteFirstAppLaunch: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isAbsoluteFirstAppLaunch)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.isAbsoluteFirstAppLaunch)
+        }
+    }
+    
     //MARK: - Access Token Related Properties
     
     var accessToken: String {

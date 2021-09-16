@@ -86,7 +86,6 @@ class UploadItemViewController: UIViewController {
             return false
         }
         viewModel.itemTitle = itemTitle
-        
         do {
             try viewModel.validateUserInputs()
             

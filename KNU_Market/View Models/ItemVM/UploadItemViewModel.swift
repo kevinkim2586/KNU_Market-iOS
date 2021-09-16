@@ -160,7 +160,7 @@ class UploadItemViewModel {
             throw UserInputError.titleTooShortOrLong
         }
         
-        guard itemDetail.count >= 3, itemDetail.count < 250 else {
+        guard itemDetail.count >= 3, itemDetail.count < 700 else {
             throw UserInputError.detailTooShortOrLong
         }
     }

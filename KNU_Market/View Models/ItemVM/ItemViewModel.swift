@@ -288,7 +288,6 @@ class ItemViewModel {
         
         let attributedString = NSMutableAttributedString(string: itemDetail)
         
-        
         if let range: Range<String.Index> = itemDetail.range(of: "http") {
             let index: Int = itemDetail.distance(
                 from: itemDetail.startIndex,
@@ -301,9 +300,6 @@ class ItemViewModel {
                 range: NSRange(location: index, length: urlString.count)
             )
         }
-        
-
-        
         delegate?.didDetectURL(with: attributedString)
     }
 }

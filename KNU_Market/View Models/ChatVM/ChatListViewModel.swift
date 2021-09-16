@@ -39,7 +39,7 @@ extension ChatListViewModel {
         
         roomList.removeAll()
         User.shared.joinedChatRoomPIDs.removeAll()
-        
+            
         ChatManager.shared.getResponseModel(function: .getRoom,
                                        method: .get,
                                        pid: nil,
@@ -47,7 +47,7 @@ extension ChatListViewModel {
                                        expectedModel: [Room].self) { [weak self] result in
             
             guard let self = self else { return }
-            
+    
             switch result {
             
             case .success(let chatRoom):

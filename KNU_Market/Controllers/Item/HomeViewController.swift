@@ -16,6 +16,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+        
+        print("✏️ isAbsoluteFirstAppLaunch: \(User.shared.isAbsoluteFirstAppLaunch)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +84,8 @@ extension HomeViewController: HomeViewModelDelegate {
         
         refreshControl.endRefreshing()
         itemTableView.tableFooterView = nil
+        itemTableView.showErrorPlaceholder()
+        
     }
     
     func failedFetchingRoomPIDInfo(with error: NetworkError) {
@@ -109,7 +113,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row > viewModel.itemList.count { return UITableViewCell() }
+        if indexPath.row > viewModel.itemList.count
+            || viewModel.itemList.count == 0 { return UITableViewCell() }
         
         let cellIdentifier = Constants.cellID.itemTableViewCell
         
@@ -173,6 +178,7 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController: PlaceholderDelegate {
     
     func view(_ view: Any, actionButtonTappedFor placeholder: Placeholder) {
+        refreshControl.beginRefreshing()
         self.viewModel.resetValues()
         self.viewModel.fetchItemList()
     }

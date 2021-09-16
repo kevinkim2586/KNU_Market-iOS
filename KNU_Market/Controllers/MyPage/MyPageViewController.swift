@@ -1,5 +1,6 @@
 import UIKit
 import Photos
+import SDWebImage
 
 class MyPageViewController: UIViewController {
     
@@ -42,7 +43,6 @@ class MyPageViewController: UIViewController {
 extension MyPageViewController {
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
-        
         presentActionSheet()
     }
     

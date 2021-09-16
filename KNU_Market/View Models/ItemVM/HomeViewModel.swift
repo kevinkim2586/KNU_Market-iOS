@@ -22,6 +22,7 @@ class HomeViewModel {
     var index: Int = 1
     var currentlySelectedFilterIndex: Int = 0
     
+
     
     //MARK: - 공구글 불러오기
     func fetchItemList(fetchCurrentUsers: Bool = false) {
@@ -35,12 +36,12 @@ class HomeViewModel {
 
             switch result {
             case .success(let fetchedModel):
-
+                
                 if fetchedModel.isEmpty {
                     self.delegate?.didFetchItemList()
                     return
                 }
-
+                
                 self.index += 1
                 
                 for model in fetchedModel {
@@ -51,7 +52,7 @@ class HomeViewModel {
                 }
                 self.isFetchingData = false
                 self.delegate?.didFetchItemList()
-
+                
             case .failure(let error):
                 self.delegate?.failedFetchingItemList(with: error)
             }

@@ -20,6 +20,7 @@ class ChatListViewController: UIViewController {
         center.removeAllDeliveredNotifications()
         
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+        refreshControl.beginRefreshing()
         viewModel.fetchChatList()
     }
     
@@ -41,6 +42,7 @@ class ChatListViewController: UIViewController {
 extension ChatListViewController: ChatListViewModelDelegate {
 
     func didFetchChatList() {
+        refreshControl.endRefreshing()
         
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)
         
@@ -163,11 +165,13 @@ extension ChatListViewController {
         chatListTableView.delegate = self
         chatListTableView.dataSource = self
         chatListTableView.refreshControl = refreshControl
-
+        chatListTableView.tableFooterView = UIView(frame: .zero)
         
-        refreshControl.addTarget(self,
-                                 action: #selector(refreshTableView),
-                                 for: .valueChanged)
+        refreshControl.addTarget(
+            self,
+            action: #selector(refreshTableView),
+            for: .valueChanged
+        )
     }
 
 }

@@ -109,6 +109,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="a2e-1v-2Un">
+                        <barButtonItem key="backBarButtonItem" title=" " id="ABy-58-6LT"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="gg2-73-Era">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -271,7 +272,9 @@
                             <constraint firstItem="c0u-5N-nDw" firstAttribute="top" secondItem="Akw-TQ-28v" secondAttribute="bottom" constant="10" id="uhW-ci-D5w"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="VVm-yc-9ll"/>
+                    <navigationItem key="navigationItem" id="VVm-yc-9ll">
+                        <barButtonItem key="backBarButtonItem" title=" " id="7yx-ci-SQE"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="checkPasswordTextField" destination="aIg-qM-TBj" id="LJW-VF-EiZ"/>
                         <outlet property="firstLineLabel" destination="Akw-TQ-28v" id="dfJ-Jw-VsN"/>
@@ -281,7 +284,7 @@
                         <outlet property="passwordTextField" destination="R38-pp-F5V" id="i7Q-je-ntC"/>
                         <outlet property="secondLineLabel" destination="c0u-5N-nDw" id="YVm-QW-lLE"/>
                         <outlet property="thirdLineLabel" destination="ZKw-9w-XDd" id="MZz-cA-hck"/>
-                        <segue destination="NH7-Fe-xc9" kind="show" identifier="goToProfilePictureVC" id="14V-9W-gmT"/>
+                        <segue destination="Tew-Sq-mEF" kind="show" id="nbV-fI-MoD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L5A-CJ-uHO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -297,19 +300,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00님 만의" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1o3-0K-hzW">
-                                <rect key="frame" x="20" y="308" width="374" height="23"/>
+                                <rect key="frame" x="20" y="264" width="374" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="프로필 사진도 선택해 주세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3e-wU-rWM">
-                                <rect key="frame" x="20" y="341" width="374" height="23"/>
+                                <rect key="frame" x="20" y="297" width="374" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIe-Je-BM1" userLabel="Profile Image Container View">
-                                <rect key="frame" x="50" y="128" width="314" height="160"/>
+                                <rect key="frame" x="50" y="84" width="314" height="160"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCE-T5-mnm" userLabel="Profile Image">
                                         <rect key="frame" x="97" y="0.0" width="120" height="120"/>
@@ -412,12 +415,11 @@
                         <outlet property="profileImageButton" destination="dCE-T5-mnm" id="sXe-mG-6bU"/>
                         <outlet property="secondLineLabel" destination="F3e-wU-rWM" id="jKO-b8-gHZ"/>
                         <outlet property="skipButton" destination="aCC-vu-Nkt" id="e4b-pc-v8b"/>
-                        <segue destination="Tew-Sq-mEF" kind="show" identifier="goToEmailInputVC" id="mXm-Df-fhQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0d-Hi-QWM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2960.8695652173915" y="99.776785714285708"/>
+            <point key="canvasLocation" x="1993" y="782"/>
         </scene>
         <!--Email Input View Controller-->
         <scene sceneID="HcO-fw-CDD">
@@ -527,7 +529,9 @@
                             <constraint firstItem="iQu-Mq-Hf5" firstAttribute="top" secondItem="frZ-Pr-2xl" secondAttribute="bottom" constant="30" id="x8R-Lw-hfr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="FnU-R0-HeN"/>
+                    <navigationItem key="navigationItem" id="FnU-R0-HeN">
+                        <barButtonItem key="backBarButtonItem" title=" " id="4B6-U2-iAi"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="checkSpamMailLabel" destination="KIO-6h-mw7" id="Nch-bV-tH8"/>
                         <outlet property="detailLabel" destination="szc-Wi-Dbu" id="Vwf-KY-4XK"/>
@@ -546,7 +550,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FY6-kn-Vd3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3848" y="100"/>
+            <point key="canvasLocation" x="2951" y="100"/>
         </scene>
         <!--Check Email View Controller-->
         <scene sceneID="eot-zM-abE">
@@ -682,7 +686,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1C0-gg-a9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4694" y="108"/>
+            <point key="canvasLocation" x="3880" y="100"/>
         </scene>
         <!--StudentID Guide View Controller-->
         <scene sceneID="B74-KK-jcA">
@@ -1056,7 +1060,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyq-y1-oTU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5557" y="100"/>
+            <point key="canvasLocation" x="4693" y="100"/>
         </scene>
         <!--TabBarController-->
         <scene sceneID="SPI-GM-DmR">

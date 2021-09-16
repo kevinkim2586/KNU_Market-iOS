@@ -12,7 +12,7 @@ class VerifyOptionViewController: UIViewController {
     
     
     @IBAction func pressedVerifyUsingStudentIDButton(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "UserRegister", bundle: nil)
+        let storyboard = UIStoryboard(name: "VerifyStudentID", bundle: nil)
         guard let vc = storyboard.instantiateViewController(
             identifier: Constants.StoryboardID.studentIDGuideVC
         ) as? StudentIDGuideViewController else { return }

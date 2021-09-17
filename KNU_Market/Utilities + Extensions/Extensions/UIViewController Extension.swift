@@ -4,11 +4,13 @@ import SnackBar_swift
 import BSImagePicker
 import SafariServices
 import Photos
+import PMAlertController
 
 //MARK: - Alert Methods
 
 extension UIViewController {
     
+    // Custom Alert
     func presentKMAlertOnMainThread(title: String, message: String, buttonTitle: String) {
         DispatchQueue.main.async {
             let alertVC = AlertViewController(
@@ -22,7 +24,7 @@ extension UIViewController {
         }
     }
     
-    // 가장 기본적인 Alert Message
+    // Apple 기본 알림
     func presentSimpleAlert(title: String, message: String) {
         
         let alertController = UIAlertController(
@@ -70,9 +72,11 @@ extension UIViewController {
 
     // SnackBar 라이브러리의 message 띄우기
     func showSimpleBottomAlert(with message: String) {
-        SnackBar.make(in: self.view,
-                      message: message,
-                      duration: .lengthLong).show()
+        SnackBar.make(
+            in: self.view,
+            message: message,
+            duration: .lengthLong
+        ).show()
     }
     
     // SnackBar 라이브러리의 액션이 추가된 message 띄우기
@@ -89,8 +93,6 @@ extension UIViewController {
                 action?()
             }).show()
     }
-    
-  
 }
 
 //MARK: - VC Router
@@ -103,7 +105,9 @@ extension UIViewController {
         User.shared.resetAllUserInfo()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
+        let initialVC = storyboard.instantiateViewController(
+            identifier: Constants.StoryboardID.initialVC
+        )
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
     }
     
@@ -132,24 +136,13 @@ extension UIViewController {
         self.present(reportVC, animated: true)
     }
     
-    // 이메일 인증하기 VC
+    // 인증하기 알림
     @objc func presentVerifyEmailVC() {
-        
         presentKMAlertOnMainThread(
             title: "인증이 필요합니다!",
             message: "앱 설정에서 웹메일 또는 학생증 인증을 마친 뒤 사용이 가능합니다.👀",
             buttonTitle: "확인"
         )
-        
-//        let storyboard = UIStoryboard(name: "VerifyEmail", bundle: nil)
-//
-//        guard let verifyEmailVC = storyboard.instantiateViewController(
-//                identifier: Constants.StoryboardID.verifyEmailVC
-//        ) as? VerifyEmailViewController else { return }
-//
-//        verifyEmailVC.modalPresentationStyle = .overFullScreen
-//
-//        self.present(verifyEmailVC, animated: true)
     }
     
     func popVCs(count: Int) {
@@ -217,6 +210,16 @@ extension UIViewController {
                                            action: #selector(dismissVC))
         navItem.rightBarButtonItem = navBarButton
         navigationBar.items = [navItem]
+    }
+    
+    func setBackBarButtonItemTitle(to title: String = "") {
+        let backBarButtonItem = UIBarButtonItem(
+            title: title,
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     @objc func dismissVC() {
@@ -324,7 +327,6 @@ extension UIViewController {
             }
             
             UNUserNotificationCenter.current().getNotificationSettings { settings in
-                print("Notification settings: \(settings)")
                 DispatchQueue.main.async {
                     User.shared.hasAllowedForNotification = true
                     UIApplication.shared.registerForRemoteNotifications()

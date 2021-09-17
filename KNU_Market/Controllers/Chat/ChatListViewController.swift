@@ -152,12 +152,14 @@ extension ChatListViewController {
         
         createObserversForGettingBadgeValue()
         viewModel.delegate = self
-        
-        self.navigationController?.view.backgroundColor = .white
-        self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
-        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
-        
+        initializeNavigationController()
         initializeTableView()
+    }
+    
+    func initializeNavigationController() {
+        navigationController?.view.backgroundColor = .white
+        navigationController?.tabBarItem.image = UIImage(named: Constants.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
     }
     
     func initializeTableView() {

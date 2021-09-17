@@ -2,6 +2,7 @@ import UIKit
 import SPIndicator
 import ViewAnimator
 import HGPlaceholders
+import PMAlertController
 
 class HomeViewController: UIViewController {
 
@@ -11,24 +12,35 @@ class HomeViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
+    private var alertVC: PMAlertController?
+    
     private var viewModel = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
         
-        print("✏️ isAbsoluteFirstAppLaunch: \(User.shared.isAbsoluteFirstAppLaunch)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
               
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        alertVC?.dismiss(animated: true, completion: nil)
+    
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        alertVC?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
@@ -187,8 +199,6 @@ extension HomeViewController: PlaceholderDelegate {
 extension HomeViewController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-     
-        
     }
 }
 
@@ -199,12 +209,10 @@ extension HomeViewController {
     func initialize() {
         
         askForNotificationPermission()
+        initializeNavigationController()
 
-        self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
-        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
-        
-        self.tabBarController?.delegate = self
-        
+        tabBarController?.delegate = self
+
         viewModel.delegate = self
         itemTableView.placeholderDelegate = self
         
@@ -214,6 +222,17 @@ extension HomeViewController {
         initializeAddButton()
 //        initializeBarButtonItem()
         createObservers()
+        setBackBarButtonItemTitle()
+        
+        #warning("출시할 때는 아래 느낌표 빼기!!")
+        if !User.shared.isAbsoluteFirstAppLaunch {
+            presentVerificationAlert()
+        }
+    }
+    
+    func initializeNavigationController() {
+        navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
     }
     
     func initializeTableView() {
@@ -236,11 +255,11 @@ extension HomeViewController {
         
         addButton.layer.cornerRadius = addButton.frame.width / 2
         addButton.backgroundColor = UIColor(named: Constants.Color.appColor)
-
+        
         let font = UIFont.systemFont(ofSize: 23, weight: .medium)
         let configuration = UIImage.SymbolConfiguration(font: font)
         let buttonImage = UIImage(systemName: "plus",
-                                withConfiguration: configuration)
+                                  withConfiguration: configuration)
         addButton.setImage(buttonImage, for: .normal)
     }
     
@@ -253,7 +272,7 @@ extension HomeViewController {
         
         settingsBarButton.tintColor = .black
         navigationItem.rightBarButtonItems?.insert(settingsBarButton, at: 0)
-    
+        
     }
     
     @objc func pressedSettingsButton() {
@@ -289,11 +308,43 @@ extension HomeViewController {
     }
     
     func createObservers() {
-    
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(refreshTableView),
-                                               name: .updateItemList,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshTableView),
+            name: .updateItemList,
+            object: nil
+        )
         createObserversForGettingBadgeValue()
+    }
+    
+    func presentVerificationAlert() {
+
+        
+    
+        
+        alertVC = PMAlertController(
+            title: "경북대생 인증하기",
+            description: "인증 방법(택1)\n1.모바일 학생증\n2.경북대 웹메일\n인증을 하지 않을 시,\n서비스 이용에 제한이 있습니다.\n추후 앱 설정에서 인증 가능",
+            textsToChangeColor: ["1.모바일 학생증","서비스 이용에 제한"],
+            image: nil,
+            style: .alert
+        )
+        
+        alertVC?.addAction(PMAlertAction(title: "취소", style: .cancel))
+        alertVC?.addAction(PMAlertAction(title: "인증하기", style: .default, action: { () in
+            
+            let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
+            guard let vc = storyboard.instantiateViewController(
+                identifier: Constants.StoryboardID.verifyOptionVC
+            ) as? VerifyOptionViewController else { return }
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }))
+        
+        if let alertVC = alertVC {
+            present(alertVC, animated: true)
+            User.shared.isAbsoluteFirstAppLaunch = false
+        }
     }
 }

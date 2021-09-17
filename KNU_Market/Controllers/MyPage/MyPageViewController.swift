@@ -204,11 +204,12 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSection_1_Options[indexPath.row]) else { return }
+            
+            guard let vc = self.storyboard?.instantiateViewController(
+                identifier: Constants.StoryboardID.myPageSection_1_Options[indexPath.row]
+            ) else { return }
             pushViewController(with: vc)
         case 1:
-            
             switch indexPath.row {
             
             case 1:
@@ -277,12 +278,17 @@ extension MyPageViewController {
         
         viewModel.delegate = self
         
-        self.navigationController?.view.backgroundColor = .white
-        self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
-        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
-        
+        initializeNavigationController()
         initializeTableView()
         initializeProfileImageButton()
+        setBackBarButtonItemTitle()
+    }
+    
+    func initializeNavigationController() {
+        navigationController?.view.backgroundColor = .white
+        navigationController?.tabBarItem.image = UIImage(named: Constants.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
+        
     }
     
     func initializeTableView() {

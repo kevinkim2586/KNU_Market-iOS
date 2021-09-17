@@ -53,13 +53,12 @@ class UserManager {
             
             guard let statusCode = response.response?.statusCode else { return }
             
-            print("✏️ register response: \(response)")
-            
             switch statusCode {
             case 201:
                 print("✏️ UserManager - register SUCCESS")
                 completion(.success(true))
                 User.shared.fcmToken = model.fcmToken
+                User.shared.isAbsoluteFirstAppLaunch = true
             default:
                 let error = NetworkError.returnError(json: response.data ?? Data())
                 print("❗️ UserManager - register FAILED")

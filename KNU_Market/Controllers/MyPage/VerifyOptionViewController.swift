@@ -30,6 +30,7 @@ class VerifyOptionViewController: UIViewController {
     
     private func configure() {
         title = "학생 인증하기"
+        setBackBarButtonItemTitle()
         configureButtons()
     }
     

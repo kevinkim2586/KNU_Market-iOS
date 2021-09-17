@@ -101,7 +101,6 @@ extension UIViewController {
     
     // Initial VC로 돌아가는 메서드 (로그아웃, 회원 탈퇴, refreshToken 만료 등의 상황에 쓰임)
     func popToInitialViewController() {
-        
         User.shared.resetAllUserInfo()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -113,7 +112,6 @@ extension UIViewController {
     
     // 로그인 or 회원가입 성공 시 홈화면 전환 시 사용되는 함수
     func goToHomeScreen() {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
         
@@ -154,6 +152,40 @@ extension UIViewController {
         let config = SFSafariViewController.Configuration()
         let vc = SFSafariViewController(url: url, configuration: config)
         present(vc, animated: true)
+    }
+    
+    @objc func refreshTokenHasExpired() {
+        
+        presentKMAlertOnMainThread(
+            title: "로그인 세션 만료 🤔",
+            message: "세션이 만료되었습니다. 다시 로그인해 주세요.",
+            buttonTitle: "확인"
+        )
+        popToInitialViewController()
+    }
+    
+    func presentInitialVerificationAlert() {
+        let alertVC = PMAlertController(
+            title: "경북대생 인증하기",
+            description: "인증 방법(택1)\n1.모바일 학생증\n2.경북대 웹메일\n인증을 하지 않을 시,\n서비스 이용에 제한이 있습니다.\n추후 앱 설정에서 인증 가능",
+            textsToChangeColor: ["1.모바일 학생증","서비스 이용에 제한"],
+            image: nil,
+            style: .alert
+        )
+        
+        alertVC.addAction(PMAlertAction(title: "취소", style: .cancel))
+        alertVC.addAction(PMAlertAction(title: "인증하기", style: .default, action: { () in
+            
+            let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
+            guard let vc = storyboard.instantiateViewController(
+                identifier: Constants.StoryboardID.verifyOptionVC
+            ) as? VerifyOptionViewController else { return }
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }))
+    
+        present(alertVC, animated: true)
+        User.shared.isAbsoluteFirstAppLaunch = false
     }
 }
 
@@ -202,7 +234,7 @@ extension UIViewController {
         navigationBar.setBackgroundImage(UIImage(),
                                          for: .default)
         navigationBar.shadowImage = UIImage()
-        self.view.addSubview(navigationBar)
+        view.addSubview(navigationBar)
         
         let navItem = UINavigationItem(title: "")
         let navBarButton = UIBarButtonItem(barButtonSystemItem: .stop,
@@ -231,20 +263,31 @@ extension UIViewController {
 
 extension UIViewController {
     
+    func createObserversForRefreshTokenExpiration() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshTokenHasExpired),
+            name: .refreshTokenExpired,
+            object: nil
+        )
+    }
+    
     func createObserversForPresentingEmailVerification() {
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(presentVerifyEmailVC),
-                                               name: .presentVerifyEmailVC,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(presentVerifyEmailVC),
+            name: .presentVerifyEmailVC,
+            object: nil
+        )
     }
     
     func createObserversForGettingBadgeValue() {
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(getChatTabBadgeValue),
-                                               name: .getBadgeValue,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getChatTabBadgeValue),
+            name: .getBadgeValue,
+            object: nil
+        )
     }
     
 }

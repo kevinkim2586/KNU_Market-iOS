@@ -11,9 +11,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
     private let refreshControl = UIRefreshControl()
-    
-    private var alertVC: PMAlertController?
-    
     private var viewModel = HomeViewModel()
     
     override func viewDidLoad() {
@@ -223,10 +220,9 @@ extension HomeViewController {
 //        initializeBarButtonItem()
         createObservers()
         setBackBarButtonItemTitle()
-        
-        #warning("출시할 때는 아래 느낌표 빼기!!")
-        if !User.shared.isAbsoluteFirstAppLaunch {
-            presentVerificationAlert()
+
+        if User.shared.isAbsoluteFirstAppLaunch {
+            presentInitialVerificationAlert()
         }
     }
     
@@ -241,12 +237,20 @@ extension HomeViewController {
         itemTableView.dataSource = self
         itemTableView.refreshControl = refreshControl
         
-        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
-        itemTableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
+        let nibName = UINib(
+            nibName: Constants.XIB.itemTableViewCell,
+            bundle: nil
+        )
+        itemTableView.register(
+            nibName,
+            forCellReuseIdentifier: Constants.cellID.itemTableViewCell
+        )
         
-        refreshControl.addTarget(self,
-                                 action: #selector(refreshTableView),
-                                 for: .valueChanged)
+        refreshControl.addTarget(
+            self,
+            action: #selector(refreshTableView),
+            for: .valueChanged
+        )
         
         itemTableView.showLoadingPlaceholder()
     }
@@ -315,36 +319,8 @@ extension HomeViewController {
             object: nil
         )
         createObserversForGettingBadgeValue()
+        createObserversForRefreshTokenExpiration()
     }
     
-    func presentVerificationAlert() {
 
-        
-    
-        
-        alertVC = PMAlertController(
-            title: "경북대생 인증하기",
-            description: "인증 방법(택1)\n1.모바일 학생증\n2.경북대 웹메일\n인증을 하지 않을 시,\n서비스 이용에 제한이 있습니다.\n추후 앱 설정에서 인증 가능",
-            textsToChangeColor: ["1.모바일 학생증","서비스 이용에 제한"],
-            image: nil,
-            style: .alert
-        )
-        
-        alertVC?.addAction(PMAlertAction(title: "취소", style: .cancel))
-        alertVC?.addAction(PMAlertAction(title: "인증하기", style: .default, action: { () in
-            
-            let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
-            guard let vc = storyboard.instantiateViewController(
-                identifier: Constants.StoryboardID.verifyOptionVC
-            ) as? VerifyOptionViewController else { return }
-            
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-        }))
-        
-        if let alertVC = alertVC {
-            present(alertVC, animated: true)
-            User.shared.isAbsoluteFirstAppLaunch = false
-        }
-    }
 }

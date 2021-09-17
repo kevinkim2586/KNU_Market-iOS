@@ -256,7 +256,7 @@ extension String {
             attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
         }
 
-        guard let characterSpacing = characterSpacing else {return attributedString}
+        guard let characterSpacing = characterSpacing else { return attributedString }
 
         attributedString.addAttribute(NSAttributedString.Key.kern, value: characterSpacing, range: NSRange(location: 0, length: attributedString.length))
 

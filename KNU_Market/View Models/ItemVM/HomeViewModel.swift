@@ -108,6 +108,7 @@ class HomeViewModel {
         fetchEnteredRoomInfo()
         loadUserProfile()
         fetchItemList()
+        
     }
     
     func resetValues() {

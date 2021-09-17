@@ -16,11 +16,8 @@ class StudentIDGuideViewController: UIViewController {
 
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
-        
         guard let nextVC = storyboard?.instantiateViewController(identifier: Constants.StoryboardID.captureStudentIDVC) as? CaptureStudentIDViewController else { fatalError() }
-        
         navigationController?.pushViewController(nextVC, animated: true)
-
     }
 }
 
@@ -31,6 +28,7 @@ extension StudentIDGuideViewController {
     func initialize() {
         title = "모바일 학생증 인증"
         initializeTitleLabel()
+        setBackBarButtonItemTitle()
     }
     
     func initializeTitleLabel() {

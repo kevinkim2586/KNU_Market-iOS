@@ -18,10 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         
         // Observer for refresh token expiration
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(refreshTokenHasExpired),
-                                               name: .refreshTokenExpired,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshTokenHasExpired),
+            name: .refreshTokenExpired,
+            object: nil
+        )
         
 
         if #available(iOS 10.0, *) {
@@ -70,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        print("✏️ configurationForConnecting")
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
@@ -176,7 +177,11 @@ extension AppDelegate {
               let rootVC = keywindow.rootViewController else {
             return
         }
-        rootVC.presentKMAlertOnMainThread(title: "로그인 세션 만료 🤔", message: "세션이 만료되었습니다. 다시 로그인해 주세요.", buttonTitle: "확인")
+        rootVC.presentKMAlertOnMainThread(
+            title: "로그인 세션 만료 🤔",
+            message: "세션이 만료되었습니다. 다시 로그인해 주세요.",
+            buttonTitle: "확인"
+        )
         rootVC.popToInitialViewController()
     }
     

@@ -203,7 +203,6 @@ extension AppDelegate {
         IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self,
                                                            NickNameInputViewController.self,
                                                            PasswordInputViewController.self,
-                                                           ProfilePictureInputViewController.self,
                                                            EmailInputViewController.self,
                                                            CheckEmailViewController.self]
         

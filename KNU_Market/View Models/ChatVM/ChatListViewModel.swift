@@ -138,10 +138,12 @@ extension ChatListViewModel {
     
     func createObservers() {
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(fetchChatList),
-                                               name: .getChatList,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(fetchChatList),
+            name: .getChatList,
+            object: nil
+        )
 
     }
 

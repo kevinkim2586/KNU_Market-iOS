@@ -6,9 +6,10 @@ class UserRegisterValues {
     
     private init() {}
     
-    var nickname: String = ""
+    var userId: String = ""
     var password: String = ""
-    var profileImage: Data?
+    var nickname: String = ""
+
     var email: String = ""
     var fcmToken: String = ""
 }

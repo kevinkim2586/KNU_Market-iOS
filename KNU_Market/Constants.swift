@@ -13,9 +13,8 @@ struct Constants {
         // UserRegister Segues
         static let goToRegister                 = "goToRegister"
         static let goToPasswordInputVC          = "goToPasswordInputVC"
-        static let goToProfilePictureVC         = "goToProfilePictureVC"
-        static let goToEmailInputVC             = "goToEmailInputVC"
-        static let goToCheckEmailVC             = "goToCheckEmailVC"
+        static let goToNicknameInputVC          = "goToNicknameInputVC"
+
         
         // Chat
         static let presentChatMemberVC          = "presentChatMemberVC"

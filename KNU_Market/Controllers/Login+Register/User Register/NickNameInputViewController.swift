@@ -25,12 +25,14 @@ class NickNameInputViewController: UIViewController {
             
             nextButtonBottomAnchor.constant = keyboardSize.height
             nextButtonHeight.constant = 60
+            nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
     }
 
     @objc func keyboardWillHide(notification: Notification) {
         nextButtonBottomAnchor.constant = 0
         nextButtonHeight.constant = 80
+
     }
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
@@ -53,22 +55,33 @@ class NickNameInputViewController: UIViewController {
 extension NickNameInputViewController {
     
     func initialize() {
-        
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification , object: nil)
-        
+        createObserverForKeyboardStateChange()
+        setClearNavigationBarBackground()
         initializeLabels()
         initializeTextField()
     }
     
+    func createObserverForKeyboardStateChange() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardDidShow),
+            name: UIResponder.keyboardDidShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name:UIResponder.keyboardWillHideNotification ,
+            object: nil
+        )
+    }
+    
     func initializeTextField() {
-        
-        nicknameTextField.addTarget(self,
-                              action: #selector(textFieldDidChange(_:)),
-                              for: .editingChanged)
+        nicknameTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChange(_:)),
+            for: .editingChanged
+        )
     }
   
     
@@ -82,9 +95,15 @@ extension NickNameInputViewController {
         secondLineLabel.textColor = .darkGray
         
         firstLineLabel.text = "크누마켓에 오신 것을 환영해요!!"
-        firstLineLabel.changeTextAttributeColor(fullText: firstLineLabel.text!, changeText: "크누마켓")
+        firstLineLabel.changeTextAttributeColor(
+            fullText: firstLineLabel.text!,
+            changeText: "크누마켓"
+        )
         secondLineLabel.text = "사용하실 닉네임을 입력해주세요!"
-        secondLineLabel.changeTextAttributeColor(fullText: secondLineLabel.text!, changeText: "닉네임")
+        secondLineLabel.changeTextAttributeColor(
+            fullText: secondLineLabel.text!,
+            changeText: "닉네임"
+        )
         
         thirdLineLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         thirdLineLabel.textColor = .lightGray
@@ -97,7 +116,6 @@ extension NickNameInputViewController {
 extension NickNameInputViewController {
     
     func checkNicknameLengthIsValid() -> Bool {
-        
         guard let nickname = nicknameTextField.text else { return false }
         
         if nickname.count >= 2 && nickname.count <= 15 { return true }
@@ -108,7 +126,6 @@ extension NickNameInputViewController {
     }
     
     func showErrorMessage(message: String) {
-        
         errorLabel.isHidden = false
         errorLabel.text = message
         errorLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)

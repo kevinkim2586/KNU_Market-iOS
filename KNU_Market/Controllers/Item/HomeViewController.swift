@@ -10,7 +10,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
-    private let refreshControl = UIRefreshControl()
     private var viewModel = HomeViewModel()
     
     override func viewDidLoad() {
@@ -26,19 +25,20 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-              
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        alertVC?.dismiss(animated: true, completion: nil)
-    
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        alertVC?.dismiss(animated: true, completion: nil)
     }
+}
+
+//MARK: - Methods
+
+extension HomeViewController {
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
         
@@ -84,12 +84,12 @@ extension HomeViewController: HomeViewModelDelegate {
   
     func didFetchItemList() {
         itemTableView.reloadData()
-        refreshControl.endRefreshing()
+        itemTableView.refreshControl?.endRefreshing()
         itemTableView.tableFooterView = nil
     }
     
     func failedFetchingItemList(with error: NetworkError) {
-        refreshControl.endRefreshing()
+        itemTableView.refreshControl?.endRefreshing()
         itemTableView.tableFooterView = nil
         if error != .E601 {
             itemTableView.showErrorPlaceholder()
@@ -185,7 +185,7 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController: PlaceholderDelegate {
     
     func view(_ view: Any, actionButtonTappedFor placeholder: Placeholder) {
-        refreshControl.beginRefreshing()
+        itemTableView.refreshControl?.beginRefreshing()
         self.viewModel.resetValues()
         self.viewModel.fetchItemList()
     }
@@ -235,7 +235,7 @@ extension HomeViewController {
         
         itemTableView.delegate = self
         itemTableView.dataSource = self
-        itemTableView.refreshControl = refreshControl
+        itemTableView.refreshControl = UIRefreshControl()
         
         let nibName = UINib(
             nibName: Constants.XIB.itemTableViewCell,
@@ -246,7 +246,7 @@ extension HomeViewController {
             forCellReuseIdentifier: Constants.cellID.itemTableViewCell
         )
         
-        refreshControl.addTarget(
+        itemTableView.refreshControl?.addTarget(
             self,
             action: #selector(refreshTableView),
             for: .valueChanged
@@ -285,24 +285,13 @@ extension HomeViewController {
                                             message: nil,
                                             preferredStyle: .actionSheet)
         
-        let title: String?
-        switch viewModel.currentlySelectedFilterIndex {
-        case 0:
-            title = "모집 중인 공구만 보기"
-        default:
-            title = "모든 공구 보기"
-        }
         
-        guard let title = title else {
-            showSimpleBottomAlert(with: "일시적인 오류입니다.😥")
-            return
-        }
-        
+        let title = viewModel.currentlySelectedFilterIndex == 0 ? "모집 중인 공구만 보기" : "모든 공구 보기"
+    
         actionSheet.addAction(UIAlertAction(title: title,
                                             style: .default) { [weak self] _ in
             
-            
-            
+    
         })
         actionSheet.addAction(UIAlertAction(title: "취소",
                                             style: .cancel,
@@ -320,6 +309,7 @@ extension HomeViewController {
         )
         createObserversForGettingBadgeValue()
         createObserversForRefreshTokenExpiration()
+        createObserversForUnexpectedErrors()
     }
     
 

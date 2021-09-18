@@ -135,10 +135,10 @@ extension UIViewController {
     }
     
     // 인증하기 알림
-    @objc func presentVerifyEmailVC() {
+    @objc func presentUserVerificationNeededAlert() {
         presentKMAlertOnMainThread(
             title: "인증이 필요합니다!",
-            message: "앱 설정에서 웹메일 또는 학생증 인증을 마친 뒤 사용이 가능합니다.👀",
+            message: "앱 설정에서 학생증 또는 웹메일 인증을 마친 뒤 사용이 가능합니다.👀",
             buttonTitle: "확인"
         )
     }
@@ -155,13 +155,22 @@ extension UIViewController {
     }
     
     @objc func refreshTokenHasExpired() {
-        
         presentKMAlertOnMainThread(
             title: "로그인 세션 만료 🤔",
-            message: "세션이 만료되었습니다. 다시 로그인해 주세요.",
+            message: "세션이 만료되었습니다. 다시 로그인 해주세요.",
             buttonTitle: "확인"
         )
-        popToInitialViewController()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.popToInitialViewController()
+        }
+    }
+    
+    @objc func presentUnexpectedError() {
+        presentKMAlertOnMainThread(
+            title: "예기치 못한 오류가 발생했습니다.🤔",
+            message: "불편을 드려 죄송합니다. 다시 로그인 해주세요.",
+            buttonTitle: "확인"
+        )
     }
     
     func presentInitialVerificationAlert() {
@@ -257,6 +266,12 @@ extension UIViewController {
     @objc func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
+    
+    func setClearNavigationBarBackground() {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+    }
 }
 
 //MARK: - Observers
@@ -275,7 +290,7 @@ extension UIViewController {
     func createObserversForPresentingEmailVerification() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(presentVerifyEmailVC),
+            selector: #selector(presentUserVerificationNeededAlert),
             name: .presentVerifyEmailVC,
             object: nil
         )
@@ -286,6 +301,15 @@ extension UIViewController {
             self,
             selector: #selector(getChatTabBadgeValue),
             name: .getBadgeValue,
+            object: nil
+        )
+    }
+    
+    func createObserversForUnexpectedErrors() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(presentUnexpectedError),
+            name: .unexpectedError,
             object: nil
         )
     }

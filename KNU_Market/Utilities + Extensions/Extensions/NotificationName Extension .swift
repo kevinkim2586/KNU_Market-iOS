@@ -20,5 +20,6 @@ extension Notification.Name {
     static let getChatList              = Notification.Name("co.wim.getChatList")
     static let getBadgeValue            = Notification.Name("co.wim.getBadgeValue")
     
+    static let unexpectedError          = Notification.Name("co.wim.unexpectedError")
 
 }

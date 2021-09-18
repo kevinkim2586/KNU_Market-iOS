@@ -73,7 +73,10 @@ class CongratulateUserViewController: UIViewController {
         congratulateLabel.text = "크누마켓 회원가입을 축하합니다!"
         congratulateLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         congratulateLabel.textColor = .darkGray
-        congratulateLabel.changeTextAttributeColor(fullText: congratulateLabel.text!, changeText: "크누마켓")
+        congratulateLabel.changeTextAttributeColor(
+            fullText: congratulateLabel.text!,
+            changeText: "크누마켓"
+        )
     }
     
     func playAnimation() {
@@ -90,7 +93,9 @@ class CongratulateUserViewController: UIViewController {
     func changeRootViewControllerToMain() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+        let mainTabBarController = storyboard.instantiateViewController(
+            identifier: Constants.StoryboardID.tabBarController
+        )
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }
     
@@ -98,7 +103,6 @@ class CongratulateUserViewController: UIViewController {
         
         NotificationCenter.default.removeObserver(NickNameInputViewController.self)
         NotificationCenter.default.removeObserver(PasswordInputViewController.self)
-        NotificationCenter.default.removeObserver(ProfilePictureInputViewController.self)
         NotificationCenter.default.removeObserver(EmailInputViewController.self)
         NotificationCenter.default.removeObserver(CheckEmailViewController.self)
     }

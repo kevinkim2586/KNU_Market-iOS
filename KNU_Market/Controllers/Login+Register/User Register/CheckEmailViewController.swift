@@ -22,6 +22,7 @@ class CheckEmailViewController: UIViewController {
             
             goBackToHomeButtonBottomAnchor.constant = keyboardSize.height
             goBackToHomeButtonHeight.constant = 60
+            goBackToHomeButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
     }
 

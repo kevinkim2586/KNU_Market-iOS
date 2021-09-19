@@ -50,6 +50,72 @@ class NickNameInputViewController: UIViewController {
     }
 }
 
+
+//MARK: - User Input Validation
+
+extension NickNameInputViewController {
+    
+    func checkNicknameLengthIsValid() -> Bool {
+        guard let nickname = nicknameTextField.text else { return false }
+        
+        if nickname.count >= 2 && nickname.count <= 15 { return true }
+        else {
+            showErrorMessage(message: "닉네임은 2자 이상, 15자 이하로 적어주세요.")
+            return false
+        }
+    }
+    
+    func showErrorMessage(message: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = message
+        errorLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        errorLabel.textColor = UIColor(named: Constants.Color.appColor)
+        
+    }
+    
+    func checkNicknameDuplication() {
+        
+        UserManager.shared.checkNicknameDuplicate(nickname: nicknameTextField.text!) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let isDuplicate):
+                
+                if isDuplicate {
+                    self.showErrorMessage(message: "이미 사용 중인 닉네임입니다. 🥲")
+                }
+                else {
+                    DispatchQueue.main.async {
+                        self.showCongratulateRegisterVC()
+                    }
+                }
+                
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
+            }
+        }
+    }
+    
+    func showCongratulateRegisterVC() {
+        guard let vc = storyboard?.instantiateViewController(
+                identifier: Constants.StoryboardID.congratulateUserVC
+        ) as? CongratulateUserViewController else { return }
+        
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+        
+    }
+    
+    func dismissErrorMessage() {
+        errorLabel.isHidden = true
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        dismissErrorMessage()
+    }
+}
+
 //MARK: - UI Configuration & Initialization
 
 extension NickNameInputViewController {
@@ -108,60 +174,5 @@ extension NickNameInputViewController {
         thirdLineLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         thirdLineLabel.textColor = .lightGray
 
-    }
-}
-
-//MARK: - User Input Validation
-
-extension NickNameInputViewController {
-    
-    func checkNicknameLengthIsValid() -> Bool {
-        guard let nickname = nicknameTextField.text else { return false }
-        
-        if nickname.count >= 2 && nickname.count <= 15 { return true }
-        else {
-            showErrorMessage(message: "닉네임은 2자 이상, 15자 이하로 적어주세요.")
-            return false
-        }
-    }
-    
-    func showErrorMessage(message: String) {
-        errorLabel.isHidden = false
-        errorLabel.text = message
-        errorLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        errorLabel.textColor = UIColor(named: Constants.Color.appColor)
-        
-    }
-    
-    func checkNicknameDuplication() {
-        
-        UserManager.shared.checkNicknameDuplicate(nickname: nicknameTextField.text!) { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let isDuplicate):
-                
-                if isDuplicate {
-                    self.showErrorMessage(message: "이미 사용 중인 닉네임입니다. 🥲")
-                }
-                else {
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: Constants.SegueID.goToPasswordInputVC, sender: self)
-                    }
-                }
-                
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
-            }
-        }
-    }
-    
-    func dismissErrorMessage() {
-        errorLabel.isHidden = true
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        dismissErrorMessage()
     }
 }

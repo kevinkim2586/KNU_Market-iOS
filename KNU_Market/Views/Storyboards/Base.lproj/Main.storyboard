@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -114,6 +115,17 @@
                                 <color key="textColor" red="0.7784514427" green="0.34576368330000001" blue="0.32939559219999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YdQ-Zd-NJi">
+                                <rect key="frame" x="320" y="395" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="JHb-Lc-Mp1"/>
+                                    <constraint firstAttribute="width" constant="32" id="NAh-Ed-i53"/>
+                                </constraints>
+                                <color key="tintColor" name="AppDefaultColor"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="questionmark.circle.fill" catalog="system" symbolScale="large"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -123,10 +135,12 @@
                             <constraint firstItem="bxM-on-3oq" firstAttribute="top" secondItem="286-Rl-XaC" secondAttribute="bottom" constant="5" id="HDc-2G-8wq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="X6J-cK-goV" secondAttribute="trailing" constant="70" id="Hsj-XI-szG"/>
                             <constraint firstItem="ihx-1m-86D" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="PIv-mG-Uzb"/>
+                            <constraint firstItem="YdQ-Zd-NJi" firstAttribute="leading" secondItem="ihx-1m-86D" secondAttribute="trailing" constant="15" id="S69-RP-1AA"/>
                             <constraint firstItem="B89-Fh-cNR" firstAttribute="top" secondItem="kfM-0r-VwU" secondAttribute="bottom" constant="5" id="ah4-7r-rDa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ihx-1m-86D" secondAttribute="trailing" constant="70" id="gRu-NK-pRx"/>
                             <constraint firstItem="X6J-cK-goV" firstAttribute="top" secondItem="0vi-xp-EMA" secondAttribute="bottom" constant="15" id="ibM-nX-ooR"/>
                             <constraint firstItem="0vi-xp-EMA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="jOl-ba-QIV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YdQ-Zd-NJi" secondAttribute="bottom" constant="240" id="jQP-4G-BcB"/>
                             <constraint firstItem="kfM-0r-VwU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mtQ-Ww-SWS"/>
                             <constraint firstItem="286-Rl-XaC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="110" id="oGb-53-KH7"/>
                             <constraint firstItem="kfM-0r-VwU" firstAttribute="top" secondItem="X6J-cK-goV" secondAttribute="bottom" constant="15" id="ogY-sn-TqL"/>
@@ -303,8 +317,9 @@
     </designables>
     <resources>
         <image name="appLogo2" width="3200.5" height="3200.5"/>
+        <image name="questionmark.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="AppDefaultColor">
-            <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.53299999237060547" blue="0.50999999046325684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

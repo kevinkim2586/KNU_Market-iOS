@@ -81,6 +81,7 @@ extension IDInputViewController {
     
     func initialize() {
         createObserverForKeyboardStateChange()
+        addDismissButtonToRightNavBar()
         setClearNavigationBarBackground()
         initializeTitleLabel()
     }

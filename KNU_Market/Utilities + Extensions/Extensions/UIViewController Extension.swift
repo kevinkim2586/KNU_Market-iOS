@@ -239,16 +239,18 @@ extension UIViewController {
         
         let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: statusBarHeight,
                                                           width: view.bounds.size.width, height: 50))
-        navigationBar.tintColor = .lightGray
+        navigationBar.tintColor = .darkGray
         navigationBar.setBackgroundImage(UIImage(),
                                          for: .default)
         navigationBar.shadowImage = UIImage()
         view.addSubview(navigationBar)
         
         let navItem = UINavigationItem(title: "")
-        let navBarButton = UIBarButtonItem(barButtonSystemItem: .stop,
-                                           target: self,
-                                           action: #selector(dismissVC))
+        let navBarButton = UIBarButtonItem(
+            barButtonSystemItem: .stop,
+            target: self,
+            action: #selector(dismissVC)
+        )
         navItem.rightBarButtonItem = navBarButton
         navigationBar.items = [navItem]
     }
@@ -264,6 +266,7 @@ extension UIViewController {
     }
     
     @objc func dismissVC() {
+        print("✏️ pressed Dismiss Button")
         dismiss(animated: true, completion: nil)
     }
     

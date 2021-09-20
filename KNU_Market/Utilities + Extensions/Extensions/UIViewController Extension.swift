@@ -233,7 +233,6 @@ extension UIViewController {
     }
     
     func addDismissButtonToRightNavBar() {
-
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 150
         

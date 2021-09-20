@@ -111,12 +111,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="a2e-1v-2Un">
                         <barButtonItem key="backBarButtonItem" title=" " id="ABy-58-6LT"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="gg2-73-Era">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="pressedDismissButton:" destination="cvm-nx-wio" id="A0g-9Y-7ot"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="errorLabel" destination="q3O-s7-VDq" id="LIA-mc-z2H"/>
@@ -626,6 +620,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="duc-wY-Jbp">
                         <barButtonItem key="backBarButtonItem" title=" " id="x8s-X9-Fqe"/>
+                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="ClX-U1-my7" userLabel="Dismiss Bar Button Item">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="pressedDismissButton:" destination="R8R-DF-bwt" id="sBu-hR-4JT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="errorLabel" destination="p02-A1-HJj" id="rVl-sk-jfm"/>
@@ -896,6 +896,7 @@
     <resources>
         <image name="camera icon" width="55" height="57"/>
         <image name="pick profile image" width="195" height="195"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53299999237060547" blue="0.50999999046325684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -104,7 +104,6 @@ extension NickNameInputViewController {
         
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
-        
     }
     
     func dismissErrorMessage() {

@@ -16,6 +16,10 @@ class IDInputViewController: UIViewController {
         initialize()
     }
     
+    @IBAction func pressedDismissButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @objc func keyboardDidShow(notification: Notification) {
         
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -81,7 +85,6 @@ extension IDInputViewController {
     
     func initialize() {
         createObserverForKeyboardStateChange()
-        addDismissButtonToRightNavBar()
         setClearNavigationBarBackground()
         initializeTitleLabel()
     }

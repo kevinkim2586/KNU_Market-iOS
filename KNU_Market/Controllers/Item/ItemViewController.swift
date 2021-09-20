@@ -91,9 +91,11 @@ class ItemViewController: UIViewController {
     
     // 더보기 버튼
     @IBAction func pressedMoreButton(_ sender: UIButton) {
-        let actionSheet = UIAlertController(title: nil,
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
         
         if viewModel.postIsUserUploaded {
             let deleteAction = UIAlertAction(title: "공구 삭제하기",
@@ -411,16 +413,22 @@ extension ItemViewController {
         
         createObserversForPresentingEmailVerification()
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(refreshPage),
-                                               name: .didUpdatePost,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshPage),
+            name: .didUpdatePost,
+            object: nil
+        )
     }
     
     func initializeScrollView() {
         
         scrollView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshPage), for: .valueChanged)
+        refreshControl.addTarget(
+            self,
+            action: #selector(refreshPage),
+            for: .valueChanged
+        )
     }
     
     func initializeProfileImageView() {
@@ -559,7 +567,6 @@ extension ItemViewController {
     }
     
     func initializeBottomView() {
-        
         bottomView.layer.addBorder([.top], color: #colorLiteral(red: 0.9119567871, green: 0.912109673, blue: 0.9119365811, alpha: 1), width: 1.0)
     }
     

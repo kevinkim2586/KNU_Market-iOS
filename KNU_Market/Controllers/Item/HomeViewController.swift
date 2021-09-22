@@ -292,7 +292,7 @@ extension HomeViewController {
                                             preferredStyle: .actionSheet)
         
         
-        let title = viewModel.currentlySelectedFilterIndex == 0 ? "모집 중인 공구만 보기" : "모든 공구 보기"
+        let title = viewModel.currentlySelectedFilterIndex == 0 ? "모집 중인 공구 먼저 보기" : "모든 공구 보기"
     
         actionSheet.addAction(UIAlertAction(title: title,
                                             style: .default) { [weak self] _ in

@@ -89,9 +89,11 @@ class ChatViewController: MessagesViewController {
     
     func showChatPrecautionMessage() {
 
-        presentKMAlertOnMainThread(title: "채팅 에티켓 공지!",
-                                   message: "폭력적이거나 선정적인 말은 삼가 부탁드립니다. 타 이용자로부터 신고가 접수되면 서비스 이용이 제한될 수 있습니다.",
-                                   buttonTitle: "확인")
+        presentKMAlertOnMainThread(
+            title: "채팅 에티켓 공지!",
+            message: "폭력적이거나 선정적인 말은 삼가 부탁드립니다. 타 이용자로부터 신고가 접수되면 서비스 이용이 제한될 수 있습니다.",
+            buttonTitle: "확인"
+        )
 
     }
 }

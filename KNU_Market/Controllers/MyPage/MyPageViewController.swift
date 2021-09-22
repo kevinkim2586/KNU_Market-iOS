@@ -167,12 +167,21 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
     
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 20
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        switch section {
+        case 0: return "사용자 설정"
+        case 1: return "기타"
+        default: break
+        }
+        return nil
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
@@ -296,6 +305,7 @@ extension MyPageViewController {
     func initializeTableView() {
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
+        settingsTableView.separatorStyle = .none
         settingsTableView.separatorColor = .lightGray
     }
     
@@ -309,7 +319,6 @@ extension MyPageViewController {
     }
     
     func initializeProfileImageButton() {
-        
         profileImageButton.setImage(#imageLiteral(resourceName: "pick profile image"), for: .normal)
         profileImageButton.layer.masksToBounds = false
         profileImageButton.isUserInteractionEnabled = true

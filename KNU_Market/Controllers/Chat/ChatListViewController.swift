@@ -168,6 +168,7 @@ extension ChatListViewController {
         chatListTableView.dataSource = self
         chatListTableView.refreshControl = refreshControl
         chatListTableView.tableFooterView = UIView(frame: .zero)
+        chatListTableView.separatorStyle = .none
         
         refreshControl.addTarget(
             self,

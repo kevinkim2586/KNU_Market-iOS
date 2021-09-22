@@ -247,6 +247,7 @@ extension ChatMemberViewController {
         
         memberTableView.delegate = self
         memberTableView.dataSource = self
+        memberTableView.separatorStyle = .none
     }
     
     func initializeTopView() {

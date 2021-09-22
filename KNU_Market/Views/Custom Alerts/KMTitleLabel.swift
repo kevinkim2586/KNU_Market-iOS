@@ -22,7 +22,7 @@ class KMTitleLabel: UILabel {
         
         textColor = .label
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.90
+        minimumScaleFactor = 0.75
         lineBreakMode = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
     }

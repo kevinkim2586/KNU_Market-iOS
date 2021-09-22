@@ -531,7 +531,7 @@ extension UserManager {
         User.shared.email = model.email
         User.shared.nickname = model.nickname
         User.shared.profileImageUID = model.profileImageCode
-        User.shared.hasVerifiedEmail = model.isVerified
+        User.shared.isVerified = model.isVerified
     }
 }
 

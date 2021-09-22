@@ -7,6 +7,7 @@ class MyPageViewController: UIViewController {
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var userNicknameLabel: UILabel!
     @IBOutlet weak var settingsTableView: UITableView!
+    @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem!
     
     lazy var imagePicker = UIImagePickerController()
     
@@ -278,13 +279,14 @@ extension MyPageViewController {
         
         viewModel.delegate = self
         
-        initializeNavigationController()
+        initializeTabBarIcon()
         initializeTableView()
+        initializeBarButtonItem()
         initializeProfileImageButton()
         setBackBarButtonItemTitle()
     }
     
-    func initializeNavigationController() {
+    func initializeTabBarIcon() {
         navigationController?.view.backgroundColor = .white
         navigationController?.tabBarItem.image = UIImage(named: Constants.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
         navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
@@ -292,9 +294,18 @@ extension MyPageViewController {
     }
     
     func initializeTableView() {
-        
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
+        settingsTableView.separatorColor = .lightGray
+    }
+    
+    func initializeBarButtonItem() {
+        
+        if #available(iOS 14.0, *) {
+            settingsBarButtonItem.image = UIImage(systemName: "gearshape")
+        } else {
+            settingsBarButtonItem.image = UIImage(systemName: "gear")
+        }
     }
     
     func initializeProfileImageButton() {
@@ -307,7 +318,6 @@ extension MyPageViewController {
     }
     
     func initializeImagePicker() {
-        
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .savedPhotosAlbum
@@ -317,7 +327,6 @@ extension MyPageViewController {
     }
     
     func updateProfileImageButton(with image: UIImage) {
-        
         profileImageButton.setImage(image, for: .normal)
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.masksToBounds = true

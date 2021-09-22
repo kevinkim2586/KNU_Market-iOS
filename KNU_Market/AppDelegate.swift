@@ -48,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         configureIQKeyboardManager()
+        if #available(iOS 15, *) {
+            configureUINavigationBarAppearance()
+        }
         return true
     }
     
@@ -55,8 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("✏️ didRegisterForRemoteNotificationsWithDeviceToken")
         // Convert token to string (디바이스 토큰 값을 가져옵니다.)
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        
-        // Print it to console(토큰 값을 콘솔창에 보여줍니다. 이 토큰값으로 푸시를 전송할 대상을 정합니다.)
+
         print("APNs device token: \(deviceTokenString)")
         
         Messaging.messaging().apnsToken = deviceToken
@@ -195,7 +197,6 @@ extension AppDelegate {
     }
     
     func configureIQKeyboardManager() {
-        
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
@@ -208,6 +209,16 @@ extension AppDelegate {
         
         IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatViewController.self)
     }
-
+    
+    func configureUINavigationBarAppearance() {
+        let appearance = UINavigationBarAppearance()
+        let navigationBar = UINavigationBar()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        appearance.backgroundColor = .white
+        navigationBar.standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
+    
     
 }

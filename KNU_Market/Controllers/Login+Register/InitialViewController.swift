@@ -3,7 +3,6 @@ import PanModal
 
 class InitialViewController: UIViewController {
 
-
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var idTextField: UITextField!
@@ -48,11 +47,36 @@ class InitialViewController: UIViewController {
     }
     
     @IBAction func pressedFindPWButton(_ sender: UIButton) {
-        
-        guard let findPasswordVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.findPasswordVC) as? FindPasswordViewController else { return }
+        guard let findPasswordVC = storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.findPasswordVC
+        ) as? FindPasswordViewController else { return }
         
         findPasswordVC.delegate = self
         presentPanModal(findPasswordVC)
+    }
+    
+    @IBAction func pressedInfoButton(_ sender: UIButton) {
+        let message = "2021년 9월 27일 이전 가입 유저의 아이디는 웹메일(@knu.ac.kr) 형식입니다."
+        let alertController = UIAlertController(
+            title: "아이디 관련 안내",
+            message: message,
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default
+        )
+     
+        alertController.setValue(NSAttributedString(
+            string: "웹메일(@knu.ac.kr) 형식",
+            attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: Constants.Color.appColor)]),
+                                 forKey: "attributedMessage"
+        )
+
+        
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 

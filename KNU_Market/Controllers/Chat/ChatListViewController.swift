@@ -149,14 +149,14 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 extension ChatListViewController {
     
     func initialize() {
-        
+        navigationController?.navigationBar.backgroundColor = .white
         createObserversForGettingBadgeValue()
         viewModel.delegate = self
-        initializeNavigationController()
+        initializeTabBarIcon()
         initializeTableView()
     }
     
-    func initializeNavigationController() {
+    func initializeTabBarIcon() {
         navigationController?.view.backgroundColor = .white
         navigationController?.tabBarItem.image = UIImage(named: Constants.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
         navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
@@ -169,6 +169,7 @@ extension ChatListViewController {
         chatListTableView.refreshControl = refreshControl
         chatListTableView.tableFooterView = UIView(frame: .zero)
         chatListTableView.separatorStyle = .none
+        chatListTableView.separatorColor = .clear
         
         refreshControl.addTarget(
             self,

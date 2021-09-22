@@ -277,7 +277,7 @@ extension ChatViewModel {
     
         self.isFetchingData = true
         
-        showProgressBar()
+//        showProgressBar()
         
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,
@@ -285,7 +285,7 @@ extension ChatViewModel {
                                             index: self.index,
                                             expectedModel: ChatResponseModel.self) { [weak self] result in
             
-            dismissProgressBar()
+//            dismissProgressBar()
             
             guard let self = self else { return }
         

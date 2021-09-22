@@ -73,7 +73,7 @@ class User {
     }
     
     // 이메일 인증 완료 판별
-    var hasVerifiedEmail: Bool {
+    var isVerified: Bool {
         get {
             return UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.hasVerifiedEmail)
         }

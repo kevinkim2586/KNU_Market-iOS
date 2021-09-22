@@ -204,20 +204,18 @@ extension HomeViewController: UITabBarControllerDelegate {
 extension HomeViewController {
     
     func initialize() {
-        
-        askForNotificationPermission()
-        initializeNavigationController()
-
         tabBarController?.delegate = self
-
         viewModel.delegate = self
         itemTableView.placeholderDelegate = self
         
         viewModel.loadInitialMethods()
-
+        
+        askForNotificationPermission()
+        initializeTabBarIcon()
+        initializeNavBar()
         initializeTableView()
         initializeAddButton()
-//        initializeBarButtonItem()
+        initializeBarButtonItem()
         createObservers()
         setBackBarButtonItemTitle()
 
@@ -226,9 +224,17 @@ extension HomeViewController {
         }
     }
     
-    func initializeNavigationController() {
+    func initializeTabBarIcon() {
         navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
         navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
+    }
+    
+    func initializeNavBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
     }
     
     func initializeTableView() {

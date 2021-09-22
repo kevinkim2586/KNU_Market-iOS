@@ -12,8 +12,6 @@ class ChatViewController: MessagesViewController {
     
     private var viewModel: ChatViewModel!
 
-    @objc private let refreshControl = UIRefreshControl()
-
     var roomUID: String = ""
     var chatRoomTitle: String = ""
     var postUploaderUID: String = ""
@@ -180,7 +178,6 @@ extension ChatViewController {
 
         dismissProgressBar()
         messagesCollectionView.backgroundView = nil
-        refreshControl.endRefreshing()
 
         if viewModel.isFirstViewLaunch {
 
@@ -198,8 +195,6 @@ extension ChatViewController {
     }
 
     func didFetchEmptyChat() {
-        refreshControl.endRefreshing()
-
         if viewModel.messages.count == 0 {
             messagesCollectionView.showEmptyChatView()
         }
@@ -210,7 +205,6 @@ extension ChatViewController {
                                    message: error.errorDescription,
                                    buttonTitle: "확인")
         dismissProgressBar()
-        refreshControl.endRefreshing()
     }
 
     func failedUploadingImageToServer() {
@@ -330,23 +324,19 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     }
     
     // UIScrollView Methods
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+
         if scrollView.contentOffset.y <= 10 {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                
+        
                 if !self.viewModel.isFetchingData &&
                     self.viewModel.needsToFetchMoreData &&
                     !self.viewModel.isFirstViewLaunch {
                     
-                    self.refreshControl.beginRefreshing()
+                    print("✏️ fetching more data...")
                     self.viewModel.getChatList()
-                    
-                } else {
-                    self.refreshControl.endRefreshing()
-                    self.messagesCollectionView.refreshControl = nil
+
                 }
             }
         }
@@ -448,7 +438,6 @@ extension ChatViewController {
 
         initializeNavigationItemTitle()
 //        initializeCheckBarButtonItem()
-        initializeRefreshControl()
         initializeInputBar()
         initializeCollectionView()
         createObservers()
@@ -485,15 +474,6 @@ extension ChatViewController {
              
         }
 
-    }
-
-    func initializeRefreshControl() {
-
-        messagesCollectionView.refreshControl = refreshControl
-        refreshControl.addTarget(
-            self,
-            action: #selector(viewModel.getChatList),
-            for: .valueChanged)
     }
 
     func initializeCollectionView() {

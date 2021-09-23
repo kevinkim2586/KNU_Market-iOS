@@ -4,6 +4,7 @@ enum HTTPHeaderKeys: String {
     
     case authentication = "authentication"
     case contentType = "Content-Type"
+    case withoutcomplete = "withoutcomplete"
 }
 
 enum HTTPHeaderValues: String {

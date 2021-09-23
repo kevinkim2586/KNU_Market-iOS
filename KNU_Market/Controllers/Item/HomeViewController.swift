@@ -149,16 +149,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     @objc func refreshTableView() {
         
         //사라지는 애니메이션 처리
-        UIView.animate(views: self.itemTableView.visibleCells,
-                       animations: Animations.forTableViews,
-                       reversed: true,
-                       initialAlpha: 1.0,   // 보이다가
-                       finalAlpha: 0.0,      // 안 보이게
-                       completion: {
-                        self.viewModel.resetValues()
-                        self.viewModel.fetchItemList()
-                        self.viewModel.fetchEnteredRoomInfo()
-                       })
+        UIView.animate(
+            views: self.itemTableView.visibleCells,
+            animations: Animations.forTableViews,
+            reversed: true,
+            initialAlpha: 1.0,   // 보이다가
+            finalAlpha: 0.0,      // 안 보이게
+            completion: {
+                self.viewModel.refreshTableView()
+            }
+        )
     }
 }
 
@@ -275,10 +275,12 @@ extension HomeViewController {
     
     func initializeBarButtonItem() {
         
-        let settingsBarButton = UIBarButtonItem(image: UIImage(named: Constants.Images.homeMenuIcon) ?? UIImage(systemName: "gear"),
-                                                style: .plain,
-                                                target: self,
-                                                action: #selector(pressedSettingsButton))
+        let settingsBarButton = UIBarButtonItem(
+            image: UIImage(named: Constants.Images.homeMenuIcon) ?? UIImage(systemName: "gear"),
+            style: .plain,
+            target: self,
+            action: #selector(pressedSettingsButton)
+        )
         
         settingsBarButton.tintColor = .black
         navigationItem.rightBarButtonItems?.insert(settingsBarButton, at: 0)
@@ -287,21 +289,24 @@ extension HomeViewController {
     
     @objc func pressedSettingsButton() {
         
-        let actionSheet = UIAlertController(title: "글 정렬 기준",
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(
+            title: "글 정렬 기준",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
         
-        
-        let title = viewModel.currentlySelectedFilterIndex == 0 ? "모집 중인 공구 먼저 보기" : "모든 공구 보기"
-    
+        let title = viewModel.filterActionTitle
+
         actionSheet.addAction(UIAlertAction(title: title,
                                             style: .default) { [weak self] _ in
-            
-    
+            guard let self = self else { return }
+            self.viewModel.changePostFilterOption()
         })
-        actionSheet.addAction(UIAlertAction(title: "취소",
-                                            style: .cancel,
-                                            handler: nil))
+        actionSheet.addAction(UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil)
+        )
         
         present(actionSheet, animated: true)
     }

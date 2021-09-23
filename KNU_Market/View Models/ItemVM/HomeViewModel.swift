@@ -20,8 +20,6 @@ class HomeViewModel {
     
     var isFetchingData: Bool = false
     var index: Int = 1
-    var currentlySelectedFilterIndex: Int = 0
-    
 
     
     //MARK: - 공구글 불러오기
@@ -30,7 +28,8 @@ class HomeViewModel {
         isFetchingData = true
 
         ItemManager.shared.fetchItemList(at: self.index,
-                                         fetchCurrentUsers: fetchCurrentUsers) { [weak self] result in
+                                         fetchCurrentUsers: fetchCurrentUsers,
+                                         postFilterOption: User.shared.postFilterOption) { [weak self] result in
             
             guard let self = self else { return }
 
@@ -100,19 +99,30 @@ class HomeViewModel {
         }
     }
     
-    
-    
-    
-    func loadInitialMethods() {
+    func changePostFilterOption() {
         
+        if User.shared.postFilterOption == .showAll {
+            User.shared.postFilterOption = .showGatheringFirst
+        } else {
+            User.shared.postFilterOption = .showAll
+        }
+        refreshTableView()
+    }
+    
+    // 앱 최초 실행 시 로딩해야 할 메서드들 모음
+    func loadInitialMethods() {
         fetchEnteredRoomInfo()
         loadUserProfile()
         fetchItemList()
-        
+    }
+    
+    func refreshTableView() {
+        resetValues()
+        fetchItemList()
+        fetchEnteredRoomInfo()
     }
     
     func resetValues() {
-         
         User.shared.joinedChatRoomPIDs.removeAll()
         itemList.removeAll()
         isFetchingData = false
@@ -120,3 +130,10 @@ class HomeViewModel {
     }
 }
 
+
+extension HomeViewModel {
+    
+    var filterActionTitle: String {
+        return User.shared.postFilterOption == .showAll ? "모집 중인 공구 먼저 보기" : "모든 공구 보기"
+    }
+}

@@ -2,24 +2,6 @@ import Foundation
 import Alamofire
 
 //MARK: - 회원가입용 Model
-/*
- - URI : POST /api/v1/auth
- - Content-Type: multipart/form-data
- 
- - Request Body:
- "id" : "string",
- "password" : "string",
- "nickname" : "string",
- "image" : "string"
- 
- - Response:
- -> 201 Created
- 
- -> 403 Forbidden
- "errorMessage" : "string"
- "errorCode" : "string"
- "errorDescription" : "string"
- */
 
 struct RegisterRequestDTO {
      

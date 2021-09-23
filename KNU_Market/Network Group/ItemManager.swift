@@ -19,6 +19,7 @@ class ItemManager {
     //MARK: - 공구글 목록 불러오기
     func fetchItemList(at index: Int,
                        fetchCurrentUsers: Bool = false,
+                       postFilterOption: PostFilterOptions,
                        completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
         
         
@@ -26,8 +27,15 @@ class ItemManager {
         ? baseURL + "/me?page=\(index)"
         : baseURL + "?page=\(index)"
         
+        var headers: HTTPHeaders = [:]
+        
+        if postFilterOption == .showGatheringFirst {
+            headers.update(name: "withoutcomplete", value: "1")
+        }
+
         AF.request(url,
                    method: .get,
+                   headers: headers,
                    interceptor: interceptor)
             .validate()
             .responseJSON { response in
@@ -37,9 +45,6 @@ class ItemManager {
                 switch statusCode {
                     
                 case 200:
-                    
-                    print("ItemManager - SUCCESS in fetchItemList")
-                    
                     do {
                         let decodedData = try JSONDecoder().decode([ItemListModel].self,
                                                                    from: response.data ?? Data())

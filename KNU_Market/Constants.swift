@@ -89,11 +89,7 @@ struct Constants {
         static let chatMemberCell               = "chatMemberCell"
     }
     
-    struct HeroID {
-        
 
-    }
-    
     //MARK: - Keys
     
     struct KeyChainKey {
@@ -117,6 +113,7 @@ struct Constants {
         static let bannedPostUploaders          = "bannedPostUploaders"
         static let bannedChatUsers              = "bannedChatUsers"
         static let isAbsoluteFirstAppLaunch     = "isAbsoluteFirstAppLaunch"
+        static let postFilterOptions            = "postFilterOptions"
     }
     
     struct NotificationKey {

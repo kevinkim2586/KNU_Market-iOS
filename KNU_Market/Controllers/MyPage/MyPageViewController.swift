@@ -174,7 +174,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         switch section {
         case 0: return "사용자 설정"
         case 1: return "기타"
@@ -188,7 +187,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.cellID.myPageCell,
             for: indexPath
@@ -209,27 +207,22 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {
         case 0:
-            
             guard let vc = self.storyboard?.instantiateViewController(
                 identifier: Constants.StoryboardID.myPageSection_1_Options[indexPath.row]
             ) else { return }
             pushViewController(with: vc)
         case 1:
             switch indexPath.row {
-            
             case 1:
                 let url = URL(string: Constants.URL.termsAndConditionNotionURL)!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        
             case 2:
                 let url = URL(string: Constants.URL.privacyInfoConditionNotionURL)!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                
             default:
                 guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSection_2_Options[indexPath.row]) else { return }
                 pushViewController(with: vc)
@@ -241,8 +234,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func pushViewController(with vc: UIViewController) {
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-
 }
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate

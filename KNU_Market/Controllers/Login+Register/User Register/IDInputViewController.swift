@@ -68,6 +68,8 @@ extension IDInputViewController {
     func checkIDDuplication() {
         //TODO: - API 통신 후 성공이면 다음 VC로 이동
         
+        
+        
     
     
         performSegue(
@@ -105,6 +107,7 @@ extension IDInputViewController {
     }
     
     func initializeTitleLabel() {
+        errorLabel.isHidden = true
         titleLabel.text = "환영합니다, 학우님!\n로그인에 사용할 아이디를 입력해주세요."
         titleLabel.font = .systemFont(ofSize: 19, weight: .semibold)
         titleLabel.textColor = .darkGray

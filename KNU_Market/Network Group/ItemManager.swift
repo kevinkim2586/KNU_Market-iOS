@@ -14,7 +14,7 @@ class ItemManager {
     let baseURL                       = "\(Constants.API_BASE_URL)posts"
     let searchURL                     = "\(Constants.API_BASE_URL)search"
     let markCompleteURL               = "\(Constants.API_BASE_URL)posts/complete/"
-
+    
     
     //MARK: - 공구글 목록 불러오기
     func fetchItemList(at index: Int,
@@ -23,9 +23,9 @@ class ItemManager {
         
         
         let url = fetchCurrentUsers == true
-            ? baseURL + "/me?page=\(index)"
-            : baseURL + "?page=\(index)"
-
+        ? baseURL + "/me?page=\(index)"
+        : baseURL + "?page=\(index)"
+        
         AF.request(url,
                    method: .get,
                    interceptor: interceptor)
@@ -35,7 +35,7 @@ class ItemManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 200:
                     
                     print("ItemManager - SUCCESS in fetchItemList")
@@ -61,7 +61,7 @@ class ItemManager {
     //MARK: - 공구글 업로드
     func uploadNewItem(with model: UploadItemRequestDTO,
                        completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
-    
+        
         AF.request(baseURL,
                    method: .post,
                    parameters: model.parameters,
@@ -73,7 +73,7 @@ class ItemManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 201:
                     print("ItemManager - uploadNewItem success")
                     completion(.success(true))
@@ -104,7 +104,7 @@ class ItemManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 201:
                     print("✏️ ItemManager - editPost SUCCESS")
                     completion(.success(true))
@@ -131,7 +131,7 @@ class ItemManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 200:
                     
                     print("ItemManager - SUCCESS in fetchItemList")
@@ -170,7 +170,7 @@ class ItemManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 201:
                     print("ItemManager - SUCCESS in deletePost")
                     completion(.success(true))
@@ -202,7 +202,7 @@ class ItemManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 200:
                     
                     print("✏️ ItemManager - fetchSearchResults SUCCESS")
@@ -211,7 +211,7 @@ class ItemManager {
                         let decodedData = try JSONDecoder().decode([ItemListModel].self,
                                                                    from: response.data ?? Data())
                         completion(.success(decodedData))
-                    
+                        
                     } catch {
                         print("ItemManager - There was an error decoding JSON Data with error: \(error)")
                         completion(.failure(.E000))
@@ -238,7 +238,7 @@ class ItemManager {
             .responseData { response in
                 
                 switch response.result {
-                
+                    
                 case .success:
                     
                     print("✏️ ItemManager - markPostDone SUCCESS")
@@ -253,4 +253,4 @@ class ItemManager {
             }
     }
 }
-    
+

@@ -205,7 +205,8 @@ extension AppDelegate {
                                                            NickNameInputViewController.self,
                                                            PasswordInputViewController.self,
                                                            EmailInputViewController.self,
-                                                           CheckEmailViewController.self]
+                                                           CheckEmailViewController.self,
+                                                           IDInputViewController.self]
         
         IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatViewController.self)
     }
@@ -215,6 +216,7 @@ extension AppDelegate {
         let navigationBar = UINavigationBar()
         appearance.configureWithOpaqueBackground()
         appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        appearance.shadowColor = .clear
         appearance.backgroundColor = .white
         navigationBar.standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance

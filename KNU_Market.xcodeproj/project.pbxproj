@@ -75,6 +75,7 @@
 		7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */; };
 		7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */; };
 		7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */; };
+		7C89B2E726FC1D9E004109FE /* PostFilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89B2E626FC1D9E004109FE /* PostFilterOptions.swift */; };
 		7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668626E746DD0060F37B /* ImageItem.swift */; };
 		7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668826E756B30060F37B /* FilteredChat.swift */; };
 		7C8E668B26E756C00060F37B /* ChatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668A26E756C00060F37B /* ChatType.swift */; };
@@ -202,6 +203,7 @@
 		7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPickedItemImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemViewController.swift; sourceTree = "<group>"; };
 		7C8839E52643CD7700F9F78C /* UploadItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemViewModel.swift; sourceTree = "<group>"; };
+		7C89B2E626FC1D9E004109FE /* PostFilterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFilterOptions.swift; sourceTree = "<group>"; };
 		7C8E668626E746DD0060F37B /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
 		7C8E668826E756B30060F37B /* FilteredChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredChat.swift; sourceTree = "<group>"; };
 		7C8E668A26E756C00060F37B /* ChatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatType.swift; sourceTree = "<group>"; };
@@ -472,6 +474,16 @@
 			path = "UserRegister & Verification";
 			sourceTree = "<group>";
 		};
+		7C89B2E526FC1D60004109FE /* User Related */ = {
+			isa = PBXGroup;
+			children = (
+				7C3B4FF626A92C6C00E2CA8F /* UserRegisterValues.swift */,
+				7CB8DF41264BEC870001CC6D /* User.swift */,
+				7C89B2E626FC1D9E004109FE /* PostFilterOptions.swift */,
+			);
+			path = "User Related";
+			sourceTree = "<group>";
+		};
 		7CA661E4263D4387000E0B7A = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +511,8 @@
 				7CA6624A26413CEF000E0B7A /* Error Management Group */,
 				7CA66228264132DC000E0B7A /* Network Group */,
 				7CA6622326413272000E0B7A /* Model */,
+				7C555464266D0A1400C3C5B6 /* Location.swift */,
+				7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */,
 				7CA6622A264132F3000E0B7A /* View Models */,
 				7CA66229264132E6000E0B7A /* Controllers */,
 				7C132BF02653979B00BE5F40 /* Utilities + Extensions */,
@@ -530,10 +544,7 @@
 			children = (
 				7C6D253C269037750030F9A1 /* DTO (Data Transfer Object) */,
 				7C036AB12696A90500F6C29B /* Response Models */,
-				7C555464266D0A1400C3C5B6 /* Location.swift */,
-				7CB8DF41264BEC870001CC6D /* User.swift */,
-				7C3B4FF626A92C6C00E2CA8F /* UserRegisterValues.swift */,
-				7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */,
+				7C89B2E526FC1D60004109FE /* User Related */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -861,6 +872,7 @@
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
 				7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */,
 				7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */,
+				7C89B2E726FC1D9E004109FE /* PostFilterOptions.swift in Sources */,
 				7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */,
 				7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */,
 				7C0F1CBA26BA6B310068FF45 /* NotificationName Extension .swift in Sources */,

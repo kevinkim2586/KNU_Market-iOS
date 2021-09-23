@@ -173,6 +173,21 @@ class User {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.bannedChatUsers)
         }
     }
+    
+    //MARK: - User Settings
+    
+    var postFilterOption: PostFilterOptions {
+        get {
+            guard let filterOption = UserDefaults.standard.object(
+                forKey: Constants.UserDefaultsKey.postFilterOptions
+            ) as? String else { return .showAll }
+            
+            return PostFilterOptions(rawValue: filterOption) ?? .showAll
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: Constants.UserDefaultsKey.postFilterOptions)
+        }
+    }
 }
 
 //MARK: - Methods
@@ -197,6 +212,8 @@ extension User {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.bannedPostUploaders)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.bannedChatUsers)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.notificationList)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isAbsoluteFirstAppLaunch)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.postFilterOptions)
     
         
         ChatNotifications.list.removeAll()

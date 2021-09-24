@@ -19,7 +19,7 @@ class NickNameInputViewController: UIViewController {
         initialize()
     }
     
-    @objc func keyboardDidShow(notification: Notification) {
+    @objc func keyboardWillShow(notification: Notification) {
         
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
@@ -32,22 +32,15 @@ class NickNameInputViewController: UIViewController {
     @objc func keyboardWillHide(notification: Notification) {
         nextButtonBottomAnchor.constant = 0
         nextButtonHeight.constant = 80
-
+        nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
+        nicknameTextField.resignFirstResponder()
         if !checkNicknameLengthIsValid() { return }
         checkNicknameDuplication()
     }
-    
-    @IBAction func pressedDismissButton(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        UserRegisterValues.shared.nickname = nicknameTextField.text!
-    }
+
 }
 
 
@@ -74,23 +67,48 @@ extension NickNameInputViewController {
     }
     
     func checkNicknameDuplication() {
+        let nickname = nicknameTextField.text!.trimmingCharacters(in: .whitespaces)
         
-        UserManager.shared.checkNicknameDuplicate(nickname: nicknameTextField.text!) { [weak self] result in
-            
+        UserManager.shared.checkDuplication(nickname: nickname) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let isDuplicate):
                 
                 if isDuplicate {
-                    self.showErrorMessage(message: "이미 사용 중인 닉네임입니다. 🥲")
-                }
-                else {
+                    self.showErrorMessage(message: "이미 사용 중인 닉네임입니다.🥲")
+                } else {
+                    UserRegisterValues.shared.nickname = nickname
                     DispatchQueue.main.async {
-                        self.showCongratulateRegisterVC()
+                        self.registerUser()
                     }
                 }
                 
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
+            }
+        }
+    }
+    
+    func registerUser() {
+        
+        showProgressBar()
+        
+        let model = RegisterRequestDTO(
+            id: UserRegisterValues.shared.userId,
+            password: UserRegisterValues.shared.password,
+            nickname: UserRegisterValues.shared.nickname,
+            fcmToken: UserRegisterValues.shared.fcmToken
+        )
+        
+        UserManager.shared.register(with: model) { [weak self] result in
+            guard let self = self else { return }
+            dismissProgressBar()
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.showCongratulateRegisterVC()
+                }
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
@@ -129,8 +147,8 @@ extension NickNameInputViewController {
     func createObserverForKeyboardStateChange() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardDidShow),
-            name: UIResponder.keyboardDidShowNotification,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -159,7 +177,7 @@ extension NickNameInputViewController {
         secondLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         secondLineLabel.textColor = .darkGray
         
-        firstLineLabel.text = "크누마켓에 오신 것을 환영해요!!"
+        firstLineLabel.text = "크누마켓 내에서"
         firstLineLabel.changeTextAttributeColor(
             fullText: firstLineLabel.text!,
             changeText: "크누마켓"

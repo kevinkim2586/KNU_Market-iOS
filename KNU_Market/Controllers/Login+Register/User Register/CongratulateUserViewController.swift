@@ -23,13 +23,10 @@ class CongratulateUserViewController: UIViewController {
         
         showProgressBar()
         
-        UserManager.shared.login(email: UserRegisterValues.shared.email,
+        UserManager.shared.login(email: UserRegisterValues.shared.userId,
                                  password: UserRegisterValues.shared.password) { [weak self] result in
-            
             guard let self = self else { return }
-            
             dismissProgressBar()
-            
             switch result {
             case .success:
                 self.changeRootViewControllerToMain()
@@ -39,8 +36,7 @@ class CongratulateUserViewController: UIViewController {
         }
     }
     
-    @IBAction func pressedSeeTermsAndConditionsButton(_ sender:
-                                                        UIButton) {
+    @IBAction func pressedSeeTermsAndConditionsButton(_ sender: UIButton) {
         let url = URL(string: Constants.URL.termsAndConditionNotionURL)!
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
@@ -91,7 +87,6 @@ class CongratulateUserViewController: UIViewController {
     }
     
     func changeRootViewControllerToMain() {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(
             identifier: Constants.StoryboardID.tabBarController
@@ -100,10 +95,11 @@ class CongratulateUserViewController: UIViewController {
     }
     
     func removeAllPreviousObservers() {
-        
-        NotificationCenter.default.removeObserver(NickNameInputViewController.self)
-        NotificationCenter.default.removeObserver(PasswordInputViewController.self)
-        NotificationCenter.default.removeObserver(EmailInputViewController.self)
-        NotificationCenter.default.removeObserver(CheckEmailViewController.self)
+        [NickNameInputViewController.self,
+         PasswordInputViewController.self,
+         EmailInputViewController.self,
+         CheckEmailViewController.self].forEach { vc in
+            NotificationCenter.default.removeObserver(vc)
+        }
     }
 }

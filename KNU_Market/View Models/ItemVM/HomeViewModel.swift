@@ -114,6 +114,7 @@ class HomeViewModel {
         fetchEnteredRoomInfo()
         loadUserProfile()
         fetchItemList()
+        
     }
     
     func refreshTableView() {
@@ -134,6 +135,6 @@ class HomeViewModel {
 extension HomeViewModel {
     
     var filterActionTitle: String {
-        return User.shared.postFilterOption == .showAll ? "모집 중인 공구 먼저 보기" : "모든 공구 보기"
+        return User.shared.postFilterOption == .showAll ? "모집 중인 공구 먼저 보기" : "업로드 순으로 보기"
     }
 }

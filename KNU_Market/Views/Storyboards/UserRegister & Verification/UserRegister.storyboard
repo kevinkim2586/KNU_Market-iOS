@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓에 오신 것을 환영해요!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSY-bk-IZ9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓 내에서" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSY-bk-IZ9">
                                 <rect key="frame" x="20" y="118" width="374" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
@@ -78,7 +78,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
-                                <state key="normal" title="다음">
+                                <state key="normal" title="크누마켓 시작하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -556,7 +556,7 @@
                                     <constraint firstAttribute="height" constant="60" id="ilG-X1-jL8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
                                         <color key="value" name="AppDefaultColor"/>
@@ -877,7 +877,6 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="5cQ-cr-Dv2"/>
         <designable name="QdO-Vc-EUe">
             <size key="intrinsicContentSize" width="82.5" height="23"/>
         </designable>
@@ -891,7 +890,7 @@
             <size key="intrinsicContentSize" width="168" height="23"/>
         </designable>
         <designable name="rrj-OI-d8j">
-            <size key="intrinsicContentSize" width="82.5" height="22"/>
+            <size key="intrinsicContentSize" width="82.5" height="23"/>
         </designable>
     </designables>
     <resources>

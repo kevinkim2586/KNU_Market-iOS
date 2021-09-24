@@ -13,7 +13,7 @@ class UserManager {
     //MARK: - API Request URLs
     let registerURL                 = "\(Constants.API_BASE_URL)auth"
     let loginURL                    = "\(Constants.API_BASE_URL)login"
-    let checkNicknameDuplicateURL   = "\(Constants.API_BASE_URL)duplicate"
+    let checkDuplicationURL         = "\(Constants.API_BASE_URL)duplicate"
     let logoutURL                   = "\(Constants.API_BASE_URL)logout"
     let requestAccessTokenURL       = "\(Constants.API_BASE_URL)token"
     let findPasswordURL             = "\(Constants.API_BASE_URL)findpassword"
@@ -24,7 +24,6 @@ class UserManager {
     let sendFeedbackURL             = "\(Constants.API_BASE_URL)report"
     
     let interceptor = Interceptor()
-    
     
     //MARK: - 회원가입
     func register(with model: RegisterRequestDTO,
@@ -41,12 +40,7 @@ class UserManager {
             multipartFormData.append(Data(model.fcmToken.utf8)
                                      ,withName: "fcmToken")
             
-            if let profileImageData = model.imageData {
-                multipartFormData.append(profileImageData,
-                                         withName: "media",
-                                         fileName: "userProfileImage.jpeg",
-                                         mimeType: "image/jpeg")
-            }
+
             
         }, to: registerURL,
         headers: model.headers).responseJSON { response in
@@ -59,6 +53,7 @@ class UserManager {
                 completion(.success(true))
                 User.shared.fcmToken = model.fcmToken
                 User.shared.isAbsoluteFirstAppLaunch = true
+                User.shared.postFilterOption = .showGatheringFirst
             default:
                 let error = NetworkError.returnError(json: response.data ?? Data())
                 print("❗️ UserManager - register FAILED")
@@ -69,13 +64,21 @@ class UserManager {
     
     
     //MARK: - 닉네임 중복 체크
-    func checkNicknameDuplicate(nickname: String,
-                                completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
+    func checkDuplication(nickname: String? = nil,
+                          id: String? = nil,
+                          completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
-        let parameters: Parameters = ["name": nickname]
-        let headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue: HTTPHeaderValues.urlEncoded.rawValue]
+        var parameters: Parameters = [:]
+        var headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue: HTTPHeaderValues.urlEncoded.rawValue]
         
-        AF.request(checkNicknameDuplicateURL,
+        if let nickname = nickname {
+            parameters["name"] = nickname
+        }
+        if let id = id {
+            headers.update(name: HTTPHeaderKeys.id.rawValue, value: id)
+        }
+        
+        AF.request(checkDuplicationURL,
                    method: .get,
                    parameters: parameters,
                    encoding: URLEncoding.queryString,
@@ -92,9 +95,6 @@ class UserManager {
                         
                         let json = try JSON(data: response.data ?? Data())
                         let result = json["isDuplicate"].boolValue
-                        
-                        print("✏️ USER MANAGER - duplicateNickname Result: \(result)")
-                        
                         result == false ? completion(.success(false)) : completion(.success(true))
                         
                     } catch {

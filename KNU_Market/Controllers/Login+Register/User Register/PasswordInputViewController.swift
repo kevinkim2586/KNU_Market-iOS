@@ -19,10 +19,8 @@ class PasswordInputViewController: UIViewController {
         initialize()
     }
     
-    @objc func keyboardDidShow(notification: Notification) {
-        
+    @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            
             nextButtonBottomAnchor.constant = keyboardSize.height
             nextButtonHeight.constant = 60
             nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -32,6 +30,7 @@ class PasswordInputViewController: UIViewController {
     @objc func keyboardWillHide(notification: Notification) {
         nextButtonBottomAnchor.constant = 0
         nextButtonHeight.constant = 80
+        nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
@@ -118,8 +117,8 @@ extension PasswordInputViewController {
     func createObserverForKeyboardStateChange() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardDidShow),
-            name: UIResponder.keyboardDidShowNotification,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -131,7 +130,6 @@ extension PasswordInputViewController {
     }
     
     func initializeTextFields() {
-        
         passwordTextField.addTarget(
             self,
             action: #selector(textFieldDidChange(_:)),
@@ -145,17 +143,15 @@ extension PasswordInputViewController {
     }
     
     func initializeLabels() {
-        
-        
         firstLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         firstLineLabel.textColor = .darkGray
         secondLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         secondLineLabel.textColor = .darkGray
         
-        firstLineLabel.text = "\(UserRegisterValues.shared.nickname)님 만나서 반갑습니다!"
+        firstLineLabel.text = "\(UserRegisterValues.shared.userId)님 만나서 반갑습니다!"
         firstLineLabel.changeTextAttributeColor(
             fullText: firstLineLabel.text!,
-            changeText: "\(UserRegisterValues.shared.nickname)님"
+            changeText: "\(UserRegisterValues.shared.userId)님"
         )
         secondLineLabel.text = "사용하실 비밀번호를 입력해 주세요!"
         secondLineLabel.changeTextAttributeColor(

@@ -20,7 +20,7 @@ class IDInputViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func keyboardDidShow(notification: Notification) {
+    @objc func keyboardWillShow(notification: Notification) {
         
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
@@ -33,9 +33,11 @@ class IDInputViewController: UIViewController {
     @objc func keyboardWillHide(notification: Notification) {
         nextButtonBottomAnchor.constant = 0
         nextButtonHeight.constant = 80
+        nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
 
     @IBAction func pressedNextButton(_ sender: UIButton) {
+        userIdTextField.resignFirstResponder()
         if !checkIDLengthIsValid() { return }
         checkIDDuplication()
     }
@@ -46,8 +48,12 @@ class IDInputViewController: UIViewController {
 extension IDInputViewController {
     
     func checkIDLengthIsValid() -> Bool {
-        
-        return false
+        guard let id = userIdTextField.text else { return false}
+        if id.count >= 4 && id.count <= 40 { return true }
+        else {
+            showErrorMessage(message: "아이디는 4자 이상, 20자 이하로 적어주세요.")
+            return false
+        }
     }
     
     func showErrorMessage(message: String) {
@@ -66,19 +72,32 @@ extension IDInputViewController {
     }
     
     func checkIDDuplication() {
-        //TODO: - API 통신 후 성공이면 다음 VC로 이동
         
+        let id = userIdTextField.text!.trimmingCharacters(in: .whitespaces)
         
-        
-    
-    
-        performSegue(
-            withIdentifier: Constants.SegueID.goToPasswordInputVC,
-            sender: self
-        )
+        UserManager.shared.checkDuplication(id: id) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let isDuplicate):
+                
+                if isDuplicate {
+                    self.showErrorMessage(message: "이미 사용 중인 아이디입니다.🥲")
+                } else {
+                    print("✏️ ID is not duplicate!")
+                    UserRegisterValues.shared.userId = id
+                    DispatchQueue.main.async {
+                        self.performSegue(
+                            withIdentifier: Constants.SegueID.goToPasswordInputVC,
+                            sender: self
+                        )
+                    }
+                }
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
+            }
+        }
     }
-    
-    
 }
 
 //MARK: - UI Configuration
@@ -94,14 +113,14 @@ extension IDInputViewController {
     func createObserverForKeyboardStateChange() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardDidShow),
-            name: UIResponder.keyboardDidShowNotification,
+            selector: #selector(keyboardWillShow),
+            name:UIResponder.keyboardWillShowNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide),
-            name:UIResponder.keyboardWillHideNotification ,
+            name:UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }

@@ -16,7 +16,6 @@ class MyPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         viewModel.loadUserProfile()
         initialize()
 
@@ -305,10 +304,8 @@ extension MyPageViewController {
     }
     
     func initializeTabBarIcon() {
-
         navigationController?.tabBarItem.image = UIImage(named: Constants.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
         navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
-        
     }
     
     func initializeTableView() {

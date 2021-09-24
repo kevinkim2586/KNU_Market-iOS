@@ -148,24 +148,15 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 extension ChatListViewController {
     
     func initialize() {
-        navigationController?.navigationBar.backgroundColor = .white
         createObserversForGettingBadgeValue()
         viewModel.delegate = self
         initializeTabBarIcon()
         initializeTableView()
         setClearNavigationBarBackground()
         setNavigationBarAppearance(to: .white)
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .white
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
     }
     
-    
     func initializeTabBarIcon() {
-//        navigationController?.view.backgroundColor = .white
         navigationController?.tabBarItem.image = UIImage(named: Constants.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
         navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
     }

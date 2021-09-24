@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uak-oy-CzP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uak-oy-CzP">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -94,17 +94,28 @@ IAo
                                     <action selector="pressedSendButton:" destination="uak-oy-CzP" eventType="touchUpInside" id="g6i-pJ-4lU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbI-HD-Pz5">
+                                <rect key="frame" x="358" y="69" width="41" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="pressedDismissButton:" destination="uak-oy-CzP" eventType="touchUpInside" id="oDy-XN-TZn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bV5-uA-KvB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="gRy-qI-jxx" firstAttribute="top" secondItem="tx4-UM-Klg" secondAttribute="bottom" constant="40" id="1Db-be-UWF"/>
                             <constraint firstItem="7yi-Xe-pq6" firstAttribute="top" secondItem="gRy-qI-jxx" secondAttribute="bottom" constant="35" id="HfR-Sd-1mD"/>
+                            <constraint firstItem="bbI-HD-Pz5" firstAttribute="top" secondItem="bV5-uA-KvB" secondAttribute="top" constant="25" id="ILO-3j-H74"/>
                             <constraint firstItem="gRy-qI-jxx" firstAttribute="leading" secondItem="bV5-uA-KvB" secondAttribute="leading" constant="15" id="La3-t4-Y9V"/>
                             <constraint firstAttribute="trailing" secondItem="gRy-qI-jxx" secondAttribute="trailing" constant="15" id="Pny-If-bA9"/>
                             <constraint firstItem="6Wp-5h-dFr" firstAttribute="centerX" secondItem="2lY-yE-t4W" secondAttribute="centerX" id="QcU-ha-mAi"/>
                             <constraint firstItem="bV5-uA-KvB" firstAttribute="trailing" secondItem="7yi-Xe-pq6" secondAttribute="trailing" constant="15" id="Ufo-1n-fLj"/>
                             <constraint firstItem="7yi-Xe-pq6" firstAttribute="leading" secondItem="bV5-uA-KvB" secondAttribute="leading" constant="15" id="V3t-2g-Zev"/>
+                            <constraint firstItem="bV5-uA-KvB" firstAttribute="trailing" secondItem="bbI-HD-Pz5" secondAttribute="trailing" constant="15" id="bVp-LX-scH"/>
                             <constraint firstItem="tx4-UM-Klg" firstAttribute="top" secondItem="bV5-uA-KvB" secondAttribute="top" constant="80" id="hYb-vB-MBx"/>
                             <constraint firstItem="6Wp-5h-dFr" firstAttribute="top" secondItem="7yi-Xe-pq6" secondAttribute="bottom" constant="15" id="i6F-rr-Jx3"/>
                             <constraint firstItem="tx4-UM-Klg" firstAttribute="leading" secondItem="bV5-uA-KvB" secondAttribute="leading" constant="15" id="mzL-g1-dPN"/>
@@ -112,9 +123,10 @@ IAo
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="건의사항" id="Btt-vZ-q6W"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="contentTextView" destination="7yi-Xe-pq6" id="3la-jh-hF9"/>
+                        <outlet property="dismissButton" destination="bbI-HD-Pz5" id="lLB-bA-scM"/>
                         <outlet property="sendButton" destination="6Wp-5h-dFr" id="y5S-9m-f9u"/>
                         <outlet property="titleLabel" destination="tx4-UM-Klg" id="W1m-re-I8O"/>
                     </connections>
@@ -125,8 +137,9 @@ IAo
         </scene>
     </scenes>
     <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="AppDefaultColor">
-            <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.53299999237060547" blue="0.50999999046325684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

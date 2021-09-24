@@ -245,6 +245,7 @@ extension UIViewController {
         navigationBar.tintColor = .darkGray
         navigationBar.setBackgroundImage(UIImage(),
                                          for: .default)
+        navigationBar.backgroundColor = .white
         navigationBar.shadowImage = UIImage()
         view.addSubview(navigationBar)
         

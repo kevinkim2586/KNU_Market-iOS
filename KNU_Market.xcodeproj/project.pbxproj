@@ -15,7 +15,6 @@
 		7C0E2DDF26B7D92800BB37FF /* String Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E2DDE26B7D92800BB37FF /* String Extension.swift */; };
 		7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */; };
 		7C0F1CB626BA64840068FF45 /* VerifyEmail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */; };
-		7C0F1CB826BA64B50068FF45 /* VerifyEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB726BA64B50068FF45 /* VerifyEmailViewController.swift */; };
 		7C0F1CBA26BA6B310068FF45 /* NotificationName Extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB926BA6B310068FF45 /* NotificationName Extension .swift */; };
 		7C132BF2265397B200BE5F40 /* Global Methods + Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */; };
 		7C132BF426552B4900BE5F40 /* UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF326552B4900BE5F40 /* UIButton Extension.swift */; };
@@ -90,8 +89,6 @@
 		7CA661F8263D4387000E0B7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA661F6263D4387000E0B7A /* Main.storyboard */; };
 		7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CA661F9263D4389000E0B7A /* Assets.xcassets */; };
 		7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA661FB263D4389000E0B7A /* LaunchScreen.storyboard */; };
-		7CA6622E26413597000E0B7A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6622D26413597000E0B7A /* LoginViewController.swift */; };
-		7CA662312641359F000E0B7A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA662302641359F000E0B7A /* RegisterViewController.swift */; };
 		7CA66234264135AA000E0B7A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66233264135AA000E0B7A /* HomeViewController.swift */; };
 		7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66236264136BF000E0B7A /* MyPageViewController.swift */; };
 		7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66239264136C7000E0B7A /* ChatListViewController.swift */; };
@@ -142,7 +139,6 @@
 		7C0E2DDE26B7D92800BB37FF /* String Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String Extension.swift"; sourceTree = "<group>"; };
 		7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerifyEmail.storyboard; sourceTree = "<group>"; };
-		7C0F1CB726BA64B50068FF45 /* VerifyEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailViewController.swift; sourceTree = "<group>"; };
 		7C0F1CB926BA6B310068FF45 /* NotificationName Extension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName Extension .swift"; sourceTree = "<group>"; };
 		7C132BF1265397B200BE5F40 /* Global Methods + Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Methods + Variables.swift"; sourceTree = "<group>"; };
 		7C132BF326552B4900BE5F40 /* UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton Extension.swift"; sourceTree = "<group>"; };
@@ -220,8 +216,6 @@
 		7CA661F9263D4389000E0B7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7CA661FC263D4389000E0B7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7CA661FE263D4389000E0B7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7CA6622D26413597000E0B7A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		7CA662302641359F000E0B7A /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7CA66233264135AA000E0B7A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7CA66236264136BF000E0B7A /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		7CA66239264136C7000E0B7A /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
@@ -383,7 +377,6 @@
 			isa = PBXGroup;
 			children = (
 				7C516C3A267F48300065E30D /* ReportUserViewController.swift */,
-				7C0F1CB726BA64B50068FF45 /* VerifyEmailViewController.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -670,8 +663,6 @@
 			children = (
 				7C3B4FF526A92C4100E2CA8F /* User Register */,
 				7CA661F4263D4387000E0B7A /* InitialViewController.swift */,
-				7CA662302641359F000E0B7A /* RegisterViewController.swift */,
-				7CA6622D26413597000E0B7A /* LoginViewController.swift */,
 				7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */,
 			);
 			path = "Login+Register";
@@ -879,9 +870,7 @@
 				7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
 				7C55545D266CDFD100C3C5B6 /* UploadItemRequestDTO.swift in Sources */,
-				7CA6622E26413597000E0B7A /* LoginViewController.swift in Sources */,
 				7C1D829526565429006FEBDE /* SendDeveloperMessageViewController.swift in Sources */,
-				7CA662312641359F000E0B7A /* RegisterViewController.swift in Sources */,
 				7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */,
 				7C3B4FF726A92C6C00E2CA8F /* UserRegisterValues.swift in Sources */,
 				7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */,
@@ -953,7 +942,6 @@
 				7CA78FFA26CE02EC0019B06F /* KMTitleLabel.swift in Sources */,
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */,
-				7C0F1CB826BA64B50068FF45 /* VerifyEmailViewController.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
 				7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */,

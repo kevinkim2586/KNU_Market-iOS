@@ -2,6 +2,7 @@ import UIKit
 
 class ReportUserViewController: UIViewController {
     
+    @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet var contentTextView: UITextView!
     @IBOutlet var sendButton: UIButton!
@@ -21,8 +22,11 @@ class ReportUserViewController: UIViewController {
         dismissProgressBar()
     }
     
+    @IBAction func pressedDismissButton(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+    
     @IBAction func pressedSendButton(_ sender: UIButton) {
-        
         self.view.endEditing(true)
         
         if !validateUserInput() { return }
@@ -55,46 +59,11 @@ class ReportUserViewController: UIViewController {
 }
 
 
-//MARK: - Initialization & UI Configuration
-
-extension ReportUserViewController {
-    
-    func initialize() {
-        
-        initializeTitleLabel()
-        initializeTextView()
-        initializeButton()
-        addDismissButtonToRightNavBar()
-    }
-    
-    func initializeTitleLabel() {
-        
-        titleLabel.text = "\(userToReport)를 신고하시겠습니까?"
-    }
-    
-    func initializeTextView() {
-        
-        contentTextView.delegate = self
-        contentTextView.layer.borderWidth = 0.7
-        contentTextView.layer.cornerRadius = 5
-        contentTextView.layer.borderColor = UIColor.lightGray.cgColor
-        contentTextView.clipsToBounds = true
-        contentTextView.font = UIFont.systemFont(ofSize: 15)
-        contentTextView.text = textViewPlaceholder
-        contentTextView.textColor = UIColor.lightGray
-    }
-    
-    func initializeButton() {
-        sendButton.layer.cornerRadius = 5
-    }
-}
-
 //MARK: - Input Validation
 
 extension ReportUserViewController {
     
     func validateUserInput() -> Bool {
-        
         guard contentTextView.text != textViewPlaceholder else {
             self.showSimpleBottomAlert(with: "신고 내용을 3글자 이상 적어주세요 👀")
             return false
@@ -114,7 +83,6 @@ extension ReportUserViewController {
 extension ReportUserViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
             textView.textColor = UIColor.black
@@ -122,12 +90,47 @@ extension ReportUserViewController: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-
         if textView.text.isEmpty {
-            
             textView.text = textViewPlaceholder
             textView.textColor = UIColor.lightGray
             return
         }
+    }
+}
+
+//MARK: - Initialization & UI Configuration
+
+extension ReportUserViewController {
+    
+    func initialize() {
+        initializeDismissButton()
+        initializeTitleLabel()
+        initializeTextView()
+        initializeButton()
+    }
+    
+    func initializeDismissButton() {
+        dismissButton.setTitle("", for: .normal)
+        dismissButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        dismissButton.tintColor = .darkGray
+    }
+    
+    func initializeTitleLabel() {
+        titleLabel.text = "\(userToReport)를 신고하시겠습니까?"
+    }
+    
+    func initializeTextView() {
+        contentTextView.delegate = self
+        contentTextView.layer.borderWidth = 0.7
+        contentTextView.layer.cornerRadius = 5
+        contentTextView.layer.borderColor = UIColor.lightGray.cgColor
+        contentTextView.clipsToBounds = true
+        contentTextView.font = UIFont.systemFont(ofSize: 15)
+        contentTextView.text = textViewPlaceholder
+        contentTextView.textColor = UIColor.lightGray
+    }
+    
+    func initializeButton() {
+        sendButton.layer.cornerRadius = 5
     }
 }

@@ -233,7 +233,6 @@ extension HomeViewController {
     }
     
     func initializeTabBarIcon() {
-        navigationController?.view.backgroundColor = .white
         navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
         navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
     }
@@ -252,7 +251,6 @@ extension HomeViewController {
             nibName,
             forCellReuseIdentifier: Constants.cellID.itemTableViewCell
         )
-        
         itemTableView.refreshControl?.addTarget(
             self,
             action: #selector(refreshTableView),

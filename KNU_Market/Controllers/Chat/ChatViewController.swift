@@ -202,6 +202,11 @@ extension ChatViewController {
         }
     }
     
+    func didFetchChatFromLastIndex() {
+        messagesCollectionView.reloadData()
+        messagesCollectionView.scrollToLastItem()
+    }
+    
     func didFetchEmptyChat() {
         if viewModel.messages.count == 0 {
             messagesCollectionView.showEmptyChatView()

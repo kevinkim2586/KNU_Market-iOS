@@ -14,16 +14,17 @@ class ChatMemberViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
-        
         guard let members = roomInfo?.member else { return }
         filteredMembers = members.filter { $0.isBanned == false }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.post(name: .didDismissPanModal, object: nil)
+        NotificationCenter.default.post(
+            name: .reconnectAndFetchFromLastChat,
+            object: nil
+        )
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -73,9 +74,11 @@ class ChatMemberViewController: UIViewController {
             switch result {
             case .success(_):
                 self.dismiss(animated: true)
-                self.presentKMAlertOnMainThread(title: "강퇴 성공",
-                                                message: "해당 사용자 내보내기에 성공하였습니다.",
-                                                buttonTitle: "확인")
+                self.presentKMAlertOnMainThread(
+                    title: "강퇴 성공",
+                    message: "해당 사용자 내보내기에 성공하였습니다.",
+                    buttonTitle: "확인"
+                )
                 
                 let userInfo: [String : String] = ["uid" : uid, "nickname" : nickname]
                 showProgressBar()
@@ -122,12 +125,13 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellID = Constants.cellID.chatMemberCell
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? ChatMemberTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellID
+        ) as? ChatMemberTableViewCell else { return UITableViewCell() }
         
         if let cellVM = filteredMembers?[indexPath.row] {
             
             guard let postUploaderUID = postUploaderUID else { return UITableViewCell() }
-            
             cell.delegate = self
             cell.configure(with: cellVM.userUID, postUploaderUID: postUploaderUID)
              
@@ -190,8 +194,6 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
         actionSheet.addAction(banAction)
         actionSheet.addAction(cancelAction)
         present(actionSheet, animated: true)
-        
-
     }
     
     func failedPresentingUserReportVC() {
@@ -208,8 +210,10 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
                                       style: .default) { [weak self] _ in
             guard let self = self else { return }
             
-            self.presentAlertWithCancelAction(title: "정말 강퇴 시키시겠습니까?",
-                                              message: "강퇴를 시키면 다시는 채팅방에 들어오지 못합니다.") { selectedOk in
+            self.presentAlertWithCancelAction(
+                title: "정말 강퇴 시키시겠습니까?",
+                message: "강퇴를 시키면 다시는 채팅방에 들어오지 못합니다."
+            ) { selectedOk in
                 if selectedOk {
                     self.banUser(uid: userUID, nickname: nickname)
                 }

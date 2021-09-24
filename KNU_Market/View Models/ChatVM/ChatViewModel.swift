@@ -21,6 +21,7 @@ protocol ChatViewDelegate: AnyObject {
     func didDeletePost()
     
     func didFetchPreviousChats()
+    func didFetchChatFromLastIndex()
     func didFetchEmptyChat()
     func failedFetchingPreviousChats(with error: NetworkError)
 
@@ -369,6 +370,7 @@ extension ChatViewModel {
         }
     }
     
+    //마지막 채팅 이후부터 새로운 채팅 가져오기
     @objc func getChatFromLastIndex() {
         if messages.count == 0 { delegate?.failedFetchingPreviousChats(with: .E000)}
         showProgressBar()
@@ -466,8 +468,8 @@ extension ChatViewModel {
                 
                 self.fetchFromLastChat = false
                 self.isFetchingData = false
-                self.indexForAfterCertainChat += 1
-                self.delegate?.didFetchPreviousChats()
+                self.indexForAfterCertainChat += 1  //수정 필요(?)
+                self.delegate?.didFetchChatFromLastIndex()
                 
             case .failure(let error):
                 self.isFetchingData = false

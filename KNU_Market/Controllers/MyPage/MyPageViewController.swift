@@ -274,7 +274,7 @@ extension MyPageViewController {
     
     func initialize() {
         
-        createObserversForPresentingEmailVerification()
+        createObserversForPresentingVerificationAlert()
         createObserversForGettingBadgeValue()
         
         viewModel.delegate = self
@@ -284,10 +284,11 @@ extension MyPageViewController {
         initializeBarButtonItem()
         initializeProfileImageButton()
         setBackBarButtonItemTitle()
+        setNavigationBarAppearance(to: .white)
     }
     
     func initializeTabBarIcon() {
-        navigationController?.view.backgroundColor = .white
+//        navigationController?.view.backgroundColor = .white
         navigationController?.tabBarItem.image = UIImage(named: Constants.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
         navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
         

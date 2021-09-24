@@ -12,7 +12,6 @@ class MyPostsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
     }
 }
@@ -47,8 +46,10 @@ extension MyPostsViewController: HomeViewModelDelegate {
     
     func failedFetchingItemList(with error: NetworkError) {
         
-        tableView.showEmptyView(imageName: Constants.Images.emptyChatList,
-                                text: "오류가 발생했습니다!\n잠시 후 다시 시도해주세요.")
+        tableView.showEmptyView(
+            imageName: Constants.Images.emptyChatList,
+            text: "오류가 발생했습니다!\n잠시 후 다시 시도해주세요."
+        )
         refreshControl.endRefreshing()
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
@@ -142,7 +143,7 @@ extension MyPostsViewController {
         
         self.title = "내가 올린 공구"
         
-        createObserversForPresentingEmailVerification()
+        createObserversForPresentingVerificationAlert()
         viewModel.delegate = self
         viewModel.fetchItemList(fetchCurrentUsers: true)
         initializeTableView()
@@ -158,10 +159,15 @@ extension MyPostsViewController {
         tableView.tableFooterView = UIView(frame: .zero)
         
         let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
-        tableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
+        tableView.register(
+            nibName,
+            forCellReuseIdentifier: Constants.cellID.itemTableViewCell
+        )
         
-        refreshControl.addTarget(self,
-                                 action: #selector(refreshTableView),
-                                 for: .valueChanged)
+        refreshControl.addTarget(
+            self,
+            action: #selector(refreshTableView),
+            for: .valueChanged
+        )
     }
 }

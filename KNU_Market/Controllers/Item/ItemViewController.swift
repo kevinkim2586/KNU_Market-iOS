@@ -411,7 +411,7 @@ extension ItemViewController {
     
     func createObservers() {
         
-        createObserversForPresentingEmailVerification()
+        createObserversForPresentingVerificationAlert()
         
         NotificationCenter.default.addObserver(
             self,

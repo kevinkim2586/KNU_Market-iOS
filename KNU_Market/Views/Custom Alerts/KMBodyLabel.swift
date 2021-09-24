@@ -18,7 +18,6 @@ class KMBodyLabel: UILabel {
     }
     
     private func configure() {
-        
         textColor = .secondaryLabel
         font = UIFont.preferredFont(forTextStyle: .body)
         adjustsFontSizeToFitWidth = true

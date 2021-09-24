@@ -487,8 +487,8 @@ extension ChatViewController {
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.delegate = self
-        messagesCollectionView.backgroundColor = .white
         messagesCollectionView.messageCellDelegate = self
+        messagesCollectionView.backgroundColor = .white
         scrollsToLastItemOnKeyboardBeginsEditing = true
         
         guard let layout = messagesCollectionView.collectionViewLayout
@@ -497,8 +497,6 @@ extension ChatViewController {
         layout.setMessageIncomingAvatarSize(.zero)
         layout.setMessageOutgoingAvatarSize(.zero)
         
-        
-
         layout.setMessageIncomingAccessoryViewSize(CGSize(width: 70, height: 10))
         layout.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 0))
         layout.setMessageIncomingAccessoryViewPosition(.messageBottom)
@@ -511,7 +509,8 @@ extension ChatViewController {
         layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left,
                                                                               textInsets: .init(top: 30, left: 15, bottom: 30, right: 10)))
         layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
-                                                                              textInsets: .init(top: 30, left: 10, bottom: 20, right: 10)))
+                                                                              textInsets: .init(top: 30, left: 0, bottom: 20, right: 0)))
+
 
     }
 

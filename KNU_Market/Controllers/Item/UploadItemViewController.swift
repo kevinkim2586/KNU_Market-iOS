@@ -258,7 +258,7 @@ extension UploadItemViewController {
         initializeStepper()
         initializePickerView()
         initializeTextView()
-        createObserversForPresentingEmailVerification()
+        createObserversForPresentingVerificationAlert()
         
         if editModel != nil {
             configurePageWithPriorData()

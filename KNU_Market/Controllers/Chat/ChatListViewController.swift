@@ -30,7 +30,6 @@ class ChatListViewController: UIViewController {
     }
     
     @IBAction func pressedLeftBarButton(_ sender: UIBarButtonItem) {
-        
         if viewModel.roomList.count == 0 { return }
         let topRow = IndexPath(row: 0, section: 0)
         self.chatListTableView.scrollToRow(at: topRow, at: .top, animated: true)
@@ -154,16 +153,24 @@ extension ChatListViewController {
         viewModel.delegate = self
         initializeTabBarIcon()
         initializeTableView()
+        setClearNavigationBarBackground()
+        setNavigationBarAppearance(to: .white)
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
     }
     
+    
     func initializeTabBarIcon() {
-        navigationController?.view.backgroundColor = .white
+//        navigationController?.view.backgroundColor = .white
         navigationController?.tabBarItem.image = UIImage(named: Constants.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
         navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
     }
     
     func initializeTableView() {
-        
         chatListTableView.delegate = self
         chatListTableView.dataSource = self
         chatListTableView.refreshControl = refreshControl

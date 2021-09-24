@@ -133,7 +133,7 @@ extension ChangeNicknameViewController {
     
     func initialize() {
         
-        createObserversForPresentingEmailVerification()
+        createObserversForPresentingVerificationAlert()
         initializeTextField()
         initializeButton()
     }

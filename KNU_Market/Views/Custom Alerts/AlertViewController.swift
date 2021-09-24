@@ -4,21 +4,24 @@ class AlertViewController: UIViewController {
     
     let containerView   = UIView()
     let titleLabel      = KMTitleLabel(textAlignment: .center, fontSize: 20)
-    let messageLabel    = KMBodyLabel(textAlignment: .center)
+    var messageLabel    = KMBodyLabel(textAlignment: .center)
     let actionButton    = KMButton(backgroundColor: UIColor(named: Constants.Color.appColor)!, title: "확인")
 
     var alertTitle: String?
     var message: String?
     var buttonTitle: String?
+    var attributedMessageString: NSAttributedString?
     
     let padding: CGFloat = 20
     
-    init(title: String, message: String, buttonTitle: String) {
+    init(title: String, message: String, buttonTitle: String, attributedMessageString: NSAttributedString? = nil) {
         super.init(nibName: nil, bundle: nil)
-        
         self.alertTitle = title
         self.message = message
         self.buttonTitle = buttonTitle
+        if let attributedMessageString = attributedMessageString {
+            self.attributedMessageString = attributedMessageString
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +38,6 @@ class AlertViewController: UIViewController {
     }
     
     func configureContainerView() {
-        
         view.addSubview(containerView)
         containerView.backgroundColor = .systemBackground
         containerView.layer.cornerRadius = 16
@@ -63,6 +65,23 @@ class AlertViewController: UIViewController {
         ])
     }
     
+    func configureMessageLabel() {
+        containerView.addSubview(messageLabel)
+        
+        if let attributedMessageString = attributedMessageString {
+            messageLabel.attributedText = attributedMessageString
+        } else {
+            messageLabel.text = message ?? "표시 오류"
+        }
+        messageLabel.numberOfLines = 5
+        NSLayoutConstraint.activate([
+            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),
+            messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -padding),
+            messageLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -12)
+        ])
+    }
+    
     func configureActionButton() {
         containerView.addSubview(actionButton)
         actionButton.setTitle(buttonTitle ?? "확인", for: .normal)
@@ -77,17 +96,5 @@ class AlertViewController: UIViewController {
         ])
     }
     
-    func configureMessageLabel() {
-        containerView.addSubview(messageLabel)
-        messageLabel.text = message ?? "표시 오류"
-        messageLabel.numberOfLines = 5
-        
-        NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),
-            messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -padding),
-            messageLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -12)
-        ])
-        
-    }
+
 }

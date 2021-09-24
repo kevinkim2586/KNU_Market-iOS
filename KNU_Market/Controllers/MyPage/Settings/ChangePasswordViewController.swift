@@ -95,7 +95,7 @@ extension ChangePasswordViewController {
         
         initializeTextFields()
         initializeButton()
-        createObserversForPresentingEmailVerification()
+        createObserversForPresentingVerificationAlert()
     }
     
     func initializeTextFields() {

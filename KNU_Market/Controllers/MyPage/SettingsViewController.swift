@@ -54,17 +54,6 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func pressedResendEmailButton(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "VerifyEmail", bundle: nil)
-        
-        guard let vc = storyboard.instantiateViewController(
-            identifier: Constants.StoryboardID.emailInputVC
-        ) as? EmailInputViewController else { return }
-        
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
     func initialize() {
         userNicknameLabel.text = User.shared.nickname
     }

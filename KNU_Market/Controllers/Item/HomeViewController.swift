@@ -40,14 +40,15 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
+        print("✏️ verified? :\(detectIfVerifiedUser())")
         if !detectIfVerifiedUser() {
             showSimpleBottomAlertWithAction(
-                message: "학생 인증을 마치셔야 사용이 가능해요.",
+                message: "학생 인증을 마치셔야 사용이 가능해요.👀",
                 buttonTitle: "인증하러 가기"
             ) {
                 self.presentVerifyOptionVC()
-                return
             }
+            return
         }
         guard let uploadVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.uploadItemVC) as? UploadItemViewController else {
             return
@@ -219,12 +220,12 @@ extension HomeViewController {
         
         askForNotificationPermission()
         initializeTabBarIcon()
-        initializeNavBar()
         initializeTableView()
         initializeAddButton()
         initializeBarButtonItem()
         createObservers()
         setBackBarButtonItemTitle()
+        setNavigationBarAppearance(to: .white)
 
         if User.shared.isAbsoluteFirstAppLaunch {
             presentInitialVerificationAlert()
@@ -232,16 +233,9 @@ extension HomeViewController {
     }
     
     func initializeTabBarIcon() {
+        navigationController?.view.backgroundColor = .white
         navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
         navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
-    }
-    
-    func initializeNavBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .white
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
     }
     
     func initializeTableView() {

@@ -11,12 +11,13 @@ import PMAlertController
 extension UIViewController {
     
     // Custom Alert
-    func presentKMAlertOnMainThread(title: String, message: String, buttonTitle: String) {
+    func presentKMAlertOnMainThread(title: String, message: String, buttonTitle: String, attributedMessageString: NSAttributedString? = nil) {
         DispatchQueue.main.async {
             let alertVC = AlertViewController(
                 title: title,
                 message: message,
-                buttonTitle: buttonTitle
+                buttonTitle: buttonTitle,
+                attributedMessageString: attributedMessageString
             )
             alertVC.modalPresentationStyle = .overFullScreen
             alertVC.modalTransitionStyle = .crossDissolve
@@ -267,16 +268,21 @@ extension UIViewController {
         navigationItem.backBarButtonItem = backBarButtonItem
     }
     
+    func setNavigationBarAppearance(to color: UIColor) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = color
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+    }
+    
     @objc func dismissVC() {
-        print("✏️ pressed Dismiss Button")
         dismiss(animated: true, completion: nil)
     }
     
     func setClearNavigationBarBackground() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-       
-        
     }
 }
 
@@ -293,7 +299,7 @@ extension UIViewController {
         )
     }
     
-    func createObserversForPresentingEmailVerification() {
+    func createObserversForPresentingVerificationAlert() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(presentUserVerificationNeededAlert),

@@ -8,15 +8,17 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
     
+    private lazy var idGuideString = "2021년 9월 27일 이전 가입 유저의 아이디는 웹메일(@knu.ac.kr) 형식입니다."
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
+
     
     //MARK: - IBActions
     
     @IBAction func pressedLoginButton(_ sender: UIButton) {
-        
         guard let id = idTextField.text, let password = pwTextField.text else { return }
         guard id.count > 0, password.count > 0 else { return }
         
@@ -37,12 +39,9 @@ class InitialViewController: UIViewController {
             }
             dismissProgressBar()
         }
-        
-        
     }
     
     @IBAction func pressedRegisterButton(_ sender: UIButton) {
-        
         performSegue(withIdentifier: Constants.SegueID.goToRegister, sender: self)
     }
     
@@ -56,27 +55,18 @@ class InitialViewController: UIViewController {
     }
     
     @IBAction func pressedInfoButton(_ sender: UIButton) {
-        let message = "2021년 9월 27일 이전 가입 유저의 아이디는 웹메일(@knu.ac.kr) 형식입니다."
-        let alertController = UIAlertController(
-            title: "아이디 관련 안내",
-            message: message,
-            preferredStyle: .alert
+        let attributedMessageString: NSAttributedString = idGuideString.attributedStringWithColor(
+            ["웹메일(@knu.ac.kr) 형식"],
+            color: UIColor(named: Constants.Color.appColor) ?? .systemPink,
+            characterSpacing: nil
         )
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default
-        )
-     
-        alertController.setValue(NSAttributedString(
-            string: "웹메일(@knu.ac.kr) 형식",
-            attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: Constants.Color.appColor)]),
-                                 forKey: "attributedMessage"
-        )
-
         
-        
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+        presentKMAlertOnMainThread(
+            title: "아이디 관련",
+            message: "",
+            buttonTitle: "확인",
+            attributedMessageString: attributedMessageString
+        )
     }
 }
 
@@ -86,22 +76,6 @@ extension InitialViewController: FindPasswordDelegate {
     
     func didSendFindPasswordEmail() {
         self.showSimpleBottomAlert(with: "발급받은 임시 비밀번호로 로그인해 주세요. 🎉")
-    }
-}
-
-//MARK: - UITextField Delegate
-
-extension InitialViewController: UITextFieldDelegate {
-    
-    @objc func textFieldChanged(textField: UITextField) {
-
-//        
-//        guard let text = idTextField.text?.replacingOccurrences(of: "@knu.ac.kr", with: "") else { return }
-//        
-//        if textField.text != "" {
-//            textField.text = text + "@knu.ac.kr"
-//        }
-        
     }
 }
 
@@ -125,10 +99,8 @@ extension InitialViewController {
         idTextField.minimumFontSize = 12
         idTextField.layer.masksToBounds = true
         idTextField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        idTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
-        idTextField.delegate = self
 
-        idTextField.placeholder = "학교 이메일 입력 (@knu.ac.kr)"
+        idTextField.placeholder = "아이디 입력"
         
         pwTextField.borderStyle = .none
         pwTextField.backgroundColor = .systemGray6

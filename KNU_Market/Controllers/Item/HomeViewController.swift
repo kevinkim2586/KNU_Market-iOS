@@ -15,7 +15,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,7 +40,15 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
-        
+        if !detectIfVerifiedUser() {
+            showSimpleBottomAlertWithAction(
+                message: "학생 인증을 마치셔야 사용이 가능해요.",
+                buttonTitle: "인증하러 가기"
+            ) {
+                self.presentVerifyOptionVC()
+                return
+            }
+        }
         guard let uploadVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.uploadItemVC) as? UploadItemViewController else {
             return
         }

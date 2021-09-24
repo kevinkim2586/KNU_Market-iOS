@@ -184,17 +184,20 @@ extension UIViewController {
         
         alertVC.addAction(PMAlertAction(title: "취소", style: .cancel))
         alertVC.addAction(PMAlertAction(title: "인증하기", style: .default, action: { () in
-            
-            let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
-            guard let vc = storyboard.instantiateViewController(
-                identifier: Constants.StoryboardID.verifyOptionVC
-            ) as? VerifyOptionViewController else { return }
-            
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.presentVerifyOptionVC()
         }))
     
         present(alertVC, animated: true)
         User.shared.isAbsoluteFirstAppLaunch = false
+    }
+    
+    func presentVerifyOptionVC() {
+        let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(
+            identifier: Constants.StoryboardID.verifyOptionVC
+        ) as? VerifyOptionViewController else { return }
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

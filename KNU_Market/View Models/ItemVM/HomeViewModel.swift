@@ -20,19 +20,19 @@ class HomeViewModel {
     
     var isFetchingData: Bool = false
     var index: Int = 1
-
+    
     
     //MARK: - 공구글 불러오기
     func fetchItemList(fetchCurrentUsers: Bool = false) {
         
         isFetchingData = true
-
+        
         ItemManager.shared.fetchItemList(at: self.index,
                                          fetchCurrentUsers: fetchCurrentUsers,
                                          postFilterOption: User.shared.postFilterOption) { [weak self] result in
             
             guard let self = self else { return }
-
+            
             switch result {
             case .success(let fetchedModel):
                 
@@ -57,7 +57,7 @@ class HomeViewModel {
             }
         }
     }
-
+    
     //MARK: - 사용자 프로필 정보 불러오기
     func loadUserProfile() {
         
@@ -79,20 +79,20 @@ class HomeViewModel {
     func fetchEnteredRoomInfo() {
         
         ChatManager.shared.getResponseModel(function: .getRoom,
-                                       method: .get,
-                                       pid: nil,
-                                       index: nil,
-                                       expectedModel: [Room].self) { [weak self] result in
+                                            method: .get,
+                                            pid: nil,
+                                            index: nil,
+                                            expectedModel: [Room].self) { [weak self] result in
             
             guard let self = self else { return }
             
             switch result {
             case .success(let chatRoom):
-        
+                
                 chatRoom.forEach { chat in
                     User.shared.joinedChatRoomPIDs.append(chat.uuid)
                 }
-
+                
             case .failure(let error):
                 self.delegate?.failedFetchingRoomPIDInfo(with: error)
             }
@@ -100,7 +100,6 @@ class HomeViewModel {
     }
     
     func changePostFilterOption() {
-        
         if User.shared.postFilterOption == .showAll {
             User.shared.postFilterOption = .showGatheringFirst
         } else {
@@ -135,6 +134,6 @@ class HomeViewModel {
 extension HomeViewModel {
     
     var filterActionTitle: String {
-        return User.shared.postFilterOption == .showAll ? "모집 중인 공구 먼저 보기" : "업로드 순으로 보기"
+        return User.shared.postFilterOption == .showAll ? "'모집 중' 먼저보기" : "최신 순으로 보기"
     }
 }

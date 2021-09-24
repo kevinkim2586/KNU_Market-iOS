@@ -6,6 +6,7 @@ class MyPageViewController: UIViewController {
     
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var userNicknameLabel: UILabel!
+    @IBOutlet weak var userVerifiedImage: UIImageView!
     @IBOutlet weak var settingsTableView: UITableView!
     @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem!
     
@@ -104,10 +105,10 @@ extension MyPageViewController: MyPageViewModelDelegate {
 
     func didLoadUserProfileInfo() {
         userNicknameLabel.text = "\(viewModel.userNickname)"
+        userVerifiedImage.isHidden = detectIfVerifiedUser() ? false : true
     }
     
     func didFetchProfileImage() {
-    
         if viewModel.profileImage != nil {
             profileImageButton.setImage(viewModel.profileImage,
                                         for: .normal)
@@ -289,12 +290,12 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
 extension MyPageViewController {
     
     func initialize() {
-        
         createObserversForPresentingVerificationAlert()
         createObserversForGettingBadgeValue()
-        
+
         viewModel.delegate = self
         
+        userVerifiedImage.isHidden = true
         initializeTabBarIcon()
         initializeTableView()
         initializeBarButtonItem()
@@ -304,7 +305,7 @@ extension MyPageViewController {
     }
     
     func initializeTabBarIcon() {
-//        navigationController?.view.backgroundColor = .white
+
         navigationController?.tabBarItem.image = UIImage(named: Constants.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
         navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
         

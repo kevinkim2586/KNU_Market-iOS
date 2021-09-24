@@ -41,16 +41,18 @@ class ChatViewModel: WebSocketDelegate {
                         displayName: User.shared.nickname)
     
     private var chatModel: ChatResponseModel?
-    private var index: Int = 1
+    private var indexForPreviousChat: Int = 1
+    private var indexForAfterCertainChat: Int = 1
     
     var isFetchingData: Bool = false
     var needsToFetchMoreData: Bool = true
+    var fetchFromLastChat: Bool = false
     
     // Socket
     private var socket: WebSocket!
     private let server =  WebSocketServer()
     private var isConnected = false
-    private var connectRetryLimit = 5
+    private var connectRetryLimit = 8
     private var connectRetryCount = 0
     
 
@@ -273,21 +275,21 @@ extension ChatViewModel {
 extension ChatViewModel {
     
     // 채팅 받아오기
-    @objc func getChatList() {
+    @objc func getPreviousChats() {
     
         self.isFetchingData = true
         
         ChatManager.shared.getResponseModel(function: .getChat,
                                             method: .get,
-                                            pid: self.room,
-                                            index: self.index,
+                                            pid: room,
+                                            index: indexForPreviousChat,
                                             expectedModel: ChatResponseModel.self) { [weak self] result in
             
             guard let self = self else { return }
         
             switch result {
             case .success(let chatResponseModel):
-                
+            
                 if chatResponseModel.chat.isEmpty {
                     self.isFetchingData = false
                     self.needsToFetchMoreData = false
@@ -297,6 +299,7 @@ extension ChatViewModel {
                 
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
                 
+
                 for chat in chatResponseModel.chat {
                     
                     let chatText = chat.chat_content
@@ -354,8 +357,9 @@ extension ChatViewModel {
                     }
                 }
                 
+
                 self.isFetchingData = false
-                self.index += 1
+                self.indexForPreviousChat += 1
                 self.delegate?.didFetchPreviousChats()
                 
             case .failure(let error):
@@ -365,6 +369,116 @@ extension ChatViewModel {
         }
     }
     
+    @objc func getChatFromLastIndex() {
+        if messages.count == 0 { delegate?.failedFetchingPreviousChats(with: .E000)}
+        showProgressBar()
+    
+        isFetchingData = true
+        
+        let dateOfLastChat = messages[messages.count - 1].sentDate.getDateStringForGetChatListHeader()
+        
+        let headers: HTTPHeaders = [
+            "isover": "1",
+            "date":  dateOfLastChat
+        ]
+        
+        ChatManager.shared.getResponseModel(function: .getChat,
+                                            method: .get,
+                                            headers: headers,
+                                            pid: room,
+                                            index: indexForAfterCertainChat,
+                                            expectedModel: ChatResponseModel.self) { [weak self] result in
+            
+            dismissProgressBar()
+            
+            guard let self = self else { return }
+        
+            switch result {
+            case .success(let chatResponseModel):
+            
+                if chatResponseModel.chat.isEmpty {
+                    self.isFetchingData = false
+                    self.needsToFetchMoreData = false
+                    self.delegate?.didFetchEmptyChat()
+                    return
+                }
+                
+                
+                self.chatModel?.chat.append(contentsOf: chatResponseModel.chat)
+                
+                
+                for chat in chatResponseModel.chat {
+                    
+                    let chatText = chat.chat_content
+                    let senderUID = chat.chat_userUID
+                    
+                    let filteredChat = self.filterChat(text: chatText, userUID: senderUID)
+                    
+                    guard filteredChat.chatMessage != Constants.ChatSuffix.emptySuffix else { continue }
+                    
+                    // 내 채팅이 아니면
+                    if chat.chat_userUID != User.shared.userUID {
+                        
+                        let others = Sender(senderId: chat.chat_userUID,
+                                            displayName: chat.chat_username)
+                        
+                        
+                        if filteredChat.chatType == .text {
+                            self.messages.append(Message(chat: chat,
+                                                         sender: others,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .text(filteredChat.chatMessage))
+                                                 )
+                        } else {
+                            self.messages.append(Message(chat: chat,
+                                                         sender: others,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                                                image: nil,
+                                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight))))
+                                                 )
+                        }
+
+                    }
+                    
+                    // 내 채팅이면
+                    else {
+                        
+                        if filteredChat.chatType == .text {
+                            self.messages.append(Message(chat: chat,
+                                                         sender: self.mySelf,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .text(filteredChat.chatMessage))
+                                                 )
+                        } else {
+                            self.messages.append(Message(chat: chat,
+                                                         sender: self.mySelf,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                                                image: nil,
+                                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight))))
+                                                 )
+                        }
+                    }
+                }
+                
+                self.fetchFromLastChat = false
+                self.isFetchingData = false
+                self.indexForAfterCertainChat += 1
+                self.delegate?.didFetchPreviousChats()
+                
+            case .failure(let error):
+                self.isFetchingData = false
+                self.delegate?.failedFetchingPreviousChats(with: error)
+            }
+        }
+    }
+    
+
+
+
     // 공구글 참가
     func joinPost() {
         
@@ -381,7 +495,6 @@ extension ChatViewModel {
                     self.connect()
                     self.getRoomInfo()
                 } else {
-                    print("❗️ ChatViewModel - joinPost ERROR")
                     self.delegate?.failedConnection(with: error)
                 }
             }
@@ -565,7 +678,7 @@ extension ChatViewModel {
     func resetMessages() {
         chatModel = nil
         messages.removeAll()
-        index = 1
+        indexForPreviousChat = 1
     }
     
     @objc func resetAndReconnect() {
@@ -573,28 +686,45 @@ extension ChatViewModel {
         connect()
     }
     
+    @objc func reconnectAndFetchFromLastChat() {
+        fetchFromLastChat = true
+        indexForAfterCertainChat = 1
+        connect()
+    }
+    
     func createObservers() {
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(exitPost),
-                                               name: .didChooseToExitPost,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(deletePost),
-                                               name: .didChooseToDeletePost,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(sendBanMessageToSocket),
-                                               name: .didBanUser,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(getChatList),
-                                               name: .didDismissPanModal,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(resetAndReconnect),
-                                               name: .getChat,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(exitPost),
+            name: .didChooseToExitPost,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(deletePost),
+            name: .didChooseToDeletePost,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(sendBanMessageToSocket),
+            name: .didBanUser,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getPreviousChats),
+            name: .didDismissPanModal,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reconnectAndFetchFromLastChat),
+            name: .reconnectAndFetchFromLastChat,
+            object: nil
+        )
+
     }
 
 }

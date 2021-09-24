@@ -48,8 +48,10 @@ extension ChatListViewController: ChatListViewModelDelegate {
         chatListTableView.refreshControl?.endRefreshing()
         
         if viewModel.roomList.count == 0 {
-            chatListTableView.showEmptyView(imageName: Constants.Images.emptyChatList,
-                                            text: "아직 활성화된 채팅방이 없네요!\n새로운 공구에 참여해보세요 :)")
+            chatListTableView.showEmptyView(
+                imageName: Constants.Images.emptyChatList,
+                text: "아직 활성화된 채팅방이 없네요!\n새로운 공구에 참여해보세요 :)"
+            )
             chatListTableView.tableFooterView = UIView(frame: .zero)
         }
 

@@ -3,7 +3,6 @@ import UIKit
 extension String {
     
     func convertStringToDate() -> Date {
-    
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "ko_KR")

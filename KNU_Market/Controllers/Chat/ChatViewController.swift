@@ -113,8 +113,14 @@ extension ChatViewController: ChatViewDelegate {
             viewModel.isFirstEntranceToChat = false
             showChatPrecautionMessage()
         }
-    
-        viewModel.getChatList()
+        
+        if viewModel.fetchFromLastChat {
+            print("✏️ ChatVC - getChatFromLastIndex")
+            viewModel.getChatFromLastIndex()
+        } else {
+            print("✏️ ChatVC - getPreviousChats")
+            viewModel.getPreviousChats()
+        }
     }
 
     func didDisconnect() {
@@ -195,37 +201,39 @@ extension ChatViewController {
             messagesCollectionView.showEmptyChatView()
         }
     }
-
+    
     func didFetchEmptyChat() {
         if viewModel.messages.count == 0 {
             messagesCollectionView.showEmptyChatView()
         }
     }
-
+    
     func failedFetchingPreviousChats(with error: NetworkError) {
-        presentKMAlertOnMainThread(title: "서비스 오류 발생",
-                                   message: error.errorDescription,
-                                   buttonTitle: "확인")
+        presentKMAlertOnMainThread(
+            title: "일시적인 오류 발생",
+            message: error.errorDescription,
+            buttonTitle: "확인"
+        )
         dismissProgressBar()
     }
-
+    
     func failedUploadingImageToServer() {
         dismissProgressBar()
         presentKMAlertOnMainThread(title: "사진 업로드 실패",
                                    message: "사진 용량이 너무 크거나 일시적인 오류로 업로드에 실패하였습니다. 잠시 후 다시 시도해주세요.😥",
                                    buttonTitle: "확인")
-
+        
     }
 }
 
 //MARK: - InputBarAccessoryViewDelegate
 
 extension ChatViewController: InputBarAccessoryViewDelegate {
-
+    
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         viewModel.sendText(text)
         messagesCollectionView.scrollToLastItem()
-
+        
     }
 }
 
@@ -336,8 +344,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                     self.viewModel.needsToFetchMoreData &&
                     !self.viewModel.isFirstViewLaunch {
                     
-                    print("✏️ fetching more data...")
-                    self.viewModel.getChatList()
+
+                    self.viewModel.getPreviousChats()
 
                 }
             }

@@ -128,7 +128,6 @@ extension ChatListViewModel {
 extension ChatListViewModel {
 
     func currentRoomIsUserUploaded(at index: Int) -> Bool {
-        
         if roomList[index].userUID == User.shared.userUID {
             return true
         } else {
@@ -137,7 +136,6 @@ extension ChatListViewModel {
     }
     
     func createObservers() {
-        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(fetchChatList),

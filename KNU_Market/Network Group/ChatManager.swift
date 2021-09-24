@@ -70,12 +70,11 @@ class ChatManager {
             .responseData { response in
                 
                 switch response.result {
-                
                 case .success:
                     do {
                         let decodedData = try JSONDecoder().decode(expectedModel,
                                                                    from: response.data ?? Data())
-                        completion(.success(decodedData))
+                         completion(.success(decodedData))
                         
                     } catch {
                         print("❗️ ChatManager - getResponse decoding error: \(error) for function: \(function)")

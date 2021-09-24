@@ -35,27 +35,22 @@ extension Message {
     var chatContent: String {
         return self.chat.chat_content
     }
-    
-//
-//    var heroID: String {
-//        return "\(Int.random(in: 0...1000))"
-//    }
-
 }
 
 extension Message {
     
     static var defaultValue: Message {
-        return Message(chat:
-                        Chat(chat_uid: 0,
-                             chat_userUID: "",
-                             chat_username: "",
-                             chat_roomUID: "",
-                             chat_content: "",
-                             chat_date: ""),
-                       sender: Sender(senderId: "",
-                                      displayName: ""),
-                       sentDate: Date(),
-                       kind: .text(""))
+        return Message(chat: Chat(
+            chat_uid: 0,
+            chat_userUID: "",
+            chat_username: "",
+            chat_roomUID: "",
+            chat_content: "",
+            chat_date: ""),
+            sender: Sender(senderId: "",
+                        displayName: ""),
+            sentDate: Date(),
+            kind: .text("")
+        )
     }
 }

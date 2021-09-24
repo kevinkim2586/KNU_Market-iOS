@@ -88,21 +88,25 @@ class ChatMemberViewController: UIViewController {
     }
     
     func blockUser(uid: String, nickname: String) {
-        
         guard !User.shared.bannedChatMembers.contains(uid) else {
-            presentKMAlertOnMainThread(title: "이미 차단한 사용자입니다.",
-                                       message: "이미 차단 목록에 추가된 사용자입니다!",
-                                       buttonTitle: "확인")
+            presentKMAlertOnMainThread(
+                title: "이미 차단한 사용자입니다.",
+                message: "이미 차단 목록에 추가된 사용자입니다!",
+                buttonTitle: "확인"
+            )
             return
         }
         
         User.shared.bannedChatMembers.append(uid)
-        print("✏️ bannedChatMembers: \(User.shared.bannedChatMembers)")
         dismiss(animated: true) {
-            NotificationCenter.default.post(name: .didBlockUser,
-                                            object: nil)
-            NotificationCenter.default.post(name: .getChat,
-                                            object: nil)
+            NotificationCenter.default.post(
+                name: .didBlockUser,
+                object: nil
+            )
+            NotificationCenter.default.post(
+                name: .resetAndReconnectChat,
+                object: nil
+            )
         }
     }
 }

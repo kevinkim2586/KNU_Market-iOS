@@ -147,7 +147,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             }
         }
         
-        NotificationCenter.default.post(name: .getChatList, object: nil)
+        NotificationCenter.default.post(name: .getPreviousChats, object: nil)
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)
         
         completionHandler([[.alert, .sound, .badge]])

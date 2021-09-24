@@ -109,8 +109,10 @@ extension MyPageViewController: MyPageViewModelDelegate {
     
     func didFetchProfileImage() {
         if viewModel.profileImage != nil {
-            profileImageButton.setImage(viewModel.profileImage,
-                                        for: .normal)
+            profileImageButton.setImage(
+                viewModel.profileImage,
+                for: .normal
+            )
             profileImageButton.layer.masksToBounds = true
         } else {
             profileImageButton.setImage(UIImage(named: Constants.Images.pickProfileImage),
@@ -120,7 +122,8 @@ extension MyPageViewController: MyPageViewModelDelegate {
     }
     
     func failedLoadingUserProfileInfo(with error: NetworkError) {
-        self.showSimpleBottomAlert(with: "프로필 정보 가져오기 실패. 잠시 후 다시 시도해주세요 🥲")
+        self.showSimpleBottomAlert(with: "프로필 정보 가져오기 실패. 로그아웃 후 다시 시도해주세요.")
+        userNicknameLabel.text = "닉네임 불러오기 실패"
     }
 
     //이미지 먼저 서버에 업로드

@@ -168,9 +168,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         return 2
     }
     
-
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        return 25
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -180,6 +179,25 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         default: break
         }
         return nil
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 25))
+        view.backgroundColor = .white
+        
+        let label = UILabel(frame: CGRect(x: 16, y: 5, width: tableView.frame.width, height: 20))
+        
+        switch section {
+        case 0: label.text = "사용자 설정"
+        case 1: label.text = "기타"
+        default: break
+        }
+
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.textAlignment = .left
+        label.textColor = .darkGray
+        view.addSubview(label)
+        return view
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -246,7 +264,6 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
             
             dismiss(animated: true) {
                 self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
-                   
                     if selectedOk {
                         self.updateProfileImageButton(with: originalImage)
                         showProgressBar()
@@ -261,8 +278,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
             }
         }
     }
-    
-    
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }

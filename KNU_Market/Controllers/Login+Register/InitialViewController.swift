@@ -25,15 +25,11 @@ class InitialViewController: UIViewController {
         showProgressBar()
     
         UserManager.shared.login(email: id, password: password) { [weak self] result in
-            
             guard let self = self else { return }
             
             switch result {
             case .success(_):
-                
-                print("LoginViewController - login success")
                 self.goToHomeScreen()
-                
             case .failure(let error):
                 self.presentKMAlertOnMainThread(title: "로그인 실패", message: error.errorDescription, buttonTitle: "확인")
             }
@@ -62,7 +58,7 @@ class InitialViewController: UIViewController {
         )
         
         presentKMAlertOnMainThread(
-            title: "아이디 관련",
+            title: "아이디 안내",
             message: "",
             buttonTitle: "확인",
             attributedMessageString: attributedMessageString

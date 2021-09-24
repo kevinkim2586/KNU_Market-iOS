@@ -526,7 +526,6 @@ extension UserManager {
     }
     
     func saveUserLoginInfo(with model: LoadProfileResponseModel) {
-    
         User.shared.userUID = model.uid
         User.shared.email = model.email
         User.shared.nickname = model.nickname

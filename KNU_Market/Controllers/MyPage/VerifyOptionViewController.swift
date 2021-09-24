@@ -8,6 +8,14 @@ class VerifyOptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        if detectIfVerifiedUser() {
+            presentKMAlertOnMainThread(
+                title: "이미 인증하셨습니다!",
+                message: "이미 경북대학교 학생 인증을 하셨습니다. 감사합니다.😁",
+                buttonTitle: "확인"
+            )
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     

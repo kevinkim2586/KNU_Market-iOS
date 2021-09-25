@@ -22,6 +22,7 @@ class UserManager {
     let unregisterURL               = "\(Constants.API_BASE_URL)auth"
     let sendEmailURL                = "\(Constants.API_BASE_URL)verification"
     let sendFeedbackURL             = "\(Constants.API_BASE_URL)report"
+    let studentIdVerifyURL          = "\(Constants.API_BASE_URL)verification/card"
     
     let interceptor = Interceptor()
     

@@ -80,34 +80,6 @@ class EmailInputViewController: UIViewController {
         vc.email = email
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-//    func registerUser() {
-//
-//        showProgressBar()
-//
-//        let model = RegisterRequestDTO(id: UserRegisterValues.shared.email,
-//                                       password: UserRegisterValues.shared.password,
-//                                       nickname: UserRegisterValues.shared.nickname,
-//                                       image: UserRegisterValues.shared.profileImage,
-//                                       fcmToken: UserRegisterValues.shared.fcmToken)
-//
-//        UserManager.shared.register(with: model) { [weak self] result in
-//
-//            guard let self = self else { return }
-//
-//            dismissProgressBar()
-//
-//            switch result {
-//            case .success:
-//                DispatchQueue.main.async {
-//                    self.performSegue(withIdentifier: Constants.SegueID.goToCheckEmailVC, sender: self)
-//                }
-//            case .failure(let error):
-//                self.showSimpleBottomAlert(with: error.errorDescription)
-//
-//            }
-//        }
-//    }
 }
 
 //MARK: - UI Configuration & Initialization

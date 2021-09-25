@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1fO-Xg-wOS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1fO-Xg-wOS">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -31,6 +31,7 @@
                                     <constraint firstAttribute="height" constant="80" id="T3p-WP-9bt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
                                 <state key="normal" title="다음">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -83,6 +84,7 @@
                                     <constraint firstAttribute="height" constant="80" id="n25-cr-IQE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
                                 <state key="normal" title="인증 완료하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -91,25 +93,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학번" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05C-Ev-lQc">
-                                <rect key="frame" x="30" y="94" width="45" height="31.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                <rect key="frame" x="30" y="68" width="33" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <color key="textColor" name="AppDefaultColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="생년월일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hm-bF-9DH">
-                                <rect key="frame" x="30" y="220.5" width="90" height="32"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                <rect key="frame" x="30" y="180" width="66" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <color key="textColor" name="AppDefaultColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모바일 학생증 캡쳐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHS-O1-6I2">
-                                <rect key="frame" x="30" y="357.5" width="191.5" height="32"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                <rect key="frame" x="30" y="302" width="140.5" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <color key="textColor" name="AppDefaultColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="학번을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PSO-dC-Wwl" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="30" y="140.5" width="224" height="60"/>
+                                <rect key="frame" x="30" y="100" width="224" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="y96-2A-81q"/>
                                 </constraints>
@@ -137,7 +139,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="생년월일 6자리 (예:981121)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pns-yS-OW6" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="30" y="267.5" width="208" height="60"/>
+                                <rect key="frame" x="30" y="212" width="208" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="yn4-Rx-bM9"/>
                                 </constraints>
@@ -165,7 +167,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W65-nU-zWY">
-                                <rect key="frame" x="304" y="164" width="80" height="30"/>
+                                <rect key="frame" x="304" y="128" width="80" height="30"/>
                                 <color key="backgroundColor" name="AppDefaultColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="DsK-mu-YMU"/>
@@ -180,32 +182,44 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrs-n8-PXg">
-                                <rect key="frame" x="30" y="440" width="354" height="326"/>
+                                <rect key="frame" x="30" y="399.5" width="354" height="386.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ys-uF-hsl">
-                                        <rect key="frame" x="152" y="138" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="N8k-op-bos"/>
-                                            <constraint firstAttribute="width" constant="50" id="i4d-5a-pir"/>
-                                        </constraints>
-                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="plus" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="pressedAddImageButton:" destination="DH6-8W-7Ud" eventType="touchUpInside" id="wTI-Cp-TAI"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="78" translatesAutoresizingMaskIntoConstraints="NO" id="zxA-mw-Qqm">
+                                        <rect key="frame" x="68" y="148.5" width="218" height="90"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ys-uF-hsl">
+                                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="N8k-op-bos"/>
+                                                    <constraint firstAttribute="width" constant="50" id="i4d-5a-pir"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="plus" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="pressedAddImageButton:" destination="DH6-8W-7Ud" eventType="touchUpInside" id="wTI-Cp-TAI"/>
+                                                </connections>
+                                            </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_bubble_icon" translatesAutoresizingMaskIntoConstraints="NO" id="z0G-eQ-xcU">
+                                                <rect key="frame" x="128" y="0.0" width="90" height="90"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="90" id="Ayy-Zn-VvH"/>
+                                                    <constraint firstAttribute="width" constant="90" id="zZQ-bb-Afo"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="4Ys-uF-hsl" firstAttribute="centerY" secondItem="Hrs-n8-PXg" secondAttribute="centerY" id="0DA-JD-Bcw"/>
-                                    <constraint firstItem="4Ys-uF-hsl" firstAttribute="centerX" secondItem="Hrs-n8-PXg" secondAttribute="centerX" id="3XO-mf-U2J"/>
+                                    <constraint firstItem="zxA-mw-Qqm" firstAttribute="centerY" secondItem="Hrs-n8-PXg" secondAttribute="centerY" id="2PH-Rs-7sH"/>
+                                    <constraint firstItem="zxA-mw-Qqm" firstAttribute="centerX" secondItem="Hrs-n8-PXg" secondAttribute="centerX" id="Uuw-is-z9c"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반드시 학번, 생년월일이 보이게 캡쳐해주세요." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ID-py-uLb">
-                                <rect key="frame" x="30" y="404.5" width="306.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="30" y="340" width="289" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -213,26 +227,26 @@
                         <viewLayoutGuide key="safeArea" id="dIF-QD-SSf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Hrs-n8-PXg" firstAttribute="top" secondItem="6ID-py-uLb" secondAttribute="bottom" constant="15" id="0rg-gA-RPD"/>
+                            <constraint firstItem="Hrs-n8-PXg" firstAttribute="top" secondItem="6ID-py-uLb" secondAttribute="bottom" constant="40" id="0rg-gA-RPD"/>
                             <constraint firstItem="W65-nU-zWY" firstAttribute="leading" secondItem="PSO-dC-Wwl" secondAttribute="trailing" constant="50" id="0wn-PV-BAH"/>
                             <constraint firstItem="Hrs-n8-PXg" firstAttribute="leading" secondItem="dIF-QD-SSf" secondAttribute="leading" constant="30" id="3xW-Y3-x4E"/>
                             <constraint firstAttribute="bottom" secondItem="Qg4-XM-VuW" secondAttribute="bottom" id="6n7-pU-77n"/>
                             <constraint firstItem="UHS-O1-6I2" firstAttribute="leading" secondItem="dIF-QD-SSf" secondAttribute="leading" constant="30" id="7xL-Cq-XBL"/>
-                            <constraint firstItem="PSO-dC-Wwl" firstAttribute="top" secondItem="05C-Ev-lQc" secondAttribute="bottom" constant="15" id="HNS-Id-nFN"/>
+                            <constraint firstItem="PSO-dC-Wwl" firstAttribute="top" secondItem="05C-Ev-lQc" secondAttribute="bottom" constant="9" id="HNS-Id-nFN"/>
                             <constraint firstItem="pns-yS-OW6" firstAttribute="leading" secondItem="dIF-QD-SSf" secondAttribute="leading" constant="30" id="HTN-Dh-aWd"/>
                             <constraint firstItem="dIF-QD-SSf" firstAttribute="trailing" secondItem="W65-nU-zWY" secondAttribute="trailing" constant="30" id="LQg-qE-pdN"/>
                             <constraint firstItem="dIF-QD-SSf" firstAttribute="trailing" secondItem="Hrs-n8-PXg" secondAttribute="trailing" constant="30" id="NeU-jU-VpN"/>
-                            <constraint firstItem="05C-Ev-lQc" firstAttribute="top" secondItem="dIF-QD-SSf" secondAttribute="top" constant="50" id="QuJ-ku-zPM"/>
-                            <constraint firstItem="W65-nU-zWY" firstAttribute="top" secondItem="dIF-QD-SSf" secondAttribute="top" constant="120" id="U1n-YA-obe"/>
+                            <constraint firstItem="05C-Ev-lQc" firstAttribute="top" secondItem="dIF-QD-SSf" secondAttribute="top" constant="24" id="QuJ-ku-zPM"/>
+                            <constraint firstItem="W65-nU-zWY" firstAttribute="top" secondItem="dIF-QD-SSf" secondAttribute="top" constant="84" id="U1n-YA-obe"/>
                             <constraint firstItem="7hm-bF-9DH" firstAttribute="top" secondItem="PSO-dC-Wwl" secondAttribute="bottom" constant="20" id="V96-RP-u3o"/>
                             <constraint firstItem="05C-Ev-lQc" firstAttribute="leading" secondItem="dIF-QD-SSf" secondAttribute="leading" constant="30" id="YIa-Zh-cRG"/>
                             <constraint firstItem="6ID-py-uLb" firstAttribute="top" secondItem="UHS-O1-6I2" secondAttribute="bottom" constant="15" id="cyn-f7-Jk5"/>
-                            <constraint firstItem="Qg4-XM-VuW" firstAttribute="top" secondItem="Hrs-n8-PXg" secondAttribute="bottom" constant="50" id="dyr-s1-4Na"/>
+                            <constraint firstItem="Qg4-XM-VuW" firstAttribute="top" secondItem="Hrs-n8-PXg" secondAttribute="bottom" constant="30" id="dyr-s1-4Na"/>
                             <constraint firstItem="UHS-O1-6I2" firstAttribute="top" secondItem="pns-yS-OW6" secondAttribute="bottom" constant="30" id="hBz-pJ-V9t"/>
                             <constraint firstItem="7hm-bF-9DH" firstAttribute="leading" secondItem="dIF-QD-SSf" secondAttribute="leading" constant="30" id="hV3-gd-bld"/>
                             <constraint firstItem="dIF-QD-SSf" firstAttribute="trailing" secondItem="Qg4-XM-VuW" secondAttribute="trailing" id="kD5-9d-tiG"/>
                             <constraint firstItem="PSO-dC-Wwl" firstAttribute="leading" secondItem="dIF-QD-SSf" secondAttribute="leading" constant="30" id="kT5-DU-PhM"/>
-                            <constraint firstItem="pns-yS-OW6" firstAttribute="top" secondItem="7hm-bF-9DH" secondAttribute="bottom" constant="15" id="koq-hL-ROv"/>
+                            <constraint firstItem="pns-yS-OW6" firstAttribute="top" secondItem="7hm-bF-9DH" secondAttribute="bottom" constant="9" id="koq-hL-ROv"/>
                             <constraint firstItem="Qg4-XM-VuW" firstAttribute="leading" secondItem="VQF-EU-eBb" secondAttribute="leading" id="sOP-1Y-DPk"/>
                             <constraint firstItem="6ID-py-uLb" firstAttribute="leading" secondItem="dIF-QD-SSf" secondAttribute="leading" constant="30" id="sb5-54-yko"/>
                         </constraints>
@@ -245,6 +259,7 @@
                         <outlet property="checkDuplicateButton" destination="W65-nU-zWY" id="STW-CD-PVL"/>
                         <outlet property="studentBirthDateTextField" destination="pns-yS-OW6" id="mWh-tS-Wra"/>
                         <outlet property="studentIDTextField" destination="PSO-dC-Wwl" id="GS4-mC-Fnj"/>
+                        <outlet property="studentIdImageView" destination="z0G-eQ-xcU" id="3Ks-jc-L9v"/>
                         <outletCollection property="titleLabels" destination="05C-Ev-lQc" collectionClass="NSMutableArray" id="8ZH-TP-yNa"/>
                         <outletCollection property="titleLabels" destination="7hm-bF-9DH" collectionClass="NSMutableArray" id="mVy-9t-ZOW"/>
                         <outletCollection property="titleLabels" destination="UHS-O1-6I2" collectionClass="NSMutableArray" id="MfN-IT-gkL"/>
@@ -252,7 +267,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JSj-nn-V7o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1009" y="810"/>
+            <point key="canvasLocation" x="1008.6956521739131" y="809.59821428571422"/>
         </scene>
     </scenes>
     <designables>
@@ -264,10 +279,11 @@
         </designable>
     </designables>
     <resources>
+        <image name="chat_bubble_icon" width="400" height="400"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="studentID_guide" width="696" height="1014"/>
         <namedColor name="AppDefaultColor">
-            <color red="1" green="0.53333333333333333" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.53299999237060547" blue="0.50999999046325684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -12,8 +12,6 @@ class ChangeNicknameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         initialize()
     }
     
@@ -24,16 +22,15 @@ class ChangeNicknameViewController: UIViewController {
     
     
     @IBAction func pressedCheckDuplicateButton(_ sender: UIButton) {
-        
         checkIfDuplicate()
     }
     
     @IBAction func pressedChangeButton(_ sender: UIButton) {
         
-        self.view.endEditing(true)
+        view.endEditing(true)
         
         if !didCheckNicknameDuplicate {
-            self.showSimpleBottomAlert(with: "🤔 닉네임 중복 확인을 먼저해주세요.")
+            showSimpleBottomAlert(with: "닉네임 중복 확인을 먼저해주세요.🤔")
             return
         }
         
@@ -132,7 +129,6 @@ extension ChangeNicknameViewController: UITextFieldDelegate {
 extension ChangeNicknameViewController {
     
     func initialize() {
-        
         createObserversForPresentingVerificationAlert()
         initializeTextField()
         initializeButton()

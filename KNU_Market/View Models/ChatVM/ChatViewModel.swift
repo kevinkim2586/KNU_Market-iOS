@@ -392,7 +392,6 @@ extension ChatViewModel {
                                             expectedModel: ChatResponseModel.self) { [weak self] result in
             
             dismissProgressBar()
-            
             guard let self = self else { return }
         
             switch result {
@@ -405,7 +404,6 @@ extension ChatViewModel {
                     return
                 }
                 
-                
                 self.chatModel?.chat.append(contentsOf: chatResponseModel.chat)
                 
                 
@@ -413,6 +411,8 @@ extension ChatViewModel {
                     
                     let chatText = chat.chat_content
                     let senderUID = chat.chat_userUID
+                    
+                    print("✏️ chat: \(chatText)")
                     
                     let filteredChat = self.filterChat(text: chatText, userUID: senderUID)
                     

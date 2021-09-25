@@ -13,10 +13,11 @@ class StudentIDGuideViewController: UIViewController {
         super.viewDidLoad()
         initialize()
     }
-
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
-        guard let nextVC = storyboard?.instantiateViewController(identifier: Constants.StoryboardID.captureStudentIDVC) as? CaptureStudentIDViewController else { fatalError() }
+        guard let nextVC = storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.captureStudentIDVC
+        ) as? CaptureStudentIDViewController else { fatalError() }
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }

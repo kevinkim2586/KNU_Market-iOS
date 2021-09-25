@@ -19,6 +19,15 @@ class User {
         }
     }
     
+    var userID: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userID) ?? "아이디 에러"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.userID)
+        }
+    }
+    
     var nickname: String {
         get {
             return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.nickname) ?? "닉네임 표시 에러"

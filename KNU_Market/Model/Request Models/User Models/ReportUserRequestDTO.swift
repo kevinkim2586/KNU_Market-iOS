@@ -7,7 +7,6 @@ struct ReportUserRequestDTO {
     var postUID: String
     
     init(user: String, content: String, postUID: String) {
-    
         parameters["userName"] = user
         parameters["content"] = content
         self.postUID = postUID

@@ -133,7 +133,7 @@ class UserManager {
                 case 201:
                     
                     do {
-                        let json = try JSON(data: response.data!)
+                        let json = try JSON(data: response.data ?? Data())
                         self.saveAccessTokens(from: json)
                         
                         User.shared.email = email
@@ -527,7 +527,7 @@ extension UserManager {
     
     func saveUserLoginInfo(with model: LoadProfileResponseModel) {
         User.shared.userUID = model.uid
-        User.shared.email = model.email
+        User.shared.userID = model.email     //email == id
         User.shared.nickname = model.nickname
         User.shared.profileImageUID = model.profileImageCode
         User.shared.isVerified = model.isVerified

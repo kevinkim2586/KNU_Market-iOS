@@ -2,7 +2,7 @@ import Foundation
 
 struct LoadProfileResponseModel: Decodable {
     
-    let email: String
+    let email: String       // email == userID
     let uid: String
     let nickname: String
     let profileImageCode: String

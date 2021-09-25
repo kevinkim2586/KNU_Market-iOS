@@ -689,6 +689,7 @@ extension ChatViewModel {
     }
     
     @objc func reconnectAndFetchFromLastChat() {
+        if messages.count == 0 { return }
         fetchFromLastChat = true
         indexForAfterCertainChat = 1
         connect()

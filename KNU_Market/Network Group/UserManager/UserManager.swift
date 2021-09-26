@@ -64,13 +64,13 @@ class UserManager {
     }
     
     
-    //MARK: - 닉네임 중복 체크
+    //MARK: - 닉네임 및 아이디 중복 체크
     func checkDuplication(nickname: String? = nil,
                           id: String? = nil,
                           completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
         var parameters: Parameters = [:]
-        var headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue: HTTPHeaderValues.urlEncoded.rawValue]
+        var headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue: HTTPHeaderValues.urlEncoded.rawValue ]
         
         if let nickname = nickname {
             parameters["name"] = nickname
@@ -209,7 +209,7 @@ class UserManager {
                 case 200:
                     do {
                         let decodedData = try JSONDecoder().decode(LoadProfileResponseModel.self, from: response.data!)  
-                        self.saveUserLoginInfo(with: decodedData)
+                        self.saveUserProfileInfo(with: decodedData)
                         
                         print("✏️ UserManager - loadUserProfile() success")
                         print("✏️ UserManager - DB FCM TOKEN: \(decodedData.fcmToken)")
@@ -443,32 +443,7 @@ class UserManager {
     
     
     
-    //MARK: - 인증 메일 다시 보내기
-    func sendVerificationEmail(email: String,
-                               completion: @escaping (Result<Bool, NetworkError>) -> Void) {
-    
-        let headers: HTTPHeaders = ["id" : email]
-        
-        AF.request(sendEmailURL,
-                   method: .post,
-                   headers: headers)
-            .responseJSON { response in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                
-                case 201:
-                    print("✏️ UserManager - resendVerificationEmail SUCCESS")
-                    completion(.success(true))
-                    
-                default:
-                    let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("❗️ UserManager - resendVerificationEmail statusCode: \(statusCode), reason: \(error.errorDescription)")
-                    completion(.failure(error))
-                }
-            }
-    }
+
     
     //MARK: - 회원 탈퇴
     func unregisterUser(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
@@ -502,38 +477,7 @@ class UserManager {
 
 }
 
-//MARK: - 개인정보 저장 메서드
 
-extension UserManager {
-    
-    func saveAccessTokens(from response: JSON) {
-        
-        let accessToken = response["accessToken"].stringValue
-        let refreshToken = response["refreshToken"].stringValue
-        
-        User.shared.savedAccessToken = KeychainWrapper.standard.set(accessToken,
-                                                                    forKey: Constants.KeyChainKey.accessToken)
-        User.shared.savedRefreshToken = KeychainWrapper.standard.set(refreshToken,
-                                                                     forKey: Constants.KeyChainKey.refreshToken)
-        
-    }
-    
-    func saveRefreshedAccessToken(from response: JSON) {
-        
-        let newAccessToken = response["accessToken"].stringValue
-   
-        User.shared.savedAccessToken = KeychainWrapper.standard.set(newAccessToken,
-                                                                    forKey: Constants.KeyChainKey.accessToken)
-    }
-    
-    func saveUserLoginInfo(with model: LoadProfileResponseModel) {
-        User.shared.userUID = model.uid
-        User.shared.userID = model.email     //email == id
-        User.shared.nickname = model.nickname
-        User.shared.profileImageUID = model.profileImageCode
-        User.shared.isVerified = model.isVerified
-    }
-}
 
 
 //MARK: - Validation Methods

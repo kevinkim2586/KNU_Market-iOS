@@ -71,7 +71,7 @@ class InitialViewController: UIViewController {
 extension InitialViewController: FindPasswordDelegate {
     
     func didSendFindPasswordEmail() {
-        self.showSimpleBottomAlert(with: "발급받은 임시 비밀번호로 로그인해 주세요. 🎉")
+        showSimpleBottomAlert(with: "발급받은 임시 비밀번호로 로그인해 주세요. 🎉")
     }
 }
 

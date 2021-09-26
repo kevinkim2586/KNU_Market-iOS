@@ -19,7 +19,11 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+        NotificationCenter.default.post(
+            name: .getBadgeValue,
+            object: nil
+        )
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -50,23 +54,24 @@ extension HomeViewController {
             }
             return
         }
-        guard let uploadVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.uploadItemVC) as? UploadItemViewController else {
-            return
-        }
+        guard let uploadVC = storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.uploadItemVC
+        ) as? UploadItemViewController else { return }
         uploadVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(uploadVC, animated: true)
     }
     
     @IBAction func pressedSearchButton(_ sender: UIBarButtonItem) {
         
-        let searchVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.searchPostVC) as! SearchPostViewController
-        self.navigationController?.pushViewController(searchVC, animated: true)
+        let searchVC = storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.searchPostVC
+        ) as! SearchPostViewController
+        navigationController?.pushViewController(searchVC, animated: true)
     }
     
     @IBAction func pressedLeftBarButton(_ sender: UIBarButtonItem) {
-        
         let topRow = IndexPath(row: 0, section: 0)
-        self.itemTableView.scrollToRow(at: topRow, at: .top, animated: true)
+        itemTableView.scrollToRow(at: topRow, at: .top, animated: true)
     }
 }
 
@@ -77,19 +82,23 @@ extension HomeViewController: HomeViewModelDelegate {
     func didFetchUserProfileInfo() {
         
         guard let defaultImage = UIImage(systemName: "checkmark.circle") else { return }
-    
-        SPIndicator.present(title: "\(User.shared.nickname)님",
-                            message: "환영합니다 🎉",
-                            preset: .custom(UIImage(systemName: "face.smiling") ?? defaultImage))
+        
+        SPIndicator.present(
+            title: "\(User.shared.nickname)님",
+            message: "환영합니다 🎉",
+            preset: .custom(UIImage(systemName: "face.smiling") ?? defaultImage)
+        )
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
-        showSimpleBottomAlertWithAction(message: "사용자 정보 불러오기에 실패하였습니다. 로그아웃 후 다시 이용해 주세요.😥",
-                                        buttonTitle: "로그아웃") {
+        showSimpleBottomAlertWithAction(
+            message: "사용자 정보 불러오기에 실패하였습니다. 로그아웃 후 다시 이용해 주세요.😥",
+            buttonTitle: "로그아웃"
+        ) {
             self.popToInitialViewController()
         }
     }
-  
+    
     func didFetchItemList() {
         itemTableView.reloadData()
         itemTableView.refreshControl?.endRefreshing()
@@ -133,9 +142,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cellIdentifier = Constants.cellID.itemTableViewCell
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell else {
-            fatalError()
-        }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellIdentifier,
+            for: indexPath
+        ) as? ItemTableViewCell else { return UITableViewCell() }
 
         cell.configure(with: viewModel.itemList[indexPath.row])
         return cell
@@ -145,12 +155,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let itemVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
+        guard let itemVC = storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.itemVC
+        ) as? ItemViewController else { return }
         
         itemVC.hidesBottomBarWhenPushed = true
         itemVC.pageID = viewModel.itemList[indexPath.row].uuid
         
-        self.navigationController?.pushViewController(itemVC, animated: true)
+        navigationController?.pushViewController(itemVC, animated: true)
     }
 
     
@@ -158,11 +170,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         //사라지는 애니메이션 처리
         UIView.animate(
-            views: self.itemTableView.visibleCells,
+            views: itemTableView.visibleCells,
             animations: Animations.forTableViews,
             reversed: true,
-            initialAlpha: 1.0,   // 보이다가
-            finalAlpha: 0.0,      // 안 보이게
+            initialAlpha: 1.0,      // 보이다가
+            finalAlpha: 0.0,        // 안 보이게
             completion: {
                 self.viewModel.refreshTableView()
             }
@@ -267,8 +279,10 @@ extension HomeViewController {
         
         let font = UIFont.systemFont(ofSize: 23, weight: .medium)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        let buttonImage = UIImage(systemName: "plus",
-                                  withConfiguration: configuration)
+        let buttonImage = UIImage(
+            systemName: "plus",
+            withConfiguration: configuration
+        )
         addButton.setImage(buttonImage, for: .normal)
     }
     

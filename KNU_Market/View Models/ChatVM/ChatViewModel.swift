@@ -696,7 +696,6 @@ extension ChatViewModel {
     }
     
     func createObservers() {
-        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(exitPost),

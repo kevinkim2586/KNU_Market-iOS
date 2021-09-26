@@ -32,7 +32,7 @@ class EmailInputViewController: UIViewController {
             nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
     }
-
+    
     @objc func keyboardWillHide(notification: Notification) {
         nextButtonBottomAnchor.constant = 0
         nextButtonHeight.constant = 80
@@ -40,12 +40,14 @@ class EmailInputViewController: UIViewController {
     
     @IBAction func pressedSendEmailButton(_ sender: UIButton) {
         if !checkIfValidEmail() { return }
-        presentAlertWithCancelAction(title: emailTextField.text!,
-                                     message: "위 이메일이 맞나요? 마지막으로 한 번 더 확인해 주세요.") { selectedOk in
+        presentAlertWithCancelAction(
+            title: emailTextField.text!,
+            message: "위 이메일이 맞나요? 마지막으로 한 번 더 확인해 주세요."
+        ) { selectedOk in
             
             if selectedOk {
                 self.emailTextField.resignFirstResponder()
-        
+                
                 guard let email = self.emailTextField.text?.trimmingCharacters(in: .whitespaces) else {
                     self.showSimpleBottomAlert(with: "올바른 이메일 형식인지 다시 한 번 확인해주세요.")
                     return
@@ -108,10 +110,11 @@ extension EmailInputViewController {
     }
     
     func initializeTextFields() {
-        
-        emailTextField.addTarget(self,
-                                 action: #selector(textFieldDidChange(_:)),
-                                 for: .editingChanged)
+        emailTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChange(_:)),
+            for: .editingChanged
+        )
     }
     
     func initializeLabels() {

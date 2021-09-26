@@ -316,6 +316,8 @@ extension UploadItemViewController {
         
         viewModel.editPostModel = editModel
         
+        print("✏️ editModel location: \(editModel?.location)")
+        
         viewModel.itemTitle = editModel!.title
         viewModel.location = editModel!.location
         viewModel.totalPeopleGathering = editModel!.totalGatheringPeople

@@ -33,24 +33,32 @@ class ChatMemberViewController: UIViewController {
     }
     
     @IBAction func pressedExitButton(_ sender: UIButton) {
-        
         if postUploaderUID == User.shared.userUID {
-            
-            self.presentAlertWithCancelAction(title: "본인이 방장으로 있는 채팅방입니다.",
-                                              message: "글 작성자가 나가면 공구가 삭제되고 참여자 전원이 채팅방에서 나가게 됩니다. 신중히 생각 후 삭제해주세요. 🤔") { selectedOk in
+            presentAlertWithCancelAction(
+                title: "본인이 방장으로 있는 채팅방입니다.",
+                message: "글 작성자가 나가면 공구가 삭제되고 참여자 전원이 채팅방에서 나가게 됩니다. 신중히 생각 후 삭제해주세요. 🤔"
+            ) { selectedOk in
                 
                 if selectedOk {
-                    NotificationCenter.default.post(name: .didChooseToDeletePost, object: nil)
+                    NotificationCenter.default.post(
+                        name: .didChooseToDeletePost,
+                        object: nil
+                    )
                     self.dismiss(animated: true)
                 }
             }
         } else {
-            self.presentAlertWithCancelAction(title: "해당 공구에서 나가시겠습니까?",
-                                              message: "") { selectedOk in
+            presentAlertWithCancelAction(
+                title: "해당 공구에서 나가시겠습니까?",
+                message: ""
+            ) { selectedOk in
                 
                 if selectedOk {
                     showProgressBar()
-                    NotificationCenter.default.post(name: .didChooseToExitPost, object: nil)
+                    NotificationCenter.default.post(
+                        name: .didChooseToExitPost,
+                        object: nil
+                    )
                     self.dismiss(animated: true)
                 }
             }
@@ -82,8 +90,10 @@ class ChatMemberViewController: UIViewController {
                 
                 let userInfo: [String : String] = ["uid" : uid, "nickname" : nickname]
                 showProgressBar()
-                NotificationCenter.default.post(name: .didBanUser, object: userInfo)
-                
+                NotificationCenter.default.post(
+                    name: .didBanUser,
+                    object: userInfo
+                )
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
@@ -161,35 +171,42 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
     
     func presentActionSheetForMembers(blockUID: String, reportNickname: String) {
         
-        let actionSheet = UIAlertController(title: "\(reportNickname)님",
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(
+            title: "\(reportNickname)님",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
         
-        let reportAction = UIAlertAction(title: "신고하기",
-                                         style: .default) { [weak self] _ in
+        let reportAction = UIAlertAction(
+            title: "신고하기",
+            style: .default
+        ) { [weak self] _ in
             guard let self = self else { return }
-            
             guard let postUID = self.roomInfo?.post.uuid else { return }
-            
             self.presentReportUserVC(userToReport: reportNickname, postUID: postUID)
         }
         
-        let banAction = UIAlertAction(title: "차단하기",
-                                      style: .default) { [weak self] _ in
+        let banAction = UIAlertAction(
+            title: "차단하기",
+            style: .default
+        ) { [weak self] _ in
             guard let self = self else { return }
             
-            self.presentAlertWithCancelAction(title: "\(reportNickname)님을 차단하시겠습니까?",
-                                              message: "한 번 차단하면 해당 사용자의 채팅이 모든 채팅방에서 더 이상 보이지 않으며, 복구할 수 없습니다. 진행하시겠습니까? ") { selectedOk in
+            self.presentAlertWithCancelAction(
+                title: "\(reportNickname)님을 차단하시겠습니까?",
+                message: "한 번 차단하면 해당 사용자의 채팅이 모든 채팅방에서 더 이상 보이지 않으며, 복구할 수 없습니다. 진행하시겠습니까? "
+            ) { selectedOk in
                 if selectedOk {
                     self.blockUser(uid: blockUID, nickname: reportNickname)
                 }
             }
         }
         
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel,
-                                         handler: nil)
-        
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil
+        )
         actionSheet.addAction(reportAction)
         actionSheet.addAction(banAction)
         actionSheet.addAction(cancelAction)
@@ -202,12 +219,16 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
     
     func presentActionSheetForPostUploader(userUID: String, nickname: String) {
         
-        let actionSheet = UIAlertController(title: "\(nickname)님",
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(
+            title: "\(nickname)님",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
         
-        let banAction = UIAlertAction(title: "강퇴하기",
-                                      style: .default) { [weak self] _ in
+        let banAction = UIAlertAction(
+            title: "강퇴하기",
+            style: .default
+        ) { [weak self] _ in
             guard let self = self else { return }
             
             self.presentAlertWithCancelAction(
@@ -218,9 +239,11 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
                     self.banUser(uid: userUID, nickname: nickname)
                 }
             }
-                                      }
-        let reportAction = UIAlertAction(title: "신고하기",
-                                         style: .default) { [weak self] _ in
+        }
+        let reportAction = UIAlertAction(
+            title: "신고하기",
+            style: .default
+        ) { [weak self] _ in
             guard let self = self else { return }
             
             guard let postUID = self.roomInfo?.post.uuid else { return }
@@ -228,16 +251,16 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
             self.presentReportUserVC(userToReport: nickname, postUID: postUID)
             
         }
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel,
-                                         handler: nil)
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil
+        )
         actionSheet.addAction(banAction)
         actionSheet.addAction(reportAction)
         actionSheet.addAction(cancelAction)
         present(actionSheet, animated: true)
-    
     }
-    
 }
 
 //MARK: - UI Configuration & Initialization
@@ -263,7 +286,6 @@ extension ChatMemberViewController {
     }
     
     func initializeExitButton() {
-        
         exitButton.layer.cornerRadius = 6
         exitButton.addBounceAnimationWithNoFeedback()
         

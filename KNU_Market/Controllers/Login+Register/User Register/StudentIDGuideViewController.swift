@@ -4,7 +4,6 @@ class StudentIDGuideViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var guideImageView: UIImageView!
-    
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
     @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
@@ -18,6 +17,7 @@ class StudentIDGuideViewController: UIViewController {
         guard let nextVC = storyboard?.instantiateViewController(
             identifier: Constants.StoryboardID.captureStudentIDVC
         ) as? CaptureStudentIDViewController else { fatalError() }
+        
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }

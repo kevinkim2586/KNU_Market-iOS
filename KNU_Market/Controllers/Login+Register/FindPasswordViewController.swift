@@ -2,8 +2,7 @@ import UIKit
 import PanModal
 import TextFieldEffects
 
-protocol FindPasswordDelegate: AnyObject{
-    
+protocol FindPasswordDelegate: AnyObject {
     func didSendFindPasswordEmail()
 }
 
@@ -17,7 +16,6 @@ class FindPasswordViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
     }
     
@@ -46,7 +44,11 @@ class FindPasswordViewController: UIViewController {
                 self.delegate?.didSendFindPasswordEmail()
             
             case .failure(let error):
-                self.presentKMAlertOnMainThread(title: "이메일 전송 실패", message: error.errorDescription, buttonTitle: "확인")
+                self.presentKMAlertOnMainThread(
+                    title: "이메일 전송 실패",
+                    message: error.errorDescription,
+                    buttonTitle: "확인"
+                )
             }
         }
     }
@@ -57,16 +59,9 @@ class FindPasswordViewController: UIViewController {
 extension FindPasswordViewController {
     
     func initialize() {
-        
-        initializeDetailLabel()
         initializeSendEmailButton()
-        
     }
-    
-    func initializeDetailLabel() {
-        
-    }
-    
+
     func initializeSendEmailButton() {
         
         sendEmailButton.layer.cornerRadius = sendEmailButton.frame.height / 2

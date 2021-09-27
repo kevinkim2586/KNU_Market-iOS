@@ -80,11 +80,13 @@ class UploadItemViewModel {
     
     func uploadItem() {
         
-        let model = UploadItemRequestDTO(title: itemTitle,
-                                         location: location + 1,
-                                         peopleGathering: totalPeopleGathering,
-                                         imageUIDs: imageUIDs,
-                                         detail: itemDetail)
+        let model = UploadItemRequestDTO(
+            title: itemTitle,
+            location: location + 1,
+            peopleGathering: totalPeopleGathering,
+            imageUIDs: imageUIDs,
+            detail: itemDetail
+        )
         
         ItemManager.shared.uploadNewItem(with: model) { [weak self] result in
             
@@ -128,19 +130,21 @@ class UploadItemViewModel {
     }
     
     func updatePost() {
-
-        let model = UpdatePostRequestDTO(title: itemTitle,
-                                         location: location + 1,
-                                         detail: itemDetail,
-                                         imageUIDs: imageUIDs,
-                                         totalGatheringPeople: totalPeopleGathering,
-                                         currentlyGatheredPeople: currentlyGatheredPeople)
+        
+        let model = UpdatePostRequestDTO(
+            title: itemTitle,
+            location: location + 1,
+            detail: itemDetail,
+            imageUIDs: imageUIDs,
+            totalGatheringPeople: totalPeopleGathering,
+            currentlyGatheredPeople: currentlyGatheredPeople
+        )
         
         ItemManager.shared.updatePost(uid: self.editPostModel?.pageUID ?? "",
                                       with: model) { [weak self] result in
-
+            
             guard let self = self else { return }
-
+            
             switch result {
             case .success(_):
                 self.delegate?.didUpdatePost()

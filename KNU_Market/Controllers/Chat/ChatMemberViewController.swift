@@ -40,6 +40,7 @@ class ChatMemberViewController: UIViewController {
             ) { selectedOk in
                 
                 if selectedOk {
+                    showProgressBar()
                     NotificationCenter.default.post(
                         name: .didChooseToDeletePost,
                         object: nil

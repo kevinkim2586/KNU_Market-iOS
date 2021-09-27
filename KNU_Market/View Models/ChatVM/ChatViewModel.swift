@@ -508,7 +508,7 @@ extension ChatViewModel {
         
         sendText(Constants.ChatSuffix.emptySuffix)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
             self.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
             dismissProgressBar()
         }
@@ -574,6 +574,7 @@ extension ChatViewModel {
         ItemManager.shared.deletePost(uid: room) { [weak self] result in
             
             guard let self = self else { return }
+            dismissProgressBar()
             
             switch result {
             

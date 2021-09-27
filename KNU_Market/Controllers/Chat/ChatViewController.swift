@@ -50,40 +50,42 @@ class ChatViewController: MessagesViewController {
         IQKeyboardManager.shared.enable = true
         viewModel.disconnect()
     }
-
+    
     @objc func pressedTitle() {
-
+        
         let storyboard = UIStoryboard(name: "ItemList", bundle: nil)
-
-        guard let itemVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
-
+        
+        guard let itemVC = storyboard.instantiateViewController(
+            identifier: Constants.StoryboardID.itemVC
+        ) as? ItemViewController else { return }
+        
         itemVC.hidesBottomBarWhenPushed = true
         itemVC.pageID = roomUID
         itemVC.isFromChatVC = true
-
-        self.navigationController?.pushViewController(itemVC, animated: true)
+        navigationController?.pushViewController(itemVC, animated: true)
     }
 
 
     @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
 
         viewModel.getRoomInfo()
-
-        guard let chatMemberVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.chatMemberVC) as? ChatMemberViewController else { return }
-
+        
+        guard let chatMemberVC = storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.chatMemberVC
+        ) as? ChatMemberViewController else { return }
+        
         chatMemberVC.roomInfo = viewModel.roomInfo
         chatMemberVC.postUploaderUID = viewModel.postUploaderUID
         presentPanModal(chatMemberVC)
     }
     
     @objc func pressedCheckButton() {
-
-        let actionSheet = UIAlertController(title: "모집 상태 변경",
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
         
-        
-        
+        let actionSheet = UIAlertController(
+            title: "모집 상태 변경",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
         present(actionSheet, animated: true)
     }
     
@@ -94,7 +96,6 @@ class ChatViewController: MessagesViewController {
             message: "폭력적이거나 선정적인 말은 삼가 부탁드립니다. 타 이용자로부터 신고가 접수되면 서비스 이용이 제한될 수 있습니다.",
             buttonTitle: "확인"
         )
-
     }
 }
 
@@ -142,7 +143,11 @@ extension ChatViewController: ChatViewDelegate {
 
     func failedConnection(with error: NetworkError) {
         dismissProgressBar()
-        presentKMAlertOnMainThread(title: "일시적인 연결 문제 발생", message: error.errorDescription, buttonTitle: "확인")
+        presentKMAlertOnMainThread(
+            title: "일시적인 연결 문제 발생",
+            message: error.errorDescription,
+            buttonTitle: "확인"
+        )
     }
 
     func didSendText() {
@@ -160,7 +165,11 @@ extension ChatViewController: ChatViewDelegate {
 
         messagesCollectionView.isScrollEnabled = false
 
-        presentKMAlertOnMainThread(title: "강퇴 당하셨습니다.", message: "방장에 의해 강퇴되었습니다. 더 이상 채팅에 참여가 불가능합니다.🤔", buttonTitle: "확인")
+        presentKMAlertOnMainThread(
+            title: "강퇴 당하셨습니다.",
+            message: "방장에 의해 강퇴되었습니다. 더 이상 채팅에 참여가 불가능합니다.🤔",
+            buttonTitle: "확인"
+        )
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.navigationController?.popViewController(animated: true)
@@ -177,7 +186,6 @@ extension ChatViewController {
     }
 
     func didDeletePost() {
-
         navigationController?.popViewController(animated: true)
         NotificationCenter.default.post(name: .updateItemList, object: nil)
     }
@@ -224,9 +232,11 @@ extension ChatViewController {
     
     func failedUploadingImageToServer() {
         dismissProgressBar()
-        presentKMAlertOnMainThread(title: "사진 업로드 실패",
-                                   message: "사진 용량이 너무 크거나 일시적인 오류로 업로드에 실패하였습니다. 잠시 후 다시 시도해주세요.😥",
-                                   buttonTitle: "확인")
+        presentKMAlertOnMainThread(
+            title: "사진 업로드 실패",
+            message: "사진 용량이 너무 크거나 일시적인 오류로 업로드에 실패하였습니다. 잠시 후 다시 시도해주세요.😥",
+            buttonTitle: "확인"
+        )
         
     }
 }
@@ -348,7 +358,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                 if !self.viewModel.isFetchingData &&
                     self.viewModel.needsToFetchMoreData &&
                     !self.viewModel.isFirstViewLaunch {
-                    
 
                     self.viewModel.getPreviousChats()
 

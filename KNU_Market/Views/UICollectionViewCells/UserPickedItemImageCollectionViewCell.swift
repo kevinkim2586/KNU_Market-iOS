@@ -17,7 +17,6 @@ class UserPickedItemImageCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
         userPickedImageView.layer.cornerRadius = 5
     }
     

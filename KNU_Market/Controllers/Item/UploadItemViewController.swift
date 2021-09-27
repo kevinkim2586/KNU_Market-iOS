@@ -310,16 +310,13 @@ extension UploadItemViewController {
         itemDetailTextView.textColor = UIColor.lightGray
         itemDetailTextView.font = .systemFont(ofSize: 14)
     }
-
     
     func configurePageWithPriorData() {
         
         viewModel.editPostModel = editModel
         
-        print("✏️ editModel location: \(editModel?.location)")
-        
         viewModel.itemTitle = editModel!.title
-        viewModel.location = editModel!.location
+        viewModel.location = editModel!.location - 1
         viewModel.totalPeopleGathering = editModel!.totalGatheringPeople
         viewModel.itemDetail = editModel!.itemDetail
         viewModel.currentlyGatheredPeople = editModel!.currentlyGatheredPeople

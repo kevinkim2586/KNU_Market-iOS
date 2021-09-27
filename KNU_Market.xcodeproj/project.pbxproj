@@ -532,7 +532,6 @@
 				7CA66228264132DC000E0B7A /* Network Group */,
 				7CA6622326413272000E0B7A /* Model */,
 				7C555464266D0A1400C3C5B6 /* Location.swift */,
-				7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */,
 				7CA6622A264132F3000E0B7A /* View Models */,
 				7CA66229264132E6000E0B7A /* Controllers */,
 				7C132BF02653979B00BE5F40 /* Utilities + Extensions */,
@@ -749,6 +748,7 @@
 			children = (
 				7CA6624E26413F03000E0B7A /* Constants.swift */,
 				7CEC19222701837100C2D671 /* StoryboardName.swift */,
+				7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";

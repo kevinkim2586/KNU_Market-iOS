@@ -19,10 +19,11 @@ class EmptyView: UIView {
     }
     
     func initialize() {
-        
-        Bundle.main.loadNibNamed(xibName,
-                                 owner: self,
-                                 options: nil)
+        Bundle.main.loadNibNamed(
+            xibName,
+            owner: self,
+            options: nil
+        )
         contentView.fixInView(self)
         configureTitleLabel()
         configureImageView()
@@ -30,7 +31,6 @@ class EmptyView: UIView {
     }
     
     func configureTitleLabel() {
-        
         titleLabel.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
         titleLabel.textColor = .darkGray
         titleLabel.textAlignment = .center
@@ -39,12 +39,10 @@ class EmptyView: UIView {
     }
     
     func configureImageView() {
-        
         imageView.contentMode = .scaleAspectFit
     }
     
     func configure(imageName: String, text: String) {
-        
         imageView.image = UIImage(named: imageName) ?? UIImage(named: "default item icon")!
         titleLabel.text = text
     }

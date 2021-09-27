@@ -19,14 +19,12 @@ class ItemTableViewCell: UITableViewCell {
     }
     
     func resetValues() {
-        
         itemImageView.image = nil
         itemTitleLabel.text = nil
         gatheringLabel.text = nil
         personImageView.image = nil
         currentlyGatheredPeopleLabel.text = nil
         locationLabel.text = nil
-        
     }
     
     func configure(with model: ItemListModel) {

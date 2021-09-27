@@ -10,7 +10,6 @@ class ChatTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -19,7 +18,6 @@ class ChatTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         chatTitleLabel.text = nil
         chatImageView.image = nil
         chatParticipatingCountLabel.text = nil
@@ -39,10 +37,12 @@ class ChatTableViewCell: UITableViewCell {
             
             let imageURL = URL(string: "\(Constants.API_BASE_URL)media/\(model.imageCodes[0])")
             chatImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            chatImageView.sd_setImage(with: imageURL,
-                                      placeholderImage: UIImage(named: Constants.Images.chatBubbleIcon),
-                                      options: .continueInBackground,
-                                      completed: nil)
+            chatImageView.sd_setImage(
+                with: imageURL,
+                placeholderImage: UIImage(named: Constants.Images.chatBubbleIcon),
+                options: .continueInBackground,
+                completed: nil
+            )
             chatImageView.contentMode = .scaleToFill
             chatImageView.layer.borderWidth = 0
         } else {
@@ -53,12 +53,9 @@ class ChatTableViewCell: UITableViewCell {
         chatTitleLabel.text = model.title
         chatParticipatingCountLabel.text = "\(model.currentlyGatheredPeople)" + "/\(model.totalGatheringPeople) 명"
         
-
-        
         if User.shared.chatNotificationList.contains(model.uuid) {
             configureUIWithNotification()
         }
-     
     }
     
     func configureImageView() {
@@ -81,7 +78,6 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     func configureUIWithNotification() {
-        
         notificationImageView.isHidden = false
         chatTitleLabel.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         chatParticipatingCountLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)

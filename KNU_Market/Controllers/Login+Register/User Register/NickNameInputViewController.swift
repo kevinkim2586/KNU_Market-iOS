@@ -51,7 +51,7 @@ extension NickNameInputViewController {
     func checkIfValidNickname() -> Bool {
         guard let nickname = nicknameTextField.text else { return false }
         
-        if nickname.hasEmojis || nickname.hasSpecialCharacters {
+        if nickname.hasEmojis {
             showErrorMessage(message: "유효하지 않은 닉네임이에요.")
             return false
         }

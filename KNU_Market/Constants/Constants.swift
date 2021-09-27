@@ -33,6 +33,7 @@ struct Constants {
         // Register  & Login
         static let initialVC                    = "initialViewController"
         static let initialNavigationController  = "InitialNavigationController"
+        static let idInputVC                    = "IDInputViewController"
         static let emailInputVC                 = "EmailInputViewController"
         static let checkEmailVC                 = "CheckEmailViewController"
         static let emailForLostPWVC             = "EmailForLostPasswordViewController"
@@ -43,6 +44,9 @@ struct Constants {
         static let studentIDGuideVC             = "StudentIDGuideViewController"
         static let captureStudentIDVC           = "CaptureStudentIDViewController"
     
+        
+        // Find User Info
+        static let chooseVerificationOptionVC   = "ChooseVerificationOptionVC"
         
         // Home & Item Tab
         static let tabBarController             = "TabBarController"

@@ -2,19 +2,26 @@ import UIKit
 
 extension UILabel {
     
-    func changeTextAttributeColor(fullText : String , changeText : String ) {
+    // UILabel 특정 부분만 색상 바꾸기
+    func changeTextAttributeColor(
+        fullText : String,
+        changeText : String,
+        toColor: UIColor? = UIColor(named: Constants.Color.appColor)
+    ) {
         let strNumber: NSString = fullText as NSString
         let range = (strNumber).range(of: changeText)
         let attribute = NSMutableAttributedString.init(string: fullText)
-        attribute.addAttribute(NSAttributedString.Key.foregroundColor,
-                               value: UIColor(named: Constants.Color.appColor)! ,
-                               range: range)
+        attribute.addAttribute(
+            NSAttributedString.Key.foregroundColor,
+            value: UIColor(named: Constants.Color.appColor)! ,
+            range: range
+        )
         self.attributedText = attribute
     }
     
     /// 입력된 포지션에 따라 라벨의 문자열의 인덱스 반환
-      /// - Parameter point: 인덱스 값을 알고 싶은 CGPoint
-      func textIndex(at point: CGPoint) -> Int? {
+    /// - Parameter point: 인덱스 값을 알고 싶은 CGPoint
+    func textIndex(at point: CGPoint) -> Int? {
           guard let attributedText = attributedText else { return nil }
 
           let layoutManager = NSLayoutManager()

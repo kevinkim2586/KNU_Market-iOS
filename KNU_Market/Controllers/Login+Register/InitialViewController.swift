@@ -8,13 +8,12 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
     
-    private lazy var idGuideString = "2021년 9월 27일 이전 가입 유저의 아이디는 웹메일(@knu.ac.kr) 형식입니다."
+    private lazy var idGuideString = "2021년 10월 6일 이전에 가입한 회원의 아이디는 웹메일(@knu.ac.kr) 형식입니다."
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
-
     
     //MARK: - IBActions
     
@@ -31,7 +30,11 @@ class InitialViewController: UIViewController {
             case .success(_):
                 self.goToHomeScreen()
             case .failure(let error):
-                self.presentKMAlertOnMainThread(title: "로그인 실패", message: error.errorDescription, buttonTitle: "확인")
+                self.presentKMAlertOnMainThread(
+                    title: "로그인 실패",
+                    message: error.errorDescription,
+                    buttonTitle: "확인"
+                )
             }
             dismissProgressBar()
         }
@@ -41,24 +44,35 @@ class InitialViewController: UIViewController {
         performSegue(withIdentifier: Constants.SegueID.goToRegister, sender: self)
     }
     
-    @IBAction func pressedFindPWButton(_ sender: UIButton) {
-        guard let findPasswordVC = storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.findPasswordVC
-        ) as? FindPasswordViewController else { return }
+    @IBAction func pressedFindPwButton(_ sender: UIButton) {
+
         
-        findPasswordVC.delegate = self
-        presentPanModal(findPasswordVC)
+    }
+    
+    
+    @IBAction func pressedFindIdButton(_ sender: UIButton) {
+
+        let storyboard = UIStoryboard(
+            name: StoryboardName.FindUserInfo,
+            bundle: nil
+        )
+        guard let findIdVC = storyboard.instantiateViewController(
+            identifier: Constants.StoryboardID.chooseVerificationOptionVC
+        ) as? ChooseVerificationOptionViewController else { return }
+        
+        findIdVC.delegate = self
+        present(findIdVC, animated: true)
     }
     
     @IBAction func pressedInfoButton(_ sender: UIButton) {
         let attributedMessageString: NSAttributedString = idGuideString.attributedStringWithColor(
-            ["웹메일(@knu.ac.kr) 형식"],
+            ["2021년 10월 6일 이전에 가입한 회원"],
             color: UIColor(named: Constants.Color.appColor) ?? .systemPink,
             characterSpacing: nil
         )
         
         presentKMAlertOnMainThread(
-            title: "아이디 안내",
+            title: "안내",
             message: "",
             buttonTitle: "확인",
             attributedMessageString: attributedMessageString
@@ -66,20 +80,20 @@ class InitialViewController: UIViewController {
     }
 }
 
-//MARK: - FindPasswordDelegate
+//MARK: - ChooseVerificationOptionDelegate
 
-extension InitialViewController: FindPasswordDelegate {
+extension InitialViewController: ChooseVerificationOptionDelegate {
     
-    func didSendFindPasswordEmail() {
-        showSimpleBottomAlert(with: "발급받은 임시 비밀번호로 로그인해 주세요. 🎉")
+    func didSelectToRegister() {
+        performSegue(withIdentifier: Constants.SegueID.goToRegister, sender: self)
     }
 }
 
 //MARK: - UI Configuration & Initialization
+
 extension InitialViewController {
    
     func initialize() {
-        
         initializeTextFields()
         initializeLoginButton()
         initializeRegisterButton()
@@ -87,32 +101,24 @@ extension InitialViewController {
     
     func initializeTextFields() {
         
-        idTextField.borderStyle = .none
-        idTextField.backgroundColor = .systemGray6
-        idTextField.layer.cornerRadius = idTextField.frame.height / 2
-        idTextField.textAlignment = .center
-        idTextField.adjustsFontSizeToFitWidth = true
-        idTextField.minimumFontSize = 12
-        idTextField.layer.masksToBounds = true
-        idTextField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        [idTextField, pwTextField].forEach { textfield in
+            guard let textfield = textfield else { return}
+            textfield.borderStyle = .none
+            textfield.backgroundColor = .systemGray6
+            textfield.layer.cornerRadius = textfield.frame.height / 2
+            textfield.textAlignment = .center
+            textfield.adjustsFontSizeToFitWidth = true
+            textfield.minimumFontSize = 12
+            textfield.layer.masksToBounds = true
+            textfield.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        }
+        pwTextField.isSecureTextEntry = true
 
         idTextField.placeholder = "아이디 입력"
-        
-        pwTextField.borderStyle = .none
-        pwTextField.backgroundColor = .systemGray6
-        pwTextField.layer.cornerRadius = idTextField.frame.height / 2
-        pwTextField.textAlignment = .center
-        pwTextField.adjustsFontSizeToFitWidth = true
-        pwTextField.minimumFontSize = 12
-        pwTextField.isSecureTextEntry = true
-        pwTextField.layer.masksToBounds = true
-        pwTextField.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        
         pwTextField.placeholder = "비밀번호 입력"
     }
     
     func initializeLoginButton() {
-
         loginButton.setTitle("로그인", for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         loginButton.backgroundColor = UIColor(named: Constants.Color.appColor)
@@ -121,9 +127,11 @@ extension InitialViewController {
     }
     
     func initializeRegisterButton() {
-        
         registerButton.setTitle("회원가입", for: .normal)
-        registerButton.setTitleColor(UIColor(named: Constants.Color.appColor), for: .normal)
+        registerButton.setTitleColor(
+            UIColor(named: Constants.Color.appColor),
+            for: .normal
+        )
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         registerButton.addBounceAnimationWithNoFeedback()
     }

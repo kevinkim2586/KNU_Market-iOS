@@ -84,24 +84,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B89-Fh-cNR">
-                                <rect key="frame" x="146.5" y="617" width="82" height="30"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="비밀번호 찾기">
-                                            <attributes>
-                                                <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <font key="NSFont" metaFont="system" size="15"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="pressedFindPWButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cfp-kS-yHx"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크누마켓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxM-on-3oq">
                                 <rect key="frame" x="141" y="235" width="93.5" height="32.5"/>
                                 <color key="tintColor" red="0.69638150929999998" green="0.34167456629999998" blue="0.32939994340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -129,17 +111,59 @@
                                     <action selector="pressedInfoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6iL-Hz-kgM"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="f0w-XN-sLO" userLabel="Find Info Stack View">
+                                <rect key="frame" x="86.5" y="617" width="200" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cIR-hM-mND">
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="아이디 찾기">
+                                                    <attributes>
+                                                        <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <font key="NSFont" metaFont="system" size="15"/>
+                                                        <integer key="NSUnderline" value="1"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedFindIdButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uLk-g8-Nbj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Evp-8h-N6s">
+                                        <rect key="frame" x="118" y="0.0" width="82" height="30"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="비밀번호 찾기">
+                                                    <attributes>
+                                                        <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <font key="NSFont" metaFont="system" size="15"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        <integer key="NSUnderline" value="1"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedFindPwButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oNG-Ga-uri"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="f0w-XN-sLO" secondAttribute="bottom" constant="20" id="0ft-4k-L9q"/>
                             <constraint firstItem="bxM-on-3oq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2lS-aI-61g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0vi-xp-EMA" secondAttribute="trailing" constant="70" id="7SR-bj-isA"/>
                             <constraint firstItem="bxM-on-3oq" firstAttribute="top" secondItem="286-Rl-XaC" secondAttribute="bottom" constant="5" id="HDc-2G-8wq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="X6J-cK-goV" secondAttribute="trailing" constant="70" id="Hsj-XI-szG"/>
+                            <constraint firstItem="f0w-XN-sLO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JrK-Jc-OyX"/>
                             <constraint firstItem="ihx-1m-86D" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="PIv-mG-Uzb"/>
                             <constraint firstItem="YdQ-Zd-NJi" firstAttribute="leading" secondItem="ihx-1m-86D" secondAttribute="trailing" constant="15" id="S69-RP-1AA"/>
-                            <constraint firstItem="B89-Fh-cNR" firstAttribute="top" secondItem="kfM-0r-VwU" secondAttribute="bottom" constant="5" id="ah4-7r-rDa"/>
+                            <constraint firstItem="f0w-XN-sLO" firstAttribute="top" secondItem="kfM-0r-VwU" secondAttribute="bottom" constant="5" id="SOT-W9-IJW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ihx-1m-86D" secondAttribute="trailing" constant="70" id="gRu-NK-pRx"/>
                             <constraint firstItem="X6J-cK-goV" firstAttribute="top" secondItem="0vi-xp-EMA" secondAttribute="bottom" constant="15" id="ibM-nX-ooR"/>
                             <constraint firstItem="0vi-xp-EMA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="jOl-ba-QIV"/>
@@ -149,8 +173,6 @@
                             <constraint firstItem="kfM-0r-VwU" firstAttribute="top" secondItem="X6J-cK-goV" secondAttribute="bottom" constant="15" id="ogY-sn-TqL"/>
                             <constraint firstItem="286-Rl-XaC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="p3n-vx-Glu"/>
                             <constraint firstItem="X6J-cK-goV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="qej-KV-GwC"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="B89-Fh-cNR" secondAttribute="bottom" constant="20" id="qkh-uY-GdF"/>
-                            <constraint firstItem="B89-Fh-cNR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rLp-g1-0VP"/>
                             <constraint firstItem="0vi-xp-EMA" firstAttribute="top" secondItem="ihx-1m-86D" secondAttribute="bottom" constant="15" id="unn-DH-hHO"/>
                             <constraint firstItem="kif-x2-Kgv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xPE-gZ-hN9"/>
                             <constraint firstItem="kif-x2-Kgv" firstAttribute="top" secondItem="bxM-on-3oq" secondAttribute="bottom" constant="5" id="yCW-WK-WhB"/>

@@ -192,13 +192,25 @@ extension UIViewController {
         User.shared.isAbsoluteFirstAppLaunch = false
     }
     
+    // 인증 수단 고르기 화면 띄우기
     func presentVerifyOptionVC() {
-        let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
+        let storyboard = UIStoryboard(name: StoryboardName.MyPage, bundle: nil)
         guard let vc = storyboard.instantiateViewController(
             identifier: Constants.StoryboardID.verifyOptionVC
         ) as? VerifyOptionViewController else { return }
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // 회원가입 VC 띄우기
+    func presentRegisterVC() {
+        let storyboard = UIStoryboard(name: StoryboardName.UserRegister, bundle: nil)
+        guard let vc = storyboard.instantiateViewController(
+            withIdentifier: Constants.StoryboardID.idInputVC
+        ) as? IDInputViewController else { return }
+        
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true)
     }
 }
 

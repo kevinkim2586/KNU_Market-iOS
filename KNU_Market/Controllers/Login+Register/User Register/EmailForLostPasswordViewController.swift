@@ -79,7 +79,7 @@ class EmailForLostPasswordViewController: UIViewController {
 extension EmailForLostPasswordViewController {
     
     func checkIfValidEmail() -> Bool {
-        guard let email = emailTextField.text else { return }
+        guard let email = emailTextField.text else { return false }
         
         if !email.isValidEmail {
             showErrorMessage(message: "유효한 이메일인지 확인해주세요.")

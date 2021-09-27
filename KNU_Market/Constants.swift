@@ -14,6 +14,7 @@ struct Constants {
         static let goToRegister                 = "goToRegister"
         static let goToPasswordInputVC          = "goToPasswordInputVC"
         static let goToNicknameInputVC          = "goToNicknameInputVC"
+        static let goToEmailForLostPwVC         = "goToEmailForLostPwVC"
 
         
         // Chat
@@ -32,9 +33,9 @@ struct Constants {
         // Register  & Login
         static let initialVC                    = "initialViewController"
         static let initialNavigationController  = "InitialNavigationController"
-        static let loginVC                      = "LoginViewController"
         static let emailInputVC                 = "EmailInputViewController"
         static let checkEmailVC                 = "CheckEmailViewController"
+        static let emailForLostPWVC             = "EmailForLostPasswordViewController"
         static let registerVC                   = "RegisterViewController"
         static let congratulateUserVC           = "CongratulateViewController"
         static let registerNavigationController = "RegisterNavigationController"

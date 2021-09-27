@@ -9,6 +9,7 @@ class UserRegisterValues {
     var userId: String = ""
     var password: String = ""
     var nickname: String = ""
+    var emailForPasswordLoss: String = ""
 
     var email: String = ""
     var fcmToken: String = ""

@@ -37,7 +37,7 @@ class NickNameInputViewController: UIViewController {
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
         nicknameTextField.resignFirstResponder()
-        if !checkNicknameLengthIsValid() { return }
+        if !checkIfValidNickname() { return }
         checkNicknameDuplication()
     }
 
@@ -48,8 +48,13 @@ class NickNameInputViewController: UIViewController {
 
 extension NickNameInputViewController {
     
-    func checkNicknameLengthIsValid() -> Bool {
+    func checkIfValidNickname() -> Bool {
         guard let nickname = nicknameTextField.text else { return false }
+        
+        if nickname.hasEmojis || nickname.hasSpecialCharacters {
+            showErrorMessage(message: "유효하지 않은 닉네임이에요.")
+            return false
+        }
         
         if nickname.count >= 2 && nickname.count <= 15 { return true }
         else {
@@ -80,48 +85,16 @@ extension NickNameInputViewController {
                 } else {
                     UserRegisterValues.shared.nickname = nickname
                     DispatchQueue.main.async {
-                        self.registerUser()
+                        self.performSegue(
+                            withIdentifier: Constants.SegueID.goToEmailForLostPwVC,
+                            sender: self
+                        )
                     }
                 }
-                
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
         }
-    }
-    
-    func registerUser() {
-        
-        showProgressBar()
-        
-        let model = RegisterRequestDTO(
-            id: UserRegisterValues.shared.userId,
-            password: UserRegisterValues.shared.password,
-            nickname: UserRegisterValues.shared.nickname,
-            fcmToken: UserRegisterValues.shared.fcmToken
-        )
-        
-        UserManager.shared.register(with: model) { [weak self] result in
-            guard let self = self else { return }
-            dismissProgressBar()
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self.showCongratulateRegisterVC()
-                }
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
-            }
-        }
-    }
-    
-    func showCongratulateRegisterVC() {
-        guard let vc = storyboard?.instantiateViewController(
-                identifier: Constants.StoryboardID.congratulateUserVC
-        ) as? CongratulateUserViewController else { return }
-        
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
     }
     
     func dismissErrorMessage() {
@@ -167,7 +140,6 @@ extension NickNameInputViewController {
         )
     }
   
-    
     func initializeLabels() {
         
         errorLabel.isHidden = true

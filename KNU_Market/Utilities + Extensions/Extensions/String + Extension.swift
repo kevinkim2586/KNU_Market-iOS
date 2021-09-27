@@ -13,7 +13,7 @@ extension String {
         return convertedDate
     }
     
-    var containsEmoji: Bool {
+    var hasEmojis: Bool {
         for scalar in unicodeScalars {
             switch scalar.value {
             case 0x1F600...0x1F64F, // Emoticons
@@ -30,6 +30,32 @@ extension String {
             }
         }
         return false
+    }
+    
+    var hasSpecialCharacters: Bool {
+
+        do {
+            let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: .caseInsensitive)
+            if let _ = regex.firstMatch(
+                in: self,
+                options: NSRegularExpression.MatchingOptions.reportCompletion,
+                range: NSMakeRange(0, self.count)
+            ) {
+                return true
+            }
+
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
+        }
+
+        return false
+    }
+    
+    var isValidEmail: Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: self)
     }
     
     subscript(_ range: CountableRange<Int>) -> String {

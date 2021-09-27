@@ -129,6 +129,7 @@
 		7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */; };
 		7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */; };
 		7CDADA0726BE623100F7F58F /* DateHelper + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper + Extension.swift */; };
+		7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -257,6 +258,7 @@
 		7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
 		7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		7CDADA0626BE623100F7F58F /* DateHelper + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper + Extension.swift"; sourceTree = "<group>"; };
+		7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewController.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -316,6 +318,7 @@
 				7C4CA63226F4BF3200F4BCA7 /* IDInputViewController.swift */,
 				7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */,
 				7C3B4FEB26A928A600E2CA8F /* PasswordInputViewController.swift */,
+				7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */,
 				7C3B4FED26A928B700E2CA8F /* ProfilePictureInputViewController.swift */,
 				7C3B4FEF26A928C700E2CA8F /* EmailInputViewController.swift */,
 				7C3B4FF126A928D300E2CA8F /* CheckEmailViewController.swift */,
@@ -933,6 +936,7 @@
 				7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */,
 				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,
 				7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */,
+				7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */,
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,

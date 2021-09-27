@@ -78,7 +78,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
-                                <state key="normal" title="크누마켓 시작하기">
+                                <state key="normal" title="다음">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -121,11 +121,108 @@
                         <outlet property="nicknameTextField" destination="QdO-Vc-EUe" id="VEF-MT-j3n"/>
                         <outlet property="secondLineLabel" destination="gcX-tx-Aaw" id="Gpi-hp-OJi"/>
                         <outlet property="thirdLineLabel" destination="HZf-mI-Vvy" id="sV6-zo-afe"/>
+                        <segue destination="vfh-oI-r4P" kind="show" identifier="goToEmailForLostPwVC" id="thV-eg-7Ru"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="see-sR-5SO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2830" y="100"/>
+        </scene>
+        <!--EmailForLostPW-->
+        <scene sceneID="H6T-kt-ckm">
+            <objects>
+                <viewController storyboardIdentifier="EmailForLostPasswordViewController" title="NickNameInputViewController" id="vfh-oI-r4P" userLabel="EmailForLostPW" customClass="EmailForLostPasswordViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Oia-pX-7bW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호 분실 시 임시 비밀번호를 받을 이메일 주소를 입력해주세요!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hZD-ru-baR">
+                                <rect key="frame" x="20" y="118" width="374" height="45.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKX-uw-3Kd">
+                                <rect key="frame" x="20" y="284.5" width="284" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일 주소 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6dD-hm-dUf" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="204.5" width="244" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="5th-kD-Eoa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                        <color key="value" name="AppDefaultColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="inactiveColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" name="AppDefaultColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMi-Pg-ZD7">
+                                <rect key="frame" x="0.0" y="816" width="414" height="80"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="dom-a1-mcH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
+                                <state key="normal" title="크누마켓 시작하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedNextButton:" destination="vfh-oI-r4P" eventType="touchUpInside" id="G15-Tc-URM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="S43-nP-BkF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nKX-uw-3Kd" firstAttribute="leading" secondItem="S43-nP-BkF" secondAttribute="leading" constant="20" id="7U1-Wx-Yhe"/>
+                            <constraint firstItem="6dD-hm-dUf" firstAttribute="leading" secondItem="S43-nP-BkF" secondAttribute="leading" constant="20" id="94c-Hb-hwN"/>
+                            <constraint firstItem="hZD-ru-baR" firstAttribute="leading" secondItem="S43-nP-BkF" secondAttribute="leading" constant="20" id="CZW-1C-iXI"/>
+                            <constraint firstAttribute="bottom" secondItem="nMi-Pg-ZD7" secondAttribute="bottom" id="CtC-XV-gUb"/>
+                            <constraint firstItem="S43-nP-BkF" firstAttribute="trailing" secondItem="6dD-hm-dUf" secondAttribute="trailing" constant="150" id="Fo9-uC-ViA"/>
+                            <constraint firstAttribute="trailing" secondItem="hZD-ru-baR" secondAttribute="trailing" constant="20" id="JBf-Ua-TEl"/>
+                            <constraint firstItem="S43-nP-BkF" firstAttribute="trailing" secondItem="nKX-uw-3Kd" secondAttribute="trailing" constant="110" id="LLs-vU-GEG"/>
+                            <constraint firstItem="hZD-ru-baR" firstAttribute="top" secondItem="S43-nP-BkF" secondAttribute="top" constant="30" id="MxG-Lv-68Z"/>
+                            <constraint firstItem="S43-nP-BkF" firstAttribute="trailing" secondItem="nMi-Pg-ZD7" secondAttribute="trailing" id="Svx-V5-7eK"/>
+                            <constraint firstItem="nMi-Pg-ZD7" firstAttribute="leading" secondItem="S43-nP-BkF" secondAttribute="leading" id="neb-IZ-PnU"/>
+                            <constraint firstItem="nKX-uw-3Kd" firstAttribute="top" secondItem="6dD-hm-dUf" secondAttribute="bottom" constant="20" id="q8w-nl-IDb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="4OT-sH-bpG">
+                        <barButtonItem key="backBarButtonItem" title=" " id="sFo-Cb-Txh"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="emailTextField" destination="6dD-hm-dUf" id="Fw4-yN-1B0"/>
+                        <outlet property="errorLabel" destination="nKX-uw-3Kd" id="AiJ-zP-iR9"/>
+                        <outlet property="nextButton" destination="nMi-Pg-ZD7" id="0qn-Zl-tLh"/>
+                        <outlet property="nextButtonBottomAnchor" destination="CtC-XV-gUb" id="saw-Gb-0fI"/>
+                        <outlet property="nextButtonHeight" destination="dom-a1-mcH" id="1cM-CF-3ew"/>
+                        <outlet property="titleLabel" destination="hZD-ru-baR" id="kf3-RD-zYd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kgr-IE-uPT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3828" y="100"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Fpk-xs-wBO">
@@ -863,7 +960,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyq-y1-oTU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3828" y="100"/>
+            <point key="canvasLocation" x="4570" y="100"/>
         </scene>
         <!--TabBarController-->
         <scene sceneID="SPI-GM-DmR">
@@ -873,10 +970,14 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bmz-WY-DNU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4716" y="100"/>
+            <point key="canvasLocation" x="5372" y="100"/>
         </scene>
     </scenes>
     <designables>
+        <designable name="5cQ-cr-Dv2"/>
+        <designable name="6dD-hm-dUf">
+            <size key="intrinsicContentSize" width="118" height="23"/>
+        </designable>
         <designable name="QdO-Vc-EUe">
             <size key="intrinsicContentSize" width="82.5" height="23"/>
         </designable>

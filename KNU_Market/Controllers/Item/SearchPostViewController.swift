@@ -64,7 +64,7 @@ extension SearchPostViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         guard let searchKey = searchBar.text else { return }
-        guard !searchKey.containsEmoji else {
+        guard !searchKey.hasEmojis else {
             searchBar.resignFirstResponder()
             tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
                                                  text: "이모티콘 검색은 지원하지 않습니다!")

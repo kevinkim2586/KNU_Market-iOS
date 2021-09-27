@@ -1,11 +1,12 @@
 import UIKit
 import TextFieldEffects
 
-class IDInputViewController: UIViewController {
+class EmailForLostPasswordViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var userIdTextField: HoshiTextField!
+    @IBOutlet weak var emailTextField: HoshiTextField!
     @IBOutlet weak var errorLabel: UILabel!
+    
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
     @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
@@ -15,12 +16,7 @@ class IDInputViewController: UIViewController {
         initialize()
     }
     
-    @IBAction func pressedDismissButton(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     @objc func keyboardWillShow(notification: Notification) {
-        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
             nextButtonBottomAnchor.constant = keyboardSize.height
@@ -34,31 +30,63 @@ class IDInputViewController: UIViewController {
         nextButtonHeight.constant = 80
         nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
-
+    
     @IBAction func pressedNextButton(_ sender: UIButton) {
-        userIdTextField.resignFirstResponder()
-        if !checkIfValidId() { return }
-        checkIDDuplication()
+        emailTextField.resignFirstResponder()
+        if !checkIfValidEmail() { return }
+        registerUser()
+    }
+
+    
+    func registerUser() {
+        
+        showProgressBar()
+        #warning("회원 가입 수정 필요")
+        let model = RegisterRequestDTO(
+            id: UserRegisterValues.shared.userId,
+            password: UserRegisterValues.shared.password,
+            nickname: UserRegisterValues.shared.nickname,
+            fcmToken: UserRegisterValues.shared.fcmToken
+        )
+        
+        UserManager.shared.register(with: model) { [weak self] result in
+            guard let self = self else { return }
+            dismissProgressBar()
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.showCongratulateRegisterVC()
+                }
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
+            }
+        }
+    }
+    
+    
+    func showCongratulateRegisterVC() {
+        guard let vc = storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.congratulateUserVC
+        ) as? CongratulateUserViewController else { return }
+        
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
 //MARK: - User Input Validation
 
-extension IDInputViewController {
+extension EmailForLostPasswordViewController {
     
-    func checkIfValidId() -> Bool {
-        guard let id = userIdTextField.text else { return false}
+    func checkIfValidEmail() -> Bool {
+        guard let email = emailTextField.text else { return }
         
-        if id.hasSpecialCharacters {
-            showErrorMessage(message: "아이디에 특수 문자와 한글을 포함할 수 없어요.")
+        if !email.isValidEmail {
+            showErrorMessage(message: "유효한 이메일인지 확인해주세요.")
             return false
         }
         
-        if id.count >= 4 && id.count <= 40 { return true }
-        else {
-            showErrorMessage(message: "아이디는 4자 이상, 20자 이하로 적어주세요.")
-            return false
-        }
+        return true
     }
     
     func showErrorMessage(message: String) {
@@ -75,79 +103,51 @@ extension IDInputViewController {
     @objc func textFieldDidChange(_ textField: UITextField) {
         dismissErrorMessage()
     }
-    
-    func checkIDDuplication() {
-        
-        let id = userIdTextField.text!.trimmingCharacters(in: .whitespaces)
-        
-        UserManager.shared.checkDuplication(id: id) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let isDuplicate):
-                
-                if isDuplicate {
-                    self.showErrorMessage(message: "이미 사용 중인 아이디입니다.🥲")
-                } else {
-                    print("✏️ ID is not duplicate!")
-                    UserRegisterValues.shared.userId = id
-                    DispatchQueue.main.async {
-                        self.performSegue(
-                            withIdentifier: Constants.SegueID.goToPasswordInputVC,
-                            sender: self
-                        )
-                    }
-                }
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
-            }
-        }
-    }
 }
 
-//MARK: - UI Configuration
 
-extension IDInputViewController {
+//MARK: - UI Configuration & Initialization
+
+extension EmailForLostPasswordViewController {
     
     func initialize() {
         createObserverForKeyboardStateChange()
         initializeTextField()
-        setClearNavigationBarBackground()
-        initializeTitleLabel()
+        initializeLabels()
     }
     
     func createObserverForKeyboardStateChange() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),
-            name:UIResponder.keyboardWillShowNotification,
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide),
-            name:UIResponder.keyboardWillHideNotification,
+            name:UIResponder.keyboardWillHideNotification ,
             object: nil
         )
     }
     
     func initializeTextField() {
-        userIdTextField.addTarget(
+        emailTextField.addTarget(
             self,
             action: #selector(textFieldDidChange(_:)),
             for: .editingChanged
         )
     }
     
-    func initializeTitleLabel() {
+    func initializeLabels() {
         errorLabel.isHidden = true
-        titleLabel.text = "환영합니다, 학우님!\n로그인에 사용할 아이디를 입력해주세요."
-        titleLabel.font = .systemFont(ofSize: 19, weight: .semibold)
+        
+        titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
         titleLabel.textColor = .darkGray
+        titleLabel.text = "비밀번호 분실 시 임시 비밀번호를 받을\n이메일 주소를 입력해주세요! "
         titleLabel.changeTextAttributeColor(
             fullText: titleLabel.text!,
-            changeText: "로그인에 사용할 아이디"
+            changeText: "이메일 주소"
         )
     }
-    
 }

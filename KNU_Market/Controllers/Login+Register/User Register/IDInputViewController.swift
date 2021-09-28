@@ -131,7 +131,6 @@ extension IDInputViewController {
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
-
     }
 
     func initializeTextField() {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */; };
+		7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */; };
 		7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */; };
 		7C036AB82696BE4C00F6C29B /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C036AB72696BE4C00F6C29B /* Date + Extension.swift */; };
 		7C036ABE269AB7CC00F6C29B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */; };
@@ -142,6 +143,7 @@
 
 /* Begin PBXFileReference section */
 		0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
+		7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + UpdateInfo.swift"; sourceTree = "<group>"; };
 		7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		7C036AB72696BE4C00F6C29B /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "APN Key/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -332,11 +334,11 @@
 			isa = PBXGroup;
 			children = (
 				7C4CA63226F4BF3200F4BCA7 /* IDInputViewController.swift */,
-				7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */,
 				7C3B4FEB26A928A600E2CA8F /* PasswordInputViewController.swift */,
+				7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */,
 				7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */,
-				7C3B4FED26A928B700E2CA8F /* ProfilePictureInputViewController.swift */,
 				7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */,
+				7C3B4FED26A928B700E2CA8F /* ProfilePictureInputViewController.swift */,
 			);
 			path = "User Register";
 			sourceTree = "<group>";
@@ -414,6 +416,7 @@
 				7CA6624626413C5A000E0B7A /* UserManager.swift */,
 				7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */,
 				7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */,
+				7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */,
 			);
 			path = UserManager;
 			sourceTree = "<group>";
@@ -479,8 +482,7 @@
 		7C79E11026E0C27B0004508A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				7CC1B59726D4C7000007F99B /* EmptyView.swift */,
-				7CC1B59926D4CB1E0007F99B /* EmptyView.xib */,
+				7CEDBB64270307D50078F5E1 /* Empty View */,
 				7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */,
 				7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */,
 				7CEDBB602702EC970078F5E1 /* KMTextField.swift */,
@@ -768,6 +770,15 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		7CEDBB64270307D50078F5E1 /* Empty View */ = {
+			isa = PBXGroup;
+			children = (
+				7CC1B59726D4C7000007F99B /* EmptyView.swift */,
+				7CC1B59926D4CB1E0007F99B /* EmptyView.xib */,
+			);
+			path = "Empty View";
+			sourceTree = "<group>";
+		};
 		B9AC8E9164D1E6F43C975A72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -999,6 +1010,7 @@
 				7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer + Extension.swift in Sources */,
+				7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,

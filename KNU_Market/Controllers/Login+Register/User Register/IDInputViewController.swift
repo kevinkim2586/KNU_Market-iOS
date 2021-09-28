@@ -10,6 +10,8 @@ class IDInputViewController: UIViewController {
     @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
     @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
     
+    private let bottomButton = KMBottomButton(buttonTitle: "다음")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -22,20 +24,27 @@ class IDInputViewController: UIViewController {
     @objc func keyboardWillShow(notification: Notification) {
         
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            
-            nextButtonBottomAnchor.constant = keyboardSize.height
-            nextButtonHeight.constant = 60
-            nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+  
+
+            bottomButton.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -keyboardSize.height
+            ).isActive = true
+            bottomButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            view.layoutIfNeeded()
+            bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
+
         }
     }
 
     @objc func keyboardWillHide(notification: Notification) {
-        nextButtonBottomAnchor.constant = 0
-        nextButtonHeight.constant = 80
-        nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        bottomButton.updateTitleEdgeInsetsForKeyboardHidden()
+//        nextButtonBottomAnchor.constant = 0
+//        nextButtonHeight.constant = 80
+//        nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
-
-    @IBAction func pressedNextButton(_ sender: UIButton) {
+    
+    @objc func pressedBottomButton() {
         userIdTextField.resignFirstResponder()
         if !checkIfValidId() { return }
         checkIDDuplication()
@@ -89,7 +98,6 @@ extension IDInputViewController {
                 if isDuplicate {
                     self.showErrorMessage(message: "이미 사용 중인 아이디입니다.🥲")
                 } else {
-                    print("✏️ ID is not duplicate!")
                     UserRegisterValues.shared.userId = id
                     DispatchQueue.main.async {
                         self.performSegue(
@@ -110,10 +118,26 @@ extension IDInputViewController {
 extension IDInputViewController {
     
     func initialize() {
+        initializeBottomButton()
         createObserverForKeyboardStateChange()
         initializeTextField()
         setClearNavigationBarBackground()
         initializeTitleLabel()
+    }
+    
+    func initializeBottomButton() {
+        view.addSubview(bottomButton)
+        bottomButton.addTarget(
+            self,
+            action: #selector(pressedBottomButton),
+            for: .touchUpInside
+        )
+        NSLayoutConstraint.activate([
+            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomButton.heightAnchor.constraint(equalToConstant: 80)
+        ])
     }
     
     func createObserverForKeyboardStateChange() {

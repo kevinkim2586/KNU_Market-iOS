@@ -13,6 +13,8 @@ class UploadItemViewController: UIViewController {
     @IBOutlet weak var expandButton: UITextField!
     @IBOutlet weak var itemDetailTextView: UITextView!
     
+    private let requiredMinimumPeopleToGather: Int = 2
+    
     var viewModel = UploadItemViewModel()
     var editModel: EditPostModel?
     
@@ -61,8 +63,10 @@ class UploadItemViewController: UIViewController {
     
     func askToUpdatePost() {
         
-        self.presentAlertWithCancelAction(title: "수정하시겠습니까?",
-                                          message: "") { selectedOk in
+        self.presentAlertWithCancelAction(
+            title: "수정하시겠습니까?",
+            message: ""
+        ) { selectedOk in
             
             if selectedOk {
                 showProgressBar()
@@ -330,7 +334,9 @@ extension UploadItemViewController {
         itemTitleTextField.text = editModel!.title
         
         // 현재 모집된 인원이 1명이면, 최소 모집 인원인 2명으로 자동 설정할 수 있게끔 실행
-        stepper.minimumValue = editModel!.currentlyGatheredPeople == 1 ? 2 : Double(editModel!.currentlyGatheredPeople)
+        stepper.minimumValue = editModel!.currentlyGatheredPeople == 1 ?
+        Double(requiredMinimumPeopleToGather) : Double(editModel!.currentlyGatheredPeople)
+        
         stepper.value = Double(editModel!.currentlyGatheredPeople)
         
         totalGatheringPeopleLabel.text = String(editModel!.totalGatheringPeople) + " 명"

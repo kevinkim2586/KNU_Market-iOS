@@ -36,7 +36,7 @@ extension String {
 
         do {
             let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: .caseInsensitive)
-            if let _ = regex.firstMatch(
+            if let _ = regex.firstMatch (
                 in: self,
                 options: NSRegularExpression.MatchingOptions.reportCompletion,
                 range: NSMakeRange(0, self.count)
@@ -45,7 +45,7 @@ extension String {
             }
 
         } catch {
-            debugPrint(error.localizedDescription)
+            print("❗️ hasSpecialCharacter: \(error.localizedDescription)")
             return false
         }
 

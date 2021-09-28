@@ -59,50 +59,50 @@ class ItemViewModel {
     }
     
     var date: String {
-        return formatDateForDisplay()
+        return getFormattedDateStringToDisplayTodayAndYesterday()
     }
     
-    // 내가 올린 공구인지
+    // 사용자가 올린 공구인지 여부
     var postIsUserUploaded: Bool {
         return model?.nickname == User.shared.nickname
     }
 
     // 이미 참여하고 있는 공구인지
     var userAlreadyJoinedPost: Bool {
-        if User.shared.joinedChatRoomPIDs.contains(pageID ?? "") {
-            return true
-        }
-        return false
+        return User.shared.joinedChatRoomPIDs.contains(pageID ?? "") ? true: false
     }
     
-    // 공구 자체가 다 마감이 됐는지
+    // 인원이 다 찼는지 여부
     var isFull: Bool {
         return model?.isFull ?? true
     }
     
-    // 인원이 다 찼는지
+    // 공구 마감 여부
     var isCompletelyDone: Bool {
         return model?.isCompletelyDone ?? true
     }
     
+    // 모집 여부
     var isGathering: Bool {
         return isCompletelyDone ? false : true
     }
     
     var modelForEdit: EditPostModel {
-        let editPostModel = EditPostModel(title: model?.title ?? "",
-                                          imageURLs: imageURLs,
-                                          imageUIDs: model?.imageUIDs,
-                                          totalGatheringPeople: totalGatheringPeople,
-                                          currentlyGatheredPeople: currentlyGatheredPeople,
-                                          location: model?.location ?? 0,
-                                          itemDetail: model?.itemDetail ?? "",
-                                          pageUID: pageID ?? "")
+        let editPostModel = EditPostModel(
+            title: model?.title ?? "",
+            imageURLs: imageURLs,
+            imageUIDs: model?.imageUIDs,
+            totalGatheringPeople: totalGatheringPeople,
+            currentlyGatheredPeople: currentlyGatheredPeople,
+            location: model?.location ?? 0,
+            itemDetail: model?.itemDetail ?? "",
+            pageUID: pageID ?? ""
+        )
         return editPostModel
     }
     
     var userIncludedURL: URL?
-
+    
     
     //MARK: - 공구 상세내용 불러오기
     func fetchItemDetails(for uid: String) {
@@ -112,13 +112,11 @@ class ItemViewModel {
             guard let self = self else { return }
             
             switch result {
-            
             case .success(let fetchedModel):
                 self.model = fetchedModel
                 self.delegate?.didFetchItemDetails()
                 
             case .failure(let error):
-                
                 print("❗️ ItemViewModel - FAILED fetchItemDetails")
                 self.delegate?.failedFetchingItemDetails(with: error)
             }
@@ -133,10 +131,8 @@ class ItemViewModel {
             guard let self = self else { return }
             
             switch result {
-            
             case .success(_):
                 self.delegate?.didDeletePost()
-                
             case .failure(let error):
                 self.delegate?.failedDeletingPost(with: error)
             }
@@ -152,10 +148,11 @@ class ItemViewModel {
             
             switch result {
             case .success:
-                
                 self.delegate?.didMarkPostDone()
-                NotificationCenter.default.post(name: .updateItemList, object: nil)
-                
+                NotificationCenter.default.post(
+                    name: .updateItemList,
+                    object: nil
+                )
             case .failure(let error):
                 self.delegate?.failedMarkingPostDone(with: error)
             }
@@ -213,16 +210,15 @@ class ItemViewModel {
                 
                 print("❗️ ItemViewModel - joinPost error: \(error)")
                 
-                // 이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
-                if error == .E108 {
+                switch error {
+                    // 이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
+                case .E108:
                     self.delegate?.didEnterChat(isFirstEntrance: false)
-                    NotificationCenter.default.post(name: .updateItemList, object: nil)
-                
-                // 강퇴를 당한 적이 있는 경우
-                } else if error == .E112 {
-                    self.delegate?.failedJoiningChat(with: error)
-                }
-                else {
+                    NotificationCenter.default.post(
+                        name: .updateItemList,
+                        object: nil
+                    )
+                default:
                     self.delegate?.failedJoiningChat(with: error)
                 }
             }
@@ -233,20 +229,20 @@ class ItemViewModel {
     func fetchEnteredRoomInfo() {
         
         ChatManager.shared.getResponseModel(function: .getRoom,
-                                       method: .get,
-                                       pid: nil,
-                                       index: nil,
-                                       expectedModel: [Room].self) { [weak self] result in
+                                            method: .get,
+                                            pid: nil,
+                                            index: nil,
+                                            expectedModel: [Room].self) { [weak self] result in
             
             guard let self = self else { return }
             
             switch result {
             case .success(let chatRoom):
-        
+                
                 chatRoom.forEach { chat in
                     User.shared.joinedChatRoomPIDs.append(chat.uuid)
                 }
-
+                
             case .failure(let error):
                 self.delegate?.failedLoadingData(with: error)
             }
@@ -254,10 +250,12 @@ class ItemViewModel {
     }
     
     func blockUser(userUID: String) {
-        
         User.shared.bannedPostUploaders.append(userUID)
         self.delegate?.didBlockUser()
-        NotificationCenter.default.post(name: .updateItemList, object: nil)
+        NotificationCenter.default.post(
+            name: .updateItemList,
+            object: nil
+        )
     }
     
     func detectURL() {
@@ -309,26 +307,23 @@ class ItemViewModel {
 extension ItemViewModel {
     
     func convertUIDsToURL() {
-        
-        self.imageURLs.removeAll()
-        
+        imageURLs.removeAll()
         if let itemImageUIDs = model?.imageUIDs {
-            
-            self.imageURLs = itemImageUIDs.compactMap { URL(string: "\(Constants.API_BASE_URL)media/" + $0) }
+            imageURLs = itemImageUIDs.compactMap { URL(string: "\(Constants.API_BASE_URL)media/" + $0) }
         }
     }
     
     func convertURLsToImageSource() {
-        
-        self.imageSources.removeAll()
+        imageSources.removeAll()
         for url in self.imageURLs {
-            imageSources.append(SDWebImageSource(url: url,
-                                                 placeholder: UIImage(named: Constants.Images.defaultItemImage)))
+            imageSources.append(SDWebImageSource(
+                url: url,
+                placeholder: UIImage(named: Constants.Images.defaultItemImage))
+            )
         }
     }
     
-    func formatDateForDisplay() -> String {
-        
+    func getFormattedDateStringToDisplayTodayAndYesterday() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = Constants.DateFormat.defaultFormat
         dateFormatter.locale = Locale(identifier:"ko_KR")

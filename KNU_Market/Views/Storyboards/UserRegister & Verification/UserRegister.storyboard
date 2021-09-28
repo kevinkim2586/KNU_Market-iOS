@@ -682,27 +682,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0SF-ar-AtL">
-                                <rect key="frame" x="0.0" y="816" width="414" height="80"/>
-                                <color key="backgroundColor" name="AppDefaultColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="hCy-Vt-Hyj"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
-                                <state key="normal" title="다음">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressedNextButton:" destination="d6t-4K-7Y7" eventType="touchUpInside" id="TQC-Vh-EWU"/>
-                                    <action selector="pressedNextButton:" destination="R8R-DF-bwt" eventType="touchUpInside" id="cFp-up-L6c"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="E5c-zQ-Fnb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="0SF-ar-AtL" firstAttribute="leading" secondItem="Jej-jS-qBz" secondAttribute="leading" id="0gj-dD-MXo"/>
                             <constraint firstItem="E5c-zQ-Fnb" firstAttribute="trailing" secondItem="YDt-t0-rBq" secondAttribute="trailing" constant="20" id="52Q-Dm-fZ7"/>
                             <constraint firstItem="YDt-t0-rBq" firstAttribute="leading" secondItem="E5c-zQ-Fnb" secondAttribute="leading" constant="20" id="9UJ-5g-XJO"/>
                             <constraint firstItem="rrj-OI-d8j" firstAttribute="top" secondItem="YDt-t0-rBq" secondAttribute="bottom" constant="55" id="GwZ-F2-n6H"/>
@@ -711,8 +694,6 @@
                             <constraint firstItem="E5c-zQ-Fnb" firstAttribute="trailing" secondItem="rrj-OI-d8j" secondAttribute="trailing" constant="150" id="Rpd-Jw-TvW"/>
                             <constraint firstItem="p02-A1-HJj" firstAttribute="top" secondItem="rrj-OI-d8j" secondAttribute="bottom" constant="20" id="dLD-Av-B9m"/>
                             <constraint firstItem="YDt-t0-rBq" firstAttribute="top" secondItem="E5c-zQ-Fnb" secondAttribute="top" constant="30" id="ntp-FU-ClH"/>
-                            <constraint firstItem="E5c-zQ-Fnb" firstAttribute="trailing" secondItem="0SF-ar-AtL" secondAttribute="trailing" id="qKw-Nf-wpW"/>
-                            <constraint firstAttribute="bottom" secondItem="0SF-ar-AtL" secondAttribute="bottom" id="uf2-Uw-Vjx"/>
                             <constraint firstItem="rrj-OI-d8j" firstAttribute="leading" secondItem="E5c-zQ-Fnb" secondAttribute="leading" constant="20" id="wo1-2A-PVS"/>
                         </constraints>
                     </view>
@@ -727,9 +708,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="errorLabel" destination="p02-A1-HJj" id="rVl-sk-jfm"/>
-                        <outlet property="nextButton" destination="0SF-ar-AtL" id="eff-SX-f4H"/>
-                        <outlet property="nextButtonBottomAnchor" destination="uf2-Uw-Vjx" id="jQb-56-a9L"/>
-                        <outlet property="nextButtonHeight" destination="hCy-Vt-Hyj" id="3d4-tJ-Zab"/>
                         <outlet property="titleLabel" destination="YDt-t0-rBq" id="sq4-bI-ypA"/>
                         <outlet property="userIdTextField" destination="rrj-OI-d8j" id="zY8-fe-P4F"/>
                         <segue destination="d6t-4K-7Y7" kind="show" identifier="goToPasswordInputVC" id="d5F-ZV-dTR"/>
@@ -975,7 +953,6 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="5cQ-cr-Dv2"/>
         <designable name="6dD-hm-dUf">
             <size key="intrinsicContentSize" width="118" height="23"/>
         </designable>

@@ -133,6 +133,7 @@
 		7CEC191C2701745300C2D671 /* FindUserInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CEC191B2701745300C2D671 /* FindUserInfo.storyboard */; };
 		7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */; };
 		7CEC19232701837100C2D671 /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC19222701837100C2D671 /* StoryboardName.swift */; };
+		7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -265,6 +266,7 @@
 		7CEC191B2701745300C2D671 /* FindUserInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FindUserInfo.storyboard; sourceTree = "<group>"; };
 		7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVerificationOptionViewController.swift; sourceTree = "<group>"; };
 		7CEC19222701837100C2D671 /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
+		7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMBottomButton.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -466,13 +468,14 @@
 			path = "Custom Alerts";
 			sourceTree = "<group>";
 		};
-		7C79E11026E0C27B0004508A /* UIView */ = {
+		7C79E11026E0C27B0004508A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
 				7CC1B59726D4C7000007F99B /* EmptyView.swift */,
 				7CC1B59926D4CB1E0007F99B /* EmptyView.xib */,
+				7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */,
 			);
-			path = UIView;
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		7C79E11126E0EDFA0004508A /* LaunchScreen Assets */ = {
@@ -550,7 +553,7 @@
 			isa = PBXGroup;
 			children = (
 				7C79E10C26E0C1F50004508A /* Storyboards */,
-				7C79E11026E0C27B0004508A /* UIView */,
+				7C79E11026E0C27B0004508A /* Custom Views */,
 				7C79E10F26E0C2630004508A /* Custom Alerts */,
 				7C79E10E26E0C24E0004508A /* UICollectionViewCells */,
 				7C79E10D26E0C20B0004508A /* UITableViewCells */,
@@ -955,6 +958,7 @@
 				7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
+				7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,
 				7C132BF2265397B200BE5F40 /* ProgressHUD.swift in Sources */,
 				7C8E668B26E756C00060F37B /* ChatType.swift in Sources */,

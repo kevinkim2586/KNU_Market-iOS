@@ -1,6 +1,6 @@
 import UIKit
 
-class KMBodyLabel: UILabel {
+class KMAlertBodyLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

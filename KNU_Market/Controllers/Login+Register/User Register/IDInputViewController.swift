@@ -2,15 +2,13 @@ import UIKit
 import TextFieldEffects
 
 class IDInputViewController: UIViewController {
-
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var userIdTextField: HoshiTextField!
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
-    @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
     
-    private let bottomButton = KMBottomButton(buttonTitle: "다음")
+    private let titleLabel      = KMTitleLabel(textColor: .darkGray)
+    private let userIdTextField = KMTextField(placeHolderText: "아이디 입력")
+    private let errorLabel      = KMErrorLabel()
+    private let bottomButton    = KMBottomButton(buttonTitle: "다음")
+    
+    private let padding: CGFloat = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,26 +20,16 @@ class IDInputViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: Notification) {
-        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-  
-
-            bottomButton.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor,
-                constant: -keyboardSize.height
-            ).isActive = true
-            bottomButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-            view.layoutIfNeeded()
+            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardSize.height).isActive = true
+            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
             bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
-
+            view.layoutIfNeeded()
         }
     }
-
+    
     @objc func keyboardWillHide(notification: Notification) {
-        bottomButton.updateTitleEdgeInsetsForKeyboardHidden()
-//        nextButtonBottomAnchor.constant = 0
-//        nextButtonHeight.constant = 80
-//        nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        bottomButton.frame.origin.y = view.bounds.height - bottomButton.heightConstantForKeyboardHidden
     }
     
     @objc func pressedBottomButton() {
@@ -59,30 +47,19 @@ extension IDInputViewController {
         guard let id = userIdTextField.text else { return false}
         
         if id.hasSpecialCharacters {
-            showErrorMessage(message: "아이디에 특수 문자와 한글을 포함할 수 없어요.")
+            errorLabel.showErrorMessage(message: "아이디에 특수 문자와 한글을 포함할 수 없어요.")
             return false
         }
         
         if id.count >= 4 && id.count <= 40 { return true }
         else {
-            showErrorMessage(message: "아이디는 4자 이상, 20자 이하로 적어주세요.")
+            errorLabel.showErrorMessage(message: "아이디는 4자 이상, 20자 이하로 적어주세요.")
             return false
         }
     }
     
-    func showErrorMessage(message: String) {
-        errorLabel.isHidden = false
-        errorLabel.text = message
-        errorLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        errorLabel.textColor = UIColor(named: Constants.Color.appColor)
-    }
-    
-    func dismissErrorMessage() {
-        errorLabel.isHidden = true
-    }
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
-        dismissErrorMessage()
+        errorLabel.isHidden = true
     }
     
     func checkIDDuplication() {
@@ -94,9 +71,8 @@ extension IDInputViewController {
             
             switch result {
             case .success(let isDuplicate):
-                
                 if isDuplicate {
-                    self.showErrorMessage(message: "이미 사용 중인 아이디입니다.🥲")
+                    self.errorLabel.showErrorMessage(message: "이미 사용 중인 아이디입니다.🥲")
                 } else {
                     UserRegisterValues.shared.userId = id
                     DispatchQueue.main.async {
@@ -118,26 +94,12 @@ extension IDInputViewController {
 extension IDInputViewController {
     
     func initialize() {
-        initializeBottomButton()
         createObserverForKeyboardStateChange()
-        initializeTextField()
         setClearNavigationBarBackground()
         initializeTitleLabel()
-    }
-    
-    func initializeBottomButton() {
-        view.addSubview(bottomButton)
-        bottomButton.addTarget(
-            self,
-            action: #selector(pressedBottomButton),
-            for: .touchUpInside
-        )
-        NSLayoutConstraint.activate([
-            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomButton.heightAnchor.constraint(equalToConstant: 80)
-        ])
+        initializeTextField()
+        initializeErrorLabel()
+        initializeBottomButton()
     }
     
     func createObserverForKeyboardStateChange() {
@@ -155,23 +117,63 @@ extension IDInputViewController {
         )
     }
     
+    func initializeTitleLabel() {
+        view.addSubview(titleLabel)
+        titleLabel.numberOfLines = 2
+        titleLabel.text = "환영합니다, 학우님!\n로그인에 사용할 아이디를 입력해주세요."
+        titleLabel.changeTextAttributeColor(
+            fullText: titleLabel.text!,
+            changeText: "로그인에 사용할 아이디"
+        )
+
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+
+    }
+
     func initializeTextField() {
+        view.addSubview(userIdTextField)
         userIdTextField.addTarget(
             self,
             action: #selector(textFieldDidChange(_:)),
             for: .editingChanged
         )
+        
+        NSLayoutConstraint.activate([
+            userIdTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 55),
+            userIdTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            userIdTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
+            userIdTextField.heightAnchor.constraint(equalToConstant: 60)
+        ])
     }
     
-    func initializeTitleLabel() {
+    func initializeErrorLabel() {
+        view.addSubview(errorLabel)
         errorLabel.isHidden = true
-        titleLabel.text = "환영합니다, 학우님!\n로그인에 사용할 아이디를 입력해주세요."
-        titleLabel.font = .systemFont(ofSize: 19, weight: .semibold)
-        titleLabel.textColor = .darkGray
-        titleLabel.changeTextAttributeColor(
-            fullText: titleLabel.text!,
-            changeText: "로그인에 사용할 아이디"
-        )
+        
+        NSLayoutConstraint.activate([
+            errorLabel.topAnchor.constraint(equalTo: userIdTextField.bottomAnchor, constant: padding),
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
     }
     
+    func initializeBottomButton() {
+        view.addSubview(bottomButton)
+        bottomButton.addTarget(
+            self,
+            action: #selector(pressedBottomButton),
+            for: .touchUpInside
+        )
+        
+        NSLayoutConstraint.activate([
+            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardHidden)
+        ])
+    }
 }

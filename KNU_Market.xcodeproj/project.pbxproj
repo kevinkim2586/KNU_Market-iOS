@@ -100,9 +100,9 @@
 		7CA6624C26413D05000E0B7A /* UserInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624B26413D05000E0B7A /* UserInputError.swift */; };
 		7CA6624F26413F03000E0B7A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624E26413F03000E0B7A /* Constants.swift */; };
 		7CA78FF626CDFC510019B06F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF526CDFC510019B06F /* AlertViewController.swift */; };
-		7CA78FF826CE02D10019B06F /* KMBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF726CE02D10019B06F /* KMBodyLabel.swift */; };
-		7CA78FFA26CE02EC0019B06F /* KMTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF926CE02EC0019B06F /* KMTitleLabel.swift */; };
-		7CA78FFC26CE03260019B06F /* KMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FFB26CE03260019B06F /* KMButton.swift */; };
+		7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */; };
+		7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */; };
+		7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FFB26CE03260019B06F /* KMAlertButton.swift */; };
 		7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */; };
 		7CB8DF36264BAB760001CC6D /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF35264BAB760001CC6D /* UIViewController + Extension.swift */; };
 		7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF37264BB0300001CC6D /* ItemManager.swift */; };
@@ -134,6 +134,10 @@
 		7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */; };
 		7CEC19232701837100C2D671 /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC19222701837100C2D671 /* StoryboardName.swift */; };
 		7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */; };
+		7CEDBB5D2702E0820078F5E1 /* KMErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB5C2702E0820078F5E1 /* KMErrorLabel.swift */; };
+		7CEDBB5F2702E89F0078F5E1 /* KMTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */; };
+		7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB602702EC970078F5E1 /* KMTextField.swift */; };
+		7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -233,9 +237,9 @@
 		7CA6624B26413D05000E0B7A /* UserInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputError.swift; sourceTree = "<group>"; };
 		7CA6624E26413F03000E0B7A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7CA78FF526CDFC510019B06F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		7CA78FF726CE02D10019B06F /* KMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMBodyLabel.swift; sourceTree = "<group>"; };
-		7CA78FF926CE02EC0019B06F /* KMTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTitleLabel.swift; sourceTree = "<group>"; };
-		7CA78FFB26CE03260019B06F /* KMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMButton.swift; sourceTree = "<group>"; };
+		7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertBodyLabel.swift; sourceTree = "<group>"; };
+		7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertTitleLabel.swift; sourceTree = "<group>"; };
+		7CA78FFB26CE03260019B06F /* KMAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertButton.swift; sourceTree = "<group>"; };
 		7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewModel.swift; sourceTree = "<group>"; };
 		7CB8DF35264BAB760001CC6D /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		7CB8DF37264BB0300001CC6D /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
@@ -267,6 +271,10 @@
 		7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVerificationOptionViewController.swift; sourceTree = "<group>"; };
 		7CEC19222701837100C2D671 /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
 		7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMBottomButton.swift; sourceTree = "<group>"; };
+		7CEDBB5C2702E0820078F5E1 /* KMErrorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMErrorLabel.swift; sourceTree = "<group>"; };
+		7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTitleLabel.swift; sourceTree = "<group>"; };
+		7CEDBB602702EC970078F5E1 /* KMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTextField.swift; sourceTree = "<group>"; };
+		7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMDetailLabel.swift; sourceTree = "<group>"; };
 		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -460,9 +468,9 @@
 		7C79E10F26E0C2630004508A /* Custom Alerts */ = {
 			isa = PBXGroup;
 			children = (
-				7CA78FF726CE02D10019B06F /* KMBodyLabel.swift */,
-				7CA78FFB26CE03260019B06F /* KMButton.swift */,
-				7CA78FF926CE02EC0019B06F /* KMTitleLabel.swift */,
+				7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */,
+				7CA78FFB26CE03260019B06F /* KMAlertButton.swift */,
+				7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */,
 				7CA78FF526CDFC510019B06F /* AlertViewController.swift */,
 			);
 			path = "Custom Alerts";
@@ -474,6 +482,10 @@
 				7CC1B59726D4C7000007F99B /* EmptyView.swift */,
 				7CC1B59926D4CB1E0007F99B /* EmptyView.xib */,
 				7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */,
+				7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */,
+				7CEDBB602702EC970078F5E1 /* KMTextField.swift */,
+				7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */,
+				7CEDBB5C2702E0820078F5E1 /* KMErrorLabel.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -911,6 +923,7 @@
 				7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7C8E668D26E875A00060F37B /* UIImageView + Extension.swift in Sources */,
+				7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */,
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
 				7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */,
 				7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */,
@@ -918,6 +931,7 @@
 				7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */,
 				7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */,
 				7C0F1CBA26BA6B310068FF45 /* NotificationName.swift in Sources */,
+				7CEDBB5D2702E0820078F5E1 /* KMErrorLabel.swift in Sources */,
 				7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
 				7C55545D266CDFD100C3C5B6 /* UploadItemRequestDTO.swift in Sources */,
@@ -970,6 +984,7 @@
 				7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7C0E2DDF26B7D92800BB37FF /* String + Extension.swift in Sources */,
+				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
 				7CCDB1EA26A2BCD30092F28D /* ChatTableViewCell.swift in Sources */,
 				7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */,
@@ -980,7 +995,7 @@
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
-				7CA78FFC26CE03260019B06F /* KMButton.swift in Sources */,
+				7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */,
 				7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer + Extension.swift in Sources */,
@@ -988,18 +1003,19 @@
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,
 				7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */,
-				7CA78FF826CE02D10019B06F /* KMBodyLabel.swift in Sources */,
+				7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */,
 				7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */,
 				7C3D986226AE8A42005DFAE0 /* ChatMemberViewController.swift in Sources */,
 				7C833686266208210032308D /* Interceptor.swift in Sources */,
 				7C436B5826820E5200943069 /* ReportManager.swift in Sources */,
 				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,
 				7CA66234264135AA000E0B7A /* HomeViewController.swift in Sources */,
-				7CA78FFA26CE02EC0019B06F /* KMTitleLabel.swift in Sources */,
+				7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */,
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
+				7CEDBB5F2702E89F0078F5E1 /* KMTitleLabel.swift in Sources */,
 				7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */,
 				7C5A1F2B26D6174F0041885B /* UICollectionView + Extension.swift in Sources */,
 				7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */,

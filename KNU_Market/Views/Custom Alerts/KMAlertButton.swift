@@ -1,6 +1,6 @@
 import UIKit
 
-class KMButton: UIButton {
+class KMAlertButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

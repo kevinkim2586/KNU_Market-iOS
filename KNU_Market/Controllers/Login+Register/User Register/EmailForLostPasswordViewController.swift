@@ -2,14 +2,13 @@ import UIKit
 import TextFieldEffects
 
 class EmailForLostPasswordViewController: UIViewController {
-
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var emailTextField: HoshiTextField!
-    @IBOutlet weak var errorLabel: UILabel!
     
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
-    @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
+    private let titleLabel      = KMTitleLabel(textColor: .darkGray)
+    private let emailTextField  = KMTextField(placeHolderText: "이메일 주소 입력")
+    private let errorLabel      = KMErrorLabel()
+    private let bottomButton    = KMBottomButton(buttonTitle: "크누마켓 시작하기")
+
+    private let padding: CGFloat = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,26 +17,23 @@ class EmailForLostPasswordViewController: UIViewController {
     
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            
-            nextButtonBottomAnchor.constant = keyboardSize.height
-            nextButtonHeight.constant = 60
-            nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardSize.height).isActive = true
+            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
+            bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
+            view.layoutIfNeeded()
         }
     }
 
     @objc func keyboardWillHide(notification: Notification) {
-        nextButtonBottomAnchor.constant = 0
-        nextButtonHeight.constant = 80
-        nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        bottomButton.frame.origin.y = view.bounds.height - bottomButton.heightConstantForKeyboardHidden
     }
     
-    @IBAction func pressedNextButton(_ sender: UIButton) {
+    @objc func pressedBottomButton(_ sender: UIButton) {
         emailTextField.resignFirstResponder()
         if !checkIfValidEmail() { return }
         registerUser()
     }
 
-    
     func registerUser() {
         
         showProgressBar()
@@ -63,7 +59,6 @@ class EmailForLostPasswordViewController: UIViewController {
         }
     }
     
-    
     func showCongratulateRegisterVC() {
         guard let vc = storyboard?.instantiateViewController(
             identifier: Constants.StoryboardID.congratulateUserVC
@@ -82,26 +77,15 @@ extension EmailForLostPasswordViewController {
         guard let email = emailTextField.text else { return false }
         
         if !email.isValidEmail {
-            showErrorMessage(message: "유효한 이메일인지 확인해주세요.")
+            errorLabel.showErrorMessage(message: "유효한 이메일인지 확인해주세요.")
             return false
         }
         
         return true
     }
     
-    func showErrorMessage(message: String) {
-        errorLabel.isHidden = false
-        errorLabel.text = message
-        errorLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        errorLabel.textColor = UIColor(named: Constants.Color.appColor)
-    }
-    
-    func dismissErrorMessage() {
-        errorLabel.isHidden = true
-    }
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
-        dismissErrorMessage()
+        errorLabel.isHidden = true
     }
 }
 
@@ -112,8 +96,10 @@ extension EmailForLostPasswordViewController {
     
     func initialize() {
         createObserverForKeyboardStateChange()
+        initializeTitleLabel()
         initializeTextField()
-        initializeLabels()
+        initializeErrorLabel()
+        initializeBottomButton()
     }
     
     func createObserverForKeyboardStateChange() {
@@ -131,23 +117,65 @@ extension EmailForLostPasswordViewController {
         )
     }
     
+    func initializeTitleLabel() {
+        view.addSubview(titleLabel)
+        titleLabel.text = "비밀번호 분실 시 임시 비밀번호를 받을\n이메일 주소를 입력해주세요!"
+        titleLabel.numberOfLines = 2
+        titleLabel.changeTextAttributeColor(
+            fullText: titleLabel.text!,
+            changeText: "이메일 주소"
+        )
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+    }
+    
+    
     func initializeTextField() {
+        view.addSubview(emailTextField)
         emailTextField.addTarget(
             self,
             action: #selector(textFieldDidChange(_:)),
             for: .editingChanged
         )
+        
+        NSLayoutConstraint.activate([
+            emailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 55),
+            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
+            emailTextField.heightAnchor.constraint(equalToConstant: 60)
+        ])
     }
     
-    func initializeLabels() {
+    func initializeErrorLabel() {
+        view.addSubview(errorLabel)
         errorLabel.isHidden = true
         
-        titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-        titleLabel.textColor = .darkGray
-        titleLabel.text = "비밀번호 분실 시 임시 비밀번호를 받을\n이메일 주소를 입력해주세요! "
-        titleLabel.changeTextAttributeColor(
-            fullText: titleLabel.text!,
-            changeText: "이메일 주소"
-        )
+        NSLayoutConstraint.activate([
+            errorLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: padding),
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
     }
+    
+    func initializeBottomButton() {
+        view.addSubview(bottomButton)
+        bottomButton.addTarget(
+            self,
+            action: #selector(pressedBottomButton),
+            for: .touchUpInside
+        )
+        
+        NSLayoutConstraint.activate([
+            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardHidden)
+        ])
+    }
+    
+
 }

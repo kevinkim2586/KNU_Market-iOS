@@ -2,6 +2,9 @@ import UIKit
 
 class KMBottomButton: UIButton {
     
+    let heightConstantForKeyboardAppeared: CGFloat = 60
+    let heightConstantForKeyboardHidden: CGFloat = 80
+    
     var buttonTitle: String?
     
     override init(frame: CGRect) {
@@ -50,6 +53,4 @@ class KMBottomButton: UIButton {
         }
         setTitle(buttonTitle ?? "다음", for: .normal)
     }
-    
-    
 }

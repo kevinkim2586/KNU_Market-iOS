@@ -2,17 +2,15 @@ import UIKit
 import TextFieldEffects
 
 class PasswordInputViewController: UIViewController {
-
-    @IBOutlet weak var firstLineLabel: UILabel!
-    @IBOutlet weak var secondLineLabel: UILabel!
-    @IBOutlet weak var thirdLineLabel: UILabel!
     
-    @IBOutlet weak var passwordTextField: HoshiTextField!
-    @IBOutlet weak var checkPasswordTextField: HoshiTextField!
+    private let titleLabelFirstLine     = KMTitleLabel(textColor: .darkGray)
+    private let titleLabelSecondLine    = KMTitleLabel(textColor: .darkGray)
+    private let detailLabel             = KMDetailLabel(numberOfTotalLines: 2)
+    private let passwordTextField       = KMTextField(placeHolderText: "비밀번호")
+    private let checkPasswordTextField  = KMTextField(placeHolderText: "비밀번호 확인")
+    private let bottomButton            = KMBottomButton(buttonTitle: "다음")
     
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
-    @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
+    private let padding: CGFloat = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +19,18 @@ class PasswordInputViewController: UIViewController {
     
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            nextButtonBottomAnchor.constant = keyboardSize.height
-            nextButtonHeight.constant = 60
-            nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardSize.height).isActive = true
+            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
+            bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
+            view.layoutIfNeeded()
         }
     }
 
     @objc func keyboardWillHide(notification: Notification) {
-        nextButtonBottomAnchor.constant = 0
-        nextButtonHeight.constant = 80
-        nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        bottomButton.frame.origin.y = view.bounds.height - bottomButton.heightConstantForKeyboardHidden
     }
     
-    @IBAction func pressedNextButton(_ sender: UIButton) {
+    @objc func pressedBottomButton(_ sender: UIButton) {
         if  !validPassword() ||
             !checkPasswordLengthIsValid() ||
             !checkIfPasswordFieldsAreIdentical() { return }
@@ -44,6 +41,11 @@ class PasswordInputViewController: UIViewController {
             sender: self
         )
     }
+    
+    func showErrorMessage(message: String) {
+        detailLabel.text = message
+        detailLabel.textColor = UIColor(named: Constants.Color.appColor)
+    }
 }
 
 //MARK: - User Input Validation
@@ -53,7 +55,7 @@ extension PasswordInputViewController {
     // 숫자+문자 포함해서 8~20글자 사이의 text 체크하는 정규표현식
     func validPassword() -> Bool {
         guard let userPW = passwordTextField.text else {
-            showErrorMessage(message: "빈 칸이 없는지 확인해 주세요. 🧐")
+            showErrorMessage(message: "빈 칸이 없는지 확인해 주세요.🧐")
             return false
         }
         
@@ -70,7 +72,7 @@ extension PasswordInputViewController {
     
     func checkPasswordLengthIsValid() -> Bool {
         guard let password = passwordTextField.text, let _ = checkPasswordTextField.text else {
-            showErrorMessage(message: "빈 칸이 없는지 확인해 주세요. 🧐")
+            showErrorMessage(message: "빈 칸이 없는지 확인해 주세요.🧐")
             return false
         }
         
@@ -84,22 +86,16 @@ extension PasswordInputViewController {
     func checkIfPasswordFieldsAreIdentical() -> Bool {
         if passwordTextField.text == checkPasswordTextField.text { return true }
         else {
-            showErrorMessage(message: "비밀번호가 일치하지 않습니다. 🤔")
+            showErrorMessage(message: "비밀번호가 일치하지 않습니다.🤔")
             checkPasswordTextField.text?.removeAll()
             passwordTextField.becomeFirstResponder()
             return false
         }
     }
     
-    func showErrorMessage(message: String) {
-        thirdLineLabel.text = message
-        thirdLineLabel.textColor = UIColor(named: Constants.Color.appColor)
-    }
-    
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
-        thirdLineLabel.text = "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요."
-        thirdLineLabel.textColor = .lightGray
+        detailLabel.text = "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요."
+        detailLabel.textColor = .lightGray
     }
 }
 
@@ -110,8 +106,11 @@ extension PasswordInputViewController {
 
     func initialize() {
         createObserverForKeyboardStateChange()
-        initializeLabels()
+        initializeTitleLabels()
+        initializeDetailLabel()
         initializeTextFields()
+        initializeBottomButton()
+
     }
     
     func createObserverForKeyboardStateChange() {
@@ -129,7 +128,46 @@ extension PasswordInputViewController {
         )
     }
     
+    func initializeTitleLabels() {
+        view.addSubview(titleLabelFirstLine)
+        view.addSubview(titleLabelSecondLine)
+        titleLabelFirstLine.text = "\(UserRegisterValues.shared.userId)님 만나서 반갑습니다!"
+        titleLabelFirstLine.changeTextAttributeColor(
+            fullText: titleLabelFirstLine.text!,
+            changeText: "\(UserRegisterValues.shared.userId)님"
+        )
+        titleLabelSecondLine.text = "사용하실 비밀번호를 입력해 주세요!"
+        titleLabelSecondLine.changeTextAttributeColor(
+            fullText: titleLabelSecondLine.text!,
+            changeText: "비밀번호"
+        )
+        
+        NSLayoutConstraint.activate([
+            titleLabelFirstLine.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabelFirstLine.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabelFirstLine.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            
+            titleLabelSecondLine.topAnchor.constraint(equalTo: titleLabelFirstLine.bottomAnchor, constant: 10),
+            titleLabelSecondLine.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabelSecondLine.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+    }
+    
+    func initializeDetailLabel() {
+        view.addSubview(detailLabel)
+        detailLabel.text = "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요."
+        
+        NSLayoutConstraint.activate([
+            detailLabel.topAnchor.constraint(equalTo: titleLabelSecondLine.bottomAnchor, constant: 25),
+            detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+    }
+    
     func initializeTextFields() {
+        view.addSubview(passwordTextField)
+        view.addSubview(checkPasswordTextField)
+        
         passwordTextField.addTarget(
             self,
             action: #selector(textFieldDidChange(_:)),
@@ -140,27 +178,36 @@ extension PasswordInputViewController {
             action: #selector(textFieldDidChange(_:)),
             for: .editingChanged
         )
+        
+        passwordTextField.isSecureTextEntry = true
+        checkPasswordTextField.isSecureTextEntry = true
+        
+        NSLayoutConstraint.activate([
+            passwordTextField.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 30),
+            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 60),
+            
+            checkPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: padding),
+            checkPasswordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            checkPasswordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
+            checkPasswordTextField.heightAnchor.constraint(equalToConstant: 60)
+        ])
     }
     
-    func initializeLabels() {
-        firstLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        firstLineLabel.textColor = .darkGray
-        secondLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        secondLineLabel.textColor = .darkGray
+    func initializeBottomButton() {
+        view.addSubview(bottomButton)
+        bottomButton.addTarget(
+            self,
+            action: #selector(pressedBottomButton),
+            for: .touchUpInside
+        )
         
-        firstLineLabel.text = "\(UserRegisterValues.shared.userId)님 만나서 반갑습니다!"
-        firstLineLabel.changeTextAttributeColor(
-            fullText: firstLineLabel.text!,
-            changeText: "\(UserRegisterValues.shared.userId)님"
-        )
-        secondLineLabel.text = "사용하실 비밀번호를 입력해 주세요!"
-        secondLineLabel.changeTextAttributeColor(
-            fullText: secondLineLabel.text!,
-            changeText: "비밀번호"
-        )
-    
-        thirdLineLabel.text = "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요."
-        thirdLineLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        thirdLineLabel.textColor = .lightGray
+        NSLayoutConstraint.activate([
+            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardHidden)
+        ])
     }
 }

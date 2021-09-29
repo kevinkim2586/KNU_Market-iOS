@@ -86,24 +86,25 @@ class UploadItemViewController: UIViewController {
         
         guard let itemTitle = itemTitleTextField.text else {
             
-            self.showSimpleBottomAlert(with: UserInputError.titleTooShortOrLong.errorDescription)
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.errorDescription)
             return false
         }
         viewModel.itemTitle = itemTitle
         do {
             try viewModel.validateUserInputs()
             
-        } catch UserInputError.titleTooShortOrLong {
+        } catch ValidationError.OnUploadPost.titleTooShortOrLong {
             
-            self.showSimpleBottomAlert(with: UserInputError.titleTooShortOrLong.errorDescription)
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.errorDescription)
             return false
             
-        } catch UserInputError.detailTooShortOrLong {
+        } catch ValidationError.OnUploadPost.detailTooShortOrLong {
             
-            self.showSimpleBottomAlert(with: UserInputError.detailTooShortOrLong.errorDescription)
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.detailTooShortOrLong.errorDescription)
             return false
             
-        } catch { return false }
+        }
+        catch { return false }
         
         return true
     }
@@ -176,8 +177,8 @@ extension UploadItemViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let addImageButtonID  = Constants.cellID.addItemImageCell
-        let newItemImageID    = Constants.cellID.userPickedItemImageCell
+        let addImageButtonID  = K.cellID.addItemImageCell
+        let newItemImageID    = K.cellID.userPickedItemImageCell
         
         if indexPath.item == 0 {
             
@@ -282,10 +283,10 @@ extension UploadItemViewController {
         stepper.maximumValue = 10
         stepper.stepValue = 1
         stepper.buttonsTextColor = .white
-        stepper.buttonsBackgroundColor = UIColor(named: Constants.Color.appColor)!
+        stepper.buttonsBackgroundColor = UIColor(named: K.Color.appColor)!
         stepper.buttonsFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
         stepper.labelFont = .systemFont(ofSize: 15)
-        stepper.labelTextColor = UIColor(named:Constants.Color.appColor)!
+        stepper.labelTextColor = UIColor(named:K.Color.appColor)!
 
         stepper.labelBackgroundColor = UIColor.systemGray6
         stepper.limitHitAnimationColor = .white

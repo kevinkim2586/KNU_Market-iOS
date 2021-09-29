@@ -4,12 +4,12 @@ class ItemTableViewModel {
     
     var uuid: String = ""
 
-    var defaultImage: UIImage = UIImage(named: Constants.Images.defaultItemIcon)!
+    var defaultImage: UIImage = UIImage(named: K.Images.defaultItemIcon)!
     
     var imageUID: String? {
         didSet {
             if let imageUID = imageUID {
-                imageURL = URL(string: "\(Constants.API_BASE_URL)media/" + imageUID)
+                imageURL = URL(string: "\(K.API_BASE_URL)media/" + imageUID)
             }
             
         }

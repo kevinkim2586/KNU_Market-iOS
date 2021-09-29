@@ -161,11 +161,11 @@ class UploadItemViewModel {
     func validateUserInputs() throws {
         
         guard itemTitle.count >= 3, itemTitle.count <= 30 else {
-            throw UserInputError.titleTooShortOrLong
+            throw ValidationError.OnUploadPost.titleTooShortOrLong
         }
         
         guard itemDetail.count >= 3, itemDetail.count < 700 else {
-            throw UserInputError.detailTooShortOrLong
+            throw ValidationError.OnUploadPost.detailTooShortOrLong
         }
     }
     

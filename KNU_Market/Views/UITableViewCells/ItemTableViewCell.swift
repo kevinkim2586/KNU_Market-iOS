@@ -68,7 +68,7 @@ class ItemTableViewCell: UITableViewCell {
        
             itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             itemImageView.sd_setImage(with: viewModel.imageURL,
-                                      placeholderImage: UIImage(named: Constants.Images.defaultItemIcon),
+                                      placeholderImage: UIImage(named: K.Images.defaultItemIcon),
                                       options: .continueInBackground,
                                       completed: nil)
         } else {
@@ -91,7 +91,7 @@ class ItemTableViewCell: UITableViewCell {
         }  else {
     
             gatheringLabel.text = "모집 중"
-            gatheringLabel.backgroundColor = UIColor(named: Constants.Color.appColor)
+            gatheringLabel.backgroundColor = UIColor(named: K.Color.appColor)
             currentlyGatheredPeopleLabel.isHidden = false
             personImageView.isHidden = false
         }
@@ -104,7 +104,7 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializePersonImageView() {
         
-        personImageView.image = UIImage(named: Constants.Images.peopleIcon)
+        personImageView.image = UIImage(named: K.Images.peopleIcon)
     }
     
     

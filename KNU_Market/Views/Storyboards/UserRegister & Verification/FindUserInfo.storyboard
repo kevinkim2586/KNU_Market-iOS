@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bSq-jb-Vrd">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -58,19 +58,19 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="어떤 방법으로 인증했었나요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bI-bF-HVm">
-                                <rect key="frame" x="25" y="104" width="216.5" height="23"/>
+                                <rect key="frame" x="25" y="148" width="216.5" height="23"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✻ 인증을 하지 않으신 회원은 아이디 찾기가 불가능합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e20-Mv-8oZ">
-                                <rect key="frame" x="25" y="152" width="364" height="18"/>
+                                <rect key="frame" x="25" y="196" width="364" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nv6-1s-7eV">
-                                <rect key="frame" x="25" y="186" width="76" height="32"/>
+                                <rect key="frame" x="25" y="226" width="76" height="32"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
@@ -88,7 +88,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="을 다시 시도해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJ7-kf-I2S">
-                                <rect key="frame" x="91" y="192.5" width="129" height="18"/>
+                                <rect key="frame" x="91" y="232.5" width="129" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -97,8 +97,8 @@
                         <viewLayoutGuide key="safeArea" id="N5Z-4Z-1bN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Nv6-1s-7eV" firstAttribute="top" secondItem="e20-Mv-8oZ" secondAttribute="bottom" constant="16" id="AY0-Ks-Gsd"/>
-                            <constraint firstItem="wJ7-kf-I2S" firstAttribute="top" secondItem="e20-Mv-8oZ" secondAttribute="bottom" constant="22.5" id="F26-yl-b66"/>
+                            <constraint firstItem="Nv6-1s-7eV" firstAttribute="top" secondItem="e20-Mv-8oZ" secondAttribute="bottom" constant="12" id="AY0-Ks-Gsd"/>
+                            <constraint firstItem="wJ7-kf-I2S" firstAttribute="top" secondItem="e20-Mv-8oZ" secondAttribute="bottom" constant="18.5" id="F26-yl-b66"/>
                             <constraint firstItem="Nv6-1s-7eV" firstAttribute="leading" secondItem="N5Z-4Z-1bN" secondAttribute="leading" constant="25" id="Fxs-rl-cI2"/>
                             <constraint firstItem="WJk-f1-rb9" firstAttribute="centerY" secondItem="29L-mz-pOS" secondAttribute="centerY" id="HyH-OZ-eZk"/>
                             <constraint firstItem="7bI-bF-HVm" firstAttribute="top" secondItem="N5Z-4Z-1bN" secondAttribute="top" constant="60" id="KTr-4y-q34"/>
@@ -112,16 +112,70 @@
                             <constraint firstItem="WJk-f1-rb9" firstAttribute="centerX" secondItem="29L-mz-pOS" secondAttribute="centerX" id="wMR-G4-Y2s"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="5PL-HZ-siz"/>
                     <connections>
                         <outlet property="detailLabel" destination="e20-Mv-8oZ" id="b8o-Dr-WlJ"/>
                         <outlet property="titleLabel" destination="7bI-bF-HVm" id="R2j-jW-eKd"/>
                         <outlet property="verifiedUsingEmailButton" destination="xSo-r3-zOT" id="To0-eU-rM1"/>
                         <outlet property="verifiedUsingStudentIdButton" destination="gC8-aw-03G" id="2Eo-vj-tRA"/>
+                        <segue destination="an0-7h-mjX" kind="show" id="1x1-wN-iZj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0BN-sY-vJ5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="439" y="92"/>
+            <point key="canvasLocation" x="3166.666666666667" y="91.741071428571431"/>
+        </scene>
+        <!--Find Id Using Student Id View Controller-->
+        <scene sceneID="WzB-0t-Zj2">
+            <objects>
+                <viewController storyboardIdentifier="FindIdUsingStudentIdViewController" id="an0-7h-mjX" customClass="FindIdUsingStudentIdViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CXO-3S-nSZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="vvN-Nd-bXe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="zhq-Hz-Js4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SSy-AP-fgB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4036.2318840579715" y="404.46428571428572"/>
+        </scene>
+        <!--Find Id Using Web Mail View Controller-->
+        <scene sceneID="Ew8-IZ-0vG">
+            <objects>
+                <viewController storyboardIdentifier="FindIdUsingWebMailViewController" id="wE4-CI-Vd4" customClass="FindIdUsingWebMailViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BMO-l6-DQh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="KIs-WQ-Eaq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9uO-yY-hK9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Vv-IL-vi0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4036.2318840579715" y="-301.33928571428572"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2o5-YA-vqI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bSq-jb-Vrd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EX1-3p-SvE">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Qvy-MJ-CmD" kind="relationship" relationship="rootViewController" id="afa-Ih-xzB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="biv-qz-ecT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2256.521739130435" y="91.741071428571431"/>
         </scene>
     </scenes>
     <resources>

@@ -11,9 +11,9 @@ class ItemManager {
     private init() {}
     
     //MARK: - API Request URLs
-    let baseURL                       = "\(Constants.API_BASE_URL)posts"
-    let searchURL                     = "\(Constants.API_BASE_URL)search"
-    let markCompleteURL               = "\(Constants.API_BASE_URL)posts/complete/"
+    let baseURL                       = "\(K.API_BASE_URL)posts"
+    let searchURL                     = "\(K.API_BASE_URL)search"
+    let markCompleteURL               = "\(K.API_BASE_URL)posts/complete/"
     
     
     //MARK: - 공구글 목록 불러오기

@@ -49,7 +49,7 @@ extension ChatListViewController: ChatListViewModelDelegate {
         
         if viewModel.roomList.count == 0 {
             chatListTableView.showEmptyView(
-                imageName: Constants.Images.emptyChatList,
+                imageName: K.Images.emptyChatList,
                 text: "아직 활성화된 채팅방이 없네요!\n새로운 공구에 참여해보세요 :)"
             )
             chatListTableView.tableFooterView = UIView(frame: .zero)
@@ -103,7 +103,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row > viewModel.roomList.count { return UITableViewCell() }
         if self.viewModel.roomList.count == 0 { return UITableViewCell() }
 
-        let cellIdentifier = Constants.cellID.chatTableViewCell
+        let cellIdentifier = K.cellID.chatTableViewCell
         
         tableView.restoreEmptyView()
         
@@ -127,7 +127,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         if viewModel.roomList.count == 0 { return }
         
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-        guard let chatVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
+        guard let chatVC = storyboard.instantiateViewController(identifier: K.StoryboardID.chatVC) as? ChatViewController else { return }
         
         chatVC.roomUID = viewModel.roomList[indexPath.row].uuid
         chatVC.chatRoomTitle = viewModel.roomList[indexPath.row].title
@@ -159,8 +159,8 @@ extension ChatListViewController {
     }
     
     func initializeTabBarIcon() {
-        navigationController?.tabBarItem.image = UIImage(named: Constants.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
-        navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
     }
     
     func initializeTableView() {

@@ -33,7 +33,7 @@ class CheckEmailViewController: UIViewController {
     
     @IBAction func pressedVerifyUsingStudentIDButton(_ sender: UIButton) {
         guard let vc = storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.studentIDGuideVC
+            identifier: K.StoryboardID.studentIDGuideVC
         ) as? StudentIDGuideViewController else { return }
         
         navigationController?.pushViewController(vc, animated: true)
@@ -44,7 +44,7 @@ class CheckEmailViewController: UIViewController {
     }
 
     @IBAction func pressedKakaoLinkButton(_ sender: UIButton) {
-        let url = URL(string: Constants.URL.kakaoHelpChannel)!
+        let url = URL(string: K.URL.kakaoHelpChannel)!
         UIApplication.shared.open(url, options: [:])
     }
     
@@ -88,7 +88,7 @@ extension CheckEmailViewController {
         )
 
         checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 반드시 스팸함을 확인해주세요!"
-        checkSpamMailLabel.textColor = UIColor(named: Constants.Color.appColor)
+        checkSpamMailLabel.textColor = UIColor(named: K.Color.appColor)
         checkSpamMailLabel.changeTextAttributeColor(
             fullText: checkSpamMailLabel.text!,
             changeText: "반드시 스팸함을 확인"

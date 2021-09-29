@@ -135,7 +135,7 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellID = Constants.cellID.chatMemberCell
+        let cellID = K.cellID.chatMemberCell
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellID
         ) as? ChatMemberTableViewCell else { return UITableViewCell() }
@@ -150,7 +150,7 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
             cell.nicknameLabel.text = "사용자 정보 불러오기 실패 🧐"
             cell.reportUserButton.isHidden = true
             cell.crownImageView.isHidden = true
-            cell.profileImageView.image = UIImage(named: Constants.Images.chatMemberDefaultImage)
+            cell.profileImageView.image = UIImage(named: K.Images.chatMemberDefaultImage)
         }
     
         tableView.tableFooterView = UIView(frame: .zero)

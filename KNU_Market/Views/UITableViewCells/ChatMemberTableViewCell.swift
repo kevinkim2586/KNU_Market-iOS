@@ -67,12 +67,12 @@ class ChatMemberTableViewCell: UITableViewCell {
                 self?.userUID = profileModel.uid
                 self?.nicknameLabel.text = self?.nickname
                 
-                let imageURL = URL(string: "\(Constants.API_BASE_URL)media/\(profileModel.profileImageCode)")
+                let imageURL = URL(string: "\(K.API_BASE_URL)media/\(profileModel.profileImageCode)")
                 self?.profileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 
                 self?.profileImageView.sd_setImage(
                     with: imageURL,
-                    placeholderImage: UIImage(named: Constants.Images.chatMemberDefaultImage),
+                    placeholderImage: UIImage(named: K.Images.chatMemberDefaultImage),
                     options: .continueInBackground,
                     completed: nil
                 )
@@ -88,7 +88,7 @@ class ChatMemberTableViewCell: UITableViewCell {
             case .failure(let error):
                 
                 self?.nicknameLabel.text = error == .E108 ? "탈퇴한 유저" : "정보 불러오기 실패"
-                self?.profileImageView.image = UIImage(named: Constants.Images.chatMemberDefaultImage)
+                self?.profileImageView.image = UIImage(named: K.Images.chatMemberDefaultImage)
                 self?.crownImageView.isHidden = true
                 self?.reportUserButton.isHidden = true
                 return
@@ -105,7 +105,7 @@ class ChatMemberTableViewCell: UITableViewCell {
             crownImageView.image?.withTintColor(.systemYellow)
         } else {
             crownImageView.image = UIImage(systemName: "checkmark.circle")
-            crownImageView.image?.withTintColor(UIColor(named: Constants.Color.appColor) ?? .black)
+            crownImageView.image?.withTintColor(UIColor(named: K.Color.appColor) ?? .black)
         }
     }
 }

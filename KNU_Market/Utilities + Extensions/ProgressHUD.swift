@@ -5,7 +5,7 @@ import ProgressHUD
 
 func showProgressBar() {
     ProgressHUD.animationType = .horizontalCirclesPulse
-    ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appColor) ?? .systemGray
+    ProgressHUD.colorAnimation = UIColor(named: K.Color.appColor) ?? .systemGray
     ProgressHUD.colorBackground = .clear
     ProgressHUD.colorHUD = .clear
     ProgressHUD.show()

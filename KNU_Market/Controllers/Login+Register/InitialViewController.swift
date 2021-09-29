@@ -41,7 +41,7 @@ class InitialViewController: UIViewController {
     }
     
     @IBAction func pressedRegisterButton(_ sender: UIButton) {
-        performSegue(withIdentifier: Constants.SegueID.goToRegister, sender: self)
+        performSegue(withIdentifier: K.SegueID.goToRegister, sender: self)
     }
     
     @IBAction func pressedFindPwButton(_ sender: UIButton) {
@@ -57,17 +57,18 @@ class InitialViewController: UIViewController {
             bundle: nil
         )
         guard let findIdVC = storyboard.instantiateViewController(
-            identifier: Constants.StoryboardID.chooseVerificationOptionVC
+            identifier: K.StoryboardID.chooseVerificationOptionVC
         ) as? ChooseVerificationOptionViewController else { return }
         
         findIdVC.delegate = self
-        present(findIdVC, animated: true)
+        let navigationController = UINavigationController(rootViewController: findIdVC)
+        present(navigationController, animated: true)
     }
     
     @IBAction func pressedInfoButton(_ sender: UIButton) {
         let attributedMessageString: NSAttributedString = idGuideString.attributedStringWithColor(
             ["2021년 10월 6일 이전에 가입한 회원"],
-            color: UIColor(named: Constants.Color.appColor) ?? .systemPink,
+            color: UIColor(named: K.Color.appColor) ?? .systemPink,
             characterSpacing: nil
         )
         
@@ -85,7 +86,7 @@ class InitialViewController: UIViewController {
 extension InitialViewController: ChooseVerificationOptionDelegate {
     
     func didSelectToRegister() {
-        performSegue(withIdentifier: Constants.SegueID.goToRegister, sender: self)
+        performSegue(withIdentifier: K.SegueID.goToRegister, sender: self)
     }
 }
 
@@ -121,7 +122,7 @@ extension InitialViewController {
     func initializeLoginButton() {
         loginButton.setTitle("로그인", for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        loginButton.backgroundColor = UIColor(named: Constants.Color.appColor)
+        loginButton.backgroundColor = UIColor(named: K.Color.appColor)
         loginButton.layer.cornerRadius  = loginButton.frame.height / 2
         loginButton.addBounceAnimationWithNoFeedback()
     }
@@ -129,7 +130,7 @@ extension InitialViewController {
     func initializeRegisterButton() {
         registerButton.setTitle("회원가입", for: .normal)
         registerButton.setTitleColor(
-            UIColor(named: Constants.Color.appColor),
+            UIColor(named: K.Color.appColor),
             for: .normal
         )
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)

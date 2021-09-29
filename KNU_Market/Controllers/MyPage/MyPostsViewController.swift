@@ -39,7 +39,7 @@ extension MyPostsViewController: HomeViewModelDelegate {
         tableView.tableFooterView = UIView(frame: .zero)
         
         if viewModel.itemList.count == 0 {
-            tableView.showEmptyView(imageName: Constants.Images.emptyChatList,
+            tableView.showEmptyView(imageName: K.Images.emptyChatList,
                                     text: "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!")
         }
     }
@@ -47,7 +47,7 @@ extension MyPostsViewController: HomeViewModelDelegate {
     func failedFetchingItemList(with error: NetworkError) {
         
         tableView.showEmptyView(
-            imageName: Constants.Images.emptyChatList,
+            imageName: K.Images.emptyChatList,
             text: "오류가 발생했습니다!\n잠시 후 다시 시도해주세요."
         )
         refreshControl.endRefreshing()
@@ -75,7 +75,7 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellIdentifier = Constants.cellID.itemTableViewCell
+        let cellIdentifier = K.cellID.itemTableViewCell
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell else {
             fatalError()
@@ -89,7 +89,7 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         self.selectedIndex = indexPath.row
         
-        performSegue(withIdentifier: Constants.SegueID.goToItemVCFromMyPosts, sender: self)
+        performSegue(withIdentifier: K.SegueID.goToItemVCFromMyPosts, sender: self)
     
     }
     
@@ -158,10 +158,10 @@ extension MyPostsViewController {
         tableView.refreshControl = refreshControl
         tableView.tableFooterView = UIView(frame: .zero)
         
-        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
+        let nibName = UINib(nibName: K.XIB.itemTableViewCell, bundle: nil)
         tableView.register(
             nibName,
-            forCellReuseIdentifier: Constants.cellID.itemTableViewCell
+            forCellReuseIdentifier: K.cellID.itemTableViewCell
         )
         
         refreshControl.addTarget(

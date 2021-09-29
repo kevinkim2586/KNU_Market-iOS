@@ -22,7 +22,7 @@ class KMErrorLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        textColor = UIColor(named: Constants.Color.appColor)
+        textColor = UIColor(named: K.Color.appColor)
         font = .systemFont(ofSize: fontSize, weight: .semibold)
     }
     

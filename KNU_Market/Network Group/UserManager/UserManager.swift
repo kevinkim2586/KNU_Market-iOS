@@ -12,18 +12,18 @@ class UserManager {
     
     //MARK: - API Request URLs
     //TODO: - EndPoint Router 로 아래 refactoring 진행
-    let registerURL                 = "\(Constants.API_BASE_URL)auth"
-    let loginURL                    = "\(Constants.API_BASE_URL)login"
-    let checkDuplicationURL         = "\(Constants.API_BASE_URL)duplicate"
-    let logoutURL                   = "\(Constants.API_BASE_URL)logout"
-    let requestAccessTokenURL       = "\(Constants.API_BASE_URL)token"
-    let findPasswordURL             = "\(Constants.API_BASE_URL)findpassword"
-    let loadUserProfileURL          = "\(Constants.API_BASE_URL)auth"
-    let userProfileUpdateURL        = "\(Constants.API_BASE_URL)auth"
-    let unregisterURL               = "\(Constants.API_BASE_URL)auth"
-    let sendEmailURL                = "\(Constants.API_BASE_URL)verification"
-    let sendFeedbackURL             = "\(Constants.API_BASE_URL)report"
-    let studentIdVerifyURL          = "\(Constants.API_BASE_URL)verification/card"
+    let registerURL                 = "\(K.API_BASE_URL)auth"
+    let loginURL                    = "\(K.API_BASE_URL)login"
+    let checkDuplicationURL         = "\(K.API_BASE_URL)duplicate"
+    let logoutURL                   = "\(K.API_BASE_URL)logout"
+    let requestAccessTokenURL       = "\(K.API_BASE_URL)token"
+    let findPasswordURL             = "\(K.API_BASE_URL)findpassword"
+    let loadUserProfileURL          = "\(K.API_BASE_URL)auth"
+    let userProfileUpdateURL        = "\(K.API_BASE_URL)auth"
+    let unregisterURL               = "\(K.API_BASE_URL)auth"
+    let sendEmailURL                = "\(K.API_BASE_URL)verification"
+    let sendFeedbackURL             = "\(K.API_BASE_URL)report"
+    let studentIdVerifyURL          = "\(K.API_BASE_URL)verification/card"
     
     let interceptor = Interceptor()
     

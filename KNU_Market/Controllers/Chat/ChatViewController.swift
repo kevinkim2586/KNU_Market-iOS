@@ -56,7 +56,7 @@ class ChatViewController: MessagesViewController {
         let storyboard = UIStoryboard(name: "ItemList", bundle: nil)
         
         guard let itemVC = storyboard.instantiateViewController(
-            identifier: Constants.StoryboardID.itemVC
+            identifier: K.StoryboardID.itemVC
         ) as? ItemViewController else { return }
         
         itemVC.hidesBottomBarWhenPushed = true
@@ -71,7 +71,7 @@ class ChatViewController: MessagesViewController {
         viewModel.getRoomInfo()
         
         guard let chatMemberVC = storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.chatMemberVC
+            identifier: K.StoryboardID.chatMemberVC
         ) as? ChatMemberViewController else { return }
         
         chatMemberVC.roomInfo = viewModel.roomInfo
@@ -110,7 +110,7 @@ extension ChatViewController: ChatViewDelegate {
         messagesCollectionView.scrollToLastItem()
 
         if viewModel.isFirstEntranceToChat {
-            viewModel.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.enterSuffix)")
+            viewModel.sendText("\(User.shared.nickname)\(K.ChatSuffix.enterSuffix)")
             viewModel.isFirstEntranceToChat = false
             showChatPrecautionMessage()
         }
@@ -300,7 +300,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 
         if viewModel.messages.count == 0 { return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1) }
         if viewModel.messages[indexPath.section].userUID == User.shared.userUID {
-            return UIColor(named: Constants.Color.appColor)!
+            return UIColor(named: K.Color.appColor)!
         } else {
             return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1)
         }
@@ -333,7 +333,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         if viewModel.messages.count == 0 { return }
         guard let message = message as? Message else { return }
         let filteredChat = viewModel.filterChat(text: message.chatContent)
-        guard let url = URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage) else { return }
+        guard let url = URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage) else { return }
         
         let heroID = String(Int.random(in: 0...1000))
     
@@ -440,7 +440,7 @@ extension ChatViewController: MessageCellDelegate {
     func presentImageVC(url: URL, heroID: String) {
         
         guard let imageVC = storyboard?.instantiateViewController(
-                identifier: Constants.StoryboardID.imageVC
+                identifier: K.StoryboardID.imageVC
         ) as? ImageViewController else { return }
         imageVC.modalPresentationStyle = .overFullScreen
         imageVC.imageURL = url
@@ -541,7 +541,7 @@ extension ChatViewController {
         messageInputBar.delegate = self
         messageInputBar.sendButton.title = nil
         let configuration = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular)
-        let color = UIColor(named: Constants.Color.appColor)
+        let color = UIColor(named: K.Color.appColor)
         let sendButtonImage = UIImage(systemName: "arrow.up.circle.fill",
                                       withConfiguration: configuration)?.withTintColor(
                                         color ?? .systemPink,
@@ -558,7 +558,7 @@ extension ChatViewController {
         button.setSize(CGSize(width: 35, height: 35), animated: false)
         button.setImage(UIImage(systemName: "plus"),
                         for: .normal)
-        button.tintColor = UIColor(named: Constants.Color.appColor) ?? .black
+        button.tintColor = UIColor(named: K.Color.appColor) ?? .black
         button.onTouchUpInside { [weak self] _ in
             self?.presentInputActionSheet()
         }

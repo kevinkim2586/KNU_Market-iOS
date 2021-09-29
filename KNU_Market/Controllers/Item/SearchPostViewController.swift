@@ -22,8 +22,8 @@ extension SearchPostViewController: SearchPostViewModelDelegate {
     func didFetchSearchList() {
         
         if viewModel.itemList.count == 0 {
-            tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
-                                    text: Constants.placeHolderTitle.emptySearchTitleList.randomElement()!)
+            tableView.showEmptyView(imageName: K.Images.emptySearchPlaceholder,
+                                    text: K.placeHolderTitle.emptySearchTitleList.randomElement()!)
         }
   
         tableView.reloadData()
@@ -36,7 +36,7 @@ extension SearchPostViewController: SearchPostViewModelDelegate {
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
         
-        tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
+        tableView.showEmptyView(imageName: K.Images.emptySearchPlaceholder,
                                 text: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.")
     }
 }
@@ -66,7 +66,7 @@ extension SearchPostViewController: UISearchBarDelegate {
         guard let searchKey = searchBar.text else { return }
         guard !searchKey.hasEmojis else {
             searchBar.resignFirstResponder()
-            tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
+            tableView.showEmptyView(imageName: K.Images.emptySearchPlaceholder,
                                                  text: "이모티콘 검색은 지원하지 않습니다!")
             return
         }
@@ -95,7 +95,7 @@ extension SearchPostViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row > viewModel.itemList.count { return UITableViewCell() }
         
-        let cellIdentifier = Constants.cellID.itemTableViewCell
+        let cellIdentifier = K.cellID.itemTableViewCell
         
         tableView.restoreEmptyView()
         
@@ -110,7 +110,7 @@ extension SearchPostViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let itemVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
+        guard let itemVC = self.storyboard?.instantiateViewController(identifier: K.StoryboardID.itemVC) as? ItemViewController else { return }
         
         itemVC.hidesBottomBarWhenPushed = true
         itemVC.pageID = viewModel.itemList[indexPath.row].uuid
@@ -153,8 +153,8 @@ extension SearchPostViewController {
     
     func initialize() {
         
-        tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
-                                text: Constants.placeHolderTitle.prepareSearchTitleList.randomElement()!)
+        tableView.showEmptyView(imageName: K.Images.emptySearchPlaceholder,
+                                text: K.placeHolderTitle.prepareSearchTitleList.randomElement()!)
         
         
         
@@ -178,8 +178,8 @@ extension SearchPostViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
-        tableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
+        let nibName = UINib(nibName: K.XIB.itemTableViewCell, bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: K.cellID.itemTableViewCell)
 
     }
     

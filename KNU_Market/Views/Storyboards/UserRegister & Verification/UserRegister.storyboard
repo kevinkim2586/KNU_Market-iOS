@@ -339,10 +339,10 @@
             </objects>
             <point key="canvasLocation" x="2899" y="781"/>
         </scene>
-        <!--Input View Controller-->
+        <!--Input ID View Controller-->
         <scene sceneID="hSl-Dv-Ga0">
             <objects>
-                <viewController storyboardIdentifier="IDInputViewController" id="R8R-DF-bwt" customClass="IDInputViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IDInputViewController" id="R8R-DF-bwt" userLabel="Input ID View Controller" customClass="IDInputViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jej-jS-qBz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

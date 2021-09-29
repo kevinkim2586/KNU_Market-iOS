@@ -25,7 +25,7 @@ class KMBottomButton: UIButton {
     private func configure() {
         setTitle(buttonTitle ?? "다음", for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor(named: Constants.Color.appColor)
+        backgroundColor = UIColor(named: K.Color.appColor)
         setTitleColor(.white, for: .normal)
         setTitleColor(.lightGray, for: .highlighted)
         titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)

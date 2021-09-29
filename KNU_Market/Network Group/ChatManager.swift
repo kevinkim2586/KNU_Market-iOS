@@ -19,7 +19,7 @@ class ChatManager {
     private init() {}
     
     //MARK: - API Request URLs
-    let baseURL     = "\(Constants.API_BASE_URL)room/"
+    let baseURL     = "\(K.API_BASE_URL)room/"
     
     //MARK: - 공구 참여 or 나가기
     func changeJoinStatus(function: ChatFunction,

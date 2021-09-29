@@ -147,7 +147,7 @@ extension CaptureStudentIDViewController {
     func initializeTitleLabels() {
         titleLabels.forEach { label in
             label.font = .systemFont(ofSize: 19, weight: .semibold)
-            label.textColor = UIColor(named: Constants.Color.appColor)
+            label.textColor = UIColor(named: K.Color.appColor)
         }
     }
     
@@ -169,7 +169,7 @@ extension CaptureStudentIDViewController {
     }
     
     func initializeStudentIdImageView() {
-        studentIdImageView.image = UIImage(named: Constants.Images.chatBubbleIcon)
+        studentIdImageView.image = UIImage(named: K.Images.chatBubbleIcon)
         studentIdImageView.contentMode = .scaleAspectFit
         studentIdImageView.layer.borderWidth = 0.5
         studentIdImageView.layer.borderColor = UIColor.lightGray.cgColor

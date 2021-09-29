@@ -10,16 +10,16 @@ extension UserManager {
         let refreshToken = response["refreshToken"].stringValue
         
         User.shared.savedAccessToken = KeychainWrapper.standard.set(accessToken,
-                                                                    forKey: Constants.KeyChainKey.accessToken)
+                                                                    forKey: K.KeyChainKey.accessToken)
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(refreshToken,
-                                                                     forKey: Constants.KeyChainKey.refreshToken)
+                                                                     forKey: K.KeyChainKey.refreshToken)
     }
     
     //MARK: - 만료된 Access Token 갱신 후 새로 발급된 토큰 기기에 저장
     func saveRefreshedAccessToken(from response: JSON) {
         let newAccessToken = response["accessToken"].stringValue
         User.shared.savedAccessToken = KeychainWrapper.standard.set(newAccessToken,
-                                                                    forKey: Constants.KeyChainKey.accessToken)
+                                                                    forKey: K.KeyChainKey.accessToken)
     }
     
     //MARK: - 사용자 프로필 조회 후 기본적인 정보 저장

@@ -66,7 +66,7 @@ extension FindPasswordViewController {
         
         sendEmailButton.layer.cornerRadius = sendEmailButton.frame.height / 2
         sendEmailButton.addBounceAnimationWithNoFeedback()
-        sendEmailButton.backgroundColor = UIColor(named: Constants.Color.appColor)
+        sendEmailButton.backgroundColor = UIColor(named: K.Color.appColor)
     }
 }
 

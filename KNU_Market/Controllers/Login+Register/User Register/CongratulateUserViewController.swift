@@ -37,14 +37,14 @@ class CongratulateUserViewController: UIViewController {
     }
     
     @IBAction func pressedSeeTermsAndConditionsButton(_ sender: UIButton) {
-        let url = URL(string: Constants.URL.termsAndConditionNotionURL)!
+        let url = URL(string: K.URL.termsAndConditionNotionURL)!
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     
     
     @IBAction func pressedSeePrivacyInfoButton(_ sender: UIButton) {
-        let url = URL(string: Constants.URL.privacyInfoConditionNotionURL)!
+        let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
@@ -89,7 +89,7 @@ class CongratulateUserViewController: UIViewController {
     func changeRootViewControllerToMain() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(
-            identifier: Constants.StoryboardID.tabBarController
+            identifier: K.StoryboardID.tabBarController
         )
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }

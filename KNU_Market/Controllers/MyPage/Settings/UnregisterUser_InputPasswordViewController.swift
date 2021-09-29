@@ -31,7 +31,7 @@ class UnregisterUser_InputPasswordViewController: UIViewController {
             case .success:
                 DispatchQueue.main.async {
                     let vc = self.storyboard?.instantiateViewController(
-                        identifier: Constants.StoryboardID.unregisterUserInputSuggestVC
+                        identifier: K.StoryboardID.unregisterUserInputSuggestVC
                     ) as! UnregisterUser_InputSuggestionViewController
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
@@ -77,7 +77,7 @@ extension UnregisterUser_InputPasswordViewController {
     func showErrorMessage(message: String) {
     
         detailLineLabel.text = message
-        detailLineLabel.textColor = UIColor(named: Constants.Color.appColor)
+        detailLineLabel.textColor = UIColor(named: K.Color.appColor)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

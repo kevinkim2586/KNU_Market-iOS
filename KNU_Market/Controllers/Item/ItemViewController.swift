@@ -122,7 +122,7 @@ class ItemViewController: UIViewController {
                     showProgressBar()
                     
                     guard let editVC = self.storyboard?.instantiateViewController(
-                            identifier: Constants.StoryboardID.uploadItemVC
+                            identifier: K.StoryboardID.uploadItemVC
                     ) as? UploadItemViewController else { return }
                     
                     editVC.editModel = self.viewModel.modelForEdit
@@ -307,7 +307,9 @@ extension ItemViewController: ItemViewModelDelegate {
     func didEnterChat(isFirstEntrance: Bool) {
         
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-        guard let vc = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
+        guard let vc = storyboard.instantiateViewController(
+            identifier: K.StoryboardID.chatVC
+        ) as? ChatViewController else { return }
         
         vc.roomUID = pageID
         vc.chatRoomTitle = viewModel.model?.title ?? ""
@@ -360,12 +362,12 @@ extension ItemViewController {
         let profileImageUID = viewModel.model?.profileImageUID ?? ""
         if profileImageUID.count > 1 {
             
-            let url = URL(string: Constants.API_BASE_URL + "media/\(profileImageUID)")
+            let url = URL(string: K.API_BASE_URL + "media/\(profileImageUID)")
             userProfileImageView.sd_setImage(with: url,
-                                             placeholderImage: UIImage(named: Constants.Images.defaultAvatar),
+                                             placeholderImage: UIImage(named: K.Images.defaultAvatar),
                                              options: .continueInBackground)
         } else {
-            userProfileImageView.image = UIImage(named: Constants.Images.defaultAvatar)
+            userProfileImageView.image = UIImage(named: K.Images.defaultAvatar)
         }
         
         // 사진 설정
@@ -434,7 +436,7 @@ extension ItemViewController {
     func initializeProfileImageView() {
         
         userProfileImageView.contentMode = .scaleAspectFill
-        userProfileImageView.image = UIImage(named: Constants.Images.defaultAvatar)
+        userProfileImageView.image = UIImage(named: K.Images.defaultAvatar)
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
     }
     
@@ -501,7 +503,7 @@ extension ItemViewController {
                     checkButtonDetail.setTitle("모집 완료  ⌵", for: .normal)
                   
                 } else {
-                    checkView.backgroundColor = UIColor(named: Constants.Color.appColor)
+                    checkView.backgroundColor = UIColor(named: K.Color.appColor)
                     
                     checkButtonDetail.setTitle("모집 중  ⌵", for: .normal)
                 }
@@ -546,7 +548,7 @@ extension ItemViewController {
         
         if viewModel.postIsUserUploaded || viewModel.isGathering || viewModel.userAlreadyJoinedPost {
             enterChatButton.isUserInteractionEnabled = true
-            enterChatButton.backgroundColor = UIColor(named: Constants.Color.appColor)
+            enterChatButton.backgroundColor = UIColor(named: K.Color.appColor)
             enterChatButton.setTitle("채팅방 입장", for: .normal)
             
         } else {
@@ -593,7 +595,7 @@ extension ItemViewController {
             slideShow.addGestureRecognizer(recognizer)
             slideShow.contentMode = .scaleAspectFit
         } else {
-            slideShow.setImageInputs([ImageSource(image: UIImage(named: Constants.Images.defaultItemImage)!)])
+            slideShow.setImageInputs([ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)])
         }
         
         slideShow.contentScaleMode = .scaleAspectFill

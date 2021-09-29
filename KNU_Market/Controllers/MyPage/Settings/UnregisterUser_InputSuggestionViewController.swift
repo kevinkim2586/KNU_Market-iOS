@@ -25,7 +25,7 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
     
     @IBAction func pressedKakaoLinkButton(_ sender: UIButton) {
         
-        let url = URL(string: Constants.URL.kakaoHelpChannel)!
+        let url = URL(string: K.URL.kakaoHelpChannel)!
         UIApplication.shared.open(url, options: [:])
     }
     

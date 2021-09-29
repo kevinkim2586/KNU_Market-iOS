@@ -61,7 +61,7 @@ class EmailForLostPasswordViewController: UIViewController {
     
     func showCongratulateRegisterVC() {
         guard let vc = storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.congratulateUserVC
+            identifier: K.StoryboardID.congratulateUserVC
         ) as? CongratulateUserViewController else { return }
         
         vc.modalPresentationStyle = .fullScreen

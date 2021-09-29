@@ -119,7 +119,7 @@ extension ChangeNicknameViewController: UITextFieldDelegate {
         if textField == nicknameTextField {
             didCheckNicknameDuplicate = false
             checkAlreadyInUseButton.setTitle("중복 확인", for: .normal)
-            checkAlreadyInUseButton.titleLabel?.tintColor = UIColor(named: Constants.Color.appColor)
+            checkAlreadyInUseButton.titleLabel?.tintColor = UIColor(named: K.Color.appColor)
         }
     }
 }

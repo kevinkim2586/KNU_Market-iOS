@@ -55,7 +55,7 @@ extension HomeViewController {
             return
         }
         guard let uploadVC = storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.uploadItemVC
+            identifier: K.StoryboardID.uploadItemVC
         ) as? UploadItemViewController else { return }
         uploadVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(uploadVC, animated: true)
@@ -64,7 +64,7 @@ extension HomeViewController {
     @IBAction func pressedSearchButton(_ sender: UIBarButtonItem) {
         
         let searchVC = storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.searchPostVC
+            identifier: K.StoryboardID.searchPostVC
         ) as! SearchPostViewController
         navigationController?.pushViewController(searchVC, animated: true)
     }
@@ -140,7 +140,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row > viewModel.itemList.count
             || viewModel.itemList.count == 0 { return UITableViewCell() }
         
-        let cellIdentifier = Constants.cellID.itemTableViewCell
+        let cellIdentifier = K.cellID.itemTableViewCell
         
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier,
@@ -156,7 +156,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let itemVC = storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.itemVC
+            identifier: K.StoryboardID.itemVC
         ) as? ItemViewController else { return }
         
         itemVC.hidesBottomBarWhenPushed = true
@@ -245,8 +245,8 @@ extension HomeViewController {
     }
     
     func initializeTabBarIcon() {
-        navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
-        navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.image = UIImage(named: K.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.selectedImage = UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
     }
     
     func initializeTableView() {
@@ -256,12 +256,12 @@ extension HomeViewController {
         itemTableView.refreshControl = UIRefreshControl()
         
         let nibName = UINib(
-            nibName: Constants.XIB.itemTableViewCell,
+            nibName: K.XIB.itemTableViewCell,
             bundle: nil
         )
         itemTableView.register(
             nibName,
-            forCellReuseIdentifier: Constants.cellID.itemTableViewCell
+            forCellReuseIdentifier: K.cellID.itemTableViewCell
         )
         itemTableView.refreshControl?.addTarget(
             self,
@@ -275,7 +275,7 @@ extension HomeViewController {
     func initializeAddButton() {
         
         addButton.layer.cornerRadius = addButton.frame.width / 2
-        addButton.backgroundColor = UIColor(named: Constants.Color.appColor)
+        addButton.backgroundColor = UIColor(named: K.Color.appColor)
         
         let font = UIFont.systemFont(ofSize: 23, weight: .medium)
         let configuration = UIImage.SymbolConfiguration(font: font)
@@ -289,7 +289,7 @@ extension HomeViewController {
     func initializeBarButtonItem() {
         
         let settingsBarButton = UIBarButtonItem(
-            image: UIImage(named: Constants.Images.homeMenuIcon) ?? UIImage(systemName: "gear"),
+            image: UIImage(named: K.Images.homeMenuIcon) ?? UIImage(systemName: "gear"),
             style: .plain,
             target: self,
             action: #selector(pressedSettingsButton)

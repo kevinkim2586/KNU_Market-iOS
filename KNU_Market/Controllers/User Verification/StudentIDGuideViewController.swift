@@ -15,7 +15,7 @@ class StudentIDGuideViewController: UIViewController {
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
         guard let nextVC = storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.captureStudentIDVC
+            identifier: K.StoryboardID.captureStudentIDVC
         ) as? CaptureStudentIDViewController else { fatalError() }
         
         navigationController?.pushViewController(nextVC, animated: true)

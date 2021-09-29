@@ -28,10 +28,8 @@ class KMTextField: HoshiTextField {
         placeholder = placeHolderText ?? "여기에 입력해주세요."
         placeholderFontScale = 1
         placeholderColor = .lightGray
-        borderActiveColor = UIColor(named: Constants.Color.appColor) ?? .systemPink
+        borderActiveColor = UIColor(named: K.Color.appColor) ?? .systemPink
         borderInactiveColor = .lightGray
-
-
     }
 }
 

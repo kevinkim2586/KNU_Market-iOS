@@ -17,29 +17,47 @@ class ChooseVerificationOptionViewController: UIViewController {
         super.viewDidLoad()
         initialize()
     }
+}
+
+//MARK: - IBActions
+
+extension ChooseVerificationOptionViewController {
     
     @IBAction func pressedRegisterButton(_ sender: UIButton) {
         dismiss(animated: true)
         delegate?.didSelectToRegister()
     }
     
-    
     @IBAction func pressedVerifiedUsingStudentIdButton(_ sender: UIButton) {
+        guard let vc = storyboard?.instantiateViewController(
+            identifier: K.StoryboardID.findIdUsingStudentIdVC
+        ) as? FindIdUsingStudentIdViewController else { return }
         
+        pushVC(vc)
     }
-    
     
     @IBAction func pressedVerifiedUsingEmailButton(_ sender: UIButton) {
+        guard let vc = storyboard?.instantiateViewController(
+            identifier: K.StoryboardID.findIdUsingWebMailVC
+        ) as? FindIdUsingWebMailViewController else { return }
         
+        pushVC(vc)
     }
     
+    func pushVC(_ vc: UIViewController) {
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
+
+//MARK: - User Input Validation
 
 //MARK: - UI Configuration & Initialization
 
 extension ChooseVerificationOptionViewController {
     
     func initialize() {
+        setBackBarButtonItemTitle(to: "뒤로")
         title = "아이디 찾기"
         initializeLabels()
         initializeButtons()

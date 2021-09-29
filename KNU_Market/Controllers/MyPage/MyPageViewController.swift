@@ -33,7 +33,7 @@ class MyPageViewController: UIViewController {
     
     @IBAction func pressedSettingsBarButtonItem(_ sender: UIBarButtonItem) {
         
-        guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsVC) as? SettingsViewController
+        guard let vc = self.storyboard?.instantiateViewController(identifier: K.StoryboardID.settingsVC) as? SettingsViewController
         else { fatalError() }
         pushViewController(with: vc)
     }
@@ -115,7 +115,7 @@ extension MyPageViewController: MyPageViewModelDelegate {
             )
             profileImageButton.layer.masksToBounds = true
         } else {
-            profileImageButton.setImage(UIImage(named: Constants.Images.pickProfileImage),
+            profileImageButton.setImage(UIImage(named: K.Images.pickProfileImage),
                                         for: .normal)
             profileImageButton.layer.masksToBounds = false
         }
@@ -209,7 +209,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.cellID.myPageCell,
+            withIdentifier: K.cellID.myPageCell,
             for: indexPath
         ) as! MyPageTableViewCell
         
@@ -218,10 +218,10 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             cell.settingsTitleLabel.text = viewModel.tableViewSection_1[indexPath.row]
-            cell.leftImageView.image = UIImage(systemName: Constants.Images.myPageSection_1_Images[indexPath.row])
+            cell.leftImageView.image = UIImage(systemName: K.Images.myPageSection_1_Images[indexPath.row])
         case 1:
             cell.settingsTitleLabel.text = viewModel.tableViewSection_2[indexPath.row]
-            cell.leftImageView.image = UIImage(systemName: Constants.Images.myPageSection_2_Images[indexPath.row])
+            cell.leftImageView.image = UIImage(systemName: K.Images.myPageSection_2_Images[indexPath.row])
         default: break
         }
         return cell
@@ -233,19 +233,19 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             guard let vc = self.storyboard?.instantiateViewController(
-                identifier: Constants.StoryboardID.myPageSection_1_Options[indexPath.row]
+                identifier: K.StoryboardID.myPageSection_1_Options[indexPath.row]
             ) else { return }
             pushViewController(with: vc)
         case 1:
             switch indexPath.row {
             case 1:
-                let url = URL(string: Constants.URL.termsAndConditionNotionURL)!
+                let url = URL(string: K.URL.termsAndConditionNotionURL)!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             case 2:
-                let url = URL(string: Constants.URL.privacyInfoConditionNotionURL)!
+                let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             default:
-                guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageSection_2_Options[indexPath.row]) else { return }
+                guard let vc = self.storyboard?.instantiateViewController(identifier: K.StoryboardID.myPageSection_2_Options[indexPath.row]) else { return }
                 pushViewController(with: vc)
             }
         default: return
@@ -307,8 +307,8 @@ extension MyPageViewController {
     }
     
     func initializeTabBarIcon() {
-        navigationController?.tabBarItem.image = UIImage(named: Constants.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
-        navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.image = UIImage(named: K.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.selectedImage = UIImage(named: K.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
     }
     
     func initializeTableView() {

@@ -35,18 +35,18 @@ class ChatTableViewCell: UITableViewCell {
                 
         if !model.imageCodes.isEmpty {
             
-            let imageURL = URL(string: "\(Constants.API_BASE_URL)media/\(model.imageCodes[0])")
+            let imageURL = URL(string: "\(K.API_BASE_URL)media/\(model.imageCodes[0])")
             chatImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             chatImageView.sd_setImage(
                 with: imageURL,
-                placeholderImage: UIImage(named: Constants.Images.chatBubbleIcon),
+                placeholderImage: UIImage(named: K.Images.chatBubbleIcon),
                 options: .continueInBackground,
                 completed: nil
             )
             chatImageView.contentMode = .scaleToFill
             chatImageView.layer.borderWidth = 0
         } else {
-            chatImageView.image = UIImage(named: Constants.Images.chatBubbleIcon)
+            chatImageView.image = UIImage(named: K.Images.chatBubbleIcon)
             chatImageView.contentMode = .scaleAspectFit
         }
         

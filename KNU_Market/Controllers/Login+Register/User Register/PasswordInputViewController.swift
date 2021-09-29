@@ -37,14 +37,14 @@ class PasswordInputViewController: UIViewController {
         
         UserRegisterValues.shared.password = passwordTextField.text!
         performSegue(
-            withIdentifier: Constants.SegueID.goToNicknameInputVC,
+            withIdentifier: K.SegueID.goToNicknameInputVC,
             sender: self
         )
     }
     
     func showErrorMessage(message: String) {
         detailLabel.text = message
-        detailLabel.textColor = UIColor(named: Constants.Color.appColor)
+        detailLabel.textColor = UIColor(named: K.Color.appColor)
     }
 }
 

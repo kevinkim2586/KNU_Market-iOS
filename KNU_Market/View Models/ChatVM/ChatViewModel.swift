@@ -96,7 +96,7 @@ extension ChatViewModel {
         
         print("✏️ Trying to connect to WebSocket...")
         
-        var request = URLRequest(url: URL(string: Constants.WEB_SOCKET_URL)!)
+        var request = URLRequest(url: URL(string: K.WEB_SOCKET_URL)!)
         request.timeoutInterval = 1000
         
         let pinner = FoundationSecurity(allowSelfSigned: true)
@@ -124,7 +124,7 @@ extension ChatViewModel {
             getRoomInfo()
             connectRetryCount = 0
             self.delegate?.didConnect()
-            sendText(Constants.ChatSuffix.emptySuffix)
+            sendText(K.ChatSuffix.emptySuffix)
             
         case .disconnected(let reason, let code):
             print("❗️ WebSocket has been Disconnected: \(reason) with code: \(code)")
@@ -142,7 +142,7 @@ extension ChatViewModel {
 
             let filteredChat = filterChat(text: chatText, userUID: userUID, isFromSocket: true)
 
-            guard filteredChat.chatMessage != Constants.ChatSuffix.emptySuffix else { return }
+            guard filteredChat.chatMessage != K.ChatSuffix.emptySuffix else { return }
         
             if isFromCurrentSender(uuid: userUID) {
                 self.delegate?.didReceiveChat()
@@ -168,7 +168,7 @@ extension ChatViewModel {
                 messages.append(Message(chat: chat,
                                              sender: others,
                                              sentDate: Date(),
-                                             kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                             kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
                                                                     image: nil,
                                                                     placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                     size: CGSize(width: imageWidth, height: imageHeight)))))
@@ -182,7 +182,7 @@ extension ChatViewModel {
             isConnected = false
         
             self.delegate?.reconnectSuggested()
-            sendText(Constants.ChatSuffix.emptySuffix)
+            sendText(K.ChatSuffix.emptySuffix)
             
         case .error(let reason):
             print("❗️ ChatViewModel - Error in didReceive .error: \(String(describing: reason?.localizedDescription))")
@@ -238,7 +238,7 @@ extension ChatViewModel {
         
         socket.write(string: convertedText) {
             
-            guard originalText != Constants.ChatSuffix.emptySuffix else {
+            guard originalText != K.ChatSuffix.emptySuffix else {
                 return
             }
             
@@ -261,7 +261,7 @@ extension ChatViewModel {
                 self.messages.append(Message(chat: chat,
                                         sender: self.mySelf,
                                         sentDate: Date(),
-                                        kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                        kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
                                                                image: nil,
                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight)))))
@@ -308,7 +308,7 @@ extension ChatViewModel {
                 
                     let filteredChat = self.filterChat(text: chatText, userUID: senderUID)
                     
-                    guard filteredChat.chatMessage != Constants.ChatSuffix.emptySuffix else { continue }
+                    guard filteredChat.chatMessage != K.ChatSuffix.emptySuffix else { continue }
                 
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {
@@ -327,7 +327,7 @@ extension ChatViewModel {
                             self.messages.insert(Message(chat: chat,
                                                          sender: others,
                                                          sentDate: chat.chat_date.convertStringToDate(),
-                                                         kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                         kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
                                                                                 image: nil,
                                                                                 placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                                 size: CGSize(width: self.imageWidth, height: self.imageHeight)))),
@@ -349,7 +349,7 @@ extension ChatViewModel {
                             self.messages.insert(Message(chat: chat,
                                                          sender: self.mySelf,
                                                          sentDate: chat.chat_date.convertStringToDate(),
-                                                         kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                         kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
                                                                                 image: nil,
                                                                                 placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                                 size: CGSize(width: self.imageWidth, height: self.imageHeight)))),
@@ -416,7 +416,7 @@ extension ChatViewModel {
                     
                     let filteredChat = self.filterChat(text: chatText, userUID: senderUID)
                     
-                    guard filteredChat.chatMessage != Constants.ChatSuffix.emptySuffix else { continue }
+                    guard filteredChat.chatMessage != K.ChatSuffix.emptySuffix else { continue }
                     
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {
@@ -435,7 +435,7 @@ extension ChatViewModel {
                             self.messages.append(Message(chat: chat,
                                                          sender: others,
                                                          sentDate: chat.chat_date.convertStringToDate(),
-                                                         kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                         kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
                                                                                 image: nil,
                                                                                 placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                                 size: CGSize(width: self.imageWidth, height: self.imageHeight))))
@@ -457,7 +457,7 @@ extension ChatViewModel {
                             self.messages.append(Message(chat: chat,
                                                          sender: self.mySelf,
                                                          sentDate: chat.chat_date.convertStringToDate(),
-                                                         kind: .photo(ImageItem(url: URL(string: Constants.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                         kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
                                                                                 image: nil,
                                                                                 placeholderImage: UIImage(named: "chat_bubble_icon")!,
                                                                                 size: CGSize(width: self.imageWidth, height: self.imageHeight))))
@@ -506,10 +506,10 @@ extension ChatViewModel {
     // 공구글 나오기
     @objc func exitPost() {
         
-        sendText(Constants.ChatSuffix.emptySuffix)
+        sendText(K.ChatSuffix.emptySuffix)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-            self.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
+            self.sendText("\(User.shared.nickname)\(K.ChatSuffix.exitSuffix)")
             dismissProgressBar()
         }
     }
@@ -533,14 +533,14 @@ extension ChatViewModel {
     
     @objc func sendBanMessageToSocket(notification: Notification) {
         
-        sendText(Constants.ChatSuffix.emptySuffix)
+        sendText(K.ChatSuffix.emptySuffix)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             
             dismissProgressBar()
             if let object = notification.object as? [String : String] {
                 if let uid = object["uid"], let nickname = object["nickname"] {
-                    self.sendText("\(nickname)님이 퇴장 당했습니다.\(uid)\(Constants.ChatSuffix.rawBanSuffix)")
+                    self.sendText("\(nickname)님이 퇴장 당했습니다.\(uid)\(K.ChatSuffix.rawBanSuffix)")
                 }
             }
         }
@@ -596,7 +596,7 @@ extension ChatViewModel {
             
             case .success(let imageUID):
                 
-                self.sendText("\(imageUID)" + Constants.ChatSuffix.imageSuffix)
+                self.sendText("\(imageUID)" + K.ChatSuffix.imageSuffix)
                 
             case .failure(_):
                 self.delegate?.failedUploadingImageToServer()
@@ -614,7 +614,7 @@ extension ChatViewModel {
     func scheduleSendingGarbageTextWithTimeInterval() {
         
         timer =  Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] timer in
-            self?.sendText(Constants.ChatSuffix.emptySuffix)
+            self?.sendText(K.ChatSuffix.emptySuffix)
         }
     }
     
@@ -627,7 +627,7 @@ extension ChatViewModel {
             "comment": text
         ]
     
-        guard let JSONString = json.rawString() else { return Constants.ChatSuffix.emptySuffix }
+        guard let JSONString = json.rawString() else { return K.ChatSuffix.emptySuffix }
         return JSONString
     }
 
@@ -643,28 +643,28 @@ extension ChatViewModel {
         
         if userUID != nil {
             if User.shared.bannedChatMembers.contains(userUID!) {
-                return FilteredChat(chatMessage: Constants.ChatSuffix.emptySuffix, chatType: .text)
+                return FilteredChat(chatMessage: K.ChatSuffix.emptySuffix, chatType: .text)
             }
         }
         
-        if text.contains(Constants.ChatSuffix.enterSuffix) {
-            return FilteredChat(chatMessage: text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: "🎉"), chatType: .text)
+        if text.contains(K.ChatSuffix.enterSuffix) {
+            return FilteredChat(chatMessage: text.replacingOccurrences(of: K.ChatSuffix.rawEnterSuffix, with: "🎉"), chatType: .text)
        
-        } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" && isFromSocket {
+        } else if text == "\(User.shared.nickname)\(K.ChatSuffix.exitSuffix)" && isFromSocket {
             outPost()
-            return FilteredChat(chatMessage: Constants.ChatSuffix.emptySuffix, chatType: .text)
+            return FilteredChat(chatMessage: K.ChatSuffix.emptySuffix, chatType: .text)
             
-        } else if text.contains(Constants.ChatSuffix.exitSuffix) {
-            return FilteredChat(chatMessage: text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: "🏃"), chatType: .text)
+        } else if text.contains(K.ChatSuffix.exitSuffix) {
+            return FilteredChat(chatMessage: text.replacingOccurrences(of: K.ChatSuffix.rawExitSuffix, with: "🏃"), chatType: .text)
             
-        } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)\(Constants.ChatSuffix.rawBanSuffix)") {
+        } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)\(K.ChatSuffix.rawBanSuffix)") {
             self.delegate?.didReceiveBanNotification()
-            return FilteredChat(chatMessage: Constants.ChatSuffix.emptySuffix, chatType: .text)
+            return FilteredChat(chatMessage: K.ChatSuffix.emptySuffix, chatType: .text)
 
-        } else if text.contains(Constants.ChatSuffix.rawBanSuffix) {
-            return FilteredChat(chatMessage: Constants.ChatSuffix.usedBanSuffix, chatType: .text)
+        } else if text.contains(K.ChatSuffix.rawBanSuffix) {
+            return FilteredChat(chatMessage: K.ChatSuffix.usedBanSuffix, chatType: .text)
             
-        } else if text.contains(Constants.ChatSuffix.imageSuffix) {
+        } else if text.contains(K.ChatSuffix.imageSuffix) {
             
             let imageUID = text[0..<22]
             return FilteredChat(chatMessage: imageUID, chatType: .photo)

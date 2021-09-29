@@ -106,7 +106,7 @@ extension UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialVC = storyboard.instantiateViewController(
-            identifier: Constants.StoryboardID.initialVC
+            identifier: K.StoryboardID.initialVC
         )
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
     }
@@ -114,7 +114,7 @@ extension UIViewController {
     // 로그인 or 회원가입 성공 시 홈화면 전환 시 사용되는 함수
     func goToHomeScreen() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+        let mainTabBarController = storyboard.instantiateViewController(identifier: K.StoryboardID.tabBarController)
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }
@@ -125,7 +125,7 @@ extension UIViewController {
         let storyboard = UIStoryboard(name: "Report", bundle: nil)
         
         guard let reportVC = storyboard.instantiateViewController(
-            identifier: Constants.StoryboardID.reportUserVC
+            identifier: K.StoryboardID.reportUserVC
         ) as? ReportUserViewController else { return }
         
         reportVC.userToReport = userToReport
@@ -196,7 +196,7 @@ extension UIViewController {
     func presentVerifyOptionVC() {
         let storyboard = UIStoryboard(name: StoryboardName.MyPage, bundle: nil)
         guard let vc = storyboard.instantiateViewController(
-            identifier: Constants.StoryboardID.verifyOptionVC
+            identifier: K.StoryboardID.verifyOptionVC
         ) as? VerifyOptionViewController else { return }
         
         navigationController?.pushViewController(vc, animated: true)
@@ -206,7 +206,7 @@ extension UIViewController {
     func presentRegisterVC() {
         let storyboard = UIStoryboard(name: StoryboardName.UserRegister, bundle: nil)
         guard let vc = storyboard.instantiateViewController(
-            withIdentifier: Constants.StoryboardID.idInputVC
+            withIdentifier: K.StoryboardID.idInputVC
         ) as? IDInputViewController else { return }
         
         vc.modalPresentationStyle = .overFullScreen
@@ -217,7 +217,6 @@ extension UIViewController {
 //MARK: - UI Related
 
 extension UIViewController {
-    
     
     // UITableView 가 Fetching Data 중일 때 나타나는 Activity Indicator
     func createSpinnerFooterView() -> UIView {

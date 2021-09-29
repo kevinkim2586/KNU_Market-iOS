@@ -72,7 +72,7 @@ extension NickNameInputViewController {
                     UserRegisterValues.shared.nickname = nickname
                     DispatchQueue.main.async {
                         self.performSegue(
-                            withIdentifier: Constants.SegueID.goToEmailForLostPwVC,
+                            withIdentifier: K.SegueID.goToEmailForLostPwVC,
                             sender: self
                         )
                     }

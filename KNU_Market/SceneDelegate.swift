@@ -23,12 +23,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if User.shared.isLoggedIn == true {
             
-            let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+            let mainTabBarController = storyboard.instantiateViewController(identifier: K.StoryboardID.tabBarController)
             window?.rootViewController = mainTabBarController
         
         } else {
             
-            let initialController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
+            let initialController = storyboard.instantiateViewController(identifier: K.StoryboardID.initialVC)
             window?.rootViewController = initialController
         }
         
@@ -56,7 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             object: nil
         )
         
-        ChatNotifications.list = UserDefaults.standard.stringArray(forKey: Constants.UserDefaultsKey.notificationList) ?? [String]()
+        ChatNotifications.list = UserDefaults.standard.stringArray(forKey: K.UserDefaultsKey.notificationList) ?? [String]()
         
         getDeliveredNotifications()
 

@@ -5,7 +5,7 @@ class AlertViewController: UIViewController {
     let containerView   = UIView()
     let titleLabel      = KMAlertTitleLabel(textAlignment: .center, fontSize: 20)
     var messageLabel    = KMAlertBodyLabel(textAlignment: .center)
-    let actionButton    = KMAlertButton(backgroundColor: UIColor(named: Constants.Color.appColor)!, title: "확인")
+    let actionButton    = KMAlertButton(backgroundColor: UIColor(named: K.Color.appColor)!, title: "확인")
 
     var alertTitle: String?
     var message: String?

@@ -6,14 +6,14 @@ extension UILabel {
     func changeTextAttributeColor(
         fullText : String,
         changeText : String,
-        toColor: UIColor? = UIColor(named: Constants.Color.appColor)
+        toColor: UIColor? = UIColor(named: K.Color.appColor)
     ) {
         let strNumber: NSString = fullText as NSString
         let range = (strNumber).range(of: changeText)
         let attribute = NSMutableAttributedString.init(string: fullText)
         attribute.addAttribute(
             NSAttributedString.Key.foregroundColor,
-            value: UIColor(named: Constants.Color.appColor)! ,
+            value: UIColor(named: K.Color.appColor)! ,
             range: range
         )
         self.attributedText = attribute

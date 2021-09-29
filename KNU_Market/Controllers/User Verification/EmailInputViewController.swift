@@ -74,7 +74,7 @@ class EmailInputViewController: UIViewController {
     
     func goToCheckEmailVC() {
         guard let vc = storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.checkEmailVC
+            identifier: K.StoryboardID.checkEmailVC
         ) as? CheckEmailViewController else { return }
         
         guard let email = email else { return }
@@ -186,7 +186,7 @@ extension EmailInputViewController {
         errorLabel.isHidden = false
         errorLabel.text = message
         errorLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        errorLabel.textColor = UIColor(named: Constants.Color.appColor)
+        errorLabel.textColor = UIColor(named: K.Color.appColor)
         
     }
 }

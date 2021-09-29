@@ -77,7 +77,7 @@ extension IDInputViewController {
                     UserRegisterValues.shared.userId = id
                     DispatchQueue.main.async {
                         self.performSegue(
-                            withIdentifier: Constants.SegueID.goToPasswordInputVC,
+                            withIdentifier: K.SegueID.goToPasswordInputVC,
                             sender: self
                         )
                     }
@@ -89,7 +89,7 @@ extension IDInputViewController {
     }
 }
 
-//MARK: - UI Configuration
+//MARK: - UI Configuration & Initialization
 
 extension IDInputViewController {
     

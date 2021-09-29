@@ -53,7 +53,7 @@ class SendDeveloperMessageViewController: UIViewController {
 
     @IBAction func pressedKakaoLink(_ sender: UIButton) {
         
-        let url = URL(string: Constants.URL.kakaoHelpChannel)!
+        let url = URL(string: K.URL.kakaoHelpChannel)!
         UIApplication.shared.open(url, options: [:])
     }
     

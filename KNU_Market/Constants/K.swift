@@ -1,6 +1,7 @@
 import UIKit
 
-struct Constants {
+//MARK: - Struct for managing constants
+struct K {
     
     static let API_BASE_URL                     = "https://knumarket.kro.kr:5051/api/v1/"
     static let WEB_SOCKET_URL                   = "wss://knumarket.kro.kr:5052"
@@ -47,6 +48,8 @@ struct Constants {
         
         // Find User Info
         static let chooseVerificationOptionVC   = "ChooseVerificationOptionVC"
+        static let findIdUsingWebMailVC         = "FindIdUsingWebMailViewController"
+        static let findIdUsingStudentIdVC       = "FindIdUsingStudentIdViewController"
         
         // Home & Item Tab
         static let tabBarController             = "TabBarController"
@@ -253,9 +256,9 @@ struct ChatNotifications {
     
     static var list: [String] = [String]() {
         didSet {
-            UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.notificationList)
+            UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.notificationList)
             UserDefaults.standard.set(list,
-                                      forKey: Constants.UserDefaultsKey.notificationList)
+                                      forKey: K.UserDefaultsKey.notificationList)
         }
     }
 }

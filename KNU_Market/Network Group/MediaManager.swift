@@ -10,9 +10,9 @@ class MediaManager {
     
     let interceptor = Interceptor()
     
-    let uploadImageURL              = "\(Constants.API_BASE_URL)media"
-    let requestMediaURL             = "\(Constants.API_BASE_URL)media/"
-    let deleteMediaURL              = "\(Constants.API_BASE_URL)media/"
+    let uploadImageURL              = "\(K.API_BASE_URL)media"
+    let requestMediaURL             = "\(K.API_BASE_URL)media/"
+    let deleteMediaURL              = "\(K.API_BASE_URL)media/"
     
     var imageUIDs: [String] = [String]()
     

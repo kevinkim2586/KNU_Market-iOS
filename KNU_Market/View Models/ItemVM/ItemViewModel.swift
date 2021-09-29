@@ -309,7 +309,7 @@ extension ItemViewModel {
     func convertUIDsToURL() {
         imageURLs.removeAll()
         if let itemImageUIDs = model?.imageUIDs {
-            imageURLs = itemImageUIDs.compactMap { URL(string: "\(Constants.API_BASE_URL)media/" + $0) }
+            imageURLs = itemImageUIDs.compactMap { URL(string: "\(K.API_BASE_URL)media/" + $0) }
         }
     }
     
@@ -318,14 +318,14 @@ extension ItemViewModel {
         for url in self.imageURLs {
             imageSources.append(SDWebImageSource(
                 url: url,
-                placeholder: UIImage(named: Constants.Images.defaultItemImage))
+                placeholder: UIImage(named: K.Images.defaultItemImage))
             )
         }
     }
     
     func getFormattedDateStringToDisplayTodayAndYesterday() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Constants.DateFormat.defaultFormat
+        dateFormatter.dateFormat = K.DateFormat.defaultFormat
         dateFormatter.locale = Locale(identifier:"ko_KR")
         
         guard let convertedDate = dateFormatter.date(from: model!.date) else {

@@ -12,12 +12,13 @@ class FindIdUsingStudentIdViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
-        
     }
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        userStudentIdTextField.becomeFirstResponder()
+    }
 }
 
 //MARK: - Target Methods
@@ -50,7 +51,6 @@ extension FindIdUsingStudentIdViewController {
 extension FindIdUsingStudentIdViewController {
     
     func initialize() {
-        
         initializeTitleLabel()
         initializeTextFields()
         initializeErrorLabel()
@@ -115,6 +115,10 @@ extension FindIdUsingStudentIdViewController {
         userBirthDateTextField.inputAccessoryView = bottomButton
         bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
         
-        bottomButton.addTarget(self, action: #selector(pressedBottomButton), for: .touchUpInside)
+        bottomButton.addTarget(
+            self,
+            action: #selector(pressedBottomButton),
+            for: .touchUpInside
+        )
     }
 }

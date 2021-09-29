@@ -1,56 +1,42 @@
 import UIKit
-import PanModal
-import TextFieldEffects
-
-protocol FindPasswordDelegate: AnyObject {
-    func didSendFindPasswordEmail()
-}
 
 class FindPasswordViewController: UIViewController {
-
-    @IBOutlet weak var emailTextField: HoshiTextField!
-    @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var sendEmailButton: UIButton!
     
-    weak var delegate: FindPasswordDelegate?
-
+    private let titleLabel      = KMTitleLabel(textColor: .darkGray)
+    private let detailLabel     = KMDetailLabel(numberOfTotalLines: 2)
+    private let userIdTextField = KMTextField(placeHolderText: "크누마켓 아이디")
+    private let errorLabel      = KMErrorLabel()
+    private let bottomButton    = KMBottomButton(buttonTitle: "임시 비밀번호 받기")
+    
+    private let padding: CGFloat = 20
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        dismissProgressBar()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        userIdTextField.becomeFirstResponder()
     }
+}
 
-    @IBAction func pressedSendEmailButton(_ sender: UIButton) {
-        
-        guard let email = emailTextField.text else { return }
-        
-        showProgressBar()
-        
-        UserManager.shared.findPassword(email: email) { [weak self] result in
-            
-            dismissProgressBar()
-            
-            guard let self = self else { return }
-            
-            switch result {
-            
-            case .success:
-              
-                self.dismiss(animated: true, completion: nil)
-                self.delegate?.didSendFindPasswordEmail()
-            
-            case .failure(let error):
-                self.presentKMAlertOnMainThread(
-                    title: "이메일 전송 실패",
-                    message: error.errorDescription,
-                    buttonTitle: "확인"
-                )
-            }
-        }
+//MARK: - Target Methods
+
+extension FindPasswordViewController {
+    
+    @objc func pressedBottomButton() {
+        errorLabel.isHidden = true
+    }
+}
+
+
+//MARK: - TextField Methods
+
+extension FindPasswordViewController {
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        errorLabel.isHidden = true
     }
 }
 
@@ -59,26 +45,80 @@ class FindPasswordViewController: UIViewController {
 extension FindPasswordViewController {
     
     func initialize() {
-        initializeSendEmailButton()
+        title = "비밀번호 찾기"
+        initializeTitleLabel()
+        initializeDetailLabel()
+        initializeTextField()
+        initializeErrorLabel()
+        initializeBottomButton()
     }
-
-    func initializeSendEmailButton() {
+    
+    func initializeTitleLabel() {
+        view.addSubview(titleLabel)
+        titleLabel.numberOfLines = 1
+        titleLabel.text = "크누마켓 아이디를 입력해주세요."
+        titleLabel.changeTextAttributeColor(
+            fullText: titleLabel.text!,
+            changeText: "크누마켓 아이디"
+        )
         
-        sendEmailButton.layer.cornerRadius = sendEmailButton.frame.height / 2
-        sendEmailButton.addBounceAnimationWithNoFeedback()
-        sendEmailButton.backgroundColor = UIColor(named: K.Color.appColor)
-    }
-}
-
-//MARK: - PanModalPresentable
-
-extension FindPasswordViewController: PanModalPresentable {
-    
-    var panScrollable: UIScrollView? {
-        return nil
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
     }
     
-    var longFormHeight: PanModalHeight {
-        return .maxHeightWithTopInset(view.bounds.height / 2)
+    func initializeDetailLabel() {
+        view.addSubview(detailLabel)
+        detailLabel.numberOfLines = 2
+        detailLabel.text = "회원가입 시 입력했던 이메일로\n임시 비밀번호가 전송됩니다."
+        
+        NSLayoutConstraint.activate([
+            detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
+            detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: padding)
+        ])
+    
+    }
+    
+    func initializeTextField() {
+        view.addSubview(userIdTextField)
+        
+        userIdTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChange(_:)),
+            for: .editingChanged
+        )
+        
+        NSLayoutConstraint.activate([
+            userIdTextField.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 55),
+            userIdTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            userIdTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
+            userIdTextField.heightAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+    
+    func initializeErrorLabel() {
+        view.addSubview(errorLabel)
+        errorLabel.isHidden = true
+        
+        NSLayoutConstraint.activate([
+            errorLabel.topAnchor.constraint(equalTo: userIdTextField.bottomAnchor, constant: padding),
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+    }
+    
+    func initializeBottomButton() {
+        bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
+        userIdTextField.inputAccessoryView = bottomButton
+        bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
+
+        bottomButton.addTarget(
+            self,
+            action: #selector(pressedBottomButton),
+            for: .touchUpInside
+        )
     }
 }

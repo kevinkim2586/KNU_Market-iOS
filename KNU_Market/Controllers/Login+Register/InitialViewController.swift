@@ -10,12 +10,27 @@ class InitialViewController: UIViewController {
     
     private lazy var idGuideString = "2021년 10월 6일 이전에 가입한 회원의 아이디는 웹메일(@knu.ac.kr) 형식입니다."
     
+    private lazy var findUserInfoStoryboard = UIStoryboard(
+        name: StoryboardName.FindUserInfo,
+        bundle: nil
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
+
+    func presentVC(_ vc: UIViewController) {
+        let navigationController = UINavigationController(rootViewController: vc)
+        present(navigationController, animated: true)
+    }
     
-    //MARK: - IBActions
+
+}
+
+//MARK: - IBActions
+
+extension InitialViewController {
     
     @IBAction func pressedLoginButton(_ sender: UIButton) {
         guard let id = idTextField.text, let password = pwTextField.text else { return }
@@ -44,25 +59,20 @@ class InitialViewController: UIViewController {
         performSegue(withIdentifier: K.SegueID.goToRegister, sender: self)
     }
     
-    @IBAction func pressedFindPwButton(_ sender: UIButton) {
-
-        
-    }
-    
-    
     @IBAction func pressedFindIdButton(_ sender: UIButton) {
-
-        let storyboard = UIStoryboard(
-            name: StoryboardName.FindUserInfo,
-            bundle: nil
-        )
-        guard let findIdVC = storyboard.instantiateViewController(
+        guard let findIdVC = findUserInfoStoryboard.instantiateViewController(
             identifier: K.StoryboardID.chooseVerificationOptionVC
         ) as? ChooseVerificationOptionViewController else { return }
         
         findIdVC.delegate = self
-        let navigationController = UINavigationController(rootViewController: findIdVC)
-        present(navigationController, animated: true)
+        presentVC(findIdVC)
+    }
+    
+    @IBAction func pressedFindPwButton(_ sender: UIButton) {
+        guard let findPwVC = findUserInfoStoryboard.instantiateViewController(
+            identifier: K.StoryboardID.findPasswordVC
+        ) as? FindPasswordViewController else { return }
+        presentVC(findPwVC)
     }
     
     @IBAction func pressedInfoButton(_ sender: UIButton) {

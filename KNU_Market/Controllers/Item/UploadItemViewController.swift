@@ -86,7 +86,7 @@ class UploadItemViewController: UIViewController {
         
         guard let itemTitle = itemTitleTextField.text else {
             
-            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.errorDescription)
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.rawValue)
             return false
         }
         viewModel.itemTitle = itemTitle
@@ -95,12 +95,12 @@ class UploadItemViewController: UIViewController {
             
         } catch ValidationError.OnUploadPost.titleTooShortOrLong {
             
-            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.errorDescription)
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.rawValue)
             return false
             
         } catch ValidationError.OnUploadPost.detailTooShortOrLong {
             
-            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.detailTooShortOrLong.errorDescription)
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.detailTooShortOrLong.rawValue)
             return false
             
         }

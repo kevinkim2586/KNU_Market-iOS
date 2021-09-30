@@ -64,10 +64,10 @@ extension String {
                                              range.upperBound - range.lowerBound))
         return String(self[start..<end])
     }
-
+    
     subscript(_ range: CountablePartialRangeFrom<Int>) -> String {
         let start = index(startIndex, offsetBy: max(0, range.lowerBound))
-         return String(self[start...])
+        return String(self[start...])
     }
     
     func attributedStringWithColor(_ strings: [String], color: UIColor, characterSpacing: UInt? = nil) -> NSAttributedString {
@@ -83,4 +83,5 @@ extension String {
 
         return attributedString
     }
+
 }

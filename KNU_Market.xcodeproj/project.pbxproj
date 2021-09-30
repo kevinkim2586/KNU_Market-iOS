@@ -76,6 +76,9 @@
 		7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */; };
 		7C8189D426F31BAB006AE474 /* VerifyStudentID.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C8189D326F31BAB006AE474 /* VerifyStudentID.storyboard */; };
 		7C833686266208210032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833685266208210032308D /* Interceptor.swift */; };
+		7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */; };
+		7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */; };
+		7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8414812705692500FFA56B /* FindIdOptions.swift */; };
 		7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */; };
 		7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */; };
 		7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */; };
@@ -214,6 +217,9 @@
 		7C77E240266BB55600680A27 /* KNU_Market.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNU_Market.entitlements; sourceTree = "<group>"; };
 		7C8189D326F31BAB006AE474 /* VerifyStudentID.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerifyStudentID.storyboard; sourceTree = "<group>"; };
 		7C833685266208210032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
+		7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserInfoViewModel.swift; sourceTree = "<group>"; };
+		7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + FindUserInfo.swift"; sourceTree = "<group>"; };
+		7C8414812705692500FFA56B /* FindIdOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdOptions.swift; sourceTree = "<group>"; };
 		7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPickedItemImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemViewController.swift; sourceTree = "<group>"; };
@@ -421,6 +427,7 @@
 				7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */,
 				7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */,
 				7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */,
+				7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */,
 			);
 			path = UserManager;
 			sourceTree = "<group>";
@@ -516,6 +523,14 @@
 			path = "UserRegister & Verification";
 			sourceTree = "<group>";
 		};
+		7C84147C270556BC00FFA56B /* FindUserInfoVM */ = {
+			isa = PBXGroup;
+			children = (
+				7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */,
+			);
+			path = FindUserInfoVM;
+			sourceTree = "<group>";
+		};
 		7C89B2E526FC1D60004109FE /* User Related */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,6 +568,7 @@
 				7CA66228264132DC000E0B7A /* Network Group */,
 				7CA6622326413272000E0B7A /* Model */,
 				7C555464266D0A1400C3C5B6 /* Location.swift */,
+				7C8414812705692500FFA56B /* FindIdOptions.swift */,
 				7CA6622A264132F3000E0B7A /* View Models */,
 				7CA66229264132E6000E0B7A /* Controllers */,
 				7C132BF02653979B00BE5F40 /* Utilities + Extensions */,
@@ -620,6 +636,7 @@
 		7CA6622A264132F3000E0B7A /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				7C84147C270556BC00FFA56B /* FindUserInfoVM */,
 				7C4012832656A4B3006B0473 /* MyPageVM */,
 				7CB8DF5D264C208A0001CC6D /* ChatVM */,
 				7CB8DF5C264C207D0001CC6D /* ItemVM */,
@@ -975,11 +992,13 @@
 				7C132BF426552B4900BE5F40 /* UIButton + Extension.swift in Sources */,
 				7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
+				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,
 				7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */,
 				7C1C1D0C265E70E000C08C66 /* SettingsViewController.swift in Sources */,
 				7C036AB82696BE4C00F6C29B /* Date + Extension.swift in Sources */,
 				7C4CA63326F4BF3200F4BCA7 /* IDInputViewController.swift in Sources */,
 				7CC1B59C26D4FC110007F99B /* UIView + Extension.swift in Sources */,
+				7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */,
 				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
 				7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
@@ -1024,6 +1043,7 @@
 				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,
 				7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */,
 				7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */,
+				7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */,
 				7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */,
 				7C3D986226AE8A42005DFAE0 /* ChatMemberViewController.swift in Sources */,
 				7C833686266208210032308D /* Interceptor.swift in Sources */,

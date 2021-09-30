@@ -9,6 +9,8 @@ class FindIdUsingWebMailViewController: UIViewController {
     
     private let padding: CGFloat = 20
     
+    private var viewModel = FindUserInfoViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -20,13 +22,35 @@ class FindIdUsingWebMailViewController: UIViewController {
     }
 }
 
+//MARK: - FindUserInfoViewModelDelegate
+
+extension FindIdUsingWebMailViewController: FindUserInfoViewModelDelegate {
+    
+    func didFindUserId(id: String) {
+        presentKMAlertOnMainThread(
+            title: "아이디 안내",
+            message: "회원님의 아이디는 \(id) 입니다",
+            buttonTitle: "확인"
+        )
+    }
+    
+    func didFailFetchingData(with error: NetworkError) {
+        errorLabel.showErrorMessage(message: error.errorDescription)
+    }
+    
+    func didFailValidatingUserInput(errorMessage: String) {
+        errorLabel.showErrorMessage(message: errorMessage)
+    }
+}
+
 //MARK: - Target Methods
 
 extension FindIdUsingWebMailViewController {
     
     @objc func pressedBottomButton() {
-        
+        viewModel.validateUserInput(findIdOption: .webMail, mail: userEmailTextField.text)
     }
+    
 }
 
 //MARK: - TextField Methods
@@ -38,12 +62,12 @@ extension FindIdUsingWebMailViewController {
     }
 }
 
-
 //MARK: - UI Configuration & Initialization
 
 extension FindIdUsingWebMailViewController {
     
     func initialize() {
+        viewModel.delegate = self
         initializeTitleLabel()
         initializeTextField()
         initializeErrorLabel()

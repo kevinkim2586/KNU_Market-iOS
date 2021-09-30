@@ -24,6 +24,8 @@ class UserManager {
     let sendEmailURL                = "\(K.API_BASE_URL)verification"
     let sendFeedbackURL             = "\(K.API_BASE_URL)report"
     let studentIdVerifyURL          = "\(K.API_BASE_URL)verification/card"
+    let findIdURL                   = "\(K.API_BASE_URL)find/id"
+
     
     let interceptor = Interceptor()
     
@@ -233,35 +235,7 @@ class UserManager {
             }
     }
     
- 
-    
-    //MARK: - 비밀번호 찾기
-    func findPassword(email: String,
-                      completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
-        
-        let parameters: Parameters = [ "id" : email ]
-        
-        AF.request(findPasswordURL,
-                   method: .post,
-                   parameters: parameters,
-                   encoding: JSONEncoding.default)
-            .responseJSON { response in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                
-                case 201:
-                    print("✏️ UserManager - findPassword SUCCESS")
-                    completion(.success(true))
-                    
-                default:
-                    let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("❗️ UserManager findPassword error statusCode: \(statusCode) and error: \(error.errorDescription)")
-                    completion(.failure(error))
-                }
-            }
-    }
+
     
     //MARK: - 건의사항 보내기 (유저 피드백)
     func sendFeedback(content: String,

@@ -98,7 +98,6 @@ extension FindIdUsingWebMailViewController {
     func initializeBottomButton() {
         bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
         userEmailTextField.inputAccessoryView = bottomButton
-        bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
 
         bottomButton.addTarget(
             self,

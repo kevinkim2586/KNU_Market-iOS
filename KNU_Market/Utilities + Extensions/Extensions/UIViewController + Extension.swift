@@ -161,7 +161,7 @@ extension UIViewController {
             message: "세션이 만료되었습니다. 다시 로그인 해주세요.",
             buttonTitle: "확인"
         )
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             self.popToInitialViewController()
         }
     }

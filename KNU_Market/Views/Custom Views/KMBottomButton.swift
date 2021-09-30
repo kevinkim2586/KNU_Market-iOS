@@ -29,7 +29,7 @@ class KMBottomButton: UIButton {
         setTitleColor(.white, for: .normal)
         setTitleColor(.lightGray, for: .highlighted)
         titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        updateTitleEdgeInsetsForKeyboardHidden()
+        updateTitleEdgeInsetsForKeyboardAppeared()
     }
     
     func updateTitleEdgeInsetsForKeyboardAppeared() {

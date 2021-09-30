@@ -113,7 +113,6 @@ extension FindIdUsingStudentIdViewController {
         bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
         userStudentIdTextField.inputAccessoryView = bottomButton
         userBirthDateTextField.inputAccessoryView = bottomButton
-        bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
         
         bottomButton.addTarget(
             self,

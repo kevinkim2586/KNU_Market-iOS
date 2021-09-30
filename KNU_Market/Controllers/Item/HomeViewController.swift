@@ -239,11 +239,9 @@ extension HomeViewController {
         setBackBarButtonItemTitle()
         setNavigationBarAppearance(to: .white)
         
-        presentInitialVerificationAlert()
-
-//        if User.shared.isAbsoluteFirstAppLaunch {
-//            presentInitialVerificationAlert()
-//        }
+        if User.shared.isAbsoluteFirstAppLaunch {
+            presentInitialVerificationAlert()
+        }
     }
     
     func initializeTabBarIcon() {

@@ -17,18 +17,15 @@ class NickNameInputViewController: UIViewController {
         initialize()
     }
     
-    @objc func keyboardWillShow(notification: Notification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardSize.height).isActive = true
-            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
-            bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
-            view.layoutIfNeeded()
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        nicknameTextField.becomeFirstResponder()
     }
+}
 
-    @objc func keyboardWillHide(notification: Notification) {
-        bottomButton.frame.origin.y = view.bounds.height - bottomButton.heightConstantForKeyboardHidden
-    }
+//MARK: - Target Methods
+
+extension NickNameInputViewController {
     
     @objc func pressedBottomButton(_ sender: UIButton) {
         nicknameTextField.resignFirstResponder()
@@ -93,7 +90,6 @@ extension NickNameInputViewController {
 extension NickNameInputViewController {
     
     func initialize() {
-        createObserverForKeyboardStateChange()
         setClearNavigationBarBackground()
         initializeTitleLabels()
         initializeDetailLabel()
@@ -102,21 +98,7 @@ extension NickNameInputViewController {
         initializeBottomButton()
     }
     
-    func createObserverForKeyboardStateChange() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name:UIResponder.keyboardWillHideNotification ,
-            object: nil
-        )
-    }
-    
+
     func initializeTitleLabels() {
         view.addSubview(titleLabelFirstLine)
         view.addSubview(titleLabelSecondLine)
@@ -183,18 +165,12 @@ extension NickNameInputViewController {
     }
   
     func initializeBottomButton() {
-        view.addSubview(bottomButton)
+        bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
         bottomButton.addTarget(
             self,
             action: #selector(pressedBottomButton),
             for: .touchUpInside
         )
-        
-        NSLayoutConstraint.activate([
-            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardHidden)
-        ])
+        nicknameTextField.inputAccessoryView = bottomButton
     }
 }

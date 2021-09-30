@@ -113,7 +113,6 @@ extension FindPasswordViewController {
     func initializeBottomButton() {
         bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
         userIdTextField.inputAccessoryView = bottomButton
-        bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
 
         bottomButton.addTarget(
             self,

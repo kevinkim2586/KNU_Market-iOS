@@ -15,24 +15,15 @@ class EmailForLostPasswordViewController: UIViewController {
         initialize()
     }
     
-    @objc func keyboardWillShow(notification: Notification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardSize.height).isActive = true
-            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
-            bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
-            view.layoutIfNeeded()
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        emailTextField.becomeFirstResponder()
     }
+}
 
-    @objc func keyboardWillHide(notification: Notification) {
-        bottomButton.frame.origin.y = view.bounds.height - bottomButton.heightConstantForKeyboardHidden
-    }
-    
-    @objc func pressedBottomButton(_ sender: UIButton) {
-        emailTextField.resignFirstResponder()
-        if !checkIfValidEmail() { return }
-        registerUser()
-    }
+//MARK: - Registration Method
+
+extension EmailForLostPasswordViewController {
 
     func registerUser() {
         
@@ -69,6 +60,17 @@ class EmailForLostPasswordViewController: UIViewController {
     }
 }
 
+//MARK: - Target Methods
+
+extension EmailForLostPasswordViewController {
+    
+    @objc func pressedBottomButton(_ sender: UIButton) {
+        emailTextField.resignFirstResponder()
+        if !checkIfValidEmail() { return }
+        registerUser()
+    }
+}
+
 //MARK: - User Input Validation
 
 extension EmailForLostPasswordViewController {
@@ -80,7 +82,6 @@ extension EmailForLostPasswordViewController {
             errorLabel.showErrorMessage(message: "유효한 이메일인지 확인해주세요.")
             return false
         }
-        
         return true
     }
     
@@ -95,28 +96,12 @@ extension EmailForLostPasswordViewController {
 extension EmailForLostPasswordViewController {
     
     func initialize() {
-        createObserverForKeyboardStateChange()
         initializeTitleLabel()
         initializeTextField()
         initializeErrorLabel()
         initializeBottomButton()
     }
-    
-    func createObserverForKeyboardStateChange() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name:UIResponder.keyboardWillHideNotification ,
-            object: nil
-        )
-    }
-    
+
     func initializeTitleLabel() {
         view.addSubview(titleLabel)
         titleLabel.text = "비밀번호 분실 시 임시 비밀번호를 받을\n이메일 주소를 입력해주세요!"
@@ -162,20 +147,12 @@ extension EmailForLostPasswordViewController {
     }
     
     func initializeBottomButton() {
-        view.addSubview(bottomButton)
+        bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
         bottomButton.addTarget(
             self,
             action: #selector(pressedBottomButton),
             for: .touchUpInside
         )
-        
-        NSLayoutConstraint.activate([
-            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardHidden)
-        ])
+        emailTextField.inputAccessoryView = bottomButton
     }
-    
-
 }

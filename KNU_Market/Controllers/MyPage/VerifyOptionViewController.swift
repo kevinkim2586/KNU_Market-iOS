@@ -10,8 +10,8 @@ class VerifyOptionViewController: UIViewController {
         configure()
         if detectIfVerifiedUser() {
             presentKMAlertOnMainThread(
-                title: "이미 인증하셨습니다!",
-                message: "이미 경북대학교 학생 인증을 하셨습니다. 감사합니다.😁",
+                title: "인증 회원 안내",
+                message: "이미 인증된 회원입니다.\n이제 공동구매를 즐겨보세요!",
                 buttonTitle: "확인"
             )
             navigationController?.popViewController(animated: true)

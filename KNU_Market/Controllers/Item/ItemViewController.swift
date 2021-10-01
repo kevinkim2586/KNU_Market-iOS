@@ -23,7 +23,8 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var trashButton: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
     
     @IBOutlet weak var checkView: UIView!
     @IBOutlet weak var checkButtonDetail: UIButton!
@@ -64,6 +65,12 @@ class ItemViewController: UIViewController {
         dismissProgressBar()
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
+
+}
+
+//MARK: - IBActions & Methods
+
+extension ItemViewController {
     
     @objc private func pressedURLLabel() {
         guard let url = viewModel.userIncludedURL else { return }
@@ -89,122 +96,105 @@ class ItemViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    // 삭제하기 버튼
+    @IBAction func pressedTrashButton(_ sender: UIButton) {
+        let deleteAction = UIAlertAction(
+            title: "공구 삭제하기",
+            style: .destructive
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.presentAlertWithCancelAction(
+                title: "정말 삭제하시겠습니까?",
+                message: ""
+            ) { selectedOk in
+                if selectedOk {
+                    showProgressBar()
+                    self.viewModel.deletePost(for: self.pageID)
+                }
+            }
+        }
+        presentActionSheet(with: [deleteAction], title: nil)
+    }
+    
+    
     // 더보기 버튼
     @IBAction func pressedMoreButton(_ sender: UIButton) {
-        let actionSheet = UIAlertController(
-            title: nil,
-            message: nil,
-            preferredStyle: .actionSheet
-        )
         
         if viewModel.postIsUserUploaded {
-            let deleteAction = UIAlertAction(title: "공구 삭제하기",
-                                             style: .destructive) { [weak self] _ in
-                
+                        
+            let editAction = UIAlertAction(
+                title: "글 수정하기",
+                style: .default
+            ) { [weak self] _ in
                 guard let self = self else { return }
-                
-                self.presentAlertWithCancelAction(title: "정말 삭제하시겠습니까?",
-                                                  message: "") { selectedOk in
-                    if selectedOk {
-                        showProgressBar()
-                        self.viewModel.deletePost(for: self.pageID)
-                    }
-                }
-                                             }
-            
-            let editAction = UIAlertAction(title: "글 수정하기",
-                                           style: .default) { [weak self] _ in
-                
-                guard let self = self else { return }
-            
                 DispatchQueue.main.async {
-                    
                     showProgressBar()
-                    
                     guard let editVC = self.storyboard?.instantiateViewController(
-                            identifier: K.StoryboardID.uploadItemVC
+                        identifier: K.StoryboardID.uploadItemVC
                     ) as? UploadItemViewController else { return }
                     
                     editVC.editModel = self.viewModel.modelForEdit
-                    
                     dismissProgressBar()
-                    
                     self.navigationController?.pushViewController(editVC, animated: true)
                 }
             }
-            actionSheet.addAction(editAction)
-            actionSheet.addAction(deleteAction)
+            
+            presentActionSheet(with: [editAction], title: nil)
+        
             
         } else {
             
-            let reportAction = UIAlertAction(title: "게시글 신고하기",
-                                           style: .default) { [weak self] _ in
-                
+            let reportAction = UIAlertAction(
+                title: "게시글 신고하기",
+                style: .default
+            ) { [weak self] _ in
                 guard let self = self else { return }
-                
                 guard let nickname = self.viewModel.model?.nickname,
                       let postUID = self.viewModel.pageID else {
-                    return
-                }
-            
-                self.presentReportUserVC(userToReport: nickname,
-                                         postUID: postUID)
+                          return
+                      }
+                self.presentReportUserVC(
+                    userToReport: nickname,
+                    postUID: postUID
+                )
             }
-            
-            let blockAction = UIAlertAction(title: "이 사용자의 글 보지 않기",
-                                            style: .default) { [weak self] _ in
-                
+            let blockAction = UIAlertAction(
+                title: "이 사용자의 글 보지 않기",
+                style: .default
+            ) { [weak self] _ in
                 guard let self = self else { return }
                 self.askToBlockUser()
             }
-            actionSheet.addAction(reportAction)
-            actionSheet.addAction(blockAction)
+            presentActionSheet(with: [reportAction, blockAction], title: nil)
+
         }
-        
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel,
-                                         handler: nil)
-        actionSheet.addAction(cancelAction)
-        self.present(actionSheet, animated: true)
     }
-    
+
     // 내가 작성한 글일 경우 check 버튼 활성화
     @IBAction func pressedCheckButton(_ sender: UIButton) {
-        
-        let actionSheet = UIAlertController(title: "모집 상태 변경",
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
-        
         
         if let isCompletelyDone = viewModel.model?.isCompletelyDone {
             
             if isCompletelyDone {
-                
-                let cancelMarkDoneAction = UIAlertAction(title: "다시 모집하기",
-                                                         style: .default) { alert in
-                    
-                    self.viewModel.cancelMarkPostDone(for: self.pageID)
-                    
-                }
-                actionSheet.addAction(cancelMarkDoneAction)
-                
-            } else {
-                let doneAction = UIAlertAction(title: "모집 완료하기",
-                                               style: .default) { [weak self] _ in
+                let cancelMarkDoneAction = UIAlertAction(
+                    title: "다시 모집하기",
+                    style: .default
+                ) { [weak self] _ in
                     guard let self = self else { return }
-                    
-                    self.viewModel.markPostDone(for: self.pageID)
-      
+                    self.viewModel.cancelMarkPostDone(for: self.pageID)
                 }
-                actionSheet.addAction(doneAction)
+                presentActionSheet(with: [cancelMarkDoneAction], title: "모집 상태 변경")
+            } else {
+                let doneAction = UIAlertAction(
+                    title: "모집 완료하기",
+                    style: .default
+                ) { [weak self] _ in
+                    guard let self = self else { return }
+                    self.viewModel.markPostDone(for: self.pageID)
+                }
+                presentActionSheet(with: [doneAction], title: "모집 상태 변경")
             }
         }
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel,
-                                         handler: nil)
-        
-        actionSheet.addAction(cancelAction)
-        self.present(actionSheet, animated: true)
     }
     
     func askToBlockUser() {
@@ -219,25 +209,22 @@ class ItemViewController: UIViewController {
             showSimpleBottomAlert(with: "이미 \(reportNickname)의 글을 안 보기 처리하였습니다.🧐")
             return
         }
-
-        presentAlertWithCancelAction(title: "\(reportNickname)님의 글 보지 않기",
-                                          message: "홈화면에서 위 사용자의 게시글이 더는 보이지 않도록 설정하시겠습니까? 한 번 설정하면 해제할 수 없습니다.") { selectedOk in
-            if selectedOk {
-                self.viewModel.blockUser(userUID: reportUID)
-            }
+        
+        presentAlertWithCancelAction(
+            title: "\(reportNickname)님의 글 보지 않기",
+            message: "홈화면에서 위 사용자의 게시글이 더는 보이지 않도록 설정하시겠습니까? 한 번 설정하면 해제할 수 없습니다."
+        ) { selectedOk in
+            if selectedOk { self.viewModel.blockUser(userUID: reportUID) }
         }
     }
-    
 }
+
 
 //MARK: - ItemViewModelDelegate
 
 extension ItemViewController: ItemViewModelDelegate {
     
     func didFetchItemDetails() {
-        
-        print("ItemVC - didFetchPostDetails activated")
-        
         DispatchQueue.main.async {
             self.scrollView.refreshControl?.endRefreshing()
             self.updateInformation()
@@ -245,40 +232,35 @@ extension ItemViewController: ItemViewModelDelegate {
     }
     
     func failedFetchingItemDetails(with error: NetworkError) {
-        
-        print("ItemVC - failedFetchingPostDetails with error: \(error.errorDescription)")
         self.scrollView.refreshControl?.endRefreshing()
         
         scrollView.isHidden = true
         bottomView.isHidden = true
         
-        showSimpleBottomAlertWithAction(message: "존재하지 않는 글입니다 🧐",
-                                             buttonTitle: "홈으로",
-                                             action: {
-                                                self.navigationController?.popViewController(animated: true)
-                                             })
+        showSimpleBottomAlertWithAction(
+            message: "존재하지 않는 글입니다 🧐",
+            buttonTitle: "홈으로",
+            action: {
+                self.navigationController?.popViewController(animated: true)
+            }
+        )
     }
     
     func didDeletePost() {
-        
         dismissProgressBar()
-        
         showSimpleBottomAlert(with: "게시글 삭제 완료 🎉")
-        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
-            
             self.navigationController?.popViewController(animated: true)
             NotificationCenter.default.post(name: .updateItemList, object: nil)
-            
         }
     }
     
     func failedDeletingPost(with error: NetworkError) {
-        
         dismissProgressBar()
-        
-        showSimpleBottomAlertWithAction(message: error.errorDescription,
-                                        buttonTitle: "재시도") {
+        showSimpleBottomAlertWithAction(
+            message: error.errorDescription,
+            buttonTitle: "재시도"
+        ) {
             self.viewModel.deletePost(for: self.pageID)
         }
     }
@@ -289,9 +271,7 @@ extension ItemViewController: ItemViewModelDelegate {
     }
     
     func failedMarkingPostDone(with error: NetworkError) {
-        
         dismissProgressBar()
-
         showSimpleBottomAlert(with: error.errorDescription)
     }
     
@@ -300,12 +280,10 @@ extension ItemViewController: ItemViewModelDelegate {
     }
     
     func failedCancelMarkPostDone(with error: NetworkError) {
-    
         showSimpleBottomAlert(with: error.errorDescription)
     }
     
     func didEnterChat(isFirstEntrance: Bool) {
-        
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
         guard let vc = storyboard.instantiateViewController(
             identifier: K.StoryboardID.chatVC
@@ -318,11 +296,9 @@ extension ItemViewController: ItemViewModelDelegate {
         
         navigationController?.pushViewController(vc, animated: true)
         enterChatButton.loadingIndicator(false)
-        
     }
     
     func failedJoiningChat(with error: NetworkError) {
-        
         presentKMAlertOnMainThread(
             title: "채팅방 참여 불가",
             message: error.errorDescription,
@@ -338,8 +314,6 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func didDetectURL(with string: NSMutableAttributedString) {
         itemDetailLabel.attributedText = string
-        
-
         itemDetailLabel.isUserInteractionEnabled = true
         itemDetailLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pressedURLLabel)))
     }
@@ -350,12 +324,38 @@ extension ItemViewController: ItemViewModelDelegate {
     
 }
 
+//MARK: - UIAlertController Configuration Methods
+
+extension ItemViewController {
+    
+    private func presentActionSheet(with actions: [UIAlertAction], title: String?) {
+        let actionSheet = UIAlertController(
+            title: title,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        actions.forEach { alertAction in
+            actionSheet.addAction(alertAction)
+        }
+        
+        
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil
+        )
+        actionSheet.addAction(cancelAction)
+
+        present(actionSheet, animated: true)
+    }
+}
+
 //MARK: - UI Configuration & Initialization
 
 extension ItemViewController {
     
     func updateInformation() {
-        
         itemTitleLabel.text = viewModel.model?.title
         
         // 프로필 이미지 설정
@@ -363,9 +363,11 @@ extension ItemViewController {
         if profileImageUID.count > 1 {
             
             let url = URL(string: K.API_BASE_URL + "media/\(profileImageUID)")
-            userProfileImageView.sd_setImage(with: url,
-                                             placeholderImage: UIImage(named: K.Images.defaultAvatar),
-                                             options: .continueInBackground)
+            userProfileImageView.sd_setImage(
+                with: url,
+                placeholderImage: UIImage(named: K.Images.defaultAvatar),
+                options: .continueInBackground
+            )
         } else {
             userProfileImageView.image = UIImage(named: K.Images.defaultAvatar)
         }
@@ -456,7 +458,7 @@ extension ItemViewController {
         
         topBarButtons.forEach { buttons in
             
-            buttons.layer.cornerRadius = menuButton.frame.height / 2
+            buttons.layer.cornerRadius = moreButton.frame.height / 2
             buttons.backgroundColor = .white
             buttons.layer.shadowColor = UIColor.black.cgColor
             buttons.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -464,7 +466,7 @@ extension ItemViewController {
             buttons.layer.shadowRadius = 2
         }
         
-        checkView.layer.cornerRadius = menuButton.frame.height / 2
+        checkView.layer.cornerRadius = moreButton.frame.height / 2
         checkView.backgroundColor = .white
         checkView.layer.shadowColor = UIColor.black.cgColor
         checkView.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -485,32 +487,29 @@ extension ItemViewController {
         let font = UIFont.systemFont(ofSize: 15)
         let configuration = UIImage.SymbolConfiguration(font: font)
         let buttonImage = UIImage(systemName: "ellipsis", withConfiguration: configuration)
-        menuButton.setImage(buttonImage, for: .normal)
+        moreButton.setImage(buttonImage, for: .normal)
     }
     
     func initializeCheckButton() {
         
         if viewModel.postIsUserUploaded {
-            
             checkView.isHidden = false
+            trashButton.isHidden = false
             
             if let isCompletelyDone = viewModel.model?.isCompletelyDone {
-                
                 if isCompletelyDone {
-                    
                     checkView.backgroundColor = .lightGray
                     checkButtonDetail.setTitleColor(.white, for: .normal)
                     checkButtonDetail.setTitle("모집 완료  ⌵", for: .normal)
-                  
                 } else {
                     checkView.backgroundColor = UIColor(named: K.Color.appColor)
-                    
                     checkButtonDetail.setTitle("모집 중  ⌵", for: .normal)
                 }
             }
             
         } else {
             checkView.isHidden = true
+            trashButton.isHidden = true
         }
     }
 

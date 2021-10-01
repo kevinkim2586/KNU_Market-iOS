@@ -24,8 +24,6 @@ class InitialViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: vc)
         present(navigationController, animated: true)
     }
-    
-
 }
 
 //MARK: - IBActions

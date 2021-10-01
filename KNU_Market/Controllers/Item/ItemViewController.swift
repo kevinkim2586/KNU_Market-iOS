@@ -334,11 +334,10 @@ extension ItemViewController {
             message: nil,
             preferredStyle: .actionSheet
         )
-
+        
         actions.forEach { alertAction in
             actionSheet.addAction(alertAction)
         }
-        
         
         let cancelAction = UIAlertAction(
             title: "취소",
@@ -346,7 +345,6 @@ extension ItemViewController {
             handler: nil
         )
         actionSheet.addAction(cancelAction)
-
         present(actionSheet, animated: true)
     }
 }

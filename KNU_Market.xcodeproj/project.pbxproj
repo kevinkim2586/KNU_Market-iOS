@@ -90,6 +90,8 @@
 		7C8E668D26E875A00060F37B /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668C26E875A00060F37B /* UIImageView + Extension.swift */; };
 		7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */; };
 		7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9871D526E9BCEA009BD195 /* ImageViewController.swift */; };
+		7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A32706EEDF00579EE6 /* Preview.swift */; };
+		7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */; };
 		7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */; };
 		7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB4026C27BD0001C54E6 /* UITableView + Extension.swift */; };
 		7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F0263D4387000E0B7A /* AppDelegate.swift */; };
@@ -231,6 +233,8 @@
 		7C8E668C26E875A00060F37B /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOptionViewController.swift; sourceTree = "<group>"; };
 		7C9871D526E9BCEA009BD195 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		7C98D2A32706EEDF00579EE6 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Preview.swift"; sourceTree = "<group>"; };
 		7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostRequestDTO.swift; sourceTree = "<group>"; };
 		7C9BBB4026C27BD0001C54E6 /* UITableView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + Extension.swift"; sourceTree = "<group>"; };
 		7CA661ED263D4387000E0B7A /* KNU_Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNU_Market.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -561,6 +565,7 @@
 		7CA661EF263D4387000E0B7A /* KNU_Market */ = {
 			isa = PBXGroup;
 			children = (
+				7C98D2A32706EEDF00579EE6 /* Preview.swift */,
 				7CEC1921270182F500C2D671 /* Constants */,
 				7C77E240266BB55600680A27 /* KNU_Market.entitlements */,
 				7CA6622226413269000E0B7A /* Views */,
@@ -657,6 +662,7 @@
 			isa = PBXGroup;
 			children = (
 				7CB8DF35264BAB760001CC6D /* UIViewController + Extension.swift */,
+				7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */,
 				7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */,
 				7C6B509F2652B17F0032328C /* UIImage + Extension.swift */,
 				7C8E668C26E875A00060F37B /* UIImageView + Extension.swift */,
@@ -1022,6 +1028,7 @@
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7C0E2DDF26B7D92800BB37FF /* String + Extension.swift in Sources */,
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
+				7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */,
 				7CCDB1EA26A2BCD30092F28D /* ChatTableViewCell.swift in Sources */,
 				7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */,
@@ -1057,6 +1064,7 @@
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
 				7CEDBB5F2702E89F0078F5E1 /* KMTitleLabel.swift in Sources */,
 				7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */,
+				7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */,
 				7C5A1F2B26D6174F0041885B /* UICollectionView + Extension.swift in Sources */,
 				7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */,
 				7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */,

@@ -50,8 +50,6 @@ extension ChooseVerificationOptionViewController {
     }
 }
 
-//MARK: - User Input Validation
-
 //MARK: - UI Configuration & Initialization
 
 extension ChooseVerificationOptionViewController {

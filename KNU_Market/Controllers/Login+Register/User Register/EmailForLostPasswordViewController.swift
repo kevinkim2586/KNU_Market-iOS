@@ -10,6 +10,8 @@ class EmailForLostPasswordViewController: UIViewController {
 
     private let padding: CGFloat = 20
     
+    typealias RegisterError = ValidationError.OnRegister
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -26,14 +28,14 @@ class EmailForLostPasswordViewController: UIViewController {
 extension EmailForLostPasswordViewController {
 
     func registerUser() {
-        
         showProgressBar()
-        #warning("회원 가입 수정 필요")
+
         let model = RegisterRequestDTO(
             id: UserRegisterValues.shared.userId,
             password: UserRegisterValues.shared.password,
             nickname: UserRegisterValues.shared.nickname,
-            fcmToken: UserRegisterValues.shared.fcmToken
+            fcmToken: UserRegisterValues.shared.fcmToken,
+            emailForPasswordLoss: UserRegisterValues.shared.emailForPasswordLoss
         )
         
         UserManager.shared.register(with: model) { [weak self] result in
@@ -41,9 +43,7 @@ extension EmailForLostPasswordViewController {
             dismissProgressBar()
             switch result {
             case .success:
-                DispatchQueue.main.async {
-                    self.showCongratulateRegisterVC()
-                }
+                DispatchQueue.main.async { self.showCongratulateRegisterVC() }
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
@@ -67,7 +67,8 @@ extension EmailForLostPasswordViewController {
     @objc func pressedBottomButton(_ sender: UIButton) {
         emailTextField.resignFirstResponder()
         if !checkIfValidEmail() { return }
-        registerUser()
+        checkEmailDuplication(email: emailTextField.text!)
+        
     }
 }
 
@@ -77,12 +78,29 @@ extension EmailForLostPasswordViewController {
     
     func checkIfValidEmail() -> Bool {
         guard let email = emailTextField.text else { return false }
-        
         if !email.isValidEmail {
-            errorLabel.showErrorMessage(message: "유효한 이메일인지 확인해주세요.")
+            errorLabel.showErrorMessage(message: RegisterError.inValidEmailFormat.rawValue)
             return false
         }
         return true
+    }
+    
+    func checkEmailDuplication(email: String) {
+        
+        UserManager.shared.checkDuplication(emailForPasswordLoss: email) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let isDuplicate):
+                if isDuplicate {
+                    self.errorLabel.showErrorMessage(message: RegisterError.existingEmail.rawValue)
+                } else {
+                    UserRegisterValues.shared.emailForPasswordLoss = email
+                    self.registerUser()
+                }
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
+            }
+        }
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

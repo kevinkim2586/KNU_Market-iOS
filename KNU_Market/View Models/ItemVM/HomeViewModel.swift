@@ -113,7 +113,6 @@ class HomeViewModel {
         fetchEnteredRoomInfo()
         loadUserProfile()
         fetchItemList()
-        
     }
     
     func refreshTableView() {

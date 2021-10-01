@@ -5,7 +5,7 @@ struct StoryboardName {
     // User Register & Verification
     static let UserRegister     = "UserRegister"
     static let VerifyEmail      = "VerifyEmail"
-    static let VerifyStudent    = "VerifyStudent"
+    static let VerifyStudent    = "VerifyStudentID"
     static let FindUserInfo     = "FindUserInfo"
     
     

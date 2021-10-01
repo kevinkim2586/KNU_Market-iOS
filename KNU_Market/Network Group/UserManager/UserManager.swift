@@ -70,6 +70,7 @@ class UserManager {
     //MARK: - 닉네임 및 아이디 중복 체크
     func checkDuplication(nickname: String? = nil,
                           id: String? = nil,
+                          emailForPasswordLoss: String? = nil,
                           completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
         var parameters: Parameters = [:]
@@ -80,6 +81,9 @@ class UserManager {
         }
         if let id = id {
             headers.update(name: HTTPHeaderKeys.id.rawValue, value: id)
+        }
+        if let emailForPasswordLoss = emailForPasswordLoss {
+            headers.update(name: HTTPHeaderKeys.email.rawValue, value: emailForPasswordLoss)
         }
         
         AF.request(checkDuplicationURL,

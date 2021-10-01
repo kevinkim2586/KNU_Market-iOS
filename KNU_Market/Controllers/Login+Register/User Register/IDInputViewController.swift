@@ -10,6 +10,8 @@ class IDInputViewController: UIViewController {
     
     private let padding: CGFloat = 20
     
+    typealias RegisterError = ValidationError.OnRegister
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -41,18 +43,18 @@ extension IDInputViewController {
 extension IDInputViewController {
     
     func checkIfValidId() -> Bool {
-        guard let id = userIdTextField.text else { return false}
+        guard let id = userIdTextField.text else { return false }
         
-        if id.hasSpecialCharacters {
-            errorLabel.showErrorMessage(message: "아이디에 특수 문자와 한글을 포함할 수 없어요.")
+        if id.count < 4 || id.count > 30 {
+            errorLabel.showErrorMessage(message: RegisterError.incorrectIdLength.rawValue)
             return false
         }
         
-        if id.count >= 4 && id.count <= 40 { return true }
-        else {
-            errorLabel.showErrorMessage(message: "아이디는 4자 이상, 20자 이하로 적어주세요.")
+        if !id.isValidEmail, !id.isValidId {
+            errorLabel.showErrorMessage(message: RegisterError.incorrectIdFormat.rawValue)
             return false
         }
+        return true
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -69,7 +71,7 @@ extension IDInputViewController {
             switch result {
             case .success(let isDuplicate):
                 if isDuplicate {
-                    self.errorLabel.showErrorMessage(message: "이미 사용 중인 아이디입니다.🥲")
+                    self.errorLabel.showErrorMessage(message: RegisterError.existingId.rawValue)
                 } else {
                     UserRegisterValues.shared.userId = id
                     DispatchQueue.main.async {
@@ -134,6 +136,7 @@ extension IDInputViewController {
     func initializeErrorLabel() {
         view.addSubview(errorLabel)
         errorLabel.isHidden = true
+        errorLabel.numberOfLines = 2
         
         NSLayoutConstraint.activate([
             errorLabel.topAnchor.constraint(equalTo: userIdTextField.bottomAnchor, constant: padding),

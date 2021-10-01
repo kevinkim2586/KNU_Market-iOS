@@ -1,10 +1,10 @@
-import Foundation
+import UIKit
 
 protocol FindUserInfoViewModelDelegate: AnyObject {
-    func didFindUserId(id: String)
+    func didFindUserId(id: NSAttributedString)
     func didFindUserPassword()
     
-    func didFailFetchingData(with error: NetworkError)
+    func didFailFetchingData(errorMessage: String)
     func didFailValidatingUserInput(errorMessage: String)
 }
 
@@ -17,13 +17,14 @@ class FindUserInfoViewModel {
     
     weak var delegate: FindUserInfoViewModelDelegate?
     
-    
     func findId(
         using option: FindIdOption,
         mail: String? = nil,
         studentId: String? = nil,
         birthDate: String? = nil
     ) {
+        showProgressBar()
+        
         UserManager.shared.findUserId(
             using: option,
             studentEmail: mail,
@@ -31,12 +32,15 @@ class FindUserInfoViewModel {
             studentBirthDate: birthDate
         ) { [weak self] result in
             guard let self = self else { return }
+            dismissProgressBar()
             
             switch result {
             case .success(let id):
                 self.delegate?.didFindUserId(id: self.filterSensitiveUserInfo(infoString: id))
-            case .failure(let error):
-                self.delegate?.didFailFetchingData(with: error)
+            case .failure(_):
+                let errorMessage = option == .webMail ?
+                InputError.nonAuthorizedSchoolEmail.rawValue : InputError.nonAuthorizedStudentId.rawValue
+                self.delegate?.didFailFetchingData(errorMessage: errorMessage)
             }
         }
     }
@@ -91,16 +95,15 @@ extension FindUserInfoViewModel {
     }
 }
 
-//MARK: - Section Heading
+//MARK: - String Filtering and Attribution Methods
 
 extension FindUserInfoViewModel {
     
-    private func filterSensitiveUserInfo(infoString: String) -> String {
-        
+    private func filterSensitiveUserInfo(infoString: String) -> NSAttributedString {
         var filteredInfoString: String
         
-        // 이메일 형식의 아이디라면 @ 앞에 부분을 *로 처리
-        if infoString.contains("@knu.ac.kr") {
+        // 이메일 형식의 아이디라면 @ 앞에 부분을 *로 처리 -> 아이디가 @knu.ac.kr 일 수도 있고, @gmail.com 이 될 수도 있음
+        if infoString.isValidEmail {
             filteredInfoString = infoString.replacingOccurrences(
                 of: #"[A-Z0-9a-z]@"#,
                 with: "*@",
@@ -115,6 +118,18 @@ extension FindUserInfoViewModel {
             userInfoString.append("*")
             filteredInfoString = userInfoString
         }
-        return filteredInfoString
+        
+        let alertBodyText = "회원님의 아이디는 \(filteredInfoString) 입니다."
+        return makeCustomAttributedString(fullText: alertBodyText, textToCustomize: filteredInfoString)
     }
+    
+    private func makeCustomAttributedString(fullText: String, textToCustomize: String) -> NSAttributedString {
+        let attributedMessage: NSAttributedString = fullText.attributedStringWithColor(
+            [textToCustomize],
+            color: UIColor(named: K.Color.appColor) ?? .systemPink,
+            characterSpacing: nil
+        )
+        return attributedMessage
+    }
+    
 }

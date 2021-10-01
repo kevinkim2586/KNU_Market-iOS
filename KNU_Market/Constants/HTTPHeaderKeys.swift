@@ -7,6 +7,7 @@ enum HTTPHeaderKeys: String {
     
     case withoutcomplete = "withoutcomplete"
     case id = "id"
+    case email = "email"
 }
 
 enum HTTPHeaderValues: String {

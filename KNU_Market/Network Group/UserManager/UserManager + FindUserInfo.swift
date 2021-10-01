@@ -30,33 +30,33 @@ extension UserManager {
             }
             parameters = ["studentId": studentId, "studentBirth": studentBirthDate]
         }
-    
+        
         AF.request(
             findIdURL,
             method: .post,
             parameters: parameters,
             encoding: JSONEncoding.default
-        ).responseJSON { response in
-            
-            switch response.result {
-            case .success(_):
-                print("✏️ UserManager - findUserId SUCCESS")
-                do {
-                    let json = try JSON(data: response.data ?? Data())
-                    let foundId = json["id"].stringValue
-                    completion(.success(foundId))
-                } catch {
-                    completion(.failure(.E000))
-                }
-            case .failure(_):
-                let error = NetworkError.returnError(json: response.data ?? Data())
-                print("❗️ UserManager - findUserID FAILED with statusCode: \(String(describing: response.response?.statusCode)) and reason: \(error.errorDescription)")
-                completion(.failure(error))
+        )
+            .validate(statusCode: 200..<300)
+            .responseJSON { response in
                 
+                switch response.result {
+                case .success(_):
+                    print("✏️ UserManager - findUserId SUCCESS: \(response.response?.statusCode)")
+                    do {
+                        let json = try JSON(data: response.data ?? Data())
+                        let foundId = json["id"].stringValue
+                        print("✏️ foundId: \(foundId)")
+                        completion(.success(foundId))
+                    } catch {
+                        completion(.failure(.E000))
+                    }
+                case .failure(_):
+                    let error = NetworkError.returnError(json: response.data ?? Data())
+                    print("❗️ UserManager - findUserID FAILED with statusCode: \(String(describing: response.response?.statusCode)) and reason: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
             }
-        }
-        
-        
     }
     
     
@@ -68,18 +68,20 @@ extension UserManager {
         completion: @escaping (Result<Bool, NetworkError>) -> Void
     ) {
         
-        let parameters: Parameters = [ "id" : email ]
+        let parameters: Parameters = ["id" : email]
         
-        AF.request(findPasswordURL,
-                   method: .post,
-                   parameters: parameters,
-                   encoding: JSONEncoding.default)
+        AF.request(
+            findPasswordURL,
+            method: .post,
+            parameters: parameters,
+            encoding: JSONEncoding.default
+        )
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 201:
                     print("✏️ UserManager - findPassword SUCCESS")
                     completion(.success(true))

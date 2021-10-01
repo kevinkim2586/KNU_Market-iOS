@@ -775,8 +775,8 @@
 		7CEC191E27017C5D00C2D671 /* Find User Info */ = {
 			isa = PBXGroup;
 			children = (
-				7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */,
 				7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */,
+				7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */,
 				7C015C9727035B2100089ED8 /* FindIdUsingWebMailViewController.swift */,
 				7C015C9927035B3800089ED8 /* FindIdUsingStudentIdViewController.swift */,
 			);

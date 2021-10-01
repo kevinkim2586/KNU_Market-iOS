@@ -26,16 +26,17 @@ class FindIdUsingWebMailViewController: UIViewController {
 
 extension FindIdUsingWebMailViewController: FindUserInfoViewModelDelegate {
     
-    func didFindUserId(id: String) {
+    func didFindUserId(id: NSAttributedString) {
         presentKMAlertOnMainThread(
             title: "아이디 안내",
-            message: "회원님의 아이디는 \(id) 입니다",
-            buttonTitle: "확인"
+            message: "",
+            buttonTitle: "닫기",
+            attributedMessageString: id
         )
     }
     
-    func didFailFetchingData(with error: NetworkError) {
-        errorLabel.showErrorMessage(message: error.errorDescription)
+    func didFailFetchingData(errorMessage: String) {
+        errorLabel.showErrorMessage(message: errorMessage)
     }
     
     func didFailValidatingUserInput(errorMessage: String) {
@@ -50,7 +51,6 @@ extension FindIdUsingWebMailViewController {
     @objc func pressedBottomButton() {
         viewModel.validateUserInput(findIdOption: .webMail, mail: userEmailTextField.text)
     }
-    
 }
 
 //MARK: - TextField Methods

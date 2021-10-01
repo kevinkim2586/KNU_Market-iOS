@@ -11,6 +11,8 @@ class NickNameInputViewController: UIViewController {
     private let bottomButton            = KMBottomButton(buttonTitle: "다음")
     
     private let padding: CGFloat = 20
+    
+    typealias RegisterError = ValidationError.OnRegister
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +45,13 @@ extension NickNameInputViewController {
         guard let nickname = nicknameTextField.text else { return false }
         
         if nickname.hasEmojis, nickname.hasSpecialCharacters {
-            errorLabel.showErrorMessage(message: "유효하지 않은 닉네임이에요.")
+            errorLabel.showErrorMessage(message: RegisterError.incorrectNicknameFormat.rawValue)
             return false
         }
         
         if nickname.count >= 2 && nickname.count <= 15 { return true }
         else {
-            errorLabel.showErrorMessage(message: "닉네임은 2자 이상, 15자 이하로 적어주세요.")
+            errorLabel.showErrorMessage(message: RegisterError.incorrectNicknameLength.rawValue)
             return false
         }
     }
@@ -64,7 +66,7 @@ extension NickNameInputViewController {
             case .success(let isDuplicate):
                 
                 if isDuplicate {
-                    self.errorLabel.showErrorMessage(message: "이미 사용 중인 닉네임입니다.🥲")
+                    self.errorLabel.showErrorMessage(message: RegisterError.existingNickname.rawValue)
                 } else {
                     UserRegisterValues.shared.nickname = nickname
                     DispatchQueue.main.async {

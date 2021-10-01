@@ -44,10 +44,7 @@ extension String {
                 return true
             }
 
-        } catch {
-            print("❗️ hasSpecialCharacter: \(error.localizedDescription)")
-            return false
-        }
+        } catch { return false }
 
         return false
     }
@@ -58,6 +55,13 @@ extension String {
         return emailTest.evaluate(with: self)
     }
     
+    var isValidId: Bool {
+        let idRegEx = "[A-Za-z0-9]{4,20}"
+        let idTest = NSPredicate(format:"SELF MATCHES %@", idRegEx)
+        return idTest.evaluate(with: self)
+    }
+    
+
     subscript(_ range: CountableRange<Int>) -> String {
         let start = index(startIndex, offsetBy: max(0, range.lowerBound))
         let end = index(start, offsetBy: min(self.count - range.lowerBound,
@@ -74,12 +78,20 @@ extension String {
         let attributedString = NSMutableAttributedString(string: self)
         for string in strings {
             let range = (self as NSString).range(of: string)
-            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+            attributedString.addAttribute(
+                NSAttributedString.Key.foregroundColor,
+                value: color,
+                range: range
+            )
         }
 
         guard let characterSpacing = characterSpacing else {return attributedString}
 
-        attributedString.addAttribute(NSAttributedString.Key.kern, value: characterSpacing, range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttribute(
+            NSAttributedString.Key.kern,
+            value: characterSpacing,
+            range: NSRange(location: 0, length: attributedString.length)
+        )
 
         return attributedString
     }

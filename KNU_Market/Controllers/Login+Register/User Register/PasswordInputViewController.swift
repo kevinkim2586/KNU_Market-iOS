@@ -12,6 +12,8 @@ class PasswordInputViewController: UIViewController {
     
     private let padding: CGFloat = 20
     
+    typealias RegisterError = ValidationError.OnRegister
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -39,8 +41,8 @@ extension PasswordInputViewController {
         )
     }
     
-    func showErrorMessage(message: String) {
-        detailLabel.text = message
+    func showErrorMessage(with errorType: ValidationError.OnRegister) {
+        detailLabel.text = errorType.rawValue
         detailLabel.textColor = UIColor(named: K.Color.appColor)
     }
 }
@@ -52,7 +54,7 @@ extension PasswordInputViewController {
     // 숫자+문자 포함해서 8~20글자 사이의 text 체크하는 정규표현식
     func validPassword() -> Bool {
         guard let userPW = passwordTextField.text else {
-            showErrorMessage(message: "빈 칸이 없는지 확인해 주세요.🧐")
+            showErrorMessage(with: RegisterError.empty)
             return false
         }
         
@@ -62,20 +64,20 @@ extension PasswordInputViewController {
         if passwordTesting.evaluate(with: userPW) == true {
             return true
         } else {
-            showErrorMessage(message: "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요.🤔")
+            showErrorMessage(with: RegisterError.incorrectPasswordFormat)
             return false
         }
     }
     
     func checkPasswordLengthIsValid() -> Bool {
         guard let password = passwordTextField.text, let _ = checkPasswordTextField.text else {
-            showErrorMessage(message: "빈 칸이 없는지 확인해 주세요.🧐")
+            showErrorMessage(with: RegisterError.empty)
             return false
         }
         
         if password.count >= 8 && password.count <= 20 { return true }
         else {
-            showErrorMessage(message: "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요.🤔")
+            showErrorMessage(with: RegisterError.incorrectPasswordFormat)
             return false
         }
     }
@@ -83,7 +85,7 @@ extension PasswordInputViewController {
     func checkIfPasswordFieldsAreIdentical() -> Bool {
         if passwordTextField.text == checkPasswordTextField.text { return true }
         else {
-            showErrorMessage(message: "비밀번호가 일치하지 않습니다.🤔")
+            showErrorMessage(with: RegisterError.passwordDoesNotMatch)
             checkPasswordTextField.text?.removeAll()
             passwordTextField.becomeFirstResponder()
             return false
@@ -91,7 +93,7 @@ extension PasswordInputViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        detailLabel.text = "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요."
+        detailLabel.text = RegisterError.incorrectPasswordFormat.rawValue
         detailLabel.textColor = .lightGray
     }
 }
@@ -135,7 +137,7 @@ extension PasswordInputViewController {
     
     func initializeDetailLabel() {
         view.addSubview(detailLabel)
-        detailLabel.text = "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요."
+        detailLabel.text = RegisterError.incorrectPasswordFormat.rawValue
         
         NSLayoutConstraint.activate([
             detailLabel.topAnchor.constraint(equalTo: titleLabelSecondLine.bottomAnchor, constant: 25),

@@ -9,6 +9,8 @@ class FindIdUsingStudentIdViewController: UIViewController {
     private let bottomButton            = KMBottomButton(buttonTitle: "아이디 찾기")
     
     private let padding: CGFloat = 20
+    
+    private var viewModel = FindUserInfoViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,20 +23,40 @@ class FindIdUsingStudentIdViewController: UIViewController {
     }
 }
 
+//MARK: - FindUserInfoViewModelDelegate
+
+extension FindIdUsingStudentIdViewController: FindUserInfoViewModelDelegate {
+    
+    func didFindUserId(id: NSAttributedString) {
+        presentKMAlertOnMainThread(
+            title: "아이디 안내",
+            message: "",
+            buttonTitle: "닫기",
+            attributedMessageString: id
+        )
+    }
+    
+    func didFailFetchingData(errorMessage: String) {
+        errorLabel.showErrorMessage(message: errorMessage)
+    }
+    
+    func didFailValidatingUserInput(errorMessage: String) {
+        errorLabel.showErrorMessage(message: errorMessage)
+        
+    }
+}
+
 //MARK: - Target Methods
 
 extension FindIdUsingStudentIdViewController {
     
     @objc func pressedBottomButton() {
-        
+        viewModel.validateUserInput(
+            findIdOption: .studentId,
+            studentId: userStudentIdTextField.text,
+            birthDate: userBirthDateTextField.text
+        )
     }
-}
-
-//MARK: - User Input Validation
-
-extension FindIdUsingStudentIdViewController {
-    
-    
 }
 
 //MARK: - TextField Methods
@@ -51,6 +73,7 @@ extension FindIdUsingStudentIdViewController {
 extension FindIdUsingStudentIdViewController {
     
     func initialize() {
+        viewModel.delegate = self
         initializeTitleLabel()
         initializeTextFields()
         initializeErrorLabel()
@@ -101,6 +124,7 @@ extension FindIdUsingStudentIdViewController {
     func initializeErrorLabel() {
         view.addSubview(errorLabel)
         errorLabel.isHidden = true
+        errorLabel.numberOfLines = 2
         
         NSLayoutConstraint.activate([
             errorLabel.topAnchor.constraint(equalTo: userBirthDateTextField.bottomAnchor, constant: padding),

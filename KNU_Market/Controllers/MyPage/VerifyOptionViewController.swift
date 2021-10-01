@@ -20,7 +20,7 @@ class VerifyOptionViewController: UIViewController {
     
     
     @IBAction func pressedVerifyUsingStudentIDButton(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "VerifyStudentID", bundle: nil)
+        let storyboard = UIStoryboard(name: StoryboardName.VerifyStudent, bundle: nil)
         guard let vc = storyboard.instantiateViewController(
             identifier: K.StoryboardID.studentIDGuideVC
         ) as? StudentIDGuideViewController else { return }
@@ -29,7 +29,7 @@ class VerifyOptionViewController: UIViewController {
     }
     
     @IBAction func pressedVerifyUsingEmail(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "VerifyEmail", bundle: nil)
+        let storyboard = UIStoryboard(name: StoryboardName.VerifyEmail, bundle: nil)
         guard let vc = storyboard.instantiateViewController(
             identifier: K.StoryboardID.emailInputVC
         ) as? EmailInputViewController else { return }

@@ -17,7 +17,7 @@ extension UserManager {
                 )
                 multipartFormData.append(
                     Data(model.studentBirth.utf8),
-                    withName: "studentId"
+                    withName: "studentBirth"
                 )
                 
                 multipartFormData.append(
@@ -28,13 +28,13 @@ extension UserManager {
                 )
             },
             to: studentIdVerifyURL,
-            headers: model.headers,
             interceptor: interceptor
         ).responseJSON { response in
             
             switch response.result {
             case .success(_):
                 print("✏️ UserManager - uploadStudentIdVerificationInformation SUCCESS")
+                User.shared.isVerified = true
                 completion(.success(true))
             case .failure(_):
                 let error = NetworkError.returnError(json: response.data ?? Data())
@@ -65,6 +65,7 @@ extension UserManager {
                 
             case 201:
                 print("✏️ UserManager - resendVerificationEmail SUCCESS")
+                User.shared.isVerified = true
                 completion(.success(true))
                 
             default:

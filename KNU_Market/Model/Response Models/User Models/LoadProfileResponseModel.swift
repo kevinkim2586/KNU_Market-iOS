@@ -2,7 +2,8 @@ import Foundation
 
 struct LoadProfileResponseModel: Decodable {
     
-    let email: String                // email == userID -> 이메일과 유저 아이디는 동일
+    let id: String
+    let emailForPasswordLoss: String
     let uid: String
     let nickname: String
     let profileImageCode: String
@@ -11,7 +12,8 @@ struct LoadProfileResponseModel: Decodable {
 
     enum CodingKeys: String, CodingKey {
         
-        case email
+        case id
+        case emailForPasswordLoss = "email"
         case uid
         case nickname
         case profileImageCode = "profileImage"

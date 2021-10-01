@@ -144,9 +144,9 @@ extension UIViewController {
         )
     }
     
-    func popVCs(count: Int) {
+    func popVCsFromNavController(count: Int) {
         let viewControllers : [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-        navigationController?.popToViewController(viewControllers[viewControllers.count - (count + 1) ], animated: false)
+        navigationController?.popToViewController(viewControllers[viewControllers.count - (count + 1) ], animated: true)
     }
     
     func presentSafariView(with url: URL) {

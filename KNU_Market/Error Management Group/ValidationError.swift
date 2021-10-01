@@ -20,7 +20,6 @@ enum ValidationError {
         case empty                      = "빈 칸이 없는지 확인해주세요.🧐"
     }
     
-    
     //MARK: - Potential error when finding User Info
     enum OnFindingUserInfo: String, Error {
         
@@ -31,8 +30,22 @@ enum ValidationError {
         case incorrectBirthDateFormat   = "생년월일 6자리를 입력해주세요. (981225)"
         case empty                      = "빈 칸이 없는지 확인해주세요."
     }
-    //MARK: - Potential error when uploading new item/post
     
+    //MARK: - Potential error when verifying as a student
+    enum OnVerification: String, Error {
+        
+        case didNotCheckStudentIdDuplication    = "학번 중복 확인을 먼저해주세요.🤔"
+        case emptyStudentId                     = "학번을 입력해주세요."
+        case emptyBirthDate                     = "생년월일을 입력해주세요."
+        case incorrectBirthDateLength           = "생년월일 6자리를 입력해주세요."
+        case didNotChooseStudentIdImage         = "모바일 학생증 캡쳐본을 첨부해주세요."
+        
+    }
+    
+    
+    
+    
+    //MARK: - Potential error when uploading new item/post
     enum OnUploadPost: String, Error {
         
         case titleTooShortOrLong        = "제목은 3글자 이상, 30자 이하로 작성해주세요.🤔"

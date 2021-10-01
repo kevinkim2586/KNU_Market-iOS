@@ -14,33 +14,34 @@ class CaptureStudentIDViewController: UIViewController {
     
     private lazy var imagePicker = UIImagePickerController()
     
-    private var didCheckDuplicate: Bool = false
+    private var didCheckDuplicate: Bool = true
     
     private var studentIdImageData: Data?
-    private let alertMessage: String = "학생증 사진은 입력하신 내용(학번, 생년월일)과 대조를 위해서만 사용되며, 절대 수집하지 않습니다. 입력하신 내용과 학생증 사진이 일치하지 않을 시, 제재 대상이 될 수 있음을 알려드립니다."
+    private let alertMessage: String = "첨부하신 학생증은 입력하신 정보 (학번, 생년월일)와의 대조를 위해서만 사용되며, 크누마켓은 절대 이를 원본으로 수집하지 않습니다.\n입력된 정보와 학생증 내의 정보가 일치하지 않을 시, 크누마켓 이용이 제한됩니다."
+    
+    typealias VerifyError = ValidationError.OnVerification
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+
 
     @IBAction func pressedCheckDuplicateButton(_ sender: UIButton) {
-        
         view.endEditing(true)
-    
-        
-        
-        
+        #warning("구현 필요")
     }
     
     @IBAction func pressedAddImageButton(_ sender: UIButton) {
         presentAlertWithCancelAction(
-            title: "주의사항",
+            title: "안내드립니다",
             message: alertMessage
         ) { selectedOk in
-            if selectedOk {
-                self.present(self.imagePicker, animated: true)
-            }
+            self.present(self.imagePicker, animated: true)
         }
     }
     
@@ -48,11 +49,38 @@ class CaptureStudentIDViewController: UIViewController {
         view.endEditing(true)
         
         if !didCheckDuplicate {
-            showSimpleBottomAlert(with: "학번 중복 확인을 먼저해주세요.🤔")
+            showSimpleBottomAlert(with: VerifyError.didNotCheckStudentIdDuplication.rawValue)
             return
         }
-        
         if !validateUserInput() { return }
+        verifyUserUsingStudentId()
+    }
+    
+    private func verifyUserUsingStudentId() {
+        showProgressBar()
+        let model = StudentIdVerificationDTO(
+            studentId: studentIDTextField.text!,
+            studentBirth: studentBirthDateTextField.text!,
+            studentIdImageData: studentIdImageData!
+        )
+        
+        UserManager.shared.uploadStudentIdVerificationInformation(with: model) { [weak self] result in
+            guard let self = self else { return }
+            dismissProgressBar()
+            switch result {
+            case .success(_):
+                self.showSimpleBottomAlertWithAction(
+                    message: "인증 완료되었습니다😁",
+                    buttonTitle: "홈으로"
+                ) {
+                    if let vcPopCount = self.navigationController?.viewControllers.count {
+                        self.popVCsFromNavController(count: vcPopCount - 1)
+                    }
+                }
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
+            }
+        }
     }
 }
 
@@ -75,6 +103,7 @@ extension CaptureStudentIDViewController: UIImagePickerControllerDelegate, UINav
     
     func updateStudentIdImageView(with newImage: UIImage) {
         studentIdImageView.image = newImage
+        studentIdImageData = newImage.jpegData(compressionQuality: 0.9)
     }
 }
 
@@ -85,27 +114,27 @@ extension CaptureStudentIDViewController {
     func validateUserInput() -> Bool {
         
         guard let _ = studentIDTextField.text else {
-            showSimpleBottomAlert(with: "학번을 입력해주세요.")
+            showSimpleBottomAlert(with: VerifyError.emptyStudentId.rawValue)
             return false
         }
         
         guard didCheckDuplicate != false else {
-            showSimpleBottomAlert(with: "학번 중복 체크를 해주세요.")
+            showSimpleBottomAlert(with: VerifyError.didNotCheckStudentIdDuplication.rawValue)
             return false
         }
         
         guard let birthDate = studentBirthDateTextField.text else {
-            showSimpleBottomAlert(with: "생년월일을 입력해주세요.")
+            showSimpleBottomAlert(with: VerifyError.emptyBirthDate.rawValue)
             return false
         }
         
         guard birthDate.count == 6 else {
-            showSimpleBottomAlert(with: "생년월일 6자리를 입력해주세요.")
+            showSimpleBottomAlert(with: VerifyError.incorrectBirthDateLength.rawValue)
             return false
         }
         
         guard studentIdImageData != nil else {
-            showSimpleBottomAlert(with: "모바일 학생증 캡쳐본을 첨부해주세요.")
+            showSimpleBottomAlert(with: VerifyError.didNotChooseStudentIdImage.rawValue)
             return false
         }
         
@@ -120,7 +149,7 @@ extension CaptureStudentIDViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == studentIDTextField {
-            didCheckDuplicate = false
+            didCheckDuplicate = true
         }
     }
 }
@@ -159,7 +188,7 @@ extension CaptureStudentIDViewController {
     }
     
     func initializeCheckDuplicateButton() {
-        checkDuplicateButton.layer.cornerRadius = 10
+        checkDuplicateButton.layer.cornerRadius = 6
     }
     
     func initializeCaptureView() {

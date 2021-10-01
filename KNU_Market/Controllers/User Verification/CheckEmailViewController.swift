@@ -40,7 +40,7 @@ class CheckEmailViewController: UIViewController {
     }
     
     @IBAction func pressedGoBackToHomeButton(_ sender: UIButton) {
-        popVCs(count: 3)
+        popVCsFromNavController(count: 3)
     }
 
     @IBAction func pressedKakaoLinkButton(_ sender: UIButton) {

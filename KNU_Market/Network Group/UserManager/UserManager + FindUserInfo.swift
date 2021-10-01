@@ -8,13 +8,13 @@ extension UserManager {
     
     //MARK: - 아이디 찾기
     func findUserId(
-        using option: FindIdOption,
+        using option: FindUserInfoOption,
         studentEmail: String? = nil,
         studentId: String? = nil,
         studentBirthDate: String? = nil,
         completion: @escaping (Result<UserId, NetworkError>) -> Void
     ) {
-        let parameters: Parameters
+        var parameters: Parameters = [:]
         
         switch option {
         case .webMail:
@@ -29,6 +29,7 @@ extension UserManager {
                 return
             }
             parameters = ["studentId": studentId, "studentBirth": studentBirthDate]
+        default: completion(.failure(.E000))
         }
         
         AF.request(
@@ -65,7 +66,7 @@ extension UserManager {
     //MARK: - 비밀번호 찾기
     func findPassword(
         email: String,
-        completion: @escaping (Result<Bool, NetworkError>) -> Void
+        completion: @escaping (Result<String, NetworkError>) -> Void
     ) {
         
         let parameters: Parameters = ["id" : email]
@@ -84,7 +85,8 @@ extension UserManager {
                     
                 case 201:
                     print("✏️ UserManager - findPassword SUCCESS")
-                    completion(.success(true))
+//                    completion(.success(true))
+                    #warning("구현 필요")
                     
                 default:
                     let error = NetworkError.returnError(json: response.data ?? Data())

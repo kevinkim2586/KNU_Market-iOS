@@ -17,8 +17,10 @@ class FindUserInfoViewModel {
     
     weak var delegate: FindUserInfoViewModelDelegate?
     
+    typealias InputError = ValidationError.OnFindingUserInfo
+    
     func findId(
-        using option: FindIdOption,
+        using option: FindUserInfoOption,
         mail: String? = nil,
         studentId: String? = nil,
         birthDate: String? = nil
@@ -44,25 +46,30 @@ class FindUserInfoViewModel {
             }
         }
     }
+    
+    func findPassword(for userId: String) {
+        
+    }
 }
 
 //MARK: - User Input Validation
 
 extension FindUserInfoViewModel {
     
-    typealias InputError = ValidationError.OnFindingUserInfo
-    
     func validateUserInput(
-        findIdOption: FindIdOption,
+        findIdOption: FindUserInfoOption,
         mail: String? = nil,
         studentId: String? = nil,
-        birthDate: String? = nil
+        birthDate: String? = nil,
+        userId: String? = nil
     ) {
         switch findIdOption {
         case .webMail:
             validateWebMail(mail: mail)
         case .studentId:
             validateStudentId(studentId: studentId, birthDate: birthDate)
+        case .password:
+            validateUserId(userId: userId)
         }
     }
     
@@ -92,6 +99,19 @@ extension FindUserInfoViewModel {
             return
         }
         findId(using: .studentId, studentId: studentId, birthDate: birthDate)
+    }
+    
+    private func validateUserId(userId: String?) {
+        guard let userId = userId else {
+            delegate?.didFailValidatingUserInput(errorMessage: InputError.empty.rawValue)
+            return
+        }
+        
+        if !userId.isValidId, !userId.isValidEmail {
+            delegate?.didFailValidatingUserInput(errorMessage: InputError.incorrectUserIdFormat.rawValue)
+            return
+        }
+        findPassword(for: userId)
     }
 }
 

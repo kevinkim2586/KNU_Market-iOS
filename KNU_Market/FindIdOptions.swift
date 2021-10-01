@@ -1,8 +1,9 @@
 import Foundation
 
-//MARK: - 아이디 찾기 옵션
-enum FindIdOption {
+//MARK: - 유저 정보 찾기 옵션 모음
+enum FindUserInfoOption {
     
     case webMail
     case studentId
+    case password
 }

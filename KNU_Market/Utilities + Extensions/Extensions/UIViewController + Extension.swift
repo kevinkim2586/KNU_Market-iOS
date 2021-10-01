@@ -183,12 +183,13 @@ extension UIViewController {
             style: .alert
         )
         
+        alertVC.addAction(PMAlertAction(title: "지금 인증하기", style: .default, action: { () in
+            self.presentVerifyOptionVC()
+        }))
         alertVC.addAction(PMAlertAction(title: "나중에 할래요", style: .cancel, action: {
             self.presentServiceLimitationNoticeAlert()
         }))
-        alertVC.addAction(PMAlertAction(title: "인증하기", style: .default, action: { () in
-            self.presentVerifyOptionVC()
-        }))
+
     
         present(alertVC, animated: true)
         User.shared.isAbsoluteFirstAppLaunch = false

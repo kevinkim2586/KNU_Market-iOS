@@ -10,6 +10,8 @@ class FindPasswordViewController: UIViewController {
     
     private let padding: CGFloat = 20
     
+    private var viewModel = FindUserInfoViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()

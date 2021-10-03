@@ -43,9 +43,8 @@ class UserManager {
                                      withName: "nickname")
             multipartFormData.append(Data(model.fcmToken.utf8)
                                      ,withName: "fcmToken")
-            
-
-            
+            multipartFormData.append(Data(model.emailForPasswordLoss.utf8)
+                                     ,withName: "email")
         }, to: registerURL,
         headers: model.headers).responseJSON { response in
             

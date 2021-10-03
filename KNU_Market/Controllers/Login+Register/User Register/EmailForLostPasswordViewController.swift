@@ -37,7 +37,7 @@ extension EmailForLostPasswordViewController {
             fcmToken: UserRegisterValues.shared.fcmToken,
             emailForPasswordLoss: UserRegisterValues.shared.emailForPasswordLoss
         )
-        
+    
         UserManager.shared.register(with: model) { [weak self] result in
             guard let self = self else { return }
             dismissProgressBar()

@@ -110,7 +110,8 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializeCurrentlyGatheredPeopleLabel() {
         
-        let currentNum = viewModel.currentlyGatheredPeople
+        var currentNum = viewModel.currentlyGatheredPeople
+        if viewModel.currentlyGatheredPeople < 1 { currentNum = 1 }
         let total = viewModel.totalGatheringPeople
         
         currentlyGatheredPeopleLabel.textColor = UIColor.darkGray

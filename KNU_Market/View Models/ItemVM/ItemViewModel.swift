@@ -43,7 +43,9 @@ class ItemViewModel {
     let itemImages: [UIImage]? = [UIImage]()
     
     var currentlyGatheredPeople: Int {
-        return model?.currentlyGatheredPeople ?? 1
+        guard let model = model else { return 1 }
+        if model.currentlyGatheredPeople < 1 { return 1 }
+        else { return model.currentlyGatheredPeople }
     }
     
     var totalGatheringPeople: Int {

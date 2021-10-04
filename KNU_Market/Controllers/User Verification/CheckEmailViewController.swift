@@ -2,52 +2,27 @@ import UIKit
 
 class CheckEmailViewController: UIViewController {
 
-    @IBOutlet weak var firstLineLabel: UILabel!
-    @IBOutlet weak var checkSpamMailLabel: UILabel!
- 
-    @IBOutlet weak var goBackToHomeButton: UIButton!
-    @IBOutlet weak var goBackToHomeButtonBottomAnchor: NSLayoutConstraint!
-    @IBOutlet weak var goBackToHomeButtonHeight: NSLayoutConstraint!
-    
+    private let titleLabel = KMTitleLabel(textColor: .darkGray)
+    private let detailLabel = KMDetailLabel(numberOfTotalLines: 2)
+    private let bottomButton = KMBottomButton(buttonTitle: "홈으로 돌아가기")
+
     var email: String?
+    
+    private let padding: CGFloat = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
-    
-    @objc func keyboardDidShow(notification: Notification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            
-            goBackToHomeButtonBottomAnchor.constant = keyboardSize.height
-            goBackToHomeButtonHeight.constant = 60
-            goBackToHomeButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        }
-    }
+}
 
-    @objc func keyboardWillHide(notification: Notification) {
-        goBackToHomeButtonBottomAnchor.constant = 0
-        goBackToHomeButtonHeight.constant = 80
-    }
+//MARK: - Target Methods
+
+extension CheckEmailViewController {
     
-    @IBAction func pressedVerifyUsingStudentIDButton(_ sender: UIButton) {
-        guard let vc = storyboard?.instantiateViewController(
-            identifier: K.StoryboardID.studentIDGuideVC
-        ) as? StudentIDGuideViewController else { return }
-        
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @IBAction func pressedGoBackToHomeButton(_ sender: UIButton) {
+    @objc func pressedGoBackToHomeButton() {
         popVCsFromNavController(count: 3)
     }
-
-    @IBAction func pressedKakaoLinkButton(_ sender: UIButton) {
-        let url = URL(string: K.URL.kakaoHelpChannel)!
-        UIApplication.shared.open(url, options: [:])
-    }
-    
 }
 
 //MARK: - UI Configuration & Initialization
@@ -55,48 +30,71 @@ class CheckEmailViewController: UIViewController {
 extension CheckEmailViewController {
     
     func initialize() {
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardDidShow),
-            name: UIResponder.keyboardDidShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name:UIResponder.keyboardWillHideNotification ,
-            object: nil
-        )
-        
         title = "웹메일 인증"
-        
-        initializeLabels()
-
+        initializeTitleLabel()
+        initializeDetailLabel()
+        initializeBottomButton()
     }
     
-    func initializeLabels() {
-        
+    func initializeTitleLabel() {
         guard let email = email else { return }
-        
-        firstLineLabel.text = "\(email)\n위의 메일로 인증 메일이 전송되었습니다."
-        firstLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        firstLineLabel.textColor = .darkGray
-        firstLineLabel.changeTextAttributeColor(
-            fullText: firstLineLabel.text!,
-            changeText: "\(email)"
+        view.addSubview(titleLabel)
+        titleLabel.numberOfLines = 2
+        titleLabel.text = "\(email)\n위의 메일로 인증 메일이 전송되었습니다."
+        titleLabel.changeTextAttributeColor(
+            fullText: titleLabel.text!,
+            changeText: email
         )
-
-        checkSpamMailLabel.text = "✻ 메일이 보이지 않는 경우 반드시 스팸함을 확인해주세요!"
-        checkSpamMailLabel.textColor = UIColor(named: K.Color.appColor)
-        checkSpamMailLabel.changeTextAttributeColor(
-            fullText: checkSpamMailLabel.text!,
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+    }
+    
+    func initializeDetailLabel() {
+        view.addSubview(detailLabel)
+        detailLabel.text = "✻ 메일이 보이지 않는 경우 반드시 스팸함을 확인해주세요!"
+        detailLabel.changeTextAttributeColor(
+            fullText: detailLabel.text!,
             changeText: "반드시 스팸함을 확인"
         )
         
-    
-        
+        NSLayoutConstraint.activate([
+            detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
+            detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
     }
-
+    
+    func initializeBottomButton() {
+        view.addSubview(bottomButton)
+        
+        bottomButton.addTarget(
+            self,
+            action: #selector(pressedGoBackToHomeButton),
+            for: .touchUpInside
+        )
+        bottomButton.updateTitleEdgeInsetsForKeyboardHidden()
+        
+        NSLayoutConstraint.activate([
+            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardHidden)
+        ])
+    }
 }
 
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct VCPreview: PreviewProvider {
+    
+    static var previews: some View {
+        UIStoryboard(name: "VerifyEmail", bundle: nil).instantiateViewController(identifier: "CheckEmailViewController").toPreview()
+    }
+}
+#endif

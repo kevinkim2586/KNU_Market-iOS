@@ -1,6 +1,5 @@
 import UIKit
 import TextFieldEffects
-import SwiftUI
 
 class EmailInputViewController: UIViewController {
     
@@ -18,6 +17,11 @@ class EmailInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        emailTextField.becomeFirstResponder()
     }
     
     @objc func pressedSendEmailButton() {
@@ -100,7 +104,7 @@ extension EmailInputViewController {
         view.addSubview(detailLabelSecondLine)
         
         detailLabelFirstLine.text = "✻ 메일이 보이지 않는 경우 반드시 스팸 메일함을\n확인해주세요."
-        detailLabelSecondLine.text = "웹메일 ID는 yes 포털 아이디와 동일합니다."
+        detailLabelSecondLine.text = "✻ 웹메일 ID는 yes 포털 아이디와 동일합니다."
 
         detailLabelFirstLine.changeTextAttributeColor(
             fullText: detailLabelFirstLine.text!,
@@ -116,7 +120,7 @@ extension EmailInputViewController {
             detailLabelFirstLine.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             detailLabelFirstLine.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             
-            detailLabelSecondLine.topAnchor.constraint(equalTo: detailLabelFirstLine.bottomAnchor, constant: padding),
+            detailLabelSecondLine.topAnchor.constraint(equalTo: detailLabelFirstLine.bottomAnchor, constant: 15),
             detailLabelSecondLine.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             detailLabelSecondLine.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
@@ -196,14 +200,3 @@ extension EmailInputViewController {
     
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct EmailVCPreview: PreviewProvider {
-    
-    static var previews: some View {
-        UIStoryboard(name: "VerifyEmail", bundle: nil).instantiateViewController(identifier: "EmailInputViewController").toPreview()
-    }
-}
-#endif

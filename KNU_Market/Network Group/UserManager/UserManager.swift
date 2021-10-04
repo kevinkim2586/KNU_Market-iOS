@@ -21,7 +21,7 @@ class UserManager {
     let loadUserProfileURL          = "\(K.API_BASE_URL)auth"
     let userProfileUpdateURL        = "\(K.API_BASE_URL)auth"
     let unregisterURL               = "\(K.API_BASE_URL)auth"
-    let sendEmailURL                = "\(K.API_BASE_URL)verification"
+    let sendEmailURL                = "\(K.API_BASE_URL)verification/mail"
     let sendFeedbackURL             = "\(K.API_BASE_URL)report"
     let studentIdVerifyURL          = "\(K.API_BASE_URL)verification/card"
     let findIdURL                   = "\(K.API_BASE_URL)find/id"

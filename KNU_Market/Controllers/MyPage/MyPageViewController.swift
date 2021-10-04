@@ -12,7 +12,7 @@ class MyPageViewController: UIViewController {
     
     lazy var imagePicker = UIImagePickerController()
     
-    private var viewModel: MyPageViewModel = MyPageViewModel()
+    private var viewModel = MyPageViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,26 +49,35 @@ extension MyPageViewController {
     
     func presentActionSheet() {
         
-        let alert = UIAlertController(title: "프로필 사진 변경",
-                                      message: "",
-                                      preferredStyle: .actionSheet)
-        let library = UIAlertAction(title: "앨범에서 선택",
-                                    style: .default) { [weak self] _ in
+        let alert = UIAlertController(
+            title: "프로필 사진 변경",
+            message: "",
+            preferredStyle: .actionSheet
+        )
+        let library = UIAlertAction(
+            title: "앨범에서 선택",
+            style: .default
+        ) { [weak self] _ in
             self?.initializeImagePicker()
         }
-        let remove = UIAlertAction(title: "프로필 사진 제거",
-                                   style: .default) { [weak self] _ in
-            
-            self?.presentAlertWithCancelAction(title: "프로필 사진 제거",
-                                              message: "정말로 제거하시겠습니까?") { selectedOk in
+        let remove = UIAlertAction(
+            title: "프로필 사진 제거",
+            style: .default
+        ) { [weak self] _ in
+            self?.presentAlertWithCancelAction(
+                title: "프로필 사진 제거",
+                message: "정말로 제거하시겠습니까?"
+            ) { selectedOk in
                 
                 if selectedOk { self?.removeProfileImage() }
                 else { return }
             }
         }
-        let cancel = UIAlertAction(title: "취소",
-                                   style: .cancel,
-                                   handler: nil)
+        let cancel = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil
+        )
         
         alert.addAction(library)
         alert.addAction(remove)
@@ -84,7 +93,6 @@ extension MyPageViewController {
             guard let self = self else { return }
 
             switch result {
-
             case .success(_):
                 self.showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
                 DispatchQueue.main.async {
@@ -103,7 +111,7 @@ extension MyPageViewController {
 extension MyPageViewController: MyPageViewModelDelegate {
 
     func didLoadUserProfileInfo() {
-        userNicknameLabel.text = "\(viewModel.userNickname)"
+        userNicknameLabel.text = "\(viewModel.userNickname)\n(\(viewModel.userId))"
         userVerifiedImage.isHidden = detectIfVerifiedUser() ? false : true
     }
     
@@ -264,9 +272,11 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let originalImage: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            
             dismiss(animated: true) {
-                self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
+                self.presentAlertWithCancelAction(
+                    title: "프로필 사진 변경",
+                    message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?"
+                ) { selectedOk in
                     if selectedOk {
                         self.updateProfileImageButton(with: originalImage)
                         showProgressBar()
@@ -328,7 +338,7 @@ extension MyPageViewController {
     }
     
     func initializeProfileImageButton() {
-        profileImageButton.setImage(#imageLiteral(resourceName: "pick profile image"), for: .normal)
+        profileImageButton.setImage(UIImage(named: K.Images.pickProfileImage), for: .normal)
         profileImageButton.layer.masksToBounds = false
         profileImageButton.isUserInteractionEnabled = true
         profileImageButton.contentMode = .scaleAspectFit
@@ -339,9 +349,7 @@ extension MyPageViewController {
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .savedPhotosAlbum
-        
         self.present(self.imagePicker, animated: true)
-      
     }
     
     func updateProfileImageButton(with image: UIImage) {

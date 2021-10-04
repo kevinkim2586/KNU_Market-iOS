@@ -23,7 +23,7 @@ class FindUserInfoViewModel {
     func findId(
         using option: FindUserInfoOption,
         mail: String? = nil,
-        studentId: String? = ni l,
+        studentId: String? = nil,
         birthDate: String? = nil
     ) {
         showProgressBar()

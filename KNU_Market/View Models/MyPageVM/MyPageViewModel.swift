@@ -26,6 +26,10 @@ class MyPageViewModel {
         return User.shared.nickname
     }
     
+    var userId: String {
+        return User.shared.userID
+    }
+    
     var profileImage: UIImage? {
         didSet {
             if profileImage != nil {

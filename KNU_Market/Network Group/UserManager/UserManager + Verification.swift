@@ -51,12 +51,14 @@ extension UserManager {
         completion: @escaping (Result<Bool, NetworkError>
         ) -> Void) {
         
-        let headers: HTTPHeaders = ["id" : email]
+        let parameters: Parameters = ["studentEmail": email]
         
         AF.request(
             sendEmailURL,
             method: .post,
-            headers: headers
+            parameters: parameters,
+            encoding: JSONEncoding.default,
+            interceptor: interceptor
         ).responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -64,13 +66,13 @@ extension UserManager {
             switch statusCode {
                 
             case 201:
-                print("✏️ UserManager - resendVerificationEmail SUCCESS")
+                print("✏️ UserManager - sendVerificationEmail SUCCESS")
                 User.shared.isVerified = true
                 completion(.success(true))
                 
             default:
                 let error = NetworkError.returnError(json: response.data ?? Data())
-                print("❗️ UserManager - resendVerificationEmail statusCode: \(statusCode), reason: \(error.errorDescription)")
+                print("❗️ UserManager - sendVerificationEmail statusCode: \(statusCode), reason: \(error.errorDescription)")
                 completion(.failure(error))
             }
         }

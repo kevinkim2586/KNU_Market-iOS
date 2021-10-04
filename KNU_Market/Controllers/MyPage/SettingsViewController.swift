@@ -69,7 +69,10 @@ extension SettingsViewController {
 extension SettingsViewController {
     
     @objc func pressedChangeIdButton() {
-        
+        navigationController?.pushViewController(
+            ChangeIdViewController(),
+            animated: true
+        )
     }
     
     @objc func pressedChangeEmailButton() {

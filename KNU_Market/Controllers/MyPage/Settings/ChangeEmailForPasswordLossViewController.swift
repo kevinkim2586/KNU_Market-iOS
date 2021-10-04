@@ -44,7 +44,6 @@ extension ChangeEmailForPasswordLossViewController {
                 self.errorLabel.showErrorMessage(message: error.errorDescription)
             }
         }
-        
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

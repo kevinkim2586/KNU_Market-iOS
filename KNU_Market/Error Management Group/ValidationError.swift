@@ -48,7 +48,11 @@ enum ValidationError {
     
     enum OnChangeUserInfo: String, Error {
         
+        case incorrectIdFormat      = "불가능한 아이디 형식입니다."
+        case incorrectIdLength      = "아이디는 4자 이상, 30자 이하로 적어주세요."
+        case existingId             = "이미 사용 중인 아이디입니다.🥲"
         case invalidEmailFormat     = "잘못된 이메일 주소 형식입니다."
+        case empty                  = "빈 칸이 없는지 확인해주세요."
     }
     
 

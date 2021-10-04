@@ -5,9 +5,11 @@ class SendDeveloperMessageViewController: UIViewController {
     
     @IBOutlet weak var emailHelpLabel: UILabel!
     @IBOutlet weak var feedbackLabel: UILabel!
+    @IBOutlet weak var timeAvailableLabel: UILabel!
     @IBOutlet weak var messageTextView: UITextView!
     
-    private let emailHelpLabelText = "웹메일 인증과 관련된 문의는 카카오채널을 통해 실시간으로 도와드리겠습니다."
+    private let emailHelpLabelText = "1:1 채팅을 통한 문의를 원하시는 분은 아래 카카오채널로 문의해주세요."
+    private let timeAvailableText = "(평일, 주말 09:00 ~ 23:00)"
     private let feedbackLabelText = "✻ 건의/제안 사항을 보내주시면 참고하여,\n추후 업데이트에 반영하겠습니다."
     private let textViewPlaceholder = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
     
@@ -58,22 +60,25 @@ class SendDeveloperMessageViewController: UIViewController {
     }
     
     func initialize() {
-        
         initializeLabels()
         initializeTextView()
     }
     
     func initializeLabels() {
         
+        [emailHelpLabel, timeAvailableLabel, feedbackLabel].forEach { label in
+            label?.font = .systemFont(ofSize: 16, weight: .medium)
+            label?.textColor = .darkGray
+        }
+        
         emailHelpLabel.text = emailHelpLabelText
-        emailHelpLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        emailHelpLabel.textColor = .darkGray
-        emailHelpLabel.changeTextAttributeColor(fullText: emailHelpLabelText, changeText: "웹메일 인증과 관련된 문의")
+        emailHelpLabel.changeTextAttributeColor(
+            fullText: emailHelpLabelText,
+            changeText: "웹메일 인증과 관련된 문의"
+        )
         
-        
+        timeAvailableLabel.text = timeAvailableText
         feedbackLabel.text = feedbackLabelText
-        feedbackLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        feedbackLabel.textColor = .darkGray
     }
     
     func initializeTextView() {

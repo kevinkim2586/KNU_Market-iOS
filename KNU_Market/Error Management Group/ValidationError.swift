@@ -4,7 +4,7 @@ import Foundation
 
 enum ValidationError {
     
-    //MARK: - Potential error when registering new user
+    //MARK: - when registering new user
     enum OnRegister: String, Error {
         
         case incorrectIdFormat          = "불가능한 아이디 형식입니다."
@@ -15,12 +15,12 @@ enum ValidationError {
         case existingNickname           = "이미 사용 중인 닉네임입니다.🥲"
         case incorrectNicknameFormat    = "유효하지 않은 닉네임이에요."
         case incorrectNicknameLength    = "닉네임은 2자 이상, 15자 이하로 적어주세요."
-        case inValidEmailFormat         = "잘못된 이메일 주소 형식입니다."
+        case invalidEmailFormat         = "잘못된 이메일 주소 형식입니다."
         case existingEmail              = "이미 존재하는 이메일입니다."
         case empty                      = "빈 칸이 없는지 확인해주세요.🧐"
     }
     
-    //MARK: - Potential error when finding User Info
+    //MARK: - when finding User Info
     enum OnFindingUserInfo: String, Error {
         
         case nonAuthorizedSchoolEmail   = "인증 이력이 없는 웹메일입니다."
@@ -33,7 +33,7 @@ enum ValidationError {
         case empty                      = "빈 칸이 없는지 확인해주세요."
     }
     
-    //MARK: - Potential error when verifying as a student
+    //MARK: - when verifying as a student
     enum OnVerification: String, Error {
         
         case didNotCheckStudentIdDuplication    = "학번 중복 확인을 먼저해주세요.🤔"
@@ -44,10 +44,17 @@ enum ValidationError {
         
     }
     
+    //MARK: - when changing user info
+    
+    enum OnChangeUserInfo: String, Error {
+        
+        case invalidEmailFormat     = "잘못된 이메일 주소 형식입니다."
+    }
+    
+
     
     
-    
-    //MARK: - Potential error when uploading new item/post
+    //MARK: - when uploading new item/post
     enum OnUploadPost: String, Error {
         
         case titleTooShortOrLong        = "제목은 3글자 이상, 30자 이하로 작성해주세요.🤔"

@@ -79,7 +79,7 @@ extension EmailForLostPasswordViewController {
     func checkIfValidEmail() -> Bool {
         guard let email = emailTextField.text else { return false }
         if !email.isValidEmail {
-            errorLabel.showErrorMessage(message: RegisterError.inValidEmailFormat.rawValue)
+            errorLabel.showErrorMessage(message: RegisterError.invalidEmailFormat.rawValue)
             return false
         }
         return true

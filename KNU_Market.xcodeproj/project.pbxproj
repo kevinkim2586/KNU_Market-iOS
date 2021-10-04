@@ -94,6 +94,7 @@
 		7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */; };
 		7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */; };
 		7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB4026C27BD0001C54E6 /* UITableView + Extension.swift */; };
+		7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */; };
 		7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F0263D4387000E0B7A /* AppDelegate.swift */; };
 		7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F2263D4387000E0B7A /* SceneDelegate.swift */; };
 		7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F4263D4387000E0B7A /* InitialViewController.swift */; };
@@ -237,6 +238,7 @@
 		7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Preview.swift"; sourceTree = "<group>"; };
 		7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostRequestDTO.swift; sourceTree = "<group>"; };
 		7C9BBB4026C27BD0001C54E6 /* UITableView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + Extension.swift"; sourceTree = "<group>"; };
+		7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailForPasswordLossViewController.swift; sourceTree = "<group>"; };
 		7CA661ED263D4387000E0B7A /* KNU_Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNU_Market.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CA661F0263D4387000E0B7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CA661F2263D4387000E0B7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 			children = (
 				7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */,
 				7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */,
+				7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */,
 				7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */,
 				7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */,
 			);
@@ -981,6 +984,7 @@
 				7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */,
 				7C015C9A27035B3800089ED8 /* FindIdUsingStudentIdViewController.swift in Sources */,
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
+				7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */,
 				7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */,
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,
 				7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */,

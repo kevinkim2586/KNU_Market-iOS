@@ -6,6 +6,12 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var userIdLabel: UILabel!
     @IBOutlet var userNicknameLabel: UILabel!
     @IBOutlet weak var userEmailLabel: UILabel!
+    
+    
+    @IBOutlet weak var changeIdButton: UIButton!
+    @IBOutlet weak var changeEmailButton: UIButton!
+    
+
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var unregisterButton: UIButton!
     
@@ -58,13 +64,50 @@ extension SettingsViewController {
     }
 }
 
+//MARK: - Target Methods
+
+extension SettingsViewController {
+    
+    @objc func pressedChangeIdButton() {
+        
+    }
+    
+    @objc func pressedChangeEmailButton() {
+        navigationController?.pushViewController(
+            ChangeEmailForPasswordLossViewController(),
+            animated: true
+        )
+    }
+}
+
 //MARK: - Initialization
 
 extension SettingsViewController {
     
     func initialize() {
+        initializeLabels()
+        initializeButtons()
+    }
+    
+    func initializeLabels() {
         userIdLabel.text = User.shared.userID
         userNicknameLabel.text = User.shared.nickname
         userEmailLabel.text = User.shared.emailForPasswordLoss
+    }
+    
+    func initializeButtons() {
+        
+        changeIdButton.addTarget(
+            self,
+            action: #selector(pressedChangeIdButton),
+            for: .touchUpInside
+        )
+        changeEmailButton.addTarget(
+            self,
+            action: #selector(pressedChangeEmailButton),
+            for: .touchUpInside
+        )
+        
+        
     }
 }

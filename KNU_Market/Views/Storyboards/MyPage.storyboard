@@ -460,6 +460,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="설정" id="Npe-8S-ft0"/>
                     <connections>
+                        <outlet property="changeEmailButton" destination="BGt-DW-EZ7" id="sQg-J1-faX"/>
+                        <outlet property="changeIdButton" destination="cqQ-eR-DSF" id="rd1-MB-p58"/>
                         <outlet property="logOutButton" destination="vbR-yJ-qai" id="Vzg-52-FEd"/>
                         <outlet property="unregisterButton" destination="lBI-JY-E3n" id="ThM-Aq-Xo8"/>
                         <outlet property="userEmailLabel" destination="sEf-cy-ADA" id="cIX-4E-fkS"/>

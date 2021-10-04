@@ -62,6 +62,15 @@ class User {
     
     var email: String = ""
     
+    var emailForPasswordLoss: String {
+        get {
+            return UserDefaults.standard.string(forKey: K.UserDefaultsKey.emailForPasswordLoss) ?? "-"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.emailForPasswordLoss)
+        }
+    }
+    
     var isLoggedIn: Bool {
         get {
             return UserDefaults.standard.bool(forKey: K.UserDefaultsKey.isLoggedIn)

@@ -17,7 +17,7 @@ class UserManager {
     let checkDuplicationURL         = "\(K.API_BASE_URL)duplicate"
     let logoutURL                   = "\(K.API_BASE_URL)logout"
     let requestAccessTokenURL       = "\(K.API_BASE_URL)token"
-    let findPasswordURL             = "\(K.API_BASE_URL)findpassword"
+    let findPasswordURL             = "\(K.API_BASE_URL)find/password"
     let loadUserProfileURL          = "\(K.API_BASE_URL)auth"
     let userProfileUpdateURL        = "\(K.API_BASE_URL)auth"
     let unregisterURL               = "\(K.API_BASE_URL)auth"
@@ -117,11 +117,11 @@ class UserManager {
     }
     
     //MARK: - 로그인
-    func login(email: String,
+    func login(id: String,
                password: String,
                completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
-        let parameters: Parameters = [ "id" : email,
+        let parameters: Parameters = [ "id" : id,
                                        "password" : password ]
         let headers: HTTPHeaders = [ HTTPHeaderKeys.contentType.rawValue : HTTPHeaderValues.applicationJSON.rawValue ]
         
@@ -143,7 +143,6 @@ class UserManager {
                         let json = try JSON(data: response.data ?? Data())
                         self.saveAccessTokens(from: json)
                         
-                        User.shared.email = email
                         User.shared.password = password
                         User.shared.isLoggedIn = true
                         UIApplication.shared.registerForRemoteNotifications()

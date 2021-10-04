@@ -19,7 +19,6 @@ class ChangePasswordViewController: UIViewController {
     }
     
     @IBAction func pressedChangeButton(_ sender: UIButton) {
-        
         self.view.endEditing(true)
         
         if !validPassword() || !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
@@ -34,6 +33,7 @@ class ChangePasswordViewController: UIViewController {
             
             case .success(_):
                 self.showSimpleBottomAlert(with: "비밀번호 변경 성공 🎉")
+                self.changeButton.isUserInteractionEnabled = false
           
             case .failure(let error):
                 self.showSimpleBottomAlert(with: "비밀번호 변경 실패. 잠시 후 다시 시도해주세요. 🥲")
@@ -99,13 +99,11 @@ extension ChangePasswordViewController {
     }
     
     func initializeTextFields() {
-        
         passwordTextField.isSecureTextEntry = true
         checkPasswordTextField.isSecureTextEntry = true
     }
     
     func initializeButton() {
-        
         changeButton.layer.cornerRadius = 10
     }
 }

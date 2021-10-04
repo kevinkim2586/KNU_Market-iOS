@@ -23,15 +23,36 @@ class FindPasswordViewController: UIViewController {
     }
 }
 
+//MARK: - FindUserInfoViewModelDelegate
+
+extension FindPasswordViewController: FindUserInfoViewModelDelegate {
+    
+    func didFindUserPassword(emailPasswordSent: NSAttributedString) {
+        presentKMAlertOnMainThread(
+            title: "비밀번호 안내",
+            message: "",
+            buttonTitle: "닫기",
+            attributedMessageString: emailPasswordSent
+        )
+    }
+    
+    func didFailFetchingData(errorMessage: String) {
+        errorLabel.showErrorMessage(message: errorMessage)
+    }
+    
+    func didFailValidatingUserInput(errorMessage: String) {
+        errorLabel.showErrorMessage(message: errorMessage)
+    }
+}
+
 //MARK: - Target Methods
 
 extension FindPasswordViewController {
     
     @objc func pressedBottomButton() {
-        errorLabel.isHidden = true
+        viewModel.validateUserInput(findIdOption: .password, userId: userIdTextField.text)
     }
 }
-
 
 //MARK: - TextField Methods
 
@@ -48,6 +69,7 @@ extension FindPasswordViewController {
     
     func initialize() {
         title = "비밀번호 찾기"
+        viewModel.delegate = self
         initializeTitleLabel()
         initializeDetailLabel()
         initializeTextField()

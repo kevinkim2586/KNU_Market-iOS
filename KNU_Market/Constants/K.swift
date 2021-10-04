@@ -112,6 +112,7 @@ struct K {
         static let userUID                      = "userUID"
         static let userID                       = "userID"
         static let nickname                     = "nickname"
+        static let emailForPasswordLoss         = "emailForPasswordLoss"
         static let profileImageUID              = "profileImageUID"
         static let isLoggedIn                   = "isLoggedIn"
         static let hasVerifiedEmail             = "hasVerifiedEmail"

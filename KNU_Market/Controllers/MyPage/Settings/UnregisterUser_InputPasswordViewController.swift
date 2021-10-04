@@ -22,7 +22,7 @@ class UnregisterUser_InputPasswordViewController: UIViewController {
             return
         }
         
-        UserManager.shared.login(email: User.shared.email,
+        UserManager.shared.login(id: User.shared.userID,
                                  password: password) { [weak self] result in
             
             guard let self = self else { return }

@@ -2,15 +2,15 @@ import UIKit
 
 protocol FindUserInfoViewModelDelegate: AnyObject {
     func didFindUserId(id: NSAttributedString)
-    func didFindUserPassword()
+    func didFindUserPassword(emailPasswordSent: NSAttributedString)
     
     func didFailFetchingData(errorMessage: String)
     func didFailValidatingUserInput(errorMessage: String)
 }
 
 extension FindUserInfoViewModelDelegate {
-    func didFindUserId(id: String) {}
-    func didFindUserPassword() {}
+    func didFindUserId(id: NSAttributedString) {}
+    func didFindUserPassword(emailPasswordSent: NSAttributedString) {}
 }
 
 class FindUserInfoViewModel {
@@ -19,10 +19,11 @@ class FindUserInfoViewModel {
     
     typealias InputError = ValidationError.OnFindingUserInfo
     
+    //MARK: - 아이디 찾기
     func findId(
         using option: FindUserInfoOption,
         mail: String? = nil,
-        studentId: String? = nil,
+        studentId: String? = ni l,
         birthDate: String? = nil
     ) {
         showProgressBar()
@@ -38,7 +39,11 @@ class FindUserInfoViewModel {
             
             switch result {
             case .success(let id):
-                self.delegate?.didFindUserId(id: self.filterSensitiveUserInfo(infoString: id))
+                let attributedGuideString = self.filterSensitiveUserInfo(
+                    infoString: id,
+                    findUserInfoOption: option
+                )
+                self.delegate?.didFindUserId(id: attributedGuideString)
             case .failure(_):
                 let errorMessage = option == .webMail ?
                 InputError.nonAuthorizedSchoolEmail.rawValue : InputError.nonAuthorizedStudentId.rawValue
@@ -47,7 +52,25 @@ class FindUserInfoViewModel {
         }
     }
     
+    //MARK: - 비밀번호 찾기
     func findPassword(for userId: String) {
+        showProgressBar()
+        
+        UserManager.shared.findPassword(id: userId) { [weak self] result in
+            guard let self = self else { return }
+            dismissProgressBar()
+            
+            switch result {
+            case .success(let emailPasswordSent):
+                let attributedGuideString = self.filterSensitiveUserInfo(
+                    infoString: emailPasswordSent,
+                    findUserInfoOption: .password
+                )
+                self.delegate?.didFindUserPassword(emailPasswordSent: attributedGuideString)
+            case .failure(_):
+                self.delegate?.didFailFetchingData(errorMessage: InputError.nonExistingUserId.rawValue)
+            }
+        }
         
     }
 }
@@ -74,10 +97,11 @@ extension FindUserInfoViewModel {
     }
     
     private func validateWebMail(mail: String?) {
-        guard let mail = mail else {
+        guard let mail = mail, mail.count != 0 else {
             delegate?.didFailValidatingUserInput(errorMessage: InputError.empty.rawValue)
             return
         }
+
         if !mail.contains("@knu.ac.kr") || !mail.isValidEmail {
             delegate?.didFailValidatingUserInput(errorMessage: InputError.incorrectSchoolEmailFormat.rawValue)
             return
@@ -86,10 +110,14 @@ extension FindUserInfoViewModel {
     }
     
     private func validateStudentId(studentId: String?, birthDate: String?) {
-        guard let studentId = studentId, let birthDate = birthDate else {
-            delegate?.didFailValidatingUserInput(errorMessage: InputError.empty.rawValue)
-            return
-        }
+        guard
+            let studentId = studentId,
+            let birthDate = birthDate,
+            studentId.count != 0,
+            birthDate.count != 0 else {
+                delegate?.didFailValidatingUserInput(errorMessage: InputError.empty.rawValue)
+                return
+            }
         if studentId.hasSpecialCharacters {
             delegate?.didFailValidatingUserInput(errorMessage: InputError.incorrectStudentIdFormat.rawValue)
             return
@@ -102,11 +130,11 @@ extension FindUserInfoViewModel {
     }
     
     private func validateUserId(userId: String?) {
-        guard let userId = userId else {
+        guard let userId = userId, userId.count != 0 else {
             delegate?.didFailValidatingUserInput(errorMessage: InputError.empty.rawValue)
             return
         }
-        
+
         if !userId.isValidId, !userId.isValidEmail {
             delegate?.didFailValidatingUserInput(errorMessage: InputError.incorrectUserIdFormat.rawValue)
             return
@@ -119,7 +147,7 @@ extension FindUserInfoViewModel {
 
 extension FindUserInfoViewModel {
     
-    private func filterSensitiveUserInfo(infoString: String) -> NSAttributedString {
+    private func filterSensitiveUserInfo(infoString: String, findUserInfoOption: FindUserInfoOption) -> NSAttributedString {
         var filteredInfoString: String
         
         // 이메일 형식의 아이디라면 @ 앞에 부분을 *로 처리 -> 아이디가 @knu.ac.kr 일 수도 있고, @gmail.com 이 될 수도 있음
@@ -139,7 +167,10 @@ extension FindUserInfoViewModel {
             filteredInfoString = userInfoString
         }
         
-        let alertBodyText = "회원님의 아이디는 \(filteredInfoString) 입니다."
+        let alertBodyText = findUserInfoOption == .password ?
+        "\(filteredInfoString)\n위의 메일로 임시 비밀번호를 전송했습니다." :
+        "회원님의 아이디는 \(filteredInfoString) 입니다."
+        
         return makeCustomAttributedString(fullText: alertBodyText, textToCustomize: filteredInfoString)
     }
     

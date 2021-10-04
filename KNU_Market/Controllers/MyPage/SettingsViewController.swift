@@ -65,5 +65,6 @@ extension SettingsViewController {
     func initialize() {
         userIdLabel.text = User.shared.userID
         userNicknameLabel.text = User.shared.nickname
+        userEmailLabel.text = User.shared.emailForPasswordLoss
     }
 }

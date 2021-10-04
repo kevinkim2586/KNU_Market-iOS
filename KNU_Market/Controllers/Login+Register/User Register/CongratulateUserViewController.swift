@@ -23,7 +23,7 @@ class CongratulateUserViewController: UIViewController {
         
         showProgressBar()
         
-        UserManager.shared.login(email: UserRegisterValues.shared.userId,
+        UserManager.shared.login(id: UserRegisterValues.shared.userId,
                                  password: UserRegisterValues.shared.password) { [weak self] result in
             guard let self = self else { return }
             dismissProgressBar()

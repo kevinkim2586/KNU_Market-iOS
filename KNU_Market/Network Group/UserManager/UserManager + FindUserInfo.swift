@@ -65,11 +65,11 @@ extension UserManager {
     
     //MARK: - 비밀번호 찾기
     func findPassword(
-        email: String,
+        id: String,
         completion: @escaping (Result<String, NetworkError>) -> Void
     ) {
         
-        let parameters: Parameters = ["id" : email]
+        let parameters: Parameters = ["id" : id]
         
         AF.request(
             findPasswordURL,
@@ -85,9 +85,13 @@ extension UserManager {
                     
                 case 201:
                     print("✏️ UserManager - findPassword SUCCESS")
-//                    completion(.success(true))
-                    #warning("구현 필요")
-                    
+                    do {
+                        let json = try JSON(data: response.data ?? Data())
+                        let emailPasswordSent = json["email"].stringValue
+                        completion(.success(emailPasswordSent))
+                    } catch {
+                        completion(.failure(.E000))
+                    }
                 default:
                     let error = NetworkError.returnError(json: response.data ?? Data())
                     print("❗️ UserManager findPassword error statusCode: \(statusCode) and error: \(error.errorDescription)")

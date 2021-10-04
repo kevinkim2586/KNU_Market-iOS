@@ -8,7 +8,7 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
     
-    private lazy var idGuideString = "2021년 10월 6일 이전에 가입한 회원의 아이디는 웹메일(@knu.ac.kr) 형식입니다."
+    private lazy var idGuideString = "2021년 10월 7일 이전에 가입한 회원의 아이디는 웹메일(@knu.ac.kr) 형식입니다."
     
     private lazy var findUserInfoStoryboard = UIStoryboard(
         name: StoryboardName.FindUserInfo,
@@ -36,7 +36,7 @@ extension InitialViewController {
         
         showProgressBar()
     
-        UserManager.shared.login(email: id, password: password) { [weak self] result in
+        UserManager.shared.login(id: id, password: password) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -75,7 +75,7 @@ extension InitialViewController {
     
     @IBAction func pressedInfoButton(_ sender: UIButton) {
         let attributedMessageString: NSAttributedString = idGuideString.attributedStringWithColor(
-            ["2021년 10월 6일 이전에 가입한 회원"],
+            ["2021년 10월 7일 이전에 가입한 회원"],
             color: UIColor(named: K.Color.appColor) ?? .systemPink,
             characterSpacing: nil
         )

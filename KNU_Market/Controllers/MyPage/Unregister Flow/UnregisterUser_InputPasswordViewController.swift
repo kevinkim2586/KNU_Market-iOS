@@ -43,7 +43,8 @@ extension UnregisterUser_InputPasswordViewController {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    let vc = self.storyboard?.instantiateViewController(
+                    let storyboard = UIStoryboard(name: StoryboardName.MyPage, bundle: nil)
+                    let vc = storyboard.instantiateViewController(
                         identifier: K.StoryboardID.unregisterUserInputSuggestVC
                     ) as! UnregisterUser_InputSuggestionViewController
                     self.navigationController?.pushViewController(vc, animated: true)
@@ -104,7 +105,8 @@ extension UnregisterUser_InputPasswordViewController {
     
     private func initializeErrorLabel() {
         view.addSubview(errorLabel)
-        errorLabel.text = incorrectPasswordText
+        errorLabel.text = errorLabelText
+        errorLabel.numberOfLines = 2
         errorLabel.isHidden = false
         errorLabel.textColor = .lightGray
         

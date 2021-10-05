@@ -32,7 +32,7 @@ extension UnregisterUser_CheckFirstPrecautionsViewController {
     
     private func initialize() {
         view.backgroundColor = .white
-        setBackBarButtonItemTitle(to: "")
+        setBackBarButtonItemTitle()
         initializeTitleLabel()
         initializeDetailLabel()
         initializeBottomButton()

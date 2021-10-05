@@ -100,6 +100,7 @@ extension SettingsViewController {
 extension SettingsViewController {
     
     private func initialize() {
+        setBackBarButtonItemTitle()
         initializeLabels()
         initializeButtons()
     }

@@ -100,6 +100,7 @@ extension ChangeIdViewController {
 extension ChangeIdViewController {
     
     func initialize() {
+        title = "아이디 변경"
         view.backgroundColor = .white
         initializeDetailLabel()
         initializeTextField()

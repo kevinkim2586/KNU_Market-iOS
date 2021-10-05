@@ -71,6 +71,7 @@ extension ChangeEmailForPasswordLossViewController {
 extension ChangeEmailForPasswordLossViewController {
     
     func initialize() {
+        title = "이메일 변경"
         view.backgroundColor = .white
         initializeDetailLabel()
         initializeTextField()

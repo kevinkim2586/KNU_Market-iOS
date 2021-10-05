@@ -51,9 +51,13 @@ class ChatViewController: MessagesViewController {
         viewModel.disconnect()
     }
     
+    deinit {
+        print("❗️ ChatViewController DEINITIALIZED")
+    }
+    
     @objc func pressedTitle() {
         
-        let storyboard = UIStoryboard(name: "ItemList", bundle: nil)
+        let storyboard = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
         
         guard let itemVC = storyboard.instantiateViewController(
             identifier: K.StoryboardID.itemVC

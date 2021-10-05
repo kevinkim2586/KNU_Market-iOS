@@ -372,7 +372,10 @@ extension ChatViewModel {
     
     //마지막 채팅 이후부터 새로운 채팅 가져오기
     @objc func getChatFromLastIndex() {
-        if messages.count == 0 { delegate?.failedFetchingPreviousChats(with: .E000)}
+        if messages.count == 0 {
+            delegate?.failedFetchingPreviousChats(with: .E000)
+            return
+        }
         showProgressBar()
     
         isFetchingData = true
@@ -384,12 +387,14 @@ extension ChatViewModel {
             "date":  dateOfLastChat
         ]
         
-        ChatManager.shared.getResponseModel(function: .getChat,
-                                            method: .get,
-                                            headers: headers,
-                                            pid: room,
-                                            index: indexForAfterCertainChat,
-                                            expectedModel: ChatResponseModel.self) { [weak self] result in
+        ChatManager.shared.getResponseModel(
+            function: .getChat,
+            method: .get,
+            headers: headers,
+            pid: room,
+            index: indexForAfterCertainChat,
+            expectedModel: ChatResponseModel.self
+        ) { [weak self] result in
             
             dismissProgressBar()
             guard let self = self else { return }

@@ -13,12 +13,12 @@ class MyPageViewController: UIViewController {
     lazy var imagePicker = UIImagePickerController()
     
     private var viewModel = MyPageViewModel()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.loadUserProfile()
         initialize()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,10 +88,11 @@ extension MyPageViewController {
     
     func removeProfileImage() {
         
-        UserManager.shared.updateUserProfileImage(with: "default") { [weak self] result in
-
+        UserManager.shared.updateUserInfo(
+            type: .profileImage,
+            infoString: "default"
+        ) { [weak self] result in
             guard let self = self else { return }
-
             switch result {
             case .success(_):
                 self.showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
@@ -109,7 +110,7 @@ extension MyPageViewController {
 //MARK: - MyPageViewModelDelegate
 
 extension MyPageViewController: MyPageViewModelDelegate {
-
+    
     func didLoadUserProfileInfo() {
         userNicknameLabel.text = "\(viewModel.userNickname)\n(\(viewModel.userId))"
         userVerifiedImage.isHidden = detectIfVerifiedUser() ? false : true
@@ -133,7 +134,7 @@ extension MyPageViewController: MyPageViewModelDelegate {
         self.showSimpleBottomAlert(with: "프로필 정보 가져오기 실패. 로그아웃 후 다시 시도해주세요.")
         userNicknameLabel.text = "닉네임 불러오기 실패"
     }
-
+    
     //이미지 먼저 서버에 업로드
     func didUploadImageToServerFirst(with uid: String) {
         viewModel.updateUserProfileImage(with: uid)
@@ -174,7 +175,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -203,7 +204,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 1: label.text = "기타"
         default: break
         }
-
+        
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.textAlignment = .left
         label.textColor = .darkGray
@@ -291,7 +292,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
             }
         }
     }
-
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
@@ -304,7 +305,7 @@ extension MyPageViewController {
     func initialize() {
         createObserversForPresentingVerificationAlert()
         createObserversForGettingBadgeValue()
-
+        
         viewModel.delegate = self
         
         userVerifiedImage.isHidden = true
@@ -358,5 +359,5 @@ extension MyPageViewController {
         profileImageButton.layer.masksToBounds = true
     }
     
-
+    
 }

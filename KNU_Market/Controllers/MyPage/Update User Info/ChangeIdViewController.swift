@@ -2,14 +2,14 @@ import UIKit
 
 class ChangeIdViewController: UIViewController {
     
-    private let detailLabel         = KMDetailLabel(fontSize: 15, numberOfTotalLines: 1)
+    private let titleLabel          = KMTitleLabel(fontSize: 18, textColor: .darkGray)
     private let idTextField         = KMTextField(placeHolderText: "새 아이디 입력")
     private let errorLabel          = KMErrorLabel()
     private let changeIdButton      = KMBottomButton(buttonTitle: "변경하기")
     
     private let padding: CGFloat = 20
     
-    typealias InputError = ValidationError.OnChangeUserInfo
+    typealias InputError = ValidationError.OnChangingUserInfo
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +44,8 @@ extension ChangeIdViewController {
             guard let self = self else { return }
             switch result {
             case .success(_):
-                self.showSimpleBottomAlert(with: "아이디 변경에 성공하셨어요.🎉")
-                DispatchQueue.main.async {
+                self.showSimpleBottomAlert(with: "아이디가 성공적으로 변경됐어요.🎉")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.navigationController?.popViewController(animated: true)
                 }
             case .failure(let error):
@@ -102,22 +102,20 @@ extension ChangeIdViewController {
     func initialize() {
         title = "아이디 변경"
         view.backgroundColor = .white
-        initializeDetailLabel()
+        initializeTitleLabel()
         initializeTextField()
         initializeErrorLabel()
         initializeChangeEmailButton()
     }
     
-    func initializeDetailLabel() {
-        view.addSubview(detailLabel)
-        detailLabel.text = "새로운 아이디를 입력해주세요."
-        detailLabel.textAlignment = .center
-        detailLabel.textColor = .darkGray
+    func initializeTitleLabel() {
+        view.addSubview(titleLabel)
+        titleLabel.text = "새로운 아이디를 입력해주세요."
         
         NSLayoutConstraint.activate([
-            detailLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
         ])
     }
     
@@ -130,9 +128,9 @@ extension ChangeIdViewController {
         )
         
         NSLayoutConstraint.activate([
-            idTextField.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 30),
+            idTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
             idTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            idTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            idTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
             idTextField.heightAnchor.constraint(equalToConstant: 60)
         ])
         

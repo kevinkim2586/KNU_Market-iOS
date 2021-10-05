@@ -1,96 +1,91 @@
 import UIKit
-import SnackBar_swift
 
 class ChangeNicknameViewController: UIViewController {
     
-    @IBOutlet var nicknameTextField: UITextField!
-    @IBOutlet var checkAlreadyInUseButton: UIButton!
-    @IBOutlet var changeButton: UIButton!
+    private let titleLabel              = KMTitleLabel(textColor: .darkGray)
+    private let nicknameTextField       = KMTextField(placeHolderText: "닉네임 입력")
+    private let errorLabel              = KMErrorLabel()
+    private let changeNicknameButton    = KMBottomButton(buttonTitle: "변경하기")
+
+    private let padding: CGFloat = 20
+    
+    typealias InputError = ValidationError.OnChangingUserInfo
     
     private var nickname: String?
-    private var didCheckNicknameDuplicate: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        nicknameTextField.becomeFirstResponder()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         dismissProgressBar()
     }
-    
-    
-    @IBAction func pressedCheckDuplicateButton(_ sender: UIButton) {
-        checkIfDuplicate()
-    }
-    
-    @IBAction func pressedChangeButton(_ sender: UIButton) {
-        
-        view.endEditing(true)
-        
-        if !didCheckNicknameDuplicate {
-            showSimpleBottomAlert(with: "닉네임 중복 확인을 먼저해주세요.🤔")
-            return
-        }
-        
-        if !validateUserInput() { return }
-        
-        guard let nickname = self.nickname else {
-            self.showSimpleBottomAlert(with: "🤔 빈 칸이 없는지 확인해주세요.")
-            return
-        }
-        
-        showProgressBar()
-        
-        UserManager.shared.updateUserNickname(with: nickname) { result in
-            
-            switch result {
-            
-            case .success(_):
-                self.showSimpleBottomAlert(with: "닉네임이 변경되었습니다 🎉")
-                
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲")
-                print("ChangeNickNameVC failed to update nickname with error: \(error.errorDescription)")
-            }
-        }
-        dismissProgressBar()
+}
 
+//MARK: - Target Methods
+
+extension ChangeNicknameViewController {
+    
+    @objc private func pressedChangeNicknameButton() {
+        nicknameTextField.resignFirstResponder()
+        if !validateUserInput() { return }
+        checkIdDuplication()
     }
     
-    func checkIfDuplicate() {
-        
-        self.view.endEditing(true)
-        
-        if !validateUserInput() { return }
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        errorLabel.isHidden = true
+    }
+    
+    private func checkIdDuplication() {
         
         UserManager.shared.checkDuplication(nickname: nickname!) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            
             case .success(let isDuplicate):
-                
                 if isDuplicate {
                     DispatchQueue.main.async {
-                        self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😅",
-                                                              for: .normal)
-                        self.didCheckNicknameDuplicate = false
+                        self.errorLabel.showErrorMessage(message: InputError.existingNickname.rawValue)
                     }
-
                 } else {
-                    DispatchQueue.main.async {
-                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 🎉",
-                                                              for: .normal)
-                        self.didCheckNicknameDuplicate = true
-                    }
+                    self.updateUserNickname(with: self.nickname!)
                 }
-                
             case .failure(_):
-                self.showSimpleBottomAlert(with: "일시적인 네트워크 오류. 잠시 후 다시 시도해주세요 🥲")
+                self.showSimpleBottomAlert(with: NetworkError.E000.errorDescription)
             }
         }
     }
+    
+    private func updateUserNickname(with nickname: String) {
+        showProgressBar()
+        UserManager.shared.updateUserInfo(
+            type: .nickname,
+            infoString: nickname
+        ) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                self.showSimpleBottomAlert(with: "닉네임이 변경되었어요.🎉")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            case .failure(_):
+                self.showSimpleBottomAlert(with: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲")
+            }
+        }
+        dismissProgressBar()
+    }
+}
+
+//MARK: - User Input Validation
+
+extension ChangeNicknameViewController {
     
     func validateUserInput() -> Bool {
         
@@ -98,11 +93,11 @@ class ChangeNicknameViewController: UIViewController {
             return false
         }
         guard !nickname.isEmpty else {
-            self.showSimpleBottomAlert(with: "빈 칸이 없는지 확인해주세요 🥲")
+            errorLabel.showErrorMessage(message: InputError.empty.rawValue)
             return false
         }
         guard nickname.count >= 2, nickname.count <= 15 else {
-            self.showSimpleBottomAlert(with: "닉네임은 2자 이상, 15자 이하로 작성해주세요❗️")
+            errorLabel.showErrorMessage(message: InputError.incorrectNicknameLength.rawValue)
             return false
         }
         self.nickname = nickname
@@ -110,36 +105,79 @@ class ChangeNicknameViewController: UIViewController {
     }
 }
 
-//MARK: - UITextFieldDelegate
-
-extension ChangeNicknameViewController: UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        if textField == nicknameTextField {
-            didCheckNicknameDuplicate = false
-            checkAlreadyInUseButton.setTitle("중복 확인", for: .normal)
-            checkAlreadyInUseButton.titleLabel?.tintColor = UIColor(named: K.Color.appColor)
-        }
-    }
-}
-
 //MARK: - UI Configuration
 
 extension ChangeNicknameViewController {
     
-    func initialize() {
-        createObserversForPresentingVerificationAlert()
+    private func initialize() {
+        view.backgroundColor = .white
+        title = "닉네임 변경"
+        initializeTitleLabel()
         initializeTextField()
-        initializeButton()
+        initializeErrorLabel()
+        initializeChangeNicknameButton()
     }
     
-    func initializeTextField() {
-        nicknameTextField.delegate = self
-        nicknameTextField.placeholder = User.shared.nickname
+    private func initializeTitleLabel() {
+        view.addSubview(titleLabel)
+        titleLabel.text = "새로운 닉네임을 입력해주세요."
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
     }
     
-    func initializeButton() {
-        changeButton.layer.cornerRadius = 10
+    private func initializeTextField() {
+        view.addSubview(nicknameTextField)
+        nicknameTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChange(_:)),
+            for: .editingChanged
+        )
+        
+        NSLayoutConstraint.activate([
+            nicknameTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 55),
+            nicknameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            nicknameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
+            nicknameTextField.heightAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+    
+    private func initializeErrorLabel() {
+        view.addSubview(errorLabel)
+        errorLabel.isHidden = true
+        errorLabel.numberOfLines = 2
+        
+        NSLayoutConstraint.activate([
+            errorLabel.topAnchor.constraint(equalTo: nicknameTextField.bottomAnchor, constant: padding),
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+    }
+    
+    private func initializeChangeNicknameButton() {
+        changeNicknameButton.heightAnchor.constraint(equalToConstant: changeNicknameButton.heightConstantForKeyboardAppeared).isActive = true
+        changeNicknameButton.addTarget(
+            self,
+            action: #selector(pressedChangeNicknameButton),
+            for: .touchUpInside
+        )
+        nicknameTextField.inputAccessoryView = changeNicknameButton
+    }
+    
+
+}
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct ChangeNicknameVC: PreviewProvider {
+    
+    static var previews: some View {
+        ChangeNicknameViewController().toPreview()
     }
 }
+#endif

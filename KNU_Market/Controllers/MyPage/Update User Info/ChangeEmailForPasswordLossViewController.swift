@@ -2,14 +2,14 @@ import UIKit
 
 class ChangeEmailForPasswordLossViewController: UIViewController {
     
-    private let detailLabel         = KMDetailLabel(fontSize: 15, numberOfTotalLines: 5)
+    private let titleLabel          = KMTitleLabel(fontSize: 17, textColor: .darkGray)
     private let emailTextField      = KMTextField(placeHolderText: "변경하실 이메일 입력")
     private let errorLabel          = KMErrorLabel()
     private let changeEmailButton   = KMBottomButton(buttonTitle: "변경하기")
     
     private let padding: CGFloat = 20
     
-    typealias InputError = ValidationError.OnChangeUserInfo
+    typealias InputError = ValidationError.OnChangingUserInfo
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ extension ChangeEmailForPasswordLossViewController {
             switch result {
             case .success(_):
                 self.showSimpleBottomAlert(with: "이메일 변경에 성공하셨어요.🎉")
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.navigationController?.popViewController(animated: true)
                 }
             case .failure(let error):
@@ -73,22 +73,21 @@ extension ChangeEmailForPasswordLossViewController {
     func initialize() {
         title = "이메일 변경"
         view.backgroundColor = .white
-        initializeDetailLabel()
+        initializeTitleLabel()
         initializeTextField()
         initializeErrorLabel()
         initializeChangeEmailButton()
     }
     
-    func initializeDetailLabel() {
-        view.addSubview(detailLabel)
-        detailLabel.text = "새로운 이메일 주소를 입력해주세요.\n비밀번호 분실 시, 해당 이메일 주소로 임시 비밀번호가\n 전송되니, 이메일 변경은 신중히 부탁드립니다."
-        detailLabel.textAlignment = .center
-        detailLabel.textColor = .darkGray
+    func initializeTitleLabel() {
+        view.addSubview(titleLabel)
+        titleLabel.numberOfLines = 5
+        titleLabel.text = "새로운 이메일 주소를 입력해주세요.\n\n비밀번호 분실 시, 해당 이메일 주소로 임시 비밀번호가 전송되니, 이메일 변경은 신중히 부탁드립니다."
         
         NSLayoutConstraint.activate([
-            detailLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
         ])
     }
     
@@ -101,9 +100,9 @@ extension ChangeEmailForPasswordLossViewController {
         )
         
         NSLayoutConstraint.activate([
-            emailTextField.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 30),
+            emailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
             emailTextField.heightAnchor.constraint(equalToConstant: 60)
         ])
         

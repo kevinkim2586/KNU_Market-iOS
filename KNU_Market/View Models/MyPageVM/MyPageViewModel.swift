@@ -128,13 +128,12 @@ class MyPageViewModel {
     
     //MARK: - 그 다음에 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String) {
-        
-        UserManager.shared.updateUserProfileImage(with: uid) { [weak self] result in
-            
+        UserManager.shared.updateUserInfo(
+            type: .profileImage,
+            infoString: uid
+        ) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
-            
             case .success(_):
                 profileImageCache.removeAllObjects()
                 self.delegate?.didUpdateUserProfileImage()
@@ -143,6 +142,4 @@ class MyPageViewModel {
             }
         }
     }
-    
-
 }

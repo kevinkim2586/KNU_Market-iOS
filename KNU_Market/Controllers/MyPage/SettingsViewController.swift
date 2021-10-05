@@ -9,6 +9,8 @@ class SettingsViewController: UIViewController {
     
     
     @IBOutlet weak var changeIdButton: UIButton!
+    @IBOutlet weak var changeNicknameButton: UIButton!
+    @IBOutlet weak var changePasswordButton: UIButton!
     @IBOutlet weak var changeEmailButton: UIButton!
     
 
@@ -69,17 +71,19 @@ extension SettingsViewController {
 extension SettingsViewController {
     
     @objc func pressedChangeIdButton() {
-        navigationController?.pushViewController(
-            ChangeIdViewController(),
-            animated: true
-        )
+        navigationController?.pushViewController(ChangeIdViewController(), animated: true)
+    }
+    
+    @objc func pressedChangeNicknameButton() {
+        navigationController?.pushViewController(ChangeNicknameViewController(), animated: true)
     }
     
     @objc func pressedChangeEmailButton() {
-        navigationController?.pushViewController(
-            ChangeEmailForPasswordLossViewController(),
-            animated: true
-        )
+        navigationController?.pushViewController(ChangeEmailForPasswordLossViewController(), animated: true)
+    }
+    
+    @objc func pressedChangePasswordButton() {
+        navigationController?.pushViewController(ChangePasswordViewController(), animated: true)
     }
     
     @objc func pressedUnregisterButton() {
@@ -118,6 +122,18 @@ extension SettingsViewController {
             action: #selector(pressedChangeIdButton),
             for: .touchUpInside
         )
+        changeNicknameButton.addTarget(
+            self,
+            action: #selector(pressedChangeNicknameButton),
+            for: .touchUpInside
+        )
+        
+        changePasswordButton.addTarget(
+            self,
+            action: #selector(pressedChangePasswordButton),
+            for: .touchUpInside
+        )
+        
         changeEmailButton.addTarget(
             self,
             action: #selector(pressedChangeEmailButton),

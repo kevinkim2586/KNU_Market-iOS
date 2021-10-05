@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserRegisterValues.shared.fcmToken = token
                 User.shared.fcmToken = token
                 if User.shared.isLoggedIn {
-                    UserManager.shared.updateUserFCMToken(with: token)
+                    UserManager.shared.updateUserInfo(type: .fcmToken, infoString: token) { _ in }
                 }
             }
         }

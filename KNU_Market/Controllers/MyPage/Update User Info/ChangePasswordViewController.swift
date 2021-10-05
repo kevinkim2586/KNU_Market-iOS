@@ -3,50 +3,72 @@ import  SnackBar_swift
 
 class ChangePasswordViewController: UIViewController {
     
-    @IBOutlet var passwordTextField: UITextField!
-    @IBOutlet var checkPasswordTextField: UITextField!
-    @IBOutlet var changeButton: UIButton!
+    private let titleLabel              = KMTitleLabel(textColor: .darkGray)
+    private let passwordTextField       = KMTextField(placeHolderText: "비밀번호")
+    private let checkPasswordTextField  = KMTextField(placeHolderText: "비밀번호 확인")
+    private let errorLabel              = KMErrorLabel()
+    private let changePasswordButton    = KMBottomButton(buttonTitle: "변경하기")
+    
+    private let padding: CGFloat = 20
+
+    typealias InputError = ValidationError.OnRegister
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        dismissProgressBar()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        passwordTextField.becomeFirstResponder()
     }
+}
+
+//MARK: - Target Methods
+
+extension ChangePasswordViewController {
     
-    @IBAction func pressedChangeButton(_ sender: UIButton) {
-        self.view.endEditing(true)
-        
+    @objc func pressedChangePasswordButton() {
+        view.endEditing(true)
         if !validPassword() || !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
         
         let newPassword = passwordTextField.text!
     
         showProgressBar()
         
-        UserManager.shared.updateUserPassword(with: newPassword) { result in
-            
+        UserManager.shared.updateUserInfo(
+            type: .password,
+            infoString: newPassword
+        ) { [weak self] result in
+            guard let self = self else { return }
             switch result {
-            
             case .success(_):
-                self.showSimpleBottomAlert(with: "비밀번호 변경 성공 🎉")
-                self.changeButton.isUserInteractionEnabled = false
-          
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: "비밀번호 변경 실패. 잠시 후 다시 시도해주세요. 🥲")
-                print("Failed to update user password with error: \(error.errorDescription)")
+                self.showSimpleBottomAlert(with: "비밀번호 변경에 성공하셨어요.🎉")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            case .failure(_):
+                self.errorLabel.showErrorMessage(message: "비밀번호 변경 실패. 잠시 후 다시 시도해주세요. 🥲")
             }
             dismissProgressBar()
         }
+        
+
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        errorLabel.isHidden = true
+    }
+}
+
+//MARK: - User Input Validation
+
+extension ChangePasswordViewController {
     
     func validPassword() -> Bool {
         
         guard let userPW = passwordTextField.text else {
-            showSimpleBottomAlert(with: "빈 칸이 없는지 확인해 주세요. 🧐")
+            errorLabel.showErrorMessage(message: InputError.empty.rawValue)
             return false
         }
         
@@ -56,7 +78,7 @@ class ChangePasswordViewController: UIViewController {
         if passwordTesting.evaluate(with: userPW) == true {
             return true
         } else {
-            showSimpleBottomAlert(with: "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요.🤔")
+            errorLabel.showErrorMessage(message: InputError.incorrectPasswordFormat.rawValue)
             return false
         }
     }
@@ -64,13 +86,13 @@ class ChangePasswordViewController: UIViewController {
     func checkPasswordLengthIsValid() -> Bool {
         
         guard let password = passwordTextField.text, let _ = checkPasswordTextField.text else {
-            showSimpleBottomAlert(with: "빈 칸이 없는지 확인해 주세요. 🧐")
+            errorLabel.showErrorMessage(message: InputError.empty.rawValue)
             return false
         }
         
         if password.count >= 8 && password.count <= 20 { return true }
         else {
-            showSimpleBottomAlert(with: "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요.🤔")
+            errorLabel.showErrorMessage(message: InputError.incorrectPasswordFormat.rawValue)
             return false
         }
     }
@@ -79,31 +101,91 @@ class ChangePasswordViewController: UIViewController {
         
         if passwordTextField.text == checkPasswordTextField.text { return true }
         else {
-            showSimpleBottomAlert(with: "비밀번호가 일치하지 않습니다. 🤔")
+            errorLabel.showErrorMessage(message: InputError.passwordDoesNotMatch.rawValue)
             checkPasswordTextField.text?.removeAll()
             passwordTextField.becomeFirstResponder()
             return false
         }
     }
+
 }
 
 //MARK: - UI Configuration
 
 extension ChangePasswordViewController {
     
-    func initialize() {
-        
+    private func initialize() {
+        title = "비밀번호 변경"
+        view.backgroundColor = .white
+        initializeTitleLabel()
         initializeTextFields()
-        initializeButton()
-        createObserversForPresentingVerificationAlert()
+        initializeErrorLabel()
+        initializeChangePasswordButton()
     }
     
-    func initializeTextFields() {
+    private func initializeTitleLabel() {
+        view.addSubview(titleLabel)
+        titleLabel.text = "새 비밀번호를 입력해주세요."
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+        ])
+    }
+    
+    private func initializeTextFields() {
+        view.addSubview(passwordTextField)
+        view.addSubview(checkPasswordTextField)
+        
+        passwordTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChange(_:)),
+            for: .editingChanged
+        )
+        checkPasswordTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChange(_:)),
+            for: .editingChanged
+        )
+        
         passwordTextField.isSecureTextEntry = true
         checkPasswordTextField.isSecureTextEntry = true
+        
+        NSLayoutConstraint.activate([
+            passwordTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
+            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 60),
+            
+            checkPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: padding),
+            checkPasswordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            checkPasswordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
+            checkPasswordTextField.heightAnchor.constraint(equalToConstant: 60)
+        ])
     }
     
-    func initializeButton() {
-        changeButton.layer.cornerRadius = 10
+    private func initializeErrorLabel() {
+        view.addSubview(errorLabel)
+        errorLabel.isHidden = true
+        errorLabel.numberOfLines = 2
+        
+        NSLayoutConstraint.activate([
+            errorLabel.topAnchor.constraint(equalTo: checkPasswordTextField.bottomAnchor, constant: 25),
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+        
+    }
+    
+    private func initializeChangePasswordButton() {
+        changePasswordButton.heightAnchor.constraint(equalToConstant: changePasswordButton.heightConstantForKeyboardAppeared).isActive = true
+        changePasswordButton.addTarget(
+            self,
+            action: #selector(pressedChangePasswordButton),
+            for: .touchUpInside
+        )
+        passwordTextField.inputAccessoryView = changePasswordButton
+        checkPasswordTextField.inputAccessoryView = changePasswordButton
     }
 }

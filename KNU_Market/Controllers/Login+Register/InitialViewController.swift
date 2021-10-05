@@ -75,7 +75,7 @@ extension InitialViewController {
     
     @IBAction func pressedInfoButton(_ sender: UIButton) {
         let attributedMessageString: NSAttributedString = idGuideString.attributedStringWithColor(
-            ["2021년 10월 7일 이전에 가입한 회원"],
+            ["2021년 10월 8일 이전에 가입한 회원"],
             color: UIColor(named: K.Color.appColor) ?? .systemPink,
             characterSpacing: nil
         )

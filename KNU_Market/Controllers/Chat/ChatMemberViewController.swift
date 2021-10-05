@@ -21,10 +21,6 @@ class ChatMemberViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.post(
-            name: .reconnectAndFetchFromLastChat,
-            object: nil
-        )
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -417,8 +417,6 @@ extension ChatViewModel {
                     let chatText = chat.chat_content
                     let senderUID = chat.chat_userUID
                     
-                    print("✏️ chat: \(chatText)")
-                    
                     let filteredChat = self.filterChat(text: chatText, userUID: senderUID)
                     
                     guard filteredChat.chatMessage != K.ChatSuffix.emptySuffix else { continue }

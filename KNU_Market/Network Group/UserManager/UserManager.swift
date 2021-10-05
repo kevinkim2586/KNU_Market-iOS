@@ -70,6 +70,7 @@ class UserManager {
     func checkDuplication(nickname: String? = nil,
                           id: String? = nil,
                           emailForPasswordLoss: String? = nil,
+                          studentId: String? = nil,
                           completion: @escaping ((Result<Bool, NetworkError>) ->Void)) {
         
         var parameters: Parameters = [:]
@@ -78,13 +79,16 @@ class UserManager {
         if let nickname = nickname {
             parameters["name"] = nickname
         }
+        if let studentId = studentId {
+            parameters["studentid"] = studentId
+        }
         if let id = id {
             headers.update(name: HTTPHeaderKeys.id.rawValue, value: id)
         }
         if let emailForPasswordLoss = emailForPasswordLoss {
             headers.update(name: HTTPHeaderKeys.email.rawValue, value: emailForPasswordLoss)
         }
-        
+
         AF.request(checkDuplicationURL,
                    method: .get,
                    parameters: parameters,

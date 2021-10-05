@@ -19,12 +19,14 @@ class ChatViewController: MessagesViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         IQKeyboardManager.shared.enable = false
-
-        viewModel = ChatViewModel(room: roomUID,
-                                  isFirstEntrance: isFirstEntrance)
-
+        
+        viewModel = ChatViewModel(
+            room: roomUID,
+            isFirstEntrance: isFirstEntrance
+        )
+        
         initialize()
         print("✏️ pageID: \(roomUID)")
         print("✏️ title: \(chatRoomTitle)")
@@ -38,10 +40,16 @@ class ChatViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        NotificationCenter.default.post(
+            name: .reconnectAndFetchFromLastChat,
+            object: nil
+        )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+
         dismissProgressBar()
     }
 
@@ -83,16 +91,10 @@ class ChatViewController: MessagesViewController {
         presentPanModal(chatMemberVC)
     }
     
-    @objc func pressedCheckButton() {
-        
-        let actionSheet = UIAlertController(
-            title: "모집 상태 변경",
-            message: nil,
-            preferredStyle: .actionSheet
-        )
-        present(actionSheet, animated: true)
+    @objc func pressedRefreshButton() {
+        viewModel.resetAndReconnect()
     }
-    
+
     func showChatPrecautionMessage() {
 
         presentKMAlertOnMainThread(
@@ -452,8 +454,6 @@ extension ChatViewController: MessageCellDelegate {
 
         present(imageVC, animated: true)
     }
-
-
 }
 
 //MARK: - Initialization & UI Configuration
@@ -465,7 +465,7 @@ extension ChatViewController {
         viewModel.delegate = self
 
         initializeNavigationItemTitle()
-//        initializeCheckBarButtonItem()
+//        initializeRefreshButton()
         initializeInputBar()
         initializeCollectionView()
         createObservers()
@@ -478,30 +478,26 @@ extension ChatViewController {
 
         titleButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         titleButton.setTitleColor(.black, for: .normal)
-        titleButton.addTarget(self, action: #selector(pressedTitle), for: .touchUpInside)
-
+        titleButton.addTarget(
+            self,
+            action: #selector(pressedTitle),
+            for: .touchUpInside
+        )
+        
         navigationItem.titleView = titleButton
     }
     
-    func initializeCheckBarButtonItem() {
+    func initializeRefreshButton() {
         
-        if postUploaderUID == User.shared.userUID {
-            
-            let checkBarButton = UIBarButtonItem(
-                image: UIImage(systemName: "checkmark.circle"),
-                style: .plain,
-                target: self,
-                action: #selector(pressedCheckButton)
-            )
-            checkBarButton.tintColor = .black
-            checkBarButton.isEnabled = true
-            navigationItem.rightBarButtonItems?.insert(checkBarButton, at: 1)
-            
-        
-        } else {
-             
-        }
-
+        let refreshButton = UIBarButtonItem(
+            image: UIImage(systemName: "arrow.clockwise.circle"),
+            style: .plain,
+            target: self,
+            action: #selector(pressedRefreshButton)
+        )
+        refreshButton.tintColor = .black
+        refreshButton.isEnabled = true
+        navigationItem.rightBarButtonItems?.insert(refreshButton, at: 1)
     }
 
     func initializeCollectionView() {

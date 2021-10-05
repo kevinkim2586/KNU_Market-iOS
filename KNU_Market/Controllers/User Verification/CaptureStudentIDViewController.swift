@@ -28,12 +28,12 @@ class CaptureStudentIDViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        studentIDTextField.becomeFirstResponder()
     }
-
 
     @IBAction func pressedCheckDuplicateButton(_ sender: UIButton) {
         view.endEditing(true)
-        #warning("구현 필요")
+        checkStudentIdDuplication()
     }
     
     @IBAction func pressedAddImageButton(_ sender: UIButton) {
@@ -54,6 +54,31 @@ class CaptureStudentIDViewController: UIViewController {
         }
         if !validateUserInput() { return }
         verifyUserUsingStudentId()
+    }
+    
+    private func checkStudentIdDuplication() {
+        guard let studentId = studentIDTextField.text, studentId.count > 5 else {
+            showSimpleBottomAlert(with: VerifyError.emptyStudentId.rawValue)
+            return
+        }
+        
+        UserManager.shared.checkDuplication(studentId: studentId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let isDuplicate):
+                if isDuplicate {
+                    self.showSimpleBottomAlert(with: VerifyError.duplicateStudentId.rawValue)
+                    self.didCheckDuplicate = false
+                } else {
+                    DispatchQueue.main.async {
+                        self.showSimpleBottomAlert(with: "사용하셔도 좋습니다🎉")
+                        self.didCheckDuplicate = true
+                    }
+                }
+            case .failure(_):
+                self.showSimpleBottomAlert(with: NetworkError.E000.rawValue)
+            }
+        }
     }
     
     private func verifyUserUsingStudentId() {
@@ -149,7 +174,7 @@ extension CaptureStudentIDViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == studentIDTextField {
-            didCheckDuplicate = true
+            didCheckDuplicate = false
         }
     }
 }

@@ -37,6 +37,7 @@ enum ValidationError {
     enum OnVerification: String, Error {
         
         case didNotCheckStudentIdDuplication    = "학번 중복 확인을 먼저해주세요.🤔"
+        case duplicateStudentId                 = "인증 내역이 존재하는 학번입니다."
         case emptyStudentId                     = "학번을 입력해주세요."
         case emptyBirthDate                     = "생년월일을 입력해주세요."
         case incorrectBirthDateLength           = "생년월일 6자리를 입력해주세요."

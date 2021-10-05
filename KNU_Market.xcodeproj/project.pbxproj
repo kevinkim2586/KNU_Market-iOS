@@ -96,6 +96,8 @@
 		7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB4026C27BD0001C54E6 /* UITableView + Extension.swift */; };
 		7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */; };
 		7CA52D69270B083F00A69F3B /* ChangeIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D68270B083F00A69F3B /* ChangeIdViewController.swift */; };
+		7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D6B270B126A00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift */; };
+		7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D6D270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift */; };
 		7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F0263D4387000E0B7A /* AppDelegate.swift */; };
 		7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F2263D4387000E0B7A /* SceneDelegate.swift */; };
 		7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA661F4263D4387000E0B7A /* InitialViewController.swift */; };
@@ -241,6 +243,8 @@
 		7C9BBB4026C27BD0001C54E6 /* UITableView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + Extension.swift"; sourceTree = "<group>"; };
 		7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailForPasswordLossViewController.swift; sourceTree = "<group>"; };
 		7CA52D68270B083F00A69F3B /* ChangeIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeIdViewController.swift; sourceTree = "<group>"; };
+		7CA52D6B270B126A00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_CheckFirstPrecautionsViewController.swift; sourceTree = "<group>"; };
+		7CA52D6D270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_CheckSecondPrecautionsViewController.swift; sourceTree = "<group>"; };
 		7CA661ED263D4387000E0B7A /* KNU_Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNU_Market.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CA661F0263D4387000E0B7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CA661F2263D4387000E0B7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -399,17 +403,15 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		7C60DC7126944C16001DEA9A /* Settings */ = {
+		7C60DC7126944C16001DEA9A /* Update User Info */ = {
 			isa = PBXGroup;
 			children = (
 				7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */,
 				7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */,
 				7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */,
 				7CA52D68270B083F00A69F3B /* ChangeIdViewController.swift */,
-				7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */,
-				7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */,
 			);
-			path = Settings;
+			path = "Update User Info";
 			sourceTree = "<group>";
 		};
 		7C60DC7226944C62001DEA9A /* Report */ = {
@@ -548,6 +550,17 @@
 				7C89B2E626FC1D9E004109FE /* PostFilterOptions.swift */,
 			);
 			path = "User Related";
+			sourceTree = "<group>";
+		};
+		7CA52D6A270B113900A69F3B /* Unregister Flow */ = {
+			isa = PBXGroup;
+			children = (
+				7CA52D6B270B126A00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift */,
+				7CA52D6D270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift */,
+				7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */,
+				7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */,
+			);
+			path = "Unregister Flow";
 			sourceTree = "<group>";
 		};
 		7CA661E4263D4387000E0B7A = {
@@ -764,7 +777,8 @@
 				7CA66236264136BF000E0B7A /* MyPageViewController.swift */,
 				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
 				7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */,
-				7C60DC7126944C16001DEA9A /* Settings */,
+				7C60DC7126944C16001DEA9A /* Update User Info */,
+				7CA52D6A270B113900A69F3B /* Unregister Flow */,
 				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
 				7C1D829426565428006FEBDE /* SendDeveloperMessageViewController.swift */,
 				7C1C1D11265E714000C08C66 /* TermsAndConditionsViewController.swift */,
@@ -968,6 +982,7 @@
 				7C60DC7626944C8E001DEA9A /* DeveloperInfoViewController.swift in Sources */,
 				7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
+				7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */,
 				7C8E668D26E875A00060F37B /* UIImageView + Extension.swift in Sources */,
 				7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */,
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
@@ -1006,6 +1021,7 @@
 				7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
 				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,
+				7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */,
 				7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */,
 				7C1C1D0C265E70E000C08C66 /* SettingsViewController.swift in Sources */,
 				7C036AB82696BE4C00F6C29B /* Date + Extension.swift in Sources */,

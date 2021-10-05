@@ -68,6 +68,7 @@ struct K {
         static let myPostsVC                    = "MyPostsViewController"
         static let settingsVC                   = "SettingsViewController"
         static let verifyOptionVC               = "VerifyOptionViewController"
+        static let unregisterInputPwVC          = "UnregisterUser_InputPWVC"
         static let unregisterUserInputSuggestVC = "UnregisterUser_InputSuggestionViewController"
         static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"
         static let termsAndConditionsVC         = "TermsAndConditionViewController"

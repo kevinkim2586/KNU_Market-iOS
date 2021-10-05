@@ -368,9 +368,6 @@
                                 <state key="normal" title="회원 탈퇴">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
-                                <connections>
-                                    <segue destination="oLN-g9-ehY" kind="show" id="Inr-xN-FH7"/>
-                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bNH-zB-57W">
                                 <rect key="frame" x="17" y="327" width="179" height="30"/>
@@ -484,109 +481,28 @@
             </objects>
             <point key="canvasLocation" x="7557" y="1033"/>
         </scene>
-        <!--Unregister User Input Password View Controller-->
-        <scene sceneID="pmP-iw-FDU">
-            <objects>
-                <viewController id="oLN-g9-ehY" customClass="UnregisterUser_InputPasswordViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Kfz-Gs-dtJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ReL-Qf-dzm">
-                                <rect key="frame" x="20" y="60" width="374" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Zf-cd-zcc" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="130.5" width="344" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="sfc-9U-WjJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
-                                        <color key="value" name="AppDefaultColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="inactiveColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" name="AppDefaultColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원 탈퇴를 위해 비밀번호를 입력해 주세요." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slb-NM-8ga">
-                                <rect key="frame" x="20" y="210.5" width="374" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="aCn-lN-gH3"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="slb-NM-8ga" firstAttribute="top" secondItem="0Zf-cd-zcc" secondAttribute="bottom" constant="20" id="Aed-zT-YKo"/>
-                            <constraint firstItem="0Zf-cd-zcc" firstAttribute="top" secondItem="ReL-Qf-dzm" secondAttribute="bottom" constant="50" id="Sre-FW-qjK"/>
-                            <constraint firstItem="aCn-lN-gH3" firstAttribute="trailing" secondItem="0Zf-cd-zcc" secondAttribute="trailing" constant="50" id="gWI-H9-hLf"/>
-                            <constraint firstItem="aCn-lN-gH3" firstAttribute="trailing" secondItem="slb-NM-8ga" secondAttribute="trailing" constant="20" id="qYD-l9-cIh"/>
-                            <constraint firstItem="ReL-Qf-dzm" firstAttribute="leading" secondItem="aCn-lN-gH3" secondAttribute="leading" constant="20" id="tp7-GC-Ws5"/>
-                            <constraint firstItem="slb-NM-8ga" firstAttribute="leading" secondItem="aCn-lN-gH3" secondAttribute="leading" constant="20" id="uh2-Sh-Yoz"/>
-                            <constraint firstItem="ReL-Qf-dzm" firstAttribute="top" secondItem="aCn-lN-gH3" secondAttribute="top" constant="60" id="vgA-oY-4kb"/>
-                            <constraint firstItem="aCn-lN-gH3" firstAttribute="trailing" secondItem="ReL-Qf-dzm" secondAttribute="trailing" constant="20" id="x0V-Z7-81G"/>
-                            <constraint firstItem="0Zf-cd-zcc" firstAttribute="leading" secondItem="aCn-lN-gH3" secondAttribute="leading" constant="20" id="zdm-Id-Yxv"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="7Rj-FH-wkU">
-                        <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="e7t-68-Rbg">
-                            <connections>
-                                <action selector="pressedNextButton:" destination="oLN-g9-ehY" id="ts1-av-Xkj"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="detailLineLabel" destination="slb-NM-8ga" id="hSG-dU-KTT"/>
-                        <outlet property="firstLineLabel" destination="ReL-Qf-dzm" id="ZIm-9C-e6Y"/>
-                        <outlet property="passwordTextField" destination="0Zf-cd-zcc" id="jfo-aN-43T"/>
-                        <segue destination="IPd-GZ-Ey7" kind="show" id="Dom-UQ-dy2"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Yut-Y8-hnx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7557" y="1935"/>
-        </scene>
         <!--Unregister User Input Suggestion View Controller-->
         <scene sceneID="QgN-sM-33h">
             <objects>
                 <viewController storyboardIdentifier="UnregisterUser_InputSuggestionViewController" hidesBottomBarWhenPushed="YES" id="IPd-GZ-Ey7" customClass="UnregisterUser_InputSuggestionViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uaq-ao-9hp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOK-KI-TsL">
-                                <rect key="frame" x="20" y="60" width="374" height="20.5"/>
+                                <rect key="frame" x="20" y="104" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="피드백을 반영하여 적극적으로 개선하겠습니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zX-zN-z3X">
-                                <rect key="frame" x="20" y="110.5" width="374" height="20.5"/>
+                                <rect key="frame" x="20" y="154.5" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xCw-zI-8UF">
-                                <rect key="frame" x="20" y="266" width="374" height="476"/>
+                                <rect key="frame" x="20" y="310" width="374" height="452"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut lrunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -594,7 +510,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7jA-t9-RGD">
-                                <rect key="frame" x="20" y="151" width="374" height="41"/>
+                                <rect key="frame" x="20" y="195" width="374" height="41"/>
                                 <string key="text">웹메일 인증과 관련된 문의는 카카오채널을
 통해 실시간으로 도와드리겠습니다.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -602,7 +518,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yQh-UF-aaL">
-                                <rect key="frame" x="20" y="207" width="187" height="29"/>
+                                <rect key="frame" x="20" y="251" width="187" height="29"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="https://pf.kakao.com/_PjLHs">
@@ -953,11 +869,6 @@
             <point key="canvasLocation" x="7557" y="240"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="0Zf-cd-zcc">
-            <size key="intrinsicContentSize" width="62.5" height="23"/>
-        </designable>
-    </designables>
     <resources>
         <image name="camera icon" width="55" height="57"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>

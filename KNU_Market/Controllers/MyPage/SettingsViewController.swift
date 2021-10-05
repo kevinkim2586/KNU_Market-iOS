@@ -81,24 +81,36 @@ extension SettingsViewController {
             animated: true
         )
     }
+    
+    @objc func pressedUnregisterButton() {
+        
+        if User.shared.joinedChatRoomPIDs.count != 0 {
+            navigationController?.pushViewController(
+                UnregisterUser_CheckFirstPrecautionsViewController(),
+                animated: true
+            )
+        } else {
+            navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(), animated: true)
+        }
+    }
 }
 
 //MARK: - Initialization
 
 extension SettingsViewController {
     
-    func initialize() {
+    private func initialize() {
         initializeLabels()
         initializeButtons()
     }
     
-    func initializeLabels() {
+    private func initializeLabels() {
         userIdLabel.text = User.shared.userID
         userNicknameLabel.text = User.shared.nickname
         userEmailLabel.text = User.shared.emailForPasswordLoss
     }
     
-    func initializeButtons() {
+    private func initializeButtons() {
         
         changeIdButton.addTarget(
             self,
@@ -111,6 +123,12 @@ extension SettingsViewController {
             for: .touchUpInside
         )
         
+        
+        unregisterButton.addTarget(
+            self,
+            action: #selector(pressedUnregisterButton),
+            for: .touchUpInside
+        )
         
     }
 }

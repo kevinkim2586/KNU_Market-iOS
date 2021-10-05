@@ -29,5 +29,6 @@ class KMErrorLabel: UILabel {
     func showErrorMessage(message: String) {
         isHidden = false
         text = message
+        textColor = UIColor(named: K.Color.appColor) ?? .systemPink
     }
 }

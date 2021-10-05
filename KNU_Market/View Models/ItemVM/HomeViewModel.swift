@@ -27,12 +27,12 @@ class HomeViewModel {
         
         isFetchingData = true
         
-        ItemManager.shared.fetchItemList(at: self.index,
-                                         fetchCurrentUsers: fetchCurrentUsers,
-                                         postFilterOption: User.shared.postFilterOption) { [weak self] result in
-            
+        ItemManager.shared.fetchItemList(
+            at: self.index,
+            fetchCurrentUsers: fetchCurrentUsers,
+            postFilterOption: User.shared.postFilterOption
+        ) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success(let fetchedModel):
                 
@@ -47,8 +47,13 @@ class HomeViewModel {
                     if User.shared.bannedPostUploaders.contains(model.userInfo?.userUID ?? "") {
                         continue
                     }
+                    
+                    if fetchCurrentUsers {
+                        User.shared.userUploadedRoomPIDs.append(model.uuid)
+                    }
                     self.itemList.append(model)
                 }
+          
                 self.isFetchingData = false
                 self.delegate?.didFetchItemList()
                 
@@ -77,22 +82,19 @@ class HomeViewModel {
     
     //MARK: - 내가 참여하고 있는 Room PID 배열 불러오기
     func fetchEnteredRoomInfo() {
-        
-        ChatManager.shared.getResponseModel(function: .getRoom,
-                                            method: .get,
-                                            pid: nil,
-                                            index: nil,
-                                            expectedModel: [Room].self) { [weak self] result in
-            
+        ChatManager.shared.getResponseModel(
+            function: .getRoom,
+            method: .get,
+            pid: nil,
+            index: nil,
+            expectedModel: [Room].self
+        ) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success(let chatRoom):
-                
                 chatRoom.forEach { chat in
                     User.shared.joinedChatRoomPIDs.append(chat.uuid)
                 }
-                
             case .failure(let error):
                 self.delegate?.failedFetchingRoomPIDInfo(with: error)
             }
@@ -123,6 +125,7 @@ class HomeViewModel {
     
     func resetValues() {
         User.shared.joinedChatRoomPIDs.removeAll()
+        User.shared.userUploadedRoomPIDs.removeAll()
         itemList.removeAll()
         isFetchingData = false
         index = 1

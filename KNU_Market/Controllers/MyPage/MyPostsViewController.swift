@@ -39,8 +39,10 @@ extension MyPostsViewController: HomeViewModelDelegate {
         tableView.tableFooterView = UIView(frame: .zero)
         
         if viewModel.itemList.count == 0 {
-            tableView.showEmptyView(imageName: K.Images.emptyChatList,
-                                    text: "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!")
+            tableView.showEmptyView(
+                imageName: K.Images.emptyChatList,
+                text: "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!"
+            )
         }
     }
     

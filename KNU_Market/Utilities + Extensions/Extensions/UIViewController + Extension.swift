@@ -192,7 +192,7 @@ extension UIViewController {
 
     
         present(alertVC, animated: true)
-        User.shared.isAbsoluteFirstAppLaunch = false
+        User.shared.isNotFirstAppLaunch = true
     }
     
     func presentServiceLimitationNoticeAlert() {

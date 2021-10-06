@@ -53,14 +53,12 @@ class UserManager {
             guard let statusCode = response.response?.statusCode else { return }
             switch statusCode {
             case 201:
-                print("✏️ UserManager - register SUCCESS")
                 completion(.success(true))
                 User.shared.fcmToken = model.fcmToken
-                User.shared.isAbsoluteFirstAppLaunch = true
+                User.shared.isNotFirstAppLaunch = false
                 User.shared.postFilterOption = .showGatheringFirst
             default:
                 let error = NetworkError.returnError(json: response.data ?? Data())
-                print("❗️ UserManager - register FAILED")
                 completion(.failure(error))
             }
         }
@@ -151,6 +149,7 @@ class UserManager {
                         self.saveAccessTokens(from: json)
                         User.shared.password = password
                         User.shared.isLoggedIn = true
+                        User.shared.postFilterOption = .showGatheringFirst
                         UIApplication.shared.registerForRemoteNotifications()
                         self.loadUserProfile { _ in }
                         completion(.success(true))

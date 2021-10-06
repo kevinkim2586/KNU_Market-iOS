@@ -122,7 +122,7 @@ struct K {
         static let hasAllowedForNotification    = "hasAllowedForNotification"
         static let bannedPostUploaders          = "bannedPostUploaders"
         static let bannedChatUsers              = "bannedChatUsers"
-        static let isAbsoluteFirstAppLaunch     = "isAbsoluteFirstAppLaunch"
+        static let isNotFirstAppLaunch          = "isNotFirstAppLaunch"
         static let postFilterOptions            = "postFilterOptions"
     }
     

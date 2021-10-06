@@ -70,7 +70,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nv6-1s-7eV">
-                                <rect key="frame" x="25" y="182" width="76" height="32"/>
+                                <rect key="frame" x="25" y="178" width="76" height="32"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
@@ -88,7 +88,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="을 다시 시도해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJ7-kf-I2S">
-                                <rect key="frame" x="91" y="188.5" width="129" height="18"/>
+                                <rect key="frame" x="91" y="184" width="129" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -97,8 +97,8 @@
                         <viewLayoutGuide key="safeArea" id="N5Z-4Z-1bN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Nv6-1s-7eV" firstAttribute="top" secondItem="e20-Mv-8oZ" secondAttribute="bottom" constant="12" id="AY0-Ks-Gsd"/>
-                            <constraint firstItem="wJ7-kf-I2S" firstAttribute="top" secondItem="e20-Mv-8oZ" secondAttribute="bottom" constant="18.5" id="F26-yl-b66"/>
+                            <constraint firstItem="Nv6-1s-7eV" firstAttribute="top" secondItem="e20-Mv-8oZ" secondAttribute="bottom" constant="8" id="AY0-Ks-Gsd"/>
+                            <constraint firstItem="wJ7-kf-I2S" firstAttribute="top" secondItem="e20-Mv-8oZ" secondAttribute="bottom" constant="14" id="F26-yl-b66"/>
                             <constraint firstItem="Nv6-1s-7eV" firstAttribute="leading" secondItem="N5Z-4Z-1bN" secondAttribute="leading" constant="25" id="Fxs-rl-cI2"/>
                             <constraint firstItem="WJk-f1-rb9" firstAttribute="centerY" secondItem="29L-mz-pOS" secondAttribute="centerY" id="HyH-OZ-eZk"/>
                             <constraint firstItem="7bI-bF-HVm" firstAttribute="top" secondItem="N5Z-4Z-1bN" secondAttribute="top" constant="60" id="KTr-4y-q34"/>

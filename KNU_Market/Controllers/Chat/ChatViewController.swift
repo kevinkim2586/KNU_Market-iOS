@@ -354,13 +354,12 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
         if scrollView.contentOffset.y <= 10 {
-            
+         
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-        
                 if !self.viewModel.isFetchingData &&
-                    self.viewModel.needsToFetchMoreData &&
+                    self.viewModel.hasMorePreviousChatToFetch &&
                     !self.viewModel.isFirstViewLaunch {
-
+                    print("✏️ Fetching previous chats..")
                     self.viewModel.getPreviousChats()
 
                 }

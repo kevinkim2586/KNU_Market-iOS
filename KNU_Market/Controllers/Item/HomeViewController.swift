@@ -86,7 +86,7 @@ extension HomeViewController: HomeViewModelDelegate {
         SPIndicator.present(
             title: "\(User.shared.nickname)님",
             message: "환영합니다 🎉",
-            preset: .custom(UIImage(systemName: "face.smiling") ?? defaultImage)
+            preset: .custom(UIImage(systemName: "face.smiling")?.withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink, renderingMode: .alwaysOriginal) ?? defaultImage)
         )
     }
     
@@ -239,7 +239,9 @@ extension HomeViewController {
         setBackBarButtonItemTitle()
         setNavigationBarAppearance(to: .white)
         
-        if User.shared.isAbsoluteFirstAppLaunch {
+        print("✏️ Absolute first launch: \(User.shared.isNotFirstAppLaunch)")
+        
+        if !User.shared.isNotFirstAppLaunch {
             presentInitialVerificationAlert()
         }
     }

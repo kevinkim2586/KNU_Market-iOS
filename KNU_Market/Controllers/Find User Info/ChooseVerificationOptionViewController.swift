@@ -56,6 +56,7 @@ extension ChooseVerificationOptionViewController {
     
     func initialize() {
         setBackBarButtonItemTitle(to: "뒤로")
+        setClearNavigationBarBackground()
         title = "아이디 찾기"
         initializeLabels()
         initializeButtons()

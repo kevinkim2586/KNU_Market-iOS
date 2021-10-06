@@ -100,12 +100,12 @@ class User {
         }
     }
     
-    var isAbsoluteFirstAppLaunch: Bool {
+    var isNotFirstAppLaunch: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: K.UserDefaultsKey.isAbsoluteFirstAppLaunch)
+            return UserDefaults.standard.bool(forKey: K.UserDefaultsKey.isNotFirstAppLaunch)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.isAbsoluteFirstAppLaunch)
+            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.isNotFirstAppLaunch)
         }
     }
     
@@ -226,11 +226,14 @@ extension User {
         UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.profileImageUID)
         UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.isLoggedIn)
         UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.userUID)
+        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.emailForPasswordLoss)
+        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.fcmToken)
+        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.hasAllowedForNotification)
         UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.hasVerifiedEmail)
         UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.bannedPostUploaders)
         UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.bannedChatUsers)
         UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.notificationList)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.isAbsoluteFirstAppLaunch)
+        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.isNotFirstAppLaunch)
         UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.postFilterOptions)
     
         

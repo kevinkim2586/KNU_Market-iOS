@@ -70,6 +70,7 @@ extension FindPasswordViewController {
     func initialize() {
         title = "비밀번호 찾기"
         viewModel.delegate = self
+        setClearNavigationBarBackground()
         initializeTitleLabel()
         initializeDetailLabel()
         initializeTextField()

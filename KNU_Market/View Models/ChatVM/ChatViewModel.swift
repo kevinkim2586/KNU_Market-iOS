@@ -46,7 +46,7 @@ class ChatViewModel: WebSocketDelegate {
     private var indexForAfterCertainChat: Int = 1
     
     var isFetchingData: Bool = false
-    var needsToFetchMoreData: Bool = true
+    var hasMorePreviousChatToFetch: Bool = true
     var fetchFromLastChat: Bool = false
     
     // Socket
@@ -277,23 +277,25 @@ extension ChatViewModel {
     
     // 채팅 받아오기
     @objc func getPreviousChats() {
-    
+        
         self.isFetchingData = true
         
-        ChatManager.shared.getResponseModel(function: .getChat,
-                                            method: .get,
-                                            pid: room,
-                                            index: indexForPreviousChat,
-                                            expectedModel: ChatResponseModel.self) { [weak self] result in
+        ChatManager.shared.getResponseModel(
+            function: .getChat,
+            method: .get,
+            pid: room,
+            index: indexForPreviousChat,
+            expectedModel: ChatResponseModel.self
+        ) { [weak self] result in
             
             guard let self = self else { return }
-        
+            
             switch result {
             case .success(let chatResponseModel):
-            
+                
                 if chatResponseModel.chat.isEmpty {
                     self.isFetchingData = false
-                    self.needsToFetchMoreData = false
+                    self.hasMorePreviousChatToFetch = false
                     self.delegate?.didFetchEmptyChat()
                     return
                 }
@@ -404,7 +406,6 @@ extension ChatViewModel {
             
                 if chatResponseModel.chat.isEmpty {
                     self.isFetchingData = false
-                    self.needsToFetchMoreData = false
                     self.delegate?.didFetchEmptyChat()
                     return
                 }

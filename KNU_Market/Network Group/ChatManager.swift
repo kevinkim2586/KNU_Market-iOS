@@ -82,7 +82,6 @@ class ChatManager {
                         
                     } catch {
                         print("❗️ ChatManager - getResponse decoding error: \(error) for function: \(function)")
-                        
                         completion(.failure(.E000))
                     }
                     

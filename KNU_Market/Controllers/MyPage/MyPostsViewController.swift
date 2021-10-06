@@ -46,13 +46,14 @@ extension MyPostsViewController: HomeViewModelDelegate {
         }
     }
     
-    func failedFetchingItemList(with error: NetworkError) {
+    func failedFetchingItemList(errorMessage: String, error: NetworkError) {
         
         tableView.showEmptyView(
             imageName: K.Images.emptyChatList,
-            text: "오류가 발생했습니다!\n잠시 후 다시 시도해주세요."
+            text: errorMessage
         )
         refreshControl.endRefreshing()
+        tableView.reloadData()
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
     }

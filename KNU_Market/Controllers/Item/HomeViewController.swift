@@ -105,7 +105,7 @@ extension HomeViewController: HomeViewModelDelegate {
         itemTableView.tableFooterView = nil
     }
     
-    func failedFetchingItemList(with error: NetworkError) {
+    func failedFetchingItemList(errorMessage: String, error: NetworkError) {
         itemTableView.refreshControl?.endRefreshing()
         itemTableView.tableFooterView = nil
         if error != .E601 {

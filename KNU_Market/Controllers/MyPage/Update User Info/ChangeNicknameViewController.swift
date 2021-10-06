@@ -36,14 +36,14 @@ extension ChangeNicknameViewController {
     @objc private func pressedChangeNicknameButton() {
         nicknameTextField.resignFirstResponder()
         if !validateUserInput() { return }
-        checkIdDuplication()
+        checkNicknameDuplication()
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
         errorLabel.isHidden = true
     }
     
-    private func checkIdDuplication() {
+    private func checkNicknameDuplication() {
         
         UserManager.shared.checkDuplication(nickname: nickname!) { [weak self] result in
             guard let self = self else { return }

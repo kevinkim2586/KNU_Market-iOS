@@ -35,7 +35,6 @@ extension UserManager {
                     completion(.failure(.E000))
                     return
                 }
-                
                 switch statusCode {
                 case 201:
                     print("✏️ UserManager - updateUserInfo SUCCESS")

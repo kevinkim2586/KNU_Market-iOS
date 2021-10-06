@@ -122,10 +122,8 @@ extension ChatViewController: ChatViewDelegate {
         }
         
         if viewModel.fetchFromLastChat {
-            print("✏️ ChatVC - getChatFromLastIndex")
             viewModel.getChatFromLastIndex()
         } else {
-            print("✏️ ChatVC - getPreviousChats")
             viewModel.getPreviousChats()
         }
     }
@@ -254,7 +252,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         viewModel.sendText(text)
         messagesCollectionView.scrollToLastItem()
-        
     }
 }
 
@@ -283,8 +280,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 
     // Message Top Label
     func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-
-        
         if viewModel.messages.count == 0 { return 0 }
         if viewModel.messages[indexPath.section].userUID == User.shared.userUID { return 0 }
         else { return 20 }
@@ -306,13 +301,13 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 
         if viewModel.messages.count == 0 { return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1) }
         if viewModel.messages[indexPath.section].userUID == User.shared.userUID {
-            return UIColor(named: K.Color.appColor)!
+            return UIColor(named: K.Color.appColor) ?? .systemPink
         } else {
             return #colorLiteral(red: 0.8771190643, green: 0.8736019731, blue: 0.8798522949, alpha: 1)
         }
     }
     
-    // Message Accessory View
+    // Message Accessory View -> date label
     
     func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         
@@ -323,6 +318,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         label.font = .systemFont(ofSize: 10, weight: .medium)
         label.textColor = .lightGray
         label.text = viewModel.messages[indexPath.section].date
+        label.textAlignment = viewModel.messages[indexPath.section].userUID == User.shared.userUID ? .right : .left
         accessoryView.addSubview(label)
         label.frame = accessoryView.bounds
     }
@@ -400,17 +396,14 @@ extension ChatViewController: MessageCellDelegate {
 
     
     func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedString.Key : Any] {
-        
         if viewModel.messages.count == 0 { return [:] }
         switch detector {
         case .url:
-            
             if viewModel.messages[indexPath.section].userUID == User.shared.userUID {
                 return [.foregroundColor: UIColor.white,  .underlineStyle: NSUnderlineStyle.single.rawValue]
             } else {
                 return [.foregroundColor: UIColor.black, .underlineStyle: NSUnderlineStyle.single.rawValue]
             }
-            
         default:
             return MessageLabel.defaultAttributes
         }
@@ -429,20 +422,22 @@ extension ChatViewController: MessageCellDelegate {
         guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
         let message = messageForItem(at: indexPath, in: messagesCollectionView)
         let heroID = viewModel.messages[indexPath.section].heroID
-    
+        
         switch message.kind {
-            case .photo(let photoItem):
-                if let url = photoItem.url {
-                    presentImageVC(url: url, heroID: heroID)
-                } else {
-                    self.presentKMAlertOnMainThread(title: "오류 발생",
-                                                    message: "유효하지 않은 사진이거나 요청을 처리하지 못했습니다. 불편을 드려 죄송합니다.😥",
-                                                    buttonTitle: "확인")
-                }
-            default: break
+        case .photo(let photoItem):
+            if let url = photoItem.url {
+                presentImageVC(url: url, heroID: heroID)
+            } else {
+                self.presentKMAlertOnMainThread(
+                    title: "오류 발생",
+                    message: "유효하지 않은 사진이거나 요청을 처리하지 못했습니다. 불편을 드려 죄송합니다.😥",
+                    buttonTitle: "확인"
+                )
+            }
+        default: break
         }
     }
-  
+    
     func presentImageVC(url: URL, heroID: String) {
         
         guard let imageVC = storyboard?.instantiateViewController(
@@ -520,24 +515,23 @@ extension ChatViewController {
         layout.setMessageOutgoingAvatarSize(.zero)
         
         layout.setMessageIncomingAccessoryViewSize(CGSize(width: 70, height: 10))
-        layout.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 0))
+        layout.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 5, right: 0))
         layout.setMessageIncomingAccessoryViewPosition(.messageBottom)
         
         layout.setMessageOutgoingAccessoryViewSize(CGSize(width: 70, height: 10))
-        layout.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 0))
+        layout.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 5))
         layout.setMessageOutgoingAccessoryViewPosition(.messageBottom)
 
         
         layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .left,
                                                                               textInsets: .init(top: 30, left: 15, bottom: 30, right: 10)))
-        layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment.init(textAlignment: .right,
-                                                                              textInsets: .init(top: 30, left: 0, bottom: 20, right: 0)))
+
 
 
     }
 
     func initializeInputBar() {
-
+        
         messageInputBar.delegate = self
         messageInputBar.sendButton.title = nil
         let configuration = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular)
@@ -547,7 +541,7 @@ extension ChatViewController {
                                         color ?? .systemPink,
                                         renderingMode: .alwaysOriginal
                                       )
-
+        
         messageInputBar.sendButton.setImage(sendButtonImage, for: .normal)
         initializeImageInputBarButton()
     }
@@ -558,7 +552,7 @@ extension ChatViewController {
         button.setSize(CGSize(width: 35, height: 35), animated: false)
         button.setImage(UIImage(systemName: "plus"),
                         for: .normal)
-        button.tintColor = UIColor(named: K.Color.appColor) ?? .black
+        button.tintColor = .darkGray
         button.onTouchUpInside { [weak self] _ in
             self?.presentInputActionSheet()
         }
@@ -593,27 +587,27 @@ extension ChatViewController {
         }
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel)
-
-
         actionSheet.addAction(cameraAction)
         actionSheet.addAction(albumAction)
         actionSheet.addAction(cancelAction)
         present(actionSheet, animated: true)
     }
-
+    
     @objc func didBlockUser() {
-        presentKMAlertOnMainThread(title: "차단 완료!",
-                                   message: "해당 사용자의 채팅이 더 이상 화면에 나타나지 않습니다.",
-                                   buttonTitle: "확인")
-
+        presentKMAlertOnMainThread(
+            title: "차단 완료!",
+            message: "해당 사용자의 채팅이 더 이상 화면에 나타나지 않습니다.",
+            buttonTitle: "확인"
+        )
     }
-
+    
     func createObservers() {
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didBlockUser),
-                                               name: .didBlockUser,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didBlockUser),
+            name: .didBlockUser,
+            object: nil
+        )
     }
 
 }

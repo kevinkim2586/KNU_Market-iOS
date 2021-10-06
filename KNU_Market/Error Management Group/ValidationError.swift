@@ -53,6 +53,7 @@ enum ValidationError {
         case incorrectIdLength          = "아이디는 4자 이상, 30자 이하로 적어주세요."
         case existingId                 = "이미 사용 중인 아이디입니다.🥲"
         case invalidEmailFormat         = "잘못된 이메일 주소 형식입니다."
+        case existingEmail              = "이미 존재하는 이메일입니다."
         case incorrectNicknameLength    = "닉네임은 2자 이상, 15자 이하로 작성해주세요."
         case existingNickname           = "이미 사용 중인 닉네임입니다.🥲"
         case empty                      = "빈 칸이 없는지 확인해주세요."

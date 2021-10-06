@@ -52,20 +52,24 @@ class ChatManager {
             }
     }
     
-    func getResponseModel<T: Decodable>(function: ChatFunction,
-                                        method: HTTPMethod,
-                                        headers: HTTPHeaders? = nil,
-                                        pid: String?,
-                                        index: Int?,
-                                        expectedModel: T.Type,
-                                        completion: @escaping (Result<T, NetworkError>) -> Void) {
+    func getResponseModel<T: Decodable>(
+        function: ChatFunction,
+        method: HTTPMethod,
+        headers: HTTPHeaders? = nil,
+        pid: String?,
+        index: Int?,
+        expectedModel: T.Type,
+        completion: @escaping (Result<T, NetworkError>) -> Void
+    ) {
         
         let requestURL = generateURLString(for: function, pid: pid, index: index)
-    
-        AF.request(requestURL,
-                   method: method,
-                   headers: headers,
-                   interceptor: interceptor)
+        
+        AF.request(
+            requestURL,
+            method: method,
+            headers: headers,
+            interceptor: interceptor
+        )
             .validate()
             .responseData { response in
                 
@@ -74,7 +78,7 @@ class ChatManager {
                     do {
                         let decodedData = try JSONDecoder().decode(expectedModel,
                                                                    from: response.data ?? Data())
-                         completion(.success(decodedData))
+                        completion(.success(decodedData))
                         
                     } catch {
                         print("❗️ ChatManager - getResponse decoding error: \(error) for function: \(function)")
@@ -105,7 +109,7 @@ class ChatManager {
             .responseData { response in
                 
                 switch response.result {
-                
+                    
                 case .success:
                     print("✏️ ChatManager - banUser SUCCESS")
                     completion(.success(true))

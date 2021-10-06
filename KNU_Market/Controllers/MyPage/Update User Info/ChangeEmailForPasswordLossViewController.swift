@@ -29,21 +29,46 @@ extension ChangeEmailForPasswordLossViewController {
     @objc func pressedChangeEmailButton() {
         emailTextField.resignFirstResponder()
         if !checkIfValidEmail() { return }
+        checkEmailDuplication()
+    }
+    
+    private func checkEmailDuplication() {
+        
+        UserManager.shared.checkDuplication(emailForPasswordLoss: emailTextField.text!) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let isDuplicate):
+                if isDuplicate {
+                    DispatchQueue.main.async {
+                        self.errorLabel.showErrorMessage(message: InputError.existingEmail.rawValue)
+                    }
+                } else {
+                    self.updateEmailForPasswordLoss(with: self.emailTextField.text!)
+                }
+            case .failure(_):
+                self.showSimpleBottomAlert(with: NetworkError.E000.errorDescription)
+            }
+        }
+    }
+    
+    private func updateEmailForPasswordLoss(with email: String) {
+        showProgressBar()
         UserManager.shared.updateUserInfo(
             type: .email,
-            infoString: emailTextField.text!
+            infoString: email
         ) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(_):
-                self.showSimpleBottomAlert(with: "이메일 변경에 성공하셨어요.🎉")
+                self.showSimpleBottomAlert(with: "이메일이 변경되었어요.🎉")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.navigationController?.popViewController(animated: true)
                 }
-            case .failure(let error):
-                self.errorLabel.showErrorMessage(message: error.errorDescription)
+            case .failure(_):
+                self.showSimpleBottomAlert(with: "이메일 변경 실패. 잠시 후 다시 시도해주세요 🥲")
             }
         }
+        dismissProgressBar()
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

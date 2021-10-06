@@ -8,7 +8,8 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
     
-    private lazy var idGuideString = "2021년 10월 7일 이전에 가입한 회원의 아이디는 웹메일(@knu.ac.kr) 형식입니다."
+    private lazy var idGuideString          = "2021년 10월 8일 이전에 가입한 회원의 아이디는 웹메일(@knu.ac.kr) 형식입니다."
+    private lazy var idGuideStringToChange  = "2021년 10월 8일 이전에 가입한 회원"
     
     private lazy var findUserInfoStoryboard = UIStoryboard(
         name: StoryboardName.FindUserInfo,
@@ -75,7 +76,7 @@ extension InitialViewController {
     
     @IBAction func pressedInfoButton(_ sender: UIButton) {
         let attributedMessageString: NSAttributedString = idGuideString.attributedStringWithColor(
-            ["2021년 10월 8일 이전에 가입한 회원"],
+            [idGuideStringToChange],
             color: UIColor(named: K.Color.appColor) ?? .systemPink,
             characterSpacing: nil
         )

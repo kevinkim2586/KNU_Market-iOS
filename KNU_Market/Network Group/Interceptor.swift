@@ -55,15 +55,17 @@ final class Interceptor: RequestInterceptor {
                 case .failure(let error):
                     
                     if error == .E301 {
-                    
                         print("❗️ Interceptor - 세션이 만료되었습니다. 다시 로그인 요망 ")
-                        NotificationCenter.default.post(name: .refreshTokenExpired,
-                                                        object: nil)
-                        
+                        NotificationCenter.default.post(
+                            name: .refreshTokenExpired,
+                            object: nil
+                        )
                     }
                     else {
-                        print("❗️ Interceptor - 이건 뭔 에러지?")
-                        completion(.doNotRetry)
+                        NotificationCenter.default.post(
+                            name: .unexpectedError,
+                            object: nil
+                        )
                     }
                     
                 }

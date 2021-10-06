@@ -19,6 +19,8 @@ class ChatListViewModel {
     
     var roomList: [Room] = [Room]()
     
+    private var isFetchingData: Bool = false
+    
     init() {
         createObservers()
     }
@@ -31,9 +33,13 @@ extension ChatListViewModel {
     // 전체 채팅 목록 불러오기
     @objc func fetchChatList() {
         
+        if isFetchingData { return }
+        
+        isFetchingData = true
+        
         roomList.removeAll()
         User.shared.joinedChatRoomPIDs.removeAll()
-        
+            
         ChatManager.shared.getResponseModel(function: .getRoom,
                                        method: .get,
                                        pid: nil,
@@ -41,13 +47,12 @@ extension ChatListViewModel {
                                        expectedModel: [Room].self) { [weak self] result in
             
             guard let self = self else { return }
-            
+    
             switch result {
             
             case .success(let chatRoom):
                 
                 var count = 0
-            
                 chatRoom.forEach { chat in
                     User.shared.joinedChatRoomPIDs.append(chat.uuid)
                     
@@ -63,8 +68,7 @@ extension ChatListViewModel {
                 if count != User.shared.chatNotificationList.count {
                     ChatNotifications.list.removeAll()
                 }
-                
-
+                self.isFetchingData = false
                 self.delegate?.didFetchChatList()
                 
             case .failure(let error):
@@ -79,19 +83,19 @@ extension ChatListViewModel {
         
         let roomPID = roomList[indexPath.row].uuid
         
-            ChatManager.shared.changeJoinStatus(function: .exit,
-                                                pid: roomPID) { [weak self] result in
-                guard let self = self else { return }
+        ChatManager.shared.changeJoinStatus(function: .exit,
+                                            pid: roomPID) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
+                self.roomList.remove(at: indexPath.row)
+                self.delegate?.didExitPost(at: indexPath)
                 
-                switch result {
-                case .success:
-                    self.roomList.remove(at: indexPath.row)
-                    self.delegate?.didExitPost(at: indexPath)
-                
-                case .failure(let error):
-                    self.delegate?.failedExitingPost(with: error)
-                }
+            case .failure(let error):
+                self.delegate?.failedExitingPost(with: error)
             }
+        }
         
     }
     
@@ -124,7 +128,6 @@ extension ChatListViewModel {
 extension ChatListViewModel {
 
     func currentRoomIsUserUploaded(at index: Int) -> Bool {
-        
         if roomList[index].userUID == User.shared.userUID {
             return true
         } else {
@@ -133,11 +136,12 @@ extension ChatListViewModel {
     }
     
     func createObservers() {
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(fetchChatList),
-                                               name: .getChatList,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(fetchChatList),
+            name: .getChatList,
+            object: nil
+        )
 
     }
 

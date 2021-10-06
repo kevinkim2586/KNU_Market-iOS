@@ -23,12 +23,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if User.shared.isLoggedIn == true {
             
-            let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+            let mainTabBarController = storyboard.instantiateViewController(identifier: K.StoryboardID.tabBarController)
             window?.rootViewController = mainTabBarController
         
         } else {
             
-            let initialController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.initialVC)
+            let initialController = storyboard.instantiateViewController(identifier: K.StoryboardID.initialVC)
             window?.rootViewController = initialController
         }
         
@@ -43,37 +43,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         print("✏️ sceneDidBecomeActive")
 
-        NotificationCenter.default.post(name: .getChat,
-                                        object: nil)
-        NotificationCenter.default.post(name: .getChatList,
-                                        object: nil)
-        NotificationCenter.default.post(name: .getBadgeValue,
-                                        object: nil)
+        NotificationCenter.default.post(
+            name: .reconnectAndFetchFromLastChat,
+            object: nil
+        )
+        NotificationCenter.default.post(
+            name: .getChatList,
+            object: nil
+        )
+        NotificationCenter.default.post(
+            name: .getBadgeValue,
+            object: nil
+        )
         
-        ChatNotifications.list = UserDefaults.standard.stringArray(forKey: Constants.UserDefaultsKey.notificationList) ?? [String]()
+        ChatNotifications.list = UserDefaults.standard.stringArray(forKey: K.UserDefaultsKey.notificationList) ?? [String]()
         
         getDeliveredNotifications()
-        
-        
+
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
         print("✏️ sceneWillResignActive")
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
         print("✏️ sceneWillEnterForeground")
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         print("✏️ sceneDidEnterBackground")
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
     }
 }
 

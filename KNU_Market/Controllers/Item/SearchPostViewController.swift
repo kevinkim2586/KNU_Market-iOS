@@ -18,14 +18,15 @@ class SearchPostViewController: UIViewController {
 //MARK: - SearchPostViewModelDelegate
 
 extension SearchPostViewController: SearchPostViewModelDelegate {
-
+    
     func didFetchSearchList() {
         
         if viewModel.itemList.count == 0 {
-            tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
-                                    text: Constants.placeHolderTitle.emptySearchTitleList.randomElement()!)
+            tableView.showEmptyView(
+                imageName: K.Images.emptySearchPlaceholder,
+                text: K.placeHolderTitle.emptySearchTitleList.randomElement()!
+            )
         }
-  
         tableView.reloadData()
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
@@ -33,11 +34,17 @@ extension SearchPostViewController: SearchPostViewModelDelegate {
     
     func failedFetchingSearchList(with error: NetworkError) {
         
+        tableView.reloadData()
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
         
-        tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
-                                text: "오류가 발생했습니다. 잠시 후 다시 시도해주세요.")
+        let errorText = error == .E401 ? "두 글자 이상 입력해주세요." : "오류가 발생했습니다. 잠시 후 다시 시도해주세요."
+        
+        tableView.showEmptyView(
+            imageName: K.Images.emptySearchPlaceholder,
+            text: errorText
+        )
+
     }
 }
 
@@ -64,10 +71,12 @@ extension SearchPostViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         guard let searchKey = searchBar.text else { return }
-        guard !searchKey.containsEmoji else {
+        guard !searchKey.hasEmojis else {
             searchBar.resignFirstResponder()
-            tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
-                                                 text: "이모티콘 검색은 지원하지 않습니다!")
+            tableView.showEmptyView(
+                imageName: K.Images.emptySearchPlaceholder,
+                text: "이모티콘 검색은 지원하지 않습니다!"
+            )
             return
         }
         searchBar.resignFirstResponder()
@@ -90,18 +99,18 @@ extension SearchPostViewController: UITableViewDelegate, UITableViewDataSource {
         return viewModel.itemList.count
     }
 
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row > viewModel.itemList.count { return UITableViewCell() }
         
-        let cellIdentifier = Constants.cellID.itemTableViewCell
+        let cellIdentifier = K.cellID.itemTableViewCell
         
         tableView.restoreEmptyView()
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell else {
-            fatalError()
-        }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellIdentifier,
+            for: indexPath
+        ) as? ItemTableViewCell else { return UITableViewCell() }
         cell.configure(with: viewModel.itemList[indexPath.row])
         return cell
     }
@@ -110,7 +119,9 @@ extension SearchPostViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let itemVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
+        guard let itemVC = storyboard?.instantiateViewController(
+            identifier: K.StoryboardID.itemVC
+        ) as? ItemViewController else { return }
         
         itemVC.hidesBottomBarWhenPushed = true
         itemVC.pageID = viewModel.itemList[indexPath.row].uuid
@@ -152,22 +163,20 @@ extension SearchPostViewController: PlaceholderDelegate {
 extension SearchPostViewController {
     
     func initialize() {
+        title = "공구 글 검색"
         
-        tableView.showEmptyView(imageName: Constants.Images.emptySearchPlaceholder,
-                                text: Constants.placeHolderTitle.prepareSearchTitleList.randomElement()!)
-        
-        
+        tableView.showEmptyView(
+            imageName: K.Images.emptySearchPlaceholder,
+            text: K.placeHolderTitle.prepareSearchTitleList.randomElement()!
+        )
         
         viewModel.delegate = self
-        
-        self.title = "공구 글 검색"
         
         initializeSearchBar()
         initializeTableView()
     }
     
     func initializeSearchBar() {
-
         searchBar.delegate = self
         searchBar.placeholder = "검색어 입력"
     }
@@ -178,8 +187,8 @@ extension SearchPostViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
-        tableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
+        let nibName = UINib(nibName: K.XIB.itemTableViewCell, bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: K.cellID.itemTableViewCell)
 
     }
     

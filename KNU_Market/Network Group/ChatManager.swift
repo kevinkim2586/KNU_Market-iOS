@@ -19,7 +19,7 @@ class ChatManager {
     private init() {}
     
     //MARK: - API Request URLs
-    let baseURL     = "\(Constants.API_BASE_URL)room/"
+    let baseURL     = "\(K.API_BASE_URL)room/"
     
     //MARK: - 공구 참여 or 나가기
     func changeJoinStatus(function: ChatFunction,
@@ -52,25 +52,28 @@ class ChatManager {
             }
     }
     
-    func getResponseModel<T: Decodable>(function: ChatFunction,
-                                        method: HTTPMethod,
-                                        headers: HTTPHeaders? = nil,
-                                        pid: String?,
-                                        index: Int?,
-                                        expectedModel: T.Type,
-                                        completion: @escaping (Result<T, NetworkError>) -> Void) {
+    func getResponseModel<T: Decodable>(
+        function: ChatFunction,
+        method: HTTPMethod,
+        headers: HTTPHeaders? = nil,
+        pid: String?,
+        index: Int?,
+        expectedModel: T.Type,
+        completion: @escaping (Result<T, NetworkError>) -> Void
+    ) {
         
         let requestURL = generateURLString(for: function, pid: pid, index: index)
-    
-        AF.request(requestURL,
-                   method: method,
-                   headers: headers,
-                   interceptor: interceptor)
+        
+        AF.request(
+            requestURL,
+            method: method,
+            headers: headers,
+            interceptor: interceptor
+        )
             .validate()
             .responseData { response in
                 
                 switch response.result {
-                
                 case .success:
                     do {
                         let decodedData = try JSONDecoder().decode(expectedModel,
@@ -79,7 +82,6 @@ class ChatManager {
                         
                     } catch {
                         print("❗️ ChatManager - getResponse decoding error: \(error) for function: \(function)")
-                        
                         completion(.failure(.E000))
                     }
                     
@@ -106,7 +108,7 @@ class ChatManager {
             .responseData { response in
                 
                 switch response.result {
-                
+                    
                 case .success:
                     print("✏️ ChatManager - banUser SUCCESS")
                     completion(.success(true))
@@ -140,8 +142,6 @@ extension ChatManager {
         case .getChat:
             guard let page = index, let pid = pid else { fatalError() }
             return baseURL + pid + "/" + String(page)
-//            return baseURL + pid + "/\(1)"
-//            #warning("API 수정하면 위 url도 수정 필요")
         }
     }
 }

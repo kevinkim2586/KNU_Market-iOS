@@ -3,48 +3,87 @@ import TextFieldEffects
 
 class NickNameInputViewController: UIViewController {
     
-    @IBOutlet weak var firstLineLabel: UILabel!
-    @IBOutlet weak var secondLineLabel: UILabel!
+    private let titleLabelFirstLine     = KMTitleLabel(textColor: .darkGray)
+    private let titleLabelSecondLine    = KMTitleLabel(textColor: .darkGray)
+    private let detailLabel             = KMDetailLabel(numberOfTotalLines: 1)
+    private let nicknameTextField       = KMTextField(placeHolderText: "닉네임 입력")
+    private let errorLabel              = KMErrorLabel()
+    private let bottomButton            = KMBottomButton(buttonTitle: "다음")
     
-    @IBOutlet weak var thirdLineLabel: UILabel!
-    @IBOutlet weak var nicknameTextField: HoshiTextField!
-    @IBOutlet weak var errorLabel: UILabel!
+    private let padding: CGFloat = 20
     
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var nextButtonBottomAnchor: NSLayoutConstraint!
-    @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
-    
+    typealias RegisterError = ValidationError.OnRegister
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
     
-    @objc func keyboardDidShow(notification: Notification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            
-            nextButtonBottomAnchor.constant = keyboardSize.height
-            nextButtonHeight.constant = 60
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        nicknameTextField.becomeFirstResponder()
     }
+}
 
-    @objc func keyboardWillHide(notification: Notification) {
-        nextButtonBottomAnchor.constant = 0
-        nextButtonHeight.constant = 80
-    }
+//MARK: - Target Methods
+
+extension NickNameInputViewController {
     
-    @IBAction func pressedNextButton(_ sender: UIButton) {
-        if !checkNicknameLengthIsValid() { return }
+    @objc func pressedBottomButton(_ sender: UIButton) {
+        nicknameTextField.resignFirstResponder()
+        if !checkIfValidNickname() { return }
         checkNicknameDuplication()
     }
+}
+
+
+//MARK: - User Input Validation
+
+extension NickNameInputViewController {
     
-    @IBAction func pressedDismissButton(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+    func checkIfValidNickname() -> Bool {
+        guard let nickname = nicknameTextField.text else { return false }
+        
+        if nickname.hasEmojis, nickname.hasSpecialCharacters {
+            errorLabel.showErrorMessage(message: RegisterError.incorrectNicknameFormat.rawValue)
+            return false
+        }
+        
+        if nickname.count >= 2 && nickname.count <= 15 { return true }
+        else {
+            errorLabel.showErrorMessage(message: RegisterError.incorrectNicknameLength.rawValue)
+            return false
+        }
     }
     
+    func checkNicknameDuplication() {
+        let nickname = nicknameTextField.text!.trimmingCharacters(in: .whitespaces)
+        
+        UserManager.shared.checkDuplication(nickname: nickname) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let isDuplicate):
+                
+                if isDuplicate {
+                    self.errorLabel.showErrorMessage(message: RegisterError.existingNickname.rawValue)
+                } else {
+                    UserRegisterValues.shared.nickname = nickname
+                    DispatchQueue.main.async {
+                        self.performSegue(
+                            withIdentifier: K.SegueID.goToEmailForLostPwVC,
+                            sender: self
+                        )
+                    }
+                }
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
+            }
+        }
+    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        UserRegisterValues.shared.nickname = nicknameTextField.text!
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        errorLabel.isHidden = true
     }
 }
 
@@ -53,98 +92,87 @@ class NickNameInputViewController: UIViewController {
 extension NickNameInputViewController {
     
     func initialize() {
-        
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification , object: nil)
-        
-        initializeLabels()
+        setClearNavigationBarBackground()
+        initializeTitleLabels()
+        initializeDetailLabel()
         initializeTextField()
+        initializeErrorLabel()
+        initializeBottomButton()
     }
     
-    func initializeTextField() {
+
+    func initializeTitleLabels() {
+        view.addSubview(titleLabelFirstLine)
+        view.addSubview(titleLabelSecondLine)
         
-        nicknameTextField.addTarget(self,
-                              action: #selector(textFieldDidChange(_:)),
-                              for: .editingChanged)
+        titleLabelFirstLine.text = "크누마켓 내에서"
+        titleLabelFirstLine.changeTextAttributeColor(
+            fullText: titleLabelFirstLine.text!,
+            changeText: "크누마켓"
+        )
+        
+        titleLabelSecondLine.text = "사용하실 닉네임을 입력해주세요!"
+        titleLabelSecondLine.changeTextAttributeColor(
+            fullText: titleLabelSecondLine.text!,
+            changeText: "닉네임"
+        )
+        
+        NSLayoutConstraint.activate([
+            titleLabelFirstLine.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabelFirstLine.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabelFirstLine.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            
+            titleLabelSecondLine.topAnchor.constraint(equalTo: titleLabelFirstLine.bottomAnchor, constant: 10),
+            titleLabelSecondLine.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabelSecondLine.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+    }
+    
+    func initializeDetailLabel() {
+        view.addSubview(detailLabel)
+        detailLabel.text = "2자 이상, 15자 이하로 적어주세요."
+        
+        NSLayoutConstraint.activate([
+            detailLabel.topAnchor.constraint(equalTo: titleLabelSecondLine.bottomAnchor, constant: 25),
+            detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
+    }
+
+    func initializeTextField() {
+        view.addSubview(nicknameTextField)
+        nicknameTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChange(_:)),
+            for: .editingChanged
+        )
+        
+        NSLayoutConstraint.activate([
+            nicknameTextField.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 30),
+            nicknameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            nicknameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
+            nicknameTextField.heightAnchor.constraint(equalToConstant: 60),
+        ])
+    }
+    
+    func initializeErrorLabel() {
+        view.addSubview(errorLabel)
+        errorLabel.isHidden = true
+        
+        NSLayoutConstraint.activate([
+            errorLabel.topAnchor.constraint(equalTo: nicknameTextField.bottomAnchor, constant: padding),
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+        ])
     }
   
-    
-    func initializeLabels() {
-        
-        errorLabel.isHidden = true
-        
-        firstLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        firstLineLabel.textColor = .darkGray
-        secondLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        secondLineLabel.textColor = .darkGray
-        
-        firstLineLabel.text = "크누마켓에 오신 것을 환영해요!!"
-        firstLineLabel.changeTextAttributeColor(fullText: firstLineLabel.text!, changeText: "크누마켓")
-        secondLineLabel.text = "사용하실 닉네임을 입력해주세요!"
-        secondLineLabel.changeTextAttributeColor(fullText: secondLineLabel.text!, changeText: "닉네임")
-        
-        thirdLineLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        thirdLineLabel.textColor = .lightGray
-
-    }
-}
-
-//MARK: - User Input Validation
-
-extension NickNameInputViewController {
-    
-    func checkNicknameLengthIsValid() -> Bool {
-        
-        guard let nickname = nicknameTextField.text else { return false }
-        
-        if nickname.count >= 2 && nickname.count <= 15 { return true }
-        else {
-            showErrorMessage(message: "닉네임은 2자 이상, 15자 이하로 적어주세요.")
-            return false
-        }
-    }
-    
-    func showErrorMessage(message: String) {
-        
-        errorLabel.isHidden = false
-        errorLabel.text = message
-        errorLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        errorLabel.textColor = UIColor(named: Constants.Color.appColor)
-        
-    }
-    
-    func checkNicknameDuplication() {
-        
-        UserManager.shared.checkNicknameDuplicate(nickname: nicknameTextField.text!) { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let isDuplicate):
-                
-                if isDuplicate {
-                    self.showErrorMessage(message: "이미 사용 중인 닉네임입니다. 🥲")
-                }
-                else {
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: Constants.SegueID.goToPasswordInputVC, sender: self)
-                    }
-                }
-                
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
-            }
-        }
-    }
-    
-    func dismissErrorMessage() {
-        errorLabel.isHidden = true
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        dismissErrorMessage()
+    func initializeBottomButton() {
+        bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
+        bottomButton.addTarget(
+            self,
+            action: #selector(pressedBottomButton),
+            for: .touchUpInside
+        )
+        nicknameTextField.inputAccessoryView = bottomButton
     }
 }

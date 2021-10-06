@@ -1,13 +1,18 @@
 import UIKit
 import Alamofire
-import ProgressHUD
 
 class SendDeveloperMessageViewController: UIViewController {
     
-    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var emailHelpLabel: UILabel!
+    @IBOutlet weak var feedbackLabel: UILabel!
+    @IBOutlet weak var timeAvailableLabel: UILabel!
     @IBOutlet weak var messageTextView: UITextView!
     
+    private let emailHelpLabelText = "1:1 채팅을 통한 문의를 원하시는 분은 아래 카카오채널로 문의해주세요."
+    private let timeAvailableText = "(평일, 주말 09:00 ~ 23:00)"
+    private let feedbackLabelText = "✻ 건의/제안 사항을 보내주시면 참고하여,\n추후 업데이트에 반영하겠습니다."
     private let textViewPlaceholder = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
+    
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,17 +53,32 @@ class SendDeveloperMessageViewController: UIViewController {
         }
     }
 
-    func initialize() {
+    @IBAction func pressedKakaoLink(_ sender: UIButton) {
         
-        initializeInfoLabel()
+        let url = URL(string: K.URL.kakaoHelpChannel)!
+        UIApplication.shared.open(url, options: [:])
+    }
+    
+    func initialize() {
+        initializeLabels()
         initializeTextView()
     }
     
-    func initializeInfoLabel() {
+    func initializeLabels() {
         
-        infoLabel.text = "✻ 혹시 건의/제안사항이 있으신가요?\n있으시면 편하게 아래에 적어서 보내주세요.\n개발자들이 참고하여 추후 업데이트에 반영하도록 하겠습니다."
-        infoLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        infoLabel.textColor = .darkGray
+        [emailHelpLabel, timeAvailableLabel, feedbackLabel].forEach { label in
+            label?.font = .systemFont(ofSize: 16, weight: .medium)
+            label?.textColor = .darkGray
+        }
+        
+        emailHelpLabel.text = emailHelpLabelText
+        emailHelpLabel.changeTextAttributeColor(
+            fullText: emailHelpLabelText,
+            changeText: "웹메일 인증과 관련된 문의"
+        )
+        
+        timeAvailableLabel.text = timeAvailableText
+        feedbackLabel.text = feedbackLabelText
     }
     
     func initializeTextView() {

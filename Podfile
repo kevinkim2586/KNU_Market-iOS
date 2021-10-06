@@ -36,6 +36,8 @@ target 'KNU_Market' do
   pod 'TextFieldEffects'
   pod 'lottie-ios'
   pod 'MHLoadingButton'
+  pod 'Hero'
+  pod 'PMAlertController'
 
   
 end

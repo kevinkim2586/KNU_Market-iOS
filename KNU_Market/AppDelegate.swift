@@ -18,10 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         
         // Observer for refresh token expiration
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(refreshTokenHasExpired),
-                                               name: .refreshTokenExpired,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshTokenHasExpired),
+            name: .refreshTokenExpired,
+            object: nil
+        )
         
 
         if #available(iOS 10.0, *) {
@@ -41,11 +43,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserRegisterValues.shared.fcmToken = token
                 User.shared.fcmToken = token
                 if User.shared.isLoggedIn {
-                    UserManager.shared.updateUserFCMToken(with: token)
+                    UserManager.shared.updateUserInfo(type: .fcmToken, infoString: token) { _ in }
                 }
             }
         }
         configureIQKeyboardManager()
+        if #available(iOS 15, *) {
+            configureUINavigationBarAppearance()
+        }
         return true
     }
     
@@ -53,8 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("✏️ didRegisterForRemoteNotificationsWithDeviceToken")
         // Convert token to string (디바이스 토큰 값을 가져옵니다.)
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        
-        // Print it to console(토큰 값을 콘솔창에 보여줍니다. 이 토큰값으로 푸시를 전송할 대상을 정합니다.)
+
         print("APNs device token: \(deviceTokenString)")
         
         Messaging.messaging().apnsToken = deviceToken
@@ -70,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        print("✏️ configurationForConnecting")
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
@@ -144,7 +147,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             }
         }
         
-        NotificationCenter.default.post(name: .getChatList, object: nil)
+        NotificationCenter.default.post(name: .getPreviousChats, object: nil)
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)
         
         completionHandler([[.alert, .sound, .badge]])
@@ -176,7 +179,11 @@ extension AppDelegate {
               let rootVC = keywindow.rootViewController else {
             return
         }
-        rootVC.presentKMAlertOnMainThread(title: "로그인 세션 만료 🤔", message: "세션이 만료되었습니다. 다시 로그인해 주세요.", buttonTitle: "확인")
+        rootVC.presentKMAlertOnMainThread(
+            title: "로그인 세션 만료 🤔",
+            message: "세션이 만료되었습니다. 다시 로그인해 주세요.",
+            buttonTitle: "확인"
+        )
         rootVC.popToInitialViewController()
     }
     
@@ -190,7 +197,6 @@ extension AppDelegate {
     }
     
     func configureIQKeyboardManager() {
-        
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
@@ -198,12 +204,24 @@ extension AppDelegate {
         IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self,
                                                            NickNameInputViewController.self,
                                                            PasswordInputViewController.self,
-                                                           ProfilePictureInputViewController.self,
                                                            EmailInputViewController.self,
-                                                           CheckEmailViewController.self]
+                                                           CheckEmailViewController.self,
+                                                           IDInputViewController.self,
+                                                           EmailForLostPasswordViewController.self]
         
         IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatViewController.self)
     }
-
+    
+    func configureUINavigationBarAppearance() {
+        let appearance = UINavigationBarAppearance()
+        let navigationBar = UINavigationBar()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        appearance.shadowColor = .clear
+        appearance.backgroundColor = .white
+        navigationBar.standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
+    
     
 }

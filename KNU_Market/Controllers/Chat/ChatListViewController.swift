@@ -20,10 +20,17 @@ class ChatListViewController: UIViewController {
         center.removeAllDeliveredNotifications()
         
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+        refreshControl.beginRefreshing()
         viewModel.fetchChatList()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        refreshControl.endRefreshing()
+    }
+    
     @IBAction func pressedLeftBarButton(_ sender: UIBarButtonItem) {
+        if viewModel.roomList.count == 0 { return }
         let topRow = IndexPath(row: 0, section: 0)
         self.chatListTableView.scrollToRow(at: topRow, at: .top, animated: true)
     }
@@ -34,14 +41,17 @@ class ChatListViewController: UIViewController {
 extension ChatListViewController: ChatListViewModelDelegate {
 
     func didFetchChatList() {
+        refreshControl.endRefreshing()
         
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)
         
         chatListTableView.refreshControl?.endRefreshing()
         
         if viewModel.roomList.count == 0 {
-            chatListTableView.showEmptyView(imageName: Constants.Images.emptyChatList,
-                                            text: "아직 활성화된 채팅방이 없네요!\n새로운 공구에 참여해보세요 :)")
+            chatListTableView.showEmptyView(
+                imageName: K.Images.emptyChatList,
+                text: "아직 활성화된 채팅방이 없네요!\n새로운 공구에 참여해보세요 :)"
+            )
             chatListTableView.tableFooterView = UIView(frame: .zero)
         }
 
@@ -93,11 +103,14 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row > viewModel.roomList.count { return UITableViewCell() }
         if self.viewModel.roomList.count == 0 { return UITableViewCell() }
 
-        let cellIdentifier = Constants.cellID.chatTableViewCell
+        let cellIdentifier = K.cellID.chatTableViewCell
         
         tableView.restoreEmptyView()
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ChatTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: cellIdentifier,
+                for: indexPath
+        ) as? ChatTableViewCell else {
             return UITableViewCell()
         }
         
@@ -114,7 +127,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         if viewModel.roomList.count == 0 { return }
         
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-        guard let chatVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.chatVC) as? ChatViewController else { return }
+        guard let chatVC = storyboard.instantiateViewController(identifier: K.StoryboardID.chatVC) as? ChatViewController else { return }
         
         chatVC.roomUID = viewModel.roomList[indexPath.row].uuid
         chatVC.chatRoomTitle = viewModel.roomList[indexPath.row].title
@@ -125,35 +138,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
             ChatNotifications.list.remove(at: index)
         }
     }
-    
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//        if editingStyle == .delete {
-//
-//            if viewModel.currentRoomIsUserUploaded(at: indexPath.row) {
-//                self.presentAlertWithCancelAction(title: "본인이 방장으로 있는 채팅방입니다.",
-//                                                  message: "채팅방을 나가면 공구 글이 삭제되고 모든 참여자가 채팅방에서 나가기 처리가 됩니다. 삭제하시겠습니까?") { selectedOk in
-//                    if selectedOk {
-//                        self.viewModel.deleteMyPostAndExit(at: indexPath)
-//                    }
-//                }
-//            } else {
-//                self.presentAlertWithCancelAction(title: "채팅방에서 나가시겠습니까?",
-//                                                  message: "'확인'을 누르시면 채팅방에서 나가기 처리됩니다.") { selectedOk in
-//                    if selectedOk {
-//                        self.viewModel.exitPost(at: indexPath)
-//                    }
-//                }
-//            }
-//            if let index = ChatNotifications.list.firstIndex(of: viewModel.roomList[indexPath.row].uuid) {
-//                ChatNotifications.list.remove(at: index)
-//            }
-//        }
-//    }
 
     @objc func refreshTableView() {
         viewModel.fetchChatList()
@@ -161,34 +145,37 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-
-
 //MARK: - UI Configuration & Initialization
 
 extension ChatListViewController {
     
     func initialize() {
-        
         createObserversForGettingBadgeValue()
         viewModel.delegate = self
-        
-        self.navigationController?.view.backgroundColor = .white
-        self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
-        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
-        
+        initializeTabBarIcon()
         initializeTableView()
+        setClearNavigationBarBackground()
+        setNavigationBarAppearance(to: .white)
+    }
+    
+    func initializeTabBarIcon() {
+        navigationController?.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
     }
     
     func initializeTableView() {
-        
         chatListTableView.delegate = self
         chatListTableView.dataSource = self
         chatListTableView.refreshControl = refreshControl
-
+        chatListTableView.tableFooterView = UIView(frame: .zero)
+        chatListTableView.separatorStyle = .none
+        chatListTableView.separatorColor = .clear
         
-        refreshControl.addTarget(self,
-                                 action: #selector(refreshTableView),
-                                 for: .valueChanged)
+        refreshControl.addTarget(
+            self,
+            action: #selector(refreshTableView),
+            for: .valueChanged
+        )
     }
 
 }

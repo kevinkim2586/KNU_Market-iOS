@@ -1,6 +1,7 @@
 import Foundation
 import Starscream
 import MessageKit
+import SDWebImage
 import SwiftyJSON
 import Alamofire
 
@@ -20,6 +21,7 @@ protocol ChatViewDelegate: AnyObject {
     func didDeletePost()
     
     func didFetchPreviousChats()
+    func didFetchChatFromLastIndex()
     func didFetchEmptyChat()
     func failedFetchingPreviousChats(with error: NetworkError)
 
@@ -40,16 +42,18 @@ class ChatViewModel: WebSocketDelegate {
                         displayName: User.shared.nickname)
     
     private var chatModel: ChatResponseModel?
-    private var index: Int = 1
+    private var indexForPreviousChat: Int = 1
+    private var indexForAfterCertainChat: Int = 1
     
     var isFetchingData: Bool = false
-    var needsToFetchMoreData: Bool = true
+    var hasMorePreviousChatToFetch: Bool = true
+    var fetchFromLastChat: Bool = false
     
     // Socket
     private var socket: WebSocket!
     private let server =  WebSocketServer()
     private var isConnected = false
-    private var connectRetryLimit = 5
+    private var connectRetryLimit = 8
     private var connectRetryCount = 0
     
 
@@ -57,9 +61,12 @@ class ChatViewModel: WebSocketDelegate {
     var isFirstViewLaunch: Bool = true
     var isFirstEntranceToChat: Bool
 
-
     // Delegate
     weak var delegate: ChatViewDelegate?
+    
+    // Image Size
+    private let imageWidth = 250
+    private let imageHeight = 200
     
 
     init(room: String, isFirstEntrance: Bool) {
@@ -89,7 +96,7 @@ extension ChatViewModel {
         
         print("✏️ Trying to connect to WebSocket...")
         
-        var request = URLRequest(url: URL(string: Constants.WEB_SOCKET_URL)!)
+        var request = URLRequest(url: URL(string: K.WEB_SOCKET_URL)!)
         request.timeoutInterval = 1000
         
         let pinner = FoundationSecurity(allowSelfSigned: true)
@@ -102,8 +109,6 @@ extension ChatViewModel {
     }
     
     func disconnect() {
-        
-
         socket.disconnect()
     }
 
@@ -119,7 +124,7 @@ extension ChatViewModel {
             getRoomInfo()
             connectRetryCount = 0
             self.delegate?.didConnect()
-            sendText(Constants.ChatSuffix.emptySuffix)
+            sendText(K.ChatSuffix.emptySuffix)
             
         case .disconnected(let reason, let code):
             print("❗️ WebSocket has been Disconnected: \(reason) with code: \(code)")
@@ -135,9 +140,9 @@ extension ChatViewModel {
             let roomUID = receivedTextInJSON["room"].stringValue
             let chatText = receivedTextInJSON["comment"].stringValue
 
-            let chatMessage = filterChat(text: chatText, userUID: userUID, isFromSocket: true)
+            let filteredChat = filterChat(text: chatText, userUID: userUID, isFromSocket: true)
 
-            guard chatMessage != Constants.ChatSuffix.emptySuffix else { return }
+            guard filteredChat.chatMessage != K.ChatSuffix.emptySuffix else { return }
         
             if isFromCurrentSender(uuid: userUID) {
                 self.delegate?.didReceiveChat()
@@ -151,14 +156,24 @@ extension ChatViewModel {
                             chat_userUID: userUID,
                             chat_username: nickname,
                             chat_roomUID: roomUID,
-                            chat_content: chatMessage,
+                            chat_content: filteredChat.chatMessage,
                             chat_date: Date().getDateStringForChatBottomLabel())
             
-            messages.append(Message(chat: chat,
-                                         sender: others,
-                                         sentDate: Date(),
-                                         kind: .text(chatMessage)))
-        
+            if filteredChat.chatType == .text {
+                messages.append(Message(chat: chat,
+                                             sender: others,
+                                             sentDate: Date(),
+                                             kind: .text(filteredChat.chatMessage)))
+            } else {
+                messages.append(Message(chat: chat,
+                                             sender: others,
+                                             sentDate: Date(),
+                                             kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                                    image: nil,
+                                                                    placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                                    size: CGSize(width: imageWidth, height: imageHeight)))))
+            }
+            
             self.delegate?.didReceiveChat()
             
         case .reconnectSuggested(_):
@@ -167,7 +182,7 @@ extension ChatViewModel {
             isConnected = false
         
             self.delegate?.reconnectSuggested()
-            sendText(Constants.ChatSuffix.emptySuffix)
+            sendText(K.ChatSuffix.emptySuffix)
             
         case .error(let reason):
             print("❗️ ChatViewModel - Error in didReceive .error: \(String(describing: reason?.localizedDescription))")
@@ -223,24 +238,34 @@ extension ChatViewModel {
         
         socket.write(string: convertedText) {
             
-            guard originalText != Constants.ChatSuffix.emptySuffix else {
+            guard originalText != K.ChatSuffix.emptySuffix else {
                 return
             }
             
-            let chatMessage = self.filterChat(text: originalText)
+            let filteredChat = self.filterChat(text: originalText)
             
             let chat = Chat(chat_uid: Int.random(in: 0...1000),
                             chat_userUID: User.shared.userUID,
                             chat_username: User.shared.nickname,
                             chat_roomUID: self.room,
-                            chat_content: chatMessage,
+                            chat_content: filteredChat.chatMessage,
                             chat_date: Date().getDateStringForChatBottomLabel())
             
-            self.messages.append(Message(chat: chat,
-                                         sender: self.mySelf,
-                                         sentDate: Date(),
-                                         kind: .text(chatMessage)))
             
+            if filteredChat.chatType == .text {
+                self.messages.append(Message(chat: chat,
+                                        sender: self.mySelf,
+                                        sentDate: Date(),
+                                        kind: .text(filteredChat.chatMessage)))
+            } else {
+                self.messages.append(Message(chat: chat,
+                                        sender: self.mySelf,
+                                        sentDate: Date(),
+                                        kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                               image: nil,
+                                                               placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                               size: CGSize(width: self.imageWidth, height: self.imageHeight)))))
+            }
             self.delegate?.didSendText()
         }
     }
@@ -251,38 +276,41 @@ extension ChatViewModel {
 extension ChatViewModel {
     
     // 채팅 받아오기
-    @objc func getChatList() {
-    
+    @objc func getPreviousChats() {
+        
         self.isFetchingData = true
         
-        ChatManager.shared.getResponseModel(function: .getChat,
-                                            method: .get,
-                                            pid: self.room,
-                                            index: self.index,
-                                            expectedModel: ChatResponseModel.self) { [weak self] result in
+        ChatManager.shared.getResponseModel(
+            function: .getChat,
+            method: .get,
+            pid: room,
+            index: indexForPreviousChat,
+            expectedModel: ChatResponseModel.self
+        ) { [weak self] result in
             
             guard let self = self else { return }
-        
+            
             switch result {
             case .success(let chatResponseModel):
                 
                 if chatResponseModel.chat.isEmpty {
                     self.isFetchingData = false
-                    self.needsToFetchMoreData = false
+                    self.hasMorePreviousChatToFetch = false
                     self.delegate?.didFetchEmptyChat()
                     return
                 }
                 
                 self.chatModel?.chat.insert(contentsOf: chatResponseModel.chat, at: 0)
                 
+
                 for chat in chatResponseModel.chat {
                     
                     let chatText = chat.chat_content
                     let senderUID = chat.chat_userUID
                 
-                    let chatMessage = self.filterChat(text: chatText, userUID: senderUID)
+                    let filteredChat = self.filterChat(text: chatText, userUID: senderUID)
                     
-                    guard chatMessage != Constants.ChatSuffix.emptySuffix else { continue }
+                    guard filteredChat.chatMessage != K.ChatSuffix.emptySuffix else { continue }
                 
                     // 내 채팅이 아니면
                     if chat.chat_userUID != User.shared.userUID {
@@ -290,32 +318,173 @@ extension ChatViewModel {
                         let others = Sender(senderId: chat.chat_userUID,
                                             displayName: chat.chat_username)
                         
-                        self.messages.insert(Message(chat: chat,
-                                                     sender: others,
-                                                     sentDate: chat.chat_date.convertStringToDate(),
-                                                     kind: .text(chatMessage)),
-                                             at: 0)
-                    } else {
                         
-                        self.messages.insert(Message(chat: chat,
-                                                     sender: self.mySelf,
-                                                     sentDate: chat.chat_date.convertStringToDate(),
-                                                     kind: .text(chatMessage)),
-                                             at: 0)
+                        if filteredChat.chatType == .text {
+                            self.messages.insert(Message(chat: chat,
+                                                         sender: others,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .text(filteredChat.chatMessage)),
+                                                 at: 0)
+                        } else {
+                            self.messages.insert(Message(chat: chat,
+                                                         sender: others,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                                                image: nil,
+                                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight)))),
+                                                 at: 0)
+                        }
+
                     }
                     
+                    // 내 채팅이면
+                    else {
+                        
+                        if filteredChat.chatType == .text {
+                            self.messages.insert(Message(chat: chat,
+                                                         sender: self.mySelf,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .text(filteredChat.chatMessage)),
+                                                 at: 0)
+                        } else {
+                            self.messages.insert(Message(chat: chat,
+                                                         sender: self.mySelf,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                                                image: nil,
+                                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight)))),
+                                                 at: 0)
+                        }
+                    }
                 }
                 
+
                 self.isFetchingData = false
-                self.index += 1
+                self.indexForPreviousChat += 1
                 self.delegate?.didFetchPreviousChats()
                 
             case .failure(let error):
+                self.isFetchingData = false
                 self.delegate?.failedFetchingPreviousChats(with: error)
             }
         }
     }
     
+    //마지막 채팅 이후부터 새로운 채팅 가져오기
+    @objc func getChatFromLastIndex() {
+        if messages.count == 0 {
+            delegate?.failedFetchingPreviousChats(with: .E000)
+            return
+        }
+        showProgressBar()
+    
+        isFetchingData = true
+        
+        let dateOfLastChat = messages[messages.count - 1].sentDate.getDateStringForGetChatListHeader()
+        
+        let headers: HTTPHeaders = [
+            "isover": "1",
+            "date":  dateOfLastChat
+        ]
+        
+        ChatManager.shared.getResponseModel(
+            function: .getChat,
+            method: .get,
+            headers: headers,
+            pid: room,
+            index: indexForAfterCertainChat,
+            expectedModel: ChatResponseModel.self
+        ) { [weak self] result in
+            
+            dismissProgressBar()
+            guard let self = self else { return }
+        
+            switch result {
+            case .success(let chatResponseModel):
+            
+                if chatResponseModel.chat.isEmpty {
+                    self.isFetchingData = false
+                    self.delegate?.didFetchEmptyChat()
+                    return
+                }
+                
+                self.chatModel?.chat.append(contentsOf: chatResponseModel.chat)
+                
+                
+                for chat in chatResponseModel.chat {
+                    
+                    let chatText = chat.chat_content
+                    let senderUID = chat.chat_userUID
+                    
+                    let filteredChat = self.filterChat(text: chatText, userUID: senderUID)
+                    
+                    guard filteredChat.chatMessage != K.ChatSuffix.emptySuffix else { continue }
+                    
+                    // 내 채팅이 아니면
+                    if chat.chat_userUID != User.shared.userUID {
+                        
+                        let others = Sender(senderId: chat.chat_userUID,
+                                            displayName: chat.chat_username)
+                        
+                        
+                        if filteredChat.chatType == .text {
+                            self.messages.append(Message(chat: chat,
+                                                         sender: others,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .text(filteredChat.chatMessage))
+                                                 )
+                        } else {
+                            self.messages.append(Message(chat: chat,
+                                                         sender: others,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                                                image: nil,
+                                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight))))
+                                                 )
+                        }
+
+                    }
+                    
+                    // 내 채팅이면
+                    else {
+                        
+                        if filteredChat.chatType == .text {
+                            self.messages.append(Message(chat: chat,
+                                                         sender: self.mySelf,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .text(filteredChat.chatMessage))
+                                                 )
+                        } else {
+                            self.messages.append(Message(chat: chat,
+                                                         sender: self.mySelf,
+                                                         sentDate: chat.chat_date.convertStringToDate(),
+                                                         kind: .photo(ImageItem(url: URL(string: K.MEDIA_REQUEST_URL + filteredChat.chatMessage),
+                                                                                image: nil,
+                                                                                placeholderImage: UIImage(named: "chat_bubble_icon")!,
+                                                                                size: CGSize(width: self.imageWidth, height: self.imageHeight))))
+                                                 )
+                        }
+                    }
+                }
+                
+                self.fetchFromLastChat = false
+                self.isFetchingData = false
+                self.indexForAfterCertainChat += 1  //수정 필요(?)
+                self.delegate?.didFetchChatFromLastIndex()
+                
+            case .failure(let error):
+                self.isFetchingData = false
+                self.delegate?.failedFetchingPreviousChats(with: error)
+            }
+        }
+    }
+    
+
+
+
     // 공구글 참가
     func joinPost() {
         
@@ -332,7 +501,6 @@ extension ChatViewModel {
                     self.connect()
                     self.getRoomInfo()
                 } else {
-                    print("❗️ ChatViewModel - joinPost ERROR")
                     self.delegate?.failedConnection(with: error)
                 }
             }
@@ -342,10 +510,10 @@ extension ChatViewModel {
     // 공구글 나오기
     @objc func exitPost() {
         
-        sendText(Constants.ChatSuffix.emptySuffix)
+        sendText(K.ChatSuffix.emptySuffix)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.sendText("\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+            self.sendText("\(User.shared.nickname)\(K.ChatSuffix.exitSuffix)")
             dismissProgressBar()
         }
     }
@@ -369,14 +537,14 @@ extension ChatViewModel {
     
     @objc func sendBanMessageToSocket(notification: Notification) {
         
-        sendText(Constants.ChatSuffix.emptySuffix)
+        sendText(K.ChatSuffix.emptySuffix)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             
             dismissProgressBar()
             if let object = notification.object as? [String : String] {
                 if let uid = object["uid"], let nickname = object["nickname"] {
-                    self.sendText("\(nickname)님이 퇴장 당했습니다.\(uid)\(Constants.ChatSuffix.rawBanSuffix)")
+                    self.sendText("\(nickname)님이 퇴장 당했습니다.\(uid)\(K.ChatSuffix.rawBanSuffix)")
                 }
             }
         }
@@ -410,6 +578,7 @@ extension ChatViewModel {
         ItemManager.shared.deletePost(uid: room) { [weak self] result in
             
             guard let self = self else { return }
+            dismissProgressBar()
             
             switch result {
             
@@ -423,9 +592,21 @@ extension ChatViewModel {
     
     func uploadImage(imageData: Data) {
         
-        
-        
-        
+        MediaManager.shared.uploadImage(with: imageData) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success(let imageUID):
+                
+                self.sendText("\(imageUID)" + K.ChatSuffix.imageSuffix)
+                
+            case .failure(_):
+                self.delegate?.failedUploadingImageToServer()
+            }
+            
+        }
     }
 }
 
@@ -437,7 +618,7 @@ extension ChatViewModel {
     func scheduleSendingGarbageTextWithTimeInterval() {
         
         timer =  Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] timer in
-            self?.sendText(Constants.ChatSuffix.emptySuffix)
+            self?.sendText(K.ChatSuffix.emptySuffix)
         }
     }
     
@@ -450,7 +631,7 @@ extension ChatViewModel {
             "comment": text
         ]
     
-        guard let JSONString = json.rawString() else { return Constants.ChatSuffix.emptySuffix }
+        guard let JSONString = json.rawString() else { return K.ChatSuffix.emptySuffix }
         return JSONString
     }
 
@@ -462,38 +643,49 @@ extension ChatViewModel {
         return roomInfo?.post.user.uid ?? ""
     }
     
-    func filterChat(text: String, userUID: String? = nil, isFromSocket: Bool = false) -> String {
+    func filterChat(text: String, userUID: String? = nil, isFromSocket: Bool = false) -> FilteredChat {
         
         if userUID != nil {
             if User.shared.bannedChatMembers.contains(userUID!) {
-                return Constants.ChatSuffix.emptySuffix
+                return FilteredChat(chatMessage: K.ChatSuffix.emptySuffix, chatType: .text)
             }
         }
-        if text.contains(Constants.ChatSuffix.enterSuffix)   {
-            return text.replacingOccurrences(of: Constants.ChatSuffix.rawEnterSuffix, with: " 🎉")
-            
-        } else if text == "\(User.shared.nickname)\(Constants.ChatSuffix.exitSuffix)" && isFromSocket {
+        
+        if text.contains(K.ChatSuffix.enterSuffix) {
+            return FilteredChat(chatMessage: text.replacingOccurrences(of: K.ChatSuffix.rawEnterSuffix, with: "🎉"), chatType: .text)
+       
+        } else if text == "\(User.shared.nickname)\(K.ChatSuffix.exitSuffix)" && isFromSocket {
             outPost()
-            return Constants.ChatSuffix.emptySuffix
+            return FilteredChat(chatMessage: K.ChatSuffix.emptySuffix, chatType: .text)
             
-        } else if text.contains(Constants.ChatSuffix.exitSuffix) {
-            return text.replacingOccurrences(of: Constants.ChatSuffix.rawExitSuffix, with: "🏃")
+        } else if text.contains(K.ChatSuffix.exitSuffix) {
+            return FilteredChat(chatMessage: text.replacingOccurrences(of: K.ChatSuffix.rawExitSuffix, with: "🏃"), chatType: .text)
             
-        } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)\(Constants.ChatSuffix.rawBanSuffix)") {
+        } else if text.contains("퇴장 당했습니다.\(User.shared.userUID)\(K.ChatSuffix.rawBanSuffix)") {
             self.delegate?.didReceiveBanNotification()
-            return Constants.ChatSuffix.emptySuffix
+            return FilteredChat(chatMessage: K.ChatSuffix.emptySuffix, chatType: .text)
 
-        } else if text.contains(Constants.ChatSuffix.rawBanSuffix) {
-            return Constants.ChatSuffix.usedBanSuffix
-        } else {
-            return text
+        } else if text.contains(K.ChatSuffix.rawBanSuffix) {
+            return FilteredChat(chatMessage: K.ChatSuffix.usedBanSuffix, chatType: .text)
+            
+        } else if text.contains(K.ChatSuffix.imageSuffix) {
+            
+            let imageUID = text[0..<22]
+            return FilteredChat(chatMessage: imageUID, chatType: .photo)
+            
+        } else if text.contains("_SUFFIX") {
+            return FilteredChat(chatMessage: "[아직 지원하지 않는 형식의 메시지입니다. 확인하시려면 앱을 최신 버전으로 업데이트 해주세요.]", chatType: .text)
+        }
+        
+        else {
+            return FilteredChat(chatMessage: text, chatType: .text)
         }
     }
     
     func resetMessages() {
         chatModel = nil
         messages.removeAll()
-        index = 1
+        indexForPreviousChat = 1
     }
     
     @objc func resetAndReconnect() {
@@ -501,28 +693,45 @@ extension ChatViewModel {
         connect()
     }
     
-    func createObservers() {
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(exitPost),
-                                               name: .didChooseToExitPost,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(deletePost),
-                                               name: .didChooseToDeletePost,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(sendBanMessageToSocket),
-                                               name: .didBanUser,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(getChatList),
-                                               name: .didDismissPanModal,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(resetAndReconnect),
-                                               name: .getChat,
-                                               object: nil)
+    @objc func reconnectAndFetchFromLastChat() {
+        if messages.count == 0 { return }
+        fetchFromLastChat = true
+        indexForAfterCertainChat = 1
+        connect()
     }
-}
+    
+    func createObservers() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(exitPost),
+            name: .didChooseToExitPost,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(deletePost),
+            name: .didChooseToDeletePost,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(sendBanMessageToSocket),
+            name: .didBanUser,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getPreviousChats),
+            name: .didDismissPanModal,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reconnectAndFetchFromLastChat),
+            name: .reconnectAndFetchFromLastChat,
+            object: nil
+        )
 
+    }
+
+}

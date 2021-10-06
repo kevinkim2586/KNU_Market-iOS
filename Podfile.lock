@@ -76,6 +76,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.3.1):
     - GoogleUtilities/Logger
+  - Hero (1.6.1)
   - HGPlaceholders (0.5.0)
   - ImageSlideshow (1.9.2):
     - ImageSlideshow/Core (= 1.9.2)
@@ -100,6 +101,7 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PanModal (1.2.7)
+  - PMAlertController (4.0.1)
   - ProgressHUD (13.6)
   - PromisesObjC (1.2.12)
   - SDWebImage (5.11.1):
@@ -122,6 +124,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - GMStepper
+  - Hero
   - HGPlaceholders
   - ImageSlideshow (~> 1.9.0)
   - ImageSlideshow/SDWebImage
@@ -132,6 +135,7 @@ DEPENDENCIES:
   - MessageKit
   - MHLoadingButton
   - PanModal
+  - PMAlertController
   - ProgressHUD
   - SDWebImage (~> 5.0)
   - SnackBar.swift
@@ -157,6 +161,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - Hero
     - HGPlaceholders
     - ImageSlideshow
     - InputBarAccessoryView
@@ -167,6 +172,7 @@ SPEC REPOS:
     - MHLoadingButton
     - nanopb
     - PanModal
+    - PMAlertController
     - ProgressHUD
     - PromisesObjC
     - SDWebImage
@@ -193,6 +199,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 1c863b1161fc3c8cf614a7460d1be6a7c262aab3
   GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
+  Hero: 215865ba3ae41dd9bb08cd6c60a645529c6fc94b
   HGPlaceholders: cbf8caed8360fc2ab5e8a4610cce61f76fbd2c37
   ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
   InputBarAccessoryView: 1f75d8c9f75e5e57f3ffac36ed58635a8005e0bc
@@ -203,6 +210,7 @@ SPEC CHECKSUMS:
   MHLoadingButton: 13bab47a3ce9d88df15638b7a5b73a8ac9f21077
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
+  PMAlertController: ab5fcf4d085b7878c9451466d701449c4bf6efb8
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
@@ -215,6 +223,6 @@ SPEC CHECKSUMS:
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: aa37d1ec2f7399d79016ed16cb811b290dde6183
+PODFILE CHECKSUM: 3edb7d58c29edbd293c03a81fc397cb2dfdffc26
 
 COCOAPODS: 1.10.1

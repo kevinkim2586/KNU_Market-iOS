@@ -19,11 +19,15 @@ class MyPageViewModel {
     
     weak var delegate: MyPageViewModelDelegate?
     
-    var tableViewSection_1: [String] = ["내가 올린 글", "설정"]
+    var tableViewSection_1: [String] = ["내가 올린 글", "설정", "웹메일/학생증 인증"]
     var tableViewSection_2: [String] = ["개발자에게 건의사항 보내기", "서비스 이용약관", "개인정보 처리방침", "개발자 정보"]
 
     var userNickname: String {
         return User.shared.nickname
+    }
+    
+    var userId: String {
+        return User.shared.userID
     }
     
     var profileImage: UIImage? {
@@ -124,13 +128,12 @@ class MyPageViewModel {
     
     //MARK: - 그 다음에 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String) {
-        
-        UserManager.shared.updateUserProfileImage(with: uid) { [weak self] result in
-            
+        UserManager.shared.updateUserInfo(
+            type: .profileImage,
+            infoString: uid
+        ) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
-            
             case .success(_):
                 profileImageCache.removeAllObjects()
                 self.delegate?.didUpdateUserProfileImage()
@@ -139,6 +142,4 @@ class MyPageViewModel {
             }
         }
     }
-    
-
 }

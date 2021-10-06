@@ -4,12 +4,12 @@ class ItemTableViewModel {
     
     var uuid: String = ""
 
-    var defaultImage: UIImage = UIImage(named: Constants.Images.defaultItemIcon)!
+    var defaultImage: UIImage = UIImage(named: K.Images.defaultItemIcon)!
     
     var imageUID: String? {
         didSet {
             if let imageUID = imageUID {
-                imageURL = URL(string: "\(Constants.API_BASE_URL)media/" + imageUID)
+                imageURL = URL(string: "\(K.API_BASE_URL)media/" + imageUID)
             }
             
         }
@@ -30,7 +30,12 @@ class ItemTableViewModel {
     var location: Int = 0
     
     var locationName: String {
-        return Location.listForCell[location - 1]
+        
+        let index = location - 1
+        guard index != Location.list.count || index >= Location.list.count else {
+            return Location.listForCell[Location.listForCell.count - 1]
+        }
+        return Location.listForCell[index]
     }
     
     private var formattedDate: String = ""

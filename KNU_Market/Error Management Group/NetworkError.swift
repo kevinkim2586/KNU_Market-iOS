@@ -46,7 +46,7 @@ enum NetworkError: String, Error {
         switch self {
         
         case .E000:
-            return "일시적인 서비스 오류입니다 😢 잠시 후 다시 시도해주세요."
+            return "일시적인 서비스 오류입니다.😢 잠시 후 다시 시도해주세요."
         case .E001:
             return "방 인원이 모두 찼습니다! 나중에 다시 시도해주세요.🧐"
         case .E101:

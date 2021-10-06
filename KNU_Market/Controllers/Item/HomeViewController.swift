@@ -2,14 +2,13 @@ import UIKit
 import SPIndicator
 import ViewAnimator
 import HGPlaceholders
+import PMAlertController
 
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var itemTableView: TableView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var searchButton: UIBarButtonItem!
-    
-    private let refreshControl = UIRefreshControl()
     
     private var viewModel = HomeViewModel()
     
@@ -20,34 +19,59 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+        NotificationCenter.default.post(
+            name: .getBadgeValue,
+            object: nil
+        )
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-              
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+}
+
+//MARK: - Methods
+
+extension HomeViewController {
+    
     @IBAction func pressedAddButton(_ sender: UIButton) {
-        
-        guard let uploadVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.uploadItemVC) as? UploadItemViewController else {
+        print("✏️ verified? :\(detectIfVerifiedUser())")
+        if !detectIfVerifiedUser() {
+            showSimpleBottomAlertWithAction(
+                message: "학생 인증을 마치셔야 사용이 가능해요.👀",
+                buttonTitle: "인증하러 가기"
+            ) {
+                self.presentVerifyOptionVC()
+            }
             return
         }
+        guard let uploadVC = storyboard?.instantiateViewController(
+            identifier: K.StoryboardID.uploadItemVC
+        ) as? UploadItemViewController else { return }
         uploadVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(uploadVC, animated: true)
     }
     
     @IBAction func pressedSearchButton(_ sender: UIBarButtonItem) {
         
-        let searchVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.searchPostVC) as! SearchPostViewController
-        self.navigationController?.pushViewController(searchVC, animated: true)
+        let searchVC = storyboard?.instantiateViewController(
+            identifier: K.StoryboardID.searchPostVC
+        ) as! SearchPostViewController
+        navigationController?.pushViewController(searchVC, animated: true)
     }
     
     @IBAction func pressedLeftBarButton(_ sender: UIBarButtonItem) {
-        
         let topRow = IndexPath(row: 0, section: 0)
-        self.itemTableView.scrollToRow(at: topRow, at: .top, animated: true)
+        itemTableView.scrollToRow(at: topRow, at: .top, animated: true)
     }
 }
 
@@ -58,34 +82,38 @@ extension HomeViewController: HomeViewModelDelegate {
     func didFetchUserProfileInfo() {
         
         guard let defaultImage = UIImage(systemName: "checkmark.circle") else { return }
-    
-        SPIndicator.present(title: "\(User.shared.nickname)님",
-                            message: "환영합니다 🎉",
-                            preset: .custom(UIImage(systemName: "face.smiling") ?? defaultImage))
+        
+        SPIndicator.present(
+            title: "\(User.shared.nickname)님",
+            message: "환영합니다 🎉",
+            preset: .custom(UIImage(systemName: "face.smiling")?.withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink, renderingMode: .alwaysOriginal) ?? defaultImage)
+        )
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
-        showSimpleBottomAlertWithAction(message: "사용자 정보 불러오기에 실패하였습니다. 로그아웃 후 다시 이용해 주세요.😥",
-                                        buttonTitle: "로그아웃") {
+        showSimpleBottomAlertWithAction(
+            message: "사용자 정보 불러오기에 실패하였습니다. 로그아웃 후 다시 이용해 주세요.😥",
+            buttonTitle: "로그아웃"
+        ) {
             self.popToInitialViewController()
         }
     }
-  
+    
     func didFetchItemList() {
-        
         itemTableView.reloadData()
-        refreshControl.endRefreshing()
+        itemTableView.refreshControl?.endRefreshing()
         itemTableView.tableFooterView = nil
     }
     
-    func failedFetchingItemList(with error: NetworkError) {
-        
-        refreshControl.endRefreshing()
+    func failedFetchingItemList(errorMessage: String, error: NetworkError) {
+        itemTableView.refreshControl?.endRefreshing()
         itemTableView.tableFooterView = nil
+        if error != .E601 {
+            itemTableView.showErrorPlaceholder()
+        }
     }
     
     func failedFetchingRoomPIDInfo(with error: NetworkError) {
-        
         self.showSimpleBottomAlert(with: error.errorDescription)
     }
     
@@ -109,13 +137,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row > viewModel.itemList.count { return UITableViewCell() }
+        if indexPath.row > viewModel.itemList.count
+            || viewModel.itemList.count == 0 { return UITableViewCell() }
         
-        let cellIdentifier = Constants.cellID.itemTableViewCell
+        let cellIdentifier = K.cellID.itemTableViewCell
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell else {
-            fatalError()
-        }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellIdentifier,
+            for: indexPath
+        ) as? ItemTableViewCell else { return UITableViewCell() }
 
         cell.configure(with: viewModel.itemList[indexPath.row])
         return cell
@@ -125,28 +155,30 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let itemVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.itemVC) as? ItemViewController else { return }
+        guard let itemVC = storyboard?.instantiateViewController(
+            identifier: K.StoryboardID.itemVC
+        ) as? ItemViewController else { return }
         
         itemVC.hidesBottomBarWhenPushed = true
         itemVC.pageID = viewModel.itemList[indexPath.row].uuid
         
-        self.navigationController?.pushViewController(itemVC, animated: true)
+        navigationController?.pushViewController(itemVC, animated: true)
     }
 
     
     @objc func refreshTableView() {
         
         //사라지는 애니메이션 처리
-        UIView.animate(views: self.itemTableView.visibleCells,
-                       animations: Animations.forTableViews,
-                       reversed: true,
-                       initialAlpha: 1.0,   // 보이다가
-                       finalAlpha: 0.0,      // 안 보이게
-                       completion: {
-                        self.viewModel.resetValues()
-                        self.viewModel.fetchItemList()
-                        self.viewModel.fetchEnteredRoomInfo()
-                       })
+        UIView.animate(
+            views: itemTableView.visibleCells,
+            animations: Animations.forTableViews,
+            reversed: true,
+            initialAlpha: 1.0,      // 보이다가
+            finalAlpha: 0.0,        // 안 보이게
+            completion: {
+                self.viewModel.refreshTableView()
+            }
+        )
     }
 }
 
@@ -173,6 +205,7 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController: PlaceholderDelegate {
     
     func view(_ view: Any, actionButtonTappedFor placeholder: Placeholder) {
+        itemTableView.refreshControl?.beginRefreshing()
         self.viewModel.resetValues()
         self.viewModel.fetchItemList()
     }
@@ -183,8 +216,6 @@ extension HomeViewController: PlaceholderDelegate {
 extension HomeViewController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-     
-        
     }
 }
 
@@ -193,36 +224,52 @@ extension HomeViewController: UITabBarControllerDelegate {
 extension HomeViewController {
     
     func initialize() {
-        
-        askForNotificationPermission()
-
-        self.navigationController?.tabBarItem.image = UIImage(named: Constants.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
-        self.navigationController?.tabBarItem.selectedImage = UIImage(named: Constants.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
-        
-        self.tabBarController?.delegate = self
-        
+        tabBarController?.delegate = self
         viewModel.delegate = self
         itemTableView.placeholderDelegate = self
         
         viewModel.loadInitialMethods()
-
+        
+        askForNotificationPermission()
+        initializeTabBarIcon()
         initializeTableView()
         initializeAddButton()
+        initializeBarButtonItem()
         createObservers()
+        setBackBarButtonItemTitle()
+        setNavigationBarAppearance(to: .white)
+        
+        print("✏️ Absolute first launch: \(User.shared.isNotFirstAppLaunch)")
+        
+        if !User.shared.isNotFirstAppLaunch {
+            presentInitialVerificationAlert()
+        }
+    }
+    
+    func initializeTabBarIcon() {
+        navigationController?.tabBarItem.image = UIImage(named: K.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
+        navigationController?.tabBarItem.selectedImage = UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
     }
     
     func initializeTableView() {
         
         itemTableView.delegate = self
         itemTableView.dataSource = self
-        itemTableView.refreshControl = refreshControl
+        itemTableView.refreshControl = UIRefreshControl()
         
-        let nibName = UINib(nibName: Constants.XIB.itemTableViewCell, bundle: nil)
-        itemTableView.register(nibName, forCellReuseIdentifier: Constants.cellID.itemTableViewCell)
-        
-        refreshControl.addTarget(self,
-                                 action: #selector(refreshTableView),
-                                 for: .valueChanged)
+        let nibName = UINib(
+            nibName: K.XIB.itemTableViewCell,
+            bundle: nil
+        )
+        itemTableView.register(
+            nibName,
+            forCellReuseIdentifier: K.cellID.itemTableViewCell
+        )
+        itemTableView.refreshControl?.addTarget(
+            self,
+            action: #selector(refreshTableView),
+            for: .valueChanged
+        )
         
         itemTableView.showLoadingPlaceholder()
     }
@@ -230,24 +277,66 @@ extension HomeViewController {
     func initializeAddButton() {
         
         addButton.layer.cornerRadius = addButton.frame.width / 2
-        addButton.backgroundColor = UIColor(named: Constants.Color.appColor)
-
-        let font = UIFont.systemFont(ofSize: 20)
+        addButton.backgroundColor = UIColor(named: K.Color.appColor)
+        
+        let font = UIFont.systemFont(ofSize: 23, weight: .medium)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        let buttonImage = UIImage(systemName: "plus",
-                                withConfiguration: configuration)
+        let buttonImage = UIImage(
+            systemName: "plus",
+            withConfiguration: configuration
+        )
         addButton.setImage(buttonImage, for: .normal)
     }
     
-    func createObservers() {
-    
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(refreshTableView),
-                                               name: .updateItemList,
-                                               object: nil)
-        createObserversForGettingBadgeValue()
+    func initializeBarButtonItem() {
+        
+        let settingsBarButton = UIBarButtonItem(
+            image: UIImage(named: K.Images.homeMenuIcon) ?? UIImage(systemName: "gear"),
+            style: .plain,
+            target: self,
+            action: #selector(pressedSettingsButton)
+        )
+        
+        settingsBarButton.tintColor = .black
+        navigationItem.rightBarButtonItems?.insert(settingsBarButton, at: 0)
         
     }
     
+    @objc func pressedSettingsButton() {
+        
+        let actionSheet = UIAlertController(
+            title: "글 정렬 기준",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        
+        let title = viewModel.filterActionTitle
+
+        actionSheet.addAction(UIAlertAction(title: title,
+                                            style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.viewModel.changePostFilterOption()
+        })
+        actionSheet.addAction(UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil)
+        )
+        
+        present(actionSheet, animated: true)
+    }
     
+    func createObservers() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshTableView),
+            name: .updateItemList,
+            object: nil
+        )
+        createObserversForGettingBadgeValue()
+        createObserversForRefreshTokenExpiration()
+        createObserversForUnexpectedErrors()
+    }
+    
+
 }

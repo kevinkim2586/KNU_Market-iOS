@@ -13,6 +13,8 @@ class UploadItemViewController: UIViewController {
     @IBOutlet weak var expandButton: UITextField!
     @IBOutlet weak var itemDetailTextView: UITextView!
     
+    private let requiredMinimumPeopleToGather: Int = 2
+    
     var viewModel = UploadItemViewModel()
     var editModel: EditPostModel?
     
@@ -20,9 +22,7 @@ class UploadItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "공구 올리기"
-        
         initialize()
     }
     
@@ -41,12 +41,8 @@ class UploadItemViewController: UIViewController {
         itemDetailTextView.resignFirstResponder()
         
         if !validateUserInput() { return }
-        
-        if self.editModel != nil {
-            askToUpdatePost()
-        } else {
-            askToUploadPost()
-        }
+
+        editModel != nil ? askToUpdatePost() : askToUploadPost()
     }
 
     func askToUploadPost() {
@@ -67,8 +63,10 @@ class UploadItemViewController: UIViewController {
     
     func askToUpdatePost() {
         
-        self.presentAlertWithCancelAction(title: "수정하시겠습니까?",
-                                          message: "") { selectedOk in
+        self.presentAlertWithCancelAction(
+            title: "수정하시겠습니까?",
+            message: ""
+        ) { selectedOk in
             
             if selectedOk {
                 showProgressBar()
@@ -88,25 +86,25 @@ class UploadItemViewController: UIViewController {
         
         guard let itemTitle = itemTitleTextField.text else {
             
-            self.showSimpleBottomAlert(with: UserInputError.titleTooShortOrLong.errorDescription)
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.rawValue)
             return false
         }
         viewModel.itemTitle = itemTitle
-        
         do {
             try viewModel.validateUserInputs()
             
-        } catch UserInputError.titleTooShortOrLong {
+        } catch ValidationError.OnUploadPost.titleTooShortOrLong {
             
-            self.showSimpleBottomAlert(with: UserInputError.titleTooShortOrLong.errorDescription)
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.rawValue)
             return false
             
-        } catch UserInputError.detailTooShortOrLong {
+        } catch ValidationError.OnUploadPost.detailTooShortOrLong {
             
-            self.showSimpleBottomAlert(with: UserInputError.detailTooShortOrLong.errorDescription)
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.detailTooShortOrLong.rawValue)
             return false
             
-        } catch { return false }
+        }
+        catch { return false }
         
         return true
     }
@@ -179,8 +177,8 @@ extension UploadItemViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let addImageButtonID  = Constants.cellID.addItemImageCell
-        let newItemImageID    = Constants.cellID.userPickedItemImageCell
+        let addImageButtonID  = K.cellID.addItemImageCell
+        let newItemImageID    = K.cellID.userPickedItemImageCell
         
         if indexPath.item == 0 {
             
@@ -223,7 +221,6 @@ extension UploadItemViewController: UIPickerViewDataSource, UIPickerViewDelegate
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         viewModel.location = row
         tradeLocationTextField.text = viewModel.locationArray[row]
     }
@@ -266,7 +263,7 @@ extension UploadItemViewController {
         initializeStepper()
         initializePickerView()
         initializeTextView()
-        createObserversForPresentingEmailVerification()
+        createObserversForPresentingVerificationAlert()
         
         if editModel != nil {
             configurePageWithPriorData()
@@ -286,10 +283,10 @@ extension UploadItemViewController {
         stepper.maximumValue = 10
         stepper.stepValue = 1
         stepper.buttonsTextColor = .white
-        stepper.buttonsBackgroundColor = UIColor(named: Constants.Color.appColor)!
+        stepper.buttonsBackgroundColor = UIColor(named: K.Color.appColor)!
         stepper.buttonsFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
         stepper.labelFont = .systemFont(ofSize: 15)
-        stepper.labelTextColor = UIColor(named:Constants.Color.appColor)!
+        stepper.labelTextColor = UIColor(named:K.Color.appColor)!
 
         stepper.labelBackgroundColor = UIColor.systemGray6
         stepper.limitHitAnimationColor = .white
@@ -318,14 +315,13 @@ extension UploadItemViewController {
         itemDetailTextView.textColor = UIColor.lightGray
         itemDetailTextView.font = .systemFont(ofSize: 14)
     }
-
     
     func configurePageWithPriorData() {
         
         viewModel.editPostModel = editModel
         
         viewModel.itemTitle = editModel!.title
-        viewModel.location = editModel!.location
+        viewModel.location = editModel!.location - 1
         viewModel.totalPeopleGathering = editModel!.totalGatheringPeople
         viewModel.itemDetail = editModel!.itemDetail
         viewModel.currentlyGatheredPeople = editModel!.currentlyGatheredPeople
@@ -339,7 +335,9 @@ extension UploadItemViewController {
         itemTitleTextField.text = editModel!.title
         
         // 현재 모집된 인원이 1명이면, 최소 모집 인원인 2명으로 자동 설정할 수 있게끔 실행
-        stepper.minimumValue = editModel!.currentlyGatheredPeople == 1 ? 2 : Double(editModel!.currentlyGatheredPeople)
+        stepper.minimumValue = editModel!.currentlyGatheredPeople == 1 ?
+        Double(requiredMinimumPeopleToGather) : Double(editModel!.currentlyGatheredPeople)
+        
         stepper.value = Double(editModel!.currentlyGatheredPeople)
         
         totalGatheringPeopleLabel.text = String(editModel!.totalGatheringPeople) + " 명"

@@ -19,14 +19,12 @@ class ItemTableViewCell: UITableViewCell {
     }
     
     func resetValues() {
-        
         itemImageView.image = nil
         itemTitleLabel.text = nil
         gatheringLabel.text = nil
         personImageView.image = nil
         currentlyGatheredPeopleLabel.text = nil
         locationLabel.text = nil
-        
     }
     
     func configure(with model: ItemListModel) {
@@ -70,7 +68,7 @@ class ItemTableViewCell: UITableViewCell {
        
             itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             itemImageView.sd_setImage(with: viewModel.imageURL,
-                                      placeholderImage: UIImage(named: Constants.Images.defaultItemIcon),
+                                      placeholderImage: UIImage(named: K.Images.defaultItemIcon),
                                       options: .continueInBackground,
                                       completed: nil)
         } else {
@@ -93,7 +91,7 @@ class ItemTableViewCell: UITableViewCell {
         }  else {
     
             gatheringLabel.text = "모집 중"
-            gatheringLabel.backgroundColor = UIColor(named: Constants.Color.appColor)
+            gatheringLabel.backgroundColor = UIColor(named: K.Color.appColor)
             currentlyGatheredPeopleLabel.isHidden = false
             personImageView.isHidden = false
         }
@@ -106,13 +104,14 @@ class ItemTableViewCell: UITableViewCell {
     
     func initializePersonImageView() {
         
-        personImageView.image = UIImage(named: Constants.Images.peopleIcon)
+        personImageView.image = UIImage(named: K.Images.peopleIcon)
     }
     
     
     func initializeCurrentlyGatheredPeopleLabel() {
         
-        let currentNum = viewModel.currentlyGatheredPeople
+        var currentNum = viewModel.currentlyGatheredPeople
+        if viewModel.currentlyGatheredPeople < 1 { currentNum = 1 }
         let total = viewModel.totalGatheringPeople
         
         currentlyGatheredPeopleLabel.textColor = UIColor.darkGray

@@ -63,8 +63,8 @@ public struct PlaceholderData {
     public static var error: PlaceholderData {
         var errorStyle = PlaceholderData()
         errorStyle.image = PlaceholdersProvider.image(named: "hg_default-error")
-        errorStyle.title = NSLocalizedString("어잌후!", comment: "")
-        errorStyle.subtitle = NSLocalizedString("예상치 못한 오류가 발생했습니다!\n나중에 다시 시도해주세요.", comment: "")
+        errorStyle.title = NSLocalizedString("서버 문제 발생!", comment: "")
+        errorStyle.subtitle = NSLocalizedString("예상치 못한 오류가 발생했습니다.\n나중에 다시 시도해주세요.", comment: "")
         errorStyle.action = NSLocalizedString("재시도", comment: "")
         
         return errorStyle

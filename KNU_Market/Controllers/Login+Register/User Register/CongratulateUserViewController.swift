@@ -23,13 +23,10 @@ class CongratulateUserViewController: UIViewController {
         
         showProgressBar()
         
-        UserManager.shared.login(email: UserRegisterValues.shared.email,
+        UserManager.shared.login(id: UserRegisterValues.shared.userId,
                                  password: UserRegisterValues.shared.password) { [weak self] result in
-            
             guard let self = self else { return }
-            
             dismissProgressBar()
-            
             switch result {
             case .success:
                 self.changeRootViewControllerToMain()
@@ -39,16 +36,15 @@ class CongratulateUserViewController: UIViewController {
         }
     }
     
-    @IBAction func pressedSeeTermsAndConditionsButton(_ sender:
-                                                        UIButton) {
-        let url = URL(string: Constants.URL.termsAndConditionNotionURL)!
+    @IBAction func pressedSeeTermsAndConditionsButton(_ sender: UIButton) {
+        let url = URL(string: K.URL.termsAndConditionNotionURL)!
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     
     
     @IBAction func pressedSeePrivacyInfoButton(_ sender: UIButton) {
-        let url = URL(string: Constants.URL.privacyInfoConditionNotionURL)!
+        let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
@@ -73,7 +69,10 @@ class CongratulateUserViewController: UIViewController {
         congratulateLabel.text = "크누마켓 회원가입을 축하합니다!"
         congratulateLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         congratulateLabel.textColor = .darkGray
-        congratulateLabel.changeTextAttributeColor(fullText: congratulateLabel.text!, changeText: "크누마켓")
+        congratulateLabel.changeTextAttributeColor(
+            fullText: congratulateLabel.text!,
+            changeText: "크누마켓"
+        )
     }
     
     func playAnimation() {
@@ -88,18 +87,19 @@ class CongratulateUserViewController: UIViewController {
     }
     
     func changeRootViewControllerToMain() {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.tabBarController)
+        let mainTabBarController = storyboard.instantiateViewController(
+            identifier: K.StoryboardID.tabBarController
+        )
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }
     
     func removeAllPreviousObservers() {
-        
-        NotificationCenter.default.removeObserver(NickNameInputViewController.self)
-        NotificationCenter.default.removeObserver(PasswordInputViewController.self)
-        NotificationCenter.default.removeObserver(ProfilePictureInputViewController.self)
-        NotificationCenter.default.removeObserver(EmailInputViewController.self)
-        NotificationCenter.default.removeObserver(CheckEmailViewController.self)
+        [NickNameInputViewController.self,
+         PasswordInputViewController.self,
+         EmailInputViewController.self,
+         CheckEmailViewController.self].forEach { vc in
+            NotificationCenter.default.removeObserver(vc)
+        }
     }
 }

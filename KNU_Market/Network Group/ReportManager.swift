@@ -11,7 +11,7 @@ class ReportManager {
     private init() {}
     
     //MARK: - API Request URLs
-    let reportUserURL               = "\(Constants.API_BASE_URL)report"
+    let reportUserURL               = "\(K.API_BASE_URL)report"
     
     let interceptor = Interceptor()
     

@@ -64,35 +64,29 @@ class UploadItemViewModel {
                 
                 switch result {
                 case .success(let uid):
-                    print("✏️ UploadItemVM: success in uploading image with uid: \(uid)")
                     self.imageUIDs.append(uid)
                 case .failure(let error):
-                    print("✏️ UploadItemVM: failed uploading image with error: \(error.errorDescription)")
                     self.delegate?.failedUploading(with: error)
                 }
-                print("✏️ group.leave() called")
                 group.leave()
             }
         }
         
         group.notify(queue: .main) {
             print("✏️ Dispatch Group has ended.")
-            
-            if self.editPostModel != nil {
-                self.updatePost()
-            } else {
-                self.uploadItem()
-            }
+            self.editPostModel != nil ? self.updatePost() : self.uploadItem()
         }
     }
     
     func uploadItem() {
         
-        let model = UploadItemRequestDTO(title: itemTitle,
-                                         location: location + 1,
-                                         peopleGathering: totalPeopleGathering,
-                                         imageUIDs: imageUIDs,
-                                         detail: itemDetail)
+        let model = UploadItemRequestDTO(
+            title: itemTitle,
+            location: location + 1,
+            peopleGathering: totalPeopleGathering,
+            imageUIDs: imageUIDs,
+            detail: itemDetail
+        )
         
         ItemManager.shared.uploadNewItem(with: model) { [weak self] result in
             
@@ -102,6 +96,7 @@ class UploadItemViewModel {
             
             case .success(_):
                 self.delegate?.didCompleteUpload()
+                NotificationCenter.default.post(name: .updateItemList, object: nil)
             case .failure(let error):
                 print("UploadItemViewModel - uploadItem() failed: \(error.errorDescription)")
                 self.delegate?.failedUploading(with: error)
@@ -136,12 +131,14 @@ class UploadItemViewModel {
     
     func updatePost() {
         
-        let model = UpdatePostRequestDTO(title: itemTitle,
-                                         location: location + 1,
-                                         detail: itemDetail,
-                                         imageUIDs: imageUIDs,
-                                         totalGatheringPeople: totalPeopleGathering,
-                                         currentlyGatheredPeople: currentlyGatheredPeople)
+        let model = UpdatePostRequestDTO(
+            title: itemTitle,
+            location: location + 1,
+            detail: itemDetail,
+            imageUIDs: imageUIDs,
+            totalGatheringPeople: totalPeopleGathering,
+            currentlyGatheredPeople: currentlyGatheredPeople
+        )
         
         ItemManager.shared.updatePost(uid: self.editPostModel?.pageUID ?? "",
                                       with: model) { [weak self] result in
@@ -164,11 +161,11 @@ class UploadItemViewModel {
     func validateUserInputs() throws {
         
         guard itemTitle.count >= 3, itemTitle.count <= 30 else {
-            throw UserInputError.titleTooShortOrLong
+            throw ValidationError.OnUploadPost.titleTooShortOrLong
         }
         
-        guard itemDetail.count >= 3, itemDetail.count < 250 else {
-            throw UserInputError.detailTooShortOrLong
+        guard itemDetail.count >= 3, itemDetail.count < 700 else {
+            throw ValidationError.OnUploadPost.detailTooShortOrLong
         }
     }
     

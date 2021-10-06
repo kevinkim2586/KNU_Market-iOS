@@ -1,7 +1,6 @@
 import Foundation
 
 protocol SearchPostViewModelDelegate: AnyObject {
-    
     func didFetchSearchList()
     func failedFetchingSearchList(with error: NetworkError)
 }
@@ -23,21 +22,19 @@ class SearchPostViewModel {
         isFetchingData = true
         
         guard let keyword = self.searchKeyword else { return }
-                
-        ItemManager.shared.fetchSearchResults(at: self.index,
-                                              keyword: keyword) { [weak self] result in
-            
+        
+        ItemManager.shared.fetchSearchResults(
+            at: index,
+            keyword: keyword
+        ) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
-            
             case .success(let fetchedModel):
                 
                 if fetchedModel.isEmpty {
                     self.delegate?.didFetchSearchList()
                     return
                 }
-                
                 self.index += 1
                 self.itemList.append(contentsOf: fetchedModel)
                 self.isFetchingData = false

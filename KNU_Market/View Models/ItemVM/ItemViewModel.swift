@@ -19,6 +19,7 @@ protocol ItemViewModelDelegate: AnyObject {
     func failedJoiningChat(with error: NetworkError)
     
     func didBlockUser()
+    func didDetectURL(with string: NSMutableAttributedString)
     
     func failedLoadingData(with error: NetworkError)
 }
@@ -42,7 +43,9 @@ class ItemViewModel {
     let itemImages: [UIImage]? = [UIImage]()
     
     var currentlyGatheredPeople: Int {
-        return model?.currentlyGatheredPeople ?? 1
+        guard let model = model else { return 1 }
+        if model.currentlyGatheredPeople < 1 { return 1 }
+        else { return model.currentlyGatheredPeople }
     }
     
     var totalGatheringPeople: Int {
@@ -51,53 +54,57 @@ class ItemViewModel {
     
     var location: String {
         let index = (model?.location ?? Location.listForCell.count - 1)
+        guard index != Location.listForCell.count + 1 else {
+            return Location.listForCell[Location.listForCell.count - 1]
+        }
         return Location.listForCell[index - 1]
     }
     
     var date: String {
-        return formatDateForDisplay()
+        return getFormattedDateStringToDisplayTodayAndYesterday()
     }
     
-    // 내가 올린 공구인지
+    // 사용자가 올린 공구인지 여부
     var postIsUserUploaded: Bool {
         return model?.nickname == User.shared.nickname
     }
 
     // 이미 참여하고 있는 공구인지
     var userAlreadyJoinedPost: Bool {
-        if User.shared.joinedChatRoomPIDs.contains(pageID ?? "") {
-            return true
-        }
-        return false
+        return User.shared.joinedChatRoomPIDs.contains(pageID ?? "") ? true: false
     }
     
-    // 공구 자체가 다 마감이 됐는지
+    // 인원이 다 찼는지 여부
     var isFull: Bool {
         return model?.isFull ?? true
     }
     
-    // 인원이 다 찼는지
+    // 공구 마감 여부
     var isCompletelyDone: Bool {
         return model?.isCompletelyDone ?? true
     }
     
+    // 모집 여부
     var isGathering: Bool {
         return isCompletelyDone ? false : true
     }
     
     var modelForEdit: EditPostModel {
-        let editPostModel = EditPostModel(title: model?.title ?? "",
-                                          imageURLs: imageURLs,
-                                          imageUIDs: model?.imageUIDs,
-                                          totalGatheringPeople: totalGatheringPeople,
-                                          currentlyGatheredPeople: currentlyGatheredPeople,
-                                          location: model?.location ?? 0,
-                                          itemDetail: model?.itemDetail ?? "",
-                                          pageUID: pageID ?? "")
+        let editPostModel = EditPostModel(
+            title: model?.title ?? "",
+            imageURLs: imageURLs,
+            imageUIDs: model?.imageUIDs,
+            totalGatheringPeople: totalGatheringPeople,
+            currentlyGatheredPeople: currentlyGatheredPeople,
+            location: model?.location ?? 0,
+            itemDetail: model?.itemDetail ?? "",
+            pageUID: pageID ?? ""
+        )
         return editPostModel
     }
     
-
+    var userIncludedURL: URL?
+    
     
     //MARK: - 공구 상세내용 불러오기
     func fetchItemDetails(for uid: String) {
@@ -107,13 +114,11 @@ class ItemViewModel {
             guard let self = self else { return }
             
             switch result {
-            
             case .success(let fetchedModel):
                 self.model = fetchedModel
                 self.delegate?.didFetchItemDetails()
                 
             case .failure(let error):
-                
                 print("❗️ ItemViewModel - FAILED fetchItemDetails")
                 self.delegate?.failedFetchingItemDetails(with: error)
             }
@@ -128,10 +133,8 @@ class ItemViewModel {
             guard let self = self else { return }
             
             switch result {
-            
             case .success(_):
                 self.delegate?.didDeletePost()
-                
             case .failure(let error):
                 self.delegate?.failedDeletingPost(with: error)
             }
@@ -147,10 +150,11 @@ class ItemViewModel {
             
             switch result {
             case .success:
-                
                 self.delegate?.didMarkPostDone()
-                NotificationCenter.default.post(name: .updateItemList, object: nil)
-                
+                NotificationCenter.default.post(
+                    name: .updateItemList,
+                    object: nil
+                )
             case .failure(let error):
                 self.delegate?.failedMarkingPostDone(with: error)
             }
@@ -190,11 +194,11 @@ class ItemViewModel {
     func joinPost() {
         
         if currentlyGatheredPeople == totalGatheringPeople && !postIsUserUploaded && !userAlreadyJoinedPost {
-            self.delegate?.failedJoiningChat(with: .E001)
+            delegate?.failedJoiningChat(with: .E001)
             return
         }
 
-        print("✏️ pageID: \(self.pageID)")
+       print("✏️ pageID: \(self.pageID)")
         
         ChatManager.shared.changeJoinStatus(function: .join,
                                             pid: self.pageID ?? "error") { [weak self] result in
@@ -208,16 +212,15 @@ class ItemViewModel {
                 
                 print("❗️ ItemViewModel - joinPost error: \(error)")
                 
-                // 이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
-                if error == .E108 {
+                switch error {
+                    // 이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
+                case .E108:
                     self.delegate?.didEnterChat(isFirstEntrance: false)
-                    NotificationCenter.default.post(name: .updateItemList, object: nil)
-                
-                // 강퇴를 당한 적이 있는 경우
-                } else if error == .E112 {
-                    self.delegate?.failedJoiningChat(with: error)
-                }
-                else {
+                    NotificationCenter.default.post(
+                        name: .updateItemList,
+                        object: nil
+                    )
+                default:
                     self.delegate?.failedJoiningChat(with: error)
                 }
             }
@@ -228,20 +231,20 @@ class ItemViewModel {
     func fetchEnteredRoomInfo() {
         
         ChatManager.shared.getResponseModel(function: .getRoom,
-                                       method: .get,
-                                       pid: nil,
-                                       index: nil,
-                                       expectedModel: [Room].self) { [weak self] result in
+                                            method: .get,
+                                            pid: nil,
+                                            index: nil,
+                                            expectedModel: [Room].self) { [weak self] result in
             
             guard let self = self else { return }
             
             switch result {
             case .success(let chatRoom):
-        
+                
                 chatRoom.forEach { chat in
                     User.shared.joinedChatRoomPIDs.append(chat.uuid)
                 }
-
+                
             case .failure(let error):
                 self.delegate?.failedLoadingData(with: error)
             }
@@ -249,12 +252,56 @@ class ItemViewModel {
     }
     
     func blockUser(userUID: String) {
-        
         User.shared.bannedPostUploaders.append(userUID)
         self.delegate?.didBlockUser()
-        NotificationCenter.default.post(name: .updateItemList, object: nil)
+        NotificationCenter.default.post(
+            name: .updateItemList,
+            object: nil
+        )
     }
+    
+    func detectURL() {
+        
+        var detectedURLString: String?
+        
+        guard let itemDetail = model?.itemDetail else { return }
+        
+        guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else { return }
+        let matches = detector.matches(
+            in: itemDetail,
+            options: [],
+            range: NSRange(location: 0, length: itemDetail.utf16.count)
+        )
 
+        for match in matches {
+            guard let range = Range(match.range, in: itemDetail) else { continue }
+            let url = itemDetail[range]
+            detectedURLString = String(url)
+        }
+        
+        guard
+            let urlString = detectedURLString,
+            let url = URL(string: urlString)
+        else { return }
+    
+        userIncludedURL = url
+        
+        let attributedString = NSMutableAttributedString(string: itemDetail)
+        
+        if let range: Range<String.Index> = itemDetail.range(of: "http") {
+            let index: Int = itemDetail.distance(
+                from: itemDetail.startIndex,
+                to: range.lowerBound
+            )
+            
+            attributedString.addAttribute(
+                .link,
+                value: urlString,
+                range: NSRange(location: index, length: urlString.count)
+            )
+        }
+        delegate?.didDetectURL(with: attributedString)
+    }
 }
 
 //MARK: - Conversion Methods
@@ -262,28 +309,25 @@ class ItemViewModel {
 extension ItemViewModel {
     
     func convertUIDsToURL() {
-        
-        self.imageURLs.removeAll()
-        
+        imageURLs.removeAll()
         if let itemImageUIDs = model?.imageUIDs {
-            
-            self.imageURLs = itemImageUIDs.compactMap { URL(string: "\(Constants.API_BASE_URL)media/" + $0) }
+            imageURLs = itemImageUIDs.compactMap { URL(string: "\(K.API_BASE_URL)media/" + $0) }
         }
     }
     
     func convertURLsToImageSource() {
-        
-        self.imageSources.removeAll()
+        imageSources.removeAll()
         for url in self.imageURLs {
-            imageSources.append(SDWebImageSource(url: url,
-                                                 placeholder: UIImage(named: Constants.Images.defaultItemImage)))
+            imageSources.append(SDWebImageSource(
+                url: url,
+                placeholder: UIImage(named: K.Images.defaultItemImage))
+            )
         }
     }
     
-    func formatDateForDisplay() -> String {
-        
+    func getFormattedDateStringToDisplayTodayAndYesterday() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Constants.DateFormat.defaultFormat
+        dateFormatter.dateFormat = K.DateFormat.defaultFormat
         dateFormatter.locale = Locale(identifier:"ko_KR")
         
         guard let convertedDate = dateFormatter.date(from: model!.date) else {

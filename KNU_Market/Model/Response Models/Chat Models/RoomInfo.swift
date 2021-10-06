@@ -35,7 +35,6 @@ struct Post: Decodable {
 }
 
 struct UploaderInfo: Decodable {
-    
     let uid: String
 }
 

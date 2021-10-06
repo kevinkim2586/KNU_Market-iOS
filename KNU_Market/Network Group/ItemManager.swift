@@ -189,34 +189,32 @@ class ItemManager {
     }
     
     //MARK: - 검색 결과 불러오기
-    func fetchSearchResults(at index: Int,
-                            keyword: String,
-                            completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
+    func fetchSearchResults(
+        at index: Int,
+        keyword: String,
+        completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)
+    ) {
         
         var parameters: Parameters = [:]
         parameters["keyword"] = keyword
         parameters["page"] = index
         
-        AF.request(searchURL,
-                   method: .get,
-                   parameters: parameters,
-                   encoding: URLEncoding.queryString)
+        AF.request(
+            searchURL,
+            method: .get,
+            parameters: parameters,
+            encoding: URLEncoding.queryString
+        )
             .validate()
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
-                
                 switch statusCode {
-                    
                 case 200:
-                    
-                    print("✏️ ItemManager - fetchSearchResults SUCCESS")
-                    
                     do {
                         let decodedData = try JSONDecoder().decode([ItemListModel].self,
                                                                    from: response.data ?? Data())
                         completion(.success(decodedData))
-                        
                     } catch {
                         print("ItemManager - There was an error decoding JSON Data with error: \(error)")
                         completion(.failure(.E000))
@@ -229,23 +227,24 @@ class ItemManager {
             }
     }
     
-    
     //MARK: - 공구글 완료 표시
-    func markPostDone(uid: String,
-                      completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func markPostDone(
+        uid: String,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         let url = markCompleteURL + uid
         
-        AF.request(url,
-                   method: .put,
-                   interceptor: interceptor)
+        AF.request(
+            url,
+            method: .put,
+            interceptor: interceptor
+        )
             .validate()
             .responseData { response in
                 
                 switch response.result {
-                    
                 case .success:
-                    
                     print("✏️ ItemManager - markPostDone SUCCESS")
                     completion(.success(true))
                     

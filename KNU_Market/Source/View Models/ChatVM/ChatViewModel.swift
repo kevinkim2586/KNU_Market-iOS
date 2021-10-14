@@ -117,9 +117,7 @@ extension ChatViewModel {
         switch event {
     
         case .connected(_):
-            
             print("✏️ WebSocket has been Connected!")
-             
             isConnected = true
             getRoomInfo()
             connectRetryCount = 0
@@ -178,9 +176,7 @@ extension ChatViewModel {
             
         case .reconnectSuggested(_):
             print("❗️ ChatViewModel - Reconnect Suggested")
-            
             isConnected = false
-        
             self.delegate?.reconnectSuggested()
             sendText(K.ChatSuffix.emptySuffix)
             
@@ -190,7 +186,7 @@ extension ChatViewModel {
             isConnected = false
             
             guard connectRetryCount < connectRetryLimit else {
-                print("❗️ ChatViewModel - connectRetryCount == 5")
+                print("❗️ ChatViewModel - connectRetryCount: \(connectRetryCount)")
                 isConnected = false
                 self.delegate?.failedConnection(with: .E000)
                 return
@@ -200,16 +196,12 @@ extension ChatViewModel {
 
         case .viabilityChanged(_):
             print("❗️ Viability Changed")
-            
             isConnected = false
-            
             socket.write(ping: Data())
         
         case .cancelled:
             print("❗️ Cancelled")
-            
             isConnected = false
-            
             disconnect()
       
         case .ping(_):
@@ -277,7 +269,6 @@ extension ChatViewModel {
     
     // 채팅 받아오기
     @objc func getPreviousChats() {
-        
         self.isFetchingData = true
         
         ChatManager.shared.getResponseModel(
@@ -374,14 +365,12 @@ extension ChatViewModel {
     
     //마지막 채팅 이후부터 새로운 채팅 가져오기
     @objc func getChatFromLastIndex() {
+        print("✏️ getChatFromLastIndex...")
         if messages.count == 0 {
             delegate?.failedFetchingPreviousChats(with: .E000)
             return
         }
-        showProgressBar()
-    
         isFetchingData = true
-        
         let dateOfLastChat = messages[messages.count - 1].sentDate.getDateStringForGetChatListHeader()
         
         let headers: HTTPHeaders = [
@@ -397,8 +386,6 @@ extension ChatViewModel {
             index: indexForAfterCertainChat,
             expectedModel: ChatResponseModel.self
         ) { [weak self] result in
-            
-            dismissProgressBar()
             guard let self = self else { return }
         
             switch result {
@@ -411,7 +398,6 @@ extension ChatViewModel {
                 }
                 
                 self.chatModel?.chat.append(contentsOf: chatResponseModel.chat)
-                
                 
                 for chat in chatResponseModel.chat {
                     
@@ -482,8 +468,6 @@ extension ChatViewModel {
         }
     }
     
-
-
 
     // 공구글 참가
     func joinPost() {

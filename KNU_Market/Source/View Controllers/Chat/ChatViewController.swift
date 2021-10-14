@@ -40,7 +40,6 @@ class ChatViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
         NotificationCenter.default.post(
             name: .reconnectAndFetchFromLastChat,
             object: nil
@@ -226,11 +225,7 @@ extension ChatViewController {
     }
     
     func failedFetchingPreviousChats(with error: NetworkError) {
-        presentKMAlertOnMainThread(
-            title: "일시적인 오류 발생",
-            message: error.errorDescription,
-            buttonTitle: "확인"
-        )
+        print("❗️ failedFetchingPreviousChats")
         dismissProgressBar()
     }
     
@@ -359,7 +354,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                 if !self.viewModel.isFetchingData &&
                     self.viewModel.hasMorePreviousChatToFetch &&
                     !self.viewModel.isFirstViewLaunch {
-                    print("✏️ Fetching previous chats..")
                     self.viewModel.getPreviousChats()
 
                 }

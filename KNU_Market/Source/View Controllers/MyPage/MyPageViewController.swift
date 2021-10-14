@@ -241,7 +241,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            guard let vc = self.storyboard?.instantiateViewController(
+            guard let vc = storyboard?.instantiateViewController(
                 identifier: K.StoryboardID.myPageSection_1_Options[indexPath.row]
             ) else { return }
             pushViewController(with: vc)

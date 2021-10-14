@@ -10,3 +10,5 @@ class DeveloperInfoViewController: UIViewController {
         developerInfoImageView.contentMode = .scaleAspectFit
     }
 }
+
+

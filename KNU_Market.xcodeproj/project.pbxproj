@@ -675,6 +675,8 @@
 				7CD74E0E2645983000BD2DE4 /* Item */,
 				7CD74E0D2645982600BD2DE4 /* Chat */,
 				7CD74E0F2645986A00BD2DE4 /* MyPage */,
+				7C60DC7126944C16001DEA9A /* Update User Info */,
+				7CA52D6A270B113900A69F3B /* Unregister Flow */,
 				7C60DC7226944C62001DEA9A /* Report */,
 			);
 			path = "View Controllers";
@@ -797,8 +799,6 @@
 		7CD74E0F2645986A00BD2DE4 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				7C60DC7126944C16001DEA9A /* Update User Info */,
-				7CA52D6A270B113900A69F3B /* Unregister Flow */,
 				7CA66236264136BF000E0B7A /* MyPageViewController.swift */,
 				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
 				7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */,

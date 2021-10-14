@@ -2,9 +2,9 @@ import UIKit
 
 class CheckEmailViewController: UIViewController {
 
-    private let titleLabel = KMTitleLabel(textColor: .darkGray)
-    private let detailLabel = KMDetailLabel(numberOfTotalLines: 2)
-    private let bottomButton = KMBottomButton(buttonTitle: "홈으로 돌아가기")
+    private let titleLabel      = KMTitleLabel(textColor: .darkGray)
+    private let detailLabel     = KMDetailLabel(numberOfTotalLines: 2)
+    private let bottomButton    = KMBottomButton(buttonTitle: "홈으로 돌아가기")
 
     var email: String?
     

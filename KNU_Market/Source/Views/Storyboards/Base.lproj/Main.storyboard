@@ -200,87 +200,6 @@
             </objects>
             <point key="canvasLocation" x="451" y="554"/>
         </scene>
-        <!--Find Password View Controller-->
-        <scene sceneID="S3Y-uQ-MfF">
-            <objects>
-                <viewController storyboardIdentifier="FindPasswordViewController" id="1Hu-lS-tIY" customClass="FindPasswordViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kZY-eH-CVs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="학교 이메일 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AI6-Wg-ngh" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="20" y="50" width="335" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="dbB-Ca-FHh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
-                                        <color key="value" name="AppDefaultColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="inactiveColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" name="AppDefaultColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가입하신 이메일 주소로 임시 비밀번호가 발급됩니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7O-T6-RrD">
-                                <rect key="frame" x="20" y="130" width="335" height="16"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YuQ-D0-dpv">
-                                <rect key="frame" x="50" y="166" width="275" height="50"/>
-                                <color key="backgroundColor" name="AppDefaultColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="cY5-U4-snI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="이메일 전송">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressedSendEmailButton:" destination="1Hu-lS-tIY" eventType="touchUpInside" id="9ny-vc-w9N"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Vt6-IJ-VDk"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Vt6-IJ-VDk" firstAttribute="trailing" secondItem="YuQ-D0-dpv" secondAttribute="trailing" constant="50" id="5UM-Fk-KvM"/>
-                            <constraint firstItem="AI6-Wg-ngh" firstAttribute="leading" secondItem="Vt6-IJ-VDk" secondAttribute="leading" constant="20" id="HJQ-83-A28"/>
-                            <constraint firstItem="Vt6-IJ-VDk" firstAttribute="trailing" secondItem="AI6-Wg-ngh" secondAttribute="trailing" constant="20" id="UfO-Aj-y0T"/>
-                            <constraint firstItem="YuQ-D0-dpv" firstAttribute="leading" secondItem="Vt6-IJ-VDk" secondAttribute="leading" constant="50" id="abr-3S-0Vc"/>
-                            <constraint firstItem="U7O-T6-RrD" firstAttribute="leading" secondItem="Vt6-IJ-VDk" secondAttribute="leading" constant="20" id="eBt-Sv-cNi"/>
-                            <constraint firstItem="U7O-T6-RrD" firstAttribute="top" secondItem="AI6-Wg-ngh" secondAttribute="bottom" constant="20" id="jfd-Pv-Mrr"/>
-                            <constraint firstItem="AI6-Wg-ngh" firstAttribute="top" secondItem="Vt6-IJ-VDk" secondAttribute="top" constant="50" id="mPa-LB-10F"/>
-                            <constraint firstItem="YuQ-D0-dpv" firstAttribute="top" secondItem="U7O-T6-RrD" secondAttribute="bottom" constant="20" id="nxy-b9-lJP"/>
-                            <constraint firstItem="Vt6-IJ-VDk" firstAttribute="trailing" secondItem="U7O-T6-RrD" secondAttribute="trailing" constant="20" id="xIb-Wy-uPO"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="detailLabel" destination="U7O-T6-RrD" id="9i1-XV-XRL"/>
-                        <outlet property="emailTextField" destination="AI6-Wg-ngh" id="HeK-Xl-pX6"/>
-                        <outlet property="sendEmailButton" destination="YuQ-D0-dpv" id="czw-WL-V6d"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AZE-mh-lzk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1418" y="-776"/>
-        </scene>
         <!--ItemList-->
         <scene sceneID="CbI-xy-zPP">
             <objects>
@@ -335,11 +254,6 @@
             <point key="canvasLocation" x="1417" y="-47"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="AI6-Wg-ngh">
-            <size key="intrinsicContentSize" width="118" height="23"/>
-        </designable>
-    </designables>
     <resources>
         <image name="appLogo2" width="3200.5" height="3200.5"/>
         <image name="questionmark.circle.fill" catalog="system" width="128" height="121"/>

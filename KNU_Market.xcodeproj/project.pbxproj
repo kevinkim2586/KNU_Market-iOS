@@ -620,12 +620,12 @@
 			isa = PBXGroup;
 			children = (
 				7C98D2A32706EEDF00579EE6 /* Preview.swift */,
-				7C77E240266BB55600680A27 /* KNU_Market.entitlements */,
 				7CA661FE263D4389000E0B7A /* Info.plist */,
 				7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */,
-				7C922A492717D8CC00295A3F /* Supporting Files */,
+				7C77E240266BB55600680A27 /* KNU_Market.entitlements */,
 				7C922A482717D8C400295A3F /* Resource */,
 				7C922A472717D8BD00295A3F /* Source */,
+				7C922A492717D8CC00295A3F /* Supporting Files */,
 			);
 			path = KNU_Market;
 			sourceTree = "<group>";

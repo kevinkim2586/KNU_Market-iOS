@@ -38,6 +38,7 @@ target 'KNU_Market' do
   pod 'MHLoadingButton'
   pod 'Hero'
   pod 'PMAlertController'
+  pod "Atributika"
 
   
 end

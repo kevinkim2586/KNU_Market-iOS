@@ -89,6 +89,9 @@
 		7C8E668B26E756C00060F37B /* ChatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668A26E756C00060F37B /* ChatType.swift */; };
 		7C8E668D26E875A00060F37B /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668C26E875A00060F37B /* UIImageView + Extension.swift */; };
 		7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */; };
+		7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */; };
+		7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5A27182A3400295A3F /* BaseViewController.swift */; };
+		7C922A5D27185EB000295A3F /* SendUsMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */; };
 		7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9871D526E9BCEA009BD195 /* ImageViewController.swift */; };
 		7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A32706EEDF00579EE6 /* Preview.swift */; };
 		7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */; };
@@ -236,6 +239,9 @@
 		7C8E668A26E756C00060F37B /* ChatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatType.swift; sourceTree = "<group>"; };
 		7C8E668C26E875A00060F37B /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOptionViewController.swift; sourceTree = "<group>"; };
+		7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInformationViewController.swift; sourceTree = "<group>"; };
+		7C922A5A27182A3400295A3F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageViewController.swift; sourceTree = "<group>"; };
 		7C9871D526E9BCEA009BD195 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		7C98D2A32706EEDF00579EE6 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Preview.swift"; sourceTree = "<group>"; };
@@ -547,6 +553,7 @@
 		7C922A472717D8BD00295A3F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				7C922A5927182A2400295A3F /* Base */,
 				7C922A4A2717D94A00295A3F /* Application */,
 				7CEC1921270182F500C2D671 /* Constants */,
 				7CA6624A26413CEF000E0B7A /* Error Management Group */,
@@ -585,6 +592,23 @@
 				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		7C922A56271826C600295A3F /* SnapKit Conversion Folder */ = {
+			isa = PBXGroup;
+			children = (
+				7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */,
+				7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */,
+			);
+			path = "SnapKit Conversion Folder";
+			sourceTree = "<group>";
+		};
+		7C922A5927182A2400295A3F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7C922A5A27182A3400295A3F /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		7CA52D6A270B113900A69F3B /* Unregister Flow */ = {
@@ -799,6 +823,7 @@
 		7CD74E0F2645986A00BD2DE4 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				7C922A56271826C600295A3F /* SnapKit Conversion Folder */,
 				7CA66236264136BF000E0B7A /* MyPageViewController.swift */,
 				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
 				7C1C1D0B265E70DF00C08C66 /* SettingsViewController.swift */,
@@ -1003,6 +1028,7 @@
 				7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */,
 				7C3D986426AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift in Sources */,
 				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
+				7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */,
 				7C60DC7626944C8E001DEA9A /* DeveloperInfoViewController.swift in Sources */,
 				7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
@@ -1023,6 +1049,7 @@
 				7C1D829526565429006FEBDE /* SendDeveloperMessageViewController.swift in Sources */,
 				7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */,
 				7C3B4FF726A92C6C00E2CA8F /* UserRegisterValues.swift in Sources */,
+				7C922A5D27185EB000295A3F /* SendUsMessageViewController.swift in Sources */,
 				7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */,
 				7C015C9A27035B3800089ED8 /* FindIdUsingStudentIdViewController.swift in Sources */,
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
@@ -1108,6 +1135,7 @@
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
+				7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
 				7CEDBB5F2702E89F0078F5E1 /* KMTitleLabel.swift in Sources */,
 				7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */,

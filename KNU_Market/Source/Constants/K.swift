@@ -156,6 +156,7 @@ struct K {
         // PlaceHolder & Default Images
         static let appLogo                      = "appLogo"
         static let appLogoWithPhrase            = "appLogoWithPhrase"
+        static let developerInfo                = "developer_info"
         
         static let defaultAvatar                = "default avatar"
         static let defaultItemIcon              = "default item icon"

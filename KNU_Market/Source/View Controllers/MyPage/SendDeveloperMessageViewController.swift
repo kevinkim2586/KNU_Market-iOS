@@ -72,11 +72,7 @@ class SendDeveloperMessageViewController: UIViewController {
         }
         
         emailHelpLabel.text = emailHelpLabelText
-        emailHelpLabel.changeTextAttributeColor(
-            fullText: emailHelpLabelText,
-            changeText: "웹메일 인증과 관련된 문의"
-        )
-        
+
         timeAvailableLabel.text = timeAvailableText
         feedbackLabel.text = feedbackLabelText
     }

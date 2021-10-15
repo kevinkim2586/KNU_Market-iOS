@@ -18,7 +18,6 @@ class MyPageViewController: UIViewController {
         super.viewDidLoad()
         viewModel.loadUserProfile()
         initialize()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

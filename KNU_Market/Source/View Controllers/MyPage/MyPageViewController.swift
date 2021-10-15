@@ -246,15 +246,15 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             pushViewController(with: vc)
         case 1:
             switch indexPath.row {
+            case 0: pushViewController(with: SendUsMessageViewController(networkManager: UserManager()))
             case 1:
                 let url = URL(string: K.URL.termsAndConditionNotionURL)!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             case 2:
                 let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            default:
-                guard let vc = self.storyboard?.instantiateViewController(identifier: K.StoryboardID.myPageSection_2_Options[indexPath.row]) else { return }
-                pushViewController(with: vc)
+            case 3: pushViewController(with: DeveloperInformationViewController())
+            default: break
             }
         default: return
         }

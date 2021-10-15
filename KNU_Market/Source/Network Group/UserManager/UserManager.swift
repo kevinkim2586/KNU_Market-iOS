@@ -8,8 +8,6 @@ class UserManager {
     //MARK: - Singleton
     static let shared: UserManager = UserManager()
     
-    private init() {}
-    
     //MARK: - API Request URLs
     //TODO: - EndPoint Router 로 아래 refactoring 진행
     let registerURL                 = "\(K.API_BASE_URL)auth"

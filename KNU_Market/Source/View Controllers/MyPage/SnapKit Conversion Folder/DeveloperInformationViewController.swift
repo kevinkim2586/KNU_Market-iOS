@@ -12,6 +12,7 @@ class DeveloperInformationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "팀 정보"
     }
     
     override func setupLayout() {
@@ -20,9 +21,16 @@ class DeveloperInformationViewController: BaseViewController {
     
     override func setupConstraints() {
         imageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.right.bottom.equalToSuperview()
         }
     }
+    
+    override func setupStyle() {
+        super.setupStyle()
+        view.backgroundColor = .white
+    }
+    
 }
 
 

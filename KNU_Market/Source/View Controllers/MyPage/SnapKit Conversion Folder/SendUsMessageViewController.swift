@@ -3,6 +3,9 @@ import SnapKit
 
 class SendUsMessageViewController: BaseViewController {
     
+    //MARK: - Properties
+    private var networkManager: UserManager?
+    
     //MARK: - Constants
     
     fileprivate struct Metrics {
@@ -89,6 +92,15 @@ class SendUsMessageViewController: BaseViewController {
     
     //MARK: - View Life Cycle
     
+    init(networkManager: UserManager) {
+        super.init()
+        self.networkManager = networkManager
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -160,7 +172,6 @@ class SendUsMessageViewController: BaseViewController {
     override func setupStyle() {
         super.setupStyle()
         view.backgroundColor = .white
-
     }
     
     private func configure() {
@@ -171,7 +182,6 @@ class SendUsMessageViewController: BaseViewController {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
-    
 }
 
 //MARK: - Actions
@@ -188,7 +198,7 @@ extension SendUsMessageViewController {
         guard let content = feedbackTextView.text else { return }
         guard content != Texts.textViewPlaceholder else { return }
         showProgressBar()
-        UserManager.shared.sendFeedback(content: content) { [weak self] result in
+        networkManager?.sendFeedback(content: content) { [weak self] result in
             guard let self = self else { return }
             dismissProgressBar()
             switch result {
@@ -234,7 +244,7 @@ import SwiftUI
 struct SendUsMessageVC: PreviewProvider {
     
     static var previews: some View {
-        SendUsMessageViewController().toPreview()
+        SendUsMessageViewController(networkManager: UserManager()).toPreview()
     }
 }
 #endif

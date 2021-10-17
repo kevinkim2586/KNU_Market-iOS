@@ -5,8 +5,6 @@ class AccountManagementViewController: BaseViewController {
     
     //MARK: - Properties
     
-    private var user: User?
-    
     //MARK: - Constants
     
     fileprivate struct Metrics {
@@ -175,6 +173,7 @@ class AccountManagementViewController: BaseViewController {
         let button = UIButton()
         button.setTitle("혹시 채팅 알림이 오지 않나요?", for: .normal)
         button.setTitleColor(Colors.button, for: .normal)
+        button.setTitleColor(.darkGray, for: .highlighted)
         button.titleLabel?.font = Fonts.button
         button.addTarget(
             self,
@@ -219,7 +218,7 @@ class AccountManagementViewController: BaseViewController {
         stackView.distribution = .equalCentering
         stackView.spacing = Metrics.stackViewSpacing
         [idGuideLabel, userIdLabel, changeIdButton].forEach { stackView.addArrangedSubview($0) }
-        userIdLabel.text = self.user?.userID
+        userIdLabel.text = User.shared.userID
         return stackView
     }()
     
@@ -230,7 +229,7 @@ class AccountManagementViewController: BaseViewController {
         stackView.distribution = .equalCentering
         stackView.spacing = Metrics.stackViewSpacing
         [nicknameGuideLabel, userNicknameLabel, changeNicknameButton].forEach { stackView.addArrangedSubview($0) }
-        userNicknameLabel.text = self.user?.nickname
+        userNicknameLabel.text = User.shared.nickname
         return stackView
     }()
     
@@ -252,20 +251,9 @@ class AccountManagementViewController: BaseViewController {
         stackView.distribution = .equalCentering
         stackView.spacing = Metrics.stackViewSpacing
         [emailGuideLabel, userEmailLabel, changeEmailButton].forEach { stackView.addArrangedSubview($0) }
-        userEmailLabel.text = self.user?.emailForPasswordLoss
+        userEmailLabel.text = User.shared.emailForPasswordLoss
         return stackView
     }()
-    
-    //MARK: - Initialization
-    
-    init(userInfo: User) {
-        super.init()
-        self.user = userInfo
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     //MARK: - View Life Cycle
     
@@ -333,13 +321,6 @@ class AccountManagementViewController: BaseViewController {
             make.centerX.equalTo(view.snp.centerX)
             make.bottom.equalTo(unregisterButton.snp.top).offset(-26)
         }
-        
-    }
-    
-    override func setupActions() {
-        super.setupActions()
-        
-        
     }
     
     override func setupStyle() {
@@ -349,7 +330,6 @@ class AccountManagementViewController: BaseViewController {
     
     private func configure() {
         title = "설정"
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -363,24 +343,50 @@ class AccountManagementViewController: BaseViewController {
 extension AccountManagementViewController {
 
     @objc private func pressedChangedUserInfoButton(_ sender: UIButton) {
-        print("✏️ button tag: \(sender.tag)")
+        switch sender.tag {
+        case 0: navigationController?.pushViewController(ChangeIdViewController(), animated: true)
+        case 1: navigationController?.pushViewController(ChangeNicknameViewController(), animated: true)
+        case 2: navigationController?.pushViewController(ChangePasswordViewController(), animated: true)
+        case 3: navigationController?.pushViewController(ChangeEmailForPasswordLossViewController(), animated: true)
+        default: break
+        }
     }
     
     @objc private func pressedNotificationSettingsButton() {
-        
+        presentAlertWithCancelAction(
+            title: "알림이 오지 않나요?",
+            message: "설정으로 이동 후 알림 받기가 꺼져있지는 않은지 확인해 주세요. 그래도 안 되면 어플 재설치를 부탁드립니다."
+        ) { selectedOk in
+            if selectedOk {
+                UIApplication.shared.open(
+                    URL(string: UIApplication.openSettingsURLString)!,
+                    options: [:],
+                    completionHandler: nil
+                )
+            }
+        }
     }
     
     @objc private func pressedLogOutButton() {
-        
+        presentAlertWithCancelAction(
+            title: "로그아웃 하시겠습니까?",
+            message: ""
+        ) { selectedOk in
+            if selectedOk { DispatchQueue.main.async { self.popToInitialViewController() } }
+        }
     }
     
     @objc private func pressedUnregisterButton() {
-        
+        if User.shared.joinedChatRoomPIDs.count != 0 {
+            navigationController?.pushViewController(
+                UnregisterUser_CheckFirstPrecautionsViewController(),
+                animated: true
+            )
+        } else {
+            navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(), animated: true)
+        }
     }
-    
 }
-
-
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
@@ -389,7 +395,7 @@ import SwiftUI
 struct AccountManagementVC: PreviewProvider {
     
     static var previews: some View {
-        AccountManagementViewController(userInfo: User()).toPreview()
+        AccountManagementViewController().toPreview()
     }
 }
 #endif

@@ -72,7 +72,7 @@ extension UnregisterUser_CheckSecondPrecautionsViewController {
             action: #selector(pressedBottomButton),
             for: .touchUpInside
         )
-        bottomButton.updateTitleEdgeInsetsForKeyboardHidden()
+        bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
         
         NSLayoutConstraint.activate([
             bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),

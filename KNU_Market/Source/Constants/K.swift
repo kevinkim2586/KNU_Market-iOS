@@ -124,6 +124,7 @@ struct K {
         static let bannedChatUsers              = "bannedChatUsers"
         static let isNotFirstAppLaunch          = "isNotFirstAppLaunch"
         static let postFilterOptions            = "postFilterOptions"
+        static let joinedChatRoomPIDs           = "joinedChatRoomPIDs"
     }
     
     struct NotificationKey {

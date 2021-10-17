@@ -159,7 +159,14 @@ class User {
     
     
     // 내가 직접 올린 공구글 PID 배열
-    var userUploadedRoomPIDs: [String] = []
+    var userUploadedRoomPIDs: [String] {
+        get {
+            return UserDefaults.standard.stringArray(forKey: K.UserDefaultsKey.joinedChatRoomPIDs) ?? [String]()
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.joinedChatRoomPIDs)
+        }
+    }
     
     // 내가 참여하고 있는 채팅방 PID 배열
     var joinedChatRoomPIDs: [String] = []

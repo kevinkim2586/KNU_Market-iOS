@@ -4,13 +4,14 @@ import SnapKit
 class SendUsMessageViewController: BaseViewController {
     
     //MARK: - Properties
+    
     private var networkManager: UserManager?
     
     //MARK: - Constants
     
     fileprivate struct Metrics {
         
-        static let labelSide: CGFloat = 16
+        static let labelSidePadding: CGFloat = 16
     }
     
     fileprivate struct Fonts {
@@ -90,7 +91,7 @@ class SendUsMessageViewController: BaseViewController {
         action: #selector(pressedSendBarButtonItem)
     )
     
-    //MARK: - View Life Cycle
+    //MARK: - Initialization
     
     init(networkManager: UserManager) {
         super.init()
@@ -100,6 +101,8 @@ class SendUsMessageViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,30 +128,30 @@ class SendUsMessageViewController: BaseViewController {
         super.setupConstraints()
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metrics.labelSide)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSide)
-            make.right.equalTo(view.snp.right).offset(Metrics.labelSide)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metrics.labelSidePadding)
+            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            make.right.equalTo(view.snp.right).offset(Metrics.labelSidePadding)
         }
         
         kakaoChannelGuideLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(Metrics.labelSide)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSide)
-            make.right.equalTo(view.snp.right).offset(Metrics.labelSide)
+            make.top.equalTo(titleLabel.snp.bottom).offset(Metrics.labelSidePadding)
+            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            make.right.equalTo(view.snp.right).offset(Metrics.labelSidePadding)
         }
         
         kakaoChannelLinkButton.snp.makeConstraints { make in
-            make.top.equalTo(kakaoChannelGuideLabel.snp.bottom).offset(Metrics.labelSide)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSide)
+            make.top.equalTo(kakaoChannelGuideLabel.snp.bottom).offset(Metrics.labelSidePadding)
+            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
         }
         
         timeAvailableLabel.snp.makeConstraints { make in
             make.top.equalTo(kakaoChannelLinkButton.snp.bottom).offset(6)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSide)
+            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
         }
         
         feedbackLabel.snp.makeConstraints { make in
             make.top.equalTo(timeAvailableLabel.snp.bottom).offset(14)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSide)
+            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
         }
         
         feedbackTextView.snp.makeConstraints { make in
@@ -195,9 +198,11 @@ extension SendUsMessageViewController {
     
     @objc func pressedSendBarButtonItem() {
         view.endEditing(true)
+        
         guard let content = feedbackTextView.text else { return }
         guard content != Texts.textViewPlaceholder else { return }
         showProgressBar()
+        
         networkManager?.sendFeedback(content: content) { [weak self] result in
             guard let self = self else { return }
             dismissProgressBar()

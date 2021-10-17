@@ -5,9 +5,7 @@ class User {
 
     //MARK: - Singleton
     static var shared: User = User()
-    
-    private init() {}
-    
+        
     //MARK: - Properties
     
     var userUID: String {

@@ -30,6 +30,7 @@
 		7C1D829526565429006FEBDE /* SendDeveloperMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D829426565428006FEBDE /* SendDeveloperMessageViewController.swift */; };
 		7C1EEE4E26A68FB700775B11 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EEE4D26A68FB700775B11 /* MainTabBarViewController.swift */; };
 		7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* HomeViewModel.swift */; };
+		7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */; };
 		7C3B4FE826A923AB00E2CA8F /* UserRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */; };
 		7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */; };
 		7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FEB26A928A600E2CA8F /* PasswordInputViewController.swift */; };
@@ -179,6 +180,7 @@
 		7C1D829426565428006FEBDE /* SendDeveloperMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDeveloperMessageViewController.swift; sourceTree = "<group>"; };
 		7C1EEE4D26A68FB700775B11 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		7C3758EC265FA97A0081A85D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserRegister.storyboard; sourceTree = "<group>"; };
 		7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewController.swift; sourceTree = "<group>"; };
 		7C3B4FEB26A928A600E2CA8F /* PasswordInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputViewController.swift; sourceTree = "<group>"; };
@@ -599,6 +601,7 @@
 			children = (
 				7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */,
 				7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */,
+				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
 			);
 			path = "SnapKit Conversion Folder";
 			sourceTree = "<group>";
@@ -1064,6 +1067,7 @@
 				7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */,
 				7CEC19232701837100C2D671 /* StoryboardName.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController + Extension.swift in Sources */,
+				7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */,
 				7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */,
 				7CCDB1EF26A2BD0C0092F28D /* ItemTableViewCell.swift in Sources */,
 				7C1EEE4E26A68FB700775B11 /* MainTabBarViewController.swift in Sources */,

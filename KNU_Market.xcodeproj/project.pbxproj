@@ -110,7 +110,7 @@
 		7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624226413C47000E0B7A /* NetworkError.swift */; };
 		7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624626413C5A000E0B7A /* UserManager.swift */; };
 		7CA6624C26413D05000E0B7A /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624B26413D05000E0B7A /* ValidationError.swift */; };
-		7CA6624F26413F03000E0B7A /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624E26413F03000E0B7A /* K.swift */; };
+		7CA6624F26413F03000E0B7A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6624E26413F03000E0B7A /* Constants.swift */; };
 		7CA78FF626CDFC510019B06F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF526CDFC510019B06F /* AlertViewController.swift */; };
 		7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */; };
 		7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */; };
@@ -259,7 +259,7 @@
 		7CA6624226413C47000E0B7A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7CA6624626413C5A000E0B7A /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		7CA6624B26413D05000E0B7A /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
-		7CA6624E26413F03000E0B7A /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
+		7CA6624E26413F03000E0B7A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7CA78FF526CDFC510019B06F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertBodyLabel.swift; sourceTree = "<group>"; };
 		7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertTitleLabel.swift; sourceTree = "<group>"; };
@@ -843,7 +843,7 @@
 		7CEC1921270182F500C2D671 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				7CA6624E26413F03000E0B7A /* K.swift */,
+				7CA6624E26413F03000E0B7A /* Constants.swift */,
 				7C555464266D0A1400C3C5B6 /* Location.swift */,
 				7CEC19222701837100C2D671 /* StoryboardName.swift */,
 				7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */,
@@ -1129,7 +1129,7 @@
 				7C3B4FEE26A928B700E2CA8F /* ProfilePictureInputViewController.swift in Sources */,
 				7CA52D69270B083F00A69F3B /* ChangeIdViewController.swift in Sources */,
 				7C3D985E26AE793D005DFAE0 /* RoomInfo.swift in Sources */,
-				7CA6624F26413F03000E0B7A /* K.swift in Sources */,
+				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

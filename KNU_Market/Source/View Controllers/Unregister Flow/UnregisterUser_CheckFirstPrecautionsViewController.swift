@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 class UnregisterUser_CheckFirstPrecautionsViewController: UIViewController {
     

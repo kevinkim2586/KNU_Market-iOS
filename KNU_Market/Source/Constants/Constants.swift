@@ -203,6 +203,8 @@ struct K {
                                                     "hand.raised",
                                                    "info.circle"
                                                     ]
+        
+        static let studentIdGuideImage              = "studentID_guide"
 
     }
     

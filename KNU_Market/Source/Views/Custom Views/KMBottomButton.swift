@@ -29,28 +29,16 @@ class KMBottomButton: UIButton {
         setTitleColor(.white, for: .normal)
         setTitleColor(.lightGray, for: .highlighted)
         titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        updateTitleEdgeInsetsForKeyboardAppeared()
+        titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     func updateTitleEdgeInsetsForKeyboardAppeared() {
-        if #available(iOS 15.0, *) {
-            var configuration = UIButton.Configuration.plain()
-            configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-            self.configuration = configuration
-        } else {
-            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        }
+        titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         setTitle(buttonTitle ?? "다음", for: .normal)
     }
     
     func updateTitleEdgeInsetsForKeyboardHidden() {
-        if #available(iOS 15.0, *) {
-            var configuration = UIButton.Configuration.plain()
-            configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
-            self.configuration = configuration
-        } else {
-            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-        }
+        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         setTitle(buttonTitle ?? "다음", for: .normal)
     }
 }

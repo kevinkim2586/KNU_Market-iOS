@@ -22,7 +22,7 @@ class VerifyOptionViewController: BaseViewController {
     }
     
     fileprivate struct Fonts {
-        static let buttonTitleLabel = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        static let buttonTitleLabel = UIFont.systemFont(ofSize: 15, weight: .bold)
     }
     
     //MARK: - UI
@@ -147,10 +147,7 @@ class VerifyOptionViewController: BaseViewController {
 extension VerifyOptionViewController {
     
     @objc private func pressedVerifyUsingStudentIdButton() {
-        let storyboard = UIStoryboard(name: StoryboardName.VerifyStudent, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(
-            identifier: K.StoryboardID.studentIDGuideVC
-        ) as? StudentIDGuideViewController else { return }
+        let vc = StudentIdGuideViewController()
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }

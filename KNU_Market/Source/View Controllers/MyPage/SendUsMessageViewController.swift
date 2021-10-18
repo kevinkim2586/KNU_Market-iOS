@@ -172,14 +172,16 @@ class SendUsMessageViewController: BaseViewController {
         view.backgroundColor = .white
     }
     
-    private func configure() {
-        feedbackTextView.delegate = self
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
+    
+    private func configure() {
+        feedbackTextView.delegate = self
+    }
+    
+
 }
 
 //MARK: - Actions

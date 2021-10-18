@@ -52,6 +52,11 @@ class SendUsMessageViewController: BaseViewController {
         ]
         let linkString: String = "https://pf.kakao.com/_PjLHs"
         button.setAttributedTitle(NSAttributedString(string: linkString, attributes: attributes), for: .normal)
+        button.addTarget(
+            self,
+            action: #selector(pressedKakaoChannelLinkButton),
+            for: .touchUpInside
+        )
         return button
     }()
     
@@ -160,16 +165,6 @@ class SendUsMessageViewController: BaseViewController {
             make.centerX.equalToSuperview()
             make.height.equalTo(300)
         }
-    }
-    
-    override func setupActions() {
-        super.setupActions()
-        
-        kakaoChannelLinkButton.addTarget(
-            self,
-            action: #selector(pressedKakaoChannelLinkButton),
-            for: .touchUpInside
-        )
     }
     
     override func setupStyle() {

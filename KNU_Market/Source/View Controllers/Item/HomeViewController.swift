@@ -227,7 +227,7 @@ extension HomeViewController {
         tabBarController?.delegate = self
         viewModel.delegate = self
         itemTableView.placeholderDelegate = self
-        
+
         viewModel.loadInitialMethods()
         
         askForNotificationPermission()

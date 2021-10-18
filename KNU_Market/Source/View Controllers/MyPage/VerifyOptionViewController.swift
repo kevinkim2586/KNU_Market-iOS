@@ -1,25 +1,148 @@
 import UIKit
+import SnapKit
 
-class VerifyOptionViewController: UIViewController {
+class VerifyOptionViewController: BaseViewController {
     
-    @IBOutlet weak var verifyUsingStudentIDButton: UIButton!
-    @IBOutlet weak var resendEmailButton: UIButton!
+    //MARK: - Properties
+    
+    //MARK: - Constants
+    
+    fileprivate struct Metrics {
+        static let buttonCornerRadius: CGFloat  = 10
+        static let buttonHeight: CGFloat        = 50
+    }
+    
+    fileprivate struct Colors {
+        static let appColor     = UIColor(named: K.Color.appColor)
+    }
+    
+    fileprivate struct Images {
+        static let studentIdImage   = UIImage(systemName: "person.crop.rectangle")?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
+        static let schoolMail       = UIImage(systemName: "envelope")?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
+    }
+    
+    fileprivate struct Fonts {
+        static let buttonTitleLabel = UIFont.systemFont(ofSize: 15, weight: .semibold)
+    }
+    
+    //MARK: - UI
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(
+            forTextStyle: .title3,
+            compatibleWith: .init(legibilityWeight: .bold)
+        )
+        label.text = "어떤 방식으로 인증하시겠어요?"
+        label.textColor = .black
+        return label
+    }()
+    
+    let studentIdButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("학생증 인증하기", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = Fonts.buttonTitleLabel
+        button.backgroundColor = UIColor(named: K.Color.appColor) ?? .systemPink
+        button.setImage(Images.studentIdImage, for: .normal)
+        button.tintColor = Colors.appColor
+        button.layer.cornerRadius = Metrics.buttonCornerRadius
+        button.heightAnchor.constraint(equalToConstant: Metrics.buttonHeight).isActive = true
+        button.addBounceAnimationWithNoFeedback()
+        button.addTarget(
+            self,
+            action: #selector(pressedVerifyUsingStudentIdButton),
+            for: .touchUpInside
+        )
+        return button
+    }()
+    
+    let schoolMailButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("웹메일로 인증하기", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = Fonts.buttonTitleLabel
+        button.backgroundColor = Colors.appColor
+        button.setImage(Images.schoolMail, for: .normal)
+        button.layer.cornerRadius = Metrics.buttonCornerRadius
+        button.tintColor = Colors.appColor
+        button.heightAnchor.constraint(equalToConstant: Metrics.buttonHeight).isActive = true
+        button.addBounceAnimationWithNoFeedback()
+        button.addTarget(
+            self,
+            action: #selector(pressedVerifyUsingEmailButton),
+            for: .touchUpInside
+        )
+        return button
+    }()
+    
+    lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 30
+        [studentIdButton, schoolMailButton].forEach { stackView.addArrangedSubview($0) }
+        return stackView
+    }()
+    
+    
+    //MARK: - Initialization
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        if detectIfVerifiedUser() {
-            presentKMAlertOnMainThread(
-                title: "인증 회원 안내",
-                message: "이미 인증된 회원입니다.\n이제 공동구매를 즐겨보세요!",
-                buttonTitle: "확인"
-            )
-            navigationController?.popViewController(animated: true)
-        }
     }
     
+    //MARK: - UI Setup
     
-    @IBAction func pressedVerifyUsingStudentIDButton(_ sender: UIButton) {
+    override func setupLayout() {
+        view.addSubview(titleLabel)
+        view.addSubview(buttonStackView)
+    }
+    
+    override func setupConstraints() {
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
+            make.left.equalTo(view.snp.left).offset(16)
+        }
+        
+        buttonStackView.snp.makeConstraints { make in
+            make.centerX.equalTo(view.snp.centerX)
+            make.centerY.equalTo(view.snp.centerY)
+            make.left.equalTo(view.snp.left).offset(20)
+            make.right.equalTo(view.snp.right).offset(-20)
+        }
+        
+    }
+    
+    override func setupStyle() {
+        super.setupStyle()
+        view.backgroundColor = .white
+    }
+    
+    private func configure() {
+        title = "학생 인증하기"
+        setBackBarButtonItemTitle()
+        //        if detectIfVerifiedUser() {
+        //            presentKMAlertOnMainThread(
+        //                title: "인증 회원 안내",
+        //                message: "이미 인증된 회원입니다.\n이제 공동구매를 즐겨보세요!",
+        //                buttonTitle: "확인"
+        //            )
+        //            navigationController?.popViewController(animated: true)
+        //        }
+    }
+    
+}
+
+//MARK: - Target Actions
+
+extension VerifyOptionViewController {
+    
+    @objc private func pressedVerifyUsingStudentIdButton() {
         let storyboard = UIStoryboard(name: StoryboardName.VerifyStudent, bundle: nil)
         guard let vc = storyboard.instantiateViewController(
             identifier: K.StoryboardID.studentIDGuideVC
@@ -28,7 +151,7 @@ class VerifyOptionViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func pressedVerifyUsingEmail(_ sender: UIButton) {
+    @objc private func pressedVerifyUsingEmailButton() {
         let storyboard = UIStoryboard(name: StoryboardName.VerifyEmail, bundle: nil)
         guard let vc = storyboard.instantiateViewController(
             identifier: K.StoryboardID.emailInputVC
@@ -36,16 +159,16 @@ class VerifyOptionViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func configure() {
-        title = "학생 인증하기"
-        setBackBarButtonItemTitle()
-        configureButtons()
-    }
-    
-    private func configureButtons() {
-        [verifyUsingStudentIDButton, resendEmailButton].forEach { button in
-            button?.layer.cornerRadius = 10
-            button?.addBounceAnimationWithNoFeedback()
-        }
+}
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct VerifyOptionVC: PreviewProvider {
+
+    static var previews: some View {
+        VerifyOptionViewController().toPreview()
     }
 }
+#endif

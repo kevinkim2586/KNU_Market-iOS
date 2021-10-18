@@ -1,7 +1,5 @@
 import UIKit
-import SDWebImage
 import SnapKit
-import Alamofire
 
 class MyPostsViewController: BaseViewController {
 

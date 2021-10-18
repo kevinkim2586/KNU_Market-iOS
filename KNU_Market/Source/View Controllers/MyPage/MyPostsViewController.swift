@@ -1,18 +1,70 @@
 import UIKit
 import SDWebImage
+import SnapKit
+import Alamofire
 
-class MyPostsViewController: UIViewController {
+class MyPostsViewController: BaseViewController {
+
+    //MARK: - Properties
+    private var viewModel: HomeViewModel!
     
-    @IBOutlet var tableView: UITableView!
+    //MARK: - Constants
     
-    private let refreshControl = UIRefreshControl()
-    private var selectedIndex: Int?
+    //MARK: - UI
     
-    private var viewModel = HomeViewModel()
+    lazy var postTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(
+            self,
+            action: #selector(refreshTableView),
+            for: .valueChanged
+        )
+        tableView.tableFooterView = UIView(frame: .zero)
+        let nibName = UINib(nibName: K.XIB.itemTableViewCell, bundle: nil)
+        tableView.register(
+            nibName,
+            forCellReuseIdentifier: K.cellID.itemTableViewCell
+        )
+        return tableView
+    }()
     
+    //MARK: - Initialization
+    
+    //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+        configure()
+        setupViewModel()
+    }
+    
+    //MARK: - UI Setup
+    override func setupLayout() {
+        view.addSubview(postTableView)
+    }
+    
+    override func setupConstraints() {
+        
+        postTableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    override func setupStyle() {
+        view.backgroundColor = .white
+    }
+    
+    private func configure() {
+        title = "내가 올린 공구"
+        createObserversForPresentingVerificationAlert()
+    }
+    
+    private func setupViewModel() {
+        self.viewModel = HomeViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager())
+        self.viewModel.delegate = self
+        self.viewModel.fetchItemList(fetchCurrentUsers: true)
     }
 }
 
@@ -20,26 +72,13 @@ class MyPostsViewController: UIViewController {
 
 extension MyPostsViewController: HomeViewModelDelegate {
     
-    func didFetchUserProfileInfo() {
-        //
-    }
-    
-    func failedFetchingUserProfileInfo(with error: NetworkError) {
-        //
-    }
-    
-    func didFetchUserProfileImage() {
-        //
-    }
-    
     func didFetchItemList() {
-        tableView.reloadData()
-        refreshControl.endRefreshing()
-        tableView.tableFooterView = nil
-        tableView.tableFooterView = UIView(frame: .zero)
-        
+        postTableView.reloadData()
+        postTableView.refreshControl?.endRefreshing()
+        postTableView.tableFooterView = nil
+        postTableView.restoreEmptyView()
         if viewModel.itemList.count == 0 {
-            tableView.showEmptyView(
+            postTableView.showEmptyView(
                 imageName: K.Images.emptyChatList,
                 text: "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!"
             )
@@ -47,24 +86,20 @@ extension MyPostsViewController: HomeViewModelDelegate {
     }
     
     func failedFetchingItemList(errorMessage: String, error: NetworkError) {
-        
-        tableView.showEmptyView(
-            imageName: K.Images.emptyChatList,
-            text: errorMessage
-        )
-        refreshControl.endRefreshing()
-        tableView.reloadData()
-        tableView.tableFooterView = nil
-        tableView.tableFooterView = UIView(frame: .zero)
+        if viewModel.itemList.count == 0 {
+            postTableView.showEmptyView(
+                imageName: K.Images.emptyChatList,
+                text: errorMessage
+            )
+        }
+        postTableView.refreshControl?.endRefreshing()
+        postTableView.reloadData()
+        postTableView.tableFooterView = nil
     }
-    
-    func failedFetchingRoomPIDInfo(with error: NetworkError) {
-        //
-    }
-    
 }
 
-//MARK: -  UITableViewDelegate, UITableViewDataSource
+
+//MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -73,104 +108,66 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.itemList.count
+        return viewModel?.itemList.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cellIdentifier = K.cellID.itemTableViewCell
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell else {
-            fatalError()
+
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellIdentifier,
+            for: indexPath
+        ) as? ItemTableViewCell else {
+            return UITableViewCell()
         }
         cell.configure(with: viewModel.itemList[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
-        self.selectedIndex = indexPath.row
         
-        performSegue(withIdentifier: K.SegueID.goToItemVCFromMyPosts, sender: self)
-    
+        let storyboard = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
+        
+        guard let postVC = storyboard.instantiateViewController(
+            withIdentifier: K.StoryboardID.itemVC
+        ) as? ItemViewController else { return }
+        
+        postVC.hidesBottomBarWhenPushed = true
+        postVC.pageID = viewModel.itemList[indexPath.row].uuid
+        navigationController?.pushViewController(postVC, animated: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard let itemVC: ItemViewController = segue.destination as? ItemViewController else { return }
-        guard let index = selectedIndex else { return }
-        
-        itemVC.hidesBottomBarWhenPushed = true
-        itemVC.pageID = viewModel.itemList[index].uuid
+    @objc private func refreshTableView() {
+        UIView.animate(
+            views: self.postTableView.visibleCells,
+            animations: Animations.forTableViews,
+            reversed: true,
+            initialAlpha: 1.0,   // 보이다가
+            finalAlpha: 0.0,     // 안 보이게
+            completion: {
+                self.viewModel.resetValues()
+                self.viewModel.fetchItemList(fetchCurrentUsers: true)
+            }
+        )
     }
     
-    @objc func refreshTableView() {
     
-        UIView.animate(views: self.tableView.visibleCells,
-                       animations: Animations.forTableViews,
-                       reversed: true,
-                       initialAlpha: 1.0,   // 보이다가
-                       finalAlpha: 0.0,      // 안 보이게
-                       completion: {
-                        self.viewModel.resetValues()
-                        self.viewModel.fetchItemList(fetchCurrentUsers: true)
-                       })
-    }
 }
-
 
 //MARK: - UIScrollViewDelegate
 
 extension MyPostsViewController: UIScrollViewDelegate {
-    
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         let position = scrollView.contentOffset.y
-   
-        if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
-        
+        if position > (postTableView.contentSize.height - 80 - scrollView.frame.size.height) {
             if !viewModel.isFetchingData {
-                tableView.tableFooterView = createSpinnerFooterView()
+                postTableView.tableFooterView = createSpinnerFooterView()
                 viewModel.fetchItemList(fetchCurrentUsers: true)
             }
         }
     }
 }
 
-//MARK: - Initialization & UI Configuration 
 
-extension MyPostsViewController {
-    
-    func initialize() {
-        
-        self.title = "내가 올린 공구"
-        
-        createObserversForPresentingVerificationAlert()
-        viewModel.delegate = self
-        viewModel.fetchItemList(fetchCurrentUsers: true)
-        initializeTableView()
-    }
-    
-    func initializeTableView() {
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-
-        
-        tableView.refreshControl = refreshControl
-        tableView.tableFooterView = UIView(frame: .zero)
-        
-        let nibName = UINib(nibName: K.XIB.itemTableViewCell, bundle: nil)
-        tableView.register(
-            nibName,
-            forCellReuseIdentifier: K.cellID.itemTableViewCell
-        )
-        
-        refreshControl.addTarget(
-            self,
-            action: #selector(refreshTableView),
-            for: .valueChanged
-        )
-    }
-}

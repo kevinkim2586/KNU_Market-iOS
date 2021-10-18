@@ -12,22 +12,39 @@ protocol HomeViewModelDelegate: AnyObject {
     func failedFetchingRoomPIDInfo(with error: NetworkError)
 }
 
+extension HomeViewModelDelegate {
+    func didFetchUserProfileInfo() {}
+    func failedFetchingUserProfileInfo(with error: NetworkError) {}
+    func didFetchUserProfileImage() {}
+    func failedFetchingRoomPIDInfo(with error: NetworkError) {}
+}
+
 class HomeViewModel {
+    
+    private var itemManager: ItemManager?
+    private var chatManager: ChatManager?
+    private var userManager: UserManager?
     
     weak var delegate: HomeViewModelDelegate?
     
-    var itemList: [ItemListModel] = [ItemListModel]()
+    var itemList: [ItemListModel] = []
     
     var isFetchingData: Bool = false
     var index: Int = 1
     
+    //MARK: - Initialization
+    init(itemManager: ItemManager, chatManager: ChatManager, userManager: UserManager) {
+        self.itemManager = itemManager
+        self.chatManager = chatManager
+        self.userManager = userManager
+    }
     
     //MARK: - 공구글 불러오기
     func fetchItemList(fetchCurrentUsers: Bool = false) {
         
         isFetchingData = true
         
-        ItemManager.shared.fetchItemList(
+        itemManager?.fetchItemList(
             at: self.index,
             fetchCurrentUsers: fetchCurrentUsers,
             postFilterOption: User.shared.postFilterOption
@@ -67,7 +84,7 @@ class HomeViewModel {
     //MARK: - 사용자 프로필 정보 불러오기
     func loadUserProfile() {
         
-        UserManager.shared.loadUserProfile { [weak self] result in
+        userManager?.loadUserProfile { [weak self] result in
             
             guard let self = self else { return }
             
@@ -83,7 +100,7 @@ class HomeViewModel {
     
     //MARK: - 내가 참여하고 있는 Room PID 배열 불러오기
     func fetchEnteredRoomInfo() {
-        ChatManager.shared.getResponseModel(
+        chatManager?.getResponseModel(
             function: .getRoom,
             method: .get,
             pid: nil,

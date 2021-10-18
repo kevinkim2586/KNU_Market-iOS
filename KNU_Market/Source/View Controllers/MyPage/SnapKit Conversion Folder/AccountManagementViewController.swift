@@ -331,11 +331,6 @@ class AccountManagementViewController: BaseViewController {
     private func configure() {
         title = "설정"
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        view.endEditing(true)
-    }
 }
 
 //MARK: - Actions

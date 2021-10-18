@@ -8,8 +8,6 @@ class ItemManager {
     
     let interceptor = Interceptor()
     
-    private init() {}
-    
     //MARK: - API Request URLs
     let baseURL                       = "\(K.API_BASE_URL)posts"
     let searchURL                     = "\(K.API_BASE_URL)search"

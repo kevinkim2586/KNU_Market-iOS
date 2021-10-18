@@ -10,7 +10,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
-    private var viewModel = HomeViewModel()
+    private var viewModel = HomeViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager())
     
     override func viewDidLoad() {
         super.viewDidLoad()

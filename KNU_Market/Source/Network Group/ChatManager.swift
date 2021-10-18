@@ -16,8 +16,6 @@ class ChatManager {
     
     let interceptor = Interceptor()
     
-    private init() {}
-    
     //MARK: - API Request URLs
     let baseURL     = "\(K.API_BASE_URL)room/"
     

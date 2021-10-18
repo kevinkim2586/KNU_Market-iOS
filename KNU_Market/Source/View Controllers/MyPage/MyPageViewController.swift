@@ -242,10 +242,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             #warning("수정 필요 - code")
 //            navigationController?.pushViewController(AccountManagementViewController(), animated: true)
-            guard let vc = storyboard?.instantiateViewController(
-                identifier: K.StoryboardID.myPageSection_1_Options[indexPath.row]
-            ) else { return }
-            pushViewController(with: vc)
+            navigationController?.pushViewController(MyPostsViewController(), animated: true)
+//            guard let vc = storyboard?.instantiateViewController(
+//                identifier: K.StoryboardID.myPageSection_1_Options[indexPath.row]
+//            ) else { return }
+//            pushViewController(with: vc)
         case 1:
             switch indexPath.row {
             case 0: pushViewController(with: SendUsMessageViewController(networkManager: UserManager()))

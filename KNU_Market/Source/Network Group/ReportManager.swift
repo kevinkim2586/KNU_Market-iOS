@@ -8,8 +8,6 @@ class ReportManager {
     //MARK: - Singleton
     static let shared: ReportManager = ReportManager()
     
-    private init() {}
-    
     //MARK: - API Request URLs
     let reportUserURL               = "\(K.API_BASE_URL)report"
     

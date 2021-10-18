@@ -77,7 +77,7 @@ class SendUsMessageViewController: BaseViewController {
         return label
     }()
     
-    let feedbackTextView: UITextView = {
+    lazy var feedbackTextView: UITextView = {
         let textView = UITextView()
         textView.layer.borderWidth = 1.0
         textView.layer.cornerRadius = 10.0
@@ -86,6 +86,7 @@ class SendUsMessageViewController: BaseViewController {
         textView.font = Fonts.textView
         textView.text = Texts.textViewPlaceholder
         textView.textColor = .lightGray
+        textView.delegate = self
         return textView
     }()
     
@@ -111,7 +112,6 @@ class SendUsMessageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
     }
     
     //MARK: - UI Setup
@@ -176,12 +176,6 @@ class SendUsMessageViewController: BaseViewController {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
-    
-    private func configure() {
-        feedbackTextView.delegate = self
-    }
-    
-
 }
 
 //MARK: - Actions

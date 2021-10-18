@@ -30,6 +30,7 @@ extension StudentIDGuideViewController {
         title = "모바일 학생증 인증"
         initializeTitleLabel()
         setBackBarButtonItemTitle()
+        
     }
     
     func initializeTitleLabel() {

@@ -31,10 +31,7 @@ class MyPageViewController: UIViewController {
     
     
     @IBAction func pressedSettingsBarButtonItem(_ sender: UIBarButtonItem) {
-        
-        guard let vc = self.storyboard?.instantiateViewController(identifier: K.StoryboardID.settingsVC) as? SettingsViewController
-        else { fatalError() }
-        pushViewController(with: vc)
+        pushViewController(with: AccountManagementViewController())
     }
 }
 
@@ -248,7 +245,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             }
         case 1:
             switch indexPath.row {
-            case 0: pushViewController(with: SendUsMessageViewController(networkManager: UserManager()))
+            case 0: pushViewController(with: SendUsMessageViewController(userManager: UserManager()))
             case 1:
                 let url = URL(string: K.URL.termsAndConditionNotionURL)!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)

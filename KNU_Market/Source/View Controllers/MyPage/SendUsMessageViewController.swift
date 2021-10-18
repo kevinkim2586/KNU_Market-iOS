@@ -5,7 +5,7 @@ class SendUsMessageViewController: BaseViewController {
     
     //MARK: - Properties
     
-    private var networkManager: UserManager?
+    private var userManager: UserManager?
     
     //MARK: - Constants
     
@@ -22,7 +22,7 @@ class SendUsMessageViewController: BaseViewController {
     }
     
     fileprivate struct Texts {
-        static let textViewPlaceholder         = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
+        static let textViewPlaceholder = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
     }
     
     //MARK: - UI
@@ -98,9 +98,9 @@ class SendUsMessageViewController: BaseViewController {
     
     //MARK: - Initialization
     
-    init(networkManager: UserManager) {
+    init(userManager: UserManager) {
         super.init()
-        self.networkManager = networkManager
+        self.userManager = userManager
     }
     
     required init?(coder: NSCoder) {
@@ -198,7 +198,7 @@ extension SendUsMessageViewController {
         guard content != Texts.textViewPlaceholder else { return }
         showProgressBar()
         
-        networkManager?.sendFeedback(content: content) { [weak self] result in
+        userManager?.sendFeedback(content: content) { [weak self] result in
             guard let self = self else { return }
             dismissProgressBar()
             switch result {
@@ -244,7 +244,7 @@ import SwiftUI
 struct SendUsMessageVC: PreviewProvider {
     
     static var previews: some View {
-        SendUsMessageViewController(networkManager: UserManager()).toPreview()
+        SendUsMessageViewController(userManager: UserManager()).toPreview()
     }
 }
 #endif

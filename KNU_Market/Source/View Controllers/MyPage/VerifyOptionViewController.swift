@@ -98,11 +98,14 @@ class VerifyOptionViewController: BaseViewController {
     //MARK: - UI Setup
     
     override func setupLayout() {
+        super.setupLayout()
+        
         view.addSubview(titleLabel)
         view.addSubview(buttonStackView)
     }
     
     override func setupConstraints() {
+        super.setupLayout()
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
@@ -126,6 +129,7 @@ class VerifyOptionViewController: BaseViewController {
     private func configure() {
         title = "학생 인증하기"
         setBackBarButtonItemTitle()
+        #warning("배포 할 때 아래 주석 해제")
         //        if detectIfVerifiedUser() {
         //            presentKMAlertOnMainThread(
         //                title: "인증 회원 안내",
@@ -147,7 +151,7 @@ extension VerifyOptionViewController {
         guard let vc = storyboard.instantiateViewController(
             identifier: K.StoryboardID.studentIDGuideVC
         ) as? StudentIDGuideViewController else { return }
-        
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     

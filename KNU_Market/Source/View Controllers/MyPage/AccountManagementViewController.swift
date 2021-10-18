@@ -277,6 +277,7 @@ class AccountManagementViewController: BaseViewController {
     }
     
     override func setupConstraints() {
+        super.setupConstraints()
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)

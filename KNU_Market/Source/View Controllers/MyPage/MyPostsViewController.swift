@@ -40,10 +40,12 @@ class MyPostsViewController: BaseViewController {
     
     //MARK: - UI Setup
     override func setupLayout() {
+        super.setupLayout()
         view.addSubview(postTableView)
     }
     
     override func setupConstraints() {
+        super.setupConstraints()
         
         postTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

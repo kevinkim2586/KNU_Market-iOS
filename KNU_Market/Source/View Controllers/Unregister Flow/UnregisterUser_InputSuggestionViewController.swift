@@ -1,43 +1,190 @@
 import UIKit
-import TextFieldEffects
-import Alamofire
+import SnapKit
 
-class UnregisterUser_InputSuggestionViewController: UIViewController {
-
-    @IBOutlet weak var firstLineLabel: UILabel!
-    @IBOutlet weak var detailLineLabel: UILabel!
-    @IBOutlet weak var emailHelpLabel: UILabel!
-    @IBOutlet weak var userInputTextView: UITextView!
+class UnregisterUser_InputSuggestionViewController: BaseViewController {
     
-    private let emailHelpLabelText = "웹메일 인증과 관련된 문의는 카카오채널을\n통해 실시간으로 도와드리겠습니다."
-    private let textViewPlaceholder = "✏️ 개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요."
+    private var userManager: UserManager?
+    
+    //MARK: - Properties
+    
+    //MARK: - Constants
+    fileprivate struct Metrics {
+        
+        static let labelSidePadding: CGFloat = 16
+    }
+    
+    fileprivate struct Fonts {
+        
+        static let titleLabel       = UIFont.systemFont(ofSize: 20, weight: .semibold)
+    }
+    
+    fileprivate struct Texts {
+        static let titleLabel           = "크누마켓팀이 개선했으면\n하는 점을 알려주세요."
+        static let mailGuideLabel       = "웹메일 인증과 관련된 문의는 카카오채널을\n통해 실시간으로 도와드리겠습니다."
+        static let textViewPlaceholder  = "✏️ 개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요."
+    }
+    
+    //MARK: - UI
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = Texts.titleLabel
+        label.font = Fonts.titleLabel
+        label.textColor = .darkGray
+        label.changeTextAttributeColor(fullText: Texts.titleLabel, changeText: "크누마켓")
+        label.numberOfLines = 2
+        return label
+    }()
+    
+    let feedbackLabel: UILabel = {
+        let label = UILabel()
+        label.text = "피드백을 반영하여 적극적으로 개선하겠습니다."
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .lightGray
+        return label
+    }()
+    
+    let mailGuideLabel: UILabel = {
+        let label = UILabel()
+        label.text = Texts.mailGuideLabel
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textColor = .darkGray
+        label.changeTextAttributeColor(fullText: Texts.mailGuideLabel, changeText: "웹메일 인증과 관련된 문의")
+        label.numberOfLines = 2
+        return label
+    }()
+    
+    let kakaoChannelLinkButton: UIButton = {
+        let button = UIButton()
+        let attributes: [NSAttributedString.Key : Any] = [
+            .font: UIFont.systemFont(ofSize: 16, weight: .medium),
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .foregroundColor: UIColor.systemBlue
+        ]
+        let linkString: String = "https://pf.kakao.com/_PjLHs"
+        button.setAttributedTitle(NSAttributedString(string: linkString, attributes: attributes), for: .normal)
+        button.addTarget(
+            self,
+            action: #selector(pressedKakaoChannelLinkButton),
+            for: .touchUpInside
+        )
+        return button
+    }()
+    
+    let feedbackTextView: UITextView = {
+        let textView = UITextView()
+        textView.layer.borderWidth = 1.0
+        textView.layer.cornerRadius = 10.0
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.clipsToBounds = true
+        textView.font = UIFont.systemFont(ofSize: 15)
+        textView.text = Texts.textViewPlaceholder
+        textView.textColor = UIColor.lightGray
+        return textView
+    }()
+
+    
+    let sendFeedbackBarButtonItem = UIBarButtonItem(
+        title: "완료",
+        style: .done,
+        target: self,
+        action: #selector(pressedSendBarButtonItem)
+    )
+    
+    
+    //MARK: - Initialization
+    
+    init(userManager: UserManager) {
+        super.init()
+        self.userManager = userManager
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configure()
+    }
+    //MARK: - UI Setup
+    
+    override func setupLayout() {
+        super.setupLayout()
+        
+        navigationItem.rightBarButtonItem = sendFeedbackBarButtonItem
+        
+        view.addSubview(titleLabel)
+        view.addSubview(feedbackLabel)
+        view.addSubview(mailGuideLabel)
+        view.addSubview(kakaoChannelLinkButton)
+        view.addSubview(feedbackTextView)
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+        }
+        
+        feedbackLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+        }
+        
+        mailGuideLabel.snp.makeConstraints { make in
+            make.top.equalTo(feedbackLabel.snp.bottom).offset(30)
+            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+        }
+        
+        kakaoChannelLinkButton.snp.makeConstraints { make in
+            make.top.equalTo(mailGuideLabel.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+        }
+        
+        feedbackTextView.snp.makeConstraints { make in
+            make.top.equalTo(kakaoChannelLinkButton.snp.bottom).offset(25)
+            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
+        }
+    }
+    
+    override func setupStyle() {
+        super.setupStyle()
+        view.backgroundColor = .white
+    }
+    
+    private func configure() {
+        feedbackTextView.delegate = self
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
 
-        initialize()
-    }
+
+}
+
+//MARK: - Target Methods
+
+extension UnregisterUser_InputSuggestionViewController {
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        dismissProgressBar()
-    }
-    
-    @IBAction func pressedKakaoLinkButton(_ sender: UIButton) {
+    @objc private func pressedSendBarButtonItem() {
+        feedbackTextView.resignFirstResponder()
         
-        let url = URL(string: K.URL.kakaoHelpChannel)!
-        UIApplication.shared.open(url, options: [:])
-    }
-    
-    @IBAction func pressedDoneButton(_ sender: UIBarButtonItem) {
-        
-        userInputTextView.resignFirstResponder()
-        
-        guard var feedback = userInputTextView.text else { return }
-        guard feedback != textViewPlaceholder else {
-            presentKMAlertOnMainThread(title: "회원 탈퇴 사유 입력",
-                                       message: "회원 탈퇴 사유를 입력해 주세요. 짧게라도 작성해주시면 감사하겠습니다 :)",
-                                       buttonTitle: "확인")
+        guard var feedback = feedbackTextView.text else { return }
+        guard feedback != Texts.textViewPlaceholder else {
+            presentKMAlertOnMainThread(
+                title: "회원 탈퇴 사유 입력",
+                message: "회원 탈퇴 사유를 입력해 주세요. 짧게라도 작성해주시면 감사하겠습니다 :)",
+                buttonTitle: "확인"
+            )
             return
         }
         
@@ -46,79 +193,38 @@ class UnregisterUser_InputSuggestionViewController: UIViewController {
         
         let group = DispatchGroup()
         group.enter()
-        UserManager.shared.sendFeedback(content: feedback) { [weak self] result in
-            
+        userManager?.sendFeedback(content: feedback) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success: break
-            case .failure(_):
-                self.showSimpleBottomAlert(with: "피드백 보내기에 실패하였습니다. 잠시 후 다시 시도해주세요.")
+            case .failure: self.showSimpleBottomAlert(with: "피드백 보내기에 실패하였습니다. 잠시 후 다시 시도해주세요.")
             }
             group.leave()
         }
         
         group.notify(queue: .main) {
-            UserManager.shared.unregisterUser { [weak self] result in
-                
+            self.userManager?.unregisterUser { [weak self] result in
                 dismissProgressBar()
-                
                 guard let self = self else { return }
-                
                 switch result {
-                case .success:
-                    self.popToInitialViewController()
+                case .success: self.popToInitialViewController()
                 case .failure(let error):
-                    
-                    self.presentKMAlertOnMainThread(title: "회원 탈퇴 실패",
-                                                    message: error.errorDescription,
-                                                    buttonTitle: "확인")
+                    self.presentKMAlertOnMainThread(
+                        title: "회원 탈퇴 실패",
+                        message: error.errorDescription,
+                        buttonTitle: "확인"
+                    )
                 }
             }
         }
     }
-}
-
-//MARK: - UI Configuration & Initialization
-
-extension UnregisterUser_InputSuggestionViewController {
     
-    func initialize() {
-        
-        initializeLabels()
-        initializeTextView()
-    }
-    
-    func initializeLabels() {
-        
-        firstLineLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        firstLineLabel.textColor = .darkGray
-
-        firstLineLabel.text = "크누마켓팀이 개선했으면\n하는 점을 알려주세요."
-        firstLineLabel.changeTextAttributeColor(fullText: firstLineLabel.text!, changeText: "크누마켓")
-        
-        detailLineLabel.text = "피드백을 반영하여 적극적으로 개선하겠습니다."
-        detailLineLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        detailLineLabel.textColor = .lightGray
-        
-        emailHelpLabel.text = emailHelpLabelText
-        emailHelpLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        emailHelpLabel.textColor = .darkGray
-        emailHelpLabel.changeTextAttributeColor(fullText: emailHelpLabelText, changeText: "웹메일 인증과 관련된 문의")
-    }
-    
-    func initializeTextView() {
-        
-        userInputTextView.delegate = self
-        userInputTextView.layer.borderWidth = 1.0
-        userInputTextView.layer.cornerRadius = 10.0
-        userInputTextView.layer.borderColor = UIColor.lightGray.cgColor
-        userInputTextView.clipsToBounds = true
-        userInputTextView.font = UIFont.systemFont(ofSize: 15)
-        userInputTextView.text = textViewPlaceholder
-        userInputTextView.textColor = UIColor.lightGray
+    @objc private func pressedKakaoChannelLinkButton() {
+        let url = URL(string: K.URL.kakaoHelpChannel)!
+        UIApplication.shared.open(url, options: [:])
     }
 }
+
 
 //MARK: - UITextViewDelegate
 
@@ -135,9 +241,23 @@ extension UnregisterUser_InputSuggestionViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
     
         if textView.text.isEmpty {
-            textView.text = textViewPlaceholder
+            textView.text = Texts.textViewPlaceholder
             textView.textColor = UIColor.lightGray
             return
         }
     }
 }
+
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct UnRegisterUser_InputSuggestionVC: PreviewProvider {
+    
+    static var previews: some View {
+        UnregisterUser_InputSuggestionViewController(userManager: UserManager()).toPreview()
+    }
+}
+#endif
+

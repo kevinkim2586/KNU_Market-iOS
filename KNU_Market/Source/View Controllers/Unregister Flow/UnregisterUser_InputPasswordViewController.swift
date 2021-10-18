@@ -43,11 +43,7 @@ extension UnregisterUser_InputPasswordViewController {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    let storyboard = UIStoryboard(name: StoryboardName.MyPage, bundle: nil)
-                    let vc = storyboard.instantiateViewController(
-                        identifier: K.StoryboardID.unregisterUserInputSuggestVC
-                    ) as! UnregisterUser_InputSuggestionViewController
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.navigationController?.pushViewController(UnregisterUser_InputSuggestionViewController(userManager: UserManager()), animated: true)
                 }
             case .failure(_):
                 self.errorLabel.showErrorMessage(message: self.incorrectPasswordText)

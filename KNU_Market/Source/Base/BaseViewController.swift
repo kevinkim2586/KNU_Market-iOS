@@ -38,7 +38,8 @@ class BaseViewController: UIViewController {
     }
     
     func setupStyle() {
-        
+        view.backgroundColor = .white
+        setBackBarButtonItemTitle()
     }
     
     func setupActions() {

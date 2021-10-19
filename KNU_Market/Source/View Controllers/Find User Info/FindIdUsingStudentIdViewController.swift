@@ -10,7 +10,7 @@ class FindIdUsingStudentIdViewController: UIViewController {
     
     private let padding: CGFloat = 20
     
-    private var viewModel = FindUserInfoViewModel()
+    private var viewModel = FindUserInfoViewModel(userManager: UserManager())
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -15,9 +15,19 @@ extension FindUserInfoViewModelDelegate {
 
 class FindUserInfoViewModel {
     
+    //MARK: - Properties
+    
+    private var userManager: UserManager?
+    
     weak var delegate: FindUserInfoViewModelDelegate?
     
     typealias InputError = ValidationError.OnFindingUserInfo
+    
+    //MARK: - Initialization
+    
+    init(userManager: UserManager) {
+        self.userManager = userManager
+    }
     
     //MARK: - 아이디 찾기
     func findId(
@@ -28,7 +38,7 @@ class FindUserInfoViewModel {
     ) {
         showProgressBar()
         
-        UserManager.shared.findUserId(
+        userManager?.findUserId(
             using: option,
             studentEmail: mail,
             studentId: studentId,
@@ -56,7 +66,7 @@ class FindUserInfoViewModel {
     func findPassword(for userId: String) {
         showProgressBar()
         
-        UserManager.shared.findPassword(id: userId) { [weak self] result in
+        userManager?.findPassword(id: userId) { [weak self] result in
             guard let self = self else { return }
             dismissProgressBar()
             

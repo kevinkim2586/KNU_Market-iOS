@@ -21,9 +21,7 @@ class CaptureStudentIdViewController: BaseViewController {
     }
     
     fileprivate struct Fonts {
-        
         static let titleLabels       = UIFont.systemFont(ofSize: 19, weight: .semibold)
-
     }
     
     fileprivate struct Images {

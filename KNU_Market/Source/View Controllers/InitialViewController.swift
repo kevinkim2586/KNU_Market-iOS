@@ -55,7 +55,13 @@ extension InitialViewController {
     }
     
     @IBAction func pressedRegisterButton(_ sender: UIButton) {
-        performSegue(withIdentifier: K.SegueID.goToRegister, sender: self)
+        
+        let vc = IDInputViewController(userManager: UserManager())
+        let navController = UINavigationController(rootViewController: vc)
+        navController.navigationBar.tintColor = UIColor.black
+        navController.modalPresentationStyle = .overFullScreen
+        present(navController, animated: true)
+
     }
     
     @IBAction func pressedFindIdButton(_ sender: UIButton) {
@@ -90,7 +96,11 @@ extension InitialViewController {
 extension InitialViewController: ChooseVerificationOptionDelegate {
     
     func didSelectToRegister() {
-        performSegue(withIdentifier: K.SegueID.goToRegister, sender: self)
+        let vc = IDInputViewController(userManager: UserManager())
+        let navController = UINavigationController(rootViewController: vc)
+        navController.navigationBar.tintColor = UIColor.black
+        navController.modalPresentationStyle = .overFullScreen
+        present(navController, animated: true)
     }
 }
 

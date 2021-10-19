@@ -29,7 +29,7 @@ class ReportUserViewController: BaseViewController {
         button.tintColor = .darkGray
         button.addTarget(
             self,
-            action: #selector(pressedDismissButton),
+            action: #selector(dismissVC),
             for: .touchUpInside
         )
         return button
@@ -183,11 +183,7 @@ extension ReportUserViewController {
             }
         }
     }
-    
-    @objc private func pressedDismissButton() {
-        print("✏️ pressedDismissButton")
-        dismiss(animated: true)
-    }
+
 }
 
 //MARK: - Input Validation

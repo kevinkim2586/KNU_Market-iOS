@@ -26,10 +26,8 @@
 		7C1EEE4E26A68FB700775B11 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1EEE4D26A68FB700775B11 /* MainTabBarViewController.swift */; };
 		7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* HomeViewModel.swift */; };
 		7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */; };
-		7C3B4FE826A923AB00E2CA8F /* UserRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */; };
 		7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */; };
 		7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FEB26A928A600E2CA8F /* PasswordInputViewController.swift */; };
-		7C3B4FEE26A928B700E2CA8F /* ProfilePictureInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FED26A928B700E2CA8F /* ProfilePictureInputViewController.swift */; };
 		7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FEF26A928C700E2CA8F /* EmailInputViewController.swift */; };
 		7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF126A928D300E2CA8F /* CheckEmailViewController.swift */; };
 		7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */; };
@@ -168,10 +166,8 @@
 		7C1EEE4D26A68FB700775B11 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		7C3758EC265FA97A0081A85D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
-		7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserRegister.storyboard; sourceTree = "<group>"; };
 		7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewController.swift; sourceTree = "<group>"; };
 		7C3B4FEB26A928A600E2CA8F /* PasswordInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputViewController.swift; sourceTree = "<group>"; };
-		7C3B4FED26A928B700E2CA8F /* ProfilePictureInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureInputViewController.swift; sourceTree = "<group>"; };
 		7C3B4FEF26A928C700E2CA8F /* EmailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInputViewController.swift; sourceTree = "<group>"; };
 		7C3B4FF126A928D300E2CA8F /* CheckEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailViewController.swift; sourceTree = "<group>"; };
 		7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulateUserViewController.swift; sourceTree = "<group>"; };
@@ -352,7 +348,6 @@
 				7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */,
 				7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */,
 				7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */,
-				7C3B4FED26A928B700E2CA8F /* ProfilePictureInputViewController.swift */,
 			);
 			path = "User Register";
 			sourceTree = "<group>";
@@ -441,7 +436,6 @@
 		7C79E10C26E0C1F50004508A /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				7C8189D526F32422006AE474 /* UserRegister & Verification */,
 				7CA661F6263D4387000E0B7A /* Main.storyboard */,
 				7C6D2536268DD6710030F9A1 /* ItemList.storyboard */,
 				7C6D2538268DD6830030F9A1 /* ChatList.storyboard */,
@@ -504,14 +498,6 @@
 				7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */,
 			);
 			path = "LaunchScreen Assets";
-			sourceTree = "<group>";
-		};
-		7C8189D526F32422006AE474 /* UserRegister & Verification */ = {
-			isa = PBXGroup;
-			children = (
-				7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */,
-			);
-			path = "UserRegister & Verification";
 			sourceTree = "<group>";
 		};
 		7C84147C270556BC00FFA56B /* FindUserInfoVM */ = {
@@ -666,7 +652,8 @@
 			isa = PBXGroup;
 			children = (
 				7C1EEE4D26A68FB700775B11 /* MainTabBarViewController.swift */,
-				7CD74E0C2645981700BD2DE4 /* Login+Register */,
+				7CA661F4263D4387000E0B7A /* InitialViewController.swift */,
+				7C3B4FF526A92C4100E2CA8F /* User Register */,
 				7CEC191E27017C5D00C2D671 /* Find User Info */,
 				7CEC191D27017C0E00C2D671 /* User Verification */,
 				7CD74E0E2645983000BD2DE4 /* Item */,
@@ -759,15 +746,6 @@
 				7C184B8226B103F1006C0FAD /* Room.swift */,
 			);
 			path = "Chat Models";
-			sourceTree = "<group>";
-		};
-		7CD74E0C2645981700BD2DE4 /* Login+Register */ = {
-			isa = PBXGroup;
-			children = (
-				7C3B4FF526A92C4100E2CA8F /* User Register */,
-				7CA661F4263D4387000E0B7A /* InitialViewController.swift */,
-			);
-			path = "Login+Register";
 			sourceTree = "<group>";
 		};
 		7CD74E0D2645982600BD2DE4 /* Chat */ = {
@@ -931,7 +909,6 @@
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
 				7C43355C26D8BD8000A044CD /* appLogo_LaunchScreen.png in Resources */,
-				7C3B4FE826A923AB00E2CA8F /* UserRegister.storyboard in Resources */,
 				7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */,
 				7C6D253B268DD68A0030F9A1 /* MyPage.storyboard in Resources */,
 				7CC1B59A26D4CB1E0007F99B /* EmptyView.xib in Resources */,
@@ -1110,7 +1087,6 @@
 				7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */,
 				7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */,
 				7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */,
-				7C3B4FEE26A928B700E2CA8F /* ProfilePictureInputViewController.swift in Sources */,
 				7CA52D69270B083F00A69F3B /* ChangeIdViewController.swift in Sources */,
 				7C3D985E26AE793D005DFAE0 /* RoomInfo.swift in Sources */,
 				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,

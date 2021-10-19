@@ -15,6 +15,7 @@ class FindPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+        view.backgroundColor = .white
     }
     
     override func viewDidAppear(_ animated: Bool) {

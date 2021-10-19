@@ -28,7 +28,7 @@ class KMBottomButton: UIButton {
         backgroundColor = UIColor(named: K.Color.appColor)
         setTitleColor(.white, for: .normal)
         setTitleColor(.lightGray, for: .highlighted)
-        titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     

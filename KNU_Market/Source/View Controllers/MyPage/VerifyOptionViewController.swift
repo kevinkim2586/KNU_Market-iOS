@@ -17,8 +17,8 @@ class VerifyOptionViewController: BaseViewController {
     }
     
     fileprivate struct Images {
-        static let studentIdImage   = UIImage(systemName: "person.crop.rectangle")?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
-        static let schoolMail       = UIImage(systemName: "envelope")?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
+        static let studentIdImage   = UIImage(systemName: K.Images.studentIdButtonSystemImage)?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
+        static let schoolMail       = UIImage(systemName: K.Images.schoolMailButtonSystemImage)?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
     }
     
     fileprivate struct Fonts {
@@ -153,10 +153,8 @@ extension VerifyOptionViewController {
     }
     
     @objc private func pressedVerifyUsingEmailButton() {
-        let storyboard = UIStoryboard(name: StoryboardName.VerifyEmail, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(
-            identifier: K.StoryboardID.emailInputVC
-        ) as? EmailInputViewController else { return }
+        let vc = EmailInputViewController()
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -30,6 +30,7 @@ extension CheckEmailViewController {
 extension CheckEmailViewController {
     
     func initialize() {
+        view.backgroundColor = .white
         title = "웹메일 인증"
         initializeTitleLabel()
         initializeDetailLabel()

@@ -16,7 +16,6 @@
 		7C036ABE269AB7CC00F6C29B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */; };
 		7C0E2DDF26B7D92800BB37FF /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E2DDE26B7D92800BB37FF /* String + Extension.swift */; };
 		7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */; };
-		7C0F1CB626BA64840068FF45 /* VerifyEmail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */; };
 		7C0F1CBA26BA6B310068FF45 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB926BA6B310068FF45 /* NotificationName.swift */; };
 		7C132BF2265397B200BE5F40 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF1265397B200BE5F40 /* ProgressHUD.swift */; };
 		7C132BF426552B4900BE5F40 /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF326552B4900BE5F40 /* UIButton + Extension.swift */; };
@@ -70,7 +69,6 @@
 		7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */; };
 		7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BD26FF0B31000E4666 /* StudentIdVerificationDTO.swift */; };
 		7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */; };
-		7C8189D426F31BAB006AE474 /* VerifyStudentID.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C8189D326F31BAB006AE474 /* VerifyStudentID.storyboard */; };
 		7C833686266208210032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833685266208210032308D /* Interceptor.swift */; };
 		7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */; };
 		7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */; };
@@ -141,7 +139,6 @@
 		7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */; };
 		7CDADA0726BE623100F7F58F /* DateHelper + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper + Extension.swift */; };
 		7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */; };
-		7CEC191C2701745300C2D671 /* FindUserInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CEC191B2701745300C2D671 /* FindUserInfo.storyboard */; };
 		7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */; };
 		7CEC19232701837100C2D671 /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC19222701837100C2D671 /* StoryboardName.swift */; };
 		7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */; };
@@ -161,7 +158,6 @@
 		7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "KNU_Market/Supporting Files/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7C0E2DDE26B7D92800BB37FF /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 		7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
-		7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerifyEmail.storyboard; sourceTree = "<group>"; };
 		7C0F1CB926BA6B310068FF45 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		7C132BF1265397B200BE5F40 /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		7C132BF326552B4900BE5F40 /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
@@ -216,7 +212,6 @@
 		7C7480BD26FF0B31000E4666 /* StudentIdVerificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdVerificationDTO.swift; sourceTree = "<group>"; };
 		7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + SaveUserInfo.swift"; sourceTree = "<group>"; };
 		7C77E240266BB55600680A27 /* KNU_Market.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNU_Market.entitlements; sourceTree = "<group>"; };
-		7C8189D326F31BAB006AE474 /* VerifyStudentID.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerifyStudentID.storyboard; sourceTree = "<group>"; };
 		7C833685266208210032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserInfoViewModel.swift; sourceTree = "<group>"; };
 		7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + FindUserInfo.swift"; sourceTree = "<group>"; };
@@ -289,7 +284,6 @@
 		7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		7CDADA0626BE623100F7F58F /* DateHelper + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper + Extension.swift"; sourceTree = "<group>"; };
 		7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewController.swift; sourceTree = "<group>"; };
-		7CEC191B2701745300C2D671 /* FindUserInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FindUserInfo.storyboard; sourceTree = "<group>"; };
 		7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVerificationOptionViewController.swift; sourceTree = "<group>"; };
 		7CEC19222701837100C2D671 /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
 		7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMBottomButton.swift; sourceTree = "<group>"; };
@@ -516,9 +510,6 @@
 			isa = PBXGroup;
 			children = (
 				7C3B4FE726A923AB00E2CA8F /* UserRegister.storyboard */,
-				7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */,
-				7C8189D326F31BAB006AE474 /* VerifyStudentID.storyboard */,
-				7CEC191B2701745300C2D671 /* FindUserInfo.storyboard */,
 			);
 			path = "UserRegister & Verification";
 			sourceTree = "<group>";
@@ -934,12 +925,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CCDB1F026A2BD0C0092F28D /* ItemTableViewCell.xib in Resources */,
-				7C8189D426F31BAB006AE474 /* VerifyStudentID.storyboard in Resources */,
 				7C184B8526B27B8B006C0FAD /* Chat.storyboard in Resources */,
 				7C43355826D89AC200A044CD /* wimLogo_Launchscreen.png in Resources */,
-				7CEC191C2701745300C2D671 /* FindUserInfo.storyboard in Resources */,
 				7C3D541D26C90B4900AE3E55 /* congratulate1.json in Resources */,
-				7C0F1CB626BA64840068FF45 /* VerifyEmail.storyboard in Resources */,
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
 				7C43355C26D8BD8000A044CD /* appLogo_LaunchScreen.png in Resources */,

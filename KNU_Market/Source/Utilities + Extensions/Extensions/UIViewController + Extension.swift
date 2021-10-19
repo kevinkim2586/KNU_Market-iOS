@@ -306,7 +306,7 @@ extension UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(presentUserVerificationNeededAlert),
-            name: .presentVerifyEmailVC,
+            name: .presentVerificationNeededAlert,
             object: nil
         )
     }

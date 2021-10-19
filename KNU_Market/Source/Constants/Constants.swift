@@ -190,6 +190,11 @@ struct K {
         static let locationIcon                 = "location icon"
         
         
+        // Verify Button
+        static let studentIdButtonSystemImage   = "person.crop.rectangle"
+        static let schoolMailButtonSystemImage  = "envelope"
+        
+        
         // Other
         static let myPageSection_1_Images         = [
                                                     "tray.full",

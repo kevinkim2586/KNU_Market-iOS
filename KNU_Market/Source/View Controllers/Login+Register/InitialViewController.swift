@@ -59,18 +59,13 @@ extension InitialViewController {
     }
     
     @IBAction func pressedFindIdButton(_ sender: UIButton) {
-        guard let findIdVC = findUserInfoStoryboard.instantiateViewController(
-            identifier: K.StoryboardID.chooseVerificationOptionVC
-        ) as? ChooseVerificationOptionViewController else { return }
-        
+        let findIdVC = ChooseVerificationOptionViewController()
         findIdVC.delegate = self
         presentVC(findIdVC)
     }
     
     @IBAction func pressedFindPwButton(_ sender: UIButton) {
-        guard let findPwVC = findUserInfoStoryboard.instantiateViewController(
-            identifier: K.StoryboardID.findPasswordVC
-        ) as? FindPasswordViewController else { return }
+        let findPwVC = FindPasswordViewController()
         presentVC(findPwVC)
     }
     

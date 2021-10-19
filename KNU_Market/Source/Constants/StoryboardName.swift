@@ -14,5 +14,4 @@ struct StoryboardName {
     static let ChatList         = "ChatList"
     static let Chat             = "Chat"
     static let MyPage           = "MyPage"
-    static let Report           = "Report"
 }

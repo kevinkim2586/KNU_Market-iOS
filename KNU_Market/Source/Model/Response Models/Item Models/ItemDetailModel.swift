@@ -8,6 +8,7 @@ struct ItemDetailModel: Decodable {
     let imageUIDs: [String]?
     let location: Int
     let itemDetail: String
+    let viewCount: Int
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
     let isFull: Bool
@@ -23,6 +24,7 @@ struct ItemDetailModel: Decodable {
         case imageUIDs = "images"
         case location = "spotCategory"
         case itemDetail = "content"
+        case viewCount  = "viewCount"
         case totalGatheringPeople = "maxHeadcount"
         case currentlyGatheredPeople = "currentHeadcount"
         case isFull = "isHeadcountArchived"

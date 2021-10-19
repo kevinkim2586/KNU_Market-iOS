@@ -14,7 +14,6 @@
 		7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */; };
 		7C036AB82696BE4C00F6C29B /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C036AB72696BE4C00F6C29B /* Date + Extension.swift */; };
 		7C036ABE269AB7CC00F6C29B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */; };
-		7C0E2DDD26B7B62600BB37FF /* Report.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C0E2DDC26B7B62600BB37FF /* Report.storyboard */; };
 		7C0E2DDF26B7D92800BB37FF /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E2DDE26B7D92800BB37FF /* String + Extension.swift */; };
 		7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */; };
 		7C0F1CB626BA64840068FF45 /* VerifyEmail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */; };
@@ -160,7 +159,6 @@
 		7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		7C036AB72696BE4C00F6C29B /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		7C036ABD269AB7CC00F6C29B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "KNU_Market/Supporting Files/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		7C0E2DDC26B7B62600BB37FF /* Report.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Report.storyboard; sourceTree = "<group>"; };
 		7C0E2DDE26B7D92800BB37FF /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 		7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		7C0F1CB526BA64840068FF45 /* VerifyEmail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerifyEmail.storyboard; sourceTree = "<group>"; };
@@ -455,7 +453,6 @@
 				7C6D2538268DD6830030F9A1 /* ChatList.storyboard */,
 				7C184B8426B27B8B006C0FAD /* Chat.storyboard */,
 				7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */,
-				7C0E2DDC26B7B62600BB37FF /* Report.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -950,7 +947,6 @@
 				7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */,
 				7C6D253B268DD68A0030F9A1 /* MyPage.storyboard in Resources */,
 				7CC1B59A26D4CB1E0007F99B /* EmptyView.xib in Resources */,
-				7C0E2DDD26B7B62600BB37FF /* Report.storyboard in Resources */,
 				7CA661F8263D4387000E0B7A /* Main.storyboard in Resources */,
 				7C6D2539268DD6830030F9A1 /* ChatList.storyboard in Resources */,
 				7C036ABE269AB7CC00F6C29B /* GoogleService-Info.plist in Resources */,

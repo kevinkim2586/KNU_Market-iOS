@@ -298,6 +298,15 @@
                                                     <action selector="pressedMoreButton:" destination="8k6-WR-GcD" eventType="touchUpInside" id="kAs-ok-GUJ"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="조회" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SeP-0J-jqk" userLabel="View Count Label">
+                                                <rect key="frame" x="368" y="425" width="26" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -319,8 +328,10 @@
                                             <constraint firstItem="rJW-ki-gZr" firstAttribute="top" secondItem="kng-gU-n1q" secondAttribute="top" constant="50" id="nGa-hv-gEC"/>
                                             <constraint firstAttribute="trailing" secondItem="9fa-0F-i3c" secondAttribute="trailing" id="orJ-6Z-DpG"/>
                                             <constraint firstItem="XBx-ma-qzB" firstAttribute="leading" secondItem="kng-gU-n1q" secondAttribute="leading" constant="20" id="pku-IJ-b1Z"/>
+                                            <constraint firstAttribute="trailing" secondItem="SeP-0J-jqk" secondAttribute="trailing" constant="20" id="sgH-DX-ACu"/>
                                             <constraint firstItem="vDL-C0-E7h" firstAttribute="top" secondItem="kng-gU-n1q" secondAttribute="top" constant="50" id="uLp-uz-v7t"/>
                                             <constraint firstItem="vDL-C0-E7h" firstAttribute="leading" secondItem="3sf-U2-skZ" secondAttribute="trailing" constant="20" id="wF6-aR-bQ9"/>
+                                            <constraint firstItem="SeP-0J-jqk" firstAttribute="top" secondItem="nr4-zF-a7J" secondAttribute="bottom" constant="15" id="yrc-cc-WOS"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -373,6 +384,7 @@
                         <outlet property="trashButton" destination="3sf-U2-skZ" id="AN3-hZ-i6Q"/>
                         <outlet property="userIdLabel" destination="zUH-wb-RPm" id="Fml-oI-ZFO"/>
                         <outlet property="userProfileImageView" destination="RbW-Q3-7k4" id="ps2-8m-PRG"/>
+                        <outlet property="viewCountLabel" destination="SeP-0J-jqk" id="FCt-52-lVR"/>
                         <outletCollection property="topBarButtons" destination="AXT-NJ-LVv" collectionClass="NSMutableArray" id="c30-u8-91f"/>
                         <outletCollection property="topBarButtons" destination="vDL-C0-E7h" collectionClass="NSMutableArray" id="s47-LD-JWR"/>
                         <outletCollection property="topBarButtons" destination="3sf-U2-skZ" collectionClass="NSMutableArray" id="t8T-Vx-cae"/>

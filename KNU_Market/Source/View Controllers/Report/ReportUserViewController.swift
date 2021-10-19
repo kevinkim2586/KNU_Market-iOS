@@ -19,7 +19,6 @@ class ReportUserViewController: BaseViewController {
     fileprivate struct Texts {
         static let detailLabelText: String      = "🥷🏻 사기가 의심되거나 사기를 당하셨나요?\n🤬 부적절한 언어를 사용했나요?\n🤔 아래에 신고 사유를 적어서 보내주세요."
         static let textViewPlaceholder: String  = "신고 내용을 적어주세요. 신고가 접수되면 크누마켓 팀이 검토 후 조치하도록 할게요 :)"
-        
     }
     
     //MARK: - UI
@@ -121,8 +120,9 @@ class ReportUserViewController: BaseViewController {
         super.setupConstraints()
         
         dismissButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(25)
+            make.right.equalTo(view.snp.right).offset(-10)
+            make.width.height.equalTo(50)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -185,6 +185,7 @@ extension ReportUserViewController {
     }
     
     @objc private func pressedDismissButton() {
+        print("✏️ pressedDismissButton")
         dismiss(animated: true)
     }
 }

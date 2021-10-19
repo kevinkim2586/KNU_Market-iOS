@@ -64,6 +64,11 @@ class ItemViewModel {
         return getFormattedDateStringToDisplayTodayAndYesterday()
     }
     
+    var viewCount: String {
+        guard let model = model else { return "조회 -" }
+        return "조회 \(model.viewCount)"
+    }
+    
     // 사용자가 올린 공구인지 여부
     var postIsUserUploaded: Bool {
         return model?.nickname == User.shared.nickname

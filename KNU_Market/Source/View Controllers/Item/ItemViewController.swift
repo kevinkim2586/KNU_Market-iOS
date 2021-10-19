@@ -21,6 +21,7 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var viewCountLabel: UILabel!
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var trashButton: UIButton!
@@ -380,6 +381,7 @@ extension ItemViewController {
         itemDetailLabel.text = viewModel.model?.itemDetail
         
         initializeDateLabel()
+        initializeViewCountLabel()
         initializeCheckButton()
         initializeGatheringPeopleLabel()
         initializeEnterChatButton()
@@ -513,6 +515,10 @@ extension ItemViewController {
 
     func initializeDateLabel() {
         dateLabel.text = viewModel.date
+    }
+    
+    func initializeViewCountLabel() {
+        viewCountLabel.text = viewModel.viewCount
     }
     
     func initializeItemExplanationLabel() {

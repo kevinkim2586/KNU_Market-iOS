@@ -23,18 +23,6 @@ class ReportUserViewController: BaseViewController {
     
     //MARK: - UI
     
-    let dismissButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.tintColor = .darkGray
-        button.addTarget(
-            self,
-            action: #selector(dismissVC),
-            for: .touchUpInside
-        )
-        return button
-    }()
-    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
@@ -84,7 +72,6 @@ class ReportUserViewController: BaseViewController {
         return button
     }()
     
-
     //MARK: - Initialization
     
     init(reportManager: ReportManager, userToReport: String, postUid: String) {
@@ -108,8 +95,9 @@ class ReportUserViewController: BaseViewController {
     
     override func setupLayout() {
         super.setupLayout()
+    
+        UIHelper.addNavigationBarWithDismissButton(in: self.view)
         
-        view.addSubview(dismissButton)
         view.addSubview(titleLabel)
         view.addSubview(detailLabel)
         view.addSubview(reportTextView)
@@ -118,13 +106,7 @@ class ReportUserViewController: BaseViewController {
     
     override func setupConstraints() {
         super.setupConstraints()
-        
-        dismissButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(25)
-            make.right.equalTo(view.snp.right).offset(-10)
-            make.width.height.equalTo(50)
-        }
-        
+    
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(80)
             make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)

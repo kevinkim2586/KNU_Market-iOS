@@ -58,6 +58,7 @@
 		7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* ItemViewModel.swift */; };
 		7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */; };
 		7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */; };
+		7C682CE9271EB02500989139 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682CE8271EB02500989139 /* UIHelper.swift */; };
 		7C6B50A02652B17F0032328C /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509F2652B17F0032328C /* UIImage + Extension.swift */; };
 		7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6D2536268DD6710030F9A1 /* ItemList.storyboard */; };
 		7C6D2539268DD6830030F9A1 /* ChatList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6D2538268DD6830030F9A1 /* ChatList.storyboard */; };
@@ -198,6 +199,7 @@
 		7C5E21282646558600E98FE5 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
+		7C682CE8271EB02500989139 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		7C6B509F2652B17F0032328C /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
 		7C6D2536268DD6710030F9A1 /* ItemList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ItemList.storyboard; sourceTree = "<group>"; };
 		7C6D2538268DD6830030F9A1 /* ChatList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatList.storyboard; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			children = (
 				7CB8DF34264BAB390001CC6D /* Extensions */,
 				7C132BF1265397B200BE5F40 /* ProgressHUD.swift */,
+				7C682CE8271EB02500989139 /* UIHelper.swift */,
 			);
 			path = "Utilities + Extensions";
 			sourceTree = "<group>";
@@ -1030,6 +1033,7 @@
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
 				7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */,
+				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,

@@ -17,7 +17,7 @@ class FindUserInfoViewModel {
     
     //MARK: - Properties
     
-    private var userManager: UserManager?
+    let userManager: UserManager
     
     weak var delegate: FindUserInfoViewModelDelegate?
     
@@ -38,7 +38,7 @@ class FindUserInfoViewModel {
     ) {
         showProgressBar()
         
-        userManager?.findUserId(
+        userManager.findUserId(
             using: option,
             studentEmail: mail,
             studentId: studentId,
@@ -66,7 +66,7 @@ class FindUserInfoViewModel {
     func findPassword(for userId: String) {
         showProgressBar()
         
-        userManager?.findPassword(id: userId) { [weak self] result in
+        userManager.findPassword(id: userId) { [weak self] result in
             guard let self = self else { return }
             dismissProgressBar()
             

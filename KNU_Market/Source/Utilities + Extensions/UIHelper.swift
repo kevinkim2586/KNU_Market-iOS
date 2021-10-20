@@ -2,6 +2,7 @@ import UIKit
 
 struct UIHelper {
     
+    
     static func addNavigationBarWithDismissButton(in view: UIView, title: String = "") {
         
         var statusBarHeight: CGFloat = 0

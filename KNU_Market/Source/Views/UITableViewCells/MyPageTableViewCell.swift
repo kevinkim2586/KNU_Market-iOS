@@ -1,21 +1,53 @@
 import UIKit
+import SnapKit
 
 class MyPageTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var leftImageView: UIImageView!
-    @IBOutlet weak var settingsTitleLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    let leftImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .black
+        return imageView
+    }()
+    
+    let settingsTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textColor = .black
+        return label
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
     }
     
-    private func configure() {
-        settingsTitleLabel.font = .systemFont(ofSize: 16, weight: .medium)
+    func configure() {
+        
+        accessoryType = .disclosureIndicator
+        contentView.addSubview(leftImageView)
+        contentView.addSubview(settingsTitleLabel)
+        makeConstraints()
+    }
+    
+    func makeConstraints() {
+        
+        leftImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(25)
+            make.top.left.bottom.equalToSuperview()
+        }
+    
+        settingsTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(9)
+            make.left.equalTo(leftImageView.snp.right).offset(10)
+            
+        }
+        
     }
 
 }

@@ -13,7 +13,7 @@
         <!--Chat List View Controller-->
         <scene sceneID="rnx-zs-TJT">
             <objects>
-                <viewController title="Chat List View Controller" id="0Xt-JH-qCD" customClass="ChatListViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatListViewController" title="Chat List View Controller" id="0Xt-JH-qCD" customClass="ChatListViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7BK-OP-4jl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -105,7 +105,7 @@ enum NetworkError: String, Error {
             let json = try JSON(data: json)
             print("❗️ NetworkError - error JSON: \(json)")
             let errorCode = json["errorCode"].stringValue
-            let errorDescription = json["errorDescription"].stringValue
+            let _ = json["errorDescription"].stringValue
  
             if errorCode == "E109" {
                 

@@ -1,23 +1,131 @@
 import UIKit
 import Photos
-import SDWebImage
+import SnapKit
 
-class MyPageViewController: UIViewController {
+class MyPageViewController: BaseViewController {
     
-    @IBOutlet weak var profileImageButton: UIButton!
-    @IBOutlet weak var userNicknameLabel: UILabel!
-    @IBOutlet weak var userVerifiedImage: UIImageView!
-    @IBOutlet weak var settingsTableView: UITableView!
-    @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem!
+    //MARK: - Properties
     
-    lazy var imagePicker = UIImagePickerController()
+    private var userManager: UserManager?
     
     private var viewModel = MyPageViewModel()
+
+    
+    //MARK: - Constants
+    
+    //MARK: - UI
+    
+    lazy var profileImageContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    let profileImageButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: K.Images.pickProfileImage), for: .normal)
+        button.layer.masksToBounds = false
+        button.isUserInteractionEnabled = true
+        button.contentMode = .scaleAspectFit
+        button.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        button.layer.cornerRadius = button.frame.height / 2
+        button.addTarget(self, action: #selector(pressedProfileImageButton(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    let cameraIcon: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: K.Images.cameraIcon)
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    let userNicknameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "로딩 중.."
+        label.numberOfLines = 2
+        label.minimumScaleFactor = 0.8
+        label.adjustsFontSizeToFitWidth = true
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .black
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let userVerifiedImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "checkmark.circle.fill")?.withRenderingMode(.alwaysOriginal)
+                        .withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink)
+        imageView.contentMode = .scaleAspectFit
+        imageView.isHidden = true
+        return imageView
+    }()
+    
+    lazy var settingsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(
+            MyPageTableViewCell.self,
+            forCellReuseIdentifier: K.cellID.myPageCell
+        )
+        return tableView
+    }()
+    
+    // UIBarButtonItems
+    
+    lazy var myPageBarButtonItem: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.title = "마이페이지"
+        button.style = .done
+        button.tintColor = .black
+        return button
+    }()
+    
+    lazy var settingsBarButtonItem: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        if #available(iOS 14.0, *) {
+            button.image = UIImage(systemName: "gearshape")
+        } else {
+            button.image = UIImage(systemName: "gear")
+        }
+        button.style = .plain
+        button.target = self
+        button.action = #selector(pressedSettingsBarButtonItem)
+        return button
+    }()
+    
+    // UIImagePickerController
+    
+    lazy var imagePicker: UIImagePickerController = {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .savedPhotosAlbum
+        return imagePicker
+    }()
+    
+    
+    //MARK: - Initialization
+    init(userManager: UserManager) {
+        super.init()
+        self.userManager = userManager
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configure()
         viewModel.loadUserProfile()
-        initialize()
+//        initialize()
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,16 +138,88 @@ class MyPageViewController: UIViewController {
     }
     
     
-    @IBAction func pressedSettingsBarButtonItem(_ sender: UIBarButtonItem) {
+    //MARK: - UI Setup
+    override func setupLayout() {
+        super.setupLayout()
+        
+        navigationItem.leftBarButtonItem = myPageBarButtonItem
+        navigationItem.rightBarButtonItem = settingsBarButtonItem
+        
+        view.addSubview(profileImageContainerView)
+        profileImageContainerView.addSubview(profileImageButton)
+        profileImageContainerView.addSubview(cameraIcon)
+        profileImageContainerView.addSubview(userNicknameLabel)
+        profileImageContainerView.addSubview(userVerifiedImage)
+        view.addSubview(settingsTableView)
+        
+        profileImageContainerView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
+            make.left.equalTo(view.snp.left).offset(50)
+            make.right.equalTo(view.snp.right).offset(-50)
+            make.height.equalTo(160)
+        }
+        
+        profileImageButton.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        userNicknameLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileImageButton.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        
+        cameraIcon.snp.makeConstraints { make in
+            make.width.height.equalTo(30)
+            make.bottom.equalTo(userNicknameLabel.snp.top).offset(-10)
+            make.right.equalTo(profileImageContainerView.snp.right).offset(-80)
+        }
+        
+        userVerifiedImage.snp.makeConstraints { make in
+            make.width.height.equalTo(20)
+            make.left.equalTo(userNicknameLabel.snp.right).offset(4)
+            make.bottom.equalTo(profileImageContainerView.snp.bottom).offset(5)
+        }
+        
+        settingsTableView.snp.makeConstraints { make in
+            make.top.equalTo(profileImageContainerView.snp.bottom).offset(6)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+    
+        }
+        
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
+    }
+    
+    private func configure() {
+        
+        createObserversForPresentingVerificationAlert()
+        createObserversForGettingBadgeValue()
+        
+        viewModel.delegate = self
+    }
+
+}
+
+//MARK: - Target Methods
+
+extension MyPageViewController {
+    
+    @objc private func pressedSettingsBarButtonItem() {
         pushViewController(with: AccountManagementViewController())
     }
+    
 }
 
 //MARK: - profile image modification methods
 
 extension MyPageViewController {
     
-    @IBAction func pressedProfileImageButton(_ sender: UIButton) {
+    @objc private func pressedProfileImageButton(_ sender: UIButton) {
         presentActionSheet()
     }
     
@@ -54,7 +234,8 @@ extension MyPageViewController {
             title: "앨범에서 선택",
             style: .default
         ) { [weak self] _ in
-            self?.initializeImagePicker()
+            guard let self = self else { return }
+            self.present(self.imagePicker, animated: true)
         }
         let remove = UIAlertAction(
             title: "프로필 사진 제거",
@@ -84,7 +265,7 @@ extension MyPageViewController {
     
     func removeProfileImage() {
         
-        UserManager.shared.updateUserInfo(
+        userManager?.updateUserInfo(
             type: .profileImage,
             infoString: "default"
         ) { [weak self] result in
@@ -163,12 +344,9 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
-        case 0:
-            return viewModel.tableViewSection_1.count
-        case 1:
-            return viewModel.tableViewSection_2.count
-        default:
-            return 0
+        case 0: return viewModel.tableViewSection_1.count
+        case 1: return viewModel.tableViewSection_2.count
+        default: return 0
         }
     }
     
@@ -190,6 +368,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 25))
         view.backgroundColor = .white
         
@@ -306,10 +485,8 @@ extension MyPageViewController {
         
         viewModel.delegate = self
         
-        userVerifiedImage.isHidden = true
+//        userVerifiedImage.isHidden = true
         initializeTabBarIcon()
-        initializeTableView()
-        initializeBarButtonItem()
         initializeProfileImageButton()
         setBackBarButtonItemTitle()
         setNavigationBarAppearance(to: .white)
@@ -320,21 +497,7 @@ extension MyPageViewController {
         navigationController?.tabBarItem.selectedImage = UIImage(named: K.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
     }
     
-    func initializeTableView() {
-        settingsTableView.delegate = self
-        settingsTableView.dataSource = self
-        settingsTableView.separatorStyle = .none
-        settingsTableView.separatorColor = .lightGray
-    }
-    
-    func initializeBarButtonItem() {
-        
-        if #available(iOS 14.0, *) {
-            settingsBarButtonItem.image = UIImage(systemName: "gearshape")
-        } else {
-            settingsBarButtonItem.image = UIImage(systemName: "gear")
-        }
-    }
+
     
     func initializeProfileImageButton() {
         profileImageButton.setImage(UIImage(named: K.Images.pickProfileImage), for: .normal)
@@ -344,12 +507,6 @@ extension MyPageViewController {
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
     }
     
-    func initializeImagePicker() {
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .savedPhotosAlbum
-        self.present(self.imagePicker, animated: true)
-    }
     
     func updateProfileImageButton(with image: UIImage) {
         profileImageButton.setImage(image, for: .normal)
@@ -359,3 +516,14 @@ extension MyPageViewController {
     
     
 }
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct MyPageVC: PreviewProvider {
+    
+    static var previews: some View {
+        MyPageViewController(userManager: UserManager()).toPreview()
+    }
+}
+#endif

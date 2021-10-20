@@ -8,7 +8,7 @@
 import UIKit
 
 /// Cusotm Page Indicator can be used by implementing this protocol
-public protocol PageIndicatorView: class {
+public protocol PageIndicatorView: AnyObject {
     /// View of the page indicator
     var view: UIView { get }
 

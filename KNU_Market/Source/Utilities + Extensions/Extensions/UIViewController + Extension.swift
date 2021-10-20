@@ -204,11 +204,7 @@ extension UIViewController {
     
     // 인증 수단 고르기 화면 띄우기
     func presentVerifyOptionVC() {
-        let storyboard = UIStoryboard(name: StoryboardName.MyPage, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(
-            identifier: K.StoryboardID.verifyOptionVC
-        ) as? VerifyOptionViewController else { return }
-        
+        let vc = VerifyOptionViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     

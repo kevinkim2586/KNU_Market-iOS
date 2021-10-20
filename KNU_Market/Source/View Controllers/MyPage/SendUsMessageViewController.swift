@@ -169,7 +169,7 @@ class SendUsMessageViewController: BaseViewController {
     
     override func setupStyle() {
         super.setupStyle()
-        view.backgroundColor = .white
+    
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

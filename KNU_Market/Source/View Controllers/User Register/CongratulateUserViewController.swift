@@ -226,11 +226,8 @@ extension CongratulateUserViewController {
     }
     
     func changeRootViewControllerToMain() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(
-            identifier: K.StoryboardID.tabBarController
-        )
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(UIHelper.createMainTabBarController())
     }
     
     func removeAllPreviousObservers() {

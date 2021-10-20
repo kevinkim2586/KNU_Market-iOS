@@ -63,7 +63,6 @@
 		7C6B50A02652B17F0032328C /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509F2652B17F0032328C /* UIImage + Extension.swift */; };
 		7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6D2536268DD6710030F9A1 /* ItemList.storyboard */; };
 		7C6D2539268DD6830030F9A1 /* ChatList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6D2538268DD6830030F9A1 /* ChatList.storyboard */; };
-		7C6D253B268DD68A0030F9A1 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */; };
 		7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71996E2679CAEC000BEE64 /* Animations.swift */; };
 		7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C719970267A1678000BEE64 /* ItemDetailModel.swift */; };
 		7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */; };
@@ -205,7 +204,6 @@
 		7C6B509F2652B17F0032328C /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
 		7C6D2536268DD6710030F9A1 /* ItemList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ItemList.storyboard; sourceTree = "<group>"; };
 		7C6D2538268DD6830030F9A1 /* ChatList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatList.storyboard; sourceTree = "<group>"; };
-		7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		7C71996E2679CAEC000BEE64 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		7C719970267A1678000BEE64 /* ItemDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailModel.swift; sourceTree = "<group>"; };
 		7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + Verification.swift"; sourceTree = "<group>"; };
@@ -445,7 +443,6 @@
 				7C6D2536268DD6710030F9A1 /* ItemList.storyboard */,
 				7C6D2538268DD6830030F9A1 /* ChatList.storyboard */,
 				7C184B8426B27B8B006C0FAD /* Chat.storyboard */,
-				7C6D253A268DD68A0030F9A1 /* MyPage.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -916,7 +913,6 @@
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
 				7C43355C26D8BD8000A044CD /* appLogo_LaunchScreen.png in Resources */,
 				7C6D2537268DD6710030F9A1 /* ItemList.storyboard in Resources */,
-				7C6D253B268DD68A0030F9A1 /* MyPage.storyboard in Resources */,
 				7CC1B59A26D4CB1E0007F99B /* EmptyView.xib in Resources */,
 				7CA661F8263D4387000E0B7A /* Main.storyboard in Resources */,
 				7C6D2539268DD6830030F9A1 /* ChatList.storyboard in Resources */,

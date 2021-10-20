@@ -39,13 +39,13 @@ class MyPageTableViewCell: UITableViewCell {
         
         leftImageView.snp.makeConstraints { make in
             make.width.height.equalTo(25)
-            make.top.left.bottom.equalToSuperview()
+            make.left.equalTo(self.snp.left).offset(20)
+            make.top.bottom.equalToSuperview()
         }
     
         settingsTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(9)
-            make.left.equalTo(leftImageView.snp.right).offset(10)
-            
+            make.centerY.equalTo(self.snp.centerY)
+            make.left.equalTo(leftImageView.snp.right).offset(12)
         }
         
     }

@@ -16,18 +16,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
         if User.shared.isLoggedIn == true {
-            let mainTabBarController = storyboard.instantiateViewController(identifier: K.StoryboardID.tabBarController)
-            window?.rootViewController = mainTabBarController
+        
+            window?.rootViewController = UIHelper.createMainTabBarController()
+            window?.makeKeyAndVisible()
+            
         } else {
 //            let initialController = storyboard.instantiateViewController(identifier: K.StoryboardID.initialVC)
             let initialController = InitialViewController(userManager: UserManager())
             window?.rootViewController = initialController
             print("✏️ rootViewcontroler")
         }
+        
     }
+    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         print("✏️ sceneDidDisconnect")

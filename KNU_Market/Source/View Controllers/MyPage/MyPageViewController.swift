@@ -13,6 +13,10 @@ class MyPageViewController: BaseViewController {
     
     //MARK: - Constants
     
+    fileprivate struct Metrics {
+        static let profileImageButtonHeight: CGFloat        = 120
+    }
+    
     //MARK: - UI
     
     lazy var profileImageContainerView: UIView = {
@@ -27,9 +31,9 @@ class MyPageViewController: BaseViewController {
         button.layer.masksToBounds = false
         button.isUserInteractionEnabled = true
         button.contentMode = .scaleAspectFit
-        button.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 120).isActive = true
-        button.layer.cornerRadius = button.frame.height / 2
+        button.widthAnchor.constraint(equalToConstant: Metrics.profileImageButtonHeight).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Metrics.profileImageButtonHeight).isActive = true
+        button.layer.cornerRadius = Metrics.profileImageButtonHeight / 2
         button.addTarget(self, action: #selector(pressedProfileImageButton(_:)), for: .touchUpInside)
         return button
     }()

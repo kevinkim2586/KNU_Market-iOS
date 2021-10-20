@@ -109,10 +109,7 @@ extension UIViewController {
     
     // 로그인 or 회원가입 성공 시 홈화면 전환 시 사용되는 함수
     func goToHomeScreen() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: K.StoryboardID.tabBarController)
-        
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(UIHelper.createMainTabBarController())
     }
     
     // 유저 신고하기 VC

@@ -75,6 +75,7 @@ extension String {
     }
     
     func attributedStringWithColor(_ strings: [String], color: UIColor, characterSpacing: UInt? = nil) -> NSAttributedString {
+        
         let attributedString = NSMutableAttributedString(string: self)
         for string in strings {
             let range = (self as NSString).range(of: string)
@@ -85,7 +86,7 @@ extension String {
             )
         }
 
-        guard let characterSpacing = characterSpacing else {return attributedString}
+        guard let characterSpacing = characterSpacing else { return attributedString }
 
         attributedString.addAttribute(
             NSAttributedString.Key.kern,

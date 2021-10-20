@@ -83,15 +83,11 @@ class HomeViewModel {
     
     //MARK: - 사용자 프로필 정보 불러오기
     func loadUserProfile() {
-        
         userManager?.loadUserProfile { [weak self] result in
-            
             guard let self = self else { return }
-            
             switch result {
             case .success(_):
                 self.delegate?.didFetchUserProfileInfo()
-                
             case .failure(let error):
                 self.delegate?.failedFetchingUserProfileInfo(with: error)
             }

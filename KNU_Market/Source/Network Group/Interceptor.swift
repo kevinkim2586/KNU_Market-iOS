@@ -8,21 +8,23 @@ final class Interceptor: RequestInterceptor {
     private var isRefreshing: Bool = false
     private var retryLimit = 3
     
-    func adapt(_ urlRequest: URLRequest,
-               for session: Session,
-               completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        
+    
+    func adapt(
+        _ urlRequest: URLRequest,
+        for session: Session,
+        completion: @escaping (Result<URLRequest, Error>) -> Void
+    ) {
         var request = urlRequest
         request.headers.update(name: "authentication", value: User.shared.accessToken)
         completion(.success(request))
     }
     
-    
-    func retry(_ request: Request,
-               for session: Session,
-               dueTo error: Error,
-               completion: @escaping (RetryResult) -> Void) {
-        
+    func retry(
+        _ request: Request,
+        for session: Session,
+        dueTo error: Error,
+        completion: @escaping (RetryResult) -> Void
+    ) {
         guard let statusCode = request.response?.statusCode else {
             completion(.doNotRetry)
             return
@@ -31,29 +33,16 @@ final class Interceptor: RequestInterceptor {
         print("Interceptor - retry() activated with statusCode: \(statusCode)")
         
         switch statusCode {
-        
-        case 200...299:
+        case 200..<300:
             completion(.doNotRetry)
-
         case 412:
             guard !isRefreshing else { return }
-            
             refreshToken() { [weak self] refreshResult in
-                
                 guard let self = self else { return }
-                
                 switch refreshResult {
-                
-                case .success(_):
-                    
-                    if request.retryCount < self.retryLimit {
-                        completion(.retry)
-                    } else {
-                        completion(.doNotRetry)
-                    }
-                  
+                case .success:
+                    request.retryCount < self.retryLimit ? completion(.retry) : completion(.doNotRetry)
                 case .failure(let error):
-                    
                     if error == .E301 {
                         print("❗️ Interceptor - 세션이 만료되었습니다. 다시 로그인 요망 ")
                         NotificationCenter.default.post(
@@ -96,37 +85,39 @@ extension Interceptor {
             "refreshToken" : User.shared.refreshToken
         ]
         
-        AF.request(UserManager.shared.requestAccessTokenURL,
-                   method: .get,
-                   headers: headers).responseJSON { [weak self] response in
+        AF.request(
+            UserManager.shared.requestAccessTokenURL,
+            method: .get,
+            headers: headers
+        ).responseJSON { [weak self] response in
+            
+            self?.isRefreshing = false
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            print("Interceptor - refreshToken() activated with statusCode: \(statusCode)")
+            
+            switch statusCode {
+                
+            case 201:
+                
+                do {
                     
-                    self?.isRefreshing = false
+                    let json = try JSON(data: response.data ?? Data())
+                    UserManager.shared.saveRefreshedAccessToken(from: json)
+                    print("successfully refreshed NEW token: \(User.shared.accessToken)")
+                    completion(.success(true))
                     
-                    guard let statusCode = response.response?.statusCode else { return }
+                } catch {
                     
-                    print("Interceptor - refreshToken() activated with statusCode: \(statusCode)")
-                    
-                    switch statusCode {
-                    
-                    case 201:
-                        
-                        do {
-                            
-                            let json = try JSON(data: response.data ?? Data())
-                            UserManager.shared.saveRefreshedAccessToken(from: json)
-                            print("successfully refreshed NEW token: \(User.shared.accessToken)")
-                            completion(.success(true))
-                            
-                        } catch {
-                            
-                        }
-                        
-                    default:
-                        print("Interceptor - refreshToken() failed default")
-                        let error = NetworkError.returnError(json: response.data ?? Data())
-                        completion(.failure(error))
-                    
-                    }
-                   }
+                }
+                
+            default:
+                print("Interceptor - refreshToken() failed default")
+                let error = NetworkError.returnError(json: response.data ?? Data())
+                completion(.failure(error))
+                
+            }
+        }
     }
 }

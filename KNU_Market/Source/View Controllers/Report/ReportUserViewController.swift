@@ -61,8 +61,6 @@ class ReportUserViewController: BaseViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         button.backgroundColor = UIColor(named: K.Color.appColor)
         button.layer.cornerRadius = 5
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 100).isActive = true
         button.addBounceAnimationWithNoFeedback()
         button.addTarget(
             self,
@@ -129,6 +127,8 @@ class ReportUserViewController: BaseViewController {
         reportButton.snp.makeConstraints { make in
             make.top.equalTo(reportTextView.snp.bottom).offset(16)
             make.centerX.equalTo(view.snp.centerX)
+            make.height.equalTo(40)
+            make.width.equalTo(100)
         }
     }
     

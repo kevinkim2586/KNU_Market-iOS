@@ -20,9 +20,11 @@ class ChatManager {
     let baseURL     = "\(K.API_BASE_URL)room/"
     
     //MARK: - 공구 참여 or 나가기
-    func changeJoinStatus(function: ChatFunction,
-                          pid: String,
-                          completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    func changeJoinStatus(
+        function: ChatFunction,
+        pid: String,
+        completion: @escaping (Result<Bool, NetworkError>) -> Void
+    ) {
         
         let requestURL = generateURLString(for: function, pid: pid)
         let method: HTTPMethod = function == .join ? .post : .delete
@@ -36,7 +38,7 @@ class ChatManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 201:
                     completion(.success(true))
                     
@@ -46,7 +48,7 @@ class ChatManager {
                     completion(.failure(error))
                 }
                 
-
+                
             }
     }
     
@@ -91,9 +93,11 @@ class ChatManager {
             }
     }
     
-    func banUser(userUID: String,
-                 in room: String,
-                 completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    func banUser(
+        userUID: String,
+        in room: String,
+        completion: @escaping (Result<Bool, NetworkError>) -> Void
+    ) {
         
         let url = baseURL + room + "/\(userUID)"
         
@@ -118,7 +122,7 @@ class ChatManager {
                 }
             }
     }
-
+    
 }
 
 
@@ -128,10 +132,12 @@ class ChatManager {
 extension ChatManager {
     
     // 채팅 API 요청 시 필요한 URL 생성 함수
-    func generateURLString(for function: ChatFunction, pid: String?, index: Int? = nil) -> String {
-        
+    func generateURLString(
+        for function: ChatFunction,
+        pid: String?,
+        index: Int? = nil
+    ) -> String {
         switch function {
-        
         case .join, .exit, .getRoomInfo:
             guard let pid = pid else { fatalError() }
             return baseURL + pid

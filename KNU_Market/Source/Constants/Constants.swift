@@ -150,6 +150,7 @@ struct K {
         static let appColor                     = "AppDefaultColor"
         static let borderColor                  = "BorderColor"
         static let backgroundColor              = "BackgroundColor"
+        static let appColorEnforced             = "AppDefaultColorEnforced"
     }
     
     struct Images {

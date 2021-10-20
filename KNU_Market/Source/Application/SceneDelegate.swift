@@ -6,16 +6,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
-        
-        guard let window = self.window else {
-            return
-        }
-        
+        guard let window = self.window else { return }
         window.rootViewController = vc
     }
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        print("✏️ Scene Delegate - willConnectTo")
 
         guard let _ = (scene as? UIWindowScene) else { return }
         
@@ -25,9 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let mainTabBarController = storyboard.instantiateViewController(identifier: K.StoryboardID.tabBarController)
             window?.rootViewController = mainTabBarController
         } else {
-            
-            let initialController = storyboard.instantiateViewController(identifier: K.StoryboardID.initialVC)
+//            let initialController = storyboard.instantiateViewController(identifier: K.StoryboardID.initialVC)
+            let initialController = InitialViewController(userManager: UserManager())
             window?.rootViewController = initialController
+            print("✏️ rootViewcontroler")
         }
     }
 

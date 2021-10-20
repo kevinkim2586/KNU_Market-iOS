@@ -10,7 +10,6 @@ class SearchPostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
     }
 }
@@ -141,7 +140,6 @@ extension SearchPostViewController: UIScrollViewDelegate {
         if position > (tableView.contentSize.height - 20 - scrollView.frame.size.height) {
         
             if !viewModel.isFetchingData {
-                tableView.tableFooterView = createSpinnerFooterView()
                 viewModel.fetchSearchResults()
             }
         }
@@ -188,7 +186,10 @@ extension SearchPostViewController {
         tableView.dataSource = self
 
         let nibName = UINib(nibName: K.XIB.itemTableViewCell, bundle: nil)
-        tableView.register(nibName, forCellReuseIdentifier: K.cellID.itemTableViewCell)
+        tableView.register(
+            nibName,
+            forCellReuseIdentifier: K.cellID.itemTableViewCell
+        )
 
     }
     

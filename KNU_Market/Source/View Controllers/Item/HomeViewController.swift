@@ -231,7 +231,6 @@ extension HomeViewController {
         viewModel.loadInitialMethods()
         
         askForNotificationPermission()
-        initializeTabBarIcon()
         initializeTableView()
         initializeAddButton()
         initializeBarButtonItem()
@@ -246,16 +245,14 @@ extension HomeViewController {
         }
     }
     
-    func initializeTabBarIcon() {
-        navigationController?.tabBarItem.image = UIImage(named: K.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
-        navigationController?.tabBarItem.selectedImage = UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
-    }
+
     
     func initializeTableView() {
         
         itemTableView.delegate = self
         itemTableView.dataSource = self
         itemTableView.refreshControl = UIRefreshControl()
+    
         
         let nibName = UINib(
             nibName: K.XIB.itemTableViewCell,

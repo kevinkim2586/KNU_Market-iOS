@@ -7,13 +7,12 @@ struct UIHelper {
         let tabBarController = UITabBarController()
         tabBarController.tabBar.tintColor = UIColor(named: K.Color.appColor) ?? .systemPink
         tabBarController.tabBar.barTintColor = .white
-        
-        
+     
         
         let itemListSB = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
         guard let itemListVC = itemListSB.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { fatalError() }
         
-        itemListVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
+        itemListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
         let nav1 = UINavigationController(rootViewController: itemListVC)
         nav1.navigationBar.tintColor = .black
         
@@ -21,7 +20,7 @@ struct UIHelper {
         let chatListSB = UIStoryboard(name: StoryboardName.ChatList, bundle: nil)
         guard let chatListVC = chatListSB.instantiateViewController(withIdentifier: "ChatListViewController") as? ChatListViewController else { fatalError() }
         
-        chatListVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
+        chatListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
         let nav2 = UINavigationController(rootViewController: chatListVC)
         nav2.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
         nav2.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
@@ -30,7 +29,7 @@ struct UIHelper {
         
         
         let myPageVC = MyPageViewController(userManager: UserManager())
-        myPageVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 0)
+        myPageVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 0)
         let nav3 = UINavigationController(rootViewController: myPageVC)
         
         nav3.tabBarItem.image = UIImage(named: K.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)

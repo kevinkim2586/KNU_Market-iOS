@@ -10,28 +10,28 @@ class User {
     
     var userUID: String {
         get {
-            return UserDefaults.standard.string(forKey: K.UserDefaultsKey.userUID) ?? "userUID 에러"
+            return UserDefaults.standard.string(forKey: UserDefaults.Keys.userUID) ?? "userUID 에러"
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.userUID)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.userUID)
         }
     }
     
     var userID: String {
         get {
-            return UserDefaults.standard.string(forKey: K.UserDefaultsKey.userID) ?? "아이디 에러"
+            return UserDefaults.standard.string(forKey: UserDefaults.Keys.userID) ?? "아이디 에러"
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.userID)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.userID)
         }
     }
     
     var nickname: String {
         get {
-            return UserDefaults.standard.string(forKey: K.UserDefaultsKey.nickname) ?? "닉네임 표시 에러"
+            return UserDefaults.standard.string(forKey: UserDefaults.Keys.nickname) ?? "닉네임 표시 에러"
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.nickname)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.nickname)
         }
     }
     
@@ -51,10 +51,10 @@ class User {
     
     var fcmToken: String {
         get {
-            return UserDefaults.standard.string(forKey: K.UserDefaultsKey.fcmToken) ?? "fcmToken 에러"
+            return UserDefaults.standard.string(forKey: UserDefaults.Keys.fcmToken) ?? "fcmToken 에러"
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.fcmToken)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.fcmToken)
         }
     }
     
@@ -62,28 +62,28 @@ class User {
     
     var emailForPasswordLoss: String {
         get {
-            return UserDefaults.standard.string(forKey: K.UserDefaultsKey.emailForPasswordLoss) ?? "-"
+            return UserDefaults.standard.string(forKey:UserDefaults.Keys.emailForPasswordLoss) ?? "-"
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.emailForPasswordLoss)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.emailForPasswordLoss)
         }
     }
     
     var isLoggedIn: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: K.UserDefaultsKey.isLoggedIn)
+            return UserDefaults.standard.bool(forKey: UserDefaults.Keys.isLoggedIn)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.isLoggedIn)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.isLoggedIn)
         }
     }
     
     var hasAllowedForNotification: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: K.UserDefaultsKey.hasAllowedForNotification)
+            return UserDefaults.standard.bool(forKey: UserDefaults.Keys.hasAllowedForNotification)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.hasAllowedForNotification)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.hasAllowedForNotification)
         }
         
     }
@@ -91,19 +91,19 @@ class User {
     // 이메일 인증 완료 판별
     var isVerified: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: K.UserDefaultsKey.hasVerifiedEmail)
+            return UserDefaults.standard.bool(forKey: UserDefaults.Keys.hasVerifiedEmail)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.hasVerifiedEmail)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.hasVerifiedEmail)
         }
     }
     
     var isNotFirstAppLaunch: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: K.UserDefaultsKey.isNotFirstAppLaunch)
+            return UserDefaults.standard.bool(forKey: UserDefaults.Keys.isNotFirstAppLaunch)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.isNotFirstAppLaunch)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.isNotFirstAppLaunch)
         }
     }
     
@@ -150,10 +150,10 @@ class User {
     
     var profileImageUID: String {
         get {
-            return UserDefaults.standard.string(forKey: K.UserDefaultsKey.profileImageUID) ?? "표시 에러"
+            return UserDefaults.standard.string(forKey: UserDefaults.Keys.profileImageUID) ?? "표시 에러"
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.profileImageUID)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.profileImageUID)
         }
     }
     
@@ -161,10 +161,10 @@ class User {
     // 내가 직접 올린 공구글 PID 배열
     var userUploadedRoomPIDs: [String] {
         get {
-            return UserDefaults.standard.stringArray(forKey: K.UserDefaultsKey.joinedChatRoomPIDs) ?? [String]()
+            return UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.joinedChatRoomPIDs) ?? [String]()
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.joinedChatRoomPIDs)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.joinedChatRoomPIDs)
         }
     }
     
@@ -174,26 +174,26 @@ class User {
     
     var chatNotificationList: [String] {
         get {
-            let list = UserDefaults.standard.stringArray(forKey: K.UserDefaultsKey.notificationList) ?? [String]()
+            let list = UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.notificationList) ?? [String]()
             return list
         }
     }
     
     var bannedPostUploaders: [String] {
         get {
-            return UserDefaults.standard.stringArray(forKey: K.UserDefaultsKey.bannedPostUploaders) ?? [String]()
+            return UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.bannedPostUploaders) ?? [String]()
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.bannedPostUploaders)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.bannedPostUploaders)
         }
     }
     
     var bannedChatMembers: [String] {
         get {
-            return UserDefaults.standard.stringArray(forKey: K.UserDefaultsKey.bannedChatUsers) ?? [String]()
+            return UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.bannedChatUsers) ?? [String]()
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: K.UserDefaultsKey.bannedChatUsers)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.bannedChatUsers)
         }
     }
     
@@ -202,13 +202,13 @@ class User {
     var postFilterOption: PostFilterOptions {
         get {
             guard let filterOption = UserDefaults.standard.object(
-                forKey: K.UserDefaultsKey.postFilterOptions
+                forKey: UserDefaults.Keys.postFilterOptions
             ) as? String else { return .showAll }
             
             return PostFilterOptions(rawValue: filterOption) ?? .showAll
         }
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: K.UserDefaultsKey.postFilterOptions)
+            UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaults.Keys.postFilterOptions)
         }
     }
 }
@@ -227,19 +227,19 @@ extension User {
         profileImageData = nil
         profileImageUID = ""
         
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.nickname)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.profileImageUID)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.isLoggedIn)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.userUID)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.emailForPasswordLoss)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.fcmToken)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.hasAllowedForNotification)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.hasVerifiedEmail)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.bannedPostUploaders)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.bannedChatUsers)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.notificationList)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.isNotFirstAppLaunch)
-        UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.postFilterOptions)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.nickname)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.profileImageUID)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.isLoggedIn)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.userUID)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.emailForPasswordLoss)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.fcmToken)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.hasAllowedForNotification)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.hasVerifiedEmail)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.bannedPostUploaders)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.bannedChatUsers)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.notificationList)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.isNotFirstAppLaunch)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.postFilterOptions)
     
         
         ChatNotifications.list.removeAll()

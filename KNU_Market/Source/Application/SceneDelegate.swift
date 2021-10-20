@@ -50,7 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             object: nil
         )
         
-        ChatNotifications.list = UserDefaults.standard.stringArray(forKey: K.UserDefaultsKey.notificationList) ?? [String]()
+        ChatNotifications.list = UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.notificationList) ?? [String]()
         
         getDeliveredNotifications()
 

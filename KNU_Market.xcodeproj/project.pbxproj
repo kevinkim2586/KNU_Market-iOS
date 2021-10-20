@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */; };
+		6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */; };
 		7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */; };
 		7C015C9827035B2100089ED8 /* FindIdUsingWebMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C9727035B2100089ED8 /* FindIdUsingWebMailViewController.swift */; };
 		7C015C9A27035B3800089ED8 /* FindIdUsingStudentIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C9927035B3800089ED8 /* FindIdUsingStudentIdViewController.swift */; };
@@ -149,6 +150,7 @@
 
 /* Begin PBXFileReference section */
 		0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
+		6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault Keys.swift"; sourceTree = "<group>"; };
 		7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + UpdateInfo.swift"; sourceTree = "<group>"; };
 		7C015C9727035B2100089ED8 /* FindIdUsingWebMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdUsingWebMailViewController.swift; sourceTree = "<group>"; };
 		7C015C9927035B3800089ED8 /* FindIdUsingStudentIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdUsingStudentIdViewController.swift; sourceTree = "<group>"; };
@@ -813,6 +815,7 @@
 			isa = PBXGroup;
 			children = (
 				7CA6624E26413F03000E0B7A /* Constants.swift */,
+				6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */,
 				7C555464266D0A1400C3C5B6 /* Location.swift */,
 				7CEC19222701837100C2D671 /* StoryboardName.swift */,
 				7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */,
@@ -1035,6 +1038,7 @@
 				7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
+				6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */,
 				7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,
 				7C132BF2265397B200BE5F40 /* ProgressHUD.swift in Sources */,

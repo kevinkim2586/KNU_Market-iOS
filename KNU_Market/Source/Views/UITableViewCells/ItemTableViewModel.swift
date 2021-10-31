@@ -4,7 +4,7 @@ class ItemTableViewModel {
     
     var uuid: String = ""
 
-    var defaultImage: UIImage = UIImage(named: K.Images.defaultItemIcon)!
+    var defaultImage: UIImage = UIImage(named: K.Images.defaultItemImage)!
     
     var imageUID: String? {
         didSet {

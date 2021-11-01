@@ -61,10 +61,7 @@ class HomeViewModel {
                 self.index += 1
                 
                 for model in fetchedModel {
-                    if User.shared.bannedPostUploaders.contains(model.userInfo?.userUID ?? "") {
-                        continue
-                    }
-                    
+                    if User.shared.bannedPostUploaders.contains(model.userInfo?.userUID ?? "") { continue }
                     if fetchCurrentUsers {
                         User.shared.userUploadedRoomPIDs.append(model.uuid)
                     }
@@ -86,10 +83,8 @@ class HomeViewModel {
         userManager?.loadUserProfile { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(_):
-                self.delegate?.didFetchUserProfileInfo()
-            case .failure(let error):
-                self.delegate?.failedFetchingUserProfileInfo(with: error)
+            case .success(_): self.delegate?.didFetchUserProfileInfo()
+            case .failure(let error): self.delegate?.failedFetchingUserProfileInfo(with: error)
             }
         }
     }
@@ -106,14 +101,13 @@ class HomeViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let chatRoom):
-                chatRoom.forEach { chat in
-                    User.shared.joinedChatRoomPIDs.append(chat.uuid)
-                }
+                chatRoom.forEach { User.shared.joinedChatRoomPIDs.append($0.uuid) }
             case .failure(let error):
                 self.delegate?.failedFetchingRoomPIDInfo(with: error)
             }
         }
     }
+    
     
     func changePostFilterOption() {
         if User.shared.postFilterOption == .showAll {

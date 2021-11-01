@@ -87,9 +87,7 @@ class ItemTableViewCell: UITableViewCell {
             gatheringLabel.backgroundColor = UIColor.lightGray
             currentlyGatheredPeopleLabel.isHidden = true
             personImageView.isHidden = true
-            
         }  else {
-    
             gatheringLabel.text = "모집 중"
             gatheringLabel.backgroundColor = UIColor(named: K.Color.appColor)
             currentlyGatheredPeopleLabel.isHidden = false

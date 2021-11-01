@@ -62,7 +62,7 @@ class MyPostsViewController: BaseViewController {
     }
     
     private func setupViewModel() {
-        self.viewModel = HomeViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager())
+        self.viewModel = HomeViewModel(itemManager: ItemManager())
         self.viewModel.delegate = self
         self.viewModel.fetchItemList(fetchCurrentUsers: true)
     }

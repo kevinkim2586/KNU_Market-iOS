@@ -9,6 +9,9 @@ protocol HomeViewModelDelegate: AnyObject {
     func didFetchItemList()
     func failedFetchingItemList(errorMessage: String, error: NetworkError)
     
+    func didFetchLatestPopup(model: PopupModel)
+    func failedFetchingLatestPopup(with error: NetworkError)
+    
     func failedFetchingRoomPIDInfo(with error: NetworkError)
 }
 
@@ -17,6 +20,8 @@ extension HomeViewModelDelegate {
     func failedFetchingUserProfileInfo(with error: NetworkError) {}
     func didFetchUserProfileImage() {}
     func failedFetchingRoomPIDInfo(with error: NetworkError) {}
+    func didFetchLatestPopup(model: PopupModel) {}
+    func failedFetchingLatestPopup(with error: NetworkError) {}
 }
 
 class HomeViewModel {
@@ -24,6 +29,7 @@ class HomeViewModel {
     private var itemManager: ItemManager?
     private var chatManager: ChatManager?
     private var userManager: UserManager?
+    private var popupManager: PopupManager?
     
     weak var delegate: HomeViewModelDelegate?
     
@@ -33,10 +39,15 @@ class HomeViewModel {
     var index: Int = 1
     
     //MARK: - Initialization
-    init(itemManager: ItemManager, chatManager: ChatManager, userManager: UserManager) {
+    init(itemManager: ItemManager) {
+        self.itemManager = itemManager
+    }
+    
+    init(itemManager: ItemManager, chatManager: ChatManager, userManager: UserManager, popupManager: PopupManager?) {
         self.itemManager = itemManager
         self.chatManager = chatManager
         self.userManager = userManager
+        self.popupManager = popupManager
     }
     
     //MARK: - 공구글 불러오기
@@ -107,8 +118,8 @@ class HomeViewModel {
             }
         }
     }
-    
-    
+
+    //MARK: - 글 정렬 기준 변경
     func changePostFilterOption() {
         if User.shared.postFilterOption == .showAll {
             User.shared.postFilterOption = .showGatheringFirst
@@ -118,11 +129,34 @@ class HomeViewModel {
         refreshTableView()
     }
     
+    func fetchLatestPopup() {
+        guard let popupManager = popupManager else { return }
+        
+        // 24시간 보지 않기를 누른 적이 있는지와 24시간이 지났는지 판별
+        if popupManager.didUserSetToNotSeePopupForADay || !popupManager.didADayPass { return }
+    
+        popupManager.fetchLatestPopup { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let popupModel):
+                print("✏️ popupModel: \(popupModel)")
+                if popupManager.determineIfAlreadySeenPopup(uid: popupModel.uid) { return }
+                self.delegate?.didFetchLatestPopup(model: popupModel)
+            case .failure(let error):
+                self.delegate?.failedFetchingLatestPopup(with: error)
+            }
+        }
+    }
+}
+
+extension HomeViewModel {
+    
     // 앱 최초 실행 시 로딩해야 할 메서드들 모음
     func loadInitialMethods() {
         fetchEnteredRoomInfo()
         loadUserProfile()
         fetchItemList()
+        fetchLatestPopup()
     }
     
     func refreshTableView() {
@@ -138,10 +172,6 @@ class HomeViewModel {
         isFetchingData = false
         index = 1
     }
-}
-
-
-extension HomeViewModel {
     
     var filterActionTitle: String {
         return User.shared.postFilterOption == .showAll ? "'모집 중' 먼저보기" : "최신 순으로 보기"

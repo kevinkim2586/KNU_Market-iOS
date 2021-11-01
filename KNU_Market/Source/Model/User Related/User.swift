@@ -4,7 +4,7 @@ import SwiftKeychainWrapper
 class User {
 
     //MARK: - Singleton
-    static var shared: User = User()
+    static let shared: User = User()
         
     //MARK: - Properties
     
@@ -190,12 +190,42 @@ class User {
     
     var bannedChatMembers: [String] {
         get {
-            return UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.bannedChatUsers) ?? [String]()
+            return UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.bannedChatUsers) ?? []
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.bannedChatUsers)
         }
     }
+    
+    //MARK: - 팝업 관련
+    
+    var userSeenPopupUids: [Int] {
+        get {
+            return UserDefaults.standard.array(forKey: UserDefaults.Keys.userSeenPopupUids) as? [Int] ?? []
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.userSeenPopupUids)
+        }
+    }
+    
+    var userSetPopupBlockTime: Date {
+        get {
+            return UserDefaults.standard.object(forKey: UserDefaults.Keys.userSetPopupBlockTime) as? Date ?? Date()
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.userSetPopupBlockTime)
+        }
+    }
+    
+    var didUserSetToNotSeePopupForADay: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaults.Keys.didUserSetToNotSeePopupForADay)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.didUserSetToNotSeePopupForADay)
+        }
+    }
+    
     
     //MARK: - User Settings
     

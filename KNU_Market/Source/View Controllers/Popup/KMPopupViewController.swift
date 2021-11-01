@@ -5,8 +5,9 @@ import SDWebImage
 class KMPopupViewController: BaseViewController {
     
     //MARK: - Properties
-    var imageUid: String?
-    var landingUrl: String?
+    private var popupManager: PopupManager?
+    private var imageUid: String?
+    private var landingUrl: String?
     
     //MARK: - Constants
     
@@ -68,8 +69,9 @@ class KMPopupViewController: BaseViewController {
     
     //MARK: - Initialization
     
-    init(imageUid: String, landingUrl: String) {
+    init(popupManager: PopupManager?, imageUid: String, landingUrl: String) {
         super.init()
+        self.popupManager = popupManager
         self.imageUid = imageUid
         self.landingUrl = landingUrl
         
@@ -149,7 +151,7 @@ extension KMPopupViewController {
     }
     
     @objc private func doNotSeePopupForOneDay() {
-        
+        popupManager?.configureToNotSeePopupForOneDay()
     }
 }
 
@@ -161,7 +163,7 @@ import SwiftUI
 struct KMPopupVC: PreviewProvider {
     
     static var previews: some View {
-        KMPopupViewController(imageUid: "", landingUrl: "").toPreview()
+        KMPopupViewController(popupManager: PopupManager(), imageUid: "", landingUrl: "").toPreview()
     }
 }
 #endif

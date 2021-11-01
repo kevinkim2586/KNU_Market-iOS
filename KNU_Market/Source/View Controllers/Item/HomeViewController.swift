@@ -10,7 +10,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
-    private var viewModel = HomeViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager())
+    private var viewModel = HomeViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager(), popupManager: PopupManager())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
         
         
         DispatchQueue.main.async {
-            let popupVC = KMPopupViewController(imageUid: "", landingUrl: "")
+            let popupVC = KMPopupViewController(popupManager: PopupManager(), imageUid: "", landingUrl: "")
             popupVC.modalPresentationStyle = .overFullScreen
             popupVC.modalTransitionStyle = .crossDissolve
             self.present(popupVC, animated: true, completion: nil)
@@ -103,7 +103,18 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func failedFetchingRoomPIDInfo(with error: NetworkError) {
-        self.showSimpleBottomAlert(with: error.errorDescription)
+        showSimpleBottomAlert(with: error.errorDescription)
+    }
+    
+    func didFetchLatestPopup(model: PopupModel) {
+        let popupVC = KMPopupViewController(popupManager: PopupManager(), imageUid: model.mediaUid, landingUrl: model.landingUrl)
+        popupVC.modalPresentationStyle = .overFullScreen
+        popupVC.modalTransitionStyle = .crossDissolve
+        self.present(popupVC, animated: true)
+    }
+    
+    func failedFetchingLatestPopup(with error: NetworkError) {
+        showSimpleBottomAlert(with: error.errorDescription)
     }
     
 }

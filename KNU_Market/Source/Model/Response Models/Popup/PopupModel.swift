@@ -2,13 +2,15 @@ import Foundation
 
 struct PopupModel: Decodable {
     
-    let uid: Int
+    let popupUid: Int
     let title: String
-    let mediaUid: String
     let landingUrl: String
+    let imagePath: String
     
     enum CodingKeys: String, CodingKey {
-        case uid, title, mediaUid
-        case landingUrl = "landing"
+        case popupUid = "popup_uid"
+        case title = "popup_title"
+        case landingUrl = "popup_landing"
+        case imagePath = "media_path"
     }
 }

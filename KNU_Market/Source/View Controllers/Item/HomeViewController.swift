@@ -23,14 +23,7 @@ class HomeViewController: UIViewController {
             name: .getBadgeValue,
             object: nil
         )
-        
-        
-        DispatchQueue.main.async {
-            let popupVC = KMPopupViewController(popupManager: PopupManager(), imageUid: "", landingUrl: "")
-            popupVC.modalPresentationStyle = .overFullScreen
-            popupVC.modalTransitionStyle = .crossDissolve
-            self.present(popupVC, animated: true, completion: nil)
-        }
+
     }
     
  
@@ -107,7 +100,8 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func didFetchLatestPopup(model: PopupModel) {
-        let popupVC = KMPopupViewController(popupManager: PopupManager(), imageUid: model.mediaUid, landingUrl: model.landingUrl)
+        print("✏️ didFetchLatestPopup Activated")
+        let popupVC = KMPopupViewController(popupManager: PopupManager(), imagePath: model.imagePath, landingUrl: model.landingUrl)
         popupVC.modalPresentationStyle = .overFullScreen
         popupVC.modalTransitionStyle = .crossDissolve
         self.present(popupVC, animated: true)

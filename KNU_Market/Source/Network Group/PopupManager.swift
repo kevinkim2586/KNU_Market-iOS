@@ -28,7 +28,7 @@ class PopupManager {
     }
     
     func determineIfAlreadySeenPopup(uid: Int) -> Bool {
-        return User.shared.userSeenPopupUids.contains(uid) ? false : true
+        return User.shared.userSeenPopupUids.contains(uid) ? true : false
     }
     
     func configureToNotSeePopupForOneDay() {
@@ -47,7 +47,7 @@ class PopupManager {
                 case .success:
                     do {
                         let decodedData = try JSONDecoder().decode(PopupModel.self, from: response.data ?? Data())
-                        self.saveSeenPopupUid(uid: decodedData.uid)
+//                        self.saveSeenPopupUid(uid: decodedData.popupUid)
                         completion(.success(decodedData))
                     } catch {
                         print("❗️ PopupManager - fetchLatestPopup error: \(error)")
@@ -61,7 +61,6 @@ class PopupManager {
             }
     }
     
-
     private func saveSeenPopupUid(uid: Int) {
         
         // UserDefaults 에 저장되어 있는

@@ -6,7 +6,7 @@ class KMPopupViewController: BaseViewController {
     
     //MARK: - Properties
     private var popupManager: PopupManager?
-    private var imageUid: String?
+    private var imagePath: String?
     private var landingUrl: String?
     
     //MARK: - Constants
@@ -17,8 +17,8 @@ class KMPopupViewController: BaseViewController {
     
     fileprivate struct Fonts {
         
-        static let findButtonAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 14, weight: .semibold),
+        static let doNotSeeForOneDayButton: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 12.5, weight: .semibold),
             .underlineStyle: NSUnderlineStyle.single.rawValue,
             .foregroundColor: UIColor.white
         ]
@@ -36,7 +36,6 @@ class KMPopupViewController: BaseViewController {
         imageView.isUserInteractionEnabled = true
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 40
-        imageView.image = UIImage(named: "studentID_guide") // TEST
         return imageView
     }()
     
@@ -45,7 +44,7 @@ class KMPopupViewController: BaseViewController {
         button.addBounceAnimationWithNoFeedback()
         button.setAttributedTitle(NSAttributedString(
             string: "24시간 보지 않기",
-            attributes: Fonts.findButtonAttributes
+            attributes: Fonts.doNotSeeForOneDayButton
         ), for: .normal)
         button.addTarget(
             self,
@@ -69,10 +68,10 @@ class KMPopupViewController: BaseViewController {
     
     //MARK: - Initialization
     
-    init(popupManager: PopupManager?, imageUid: String, landingUrl: String) {
+    init(popupManager: PopupManager?, imagePath: String, landingUrl: String) {
         super.init()
         self.popupManager = popupManager
-        self.imageUid = imageUid
+        self.imagePath = imagePath
         self.landingUrl = landingUrl
         
     }
@@ -85,7 +84,7 @@ class KMPopupViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        configure()
+        configure()
     }
     
     //MARK: - UI Setup
@@ -104,11 +103,12 @@ class KMPopupViewController: BaseViewController {
         popupImageView.snp.makeConstraints { make in
             make.width.equalTo(view.snp.width).multipliedBy(0.8)
             make.height.equalTo(view.snp.height).multipliedBy(0.5)
-            make.center.equalToSuperview()
+            make.top.equalToSuperview().inset(180)
+            make.centerX.equalToSuperview()
         }
         
         doNotSeeForOneDayButton.snp.makeConstraints { make in
-            make.top.equalTo(popupImageView.snp.bottom).offset(12)
+            make.top.equalTo(popupImageView.snp.bottom).offset(15.3)
             make.centerX.equalToSuperview()
         }
         
@@ -128,11 +128,11 @@ class KMPopupViewController: BaseViewController {
     }
     
     private func configure() {
-        guard let imageUid = imageUid else { return }
-        let imageUrl = URL(string: "\(K.API_BASE_URL)media/" + imageUid)
-        
+//        popupImageView.image = UIImage(named: "studentID_guide")
+        guard let imagePath = imagePath else { return }
+        print("✏️ imagePath: \(imagePath)")
         popupImageView.sd_setImage(
-            with: imageUrl,
+            with: URL(string: imagePath),
             placeholderImage: nil,
             options: .continueInBackground,
             completed: nil
@@ -152,6 +152,7 @@ extension KMPopupViewController {
     
     @objc private func doNotSeePopupForOneDay() {
         popupManager?.configureToNotSeePopupForOneDay()
+        dismiss(animated: true)
     }
 }
 
@@ -163,7 +164,7 @@ import SwiftUI
 struct KMPopupVC: PreviewProvider {
     
     static var previews: some View {
-        KMPopupViewController(popupManager: PopupManager(), imageUid: "", landingUrl: "").toPreview()
+        KMPopupViewController(popupManager: PopupManager(), imagePath: "", landingUrl: "").toPreview()
     }
 }
 #endif

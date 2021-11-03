@@ -10,11 +10,15 @@ class SendUsMessageViewController: BaseViewController {
     //MARK: - Constants
     
     fileprivate struct Metric {
+        // View
         static let viewSide = 20.f
+        
+        // title
+        static let titleTop = 25.f
     }
     
     fileprivate struct Fonts {
-        
+        static let titleFont = UIFont.systemFont(ofSize: 14)
     }
     
     fileprivate struct Texts {
@@ -22,7 +26,14 @@ class SendUsMessageViewController: BaseViewController {
     }
     
     //MARK: - UI
-    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "저희에게 궁금한 점이 있거나 부탁하고싶은 점을 말해주세요!\n빠른 시일내로 답변드리겠습니다"
+        label.adjustsFontSizeToFitWidth = true
+        label.font = Fonts.titleFont
+        label.numberOfLines = 2
+        return label
+    }()
     
     //MARK: - Initialization
     
@@ -46,18 +57,24 @@ class SendUsMessageViewController: BaseViewController {
     override func setupLayout() {
         super.setupLayout()
         
-        self.title = "크누마켓팀과 대화하기"
-        
+        self.view.addSubview(self.titleLabel)
     }
     
     override func setupConstraints() {
         super.setupConstraints()
         
+        self.titleLabel.snp.makeConstraints {
+            $0.top.equalToSafeArea(self.view).offset(Metric.titleTop)
+            $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
+            $0.trailing.equalToSafeArea(self.view)
+                .offset(-Metric.viewSide)
+        }
     }
     
     override func setupStyle() {
         super.setupStyle()
     
+        self.title = "크누마켓팀과 대화하기"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

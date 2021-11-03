@@ -14,11 +14,12 @@ class SendUsMessageViewController: BaseViewController {
         static let viewSide = 20.f
         
         // title
-        static let titleTop = 25.f
+        static let titleTop = 35.f
     }
     
     fileprivate struct Fonts {
-        static let titleFont = UIFont.systemFont(ofSize: 14)
+        static let titleFont = UIFont.systemFont(ofSize: 14, weight: .light)
+        static let tintFont = UIFont.systemFont(ofSize: 16, weight: .bold)
     }
     
     fileprivate struct Texts {
@@ -26,12 +27,19 @@ class SendUsMessageViewController: BaseViewController {
     }
     
     //MARK: - UI
-    let titleLabel: UILabel = {
+    let describeLabel: UILabel = {
         let label = UILabel()
         label.text = "저희에게 궁금한 점이 있거나 부탁하고싶은 점을 말해주세요!\n빠른 시일내로 답변드리겠습니다"
         label.adjustsFontSizeToFitWidth = true
         label.font = Fonts.titleFont
         label.numberOfLines = 2
+        return label
+    }()
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "문의 및 건의 내용"
+        label.font = Fonts.tintFont
         return label
     }()
     
@@ -57,14 +65,22 @@ class SendUsMessageViewController: BaseViewController {
     override func setupLayout() {
         super.setupLayout()
         
+        self.view.addSubview(self.describeLabel)
         self.view.addSubview(self.titleLabel)
     }
     
     override func setupConstraints() {
         super.setupConstraints()
         
-        self.titleLabel.snp.makeConstraints {
+        self.describeLabel.snp.makeConstraints {
             $0.top.equalToSafeArea(self.view).offset(Metric.titleTop)
+            $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
+            $0.trailing.equalToSafeArea(self.view)
+                .offset(-Metric.viewSide)
+        }
+        
+        self.titleLabel.snp.makeConstraints {
+            $0.top.equalTo(self.describeLabel.snp.bottom).offset(Metric.titleTop)
             $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.trailing.equalToSafeArea(self.view)
                 .offset(-Metric.viewSide)

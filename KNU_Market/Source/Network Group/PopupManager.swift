@@ -10,10 +10,12 @@ class PopupManager {
     //MARK: - End Points
     let popupUrl        = "\(K.API_BASE_URL)popup"
     
+    // 유저가 팝업 24시간 동안 보지 않기를 설정하였는지 여부
     var didUserSetToNotSeePopupForADay: Bool {
         return User.shared.didUserSetToNotSeePopupForADay
     }
     
+    // 24시간이 지났는지 판별
     var didADayPass: Bool {
         
         let oneDay = 24
@@ -27,15 +29,18 @@ class PopupManager {
         else { return false }
     }
     
+    // 이미 유저가 본 팝업인지 판단
     func determineIfAlreadySeenPopup(uid: Int) -> Bool {
         return User.shared.userSeenPopupUids.contains(uid) ? true : false
     }
     
+    // 24시간 팝업 보지 않기 설정
     func configureToNotSeePopupForOneDay() {
         User.shared.didUserSetToNotSeePopupForADay = true
         User.shared.userSetPopupBlockTime = Date()
     }
     
+    // 최신 팝업 가져오기
     func fetchLatestPopup(completion: @escaping ((Result<PopupModel, NetworkError>) ->Void)) {
         AF.request(
             popupUrl,
@@ -58,6 +63,22 @@ class PopupManager {
                     print("❗️ PopupManager - fetchLatestPopup error: \(error.errorDescription)")
                 }
                 
+            }
+    }
+    
+    // 팝업 터치했을 시 - 터치했다고 서버에 알리는 함수
+    func incrementPopupViewCount(popupUid: Int) {
+        let url = popupUrl + "/\(popupUid)"
+        
+        AF.request(
+            url,
+            method: .get
+        )
+            .responseJSON { response in
+                switch response.result {
+                case .success: print("✏️ PopupManager - incrementPopupViewCount SUCCESS")
+                case .failure: print("❗️ PopupManager - incrementPopupViewCount FAILED")
+                }
             }
     }
     

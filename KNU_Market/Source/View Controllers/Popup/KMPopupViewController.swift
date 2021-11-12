@@ -6,7 +6,8 @@ class KMPopupViewController: BaseViewController {
     
     //MARK: - Properties
     private var popupManager: PopupManager?
-    private var imagePath: String?
+    private var popupUid: Int?
+    private var mediaUid: String?
     private var landingUrl: String?
     
     //MARK: - Constants
@@ -30,12 +31,14 @@ class KMPopupViewController: BaseViewController {
     
     //MARK: - UI
     
-    let popupImageView: UIImageView = {
+    lazy var popupImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 40
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(pressedPopupImage))
+        imageView.addGestureRecognizer(tapGesture)
         return imageView
     }()
     
@@ -54,7 +57,7 @@ class KMPopupViewController: BaseViewController {
         return button
     }()
     
-    lazy var dismissButton: UIButton = {
+    let dismissButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .darkGray
         button.setImage(Images.dismissButton, for: .normal)
@@ -68,12 +71,12 @@ class KMPopupViewController: BaseViewController {
     
     //MARK: - Initialization
     
-    init(popupManager: PopupManager?, imagePath: String, landingUrl: String) {
+    init(popupManager: PopupManager?, popupUid: Int, mediaUid: String, landingUrl: String) {
         super.init()
         self.popupManager = popupManager
-        self.imagePath = imagePath
+        self.popupUid = popupUid
+        self.mediaUid = mediaUid
         self.landingUrl = landingUrl
-        
     }
     
     required init?(coder: NSCoder) {
@@ -128,11 +131,9 @@ class KMPopupViewController: BaseViewController {
     }
     
     private func configure() {
-//        popupImageView.image = UIImage(named: "studentID_guide")
-        guard let imagePath = imagePath else { return }
-        print("✏️ imagePath: \(imagePath)")
+        guard let mediaUid = mediaUid else { return }
         popupImageView.sd_setImage(
-            with: URL(string: imagePath),
+            with: URL(string: K.MEDIA_REQUEST_URL + mediaUid),
             placeholderImage: nil,
             options: .continueInBackground,
             completed: nil
@@ -144,10 +145,21 @@ class KMPopupViewController: BaseViewController {
 
 extension KMPopupViewController {
     
-    @objc private func openLandingUrl() {
+    @objc private func pressedPopupImage() {
+        incrementPopupViewCount()
+        openLandingUrl()
+        dismiss(animated: true)
+    }
+    
+    private func openLandingUrl() {
         guard let landingUrl = landingUrl else { return }
         guard let url = URL(string: landingUrl) else { return }
         UIApplication.shared.open(url, options: [:])
+    }
+    
+    private func incrementPopupViewCount() {
+        guard let popupUid = popupUid else { return }
+        popupManager?.incrementPopupViewCount(popupUid: popupUid)
     }
     
     @objc private func doNotSeePopupForOneDay() {
@@ -164,7 +176,7 @@ import SwiftUI
 struct KMPopupVC: PreviewProvider {
     
     static var previews: some View {
-        KMPopupViewController(popupManager: PopupManager(), imagePath: "", landingUrl: "").toPreview()
+        KMPopupViewController(popupManager: PopupManager(), popupUid: 0, mediaUid: "", landingUrl: "").toPreview()
     }
 }
 #endif

@@ -100,8 +100,7 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func didFetchLatestPopup(model: PopupModel) {
-        print("✏️ didFetchLatestPopup Activated")
-        let popupVC = KMPopupViewController(popupManager: PopupManager(), imagePath: model.imagePath, landingUrl: model.landingUrl)
+        let popupVC = KMPopupViewController(popupManager: PopupManager(), popupUid: model.popupUid, mediaUid: model.mediaUid, landingUrl: model.landingUrl)
         popupVC.modalPresentationStyle = .overFullScreen
         popupVC.modalTransitionStyle = .crossDissolve
         self.present(popupVC, animated: true)

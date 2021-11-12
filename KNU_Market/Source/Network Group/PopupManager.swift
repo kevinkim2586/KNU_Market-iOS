@@ -31,6 +31,7 @@ class PopupManager {
     
     // 이미 유저가 본 팝업인지 판단
     func determineIfAlreadySeenPopup(uid: Int) -> Bool {
+        print("✏️ already seen? :\(User.shared.userSeenPopupUids.contains(uid))")
         return User.shared.userSeenPopupUids.contains(uid) ? true : false
     }
     
@@ -52,7 +53,9 @@ class PopupManager {
                 case .success:
                     do {
                         let decodedData = try JSONDecoder().decode(PopupModel.self, from: response.data ?? Data())
-//                        self.saveSeenPopupUid(uid: decodedData.popupUid)
+                        print("✏️ PopUpUid: \(decodedData.popupUid)")
+                        #warning("saveSeendpopup 여기에서 하면 안됨!")
+                        self.saveSeenPopupUid(uid: decodedData.popupUid)
                         completion(.success(decodedData))
                     } catch {
                         print("❗️ PopupManager - fetchLatestPopup error: \(error)")
@@ -84,12 +87,17 @@ class PopupManager {
     
     private func saveSeenPopupUid(uid: Int) {
         
-        // UserDefaults 에 저장되어 있는
         guard var savedUidArray = UserDefaults.standard.array(
             forKey: UserDefaults.Keys.userSeenPopupUids
-        ) as? [Int] else { return }
+        ) as? [Int] else {
+            User.shared.userSeenPopupUids = [uid]
+            return
+        }
+        
+        print("✏️ saveduidarray: \(savedUidArray)")
         
         savedUidArray.append(uid)
         User.shared.userSeenPopupUids = savedUidArray
+        print("✏️ userSeendPopupUids: \(savedUidArray)")
     }
 }

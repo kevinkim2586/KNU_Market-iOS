@@ -63,7 +63,7 @@ class HomeViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let fetchedModel):
-                
+
                 if fetchedModel.isEmpty {
                     self.delegate?.didFetchItemList()
                     return
@@ -121,11 +121,9 @@ class HomeViewModel {
 
     //MARK: - 글 정렬 기준 변경
     func changePostFilterOption() {
-        if User.shared.postFilterOption == .showAll {
-            User.shared.postFilterOption = .showGatheringFirst
-        } else {
-            User.shared.postFilterOption = .showAll
-        }
+        User.shared.postFilterOption = User.shared.postFilterOption == .showAll
+        ? .showGatheringFirst
+        : .showAll
         refreshTableView()
     }
     
@@ -136,23 +134,25 @@ class HomeViewModel {
         print("✏️ didADayPass: \(popupManager.didADayPass)")
         
         // 24시간 보지 않기를 누른 적이 있는지와 24시간이 지났는지 판별
-//        if popupManager.didUserSetToNotSeePopupForADay || popupManager.didADayPass {
-//            print("❗️ will returm")
-//            return }
-//
-        
-        
+        if popupManager.didUserSetToNotSeePopupForADay || popupManager.didADayPass {
+            return
+        }
+
         popupManager.fetchLatestPopup { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let popupModel):
-                if popupManager.determineIfAlreadySeenPopup(uid: popupModel.popupUid) { return }
+                if popupManager.determineIfAlreadySeenPopup(uid: popupModel.popupUid) {
+                    return
+                }
                 self.delegate?.didFetchLatestPopup(model: popupModel)
             case .failure(let error):
                 self.delegate?.failedFetchingLatestPopup(with: error)
             }
         }
     }
+    
+
 }
 
 extension HomeViewModel {

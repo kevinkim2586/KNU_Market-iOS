@@ -102,14 +102,14 @@ extension SearchPostViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row > viewModel.itemList.count { return UITableViewCell() }
         
-        let cellIdentifier = K.cellID.itemTableViewCell
+        let cellIdentifier = PostTableViewCell.cellId
         
         tableView.restoreEmptyView()
         
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier,
             for: indexPath
-        ) as? ItemTableViewCell else { return UITableViewCell() }
+        ) as? PostTableViewCell else { return UITableViewCell() }
         cell.configure(with: viewModel.itemList[indexPath.row])
         return cell
     }
@@ -184,13 +184,10 @@ extension SearchPostViewController {
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.delegate = self
         tableView.dataSource = self
-
-        let nibName = UINib(nibName: K.XIB.itemTableViewCell, bundle: nil)
         tableView.register(
-            nibName,
-            forCellReuseIdentifier: K.cellID.itemTableViewCell
+            PostTableViewCell.self,
+            forCellReuseIdentifier: PostTableViewCell.cellId
         )
-
     }
     
 }

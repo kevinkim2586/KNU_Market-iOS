@@ -140,15 +140,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row > viewModel.itemList.count
             || viewModel.itemList.count == 0 { return UITableViewCell() }
         
-//        let cellIdentifier = K.cellID.itemTableViewCell
-//
-//        guard let cell = tableView.dequeueReusableCell(
-//            withIdentifier: cellIdentifier,
-//            for: indexPath
-//        ) as? ItemTableViewCell else { return UITableViewCell() }
-//
-//        cell.configure(with: viewModel.itemList[indexPath.row])
-        
         let cellIdentifier = PostTableViewCell.cellId
                 
         guard let cell = tableView.dequeueReusableCell(
@@ -258,22 +249,17 @@ extension HomeViewController {
         itemTableView.dataSource = self
         itemTableView.refreshControl = UIRefreshControl()
     
-        
-        let nibName = UINib(
-            nibName: K.XIB.itemTableViewCell,
-            bundle: nil
+        itemTableView.register(
+            PostTableViewCell.self,
+            forCellReuseIdentifier: PostTableViewCell.cellId
         )
-        itemTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.cellId)
-//        itemTableView.register(
-//            nibName,
-//            forCellReuseIdentifier: K.cellID.itemTableViewCell
-//        )
+
         itemTableView.refreshControl?.addTarget(
             self,
             action: #selector(refreshTableView),
             for: .valueChanged
         )
-        
+
         itemTableView.showLoadingPlaceholder()
     }
     

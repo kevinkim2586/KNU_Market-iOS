@@ -21,10 +21,9 @@ class MyPostsViewController: BaseViewController {
             for: .valueChanged
         )
         tableView.tableFooterView = UIView(frame: .zero)
-        let nibName = UINib(nibName: K.XIB.itemTableViewCell, bundle: nil)
         tableView.register(
-            nibName,
-            forCellReuseIdentifier: K.cellID.itemTableViewCell
+            PostTableViewCell.self,
+            forCellReuseIdentifier: PostTableViewCell.cellId
         )
         return tableView
     }()
@@ -112,12 +111,13 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = K.cellID.itemTableViewCell
-
+       
+        let cellIdentifier = PostTableViewCell.cellId
+        
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier,
             for: indexPath
-        ) as? ItemTableViewCell else {
+        ) as? PostTableViewCell else {
             return UITableViewCell()
         }
         cell.configure(with: viewModel.itemList[indexPath.row])

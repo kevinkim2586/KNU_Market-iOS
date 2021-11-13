@@ -129,22 +129,18 @@ class HomeViewModel {
     
     func fetchLatestPopup() {
         guard let popupManager = popupManager else { return }
+
+        if !popupManager.shouldFetchPopup { return }
         
-        print("✏️ didUserSetTonotseepop: \(popupManager.didUserSetToNotSeePopupForADay)")
-        print("✏️ didADayPass: \(popupManager.didADayPass)")
-        
-        // 24시간 보지 않기를 누른 적이 있는지와 24시간이 지났는지 판별
-        if popupManager.didUserSetToNotSeePopupForADay || popupManager.didADayPass {
-            return
-        }
 
         popupManager.fetchLatestPopup { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let popupModel):
-                if popupManager.determineIfAlreadySeenPopup(uid: popupModel.popupUid) {
+                if popupManager.checkIfAlreadySeenPopup(uid: popupModel.popupUid) {
                     return
                 }
+                popupManager.savePopupUidAsSeen(uid: popupModel.popupUid)
                 self.delegate?.didFetchLatestPopup(model: popupModel)
             case .failure(let error):
                 self.delegate?.failedFetchingLatestPopup(with: error)

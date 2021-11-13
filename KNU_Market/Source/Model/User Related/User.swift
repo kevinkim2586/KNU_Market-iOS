@@ -208,21 +208,21 @@ class User {
         }
     }
     
-    var userSetPopupBlockTime: Date {
+    var userSetPopupBlockTime: Date? {
         get {
-            return UserDefaults.standard.object(forKey: UserDefaults.Keys.userSetPopupBlockTime) as? Date ?? Date()
+            return UserDefaults.standard.object(forKey: UserDefaults.Keys.userSetPopupBlockTime) as? Date
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.userSetPopupBlockTime)
         }
     }
     
-    var didUserSetToNotSeePopupForADay: Bool {
+    var didUserBlockPopupForADay: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: UserDefaults.Keys.didUserSetToNotSeePopupForADay)
+            return UserDefaults.standard.bool(forKey: UserDefaults.Keys.didUserBlockPopupForADay)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.didUserSetToNotSeePopupForADay)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.didUserBlockPopupForADay)
         }
     }
     
@@ -270,6 +270,9 @@ extension User {
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.notificationList)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.isNotFirstAppLaunch)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.postFilterOptions)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.userSeenPopupUids)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.didUserBlockPopupForADay)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.userSetPopupBlockTime)
     
         
         ChatNotifications.list.removeAll()

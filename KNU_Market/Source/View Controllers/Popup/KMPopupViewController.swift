@@ -155,6 +155,7 @@ extension KMPopupViewController {
         guard let landingUrl = landingUrl else { return }
         guard let url = URL(string: landingUrl) else { return }
         UIApplication.shared.open(url, options: [:])
+      
     }
     
     private func incrementPopupViewCount() {

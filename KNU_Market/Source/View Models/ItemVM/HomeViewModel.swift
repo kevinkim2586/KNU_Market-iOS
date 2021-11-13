@@ -3,23 +3,27 @@ import UIKit
 
 protocol HomeViewModelDelegate: AnyObject {
     
+    // 유저 프로필 정보 가져오기
     func didFetchUserProfileInfo()
     func failedFetchingUserProfileInfo(with error: NetworkError)
     
+    // 공구글 정보 가져오기
     func didFetchItemList()
     func failedFetchingItemList(errorMessage: String, error: NetworkError)
     
+    // 팝업 가져오기
     func didFetchLatestPopup(model: PopupModel)
     func failedFetchingLatestPopup(with error: NetworkError)
     
-    func failedFetchingRoomPIDInfo(with error: NetworkError)
+    // 입장한 공구글 정보 가져오기
+    func failedFetchingEnteredRoomInfo(with error: NetworkError)
 }
 
 extension HomeViewModelDelegate {
     func didFetchUserProfileInfo() {}
     func failedFetchingUserProfileInfo(with error: NetworkError) {}
     func didFetchUserProfileImage() {}
-    func failedFetchingRoomPIDInfo(with error: NetworkError) {}
+    func failedFetchingEnteredRoomInfo(with error: NetworkError) {}
     func didFetchLatestPopup(model: PopupModel) {}
     func failedFetchingLatestPopup(with error: NetworkError) {}
 }
@@ -114,7 +118,7 @@ class HomeViewModel {
             case .success(let chatRoom):
                 chatRoom.forEach { User.shared.joinedChatRoomPIDs.append($0.uuid) }
             case .failure(let error):
-                self.delegate?.failedFetchingRoomPIDInfo(with: error)
+                self.delegate?.failedFetchingEnteredRoomInfo(with: error)
             }
         }
     }
@@ -131,7 +135,6 @@ class HomeViewModel {
         guard let popupManager = popupManager else { return }
 
         if !popupManager.shouldFetchPopup { return }
-        
 
         popupManager.fetchLatestPopup { [weak self] result in
             guard let self = self else { return }
@@ -147,8 +150,6 @@ class HomeViewModel {
             }
         }
     }
-    
-
 }
 
 extension HomeViewModel {

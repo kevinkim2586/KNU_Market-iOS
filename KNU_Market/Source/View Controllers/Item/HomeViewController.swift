@@ -95,7 +95,7 @@ extension HomeViewController: HomeViewModelDelegate {
         }
     }
     
-    func failedFetchingRoomPIDInfo(with error: NetworkError) {
+    func failedFetchingEnteredRoomInfo(with error: NetworkError) {
         showSimpleBottomAlert(with: error.errorDescription)
     }
     

@@ -17,6 +17,14 @@ class MyPageViewController: BaseViewController {
         static let profileImageButtonHeight: CGFloat        = 120
     }
     
+    fileprivate struct Images {
+        static let userVerifiedImage = UIImage(systemName: "checkmark.circle.fill")?.withRenderingMode(.alwaysOriginal)
+            .withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink)
+        
+        static let userUnVerifiedImage = UIImage(systemName: "xmark.circle.fill")?.withRenderingMode(.alwaysOriginal)
+            .withTintColor(UIColor.systemGray)
+    }
+    
     //MARK: - UI
     
     lazy var profileImageContainerView: UIView = {
@@ -59,10 +67,7 @@ class MyPageViewController: BaseViewController {
     
     let userVerifiedImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "checkmark.circle.fill")?.withRenderingMode(.alwaysOriginal)
-                        .withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink)
         imageView.contentMode = .scaleAspectFit
-        imageView.isHidden = true
         return imageView
     }()
     
@@ -294,7 +299,10 @@ extension MyPageViewController: MyPageViewModelDelegate {
     
     func didLoadUserProfileInfo() {
         userNicknameLabel.text = "\(viewModel.userNickname)\n(\(viewModel.userId))"
-        userVerifiedImage.isHidden = detectIfVerifiedUser() ? false : true
+        
+        userVerifiedImage.image = detectIfVerifiedUser()
+        ? Images.userVerifiedImage
+        : Images.userUnVerifiedImage
     }
     
     func didFetchProfileImage() {
@@ -489,7 +497,6 @@ extension MyPageViewController {
         
         viewModel.delegate = self
         
-//        userVerifiedImage.isHidden = true
         initializeTabBarIcon()
         initializeProfileImageButton()
         setBackBarButtonItemTitle()

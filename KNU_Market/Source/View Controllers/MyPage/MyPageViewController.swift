@@ -431,10 +431,10 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             case 0: pushViewController(with: SendUsMessageViewController(userManager: UserManager()))
             case 1:
                 let url = URL(string: K.URL.termsAndConditionNotionURL)!
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                presentSafariView(with: url)
             case 2:
                 let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                presentSafariView(with: url)
             case 3: pushViewController(with: DeveloperInformationViewController())
             default: break
             }

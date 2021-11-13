@@ -394,10 +394,10 @@
             </objects>
             <point key="canvasLocation" x="6979.7101449275369" y="-719.19642857142856"/>
         </scene>
-        <!--공동구매 글 검색-->
+        <!--Search Post View Controller-->
         <scene sceneID="l8L-1q-BEG">
             <objects>
-                <viewController storyboardIdentifier="SearchPostViewController" title="공동구매 글 검색" hidesBottomBarWhenPushed="YES" id="wk6-z2-Neg" customClass="SearchPostViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchPostViewController" title="공동구매 글 검색" hidesBottomBarWhenPushed="YES" id="wk6-z2-Neg" userLabel="Search Post View Controller" customClass="SearchPostViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lSa-8B-eVL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

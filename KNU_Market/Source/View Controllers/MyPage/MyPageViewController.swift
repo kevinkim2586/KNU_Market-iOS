@@ -155,6 +155,11 @@ class MyPageViewController: BaseViewController {
         profileImageContainerView.addSubview(userNicknameLabel)
         profileImageContainerView.addSubview(userVerifiedImage)
         view.addSubview(settingsTableView)
+
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
         
         profileImageContainerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
@@ -192,11 +197,6 @@ class MyPageViewController: BaseViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
     
         }
-        
-    }
-    
-    override func setupConstraints() {
-        super.setupConstraints()
     }
     
     private func configure() {

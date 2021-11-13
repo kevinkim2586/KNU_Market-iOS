@@ -29,7 +29,7 @@ class ItemTableViewCell: UITableViewCell {
     
     func configure(with model: ItemListModel) {
 
-        resetValues()
+        resetValues() 
 
         viewModel.uuid = model.uuid
         viewModel.title = model.title

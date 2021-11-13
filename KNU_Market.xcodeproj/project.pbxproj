@@ -121,6 +121,8 @@
 		7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */; };
 		7CB8DF61264D02690001CC6D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF60264D02690001CC6D /* Message.swift */; };
 		7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF62264D02AF0001CC6D /* Sender.swift */; };
+		7CBFDA78273FE01F000C8C8A /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBFDA77273FE01F000C8C8A /* PostTableViewCell.swift */; };
+		7CBFDA7A274005DF000C8C8A /* PostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */; };
 		7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC05E9926B6D91800BE9288 /* EditPostModel.swift */; };
 		7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC1B59726D4C7000007F99B /* EmptyView.swift */; };
 		7CC1B59A26D4CB1E0007F99B /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC1B59926D4CB1E0007F99B /* EmptyView.xib */; };
@@ -265,6 +267,8 @@
 		7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		7CB8DF60264D02690001CC6D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7CB8DF62264D02AF0001CC6D /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		7CBFDA77273FE01F000C8C8A /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellViewModel.swift; sourceTree = "<group>"; };
 		7CC05E9926B6D91800BE9288 /* EditPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostModel.swift; sourceTree = "<group>"; };
 		7CC1B59726D4C7000007F99B /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		7CC1B59926D4CB1E0007F99B /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
@@ -452,10 +456,12 @@
 			children = (
 				7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */,
 				7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */,
+				7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */,
 				7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */,
 				7CCDB1ED26A2BD0C0092F28D /* ItemTableViewCell.swift */,
 				7CCDB1EE26A2BD0C0092F28D /* ItemTableViewCell.xib */,
 				7C3D985F26AE89B4005DFAE0 /* ChatMemberTableViewCell.swift */,
+				7CBFDA77273FE01F000C8C8A /* PostTableViewCell.swift */,
 			);
 			path = UITableViewCells;
 			sourceTree = "<group>";
@@ -1004,6 +1010,7 @@
 				7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */,
 				7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
+				7CBFDA78273FE01F000C8C8A /* PostTableViewCell.swift in Sources */,
 				7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */,
 				7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */,
 				7CEC19232701837100C2D671 /* StoryboardName.swift in Sources */,
@@ -1070,6 +1077,7 @@
 				7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */,
 				7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */,
 				7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */,
+				7CBFDA7A274005DF000C8C8A /* PostCellViewModel.swift in Sources */,
 				7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */,
 				7C3D986226AE8A42005DFAE0 /* ChatMemberViewController.swift in Sources */,
 				7C833686266208210032308D /* Interceptor.swift in Sources */,

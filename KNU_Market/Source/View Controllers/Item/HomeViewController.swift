@@ -140,13 +140,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row > viewModel.itemList.count
             || viewModel.itemList.count == 0 { return UITableViewCell() }
         
-        let cellIdentifier = K.cellID.itemTableViewCell
+//        let cellIdentifier = K.cellID.itemTableViewCell
+//
+//        guard let cell = tableView.dequeueReusableCell(
+//            withIdentifier: cellIdentifier,
+//            for: indexPath
+//        ) as? ItemTableViewCell else { return UITableViewCell() }
+//
+//        cell.configure(with: viewModel.itemList[indexPath.row])
         
+        let cellIdentifier = PostTableViewCell.cellId
+                
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier,
             for: indexPath
-        ) as? ItemTableViewCell else { return UITableViewCell() }
-
+        ) as? PostTableViewCell else { return UITableViewCell() }
+        
         cell.configure(with: viewModel.itemList[indexPath.row])
         return cell
     }
@@ -238,14 +247,10 @@ extension HomeViewController {
         setBackBarButtonItemTitle()
         setNavigationBarAppearance(to: .white)
         
-        print("✏️ Absolute first launch: \(User.shared.isNotFirstAppLaunch)")
-        
         if !User.shared.isNotFirstAppLaunch {
             presentInitialVerificationAlert()
         }
     }
-    
-
     
     func initializeTableView() {
         
@@ -258,10 +263,11 @@ extension HomeViewController {
             nibName: K.XIB.itemTableViewCell,
             bundle: nil
         )
-        itemTableView.register(
-            nibName,
-            forCellReuseIdentifier: K.cellID.itemTableViewCell
-        )
+        itemTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.cellId)
+//        itemTableView.register(
+//            nibName,
+//            forCellReuseIdentifier: K.cellID.itemTableViewCell
+//        )
         itemTableView.refreshControl?.addTarget(
             self,
             action: #selector(refreshTableView),

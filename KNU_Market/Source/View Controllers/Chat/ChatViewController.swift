@@ -551,34 +551,32 @@ extension ChatViewController {
     }
 
     func presentInputActionSheet() {
-
-        let actionSheet = UIAlertController(title: nil,
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
-
-        let cameraAction = UIAlertAction(title: "사진 찍기",
-                                         style: .default) { [weak self] _ in
-
+        
+        let cameraAction = UIAlertAction(
+            title: "사진 찍기",
+            style: .default
+        ) { [weak self] _ in
             let picker = UIImagePickerController()
             picker.sourceType = .camera
             picker.delegate = self
             picker.allowsEditing = true
             self?.present(picker, animated: true)
         }
-        let albumAction = UIAlertAction(title: "사진 앨범",
-                                         style: .default) { [weak self] _ in
-
+        let albumAction = UIAlertAction(
+            title: "사진 앨범",
+            style: .default
+        ) { [weak self] _ in
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
             picker.delegate = self
             picker.allowsEditing = true
             self?.present(picker, animated: true)
         }
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel)
-        actionSheet.addAction(cameraAction)
-        actionSheet.addAction(albumAction)
-        actionSheet.addAction(cancelAction)
+     
+        let actionSheet = UIHelper.createActionSheet(
+            with: [cameraAction, albumAction],
+            title: nil
+        )
         present(actionSheet, animated: true)
     }
     

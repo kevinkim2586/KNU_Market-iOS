@@ -14,10 +14,10 @@ class PostTableViewCell: UITableViewCell {
     
     fileprivate struct Metrics {
         
-        static let topOffSet: CGFloat = 15
-        static let bottomOffSet: CGFloat = 15
-        static let leftOffSet: CGFloat = 20
-        static let rightOffSet: CGFloat = 20
+        static let topOffSet: CGFloat       = 15
+        static let bottomOffSet: CGFloat    = 15
+        static let leftOffSet: CGFloat      = 20
+        static let rightOffSet: CGFloat     = 20
         
         static let isGatheringLabelHeight: CGFloat = 20
     }

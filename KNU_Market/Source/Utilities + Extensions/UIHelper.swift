@@ -86,4 +86,26 @@ struct UIHelper {
         naviBar.items = [naviItem]
         view.addSubview(naviBar)
     }
+    
+    // ActionSheet 만들기
+    static func createActionSheet(with actions: [UIAlertAction], title: String?) -> UIAlertController {
+        
+        let actionSheet = UIAlertController(
+            title: title,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        actionSheet.view.tintColor = .black
+        
+        actions.forEach { actionSheet.addAction($0) }
+        
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil
+        )
+        actionSheet.addAction(cancelAction)
+        
+        return actionSheet
+    }
 }

@@ -131,16 +131,22 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellID = K.cellID.chatMemberCell
+//        let cellID = K.cellID.chatMemberCell
+//        guard let cell = tableView.dequeueReusableCell(
+//            withIdentifier: cellID
+//        ) as? ChatMemberTableViewCell else { return UITableViewCell() }
+        
+        let cellID = ChatMembersTableViewCell.cellId
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellID
-        ) as? ChatMemberTableViewCell else { return UITableViewCell() }
+        ) as? ChatMembersTableViewCell else { return UITableViewCell() }
         
         if let cellVM = filteredMembers?[indexPath.row] {
             
             guard let postUploaderUID = postUploaderUID else { return UITableViewCell() }
             cell.delegate = self
-            cell.configure(with: cellVM.userUID, postUploaderUID: postUploaderUID)
+            cell.configure(userManager: UserManager(), userUid: cellVM.userUID, postUploaderUid: postUploaderUID)
+//            cell.configure(with: cellVM.userUID, postUploaderUID: postUploaderUID)
              
         } else {
             cell.nicknameLabel.text = "사용자 정보 불러오기 실패 🧐"
@@ -164,16 +170,10 @@ extension ChatMemberViewController: UITableViewDelegate, UITableViewDataSource {
 
 //MARK: - ChatMemberTableViewCellDelegate
 
-extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
+extension ChatMemberViewController: ChatMembersTableViewCellDelegate {
     
     func presentActionSheetForMembers(blockUID: String, reportNickname: String) {
-        
-        let actionSheet = UIAlertController(
-            title: "\(reportNickname)님",
-            message: nil,
-            preferredStyle: .actionSheet
-        )
-        
+            
         let reportAction = UIAlertAction(
             title: "신고하기",
             style: .default
@@ -198,15 +198,12 @@ extension ChatMemberViewController: ChatMemberTableViewCellDelegate {
                 }
             }
         }
-        
-        let cancelAction = UIAlertAction(
-            title: "취소",
-            style: .cancel,
-            handler: nil
+   
+        let actionSheet = UIHelper.createActionSheet(
+            with: [reportAction, banAction],
+            title: "\(reportNickname)님"
         )
-        actionSheet.addAction(reportAction)
-        actionSheet.addAction(banAction)
-        actionSheet.addAction(cancelAction)
+
         present(actionSheet, animated: true)
     }
     
@@ -276,6 +273,10 @@ extension ChatMemberViewController {
         memberTableView.delegate = self
         memberTableView.dataSource = self
         memberTableView.separatorStyle = .none
+        memberTableView.register(
+            ChatMembersTableViewCell.self,
+            forCellReuseIdentifier: ChatMembersTableViewCell.cellId
+        )
     }
     
     func initializeTopView() {

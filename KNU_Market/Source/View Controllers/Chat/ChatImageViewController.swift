@@ -89,7 +89,7 @@ class ChatImageViewController: BaseViewController {
         dismissButton.snp.makeConstraints { make in
             make.width.height.equalTo(30)
             make.top.equalToSuperview().offset(60)
-            make.right.equalToSuperview().offset(-30)
+            make.right.equalToSuperview().offset(-15)
         }
         
         chatImageView.snp.makeConstraints { make in
@@ -157,7 +157,6 @@ extension ChatImageViewController {
     }
     
     @objc private func pressedDismissButton() {
-        print("✅ pressedDismissButton")
         hero.dismissViewController()
         dismissVC()
     }

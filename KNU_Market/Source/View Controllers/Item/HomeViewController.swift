@@ -292,26 +292,16 @@ extension HomeViewController {
     }
     
     @objc func pressedSettingsButton() {
-        
-        let actionSheet = UIAlertController(
-            title: "글 정렬 기준",
-            message: nil,
-            preferredStyle: .actionSheet
-        )
-        
-        let title = viewModel.filterActionTitle
 
-        actionSheet.addAction(UIAlertAction(title: title,
-                                            style: .default) { [weak self] _ in
+        let changePostFilterAction = UIAlertAction(
+            title: viewModel.filterActionTitle,
+            style: .default
+        ) { [weak self] _ in
             guard let self = self else { return }
             self.viewModel.changePostFilterOption()
-        })
-        actionSheet.addAction(UIAlertAction(
-            title: "취소",
-            style: .cancel,
-            handler: nil)
-        )
+        }
         
+        let actionSheet = UIHelper.createActionSheet(with: [changePostFilterAction], title: "글 정렬 기준")
         present(actionSheet, animated: true)
     }
     

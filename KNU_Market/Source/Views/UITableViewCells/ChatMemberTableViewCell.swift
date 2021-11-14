@@ -14,7 +14,7 @@ class ChatMemberTableViewCell: UITableViewCell {
     @IBOutlet weak var reportUserButton: UIButton!
     @IBOutlet weak var crownImageView: UIImageView!
     
-    private var imageCode: String?
+
     private var nickname: String?
     private var userUID: String?
     private var postUploaderUID: String?

@@ -330,22 +330,7 @@ extension ItemViewController: ItemViewModelDelegate {
 extension ItemViewController {
     
     private func presentActionSheet(with actions: [UIAlertAction], title: String?) {
-        let actionSheet = UIAlertController(
-            title: title,
-            message: nil,
-            preferredStyle: .actionSheet
-        )
-        
-        actions.forEach { alertAction in
-            actionSheet.addAction(alertAction)
-        }
-        
-        let cancelAction = UIAlertAction(
-            title: "취소",
-            style: .cancel,
-            handler: nil
-        )
-        actionSheet.addAction(cancelAction)
+        let actionSheet = UIHelper.createActionSheet(with: actions, title: title)
         present(actionSheet, animated: true)
     }
 }

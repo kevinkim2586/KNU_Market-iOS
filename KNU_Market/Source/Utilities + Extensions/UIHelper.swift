@@ -17,14 +17,16 @@ struct UIHelper {
         nav1.navigationBar.tintColor = .black
         
         
-        let chatListSB = UIStoryboard(name: StoryboardName.ChatList, bundle: nil)
-        guard let chatListVC = chatListSB.instantiateViewController(withIdentifier: "ChatListViewController") as? ChatListViewController else { fatalError() }
+  
+        let chatListVC = ChatListViewController(
+            viewModel: ChatListViewModel(chatManager: ChatManager(), itemManager: ItemManager())
+        )
         
         chatListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
         let nav2 = UINavigationController(rootViewController: chatListVC)
         nav2.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
         nav2.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
-        nav2.navigationBar.tintColor = .black
+        nav2.navigationBar.tintColor = UIColor.black
         
         
         

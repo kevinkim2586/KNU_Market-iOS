@@ -21,7 +21,12 @@ class ChatListViewModel {
     
     private var isFetchingData: Bool = false
     
-    init() {
+    private let chatManager: ChatManager
+    private let itemManager: ItemManager
+    
+    init(chatManager: ChatManager, itemManager: ItemManager) {
+        self.chatManager = chatManager
+        self.itemManager = itemManager
         createObservers()
     }
 }
@@ -39,17 +44,16 @@ extension ChatListViewModel {
         
         roomList.removeAll()
         User.shared.joinedChatRoomPIDs.removeAll()
-            
-        ChatManager.shared.getResponseModel(function: .getRoom,
-                                       method: .get,
-                                       pid: nil,
-                                       index: nil,
-                                       expectedModel: [Room].self) { [weak self] result in
-            
+        
+        chatManager.getResponseModel(
+            function: .getRoom,
+            method: .get,
+            pid: nil,
+            index: nil,
+            expectedModel: [Room].self
+        ) { [weak self] result in
             guard let self = self else { return }
-    
             switch result {
-            
             case .success(let chatRoom):
                 
                 var count = 0
@@ -63,7 +67,7 @@ extension ChatListViewModel {
                         self.roomList.append(chat)
                     }
                 }
-
+                
                 // 알림 숫자가 안 맞을 시 그냥 초기화
                 if count != User.shared.chatNotificationList.count {
                     ChatNotifications.list.removeAll()
@@ -76,15 +80,17 @@ extension ChatListViewModel {
             }
         }
     }
-
+    
     
     // 공구 나가기
     func exitPost(at indexPath: IndexPath) {
         
         let roomPID = roomList[indexPath.row].uuid
         
-        ChatManager.shared.changeJoinStatus(function: .exit,
-                                            pid: roomPID) { [weak self] result in
+        chatManager.changeJoinStatus(
+            function: .exit,
+            pid: roomPID
+        ) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -104,14 +110,10 @@ extension ChatListViewModel {
         
         let roomPID = self.roomList[indexPath.row].uuid
         
-        ItemManager.shared.deletePost(uid: roomPID) { [weak self] result in
-            
+        itemManager.deletePost(uid: roomPID) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
-            
             case .success:
-                
                 self.roomList.remove(at: indexPath.row)
                 self.delegate?.didDeleteAndExitPost(at: indexPath)
                 
@@ -128,11 +130,9 @@ extension ChatListViewModel {
 extension ChatListViewModel {
 
     func currentRoomIsUserUploaded(at index: Int) -> Bool {
-        if roomList[index].userUID == User.shared.userUID {
-            return true
-        } else {
-            return false
-        }
+        return roomList[index].userUID == User.shared.userUID
+        ? true
+        : false
     }
     
     func createObservers() {

@@ -3,7 +3,6 @@ import SDWebImage
 import SnapKit
 
 protocol ChatMembersTableViewCellDelegate: AnyObject {
-    
     func presentActionSheetForMembers(blockUID: String, reportNickname: String)
     func presentActionSheetForPostUploader(userUID: String, nickname: String)
 }
@@ -24,7 +23,6 @@ class ChatMembersTableViewCell: UITableViewCell {
     static let cellId: String = "ChatMembersTableViewCell"
     
     fileprivate struct Metrics {
-        
         static let profileImageViewSize: CGFloat = 45
     }
     
@@ -146,9 +144,6 @@ class ChatMembersTableViewCell: UITableViewCell {
 extension ChatMembersTableViewCell {
     
     @objc private func pressedReportUserButton() {
-        
-        print("✅ pressedReportUserButton")
-        
         guard
             let postUploaderUid = postUploaderUid,
             let nickname = nickname,

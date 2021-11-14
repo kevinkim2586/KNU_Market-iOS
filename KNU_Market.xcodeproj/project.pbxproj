@@ -38,8 +38,6 @@
 		7C3D541D26C90B4900AE3E55 /* congratulate1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C3D541A26C90B4900AE3E55 /* congratulate1.json */; };
 		7C3D541F26CA722B00AE3E55 /* CALayer + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D541E26CA722B00AE3E55 /* CALayer + Extension.swift */; };
 		7C3D985E26AE793D005DFAE0 /* RoomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D985D26AE793D005DFAE0 /* RoomInfo.swift */; };
-		7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D985F26AE89B4005DFAE0 /* ChatMemberTableViewCell.swift */; };
-		7C3D986226AE8A42005DFAE0 /* ChatMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */; };
 		7C3D986426AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D986326AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift */; };
 		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
 		7C43355826D89AC200A044CD /* wimLogo_Launchscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */; };
@@ -71,6 +69,7 @@
 		7C833686266208210032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833685266208210032308D /* Interceptor.swift */; };
 		7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */; };
 		7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */; };
+		7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */; };
 		7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */; };
 		7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */; };
 		7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8414812705692500FFA56B /* FindIdOptions.swift */; };
@@ -179,8 +178,6 @@
 		7C3D541A26C90B4900AE3E55 /* congratulate1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congratulate1.json; sourceTree = "<group>"; };
 		7C3D541E26CA722B00AE3E55 /* CALayer + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer + Extension.swift"; sourceTree = "<group>"; };
 		7C3D985D26AE793D005DFAE0 /* RoomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInfo.swift; sourceTree = "<group>"; };
-		7C3D985F26AE89B4005DFAE0 /* ChatMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberTableViewCell.swift; sourceTree = "<group>"; };
-		7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberViewController.swift; sourceTree = "<group>"; };
 		7C3D986326AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOtherUserProfileModel.swift; sourceTree = "<group>"; };
 		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wimLogo_Launchscreen.png; sourceTree = "<group>"; };
@@ -213,6 +210,7 @@
 		7C833685266208210032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
 		7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembersTableViewCell.swift; sourceTree = "<group>"; };
+		7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberListViewController.swift; sourceTree = "<group>"; };
 		7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserInfoViewModel.swift; sourceTree = "<group>"; };
 		7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + FindUserInfo.swift"; sourceTree = "<group>"; };
 		7C8414812705692500FFA56B /* FindIdOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdOptions.swift; sourceTree = "<group>"; };
@@ -452,7 +450,6 @@
 			children = (
 				7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */,
 				7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */,
-				7C3D985F26AE89B4005DFAE0 /* ChatMemberTableViewCell.swift */,
 				7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */,
 				7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */,
 				7CBFDA77273FE01F000C8C8A /* PostTableViewCell.swift */,
@@ -755,7 +752,7 @@
 			children = (
 				7CA66239264136C7000E0B7A /* ChatListViewController.swift */,
 				7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */,
-				7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */,
+				7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */,
 				7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */,
 			);
 			path = Chat;
@@ -1071,14 +1068,12 @@
 				7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */,
 				7CBFDA7A274005DF000C8C8A /* PostCellViewModel.swift in Sources */,
 				7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */,
-				7C3D986226AE8A42005DFAE0 /* ChatMemberViewController.swift in Sources */,
 				7C833686266208210032308D /* Interceptor.swift in Sources */,
 				7C436B5826820E5200943069 /* ReportManager.swift in Sources */,
 				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,
 				7CA66234264135AA000E0B7A /* HomeViewController.swift in Sources */,
 				7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */,
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
-				7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
 				7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
@@ -1089,6 +1084,7 @@
 				7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */,
 				7C8839DE2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift in Sources */,
 				7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */,
+				7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */,
 				7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */,
 				7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */,
 				7CA52D69270B083F00A69F3B /* ChangeIdViewController.swift in Sources */,

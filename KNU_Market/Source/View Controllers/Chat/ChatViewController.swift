@@ -81,13 +81,12 @@ class ChatViewController: MessagesViewController {
 
         viewModel.getRoomInfo()
         
-        guard let chatMemberVC = storyboard?.instantiateViewController(
-            identifier: K.StoryboardID.chatMemberVC
-        ) as? ChatMemberViewController else { return }
-        
-        chatMemberVC.roomInfo = viewModel.roomInfo
-        chatMemberVC.postUploaderUID = viewModel.postUploaderUID
-        presentPanModal(chatMemberVC)
+        let chatMemberListVC = ChatMemberListViewController(
+            chatManager: ChatManager(),
+            roomInfo: viewModel.roomInfo,
+            postUploaderUid: viewModel.postUploaderUID
+        )
+        presentPanModal(chatMemberListVC)
     }
     
     @objc func pressedRefreshButton() {

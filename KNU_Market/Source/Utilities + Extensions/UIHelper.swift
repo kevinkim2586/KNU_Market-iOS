@@ -4,53 +4,57 @@ struct UIHelper {
     
     static func createMainTabBarController() -> UITabBarController {
         
-        let tabBarController = UITabBarController()
-        tabBarController.tabBar.tintColor = UIColor(named: K.Color.appColor) ?? .systemPink
-        tabBarController.tabBar.barTintColor = .white
-     
+        // 탭바 생성
+        let mainTabBarController = UITabBarController()
+        mainTabBarController.tabBar.tintColor = UIColor(named: K.Color.appColor) ?? .systemPink
+        mainTabBarController.tabBar.barTintColor = .white
         
+        // 탭바 설정
+        mainTabBarController.setViewControllers([
+            createPostNavigationController(),
+            createChatNavigationController(),
+            createMyPageNavigationController()
+        ], animated: true)
+        return mainTabBarController
+    }
+    
+    private static func createPostNavigationController() -> UINavigationController {
         let itemListSB = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
         guard let itemListVC = itemListSB.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { fatalError() }
         
         itemListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
-        let nav1 = UINavigationController(rootViewController: itemListVC)
-        nav1.navigationBar.tintColor = .black
+        let PostNavigationController = UINavigationController(rootViewController: itemListVC)
+        PostNavigationController.navigationBar.tintColor = .black
         
-        
-  
+        return PostNavigationController
+    }
+    
+    private static func createChatNavigationController() -> UINavigationController {
         let chatListVC = ChatListViewController(
             viewModel: ChatListViewModel(chatManager: ChatManager(), itemManager: ItemManager())
         )
         
         chatListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
-        let nav2 = UINavigationController(rootViewController: chatListVC)
-        nav2.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
-        nav2.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
-        nav2.navigationBar.tintColor = UIColor.black
+        let ChatNavigationController = UINavigationController(rootViewController: chatListVC)
+        ChatNavigationController.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
+        ChatNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
+        ChatNavigationController.navigationBar.tintColor = UIColor.black
         
-        
+        return ChatNavigationController
+    }
+    
+    private static func createMyPageNavigationController() -> UINavigationController {
         
         let myPageVC = MyPageViewController(userManager: UserManager())
         myPageVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 0)
-        let nav3 = UINavigationController(rootViewController: myPageVC)
+        let MyPageNavigationController = UINavigationController(rootViewController: myPageVC)
         
-        nav3.tabBarItem.image = UIImage(named: K.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
-        nav3.tabBarItem.selectedImage = UIImage(named: K.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
-        nav3.navigationBar.tintColor = .black
+        MyPageNavigationController.tabBarItem.image = UIImage(named: K.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
+        MyPageNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
+        MyPageNavigationController.navigationBar.tintColor = .black
         
-     
-
-    
-    
-        #warning("Badge Color도 지정")
-        
-        tabBarController.setViewControllers([nav1, nav2, nav3], animated: true)
-        
-        
-        
-        return tabBarController
+        return MyPageNavigationController
     }
-    
     
     
     

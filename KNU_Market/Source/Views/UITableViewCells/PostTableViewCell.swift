@@ -10,7 +10,7 @@ class PostTableViewCell: UITableViewCell {
     
     //MARK: - Constants
     
-    static let cellId: String = "ItemTableViewCell"
+    static let cellId: String = "PostTableViewCell"
     
     fileprivate struct Metrics {
         

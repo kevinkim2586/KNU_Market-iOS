@@ -131,7 +131,6 @@
 		7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */; };
 		7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */; };
 		7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */; };
-		7CCDB1EA26A2BCD30092F28D /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */; };
 		7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */; };
 		7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */; };
 		7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */; };
@@ -275,7 +274,6 @@
 		7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureStudentIDViewController.swift; sourceTree = "<group>"; };
 		7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModel.swift; sourceTree = "<group>"; };
 		7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewController.swift; sourceTree = "<group>"; };
-		7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
 		7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
@@ -450,7 +448,6 @@
 		7C79E10D26E0C20B0004508A /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */,
 				7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */,
 				7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */,
 				7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */,
@@ -1048,7 +1045,6 @@
 				7C0E2DDF26B7D92800BB37FF /* String + Extension.swift in Sources */,
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
 				7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */,
-				7CCDB1EA26A2BCD30092F28D /* ChatTableViewCell.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */,
 				7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */,
 				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,

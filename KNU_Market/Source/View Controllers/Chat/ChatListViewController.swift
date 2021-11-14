@@ -100,39 +100,19 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row > viewModel.roomList.count { return UITableViewCell() }
-        if self.viewModel.roomList.count == 0 { return UITableViewCell() }
-
-//        let cellIdentifier = K.cellID.chatTableViewCell
-//
-//        tableView.restoreEmptyView()
-//
-//        guard let cell = tableView.dequeueReusableCell(
-//                withIdentifier: cellIdentifier,
-//                for: indexPath
-//        ) as? ChatTableViewCell else {
-//            return UITableViewCell()
-//        }
-  
-        
-        
-        let cellIdentifier = ChatListTableViewCell.cellId
-        
+        if indexPath.row > viewModel.roomList.count || viewModel.roomList.count == 0 {
+            return UITableViewCell()
+        }
         tableView.restoreEmptyView()
         
         guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: cellIdentifier,
+            withIdentifier: ChatListTableViewCell.cellId,
                 for: indexPath
-        ) as? ChatListTableViewCell else {
-            return UITableViewCell()
-        }
+        ) as? ChatListTableViewCell else { return UITableViewCell() }
         
-        
-    
         cell.configure(with: self.viewModel.roomList[indexPath.row])
         tableView.tableFooterView = UIView(frame: .zero)
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

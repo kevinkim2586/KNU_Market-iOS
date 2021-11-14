@@ -86,7 +86,6 @@
 		7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */; };
 		7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5A27182A3400295A3F /* BaseViewController.swift */; };
 		7C922A5D27185EB000295A3F /* SendUsMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */; };
-		7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9871D526E9BCEA009BD195 /* ImageViewController.swift */; };
 		7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A32706EEDF00579EE6 /* Preview.swift */; };
 		7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */; };
 		7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */; };
@@ -228,7 +227,6 @@
 		7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInformationViewController.swift; sourceTree = "<group>"; };
 		7C922A5A27182A3400295A3F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageViewController.swift; sourceTree = "<group>"; };
-		7C9871D526E9BCEA009BD195 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		7C98D2A32706EEDF00579EE6 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Preview.swift"; sourceTree = "<group>"; };
 		7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostRequestDTO.swift; sourceTree = "<group>"; };
@@ -753,7 +751,6 @@
 			isa = PBXGroup;
 			children = (
 				7CA66239264136C7000E0B7A /* ChatListViewController.swift */,
-				7C9871D526E9BCEA009BD195 /* ImageViewController.swift */,
 				7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */,
 				7C3D986126AE8A42005DFAE0 /* ChatMemberViewController.swift */,
 				7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */,
@@ -1030,7 +1027,6 @@
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
-				7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,

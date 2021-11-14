@@ -172,82 +172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bF6-QS-jBs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1435" y="757"/>
-        </scene>
-        <!--Image View Controller-->
-        <scene sceneID="eWF-5O-aa2">
-            <objects>
-                <viewController storyboardIdentifier="ImageViewController" id="LTj-Vy-cKY" customClass="ImageViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XKv-7y-T39">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBq-oM-2iD">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vrQ-9n-5d2">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuH-Uc-QfB" userLabel="Dismiss Button">
-                                        <rect key="frame" x="364" y="50" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="EzM-8q-juM"/>
-                                            <constraint firstAttribute="height" constant="30" id="zMX-SY-cqD"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="xmark" catalog="system"/>
-                                        <connections>
-                                            <action selector="pressedDismissButton:" destination="LTj-Vy-cKY" eventType="touchUpInside" id="GnF-u0-z5w"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="vrQ-9n-5d2" firstAttribute="width" secondItem="KBq-oM-2iD" secondAttribute="width" id="56Z-OQ-pFx"/>
-                                    <constraint firstItem="vrQ-9n-5d2" firstAttribute="top" secondItem="KBq-oM-2iD" secondAttribute="top" id="68d-Iq-EaP"/>
-                                    <constraint firstAttribute="trailing" secondItem="vrQ-9n-5d2" secondAttribute="trailing" id="6fj-NF-Qs3"/>
-                                    <constraint firstItem="vrQ-9n-5d2" firstAttribute="top" secondItem="JbA-sF-drR" secondAttribute="top" id="9Dt-2y-rjD"/>
-                                    <constraint firstItem="vrQ-9n-5d2" firstAttribute="leading" secondItem="KBq-oM-2iD" secondAttribute="leading" id="B2W-g8-Xld"/>
-                                    <constraint firstItem="JbA-sF-drR" firstAttribute="trailing" secondItem="wuH-Uc-QfB" secondAttribute="trailing" constant="20" id="Iap-tg-ot6"/>
-                                    <constraint firstAttribute="bottom" secondItem="vrQ-9n-5d2" secondAttribute="bottom" id="Wk0-Bo-cR3"/>
-                                    <constraint firstItem="vrQ-9n-5d2" firstAttribute="height" secondItem="KBq-oM-2iD" secondAttribute="height" id="asT-ms-7nb"/>
-                                    <constraint firstItem="vrQ-9n-5d2" firstAttribute="leading" secondItem="JbA-sF-drR" secondAttribute="leading" id="lnl-KD-0bj"/>
-                                    <constraint firstItem="wuH-Uc-QfB" firstAttribute="top" secondItem="JbA-sF-drR" secondAttribute="top" constant="50" id="sds-4M-WOg"/>
-                                    <constraint firstItem="JbA-sF-drR" firstAttribute="trailing" secondItem="vrQ-9n-5d2" secondAttribute="trailing" id="txA-gA-w6h"/>
-                                    <constraint firstItem="JbA-sF-drR" firstAttribute="bottom" secondItem="vrQ-9n-5d2" secondAttribute="bottom" id="z1a-nt-1mE"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="NcP-gJ-etR"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="JbA-sF-drR"/>
-                            </scrollView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="klk-h3-Ul1"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="KBq-oM-2iD" firstAttribute="top" secondItem="XKv-7y-T39" secondAttribute="top" id="3qv-Hg-wqT"/>
-                            <constraint firstItem="klk-h3-Ul1" firstAttribute="trailing" secondItem="KBq-oM-2iD" secondAttribute="trailing" id="OB7-WR-0K7"/>
-                            <constraint firstItem="KBq-oM-2iD" firstAttribute="leading" secondItem="klk-h3-Ul1" secondAttribute="leading" id="OFb-Yb-wRd"/>
-                            <constraint firstAttribute="bottom" secondItem="KBq-oM-2iD" secondAttribute="bottom" id="jl9-H2-Nwq"/>
-                        </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="wxq-PE-gQo" appends="YES" id="PbR-Xm-mfw"/>
-                        </connections>
-                    </view>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <outlet property="imageScrollView" destination="KBq-oM-2iD" id="82d-x6-e1Z"/>
-                        <outlet property="imageView" destination="vrQ-9n-5d2" id="UpA-lq-Cuc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aQS-yl-VJu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="wxq-PE-gQo">
-                    <connections>
-                        <action selector="handlePanGesture:" destination="LTj-Vy-cKY" id="lam-ED-A38"/>
-                    </connections>
-                </panGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="657" y="757"/>
+            <point key="canvasLocation" x="1449" y="86"/>
         </scene>
     </scenes>
     <resources>
@@ -255,7 +180,6 @@
         <image name="exclamationmark.octagon" catalog="system" width="128" height="112"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <image name="people icon" width="52" height="52"/>
-        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.53299999237060547" blue="0.50999999046325684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

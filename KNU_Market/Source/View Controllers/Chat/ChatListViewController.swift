@@ -80,7 +80,6 @@ class ChatListViewController: BaseViewController {
         super.setupLayout()
         
         navigationItem.leftBarButtonItem = chatBarButtonItem
-        
         view.addSubview(chatListTableView)
     }
     
@@ -207,8 +206,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         
         if viewModel.roomList.count == 0 { return }
         
-        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-        guard let chatVC = storyboard.instantiateViewController(identifier: K.StoryboardID.chatVC) as? ChatViewController else { return }
+        let chatVC = ChatViewController()
         
         chatVC.roomUID = viewModel.roomList[indexPath.row].uuid
         chatVC.chatRoomTitle = viewModel.roomList[indexPath.row].title

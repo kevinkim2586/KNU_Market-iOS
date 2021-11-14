@@ -2,7 +2,6 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 import SafariServices
-import SwiftyJSON
 import SDWebImage
 import IQKeyboardManagerSwift
 import ImageSlideshow
@@ -10,15 +9,39 @@ import Hero
 
 class ChatViewController: MessagesViewController {
     
+    //MARK: - Properties
+
     private var viewModel: ChatViewModel!
 
     var roomUID: String = ""
     var chatRoomTitle: String = ""
     var postUploaderUID: String = ""
     var isFirstEntrance: Bool = false
+    
+
+    //MARK: - UI
+    
+    lazy var moreBarButtonItem: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.image = UIImage(systemName: "line.horizontal.3")
+        button.style = .done
+        button.tintColor = .black
+        button.target = self
+        button.action = #selector(pressedMoreBarButtonItem)
+        return button
+    }()
+  
+    
+    //MARK: - Initialization
+    
+    
+    //MARK: - View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = moreBarButtonItem
+        
         
         IQKeyboardManager.shared.enable = false
         
@@ -76,9 +99,7 @@ class ChatViewController: MessagesViewController {
         navigationController?.pushViewController(itemVC, animated: true)
     }
 
-
-    @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
-
+    @objc private func pressedMoreBarButtonItem() {
         viewModel.getRoomInfo()
         
         let chatMemberListVC = ChatMemberListViewController(
@@ -88,6 +109,18 @@ class ChatViewController: MessagesViewController {
         )
         presentPanModal(chatMemberListVC)
     }
+    
+//    @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
+//
+//        viewModel.getRoomInfo()
+//
+//        let chatMemberListVC = ChatMemberListViewController(
+//            chatManager: ChatManager(),
+//            roomInfo: viewModel.roomInfo,
+//            postUploaderUid: viewModel.postUploaderUID
+//        )
+//        presentPanModal(chatMemberListVC)
+//    }
     
     @objc func pressedRefreshButton() {
         viewModel.resetAndReconnect()

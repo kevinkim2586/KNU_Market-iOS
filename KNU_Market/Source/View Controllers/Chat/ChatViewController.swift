@@ -433,14 +433,10 @@ extension ChatViewController: MessageCellDelegate {
     
     func presentImageVC(url: URL, heroID: String) {
         
-        guard let imageVC = storyboard?.instantiateViewController(
-                identifier: K.StoryboardID.imageVC
-        ) as? ImageViewController else { return }
-        imageVC.modalPresentationStyle = .overFullScreen
-        imageVC.imageURL = url
-        imageVC.heroID = heroID
+        let chatImageVC = ChatImageViewController(imageUrl: url, heroId: heroID)
+        chatImageVC.modalPresentationStyle = .overFullScreen
+        present(chatImageVC, animated: true)
 
-        present(imageVC, animated: true)
     }
 }
 

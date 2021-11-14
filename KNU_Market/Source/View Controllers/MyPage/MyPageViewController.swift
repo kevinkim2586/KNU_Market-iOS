@@ -443,6 +443,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func pushViewController(with vc: UIViewController) {
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }

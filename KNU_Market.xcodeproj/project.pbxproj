@@ -70,6 +70,7 @@
 		7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */; };
 		7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */; };
 		7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */; };
+		7C83EE4A274121FF00CF1680 /* ChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE49274121FF00CF1680 /* ChatListTableViewCell.swift */; };
 		7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */; };
 		7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */; };
 		7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8414812705692500FFA56B /* FindIdOptions.swift */; };
@@ -211,6 +212,7 @@
 		7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
 		7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembersTableViewCell.swift; sourceTree = "<group>"; };
 		7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberListViewController.swift; sourceTree = "<group>"; };
+		7C83EE49274121FF00CF1680 /* ChatListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTableViewCell.swift; sourceTree = "<group>"; };
 		7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserInfoViewModel.swift; sourceTree = "<group>"; };
 		7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + FindUserInfo.swift"; sourceTree = "<group>"; };
 		7C8414812705692500FFA56B /* FindIdOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdOptions.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */,
 				7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */,
 				7CBFDA77273FE01F000C8C8A /* PostTableViewCell.swift */,
+				7C83EE49274121FF00CF1680 /* ChatListTableViewCell.swift */,
 			);
 			path = UITableViewCells;
 			sourceTree = "<group>";
@@ -1016,6 +1019,7 @@
 				7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */,
 				7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */,
 				7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */,
+				7C83EE4A274121FF00CF1680 /* ChatListTableViewCell.swift in Sources */,
 				7C036AB82696BE4C00F6C29B /* Date + Extension.swift in Sources */,
 				7C4CA63326F4BF3200F4BCA7 /* IDInputViewController.swift in Sources */,
 				7CC1B59C26D4FC110007F99B /* UIView + Extension.swift in Sources */,

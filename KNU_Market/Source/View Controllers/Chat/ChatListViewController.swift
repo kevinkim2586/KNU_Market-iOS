@@ -103,17 +103,32 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row > viewModel.roomList.count { return UITableViewCell() }
         if self.viewModel.roomList.count == 0 { return UITableViewCell() }
 
-        let cellIdentifier = K.cellID.chatTableViewCell
+//        let cellIdentifier = K.cellID.chatTableViewCell
+//
+//        tableView.restoreEmptyView()
+//
+//        guard let cell = tableView.dequeueReusableCell(
+//                withIdentifier: cellIdentifier,
+//                for: indexPath
+//        ) as? ChatTableViewCell else {
+//            return UITableViewCell()
+//        }
+  
+        
+        
+        let cellIdentifier = ChatListTableViewCell.cellId
         
         tableView.restoreEmptyView()
         
         guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: cellIdentifier,
                 for: indexPath
-        ) as? ChatTableViewCell else {
+        ) as? ChatListTableViewCell else {
             return UITableViewCell()
         }
         
+        
+    
         cell.configure(with: self.viewModel.roomList[indexPath.row])
         tableView.tableFooterView = UIView(frame: .zero)
         return cell
@@ -139,6 +154,14 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
     @objc func refreshTableView() {
         viewModel.fetchChatList()
     }
@@ -170,6 +193,8 @@ extension ChatListViewController {
         chatListTableView.tableFooterView = UIView(frame: .zero)
         chatListTableView.separatorStyle = .none
         chatListTableView.separatorColor = .clear
+        
+        chatListTableView.register(ChatListTableViewCell.self, forCellReuseIdentifier: ChatListTableViewCell.cellId)
         
         refreshControl.addTarget(
             self,

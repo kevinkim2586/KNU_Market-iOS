@@ -3,20 +3,29 @@ import UIKit
 
 protocol HomeViewModelDelegate: AnyObject {
     
+    // 유저 프로필 정보 가져오기
     func didFetchUserProfileInfo()
     func failedFetchingUserProfileInfo(with error: NetworkError)
     
+    // 공구글 정보 가져오기
     func didFetchItemList()
     func failedFetchingItemList(errorMessage: String, error: NetworkError)
     
-    func failedFetchingRoomPIDInfo(with error: NetworkError)
+    // 팝업 가져오기
+    func didFetchLatestPopup(model: PopupModel)
+    func failedFetchingLatestPopup(with error: NetworkError)
+    
+    // 입장한 공구글 정보 가져오기
+    func failedFetchingEnteredRoomInfo(with error: NetworkError)
 }
 
 extension HomeViewModelDelegate {
     func didFetchUserProfileInfo() {}
     func failedFetchingUserProfileInfo(with error: NetworkError) {}
     func didFetchUserProfileImage() {}
-    func failedFetchingRoomPIDInfo(with error: NetworkError) {}
+    func failedFetchingEnteredRoomInfo(with error: NetworkError) {}
+    func didFetchLatestPopup(model: PopupModel) {}
+    func failedFetchingLatestPopup(with error: NetworkError) {}
 }
 
 class HomeViewModel {
@@ -24,6 +33,7 @@ class HomeViewModel {
     private var itemManager: ItemManager?
     private var chatManager: ChatManager?
     private var userManager: UserManager?
+    private var popupManager: PopupManager?
     
     weak var delegate: HomeViewModelDelegate?
     
@@ -33,10 +43,15 @@ class HomeViewModel {
     var index: Int = 1
     
     //MARK: - Initialization
-    init(itemManager: ItemManager, chatManager: ChatManager, userManager: UserManager) {
+    init(itemManager: ItemManager) {
+        self.itemManager = itemManager
+    }
+    
+    init(itemManager: ItemManager, chatManager: ChatManager, userManager: UserManager, popupManager: PopupManager?) {
         self.itemManager = itemManager
         self.chatManager = chatManager
         self.userManager = userManager
+        self.popupManager = popupManager
     }
     
     //MARK: - 공구글 불러오기
@@ -52,7 +67,7 @@ class HomeViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let fetchedModel):
-                
+
                 if fetchedModel.isEmpty {
                     self.delegate?.didFetchItemList()
                     return
@@ -61,10 +76,7 @@ class HomeViewModel {
                 self.index += 1
                 
                 for model in fetchedModel {
-                    if User.shared.bannedPostUploaders.contains(model.userInfo?.userUID ?? "") {
-                        continue
-                    }
-                    
+                    if User.shared.bannedPostUploaders.contains(model.userInfo?.userUID ?? "") { continue }
                     if fetchCurrentUsers {
                         User.shared.userUploadedRoomPIDs.append(model.uuid)
                     }
@@ -86,10 +98,8 @@ class HomeViewModel {
         userManager?.loadUserProfile { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(_):
-                self.delegate?.didFetchUserProfileInfo()
-            case .failure(let error):
-                self.delegate?.failedFetchingUserProfileInfo(with: error)
+            case .success(_): self.delegate?.didFetchUserProfileInfo()
+            case .failure(let error): self.delegate?.failedFetchingUserProfileInfo(with: error)
             }
         }
     }
@@ -106,29 +116,50 @@ class HomeViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let chatRoom):
-                chatRoom.forEach { chat in
-                    User.shared.joinedChatRoomPIDs.append(chat.uuid)
-                }
+                chatRoom.forEach { User.shared.joinedChatRoomPIDs.append($0.uuid) }
             case .failure(let error):
-                self.delegate?.failedFetchingRoomPIDInfo(with: error)
+                self.delegate?.failedFetchingEnteredRoomInfo(with: error)
             }
         }
     }
-    
+
+    //MARK: - 글 정렬 기준 변경
     func changePostFilterOption() {
-        if User.shared.postFilterOption == .showAll {
-            User.shared.postFilterOption = .showGatheringFirst
-        } else {
-            User.shared.postFilterOption = .showAll
-        }
+        User.shared.postFilterOption = User.shared.postFilterOption == .showAll
+        ? .showGatheringFirst
+        : .showAll
         refreshTableView()
     }
+    
+    func fetchLatestPopup() {
+        guard let popupManager = popupManager else { return }
+
+        if !popupManager.shouldFetchPopup { return }
+
+        popupManager.fetchLatestPopup { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let popupModel):
+                if popupManager.checkIfAlreadySeenPopup(uid: popupModel.popupUid) {
+                    return
+                }
+                popupManager.savePopupUidAsSeen(uid: popupModel.popupUid)
+                self.delegate?.didFetchLatestPopup(model: popupModel)
+            case .failure(let error):
+                self.delegate?.failedFetchingLatestPopup(with: error)
+            }
+        }
+    }
+}
+
+extension HomeViewModel {
     
     // 앱 최초 실행 시 로딩해야 할 메서드들 모음
     func loadInitialMethods() {
         fetchEnteredRoomInfo()
         loadUserProfile()
         fetchItemList()
+        fetchLatestPopup()
     }
     
     func refreshTableView() {
@@ -144,10 +175,6 @@ class HomeViewModel {
         isFetchingData = false
         index = 1
     }
-}
-
-
-extension HomeViewModel {
     
     var filterActionTitle: String {
         return User.shared.postFilterOption == .showAll ? "'모집 중' 먼저보기" : "최신 순으로 보기"

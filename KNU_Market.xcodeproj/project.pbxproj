@@ -125,6 +125,8 @@
 		7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */; };
 		7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FFB26CE03260019B06F /* KMAlertButton.swift */; };
 		7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */; };
+		7CB22568272EB0650045CE94 /* PopupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB22567272EB0650045CE94 /* PopupManager.swift */; };
+		7CB2256B272EB23E0045CE94 /* KMPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2256A272EB23E0045CE94 /* KMPopupViewController.swift */; };
 		7CB8DF36264BAB760001CC6D /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF35264BAB760001CC6D /* UIViewController + Extension.swift */; };
 		7CB8DF38264BB0300001CC6D /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF37264BB0300001CC6D /* ItemManager.swift */; };
 		7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF39264BB0360001CC6D /* ChatManager.swift */; };
@@ -134,6 +136,7 @@
 		7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */; };
 		7CB8DF61264D02690001CC6D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF60264D02690001CC6D /* Message.swift */; };
 		7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF62264D02AF0001CC6D /* Sender.swift */; };
+		7CBDF4B0272F886500E657D9 /* PopupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBDF4AF272F886500E657D9 /* PopupModel.swift */; };
 		7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC05E9926B6D91800BE9288 /* EditPostModel.swift */; };
 		7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC1B59726D4C7000007F99B /* EmptyView.swift */; };
 		7CC1B59A26D4CB1E0007F99B /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC1B59926D4CB1E0007F99B /* EmptyView.xib */; };
@@ -283,6 +286,8 @@
 		7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertTitleLabel.swift; sourceTree = "<group>"; };
 		7CA78FFB26CE03260019B06F /* KMAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertButton.swift; sourceTree = "<group>"; };
 		7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewModel.swift; sourceTree = "<group>"; };
+		7CB22567272EB0650045CE94 /* PopupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupManager.swift; sourceTree = "<group>"; };
+		7CB2256A272EB23E0045CE94 /* KMPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPopupViewController.swift; sourceTree = "<group>"; };
 		7CB8DF35264BAB760001CC6D /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		7CB8DF37264BB0300001CC6D /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
 		7CB8DF39264BB0360001CC6D /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
@@ -292,6 +297,7 @@
 		7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		7CB8DF60264D02690001CC6D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7CB8DF62264D02AF0001CC6D /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		7CBDF4AF272F886500E657D9 /* PopupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupModel.swift; sourceTree = "<group>"; };
 		7CC05E9926B6D91800BE9288 /* EditPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostModel.swift; sourceTree = "<group>"; };
 		7CC1B59726D4C7000007F99B /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		7CC1B59926D4CB1E0007F99B /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
@@ -388,6 +394,7 @@
 		7C036AB12696A90500F6C29B /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
+				7CBDF4AE272F884800E657D9 /* Popup */,
 				7C036AB32696AAA000F6C29B /* User Models */,
 				7CD1522526AA99DA00F2C466 /* Chat Models */,
 				7C036AB22696AA8B00F6C29B /* Item Models */,
@@ -733,6 +740,7 @@
 				7C833685266208210032308D /* Interceptor.swift */,
 				7C555466266D1A8600C3C5B6 /* MediaManager.swift */,
 				7C436B5726820E5200943069 /* ReportManager.swift */,
+				7CB22567272EB0650045CE94 /* PopupManager.swift */,
 			);
 			path = "Network Group";
 			sourceTree = "<group>";
@@ -751,6 +759,7 @@
 				7C60DC7126944C16001DEA9A /* Update User Info */,
 				7CA52D6A270B113900A69F3B /* Unregister Flow */,
 				7C60DC7226944C62001DEA9A /* Report */,
+				7CB22569272EB2190045CE94 /* Popup */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -773,6 +782,14 @@
 				7CA6624B26413D05000E0B7A /* ValidationError.swift */,
 			);
 			path = "Error Management Group";
+			sourceTree = "<group>";
+		};
+		7CB22569272EB2190045CE94 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				7CB2256A272EB23E0045CE94 /* KMPopupViewController.swift */,
+			);
+			path = Popup;
 			sourceTree = "<group>";
 		};
 		7CB8DF34264BAB390001CC6D /* Extensions */ = {
@@ -814,6 +831,14 @@
 				7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */,
 			);
 			path = ChatVM;
+			sourceTree = "<group>";
+		};
+		7CBDF4AE272F884800E657D9 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				7CBDF4AF272F886500E657D9 /* PopupModel.swift */,
+			);
+			path = Popup;
 			sourceTree = "<group>";
 		};
 		7CC05E9826B6D90800BE9288 /* Item Models */ = {
@@ -1094,6 +1119,7 @@
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,
 				7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */,
 				7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */,
+				7CB2256B272EB23E0045CE94 /* KMPopupViewController.swift in Sources */,
 				7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
 				7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */,
@@ -1159,6 +1185,7 @@
 				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
 				7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */,
 				7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */,
+				7CB22568272EB0650045CE94 /* PopupManager.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer + Extension.swift in Sources */,
 				7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */,
@@ -1178,6 +1205,7 @@
 				625B0E322741E259003968BA /* ErrorModel.swift in Sources */,
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */,
+				7CBDF4B0272F886500E657D9 /* PopupModel.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
 				7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
@@ -1346,6 +1374,7 @@
 				CURRENT_PROJECT_VERSION = 2.1;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1369,6 +1398,7 @@
 				CURRENT_PROJECT_VERSION = 2.1;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

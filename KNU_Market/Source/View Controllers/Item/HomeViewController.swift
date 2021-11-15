@@ -10,7 +10,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
-    private var viewModel = HomeViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager())
+    private var viewModel = HomeViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager(), popupManager: PopupManager())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,20 +23,10 @@ class HomeViewController: UIViewController {
             name: .getBadgeValue,
             object: nil
         )
-        
+
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
+ 
 }
 
 //MARK: - Methods
@@ -44,7 +34,6 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
-        print("✏️ verified? :\(detectIfVerifiedUser())")
         if !detectIfVerifiedUser() {
             showSimpleBottomAlertWithAction(
                 message: "학생 인증을 마치셔야 사용이 가능해요.👀",
@@ -80,14 +69,7 @@ extension HomeViewController {
 extension HomeViewController: HomeViewModelDelegate {
     
     func didFetchUserProfileInfo() {
-        
-        guard let defaultImage = UIImage(systemName: "checkmark.circle") else { return }
-        
-        SPIndicator.present(
-            title: "\(User.shared.nickname)님",
-            message: "환영합니다 🎉",
-            preset: .custom(UIImage(systemName: "face.smiling")?.withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink, renderingMode: .alwaysOriginal) ?? defaultImage)
-        )
+        UIHelper.presentWelcomePopOver(nickname: User.shared.nickname)
     }
     
     func failedFetchingUserProfileInfo(with error: NetworkError) {
@@ -113,8 +95,19 @@ extension HomeViewController: HomeViewModelDelegate {
         }
     }
     
-    func failedFetchingRoomPIDInfo(with error: NetworkError) {
-        self.showSimpleBottomAlert(with: error.errorDescription)
+    func failedFetchingEnteredRoomInfo(with error: NetworkError) {
+        showSimpleBottomAlert(with: error.errorDescription)
+    }
+    
+    func didFetchLatestPopup(model: PopupModel) {
+        let popupVC = KMPopupViewController(popupManager: PopupManager(), popupUid: model.popupUid, mediaUid: model.mediaUid, landingUrl: model.landingUrl)
+        popupVC.modalPresentationStyle = .overFullScreen
+        popupVC.modalTransitionStyle = .crossDissolve
+        self.present(popupVC, animated: true)
+    }
+    
+    func failedFetchingLatestPopup(with error: NetworkError) {
+        showSimpleBottomAlert(with: error.errorDescription)
     }
     
 }
@@ -238,7 +231,6 @@ extension HomeViewController {
         setBackBarButtonItemTitle()
         setNavigationBarAppearance(to: .white)
         
-        print("✏️ Absolute first launch: \(User.shared.isNotFirstAppLaunch)")
         
         if !User.shared.isNotFirstAppLaunch {
             presentInitialVerificationAlert()

@@ -298,7 +298,8 @@ extension ChatMemberViewController: PanModalPresentable {
     }
     
     var shortFormHeight: PanModalHeight {
-        return .contentHeight(view.bounds.height / 2)
+        return filteredMembers != nil ? .contentHeight(CGFloat(filteredMembers!.count) * 65 + 50) : .contentHeight(view.bounds.height / 2)
+//        return .contentHeight(view.bounds.height / 2)
     }
     
     var longFormHeight: PanModalHeight {

@@ -11,7 +11,6 @@ class ItemTableViewModel {
             if let imageUID = imageUID {
                 imageURL = URL(string: "\(K.API_BASE_URL)media/" + imageUID)
             }
-            
         }
     }
     

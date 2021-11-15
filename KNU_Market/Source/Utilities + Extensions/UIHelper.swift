@@ -1,4 +1,5 @@
 import UIKit
+import SPIndicator
 
 struct UIHelper {
     
@@ -52,9 +53,6 @@ struct UIHelper {
     
     
     
-    
-    
-    
     static func addNavigationBarWithDismissButton(in view: UIView, title: String = "") {
         
         var statusBarHeight: CGFloat = 0
@@ -85,5 +83,15 @@ struct UIHelper {
         naviItem.rightBarButtonItem = stopBarButtonItem
         naviBar.items = [naviItem]
         view.addSubview(naviBar)
+    }
+    
+    static func presentWelcomePopOver(nickname: String) {
+        guard let defaultImage = UIImage(systemName: "checkmark.circle") else { return }
+        
+        SPIndicator.present(
+            title: "\(nickname)님",
+            message: "환영합니다 🎉",
+            preset: .custom(UIImage(systemName: "face.smiling")?.withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink, renderingMode: .alwaysOriginal) ?? defaultImage)
+        )
     }
 }

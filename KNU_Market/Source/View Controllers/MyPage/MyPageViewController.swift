@@ -428,7 +428,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             }
         case 1:
             switch indexPath.row {
-            case 0: pushViewController(with: SendUsMessageViewController(userManager: UserManager()))
+            case 0: pushViewController(with: SendUsMessageViewController(userManager: UserManager(), reactor: SendUsMessageReactor()))
             case 1:
                 let url = URL(string: K.URL.termsAndConditionNotionURL)!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)

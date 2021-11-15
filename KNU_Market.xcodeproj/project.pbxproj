@@ -7,7 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */; };
+		0AC831EE9BD44900B8497550 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66090B72CC5F88412C341C7C /* Pods_KNU_Market.framework */; };
+		625B0E2A2741D9BC003968BA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E292741D9BC003968BA /* Network.swift */; };
+		625B0E2C2741DED7003968BA /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E2B2741DED7003968BA /* ModelType.swift */; };
+		625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E2D2741DF4D003968BA /* NetworkResult.swift */; };
+		625B0E322741E259003968BA /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E312741E259003968BA /* ErrorModel.swift */; };
+		625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E352741EA90003968BA /* RequestLoggingPlugin.swift */; };
+		625B0E382741EAAE003968BA /* AuthPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E372741EAAE003968BA /* AuthPlugin.swift */; };
+		625B0E3B2741F6A8003968BA /* MyPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E3A2741F6A8003968BA /* MyPageService.swift */; };
+		625B0E3D2741F741003968BA /* MyPageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E3C2741F741003968BA /* MyPageAPI.swift */; };
+		625B0E3F2741F75C003968BA /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E3E2741F75C003968BA /* BaseAPI.swift */; };
+		626AC5B227324C1200E907E8 /* CGFloatLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626AC5B127324C1200E907E8 /* CGFloatLiteral.swift */; };
+		626AC5B52732506900E907E8 /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626AC5B42732506900E907E8 /* SnapKit.swift */; };
+		626D66E92742705700CB7F4F /* KMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66E82742705700CB7F4F /* KMButton.swift */; };
+		62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */; };
 		6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */; };
 		7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */; };
 		7C015C9827035B2100089ED8 /* FindIdUsingWebMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C9727035B2100089ED8 /* FindIdUsingWebMailViewController.swift */; };
@@ -148,7 +161,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
+		625B0E292741D9BC003968BA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		625B0E2B2741DED7003968BA /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
+		625B0E2D2741DF4D003968BA /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		625B0E312741E259003968BA /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		625B0E352741EA90003968BA /* RequestLoggingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingPlugin.swift; sourceTree = "<group>"; };
+		625B0E372741EAAE003968BA /* AuthPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPlugin.swift; sourceTree = "<group>"; };
+		625B0E3A2741F6A8003968BA /* MyPageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageService.swift; sourceTree = "<group>"; };
+		625B0E3C2741F741003968BA /* MyPageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageAPI.swift; sourceTree = "<group>"; };
+		625B0E3E2741F75C003968BA /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		626AC5B127324C1200E907E8 /* CGFloatLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatLiteral.swift; sourceTree = "<group>"; };
+		626AC5B42732506900E907E8 /* SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
+		626ACD0ABA4A79DA0AB78160 /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
+		626D66E82742705700CB7F4F /* KMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMButton.swift; sourceTree = "<group>"; };
+		62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageReactor.swift; sourceTree = "<group>"; };
+		66090B72CC5F88412C341C7C /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault Keys.swift"; sourceTree = "<group>"; };
 		7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + UpdateInfo.swift"; sourceTree = "<group>"; };
 		7C015C9727035B2100089ED8 /* FindIdUsingWebMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdUsingWebMailViewController.swift; sourceTree = "<group>"; };
@@ -289,8 +316,7 @@
 		7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTitleLabel.swift; sourceTree = "<group>"; };
 		7CEDBB602702EC970078F5E1 /* KMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTextField.swift; sourceTree = "<group>"; };
 		7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMDetailLabel.swift; sourceTree = "<group>"; };
-		96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
-		CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		840059C54FF47D4EF0D2F149 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,13 +324,67 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */,
+				0AC831EE9BD44900B8497550 /* Pods_KNU_Market.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		625B0E282741D9AB003968BA /* Moya */ = {
+			isa = PBXGroup;
+			children = (
+				625B0E342741EA7B003968BA /* Plugin */,
+				625B0E332741E7BD003968BA /* API */,
+				625B0E292741D9BC003968BA /* Network.swift */,
+				625B0E2D2741DF4D003968BA /* NetworkResult.swift */,
+			);
+			path = Moya;
+			sourceTree = "<group>";
+		};
+		625B0E332741E7BD003968BA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				625B0E3C2741F741003968BA /* MyPageAPI.swift */,
+				625B0E3E2741F75C003968BA /* BaseAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		625B0E342741EA7B003968BA /* Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				625B0E352741EA90003968BA /* RequestLoggingPlugin.swift */,
+				625B0E372741EAAE003968BA /* AuthPlugin.swift */,
+			);
+			path = Plugin;
+			sourceTree = "<group>";
+		};
+		625B0E392741F5BA003968BA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				625B0E3A2741F6A8003968BA /* MyPageService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		626AC5B32732504D00E907E8 /* SnapKit */ = {
+			isa = PBXGroup;
+			children = (
+				626AC5B42732506900E907E8 /* SnapKit.swift */,
+			);
+			path = SnapKit;
+			sourceTree = "<group>";
+		};
+		62C2E44127363D4C00F037B9 /* SendUsMessage */ = {
+			isa = PBXGroup;
+			children = (
+				7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */,
+				62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */,
+			);
+			path = SendUsMessage;
+			sourceTree = "<group>";
+		};
 		7C036AB12696A90500F6C29B /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,9 +416,11 @@
 		7C132BF02653979B00BE5F40 /* Utilities + Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				626AC5B32732504D00E907E8 /* SnapKit */,
 				7CB8DF34264BAB390001CC6D /* Extensions */,
 				7C132BF1265397B200BE5F40 /* ProgressHUD.swift */,
 				7C682CE8271EB02500989139 /* UIHelper.swift */,
+				626AC5B127324C1200E907E8 /* CGFloatLiteral.swift */,
 			);
 			path = "Utilities + Extensions";
 			sourceTree = "<group>";
@@ -489,6 +571,7 @@
 				7CEDBB602702EC970078F5E1 /* KMTextField.swift */,
 				7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */,
 				7CEDBB5C2702E0820078F5E1 /* KMErrorLabel.swift */,
+				626D66E82742705700CB7F4F /* KMButton.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -523,6 +606,7 @@
 		7C922A472717D8BD00295A3F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				625B0E392741F5BA003968BA /* Services */,
 				7C922A5927182A2400295A3F /* Base */,
 				7C922A4A2717D94A00295A3F /* Application */,
 				7CEC1921270182F500C2D671 /* Constants */,
@@ -589,7 +673,7 @@
 				7CA661EF263D4387000E0B7A /* KNU_Market */,
 				7CA661EE263D4387000E0B7A /* Products */,
 				EF6E8F5DA035698264ED872C /* Pods */,
-				B9AC8E9164D1E6F43C975A72 /* Frameworks */,
+				C0143FBE70EA32961506FF0F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -630,6 +714,8 @@
 		7CA6622326413272000E0B7A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				625B0E2B2741DED7003968BA /* ModelType.swift */,
+				625B0E312741E259003968BA /* ErrorModel.swift */,
 				7C6D253C269037750030F9A1 /* Request Models */,
 				7C036AB12696A90500F6C29B /* Response Models */,
 				7C89B2E526FC1D60004109FE /* User Related */,
@@ -640,6 +726,7 @@
 		7CA66228264132DC000E0B7A /* Network Group */ = {
 			isa = PBXGroup;
 			children = (
+				625B0E282741D9AB003968BA /* Moya */,
 				7C7480B926FF08CA000E4666 /* UserManager */,
 				7CB8DF37264BB0300001CC6D /* ItemManager.swift */,
 				7CB8DF39264BB0360001CC6D /* ChatManager.swift */,
@@ -780,7 +867,7 @@
 				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
 				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
 				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
-				7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */,
+				62C2E44127363D4C00F037B9 /* SendUsMessage */,
 				7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */,
 			);
 			path = MyPage;
@@ -829,10 +916,10 @@
 			path = "Empty View";
 			sourceTree = "<group>";
 		};
-		B9AC8E9164D1E6F43C975A72 /* Frameworks */ = {
+		C0143FBE70EA32961506FF0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */,
+				66090B72CC5F88412C341C7C /* Pods_KNU_Market.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -840,8 +927,8 @@
 		EF6E8F5DA035698264ED872C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */,
-				96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */,
+				626ACD0ABA4A79DA0AB78160 /* Pods-KNU_Market.debug.xcconfig */,
+				840059C54FF47D4EF0D2F149 /* Pods-KNU_Market.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -853,11 +940,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CA66201263D4389000E0B7A /* Build configuration list for PBXNativeTarget "KNU_Market" */;
 			buildPhases = (
-				6FBD5E8EDC477FC8E3453DD5 /* [CP] Check Pods Manifest.lock */,
+				D8C0E24D3130DB0ED0EE9569 /* [CP] Check Pods Manifest.lock */,
 				7CA661E9263D4387000E0B7A /* Sources */,
 				7CA661EA263D4387000E0B7A /* Frameworks */,
 				7CA661EB263D4387000E0B7A /* Resources */,
-				C8A89F76B64200F61AF0A87D /* [CP] Embed Pods Frameworks */,
+				9E514A9526A717DF4FD2BDA3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -923,7 +1010,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6FBD5E8EDC477FC8E3453DD5 /* [CP] Check Pods Manifest.lock */ = {
+		9E514A9526A717DF4FD2BDA3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8C0E24D3130DB0ED0EE9569 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -945,23 +1049,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C8A89F76B64200F61AF0A87D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -971,6 +1058,7 @@
 			files = (
 				7CDADA0726BE623100F7F58F /* DateHelper + Extension.swift in Sources */,
 				7C6B50A02652B17F0032328C /* UIImage + Extension.swift in Sources */,
+				625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */,
 				7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */,
 				7C3D986426AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift in Sources */,
 				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
@@ -979,6 +1067,8 @@
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */,
 				7C8E668D26E875A00060F37B /* UIImageView + Extension.swift in Sources */,
+				626AC5B227324C1200E907E8 /* CGFloatLiteral.swift in Sources */,
+				625B0E2C2741DED7003968BA /* ModelType.swift in Sources */,
 				7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */,
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
 				7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */,
@@ -999,6 +1089,8 @@
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
 				7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */,
 				7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */,
+				626AC5B52732506900E907E8 /* SnapKit.swift in Sources */,
+				625B0E2A2741D9BC003968BA /* Network.swift in Sources */,
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,
 				7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */,
 				7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */,
@@ -1020,6 +1112,7 @@
 				7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */,
 				7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */,
 				7C036AB82696BE4C00F6C29B /* Date + Extension.swift in Sources */,
+				625B0E3F2741F75C003968BA /* BaseAPI.swift in Sources */,
 				7C4CA63326F4BF3200F4BCA7 /* IDInputViewController.swift in Sources */,
 				7CC1B59C26D4FC110007F99B /* UIView + Extension.swift in Sources */,
 				7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */,
@@ -1028,9 +1121,11 @@
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
+				626D66E92742705700CB7F4F /* KMButton.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
 				7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */,
+				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
@@ -1043,12 +1138,14 @@
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7CA78FF626CDFC510019B06F /* AlertViewController.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
+				625B0E382741EAAE003968BA /* AuthPlugin.swift in Sources */,
 				7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7C0E2DDF26B7D92800BB37FF /* String + Extension.swift in Sources */,
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
 				7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */,
 				7CCDB1EA26A2BCD30092F28D /* ChatTableViewCell.swift in Sources */,
+				625B0E3D2741F741003968BA /* MyPageAPI.swift in Sources */,
 				7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */,
 				7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */,
@@ -1059,6 +1156,7 @@
 				7C015C9827035B2100089ED8 /* FindIdUsingWebMailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
+				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
 				7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */,
 				7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
@@ -1077,11 +1175,13 @@
 				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,
 				7CA66234264135AA000E0B7A /* HomeViewController.swift in Sources */,
 				7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */,
+				625B0E322741E259003968BA /* ErrorModel.swift in Sources */,
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
 				7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
+				625B0E3B2741F6A8003968BA /* MyPageService.swift in Sources */,
 				7CEDBB5F2702E89F0078F5E1 /* KMTitleLabel.swift in Sources */,
 				7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */,
 				7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */,
@@ -1237,7 +1337,7 @@
 		};
 		7CA66202263D4389000E0B7A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */;
+			baseConfigurationReference = 626ACD0ABA4A79DA0AB78160 /* Pods-KNU_Market.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1260,7 +1360,7 @@
 		};
 		7CA66203263D4389000E0B7A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96BAC897FCA7DC2BD1C84376 /* Pods-KNU_Market.release.xcconfig */;
+			baseConfigurationReference = 840059C54FF47D4EF0D2F149 /* Pods-KNU_Market.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

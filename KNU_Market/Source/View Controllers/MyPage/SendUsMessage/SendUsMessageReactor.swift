@@ -17,14 +17,19 @@ final class SendUsMessageReactor: Reactor {
     
     enum Action {
         case setImage([UIImage])
+        case sendMessage
     }
     
     enum Mutation {
         case updateImage([UIImage])
+        case setLoading(Bool)
     }
     
     struct State {
         var image: [UIImage] = []
+        var title: String = ""
+        var content: String = ""
+        var isLoading: Bool = false
     }
     
     init() {
@@ -35,6 +40,15 @@ final class SendUsMessageReactor: Reactor {
         switch action {
         case let .setImage(images):
             return Observable.just(Mutation.updateImage(images))
+            
+        case .sendMessage:
+            return Observable.merge([
+                Observable.just(Mutation.setLoading(true)),
+                
+                
+                
+                Observable.just(Mutation.setLoading(false))
+            ])
         }
     }
     
@@ -46,6 +60,9 @@ final class SendUsMessageReactor: Reactor {
             images.forEach {
                 state.image.append($0)
             }
+            
+        case let .setLoading(isLoading):
+            state.isLoading = isLoading
         }
         
         return state

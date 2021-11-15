@@ -14,6 +14,9 @@
 		625B0E322741E259003968BA /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E312741E259003968BA /* ErrorModel.swift */; };
 		625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E352741EA90003968BA /* RequestLoggingPlugin.swift */; };
 		625B0E382741EAAE003968BA /* AuthPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E372741EAAE003968BA /* AuthPlugin.swift */; };
+		625B0E3B2741F6A8003968BA /* MyPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E3A2741F6A8003968BA /* MyPageService.swift */; };
+		625B0E3D2741F741003968BA /* MyPageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E3C2741F741003968BA /* MyPageAPI.swift */; };
+		625B0E3F2741F75C003968BA /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E3E2741F75C003968BA /* BaseAPI.swift */; };
 		626AC5B227324C1200E907E8 /* CGFloatLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626AC5B127324C1200E907E8 /* CGFloatLiteral.swift */; };
 		626AC5B52732506900E907E8 /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626AC5B42732506900E907E8 /* SnapKit.swift */; };
 		62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */; };
@@ -164,6 +167,9 @@
 		625B0E312741E259003968BA /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		625B0E352741EA90003968BA /* RequestLoggingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingPlugin.swift; sourceTree = "<group>"; };
 		625B0E372741EAAE003968BA /* AuthPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPlugin.swift; sourceTree = "<group>"; };
+		625B0E3A2741F6A8003968BA /* MyPageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageService.swift; sourceTree = "<group>"; };
+		625B0E3C2741F741003968BA /* MyPageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageAPI.swift; sourceTree = "<group>"; };
+		625B0E3E2741F75C003968BA /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		626AC5B127324C1200E907E8 /* CGFloatLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatLiteral.swift; sourceTree = "<group>"; };
 		626AC5B42732506900E907E8 /* SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
 		62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageReactor.swift; sourceTree = "<group>"; };
@@ -337,6 +343,8 @@
 		625B0E332741E7BD003968BA /* API */ = {
 			isa = PBXGroup;
 			children = (
+				625B0E3C2741F741003968BA /* MyPageAPI.swift */,
+				625B0E3E2741F75C003968BA /* BaseAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -348,6 +356,14 @@
 				625B0E372741EAAE003968BA /* AuthPlugin.swift */,
 			);
 			path = Plugin;
+			sourceTree = "<group>";
+		};
+		625B0E392741F5BA003968BA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				625B0E3A2741F6A8003968BA /* MyPageService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		626AC5B32732504D00E907E8 /* SnapKit */ = {
@@ -587,6 +603,7 @@
 		7C922A472717D8BD00295A3F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				625B0E392741F5BA003968BA /* Services */,
 				7C922A5927182A2400295A3F /* Base */,
 				7C922A4A2717D94A00295A3F /* Application */,
 				7CEC1921270182F500C2D671 /* Constants */,
@@ -1092,6 +1109,7 @@
 				7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */,
 				7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */,
 				7C036AB82696BE4C00F6C29B /* Date + Extension.swift in Sources */,
+				625B0E3F2741F75C003968BA /* BaseAPI.swift in Sources */,
 				7C4CA63326F4BF3200F4BCA7 /* IDInputViewController.swift in Sources */,
 				7CC1B59C26D4FC110007F99B /* UIView + Extension.swift in Sources */,
 				7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */,
@@ -1123,6 +1141,7 @@
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
 				7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */,
 				7CCDB1EA26A2BCD30092F28D /* ChatTableViewCell.swift in Sources */,
+				625B0E3D2741F741003968BA /* MyPageAPI.swift in Sources */,
 				7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */,
 				7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */,
@@ -1158,6 +1177,7 @@
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,
 				7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
+				625B0E3B2741F6A8003968BA /* MyPageService.swift in Sources */,
 				7CEDBB5F2702E89F0078F5E1 /* KMTitleLabel.swift in Sources */,
 				7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */,
 				7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */,

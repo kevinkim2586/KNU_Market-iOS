@@ -49,6 +49,8 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         $0.numberOfLines = 2
     }
     
+    let barButton = UIBarButtonItem(title: "내역", style: .plain, target: nil, action: nil)
+    
     let titleLabel = UILabel().then {
         $0.text = "문의 및 건의 내용"
         $0.font = Fonts.tintFont
@@ -143,6 +145,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         self.view.addSubview(self.firstImage)
         self.view.addSubview(self.secondImage)
         self.view.addSubview(self.buttomButton)
+        self.navigationItem.rightBarButtonItem = self.barButton
     }
     
     override func setupConstraints() {
@@ -238,6 +241,12 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         self.buttomButton.rx.tap.asObservable()
             .map { Reactor.Action.sendMessage }
             .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        self.barButton.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.pushViewController(InquiryListViewController(), animated: true)
+            })
             .disposed(by: disposeBag)
         
         reactor.state.map { $0.image }.asObservable()

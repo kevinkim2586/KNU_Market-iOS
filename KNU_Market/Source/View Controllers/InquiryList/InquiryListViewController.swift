@@ -131,9 +131,9 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
             .validate(statusCode: 200..<300)
             .responseJSON{res in
                 do {
-                    let model = try JSONDecoder().decode([InquiryModel].self, from: res.data!)
+                    let model = try JSONDecoder().decode([InquiryListModel].self, from: res.data!)
                     self.inquiryModel.removeAll()
-                    self.inquiryModel.append(model)
+                    self.inquiryModel.append(contentsOf: model)
                     self.inquiryList.reloadData()
                 } catch {
                     print(error)

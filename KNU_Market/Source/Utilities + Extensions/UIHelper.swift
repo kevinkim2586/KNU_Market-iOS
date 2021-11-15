@@ -18,6 +18,7 @@ struct UIHelper {
         return mainTabBarController
     }
     
+    // 공구글 NavController 생성
     private static func createPostNavigationController() -> UINavigationController {
         let itemListSB = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
         guard let itemListVC = itemListSB.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { fatalError() }
@@ -29,6 +30,7 @@ struct UIHelper {
         return PostNavigationController
     }
     
+    // 채팅 NavController 생성
     private static func createChatNavigationController() -> UINavigationController {
         let chatListVC = ChatListViewController(
             viewModel: ChatListViewModel(chatManager: ChatManager(), itemManager: ItemManager())
@@ -43,6 +45,7 @@ struct UIHelper {
         return ChatNavigationController
     }
     
+    // 마이페이지 NavController 생성
     private static func createMyPageNavigationController() -> UINavigationController {
         
         let myPageVC = MyPageViewController(userManager: UserManager())

@@ -285,10 +285,8 @@ extension ItemViewController: ItemViewModelDelegate {
     }
     
     func didEnterChat(isFirstEntrance: Bool) {
-        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-        guard let vc = storyboard.instantiateViewController(
-            identifier: K.StoryboardID.chatVC
-        ) as? ChatViewController else { return }
+        
+        let vc = ChatViewController()
         
         vc.roomUID = pageID
         vc.chatRoomTitle = viewModel.model?.title ?? ""

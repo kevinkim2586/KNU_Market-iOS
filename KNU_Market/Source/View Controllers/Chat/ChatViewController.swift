@@ -110,18 +110,6 @@ class ChatViewController: MessagesViewController {
         presentPanModal(chatMemberListVC)
     }
     
-//    @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
-//
-//        viewModel.getRoomInfo()
-//
-//        let chatMemberListVC = ChatMemberListViewController(
-//            chatManager: ChatManager(),
-//            roomInfo: viewModel.roomInfo,
-//            postUploaderUid: viewModel.postUploaderUID
-//        )
-//        presentPanModal(chatMemberListVC)
-//    }
-    
     @objc func pressedRefreshButton() {
         viewModel.resetAndReconnect()
     }

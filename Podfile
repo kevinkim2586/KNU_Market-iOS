@@ -50,6 +50,7 @@ target 'KNU_Market' do
   pod 'RxViewController'
   pod 'RxAnimated'
   pod 'RxGesture'
+  pod 'RxKeyboard'
 
   # Network
   pod 'Starscream', '~> 4.0.0'

@@ -166,7 +166,7 @@ extension UIViewController {
         let alertVC = PMAlertController(
             title: "경북대생 인증하기",
             description: "경북대 웹메일 인증 외에도\n학생증 인증이 추가되었어요!\n인증 가능한 방법\n- 경북대 웹메일 인증\n- 모바일 학생증 인증",
-            textsToChangeColor: ["학생증 인증이 추가","인증 가능한 방법"],
+//            textsToChangeColor: ["학생증 인증이 추가","인증 가능한 방법"],
             image: nil,
             style: .alert
         )
@@ -190,7 +190,7 @@ extension UIViewController {
         let alertVC = PMAlertController(
             title: nil,
             description: message + "\n1. 공구모집 글 개설 불가\n2. 공구 채팅방에 참가 불가",
-            textsToChangeColor: [message],
+//            textsToChangeColor: [message],
             image: nil,
             style: .alert
         )

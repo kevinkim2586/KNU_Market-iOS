@@ -10,6 +10,7 @@ import Foundation
 import ReactorKit
 import RxRelay
 import UIKit
+import Moya
 
 final class SendUsMessageReactor: Reactor {
     
@@ -18,11 +19,15 @@ final class SendUsMessageReactor: Reactor {
     enum Action {
         case setImage([UIImage])
         case sendMessage
+        case updateTitle(String)
+        case updateContent(String)
     }
     
     enum Mutation {
         case updateImage([UIImage])
         case setLoading(Bool)
+        case setTitle(String)
+        case setContent(String)
     }
     
     struct State {
@@ -32,8 +37,11 @@ final class SendUsMessageReactor: Reactor {
         var isLoading: Bool = false
     }
     
+    fileprivate let myPageService: MyPageServiceType
     init() {
         self.initialState = State()
+        
+        self.myPageService = MyPageService(network: Network<MyPageAPI>(plugins: [NetworkLoggerPlugin(), AuthPlugin()]))
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -41,11 +49,31 @@ final class SendUsMessageReactor: Reactor {
         case let .setImage(images):
             return Observable.just(Mutation.updateImage(images))
             
+        case let .updateTitle(title):
+            return Observable.just(Mutation.setTitle(title))
+            
+        case let .updateContent(content):
+            return Observable.just(Mutation.setContent(content))
+            
         case .sendMessage:
+            var data: [Data] = []
+            
+            self.currentState.image.forEach {
+                data.append($0.jpegData(compressionQuality: 0.6)!)
+            }
+            
             return Observable.merge([
                 Observable.just(Mutation.setLoading(true)),
                 
-                
+                self.myPageService.writeReport(self.currentState.title, self.currentState.content, data.first, data.last)
+                    .map { result in
+                        switch result {
+                        case .success:
+                            print("success")
+                        case let .error(error):
+                            print(error)
+                        }
+                    }.asObservable().flatMap { _ in Observable.empty() },
                 
                 Observable.just(Mutation.setLoading(false))
             ])
@@ -60,6 +88,12 @@ final class SendUsMessageReactor: Reactor {
             images.forEach {
                 state.image.append($0)
             }
+            
+        case let .setTitle(title):
+            state.title = title
+            
+        case let .setContent(content):
+            state.content = content
             
         case let .setLoading(isLoading):
             state.isLoading = isLoading

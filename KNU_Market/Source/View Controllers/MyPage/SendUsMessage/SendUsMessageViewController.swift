@@ -3,7 +3,7 @@ import UIKit
 import Then
 import ReactorKit
 import RxGesture
-import SnapKit
+import RxKeyboard
 import UITextView_Placeholder
 import SnapKit
 import BSImagePicker
@@ -99,6 +99,11 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         $0.clipsToBounds = true
     }
     
+    let buttomButton = KMButton(type: .system).then {
+        $0.setTitle("전송하기", for: .normal)
+        $0.setTitle("작성중", for: .disabled)
+    }
+    
     //MARK: - Initialization
     
     init(userManager: UserManager, reactor: Reactor) {
@@ -120,6 +125,8 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIBind()
     }
     
     //MARK: - UI Setup
@@ -135,6 +142,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         self.view.addSubview(self.selectView)
         self.view.addSubview(self.firstImage)
         self.view.addSubview(self.secondImage)
+        self.view.addSubview(self.buttomButton)
     }
     
     override func setupConstraints() {
@@ -190,6 +198,12 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             $0.left.equalTo(self.firstImage.snp.right).offset(10)
             $0.height.width.equalTo(65)
         }
+        
+        self.buttomButton.snp.makeConstraints {
+            $0.left.right.equalToSafeArea(self.view)
+            $0.height.equalTo(60)
+            $0.bottom.equalToSafeArea(self.view)
+        }
     }
     
     override func setupStyle() {
@@ -205,11 +219,26 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     
     // MARK: - Configuring
     func bind(reactor: SendUsMessageReactor) {
+        self.titleTextField.rx.text.orEmpty.asObservable()
+            .map { Reactor.Action.updateTitle($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        self.textView.rx.text.orEmpty.asObservable()
+            .map { Reactor.Action.updateContent($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         self.selectView.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
                 self?.pickImage(currentImage: reactor.currentState.image.count)
             }).disposed(by: disposeBag)
+        
+        self.buttomButton.rx.tap.asObservable()
+            .map { Reactor.Action.sendMessage }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
         reactor.state.map { $0.image }.asObservable()
             .subscribe(onNext: { [weak self] in
@@ -285,8 +314,25 @@ private extension SendUsMessageViewController {
                 .bind(to: self.reactor!.action )
                 .disposed(by: self.disposeBag)
         })
-        
-        
+    }
+    
+    func UIBind() {
+        RxKeyboard.instance.visibleHeight
+            .distinctUntilChanged()
+            .drive(onNext: { [weak self] height in
+                guard let self = self else { return }
+                
+                self.buttomButton.snp.updateConstraints {
+                    $0.bottom.equalToSafeArea(self.view).offset(-height/2)
+                }
+
+                // animation
+                UIView.animate(withDuration: 0.1) {
+                    self.view.layoutIfNeeded()
+                }
+
+            })
+            .disposed(by: disposeBag)
     }
 }
 

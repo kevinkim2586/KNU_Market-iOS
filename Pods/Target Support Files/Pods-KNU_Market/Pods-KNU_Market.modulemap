@@ -1,6 +1,0 @@
-framework module Pods_KNU_Market {
-  umbrella header "Pods-KNU_Market-umbrella.h"
-
-  export *
-  module * { export * }
-}

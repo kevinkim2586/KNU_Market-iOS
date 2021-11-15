@@ -8,8 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		5E6905051027E70563E652B2 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE1D0B088C71E5A52F0D900 /* Pods_KNU_Market.framework */; };
+		625B0E2A2741D9BC003968BA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E292741D9BC003968BA /* Network.swift */; };
+		625B0E2C2741DED7003968BA /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E2B2741DED7003968BA /* ModelType.swift */; };
+		625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E2D2741DF4D003968BA /* NetworkResult.swift */; };
+		625B0E322741E259003968BA /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E312741E259003968BA /* ErrorModel.swift */; };
+		625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E352741EA90003968BA /* RequestLoggingPlugin.swift */; };
+		625B0E382741EAAE003968BA /* AuthPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E372741EAAE003968BA /* AuthPlugin.swift */; };
 		626AC5B227324C1200E907E8 /* CGFloatLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626AC5B127324C1200E907E8 /* CGFloatLiteral.swift */; };
 		626AC5B52732506900E907E8 /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626AC5B42732506900E907E8 /* SnapKit.swift */; };
+		62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */; };
 		6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */; };
 		7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */; };
 		7C015C9827035B2100089ED8 /* FindIdUsingWebMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C9727035B2100089ED8 /* FindIdUsingWebMailViewController.swift */; };
@@ -151,8 +158,15 @@
 
 /* Begin PBXFileReference section */
 		0CF9625A9653E09453A9580D /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
+		625B0E292741D9BC003968BA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		625B0E2B2741DED7003968BA /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
+		625B0E2D2741DF4D003968BA /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		625B0E312741E259003968BA /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		625B0E352741EA90003968BA /* RequestLoggingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingPlugin.swift; sourceTree = "<group>"; };
+		625B0E372741EAAE003968BA /* AuthPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPlugin.swift; sourceTree = "<group>"; };
 		626AC5B127324C1200E907E8 /* CGFloatLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatLiteral.swift; sourceTree = "<group>"; };
 		626AC5B42732506900E907E8 /* SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
+		62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageReactor.swift; sourceTree = "<group>"; };
 		6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault Keys.swift"; sourceTree = "<group>"; };
 		7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + UpdateInfo.swift"; sourceTree = "<group>"; };
 		7C015C9727035B2100089ED8 /* FindIdUsingWebMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdUsingWebMailViewController.swift; sourceTree = "<group>"; };
@@ -309,12 +323,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		625B0E282741D9AB003968BA /* Moya */ = {
+			isa = PBXGroup;
+			children = (
+				625B0E342741EA7B003968BA /* Plugin */,
+				625B0E332741E7BD003968BA /* API */,
+				625B0E292741D9BC003968BA /* Network.swift */,
+				625B0E2D2741DF4D003968BA /* NetworkResult.swift */,
+			);
+			path = Moya;
+			sourceTree = "<group>";
+		};
+		625B0E332741E7BD003968BA /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		625B0E342741EA7B003968BA /* Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				625B0E352741EA90003968BA /* RequestLoggingPlugin.swift */,
+				625B0E372741EAAE003968BA /* AuthPlugin.swift */,
+			);
+			path = Plugin;
+			sourceTree = "<group>";
+		};
 		626AC5B32732504D00E907E8 /* SnapKit */ = {
 			isa = PBXGroup;
 			children = (
 				626AC5B42732506900E907E8 /* SnapKit.swift */,
 			);
 			path = SnapKit;
+			sourceTree = "<group>";
+		};
+		62C2E44127363D4C00F037B9 /* SendUsMessage */ = {
+			isa = PBXGroup;
+			children = (
+				7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */,
+				62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */,
+			);
+			path = SendUsMessage;
 			sourceTree = "<group>";
 		};
 		7C036AB12696A90500F6C29B /* Response Models */ = {
@@ -644,6 +694,8 @@
 		7CA6622326413272000E0B7A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				625B0E2B2741DED7003968BA /* ModelType.swift */,
+				625B0E312741E259003968BA /* ErrorModel.swift */,
 				7C6D253C269037750030F9A1 /* Request Models */,
 				7C036AB12696A90500F6C29B /* Response Models */,
 				7C89B2E526FC1D60004109FE /* User Related */,
@@ -654,6 +706,7 @@
 		7CA66228264132DC000E0B7A /* Network Group */ = {
 			isa = PBXGroup;
 			children = (
+				625B0E282741D9AB003968BA /* Moya */,
 				7C7480B926FF08CA000E4666 /* UserManager */,
 				7CB8DF37264BB0300001CC6D /* ItemManager.swift */,
 				7CB8DF39264BB0360001CC6D /* ChatManager.swift */,
@@ -794,7 +847,7 @@
 				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
 				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
 				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
-				7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */,
+				62C2E44127363D4C00F037B9 /* SendUsMessage */,
 				7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */,
 			);
 			path = MyPage;
@@ -985,6 +1038,7 @@
 			files = (
 				7CDADA0726BE623100F7F58F /* DateHelper + Extension.swift in Sources */,
 				7C6B50A02652B17F0032328C /* UIImage + Extension.swift in Sources */,
+				625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */,
 				7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */,
 				7C3D986426AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift in Sources */,
 				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
@@ -994,6 +1048,7 @@
 				7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */,
 				7C8E668D26E875A00060F37B /* UIImageView + Extension.swift in Sources */,
 				626AC5B227324C1200E907E8 /* CGFloatLiteral.swift in Sources */,
+				625B0E2C2741DED7003968BA /* ModelType.swift in Sources */,
 				7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */,
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
 				7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */,
@@ -1015,6 +1070,7 @@
 				7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */,
 				7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */,
 				626AC5B52732506900E907E8 /* SnapKit.swift in Sources */,
+				625B0E2A2741D9BC003968BA /* Network.swift in Sources */,
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,
 				7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */,
 				7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */,
@@ -1047,6 +1103,7 @@
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
 				7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */,
+				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
@@ -1059,6 +1116,7 @@
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7CA78FF626CDFC510019B06F /* AlertViewController.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
+				625B0E382741EAAE003968BA /* AuthPlugin.swift in Sources */,
 				7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7C0E2DDF26B7D92800BB37FF /* String + Extension.swift in Sources */,
@@ -1075,6 +1133,7 @@
 				7C015C9827035B2100089ED8 /* FindIdUsingWebMailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
+				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
 				7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */,
 				7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
@@ -1093,6 +1152,7 @@
 				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,
 				7CA66234264135AA000E0B7A /* HomeViewController.swift in Sources */,
 				7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */,
+				625B0E322741E259003968BA /* ErrorModel.swift in Sources */,
 				7C5E21292646558700E98FE5 /* ItemViewModel.swift in Sources */,
 				7C3D986026AE89B5005DFAE0 /* ChatMemberTableViewCell.swift in Sources */,
 				7C5E2127264645B300E98FE5 /* ItemViewController.swift in Sources */,

@@ -70,6 +70,10 @@
 		7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */; };
 		7C83EE4A274121FF00CF1680 /* ChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE49274121FF00CF1680 /* ChatListTableViewCell.swift */; };
 		7C83EE4C2742121600CF1680 /* SearchPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE4B2742121500CF1680 /* SearchPostsViewController.swift */; };
+		7C83EE4F274226FE00CF1680 /* KMPostButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE4E274226FE00CF1680 /* KMPostButtonView.swift */; };
+		7C83EE5127422E3A00CF1680 /* KMPostControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE5027422E3A00CF1680 /* KMPostControlButton.swift */; };
+		7C83EE532742378000CF1680 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE522742378000CF1680 /* PostViewController.swift */; };
+		7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE542742407B00CF1680 /* PostHeaderView.swift */; };
 		7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */; };
 		7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */; };
 		7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8414812705692500FFA56B /* FindIdOptions.swift */; };
@@ -209,6 +213,10 @@
 		7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberListViewController.swift; sourceTree = "<group>"; };
 		7C83EE49274121FF00CF1680 /* ChatListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTableViewCell.swift; sourceTree = "<group>"; };
 		7C83EE4B2742121500CF1680 /* SearchPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostsViewController.swift; sourceTree = "<group>"; };
+		7C83EE4E274226FE00CF1680 /* KMPostButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPostButtonView.swift; sourceTree = "<group>"; };
+		7C83EE5027422E3A00CF1680 /* KMPostControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPostControlButton.swift; sourceTree = "<group>"; };
+		7C83EE522742378000CF1680 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		7C83EE542742407B00CF1680 /* PostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderView.swift; sourceTree = "<group>"; };
 		7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserInfoViewModel.swift; sourceTree = "<group>"; };
 		7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + FindUserInfo.swift"; sourceTree = "<group>"; };
 		7C8414812705692500FFA56B /* FindIdOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdOptions.swift; sourceTree = "<group>"; };
@@ -474,6 +482,7 @@
 		7C79E11026E0C27B0004508A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C83EE4D2742267700CF1680 /* Post View */,
 				7CEDBB64270307D50078F5E1 /* Empty View */,
 				7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */,
 				7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */,
@@ -491,6 +500,16 @@
 				7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */,
 			);
 			path = "LaunchScreen Assets";
+			sourceTree = "<group>";
+		};
+		7C83EE4D2742267700CF1680 /* Post View */ = {
+			isa = PBXGroup;
+			children = (
+				7C83EE4E274226FE00CF1680 /* KMPostButtonView.swift */,
+				7C83EE5027422E3A00CF1680 /* KMPostControlButton.swift */,
+				7C83EE542742407B00CF1680 /* PostHeaderView.swift */,
+			);
+			path = "Post View";
 			sourceTree = "<group>";
 		};
 		7C84147C270556BC00FFA56B /* FindUserInfoVM */ = {
@@ -760,6 +779,7 @@
 				7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */,
 				7C5E2126264645B300E98FE5 /* ItemViewController.swift */,
 				7C83EE4B2742121500CF1680 /* SearchPostsViewController.swift */,
+				7C83EE522742378000CF1680 /* PostViewController.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -988,6 +1008,7 @@
 				7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */,
 				7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */,
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,
+				7C83EE5127422E3A00CF1680 /* KMPostControlButton.swift in Sources */,
 				7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */,
 				7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */,
 				7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */,
@@ -1033,6 +1054,7 @@
 				7CA78FF626CDFC510019B06F /* AlertViewController.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
 				7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */,
+				7C83EE4F274226FE00CF1680 /* KMPostButtonView.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7C0E2DDF26B7D92800BB37FF /* String + Extension.swift in Sources */,
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
@@ -1043,6 +1065,7 @@
 				7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */,
 				7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */,
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
+				7C83EE532742378000CF1680 /* PostViewController.swift in Sources */,
 				7C015C9827035B2100089ED8 /* FindIdUsingWebMailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
@@ -1052,6 +1075,7 @@
 				7C3D541F26CA722B00AE3E55 /* CALayer + Extension.swift in Sources */,
 				7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* ValidationError.swift in Sources */,
+				7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,
 				7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */,

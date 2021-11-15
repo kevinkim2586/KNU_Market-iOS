@@ -44,21 +44,25 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
-        print("✏️ verified? :\(detectIfVerifiedUser())")
-        if !detectIfVerifiedUser() {
-            showSimpleBottomAlertWithAction(
-                message: "학생 인증을 마치셔야 사용이 가능해요.👀",
-                buttonTitle: "인증하러 가기"
-            ) {
-                self.presentVerifyOptionVC()
-            }
-            return
-        }
-        guard let uploadVC = storyboard?.instantiateViewController(
-            identifier: K.StoryboardID.uploadItemVC
-        ) as? UploadItemViewController else { return }
-        uploadVC.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(uploadVC, animated: true)
+        
+        let vc = PostViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+
+//        if !detectIfVerifiedUser() {
+//            showSimpleBottomAlertWithAction(
+//                message: "학생 인증을 마치셔야 사용이 가능해요.👀",
+//                buttonTitle: "인증하러 가기"
+//            ) {
+//                self.presentVerifyOptionVC()
+//            }
+//            return
+//        }
+//        guard let uploadVC = storyboard?.instantiateViewController(
+//            identifier: K.StoryboardID.uploadItemVC
+//        ) as? UploadItemViewController else { return }
+//        uploadVC.hidesBottomBarWhenPushed = true
+//        navigationController?.pushViewController(uploadVC, animated: true)
     }
     
     @IBAction func pressedSearchButton(_ sender: UIBarButtonItem) {

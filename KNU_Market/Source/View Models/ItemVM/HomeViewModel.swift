@@ -75,7 +75,9 @@ class HomeViewModel {
                 self.delegate?.didFetchItemList()
                 
             case .failure(let error):
-                let errorMessage = error == .E601 ? "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!" : "오류가 발생했습니다!\n잠시 후 다시 시도해주세요."
+                let errorMessage = error == .E601
+                ? "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!"
+                : "오류가 발생했습니다!\n잠시 후 다시 시도해주세요."
                 self.delegate?.failedFetchingItemList(errorMessage: errorMessage, error: error)
             }
         }

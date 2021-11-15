@@ -1,0 +1,159 @@
+import Foundation
+import SnapKit
+import UIKit
+
+protocol KMPostButtonViewDelegate: AnyObject {
+    func didPressBackButton()
+    func didPressGatheringStatusButton()
+    func didPresseTrashButton()
+    func didPressMenuButton()
+}
+
+class KMPostButtonView: UIView {
+    
+    //MARK: - Properties
+
+    weak var delegate: KMPostButtonViewDelegate?
+    
+    //MARK: - Constants
+    
+    //MARK: - UI
+    
+    // 뒤로가기 버튼
+    lazy var backButton: KMPostControlButton = {
+        let button = KMPostControlButton(buttonImageSystemName: "arrow.left")
+        button.addTarget(
+            self,
+            action: #selector(pressedBackButton),
+            for: .touchUpInside
+        )
+        return button
+    }()
+    
+    // gatheringStatusButton 이 들어갈 UIView
+    let gatheringStatusView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGray
+        view.layer.cornerRadius = KMPostControlButton.buttonSize / 2
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 2, height: 2)
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 2
+        return view
+    }()
+    
+    // 모집 중, 모집완료 설정 버튼
+    lazy var gatheringStatusButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(
+            self,
+            action: #selector(pressedGatheringStatusButton),
+            for: .touchUpInside
+        )
+        button.setTitle("모집 완료 ⌵", for: .normal)
+        button.titleLabel?.textColor = UIColor.white
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        return button
+    }()
+    
+    // 공구 삭제 버튼
+    lazy var trashButton: KMPostControlButton = {
+        let button = KMPostControlButton(buttonImageSystemName: "trash")
+        button.addTarget(
+            self,
+            action: #selector(pressedTrashButton),
+            for: .touchUpInside
+        )
+        return button
+    }()
+    
+    // 더보기 버튼
+    lazy var menuButton: KMPostControlButton = {
+        let button = KMPostControlButton(buttonImageSystemName: "ellipsis")
+        button.addTarget(
+            self,
+            action: #selector(pressedMenuButton),
+            for: .touchUpInside
+        )
+        return button
+    }()
+    
+    //MARK: - Initialization
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+        setupLayout()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
+    private func configure() {
+        backgroundColor = .clear
+    }
+    
+    //MARK: - UI Setup
+    
+    private func setupLayout() {
+        
+        addSubview(backButton)
+        addSubview(gatheringStatusView)
+        gatheringStatusView.addSubview(gatheringStatusButton)
+        addSubview(trashButton)
+        addSubview(menuButton)
+    }
+    
+    private func setupConstraints() {
+     
+        backButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(10)
+            $0.left.equalToSuperview().offset(15)
+        }
+        
+        menuButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(10)
+            $0.right.equalToSuperview().offset(-15)
+        }
+        
+        trashButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(10)
+            $0.right.equalTo(menuButton.snp.left).offset(-20)
+        }
+        
+        gatheringStatusView.snp.makeConstraints {
+            $0.width.equalTo(100)
+            $0.height.equalTo(35)
+            $0.right.equalTo(trashButton.snp.left).offset(-20)
+            $0.top.equalToSuperview().offset(10)
+        }
+        
+        gatheringStatusButton.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+}
+
+//MARK: - Target Methods
+
+extension KMPostButtonView {
+    
+    @objc private func pressedBackButton() {
+        delegate?.didPressBackButton()
+    }
+    
+    @objc private func pressedGatheringStatusButton() {
+        delegate?.didPressGatheringStatusButton()
+    }
+    
+    @objc private func pressedTrashButton() {
+        delegate?.didPresseTrashButton()
+    }
+    
+    @objc private func pressedMenuButton() {
+        delegate?.didPressMenuButton()
+    }
+    
+}

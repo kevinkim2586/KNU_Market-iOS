@@ -7,6 +7,10 @@ protocol SearchPostViewModelDelegate: AnyObject {
 
 class SearchPostViewModel {
     
+    //MARK: - Properties
+    
+    private var itemManager: ItemManager
+    
     weak var delegate: SearchPostViewModelDelegate?
     
     var itemList: [ItemListModel] = [ItemListModel]()
@@ -17,13 +21,21 @@ class SearchPostViewModel {
     
     var searchKeyword: String?
     
+    //MARK: - Initialization
+    
+    init(itemManager: ItemManager) {
+        self.itemManager = itemManager
+    }
+    
+    //MARK: - Methods
+    
     func fetchSearchResults() {
         
         isFetchingData = true
         
         guard let keyword = self.searchKeyword else { return }
         
-        ItemManager.shared.fetchSearchResults(
+        itemManager.fetchSearchResults(
             at: index,
             keyword: keyword
         ) { [weak self] result in

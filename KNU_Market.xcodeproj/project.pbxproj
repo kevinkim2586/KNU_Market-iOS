@@ -69,6 +69,7 @@
 		7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */; };
 		7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */; };
 		7C83EE4A274121FF00CF1680 /* ChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE49274121FF00CF1680 /* ChatListTableViewCell.swift */; };
+		7C83EE4C2742121600CF1680 /* SearchPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE4B2742121500CF1680 /* SearchPostsViewController.swift */; };
 		7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */; };
 		7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */; };
 		7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8414812705692500FFA56B /* FindIdOptions.swift */; };
@@ -128,7 +129,6 @@
 		7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */; };
 		7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */; };
 		7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */; };
-		7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */; };
 		7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */; };
 		7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */; };
 		7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */; };
@@ -208,6 +208,7 @@
 		7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembersTableViewCell.swift; sourceTree = "<group>"; };
 		7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberListViewController.swift; sourceTree = "<group>"; };
 		7C83EE49274121FF00CF1680 /* ChatListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTableViewCell.swift; sourceTree = "<group>"; };
+		7C83EE4B2742121500CF1680 /* SearchPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostsViewController.swift; sourceTree = "<group>"; };
 		7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserInfoViewModel.swift; sourceTree = "<group>"; };
 		7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + FindUserInfo.swift"; sourceTree = "<group>"; };
 		7C8414812705692500FFA56B /* FindIdOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdOptions.swift; sourceTree = "<group>"; };
@@ -269,7 +270,6 @@
 		7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDGuideViewController.swift; sourceTree = "<group>"; };
 		7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureStudentIDViewController.swift; sourceTree = "<group>"; };
 		7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModel.swift; sourceTree = "<group>"; };
-		7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewController.swift; sourceTree = "<group>"; };
 		7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
 		7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
@@ -759,7 +759,7 @@
 				7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */,
 				7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */,
 				7C5E2126264645B300E98FE5 /* ItemViewController.swift */,
-				7CCDB1E726A2B9AE0092F28D /* SearchPostViewController.swift */,
+				7C83EE4B2742121500CF1680 /* SearchPostsViewController.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -1038,7 +1038,6 @@
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
 				7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */,
-				7CCDB1E826A2B9AE0092F28D /* SearchPostViewController.swift in Sources */,
 				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,
 				7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */,
 				7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */,
@@ -1059,6 +1058,7 @@
 				7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */,
 				7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */,
 				7CBFDA7A274005DF000C8C8A /* PostCellViewModel.swift in Sources */,
+				7C83EE4C2742121600CF1680 /* SearchPostsViewController.swift in Sources */,
 				7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */,
 				7C833686266208210032308D /* Interceptor.swift in Sources */,
 				7C436B5826820E5200943069 /* ReportManager.swift in Sources */,

@@ -63,9 +63,15 @@ extension HomeViewController {
     
     @IBAction func pressedSearchButton(_ sender: UIBarButtonItem) {
         
-        let searchVC = storyboard?.instantiateViewController(
-            identifier: K.StoryboardID.searchPostVC
-        ) as! SearchPostViewController
+//        let searchVC = storyboard?.instantiateViewController(
+//            identifier: K.StoryboardID.searchPostVC
+//        ) as! SearchPostViewController
+        
+        let searchVC = SearchPostsViewController(
+            viewModel: SearchPostViewModel(itemManager: ItemManager())
+        )
+        searchVC.hidesBottomBarWhenPushed = true
+        
         navigationController?.pushViewController(searchVC, animated: true)
     }
     

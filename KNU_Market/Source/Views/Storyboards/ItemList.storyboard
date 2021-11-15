@@ -394,50 +394,6 @@
             </objects>
             <point key="canvasLocation" x="6979.7101449275369" y="-719.19642857142856"/>
         </scene>
-        <!--Search Post View Controller-->
-        <scene sceneID="l8L-1q-BEG">
-            <objects>
-                <viewController storyboardIdentifier="SearchPostViewController" title="공동구매 글 검색" hidesBottomBarWhenPushed="YES" id="wk6-z2-Neg" userLabel="Search Post View Controller" customClass="SearchPostViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="lSa-8B-eVL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q4S-Ux-Edq">
-                                <rect key="frame" x="0.0" y="95" width="414" height="801"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="7GM-6n-92m">
-                                <rect key="frame" x="10" y="44" width="394" height="51"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="F2a-3m-agv"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="7GM-6n-92m" firstAttribute="top" secondItem="F2a-3m-agv" secondAttribute="top" id="2CN-pB-l4E"/>
-                            <constraint firstItem="F2a-3m-agv" firstAttribute="trailing" secondItem="7GM-6n-92m" secondAttribute="trailing" constant="10" id="GiF-Ac-gAD"/>
-                            <constraint firstItem="Q4S-Ux-Edq" firstAttribute="top" secondItem="7GM-6n-92m" secondAttribute="bottom" id="QLM-K2-ACh"/>
-                            <constraint firstItem="7GM-6n-92m" firstAttribute="leading" secondItem="F2a-3m-agv" secondAttribute="leading" constant="10" id="SW8-Jr-FY9"/>
-                            <constraint firstItem="Q4S-Ux-Edq" firstAttribute="trailing" secondItem="F2a-3m-agv" secondAttribute="trailing" id="U2x-rs-kKe"/>
-                            <constraint firstItem="Q4S-Ux-Edq" firstAttribute="leading" secondItem="F2a-3m-agv" secondAttribute="leading" id="egz-Wi-oM1"/>
-                            <constraint firstAttribute="bottom" secondItem="Q4S-Ux-Edq" secondAttribute="bottom" id="kQ7-ot-ZcA"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="m0f-Ah-9Ka"/>
-                    <connections>
-                        <outlet property="searchBar" destination="7GM-6n-92m" id="p1a-9S-99t"/>
-                        <outlet property="tableView" destination="Q4S-Ux-Edq" id="2EJ-gj-x2y"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="arQ-cL-DlS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6002.898550724638" y="-1728.3482142857142"/>
-        </scene>
         <!--HomeNavigationController-->
         <scene sceneID="e3x-qg-hIx">
             <objects>

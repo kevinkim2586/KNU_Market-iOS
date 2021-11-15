@@ -323,7 +323,7 @@ private extension SendUsMessageViewController {
                 guard let self = self else { return }
                 
                 self.buttomButton.snp.updateConstraints {
-                    $0.bottom.equalToSafeArea(self.view).offset(-height/2)
+                    $0.bottom.equalToSafeArea(self.view).offset(-height)
                 }
 
                 // animation

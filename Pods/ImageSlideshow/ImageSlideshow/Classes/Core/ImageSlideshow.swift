@@ -9,7 +9,7 @@ import UIKit
 
 @objc
 /// The delegate protocol informing about image slideshow state changes
-public protocol ImageSlideshowDelegate: AnyObject {
+public protocol ImageSlideshowDelegate: class {
     /// Tells the delegate that the current page has changed
     ///
     /// - Parameters:

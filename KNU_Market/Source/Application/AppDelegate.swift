@@ -207,7 +207,7 @@ extension AppDelegate {
                                                            EmailInputViewController.self,
                                                            CheckEmailViewController.self,
                                                            IDInputViewController.self,
-                                                           EmailForLostPasswordViewController.self]
+                                                           EmailForLostPasswordViewController.self,SendUsMessageViewController.self]
         
         IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatViewController.self)
     }

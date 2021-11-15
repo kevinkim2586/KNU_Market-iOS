@@ -94,7 +94,7 @@ public enum HTTPEvent {
     case failure(Error)
 }
 
-public protocol HTTPHandlerDelegate: AnyObject {
+public protocol HTTPHandlerDelegate: class {
     func didReceiveHTTP(event: HTTPEvent)
 }
 
@@ -104,7 +104,7 @@ public protocol HTTPHandler {
     func parse(data: Data) -> Int
 }
 
-public protocol HTTPServerDelegate: AnyObject {
+public protocol HTTPServerDelegate: class {
     func didReceive(event: HTTPEvent)
 }
 

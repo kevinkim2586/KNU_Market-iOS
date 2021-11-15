@@ -16,7 +16,7 @@ import UIKit
  *
  * to be able to instantiate them from the NIB in a type-safe manner
  */
-protocol NibLoadable: AnyObject {
+protocol NibLoadable: class {
     /// The nib file to use to load a new instance of the View designed in a XIB
     static var nib: UINib { get }
 }

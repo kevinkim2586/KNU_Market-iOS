@@ -42,11 +42,11 @@ public enum ConnectionState {
     case receive(Data)
 }
 
-public protocol TransportEventClient: AnyObject {
+public protocol TransportEventClient: class {
     func connectionChanged(state: ConnectionState)
 }
 
-public protocol Transport: AnyObject {
+public protocol Transport: class {
     func register(delegate: TransportEventClient)
     func connect(url: URL, timeout: Double, certificatePinning: CertificatePinning?)
     func disconnect()

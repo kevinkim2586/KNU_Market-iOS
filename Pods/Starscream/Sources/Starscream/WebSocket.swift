@@ -41,7 +41,7 @@ public struct WSError: Error {
     }
 }
 
-public protocol WebSocketClient: AnyObject {
+public protocol WebSocketClient: class {
     func connect()
     func disconnect(closeCode: UInt16)
     func write(string: String, completion: (() -> ())?)
@@ -87,7 +87,7 @@ public enum WebSocketEvent {
     case cancelled
 }
 
-public protocol WebSocketDelegate: AnyObject {
+public protocol WebSocketDelegate: class {
     func didReceive(event: WebSocketEvent, client: WebSocket)
 }
 

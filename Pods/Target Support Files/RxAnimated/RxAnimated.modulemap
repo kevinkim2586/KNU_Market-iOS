@@ -1,0 +1,6 @@
+framework module RxAnimated {
+  umbrella header "RxAnimated-umbrella.h"
+
+  export *
+  module * { export * }
+}

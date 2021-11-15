@@ -60,12 +60,12 @@ import UIKit
     
     
     //MARK: - Initialiser
-    @objc public convenience init(title: String?, description: String?, textsToChangeColor: [String]? = nil, image: UIImage?, style: PMAlertControllerStyle) {
+    @objc public convenience init(title: String?, description: String?, image: UIImage?, style: PMAlertControllerStyle) {
         self.init()
         guard let nib = loadNibAlertController(), let unwrappedView = nib[0] as? UIView else { return }
         self.view = unwrappedView
         
-        self.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+        self.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         
         alertView.layer.cornerRadius = 5
@@ -73,21 +73,12 @@ import UIKit
         
         if let title = title {
             alertTitle.text = title
-            alertTitle.textColor = UIColor(red: 1.0, green: 0.53, blue: 0.51, alpha: 1.0)
         }else{
             alertTitle.isHidden = true
         }
         
         if let description = description {
             alertDescription.text = description
-            if let textsToChangeColor = textsToChangeColor {
-                let attributedText: NSAttributedString = description.attributedStringWithColor(
-                    textsToChangeColor,
-                    color: UIColor(red: 1.0, green: 0.53, blue: 0.51, alpha: 1.0)
-                )
-                alertDescription.attributedText = attributedText
-            }
-            
         }else{
             alertDescription.isHidden = true
         }
@@ -245,21 +236,5 @@ extension PMAlertController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         return true
-    }
-}
-
-extension String {
-    func attributedStringWithColor(_ strings: [String], color: UIColor, characterSpacing: UInt? = nil) -> NSAttributedString {
-        let attributedString = NSMutableAttributedString(string: self)
-        for string in strings {
-            let range = (self as NSString).range(of: string)
-            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
-        }
-
-        guard let characterSpacing = characterSpacing else { return attributedString }
-
-        attributedString.addAttribute(NSAttributedString.Key.kern, value: characterSpacing, range: NSRange(location: 0, length: attributedString.length))
-
-        return attributedString
     }
 }

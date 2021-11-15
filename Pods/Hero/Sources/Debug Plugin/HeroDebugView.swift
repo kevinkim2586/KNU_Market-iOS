@@ -24,7 +24,7 @@
 
 import UIKit
 
-protocol HeroDebugViewDelegate: AnyObject {
+protocol HeroDebugViewDelegate: class {
   func onProcessSliderChanged(progress: Float)
   func onPerspectiveChanged(translation: CGPoint, rotation: CGFloat, scale: CGFloat)
   func on3D(wants3D: Bool)

@@ -19,6 +19,11 @@
 		626AC5B227324C1200E907E8 /* CGFloatLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626AC5B127324C1200E907E8 /* CGFloatLiteral.swift */; };
 		626AC5B52732506900E907E8 /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626AC5B42732506900E907E8 /* SnapKit.swift */; };
 		626D66E92742705700CB7F4F /* KMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66E82742705700CB7F4F /* KMButton.swift */; };
+		626D66F1274291AE00CB7F4F /* InquiryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F0274291AE00CB7F4F /* InquiryListViewController.swift */; };
+		626D66F3274291EC00CB7F4F /* InquiryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F2274291EC00CB7F4F /* InquiryTableViewCell.swift */; };
+		626D66FA2742920300CB7F4F /* InquiryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F72742920300CB7F4F /* InquiryAPI.swift */; };
+		626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F82742920300CB7F4F /* InquiryListmodel.swift */; };
+		626D66FC2742920300CB7F4F /* InquiryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F92742920300CB7F4F /* InquiryModel.swift */; };
 		62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */; };
 		6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */; };
 		7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */; };
@@ -177,6 +182,11 @@
 		626AC5B127324C1200E907E8 /* CGFloatLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatLiteral.swift; sourceTree = "<group>"; };
 		626AC5B42732506900E907E8 /* SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
 		626D66E82742705700CB7F4F /* KMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMButton.swift; sourceTree = "<group>"; };
+		626D66F0274291AE00CB7F4F /* InquiryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryListViewController.swift; sourceTree = "<group>"; };
+		626D66F2274291EC00CB7F4F /* InquiryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryTableViewCell.swift; sourceTree = "<group>"; };
+		626D66F72742920300CB7F4F /* InquiryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryAPI.swift; sourceTree = "<group>"; };
+		626D66F82742920300CB7F4F /* InquiryListmodel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryListmodel.swift; sourceTree = "<group>"; };
+		626D66F92742920300CB7F4F /* InquiryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryModel.swift; sourceTree = "<group>"; };
 		62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageReactor.swift; sourceTree = "<group>"; };
 		6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault Keys.swift"; sourceTree = "<group>"; };
 		6EC6A645B304E4B1E7AF6FFA /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -382,6 +392,32 @@
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
+		626D66EF274291AE00CB7F4F /* InquiryList */ = {
+			isa = PBXGroup;
+			children = (
+				626D66F0274291AE00CB7F4F /* InquiryListViewController.swift */,
+			);
+			path = InquiryList;
+			sourceTree = "<group>";
+		};
+		626D66F52742920300CB7F4F /* Inquiry Models */ = {
+			isa = PBXGroup;
+			children = (
+				626D66F62742920300CB7F4F /* Networking */,
+				626D66F82742920300CB7F4F /* InquiryListmodel.swift */,
+				626D66F92742920300CB7F4F /* InquiryModel.swift */,
+			);
+			path = "Inquiry Models";
+			sourceTree = "<group>";
+		};
+		626D66F62742920300CB7F4F /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				626D66F72742920300CB7F4F /* InquiryAPI.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		62C2E44127363D4C00F037B9 /* SendUsMessage */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +430,7 @@
 		7C036AB12696A90500F6C29B /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
+				626D66F52742920300CB7F4F /* Inquiry Models */,
 				7CBDF4AE272F884800E657D9 /* Popup */,
 				7C036AB32696AAA000F6C29B /* User Models */,
 				7CD1522526AA99DA00F2C466 /* Chat Models */,
@@ -539,6 +576,7 @@
 		7C79E10D26E0C20B0004508A /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				626D66F2274291EC00CB7F4F /* InquiryTableViewCell.swift */,
 				7CCDB1E926A2BCD30092F28D /* ChatTableViewCell.swift */,
 				7CAC1E73265BC84800EAA3A5 /* ItemTableViewModel.swift */,
 				7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */,
@@ -757,6 +795,7 @@
 				7CD74E0D2645982600BD2DE4 /* Chat */,
 				7CD74E0F2645986A00BD2DE4 /* MyPage */,
 				7C60DC7126944C16001DEA9A /* Update User Info */,
+				626D66EF274291AE00CB7F4F /* InquiryList */,
 				7CA52D6A270B113900A69F3B /* Unregister Flow */,
 				7C60DC7226944C62001DEA9A /* Report */,
 				7CB22569272EB2190045CE94 /* Popup */,
@@ -1103,6 +1142,7 @@
 				7C3758ED265FA97A0081A85D /* HomeViewModel.swift in Sources */,
 				7C0F1CBA26BA6B310068FF45 /* NotificationName.swift in Sources */,
 				7CEDBB5D2702E0820078F5E1 /* KMErrorLabel.swift in Sources */,
+				626D66FA2742920300CB7F4F /* InquiryAPI.swift in Sources */,
 				7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
 				7C55545D266CDFD100C3C5B6 /* UploadItemRequestDTO.swift in Sources */,
@@ -1128,6 +1168,7 @@
 				7CB8DF36264BAB760001CC6D /* UIViewController + Extension.swift in Sources */,
 				7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */,
 				7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */,
+				626D66F1274291AE00CB7F4F /* InquiryListViewController.swift in Sources */,
 				7CCDB1EF26A2BD0C0092F28D /* ItemTableViewCell.swift in Sources */,
 				7C1EEE4E26A68FB700775B11 /* MainTabBarViewController.swift in Sources */,
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
@@ -1145,12 +1186,14 @@
 				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
 				7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
+				626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */,
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				626D66E92742705700CB7F4F /* KMButton.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
 				7C9871D626E9BCEA009BD195 /* ImageViewController.swift in Sources */,
+				626D66FC2742920300CB7F4F /* InquiryModel.swift in Sources */,
 				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
@@ -1194,6 +1237,7 @@
 				7C8839E32643CBC300F9F78C /* UploadItemViewController.swift in Sources */,
 				7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */,
 				7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */,
+				626D66F3274291EC00CB7F4F /* InquiryTableViewCell.swift in Sources */,
 				7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */,
 				7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */,
 				7C3D986226AE8A42005DFAE0 /* ChatMemberViewController.swift in Sources */,

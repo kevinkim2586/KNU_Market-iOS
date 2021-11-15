@@ -34,6 +34,7 @@ target 'KNU_Market' do
   pod 'PanModal'
   pod 'TextFieldEffects'
   pod 'PMAlertController'
+  
 
   # UI
   pod 'lottie-ios'

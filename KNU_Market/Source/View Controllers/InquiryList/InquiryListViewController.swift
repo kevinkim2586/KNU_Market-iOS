@@ -11,7 +11,7 @@ import Alamofire
 
 class InquiryListViewController: UIViewController {
     
-    var model = [InquiryListModel]()
+    var inquiryModel = [InquiryListModel]()
     
     private let profileImageView: UIImageView = {
         let profileImg = UIImageView()
@@ -70,6 +70,7 @@ class InquiryListViewController: UIViewController {
         setUpSubViews()
         inquiryList.delegate = self
         inquiryList.dataSource = self
+        getList()
     }
     
     private func setUpSubViews() {
@@ -102,16 +103,16 @@ class InquiryListViewController: UIViewController {
 
 extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        model.count
+        inquiryModel.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InquiryTableViewCell") as! InquiryTableViewCell
         
-        cell.dateLabel.text = model[indexPath.row].date
-        cell.inquieryTitleLabel.text = model[indexPath.row].title
+        cell.dateLabel.text = inquiryModel[indexPath.row].date
+        cell.inquieryTitleLabel.text = inquiryModel[indexPath.row].title
         
-        if model[indexPath.row].isArchived == true {
+        if inquiryModel[indexPath.row].isArchived == true {
             cell.prograssImageView.image = UIImage(named: "doneImg")
         } else {
             cell.prograssImageView.image = UIImage(named: "inPrograssImg")
@@ -121,6 +122,22 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     private func getList() {
-        
+        let url = "https://knumarket.kro.kr:5051/api/v1/reports?page=1"
+        AF.request(url,
+                   method: .get,
+                   parameters: nil,
+                   encoding: URLEncoding.default,
+                   headers: ["authentication": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFoclJodUJTSnRuZ2NKWEhxRDU3QUQiLCJpYXQiOjE2MzYxOTIyNTEsImV4cCI6MTYzNjE5OTQ1MX0.9kY1PPmEEFstaYKQgDB7tG-lCkIgAh5b6-wqHNtafrc"])
+            .validate(statusCode: 200..<300)
+            .responseJSON{res in
+                do {
+                    let model = try JSONDecoder().decode([InquiryModel].self, from: res.data!)
+                    self.inquiryModel.removeAll()
+                    self.inquiryModel.append(model)
+                    self.inquiryList.reloadData()
+                } catch {
+                    print(error)
+                }
+            }
     }
 }

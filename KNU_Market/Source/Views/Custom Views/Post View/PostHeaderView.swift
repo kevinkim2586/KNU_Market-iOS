@@ -37,7 +37,7 @@ class PostHeaderView: UIView {
             action: #selector(self.pressedImage)
         )
         slideShow.addGestureRecognizer(recognizer)
-        slideShow.contentMode = .scaleAspectFill
+        slideShow.contentMode = .scaleAspectFit
         slideShow.slideshowInterval = 5
         slideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: 50))
         return slideShow
@@ -120,55 +120,42 @@ class PostHeaderView: UIView {
         super.init(frame: frame)
         setupLayout()
         setupConstraints()
-        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
     
-    init(
-        frame: CGRect,
+    func configure(
         currentVC: UIViewController,
         imageSources: [InputSource],
         postTitle: String,
         profileImageUid: String,
         userNickname: String,
         locationName: String,
-        dateString: String
+        dateString: String,
+        viewCount: String
     ) {
-        super.init(frame: frame)
         
-        self.currentVC = currentVC
-        self.imageSources = imageSources
-        self.postTitle = postTitle
-        self.profileImageUid = profileImageUid
-        self.userNickname = userNickname
-        self.locationName = locationName
-        self.dateString = dateString
+
         
-        setupLayout()
-        setupConstraints()
-        configure()
-    }
-    
-    private func configure() {
+        imageSources.isEmpty
+        ? imageSlideShow.setImageInputs([ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)])
+        : imageSlideShow.setImageInputs(imageSources)
         
-        configureImageSlideShow()
+        postTitleLabel.text = postTitle
         
-        postTitleLabel.text = postTitle ?? "공구글 정보 불러오기에 실패했어요."
-        
-        let imageUid = profileImageUid ?? ""
+        let imageUid = profileImageUid
         profileImageView.sd_setImage(
             with: URL(string: K.MEDIA_REQUEST_URL + "\(imageUid)"),
             placeholderImage: UIImage(named: K.Images.defaultAvatar),
             options: .continueInBackground
         )
         
-        userNicknameLabel.text = userNickname ?? "-"
-        locationNameLabel.text = locationName ?? "-"
-        dateLabel.text = dateString ?? "-"
-        viewCountLabel.text = "조회 \(viewCount ?? "-")"
+        userNicknameLabel.text = userNickname
+        locationNameLabel.text = locationName
+        dateLabel.text = dateString
+        viewCountLabel.text = "조회 \(viewCount)"
     }
     
     private func configureImageSlideShow() {
@@ -180,8 +167,7 @@ class PostHeaderView: UIView {
         ? imageSlideShow.setImageInputs([ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)])
         : imageSlideShow.setImageInputs(imageSources)
     }
-    
-    
+
     
     //MARK: - UI Setup
     
@@ -199,8 +185,6 @@ class PostHeaderView: UIView {
     }
     
     private func setupConstraints() {
-        
-        backgroundColor = .systemTeal
         
         imageSlideShow.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
@@ -237,7 +221,7 @@ class PostHeaderView: UIView {
         
         locationMarkerImageView.snp.makeConstraints {
             $0.width.height.equalTo(Metrics.iconImageViewHeight)
-            $0.right.equalTo(locationNameLabel.snp.left).inset(5)
+            $0.right.equalTo(locationNameLabel.snp.left).offset(-5)
             $0.bottom.equalToSuperview().offset(-10)
         }
 
@@ -247,15 +231,10 @@ class PostHeaderView: UIView {
         }
         
         viewCountLabel.snp.makeConstraints {
-            $0.top.equalTo(titleContainerView.snp.bottom).offset(15)
+            $0.bottom.equalToSuperview().offset(-15)
             $0.right.equalToSuperview().offset(-20)
         }
-        
-        
     }
-    
-    
-
 }
 
 //MARK: - Target Methods
@@ -267,4 +246,17 @@ extension PostHeaderView {
         let fullScreenController = imageSlideShow.presentFullScreenController(from: currentVC ?? UIViewController())
         fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .gray, color: nil)
     }
+}
+
+//MARK: - ScrollView -> For stretchy header effect
+
+extension PostHeaderView {
+    
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        containerViewHeight.constant = scrollView.contentInset.top
+//        let offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top)
+//        containerView.clipsToBounds = offsetY <= 0
+//        imageViewBottom.constant = offsetY >= 0 ? 0 : -offsetY / 2
+//        imageViewHeight.constant = max(offsetY + scrollView.contentInset.top, scrollView.contentInset.top)
+//    }
 }

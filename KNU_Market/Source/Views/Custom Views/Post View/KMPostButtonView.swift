@@ -82,7 +82,8 @@ class KMPostButtonView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        backgroundColor = .clear
+    
         setupLayout()
         setupConstraints()
     }
@@ -91,8 +92,27 @@ class KMPostButtonView: UIView {
         fatalError()
     }
     
-    private func configure() {
-        backgroundColor = .clear
+
+    func configure(isPostUserUploaded: Bool, isCompletelyDone: Bool) {
+
+        if isPostUserUploaded {
+            gatheringStatusView.isHidden = false
+            trashButton.isHidden = false
+            
+            if isCompletelyDone {
+                
+                gatheringStatusView.backgroundColor = .lightGray
+                gatheringStatusButton.setTitleColor(.white, for: .normal)
+                gatheringStatusButton.setTitle("모집 완료  ⌵", for: .normal)
+            } else {
+                gatheringStatusView.backgroundColor = UIColor(named: K.Color.appColor)
+                gatheringStatusButton.setTitle("모집 중  ⌵", for: .normal)
+            }
+            
+        } else {
+            gatheringStatusView.isHidden = true
+            trashButton.isHidden = true
+        }
     }
     
     //MARK: - UI Setup

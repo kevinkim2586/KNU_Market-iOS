@@ -79,7 +79,9 @@ class ChatListTableViewCell: UITableViewCell {
         chatRoomTitleLabel.text = nil
         chatRoomImageView.image = nil
         currentlyParticipatingCountLabel.text = nil
+        chatRoomTitleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         backgroundColor = .white
+        notificationBadgeImageView.image = nil
     }
     
     //MARK: - UI Setup

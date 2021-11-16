@@ -26,9 +26,14 @@ protocol ItemViewModelDelegate: AnyObject {
 
 class ItemViewModel {
     
+    //MARK: - Properties
+    
+    private var itemManager: ItemManager?
+    private var chatManager: ChatManager?
+    
     weak var delegate: ItemViewModelDelegate?
     
-    var pageID: String?
+    var pageID: String
     
     var model: ItemDetailModel? {
         didSet { convertUIDsToURL() }
@@ -94,6 +99,11 @@ class ItemViewModel {
         return isCompletelyDone ? false : true
     }
     
+    // 채팅방 입장 버튼 활성화 여부
+    var shouldEnableChatEntrance: Bool {
+        return postIsUserUploaded || isGathering || userAlreadyJoinedPost
+    }
+    
     var modelForEdit: EditPostModel {
         let editPostModel = EditPostModel(
             title: model?.title ?? "",
@@ -110,11 +120,19 @@ class ItemViewModel {
     
     var userIncludedURL: URL?
     
+    //MARK: - Initialization
+    
+    init(pageId: String, itemManager: ItemManager, chatManager: ChatManager) {
+        self.pageID = pageId
+        self.itemManager = itemManager
+        self.chatManager = chatManager
+    }
+    
     
     //MARK: - 공구 상세내용 불러오기
-    func fetchItemDetails(for uid: String) {
+    func fetchItemDetails() {
         
-        ItemManager.shared.fetchItemDetails(uid: uid) { [weak self] result in
+        ItemManager.shared.fetchItemDetails(uid: self.pageID) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -131,9 +149,9 @@ class ItemViewModel {
     }
     
     //MARK: - 본인 작성 게시글 삭제하기
-    func deletePost(for uid: String) {
+    func deletePost() {
         
-        ItemManager.shared.deletePost(uid: uid) { [weak self] result in
+        ItemManager.shared.deletePost(uid: self.pageID) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -147,9 +165,9 @@ class ItemViewModel {
     }
     
     //MARK: - 공구글 완료 표시
-    func markPostDone(for uid: String) {
+    func markPostDone() {
         
-        ItemManager.shared.markPostDone(uid: uid) { [weak self] result in
+        ItemManager.shared.markPostDone(uid: self.pageID) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -167,7 +185,7 @@ class ItemViewModel {
     }
     
     //MARK: - 공구글 완료 표시 해제하기
-    func cancelMarkPostDone(for uid: String) {
+    func cancelMarkPostDone() {
         
         let model = UpdatePostRequestDTO(title: self.model?.title ?? "",
                                          location: self.model?.location ?? 0,
@@ -177,7 +195,7 @@ class ItemViewModel {
                                          currentlyGatheredPeople: self.currentlyGatheredPeople,
                                          isCompletelyDone: false)
         
-        ItemManager.shared.updatePost(uid: uid, with: model) { [weak self] result in
+        ItemManager.shared.updatePost(uid: self.pageID, with: model) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -202,8 +220,6 @@ class ItemViewModel {
             delegate?.failedJoiningChat(with: .E001)
             return
         }
-
-       print("✏️ pageID: \(self.pageID ?? "에러")")
         
         ChatManager.shared.changeJoinStatus(function: .join,
                                             pid: self.pageID ?? "error") { [weak self] result in

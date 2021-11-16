@@ -74,6 +74,7 @@
 		7C83EE5127422E3A00CF1680 /* KMPostControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE5027422E3A00CF1680 /* KMPostControlButton.swift */; };
 		7C83EE532742378000CF1680 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE522742378000CF1680 /* PostViewController.swift */; };
 		7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE542742407B00CF1680 /* PostHeaderView.swift */; };
+		7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE5627437B6200CF1680 /* KMPostBottomView.swift */; };
 		7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */; };
 		7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */; };
 		7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8414812705692500FFA56B /* FindIdOptions.swift */; };
@@ -217,6 +218,7 @@
 		7C83EE5027422E3A00CF1680 /* KMPostControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPostControlButton.swift; sourceTree = "<group>"; };
 		7C83EE522742378000CF1680 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		7C83EE542742407B00CF1680 /* PostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderView.swift; sourceTree = "<group>"; };
+		7C83EE5627437B6200CF1680 /* KMPostBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPostBottomView.swift; sourceTree = "<group>"; };
 		7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserInfoViewModel.swift; sourceTree = "<group>"; };
 		7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + FindUserInfo.swift"; sourceTree = "<group>"; };
 		7C8414812705692500FFA56B /* FindIdOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdOptions.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				7C83EE4E274226FE00CF1680 /* KMPostButtonView.swift */,
+				7C83EE5627437B6200CF1680 /* KMPostBottomView.swift */,
 				7C83EE5027422E3A00CF1680 /* KMPostControlButton.swift */,
 				7C83EE542742407B00CF1680 /* PostHeaderView.swift */,
 			);
@@ -1036,6 +1039,7 @@
 				7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */,
 				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
 				7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */,
+				7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,

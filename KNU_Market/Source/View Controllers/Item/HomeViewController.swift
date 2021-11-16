@@ -44,25 +44,21 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
-        
-        let vc = PostViewController()
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
 
-//        if !detectIfVerifiedUser() {
-//            showSimpleBottomAlertWithAction(
-//                message: "학생 인증을 마치셔야 사용이 가능해요.👀",
-//                buttonTitle: "인증하러 가기"
-//            ) {
-//                self.presentVerifyOptionVC()
-//            }
-//            return
-//        }
-//        guard let uploadVC = storyboard?.instantiateViewController(
-//            identifier: K.StoryboardID.uploadItemVC
-//        ) as? UploadItemViewController else { return }
-//        uploadVC.hidesBottomBarWhenPushed = true
-//        navigationController?.pushViewController(uploadVC, animated: true)
+        if !detectIfVerifiedUser() {
+            showSimpleBottomAlertWithAction(
+                message: "학생 인증을 마치셔야 사용이 가능해요.👀",
+                buttonTitle: "인증하러 가기"
+            ) {
+                self.presentVerifyOptionVC()
+            }
+            return
+        }
+        guard let uploadVC = storyboard?.instantiateViewController(
+            identifier: K.StoryboardID.uploadItemVC
+        ) as? UploadItemViewController else { return }
+        uploadVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(uploadVC, animated: true)
     }
     
     @IBAction func pressedSearchButton(_ sender: UIBarButtonItem) {
@@ -165,14 +161,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let itemVC = storyboard?.instantiateViewController(
-            identifier: K.StoryboardID.itemVC
-        ) as? ItemViewController else { return }
+//        guard let itemVC = storyboard?.instantiateViewController(
+//            identifier: K.StoryboardID.itemVC
+//        ) as? ItemViewController else { return }
+//        
+//        itemVC.hidesBottomBarWhenPushed = true
+//        itemVC.pageID = viewModel.itemList[indexPath.row].uuid
+//        navigationController?.pushViewController(itemVC, animated: true)
+//        
         
-        itemVC.hidesBottomBarWhenPushed = true
-        itemVC.pageID = viewModel.itemList[indexPath.row].uuid
+        let postVC = PostViewController(
+            viewModel: ItemViewModel(
+                pageId: viewModel.itemList[indexPath.row].uuid,
+                itemManager: ItemManager(),
+                chatManager: ChatManager()
+            ),
+            isFromChatVC: false
+        )
         
-        navigationController?.pushViewController(itemVC, animated: true)
+        navigationController?.pushViewController(postVC, animated: true)
+        
+
     }
 
     

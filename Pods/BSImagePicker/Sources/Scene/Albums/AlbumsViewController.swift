@@ -23,7 +23,7 @@
 import UIKit
 import Photos
 
-protocol AlbumsViewControllerDelegate: AnyObject {
+protocol AlbumsViewControllerDelegate: class {
     func albumsViewController(_ albumsViewController: AlbumsViewController, didSelectAlbum album: PHAssetCollection)
     func didDismissAlbumsViewController(_ albumsViewController: AlbumsViewController)
 }

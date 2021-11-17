@@ -39,6 +39,7 @@ class KMPostButtonView: UIView {
         view.layer.shadowOffset = CGSize(width: 2, height: 2)
         view.layer.shadowOpacity = 0.2
         view.layer.shadowRadius = 2
+        view.isHidden = true
         return view
     }()
     
@@ -64,6 +65,7 @@ class KMPostButtonView: UIView {
             action: #selector(pressedTrashButton),
             for: .touchUpInside
         )
+        button.isHidden = true
         return button
     }()
     
@@ -83,7 +85,6 @@ class KMPostButtonView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
-    
         setupLayout()
         setupConstraints()
     }

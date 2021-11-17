@@ -55,17 +55,49 @@ class KMPostBottomView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        layer.addBorder([.top], color: .lightGray, width: 1.0)
-        backgroundColor = .systemGray6
-    
+        backgroundColor = .white
+        addTopBorder(with: .systemGray6, andWidth: 0.8)
         setupLayout()
         setupConstraints()
     }
     
+ 
     required init?(coder: NSCoder) {
         fatalError()
     }
+        
+    //MARK: - UI Setup
+    
+    private func setupLayout() {
+        
+        addSubview(gatheringPeopleLabel)
+        addSubview(personImageView)
+        addSubview(enterChatButton)
+    }
+    
+    private func setupConstraints() {
+        
+        gatheringPeopleLabel.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(40)
+            $0.centerY.equalToSuperview()
+        }
+        
+        personImageView.snp.makeConstraints {
+            $0.width.height.equalTo(Metrics.personImageViewSize)
+            $0.left.equalTo(gatheringPeopleLabel.snp.right).offset(20)
+            $0.centerY.equalToSuperview()
+        }
+        
+        enterChatButton.snp.makeConstraints {
+            $0.width.equalTo(170)
+            $0.height.equalTo(40)
+            $0.right.equalToSuperview().offset(-15)
+            $0.centerY.equalToSuperview()
+        }
+        
+    }
+    
+    //MARK: - Data Configuration
     
     func updateData(
         isPostCompletelyDone: Bool,
@@ -111,37 +143,6 @@ class KMPostBottomView: UIView {
         }
     }
     
-    
-    //MARK: - UI Setup
-    
-    private func setupLayout() {
-        
-        addSubview(gatheringPeopleLabel)
-        addSubview(personImageView)
-        addSubview(enterChatButton)
-    }
-    
-    private func setupConstraints() {
-        
-        gatheringPeopleLabel.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(40)
-            $0.centerY.equalToSuperview()
-        }
-        
-        personImageView.snp.makeConstraints {
-            $0.width.height.equalTo(Metrics.personImageViewSize)
-            $0.left.equalTo(gatheringPeopleLabel.snp.right).offset(20)
-            $0.centerY.equalToSuperview()
-        }
-        
-        enterChatButton.snp.makeConstraints {
-            $0.width.equalTo(170)
-            $0.height.equalTo(40)
-            $0.right.equalToSuperview().offset(-15)
-            $0.centerY.equalToSuperview()
-        }
-        
-    }
 }
 
 //MARK: - Target Methods

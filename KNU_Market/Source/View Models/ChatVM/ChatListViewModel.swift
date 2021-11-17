@@ -41,10 +41,7 @@ extension ChatListViewModel {
         if isFetchingData { return }
         
         isFetchingData = true
-        
-        roomList.removeAll()
-        User.shared.joinedChatRoomPIDs.removeAll()
-        
+
         chatManager.getResponseModel(
             function: .getRoom,
             method: .get,
@@ -55,6 +52,9 @@ extension ChatListViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let chatRoom):
+                
+                self.roomList.removeAll()
+                User.shared.joinedChatRoomPIDs.removeAll()
                 
                 var count = 0
                 chatRoom.forEach { chat in

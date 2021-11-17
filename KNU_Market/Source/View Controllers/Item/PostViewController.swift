@@ -22,7 +22,13 @@ class PostViewController: BaseViewController {
         return view
     }()
         
-    private var headerView: PostHeaderView!
+    lazy var postHeaderView: PostHeaderView = {
+        let headerView = PostHeaderView(
+            frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: headerViewHeight),
+            currentVC: self
+        )
+       return headerView
+    }()
 
     lazy var postTableView: UITableView = {
         let tableView = UITableView()
@@ -30,7 +36,7 @@ class PostViewController: BaseViewController {
         tableView.dataSource = self
         tableView.separatorColor = .clear
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         return tableView
     }()
     
@@ -39,8 +45,6 @@ class PostViewController: BaseViewController {
         view.delegate = self
         return view
     }()
-    
-    
     
     
     //MARK: - Initialization
@@ -90,12 +94,6 @@ class PostViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         
-        
-        postTableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        
         postControlButtonView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.height.equalTo(50)
@@ -107,7 +105,11 @@ class PostViewController: BaseViewController {
             $0.left.right.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
-    
+        
+        postTableView.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
+            $0.bottom.equalTo(postBottomView.snp.top).offset(0)
+        }
     }
     
     private func configure() {
@@ -116,30 +118,14 @@ class PostViewController: BaseViewController {
         configureHeaderView()
     }
     
-    func loadInitialMethods() {
+    private func loadInitialMethods() {
         viewModel.fetchItemDetails()
         viewModel.fetchEnteredRoomInfo()
     }
 
-    
     private func configureHeaderView() {
-        
-        headerView = PostHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: headerViewHeight))
-    
-//        headerView = PostHeaderView(
-//            frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: headerViewHeight),
-//            currentVC: self,
-//            imageSources: [ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)],
-//            postTitle: "맥모닝 빵 잉글리쉬 머핀",
-//            profileImageUid: "",
-//            userNickname: "연어참치롤",
-//            locationName: "텍문 근처",
-//            dateString: "11/13 11:15",
-//            viewCount: "123"
-//        )
-        
         postTableView.tableHeaderView = nil
-        postTableView.addSubview(headerView)
+        postTableView.addSubview(postHeaderView)
         postTableView.contentInset = UIEdgeInsets(
             top: headerViewHeight,
             left: 0,
@@ -163,7 +149,7 @@ class PostViewController: BaseViewController {
             headerRect.origin.y = postTableView.contentOffset.y
             headerRect.size.height = -postTableView.contentOffset.y
         }
-        headerView.frame = headerRect
+        postHeaderView.frame = headerRect
     }
     
     func createObservers() {
@@ -398,7 +384,7 @@ extension PostViewController: ItemViewModelDelegate {
         
         let vc = ChatViewController()
         
-        vc.roomUID = viewModel.pageID ?? ""
+        vc.roomUID = viewModel.pageID
         vc.chatRoomTitle = viewModel.model?.title ?? ""
         
         vc.isFirstEntrance = isFirstEntrance ? true : false
@@ -422,8 +408,7 @@ extension PostViewController: ItemViewModelDelegate {
     }
     
     func didDetectURL(with string: NSMutableAttributedString) {
-        let indexPath = IndexPath(row: 0, section: 0)
-        postTableView.reloadRows(at: [indexPath], with: .automatic)
+        postTableView.reloadData()
     }
     
     func failedLoadingData(with error: NetworkError) {
@@ -436,16 +421,23 @@ extension PostViewController: ItemViewModelDelegate {
 extension PostViewController {
     
     func updatePostInformation() {
-        updateHeaderView()
-        updateBottomView()
+        updatePostControlButtonView()
+        updatePostHeaderView()
+        updatePostBottomView()
         postTableView.reloadData()
     }
     
-    func updateHeaderView() {
+    private func updatePostControlButtonView() {
         
-
-        headerView.configure(
-            currentVC: self,
+        postControlButtonView.configure(
+            isPostUserUploaded: viewModel.postIsUserUploaded,
+            isCompletelyDone: viewModel.isCompletelyDone
+        )
+    }
+    
+    private func updatePostHeaderView() {
+        
+        postHeaderView.configure(
             imageSources: viewModel.imageSources,
             postTitle: viewModel.model?.title ?? "로딩 중..",
             profileImageUid: viewModel.model?.profileImageUID ?? "",
@@ -454,9 +446,10 @@ extension PostViewController {
             dateString: viewModel.date,
             viewCount: viewModel.viewCount
         )
+        updateHeaderViewStyle()
     }
     
-    func updateBottomView() {
+    private func updatePostBottomView() {
         
         postBottomView.updateData(
             isPostCompletelyDone: viewModel.isCompletelyDone,
@@ -473,10 +466,6 @@ extension PostViewController {
 }
 
 
-extension PostViewController {
-    
-}
-
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
 
@@ -489,22 +478,28 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: "PostCell")
+        cell.selectionStyle = .none
         
         let postDetail = viewModel.model?.itemDetail ?? "로딩 중.."
     
         let labelStyle = NSMutableParagraphStyle()
         labelStyle.lineSpacing = 5
         let attributes = [NSAttributedString.Key.paragraphStyle : labelStyle]
-        #warning("글씨 잘리는 문제 해결")
         
-        cell.textLabel?.attributedText = NSAttributedString(string: postDetail, attributes: attributes)
-
+        cell.textLabel?.numberOfLines = 0
+        
+        if let postDetailWithUrl = viewModel.postDetailWithUrl {
+            cell.textLabel?.attributedText = postDetailWithUrl
+        } else {
+            cell.textLabel?.attributedText = NSAttributedString(
+                string: postDetail,
+                attributes: attributes
+            )
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
         guard let url = viewModel.userIncludedURL else { return }
         presentSafariView(with: url)
     }
@@ -516,6 +511,4 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateHeaderViewStyle()
     }
-    
-
 }

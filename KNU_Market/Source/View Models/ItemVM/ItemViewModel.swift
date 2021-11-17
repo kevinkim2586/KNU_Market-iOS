@@ -81,7 +81,7 @@ class ItemViewModel {
 
     // 이미 참여하고 있는 공구인지
     var userAlreadyJoinedPost: Bool {
-        return User.shared.joinedChatRoomPIDs.contains(pageID ?? "") ? true: false
+        return User.shared.joinedChatRoomPIDs.contains(pageID) ? true: false
     }
     
     // 인원이 다 찼는지 여부
@@ -104,6 +104,28 @@ class ItemViewModel {
         return postIsUserUploaded || isGathering || userAlreadyJoinedPost
     }
     
+    
+    var userIncludedURL: URL?
+    
+    
+    
+    
+    // 공구글
+//    var postDetail: NSMutableAttributedString? {
+//        
+//        
+//        if let userIncludedURL = userIncludedURL {
+//            
+//        }
+//        
+//        if let postDetail = model?.itemDetail {
+//        }
+//    }
+    
+    var postDetailWithUrl: NSMutableAttributedString?
+    
+    
+    
     var modelForEdit: EditPostModel {
         let editPostModel = EditPostModel(
             title: model?.title ?? "",
@@ -113,12 +135,10 @@ class ItemViewModel {
             currentlyGatheredPeople: currentlyGatheredPeople,
             location: model?.location ?? 0,
             itemDetail: model?.itemDetail ?? "",
-            pageUID: pageID ?? ""
+            pageUID: pageID
         )
         return editPostModel
     }
-    
-    var userIncludedURL: URL?
     
     //MARK: - Initialization
     
@@ -140,9 +160,9 @@ class ItemViewModel {
             case .success(let fetchedModel):
                 self.model = fetchedModel
                 self.delegate?.didFetchItemDetails()
+                self.detectURL()
                 
             case .failure(let error):
-                print("❗️ ItemViewModel - FAILED fetchItemDetails")
                 self.delegate?.failedFetchingItemDetails(with: error)
             }
         }
@@ -221,8 +241,10 @@ class ItemViewModel {
             return
         }
         
-        ChatManager.shared.changeJoinStatus(function: .join,
-                                            pid: self.pageID ?? "error") { [weak self] result in
+        ChatManager.shared.changeJoinStatus(
+            function: .join,
+            pid: self.pageID
+        ) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -281,6 +303,7 @@ class ItemViewModel {
         )
     }
     
+    // 공구글에 url 이 별도 포함되어 있는지 판별
     func detectURL() {
         
         var detectedURLString: String?
@@ -305,8 +328,6 @@ class ItemViewModel {
             let url = URL(string: urlString)
         else { return }
     
-        userIncludedURL = url
-        
         let attributedString = NSMutableAttributedString(string: itemDetail)
         
         if let range: Range<String.Index> = itemDetail.range(of: "http") {
@@ -321,6 +342,8 @@ class ItemViewModel {
                 range: NSRange(location: index, length: urlString.count)
             )
         }
+        self.userIncludedURL = url
+        self.postDetailWithUrl = attributedString
         delegate?.didDetectURL(with: attributedString)
     }
 }

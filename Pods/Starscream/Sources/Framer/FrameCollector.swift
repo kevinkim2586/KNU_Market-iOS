@@ -22,7 +22,7 @@
 
 import Foundation
 
-public protocol FrameCollectorDelegate: AnyObject {
+public protocol FrameCollectorDelegate: class {
     func didForm(event: FrameCollector.Event)
     func decompress(data: Data, isFinal: Bool) -> Data?
 }

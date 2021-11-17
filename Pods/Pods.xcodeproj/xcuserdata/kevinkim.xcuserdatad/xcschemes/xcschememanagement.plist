@@ -11,11 +11,6 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>Atributika.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
 		<key>BSImagePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -156,11 +151,6 @@
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
-		<key>Moya.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>38</integer>
-		</dict>
 		<key>PMAlertController-PMAlertController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -202,46 +192,6 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>28</integer>
-		</dict>
-		<key>ReactorKit.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>39</integer>
-		</dict>
-		<key>RxAnimated.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>40</integer>
-		</dict>
-		<key>RxCocoa.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>41</integer>
-		</dict>
-		<key>RxGesture.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>42</integer>
-		</dict>
-		<key>RxKeyboard.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>43</integer>
-		</dict>
-		<key>RxRelay.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>44</integer>
-		</dict>
-		<key>RxSwift.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>45</integer>
-		</dict>
-		<key>RxViewController.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>46</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
@@ -299,27 +249,12 @@
 			<key>orderHint</key>
 			<integer>36</integer>
 		</dict>
-		<key>Then.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>47</integer>
-		</dict>
-		<key>UITextView+Placeholder.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>48</integer>
-		</dict>
 		<key>ViewAnimator.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>37</integer>
-		</dict>
-		<key>WeakMapTable.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>49</integer>
 		</dict>
 		<key>lottie-ios.xcscheme</key>
 		<dict>

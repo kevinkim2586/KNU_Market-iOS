@@ -6,6 +6,7 @@ import SDWebImage
 import IQKeyboardManagerSwift
 import ImageSlideshow
 import Hero
+import SnapKit
 
 class ChatViewController: MessagesViewController {
     
@@ -17,7 +18,6 @@ class ChatViewController: MessagesViewController {
     var chatRoomTitle: String = ""
     var postUploaderUID: String = ""
     var isFirstEntrance: Bool = false
-    
 
     //MARK: - UI
     
@@ -31,6 +31,11 @@ class ChatViewController: MessagesViewController {
         return button
     }()
   
+    let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .darkGray
+        return indicator
+    }()
     
     //MARK: - Initialization
     
@@ -39,6 +44,7 @@ class ChatViewController: MessagesViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
         
         navigationItem.rightBarButtonItem = moreBarButtonItem
         
@@ -51,6 +57,8 @@ class ChatViewController: MessagesViewController {
         )
         
         initialize()
+        setupLayout()
+        setupConstraints()
         print("✏️ pageID: \(roomUID)")
         print("✏️ title: \(chatRoomTitle)")
     }
@@ -83,6 +91,18 @@ class ChatViewController: MessagesViewController {
     
     deinit {
         print("❗️ ChatViewController DEINITIALIZED")
+    }
+    
+    //MARK: - UI Setup
+    
+    private func setupLayout() {
+        view.addSubview(activityIndicator)
+    }
+    
+    private func setupConstraints() {
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
     }
     
     @objc func pressedTitle() {
@@ -130,7 +150,7 @@ class ChatViewController: MessagesViewController {
 extension ChatViewController: ChatViewDelegate {
 
     func didConnect() {
-        dismissProgressBar()
+        activityIndicator.stopAnimating()
 
         messagesCollectionView.scrollToLastItem()
 
@@ -140,11 +160,9 @@ extension ChatViewController: ChatViewDelegate {
             showChatPrecautionMessage()
         }
         
-        if viewModel.fetchFromLastChat {
-            viewModel.getChatFromLastIndex()
-        } else {
-            viewModel.getPreviousChats()
-        }
+        viewModel.fetchFromLastChat
+        ? viewModel.getChatFromLastIndex()
+        : viewModel.getPreviousChats()
     }
 
     func didDisconnect() {

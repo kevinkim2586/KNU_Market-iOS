@@ -10,7 +10,7 @@ import UIKit
 
 
 /// The delegate of a TableView/CollectionView object must adopt the PlaceholderDelegate protocol. the method of the protocol allow the delegate to perform placeholders action.
-public protocol PlaceholderDelegate: AnyObject {
+public protocol PlaceholderDelegate: class {
     
     /// Performs the action to the delegate of the table or collection view
     ///

@@ -29,17 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
           
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
         }
-        
-        
-        let settings: UIUserNotificationSettings =
-        UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
-        UNUserNotificationCenter.current().requestAuthorization(options: settings) { _, _ in }
-      
-    
-        
         
         Messaging.messaging().delegate = self
         Messaging.messaging().token { token, error in

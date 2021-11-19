@@ -35,6 +35,7 @@ class SearchPostsViewController: BaseViewController {
     
     init(viewModel: SearchPostViewModel) {
         super.init()
+        hidesBottomBarWhenPushed = true
         self.viewModel = viewModel
         viewModel.delegate = self
     }
@@ -190,19 +191,16 @@ extension SearchPostsViewController: UITableViewDelegate, UITableViewDataSource 
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let storyboard = UIStoryboard(name: "ItemList", bundle: nil)
+        let postVC = PostViewController(
+            viewModel: ItemViewModel(
+                pageId: viewModel.itemList[indexPath.row].uuid,
+                itemManager: ItemManager(),
+                chatManager: ChatManager()
+            ),
+            isFromChatVC: false
+        )
         
-        
-        #warning("itemVC 코드로 수정하면 이 부분도 수정")
-        
-        guard let itemVC = storyboard.instantiateViewController(
-            identifier: K.StoryboardID.itemVC
-        ) as? ItemViewController else { return }
-        
-        itemVC.hidesBottomBarWhenPushed = true
-        itemVC.pageID = viewModel.itemList[indexPath.row].uuid
-        
-        self.navigationController?.pushViewController(itemVC, animated: true)
+        navigationController?.pushViewController(postVC, animated: true)
     }
 }
 

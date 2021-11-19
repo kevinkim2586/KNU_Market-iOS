@@ -107,16 +107,16 @@ class ChatViewController: MessagesViewController {
     
     @objc func pressedTitle() {
         
-        let storyboard = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
+        let postVC = PostViewController(
+            viewModel: ItemViewModel(
+                pageId: roomUID,
+                itemManager: ItemManager(),
+                chatManager: ChatManager()
+            ),
+            isFromChatVC: true
+        )
         
-        guard let itemVC = storyboard.instantiateViewController(
-            identifier: K.StoryboardID.itemVC
-        ) as? ItemViewController else { return }
-        
-        itemVC.hidesBottomBarWhenPushed = true
-        itemVC.pageID = roomUID
-        itemVC.isFromChatVC = true
-        navigationController?.pushViewController(itemVC, animated: true)
+        navigationController?.pushViewController(postVC, animated: true)
     }
 
     @objc private func pressedMoreBarButtonItem() {

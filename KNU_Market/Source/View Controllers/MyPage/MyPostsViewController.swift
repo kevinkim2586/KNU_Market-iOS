@@ -127,14 +127,15 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let storyboard = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
+        let postVC = PostViewController(
+            viewModel: ItemViewModel(
+                pageId: viewModel.itemList[indexPath.row].uuid,
+                itemManager: ItemManager(),
+                chatManager: ChatManager()
+            ),
+            isFromChatVC: false
+        )
         
-        guard let postVC = storyboard.instantiateViewController(
-            withIdentifier: K.StoryboardID.itemVC
-        ) as? ItemViewController else { return }
-        
-        postVC.hidesBottomBarWhenPushed = true
-        postVC.pageID = viewModel.itemList[indexPath.row].uuid
         navigationController?.pushViewController(postVC, animated: true)
     }
     

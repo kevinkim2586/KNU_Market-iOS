@@ -39,15 +39,12 @@ class ChatViewController: MessagesViewController {
     
     //MARK: - Initialization
     
-    
     //MARK: - View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
-        
         navigationItem.rightBarButtonItem = moreBarButtonItem
-        
         
         IQKeyboardManager.shared.enable = false
         
@@ -59,8 +56,6 @@ class ChatViewController: MessagesViewController {
         initialize()
         setupLayout()
         setupConstraints()
-        print("✏️ pageID: \(roomUID)")
-        print("✏️ title: \(chatRoomTitle)")
     }
 
     override func viewWillAppear(_ animated: Bool) {

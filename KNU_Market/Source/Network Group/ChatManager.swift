@@ -100,9 +100,7 @@ class ChatManager {
     ) {
         
         let url = baseURL + room + "/\(userUID)"
-        
-        print("✏️ banUser url: \(url)")
-        
+            
         AF.request(url,
                    method: .delete,
                    interceptor: interceptor)
@@ -112,7 +110,6 @@ class ChatManager {
                 switch response.result {
                     
                 case .success:
-                    print("✏️ ChatManager - banUser SUCCESS")
                     completion(.success(true))
                     
                 case .failure:

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		622270AA2749EDD600FDC47B /* ImageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270A92749EDD600FDC47B /* ImageSelectionView.swift */; };
-		622270AC274A2CDB00FDC47B /* SendMessageImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270AB274A2CDB00FDC47B /* SendMessageImageView.swift */; };
 		625B0E2A2741D9BC003968BA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E292741D9BC003968BA /* Network.swift */; };
 		625B0E2C2741DED7003968BA /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E2B2741DED7003968BA /* ModelType.swift */; };
 		625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E2D2741DF4D003968BA /* NetworkResult.swift */; };
@@ -168,7 +167,6 @@
 /* Begin PBXFileReference section */
 		22C0F11694A1DA76842979BF /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		622270A92749EDD600FDC47B /* ImageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionView.swift; sourceTree = "<group>"; };
-		622270AB274A2CDB00FDC47B /* SendMessageImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageImageView.swift; sourceTree = "<group>"; };
 		625B0E292741D9BC003968BA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		625B0E2B2741DED7003968BA /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
 		625B0E2D2741DF4D003968BA /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
@@ -345,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				622270A92749EDD600FDC47B /* ImageSelectionView.swift */,
-				622270AB274A2CDB00FDC47B /* SendMessageImageView.swift */,
 			);
 			path = SendUSMessage;
 			sourceTree = "<group>";
@@ -1158,7 +1155,6 @@
 				7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */,
 				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
 				7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */,
-				622270AC274A2CDB00FDC47B /* SendMessageImageView.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,

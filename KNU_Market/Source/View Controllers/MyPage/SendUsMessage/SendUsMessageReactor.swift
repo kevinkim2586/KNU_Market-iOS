@@ -21,6 +21,7 @@ final class SendUsMessageReactor: Reactor {
         case sendMessage
         case updateTitle(String)
         case updateContent(String)
+        case deleteImage(Int)
     }
     
     enum Mutation {
@@ -28,6 +29,7 @@ final class SendUsMessageReactor: Reactor {
         case setLoading(Bool)
         case setTitle(String)
         case setContent(String)
+        case deleteImage(Int)
     }
     
     struct State {
@@ -54,6 +56,9 @@ final class SendUsMessageReactor: Reactor {
             
         case let .updateContent(content):
             return Observable.just(Mutation.setContent(content))
+            
+        case let .deleteImage(idx):
+            return Observable.just(Mutation.deleteImage(idx))
             
         case .sendMessage:
             var data: [Data] = []
@@ -97,6 +102,9 @@ final class SendUsMessageReactor: Reactor {
             
         case let .setLoading(isLoading):
             state.isLoading = isLoading
+            
+        case let .deleteImage(idx):
+            state.image.remove(at: idx)
         }
         
         return state

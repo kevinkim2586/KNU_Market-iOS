@@ -27,7 +27,7 @@ enum ValidationError {
         case incorrectSchoolEmailFormat = "이메일 형식이 올바르지 않습니다."
         case nonAuthorizedStudentId     = "인증 이력이 없습니다.\n학번과 생년월일을 다시 확인해주세요."
         case incorrectStudentIdFormat   = "학번 형식이 올바르지 않습니다."
-        case incorrectBirthDateFormat   = "생년월일 6자리를 입력해주세요. (981225)"
+        case incorrectBirthDateFormat   = "생년월일 6자리를 입력해주세요. (ex.981225)"
         case incorrectUserIdFormat      = "올바르지 않은 아이디 형식입니다."
         case nonExistingUserId          = "존재하지 않는 아이디입니다."
         case empty                      = "빈 칸이 없는지 확인해주세요."

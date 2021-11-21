@@ -154,16 +154,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        
-//        guard let itemVC = storyboard?.instantiateViewController(
-//            identifier: K.StoryboardID.itemVC
-//        ) as? ItemViewController else { return }
-//        
-//        itemVC.hidesBottomBarWhenPushed = true
-//        itemVC.pageID = viewModel.itemList[indexPath.row].uuid
-//        navigationController?.pushViewController(itemVC, animated: true)
-//        
-        
+          
         let postVC = PostViewController(
             viewModel: ItemViewModel(
                 pageId: viewModel.itemList[indexPath.row].uuid,

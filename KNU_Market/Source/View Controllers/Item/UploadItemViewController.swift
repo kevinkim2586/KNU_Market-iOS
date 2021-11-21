@@ -116,7 +116,6 @@ extension UploadItemViewController: UploadItemDelegate {
     
     func didCompleteUpload() { 
         
-        print("✏️ UploadItemVC - didCompleteUpload")
         dismissProgressBar()
         navigationController?.popViewController(animated: true)
         NotificationCenter.default.post(name: .updateItemList, object: nil)
@@ -124,7 +123,6 @@ extension UploadItemViewController: UploadItemDelegate {
     
     func failedUploading(with error: NetworkError) {
         
-        print("✏️ UploadItemVC - failedUploading: \(error.errorDescription)")
         dismissProgressBar()
         showSimpleBottomAlert(with: "업로드 실패: \(error.errorDescription)")
         navigationController?.popViewController(animated: true)
@@ -132,14 +130,12 @@ extension UploadItemViewController: UploadItemDelegate {
     
     func didUpdatePost() {
         
-        print("✏️ UploadItemVC - didUpdatePost")
         dismissProgressBar()
         navigationController?.popViewController(animated: true)
     }
     
     func failedUpdatingPost(with error: NetworkError) {
 
-        print("✏️ UploadItemVC - failedUpdatingPost: \(error.errorDescription)")
         dismissProgressBar()
         showSimpleBottomAlert(with: NetworkError.E000.errorDescription)
         navigationController?.popViewController(animated: true)

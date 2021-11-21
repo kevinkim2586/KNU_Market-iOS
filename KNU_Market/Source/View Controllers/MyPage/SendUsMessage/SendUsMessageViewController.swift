@@ -3,7 +3,6 @@ import UIKit
 import Then
 import ReactorKit
 import RxGesture
-import RxKeyboard
 import UITextView_Placeholder
 import SnapKit
 import BSImagePicker
@@ -24,17 +23,38 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         static let viewSide = 20.f
         
         // title
-        static let titleTop = 35.f
+        static let titleTop = 30.f
+        
+        static let titleTextFieldTop = 20.f
+        static let titleTextFieldHeight = 50.f
+        
+        static let explainLabelTop = 20.f
+        
+        static let TextViewTop = 10.f
+        
+        static let imagesSize = 65.f
+        static let imagesTop = 20.f
+        static let imagesSide = 10.f
+        
+        static let ButtonButtonHeight = 80.f
+        
+        // Delete Button
+        static let deleteButtonSize = 20.f
     }
     
     fileprivate struct Fonts {
         static let titleFont = UIFont.systemFont(ofSize: 14, weight: .light)
         static let tintFont = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let textFont = UIFont.systemFont(ofSize: 13, weight: .regular)
+        
+        // Bottom Button
+        static let buttonFont = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
     fileprivate struct Style {
         static let mainColor = UIColor(named: "AppDefaultColor")
+        static let cornerRadius = 5.f
+        static let borderWidth = 1.f
     }
     
     fileprivate struct Texts {
@@ -58,8 +78,8 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     
     let titleTextField = UITextField().then {
         $0.borderStyle = .roundedRect
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 5
+        $0.layer.borderWidth = Style.borderWidth
+        $0.layer.cornerRadius = Style.cornerRadius
         $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.tintColor = Style.mainColor
         $0.placeholder = "30자 이내"
@@ -73,33 +93,45 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     
     let textView = UITextView().then {
         $0.font = Fonts.textFont
-        $0.layer.borderWidth = 1
+        $0.layer.borderWidth = Style.borderWidth
         $0.tintColor = Style.mainColor
         $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.layer.cornerRadius = 5
+        $0.layer.cornerRadius = Style.cornerRadius
         $0.placeholder = "전하고 싶은 말을 자유롭게 남겨주세요!"
     }
     
-    let selectView = UIImageView().then {
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 5
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.backgroundColor = .clear
-    }
+    let selectView = ImageSelectionView()
     
     let firstImage = UIImageView().then {
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 5
+        $0.layer.borderWidth = Style.borderWidth
+        $0.layer.cornerRadius = Style.cornerRadius
         $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.clipsToBounds = true
+    }
+    
+    let firstButton = UIButton(type: .system).then {
+        $0.layer.cornerRadius = Metric.deleteButtonSize / 2
+        $0.backgroundColor = Style.mainColor
+        $0.clipsToBounds = true
+        $0.setTitle("-", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
     }
     
     let secondImage = UIImageView().then {
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 5
+        $0.layer.borderWidth = Style.borderWidth
+        $0.layer.cornerRadius = Style.cornerRadius
         $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.clipsToBounds = true
     }
+    
+    let secondButton = UIButton(type: .system).then {
+        $0.layer.cornerRadius = Metric.deleteButtonSize / 2
+        $0.backgroundColor = Style.mainColor
+        $0.clipsToBounds = true
+        $0.setTitle("-", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+    }
+
     
     let buttomButton = KMButton(type: .system).then {
         $0.setTitle("전송하기", for: .normal)
@@ -128,7 +160,6 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIBind()
     }
     
     //MARK: - UI Setup
@@ -143,7 +174,9 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         self.view.addSubview(self.textView)
         self.view.addSubview(self.selectView)
         self.view.addSubview(self.firstImage)
+        self.view.addSubview(self.firstButton)
         self.view.addSubview(self.secondImage)
+        self.view.addSubview(self.secondButton)
         self.view.addSubview(self.buttomButton)
         self.navigationItem.rightBarButtonItem = self.barButton
     }
@@ -159,53 +192,65 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         }
         
         self.titleLabel.snp.makeConstraints {
-            $0.top.equalTo(self.describeLabel.snp.bottom).offset(30)
+            $0.top.equalTo(self.describeLabel.snp.bottom).offset(Metric.titleTop)
             $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.trailing.equalToSafeArea(self.view).offset(-Metric.viewSide)
         }
         
         self.titleTextField.snp.makeConstraints {
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(20)
+            $0.top.equalTo(self.titleLabel.snp.bottom).offset(Metric.titleTextFieldTop)
             $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.trailing.equalToSafeArea(self.view).offset(-Metric.viewSide)
-            $0.height.equalTo(50)
+            $0.height.equalTo(Metric.titleTextFieldHeight)
         }
         
         self.explainLabel.snp.makeConstraints {
-            $0.top.equalTo(self.titleTextField.snp.bottom).offset(20)
+            $0.top.equalTo(self.titleTextField.snp.bottom).offset(Metric.explainLabelTop)
             $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.trailing.equalToSafeArea(self.view).offset(-Metric.viewSide)
         }
         
         self.textView.snp.makeConstraints {
-            $0.top.equalTo(self.explainLabel.snp.bottom).offset(10)
+            $0.top.equalTo(self.explainLabel.snp.bottom).offset(Metric.TextViewTop)
             $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.trailing.equalToSafeArea(self.view).offset(-Metric.viewSide)
             $0.height.equalTo(self.view.frame.height / 4)
         }
         
         self.selectView.snp.makeConstraints {
-            $0.top.equalTo(self.textView.snp.bottom).offset(20)
+            $0.top.equalTo(self.textView.snp.bottom).offset(Metric.imagesTop)
             $0.left.equalToSuperview().offset(Metric.viewSide)
-            $0.height.width.equalTo(65)
+            $0.height.width.equalTo(Metric.imagesSize)
         }
         
         self.firstImage.snp.makeConstraints {
-            $0.top.equalTo(self.textView.snp.bottom).offset(20)
-            $0.left.equalTo(self.selectView.snp.right).offset(10)
-            $0.height.width.equalTo(65)
+            $0.top.equalTo(self.textView.snp.bottom).offset(Metric.imagesTop)
+            $0.left.equalTo(self.selectView.snp.right).offset(Metric.imagesSide)
+            $0.height.width.equalTo(Metric.imagesSize)
+        }
+        
+        self.firstButton.snp.makeConstraints {
+            $0.height.width.equalTo(Metric.deleteButtonSize)
+            $0.centerX.equalTo(self.firstImage.snp.right)
+            $0.centerY.equalTo(self.firstImage.snp.top)
         }
         
         self.secondImage.snp.makeConstraints {
-            $0.top.equalTo(self.textView.snp.bottom).offset(20)
-            $0.left.equalTo(self.firstImage.snp.right).offset(10)
-            $0.height.width.equalTo(65)
+            $0.top.equalTo(self.textView.snp.bottom).offset(Metric.imagesTop)
+            $0.left.equalTo(self.firstImage.snp.right).offset(Metric.imagesSide)
+            $0.height.width.equalTo(Metric.imagesSize)
+        }
+        
+        self.secondButton.snp.makeConstraints {
+            $0.height.width.equalTo(Metric.deleteButtonSize)
+            $0.centerX.equalTo(self.secondImage.snp.right)
+            $0.centerY.equalTo(self.secondImage.snp.top)
         }
         
         self.buttomButton.snp.makeConstraints {
             $0.left.right.equalToSafeArea(self.view)
-            $0.height.equalTo(60)
-            $0.bottom.equalToSafeArea(self.view)
+            $0.height.equalTo(Metric.ButtonButtonHeight)
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -232,11 +277,20 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        self.selectView.rx.tapGesture()
-            .when(.recognized)
+        self.selectView.tap.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.pickImage(currentImage: reactor.currentState.image.count)
             }).disposed(by: disposeBag)
+        
+        self.firstButton.rx.tap.asObservable()
+            .map { Reactor.Action.deleteImage(0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        self.secondButton.rx.tap.asObservable()
+            .map { Reactor.Action.deleteImage(1) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
         self.buttomButton.rx.tap.asObservable()
             .map { Reactor.Action.sendMessage }
@@ -252,15 +306,28 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         reactor.state.map { $0.image }.asObservable()
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
+                
+                self.firstImage.image = nil
+                self.firstButton.isHidden = true
+                self.secondImage.image = nil
+                self.secondButton.isHidden = true
+                
                 $0.enumerated().forEach {
                     if $0.0 == 0 {
                         self.firstImage.image = $0.1
+                        self.firstButton.isHidden = false
                     }
                     else if $0.0 == 1 {
                         self.secondImage.image = $0.1
+                        self.secondButton.isHidden = false
                     }
                 }
+                
             }).disposed(by: disposeBag)
+        
+        reactor.state.map { "\($0.image.count)/2" }.asObservable()
+            .bind(to: self.selectView.label.rx.text)
+            .disposed(by: disposeBag)
     }
     
     
@@ -323,25 +390,6 @@ private extension SendUsMessageViewController {
                 .bind(to: self.reactor!.action )
                 .disposed(by: self.disposeBag)
         })
-    }
-    
-    func UIBind() {
-        RxKeyboard.instance.visibleHeight
-            .distinctUntilChanged()
-            .drive(onNext: { [weak self] height in
-                guard let self = self else { return }
-                
-                self.buttomButton.snp.updateConstraints {
-                    $0.bottom.equalToSafeArea(self.view).offset(-height)
-                }
-
-                // animation
-                UIView.animate(withDuration: 0.1) {
-                    self.view.layoutIfNeeded()
-                }
-
-            })
-            .disposed(by: disposeBag)
     }
 }
 

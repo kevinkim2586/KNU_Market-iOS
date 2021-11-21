@@ -12,7 +12,7 @@ protocol BaseAPI: TargetType {}
 
 extension BaseAPI {
     
-    var baseURL: URL { URL(string: "https://knumarket.kro.kr:5051/api/v1")! }
+    var baseURL: URL { URL(string: K.API_BASE_URL)! }
     
     var headers: [String : String]? { nil }
     

@@ -5,10 +5,23 @@ import BSImagePicker
 import SafariServices
 import Photos
 import PMAlertController
+import RxSwift
+import RxCocoa
 
 //MARK: - Alert Methods
 
 extension UIViewController {
+    
+    func presentCustomAlert(title: String, message: String, cancelButtonTitle: String, actionButtonTitle: String, action: (()-> Void)) {
+        let VC = KMCustomAlertViewController(
+            title: title,
+            message: message,
+            cancelButtonTitle: cancelButtonTitle,
+            actionButtonTitle: actionButtonTitle,
+            action: action)
+        VC.modalPresentationStyle = .overFullScreen
+        self.present(VC, animated: false)
+    }
     
     // Custom Alert
     func presentKMAlertOnMainThread(title: String, message: String, buttonTitle: String, attributedMessageString: NSAttributedString? = nil) {

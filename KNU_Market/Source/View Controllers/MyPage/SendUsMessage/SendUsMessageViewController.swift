@@ -287,6 +287,11 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        self.secondButton.rx.tap.asObservable()
+            .map { Reactor.Action.deleteImage(1) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         self.buttomButton.rx.tap.asObservable()
             .map { Reactor.Action.sendMessage }
             .bind(to: reactor.action)

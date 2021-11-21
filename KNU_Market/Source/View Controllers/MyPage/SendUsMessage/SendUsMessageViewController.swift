@@ -3,7 +3,6 @@ import UIKit
 import Then
 import ReactorKit
 import RxGesture
-import RxKeyboard
 import UITextView_Placeholder
 import SnapKit
 import BSImagePicker
@@ -37,7 +36,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         static let imagesTop = 20.f
         static let imagesSide = 10.f
         
-        static let ButtonButtonHeight = 60.f
+        static let ButtonButtonHeight = 80.f
         
         // Delete Button
         static let deleteButtonSize = 20.f
@@ -47,6 +46,9 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         static let titleFont = UIFont.systemFont(ofSize: 14, weight: .light)
         static let tintFont = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let textFont = UIFont.systemFont(ofSize: 13, weight: .regular)
+        
+        // Bottom Button
+        static let buttonFont = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
     fileprivate struct Style {
@@ -156,7 +158,6 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIBind()
     }
     
     //MARK: - UI Setup
@@ -246,7 +247,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         self.buttomButton.snp.makeConstraints {
             $0.left.right.equalToSafeArea(self.view)
             $0.height.equalTo(Metric.ButtonButtonHeight)
-            $0.bottom.equalToSafeArea(self.view)
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -375,25 +376,6 @@ private extension SendUsMessageViewController {
                 .bind(to: self.reactor!.action )
                 .disposed(by: self.disposeBag)
         })
-    }
-    
-    func UIBind() {
-        RxKeyboard.instance.visibleHeight
-            .distinctUntilChanged()
-            .drive(onNext: { [weak self] height in
-                guard let self = self else { return }
-                
-                self.buttomButton.snp.updateConstraints {
-                    $0.bottom.equalToSafeArea(self.view).offset(-height)
-                }
-
-                // animation
-                UIView.animate(withDuration: 0.1) {
-                    self.view.layoutIfNeeded()
-                }
-
-            })
-            .disposed(by: disposeBag)
     }
 }
 

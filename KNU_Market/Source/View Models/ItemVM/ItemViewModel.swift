@@ -107,21 +107,8 @@ class ItemViewModel {
     
     var userIncludedURL: URL?
     
-    
-    
-    
     // 공구글
-//    var postDetail: NSMutableAttributedString? {
-//        
-//        
-//        if let userIncludedURL = userIncludedURL {
-//            
-//        }
-//        
-//        if let postDetail = model?.itemDetail {
-//        }
-//    }
-    
+
     var postDetailWithUrl: NSMutableAttributedString?
     
     

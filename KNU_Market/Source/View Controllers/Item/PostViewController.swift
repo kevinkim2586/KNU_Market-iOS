@@ -37,6 +37,9 @@ class PostViewController: BaseViewController {
         tableView.separatorColor = .clear
         tableView.separatorStyle = .none
         tableView.allowsSelection = true
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.tintColor = .clear
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshPage), for: .valueChanged)
         return tableView
     }()
     
@@ -172,7 +175,9 @@ extension PostViewController {
     
 
     @objc func refreshPage() {
-      
+        postTableView.refreshControl?.endRefreshing()
+        showProgressBar()
+        viewModel.fetchItemDetails()
     }
     
     private func presentActionSheet(with actions: [UIAlertAction], title: String?) {
@@ -322,6 +327,7 @@ extension PostViewController: KMPostBottomViewDelegate {
 extension PostViewController: ItemViewModelDelegate {
     
     func didFetchItemDetails() {
+        dismissProgressBar()
         DispatchQueue.main.async {
             self.postTableView.refreshControl?.endRefreshing()
             self.updatePostInformation()

@@ -165,7 +165,7 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // push to answer
+//        DetailMessageViewController(reactor: DetailMessageViewReactor(title: title, content: content, answer: nil))
     }
     
     private func getList() {
@@ -178,9 +178,9 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
             .validate(statusCode: 200..<300)
             .responseJSON{res in
                 do {
-                    let model = try JSONDecoder().decode([InquiryListModel].self, from: res.data!)
+                    let model = try JSONDecoder().decode(InquiryListModel.self, from: res.data!)
                     self.inquiryModel.removeAll()
-                    self.inquiryModel.append(contentsOf: model)
+                    self.inquiryModel.append(model)
                     self.inquiryList.reloadData()
                     print(model)
                 } catch {
@@ -191,7 +191,7 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
     
     private func formatDate(_ startDate: String)-> String {
         let finalDate = startDate.components(separatedBy: ["-", ":"," "])
-        let formattedDate = finalDate[1] + "월 " + finalDate[2] + "일 m" + finalDate[3] + ":" + finalDate[4]
+        let formattedDate = finalDate[1] + "월 " + finalDate[2] + "일 " + finalDate[3] + ":" + finalDate[4]
         
         return formattedDate
     }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		622270B0274A481E00FDC47B /* DetailMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270AF274A481E00FDC47B /* DetailMessageViewController.swift */; };
 		622270B3274A489500FDC47B /* DetailMessageViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270B2274A489500FDC47B /* DetailMessageViewReactor.swift */; };
+		622270B6274A77AB00FDC47B /* ImageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270B5274A77AB00FDC47B /* ImageSelectionView.swift */; };
 		625B0E2A2741D9BC003968BA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E292741D9BC003968BA /* Network.swift */; };
 		625B0E2C2741DED7003968BA /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E2B2741DED7003968BA /* ModelType.swift */; };
 		625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E2D2741DF4D003968BA /* NetworkResult.swift */; };
@@ -174,6 +175,7 @@
 		22C0F11694A1DA76842979BF /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		622270AF274A481E00FDC47B /* DetailMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageViewController.swift; sourceTree = "<group>"; };
 		622270B2274A489500FDC47B /* DetailMessageViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageViewReactor.swift; sourceTree = "<group>"; };
+		622270B5274A77AB00FDC47B /* ImageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionView.swift; sourceTree = "<group>"; };
 		625B0E292741D9BC003968BA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		625B0E2B2741DED7003968BA /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
 		625B0E2D2741DF4D003968BA /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
@@ -358,6 +360,14 @@
 				622270B2274A489500FDC47B /* DetailMessageViewReactor.swift */,
 			);
 			path = DetailMessage;
+			sourceTree = "<group>";
+		};
+		622270B4274A779600FDC47B /* Mypage */ = {
+			isa = PBXGroup;
+			children = (
+				622270B5274A77AB00FDC47B /* ImageSelectionView.swift */,
+			);
+			path = Mypage;
 			sourceTree = "<group>";
 		};
 		625B0E282741D9AB003968BA /* Moya */ = {
@@ -623,6 +633,7 @@
 		7C79E11026E0C27B0004508A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				622270B4274A779600FDC47B /* Mypage */,
 				7CEDBB64270307D50078F5E1 /* Empty View */,
 				7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */,
 				7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */,
@@ -1230,6 +1241,7 @@
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
 				7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */,
 				7CCDB1EA26A2BCD30092F28D /* ChatTableViewCell.swift in Sources */,
+				622270B6274A77AB00FDC47B /* ImageSelectionView.swift in Sources */,
 				625B0E3D2741F741003968BA /* MyPageAPI.swift in Sources */,
 				7CAC1E74265BC84800EAA3A5 /* ItemTableViewModel.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */,

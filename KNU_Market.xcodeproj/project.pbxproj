@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		622270AA2749EDD600FDC47B /* ImageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270A92749EDD600FDC47B /* ImageSelectionView.swift */; };
+		622270B0274A481E00FDC47B /* DetailMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270AF274A481E00FDC47B /* DetailMessageViewController.swift */; };
+		622270B3274A489500FDC47B /* DetailMessageViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270B2274A489500FDC47B /* DetailMessageViewReactor.swift */; };
 		625B0E2A2741D9BC003968BA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E292741D9BC003968BA /* Network.swift */; };
 		625B0E2C2741DED7003968BA /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E2B2741DED7003968BA /* ModelType.swift */; };
 		625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B0E2D2741DF4D003968BA /* NetworkResult.swift */; };
@@ -171,7 +172,8 @@
 
 /* Begin PBXFileReference section */
 		22C0F11694A1DA76842979BF /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
-		622270A92749EDD600FDC47B /* ImageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionView.swift; sourceTree = "<group>"; };
+		622270AF274A481E00FDC47B /* DetailMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageViewController.swift; sourceTree = "<group>"; };
+		622270B2274A489500FDC47B /* DetailMessageViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageViewReactor.swift; sourceTree = "<group>"; };
 		625B0E292741D9BC003968BA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		625B0E2B2741DED7003968BA /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
 		625B0E2D2741DF4D003968BA /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
@@ -349,12 +351,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		622270A82749EDBE00FDC47B /* SendUSMessage */ = {
+		622270B1274A487200FDC47B /* DetailMessage */ = {
 			isa = PBXGroup;
 			children = (
-				622270A92749EDD600FDC47B /* ImageSelectionView.swift */,
+				622270AF274A481E00FDC47B /* DetailMessageViewController.swift */,
+				622270B2274A489500FDC47B /* DetailMessageViewReactor.swift */,
 			);
-			path = SendUSMessage;
+			path = DetailMessage;
 			sourceTree = "<group>";
 		};
 		625B0E282741D9AB003968BA /* Moya */ = {
@@ -620,7 +623,6 @@
 		7C79E11026E0C27B0004508A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				622270A82749EDBE00FDC47B /* SendUSMessage */,
 				7CEDBB64270307D50078F5E1 /* Empty View */,
 				7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */,
 				7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */,
@@ -943,6 +945,7 @@
 				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
 				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
 				62C2E44127363D4C00F037B9 /* SendUsMessage */,
+				622270B1274A487200FDC47B /* DetailMessage */,
 				7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */,
 			);
 			path = MyPage;
@@ -1142,6 +1145,7 @@
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */,
 				7C8E668D26E875A00060F37B /* UIImageView + Extension.swift in Sources */,
+				622270B0274A481E00FDC47B /* DetailMessageViewController.swift in Sources */,
 				626AC5B227324C1200E907E8 /* CGFloatLiteral.swift in Sources */,
 				625B0E2C2741DED7003968BA /* ModelType.swift in Sources */,
 				7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */,
@@ -1190,6 +1194,7 @@
 				7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */,
 				7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */,
 				7C036AB82696BE4C00F6C29B /* Date + Extension.swift in Sources */,
+				622270B3274A489500FDC47B /* DetailMessageViewReactor.swift in Sources */,
 				625B0E3F2741F75C003968BA /* BaseAPI.swift in Sources */,
 				7C4CA63326F4BF3200F4BCA7 /* IDInputViewController.swift in Sources */,
 				7CC1B59C26D4FC110007F99B /* UIView + Extension.swift in Sources */,
@@ -1214,7 +1219,6 @@
 				7C8839E62643CD7700F9F78C /* UploadItemViewModel.swift in Sources */,
 				7C132BF2265397B200BE5F40 /* ProgressHUD.swift in Sources */,
 				7C8E668B26E756C00060F37B /* ChatType.swift in Sources */,
-				622270AA2749EDD600FDC47B /* ImageSelectionView.swift in Sources */,
 				7C184B8326B103F1006C0FAD /* Room.swift in Sources */,
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7CA78FF626CDFC510019B06F /* AlertViewController.swift in Sources */,

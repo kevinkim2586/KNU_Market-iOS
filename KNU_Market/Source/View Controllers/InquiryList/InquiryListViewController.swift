@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Alamofire
+import SDWebImage
 
 class InquiryListViewController: UIViewController {
     
@@ -15,15 +16,19 @@ class InquiryListViewController: UIViewController {
     
     private let profileImageView: UIImageView = {
         let profileImg = UIImageView()
-        profileImg.layer.cornerRadius = profileImg.bounds.height * 0.5
         profileImg.contentMode = .scaleAspectFit
+        
+        let url = URL(string: K.MEDIA_REQUEST_URL + User.shared.profileImageUID)
+        profileImg.sd_setImage(with: url, placeholderImage: UIImage(named: K.Images.chatBubbleIcon), options: .continueInBackground, context: .none)
+        
         return profileImg
     }()
     
     private let profileNameLabel: UILabel = {
         let profileName = UILabel()
-        profileName.font = .systemFont(ofSize: 12)
+        profileName.font = .systemFont(ofSize: 15)
         profileName.adjustsFontSizeToFitWidth = true
+        profileName.text = User.shared.nickname
         return profileName
     }()
     
@@ -59,17 +64,28 @@ class InquiryListViewController: UIViewController {
     
     private let inquiryList: UITableView = {
         let tableView = UITableView()
-        tableView.register(InquiryTableViewCell.self, forCellReuseIdentifier: "InquiryTableViewCell")
+        tableView.register(InquiryTableViewCell.self, forCellReuseIdentifier: "InquiryCell")
+        tableView.rowHeight = 60
+        tableView.separatorStyle = .none
         return tableView
     }()
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSubViews()
+        setNavigationBar()
         inquiryList.delegate = self
         inquiryList.dataSource = self
+        self.view.backgroundColor = .white
+        print(User.shared.profileImageUID)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        profileImageView.layer.cornerRadius = profileImageView.bounds.size.width * 0.5
+        getList()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         getList()
     }
     
@@ -77,41 +93,68 @@ class InquiryListViewController: UIViewController {
         [profileImageView, profileNameLabel, isDoneImageView, isDoneLabel, isInPrograssImageView, isInPrograssLabel, inquiryList].forEach({ self.view.addSubview($0) })
         
         profileImageView.snp.makeConstraints {
-            $0.width.height.equalTo(40)
-            $0.top.equalToSuperview().offset(30)
+            $0.width.height.equalTo(52)
+            $0.top.equalToSafeArea(view).offset(50)
             $0.centerX.equalToSuperview()
         }
         
         profileNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
-            $0.centerX.equalToSuperview()
+            $0.top.equalTo(profileImageView.snp.bottom).offset(10)
+            $0.centerX.equalToSafeArea(view)
         }
         
         isDoneImageView.snp.makeConstraints {
             $0.top.equalTo(profileNameLabel.snp.bottom).offset(40)
-            $0.leading.equalTo(200)
-            $0.width.equalTo(11)
-            $0.height.equalTo(7)
+            $0.trailing.equalTo(isDoneLabel.snp.leading).offset(-3)
+            $0.width.equalTo(20)
+            $0.height.equalTo(10)
         }
         
         isDoneLabel.snp.makeConstraints {
-            $0.top.equalTo(profileNameLabel.snp.bottom).offset(40)
-            $0.leading.equalTo(isDoneImageView.snp.trailing).offset(5)
+            $0.centerY.equalTo(isDoneImageView)
+            $0.trailing.equalTo(isInPrograssImageView.snp.leading).offset(-7)
         }
+        
+        isInPrograssImageView.snp.makeConstraints {
+            $0.top.equalTo(profileNameLabel.snp.bottom).offset(40)
+            $0.trailing.equalTo(isInPrograssLabel.snp.leading).offset(-3)
+            $0.width.equalTo(20)
+            $0.height.equalTo(10)
+        }
+        
+        isInPrograssLabel.snp.makeConstraints {
+            $0.top.equalTo(profileNameLabel.snp.bottom).offset(40)
+            $0.trailing.equalToSafeArea(view).offset(-20)
+        }
+        
+        inquiryList.snp.makeConstraints {
+            $0.top.equalTo(isInPrograssLabel.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSafeArea(view)
+            $0.width.equalToSafeArea(view)
+        }
+    }
+    
+    func setNavigationBar() {
+        self.navigationController?.navigationBar.backgroundColor = nil
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+        self.navigationItem.title = "문의내역"
     }
 }
 
 extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        inquiryModel.count
+        return inquiryModel.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "InquiryTableViewCell") as! InquiryTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "InquiryCell", for: indexPath)
+                        as? InquiryTableViewCell else { return UITableViewCell() }
         
-        cell.dateLabel.text = inquiryModel[indexPath.row].date
-        cell.inquieryTitleLabel.text = inquiryModel[indexPath.row].title
-        
+        cell.dateLabel.text = formatDate(inquiryModel[indexPath.row].date)
+        cell.inquieryTitleLabel.text = ": " + inquiryModel[indexPath.row].title
+
         if inquiryModel[indexPath.row].isArchived == true {
             cell.prograssImageView.image = UIImage(named: "doneImg")
         } else {
@@ -121,13 +164,17 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // push to answer
+    }
+    
     private func getList() {
         let url = "https://knumarket.kro.kr:5051/api/v1/reports?page=1"
         AF.request(url,
                    method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default,
-                   headers: ["authentication": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFoclJodUJTSnRuZ2NKWEhxRDU3QUQiLCJpYXQiOjE2MzYxOTIyNTEsImV4cCI6MTYzNjE5OTQ1MX0.9kY1PPmEEFstaYKQgDB7tG-lCkIgAh5b6-wqHNtafrc"])
+                   headers: ["authentication": User.shared.accessToken])
             .validate(statusCode: 200..<300)
             .responseJSON{res in
                 do {
@@ -135,9 +182,17 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
                     self.inquiryModel.removeAll()
                     self.inquiryModel.append(contentsOf: model)
                     self.inquiryList.reloadData()
+                    print(model)
                 } catch {
                     print(error)
                 }
             }
+    }
+    
+    private func formatDate(_ startDate: String)-> String {
+        let finalDate = startDate.components(separatedBy: ["-", ":"," "])
+        let formattedDate = finalDate[1] + "월 " + finalDate[2] + "일 m" + finalDate[3] + ":" + finalDate[4]
+        
+        return formattedDate
     }
 }

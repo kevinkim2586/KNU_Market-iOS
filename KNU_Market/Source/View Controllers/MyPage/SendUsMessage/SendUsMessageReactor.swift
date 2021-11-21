@@ -21,6 +21,7 @@ final class SendUsMessageReactor: Reactor {
         case sendMessage
         case updateTitle(String)
         case updateContent(String)
+        case deleteImage(Int)
     }
     
     enum Mutation {
@@ -28,6 +29,7 @@ final class SendUsMessageReactor: Reactor {
         case setLoading(Bool)
         case setTitle(String)
         case setContent(String)
+        case deleteImage(Int)
     }
     
     struct State {
@@ -55,16 +57,19 @@ final class SendUsMessageReactor: Reactor {
         case let .updateContent(content):
             return Observable.just(Mutation.setContent(content))
             
+        case let .deleteImage(idx):
+            return Observable.just(Mutation.deleteImage(idx))
+            
         case .sendMessage:
             var data: [Data] = []
-            
+
             self.currentState.image.forEach {
                 data.append($0.jpegData(compressionQuality: 0.6)!)
             }
-            
+
             return Observable.merge([
                 Observable.just(Mutation.setLoading(true)),
-                
+
                 self.myPageService.writeReport(self.currentState.title, self.currentState.content, data.first, data.last)
                     .map { result in
                         switch result {
@@ -74,7 +79,7 @@ final class SendUsMessageReactor: Reactor {
                             print(error)
                         }
                     }.asObservable().flatMap { _ in Observable.empty() },
-                
+
                 Observable.just(Mutation.setLoading(false))
             ])
         }
@@ -97,9 +102,12 @@ final class SendUsMessageReactor: Reactor {
             
         case let .setLoading(isLoading):
             state.isLoading = isLoading
+            
+        case let .deleteImage(idx):
+            state.image.remove(at: idx)
         }
         
         return state
     }
+    
 }
-

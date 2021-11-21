@@ -19,7 +19,7 @@ extension MyPageAPI: BaseAPI {
     var path: String {
         switch self {
         case .writeReport:
-            return "/report"
+            return "report"
         }
     }
     
@@ -59,12 +59,14 @@ extension MyPageAPI: BaseAPI {
             
             // add medias
             if let media1 = media1 {
-                multipartData.append(MultipartFormData(provider: .data(media1), name: "medias", fileName: "file.jpg", mimeType: "image/jpg"))
-            }
-            if let media2 = media2 {
-                multipartData.append(MultipartFormData(provider: .data(media2), name: "medias", fileName: "file.jpg", mimeType: "image/jpg"))
+                multipartData.append(MultipartFormData(provider: .data(media1), name: "medias", fileName: "file.jpeg", mimeType: "image/jpeg"))
             }
             
+            if let media2 = media2 {
+                multipartData.append(MultipartFormData(provider: .data(media2), name: "medias", fileName: "file.jpeg", mimeType: "image/jpeg"))
+            }
+            
+            print(multipartData)
             return .uploadMultipart(multipartData)
             
 //        default:

@@ -19,7 +19,7 @@ class InquiryTableViewCell: UITableViewCell {
     
     let inquieryTitleLabel: UILabel = {
         let inquieryTitleLabel = UILabel()
-        inquieryTitleLabel.font = .boldSystemFont(ofSize: 13)
+        inquieryTitleLabel.font = .boldSystemFont(ofSize: 14)
         inquieryTitleLabel.textColor = .black
         return inquieryTitleLabel
     }()
@@ -30,11 +30,15 @@ class InquiryTableViewCell: UITableViewCell {
         return prograssImg
     }()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setUpSubViews()
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -42,21 +46,24 @@ class InquiryTableViewCell: UITableViewCell {
     }
     
     private func setUpSubViews() {
-        [dateLabel, inquieryTitleLabel, prograssImageView].forEach({ self.addSubview($0)})
+        self.addSubview(self.contentView)
+        [dateLabel, inquieryTitleLabel, prograssImageView].forEach({ self.contentView.addSubview($0)})
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
+            $0.top.equalToSafeArea(contentView).offset(10)
             $0.leading.equalTo(25)
         }
         
         inquieryTitleLabel.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(5)
             $0.leading.equalTo(25)
+            $0.bottom.equalTo(-17)
         }
         
         prograssImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(25)
+            $0.trailing.equalTo(-25)
+            $0.width.height.equalTo(34)
         }
     }
 

@@ -11,7 +11,7 @@ import Foundation
 import ReactorKit
 import RxRelay
 
-final class DetailMessageViewReactor: Reactor, Stepper {
+final class DetailMessageViewReactor: Reactor {
     
     let initialState: State
     
@@ -19,24 +19,21 @@ final class DetailMessageViewReactor: Reactor, Stepper {
         
     }
     
-    enum Mutation {
-        
-    }
+    typealias Mutation = NoMutation
     
     struct State {
-        
+        var title: String
+        var content: String
+        var answer: String
     }
     
-    init() {
-        self.initialState = State()
+    init(title: String, content: String, answer: String?) {
+        self.initialState = State(title: title, content: content, answer: answer ?? "")
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         
     }
     
-    func reduce(state: State, mutation: Mutation) -> State {
-        
-    }
 }
 

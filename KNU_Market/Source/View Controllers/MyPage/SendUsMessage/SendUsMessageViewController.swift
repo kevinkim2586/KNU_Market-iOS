@@ -78,12 +78,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         $0.placeholder = "전하고 싶은 말을 자유롭게 남겨주세요!"
     }
     
-    let selectView = UIImageView().then {
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 5
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.backgroundColor = .clear
-    }
+    let selectView = ImageSelectionView()
     
     let firstImage = UIImageView().then {
         $0.layer.borderWidth = 1
@@ -229,8 +224,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        self.selectView.rx.tapGesture()
-            .when(.recognized)
+        self.selectView.tap.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.pickImage(currentImage: reactor.currentState.image.count)
             }).disposed(by: disposeBag)
@@ -252,6 +246,10 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
                     }
                 }
             }).disposed(by: disposeBag)
+        
+        reactor.state.map { "\($0.image.count)/2" }.asObservable()
+            .bind(to: self.selectView.label.rx.text)
+            .disposed(by: disposeBag)
     }
     
     

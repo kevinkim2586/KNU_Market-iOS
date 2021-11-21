@@ -57,14 +57,14 @@ final class SendUsMessageReactor: Reactor {
             
         case .sendMessage:
             var data: [Data] = []
-            
+
             self.currentState.image.forEach {
                 data.append($0.jpegData(compressionQuality: 0.6)!)
             }
-            
+
             return Observable.merge([
                 Observable.just(Mutation.setLoading(true)),
-                
+
                 self.myPageService.writeReport(self.currentState.title, self.currentState.content, data.first, data.last)
                     .map { result in
                         switch result {
@@ -74,7 +74,7 @@ final class SendUsMessageReactor: Reactor {
                             print(error)
                         }
                     }.asObservable().flatMap { _ in Observable.empty() },
-                
+
                 Observable.just(Mutation.setLoading(false))
             ])
         }
@@ -101,5 +101,5 @@ final class SendUsMessageReactor: Reactor {
         
         return state
     }
+    
 }
-

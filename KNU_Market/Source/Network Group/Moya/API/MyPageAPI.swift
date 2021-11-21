@@ -19,7 +19,7 @@ extension MyPageAPI: BaseAPI {
     var path: String {
         switch self {
         case .writeReport:
-            return "/report"
+            return "report"
         }
     }
     

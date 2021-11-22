@@ -299,6 +299,13 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
+        Observable.combineLatest(
+            self.titleTextField.rx.text.orEmpty.map { !$0.isEmpty }.asObservable(),
+            self.textView.rx.text.orEmpty.map { !$0.isEmpty }.asObservable()
+        ).map { $0 && $1 }
+        .bind(to: self.buttomButton.rx.isEnabled)
+        .disposed(by: disposeBag)
+        
         reactor.state.map { $0.image }.asObservable()
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }

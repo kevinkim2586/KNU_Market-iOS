@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.4)
+  - Atributika (4.10.1)
   - BSImagePicker (3.3.1)
   - Firebase/Analytics (8.9.1):
     - Firebase/Core
@@ -172,6 +173,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - Atributika
   - BSImagePicker (~> 3.1)
   - Firebase/Analytics
   - Firebase/Core
@@ -212,6 +214,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Atributika
     - BSImagePicker
     - Firebase
     - FirebaseAnalytics
@@ -261,6 +264,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  Atributika: 47e778507cfb3cd2c996278b0285221a62e97d71
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   Firebase: fb5114cd2bf96e2ff7bcb01d0d9a156cf5fd2f07
   FirebaseAnalytics: 4ab446ce08a3fe52e8a4303dd997cf26276bf968
@@ -308,6 +312,6 @@ SPEC CHECKSUMS:
   ViewAnimator: a9ceed80266e00fd435ec4fb99b2df64d580d0e4
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: d54ded1e2fda96bdf4bd387375a7ed6689766698
+PODFILE CHECKSUM: 789553746f08d5d7b1c7cafd7b3ccf4b02ee9196
 
 COCOAPODS: 1.11.2

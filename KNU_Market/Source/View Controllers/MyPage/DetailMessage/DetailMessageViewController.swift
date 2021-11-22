@@ -33,11 +33,11 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
         static let textFont = UIFont.systemFont(ofSize: 13, weight: .regular)
         
         static let highlightFont = Style("h")
-            .font(.systemFont(ofSize: 10, weight: .bold))
-            .foregroundColor(Styles.mainColor!)
+            .font(.systemFont(ofSize: 14, weight: .bold))
+            .foregroundColor(Styles.mainColor!).underlineStyle(.single)
         static let defaultFont = Style
-            .font(.systemFont(ofSize: 10, weight: .bold))
-            .foregroundColor(.black)
+            .font(.systemFont(ofSize: 14, weight: .bold))
+            .foregroundColor(.darkGray)
     }
     
     fileprivate struct Styles {
@@ -105,6 +105,8 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
     }
     
     let resendButton = UIButton(type: .system).then {
+        $0.titleLabel?.numberOfLines = 2
+        $0.titleLabel?.textAlignment = .center
         $0.setAttributedTitle(
             "해당 답변으로 문제 해결이 되지 않으셨다면\n<h>다시 문의</h> 주시면 도움드리겠습니다."
             .style(tags: Fonts.highlightFont)
@@ -213,6 +215,13 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
     
     // MARK: - Configuring
     func bind(reactor: Reactor) {
+        self.resendButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+                self?.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
         reactor.state.map { $0.title }.asObservable()
             .bind(to: self.titleTextField.rx.text)
             .disposed(by: disposeBag)
@@ -226,6 +235,7 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
                 guard let self = self else { return }
                 self.answerLabel.isHidden = $0
                 self.answerTextView.isHidden = $0
+                self.resendButton.isHidden = $0
                 self.noAnswerLabel.isHidden = !$0
                 self.noAnswerImage.isHidden = !$0
             })
@@ -244,7 +254,7 @@ import SwiftUI
 struct DetailMessageVC: PreviewProvider {
     
     static var previews: some SwiftUI.View {
-        DetailMessageViewController(reactor: DetailMessageViewReactor(title: "test", content: "test", answer: "test")).toPreview()
+        DetailMessageViewController(reactor: DetailMessageViewReactor(title: "test", content: "test", answer: "")).toPreview()
     }
 }
 #endif

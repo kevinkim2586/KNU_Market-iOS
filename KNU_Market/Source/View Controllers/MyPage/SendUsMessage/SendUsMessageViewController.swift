@@ -14,7 +14,6 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     
     //MARK: - Properties
     var disposeBag: DisposeBag = DisposeBag()
-    private var userManager: UserManager?
     
     //MARK: - Constants
     
@@ -140,15 +139,11 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     
     //MARK: - Initialization
     
-    init(userManager: UserManager, reactor: Reactor) {
+    init(reactor: Reactor) {
         super.init()
-        self.userManager = userManager
         
         self.hidesBottomBarWhenPushed = true
-        
-        defer {
-            self.reactor = reactor
-        }
+        defer { self.reactor = reactor }
     }
     
     required init?(coder: NSCoder) {
@@ -258,6 +253,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         super.setupStyle()
     
         self.title = "크누마켓팀과 대화하기"
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -400,7 +396,7 @@ import SwiftUI
 struct SendUsMessageVC: PreviewProvider {
     
     static var previews: some SwiftUI.View {
-        SendUsMessageViewController(userManager: UserManager(), reactor: SendUsMessageReactor()).toPreview()
+        SendUsMessageViewController(reactor: SendUsMessageReactor()).toPreview()
     }
 }
 #endif

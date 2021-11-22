@@ -41,6 +41,7 @@ target 'KNU_Market' do
   pod 'UITextView+Placeholder'
   pod 'Hero'
   pod 'MHLoadingButton'
+  #pod 'Atributika'
   
   # Architecture
   pod 'ReactorKit'

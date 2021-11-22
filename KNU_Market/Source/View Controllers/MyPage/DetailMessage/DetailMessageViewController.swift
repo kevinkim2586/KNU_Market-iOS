@@ -8,6 +8,7 @@
 import UIKit
 
 import ReactorKit
+import Atributika
 
 final class DetailMessageViewController: BaseViewController, ReactorKit.View {
     
@@ -30,9 +31,16 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
         static let titleFont = UIFont.systemFont(ofSize: 14, weight: .light)
         static let tintFont = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let textFont = UIFont.systemFont(ofSize: 13, weight: .regular)
+        
+        static let highlightFont = Style("h")
+            .font(.systemFont(ofSize: 10, weight: .bold))
+            .foregroundColor(Styles.mainColor!)
+        static let defaultFont = Style
+            .font(.systemFont(ofSize: 10, weight: .bold))
+            .foregroundColor(.black)
     }
     
-    fileprivate struct Style {
+    fileprivate struct Styles {
         static let mainColor = UIColor(named: "AppDefaultColor")
         
         static let borderWidth = 1.f
@@ -49,10 +57,10 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
     
     let titleTextField = UITextField().then {
         $0.borderStyle = .roundedRect
-        $0.layer.borderWidth = Style.borderWidth
-        $0.layer.cornerRadius = Style.cornerRadius
+        $0.layer.borderWidth = Styles.borderWidth
+        $0.layer.cornerRadius = Styles.cornerRadius
         $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.tintColor = Style.mainColor
+        $0.tintColor = Styles.mainColor
         $0.font = Fonts.textFont
         $0.isEnabled = false
     }
@@ -64,26 +72,45 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
     
     let explainTextView = UITextView().then {
         $0.font = Fonts.textFont
-        $0.layer.borderWidth = Style.borderWidth
-        $0.tintColor = Style.mainColor
+        $0.layer.borderWidth = Styles.borderWidth
+        $0.tintColor = Styles.mainColor
         $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.layer.cornerRadius = Style.cornerRadius
+        $0.layer.cornerRadius = Styles.cornerRadius
         $0.isEditable = false
     }
     
     let answerLabel = UILabel().then {
         $0.text = "답변 내용"
         $0.font = Fonts.tintFont
-        $0.textColor = Style.mainColor
+        $0.textColor = Styles.mainColor
     }
     
     let answerTextView = UITextView().then {
         $0.font = Fonts.textFont
-        $0.layer.borderWidth = Style.borderWidth
-        $0.tintColor = Style.mainColor
+        $0.layer.borderWidth = Styles.borderWidth
+        $0.tintColor = Styles.mainColor
         $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.layer.cornerRadius = Style.cornerRadius
+        $0.layer.cornerRadius = Styles.cornerRadius
         $0.isEditable = false
+    }
+    
+    let noAnswerLabel = UILabel().then {
+        $0.text = "조금만 기다려주시면 답변 드리겠습니다"
+        $0.textColor = .gray
+        $0.font = Fonts.tintFont
+    }
+    
+    let noAnswerImage = UIImageView().then {
+        $0.image = UIImage(named: "no_answer_image")
+    }
+    
+    let resendButton = UIButton(type: .system).then {
+        $0.setAttributedTitle(
+            "해당 답변으로 문제 해결이 되지 않으셨다면\n<h>다시 문의</h> 주시면 도움드리겠습니다."
+            .style(tags: Fonts.highlightFont)
+            .styleAll(Fonts.defaultFont)
+            .attributedString,
+            for: .normal)
     }
 
     
@@ -113,6 +140,9 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
         self.view.addSubview(self.explainTextView)
         self.view.addSubview(self.answerLabel)
         self.view.addSubview(self.answerTextView)
+        self.view.addSubview(self.noAnswerLabel)
+        self.view.addSubview(self.noAnswerImage)
+        self.view.addSubview(self.resendButton)
     }
     
     override func setupConstraints() {
@@ -156,6 +186,23 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
             $0.trailing.equalToSafeArea(self.view).offset(-Metric.viewSide)
             $0.height.equalTo(self.view.frame.height / 4)
         }
+        
+        self.noAnswerLabel.snp.makeConstraints {
+            $0.top.equalTo(self.answerTextView)
+            $0.centerX.equalToSuperview()
+        }
+        
+        self.noAnswerImage.snp.makeConstraints {
+            $0.top.equalTo(self.answerLabel.snp.bottom).offset(50)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(160)
+            $0.width.equalTo(130)
+        }
+        
+        self.resendButton.snp.makeConstraints {
+            $0.bottom.left.right.equalToSafeArea(self.view)
+        }
+
     }
     
     override func setupStyle() {
@@ -179,6 +226,8 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
                 guard let self = self else { return }
                 self.answerLabel.isHidden = $0
                 self.answerTextView.isHidden = $0
+                self.noAnswerLabel.isHidden = !$0
+                self.noAnswerImage.isHidden = !$0
             })
             .disposed(by: disposeBag)
         
@@ -195,7 +244,7 @@ import SwiftUI
 struct DetailMessageVC: PreviewProvider {
     
     static var previews: some SwiftUI.View {
-        DetailMessageViewController(reactor: DetailMessageViewReactor(title: "", content: "", answer: "")).toPreview()
+        DetailMessageViewController(reactor: DetailMessageViewReactor(title: "test", content: "test", answer: "test")).toPreview()
     }
 }
 #endif

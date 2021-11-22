@@ -160,7 +160,7 @@ PODS:
   - SnackBar.swift (0.1.0):
     - SnapKit
   - SnapKit (5.0.1)
-  - SPIndicator (1.4.1)
+  - SPIndicator (1.5.0)
   - Starscream (4.0.4)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (4.3.0)
@@ -298,7 +298,7 @@ SPEC CHECKSUMS:
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   SnackBar.swift: 79ea4df13ea9e6633137dd6acbd490534d26440d
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SPIndicator: 390446852611bcebb4e69b1f5229f2c27026328f
+  SPIndicator: 838af916c34c6219cf0fc7a25b867dae6227c594
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
@@ -308,6 +308,6 @@ SPEC CHECKSUMS:
   ViewAnimator: a9ceed80266e00fd435ec4fb99b2df64d580d0e4
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: e55f7d7202e41c154a8d5f2667a3be12e146e5f9
+PODFILE CHECKSUM: d54ded1e2fda96bdf4bd387375a7ed6689766698
 
 COCOAPODS: 1.11.2

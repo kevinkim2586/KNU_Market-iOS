@@ -417,7 +417,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.leftImageView.image = UIImage(systemName: K.Images.myPageSection_1_Images[indexPath.row])
         case 1:
             cell.settingsTitleLabel.text = viewModel.tableViewSection_2[indexPath.row]
-            cell.leftImageView.image = UIImage(systemName: K.Images.myPageSection_2_Images[indexPath.row])
+            if indexPath.row == 0 {
+                cell.leftImageView.image = UIImage(named: K.Images.myPageSection_2_Images[indexPath.row])
+            } else {
+                cell.leftImageView.image = UIImage(systemName: K.Images.myPageSection_2_Images[indexPath.row])
+            }
         default: break
         }
         return cell
@@ -436,7 +440,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             }
         case 1:
             switch indexPath.row {
-            case 0: pushViewController(with: SendUsMessageViewController(userManager: UserManager(), reactor: SendUsMessageReactor()))
+            case 0: pushViewController(with: SendUsMessageViewController(reactor: SendUsMessageReactor()))
             case 1:
                 let url = URL(string: K.URL.termsAndConditionNotionURL)!
                 presentSafariView(with: url)

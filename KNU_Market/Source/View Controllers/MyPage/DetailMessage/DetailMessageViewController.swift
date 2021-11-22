@@ -25,6 +25,17 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
         static let titleTop = 30.f
         static let titleTextFieldTop = 20.f
         static let titleTextFieldHeight = 50.f
+        
+        // Label
+        static let labelTop = 20.f
+        
+        // Text View
+        static let textViewTop = 10.f
+        
+        // Image
+        static let imageTop = 50.f
+        static let imageHeight = 160.f
+        static let imageWidth = 130.f
     }
     
     fileprivate struct Fonts {
@@ -164,26 +175,26 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
         }
         
         self.explainLabel.snp.makeConstraints {
-            $0.top.equalTo(self.titleTextField.snp.bottom).offset(20)
+            $0.top.equalTo(self.titleTextField.snp.bottom).offset(Metric.labelTop)
             $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.trailing.equalToSafeArea(self.view).offset(-Metric.viewSide)
         }
         
         self.explainTextView.snp.makeConstraints {
-            $0.top.equalTo(self.explainLabel.snp.bottom).offset(10)
+            $0.top.equalTo(self.explainLabel.snp.bottom).offset(Metric.textViewTop)
             $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.trailing.equalToSafeArea(self.view).offset(-Metric.viewSide)
             $0.height.equalTo(self.view.frame.height / 4)
         }
         
         self.answerLabel.snp.makeConstraints {
-            $0.top.equalTo(self.explainTextView.snp.bottom).offset(20)
+            $0.top.equalTo(self.explainTextView.snp.bottom).offset(Metric.labelTop)
             $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.trailing.equalToSafeArea(self.view).offset(-Metric.viewSide)
         }
         
         self.answerTextView.snp.makeConstraints {
-            $0.top.equalTo(self.answerLabel.snp.bottom).offset(10)
+            $0.top.equalTo(self.answerLabel.snp.bottom).offset(Metric.textViewTop)
             $0.leading.equalToSafeArea(self.view).offset(Metric.viewSide)
             $0.trailing.equalToSafeArea(self.view).offset(-Metric.viewSide)
             $0.height.equalTo(self.view.frame.height / 4)
@@ -195,10 +206,10 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
         }
         
         self.noAnswerImage.snp.makeConstraints {
-            $0.top.equalTo(self.answerLabel.snp.bottom).offset(50)
+            $0.top.equalTo(self.answerLabel.snp.bottom).offset(Metric.imageTop)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(160)
-            $0.width.equalTo(130)
+            $0.height.equalTo(Metric.imageHeight)
+            $0.width.equalTo(Metric.imageWidth)
         }
         
         self.resendButton.snp.makeConstraints {

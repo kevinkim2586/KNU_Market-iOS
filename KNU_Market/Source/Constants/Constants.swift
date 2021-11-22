@@ -184,7 +184,7 @@ struct K {
                                                     ]
         
         static let myPageSection_2_Images         = [
-                                                   "paperplane",
+                                                   "talk_with_team_icon",
                                                    "doc.text",
                                                     "hand.raised",
                                                    "info.circle"

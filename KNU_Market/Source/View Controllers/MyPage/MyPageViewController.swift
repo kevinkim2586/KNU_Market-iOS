@@ -417,7 +417,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.leftImageView.image = UIImage(systemName: K.Images.myPageSection_1_Images[indexPath.row])
         case 1:
             cell.settingsTitleLabel.text = viewModel.tableViewSection_2[indexPath.row]
-            cell.leftImageView.image = UIImage(systemName: K.Images.myPageSection_2_Images[indexPath.row])
+            if indexPath.row == 0 {
+                cell.leftImageView.image = UIImage(named: K.Images.myPageSection_2_Images[indexPath.row])
+            } else {
+                cell.leftImageView.image = UIImage(systemName: K.Images.myPageSection_2_Images[indexPath.row])
+            }
         default: break
         }
         return cell

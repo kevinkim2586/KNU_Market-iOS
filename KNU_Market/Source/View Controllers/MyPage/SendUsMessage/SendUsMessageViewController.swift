@@ -321,6 +321,16 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
                 
             }).disposed(by: disposeBag)
         
+        reactor.state.map { $0.isLoading }.asObservable()
+            .subscribe(onNext: {
+                if $0 {
+                    showProgressBar()
+                } else {
+                    dismissProgressBar()
+                }
+            })
+            .disposed(by: disposeBag)
+        
         reactor.state.map { "\($0.image.count)/2" }.asObservable()
             .bind(to: self.selectView.label.rx.text)
             .disposed(by: disposeBag)

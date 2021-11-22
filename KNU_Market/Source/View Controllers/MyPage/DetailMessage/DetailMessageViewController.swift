@@ -174,6 +174,14 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
             .bind(to: self.explainTextView.rx.text)
             .disposed(by: disposeBag)
         
+        reactor.state.map { $0.answer.isEmpty }.asObservable()
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.answerLabel.isHidden = $0
+                self.answerTextView.isHidden = $0
+            })
+            .disposed(by: disposeBag)
+        
         reactor.state.map { $0.answer }.asObservable()
             .bind(to: self.answerTextView.rx.text)
             .disposed(by: disposeBag)

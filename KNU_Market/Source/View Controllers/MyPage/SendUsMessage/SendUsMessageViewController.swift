@@ -329,11 +329,23 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             }).disposed(by: disposeBag)
         
         reactor.state.map { $0.isLoading }.asObservable()
+            .distinctUntilChanged()
             .subscribe(onNext: {
                 if $0 {
                     showProgressBar()
                 } else {
                     dismissProgressBar()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.dismiss }.filter { $0 }.asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] _ in
+                self?.showSimpleBottomAlert(with: "문의사항이 전송 완료되었어요 🎉")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    self?.navigationController?.popViewController(animated: true)
                 }
             })
             .disposed(by: disposeBag)

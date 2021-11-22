@@ -30,6 +30,8 @@ final class SendUsMessageReactor: Reactor {
         case setTitle(String)
         case setContent(String)
         case deleteImage(Int)
+        case dismiss
+        case empty
     }
     
     struct State {
@@ -37,6 +39,7 @@ final class SendUsMessageReactor: Reactor {
         var title: String = ""
         var content: String = ""
         var isLoading: Bool = false
+        var dismiss = false
     }
     
     fileprivate let myPageService: MyPageServiceType
@@ -71,14 +74,16 @@ final class SendUsMessageReactor: Reactor {
                 Observable.just(Mutation.setLoading(true)),
 
                 self.myPageService.writeReport(self.currentState.title, self.currentState.content, data.first, data.last)
+                    .asObservable()
                     .map { result in
                         switch result {
                         case .success:
-                            print("success")
+                            return Mutation.dismiss
                         case let .error(error):
                             print(error)
+                            return Mutation.empty
                         }
-                    }.asObservable().flatMap { _ in Observable.empty() },
+                    },
 
                 Observable.just(Mutation.setLoading(false))
             ])
@@ -105,6 +110,12 @@ final class SendUsMessageReactor: Reactor {
             
         case let .deleteImage(idx):
             state.image.remove(at: idx)
+            
+        case .dismiss:
+            state.dismiss = true
+            
+        case .empty:
+            break
         }
         
         return state

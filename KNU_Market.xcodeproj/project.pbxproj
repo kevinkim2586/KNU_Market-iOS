@@ -130,6 +130,9 @@
 		7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC1B59726D4C7000007F99B /* EmptyView.swift */; };
 		7CC1B59A26D4CB1E0007F99B /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC1B59926D4CB1E0007F99B /* EmptyView.xib */; };
 		7CC1B59C26D4FC110007F99B /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC1B59B26D4FC110007F99B /* UIView + Extension.swift */; };
+		7CC33B2B274B58EB00B0C2C0 /* UploadPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33B2A274B58EB00B0C2C0 /* UploadPostViewController.swift */; };
+		7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33B2C274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift */; };
+		7CC33B2F274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33B2E274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift */; };
 		7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */; };
 		7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */; };
 		7CCB02082674CE5D00D58BC2 /* ItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */; };
@@ -277,6 +280,9 @@
 		7CC1B59726D4C7000007F99B /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		7CC1B59926D4CB1E0007F99B /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
 		7CC1B59B26D4FC110007F99B /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
+		7CC33B2A274B58EB00B0C2C0 /* UploadPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostViewController.swift; sourceTree = "<group>"; };
+		7CC33B2C274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		7CC33B2E274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedPostImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDGuideViewController.swift; sourceTree = "<group>"; };
 		7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureStudentIDViewController.swift; sourceTree = "<group>"; };
 		7CCB02072674CE5D00D58BC2 /* ItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModel.swift; sourceTree = "<group>"; };
@@ -466,6 +472,8 @@
 			children = (
 				7C8839DC2643CB0400F9F78C /* AddImageButtonCollectionViewCell.swift */,
 				7C8839DD2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift */,
+				7CC33B2C274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift */,
+				7CC33B2E274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift */,
 			);
 			path = UICollectionViewCells;
 			sourceTree = "<group>";
@@ -778,6 +786,7 @@
 			isa = PBXGroup;
 			children = (
 				7CA66233264135AA000E0B7A /* HomeViewController.swift */,
+				7CC33B2A274B58EB00B0C2C0 /* UploadPostViewController.swift */,
 				7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */,
 				7C8839E22643CBC300F9F78C /* UploadItemViewController.swift */,
 				7C5E2126264645B300E98FE5 /* ItemViewController.swift */,
@@ -1014,6 +1023,7 @@
 				7C83EE5127422E3A00CF1680 /* KMPostControlButton.swift in Sources */,
 				7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */,
 				7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */,
+				7CC33B2F274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift in Sources */,
 				7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
 				7CBFDA78273FE01F000C8C8A /* PostTableViewCell.swift in Sources */,
@@ -1040,6 +1050,7 @@
 				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
 				7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */,
 				7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */,
+				7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
@@ -1065,6 +1076,7 @@
 				7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */,
 				7C8839DF2643CB0400F9F78C /* UserPickedItemImageCollectionViewCell.swift in Sources */,
+				7CC33B2B274B58EB00B0C2C0 /* UploadPostViewController.swift in Sources */,
 				7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */,
 				7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */,
 				7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */,

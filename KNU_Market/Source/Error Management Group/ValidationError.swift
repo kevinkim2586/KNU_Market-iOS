@@ -8,13 +8,13 @@ enum ValidationError {
     enum OnRegister: String, Error {
         
         case incorrectIdFormat          = "불가능한 아이디 형식입니다."
-        case incorrectIdLength          = "아이디는 4자 이상, 30자 이하로 적어주세요."
+        case incorrectIdLength          = "아이디는 4자 이상, 50자 이하로 적어주세요."
         case existingId                 = "이미 사용 중인 아이디입니다.🥲"
         case incorrectPasswordFormat    = "숫자와 문자를 조합하여\n8자 이상, 20자 이하로 적어주세요."
         case passwordDoesNotMatch       = "비밀번호가 일치하지 않습니다.🤔"
         case existingNickname           = "이미 사용 중인 닉네임입니다.🥲"
         case incorrectNicknameFormat    = "유효하지 않은 닉네임이에요."
-        case incorrectNicknameLength    = "닉네임은 2자 이상, 15자 이하로 적어주세요."
+        case incorrectNicknameLength    = "닉네임은 2자 이상, 10자 이하로 적어주세요."
         case invalidEmailFormat         = "잘못된 이메일 주소 형식입니다."
         case existingEmail              = "이미 존재하는 이메일입니다."
         case empty                      = "빈 칸이 없는지 확인해주세요.🧐"

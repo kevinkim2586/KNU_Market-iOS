@@ -12,7 +12,13 @@ protocol UploadItemDelegate: AnyObject {
 class UploadItemViewModel {
     
     //MARK: - Properties
+    
+    private var mediaManager: MediaManager?
+    private var itemManager: ItemManager?
+    
     weak var delegate: UploadItemDelegate?
+    
+    var requiredMinimumPeopleToGather: Int = 2
     
     var itemTitle: String = ""
     
@@ -45,6 +51,13 @@ class UploadItemViewModel {
     
     lazy var currentlyGatheredPeople: Int = 1
     
+    //MARK: - Initialization
+    
+    init(itemManager: ItemManager, mediaManager: MediaManager) {
+        self.itemManager = itemManager
+        self.mediaManager = mediaManager
+    }
+    
     //MARK: - API
     func uploadImageToServerFirst() {
         
@@ -58,7 +71,7 @@ class UploadItemViewModel {
         for image in imageData {
             
             group.enter()
-            MediaManager.shared.uploadImage(with: image) { [weak self] result in
+            mediaManager?.uploadImage(with: image) { [weak self] result in
                 
                 guard let self = self else { return }
                 
@@ -73,7 +86,6 @@ class UploadItemViewModel {
         }
         
         group.notify(queue: .main) {
-            print("✏️ Dispatch Group has ended.")
             self.editPostModel != nil ? self.updatePost() : self.uploadItem()
         }
     }
@@ -88,7 +100,7 @@ class UploadItemViewModel {
             detail: itemDetail
         )
         
-        ItemManager.shared.uploadNewItem(with: model) { [weak self] result in
+        itemManager?.uploadNewItem(with: model) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -111,7 +123,7 @@ class UploadItemViewModel {
         for imageUID in self.priorImageUIDs {
             
             group.enter()
-            MediaManager.shared.deleteImage(uid: imageUID) { result in
+            mediaManager?.deleteImage(uid: imageUID) { result in
     
                 switch result {
                 case .success: break
@@ -140,7 +152,7 @@ class UploadItemViewModel {
             currentlyGatheredPeople: currentlyGatheredPeople
         )
         
-        ItemManager.shared.updatePost(uid: self.editPostModel?.pageUID ?? "",
+        itemManager?.updatePost(uid: self.editPostModel?.pageUID ?? "",
                                       with: model) { [weak self] result in
             
             guard let self = self else { return }

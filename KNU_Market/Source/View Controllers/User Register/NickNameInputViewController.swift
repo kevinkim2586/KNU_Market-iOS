@@ -170,7 +170,7 @@ extension NickNameInputViewController {
             errorLabel.showErrorMessage(message: RegisterError.incorrectNicknameFormat.rawValue)
             return false
         }
-        if nickname.count >= 2 && nickname.count <= 15 { return true }
+        if nickname.count >= 2 && nickname.count <= 10 { return true }
         else {
             errorLabel.showErrorMessage(message: RegisterError.incorrectNicknameLength.rawValue)
             return false

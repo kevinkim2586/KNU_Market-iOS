@@ -130,6 +130,8 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
     // MARK: - Inintializing
     init(reactor: Reactor) {
         super.init()
+        
+        self.navigationController?.navigationBar.isTranslucent = false
         defer {
             self.reactor = reactor
         }

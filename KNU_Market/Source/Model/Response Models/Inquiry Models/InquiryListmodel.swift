@@ -9,8 +9,8 @@ import Foundation
 
 struct InquiryListModel: Codable {
     var uid = Int()
-    var title = String()
-    var content = String()
+    var title : String?
+    var content : String?
     var postUid = String()
     var reportedUserUid = String()
     var reportUserUid = String()
@@ -22,8 +22,8 @@ struct InquiryListModel: Codable {
     var delete_date : String?
     
     init(uid: Int,
-         title: String,
-         content: String,
+         title: String?,
+         content: String?,
          postUid : String,
          reportedUserUid: String,
          reportUserUid: String,

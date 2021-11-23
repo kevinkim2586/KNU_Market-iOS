@@ -23,12 +23,14 @@ class KMCustomAlertViewController: UIViewController {
     let titleLabel = UILabel().then {
         $0.font = .boldSystemFont(ofSize: 20)
         $0.textColor = .black
+        $0.textAlignment = .center
         $0.numberOfLines = 2
     }
     
     let messageLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 15)
         $0.textColor = .black
+        $0.textAlignment = .center
         $0.numberOfLines = 7
     }
     
@@ -82,11 +84,15 @@ class KMCustomAlertViewController: UIViewController {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(20)
+            $0.leading.equalTo(20)
+            $0.trailing.equalTo(-20)
             $0.centerX.equalTo(alertView)
         }
         
         messageLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.leading.equalTo(20)
+            $0.trailing.equalTo(-20)
             $0.centerX.equalTo(alertView)
         }
         

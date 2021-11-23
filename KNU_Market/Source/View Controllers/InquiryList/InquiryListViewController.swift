@@ -168,7 +168,7 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
                         as? InquiryTableViewCell else { return UITableViewCell() }
         
         cell.dateLabel.text = formatDate(inquiryModel[indexPath.row].date)
-        cell.inquieryTitleLabel.text = ": " + inquiryModel[indexPath.row].title
+        cell.inquieryTitleLabel.text = ": \(inquiryModel[indexPath.row].title ?? " ")"
 
         if inquiryModel[indexPath.row].isArchived == true {
             cell.prograssImageView.image = UIImage(named: "doneImg")
@@ -180,10 +180,11 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presentCustomAlert(title: "asdfasdfasdfasdfasfdsadfasdfasf", message: "asdfas\nasdf\nasdf\nasdf\nasdf\nasdf\nasdf", cancelButtonTitle: "asdfasdfasasdf", actionButtonTitle: "asdfasdfasdfasdf", action: getList)
         let detailVC = DetailMessageViewController(
             reactor: DetailMessageViewReactor(
-                title: inquiryModel[indexPath.row].title,
-                content: inquiryModel[indexPath.row].content,
+                title: inquiryModel[indexPath.row].title ?? " ",
+                content: inquiryModel[indexPath.row].content ?? " ",
                 answer: inquiryModel[indexPath.row].answer)
         )
         navigationController?.pushViewController(detailVC, animated: true)

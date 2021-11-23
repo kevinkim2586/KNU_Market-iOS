@@ -50,7 +50,11 @@ class UploadPostViewController: BaseViewController {
     }()
     
     lazy var postImagesCollectionView: UICollectionView = {
-        let cv = UICollectionView()
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 10
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
         cv.register(
@@ -241,6 +245,7 @@ class UploadPostViewController: BaseViewController {
     
     override func setupConstraints() {
         super.setupConstraints()
+        #warning("공구글 수정할때도 반영")
         
         postScrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -248,61 +253,62 @@ class UploadPostViewController: BaseViewController {
         
         postTitleTextField.snp.makeConstraints {
             $0.top.left.right.equalTo(Metrics.basicInset)
-            $0.height.equalTo(40)
+            $0.height.greaterThanOrEqualTo(40)
         }
         
         dividerLineImageView_1.snp.makeConstraints {
-            $0.top.equalTo(postTitleTextField.snp.bottom).inset(10)
+            $0.top.equalTo(postTitleTextField.snp.bottom).offset(10)
+//            $0.top.equalTo(postTitleTextField.snp.bottom).inset(20)
             $0.left.right.equalToSuperview()
         }
-        
-        postImagesCollectionView.snp.makeConstraints {
-            $0.height.equalTo(135)
-            $0.top.left.right.equalToSuperview().inset(10)
-        }
-        
-        dividerLineImageView_2.snp.makeConstraints {
-            $0.top.equalTo(postImagesCollectionView.snp.bottom).inset(10)
-            $0.left.right.equalToSuperview()
-        }
-        
-        gatheringPeopleGuideStackView.snp.makeConstraints {
-            $0.top.equalTo(dividerLineImageView_2.snp.bottom).inset(Metrics.basicInset)
-            $0.left.equalToSuperview().inset(Metrics.basicInset)
-        }
-        
-        gatheringPeopleStepper.snp.makeConstraints {
-            $0.width.equalTo(100)
-            $0.height.equalTo(30)
-            $0.top.equalTo(dividerLineImageView_2.snp.bottom).inset(20)
-            $0.right.equalToSuperview().inset(20)
-        }
-        
-        preferredLocationGuideLabel.snp.makeConstraints {
-            $0.top.equalTo(gatheringPeopleGuideStackView.snp.bottom).inset(30)
-            $0.left.equalToSuperview().inset(Metrics.basicInset)
-        }
-        
-        expandTextField.snp.makeConstraints {
-            $0.left.equalToSuperview().inset(20)
-            $0.top.equalTo(gatheringPeopleStepper.snp.bottom).inset(37)
-        }
-        
-        tradeLocationTextField.snp.makeConstraints {
-            $0.top.equalTo(gatheringPeopleStepper.snp.bottom).inset(38)
-            $0.right.equalTo(expandTextField.snp.left).inset(10)
-        }
-        
-        postDetailGuideLabel.snp.makeConstraints {
-            $0.top.equalTo(preferredLocationGuideLabel.snp.bottom).inset(35)
-            $0.left.equalToSuperview().inset(Metrics.basicInset)
-        }
-        
-        postDetailTextView.snp.makeConstraints {
-            $0.top.equalTo(postDetailGuideLabel.snp.bottom).inset(Metrics.basicInset)
-            $0.left.right.bottom.equalToSuperview().inset(Metrics.basicInset)
-        }
-        
+//
+//        postImagesCollectionView.snp.makeConstraints {
+//            $0.height.equalTo(135)
+//            $0.top.left.right.equalToSuperview().inset(10)
+//        }
+//
+//        dividerLineImageView_2.snp.makeConstraints {
+//            $0.top.equalTo(postImagesCollectionView.snp.bottom).inset(20)
+//            $0.left.right.equalToSuperview()
+//        }
+//
+//        gatheringPeopleGuideStackView.snp.makeConstraints {
+//            $0.top.equalTo(dividerLineImageView_2.snp.bottom).inset(Metrics.basicInset)
+//            $0.left.equalToSuperview().inset(Metrics.basicInset)
+//        }
+//
+//        gatheringPeopleStepper.snp.makeConstraints {
+//            $0.width.equalTo(100)
+//            $0.height.equalTo(30)
+//            $0.top.equalTo(dividerLineImageView_2.snp.bottom).inset(20)
+//            $0.right.equalToSuperview().inset(20)
+//        }
+//
+//        preferredLocationGuideLabel.snp.makeConstraints {
+//            $0.top.equalTo(gatheringPeopleGuideStackView.snp.bottom).inset(30)
+//            $0.left.equalToSuperview().inset(Metrics.basicInset)
+//        }
+//
+//        expandTextField.snp.makeConstraints {
+//            $0.left.equalToSuperview().inset(20)
+//            $0.top.equalTo(gatheringPeopleStepper.snp.bottom).inset(37)
+//        }
+//
+//        tradeLocationTextField.snp.makeConstraints {
+//            $0.top.equalTo(gatheringPeopleStepper.snp.bottom).inset(38)
+//            $0.right.equalTo(expandTextField.snp.left).inset(10)
+//        }
+//
+//        postDetailGuideLabel.snp.makeConstraints {
+//            $0.top.equalTo(preferredLocationGuideLabel.snp.bottom).inset(35)
+//            $0.left.equalToSuperview().inset(Metrics.basicInset)
+//        }
+//
+//        postDetailTextView.snp.makeConstraints {
+//            $0.top.equalTo(postDetailGuideLabel.snp.bottom).inset(Metrics.basicInset)
+//            $0.left.right.bottom.equalToSuperview().inset(Metrics.basicInset)
+//        }
+//
         
     }
     

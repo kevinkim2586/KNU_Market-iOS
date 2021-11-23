@@ -54,10 +54,13 @@ extension HomeViewController {
             }
             return
         }
-        guard let uploadVC = storyboard?.instantiateViewController(
-            identifier: K.StoryboardID.uploadItemVC
-        ) as? UploadItemViewController else { return }
-        uploadVC.hidesBottomBarWhenPushed = true
+//        guard let uploadVC = storyboard?.instantiateViewController(
+//            identifier: K.StoryboardID.uploadItemVC
+//        ) as? UploadItemViewController else { return }
+//        uploadVC.hidesBottomBarWhenPushed = true
+        
+        let uploadVC = UploadPostViewController(viewModel: UploadItemViewModel(itemManager: ItemManager(), mediaManager: MediaManager()))
+        
         navigationController?.pushViewController(uploadVC, animated: true)
     }
     

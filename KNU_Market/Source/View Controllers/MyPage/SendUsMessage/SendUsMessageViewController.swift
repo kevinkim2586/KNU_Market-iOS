@@ -299,6 +299,13 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
+        Observable.combineLatest(
+            self.titleTextField.rx.text.orEmpty.map { !$0.isEmpty }.asObservable(),
+            self.textView.rx.text.orEmpty.map { !$0.isEmpty }.asObservable()
+        ).map { $0 && $1 }
+        .bind(to: self.buttomButton.rx.isEnabled)
+        .disposed(by: disposeBag)
+        
         reactor.state.map { $0.image }.asObservable()
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
@@ -320,6 +327,28 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
                 }
                 
             }).disposed(by: disposeBag)
+        
+        reactor.state.map { $0.isLoading }.asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                if $0 {
+                    showProgressBar()
+                } else {
+                    dismissProgressBar()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.dismiss }.filter { $0 }.asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] _ in
+                self?.showSimpleBottomAlert(with: "문의사항이 전송 완료되었어요 🎉")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
         
         reactor.state.map { "\($0.image.count)/2" }.asObservable()
             .bind(to: self.selectView.label.rx.text)

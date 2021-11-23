@@ -19,6 +19,7 @@ extension UIViewController {
             cancelButtonTitle: cancelButtonTitle,
             actionButtonTitle: actionButtonTitle,
             action: action)
+        VC.modalTransitionStyle = .crossDissolve
         VC.modalPresentationStyle = .overFullScreen
         self.present(VC, animated: false)
     }

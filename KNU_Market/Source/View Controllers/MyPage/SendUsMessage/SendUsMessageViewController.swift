@@ -68,7 +68,9 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         $0.numberOfLines = 2
     }
     
-    let barButton = UIBarButtonItem(title: "내역", style: .plain, target: nil, action: nil)
+    let barButton = UIBarButtonItem(title: "내역", style: .plain, target: nil, action: nil).then {
+        $0.tintColor = Style.mainColor
+    }
     
     let titleLabel = UILabel().then {
         $0.text = "문의 및 건의 내용"

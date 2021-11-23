@@ -53,13 +53,17 @@ class KMCustomAlertViewController: UIViewController {
         cancelButtonTapped()
     }
     
-    init(title: String, message: String, cancelButtonTitle: String, actionButtonTitle: String, action: (()-> Void)) {
+    init(title: String, message: String, cancelButtonTitle: String, actionButtonTitle: String, action: @escaping () -> Void = { }) {
         super.init(nibName: nil, bundle: nil)
         titleLabel.text = title
         messageLabel.text = message
         cancelButton.setTitle(cancelButtonTitle, for: .normal)
         actionButton.setTitle(actionButtonTitle, for: .normal)
-        actionButtonTapped(action: action())
+        actionButton.rx.tap
+            .bind {
+                action()
+            }.disposed(by: disposedBag)
+
     }
     
     required init?(coder: NSCoder) {
@@ -72,7 +76,7 @@ class KMCustomAlertViewController: UIViewController {
         
         alertView.snp.makeConstraints {
             $0.width.equalTo(280)
-            $0.height.equalTo(220)
+            $0.height.equalTo(messageLabel.snp.height).multipliedBy(2.0)
             $0.centerX.centerY.equalToSuperview()
         }
         
@@ -91,6 +95,7 @@ class KMCustomAlertViewController: UIViewController {
             $0.height.equalTo(44)
             $0.leading.equalTo(alertView).offset(10)
             $0.bottom.equalTo(alertView).offset(-10)
+            $0.top.equalTo(messageLabel.snp.bottom).offset(10)
         }
         
         actionButton.snp.makeConstraints {
@@ -99,6 +104,7 @@ class KMCustomAlertViewController: UIViewController {
             $0.leading.equalTo(cancelButton.snp.trailing).offset(10)
             $0.trailing.equalTo(alertView).offset(-10)
             $0.bottom.equalTo(alertView).offset(-10)
+            $0.top.equalTo(messageLabel.snp.bottom).offset(10)
         }
     }
     
@@ -107,12 +113,5 @@ class KMCustomAlertViewController: UIViewController {
             .bind(onNext: {
                 self.dismiss(animated: false)
             }).disposed(by: disposedBag)
-    }
-    
-    func actionButtonTapped(action: Void) {
-//        cancelButton.rx.tap
-//            .bind(to: {
-//                action
-//            }).disposed(by: disposedBag)
     }
 }

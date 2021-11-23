@@ -12,7 +12,7 @@ import RxCocoa
 
 extension UIViewController {
     
-    func presentCustomAlert(title: String, message: String, cancelButtonTitle: String, actionButtonTitle: String, action: (()-> Void)) {
+    func presentCustomAlert(title: String, message: String, cancelButtonTitle: String, actionButtonTitle: String, action: @escaping () -> Void = { }) {
         let VC = KMCustomAlertViewController(
             title: title,
             message: message,

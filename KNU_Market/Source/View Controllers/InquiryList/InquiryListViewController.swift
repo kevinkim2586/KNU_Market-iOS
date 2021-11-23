@@ -16,11 +16,15 @@ class InquiryListViewController: UIViewController {
     
     private let profileImageView: UIImageView = {
         let profileImg = UIImageView()
-        profileImg.contentMode = .scaleAspectFit
+        
+        profileImg.contentMode = .scaleAspectFill
+        profileImg.clipsToBounds = true
         
         let url = URL(string: K.MEDIA_REQUEST_URL + User.shared.profileImageUID)
-        profileImg.sd_setImage(with: url, placeholderImage: UIImage(named: K.Images.chatBubbleIcon), options: .continueInBackground, context: .none)
-        
+        profileImg.sd_setImage(with: url,
+                               placeholderImage: UIImage(named: K.Images.chatBubbleIcon),
+                               options: .continueInBackground,
+                               context: .none)
         return profileImg
     }()
     
@@ -28,7 +32,7 @@ class InquiryListViewController: UIViewController {
         let profileName = UILabel()
         profileName.font = .systemFont(ofSize: 15)
         profileName.adjustsFontSizeToFitWidth = true
-        profileName.text = User.shared.nickname
+        profileName.text = User.shared.nickname + "님의 문의내역"
         return profileName
     }()
     
@@ -69,6 +73,13 @@ class InquiryListViewController: UIViewController {
         tableView.separatorStyle = .none
         return tableView
     }()
+    
+    private let listNULLLabel: UILabel = {
+        let label = UILabel()
+        label.text = "문의내역이 없습니다. 🧐"
+        label.font = .boldSystemFont(ofSize: 15)
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +88,6 @@ class InquiryListViewController: UIViewController {
         inquiryList.delegate = self
         inquiryList.dataSource = self
         self.view.backgroundColor = .white
-        print(User.shared.profileImageUID)
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,7 +100,7 @@ class InquiryListViewController: UIViewController {
     }
     
     private func setUpSubViews() {
-        [profileImageView, profileNameLabel, isDoneImageView, isDoneLabel, isInPrograssImageView, isInPrograssLabel, inquiryList].forEach({ self.view.addSubview($0) })
+        [profileImageView, profileNameLabel, isDoneImageView, isDoneLabel, isInPrograssImageView, isInPrograssLabel, inquiryList, listNULLLabel].forEach({ self.view.addSubview($0) })
         
         profileImageView.snp.makeConstraints {
             $0.width.height.equalTo(52)
@@ -133,6 +143,11 @@ class InquiryListViewController: UIViewController {
             $0.bottom.equalToSafeArea(view)
             $0.width.equalToSafeArea(view)
         }
+        
+        listNULLLabel.snp.makeConstraints {
+            $0.top.equalTo(isInPrograssLabel.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+        }
     }
     
     func setNavigationBar() {
@@ -165,7 +180,23 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // push to answer
+        let detailVC = DetailMessageViewController(
+            reactor: DetailMessageViewReactor(
+                title: inquiryModel[indexPath.row].title,
+                content: inquiryModel[indexPath.row].content,
+                answer: inquiryModel[indexPath.row].answer)
+        )
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    private func isHaveData() {
+        if inquiryModel.count != 0 {
+            listNULLLabel.isHidden = true
+            inquiryList.isHidden = false
+        } else {
+            listNULLLabel.isHidden = false
+            inquiryList.isHidden = true
+        }
     }
     
     private func getList() {
@@ -178,11 +209,11 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
             .validate(statusCode: 200..<300)
             .responseJSON{res in
                 do {
-                    let model = try JSONDecoder().decode([InquiryListModel].self, from: res.data!)
+                    let model = try JSONDecoder().decode([InquiryListModel].self, from: res.data ?? Data())
                     self.inquiryModel.removeAll()
                     self.inquiryModel.append(contentsOf: model)
+                    self.isHaveData()
                     self.inquiryList.reloadData()
-                    print(model)
                 } catch {
                     print(error)
                 }
@@ -191,7 +222,7 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
     
     private func formatDate(_ startDate: String)-> String {
         let finalDate = startDate.components(separatedBy: ["-", ":"," "])
-        let formattedDate = finalDate[1] + "월 " + finalDate[2] + "일 m" + finalDate[3] + ":" + finalDate[4]
+        let formattedDate = finalDate[1] + "월 " + finalDate[2] + "일 " + finalDate[3] + ":" + finalDate[4]
         
         return formattedDate
     }

@@ -64,6 +64,12 @@ class PopupManager {
                     do {
                         let decodedData = try JSONDecoder().decode(PopupModel.self, from: response.data ?? Data())
                         completion(.success(decodedData))
+                        
+                    } catch let error as DecodingError {
+                        switch error {
+                        case .keyNotFound(_, _): break  // 팝업이 없을 때 200은 날라오지만 decode 할게 없으니 keyNotFound error 가 뜸
+                        default: completion(.failure(.E000))
+                        }
                     } catch {
                         completion(.failure(.E000))
                     }

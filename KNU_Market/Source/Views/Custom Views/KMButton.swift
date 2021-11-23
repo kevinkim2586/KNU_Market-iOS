@@ -33,7 +33,6 @@ final class KMButton: UIButton {
         self.clipsToBounds = true
         self.setTitleColor(.white, for: .normal)
         self.titleLabel?.font = Style.titleFont
-        self.backgroundColor = UIColor(named: "AppDefaultColor")
     }
     
     override public var isHighlighted: Bool {

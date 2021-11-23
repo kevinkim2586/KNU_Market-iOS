@@ -14,7 +14,6 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     
     //MARK: - Properties
     var disposeBag: DisposeBag = DisposeBag()
-    private var userManager: UserManager?
     
     //MARK: - Constants
     
@@ -69,7 +68,9 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         $0.numberOfLines = 2
     }
     
-    let barButton = UIBarButtonItem(title: "내역", style: .plain, target: nil, action: nil)
+    let barButton = UIBarButtonItem(title: "내역", style: .plain, target: nil, action: nil).then {
+        $0.tintColor = Style.mainColor
+    }
     
     let titleLabel = UILabel().then {
         $0.text = "문의 및 건의 내용"
@@ -140,15 +141,11 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     
     //MARK: - Initialization
     
-    init(userManager: UserManager, reactor: Reactor) {
+    init(reactor: Reactor) {
         super.init()
-        self.userManager = userManager
         
         self.hidesBottomBarWhenPushed = true
-        
-        defer {
-            self.reactor = reactor
-        }
+        defer { self.reactor = reactor }
     }
     
     required init?(coder: NSCoder) {
@@ -258,6 +255,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         super.setupStyle()
     
         self.title = "크누마켓팀과 대화하기"
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -303,6 +301,13 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
+        Observable.combineLatest(
+            self.titleTextField.rx.text.orEmpty.map { !$0.isEmpty }.asObservable(),
+            self.textView.rx.text.orEmpty.map { !$0.isEmpty }.asObservable()
+        ).map { $0 && $1 }
+        .bind(to: self.buttomButton.rx.isEnabled)
+        .disposed(by: disposeBag)
+        
         reactor.state.map { $0.image }.asObservable()
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
@@ -324,6 +329,28 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
                 }
                 
             }).disposed(by: disposeBag)
+        
+        reactor.state.map { $0.isLoading }.asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                if $0 {
+                    showProgressBar()
+                } else {
+                    dismissProgressBar()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.dismiss }.filter { $0 }.asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] _ in
+                self?.showSimpleBottomAlert(with: "문의사항이 전송 완료되었어요 🎉")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
         
         reactor.state.map { "\($0.image.count)/2" }.asObservable()
             .bind(to: self.selectView.label.rx.text)
@@ -400,7 +427,7 @@ import SwiftUI
 struct SendUsMessageVC: PreviewProvider {
     
     static var previews: some SwiftUI.View {
-        SendUsMessageViewController(userManager: UserManager(), reactor: SendUsMessageReactor()).toPreview()
+        SendUsMessageViewController(reactor: SendUsMessageReactor()).toPreview()
     }
 }
 #endif

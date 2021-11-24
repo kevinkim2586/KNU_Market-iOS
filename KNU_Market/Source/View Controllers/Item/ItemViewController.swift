@@ -301,13 +301,6 @@ extension ItemViewController: ItemViewModelDelegate {
     
     func failedJoiningChat(with error: NetworkError) {
         
-        presentCustomAlert(
-            title: "채팅방 참여 불가",
-            message: error.errorDescription,
-            cancelButtonTitle: "취소",
-            actionButtonTitle: "확인"
-        )
-        
         presentKMAlertOnMainThread(
             title: "채팅방 참여 불가",
             message: error.errorDescription,

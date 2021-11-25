@@ -2,12 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSAppTransportSecurity</key>
-	<dict/>
 	<key>Allow Arbitrary Loads</key>
 	<true/>
-	<key>CFBundleGetInfoString</key>
-	<string></string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>WIM.KNU-Market</string>
@@ -18,6 +14,8 @@
 	<string>크누마켓</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -51,6 +49,8 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict/>
 	<key>NSCameraUsageDescription</key>
 	<string>공동구매 글 작성 시 어떤 품목을 구매하는지 사용자에게 자세히 보여주기 위해 사용됩니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

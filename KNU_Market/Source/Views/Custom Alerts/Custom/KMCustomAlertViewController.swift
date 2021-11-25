@@ -64,6 +64,7 @@ class KMCustomAlertViewController: UIViewController {
         actionButton.rx.tap
             .bind {
                 action()
+                self.dismiss(animated: false)
             }.disposed(by: disposedBag)
 
     }

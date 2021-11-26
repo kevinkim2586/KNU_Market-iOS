@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "chatTableViewCellPlaceholder.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "chatTableViewCellPlaceholder-1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "chatTableViewCellPlaceholder-2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

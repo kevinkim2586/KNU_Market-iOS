@@ -30,14 +30,35 @@ target 'KNU_Market' do
   pod 'SDWebImage', '~> 5.0'
   pod 'ImageSlideshow', '~> 1.9.0'
   pod "ImageSlideshow/SDWebImage"
-  pod 'Starscream', '~> 4.0.0'
   pod 'HGPlaceholders'
   pod 'PanModal'
   pod 'TextFieldEffects'
-  pod 'lottie-ios'
-  pod 'MHLoadingButton'
-  pod 'Hero'
   pod 'PMAlertController'
-
   
+
+  # UI
+  pod 'lottie-ios'
+  pod 'UITextView+Placeholder'
+  pod 'Hero'
+  pod 'MHLoadingButton'
+  pod 'Atributika'
+  
+  # Architecture
+  pod 'ReactorKit'
+
+  # Rx
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxViewController'
+  pod 'RxAnimated'
+  pod 'RxGesture'
+  pod 'RxKeyboard'
+
+  # Network
+  pod 'Starscream', '~> 4.0.0'
+  pod 'Moya/RxSwift'
+
+  # ETC
+  pod 'Then'
+
 end

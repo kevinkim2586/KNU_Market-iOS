@@ -11,6 +11,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Atributika.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>49</integer>
+		</dict>
 		<key>BSImagePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -63,7 +68,7 @@
 		<key>FirebaseInstanceID.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>49</integer>
+			<integer>50</integer>
 		</dict>
 		<key>FirebaseMessaging.xcscheme</key>
 		<dict>

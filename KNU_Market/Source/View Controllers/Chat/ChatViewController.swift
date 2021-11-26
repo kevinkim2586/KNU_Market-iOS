@@ -490,7 +490,7 @@ extension ChatViewController {
 
     func initializeNavigationItemTitle() {
 
-        let titleButton = UIButton()
+        let titleButton = UIButton(type: .system)
         titleButton.setTitle(chatRoomTitle, for: .normal)
 
         titleButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)

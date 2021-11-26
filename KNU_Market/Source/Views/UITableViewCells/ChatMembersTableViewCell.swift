@@ -62,7 +62,7 @@ class ChatMembersTableViewCell: UITableViewCell {
     }()
     
     lazy var reportUserButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setImage(
             UIImage(systemName: "exclamationmark.octagon"),
             for: .normal

@@ -176,7 +176,6 @@ extension PostViewController {
 
     @objc func refreshPage() {
         postTableView.refreshControl?.endRefreshing()
-        showProgressBar()
         viewModel.fetchItemDetails()
     }
     
@@ -327,7 +326,6 @@ extension PostViewController: KMPostBottomViewDelegate {
 extension PostViewController: ItemViewModelDelegate {
     
     func didFetchItemDetails() {
-        dismissProgressBar()
         DispatchQueue.main.async {
             self.postTableView.refreshControl?.endRefreshing()
             self.updatePostInformation()

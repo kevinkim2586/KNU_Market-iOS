@@ -55,7 +55,7 @@ class ReportUserViewController: BaseViewController {
     }()
     
     let reportButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("신고 접수", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)

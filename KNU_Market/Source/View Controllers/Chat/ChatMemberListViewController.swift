@@ -44,10 +44,10 @@ class ChatMemberListViewController: BaseViewController {
     }()
     
     lazy var exitButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.backgroundColor = UIColor(named: K.Color.appColor) ?? .systemPink
         button.setTitle("나가기", for: .normal)
-        button.titleLabel?.textColor = UIColor.white
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         button.addTarget(
             self,

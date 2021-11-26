@@ -32,7 +32,7 @@ class UserPickedPostImageCollectionViewCell: UICollectionViewCell {
     }()
     
     lazy var deleteButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.addTarget(
             self,
             action: #selector(pressedDeleteButton),

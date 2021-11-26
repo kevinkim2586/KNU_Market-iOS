@@ -39,7 +39,7 @@ class ChatImageViewController: BaseViewController {
     }()
     
     lazy var dismissButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setImage(Images.dismissButton, for: .normal)
         button.addTarget(
             self,

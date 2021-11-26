@@ -67,7 +67,7 @@ class InitialViewController: BaseViewController {
     }()
     
     let infoButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setImage(Images.infoButton, for: .normal)
         button.addTarget(
             self,
@@ -107,7 +107,7 @@ class InitialViewController: BaseViewController {
     }()
     
     let loginButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("로그인", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         button.backgroundColor = UIColor(named: K.Color.appColor)
@@ -122,7 +122,7 @@ class InitialViewController: BaseViewController {
     }()
     
     let registerButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setAttributedTitle(Fonts.registerButtonAttributes, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         button.addTarget(
@@ -135,7 +135,7 @@ class InitialViewController: BaseViewController {
     }()
     
     let findIdButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setAttributedTitle(NSAttributedString(
             string: "아이디 찾기",
             attributes: Fonts.findButtonAttributes
@@ -150,7 +150,7 @@ class InitialViewController: BaseViewController {
     }()
     
     let findPwButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setAttributedTitle(NSAttributedString(
             string: "비밀번호 찾기",
             attributes: Fonts.findButtonAttributes

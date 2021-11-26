@@ -45,7 +45,7 @@ class KMPostButtonView: UIView {
     
     // 모집 중, 모집완료 설정 버튼
     lazy var gatheringStatusButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.addTarget(
             self,
             action: #selector(pressedGatheringStatusButton),

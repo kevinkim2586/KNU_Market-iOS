@@ -37,11 +37,11 @@ class KMPostBottomView: UIView {
     }()
     
     lazy var enterChatButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("모집 완료", for: .normal)
         button.layer.cornerRadius = 7
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-        button.titleLabel?.textColor = .white
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(
             self,
             action: #selector(pressedEnterChatButton),

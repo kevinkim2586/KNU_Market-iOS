@@ -38,12 +38,6 @@ class PopupManager {
         }
         else { return false }
     }
-
-    
-    // 이미 유저가 본 팝업인지 판단
-    func checkIfAlreadySeenPopup(uid: Int) -> Bool {
-        return User.shared.userSeenPopupUids.contains(uid) ? true : false
-    }
     
     // 24시간 팝업 보지 않기 설정
     func configureToNotSeePopupForOneDay() {
@@ -86,15 +80,4 @@ class PopupManager {
         AF.request(url, method: .get).responseJSON { _ in }
     }
     
-    // 방금 띄운 팝업은 조회가 완료된 팝업이라고 처리 - 추후 UserDefaults 가 아닌 Realm 에 저장 예정
-    func savePopupUidAsSeen(uid: Int) {
-        guard var savedUidArray = UserDefaults.standard.array(
-            forKey: UserDefaults.Keys.userSeenPopupUids
-        ) as? [Int] else {
-            User.shared.userSeenPopupUids = [uid]
-            return
-        }
-        savedUidArray.append(uid)
-        User.shared.userSeenPopupUids = savedUidArray
-    }
 }

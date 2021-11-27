@@ -199,15 +199,6 @@ class User {
     
     //MARK: - 팝업 관련
     
-    var userSeenPopupUids: [Int] {
-        get {
-            return UserDefaults.standard.array(forKey: UserDefaults.Keys.userSeenPopupUids) as? [Int] ?? []
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.userSeenPopupUids)
-        }
-    }
-    
     var userSetPopupBlockTime: Date? {
         get {
             return UserDefaults.standard.object(forKey: UserDefaults.Keys.userSetPopupBlockTime) as? Date
@@ -270,7 +261,6 @@ extension User {
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.notificationList)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.isNotFirstAppLaunch)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.postFilterOptions)
-        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.userSeenPopupUids)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.didUserBlockPopupForADay)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.userSetPopupBlockTime)
     

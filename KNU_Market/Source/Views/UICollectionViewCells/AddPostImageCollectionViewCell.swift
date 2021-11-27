@@ -35,7 +35,7 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
     }()
     
     lazy var addPostImageButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.setImage(UIImage(named: "add button"), for: .normal)
         button.addTarget(
             self,

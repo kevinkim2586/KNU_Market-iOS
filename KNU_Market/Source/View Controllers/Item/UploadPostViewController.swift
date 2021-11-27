@@ -54,6 +54,7 @@ class UploadPostViewController: BaseViewController {
         layout.minimumLineSpacing = 10
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.itemSize = CGSize(width: 80, height: 80)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
@@ -65,6 +66,10 @@ class UploadPostViewController: BaseViewController {
             UserPickedPostImageCollectionViewCell.self,
             forCellWithReuseIdentifier: UserPickedPostImageCollectionViewCell.cellId
         )
+        cv.showsHorizontalScrollIndicator = true
+        cv.isScrollEnabled = true
+        cv.alwaysBounceHorizontal = true
+        cv.clipsToBounds = true
         return cv
     }()
     
@@ -241,6 +246,7 @@ class UploadPostViewController: BaseViewController {
         postScrollView.addSubview(expandTextField)
         postScrollView.addSubview(postDetailGuideLabel)
         postScrollView.addSubview(postDetailTextView)
+        
     }
     
     override func setupConstraints() {
@@ -258,19 +264,21 @@ class UploadPostViewController: BaseViewController {
         
         dividerLineImageView_1.snp.makeConstraints {
             $0.top.equalTo(postTitleTextField.snp.bottom).offset(10)
-//            $0.top.equalTo(postTitleTextField.snp.bottom).inset(20)
-            $0.left.right.equalToSuperview()
+            $0.centerX.equalToSuperview()
         }
-//
-//        postImagesCollectionView.snp.makeConstraints {
-//            $0.height.equalTo(135)
-//            $0.top.left.right.equalToSuperview().inset(10)
-//        }
-//
-//        dividerLineImageView_2.snp.makeConstraints {
-//            $0.top.equalTo(postImagesCollectionView.snp.bottom).inset(20)
-//            $0.left.right.equalToSuperview()
-//        }
+
+        postImagesCollectionView.snp.makeConstraints {
+            $0.height.equalTo(135)
+            $0.top.equalTo(dividerLineImageView_1.snp.bottom).offset(10)
+            $0.width.equalTo(view.frame.size.width)
+        }
+
+        dividerLineImageView_2.snp.makeConstraints {
+            $0.top.equalTo(postImagesCollectionView.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+        }
+        
+
 //
 //        gatheringPeopleGuideStackView.snp.makeConstraints {
 //            $0.top.equalTo(dividerLineImageView_2.snp.bottom).inset(Metrics.basicInset)

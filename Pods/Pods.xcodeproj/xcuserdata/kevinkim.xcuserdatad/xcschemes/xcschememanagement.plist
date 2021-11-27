@@ -68,7 +68,7 @@
 		<key>FirebaseInstanceID.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>51</integer>
+			<integer>50</integer>
 		</dict>
 		<key>FirebaseMessaging.xcscheme</key>
 		<dict>

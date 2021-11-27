@@ -278,19 +278,17 @@ class UploadPostViewController: BaseViewController {
             $0.centerX.equalToSuperview()
         }
         
+        gatheringPeopleGuideStackView.snp.makeConstraints {
+            $0.top.equalTo(dividerLineImageView_2.snp.bottom).offset(Metrics.basicInset)
+            $0.left.equalToSuperview().inset(Metrics.basicInset)
+        }
 
-//
-//        gatheringPeopleGuideStackView.snp.makeConstraints {
-//            $0.top.equalTo(dividerLineImageView_2.snp.bottom).inset(Metrics.basicInset)
-//            $0.left.equalToSuperview().inset(Metrics.basicInset)
-//        }
-//
-//        gatheringPeopleStepper.snp.makeConstraints {
-//            $0.width.equalTo(100)
-//            $0.height.equalTo(30)
-//            $0.top.equalTo(dividerLineImageView_2.snp.bottom).inset(20)
-//            $0.right.equalToSuperview().inset(20)
-//        }
+        gatheringPeopleStepper.snp.makeConstraints {
+            $0.width.equalTo(100)
+            $0.height.equalTo(30)
+            $0.top.equalTo(dividerLineImageView_2.snp.bottom).offset(20)
+            $0.right.equalToSuperview().offset(-20)
+        }
 //
 //        preferredLocationGuideLabel.snp.makeConstraints {
 //            $0.top.equalTo(gatheringPeopleGuideStackView.snp.bottom).inset(30)

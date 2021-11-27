@@ -24,15 +24,15 @@ class UserPickedPostImageCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI
     
-    let userPickedPostImageView: UIImageView = {
+    lazy var userPickedPostImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 5
         return imageView
     }()
     
     lazy var deleteButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.addTarget(
             self,
             action: #selector(pressedDeleteButton),

@@ -270,7 +270,7 @@ class UploadPostViewController: BaseViewController {
         postImagesCollectionView.snp.makeConstraints {
             $0.height.equalTo(135)
             $0.top.equalTo(dividerLineImageView_1.snp.bottom).offset(10)
-            $0.width.equalTo(view.frame.size.width)
+            $0.width.equalTo(view.frame.size.width - 20)
         }
 
         dividerLineImageView_2.snp.makeConstraints {

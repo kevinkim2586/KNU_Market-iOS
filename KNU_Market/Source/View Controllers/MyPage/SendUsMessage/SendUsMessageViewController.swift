@@ -352,6 +352,10 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         reactor.state.map { "\($0.image.count)/2" }.asObservable()
             .bind(to: self.selectView.label.rx.text)
             .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.title }.asObservable()
+            .bind(to: self.titleTextField.rx.text)
+            .disposed(by: disposeBag)
     }
     
     

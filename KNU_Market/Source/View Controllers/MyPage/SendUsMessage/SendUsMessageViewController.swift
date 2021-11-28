@@ -301,10 +301,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
-        Observable.combineLatest(
-            self.titleTextField.rx.text.orEmpty.map { !$0.isEmpty }.asObservable(),
-            self.textView.rx.text.orEmpty.map { !$0.isEmpty }.asObservable()
-        ).map { $0 && $1 }
+        self.titleTextField.rx.text.orEmpty.map { !$0.isEmpty }.asObservable()
         .bind(to: self.buttomButton.rx.isEnabled)
         .disposed(by: disposeBag)
         

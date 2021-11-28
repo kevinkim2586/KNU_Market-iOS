@@ -34,6 +34,8 @@ class UploadPostViewController: BaseViewController {
         return scrollView
     }()
     
+    let contentView = UIView()
+    
     let postTitleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "공구 제목"
@@ -92,6 +94,7 @@ class UploadPostViewController: BaseViewController {
     let totalGatheringPeopleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17)
+        label.text = "2 명"
         return label
     }()
     
@@ -235,17 +238,19 @@ class UploadPostViewController: BaseViewController {
         super.setupLayout()
         
         view.addSubview(postScrollView)
-        postScrollView.addSubview(postTitleTextField)
-        postScrollView.addSubview(dividerLineImageView_1)
-        postScrollView.addSubview(postImagesCollectionView)
-        postScrollView.addSubview(dividerLineImageView_2)
-        postScrollView.addSubview(gatheringPeopleGuideStackView)
-        postScrollView.addSubview(gatheringPeopleStepper)
-        postScrollView.addSubview(preferredLocationGuideLabel)
-        postScrollView.addSubview(tradeLocationTextField)
-        postScrollView.addSubview(expandTextField)
-        postScrollView.addSubview(postDetailGuideLabel)
-        postScrollView.addSubview(postDetailTextView)
+        postScrollView.addSubview(contentView)
+        
+        contentView.addSubview(postTitleTextField)
+        contentView.addSubview(dividerLineImageView_1)
+        contentView.addSubview(postImagesCollectionView)
+        contentView.addSubview(dividerLineImageView_2)
+        contentView.addSubview(gatheringPeopleGuideStackView)
+        contentView.addSubview(gatheringPeopleStepper)
+        contentView.addSubview(preferredLocationGuideLabel)
+        contentView.addSubview(tradeLocationTextField)
+        contentView.addSubview(expandTextField)
+        contentView.addSubview(postDetailGuideLabel)
+        contentView.addSubview(postDetailTextView)
         
     }
     
@@ -255,6 +260,11 @@ class UploadPostViewController: BaseViewController {
         
         postScrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.centerX.top.bottom.equalToSuperview()
         }
         
         postTitleTextField.snp.makeConstraints {

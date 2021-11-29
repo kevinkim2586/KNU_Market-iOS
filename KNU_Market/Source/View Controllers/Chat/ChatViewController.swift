@@ -223,7 +223,7 @@ extension ChatViewController {
 
     func didDeletePost() {
         navigationController?.popViewController(animated: true)
-        NotificationCenter.default.post(name: .updateItemList, object: nil)
+        NotificationCenter.default.post(name: .updatePostList, object: nil)
     }
 
     func didFetchPreviousChats() {

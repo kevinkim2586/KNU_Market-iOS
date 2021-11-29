@@ -13,7 +13,7 @@ class SearchPostViewModel {
     
     weak var delegate: SearchPostViewModelDelegate?
     
-    var itemList: [PostListModel] = [PostListModel]()
+    var postList: [PostListModel] = [PostListModel]()
 
     var isFetchingData: Bool = false
     
@@ -48,7 +48,7 @@ class SearchPostViewModel {
                     return
                 }
                 self.index += 1
-                self.itemList.append(contentsOf: fetchedModel)
+                self.postList.append(contentsOf: fetchedModel)
                 self.isFetchingData = false
                 self.delegate?.didFetchSearchList()
                 
@@ -60,7 +60,7 @@ class SearchPostViewModel {
     
     func resetValues() {
         
-        itemList.removeAll()
+        postList.removeAll()
         searchKeyword = nil
         isFetchingData = false
         index = 1

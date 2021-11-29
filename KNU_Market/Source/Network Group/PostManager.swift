@@ -15,7 +15,7 @@ class PostManager {
     
     
     //MARK: - 공구글 목록 불러오기
-    func fetchItemList(
+    func fetchPostList(
         at index: Int,
         fetchCurrentUsers: Bool = false,
         postFilterOption: PostFilterOptions,
@@ -64,8 +64,8 @@ class PostManager {
     }
     
     //MARK: - 공구글 업로드
-    func uploadNewItem(
-        with model: UploadItemRequestDTO,
+    func uploadNewPost(
+        with model: UploadPostRequestDTO,
         completion: @escaping ((Result<Bool, NetworkError>) -> Void)
     ) {
         
@@ -126,7 +126,7 @@ class PostManager {
     }
     
     //MARK: - 특정 공구글 불러오기
-    func fetchItemDetails(
+    func fetchPostDetails(
         uid: String,
         completion: @escaping ((Result<PostDetailModel, NetworkError>) -> Void)
     ) {

@@ -63,7 +63,7 @@ class MyPostsViewController: BaseViewController {
     private func setupViewModel() {
         self.viewModel = PostListViewModel(postManager: PostManager(), chatManager: ChatManager(), userManager: UserManager())
         self.viewModel.delegate = self
-        self.viewModel.fetchItemList(fetchCurrentUsers: true)
+        self.viewModel.fetchPostList(fetchCurrentUsers: true)
     }
 }
 
@@ -71,12 +71,12 @@ class MyPostsViewController: BaseViewController {
 
 extension MyPostsViewController: PostListViewModelDelegate {
     
-    func didFetchItemList() {
+    func didFetchPostList() {
         postTableView.reloadData()
         postTableView.refreshControl?.endRefreshing()
         postTableView.tableFooterView = nil
         postTableView.restoreEmptyView()
-        if viewModel.itemList.count == 0 {
+        if viewModel.postList.count == 0 {
             postTableView.showEmptyView(
                 imageName: K.Images.emptyChatList,
                 text: "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!"
@@ -84,8 +84,8 @@ extension MyPostsViewController: PostListViewModelDelegate {
         }
     }
     
-    func failedFetchingItemList(errorMessage: String, error: NetworkError) {
-        if viewModel.itemList.count == 0 {
+    func failedFetchingPostList(errorMessage: String, error: NetworkError) {
+        if viewModel.postList.count == 0 {
             postTableView.showEmptyView(
                 imageName: K.Images.emptyChatList,
                 text: errorMessage
@@ -107,7 +107,7 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.itemList.count ?? 0
+        return viewModel?.postList.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -120,7 +120,7 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
         ) as? PostTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(with: viewModel.itemList[indexPath.row])
+        cell.configure(with: viewModel.postList[indexPath.row])
         return cell
     }
     
@@ -129,7 +129,7 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let postVC = PostViewController(
             viewModel: PostViewModel(
-                pageId: viewModel.itemList[indexPath.row].uuid,
+                pageId: viewModel.postList[indexPath.row].uuid,
                 postManager: PostManager(),
                 chatManager: ChatManager()
             ),
@@ -148,7 +148,7 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
             finalAlpha: 0.0,     // 안 보이게
             completion: {
                 self.viewModel.resetValues()
-                self.viewModel.fetchItemList(fetchCurrentUsers: true)
+                self.viewModel.fetchPostList(fetchCurrentUsers: true)
             }
         )
     }
@@ -165,7 +165,7 @@ extension MyPostsViewController: UIScrollViewDelegate {
         if position > (postTableView.contentSize.height - 80 - scrollView.frame.size.height) {
             if !viewModel.isFetchingData {
                 postTableView.tableFooterView = createSpinnerFooterView()
-                viewModel.fetchItemList(fetchCurrentUsers: true)
+                viewModel.fetchPostList(fetchCurrentUsers: true)
             }
         }
     }

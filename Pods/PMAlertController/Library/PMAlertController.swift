@@ -71,7 +71,6 @@ import UIKit
         alertView.layer.cornerRadius = 5
         (image != nil) ? (alertImage.image = image) : (headerViewHeightConstraint.constant = 0)
         
-        
         if let title = title {
             alertTitle.text = title
         }else{

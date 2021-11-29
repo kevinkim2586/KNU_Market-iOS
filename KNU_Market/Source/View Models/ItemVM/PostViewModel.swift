@@ -3,8 +3,8 @@ import UIKit
 import ImageSlideshow
 
 protocol PostViewModelDelegate: AnyObject {
-    func didFetchItemDetails()
-    func failedFetchingItemDetails(with error: NetworkError)
+    func didFetchPostDetails()
+    func failedFetchingPostDetails(with error: NetworkError)
     
     func didDeletePost()
     func failedDeletingPost(with error: NetworkError)
@@ -45,7 +45,7 @@ class PostViewModel {
     
     var imageSources: [InputSource] = [InputSource]()
     
-    let itemImages: [UIImage]? = [UIImage]()
+    let postImages: [UIImage]? = [UIImage]()
     
     var currentlyGatheredPeople: Int {
         guard let model = model else { return 1 }
@@ -121,7 +121,7 @@ class PostViewModel {
             totalGatheringPeople: totalGatheringPeople,
             currentlyGatheredPeople: currentlyGatheredPeople,
             location: model?.location ?? 0,
-            itemDetail: model?.itemDetail ?? "",
+            postDetail: model?.postDetail ?? "",
             pageUID: pageID
         )
         return editPostModel
@@ -137,20 +137,20 @@ class PostViewModel {
     
     
     //MARK: - 공구 상세내용 불러오기
-    func fetchItemDetails() {
+    func fetchPostDetails() {
         
-        PostManager.shared.fetchItemDetails(uid: self.pageID) { [weak self] result in
+        PostManager.shared.fetchPostDetails(uid: self.pageID) { [weak self] result in
             
             guard let self = self else { return }
             
             switch result {
             case .success(let fetchedModel):
                 self.model = fetchedModel
-                self.delegate?.didFetchItemDetails()
+                self.delegate?.didFetchPostDetails()
                 self.detectURL()
                 
             case .failure(let error):
-                self.delegate?.failedFetchingItemDetails(with: error)
+                self.delegate?.failedFetchingPostDetails(with: error)
             }
         }
     }
@@ -182,7 +182,7 @@ class PostViewModel {
             case .success:
                 self.delegate?.didMarkPostDone()
                 NotificationCenter.default.post(
-                    name: .updateItemList,
+                    name: .updatePostList,
                     object: nil
                 )
             case .failure(let error):
@@ -196,7 +196,7 @@ class PostViewModel {
         
         let model = UpdatePostRequestDTO(title: self.model?.title ?? "",
                                          location: self.model?.location ?? 0,
-                                         detail: self.model?.itemDetail ?? "",
+                                         detail: self.model?.postDetail ?? "",
                                          imageUIDs: self.model?.imageUIDs ?? [],
                                          totalGatheringPeople: self.totalGatheringPeople,
                                          currentlyGatheredPeople: self.currentlyGatheredPeople,
@@ -210,7 +210,7 @@ class PostViewModel {
             case .success:
                 
                 self.delegate?.didCancelMarkPostDone()
-                NotificationCenter.default.post(name: .updateItemList, object: nil)
+                NotificationCenter.default.post(name: .updatePostList, object: nil)
                 
             case .failure(let error):
                 
@@ -247,7 +247,7 @@ class PostViewModel {
                 case .E108:
                     self.delegate?.didEnterChat(isFirstEntrance: false)
                     NotificationCenter.default.post(
-                        name: .updateItemList,
+                        name: .updatePostList,
                         object: nil
                     )
                 default:
@@ -285,7 +285,7 @@ class PostViewModel {
         User.shared.bannedPostUploaders.append(userUID)
         self.delegate?.didBlockUser()
         NotificationCenter.default.post(
-            name: .updateItemList,
+            name: .updatePostList,
             object: nil
         )
     }
@@ -295,18 +295,18 @@ class PostViewModel {
         
         var detectedURLString: String?
         
-        guard let itemDetail = model?.itemDetail else { return }
+        guard let postDetail = model?.postDetail else { return }
         
         guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else { return }
         let matches = detector.matches(
-            in: itemDetail,
+            in: postDetail,
             options: [],
-            range: NSRange(location: 0, length: itemDetail.utf16.count)
+            range: NSRange(location: 0, length: postDetail.utf16.count)
         )
 
         for match in matches {
-            guard let range = Range(match.range, in: itemDetail) else { continue }
-            let url = itemDetail[range]
+            guard let range = Range(match.range, in: postDetail) else { continue }
+            let url = postDetail[range]
             detectedURLString = String(url)
         }
         
@@ -315,11 +315,11 @@ class PostViewModel {
             let url = URL(string: urlString)
         else { return }
     
-        let attributedString = NSMutableAttributedString(string: itemDetail)
+        let attributedString = NSMutableAttributedString(string: postDetail)
         
-        if let range: Range<String.Index> = itemDetail.range(of: "http") {
-            let index: Int = itemDetail.distance(
-                from: itemDetail.startIndex,
+        if let range: Range<String.Index> = postDetail.range(of: "http") {
+            let index: Int = postDetail.distance(
+                from: postDetail.startIndex,
                 to: range.lowerBound
             )
             
@@ -341,8 +341,8 @@ extension PostViewModel {
     
     func convertUIDsToURL() {
         imageURLs.removeAll()
-        if let itemImageUIDs = model?.imageUIDs {
-            imageURLs = itemImageUIDs.compactMap { URL(string: "\(K.API_BASE_URL)media/" + $0) }
+        if let postImageUIDs = model?.imageUIDs {
+            imageURLs = postImageUIDs.compactMap { URL(string: "\(K.API_BASE_URL)media/" + $0) }
         }
     }
     

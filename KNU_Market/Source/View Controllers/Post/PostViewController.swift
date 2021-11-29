@@ -122,7 +122,7 @@ class PostViewController: BaseViewController {
     }
     
     private func loadInitialMethods() {
-        viewModel.fetchItemDetails()
+        viewModel.fetchPostDetails()
         viewModel.fetchEnteredRoomInfo()
     }
 
@@ -176,7 +176,7 @@ extension PostViewController {
 
     @objc func refreshPage() {
         postTableView.refreshControl?.endRefreshing()
-        viewModel.fetchItemDetails()
+        viewModel.fetchPostDetails()
     }
     
     private func presentActionSheet(with actions: [UIAlertAction], title: String?) {
@@ -322,18 +322,18 @@ extension PostViewController: KMPostBottomViewDelegate {
     }
 }
 
-//MARK: - ItemViewModelDelegate
+//MARK: - PostViewModelDelegate
 
 extension PostViewController: PostViewModelDelegate {
     
-    func didFetchItemDetails() {
+    func didFetchPostDetails() {
         DispatchQueue.main.async {
             self.postTableView.refreshControl?.endRefreshing()
             self.updatePostInformation()
         }
     }
     
-    func failedFetchingItemDetails(with error: NetworkError) {
+    func failedFetchingPostDetails(with error: NetworkError) {
         self.postTableView.refreshControl?.endRefreshing()
         
         postTableView.isHidden = true
@@ -353,7 +353,7 @@ extension PostViewController: PostViewModelDelegate {
         showSimpleBottomAlert(with: "게시글 삭제 완료 🎉")
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
             self.navigationController?.popViewController(animated: true)
-            NotificationCenter.default.post(name: .updateItemList, object: nil)
+            NotificationCenter.default.post(name: .updatePostList, object: nil)
         }
     }
     
@@ -485,7 +485,7 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "PostCell")
         cell.selectionStyle = .none
         
-        let postDetail = viewModel.model?.itemDetail ?? "로딩 중.."
+        let postDetail = viewModel.model?.postDetail ?? "로딩 중.."
     
         let labelStyle = NSMutableParagraphStyle()
         labelStyle.lineSpacing = 5

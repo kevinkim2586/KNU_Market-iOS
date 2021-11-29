@@ -91,7 +91,7 @@ extension SearchPostsViewController: SearchPostViewModelDelegate {
     
     func didFetchSearchList() {
         
-        if viewModel.itemList.count == 0 {
+        if viewModel.postList.count == 0 {
             searchTableView.showEmptyView(
                 imageName: K.Images.emptySearchPlaceholder,
                 text: K.placeHolderTitle.emptySearchTitleList.randomElement()!
@@ -168,12 +168,12 @@ extension SearchPostsViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.itemList.count
+        return viewModel.postList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row > viewModel.itemList.count { return UITableViewCell() }
+        if indexPath.row > viewModel.postList.count { return UITableViewCell() }
         
         let cellIdentifier = PostTableViewCell.cellId
         
@@ -183,7 +183,7 @@ extension SearchPostsViewController: UITableViewDelegate, UITableViewDataSource 
             withIdentifier: cellIdentifier,
             for: indexPath
         ) as? PostTableViewCell else { return UITableViewCell() }
-        cell.configure(with: viewModel.itemList[indexPath.row])
+        cell.configure(with: viewModel.postList[indexPath.row])
         return cell
     }
 
@@ -193,7 +193,7 @@ extension SearchPostsViewController: UITableViewDelegate, UITableViewDataSource 
         
         let postVC = PostViewController(
             viewModel: PostViewModel(
-                pageId: viewModel.itemList[indexPath.row].uuid,
+                pageId: viewModel.postList[indexPath.row].uuid,
                 postManager: PostManager(),
                 chatManager: ChatManager()
             ),

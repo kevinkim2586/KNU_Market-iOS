@@ -7,7 +7,7 @@ struct PostDetailModel: Decodable {
     let title: String
     let imageUIDs: [String]?
     let location: Int
-    let itemDetail: String
+    let postDetail: String
     let viewCount: Int
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
@@ -23,7 +23,7 @@ struct PostDetailModel: Decodable {
         case title
         case imageUIDs = "images"
         case location = "spotCategory"
-        case itemDetail = "content"
+        case postDetail = "content"
         case viewCount  = "viewCount"
         case totalGatheringPeople = "maxHeadcount"
         case currentlyGatheredPeople = "currentHeadcount"

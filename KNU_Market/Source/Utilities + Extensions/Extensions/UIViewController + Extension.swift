@@ -221,11 +221,9 @@ extension UIViewController {
     
     // 회원가입 VC 띄우기
     func presentRegisterVC() {
-        let storyboard = UIStoryboard(name: StoryboardName.UserRegister, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(
-            withIdentifier: K.StoryboardID.idInputVC
-        ) as? IDInputViewController else { return }
         
+        
+        let vc = IDInputViewController(userManager: UserManager())
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
     }

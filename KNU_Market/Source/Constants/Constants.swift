@@ -23,9 +23,6 @@ struct K {
         static let presentChatMemberVC          = "presentChatMemberVC"
 
         
-        static let goToItemVC                   = "goToItemVC"
-        static let goToItemVCFromMyPosts        = "goToItemVCFromMyPosts"
-        
         static let goToReportVC                 = "goToReportVC"
         
     }
@@ -52,7 +49,7 @@ struct K {
         static let findIdUsingWebMailVC         = "FindIdUsingWebMailViewController"
         static let findIdUsingStudentIdVC       = "FindIdUsingStudentIdViewController"
         
-        // Home & Item Tab
+        // Home & Post Tab
         static let tabBarController             = "TabBarController"
         static let photoDetailVC                = "PhotoDetailViewController"
         static let searchPostVC                 = "SearchPostViewController"
@@ -85,11 +82,8 @@ struct K {
     }
     
     struct cellID {
-        
-        static let itemTableViewCell            = "itemTableViewCell"
+
         static let chatTableViewCell            = "chatTableViewCell"
-        static let addItemImageCell             = "addItemImageCell"
-        static let userPickedItemImageCell      = "userPickedItemImageCell"
         static let sendCell                     = "sendCell"
         static let receiveCell                  = "receiveCell"
         static let myPageCell                   = "myPageCell"
@@ -106,23 +100,10 @@ struct K {
         static let password                     = "password"
     }
     
-    struct NotificationKey {
-        
-        static let updateChatList               = "co.wim.updateChatList"
-        static let updateItemList               = "co.wim.updateItemList"
-        
-    }
-    
+
     static let entireChatRoomUID                = "__entireRoomPid"
     
     //MARK: - UI Related Constants
-    
-    struct XIB {
-        
-        static let sendCell                     = "SendCell"
-        static let receiveCell                  = "ReceiveCell"
-        static let itemTableViewCell            = "ItemTableViewCell"
-    }
     
     struct Color {
         
@@ -165,7 +146,7 @@ struct K {
         static let myPageSelected               = "my"
         
         
-        // Item View Controller Images
+        // Post View Controller Images
         static let locationIcon                 = "location icon"
         
         

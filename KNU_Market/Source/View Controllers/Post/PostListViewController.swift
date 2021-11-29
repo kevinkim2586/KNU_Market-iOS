@@ -214,7 +214,7 @@ extension PostListViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(refreshTableView),
-            name: .updateItemList,
+            name: .updatePostList,
             object: nil
         )
         createObserversForGettingBadgeValue()
@@ -248,13 +248,13 @@ extension PostListViewController: PostListViewModelDelegate {
         }
     }
     
-    func didFetchItemList() {
+    func didFetchPostList() {
         postListsTableView.reloadData()
         postListsTableView.refreshControl?.endRefreshing()
         postListsTableView.tableFooterView = nil
     }
     
-    func failedFetchingItemList(errorMessage: String, error: NetworkError) {
+    func failedFetchingPostList(errorMessage: String, error: NetworkError) {
         postListsTableView.refreshControl?.endRefreshing()
         postListsTableView.tableFooterView = nil
         if error != .E601 {
@@ -281,13 +281,13 @@ extension PostListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.itemList.count
+        return viewModel.postList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row > viewModel.itemList.count
-            || viewModel.itemList.count == 0 { return UITableViewCell() }
+        if indexPath.row > viewModel.postList.count
+            || viewModel.postList.count == 0 { return UITableViewCell() }
         
         let cellIdentifier = PostTableViewCell.cellId
                 
@@ -296,7 +296,7 @@ extension PostListViewController: UITableViewDelegate, UITableViewDataSource {
             for: indexPath
         ) as? PostTableViewCell else { return UITableViewCell() }
         
-        cell.configure(with: viewModel.itemList[indexPath.row])
+        cell.configure(with: viewModel.postList[indexPath.row])
         return cell
     }
     
@@ -306,7 +306,7 @@ extension PostListViewController: UITableViewDelegate, UITableViewDataSource {
           
         let postVC = PostViewController(
             viewModel: PostViewModel(
-                pageId: viewModel.itemList[indexPath.row].uuid,
+                pageId: viewModel.postList[indexPath.row].uuid,
                 postManager: PostManager(),
                 chatManager: ChatManager()
             ),
@@ -344,7 +344,7 @@ extension PostListViewController: UIScrollViewDelegate {
         
             if !viewModel.isFetchingData {
                 postListsTableView.tableFooterView = createSpinnerFooterView()
-                viewModel.fetchItemList()
+                viewModel.fetchPostList()
             }
         }
     }
@@ -358,7 +358,7 @@ extension PostListViewController: PlaceholderDelegate {
     func view(_ view: Any, actionButtonTappedFor placeholder: Placeholder) {
         postListsTableView.refreshControl?.beginRefreshing()
         self.viewModel.resetValues()
-        self.viewModel.fetchItemList()
+        self.viewModel.fetchPostList()
     }
 }
 

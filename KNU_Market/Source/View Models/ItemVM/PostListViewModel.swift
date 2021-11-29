@@ -6,8 +6,8 @@ protocol PostListViewModelDelegate: AnyObject {
     func didFetchUserProfileInfo()
     func failedFetchingUserProfileInfo(with error: NetworkError)
     
-    func didFetchItemList()
-    func failedFetchingItemList(errorMessage: String, error: NetworkError)
+    func didFetchPostList()
+    func failedFetchingPostList(errorMessage: String, error: NetworkError)
     
     func failedFetchingRoomPIDInfo(with error: NetworkError)
 }
@@ -27,7 +27,7 @@ class PostListViewModel {
     
     weak var delegate: PostListViewModelDelegate?
     
-    var itemList: [PostListModel] = []
+    var postList: [PostListModel] = []
     
     var isFetchingData: Bool = false
     var index: Int = 1
@@ -40,11 +40,11 @@ class PostListViewModel {
     }
     
     //MARK: - 공구글 불러오기
-    func fetchItemList(fetchCurrentUsers: Bool = false) {
+    func fetchPostList(fetchCurrentUsers: Bool = false) {
         
         isFetchingData = true
         
-        postManager?.fetchItemList(
+        postManager?.fetchPostList(
             at: self.index,
             fetchCurrentUsers: fetchCurrentUsers,
             postFilterOption: User.shared.postFilterOption
@@ -54,7 +54,7 @@ class PostListViewModel {
             case .success(let fetchedModel):
                 
                 if fetchedModel.isEmpty {
-                    self.delegate?.didFetchItemList()
+                    self.delegate?.didFetchPostList()
                     return
                 }
                 
@@ -68,17 +68,17 @@ class PostListViewModel {
                     if fetchCurrentUsers {
                         User.shared.userUploadedRoomPIDs.append(model.uuid)
                     }
-                    self.itemList.append(model)
+                    self.postList.append(model)
                 }
           
                 self.isFetchingData = false
-                self.delegate?.didFetchItemList()
+                self.delegate?.didFetchPostList()
                 
             case .failure(let error):
                 let errorMessage = error == .E601
                 ? "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!"
                 : "오류가 발생했습니다!\n잠시 후 다시 시도해주세요."
-                self.delegate?.failedFetchingItemList(errorMessage: errorMessage, error: error)
+                self.delegate?.failedFetchingPostList(errorMessage: errorMessage, error: error)
             }
         }
     }
@@ -130,19 +130,19 @@ class PostListViewModel {
     func loadInitialMethods() {
         fetchEnteredRoomInfo()
         loadUserProfile()
-        fetchItemList()
+        fetchPostList()
     }
     
     func refreshTableView() {
         resetValues()
-        fetchItemList()
+        fetchPostList()
         fetchEnteredRoomInfo()
     }
     
     func resetValues() {
         User.shared.joinedChatRoomPIDs.removeAll()
         User.shared.userUploadedRoomPIDs.removeAll()
-        itemList.removeAll()
+        postList.removeAll()
         isFetchingData = false
         index = 1
     }

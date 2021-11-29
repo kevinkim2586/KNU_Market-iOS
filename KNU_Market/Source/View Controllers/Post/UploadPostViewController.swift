@@ -400,7 +400,7 @@ extension UploadPostViewController {
                 if !self.viewModel.userSelectedImages.isEmpty {
                     self.viewModel.uploadImageToServerFirst()
                 } else {
-                    self.viewModel.uploadItem()
+                    self.viewModel.uploadPost()
                 }
             }
         }
@@ -434,7 +434,7 @@ extension UploadPostViewController {
             self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.rawValue)
             return false
         }
-        viewModel.itemTitle = postTitle
+        viewModel.postTitle = postTitle
         do {
             try viewModel.validateUserInputs()
             
@@ -463,10 +463,10 @@ extension UploadPostViewController {
         
         viewModel.editPostModel = editModel
         
-        viewModel.itemTitle = editModel!.title
+        viewModel.postTitle = editModel!.title
         viewModel.location = editModel!.location - 1
         viewModel.totalPeopleGathering = editModel!.totalGatheringPeople
-        viewModel.itemDetail = editModel!.itemDetail
+        viewModel.postDetail = editModel!.postDetail
         viewModel.currentlyGatheredPeople = editModel!.currentlyGatheredPeople
         
         // 이미지 url 이 있으면 실행
@@ -486,21 +486,21 @@ extension UploadPostViewController {
         totalGatheringPeopleLabel.text = String(editModel!.totalGatheringPeople) + " 명"
         tradeLocationTextField.text = self.viewModel.locationArray[editModel!.location - 1]
         
-        postDetailTextView.text = editModel!.itemDetail
+        postDetailTextView.text = editModel!.postDetail
         postDetailTextView.textColor = UIColor.black
     
     }
 }
 
-//MARK: - UploadItemDelegate
+//MARK: - UploadPostDelegate
 
-extension UploadPostViewController: UploadItemDelegate {
+extension UploadPostViewController: UploadPostDelegate {
     
     func didCompleteUpload() {
         
         dismissProgressBar()
         navigationController?.popViewController(animated: true)
-        NotificationCenter.default.post(name: .updateItemList, object: nil)
+        NotificationCenter.default.post(name: .updatePostList, object: nil)
     }
     
     func failedUploading(with error: NetworkError) {
@@ -586,7 +586,7 @@ extension UploadPostViewController: UITextViewDelegate {
             textView.textColor = UIColor.lightGray
             return
         }
-        viewModel.itemDetail = textView.text
+        viewModel.postDetail = textView.text
     }
 }
  

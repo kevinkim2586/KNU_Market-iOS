@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-protocol UploadItemDelegate: AnyObject {
+protocol UploadPostDelegate: AnyObject {
     func didCompleteUpload()
     func failedUploading(with error: NetworkError)
     
@@ -16,18 +16,18 @@ class UploadPostViewModel {
     private var mediaManager: MediaManager?
     private var postManager: PostManager?
     
-    weak var delegate: UploadItemDelegate?
+    weak var delegate: UploadPostDelegate?
     
     var requiredMinimumPeopleToGather: Int = 2
     
-    var itemTitle: String = ""
+    var postTitle: String = ""
     
     var location: Int = 0
     let locationArray: [String] = Location.list
 
     var totalPeopleGathering: Int = 2
     
-    var itemDetail: String = ""
+    var postDetail: String = ""
     
     var userSelectedImages: [UIImage] = [] {
         didSet { convertUIImagesToDataFormat() }
@@ -86,21 +86,21 @@ class UploadPostViewModel {
         }
         
         group.notify(queue: .main) {
-            self.editPostModel != nil ? self.updatePost() : self.uploadItem()
+            self.editPostModel != nil ? self.updatePost() : self.uploadPost()
         }
     }
     
-    func uploadItem() {
+    func uploadPost() {
         
-        let model = UploadItemRequestDTO(
-            title: itemTitle,
+        let model = UploadPostRequestDTO(
+            title: postTitle,
             location: location + 1,
             peopleGathering: totalPeopleGathering,
             imageUIDs: imageUIDs,
-            detail: itemDetail
+            detail: postDetail
         )
         
-        postManager?.uploadNewItem(with: model) { [weak self] result in
+        postManager?.uploadNewPost(with: model) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -108,7 +108,7 @@ class UploadPostViewModel {
             
             case .success(_):
                 self.delegate?.didCompleteUpload()
-                NotificationCenter.default.post(name: .updateItemList, object: nil)
+                NotificationCenter.default.post(name: .updatePostList, object: nil)
             case .failure(let error):
                 print("UploadItemViewModel - uploadItem() failed: \(error.errorDescription)")
                 self.delegate?.failedUploading(with: error)
@@ -144,9 +144,9 @@ class UploadPostViewModel {
     func updatePost() {
         
         let model = UpdatePostRequestDTO(
-            title: itemTitle,
+            title: postTitle,
             location: location + 1,
-            detail: itemDetail,
+            detail: postDetail,
             imageUIDs: imageUIDs,
             totalGatheringPeople: totalPeopleGathering,
             currentlyGatheredPeople: currentlyGatheredPeople
@@ -172,11 +172,11 @@ class UploadPostViewModel {
     
     func validateUserInputs() throws {
         
-        guard itemTitle.count >= 3, itemTitle.count <= 30 else {
+        guard postTitle.count >= 3, postTitle.count <= 30 else {
             throw ValidationError.OnUploadPost.titleTooShortOrLong
         }
         
-        guard itemDetail.count >= 3, itemDetail.count < 700 else {
+        guard postDetail.count >= 3, postDetail.count < 700 else {
             throw ValidationError.OnUploadPost.detailTooShortOrLong
         }
     }

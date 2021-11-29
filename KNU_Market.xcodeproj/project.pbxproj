@@ -64,7 +64,6 @@
 		7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */; };
 		7C4CA63326F4BF3200F4BCA7 /* IDInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CA63226F4BF3200F4BCA7 /* IDInputViewController.swift */; };
 		7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C516C3A267F48300065E30D /* ReportUserViewController.swift */; };
-		7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */; };
 		7C55545D266CDFD100C3C5B6 /* UploadPostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545C266CDFD100C3C5B6 /* UploadPostRequestDTO.swift */; };
 		7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */; };
 		7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */; };
@@ -171,6 +170,22 @@
 		7CEDBB5F2702E89F0078F5E1 /* KMTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */; };
 		7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB602702EC970078F5E1 /* KMTextField.swift */; };
 		7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */; };
+		7CF369A32754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369A22754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift */; };
+		7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369A42754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift */; };
+		7CF369A92754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369A82754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift */; };
+		7CF369AB2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */; };
+		7CF369AD2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369AC2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift */; };
+		7CF369AF2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */; };
+		7CF369B22754D60E00C9D7A9 /* PostListViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */; };
+		7CF369B42754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B32754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift */; };
+		7CF369B62754D65200C9D7A9 /* PostListViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B52754D65200C9D7A9 /* PostListViewController+TargetMethods.swift */; };
+		7CF369B82754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B72754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift */; };
+		7CF369BA2754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B92754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift */; };
+		7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369BD2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift */; };
+		7CF369C02754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369BF2754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift */; };
+		7CF369C22754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */; };
+		7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C32754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift */; };
+		7CF369C62754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C52754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift */; };
 		9EA0AE612D2A658F824B7CA3 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC6A645B304E4B1E7AF6FFA /* Pods_KNU_Market.framework */; };
 /* End PBXBuildFile section */
 
@@ -234,7 +249,6 @@
 		7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserRequestDTO.swift; sourceTree = "<group>"; };
 		7C4CA63226F4BF3200F4BCA7 /* IDInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDInputViewController.swift; sourceTree = "<group>"; };
 		7C516C3A267F48300065E30D /* ReportUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
-		7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		7C55545C266CDFD100C3C5B6 /* UploadPostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostRequestDTO.swift; sourceTree = "<group>"; };
 		7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
 		7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderKeys.swift; sourceTree = "<group>"; };
@@ -344,6 +358,22 @@
 		7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTitleLabel.swift; sourceTree = "<group>"; };
 		7CEDBB602702EC970078F5E1 /* KMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTextField.swift; sourceTree = "<group>"; };
 		7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMDetailLabel.swift; sourceTree = "<group>"; };
+		7CF369A22754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+UploadPostDelegate.swift"; sourceTree = "<group>"; };
+		7CF369A42754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+UICollectionView.swift"; sourceTree = "<group>"; };
+		7CF369A82754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+UIPicker.swift"; sourceTree = "<group>"; };
+		7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+PostImagesCollectionView.swift"; sourceTree = "<group>"; };
+		7CF369AC2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+UITextViewDelegate.swift"; sourceTree = "<group>"; };
+		7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+TargetMethods.swift"; sourceTree = "<group>"; };
+		7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+UITableView.swift"; sourceTree = "<group>"; };
+		7CF369B32754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+PostViewModelDelegate.swift"; sourceTree = "<group>"; };
+		7CF369B52754D65200C9D7A9 /* PostListViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+TargetMethods.swift"; sourceTree = "<group>"; };
+		7CF369B72754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
+		7CF369B92754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+PlaceholderDelegate.swift"; sourceTree = "<group>"; };
+		7CF369BD2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+SearchPostViewModelDelegate.swift"; sourceTree = "<group>"; };
+		7CF369BF2754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UISearchBarDelegate.swift"; sourceTree = "<group>"; };
+		7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UITableView.swift"; sourceTree = "<group>"; };
+		7CF369C32754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
+		7CF369C52754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+PlaceholderDelegate.swift"; sourceTree = "<group>"; };
 		D84C1EB55AC5608AFB3E68DA /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -953,15 +983,10 @@
 		7CD74E0E2645983000BD2DE4 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				7CBB8E682754729E0003B183 /* PostListViewController.swift */,
-				7C83EE522742378000CF1680 /* PostViewController.swift */,
-				7CAE5AF92754B50B00426708 /* PostViewController+UITableView.swift */,
-				7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */,
-				7CAE5AFD2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift */,
-				7CAE5AFF2754B5F100426708 /* PostViewController+PostViewModelDelegate.swift */,
-				7CC33B2A274B58EB00B0C2C0 /* UploadPostViewController.swift */,
-				7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */,
-				7C83EE4B2742121500CF1680 /* SearchPostsViewController.swift */,
+				7CF369B02754D5F700C9D7A9 /* PostListVC */,
+				7CF369A62754D53300C9D7A9 /* PostVC */,
+				7CF369A72754D54100C9D7A9 /* UploadPostVC */,
+				7CF369BB2754D7C700C9D7A9 /* SearchPostsVC */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1020,6 +1045,58 @@
 				7CC1B59926D4CB1E0007F99B /* EmptyView.xib */,
 			);
 			path = "Empty View";
+			sourceTree = "<group>";
+		};
+		7CF369A62754D53300C9D7A9 /* PostVC */ = {
+			isa = PBXGroup;
+			children = (
+				7C83EE522742378000CF1680 /* PostViewController.swift */,
+				7CAE5AF92754B50B00426708 /* PostViewController+UITableView.swift */,
+				7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */,
+				7CAE5AFD2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift */,
+				7CAE5AFF2754B5F100426708 /* PostViewController+PostViewModelDelegate.swift */,
+			);
+			path = PostVC;
+			sourceTree = "<group>";
+		};
+		7CF369A72754D54100C9D7A9 /* UploadPostVC */ = {
+			isa = PBXGroup;
+			children = (
+				7CC33B2A274B58EB00B0C2C0 /* UploadPostViewController.swift */,
+				7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */,
+				7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */,
+				7CF369AC2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift */,
+				7CF369A82754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift */,
+				7CF369A22754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift */,
+				7CF369A42754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift */,
+			);
+			path = UploadPostVC;
+			sourceTree = "<group>";
+		};
+		7CF369B02754D5F700C9D7A9 /* PostListVC */ = {
+			isa = PBXGroup;
+			children = (
+				7CBB8E682754729E0003B183 /* PostListViewController.swift */,
+				7CF369B52754D65200C9D7A9 /* PostListViewController+TargetMethods.swift */,
+				7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */,
+				7CF369B32754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift */,
+				7CF369B72754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift */,
+				7CF369B92754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift */,
+			);
+			path = PostListVC;
+			sourceTree = "<group>";
+		};
+		7CF369BB2754D7C700C9D7A9 /* SearchPostsVC */ = {
+			isa = PBXGroup;
+			children = (
+				7C83EE4B2742121500CF1680 /* SearchPostsViewController.swift */,
+				7CF369BD2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift */,
+				7CF369BF2754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift */,
+				7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */,
+				7CF369C32754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift */,
+				7CF369C52754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift */,
+			);
+			path = SearchPostsVC;
 			sourceTree = "<group>";
 		};
 		CDDDF223A372EAE9E7F9AB5E /* Frameworks */ = {
@@ -1157,6 +1234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CF369C22754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift in Sources */,
 				7CDADA0726BE623100F7F58F /* DateHelper + Extension.swift in Sources */,
 				7C6B50A02652B17F0032328C /* UIImage + Extension.swift in Sources */,
 				625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */,
@@ -1213,9 +1291,11 @@
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
 				7C132BF426552B4900BE5F40 /* UIButton + Extension.swift in Sources */,
 				7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */,
+				7CF369AD2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
 				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,
 				7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */,
+				7CF369B62754D65200C9D7A9 /* PostListViewController+TargetMethods.swift in Sources */,
 				7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */,
 				7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */,
 				7C83EE4A274121FF00CF1680 /* ChatListTableViewCell.swift in Sources */,
@@ -1224,10 +1304,12 @@
 				622270B3274A489500FDC47B /* DetailMessageViewReactor.swift in Sources */,
 				625B0E3F2741F75C003968BA /* BaseAPI.swift in Sources */,
 				7C4CA63326F4BF3200F4BCA7 /* IDInputViewController.swift in Sources */,
+				7CF369B22754D60E00C9D7A9 /* PostListViewController+UITableView.swift in Sources */,
 				7CC1B59C26D4FC110007F99B /* UIView + Extension.swift in Sources */,
 				7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */,
 				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
 				7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */,
+				7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */,
 				7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */,
 				7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
@@ -1239,6 +1321,7 @@
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
 				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */,
+				7CF369BA2754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */,
@@ -1250,8 +1333,8 @@
 				7CA661F5263D4387000E0B7A /* InitialViewController.swift in Sources */,
 				7CA78FF626CDFC510019B06F /* AlertViewController.swift in Sources */,
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
+				7CF369A32754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift in Sources */,
 				625B0E382741EAAE003968BA /* AuthPlugin.swift in Sources */,
-				7C516C3D267F649C0065E30D /* PhotoDetailViewController.swift in Sources */,
 				7C83EE4F274226FE00CF1680 /* KMPostButtonView.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7C0E2DDF26B7D92800BB37FF /* String + Extension.swift in Sources */,
@@ -1271,16 +1354,22 @@
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
 				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
+				7CF369A92754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift in Sources */,
+				7CF369C62754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift in Sources */,
+				7CF369AB2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift in Sources */,
 				7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */,
 				7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */,
 				7CB22568272EB0650045CE94 /* PopupManager.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
+				7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer + Extension.swift in Sources */,
+				7CF369AF2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift in Sources */,
 				7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */,
 				7CAE5B002754B5F100426708 /* PostViewController+PostViewModelDelegate.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* ValidationError.swift in Sources */,
 				7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
+				7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */,
 				7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */,
 				7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */,
 				626D66F3274291EC00CB7F4F /* InquiryTableViewCell.swift in Sources */,
@@ -1296,12 +1385,14 @@
 				7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */,
 				625B0E322741E259003968BA /* ErrorModel.swift in Sources */,
 				7CBDF4B0272F886500E657D9 /* PopupModel.swift in Sources */,
+				7CF369C02754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift in Sources */,
 				7C5E21292646558700E98FE5 /* PostViewModel.swift in Sources */,
 				7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */,
 				7CB8DF3E264BB1970001CC6D /* RegisterRequestDTO.swift in Sources */,
 				625B0E3B2741F6A8003968BA /* MyPageService.swift in Sources */,
 				7CEDBB5F2702E89F0078F5E1 /* KMTitleLabel.swift in Sources */,
 				7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */,
+				7CF369B42754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift in Sources */,
 				7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */,
 				7C5A1F2B26D6174F0041885B /* UICollectionView + Extension.swift in Sources */,
 				7CBB8E692754729F0003B183 /* PostListViewController.swift in Sources */,
@@ -1311,6 +1402,7 @@
 				7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */,
 				7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */,
 				7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */,
+				7CF369B82754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift in Sources */,
 				7CA52D69270B083F00A69F3B /* ChangeIdViewController.swift in Sources */,
 				7C3D985E26AE793D005DFAE0 /* RoomInfo.swift in Sources */,
 				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,

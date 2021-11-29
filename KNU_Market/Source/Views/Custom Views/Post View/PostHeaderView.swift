@@ -250,10 +250,6 @@ class PostHeaderView: UIView {
 extension PostHeaderView {
     
     @objc func pressedImage() {
-        
-        print("✅ pressedImage")
-        print("✅ currentVC = \(currentVC)")
-        
         let fullScreenController = imageSlideShow.presentFullScreenController(from: currentVC ?? UIViewController())
         fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .gray, color: nil)
     }

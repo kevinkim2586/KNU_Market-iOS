@@ -51,7 +51,6 @@ struct K {
         
         // Home & Post Tab
         static let tabBarController             = "TabBarController"
-        static let photoDetailVC                = "PhotoDetailViewController"
         static let searchPostVC                 = "SearchPostViewController"
         
         // Chat Tab

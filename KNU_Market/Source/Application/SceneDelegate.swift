@@ -13,15 +13,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
         
         if User.shared.isLoggedIn == true {
             window?.rootViewController = UIHelper.createMainTabBarController()
-            window?.makeKeyAndVisible()
+  
         } else {
             let initialController = InitialViewController(userManager: UserManager())
             window?.rootViewController = initialController
         }
+        window?.makeKeyAndVisible()
     }
     
 

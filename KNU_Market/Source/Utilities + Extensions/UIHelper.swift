@@ -20,11 +20,17 @@ struct UIHelper {
     
     // 공구글 NavController 생성
     private static func createPostNavigationController() -> UINavigationController {
-        let itemListSB = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
-        guard let itemListVC = itemListSB.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { fatalError() }
         
-        itemListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
-        let PostNavigationController = UINavigationController(rootViewController: itemListVC)
+        let postListVC = PostListViewController(
+            postViewModel: PostViewModel(
+                itemManager: ItemManager(),
+                chatManager: ChatManager(),
+                userManager: UserManager()
+            )
+        )
+        
+        postListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
+        let PostNavigationController = UINavigationController(rootViewController: postListVC)
         PostNavigationController.navigationBar.tintColor = .black
         
         return PostNavigationController

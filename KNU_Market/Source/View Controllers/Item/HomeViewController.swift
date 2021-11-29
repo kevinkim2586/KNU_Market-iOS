@@ -10,7 +10,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
-    private var viewModel = HomeViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager())
+    private var viewModel = PostViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,17 +26,6 @@ class HomeViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
 }
 
 //MARK: - Methods
@@ -54,12 +43,13 @@ extension HomeViewController {
             }
             return
         }
-//        guard let uploadVC = storyboard?.instantiateViewController(
-//            identifier: K.StoryboardID.uploadItemVC
-//        ) as? UploadItemViewController else { return }
-//        uploadVC.hidesBottomBarWhenPushed = true
         
-        let uploadVC = UploadPostViewController(viewModel: UploadItemViewModel(itemManager: ItemManager(), mediaManager: MediaManager()))
+        let uploadVC = UploadPostViewController(
+            viewModel: UploadItemViewModel(
+                itemManager: ItemManager(),
+                mediaManager: MediaManager()
+            )
+        )
         
         navigationController?.pushViewController(uploadVC, animated: true)
     }
@@ -80,7 +70,7 @@ extension HomeViewController {
 
 //MARK: - HomeViewModelDelegate
 
-extension HomeViewController: HomeViewModelDelegate {
+extension HomeViewController: PostViewModelDelegate {
     
     func didFetchUserProfileInfo() {
         

@@ -109,6 +109,7 @@ class InitialViewController: BaseViewController {
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("로그인", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         button.backgroundColor = UIColor(named: K.Color.appColor)
         button.layer.cornerRadius  = Metrics.textFieldHeight / 2
@@ -124,6 +125,7 @@ class InitialViewController: BaseViewController {
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setAttributedTitle(Fonts.registerButtonAttributes, for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         button.addTarget(
             self,

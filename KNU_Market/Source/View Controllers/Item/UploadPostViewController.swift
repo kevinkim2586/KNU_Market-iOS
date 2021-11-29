@@ -280,8 +280,6 @@ class UploadPostViewController: BaseViewController {
     
     override func setupConstraints() {
         super.setupConstraints()
-        #warning("공구글 수정할때도 반영")
-        #warning("완료 버튼도 추가하기")
         
         postScrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()

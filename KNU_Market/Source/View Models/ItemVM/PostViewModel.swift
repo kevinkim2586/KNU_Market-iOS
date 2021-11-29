@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-protocol HomeViewModelDelegate: AnyObject {
+protocol PostViewModelDelegate: AnyObject {
     
     func didFetchUserProfileInfo()
     func failedFetchingUserProfileInfo(with error: NetworkError)
@@ -12,20 +12,20 @@ protocol HomeViewModelDelegate: AnyObject {
     func failedFetchingRoomPIDInfo(with error: NetworkError)
 }
 
-extension HomeViewModelDelegate {
+extension PostViewModelDelegate {
     func didFetchUserProfileInfo() {}
     func failedFetchingUserProfileInfo(with error: NetworkError) {}
     func didFetchUserProfileImage() {}
     func failedFetchingRoomPIDInfo(with error: NetworkError) {}
 }
 
-class HomeViewModel {
+class PostViewModel {
     
     private var itemManager: ItemManager?
     private var chatManager: ChatManager?
     private var userManager: UserManager?
     
-    weak var delegate: HomeViewModelDelegate?
+    weak var delegate: PostViewModelDelegate?
     
     var itemList: [ItemListModel] = []
     
@@ -149,7 +149,7 @@ class HomeViewModel {
 }
 
 
-extension HomeViewModel {
+extension PostViewModel {
     
     var filterActionTitle: String {
         return User.shared.postFilterOption == .showAll ? "'모집 중' 먼저보기" : "최신 순으로 보기"

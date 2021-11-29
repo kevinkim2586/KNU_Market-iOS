@@ -10,7 +10,6 @@ class MyPageViewController: BaseViewController {
     
     private var viewModel = MyPageViewModel()
 
-    
     //MARK: - Constants
     
     fileprivate struct Metrics {
@@ -132,6 +131,7 @@ class MyPageViewController: BaseViewController {
     
     }
     
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)

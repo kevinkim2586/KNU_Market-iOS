@@ -4,7 +4,7 @@ import SnapKit
 class MyPostsViewController: BaseViewController {
 
     //MARK: - Properties
-    private var viewModel: HomeViewModel!
+    private var viewModel: PostViewModel!
     
     //MARK: - Constants
     
@@ -61,7 +61,7 @@ class MyPostsViewController: BaseViewController {
     }
     
     private func setupViewModel() {
-        self.viewModel = HomeViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager())
+        self.viewModel = PostViewModel(itemManager: ItemManager(), chatManager: ChatManager(), userManager: UserManager())
         self.viewModel.delegate = self
         self.viewModel.fetchItemList(fetchCurrentUsers: true)
     }
@@ -69,7 +69,7 @@ class MyPostsViewController: BaseViewController {
 
 //MARK: - HomeViewModelDelegate
 
-extension MyPostsViewController: HomeViewModelDelegate {
+extension MyPostsViewController: PostViewModelDelegate {
     
     func didFetchItemList() {
         postTableView.reloadData()

@@ -1,15 +1,60 @@
 import UIKit
+import SnapKit
 
-class ChatListViewController: UIViewController {
-
-    @IBOutlet weak var chatListTableView: UITableView!
+class ChatListViewController: BaseViewController {
     
-    private let refreshControl = UIRefreshControl()
-    private let viewModel = ChatListViewModel()
+    //MARK: - Properties
+    
+    private var viewModel: ChatListViewModel!
+    
+    //MARK: - UI
+    
+    lazy var chatListTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.separatorColor = .clear
+        tableView.tableFooterView = UIView(frame: .zero)
+        tableView.register(
+            ChatListTableViewCell.self,
+            forCellReuseIdentifier: ChatListTableViewCell.cellId
+        )
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(
+            self,
+            action: #selector(refreshTableView),
+            for: .valueChanged
+        )
+        return tableView
+    }()
+    
+    lazy var chatBarButtonItem: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.title = "채팅"
+        button.style = .done
+        button.tintColor = .black
+        button.target = self
+        button.action = #selector(pressedChatBarButtonItem)
+        return button
+    }()
+    
+    //MARK: - Initialization
+    
+    init(viewModel: ChatListViewModel) {
+        super.init()
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+        configure()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -20,33 +65,66 @@ class ChatListViewController: UIViewController {
         center.removeAllDeliveredNotifications()
         
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)
-        refreshControl.beginRefreshing()
+        chatListTableView.refreshControl?.beginRefreshing()
         viewModel.fetchChatList()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        refreshControl.endRefreshing()
+        chatListTableView.refreshControl?.endRefreshing()
     }
     
-    @IBAction func pressedLeftBarButton(_ sender: UIBarButtonItem) {
+    //MARK: - UI Setup
+    
+    override func setupLayout() {
+        super.setupLayout()
+        
+        navigationItem.leftBarButtonItem = chatBarButtonItem
+        view.addSubview(chatListTableView)
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
+        
+        chatListTableView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+    }
+    
+    override func setupStyle() {
+        super.setupStyle()
+        setNavigationBarAppearance(to: .white)
+    }
+    
+    private func configure() {
+        createObserversForGettingBadgeValue()
+        viewModel.delegate = self
+    }
+}
+
+//MARK: - Target Methods
+
+extension ChatListViewController {
+    
+    @objc private func pressedChatBarButtonItem() {
         if viewModel.roomList.count == 0 { return }
         let topRow = IndexPath(row: 0, section: 0)
-        self.chatListTableView.scrollToRow(at: topRow, at: .top, animated: true)
+        chatListTableView.scrollToRow(at: topRow, at: .top, animated: true)
     }
+    
 }
 
 //MARK: - ChatListViewModelDelegate
 
 extension ChatListViewController: ChatListViewModelDelegate {
-
+    
     func didFetchChatList() {
-        refreshControl.endRefreshing()
-        
-        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
-        
         chatListTableView.refreshControl?.endRefreshing()
-        
+
+        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+            
         if viewModel.roomList.count == 0 {
             chatListTableView.showEmptyView(
                 imageName: K.Images.emptyChatList,
@@ -61,8 +139,10 @@ extension ChatListViewController: ChatListViewModelDelegate {
     func failedFetchingChatList(with error: NetworkError) {
         
         chatListTableView.refreshControl?.endRefreshing()
-        showSimpleBottomAlertWithAction(message: "채팅 목록을 불러오지 못했습니다 😥",
-                                        buttonTitle: "재시도") {
+        showSimpleBottomAlertWithAction(
+            message: "채팅 목록을 불러오지 못했습니다 😥",
+            buttonTitle: "재시도"
+        ) {
             self.chatListTableView.refreshControl?.beginRefreshing()
             self.viewModel.fetchChatList()
         }
@@ -70,24 +150,29 @@ extension ChatListViewController: ChatListViewModelDelegate {
     
     func didExitPost(at indexPath: IndexPath) {
         chatListTableView.deleteRows(at: [indexPath], with: .fade)
-        NotificationCenter.default.post(name: .updateItemList,
-                                        object: nil)
+        NotificationCenter.default.post(
+            name: .updateItemList,
+            object: nil
+        )
     }
     
     func failedExitingPost(with error: NetworkError) {
-        self.showSimpleBottomAlert(with: "채팅방 나가기에 실패했습니다. 나중에 다시 시도해주세요.😥")
+        showSimpleBottomAlert(with: "채팅방 나가기에 실패했습니다. 나중에 다시 시도해주세요.😥")
     }
     
     func didDeleteAndExitPost(at indexPath: IndexPath) {
         chatListTableView.deleteRows(at: [indexPath], with: .fade)
-        NotificationCenter.default.post(name: .updateItemList,
-                                        object: nil)
+        NotificationCenter.default.post(
+            name: .updateItemList,
+            object: nil
+        )
     }
     
     func failedDeletingAndExitingPost(with error: NetworkError) {
-        self.showSimpleBottomAlert(with: "공구 삭제 및 채팅방 나가기에 실패했습니다. 나중에 다시 시도해주세요.😥")
+        showSimpleBottomAlert(with: "공구 삭제 및 채팅방 나가기에 실패했습니다. 나중에 다시 시도해주세요.😥")
     }
 
+    
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -100,24 +185,19 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row > viewModel.roomList.count { return UITableViewCell() }
-        if self.viewModel.roomList.count == 0 { return UITableViewCell() }
-
-        let cellIdentifier = K.cellID.chatTableViewCell
-        
+        if indexPath.row > viewModel.roomList.count || viewModel.roomList.count == 0 {
+            return UITableViewCell()
+        }
         tableView.restoreEmptyView()
         
         guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: cellIdentifier,
+            withIdentifier: ChatListTableViewCell.cellId,
                 for: indexPath
-        ) as? ChatTableViewCell else {
-            return UITableViewCell()
-        }
+        ) as? ChatListTableViewCell else { return UITableViewCell() }
         
         cell.configure(with: self.viewModel.roomList[indexPath.row])
         tableView.tableFooterView = UIView(frame: .zero)
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -126,8 +206,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         
         if viewModel.roomList.count == 0 { return }
         
-        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-        guard let chatVC = storyboard.instantiateViewController(identifier: K.StoryboardID.chatVC) as? ChatViewController else { return }
+        let chatVC = ChatViewController()
         
         chatVC.roomUID = viewModel.roomList[indexPath.row].uuid
         chatVC.chatRoomTitle = viewModel.roomList[indexPath.row].title
@@ -139,43 +218,16 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
     @objc func refreshTableView() {
         viewModel.fetchChatList()
     }
     
-}
-
-//MARK: - UI Configuration & Initialization
-
-extension ChatListViewController {
-    
-    func initialize() {
-        createObserversForGettingBadgeValue()
-        viewModel.delegate = self
-        initializeTabBarIcon()
-        initializeTableView()
-        setClearNavigationBarBackground()
-        setNavigationBarAppearance(to: .white)
-    }
-    
-    func initializeTabBarIcon() {
-        navigationController?.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
-        navigationController?.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
-    }
-    
-    func initializeTableView() {
-        chatListTableView.delegate = self
-        chatListTableView.dataSource = self
-        chatListTableView.refreshControl = refreshControl
-        chatListTableView.tableFooterView = UIView(frame: .zero)
-        chatListTableView.separatorStyle = .none
-        chatListTableView.separatorColor = .clear
-        
-        refreshControl.addTarget(
-            self,
-            action: #selector(refreshTableView),
-            for: .valueChanged
-        )
-    }
-
 }

@@ -2,14 +2,16 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 import SafariServices
-import SwiftyJSON
 import SDWebImage
 import IQKeyboardManagerSwift
 import ImageSlideshow
 import Hero
+import SnapKit
 
 class ChatViewController: MessagesViewController {
     
+    //MARK: - Properties
+
     private var viewModel: ChatViewModel!
 
     var roomUID: String = ""
@@ -17,8 +19,32 @@ class ChatViewController: MessagesViewController {
     var postUploaderUID: String = ""
     var isFirstEntrance: Bool = false
 
+    //MARK: - UI
+    
+    lazy var moreBarButtonItem: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.image = UIImage(systemName: "line.horizontal.3")
+        button.style = .done
+        button.tintColor = .black
+        button.target = self
+        button.action = #selector(pressedMoreBarButtonItem)
+        return button
+    }()
+  
+    let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .darkGray
+        return indicator
+    }()
+    
+    //MARK: - Initialization
+    
+    //MARK: - View Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
+        navigationItem.rightBarButtonItem = moreBarButtonItem
         
         IQKeyboardManager.shared.enable = false
         
@@ -28,8 +54,8 @@ class ChatViewController: MessagesViewController {
         )
         
         initialize()
-        print("✏️ pageID: \(roomUID)")
-        print("✏️ title: \(chatRoomTitle)")
+        setupLayout()
+        setupConstraints()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -62,32 +88,41 @@ class ChatViewController: MessagesViewController {
         print("❗️ ChatViewController DEINITIALIZED")
     }
     
+    //MARK: - UI Setup
+    
+    private func setupLayout() {
+        view.addSubview(activityIndicator)
+    }
+    
+    private func setupConstraints() {
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+    
     @objc func pressedTitle() {
         
-        let storyboard = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
+        let postVC = PostViewController(
+            viewModel: PostViewModel(
+                pageId: roomUID,
+                postManager: PostManager(),
+                chatManager: ChatManager()
+            ),
+            isFromChatVC: true
+        )
         
-        guard let itemVC = storyboard.instantiateViewController(
-            identifier: K.StoryboardID.itemVC
-        ) as? ItemViewController else { return }
-        
-        itemVC.hidesBottomBarWhenPushed = true
-        itemVC.pageID = roomUID
-        itemVC.isFromChatVC = true
-        navigationController?.pushViewController(itemVC, animated: true)
+        navigationController?.pushViewController(postVC, animated: true)
     }
 
-
-    @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
-
+    @objc private func pressedMoreBarButtonItem() {
         viewModel.getRoomInfo()
         
-        guard let chatMemberVC = storyboard?.instantiateViewController(
-            identifier: K.StoryboardID.chatMemberVC
-        ) as? ChatMemberViewController else { return }
-        
-        chatMemberVC.roomInfo = viewModel.roomInfo
-        chatMemberVC.postUploaderUID = viewModel.postUploaderUID
-        presentPanModal(chatMemberVC)
+        let chatMemberListVC = ChatMemberListViewController(
+            chatManager: ChatManager(),
+            roomInfo: viewModel.roomInfo,
+            postUploaderUid: viewModel.postUploaderUID
+        )
+        presentPanModal(chatMemberListVC)
     }
     
     @objc func pressedRefreshButton() {
@@ -110,7 +145,7 @@ class ChatViewController: MessagesViewController {
 extension ChatViewController: ChatViewDelegate {
 
     func didConnect() {
-        dismissProgressBar()
+        activityIndicator.stopAnimating()
 
         messagesCollectionView.scrollToLastItem()
 
@@ -120,11 +155,9 @@ extension ChatViewController: ChatViewDelegate {
             showChatPrecautionMessage()
         }
         
-        if viewModel.fetchFromLastChat {
-            viewModel.getChatFromLastIndex()
-        } else {
-            viewModel.getPreviousChats()
-        }
+        viewModel.fetchFromLastChat
+        ? viewModel.getChatFromLastIndex()
+        : viewModel.getPreviousChats()
     }
 
     func didDisconnect() {
@@ -433,14 +466,10 @@ extension ChatViewController: MessageCellDelegate {
     
     func presentImageVC(url: URL, heroID: String) {
         
-        guard let imageVC = storyboard?.instantiateViewController(
-                identifier: K.StoryboardID.imageVC
-        ) as? ImageViewController else { return }
-        imageVC.modalPresentationStyle = .overFullScreen
-        imageVC.imageURL = url
-        imageVC.heroID = heroID
+        let chatImageVC = ChatImageViewController(imageUrl: url, heroId: heroID)
+        chatImageVC.modalPresentationStyle = .overFullScreen
+        present(chatImageVC, animated: true)
 
-        present(imageVC, animated: true)
     }
 }
 
@@ -461,7 +490,7 @@ extension ChatViewController {
 
     func initializeNavigationItemTitle() {
 
-        let titleButton = UIButton()
+        let titleButton = UIButton(type: .system)
         titleButton.setTitle(chatRoomTitle, for: .normal)
 
         titleButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
@@ -555,34 +584,32 @@ extension ChatViewController {
     }
 
     func presentInputActionSheet() {
-
-        let actionSheet = UIAlertController(title: nil,
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
-
-        let cameraAction = UIAlertAction(title: "사진 찍기",
-                                         style: .default) { [weak self] _ in
-
+        
+        let cameraAction = UIAlertAction(
+            title: "사진 찍기",
+            style: .default
+        ) { [weak self] _ in
             let picker = UIImagePickerController()
             picker.sourceType = .camera
             picker.delegate = self
             picker.allowsEditing = true
             self?.present(picker, animated: true)
         }
-        let albumAction = UIAlertAction(title: "사진 앨범",
-                                         style: .default) { [weak self] _ in
-
+        let albumAction = UIAlertAction(
+            title: "사진 앨범",
+            style: .default
+        ) { [weak self] _ in
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
             picker.delegate = self
             picker.allowsEditing = true
             self?.present(picker, animated: true)
         }
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel)
-        actionSheet.addAction(cameraAction)
-        actionSheet.addAction(albumAction)
-        actionSheet.addAction(cancelAction)
+     
+        let actionSheet = UIHelper.createActionSheet(
+            with: [cameraAction, albumAction],
+            title: nil
+        )
         present(actionSheet, animated: true)
     }
     

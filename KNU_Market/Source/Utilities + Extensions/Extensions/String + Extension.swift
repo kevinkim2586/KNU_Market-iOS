@@ -56,7 +56,7 @@ extension String {
     }
     
     var isValidId: Bool {
-        let idRegEx = "[A-Za-z0-9]{4,20}"
+        let idRegEx = "^([0-9a-z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:'\",<.>/?]{4,50})$"
         let idTest = NSPredicate(format:"SELF MATCHES %@", idRegEx)
         return idTest.evaluate(with: self)
     }

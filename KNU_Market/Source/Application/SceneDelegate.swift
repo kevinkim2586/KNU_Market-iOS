@@ -12,33 +12,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        print("✏️ Scene Delegate - willConnectTo")
 
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
         
         if User.shared.isLoggedIn == true {
-        
             window?.rootViewController = UIHelper.createMainTabBarController()
-            window?.makeKeyAndVisible()
-            
         } else {
-//            let initialController = storyboard.instantiateViewController(identifier: K.StoryboardID.initialVC)
             let initialController = InitialViewController(userManager: UserManager())
             window?.rootViewController = initialController
-            print("✏️ rootViewcontroler")
         }
-        
+        window?.makeKeyAndVisible()
     }
     
 
     func sceneDidDisconnect(_ scene: UIScene) {
-        print("✏️ sceneDidDisconnect")
-
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        print("✏️ sceneDidBecomeActive")
-
         NotificationCenter.default.post(
             name: .reconnectAndFetchFromLastChat,
             object: nil

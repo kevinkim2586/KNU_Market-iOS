@@ -6,8 +6,6 @@ class MediaManager {
     
     static let shared: MediaManager = MediaManager()
     
-    private init() {}
-    
     let interceptor = Interceptor()
     
     let uploadImageURL              = "\(K.API_BASE_URL)media"

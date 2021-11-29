@@ -47,7 +47,6 @@ class MyPageTableViewCell: UITableViewCell {
             make.centerY.equalTo(self.snp.centerY)
             make.left.equalTo(leftImageView.snp.right).offset(12)
         }
-        
     }
 
 }

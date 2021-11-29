@@ -10,7 +10,6 @@ class MyPageViewController: BaseViewController {
     
     private var viewModel = MyPageViewModel()
 
-    
     //MARK: - Constants
     
     fileprivate struct Metrics {
@@ -137,6 +136,7 @@ class MyPageViewController: BaseViewController {
     
     }
     
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)
@@ -160,6 +160,11 @@ class MyPageViewController: BaseViewController {
         profileImageContainerView.addSubview(userNicknameLabel)
         profileImageContainerView.addSubview(userVerifiedImage)
         view.addSubview(settingsTableView)
+
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
         
         profileImageContainerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
@@ -197,11 +202,6 @@ class MyPageViewController: BaseViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
     
         }
-        
-    }
-    
-    override func setupConstraints() {
-        super.setupConstraints()
     }
     
     private func configure() {
@@ -455,6 +455,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func pushViewController(with vc: UIViewController) {
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }

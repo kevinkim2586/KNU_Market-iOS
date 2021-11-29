@@ -559,7 +559,7 @@ extension ChatViewModel {
     // 글 작성자가 ChatVC 내에서 공구글을 삭제하고자 할 때 실행
     @objc func deletePost() {
         
-        ItemManager.shared.deletePost(uid: room) { [weak self] result in
+        PostManager.shared.deletePost(uid: room) { [weak self] result in
             
             guard let self = self else { return }
             dismissProgressBar()

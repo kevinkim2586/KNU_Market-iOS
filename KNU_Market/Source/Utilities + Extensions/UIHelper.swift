@@ -5,50 +5,68 @@ struct UIHelper {
     
     static func createMainTabBarController() -> UITabBarController {
         
-        let tabBarController = UITabBarController()
-        tabBarController.tabBar.tintColor = UIColor(named: K.Color.appColor) ?? .systemPink
-        tabBarController.tabBar.barTintColor = .white
-     
+        // 탭바 생성
+        let mainTabBarController = UITabBarController()
+        mainTabBarController.tabBar.tintColor = UIColor(named: K.Color.appColor) ?? .systemPink
+        mainTabBarController.tabBar.barTintColor = .white
         
-        let itemListSB = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
-        guard let itemListVC = itemListSB.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { fatalError() }
+        // 탭바 설정
+        mainTabBarController.setViewControllers([
+            createPostNavigationController(),
+            createChatNavigationController(),
+            createMyPageNavigationController()
+        ], animated: true)
+        return mainTabBarController
+    }
+    
+    // 공구글 NavController 생성
+    private static func createPostNavigationController() -> UINavigationController {
         
-        itemListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
-        let nav1 = UINavigationController(rootViewController: itemListVC)
-        nav1.navigationBar.tintColor = .black
+        let postListVC = PostListViewController(
+            postViewModel: PostListViewModel(
+                postManager: PostManager(),
+                chatManager: ChatManager(),
+                userManager: UserManager()
+            )
+        )
         
+        postListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
+        let PostNavigationController = UINavigationController(rootViewController: postListVC)
+        PostNavigationController.navigationBar.tintColor = .black
         
-        let chatListSB = UIStoryboard(name: StoryboardName.ChatList, bundle: nil)
-        guard let chatListVC = chatListSB.instantiateViewController(withIdentifier: "ChatListViewController") as? ChatListViewController else { fatalError() }
+        return PostNavigationController
+    }
+    
+    // 채팅 NavController 생성
+    private static func createChatNavigationController() -> UINavigationController {
+        let chatListVC = ChatListViewController(
+            viewModel: ChatListViewModel(chatManager: ChatManager(), postManager: PostManager())
+        )
         
         chatListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
-        let nav2 = UINavigationController(rootViewController: chatListVC)
-        nav2.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
-        nav2.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
-        nav2.navigationBar.tintColor = .black
+        let ChatNavigationController = UINavigationController(rootViewController: chatListVC)
+        ChatNavigationController.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
+        ChatNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
+        ChatNavigationController.navigationBar.tintColor = UIColor.black
         
-        
+        return ChatNavigationController
+    }
+    
+    // 마이페이지 NavController 생성
+    private static func createMyPageNavigationController() -> UINavigationController {
         
         let myPageVC = MyPageViewController(userManager: UserManager())
         myPageVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 0)
-        let nav3 = UINavigationController(rootViewController: myPageVC)
+        let MyPageNavigationController = UINavigationController(rootViewController: myPageVC)
         
-        nav3.tabBarItem.image = UIImage(named: K.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
-        nav3.tabBarItem.selectedImage = UIImage(named: K.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
-        nav3.navigationBar.tintColor = .black
+        MyPageNavigationController.tabBarItem.image = UIImage(named: K.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
+        MyPageNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate)
+        MyPageNavigationController.navigationBar.tintColor = .black
         
-     
-
-    
-    
-        #warning("Badge Color도 지정")
-        
-        tabBarController.setViewControllers([nav1, nav2, nav3], animated: true)
-        
-        
-        
-        return tabBarController
+        return MyPageNavigationController
     }
+    
+    
     
     
     
@@ -83,6 +101,28 @@ struct UIHelper {
         naviItem.rightBarButtonItem = stopBarButtonItem
         naviBar.items = [naviItem]
         view.addSubview(naviBar)
+    }
+    
+    // ActionSheet 만들기
+    static func createActionSheet(with actions: [UIAlertAction], title: String?) -> UIAlertController {
+        
+        let actionSheet = UIAlertController(
+            title: title,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        actionSheet.view.tintColor = .black
+        
+        actions.forEach { actionSheet.addAction($0) }
+        
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil
+        )
+        actionSheet.addAction(cancelAction)
+        
+        return actionSheet
     }
     
     static func presentWelcomePopOver(nickname: String) {

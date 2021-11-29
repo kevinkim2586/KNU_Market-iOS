@@ -74,7 +74,7 @@ class ChooseVerificationOptionViewController: BaseViewController {
     }()
     
     let studentIdButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("학생증", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = Fonts.buttonTitleLabel
@@ -93,7 +93,7 @@ class ChooseVerificationOptionViewController: BaseViewController {
     }()
     
     let schoolMailButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("웹메일", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = Fonts.buttonTitleLabel

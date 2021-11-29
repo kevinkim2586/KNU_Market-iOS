@@ -4,6 +4,7 @@ import UIKit
 struct K {
     
     static let API_BASE_URL                     = "https://knumarket.kro.kr:5051/api/v1/"
+//    static let API_BASE_URL                     = "https://test.knumarket.kro.kr:5051/api/v1/"
     static let WEB_SOCKET_URL                   = "wss://knumarket.kro.kr:5052"
     static let MEDIA_REQUEST_URL                = "https://knumarket.kro.kr:5051/api/v1/media/"
     
@@ -53,9 +54,6 @@ struct K {
         
         // Home & Item Tab
         static let tabBarController             = "TabBarController"
-        static let homeVC                       = "HomeViewController"
-        static let itemVC                       = "ItemViewController"
-        static let uploadItemVC                 = "UploadItemViewController"
         static let photoDetailVC                = "PhotoDetailViewController"
         static let searchPostVC                 = "SearchPostViewController"
         

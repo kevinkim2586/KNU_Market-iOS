@@ -4,7 +4,7 @@ import SnapKit
 class MyPostsViewController: BaseViewController {
 
     //MARK: - Properties
-    private var viewModel: HomeViewModel!
+    private var viewModel: PostListViewModel!
     
     //MARK: - Constants
     
@@ -21,10 +21,9 @@ class MyPostsViewController: BaseViewController {
             for: .valueChanged
         )
         tableView.tableFooterView = UIView(frame: .zero)
-        let nibName = UINib(nibName: K.XIB.itemTableViewCell, bundle: nil)
         tableView.register(
-            nibName,
-            forCellReuseIdentifier: K.cellID.itemTableViewCell
+            PostTableViewCell.self,
+            forCellReuseIdentifier: PostTableViewCell.cellId
         )
         return tableView
     }()
@@ -62,7 +61,7 @@ class MyPostsViewController: BaseViewController {
     }
     
     private func setupViewModel() {
-        self.viewModel = HomeViewModel(itemManager: ItemManager())
+        self.viewModel = PostListViewModel(postManager: PostManager(), chatManager: ChatManager(), userManager: UserManager())
         self.viewModel.delegate = self
         self.viewModel.fetchItemList(fetchCurrentUsers: true)
     }
@@ -70,7 +69,7 @@ class MyPostsViewController: BaseViewController {
 
 //MARK: - HomeViewModelDelegate
 
-extension MyPostsViewController: HomeViewModelDelegate {
+extension MyPostsViewController: PostListViewModelDelegate {
     
     func didFetchItemList() {
         postTableView.reloadData()
@@ -112,12 +111,13 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = K.cellID.itemTableViewCell
-
+       
+        let cellIdentifier = PostTableViewCell.cellId
+        
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier,
             for: indexPath
-        ) as? ItemTableViewCell else {
+        ) as? PostTableViewCell else {
             return UITableViewCell()
         }
         cell.configure(with: viewModel.itemList[indexPath.row])
@@ -127,14 +127,15 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let storyboard = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
+        let postVC = PostViewController(
+            viewModel: PostViewModel(
+                pageId: viewModel.itemList[indexPath.row].uuid,
+                postManager: PostManager(),
+                chatManager: ChatManager()
+            ),
+            isFromChatVC: false
+        )
         
-        guard let postVC = storyboard.instantiateViewController(
-            withIdentifier: K.StoryboardID.itemVC
-        ) as? ItemViewController else { return }
-        
-        postVC.hidesBottomBarWhenPushed = true
-        postVC.pageID = viewModel.itemList[indexPath.row].uuid
         navigationController?.pushViewController(postVC, animated: true)
     }
     

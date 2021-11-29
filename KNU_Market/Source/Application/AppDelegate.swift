@@ -28,12 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
+          
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-    
+        
         Messaging.messaging().delegate = self
         Messaging.messaging().token { token, error in
             if let error = error {
@@ -48,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         configureIQKeyboardManager()
+        
         if #available(iOS 15, *) {
             configureUINavigationBarAppearance()
         }

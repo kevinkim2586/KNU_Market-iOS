@@ -218,12 +218,7 @@ extension ChatMemberListViewController {
             switch result {
             case .success(_):
                 self.dismiss(animated: true)
-                self.presentKMAlertOnMainThread(
-                    title: "강퇴 성공",
-                    message: "해당 사용자 내보내기에 성공하였습니다.",
-                    buttonTitle: "확인"
-                )
-                
+                self.presentCustomAlert(title: "강퇴 성공", message: "해당 사용자 내보내기에 성공하였습니다.")
                 let userInfo: [String : String] = ["uid" : uid, "nickname" : nickname]
                 showProgressBar()
                 NotificationCenter.default.post(
@@ -238,11 +233,7 @@ extension ChatMemberListViewController {
     
     func blockUser(uid: String, nickname: String) {
         guard !User.shared.bannedChatMembers.contains(uid) else {
-            presentKMAlertOnMainThread(
-                title: "이미 차단한 사용자입니다.",
-                message: "이미 차단 목록에 추가된 사용자입니다!",
-                buttonTitle: "확인"
-            )
+            presentCustomAlert(title: "이미 차단한 사용자입니다.", message: "이미 차단 목록에 추가된 사용자입니다!")
             return
         }
         

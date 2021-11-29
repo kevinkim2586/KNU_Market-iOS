@@ -82,11 +82,7 @@ extension PostViewController: PostViewModelDelegate {
     }
     
     func failedJoiningChat(with error: NetworkError) {
-        presentKMAlertOnMainThread(
-            title: "채팅방 참여 불가",
-            message: error.errorDescription,
-            buttonTitle: "확인"
-        )
+        presentCustomAlert(title: "채팅방 참여 불가", message: error.errorDescription)
         postBottomView.enterChatButton.loadingIndicator(false)
     }
     

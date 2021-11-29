@@ -288,11 +288,7 @@ extension InitialViewController {
             case .success(_):
                 self.goToHomeScreen()
             case .failure(let error):
-                self.presentKMAlertOnMainThread(
-                    title: "로그인 실패",
-                    message: error.errorDescription,
-                    buttonTitle: "확인"
-                )
+                self.presentCustomAlert(title: "로그인 실패", message: error.errorDescription)
             }
             dismissProgressBar()
         }

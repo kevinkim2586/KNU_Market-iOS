@@ -180,11 +180,7 @@ extension UnregisterUser_InputSuggestionViewController {
         
         guard var feedback = feedbackTextView.text else { return }
         guard feedback != Texts.textViewPlaceholder else {
-            presentKMAlertOnMainThread(
-                title: "회원 탈퇴 사유 입력",
-                message: "회원 탈퇴 사유를 입력해 주세요. 짧게라도 작성해주시면 감사하겠습니다 :)",
-                buttonTitle: "확인"
-            )
+            presentCustomAlert(title: "회원 탈퇴 사유 입력", message: "회원 탈퇴 사유를 입력해 주세요. 짧게라도 작성해주시면 감사하겠습니다 :)")
             return
         }
         
@@ -209,11 +205,7 @@ extension UnregisterUser_InputSuggestionViewController {
                 switch result {
                 case .success: self.popToInitialViewController()
                 case .failure(let error):
-                    self.presentKMAlertOnMainThread(
-                        title: "회원 탈퇴 실패",
-                        message: error.errorDescription,
-                        buttonTitle: "확인"
-                    )
+                    self.presentCustomAlert(title: "회원 탈퇴 실패", message: error.errorDescription)
                 }
             }
         }

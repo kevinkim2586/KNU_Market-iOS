@@ -130,11 +130,7 @@ class VerifyOptionViewController: BaseViewController {
         title = "학생 인증하기"
         setBackBarButtonItemTitle()
         if detectIfVerifiedUser() {
-            presentKMAlertOnMainThread(
-                title: "인증 회원 안내",
-                message: "이미 인증된 회원입니다.\n이제 공동구매를 즐겨보세요!",
-                buttonTitle: "확인"
-            )
+            presentCustomAlert(title: "인증 회원 안내", message: "이미 인증된 회원입니다.\n이제 공동구매를 즐겨보세요!")
             navigationController?.popViewController(animated: true)
         }
     }

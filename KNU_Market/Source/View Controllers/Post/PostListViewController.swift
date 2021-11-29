@@ -114,6 +114,7 @@ class PostListViewController: BaseViewController {
         )
     }
     
+
     //MARK: - UI Setup
     
     override func setupLayout() {

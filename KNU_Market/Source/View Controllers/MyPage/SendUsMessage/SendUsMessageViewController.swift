@@ -301,10 +301,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
-        Observable.combineLatest(
-            self.titleTextField.rx.text.orEmpty.map { !$0.isEmpty }.asObservable(),
-            self.textView.rx.text.orEmpty.map { !$0.isEmpty }.asObservable()
-        ).map { $0 && $1 }
+        self.titleTextField.rx.text.orEmpty.map { !$0.isEmpty }.asObservable()
         .bind(to: self.buttomButton.rx.isEnabled)
         .disposed(by: disposeBag)
         
@@ -354,6 +351,10 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         
         reactor.state.map { "\($0.image.count)/2" }.asObservable()
             .bind(to: self.selectView.label.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.title }.asObservable()
+            .bind(to: self.titleTextField.rx.text)
             .disposed(by: disposeBag)
     }
     

@@ -12,7 +12,7 @@ class ChatViewController: MessagesViewController {
     
     //MARK: - Properties
 
-    private var viewModel: ChatViewModel!
+    var viewModel: ChatViewModel!
 
     var roomUID: String = ""
     var chatRoomTitle: String = ""
@@ -98,188 +98,6 @@ class ChatViewController: MessagesViewController {
         activityIndicator.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
-    }
-    
-    @objc func pressedTitle() {
-        
-        let postVC = PostViewController(
-            viewModel: PostViewModel(
-                pageId: roomUID,
-                postManager: PostManager(),
-                chatManager: ChatManager()
-            ),
-            isFromChatVC: true
-        )
-        
-        navigationController?.pushViewController(postVC, animated: true)
-    }
-
-    @objc private func pressedMoreBarButtonItem() {
-        viewModel.getRoomInfo()
-        
-        let chatMemberListVC = ChatMemberListViewController(
-            chatManager: ChatManager(),
-            roomInfo: viewModel.roomInfo,
-            postUploaderUid: viewModel.postUploaderUID
-        )
-        presentPanModal(chatMemberListVC)
-    }
-    
-    @objc func pressedRefreshButton() {
-        viewModel.resetAndReconnect()
-    }
-
-    func showChatPrecautionMessage() {
-
-        presentKMAlertOnMainThread(
-            title: "채팅 에티켓 공지!",
-            message: "폭력적이거나 선정적인 말은 삼가 부탁드립니다. 타 이용자로부터 신고가 접수되면 서비스 이용이 제한될 수 있습니다.",
-            buttonTitle: "확인"
-        )
-    }
-}
-
-
-//MARK: - ChatViewDelegate - Socket Delegate Methods
-
-extension ChatViewController: ChatViewDelegate {
-
-    func didConnect() {
-        activityIndicator.stopAnimating()
-
-        messagesCollectionView.scrollToLastItem()
-
-        if viewModel.isFirstEntranceToChat {
-            viewModel.sendText("\(User.shared.nickname)\(K.ChatSuffix.enterSuffix)")
-            viewModel.isFirstEntranceToChat = false
-            showChatPrecautionMessage()
-        }
-        
-        viewModel.fetchFromLastChat
-        ? viewModel.getChatFromLastIndex()
-        : viewModel.getPreviousChats()
-    }
-
-    func didDisconnect() {
-        dismissProgressBar()
-        navigationController?.popViewController(animated: true)
-    }
-
-    func didReceiveChat() {
-        dismissProgressBar()
-        messagesCollectionView.backgroundView = nil
-        messagesCollectionView.reloadDataAndKeepOffset()
-    }
-
-    func reconnectSuggested() {
-        dismissProgressBar()
-        viewModel.resetMessages()
-        viewModel.connect()
-    }
-
-    func failedConnection(with error: NetworkError) {
-        dismissProgressBar()
-        presentKMAlertOnMainThread(
-            title: "일시적인 연결 문제 발생",
-            message: error.errorDescription,
-            buttonTitle: "확인"
-        )
-    }
-
-    func didSendText() {
-        DispatchQueue.main.async {
-            self.messageInputBar.inputTextView.text = ""
-            self.messagesCollectionView.scrollToLastItem()
-        }
-    }
-
-    func didReceiveBanNotification() {
-        messageInputBar.isUserInteractionEnabled = false
-        messageInputBar.isHidden = true
-        viewModel.disconnect()
-        viewModel.resetMessages()
-
-        messagesCollectionView.isScrollEnabled = false
-
-        presentKMAlertOnMainThread(
-            title: "강퇴 당하셨습니다.",
-            message: "방장에 의해 강퇴되었습니다. 더 이상 채팅에 참여가 불가능합니다.🤔",
-            buttonTitle: "확인"
-        )
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-}
-
-//MARK: - ChatViewDelegate - API Delegate Methods
-
-extension ChatViewController {
-
-    func didExitPost() {
-        navigationController?.popViewController(animated: true)
-    }
-
-    func didDeletePost() {
-        navigationController?.popViewController(animated: true)
-        NotificationCenter.default.post(name: .updatePostList, object: nil)
-    }
-
-    func didFetchPreviousChats() {
-
-        dismissProgressBar()
-        messagesCollectionView.backgroundView = nil
-
-        if viewModel.isFirstViewLaunch {
-
-            viewModel.isFirstViewLaunch = false
-            messagesCollectionView.reloadData()
-            messagesCollectionView.scrollToLastItem()
-
-        } else {
-            messagesCollectionView.reloadDataAndKeepOffset()
-        }
-
-        if viewModel.messages.count == 0 {
-            messagesCollectionView.showEmptyChatView()
-        }
-    }
-    
-    func didFetchChatFromLastIndex() {
-        messagesCollectionView.reloadData()
-        messagesCollectionView.scrollToLastItem()
-    }
-    
-    func didFetchEmptyChat() {
-        if viewModel.messages.count == 0 {
-            messagesCollectionView.showEmptyChatView()
-        }
-    }
-    
-    func failedFetchingPreviousChats(with error: NetworkError) {
-        print("❗️ failedFetchingPreviousChats")
-        dismissProgressBar()
-    }
-    
-    func failedUploadingImageToServer() {
-        dismissProgressBar()
-        presentKMAlertOnMainThread(
-            title: "사진 업로드 실패",
-            message: "사진 용량이 너무 크거나 일시적인 오류로 업로드에 실패하였습니다. 잠시 후 다시 시도해주세요.😥",
-            buttonTitle: "확인"
-        )
-        
-    }
-}
-
-//MARK: - InputBarAccessoryViewDelegate
-
-extension ChatViewController: InputBarAccessoryViewDelegate {
-    
-    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-        viewModel.sendText(text)
-        messagesCollectionView.scrollToLastItem()
     }
 }
 
@@ -396,82 +214,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
 }
 
-//MARK: - MessageCellDelegate
-
-extension ChatViewController: MessageCellDelegate {
-    
-    func didTapMessageTopLabel(in cell: MessageCollectionViewCell) {
-        
-        if viewModel.messages.count == 0 { return }
-        
-        guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
-        guard let message = messageForItem(
-                at: indexPath,
-                in: messagesCollectionView
-        ) as? Message else { return }
-        
-        let nickname = message.usernickname
-        
-        presentAlertWithCancelAction(
-            title: "\(nickname)을 신고하시겠습니까?",
-            message: ""
-        ) { selectedOk in
-            if selectedOk { self.presentReportUserVC(userToReport: nickname) }
-        }
-    }
-
-    
-    func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedString.Key : Any] {
-        if viewModel.messages.count == 0 { return [:] }
-        switch detector {
-        case .url:
-            if viewModel.messages[indexPath.section].userUID == User.shared.userUID {
-                return [.foregroundColor: UIColor.white,  .underlineStyle: NSUnderlineStyle.single.rawValue]
-            } else {
-                return [.foregroundColor: UIColor.black, .underlineStyle: NSUnderlineStyle.single.rawValue]
-            }
-        default:
-            return MessageLabel.defaultAttributes
-        }
-    }
-    
-    func enabledDetectors(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> [DetectorType] {
-        return [.url]
-    }
-    
-    func didSelectURL(_ url: URL) {
-        presentSafariView(with: url)
-    }
-    
-    func didTapImage(in cell: MessageCollectionViewCell) {
-        if viewModel.messages.count == 0 { return }
-        guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
-        let message = messageForItem(at: indexPath, in: messagesCollectionView)
-        let heroID = viewModel.messages[indexPath.section].heroID
-        
-        switch message.kind {
-        case .photo(let photoItem):
-            if let url = photoItem.url {
-                presentImageVC(url: url, heroID: heroID)
-            } else {
-                self.presentKMAlertOnMainThread(
-                    title: "오류 발생",
-                    message: "유효하지 않은 사진이거나 요청을 처리하지 못했습니다. 불편을 드려 죄송합니다.😥",
-                    buttonTitle: "확인"
-                )
-            }
-        default: break
-        }
-    }
-    
-    func presentImageVC(url: URL, heroID: String) {
-        
-        let chatImageVC = ChatImageViewController(imageUrl: url, heroId: heroID)
-        chatImageVC.modalPresentationStyle = .overFullScreen
-        present(chatImageVC, animated: true)
-
-    }
-}
 
 //MARK: - Initialization & UI Configuration
 
@@ -482,7 +224,7 @@ extension ChatViewController {
         viewModel.delegate = self
 
         initializeNavigationItemTitle()
-//        initializeRefreshButton()
+
         initializeInputBar()
         initializeCollectionView()
         createObservers()
@@ -502,19 +244,6 @@ extension ChatViewController {
         )
         
         navigationItem.titleView = titleButton
-    }
-    
-    func initializeRefreshButton() {
-        
-        let refreshButton = UIBarButtonItem(
-            image: UIImage(systemName: "arrow.clockwise.circle"),
-            style: .plain,
-            target: self,
-            action: #selector(pressedRefreshButton)
-        )
-        refreshButton.tintColor = .black
-        refreshButton.isEnabled = true
-        navigationItem.rightBarButtonItems?.insert(refreshButton, at: 1)
     }
 
     func initializeCollectionView() {
@@ -630,29 +359,4 @@ extension ChatViewController {
         )
     }
 
-}
-
-//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
-
-extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        picker.dismiss(animated: true, completion: nil)
-        
-        guard
-            let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
-            let imageData = image.jpegData(compressionQuality: 0.8) else {
-            return
-        }
-        
-        // Upload Message
-        showProgressBar()
-        viewModel.uploadImage(imageData: imageData)
-
-    }
 }

@@ -186,6 +186,15 @@
 		7CF369C22754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */; };
 		7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C32754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift */; };
 		7CF369C62754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C52754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift */; };
+		7CF369CB2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369CA2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift */; };
+		7CF369CD2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369CC2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift */; };
+		7CF369CF2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369CE2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift */; };
+		7CF369D12754DA5200C9D7A9 /* ChatViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D02754DA5200C9D7A9 /* ChatViewController+TargetMethods.swift */; };
+		7CF369D32754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D22754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift */; };
+		7CF369D52754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D42754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift */; };
+		7CF369D72754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */; };
+		7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */; };
+		7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */; };
 		9EA0AE612D2A658F824B7CA3 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC6A645B304E4B1E7AF6FFA /* Pods_KNU_Market.framework */; };
 /* End PBXBuildFile section */
 
@@ -374,6 +383,15 @@
 		7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UITableView.swift"; sourceTree = "<group>"; };
 		7CF369C32754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
 		7CF369C52754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+PlaceholderDelegate.swift"; sourceTree = "<group>"; };
+		7CF369CA2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatListViewController+ChatListViewModelDelegate.swift"; sourceTree = "<group>"; };
+		7CF369CC2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatListViewController+UITableView.swift"; sourceTree = "<group>"; };
+		7CF369CE2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatListViewController+TargetMethods.swift"; sourceTree = "<group>"; };
+		7CF369D02754DA5200C9D7A9 /* ChatViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+TargetMethods.swift"; sourceTree = "<group>"; };
+		7CF369D22754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift"; sourceTree = "<group>"; };
+		7CF369D42754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+ChatViewDelegate_APIDelegateMethods.swift"; sourceTree = "<group>"; };
+		7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+MessageCellDelegate.swift"; sourceTree = "<group>"; };
+		7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
+		7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+InputBarAccessoryViewDelegate.swift"; sourceTree = "<group>"; };
 		D84C1EB55AC5608AFB3E68DA /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -972,10 +990,9 @@
 		7CD74E0D2645982600BD2DE4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				7CA66239264136C7000E0B7A /* ChatListViewController.swift */,
-				7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */,
-				7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */,
-				7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */,
+				7CF369C72754D98E00C9D7A9 /* ChatListVC */,
+				7CF369C82754D99300C9D7A9 /* ChatVC */,
+				7CF369C92754D99D00C9D7A9 /* ChatMemberListVC */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1097,6 +1114,40 @@
 				7CF369C52754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift */,
 			);
 			path = SearchPostsVC;
+			sourceTree = "<group>";
+		};
+		7CF369C72754D98E00C9D7A9 /* ChatListVC */ = {
+			isa = PBXGroup;
+			children = (
+				7CA66239264136C7000E0B7A /* ChatListViewController.swift */,
+				7CF369CA2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift */,
+				7CF369CC2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift */,
+				7CF369CE2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift */,
+			);
+			path = ChatListVC;
+			sourceTree = "<group>";
+		};
+		7CF369C82754D99300C9D7A9 /* ChatVC */ = {
+			isa = PBXGroup;
+			children = (
+				7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */,
+				7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */,
+				7CF369D02754DA5200C9D7A9 /* ChatViewController+TargetMethods.swift */,
+				7CF369D22754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift */,
+				7CF369D42754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift */,
+				7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */,
+				7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */,
+				7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */,
+			);
+			path = ChatVC;
+			sourceTree = "<group>";
+		};
+		7CF369C92754D99D00C9D7A9 /* ChatMemberListVC */ = {
+			isa = PBXGroup;
+			children = (
+				7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */,
+			);
+			path = ChatMemberListVC;
 			sourceTree = "<group>";
 		};
 		CDDDF223A372EAE9E7F9AB5E /* Frameworks */ = {
@@ -1242,6 +1293,7 @@
 				7C3D986426AE9F2E005DFAE0 /* LoadOtherUserProfileModel.swift in Sources */,
 				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
 				7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */,
+				7CF369D32754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift in Sources */,
 				7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */,
@@ -1252,6 +1304,7 @@
 				7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */,
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
 				7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */,
+				7CF369D72754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift in Sources */,
 				7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */,
 				7C89B2E726FC1D9E004109FE /* PostFilterOptions.swift in Sources */,
 				7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */,
@@ -1270,6 +1323,7 @@
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
 				7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */,
 				7CAE5AFA2754B50B00426708 /* PostViewController+UITableView.swift in Sources */,
+				7CF369D52754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift in Sources */,
 				7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */,
 				626AC5B52732506900E907E8 /* SnapKit.swift in Sources */,
 				625B0E2A2741D9BC003968BA /* Network.swift in Sources */,
@@ -1288,11 +1342,13 @@
 				7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */,
 				7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */,
 				626D66F1274291AE00CB7F4F /* InquiryListViewController.swift in Sources */,
+				7CF369D12754DA5200C9D7A9 /* ChatViewController+TargetMethods.swift in Sources */,
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
 				7C132BF426552B4900BE5F40 /* UIButton + Extension.swift in Sources */,
 				7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */,
 				7CF369AD2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
+				7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */,
 				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,
 				7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */,
 				7CF369B62754D65200C9D7A9 /* PostListViewController+TargetMethods.swift in Sources */,
@@ -1318,6 +1374,7 @@
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				626D66E92742705700CB7F4F /* KMButton.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
+				7CF369CF2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift in Sources */,
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
 				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */,
@@ -1327,6 +1384,7 @@
 				6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */,
 				7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadPostViewModel.swift in Sources */,
+				7CF369CB2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift in Sources */,
 				7C132BF2265397B200BE5F40 /* ProgressHUD.swift in Sources */,
 				7C8E668B26E756C00060F37B /* ChatType.swift in Sources */,
 				7C184B8326B103F1006C0FAD /* Room.swift in Sources */,
@@ -1349,6 +1407,7 @@
 				7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */,
 				7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */,
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
+				7CF369CD2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift in Sources */,
 				7C83EE532742378000CF1680 /* PostViewController.swift in Sources */,
 				7C015C9827035B2100089ED8 /* FindIdUsingWebMailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
@@ -1402,6 +1461,7 @@
 				7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */,
 				7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */,
 				7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */,
+				7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */,
 				7CF369B82754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift in Sources */,
 				7CA52D69270B083F00A69F3B /* ChangeIdViewController.swift in Sources */,
 				7C3D985E26AE793D005DFAE0 /* RoomInfo.swift in Sources */,

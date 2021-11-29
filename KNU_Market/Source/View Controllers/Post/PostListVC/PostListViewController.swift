@@ -76,6 +76,7 @@ class PostListViewController: BaseViewController {
             systemName: "plus",
             withConfiguration: configuration
         )
+        button.tintColor = .white
         button.setImage(buttonImage, for: .normal)
         button.layer.cornerRadius = Metrics.addPostButtonSize / 2
         button.backgroundColor = UIColor(named: K.Color.appColor)
@@ -135,7 +136,8 @@ class PostListViewController: BaseViewController {
         }
         
         addPostButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-20)
+            $0.width.height.equalTo(Metrics.addPostButtonSize)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             $0.right.equalToSuperview().offset(-25)
         }
     }

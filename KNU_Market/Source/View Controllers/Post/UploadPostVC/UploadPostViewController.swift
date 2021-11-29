@@ -83,6 +83,7 @@ class UploadPostViewController: BaseViewController {
         cv.isScrollEnabled = true
         cv.alwaysBounceHorizontal = true
         cv.clipsToBounds = true
+        cv.backgroundColor = .clear
         return cv
     }()
     

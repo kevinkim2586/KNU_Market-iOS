@@ -130,6 +130,10 @@
 		7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */; };
 		7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */; };
 		7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FFB26CE03260019B06F /* KMAlertButton.swift */; };
+		7CAE5AFA2754B50B00426708 /* PostViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE5AF92754B50B00426708 /* PostViewController+UITableView.swift */; };
+		7CAE5AFC2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */; };
+		7CAE5AFE2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE5AFD2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift */; };
+		7CAE5B002754B5F100426708 /* PostViewController+PostViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE5AFF2754B5F100426708 /* PostViewController+PostViewModelDelegate.swift */; };
 		7CB22568272EB0650045CE94 /* PopupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB22567272EB0650045CE94 /* PopupManager.swift */; };
 		7CB2256B272EB23E0045CE94 /* KMPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2256A272EB23E0045CE94 /* KMPopupViewController.swift */; };
 		7CB8DF36264BAB760001CC6D /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF35264BAB760001CC6D /* UIViewController + Extension.swift */; };
@@ -299,6 +303,10 @@
 		7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertBodyLabel.swift; sourceTree = "<group>"; };
 		7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertTitleLabel.swift; sourceTree = "<group>"; };
 		7CA78FFB26CE03260019B06F /* KMAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertButton.swift; sourceTree = "<group>"; };
+		7CAE5AF92754B50B00426708 /* PostViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostViewController+UITableView.swift"; sourceTree = "<group>"; };
+		7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostViewController+KMPostButtonViewDelegate.swift"; sourceTree = "<group>"; };
+		7CAE5AFD2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostViewController+KMPostBottomViewDelegate.swift"; sourceTree = "<group>"; };
+		7CAE5AFF2754B5F100426708 /* PostViewController+PostViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostViewController+PostViewModelDelegate.swift"; sourceTree = "<group>"; };
 		7CB22567272EB0650045CE94 /* PopupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupManager.swift; sourceTree = "<group>"; };
 		7CB2256A272EB23E0045CE94 /* KMPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPopupViewController.swift; sourceTree = "<group>"; };
 		7CB8DF35264BAB760001CC6D /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
@@ -946,10 +954,14 @@
 			isa = PBXGroup;
 			children = (
 				7CBB8E682754729E0003B183 /* PostListViewController.swift */,
+				7C83EE522742378000CF1680 /* PostViewController.swift */,
+				7CAE5AF92754B50B00426708 /* PostViewController+UITableView.swift */,
+				7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */,
+				7CAE5AFD2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift */,
+				7CAE5AFF2754B5F100426708 /* PostViewController+PostViewModelDelegate.swift */,
 				7CC33B2A274B58EB00B0C2C0 /* UploadPostViewController.swift */,
 				7C516C3C267F649C0065E30D /* PhotoDetailViewController.swift */,
 				7C83EE4B2742121500CF1680 /* SearchPostsViewController.swift */,
-				7C83EE522742378000CF1680 /* PostViewController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1179,6 +1191,7 @@
 				7C015C9A27035B3800089ED8 /* FindIdUsingStudentIdViewController.swift in Sources */,
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
 				7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */,
+				7CAE5AFA2754B50B00426708 /* PostViewController+UITableView.swift in Sources */,
 				7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */,
 				626AC5B52732506900E907E8 /* SnapKit.swift in Sources */,
 				625B0E2A2741D9BC003968BA /* Network.swift in Sources */,
@@ -1245,6 +1258,7 @@
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
 				7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */,
 				622270B6274A77AB00FDC47B /* ImageSelectionView.swift in Sources */,
+				7CAE5AFE2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift in Sources */,
 				625B0E3D2741F741003968BA /* MyPageAPI.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */,
 				7CC33B2B274B58EB00B0C2C0 /* UploadPostViewController.swift in Sources */,
@@ -1263,6 +1277,7 @@
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer + Extension.swift in Sources */,
 				7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */,
+				7CAE5B002754B5F100426708 /* PostViewController+PostViewModelDelegate.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* ValidationError.swift in Sources */,
 				7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
@@ -1290,6 +1305,7 @@
 				7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */,
 				7C5A1F2B26D6174F0041885B /* UICollectionView + Extension.swift in Sources */,
 				7CBB8E692754729F0003B183 /* PostListViewController.swift in Sources */,
+				7CAE5AFC2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift in Sources */,
 				7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */,
 				7CB8DF38264BB0300001CC6D /* PostManager.swift in Sources */,
 				7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */,

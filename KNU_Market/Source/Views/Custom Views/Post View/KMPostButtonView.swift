@@ -52,7 +52,7 @@ class KMPostButtonView: UIView {
             for: .touchUpInside
         )
         button.setTitle("모집 완료 ⌵", for: .normal)
-        button.titleLabel?.textColor = UIColor.white
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         return button
     }()

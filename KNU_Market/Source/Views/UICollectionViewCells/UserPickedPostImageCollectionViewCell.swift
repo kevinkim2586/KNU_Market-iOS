@@ -26,8 +26,9 @@ class UserPickedPostImageCollectionViewCell: UICollectionViewCell {
     
     lazy var userPickedPostImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 5
+        imageView.clipsToBounds = true
         return imageView
     }()
     

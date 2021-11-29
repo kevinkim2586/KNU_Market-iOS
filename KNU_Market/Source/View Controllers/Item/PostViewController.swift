@@ -249,17 +249,18 @@ extension PostViewController: KMPostButtonViewDelegate {
             ) { [weak self] _ in
                 guard let self = self else { return }
                 DispatchQueue.main.async {
-                    guard let editVC = self.storyboard?.instantiateViewController(
-                        identifier: K.StoryboardID.uploadItemVC
-                    ) as? UploadItemViewController else { return }
-                    editVC.editModel = self.viewModel.modelForEdit
-                    self.navigationController?.pushViewController(editVC, animated: true)
+                    
+                    let vc = UploadPostViewController(
+                        viewModel: UploadItemViewModel(
+                            itemManager: ItemManager(),
+                            mediaManager: MediaManager()
+                        ),
+                        editModel: self.viewModel.modelForEdit
+                    )
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
-            
             presentActionSheet(with: [editAction], title: nil)
-        
-            
         } else {
             
             let reportAction = UIAlertAction(

@@ -26,20 +26,31 @@ class UploadPostViewController: BaseViewController {
     
     //MARK: - UI
     
+    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+    
     lazy var postScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
+        let scrollView = UIScrollView(frame: .zero)
+        scrollView.frame = self.view.bounds
+        scrollView.contentSize = contentViewSize
         scrollView.clipsToBounds = true
         scrollView.alwaysBounceVertical = true
-        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.autoresizingMask = .flexibleHeight
         return scrollView
     }()
     
-    let contentView = UIView()
+    lazy var contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.frame.size = contentViewSize
+        return view
+    }()
     
     let postTitleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "공구 제목"
         textField.font = Fonts.guideLabel
+        textField.tintColor = UIColor(named: K.Color.appColor)
         return textField
     }()
     
@@ -140,6 +151,7 @@ class UploadPostViewController: BaseViewController {
         stepper.labelBackgroundColor = UIColor.systemGray6
         stepper.limitHitAnimationColor = .white
         stepper.cornerRadius = 5
+        stepper.limitHitAnimationColor = .systemRed
         stepper.addTarget(
             self,
             action: #selector(pressedStepper),
@@ -170,6 +182,7 @@ class UploadPostViewController: BaseViewController {
         textField.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         textField.textAlignment = .right
         textField.borderStyle = .none
+        textField.tintColor = .clear
         textField.inputView = locationPickerView
         return textField
     }()
@@ -181,6 +194,7 @@ class UploadPostViewController: BaseViewController {
         textField.font = UIFont.systemFont(ofSize: 22)
         textField.textAlignment = .center
         textField.borderStyle = .none
+        textField.tintColor = .clear
         textField.inputView = locationPickerView
         return textField
     }()
@@ -195,17 +209,25 @@ class UploadPostViewController: BaseViewController {
     lazy var postDetailTextView: UITextView = {
         let textView = UITextView()
         textView.delegate = self
-        textView.layer.borderWidth = 0.7
+        textView.layer.borderWidth = 0.5
         textView.layer.cornerRadius = 5.0
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.clipsToBounds = true
         textView.text = Texts.textViewPlaceholder
         textView.textColor = UIColor.lightGray
+        textView.tintColor = UIColor(named: K.Color.appColor)
         textView.font = .systemFont(ofSize: 14)
         return textView
     }()
-
     
+    
+    let uploadPostBarButtonItem = UIBarButtonItem(
+        title: "완료",
+        style: .plain,
+        target: self,
+        action: #selector(pressedUploadButton)
+    )
+
     //MARK: - Initialization
     
     init(viewModel: UploadItemViewModel) {
@@ -237,6 +259,8 @@ class UploadPostViewController: BaseViewController {
     override func setupLayout() {
         super.setupLayout()
         
+        navigationItem.rightBarButtonItem = uploadPostBarButtonItem
+        
         view.addSubview(postScrollView)
         postScrollView.addSubview(contentView)
         
@@ -257,6 +281,7 @@ class UploadPostViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         #warning("공구글 수정할때도 반영")
+        #warning("완료 버튼도 추가하기")
         
         postScrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -266,7 +291,7 @@ class UploadPostViewController: BaseViewController {
             $0.width.equalToSuperview()
             $0.centerX.top.bottom.equalToSuperview()
         }
-        
+    
         postTitleTextField.snp.makeConstraints {
             $0.top.left.right.equalTo(Metrics.basicInset)
             $0.height.greaterThanOrEqualTo(40)
@@ -299,33 +324,34 @@ class UploadPostViewController: BaseViewController {
             $0.top.equalTo(dividerLineImageView_2.snp.bottom).offset(20)
             $0.right.equalToSuperview().offset(-20)
         }
-//
-//        preferredLocationGuideLabel.snp.makeConstraints {
-//            $0.top.equalTo(gatheringPeopleGuideStackView.snp.bottom).inset(30)
-//            $0.left.equalToSuperview().inset(Metrics.basicInset)
-//        }
-//
-//        expandTextField.snp.makeConstraints {
-//            $0.left.equalToSuperview().inset(20)
-//            $0.top.equalTo(gatheringPeopleStepper.snp.bottom).inset(37)
-//        }
-//
-//        tradeLocationTextField.snp.makeConstraints {
-//            $0.top.equalTo(gatheringPeopleStepper.snp.bottom).inset(38)
-//            $0.right.equalTo(expandTextField.snp.left).inset(10)
-//        }
-//
-//        postDetailGuideLabel.snp.makeConstraints {
-//            $0.top.equalTo(preferredLocationGuideLabel.snp.bottom).inset(35)
-//            $0.left.equalToSuperview().inset(Metrics.basicInset)
-//        }
-//
-//        postDetailTextView.snp.makeConstraints {
-//            $0.top.equalTo(postDetailGuideLabel.snp.bottom).inset(Metrics.basicInset)
-//            $0.left.right.bottom.equalToSuperview().inset(Metrics.basicInset)
-//        }
-//
-        
+
+        preferredLocationGuideLabel.snp.makeConstraints {
+            $0.top.equalTo(gatheringPeopleGuideStackView.snp.bottom).offset(30)
+            $0.left.equalToSuperview().inset(Metrics.basicInset)
+        }
+
+        expandTextField.snp.makeConstraints {
+            $0.right.equalToSuperview().offset(-20)
+            $0.top.equalTo(gatheringPeopleStepper.snp.bottom).offset(36)
+        }
+
+        tradeLocationTextField.snp.makeConstraints {
+            $0.top.equalTo(gatheringPeopleStepper.snp.bottom).offset(41)
+            $0.right.equalTo(expandTextField.snp.left).offset(-7)
+        }
+
+        postDetailGuideLabel.snp.makeConstraints {
+            $0.top.equalTo(preferredLocationGuideLabel.snp.bottom).offset(35)
+            $0.left.equalToSuperview().inset(Metrics.basicInset)
+        }
+
+        postDetailTextView.snp.makeConstraints {
+            $0.top.equalTo(postDetailGuideLabel.snp.bottom).offset(Metrics.basicInset)
+            $0.left.equalToSuperview().offset(Metrics.basicInset)
+            $0.right.equalToSuperview().offset(-Metrics.basicInset)
+            $0.bottom.equalToSuperview().offset(-Metrics.basicInset)
+            $0.height.equalTo(300)
+        }
     }
     
     override func setupStyle() {
@@ -344,6 +370,7 @@ class UploadPostViewController: BaseViewController {
     private func configure() {
         title = "공구 올리기"
         viewModel.delegate = self
+        createObserversForPresentingVerificationAlert()
         
         if editModel != nil { configurePageWithPriorData() }
     }
@@ -351,7 +378,83 @@ class UploadPostViewController: BaseViewController {
     
 }
 
+//MARK: - Target Methods
+
 extension UploadPostViewController {
+    
+    @objc private func pressedUploadButton() {
+        view.endEditing(true)
+        
+        if !validateUserInput() { return }
+
+        editModel != nil ? askToUpdatePost() : askToUploadPost()
+    }
+    
+    
+    func askToUploadPost() {
+        
+        self.presentAlertWithCancelAction(
+            title: "작성하신 글을 올리시겠습니까?",
+            message: ""
+        ) { selectedOk in
+            if selectedOk {
+                showProgressBar()
+                if !self.viewModel.userSelectedImages.isEmpty {
+                    self.viewModel.uploadImageToServerFirst()
+                } else {
+                    self.viewModel.uploadItem()
+                }
+            }
+        }
+    }
+    
+    func askToUpdatePost() {
+        
+        self.presentAlertWithCancelAction(
+            title: "수정하시겠습니까?",
+            message: ""
+        ) { selectedOk in
+            
+            if selectedOk {
+                showProgressBar()
+                
+                if !self.viewModel.userSelectedImages.isEmpty {
+                    self.viewModel.deletePriorImagesInServerFirst()
+                    self.viewModel.uploadImageToServerFirst()
+                } else {
+                    self.viewModel.updatePost()
+                }
+            }
+        }
+    }
+    
+
+    func validateUserInput() -> Bool {
+        
+        guard let postTitle = postTitleTextField.text else {
+            
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.rawValue)
+            return false
+        }
+        viewModel.itemTitle = postTitle
+        do {
+            try viewModel.validateUserInputs()
+            
+        } catch ValidationError.OnUploadPost.titleTooShortOrLong {
+            
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.titleTooShortOrLong.rawValue)
+            return false
+            
+        } catch ValidationError.OnUploadPost.detailTooShortOrLong {
+            
+            self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.detailTooShortOrLong.rawValue)
+            return false
+            
+        }
+        catch { return false }
+        
+        return true
+    }
     
     @objc private func pressedStepper(_ sender: GMStepper) {
         totalGatheringPeopleLabel.text = "\(String(Int(gatheringPeopleStepper.value))) 명"

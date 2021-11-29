@@ -62,6 +62,7 @@ class InquiryTableViewCell: UITableViewCell {
         
         prograssImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
+            $0.leading.equalTo(inquieryTitleLabel.snp.trailing).offset(10)
             $0.trailing.equalTo(-25)
             $0.width.height.equalTo(34)
         }

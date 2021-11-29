@@ -180,7 +180,6 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presentCustomAlert(title: "asdfasdfasdfasdfasfdsadfasdfasf", message: "asdfas\nasdf\nasdf\nasdf\nasdf\nasdf\nasdf", cancelButtonTitle: "asdfasdfasasdf", actionButtonTitle: "asdfasdfasdfasdf", action: getList)
         let detailVC = DetailMessageViewController(
             reactor: DetailMessageViewReactor(
                 title: inquiryModel[indexPath.row].title ?? " ",

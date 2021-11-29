@@ -15,7 +15,7 @@ class UploadItemViewController: UIViewController {
     
     private let requiredMinimumPeopleToGather: Int = 2
     
-    var viewModel = UploadItemViewModel(itemManager: ItemManager(), mediaManager: MediaManager())
+    var viewModel = UploadPostViewModel(postManager: PostManager(), mediaManager: MediaManager())
     var editModel: EditPostModel?
     
     private let textViewPlaceholder: String = "공구 내용을 작성해주세요. (중고 거래 또는 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.) \n\n 게시 가능 글 종류: \n- 배달음식 공구 \n- 온라인 쇼핑 공구 \n- 물물교환 및 나눔\n\n✻ 그 외 아래의 규칙을 위반할 시 게시물이 삭제되고 서비스 이용이 일정 기간 제한될 수 있습니다.\n- 음란물, 성적 수치심을 유발하는 내용\n- 욕설, 차별, 비하, 폭력 관련 내용을 포함하는 행위\n- 범죄, 불법 행위 등 법령을 위반하는 행위"

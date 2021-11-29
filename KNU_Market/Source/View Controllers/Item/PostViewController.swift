@@ -8,7 +8,7 @@ class PostViewController: BaseViewController {
     
     //MARK: - Properties
     
-    private var viewModel: ItemViewModel!
+    private var viewModel: PostViewModel!
     private var isFromChatVC: Bool = false
     
     //MARK: - Constants
@@ -52,7 +52,7 @@ class PostViewController: BaseViewController {
     
     //MARK: - Initialization
     
-    init(viewModel: ItemViewModel, isFromChatVC: Bool = false) {
+    init(viewModel: PostViewModel, isFromChatVC: Bool = false) {
         super.init()
         self.viewModel = viewModel
         self.viewModel.delegate = self
@@ -251,8 +251,8 @@ extension PostViewController: KMPostButtonViewDelegate {
                 DispatchQueue.main.async {
                     
                     let vc = UploadPostViewController(
-                        viewModel: UploadItemViewModel(
-                            itemManager: ItemManager(),
+                        viewModel: UploadPostViewModel(
+                            postManager: PostManager(),
                             mediaManager: MediaManager()
                         ),
                         editModel: self.viewModel.modelForEdit
@@ -324,7 +324,7 @@ extension PostViewController: KMPostBottomViewDelegate {
 
 //MARK: - ItemViewModelDelegate
 
-extension PostViewController: ItemViewModelDelegate {
+extension PostViewController: PostViewModelDelegate {
     
     func didFetchItemDetails() {
         DispatchQueue.main.async {

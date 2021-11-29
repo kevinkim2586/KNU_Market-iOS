@@ -6,7 +6,7 @@ class UploadPostViewController: BaseViewController {
     
     //MARK: - Properties
     
-    private var viewModel: UploadItemViewModel!
+    private var viewModel: UploadPostViewModel!
     var editModel: EditPostModel?
     
     
@@ -230,13 +230,13 @@ class UploadPostViewController: BaseViewController {
 
     //MARK: - Initialization
     
-    init(viewModel: UploadItemViewModel) {
+    init(viewModel: UploadPostViewModel) {
         super.init()
         hidesBottomBarWhenPushed = true
         self.viewModel = viewModel
     }
     
-    init(viewModel: UploadItemViewModel, editModel: EditPostModel) {
+    init(viewModel: UploadPostViewModel, editModel: EditPostModel) {
         super.init()
         hidesBottomBarWhenPushed = true
         self.viewModel = viewModel

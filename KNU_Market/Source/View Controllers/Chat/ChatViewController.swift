@@ -103,9 +103,9 @@ class ChatViewController: MessagesViewController {
     @objc func pressedTitle() {
         
         let postVC = PostViewController(
-            viewModel: ItemViewModel(
+            viewModel: PostViewModel(
                 pageId: roomUID,
-                itemManager: ItemManager(),
+                postManager: PostManager(),
                 chatManager: ChatManager()
             ),
             isFromChatVC: true

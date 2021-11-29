@@ -9,12 +9,12 @@ protocol UploadItemDelegate: AnyObject {
     func failedUpdatingPost(with error: NetworkError)
 }
 
-class UploadItemViewModel {
+class UploadPostViewModel {
     
     //MARK: - Properties
     
     private var mediaManager: MediaManager?
-    private var itemManager: ItemManager?
+    private var postManager: PostManager?
     
     weak var delegate: UploadItemDelegate?
     
@@ -53,8 +53,8 @@ class UploadItemViewModel {
     
     //MARK: - Initialization
     
-    init(itemManager: ItemManager, mediaManager: MediaManager) {
-        self.itemManager = itemManager
+    init(postManager: PostManager, mediaManager: MediaManager) {
+        self.postManager = postManager
         self.mediaManager = mediaManager
     }
     
@@ -100,7 +100,7 @@ class UploadItemViewModel {
             detail: itemDetail
         )
         
-        itemManager?.uploadNewItem(with: model) { [weak self] result in
+        postManager?.uploadNewItem(with: model) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -152,7 +152,7 @@ class UploadItemViewModel {
             currentlyGatheredPeople: currentlyGatheredPeople
         )
         
-        itemManager?.updatePost(uid: self.editPostModel?.pageUID ?? "",
+        postManager?.updatePost(uid: self.editPostModel?.pageUID ?? "",
                                       with: model) { [weak self] result in
             
             guard let self = self else { return }

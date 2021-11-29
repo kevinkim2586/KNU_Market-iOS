@@ -20,7 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if User.shared.isLoggedIn == true {
             window?.rootViewController = UIHelper.createMainTabBarController()
-  
         } else {
             let initialController = InitialViewController(userManager: UserManager())
             window?.rootViewController = initialController

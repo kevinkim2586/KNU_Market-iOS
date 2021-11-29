@@ -2,7 +2,7 @@ import Foundation
 
 //MARK: - 공구글 Model
 
-struct ItemDetailModel: Decodable {
+struct PostDetailModel: Decodable {
     
     let title: String
     let imageUIDs: [String]?

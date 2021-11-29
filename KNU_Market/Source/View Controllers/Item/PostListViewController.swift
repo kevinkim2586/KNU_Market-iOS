@@ -9,7 +9,7 @@ class PostListViewController: BaseViewController {
 
     //MARK: - Properties
     
-    private var viewModel: PostViewModel!
+    private var viewModel: PostListViewModel!
     
     //MARK: - Constants
     
@@ -89,7 +89,7 @@ class PostListViewController: BaseViewController {
     
     //MARK: - Initialization
     
-    init(postViewModel: PostViewModel) {
+    init(postViewModel: PostListViewModel) {
         super.init()
         self.viewModel = postViewModel
     }
@@ -170,7 +170,7 @@ extension PostListViewController {
     @objc private func pressedSearchBarButton() {
         
         let searchVC = SearchPostsViewController(
-            viewModel: SearchPostViewModel(itemManager: ItemManager())
+            viewModel: SearchPostViewModel(postManager: PostManager())
         )
         navigationController?.pushViewController(searchVC, animated: true)
     }
@@ -201,8 +201,8 @@ extension PostListViewController {
         }
         
         let uploadVC = UploadPostViewController(
-            viewModel: UploadItemViewModel(
-                itemManager: ItemManager(),
+            viewModel: UploadPostViewModel(
+                postManager: PostManager(),
                 mediaManager: MediaManager()
             )
         )
@@ -226,7 +226,7 @@ extension PostListViewController {
 
 //MARK: - PostViewModelDelegate
 
-extension PostListViewController: PostViewModelDelegate {
+extension PostListViewController: PostListViewModelDelegate {
     
     func didFetchUserProfileInfo() {
         
@@ -305,9 +305,9 @@ extension PostListViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
           
         let postVC = PostViewController(
-            viewModel: ItemViewModel(
+            viewModel: PostViewModel(
                 pageId: viewModel.itemList[indexPath.row].uuid,
-                itemManager: ItemManager(),
+                postManager: PostManager(),
                 chatManager: ChatManager()
             ),
             isFromChatVC: false

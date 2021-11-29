@@ -4,7 +4,7 @@ import UIKit
 
 class KMPostControlButton: UIButton {
     
-    static let buttonSize: CGFloat     = 35
+    static let buttonSize: CGFloat      = 35
     private let buttonFontSize: CGFloat = 15
     
     private var buttonImageSystemName: String?

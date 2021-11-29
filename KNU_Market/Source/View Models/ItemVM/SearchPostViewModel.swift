@@ -9,11 +9,11 @@ class SearchPostViewModel {
     
     //MARK: - Properties
     
-    private var itemManager: ItemManager
+    private var postManager: PostManager
     
     weak var delegate: SearchPostViewModelDelegate?
     
-    var itemList: [ItemListModel] = [ItemListModel]()
+    var itemList: [PostListModel] = [PostListModel]()
 
     var isFetchingData: Bool = false
     
@@ -23,8 +23,8 @@ class SearchPostViewModel {
     
     //MARK: - Initialization
     
-    init(itemManager: ItemManager) {
-        self.itemManager = itemManager
+    init(postManager: PostManager) {
+        self.postManager = postManager
     }
     
     //MARK: - Methods
@@ -35,7 +35,7 @@ class SearchPostViewModel {
         
         guard let keyword = self.searchKeyword else { return }
         
-        itemManager.fetchSearchResults(
+        postManager.fetchSearchResults(
             at: index,
             keyword: keyword
         ) { [weak self] result in

@@ -166,7 +166,7 @@ class PostTableViewCell: UITableViewCell {
     
     //MARK: - Data Configuration
 
-    func configure(with model: ItemListModel) {
+    func configure(with model: PostListModel) {
         
         self.viewModel = PostCellViewModel(model: model)
         

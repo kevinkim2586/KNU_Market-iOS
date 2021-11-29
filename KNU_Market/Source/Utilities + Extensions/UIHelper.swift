@@ -22,8 +22,8 @@ struct UIHelper {
     private static func createPostNavigationController() -> UINavigationController {
         
         let postListVC = PostListViewController(
-            postViewModel: PostViewModel(
-                itemManager: ItemManager(),
+            postViewModel: PostListViewModel(
+                postManager: PostManager(),
                 chatManager: ChatManager(),
                 userManager: UserManager()
             )
@@ -39,7 +39,7 @@ struct UIHelper {
     // 채팅 NavController 생성
     private static func createChatNavigationController() -> UINavigationController {
         let chatListVC = ChatListViewController(
-            viewModel: ChatListViewModel(chatManager: ChatManager(), itemManager: ItemManager())
+            viewModel: ChatListViewModel(chatManager: ChatManager(), postManager: PostManager())
         )
         
         chatListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)

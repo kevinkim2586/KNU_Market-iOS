@@ -22,11 +22,11 @@ class ChatListViewModel {
     private var isFetchingData: Bool = false
     
     private let chatManager: ChatManager
-    private let itemManager: ItemManager
+    private let postManager: PostManager
     
-    init(chatManager: ChatManager, itemManager: ItemManager) {
+    init(chatManager: ChatManager, postManager: PostManager) {
         self.chatManager = chatManager
-        self.itemManager = itemManager
+        self.postManager = postManager
         createObservers()
     }
 }
@@ -110,7 +110,7 @@ extension ChatListViewModel {
         
         let roomPID = self.roomList[indexPath.row].uuid
         
-        itemManager.deletePost(uid: roomPID) { [weak self] result in
+        postManager.deletePost(uid: roomPID) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:

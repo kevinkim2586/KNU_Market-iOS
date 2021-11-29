@@ -192,9 +192,9 @@ extension SearchPostsViewController: UITableViewDelegate, UITableViewDataSource 
         tableView.deselectRow(at: indexPath, animated: true)
         
         let postVC = PostViewController(
-            viewModel: ItemViewModel(
+            viewModel: PostViewModel(
                 pageId: viewModel.itemList[indexPath.row].uuid,
-                itemManager: ItemManager(),
+                postManager: PostManager(),
                 chatManager: ChatManager()
             ),
             isFromChatVC: false

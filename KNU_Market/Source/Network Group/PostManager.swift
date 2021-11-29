@@ -1,10 +1,10 @@
 import Foundation
 import Alamofire
 
-class ItemManager {
+class PostManager {
     
     //MARK: - Singleton
-    static let shared: ItemManager = ItemManager()
+    static let shared: PostManager = PostManager()
     
     let interceptor = Interceptor()
     
@@ -15,10 +15,12 @@ class ItemManager {
     
     
     //MARK: - 공구글 목록 불러오기
-    func fetchItemList(at index: Int,
-                       fetchCurrentUsers: Bool = false,
-                       postFilterOption: PostFilterOptions,
-                       completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)) {
+    func fetchItemList(
+        at index: Int,
+        fetchCurrentUsers: Bool = false,
+        postFilterOption: PostFilterOptions,
+        completion: @escaping ((Result<[PostListModel], NetworkError>) -> Void)
+    ) {
         
         
         let url = fetchCurrentUsers == true
@@ -30,7 +32,7 @@ class ItemManager {
         if postFilterOption == .showGatheringFirst {
             headers.update(name: "withoutcomplete", value: "1")
         }
-
+        
         AF.request(url,
                    method: .get,
                    headers: headers,
@@ -44,26 +46,28 @@ class ItemManager {
                     
                 case 200:
                     do {
-                        let decodedData = try JSONDecoder().decode([ItemListModel].self,
+                        let decodedData = try JSONDecoder().decode([PostListModel].self,
                                                                    from: response.data ?? Data())
                         completion(.success(decodedData))
                         
                     } catch {
-                        print("❗️ ItemManager - There was an error decoding JSON Data with error: \(error)")
+                        print("❗️ postManager - There was an error decoding JSON Data with error: \(error)")
                         completion(.failure(.E000))
                     }
                     
                 default:
                     let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("ItemManager fetchItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
+                    print("postManager fetchItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
             }
     }
     
     //MARK: - 공구글 업로드
-    func uploadNewItem(with model: UploadItemRequestDTO,
-                       completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func uploadNewItem(
+        with model: UploadItemRequestDTO,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         AF.request(baseURL,
                    method: .post,
@@ -78,21 +82,23 @@ class ItemManager {
                 switch statusCode {
                     
                 case 201:
-                    print("ItemManager - uploadNewItem success")
+                    print("postManager - uploadNewItem success")
                     completion(.success(true))
                     
                 default:
                     let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("❗️ ItemManager - uploadNewItem failed with error: \(error.errorDescription)")
+                    print("❗️ postManager - uploadNewItem failed with error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }
     }
     
     //MARK: - 공구글 수정
-    func updatePost(uid: String,
-                    with model: UpdatePostRequestDTO,
-                    completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    func updatePost(
+        uid: String,
+        with model: UpdatePostRequestDTO,
+        completion: @escaping (Result<Bool, NetworkError>) -> Void
+    ) {
         
         let url = baseURL + "/\(uid)"
         
@@ -109,19 +115,21 @@ class ItemManager {
                 switch statusCode {
                     
                 case 201:
-                    print("✏️ ItemManager - editPost SUCCESS")
+                    print("✏️ postManager - editPost SUCCESS")
                     completion(.success(true))
                 default:
                     let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("❗️ ItemManager - editPost FAILED with statusCode: \(statusCode) and reason: \(error.errorDescription)")
+                    print("❗️ postManager - editPost FAILED with statusCode: \(statusCode) and reason: \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }
     }
     
     //MARK: - 특정 공구글 불러오기
-    func fetchItemDetails(uid: String,
-                          completion: @escaping ((Result<ItemDetailModel, NetworkError>) -> Void)) {
+    func fetchItemDetails(
+        uid: String,
+        completion: @escaping ((Result<PostDetailModel, NetworkError>) -> Void)
+    ) {
         
         let url = baseURL + "/\(uid)"
         
@@ -136,31 +144,29 @@ class ItemManager {
                 switch statusCode {
                     
                 case 200:
-                    
-                    print("ItemManager - SUCCESS in fetchItemList")
-                    
                     do {
-                        let decodedData = try JSONDecoder().decode(ItemDetailModel.self,
+                        let decodedData = try JSONDecoder().decode(PostDetailModel.self,
                                                                    from: response.data ?? Data())
                         completion(.success(decodedData))
                         
                     } catch {
-                        print("ItemManager - There was an error decoding JSON Data with error: \(error)")
+                        print("postManager - There was an error decoding JSON Data with error: \(error)")
                         completion(.failure(.E000))
                     }
                     
                 default:
                     
                     let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("ItemManager fetchItemList error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
             }
     }
     
     //MARK: - 본인 작성 게시글 삭제하기
-    func deletePost(uid: String,
-                    completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func deletePost(
+        uid: String,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         let url = baseURL + "/\(uid)"
         
@@ -175,12 +181,12 @@ class ItemManager {
                 switch statusCode {
                     
                 case 201:
-                    print("ItemManager - SUCCESS in deletePost")
+                    print("postManager - SUCCESS in deletePost")
                     completion(.success(true))
                     
                 default:
                     let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("❗️ ItemManager deletePost error: \(error.errorDescription) and statusCode: \(statusCode)")
+                    print("❗️ postManager deletePost error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
             }
@@ -190,7 +196,7 @@ class ItemManager {
     func fetchSearchResults(
         at index: Int,
         keyword: String,
-        completion: @escaping ((Result<[ItemListModel], NetworkError>) -> Void)
+        completion: @escaping ((Result<[PostListModel], NetworkError>) -> Void)
     ) {
         
         var parameters: Parameters = [:]
@@ -210,16 +216,16 @@ class ItemManager {
                 switch statusCode {
                 case 200:
                     do {
-                        let decodedData = try JSONDecoder().decode([ItemListModel].self,
+                        let decodedData = try JSONDecoder().decode([PostListModel].self,
                                                                    from: response.data ?? Data())
                         completion(.success(decodedData))
                     } catch {
-                        print("ItemManager - There was an error decoding JSON Data with error: \(error)")
+                        print("postManager - There was an error decoding JSON Data with error: \(error)")
                         completion(.failure(.E000))
                     }
                 default:
                     let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("❗️ ItemManager - fetchSearchResults error: \(error.errorDescription) with statusCode: \(statusCode)")
+                    print("❗️ postManager - fetchSearchResults error: \(error.errorDescription) with statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
             }
@@ -243,12 +249,12 @@ class ItemManager {
                 
                 switch response.result {
                 case .success:
-                    print("✏️ ItemManager - markPostDone SUCCESS")
+                    print("✏️ postManager - markPostDone SUCCESS")
                     completion(.success(true))
                     
                 case .failure:
                     let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("❗️ ItemManager - markPostDone FAILED with error: \(error.errorDescription) and statusCode: \(String(describing: response.response?.statusCode))")
+                    print("❗️ postManager - markPostDone FAILED with error: \(error.errorDescription) and statusCode: \(String(describing: response.response?.statusCode))")
                     completion(.failure(error))
                     
                 }

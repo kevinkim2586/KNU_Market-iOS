@@ -58,7 +58,7 @@ class PostCellViewModel {
     }
     
  
-    init(model: ItemListModel) {
+    init(model: PostListModel) {
         
         self.uuid = model.uuid
         self.title = model.title

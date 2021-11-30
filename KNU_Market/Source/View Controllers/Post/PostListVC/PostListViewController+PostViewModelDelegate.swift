@@ -7,6 +7,7 @@
 
 import UIKit
 import SPIndicator
+
 extension PostListViewController: PostListViewModelDelegate {
     
     func didFetchUserProfileInfo() {

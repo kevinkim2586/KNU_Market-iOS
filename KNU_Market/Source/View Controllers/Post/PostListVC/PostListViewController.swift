@@ -23,8 +23,7 @@ class PostListViewController: BaseViewController {
         let tableView = TableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.placeholderDelegate = self
-        tableView.separatorStyle = .none
+        tableView.placeholderDelegate = self   
         tableView.register(
             PostTableViewCell.self,
             forCellReuseIdentifier: PostTableViewCell.cellId

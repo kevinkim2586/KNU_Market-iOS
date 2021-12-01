@@ -367,21 +367,26 @@ private extension SendUsMessageViewController {
     func convertAssetToImage(_ assets: [PHAsset]) -> [UIImage] {
         var result: [UIImage] = []
         if assets.count != 0 {
-                for i in 0 ..< assets.count {
-                    let imageManager = PHImageManager.default()
-                        let option = PHImageRequestOptions()
-                        option.isSynchronous = true
-                        var thumbnail = UIImage()
-                        imageManager.requestImage(for: assets[i], targetSize: CGSize(width: assets[i].pixelWidth, height: assets[i].pixelHeight), contentMode: .aspectFill, options: option) {
-                                (result, info) in
-                                thumbnail = result!
-                        }
+            for i in 0 ..< assets.count {
+                let imageManager = PHImageManager.default()
+                let option = PHImageRequestOptions()
+                option.isSynchronous = true
+                var thumbnail = UIImage()
+                imageManager.requestImage(
+                    for: assets[i],
+                       targetSize: CGSize(width: 1000, height: 1000),
+                       contentMode: .aspectFill,
+                       options: option
+                ) {
+                    (result, _) in
+                    thumbnail = result!
+                }
                 
-                        let data = thumbnail.jpegData(compressionQuality: 1)
-                        let newImage = UIImage(data: data!)
-                        result.append(newImage! as UIImage)
-                    }
+                let data = thumbnail.jpegData(compressionQuality: 1)
+                let newImage = UIImage(data: data!)
+                result.append(newImage! as UIImage)
             }
+        }
         return result
     }
     

@@ -157,7 +157,7 @@ extension ChatMembersTableViewCell {
     
     private func fetchUserProfileInfo(userUid: String) {
         
-        userManager?.loadOtherUsersProfile(userUID: userUid) { [weak self] result in
+        userManager?.loadUserProfileUsingUid(userUID: userUid) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let profileModel):

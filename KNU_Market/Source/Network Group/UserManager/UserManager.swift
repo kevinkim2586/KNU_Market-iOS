@@ -162,7 +162,7 @@ class UserManager {
         }
     }
     
-    func loadOtherUsersProfile(
+    func loadUserProfileUsingUid(
         userUID: String,
         completion: @escaping (Result<LoadOtherUserProfileModel, NetworkError>) -> Void
     ) {

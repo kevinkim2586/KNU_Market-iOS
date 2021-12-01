@@ -17,6 +17,11 @@ protocol MyPageViewModelDelegate: AnyObject {
 
 class MyPageViewModel {
     
+    //MARK: - Properties
+    
+    private var userManager: UserManager?
+    private var mediaManager: MediaManager?
+    
     weak var delegate: MyPageViewModelDelegate?
     
     var tableViewSection_1: [String] = ["내가 올린 글", "설정", "웹메일/학생증 인증"]
@@ -39,15 +44,23 @@ class MyPageViewModel {
         }
     }
     
+    var isReportChecked: Bool = false
+    
+    //MARK: - Initialization
+    
+    init(userManager: UserManager, mediaManager: MediaManager) {
+        self.userManager = userManager
+        self.mediaManager = mediaManager
+    }
+    
     //MARK: - 사용자 프로필 정보 불러오기
     func loadUserProfile() {
      
-        UserManager.shared.loadUserProfile { [weak self] result in
-            
+        userManager?.loadUserProfile { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success(let model):
+                self.isReportChecked = model.isReportChecked
                 self.delegate?.didLoadUserProfileInfo()
                 
                 // 이미 받아온 프로필 이미지 Cache 가 있다면
@@ -73,15 +86,10 @@ class MyPageViewModel {
     //MARK: - 사용자 프로필 이미지 불러오기
     func fetchProfileImage(with urlString: String) {
         
-        MediaManager.shared.requestMedia(from: urlString) { [weak self] result in
-            
+        mediaManager?.requestMedia(from: urlString) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success(let imageData):
-                
-                print("MyPageViewModel - fetchProfileImage .success()")
-                
                 if let imageData = imageData {
                     
                     self.profileImage = UIImage(data: imageData) ?? nil
@@ -89,7 +97,6 @@ class MyPageViewModel {
                     
                 // 그냥 이미지를 애초에 사용자가 안 올린 경우에
                 } else {
-                    
                     self.profileImage = nil
                     self.delegate?.didFetchProfileImage()
                 }
@@ -107,28 +114,21 @@ class MyPageViewModel {
             self.delegate?.failedUploadingImageToServerFirst(with: .E000)
             return
         }
-        
-        MediaManager.shared.uploadImage(with: imageData) { [weak self] result in
-            
+        mediaManager?.uploadImage(with: imageData) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
-            
             case .success(let uid):
                 User.shared.profileImageUID = uid
-                print("uploadImage success with new uid: \(uid)")
                 self.delegate?.didUploadImageToServerFirst(with: uid)
-                
             case .failure(let error):
                 self.delegate?.failedUploadingImageToServerFirst(with: error)
-                print("uploadImage failed with error: \(error.errorDescription)")
             }
         }
     }
     
     //MARK: - 그 다음에 프로필 이미지 수정 (DB상)
     func updateUserProfileImage(with uid: String) {
-        UserManager.shared.updateUserInfo(
+        userManager?.updateUserInfo(
             type: .profileImage,
             infoString: uid
         ) { [weak self] result in

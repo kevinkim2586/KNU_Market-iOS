@@ -8,12 +8,12 @@ class MyPageViewController: BaseViewController {
     
     private var userManager: UserManager?
     
-    private var viewModel = MyPageViewModel()
+    private var viewModel = MyPageViewModel(userManager: UserManager(), mediaManager: MediaManager())
 
     //MARK: - Constants
     
     fileprivate struct Metrics {
-        static let profileImageButtonHeight: CGFloat        = 120
+        static let profileImageButtonHeight: CGFloat = 120
     }
     
     fileprivate struct Images {
@@ -77,7 +77,7 @@ class MyPageViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.register(
             MyPageTableViewCell.self,
-            forCellReuseIdentifier: K.cellID.myPageCell
+            forCellReuseIdentifier: MyPageTableViewCell.cellId
         )
         return tableView
     }()
@@ -303,6 +303,8 @@ extension MyPageViewController: MyPageViewModelDelegate {
         userVerifiedImage.image = detectIfVerifiedUser()
         ? Images.userVerifiedImage
         : Images.userUnVerifiedImage
+        
+        settingsTableView.reloadData()
     }
     
     func didFetchProfileImage() {
@@ -405,7 +407,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: K.cellID.myPageCell,
+            withIdentifier: MyPageTableViewCell.cellId,
             for: indexPath
         ) as! MyPageTableViewCell
         
@@ -419,6 +421,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.settingsTitleLabel.text = viewModel.tableViewSection_2[indexPath.row]
             if indexPath.row == 0 {
                 cell.leftImageView.image = UIImage(named: K.Images.myPageSection_2_Images[indexPath.row])
+                cell.notificationBadgeImageView.isHidden = viewModel.isReportChecked
             } else {
                 cell.leftImageView.image = UIImage(systemName: K.Images.myPageSection_2_Images[indexPath.row])
             }

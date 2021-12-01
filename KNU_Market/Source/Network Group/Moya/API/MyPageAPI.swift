@@ -12,6 +12,7 @@ import Moya
 
 enum MyPageAPI {
     case writeReport(String, String, Data?, Data?)
+    case viewReport(String)
 }
 
 extension MyPageAPI: BaseAPI {
@@ -20,12 +21,15 @@ extension MyPageAPI: BaseAPI {
         switch self {
         case .writeReport:
             return "report"
+            
+        case let .viewReport(uid):
+            return "report/\(uid)"
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .writeReport:
+        default:
             return [
                 "Content-Type" : "multipart/form-data"
             ]
@@ -36,6 +40,9 @@ extension MyPageAPI: BaseAPI {
         switch self {
         case .writeReport:
             return .post
+            
+        case .viewReport:
+            return .get
         }
     }
     
@@ -69,11 +76,11 @@ extension MyPageAPI: BaseAPI {
             print(multipartData)
             return .uploadMultipart(multipartData)
             
-//        default:
-//            if let parameters = parameters {
-//                return .requestParameters(parameters: parameters, encoding: parameterEncoding)
-//            }
-//            return .requestPlain
+        default:
+            if let parameters = parameters {
+                return .requestParameters(parameters: parameters, encoding: parameterEncoding)
+            }
+            return .requestPlain
         }
     }
     

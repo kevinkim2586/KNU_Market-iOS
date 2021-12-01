@@ -82,6 +82,7 @@ class ChatListTableViewCell: UITableViewCell {
         chatRoomTitleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         backgroundColor = .white
         notificationBadgeImageView.image = nil
+        notificationBadgeImageView.isHidden = true
     }
     
     //MARK: - UI Setup

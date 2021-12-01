@@ -61,7 +61,7 @@ class MyPostsViewController: BaseViewController {
     }
     
     private func setupViewModel() {
-        self.viewModel = PostListViewModel(postManager: PostManager(), chatManager: ChatManager(), userManager: UserManager())
+        self.viewModel = PostListViewModel(postManager: PostManager(), chatManager: ChatManager(), userManager: UserManager(), popupManager: PopupManager())
         self.viewModel.delegate = self
         self.viewModel.fetchPostList(fetchCurrentUsers: true)
     }

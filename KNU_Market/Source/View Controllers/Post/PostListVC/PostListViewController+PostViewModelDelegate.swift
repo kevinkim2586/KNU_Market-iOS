@@ -47,4 +47,14 @@ extension PostListViewController: PostListViewModelDelegate {
     func failedFetchingRoomPIDInfo(with error: NetworkError) {
         self.showSimpleBottomAlert(with: error.errorDescription)
     }
+    
+    func didFetchLatestPopup(model: PopupModel) {
+        let popupVC = KMPopupViewController(popupManager: PopupManager(), popupUid: model.popupUid, mediaUid: model.mediaUid, landingUrl: model.landingUrl)
+        popupVC.modalPresentationStyle = .overFullScreen
+        popupVC.modalTransitionStyle = .crossDissolve
+        self.present(popupVC, animated: true)
+    }
+    func failedFetchingLatestPopup(with error: NetworkError) {
+        showSimpleBottomAlert(with: error.errorDescription)
+    }
 }

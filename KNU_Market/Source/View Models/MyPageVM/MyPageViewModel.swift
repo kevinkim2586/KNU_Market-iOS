@@ -60,6 +60,7 @@ class MyPageViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let model):
+                print("✅ isReportChecked: \(model.isReportChecked)")
                 self.isReportChecked = !model.isReportChecked
                 self.delegate?.didLoadUserProfileInfo()
                 

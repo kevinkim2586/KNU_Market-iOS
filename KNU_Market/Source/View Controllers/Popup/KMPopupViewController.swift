@@ -148,7 +148,6 @@ extension KMPopupViewController {
     @objc private func pressedPopupImage() {
         incrementPopupViewCount()
         openLandingUrl()
-        dismiss(animated: true)
     }
     
     private func openLandingUrl() {

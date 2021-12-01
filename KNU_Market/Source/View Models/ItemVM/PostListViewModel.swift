@@ -9,6 +9,10 @@ protocol PostListViewModelDelegate: AnyObject {
     func didFetchPostList()
     func failedFetchingPostList(errorMessage: String, error: NetworkError)
     
+    // 팝업 가져오기
+    func didFetchLatestPopup(model: PopupModel)
+    func failedFetchingLatestPopup(with error: NetworkError)
+    
     func failedFetchingRoomPIDInfo(with error: NetworkError)
 }
 
@@ -17,6 +21,8 @@ extension PostListViewModelDelegate {
     func failedFetchingUserProfileInfo(with error: NetworkError) {}
     func didFetchUserProfileImage() {}
     func failedFetchingRoomPIDInfo(with error: NetworkError) {}
+    func didFetchLatestPopup(model: PopupModel) {}
+    func failedFetchingLatestPopup(with error: NetworkError) {}
 }
 
 class PostListViewModel {
@@ -24,6 +30,7 @@ class PostListViewModel {
     private var postManager: PostManager?
     private var chatManager: ChatManager?
     private var userManager: UserManager?
+    private var popupManager: PopupManager?
     
     weak var delegate: PostListViewModelDelegate?
     
@@ -33,10 +40,11 @@ class PostListViewModel {
     var index: Int = 1
     
     //MARK: - Initialization
-    init(postManager: PostManager, chatManager: ChatManager, userManager: UserManager) {
+    init(postManager: PostManager, chatManager: ChatManager, userManager: UserManager, popupManager: PopupManager) {
         self.postManager = postManager
         self.chatManager = chatManager
         self.userManager = userManager
+        self.popupManager = popupManager
     }
     
     //MARK: - 공구글 불러오기
@@ -117,6 +125,24 @@ class PostListViewModel {
         }
     }
     
+    //MARK: - 팝업 가져오기
+    func fetchLatestPopup() {
+        guard let popupManager = popupManager else { return }
+
+        if !popupManager.shouldFetchPopup { return }
+
+        popupManager.fetchLatestPopup { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let popupModel):
+                self.delegate?.didFetchLatestPopup(model: popupModel)
+            case .failure(let error):
+                self.delegate?.failedFetchingLatestPopup(with: error)
+            }
+        }
+    }
+    
+    
     func changePostFilterOption() {
         if User.shared.postFilterOption == .showAll {
             User.shared.postFilterOption = .showGatheringFirst
@@ -131,6 +157,7 @@ class PostListViewModel {
         fetchEnteredRoomInfo()
         loadUserProfile()
         fetchPostList()
+        fetchLatestPopup()
     }
     
     func refreshTableView() {

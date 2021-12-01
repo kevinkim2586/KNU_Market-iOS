@@ -26,7 +26,8 @@ struct UIHelper {
             postViewModel: PostListViewModel(
                 postManager: PostManager(),
                 chatManager: ChatManager(),
-                userManager: UserManager()
+                userManager: UserManager(),
+                popupManager: PopupManager()
             )
         )
         

@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 import SDWebImage
+import Moya
 
 class InquiryListViewController: UIViewController {
     
@@ -184,7 +185,13 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
             reactor: DetailMessageViewReactor(
                 title: inquiryModel[indexPath.row].title ?? " ",
                 content: inquiryModel[indexPath.row].content ?? " ",
-                answer: inquiryModel[indexPath.row].answer)
+                answer: inquiryModel[indexPath.row].answer,
+                uid: inquiryModel[indexPath.row].uid,
+                myPageService: MyPageService(network: Network<MyPageAPI>(plugins: [
+                    AuthPlugin(),
+                    NetworkLoggerPlugin()
+                ]))
+            )
         )
         navigationController?.pushViewController(detailVC, animated: true)
     }

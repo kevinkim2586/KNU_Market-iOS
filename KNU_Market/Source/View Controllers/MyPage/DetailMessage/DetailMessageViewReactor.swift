@@ -16,24 +16,53 @@ final class DetailMessageViewReactor: Reactor {
     let initialState: State
     
     enum Action {
-        
+        case appear
     }
     
-    typealias Mutation = NoMutation
+    enum Mutation {
+        case empty
+    }
     
     struct State {
         var title: String
         var content: String
         var answer: String
+        var uid: Int
     }
     
-    init(title: String, content: String, answer: String?) {
-        self.initialState = State(title: title, content: content, answer: answer ?? "")
+    fileprivate let myPageService: MyPageServiceType
+    init(title: String, content: String, answer: String?, uid: Int, myPageService: MyPageServiceType) {
+        self.initialState = State(title: title, content: content, answer: answer ?? "", uid: uid)
+        
+        self.myPageService = myPageService
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
-        
+        switch action {
+        case .appear:
+            return self.myPageService.viewMessage(self.currentState.uid).asObservable()
+                .map { result in
+                switch result {
+                case .success:
+                    print("success")
+                case let .error(error):
+                    print(error)
+                }
+                
+                return .empty
+            }
+        }
     }
     
+    func reduce(state: State, mutation: Mutation) -> State {
+        let state = state
+        
+        switch mutation {
+        case .empty:
+            break
+        }
+        
+        return state
+    }
 }
 

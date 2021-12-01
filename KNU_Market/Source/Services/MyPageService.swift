@@ -11,7 +11,7 @@ import RxSwift
 
 protocol MyPageServiceType: AnyObject {
     func writeReport(_ title: String, _ content: String, _ media1: Data?, _ media2: Data?) -> Single<NetworkResult>
-    func viewMessage(_ uid: String) -> Single<NetworkResult>
+    func viewMessage(_ uid: Int) -> Single<NetworkResult>
 }
 
 class MyPageService: MyPageServiceType {
@@ -34,7 +34,7 @@ class MyPageService: MyPageServiceType {
             }
     }
     
-    func viewMessage(_ uid: String) -> Single<NetworkResult> {
+    func viewMessage(_ uid: Int) -> Single<NetworkResult> {
         return network.requestWithoutMapping(.viewReport(uid))
             .map { result in
                 switch result {

@@ -12,7 +12,7 @@ import Moya
 
 enum MyPageAPI {
     case writeReport(String, String, Data?, Data?)
-    case viewReport(String)
+    case viewReport(Int)
 }
 
 extension MyPageAPI: BaseAPI {
@@ -23,7 +23,7 @@ extension MyPageAPI: BaseAPI {
             return "report"
             
         case let .viewReport(uid):
-            return "report/\(uid)"
+            return "reports/\(uid)"
         }
     }
     

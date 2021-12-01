@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxViewController
 import ReactorKit
 import Atributika
 
@@ -235,6 +236,11 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
+        self.rx.viewDidAppear.asObservable()
+            .map { _ in Reactor.Action.appear }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         reactor.state.map { $0.title }.asObservable()
             .bind(to: self.titleTextField.rx.text)
             .disposed(by: disposeBag)
@@ -260,14 +266,14 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
     }
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct DetailMessageVC: PreviewProvider {
-    
-    static var previews: some SwiftUI.View {
-        DetailMessageViewController(reactor: DetailMessageViewReactor(title: "test", content: "test", answer: "")).toPreview()
-    }
-}
-#endif
+//#if canImport(SwiftUI) && DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct DetailMessageVC: PreviewProvider {
+//
+//    static var previews: some SwiftUI.View {
+//        DetailMessageViewController(reactor: DetailMessageViewReactor(title: "test", content: "test", answer: "")).toPreview()
+//    }
+//}
+//#endif

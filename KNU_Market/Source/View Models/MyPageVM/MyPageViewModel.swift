@@ -60,7 +60,7 @@ class MyPageViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let model):
-                self.isReportChecked = model.isReportChecked
+                self.isReportChecked = !model.isReportChecked
                 self.delegate?.didLoadUserProfileInfo()
                 
                 // 이미 받아온 프로필 이미지 Cache 가 있다면

@@ -10,6 +10,8 @@ import SnapKit
 
 class InquiryTableViewCell: UITableViewCell {
     
+    static let cellId: String = "InquiryTableViewCell"
+    
     let dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.font = .systemFont(ofSize: 10)
@@ -17,7 +19,7 @@ class InquiryTableViewCell: UITableViewCell {
         return dateLabel
     }()
     
-    let inquieryTitleLabel: UILabel = {
+    let inquiryTitleLabel: UILabel = {
         let inquieryTitleLabel = UILabel()
         inquieryTitleLabel.font = .boldSystemFont(ofSize: 14)
         inquieryTitleLabel.textColor = .black
@@ -47,14 +49,14 @@ class InquiryTableViewCell: UITableViewCell {
     
     private func setUpSubViews() {
         self.addSubview(self.contentView)
-        [dateLabel, inquieryTitleLabel, prograssImageView].forEach({ self.contentView.addSubview($0)})
+        [dateLabel, inquiryTitleLabel, prograssImageView].forEach({ self.contentView.addSubview($0)})
         
         dateLabel.snp.makeConstraints {
             $0.top.equalToSafeArea(contentView).offset(10)
             $0.leading.equalTo(25)
         }
         
-        inquieryTitleLabel.snp.makeConstraints {
+        inquiryTitleLabel.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(5)
             $0.leading.equalTo(25)
             $0.bottom.equalTo(-17)
@@ -62,7 +64,7 @@ class InquiryTableViewCell: UITableViewCell {
         
         prograssImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(inquieryTitleLabel.snp.trailing).offset(10)
+            $0.leading.equalTo(inquiryTitleLabel.snp.trailing).offset(10)
             $0.trailing.equalTo(-25)
             $0.width.height.equalTo(34)
         }

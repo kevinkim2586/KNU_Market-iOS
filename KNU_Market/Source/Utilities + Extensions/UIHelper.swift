@@ -56,7 +56,7 @@ struct UIHelper {
     // 마이페이지 NavController 생성
     private static func createMyPageNavigationController() -> UINavigationController {
         
-        let myPageVC = MyPageViewController(userManager: UserManager())
+        let myPageVC = MyPageViewController(viewModel: MyPageViewModel(userManager: UserManager(), mediaManager: MediaManager()))
         myPageVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 0)
         let MyPageNavigationController = UINavigationController(rootViewController: myPageVC)
         

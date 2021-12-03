@@ -29,6 +29,14 @@ class MyPostsViewController: BaseViewController {
     }()
     
     //MARK: - Initialization
+    init(viewModel: PostListViewModel) {
+        super.init()
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -61,9 +69,8 @@ class MyPostsViewController: BaseViewController {
     }
     
     private func setupViewModel() {
-        self.viewModel = PostListViewModel(postManager: PostManager(), chatManager: ChatManager(), userManager: UserManager(), popupManager: PopupManager())
-        self.viewModel.delegate = self
-        self.viewModel.fetchPostList(fetchCurrentUsers: true)
+        viewModel.delegate = self
+        viewModel.fetchPostList(fetchCurrentUsers: true)
     }
 }
 

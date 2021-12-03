@@ -5,6 +5,7 @@ protocol MyPageViewModelDelegate: AnyObject {
     
     func didLoadUserProfileInfo()
     func didFetchProfileImage()
+    func didRemoveProfileImage()
     func didUpdateUserProfileImage()
     func didUploadImageToServerFirst(with uid: String)
     
@@ -141,6 +142,23 @@ class MyPageViewModel {
             case .failure(let error):
                 self.delegate?.failedUpdatingUserProfileImage(with: error)
             }
+        }
+    }
+    
+    //MARK: - 프로필 사진 제거
+    func removeProfileImage() {
+        userManager?.updateUserInfo(
+            type: .profileImage,
+            infoString: "default"
+        ) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                self.delegate?.didRemoveProfileImage()
+            case .failure(let error):
+                self.delegate?.showErrorMessage(with: error.errorDescription)
+            }
+            
         }
     }
 }

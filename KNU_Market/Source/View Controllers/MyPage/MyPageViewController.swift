@@ -6,9 +6,8 @@ class MyPageViewController: BaseViewController {
     
     //MARK: - Properties
     
-    private var userManager: UserManager?
+    var viewModel: MyPageViewModel!
     
-    private var viewModel = MyPageViewModel(userManager: UserManager(), mediaManager: MediaManager())
 
     //MARK: - Constants
     
@@ -117,9 +116,9 @@ class MyPageViewController: BaseViewController {
     
     
     //MARK: - Initialization
-    init(userManager: UserManager) {
+    init(viewModel: MyPageViewModel) {
         super.init()
-        self.userManager = userManager
+        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -135,7 +134,6 @@ class MyPageViewController: BaseViewController {
 //        initialize()
     
     }
-    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -234,11 +232,6 @@ extension MyPageViewController {
     
     func presentActionSheet() {
         
-        let alert = UIAlertController(
-            title: "프로필 사진 변경",
-            message: "",
-            preferredStyle: .actionSheet
-        )
         let library = UIAlertAction(
             title: "앨범에서 선택",
             style: .default
@@ -255,42 +248,15 @@ extension MyPageViewController {
                 message: "정말로 제거하시겠습니까?"
             ) { selectedOk in
                 
-                if selectedOk { self?.removeProfileImage() }
+                if selectedOk { self?.viewModel.removeProfileImage() }
                 else { return }
             }
         }
-        let cancel = UIAlertAction(
-            title: "취소",
-            style: .cancel,
-            handler: nil
-        )
-        
-        alert.addAction(library)
-        alert.addAction(remove)
-        alert.addAction(cancel)
-        
+
+        let alert = UIHelper.createActionSheet(with: [library, remove], title: "프로필 사진 변경")
         present(alert, animated: true, completion: nil)
     }
     
-    func removeProfileImage() {
-        
-        userManager?.updateUserInfo(
-            type: .profileImage,
-            infoString: "default"
-        ) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(_):
-                self.showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
-                DispatchQueue.main.async {
-                    self.initializeProfileImageButton()
-                    User.shared.profileImage = nil
-                }
-            case .failure(_):
-                self.showSimpleBottomAlert(with: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲")
-            }
-        }
-    }
 }
 
 //MARK: - MyPageViewModelDelegate
@@ -329,6 +295,13 @@ extension MyPageViewController: MyPageViewModelDelegate {
     //이미지 먼저 서버에 업로드
     func didUploadImageToServerFirst(with uid: String) {
         viewModel.updateUserProfileImage(with: uid)
+    }
+    
+    func didRemoveProfileImage() {
+        showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
+        initializeProfileImageButton()
+        User.shared.profileImage = nil
+        
     }
     
     func failedUploadingImageToServerFirst(with error: NetworkError) {
@@ -436,7 +409,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 0: pushViewController(with: MyPostsViewController())
+            case 0: pushViewController(with: MyPostsViewController(viewModel: PostListViewModel(postManager: PostManager(), chatManager: ChatManager(), userManager: UserManager(), popupManager: PopupManager())))
             case 1: pushViewController(with: AccountManagementViewController())
             case 2: pushViewController(with: VerifyOptionViewController())
             default: break
@@ -535,14 +508,14 @@ extension MyPageViewController {
     
     
 }
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct MyPageVC: PreviewProvider {
-    
-    static var previews: some View {
-        MyPageViewController(userManager: UserManager()).toPreview()
-    }
-}
-#endif
+//#if canImport(SwiftUI) && DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct MyPageVC: PreviewProvider {
+//
+//    static var previews: some View {
+//        MyPageViewController(userManager: UserManager()).toPreview()
+//    }
+//}
+//#endif

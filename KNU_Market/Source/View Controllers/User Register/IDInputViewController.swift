@@ -59,7 +59,7 @@ class IDInputViewController: BaseViewController {
         return button
     }()
     
-    let dismissBarButtonItem = UIBarButtonItem(
+    lazy var dismissBarButtonItem = UIBarButtonItem(
         image: UIImage(systemName: "xmark"),
         style: .plain,
         target: self,

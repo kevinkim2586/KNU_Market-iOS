@@ -1,6 +1,7 @@
 import UIKit
 import SnapKit
 import GMStepper
+import Then
 
 class UploadPostViewController: BaseViewController {
     
@@ -220,8 +221,7 @@ class UploadPostViewController: BaseViewController {
         textView.font = .systemFont(ofSize: 14)
         return textView
     }()
-    
-    
+
     lazy var uploadPostBarButtonItem = UIBarButtonItem(
         title: "완료",
         style: .plain,

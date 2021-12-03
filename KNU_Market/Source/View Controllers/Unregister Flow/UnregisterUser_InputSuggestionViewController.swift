@@ -84,7 +84,7 @@ class UnregisterUser_InputSuggestionViewController: BaseViewController {
     }()
 
     
-    let sendFeedbackBarButtonItem = UIBarButtonItem(
+    lazy var sendFeedbackBarButtonItem = UIBarButtonItem(
         title: "완료",
         style: .done,
         target: self,

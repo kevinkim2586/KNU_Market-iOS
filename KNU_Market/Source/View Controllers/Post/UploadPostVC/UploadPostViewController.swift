@@ -222,7 +222,7 @@ class UploadPostViewController: BaseViewController {
     }()
     
     
-    let uploadPostBarButtonItem = UIBarButtonItem(
+    lazy var uploadPostBarButtonItem = UIBarButtonItem(
         title: "완료",
         style: .plain,
         target: self,

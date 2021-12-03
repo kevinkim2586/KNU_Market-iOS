@@ -77,7 +77,15 @@ class PopupManager {
     // 팝업 터치했을 시 - 터치했다고 서버에 알리는 함수
     func incrementPopupViewCount(popupUid: Int) {
         let url = popupUrl + "/\(popupUid)"
-        AF.request(url, method: .get).responseJSON { _ in }
+        AF.request(url, method: .get).responseJSON { response in
+            switch response.result {
+            case .success(_):
+                print("✅ success in incrementing popup viewcount")
+            case .failure(_):
+                print("❗️ error in incrementing popup viewcount")
+            }
+        }
+     
     }
     
 }

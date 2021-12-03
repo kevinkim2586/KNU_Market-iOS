@@ -12,7 +12,7 @@ extension UploadPostViewController {
     
     @objc func pressedUploadButton() {
         view.endEditing(true)
-        
+    
         if !validateUserInput() { return }
 
         editModel != nil ? askToUpdatePost() : askToUploadPost()

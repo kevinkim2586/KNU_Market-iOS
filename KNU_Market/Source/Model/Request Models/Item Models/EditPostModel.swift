@@ -8,6 +8,6 @@ struct EditPostModel {
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
     let location: Int
-    let itemDetail: String
+    let postDetail: String
     let pageUID: String
 }

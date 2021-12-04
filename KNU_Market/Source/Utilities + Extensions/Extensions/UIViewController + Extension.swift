@@ -12,16 +12,22 @@ import RxCocoa
 
 extension UIViewController {
     
-    func presentCustomAlert(title: String, message: String, cancelButtonTitle: String, actionButtonTitle: String, action: @escaping () -> Void = { }) {
-        let VC = KMCustomAlertViewController(
+    func presentCustomAlert(
+        title: String,
+        message: String,
+        cancelButtonTitle: String = "취소",
+        actionButtonTitle: String = "확인",
+        action: @escaping () -> Void = { }
+    ) {
+        let vc = KMCustomAlertViewController(
             title: title,
             message: message,
             cancelButtonTitle: cancelButtonTitle,
             actionButtonTitle: actionButtonTitle,
             action: action)
-        VC.modalTransitionStyle = .crossDissolve
-        VC.modalPresentationStyle = .overFullScreen
-        self.present(VC, animated: false)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        self.present(vc, animated: false)
     }
     
     // Custom Alert
@@ -139,11 +145,7 @@ extension UIViewController {
     
     // 인증하기 알림
     @objc func presentUserVerificationNeededAlert() {
-        presentKMAlertOnMainThread(
-            title: "인증이 필요합니다!",
-            message: "앱 설정에서 학생증 또는 웹메일 인증을 마친 뒤 사용이 가능합니다.👀",
-            buttonTitle: "확인"
-        )
+        presentCustomAlert(title: "인증이 필요합니다!", message: "앱 설정에서 학생증 또는 웹메일 인증을 마친 뒤 사용이 가능합니다.👀")
     }
     
     func popVCsFromNavController(count: Int) {
@@ -158,22 +160,13 @@ extension UIViewController {
     }
     
     @objc func refreshTokenHasExpired() {
-        presentKMAlertOnMainThread(
-            title: "로그인 세션 만료 🤔",
-            message: "세션이 만료되었습니다. 다시 로그인 해주세요.",
-            buttonTitle: "확인"
-        )
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        presentCustomAlert(title: "로그인 세션 만료 🤔", message: "세션이 만료되었습니다. 다시 로그인 해주세요.") {
             self.popToInitialViewController()
         }
     }
     
     @objc func presentUnexpectedError() {
-        presentKMAlertOnMainThread(
-            title: "예기치 못한 오류가 발생했습니다.🤔",
-            message: "불편을 드려 죄송합니다. 다시 로그인 해주세요.",
-            buttonTitle: "확인"
-        )
+        presentCustomAlert(title: "예기치 못한 오류가 발생했습니다.🤔", message: "불편을 드려 죄송합니다. 다시 로그인 해주세요.")
     }
     
     func presentInitialVerificationAlert() {
@@ -221,11 +214,9 @@ extension UIViewController {
     
     // 회원가입 VC 띄우기
     func presentRegisterVC() {
-        let storyboard = UIStoryboard(name: StoryboardName.UserRegister, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(
-            withIdentifier: K.StoryboardID.idInputVC
-        ) as? IDInputViewController else { return }
         
+        
+        let vc = IDInputViewController(userManager: UserManager())
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
     }

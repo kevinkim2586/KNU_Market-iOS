@@ -114,7 +114,7 @@ class AccountManagementViewController: BaseViewController {
     
     // Buttons
     let changeIdButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle(Texts.buttonChangeTitle, for: .normal)
         button.setTitleColor(Colors.button, for: .normal)
         button.titleLabel?.font = Fonts.button
@@ -128,7 +128,7 @@ class AccountManagementViewController: BaseViewController {
     }()
     
     let changeNicknameButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle(Texts.buttonChangeTitle, for: .normal)
         button.setTitleColor(Colors.button, for: .normal)
         button.titleLabel?.font = Fonts.button
@@ -142,7 +142,7 @@ class AccountManagementViewController: BaseViewController {
     }()
     
     let changePasswordButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle(Texts.buttonChangeTitle, for: .normal)
         button.setTitleColor(Colors.button, for: .normal)
         button.titleLabel?.font = Fonts.button
@@ -156,7 +156,7 @@ class AccountManagementViewController: BaseViewController {
     }()
     
     let changeEmailButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle(Texts.buttonChangeTitle, for: .normal)
         button.setTitleColor(Colors.button, for: .normal)
         button.titleLabel?.font = Fonts.button
@@ -170,7 +170,7 @@ class AccountManagementViewController: BaseViewController {
     }()
     
     let notificationSettingsButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("혹시 채팅 알림이 오지 않나요?", for: .normal)
         button.setTitleColor(Colors.button, for: .normal)
         button.setTitleColor(.darkGray, for: .highlighted)
@@ -184,7 +184,7 @@ class AccountManagementViewController: BaseViewController {
     }()
 
     let logOutButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("로그아웃", for: .normal)
         button.setTitleColor(Colors.button, for: .normal)
         button.titleLabel?.font = Fonts.button
@@ -197,7 +197,7 @@ class AccountManagementViewController: BaseViewController {
     }()
     
     let unregisterButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("회원 탈퇴", for: .normal)
         button.setTitleColor(Colors.button, for: .normal)
         button.titleLabel?.font = Fonts.button

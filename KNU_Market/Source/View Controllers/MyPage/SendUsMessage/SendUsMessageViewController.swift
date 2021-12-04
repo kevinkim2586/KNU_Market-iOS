@@ -301,10 +301,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
-        Observable.combineLatest(
-            self.titleTextField.rx.text.orEmpty.map { !$0.isEmpty }.asObservable(),
-            self.textView.rx.text.orEmpty.map { !$0.isEmpty }.asObservable()
-        ).map { $0 && $1 }
+        self.titleTextField.rx.text.orEmpty.map { !$0.isEmpty }.asObservable()
         .bind(to: self.buttomButton.rx.isEnabled)
         .disposed(by: disposeBag)
         
@@ -355,6 +352,10 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         reactor.state.map { "\($0.image.count)/2" }.asObservable()
             .bind(to: self.selectView.label.rx.text)
             .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.title }.asObservable()
+            .bind(to: self.titleTextField.rx.text)
+            .disposed(by: disposeBag)
     }
     
     
@@ -366,21 +367,26 @@ private extension SendUsMessageViewController {
     func convertAssetToImage(_ assets: [PHAsset]) -> [UIImage] {
         var result: [UIImage] = []
         if assets.count != 0 {
-                for i in 0 ..< assets.count {
-                    let imageManager = PHImageManager.default()
-                        let option = PHImageRequestOptions()
-                        option.isSynchronous = true
-                        var thumbnail = UIImage()
-                        imageManager.requestImage(for: assets[i], targetSize: CGSize(width: assets[i].pixelWidth, height: assets[i].pixelHeight), contentMode: .aspectFill, options: option) {
-                                (result, info) in
-                                thumbnail = result!
-                        }
+            for i in 0 ..< assets.count {
+                let imageManager = PHImageManager.default()
+                let option = PHImageRequestOptions()
+                option.isSynchronous = true
+                var thumbnail = UIImage()
+                imageManager.requestImage(
+                    for: assets[i],
+                       targetSize: CGSize(width: 1000, height: 1000),
+                       contentMode: .aspectFill,
+                       options: option
+                ) {
+                    (result, _) in
+                    thumbnail = result!
+                }
                 
-                        let data = thumbnail.jpegData(compressionQuality: 1)
-                        let newImage = UIImage(data: data!)
-                        result.append(newImage! as UIImage)
-                    }
+                let data = thumbnail.jpegData(compressionQuality: 1)
+                let newImage = UIImage(data: data!)
+                result.append(newImage! as UIImage)
             }
+        }
         return result
     }
     

@@ -67,7 +67,7 @@ class InitialViewController: BaseViewController {
     }()
     
     let infoButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setImage(Images.infoButton, for: .normal)
         button.addTarget(
             self,
@@ -107,8 +107,9 @@ class InitialViewController: BaseViewController {
     }()
     
     let loginButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("로그인", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         button.backgroundColor = UIColor(named: K.Color.appColor)
         button.layer.cornerRadius  = Metrics.textFieldHeight / 2
@@ -122,8 +123,9 @@ class InitialViewController: BaseViewController {
     }()
     
     let registerButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setAttributedTitle(Fonts.registerButtonAttributes, for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         button.addTarget(
             self,
@@ -135,7 +137,7 @@ class InitialViewController: BaseViewController {
     }()
     
     let findIdButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setAttributedTitle(NSAttributedString(
             string: "아이디 찾기",
             attributes: Fonts.findButtonAttributes
@@ -150,7 +152,7 @@ class InitialViewController: BaseViewController {
     }()
     
     let findPwButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setAttributedTitle(NSAttributedString(
             string: "비밀번호 찾기",
             attributes: Fonts.findButtonAttributes
@@ -286,11 +288,7 @@ extension InitialViewController {
             case .success(_):
                 self.goToHomeScreen()
             case .failure(let error):
-                self.presentKMAlertOnMainThread(
-                    title: "로그인 실패",
-                    message: error.errorDescription,
-                    buttonTitle: "확인"
-                )
+                self.presentCustomAlert(title: "로그인 실패", message: error.errorDescription)
             }
             dismissProgressBar()
         }

@@ -5,7 +5,7 @@ extension Notification.Name {
     static let presentVerificationNeededAlert       = Notification.Name("co.wim.presentVerifyEmailVC")
     
     static let updateChatList                       = Notification.Name("co.wim.updateChatList")
-    static let updateItemList                       = Notification.Name("co.wim.updateItemList")
+    static let updatePostList                       = Notification.Name("co.wim.updateItemList")
     static let didUpdatePost                        = Notification.Name("co.wim.didUpdatePost")
     
     static let refreshTokenExpired                  = Notification.Name("co.wim.refreshTokenExpired")

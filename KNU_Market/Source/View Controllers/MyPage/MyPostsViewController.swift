@@ -4,7 +4,7 @@ import SnapKit
 class MyPostsViewController: BaseViewController {
 
     //MARK: - Properties
-    private var viewModel: HomeViewModel!
+    private var viewModel: PostListViewModel!
     
     //MARK: - Constants
     
@@ -21,15 +21,22 @@ class MyPostsViewController: BaseViewController {
             for: .valueChanged
         )
         tableView.tableFooterView = UIView(frame: .zero)
-        let nibName = UINib(nibName: K.XIB.itemTableViewCell, bundle: nil)
         tableView.register(
-            nibName,
-            forCellReuseIdentifier: K.cellID.itemTableViewCell
+            PostTableViewCell.self,
+            forCellReuseIdentifier: PostTableViewCell.cellId
         )
         return tableView
     }()
     
     //MARK: - Initialization
+    init(viewModel: PostListViewModel) {
+        super.init()
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -62,22 +69,21 @@ class MyPostsViewController: BaseViewController {
     }
     
     private func setupViewModel() {
-        self.viewModel = HomeViewModel(itemManager: ItemManager())
-        self.viewModel.delegate = self
-        self.viewModel.fetchItemList(fetchCurrentUsers: true)
+        viewModel.delegate = self
+        viewModel.fetchPostList(fetchCurrentUsers: true)
     }
 }
 
 //MARK: - HomeViewModelDelegate
 
-extension MyPostsViewController: HomeViewModelDelegate {
+extension MyPostsViewController: PostListViewModelDelegate {
     
-    func didFetchItemList() {
+    func didFetchPostList() {
         postTableView.reloadData()
         postTableView.refreshControl?.endRefreshing()
         postTableView.tableFooterView = nil
         postTableView.restoreEmptyView()
-        if viewModel.itemList.count == 0 {
+        if viewModel.postList.count == 0 {
             postTableView.showEmptyView(
                 imageName: K.Images.emptyChatList,
                 text: "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!"
@@ -85,8 +91,8 @@ extension MyPostsViewController: HomeViewModelDelegate {
         }
     }
     
-    func failedFetchingItemList(errorMessage: String, error: NetworkError) {
-        if viewModel.itemList.count == 0 {
+    func failedFetchingPostList(errorMessage: String, error: NetworkError) {
+        if viewModel.postList.count == 0 {
             postTableView.showEmptyView(
                 imageName: K.Images.emptyChatList,
                 text: errorMessage
@@ -108,33 +114,35 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.itemList.count ?? 0
+        return viewModel?.postList.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = K.cellID.itemTableViewCell
-
+       
+        let cellIdentifier = PostTableViewCell.cellId
+        
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier,
             for: indexPath
-        ) as? ItemTableViewCell else {
+        ) as? PostTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(with: viewModel.itemList[indexPath.row])
+        cell.configure(with: viewModel.postList[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let storyboard = UIStoryboard(name: StoryboardName.ItemList, bundle: nil)
+        let postVC = PostViewController(
+            viewModel: PostViewModel(
+                pageId: viewModel.postList[indexPath.row].uuid,
+                postManager: PostManager(),
+                chatManager: ChatManager()
+            ),
+            isFromChatVC: false
+        )
         
-        guard let postVC = storyboard.instantiateViewController(
-            withIdentifier: K.StoryboardID.itemVC
-        ) as? ItemViewController else { return }
-        
-        postVC.hidesBottomBarWhenPushed = true
-        postVC.pageID = viewModel.itemList[indexPath.row].uuid
         navigationController?.pushViewController(postVC, animated: true)
     }
     
@@ -147,7 +155,7 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
             finalAlpha: 0.0,     // 안 보이게
             completion: {
                 self.viewModel.resetValues()
-                self.viewModel.fetchItemList(fetchCurrentUsers: true)
+                self.viewModel.fetchPostList(fetchCurrentUsers: true)
             }
         )
     }
@@ -164,7 +172,7 @@ extension MyPostsViewController: UIScrollViewDelegate {
         if position > (postTableView.contentSize.height - 80 - scrollView.frame.size.height) {
             if !viewModel.isFetchingData {
                 postTableView.tableFooterView = createSpinnerFooterView()
-                viewModel.fetchItemList(fetchCurrentUsers: true)
+                viewModel.fetchPostList(fetchCurrentUsers: true)
             }
         }
     }

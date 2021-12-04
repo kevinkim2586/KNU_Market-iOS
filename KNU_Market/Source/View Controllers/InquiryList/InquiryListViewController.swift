@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 import SDWebImage
+import Moya
 
 class InquiryListViewController: UIViewController {
     
@@ -68,7 +69,7 @@ class InquiryListViewController: UIViewController {
     
     private let inquiryList: UITableView = {
         let tableView = UITableView()
-        tableView.register(InquiryTableViewCell.self, forCellReuseIdentifier: "InquiryCell")
+        tableView.register(InquiryTableViewCell.self, forCellReuseIdentifier: InquiryTableViewCell.cellId)
         tableView.rowHeight = 60
         tableView.separatorStyle = .none
         return tableView
@@ -164,11 +165,11 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "InquiryCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: InquiryTableViewCell.cellId, for: indexPath)
                         as? InquiryTableViewCell else { return UITableViewCell() }
         
         cell.dateLabel.text = formatDate(inquiryModel[indexPath.row].date)
-        cell.inquieryTitleLabel.text = ": \(inquiryModel[indexPath.row].title ?? " ")"
+        cell.inquiryTitleLabel.text = ": \(inquiryModel[indexPath.row].title ?? "사용자 신고 문의")"
 
         if inquiryModel[indexPath.row].isArchived == true {
             cell.prograssImageView.image = UIImage(named: "doneImg")
@@ -184,7 +185,13 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
             reactor: DetailMessageViewReactor(
                 title: inquiryModel[indexPath.row].title ?? " ",
                 content: inquiryModel[indexPath.row].content ?? " ",
-                answer: inquiryModel[indexPath.row].answer)
+                answer: inquiryModel[indexPath.row].answer,
+                uid: inquiryModel[indexPath.row].uid,
+                myPageService: MyPageService(network: Network<MyPageAPI>(plugins: [
+                    AuthPlugin(),
+                    NetworkLoggerPlugin()
+                ]))
+            )
         )
         navigationController?.pushViewController(detailVC, animated: true)
     }

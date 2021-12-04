@@ -49,7 +49,7 @@ class CaptureStudentIdViewController: BaseViewController {
     }()
     
     let checkDuplicateButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.layer.cornerRadius = 6
         button.setTitle("중복 확인", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -96,7 +96,7 @@ class CaptureStudentIdViewController: BaseViewController {
     }()
     
     let selectImageButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setImage(Images.plusImage, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 90).isActive = true
         button.heightAnchor.constraint(equalToConstant: 90).isActive = true

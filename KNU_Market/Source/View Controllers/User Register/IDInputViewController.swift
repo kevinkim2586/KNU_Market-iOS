@@ -36,6 +36,7 @@ class IDInputViewController: BaseViewController {
             action: #selector(textFieldDidChange(_:)),
             for: .editingChanged
         )
+        textField.autocapitalizationType = .none
         textField.inputAccessoryView = bottomButton
         return textField
     }()
@@ -58,7 +59,7 @@ class IDInputViewController: BaseViewController {
         return button
     }()
     
-    let dismissBarButtonItem = UIBarButtonItem(
+    lazy var dismissBarButtonItem = UIBarButtonItem(
         image: UIImage(systemName: "xmark"),
         style: .plain,
         target: self,
@@ -148,12 +149,12 @@ extension IDInputViewController {
     func checkIfValidId() -> Bool {
         guard let id = userIdTextField.text else { return false }
         
-        if id.count < 4 || id.count > 30 {
+        if id.count < 4 || id.count > 50 {
             errorLabel.showErrorMessage(message: RegisterError.incorrectIdLength.rawValue)
             return false
         }
         
-        if !id.isValidEmail, !id.isValidId {
+        if !id.isValidId {
             errorLabel.showErrorMessage(message: RegisterError.incorrectIdFormat.rawValue)
             return false
         }

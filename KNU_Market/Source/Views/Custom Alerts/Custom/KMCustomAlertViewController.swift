@@ -28,10 +28,13 @@ class KMCustomAlertViewController: UIViewController {
     }
     
     let messageLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 15)
+        $0.font = UIFont.preferredFont(forTextStyle: .body)
         $0.textColor = .black
         $0.textAlignment = .center
         $0.numberOfLines = 7
+        $0.adjustsFontSizeToFitWidth = true
+        $0.minimumScaleFactor = 0.75
+        $0.lineBreakMode = .byWordWrapping
     }
     
     let cancelButton = UIButton(type: .system).then {
@@ -39,6 +42,7 @@ class KMCustomAlertViewController: UIViewController {
         $0.layer.cornerRadius = 5
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        $0.addBounceAnimationWithNoFeedback()
     }
     
     let actionButton = UIButton(type: .system).then {
@@ -46,6 +50,7 @@ class KMCustomAlertViewController: UIViewController {
         $0.layer.cornerRadius = 5
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        $0.addBounceAnimationWithNoFeedback()
     }
 
     override func viewDidLoad() {

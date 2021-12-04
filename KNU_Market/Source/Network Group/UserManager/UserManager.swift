@@ -162,9 +162,9 @@ class UserManager {
         }
     }
     
-    func loadOtherUsersProfile(
+    func loadUserProfileUsingUid(
         userUID: String,
-        completion: @escaping (Result<LoadOtherUserProfileModel, NetworkError>) -> Void
+        completion: @escaping (Result<LoadUserProfileUidModel, NetworkError>) -> Void
     ) {
         let url = loadUserProfileURL + "/\(userUID)"
         AF.request(
@@ -178,7 +178,7 @@ class UserManager {
                 switch statusCode {
                 case 200:
                     do {
-                        let decodedData = try JSONDecoder().decode(LoadOtherUserProfileModel.self, from: response.data!)
+                        let decodedData = try JSONDecoder().decode(LoadUserProfileUidModel.self, from: response.data!)
                         print("✏️ User Manager - loadOtherUsersProfile() success")
                         completion(.success(decodedData))
                     } catch {

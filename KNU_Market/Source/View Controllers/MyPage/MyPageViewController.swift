@@ -6,15 +6,13 @@ class MyPageViewController: BaseViewController {
     
     //MARK: - Properties
     
-    private var userManager: UserManager?
+    var viewModel: MyPageViewModel!
     
-    private var viewModel = MyPageViewModel()
 
-    
     //MARK: - Constants
     
     fileprivate struct Metrics {
-        static let profileImageButtonHeight: CGFloat        = 120
+        static let profileImageButtonHeight: CGFloat = 120
     }
     
     fileprivate struct Images {
@@ -78,7 +76,7 @@ class MyPageViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.register(
             MyPageTableViewCell.self,
-            forCellReuseIdentifier: K.cellID.myPageCell
+            forCellReuseIdentifier: MyPageTableViewCell.cellId
         )
         return tableView
     }()
@@ -118,9 +116,9 @@ class MyPageViewController: BaseViewController {
     
     
     //MARK: - Initialization
-    init(userManager: UserManager) {
+    init(viewModel: MyPageViewModel) {
         super.init()
-        self.userManager = userManager
+        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -136,7 +134,7 @@ class MyPageViewController: BaseViewController {
 //        initialize()
     
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.post(name: .getBadgeValue, object: nil)
@@ -160,6 +158,11 @@ class MyPageViewController: BaseViewController {
         profileImageContainerView.addSubview(userNicknameLabel)
         profileImageContainerView.addSubview(userVerifiedImage)
         view.addSubview(settingsTableView)
+
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
         
         profileImageContainerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
@@ -197,11 +200,6 @@ class MyPageViewController: BaseViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
     
         }
-        
-    }
-    
-    override func setupConstraints() {
-        super.setupConstraints()
     }
     
     private func configure() {
@@ -234,11 +232,6 @@ extension MyPageViewController {
     
     func presentActionSheet() {
         
-        let alert = UIAlertController(
-            title: "프로필 사진 변경",
-            message: "",
-            preferredStyle: .actionSheet
-        )
         let library = UIAlertAction(
             title: "앨범에서 선택",
             style: .default
@@ -255,42 +248,15 @@ extension MyPageViewController {
                 message: "정말로 제거하시겠습니까?"
             ) { selectedOk in
                 
-                if selectedOk { self?.removeProfileImage() }
+                if selectedOk { self?.viewModel.removeProfileImage() }
                 else { return }
             }
         }
-        let cancel = UIAlertAction(
-            title: "취소",
-            style: .cancel,
-            handler: nil
-        )
-        
-        alert.addAction(library)
-        alert.addAction(remove)
-        alert.addAction(cancel)
-        
+
+        let alert = UIHelper.createActionSheet(with: [library, remove], title: "프로필 사진 변경")
         present(alert, animated: true, completion: nil)
     }
     
-    func removeProfileImage() {
-        
-        userManager?.updateUserInfo(
-            type: .profileImage,
-            infoString: "default"
-        ) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(_):
-                self.showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
-                DispatchQueue.main.async {
-                    self.initializeProfileImageButton()
-                    User.shared.profileImage = nil
-                }
-            case .failure(_):
-                self.showSimpleBottomAlert(with: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲")
-            }
-        }
-    }
 }
 
 //MARK: - MyPageViewModelDelegate
@@ -303,6 +269,8 @@ extension MyPageViewController: MyPageViewModelDelegate {
         userVerifiedImage.image = detectIfVerifiedUser()
         ? Images.userVerifiedImage
         : Images.userUnVerifiedImage
+        
+        settingsTableView.reloadData()
     }
     
     func didFetchProfileImage() {
@@ -327,6 +295,13 @@ extension MyPageViewController: MyPageViewModelDelegate {
     //이미지 먼저 서버에 업로드
     func didUploadImageToServerFirst(with uid: String) {
         viewModel.updateUserProfileImage(with: uid)
+    }
+    
+    func didRemoveProfileImage() {
+        showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
+        initializeProfileImageButton()
+        User.shared.profileImage = nil
+        
     }
     
     func failedUploadingImageToServerFirst(with error: NetworkError) {
@@ -405,7 +380,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: K.cellID.myPageCell,
+            withIdentifier: MyPageTableViewCell.cellId,
             for: indexPath
         ) as! MyPageTableViewCell
         
@@ -419,6 +394,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.settingsTitleLabel.text = viewModel.tableViewSection_2[indexPath.row]
             if indexPath.row == 0 {
                 cell.leftImageView.image = UIImage(named: K.Images.myPageSection_2_Images[indexPath.row])
+                cell.notificationBadgeImageView.isHidden = viewModel.isReportChecked
             } else {
                 cell.leftImageView.image = UIImage(systemName: K.Images.myPageSection_2_Images[indexPath.row])
             }
@@ -433,7 +409,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 0: pushViewController(with: MyPostsViewController())
+            case 0: pushViewController(with: MyPostsViewController(viewModel: PostListViewModel(postManager: PostManager(), chatManager: ChatManager(), userManager: UserManager(), popupManager: PopupManager())))
             case 1: pushViewController(with: AccountManagementViewController())
             case 2: pushViewController(with: VerifyOptionViewController())
             default: break
@@ -455,6 +431,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func pushViewController(with vc: UIViewController) {
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -531,14 +508,14 @@ extension MyPageViewController {
     
     
 }
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct MyPageVC: PreviewProvider {
-    
-    static var previews: some View {
-        MyPageViewController(userManager: UserManager()).toPreview()
-    }
-}
-#endif
+//#if canImport(SwiftUI) && DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct MyPageVC: PreviewProvider {
+//
+//    static var previews: some View {
+//        MyPageViewController(userManager: UserManager()).toPreview()
+//    }
+//}
+//#endif

@@ -22,6 +22,6 @@ extension UserDefaults {
         
         static let userSeenPopupUids                = "userSeenPopupUids"
         static let userSetPopupBlockTime            = "userSetPopupBlockTime"
-        static let didUserBlockPopupForADay   = "didUserBlockPopupForADay"
+        static let didUserBlockPopupForADay         = "didUserBlockPopupForADay"
     }
 }

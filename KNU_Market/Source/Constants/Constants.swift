@@ -4,6 +4,7 @@ import UIKit
 struct K {
     
     static let API_BASE_URL                     = "https://knumarket.kro.kr:5051/api/v1/"
+//    static let API_BASE_URL                     = "https://test.knumarket.kro.kr:5051/api/v1/"
     static let WEB_SOCKET_URL                   = "wss://knumarket.kro.kr:5052"
     static let MEDIA_REQUEST_URL                = "https://knumarket.kro.kr:5051/api/v1/media/"
     
@@ -21,9 +22,6 @@ struct K {
         // Chat
         static let presentChatMemberVC          = "presentChatMemberVC"
 
-        
-        static let goToItemVC                   = "goToItemVC"
-        static let goToItemVCFromMyPosts        = "goToItemVCFromMyPosts"
         
         static let goToReportVC                 = "goToReportVC"
         
@@ -51,12 +49,8 @@ struct K {
         static let findIdUsingWebMailVC         = "FindIdUsingWebMailViewController"
         static let findIdUsingStudentIdVC       = "FindIdUsingStudentIdViewController"
         
-        // Home & Item Tab
+        // Home & Post Tab
         static let tabBarController             = "TabBarController"
-        static let homeVC                       = "HomeViewController"
-        static let itemVC                       = "ItemViewController"
-        static let uploadItemVC                 = "UploadItemViewController"
-        static let photoDetailVC                = "PhotoDetailViewController"
         static let searchPostVC                 = "SearchPostViewController"
         
         // Chat Tab
@@ -87,11 +81,8 @@ struct K {
     }
     
     struct cellID {
-        
-        static let itemTableViewCell            = "itemTableViewCell"
+
         static let chatTableViewCell            = "chatTableViewCell"
-        static let addItemImageCell             = "addItemImageCell"
-        static let userPickedItemImageCell      = "userPickedItemImageCell"
         static let sendCell                     = "sendCell"
         static let receiveCell                  = "receiveCell"
         static let myPageCell                   = "myPageCell"
@@ -108,23 +99,10 @@ struct K {
         static let password                     = "password"
     }
     
-    struct NotificationKey {
-        
-        static let updateChatList               = "co.wim.updateChatList"
-        static let updateItemList               = "co.wim.updateItemList"
-        
-    }
-    
+
     static let entireChatRoomUID                = "__entireRoomPid"
     
     //MARK: - UI Related Constants
-    
-    struct XIB {
-        
-        static let sendCell                     = "SendCell"
-        static let receiveCell                  = "ReceiveCell"
-        static let itemTableViewCell            = "ItemTableViewCell"
-    }
     
     struct Color {
         
@@ -167,7 +145,7 @@ struct K {
         static let myPageSelected               = "my"
         
         
-        // Item View Controller Images
+        // Post View Controller Images
         static let locationIcon                 = "location icon"
         
         

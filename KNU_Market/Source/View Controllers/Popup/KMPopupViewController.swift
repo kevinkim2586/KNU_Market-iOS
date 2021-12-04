@@ -10,6 +10,8 @@ class KMPopupViewController: BaseViewController {
     private var mediaUid: String?
     private var landingUrl: String?
     
+    private var didTouchPopup: Bool = false
+    
     //MARK: - Constants
     
     fileprivate struct Metrics {
@@ -146,9 +148,13 @@ class KMPopupViewController: BaseViewController {
 extension KMPopupViewController {
     
     @objc private func pressedPopupImage() {
-        incrementPopupViewCount()
-        openLandingUrl()
-        dismiss(animated: true)
+        if didTouchPopup == true {
+            openLandingUrl()
+        } else {
+            incrementPopupViewCount()
+            didTouchPopup = true
+            openLandingUrl()
+        }
     }
     
     private func openLandingUrl() {

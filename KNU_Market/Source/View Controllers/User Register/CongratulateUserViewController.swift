@@ -44,7 +44,7 @@ class CongratulateUserViewController: BaseViewController {
     }()
     
     let termsAndConditionButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setAttributedTitle(NSAttributedString(string: "이용약관", attributes: Style.buttonAttributes), for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
         button.addTarget(
@@ -56,7 +56,7 @@ class CongratulateUserViewController: BaseViewController {
     }()
     
     let privacyButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setAttributedTitle(NSAttributedString(string: "개인정보취급방침", attributes: Style.buttonAttributes), for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
         button.addTarget(
@@ -99,7 +99,7 @@ class CongratulateUserViewController: BaseViewController {
     }()
     
     let goHomeButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.addBounceAnimationWithNoFeedback()
         button.setTitle("동의하고 진행하기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)

@@ -140,10 +140,10 @@ class HomeViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let popupModel):
-                if popupManager.checkIfAlreadySeenPopup(uid: popupModel.popupUid) {
-                    return
-                }
-                popupManager.savePopupUidAsSeen(uid: popupModel.popupUid)
+//                if popupManager.checkIfAlreadySeenPopup(uid: popupModel.popupUid) {
+//                    return
+//                }
+//                popupManager.savePopupUidAsSeen(uid: popupModel.popupUid)
                 self.delegate?.didFetchLatestPopup(model: popupModel)
             case .failure(let error):
                 self.delegate?.failedFetchingLatestPopup(with: error)

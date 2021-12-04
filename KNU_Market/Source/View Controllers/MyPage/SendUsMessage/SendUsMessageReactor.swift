@@ -100,6 +100,9 @@ final class SendUsMessageReactor: Reactor {
             }
             
         case let .setTitle(title):
+            if title.count >= 30 {
+                break
+            }
             state.title = title
             
         case let .setContent(content):

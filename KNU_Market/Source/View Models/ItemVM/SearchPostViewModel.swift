@@ -7,9 +7,13 @@ protocol SearchPostViewModelDelegate: AnyObject {
 
 class SearchPostViewModel {
     
+    //MARK: - Properties
+    
+    private var postManager: PostManager
+    
     weak var delegate: SearchPostViewModelDelegate?
     
-    var itemList: [ItemListModel] = [ItemListModel]()
+    var postList: [PostListModel] = [PostListModel]()
 
     var isFetchingData: Bool = false
     
@@ -17,13 +21,21 @@ class SearchPostViewModel {
     
     var searchKeyword: String?
     
+    //MARK: - Initialization
+    
+    init(postManager: PostManager) {
+        self.postManager = postManager
+    }
+    
+    //MARK: - Methods
+    
     func fetchSearchResults() {
         
         isFetchingData = true
         
         guard let keyword = self.searchKeyword else { return }
         
-        ItemManager.shared.fetchSearchResults(
+        postManager.fetchSearchResults(
             at: index,
             keyword: keyword
         ) { [weak self] result in
@@ -36,7 +48,7 @@ class SearchPostViewModel {
                     return
                 }
                 self.index += 1
-                self.itemList.append(contentsOf: fetchedModel)
+                self.postList.append(contentsOf: fetchedModel)
                 self.isFetchingData = false
                 self.delegate?.didFetchSearchList()
                 
@@ -48,7 +60,7 @@ class SearchPostViewModel {
     
     func resetValues() {
         
-        itemList.removeAll()
+        postList.removeAll()
         searchKeyword = nil
         isFetchingData = false
         index = 1

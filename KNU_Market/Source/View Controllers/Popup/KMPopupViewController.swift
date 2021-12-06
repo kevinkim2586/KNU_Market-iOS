@@ -107,7 +107,7 @@ class KMPopupViewController: BaseViewController {
         
         popupImageView.snp.makeConstraints { make in
             make.width.equalTo(view.snp.width).multipliedBy(0.8)
-            make.height.equalTo(view.snp.height).multipliedBy(0.5)
+            make.height.equalTo(self.popupImageView.snp.width).multipliedBy(1.3)
             make.center.equalToSuperview()
         }
         

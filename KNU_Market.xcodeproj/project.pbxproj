@@ -819,8 +819,6 @@
 		7CA661E4263D4387000E0B7A = {
 			isa = PBXGroup;
 			children = (
-				7C22CFB5275E04E80080A816 /* MyPageViewController+UIImagePicker.swift */,
-				7C22CFB7275E056E0080A816 /* MyPageViewController+TargetMethods.swift */,
 				7CA661EF263D4387000E0B7A /* KNU_Market */,
 				7CA661EE263D4387000E0B7A /* Products */,
 				EF6E8F5DA035698264ED872C /* Pods */,
@@ -1032,6 +1030,8 @@
 				7CA66236264136BF000E0B7A /* MyPageViewController.swift */,
 				7C22CFB1275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift */,
 				7C22CFB3275E04CD0080A816 /* MyPageViewController+UITableView.swift */,
+				7C22CFB5275E04E80080A816 /* MyPageViewController+UIImagePicker.swift */,
+				7C22CFB7275E056E0080A816 /* MyPageViewController+TargetMethods.swift */,
 				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
 				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
 				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,

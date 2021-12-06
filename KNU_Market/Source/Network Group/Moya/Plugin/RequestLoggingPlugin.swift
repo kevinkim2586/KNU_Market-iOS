@@ -40,13 +40,13 @@ final class RequestLoggingPlugin: PluginType {
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         switch result {
         case let .success(response):
-            onSuceed(response, target: target, isFromError: false)
+            onSucceed(response, target: target, isFromError: false)
         case let .failure(error):
             onFail(error, target: target)
         }
     }
 
-    func onSuceed(_ response: Response, target: TargetType, isFromError: Bool) {
+    func onSucceed(_ response: Response, target: TargetType, isFromError: Bool) {
         let request = response.request
         let url = request?.url?.absoluteString ?? "nil"
         let statusCode = response.statusCode
@@ -68,7 +68,7 @@ final class RequestLoggingPlugin: PluginType {
 
     func onFail(_ error: MoyaError, target: TargetType) {
         if let response = error.response {
-            onSuceed(response, target: target, isFromError: true)
+            onSucceed(response, target: target, isFromError: true)
             return
         }
 

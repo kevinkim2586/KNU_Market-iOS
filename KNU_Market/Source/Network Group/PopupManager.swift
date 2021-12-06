@@ -85,7 +85,5 @@ class PopupManager {
                 print("❗️ error in incrementing popup viewcount")
             }
         }
-     
     }
-    
 }

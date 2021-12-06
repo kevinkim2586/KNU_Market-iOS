@@ -43,6 +43,10 @@
 		7C184B8326B103F1006C0FAD /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C184B8226B103F1006C0FAD /* Room.swift */; };
 		7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */; };
 		7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */; };
+		7C22CFB2275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22CFB1275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift */; };
+		7C22CFB4275E04CD0080A816 /* MyPageViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22CFB3275E04CD0080A816 /* MyPageViewController+UITableView.swift */; };
+		7C22CFB6275E04E80080A816 /* MyPageViewController+UIImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22CFB5275E04E80080A816 /* MyPageViewController+UIImagePicker.swift */; };
+		7C22CFB8275E056E0080A816 /* MyPageViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22CFB7275E056E0080A816 /* MyPageViewController+TargetMethods.swift */; };
 		7C3758ED265FA97A0081A85D /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* PostListViewModel.swift */; };
 		7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */; };
 		7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */; };
@@ -235,6 +239,10 @@
 		7C184B8226B103F1006C0FAD /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		7C22CFB1275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyPageViewController+MyPageViewModelDelegate.swift"; sourceTree = "<group>"; };
+		7C22CFB3275E04CD0080A816 /* MyPageViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyPageViewController+UITableView.swift"; sourceTree = "<group>"; };
+		7C22CFB5275E04E80080A816 /* MyPageViewController+UIImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyPageViewController+UIImagePicker.swift"; sourceTree = "<group>"; };
+		7C22CFB7275E056E0080A816 /* MyPageViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyPageViewController+TargetMethods.swift"; sourceTree = "<group>"; };
 		7C3758EC265FA97A0081A85D /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewController.swift; sourceTree = "<group>"; };
@@ -1020,6 +1028,10 @@
 			isa = PBXGroup;
 			children = (
 				7CA66236264136BF000E0B7A /* MyPageViewController.swift */,
+				7C22CFB1275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift */,
+				7C22CFB3275E04CD0080A816 /* MyPageViewController+UITableView.swift */,
+				7C22CFB5275E04E80080A816 /* MyPageViewController+UIImagePicker.swift */,
+				7C22CFB7275E056E0080A816 /* MyPageViewController+TargetMethods.swift */,
 				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
 				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
 				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
@@ -1313,6 +1325,7 @@
 				7CEDBB5D2702E0820078F5E1 /* KMErrorLabel.swift in Sources */,
 				626D66FA2742920300CB7F4F /* InquiryAPI.swift in Sources */,
 				7CCB02082674CE5D00D58BC2 /* PostListModel.swift in Sources */,
+				7C22CFB4275E04CD0080A816 /* MyPageViewController+UITableView.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
 				7C55545D266CDFD100C3C5B6 /* UploadPostRequestDTO.swift in Sources */,
 				7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */,
@@ -1338,6 +1351,7 @@
 				7CBFDA78273FE01F000C8C8A /* PostTableViewCell.swift in Sources */,
 				7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */,
 				7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */,
+				7C22CFB8275E056E0080A816 /* MyPageViewController+TargetMethods.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController + Extension.swift in Sources */,
 				7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */,
 				7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */,
@@ -1379,6 +1393,7 @@
 				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */,
 				7CF369BA2754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift in Sources */,
+				7C22CFB6275E04E80080A816 /* MyPageViewController+UIImagePicker.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */,
@@ -1411,6 +1426,7 @@
 				7C83EE532742378000CF1680 /* PostViewController.swift in Sources */,
 				7C015C9827035B2100089ED8 /* FindIdUsingWebMailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
+				7C22CFB2275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
 				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
 				7CF369A92754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift in Sources */,
@@ -1610,7 +1626,7 @@
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.4;
+				CURRENT_PROJECT_VERSION = 1.2.6;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1618,7 +1634,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1636,7 +1652,7 @@
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.4;
+				CURRENT_PROJECT_VERSION = 1.2.6;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1644,7 +1660,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -107,9 +107,8 @@ class KMPopupViewController: BaseViewController {
         
         popupImageView.snp.makeConstraints { make in
             make.width.equalTo(view.snp.width).multipliedBy(0.8)
-            make.height.equalTo(view.snp.height).multipliedBy(0.5)
-            make.top.equalToSuperview().inset(180)
-            make.centerX.equalToSuperview()
+            make.height.equalTo(self.popupImageView.snp.width).multipliedBy(1.3)
+            make.center.equalToSuperview()
         }
         
         doNotSeeForOneDayButton.snp.makeConstraints { make in

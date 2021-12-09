@@ -9,7 +9,7 @@
 		<string>WIM.KNU-Market</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<string>ko_KR</string>
 	<key>CFBundleDisplayName</key>
 	<string>크누마켓</string>
 	<key>CFBundleExecutable</key>

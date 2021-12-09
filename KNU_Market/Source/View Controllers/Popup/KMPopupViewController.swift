@@ -169,7 +169,7 @@ extension KMPopupViewController {
     }
     
     @objc private func doNotSeePopupForOneDay() {
-        popupManager?.configureToNotSeePopupForOneDay()
+        popupManager?.blockPopupForADay()
         dismiss(animated: true)
     }
 }

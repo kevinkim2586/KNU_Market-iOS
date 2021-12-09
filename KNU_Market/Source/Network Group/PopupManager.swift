@@ -21,18 +21,17 @@ class PopupManager {
     }
     
     // 24시간이 지났는지 판별
-    private var didADayPass: Bool {
+    fileprivate var didADayPass: Bool {
         
         //사용자가 "24시간 보지않기"를 누른 시간 가져오기 -> nil 이면 팝업 가져오기
         guard let userSetDate = User.shared.userSetPopupBlockDate else {
             return true
         }
         
-        let currentDate = Date()
         let oneDay = 86400          // 하루 == 86400초
         
         // 24시간이 지났는지 판별 
-        if let timeDifference = Calendar.current.dateComponents([.second], from: userSetDate, to: currentDate).second, timeDifference > oneDay {
+        if let timeDifference = Calendar.current.dateComponents([.second], from: userSetDate, to: Date()).second, timeDifference > oneDay {
             User.shared.userSetPopupBlockDate = nil     // 초기화
             return true
         } else {

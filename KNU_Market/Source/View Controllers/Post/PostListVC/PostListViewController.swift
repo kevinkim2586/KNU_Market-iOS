@@ -114,7 +114,6 @@ class PostListViewController: BaseViewController {
         )
     }
     
-
     //MARK: - UI Setup
     
     override func setupLayout() {
@@ -129,7 +128,7 @@ class PostListViewController: BaseViewController {
     
     override func setupConstraints() {
         super.setupConstraints()
-        
+                
         postListsTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

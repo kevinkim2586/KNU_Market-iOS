@@ -3,6 +3,7 @@ import UIKit
 extension Notification.Name {
     
     static let presentVerificationNeededAlert       = Notification.Name("co.wim.presentVerifyEmailVC")
+    static let triggerMainTabBarHiddenProperty      = Notification.Name("co.wim.triggerMainTabBarHiddenProperty")
     
     static let updateChatList                       = Notification.Name("co.wim.updateChatList")
     static let updatePostList                       = Notification.Name("co.wim.updateItemList")
@@ -23,5 +24,7 @@ extension Notification.Name {
     static let getChatList                          = Notification.Name("co.wim.getChatList")
             
     static let unexpectedError                      = Notification.Name("co.wim.unexpectedError")
+    
+    
 
 }

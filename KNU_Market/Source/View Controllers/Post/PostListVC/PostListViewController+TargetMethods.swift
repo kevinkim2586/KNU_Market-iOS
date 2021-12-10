@@ -63,6 +63,12 @@ extension PostListViewController {
             name: .updatePostList,
             object: nil
         )
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(triggerMainTabBarHiddenProperty),
+//            name: .triggerMainTabBarHiddenProperty,
+//            object: nil
+//        )
         createObserversForGettingBadgeValue()
         createObserversForRefreshTokenExpiration()
         createObserversForUnexpectedErrors()

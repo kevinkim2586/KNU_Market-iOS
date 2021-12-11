@@ -26,6 +26,7 @@
 		626D66F3274291EC00CB7F4F /* InquiryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F2274291EC00CB7F4F /* InquiryTableViewCell.swift */; };
 		626D66FA2742920300CB7F4F /* InquiryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F72742920300CB7F4F /* InquiryAPI.swift */; };
 		626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F82742920300CB7F4F /* InquiryListmodel.swift */; };
+		6273750E27647DA6008A29B5 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6273750D27647DA6008A29B5 /* PostCell.swift */; };
 		62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */; };
 		6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */; };
 		7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */; };
@@ -223,6 +224,7 @@
 		626D66F2274291EC00CB7F4F /* InquiryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryTableViewCell.swift; sourceTree = "<group>"; };
 		626D66F72742920300CB7F4F /* InquiryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryAPI.swift; sourceTree = "<group>"; };
 		626D66F82742920300CB7F4F /* InquiryListmodel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryListmodel.swift; sourceTree = "<group>"; };
+		6273750D27647DA6008A29B5 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageReactor.swift; sourceTree = "<group>"; };
 		6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault Keys.swift"; sourceTree = "<group>"; };
 		7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + UpdateInfo.swift"; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 				7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */,
 				7CBFDA77273FE01F000C8C8A /* PostTableViewCell.swift */,
 				7C83EE49274121FF00CF1680 /* ChatListTableViewCell.swift */,
+				6273750D27647DA6008A29B5 /* PostCell.swift */,
 			);
 			path = UITableViewCells;
 			sourceTree = "<group>";
@@ -1385,6 +1388,7 @@
 				7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */,
 				7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */,
 				7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */,
+				6273750E27647DA6008A29B5 /* PostCell.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
 				626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */,
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,

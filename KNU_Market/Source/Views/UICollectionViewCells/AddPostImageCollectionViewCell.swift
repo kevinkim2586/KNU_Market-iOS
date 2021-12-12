@@ -30,6 +30,9 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
     lazy var imagePicker: ImagePickerController = {
         let imagePicker = ImagePickerController()
         imagePicker.settings.selection.max = 3
+        imagePicker.settings.theme.selectionFillColor = UIColor.init(named: K.Color.appColor) ?? .systemBlue
+        imagePicker.doneButton.tintColor = UIColor.init(named: K.Color.appColor)
+        imagePicker.cancelButton.tintColor = UIColor.init(named: K.Color.appColor)
         imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
         imagePicker.modalPresentationStyle = .fullScreen
         return imagePicker

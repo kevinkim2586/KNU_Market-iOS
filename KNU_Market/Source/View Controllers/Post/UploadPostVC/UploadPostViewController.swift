@@ -27,6 +27,20 @@ class UploadPostViewController: BaseViewController {
     
     //MARK: - UI
     
+//    lazy var navigationBar: UINavigationBar = {
+//        let doneBarButtonItem =  UIBarButtonItem(
+//            barButtonSystemItem: .done,
+//            target: self,
+//            action: #selector(pressedUploadButton)
+//        )
+//        let navBar = UIHelper.addNavigationBarWithAdditionalAction(
+//            in: self.view,
+//            title: "공구 올리기",
+//            additionalBarButtonItem: doneBarButtonItem)
+//
+//        return navBar
+//    }()
+    
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     
     lazy var postScrollView: UIScrollView = {
@@ -224,11 +238,11 @@ class UploadPostViewController: BaseViewController {
 
     lazy var uploadPostBarButtonItem = UIBarButtonItem(
         title: "완료",
-        style: .plain,
+        style: .done,
         target: self,
         action: #selector(pressedUploadButton)
     )
-
+    
     //MARK: - Initialization
     
     init(viewModel: UploadPostViewModel) {
@@ -253,6 +267,7 @@ class UploadPostViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        
     }
     
     //MARK: - UI Setup
@@ -261,10 +276,10 @@ class UploadPostViewController: BaseViewController {
         super.setupLayout()
         
         navigationItem.rightBarButtonItem = uploadPostBarButtonItem
-        
+
+//        view.addSubview(navigationBar)
         view.addSubview(postScrollView)
         postScrollView.addSubview(contentView)
-        
         contentView.addSubview(postTitleTextField)
         contentView.addSubview(dividerLineImageView_1)
         contentView.addSubview(postImagesCollectionView)
@@ -276,11 +291,20 @@ class UploadPostViewController: BaseViewController {
         contentView.addSubview(expandTextField)
         contentView.addSubview(postDetailGuideLabel)
         contentView.addSubview(postDetailTextView)
-        
     }
     
     override func setupConstraints() {
         super.setupConstraints()
+        
+//        navigationBar.snp.makeConstraints {
+//            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+//            $0.left.right.equalToSuperview()
+//        }
+        
+//        postScrollView.snp.makeConstraints {
+//            $0.top.equalTo(navigationBar.snp.bottom)
+//            $0.left.bottom.right.equalToSuperview()
+//        }
         
         postScrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()

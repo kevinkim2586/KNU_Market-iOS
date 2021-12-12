@@ -31,6 +31,7 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
         let imagePicker = ImagePickerController()
         imagePicker.settings.selection.max = 3
         imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
+        imagePicker.modalPresentationStyle = .fullScreen
         return imagePicker
     }()
     
@@ -61,8 +62,6 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
     }
     
-    
-    
     //MARK: - UI Setup
     
     private func setupLayout() {
@@ -75,7 +74,6 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
             $0.width.height.equalTo(Metrics.addPostImageButtonSize)
             $0.edges.equalToSuperview().inset(Metrics.addPostImageButtonInset)
         }
-    
     }
     
     //MARK: - Target Methods
@@ -87,7 +85,6 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
         userSelectedImages.removeAll()
         
         let vc = self.window?.rootViewController
-        
         vc?.presentImagePicker(imagePicker, select: { (asset) in
         }, deselect: { (asset) in
         }, cancel: { (assets) in

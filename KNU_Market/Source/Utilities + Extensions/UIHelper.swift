@@ -69,8 +69,54 @@ struct UIHelper {
     
     
     
+    static func addNavigationBar(to view: UIView) -> UINavigationBar {
+        
+        let height: CGFloat
+        
+        if let statusBarHeight = UIApplication.shared.windows.first?.safeAreaInsets.top {
+            print("✅ statusBarHeight: \(statusBarHeight)")
+            height = statusBarHeight + 44
+        } else {
+            height = 75
+        }
+        
+//        let height: CGFloat = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 44
+        let width: CGFloat = UIScreen.main.bounds.width
+        print("✅ width: \(width), height: \(height)")
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        
+        navigationBar.backgroundColor = .systemGray
+        
+        return navigationBar
+    }
     
+    static func addNavigationBarWithAdditionalAction(in view: UIView, title: String = "", additionalBarButtonItem: UIBarButtonItem) -> UINavigationBar {
+        
+        let naviBar = UINavigationBar()
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        naviBar.standardAppearance = appearance
+        naviBar.scrollEdgeAppearance = appearance
     
+        let naviItem = UINavigationItem(title: title)
+        
+        // X 버튼
+        let dismissBarButtonItem =  UIBarButtonItem(
+            barButtonSystemItem: .stop,
+            target: self,
+            action: #selector(UIViewController.dismissVC)
+        )
+        dismissBarButtonItem.tintColor = .black
+        additionalBarButtonItem.tintColor = .black
+        
+        
+        naviItem.leftBarButtonItem = dismissBarButtonItem
+        naviItem.rightBarButtonItem = additionalBarButtonItem
+    
+        naviBar.items = [naviItem]
+        return naviBar
+    }
     
     static func addNavigationBarWithDismissButton(in view: UIView, title: String = "") {
         

@@ -1,13 +1,12 @@
 import UIKit
 import SnapKit
 import ImageSlideshow
-import SafariServices
-
+import RxSwift
 
 class PostViewController: BaseViewController {
     
     //MARK: - Properties
-    
+    var disposeBag = DisposeBag()
     var viewModel: PostViewModel!
     var isFromChatVC: Bool = false
     
@@ -39,6 +38,7 @@ class PostViewController: BaseViewController {
         tableView.allowsSelection = true
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.tintColor = .clear
+        tableView.register(PostCell.self, forCellReuseIdentifier: "PostCell")
         tableView.refreshControl?.addTarget(self, action: #selector(refreshPage), for: .valueChanged)
         return tableView
     }()
@@ -119,6 +119,14 @@ class PostViewController: BaseViewController {
         loadInitialMethods()
         createObservers()
         configureHeaderView()
+        bind()
+    }
+    
+    private func bind() {
+        linkOnClicked.asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.presentSafariView(with: $0)
+            }).disposed(by: disposeBag)
     }
     
     private func loadInitialMethods() {

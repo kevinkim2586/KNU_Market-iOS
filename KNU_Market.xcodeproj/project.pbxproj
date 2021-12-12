@@ -26,6 +26,7 @@
 		626D66F3274291EC00CB7F4F /* InquiryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F2274291EC00CB7F4F /* InquiryTableViewCell.swift */; };
 		626D66FA2742920300CB7F4F /* InquiryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F72742920300CB7F4F /* InquiryAPI.swift */; };
 		626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F82742920300CB7F4F /* InquiryListmodel.swift */; };
+		6273750E27647DA6008A29B5 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6273750D27647DA6008A29B5 /* PostCell.swift */; };
 		62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */; };
 		6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */; };
 		7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */; };
@@ -167,6 +168,7 @@
 		7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */; };
 		7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */; };
 		7CDADA0726BE623100F7F58F /* DateHelper + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper + Extension.swift */; };
+		7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEAC991275F7AFF005AF338 /* UserAPI.swift */; };
 		7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */; };
 		7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */; };
 		7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */; };
@@ -222,6 +224,7 @@
 		626D66F2274291EC00CB7F4F /* InquiryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryTableViewCell.swift; sourceTree = "<group>"; };
 		626D66F72742920300CB7F4F /* InquiryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryAPI.swift; sourceTree = "<group>"; };
 		626D66F82742920300CB7F4F /* InquiryListmodel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryListmodel.swift; sourceTree = "<group>"; };
+		6273750D27647DA6008A29B5 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageReactor.swift; sourceTree = "<group>"; };
 		6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault Keys.swift"; sourceTree = "<group>"; };
 		7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + UpdateInfo.swift"; sourceTree = "<group>"; };
@@ -366,6 +369,7 @@
 		7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
 		7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		7CDADA0626BE623100F7F58F /* DateHelper + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper + Extension.swift"; sourceTree = "<group>"; };
+		7CEAC991275F7AFF005AF338 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewController.swift; sourceTree = "<group>"; };
 		7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVerificationOptionViewController.swift; sourceTree = "<group>"; };
 		7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMBottomButton.swift; sourceTree = "<group>"; };
@@ -456,6 +460,7 @@
 			children = (
 				625B0E3C2741F741003968BA /* MyPageAPI.swift */,
 				625B0E3E2741F75C003968BA /* BaseAPI.swift */,
+				7CEAC991275F7AFF005AF338 /* UserAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -664,6 +669,7 @@
 				7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */,
 				7CBFDA77273FE01F000C8C8A /* PostTableViewCell.swift */,
 				7C83EE49274121FF00CF1680 /* ChatListTableViewCell.swift */,
+				6273750D27647DA6008A29B5 /* PostCell.swift */,
 			);
 			path = UITableViewCells;
 			sourceTree = "<group>";
@@ -1382,6 +1388,7 @@
 				7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */,
 				7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */,
 				7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */,
+				6273750E27647DA6008A29B5 /* PostCell.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
 				626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */,
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
@@ -1446,6 +1453,7 @@
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */,
 				7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */,
+				7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */,
 				7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */,
 				626D66F3274291EC00CB7F4F /* InquiryTableViewCell.swift in Sources */,
 				7C868D6A274C97420056B3F3 /* KMCustomAlertView.swift in Sources */,
@@ -1626,7 +1634,7 @@
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.6;
+				CURRENT_PROJECT_VERSION = 1.2.7;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1634,7 +1642,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1652,7 +1660,7 @@
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.6;
+				CURRENT_PROJECT_VERSION = 1.2.7;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1660,7 +1668,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -7,6 +7,7 @@ import Photos
 import PMAlertController
 import RxSwift
 import RxCocoa
+import SnapKit
 
 //MARK: - Alert Methods
 
@@ -274,7 +275,15 @@ extension UIViewController {
     }
     
     @objc func dismissVC() {
+
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func triggerMainTabBarHiddenProperty() {
+        self.tabBarController?.tabBar.isHidden
+        view.layoutIfNeeded()
+        view.updateConstraints()
+        
     }
     
     func setClearNavigationBarBackground() {

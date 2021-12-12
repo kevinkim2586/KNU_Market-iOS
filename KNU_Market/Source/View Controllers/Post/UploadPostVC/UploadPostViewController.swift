@@ -2,6 +2,7 @@ import UIKit
 import SnapKit
 import GMStepper
 import Then
+import UITextView_Placeholder
 
 class UploadPostViewController: BaseViewController {
     
@@ -224,12 +225,13 @@ class UploadPostViewController: BaseViewController {
     
     lazy var postDetailTextView: UITextView = {
         let textView = UITextView()
-        textView.delegate = self
         textView.layer.borderWidth = 0.5
         textView.layer.cornerRadius = 5.0
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.clipsToBounds = true
-        textView.text = Texts.textViewPlaceholder
+        textView.textColor = .none
+        textView.placeholder = Texts.textViewPlaceholder
+        textView.placeholderColor = .lightGray
         textView.textColor = UIColor.lightGray
         textView.tintColor = UIColor(named: K.Color.appColor)
         textView.font = .systemFont(ofSize: 14)

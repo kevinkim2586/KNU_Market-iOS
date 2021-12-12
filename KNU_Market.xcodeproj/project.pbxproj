@@ -180,7 +180,6 @@
 		7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369A42754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift */; };
 		7CF369A92754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369A82754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift */; };
 		7CF369AB2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */; };
-		7CF369AD2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369AC2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift */; };
 		7CF369AF2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */; };
 		7CF369B22754D60E00C9D7A9 /* PostListViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */; };
 		7CF369B42754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B32754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift */; };
@@ -381,7 +380,6 @@
 		7CF369A42754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+UICollectionView.swift"; sourceTree = "<group>"; };
 		7CF369A82754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+UIPicker.swift"; sourceTree = "<group>"; };
 		7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+PostImagesCollectionView.swift"; sourceTree = "<group>"; };
-		7CF369AC2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+UITextViewDelegate.swift"; sourceTree = "<group>"; };
 		7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+TargetMethods.swift"; sourceTree = "<group>"; };
 		7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+UITableView.swift"; sourceTree = "<group>"; };
 		7CF369B32754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+PostViewModelDelegate.swift"; sourceTree = "<group>"; };
@@ -1108,7 +1106,6 @@
 				7CC33B2A274B58EB00B0C2C0 /* UploadPostViewController.swift */,
 				7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */,
 				7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */,
-				7CF369AC2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift */,
 				7CF369A82754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift */,
 				7CF369A22754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift */,
 				7CF369A42754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift */,
@@ -1366,7 +1363,6 @@
 				7CB8DF5F264CE5E80001CC6D /* ChatViewController.swift in Sources */,
 				7C132BF426552B4900BE5F40 /* UIButton + Extension.swift in Sources */,
 				7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */,
-				7CF369AD2754D5B200C9D7A9 /* UploadPostViewController+UITextViewDelegate.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
 				7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */,
 				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,

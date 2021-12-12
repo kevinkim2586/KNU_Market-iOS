@@ -2,6 +2,7 @@ import UIKit
 import SnapKit
 import GMStepper
 import Then
+import UITextView_Placeholder
 
 class UploadPostViewController: BaseViewController {
     
@@ -43,200 +44,166 @@ class UploadPostViewController: BaseViewController {
     
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     
-    lazy var postScrollView: UIScrollView = {
-        let scrollView = UIScrollView(frame: .zero)
-        scrollView.frame = self.view.bounds
-        scrollView.contentSize = contentViewSize
-        scrollView.clipsToBounds = true
-        scrollView.alwaysBounceVertical = true
-        scrollView.showsVerticalScrollIndicator = true
-        scrollView.autoresizingMask = .flexibleHeight
-        return scrollView
-    }()
+    private lazy var postScrollView = UIScrollView(frame: .zero).then {
+        $0.frame = self.view.bounds
+        $0.contentSize = contentViewSize
+        $0.clipsToBounds = true
+        $0.alwaysBounceVertical = true
+        $0.showsVerticalScrollIndicator = true
+        $0.autoresizingMask = .flexibleHeight
+    }
     
-    lazy var contentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.frame.size = contentViewSize
-        return view
-    }()
+    private lazy var contentView = UIView().then {
+        $0.backgroundColor = .white
+        $0.frame.size = contentViewSize
+    }
     
-    let postTitleTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "공구 제목"
-        textField.font = Fonts.guideLabel
-        textField.tintColor = UIColor(named: K.Color.appColor)
-        return textField
-    }()
+    let postTitleTextField = UITextField().then {
+        $0.placeholder = "공구 제목"
+        $0.font = Fonts.guideLabel
+        $0.tintColor = UIColor(named: K.Color.appColor)
+    }
     
-    let dividerLineImageView_1: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "line divider (gray)")
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleToFill
-        return imageView
-    }()
+    private let dividerLineImageView_1 = UIImageView().then {
+        $0.image = UIImage(named: "line divider (gray)")
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleToFill
+    }
     
-    lazy var postImagesCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
-        layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: 80, height: 80)
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.delegate = self
-        cv.dataSource = self
-        cv.register(
+    private let layout = UICollectionViewFlowLayout().then {
+        $0.minimumLineSpacing = 10
+        $0.scrollDirection = .horizontal
+        $0.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        $0.itemSize = CGSize(width: 80, height: 80)
+    }
+    
+    lazy var postImagesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.layout).then {
+        $0.delegate = self
+        $0.dataSource = self
+        $0.register(
             AddPostImageCollectionViewCell.self,
             forCellWithReuseIdentifier: AddPostImageCollectionViewCell.cellId
         )
-        cv.register(
+        $0.register(
             UserPickedPostImageCollectionViewCell.self,
             forCellWithReuseIdentifier: UserPickedPostImageCollectionViewCell.cellId
         )
-        cv.showsHorizontalScrollIndicator = true
-        cv.isScrollEnabled = true
-        cv.alwaysBounceHorizontal = true
-        cv.clipsToBounds = true
-        cv.backgroundColor = .clear
-        return cv
-    }()
+        $0.showsHorizontalScrollIndicator = true
+        $0.isScrollEnabled = true
+        $0.alwaysBounceHorizontal = true
+        $0.clipsToBounds = true
+        $0.backgroundColor = .clear
+    }
     
-    let dividerLineImageView_2: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "line divider (gray)")
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleToFill
-        return imageView
-    }()
+    private let dividerLineImageView_2 = UIImageView().then {
+        $0.image = UIImage(named: "line divider (gray)")
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleToFill
+    }
     
     
-    let gatheringPeopleGuideLabel: UILabel = {
-        let label = UILabel()
-        label.font = Fonts.guideLabel
-        label.text = "모집 인원 :"
-        return label
-    }()
+    private let gatheringPeopleGuideLabel = UILabel().then {
+        $0.font = Fonts.guideLabel
+        $0.text = "모집 인원 :"
+    }
     
-    let totalGatheringPeopleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
-        label.text = "2 명"
-        return label
-    }()
+    let totalGatheringPeopleLabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 17)
+        $0.text = "2 명"
+    }
     
-    lazy var gatheringPeopleStackView: UIStackView = {
-        let stackView = UIStackView()
+    private lazy var gatheringPeopleStackView = UIStackView().then { stackView in
         [gatheringPeopleGuideLabel, totalGatheringPeopleLabel].forEach { stackView.addArrangedSubview($0) }
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 17
-        return stackView
-    }()
+    }
     
-    let includeSelfLabel: UILabel = {
-        let label = UILabel()
-        label.text = "✻ 본인 포함"
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .lightGray
-        return label
-    }()
+    private let includeSelfLabel = UILabel().then {
+        $0.text = "✻ 본인 포함"
+        $0.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        $0.textColor = .lightGray
+    }
     
-    lazy var gatheringPeopleGuideStackView: UIStackView = {
-        let stackView = UIStackView()
+    lazy var gatheringPeopleGuideStackView = UIStackView().then { stackView in
         [gatheringPeopleStackView, includeSelfLabel].forEach { stackView.addArrangedSubview($0) }
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 8
-        return stackView
-    }()
+    }
     
-    let gatheringPeopleStepper: GMStepper = {
-        let stepper = GMStepper()
-        stepper.value = 2
-        stepper.minimumValue = 2
-        stepper.maximumValue = 10
-        stepper.stepValue = 1
-        stepper.buttonsTextColor = .white
-        stepper.buttonsBackgroundColor = UIColor(named: K.Color.appColor)!
-        stepper.buttonsFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        stepper.labelFont = .systemFont(ofSize: 15)
-        stepper.labelTextColor = UIColor(named:K.Color.appColor)!
-        stepper.labelBackgroundColor = UIColor.systemGray6
-        stepper.limitHitAnimationColor = .white
-        stepper.cornerRadius = 5
-        stepper.limitHitAnimationColor = .systemRed
-        stepper.addTarget(
+    let gatheringPeopleStepper = GMStepper().then {
+        $0.value = 2
+        $0.minimumValue = 2
+        $0.maximumValue = 10
+        $0.stepValue = 1
+        $0.buttonsTextColor = .white
+        $0.buttonsBackgroundColor = UIColor(named: K.Color.appColor)!
+        $0.buttonsFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        $0.labelFont = .systemFont(ofSize: 15)
+        $0.labelTextColor = UIColor(named:K.Color.appColor)!
+        $0.labelBackgroundColor = UIColor.systemGray6
+        $0.limitHitAnimationColor = .white
+        $0.cornerRadius = 5
+        $0.limitHitAnimationColor = .systemRed
+        $0.addTarget(
             self,
             action: #selector(pressedStepper),
             for: .valueChanged
         )
-        return stepper
-    }()
+    }
 
-    lazy var locationPickerView: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        pickerView.backgroundColor = .white
-        
-        return pickerView
-    }()
+    lazy var locationPickerView = UIPickerView().then {
+        $0.delegate = self
+        $0.dataSource = self
+        $0.backgroundColor = .white
+    }
     
-    let preferredLocationGuideLabel: UILabel = {
-        let label = UILabel()
-        label.text = "거래 선호 장소 :"
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        return label
-    }()
+    private let preferredLocationGuideLabel = UILabel().then {
+        $0.text = "거래 선호 장소 :"
+        $0.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+    }
     
-    lazy var tradeLocationTextField: UITextField = {
-        let textField = UITextField()
-        textField.text = "북문"
-        textField.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        textField.textAlignment = .right
-        textField.borderStyle = .none
-        textField.tintColor = .clear
-        textField.inputView = locationPickerView
-        return textField
-    }()
+    lazy var tradeLocationTextField = UITextField().then {
+        $0.text = "북문"
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        $0.textAlignment = .right
+        $0.borderStyle = .none
+        $0.tintColor = .clear
+        $0.inputView = locationPickerView
+    }
     
-    lazy var expandTextField: UITextField = {
-        let textField = UITextField()
-        textField.text = "▼"
-        textField.textColor = UIColor(named: K.Color.appColor)!
-        textField.font = UIFont.systemFont(ofSize: 22)
-        textField.textAlignment = .center
-        textField.borderStyle = .none
-        textField.tintColor = .clear
-        textField.inputView = locationPickerView
-        return textField
-    }()
+    lazy var expandTextField = UITextField().then {
+        $0.text = "▼"
+        $0.textColor = UIColor(named: K.Color.appColor)!
+        $0.font = UIFont.systemFont(ofSize: 22)
+        $0.textAlignment = .center
+        $0.borderStyle = .none
+        $0.tintColor = .clear
+        $0.inputView = locationPickerView
+    }
     
-    let postDetailGuideLabel: UILabel = {
-        let label = UILabel()
-        label.text = "공구 내용"
-        label.font = Fonts.guideLabel
-        return label
-    }()
+    private let postDetailGuideLabel = UILabel().then {
+        $0.text = "공구 내용"
+        $0.font = Fonts.guideLabel
+    }
     
-    lazy var postDetailTextView: UITextView = {
-        let textView = UITextView()
-        textView.delegate = self
-        textView.layer.borderWidth = 0.5
-        textView.layer.cornerRadius = 5.0
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.clipsToBounds = true
-        textView.text = Texts.textViewPlaceholder
-        textView.textColor = UIColor.lightGray
-        textView.tintColor = UIColor(named: K.Color.appColor)
-        textView.font = .systemFont(ofSize: 14)
-        return textView
-    }()
+    lazy var postDetailTextView = UITextView().then {
+        $0.layer.borderWidth = 0.5
+        $0.layer.cornerRadius = 5.0
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.clipsToBounds = true
+        $0.textColor = .none
+        $0.placeholder = Texts.textViewPlaceholder
+        $0.placeholderColor = .lightGray
+        $0.textColor = UIColor.lightGray
+        $0.tintColor = UIColor(named: K.Color.appColor)
+        $0.font = .systemFont(ofSize: 14)
+    }
 
-    lazy var uploadPostBarButtonItem = UIBarButtonItem(
+    private lazy var uploadPostBarButtonItem = UIBarButtonItem(
         title: "완료",
         style: .done,
         target: self,

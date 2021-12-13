@@ -8,14 +8,6 @@
 import Foundation
 import Moya
 
-enum UpdateUserInfoType: String {
-    case nickname       = "nickname"
-    case password       = "password"
-    case fcmToken       = "fcmToken"
-    case profileImage   = "image"
-    case id             = "id"
-    case email          = "email"
-}
 
 enum UserAPI {
     case register(model: RegisterRequestDTO)
@@ -139,7 +131,18 @@ extension UserAPI: BaseAPI {
     }
     
     var validationType: ValidationType {
-        return .none
+        return .successCodes
     }
 }
 
+extension UserAPI {
+    
+    enum UpdateUserInfoType: String {
+        case nickname       = "nickname"
+        case password       = "password"
+        case fcmToken       = "fcmToken"
+        case profileImage   = "image"
+        case id             = "id"
+        case email          = "email"
+    }
+}

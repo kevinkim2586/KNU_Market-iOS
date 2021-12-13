@@ -8,38 +8,97 @@
 import Foundation
 import Moya
 
+enum UpdateUserInfoType: String {
+    case nickname       = "nickname"
+    case password       = "password"
+    case fcmToken       = "fcmToken"
+    case profileImage   = "image"
+    case id             = "id"
+    case email          = "email"
+}
+
 enum UserAPI {
     case register(model: RegisterRequestDTO)
-    
+    case login(id: String, password: String)
+    case loadUserProfileUsingUid(userUid: String)
+    case loadUserProfile
+    case sendFeedback(content: String)
+    case unregisterUser
+    case uploadStudentIdVerificationInformation(model: StudentIdVerificationDTO)
+    case sendVerificationEmail(email: String)
+    case updateUserInfo(type: UpdateUserInfoType, updatedInfo: String)
+    case findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?)
+    case findPassword(id: String)
 }
 
 extension UserAPI: BaseAPI {
     
     var path: String {
         switch self {
-        case .register:
+        case .register, .loadUserProfile, .unregisterUser, .updateUserInfo:
             return "auth"
+        case .login:
+            return "login"
+        case let .loadUserProfileUsingUid(uid):
+            return "auth/\(uid)"
+        case .sendFeedback:
+            return "report"
+        case .uploadStudentIdVerificationInformation:
+            return "verification/card"
+        case .sendVerificationEmail:
+            return "verification/mail"
+        case .findUserId:
+            return "find/id"
+        case .findPassword:
+            return "find/password"
         }
     }
     
     var headers: [String : String]? {
         switch self {
+        case .register, .uploadStudentIdVerificationInformation:
+            return ["Content-Type" : "multipart/form-data"]
         default:
-            return [
-                "Content-Type" : "multipart/form-data"
-            ]
+            return ["Content-Type" : "application/json"]
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .register:
+        case .register, .login, .uploadStudentIdVerificationInformation, .sendVerificationEmail, .findUserId, .findPassword:
             return .post
+        case .loadUserProfileUsingUid, .loadUserProfile, .sendFeedback:
+            return .get
+        case .unregisterUser:
+            return .delete
+        case .updateUserInfo:
+            return .put
         }
     }
     
     var parameters: [String : Any]? {
-        return nil
+        switch self {
+        case let .login(id, password):
+            return [ "id" : id, "password" : password ]
+        case let .sendFeedback(content):
+            return [ "content" : content ]
+        case let .sendVerificationEmail(email):
+            return [ "studentEmail": email ]
+        case let .updateUserInfo(type, updatedInfo):
+            return [ type.rawValue : updatedInfo ]
+        case let .findUserId(option, studentEmail, studentId, studentBirthDate):
+            switch option {
+            case .webMail:
+                return [ "studentEmail": studentEmail! ]
+            case .studentId:
+                return ["studentId": studentId!, "studentBirth": studentBirthDate!]
+            default: return nil
+            }
+        case let .findPassword(id):
+            return [ "id" : id ]
+        default: return nil
+        }
+     
     }
     
     var parameterEncoding: ParameterEncoding {
@@ -59,6 +118,16 @@ extension UserAPI: BaseAPI {
             multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "fcmToken"))
             multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "email"))
         
+            return .uploadMultipart(multipartData)
+            
+        case let .uploadStudentIdVerificationInformation(model: model):
+            
+            var multipartData: [MultipartFormData] = []
+            
+            multipartData.append(MultipartFormData(provider: .data(model.studentId.data(using: .utf8)!), name: "studentId"))
+            multipartData.append(MultipartFormData(provider: .data(model.studentBirth.data(using: .utf8)!), name: "studentBirth"))
+            multipartData.append(MultipartFormData(provider: .data(model.studentBirth.data(using: .utf8)!), name: "media", fileName: "studentId.jpeg", mimeType: "image/jpeg"))
+            
             return .uploadMultipart(multipartData)
             
         default:

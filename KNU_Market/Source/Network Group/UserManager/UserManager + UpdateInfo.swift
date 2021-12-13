@@ -48,6 +48,7 @@ extension UserManager {
             }
     }
     
+    #warning("updateUserInfo 적용 후 이 부분 추가하기")
     func updateLocalUserInfo(type: UpdateUserInfoType, infoString: String) {
         
         switch type {

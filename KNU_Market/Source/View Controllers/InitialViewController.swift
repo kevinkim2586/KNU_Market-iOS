@@ -282,6 +282,12 @@ extension InitialViewController {
         
         showProgressBar()
         
+        
+        
+        
+        
+        
+        
         userManager?.login(id: id, password: password) { [weak self] result in
             guard let self = self else { return }
             switch result {

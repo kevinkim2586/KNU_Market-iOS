@@ -100,7 +100,7 @@ class ChatManager {
     ) {
         
         let url = baseURL + room + "/\(userUID)"
-            
+        
         AF.request(url,
                    method: .delete,
                    interceptor: interceptor)

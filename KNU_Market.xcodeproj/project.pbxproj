@@ -162,6 +162,7 @@
 		7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */; };
 		7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */; };
 		7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC69A752767027C00105FC0 /* PostAPI.swift */; };
+		7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC69A7727670A0F00105FC0 /* MediaAPI.swift */; };
 		7CCB02082674CE5D00D58BC2 /* PostListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB02072674CE5D00D58BC2 /* PostListModel.swift */; };
 		7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */; };
 		7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */; };
@@ -363,6 +364,7 @@
 		7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDGuideViewController.swift; sourceTree = "<group>"; };
 		7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureStudentIDViewController.swift; sourceTree = "<group>"; };
 		7CC69A752767027C00105FC0 /* PostAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
+		7CC69A7727670A0F00105FC0 /* MediaAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAPI.swift; sourceTree = "<group>"; };
 		7CCB02072674CE5D00D58BC2 /* PostListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListModel.swift; sourceTree = "<group>"; };
 		7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
 		7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				625B0E3C2741F741003968BA /* MyPageAPI.swift */,
 				7CEAC991275F7AFF005AF338 /* UserAPI.swift */,
 				7CC69A752767027C00105FC0 /* PostAPI.swift */,
+				7CC69A7727670A0F00105FC0 /* MediaAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1430,6 +1433,7 @@
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
 				7CF369CD2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift in Sources */,
 				7C83EE532742378000CF1680 /* PostViewController.swift in Sources */,
+				7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */,
 				7C015C9827035B2100089ED8 /* FindIdUsingWebMailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C22CFB2275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift in Sources */,

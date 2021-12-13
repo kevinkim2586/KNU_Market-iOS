@@ -164,6 +164,7 @@
 		7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC69A752767027C00105FC0 /* PostAPI.swift */; };
 		7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC69A7727670A0F00105FC0 /* MediaAPI.swift */; };
 		7CC69A7A27670CF200105FC0 /* ReportAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC69A7927670CF200105FC0 /* ReportAPI.swift */; };
+		7CC69A7C27670E3B00105FC0 /* PopupAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC69A7B27670E3B00105FC0 /* PopupAPI.swift */; };
 		7CCB02082674CE5D00D58BC2 /* PostListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB02072674CE5D00D58BC2 /* PostListModel.swift */; };
 		7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */; };
 		7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */; };
@@ -367,6 +368,7 @@
 		7CC69A752767027C00105FC0 /* PostAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
 		7CC69A7727670A0F00105FC0 /* MediaAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAPI.swift; sourceTree = "<group>"; };
 		7CC69A7927670CF200105FC0 /* ReportAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAPI.swift; sourceTree = "<group>"; };
+		7CC69A7B27670E3B00105FC0 /* PopupAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAPI.swift; sourceTree = "<group>"; };
 		7CCB02072674CE5D00D58BC2 /* PostListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListModel.swift; sourceTree = "<group>"; };
 		7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
 		7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 				7CC69A752767027C00105FC0 /* PostAPI.swift */,
 				7CC69A7727670A0F00105FC0 /* MediaAPI.swift */,
 				7CC69A7927670CF200105FC0 /* ReportAPI.swift */,
+				7CC69A7B27670E3B00105FC0 /* PopupAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1450,6 +1453,7 @@
 				7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */,
 				7CB22568272EB0650045CE94 /* PopupManager.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
+				7CC69A7C27670E3B00105FC0 /* PopupAPI.swift in Sources */,
 				7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer + Extension.swift in Sources */,
 				7CF369AF2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift in Sources */,

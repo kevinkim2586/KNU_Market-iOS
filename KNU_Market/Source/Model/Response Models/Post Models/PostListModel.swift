@@ -30,7 +30,7 @@ struct PostListModel: ModelType {
     }
 }
 
-struct Media: Decodable {
+struct Media: ModelType {
     
     let uid: String
     let path: String
@@ -44,7 +44,7 @@ struct Media: Decodable {
     }
 }
 
-struct UserInfo: Decodable {
+struct UserInfo: ModelType {
     
     let userUID: String
     

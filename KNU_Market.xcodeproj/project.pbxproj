@@ -69,6 +69,7 @@
 		7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C516C3A267F48300065E30D /* ReportUserViewController.swift */; };
 		7C5386D92768902000BFEA7F /* FindIdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386D82768902000BFEA7F /* FindIdModel.swift */; };
 		7C5386DB2768912400BFEA7F /* FindPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386DA2768912400BFEA7F /* FindPasswordModel.swift */; };
+		7C5386DD276892D300BFEA7F /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386DC276892D300BFEA7F /* PostService.swift */; };
 		7C55545D266CDFD100C3C5B6 /* UploadPostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545C266CDFD100C3C5B6 /* UploadPostRequestDTO.swift */; };
 		7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */; };
 		7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */; };
@@ -274,6 +275,7 @@
 		7C516C3A267F48300065E30D /* ReportUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
 		7C5386D82768902000BFEA7F /* FindIdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdModel.swift; sourceTree = "<group>"; };
 		7C5386DA2768912400BFEA7F /* FindPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordModel.swift; sourceTree = "<group>"; };
+		7C5386DC276892D300BFEA7F /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		7C55545C266CDFD100C3C5B6 /* UploadPostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostRequestDTO.swift; sourceTree = "<group>"; };
 		7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
 		7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderKeys.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 			children = (
 				625B0E3A2741F6A8003968BA /* MyPageService.swift */,
 				7CC69A7D27670FFE00105FC0 /* UserService.swift */,
+				7C5386DC276892D300BFEA7F /* PostService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1326,6 +1329,7 @@
 				7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */,
 				7CF369D32754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift in Sources */,
 				7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */,
+				7C5386DD276892D300BFEA7F /* PostService.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */,
 				7C8E668D26E875A00060F37B /* UIImageView + Extension.swift in Sources */,

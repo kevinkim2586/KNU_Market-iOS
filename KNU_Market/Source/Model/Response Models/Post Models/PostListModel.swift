@@ -2,7 +2,7 @@ import Foundation
 
 //MARK: - 공구글 리스트 Model
 
-struct PostListModel: Decodable {
+struct PostListModel: ModelType {
     
     let uuid: String
     let title: String

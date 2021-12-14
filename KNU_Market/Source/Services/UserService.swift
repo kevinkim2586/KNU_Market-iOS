@@ -17,13 +17,10 @@ protocol UserServiceType: AnyObject {
     
     @discardableResult
     func login(id: String, password: String) -> Single<NetworkResultWithValue<LoginResponseModel>>
-    
     func loadUserProfileUsingUid(userUid: String) -> Single<NetworkResultWithValue<LoadUserProfileUidModel>>
     
     @discardableResult
     func loadUserProfile() -> Single<NetworkResultWithValue<LoadProfileResponseModel>>
-    
-    
     func sendFeedback(content: String) -> Single<NetworkResult>
     func unregisterUser() -> Single<NetworkResult>
     func uploadStudentIdVerificationInformation(model: StudentIdVerificationDTO) -> Single<NetworkResult>
@@ -31,7 +28,6 @@ protocol UserServiceType: AnyObject {
     
     @discardableResult
     func updateUserInfo(type: UpdateUserInfoType, updatedInfo: String) -> Single<NetworkResult>
-    
     func findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?) -> Single<NetworkResultWithValue<FindIdModel>>
     func findPassword(id: String) -> Single<NetworkResultWithValue<FindPasswordModel>>
     

@@ -1,6 +1,6 @@
 import Foundation
 
-struct PopupModel: Decodable {
+struct PopupModel: ModelType {
     
     let popupUid: Int
     let title: String

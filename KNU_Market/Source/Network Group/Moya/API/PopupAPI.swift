@@ -10,6 +10,7 @@ import Moya
 
 enum PopupAPI {
     case fetchLatestPopup
+    case incrementPopupViewCount(uid: Int)
 }
 
 extension PopupAPI: BaseAPI {
@@ -18,6 +19,8 @@ extension PopupAPI: BaseAPI {
         switch self {
         case .fetchLatestPopup:
             return "popup"
+        case let .incrementPopupViewCount(uid):
+            return "popup/\(uid)"
         }
     }
     
@@ -29,7 +32,7 @@ extension PopupAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
-        case .fetchLatestPopup:
+        case .fetchLatestPopup, .incrementPopupViewCount:
             return .get
         }
     }

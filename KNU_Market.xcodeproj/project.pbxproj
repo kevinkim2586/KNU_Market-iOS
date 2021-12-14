@@ -73,6 +73,7 @@
 		7C5386DF27689B5B00BFEA7F /* MediaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386DE27689B5B00BFEA7F /* MediaService.swift */; };
 		7C5386E227689C2100BFEA7F /* UploadImageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E127689C2100BFEA7F /* UploadImageResponseModel.swift */; };
 		7C5386E42768C83B00BFEA7F /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E32768C83B00BFEA7F /* ReportService.swift */; };
+		7C5386E62768CA8200BFEA7F /* PopupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E52768CA8200BFEA7F /* PopupService.swift */; };
 		7C55545D266CDFD100C3C5B6 /* UploadPostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545C266CDFD100C3C5B6 /* UploadPostRequestDTO.swift */; };
 		7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */; };
 		7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */; };
@@ -282,6 +283,7 @@
 		7C5386DE27689B5B00BFEA7F /* MediaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaService.swift; sourceTree = "<group>"; };
 		7C5386E127689C2100BFEA7F /* UploadImageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageResponseModel.swift; sourceTree = "<group>"; };
 		7C5386E32768C83B00BFEA7F /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
+		7C5386E52768CA8200BFEA7F /* PopupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupService.swift; sourceTree = "<group>"; };
 		7C55545C266CDFD100C3C5B6 /* UploadPostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostRequestDTO.swift; sourceTree = "<group>"; };
 		7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
 		7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderKeys.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				7C5386E32768C83B00BFEA7F /* ReportService.swift */,
 				7C5386DC276892D300BFEA7F /* PostService.swift */,
 				7C5386DE27689B5B00BFEA7F /* MediaService.swift */,
+				7C5386E52768CA8200BFEA7F /* PopupService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1481,6 +1484,7 @@
 				7C5386DF27689B5B00BFEA7F /* MediaService.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7CC69A7C27670E3B00105FC0 /* PopupAPI.swift in Sources */,
+				7C5386E62768CA8200BFEA7F /* PopupService.swift in Sources */,
 				7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer + Extension.swift in Sources */,
 				7CF369AF2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift in Sources */,

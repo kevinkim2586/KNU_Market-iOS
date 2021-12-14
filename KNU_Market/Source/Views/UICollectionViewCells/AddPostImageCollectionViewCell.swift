@@ -2,6 +2,7 @@ import UIKit
 import BSImagePicker
 import Photos
 import SnapKit
+import Then
 
 protocol AddPostImageDelegate: AnyObject {
     func didPickImagesToUpload(images: [UIImage])
@@ -27,27 +28,24 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI
     
-    lazy var imagePicker: ImagePickerController = {
-        let imagePicker = ImagePickerController()
-        imagePicker.settings.selection.max = 3
-        imagePicker.settings.theme.selectionFillColor = UIColor.init(named: K.Color.appColor) ?? .systemBlue
-        imagePicker.doneButton.tintColor = UIColor.init(named: K.Color.appColor)
-        imagePicker.cancelButton.tintColor = UIColor.init(named: K.Color.appColor)
-        imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
-        imagePicker.modalPresentationStyle = .fullScreen
-        return imagePicker
-    }()
+    fileprivate lazy var imagePicker = ImagePickerController().then {
+        $0.settings.selection.max = 3
+        $0.doneButtonTitle = "완료"
+        $0.settings.theme.selectionFillColor = UIColor.init(named: K.Color.appColor) ?? .systemBlue
+        $0.doneButton.tintColor = UIColor.init(named: K.Color.appColor)
+        $0.cancelButton.tintColor = UIColor.init(named: K.Color.appColor)
+        $0.settings.fetch.assets.supportedMediaTypes = [.image]
+        $0.modalPresentationStyle = .fullScreen
+    }
     
-    lazy var addPostImageButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "add button"), for: .normal)
-        button.addTarget(
+    private lazy var addPostImageButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: "add button"), for: .normal)
+        $0.addTarget(
             self,
             action: #selector(pressedAddButton),
             for: .touchUpInside
         )
-        return button
-    }()
+    }
     
     //MARK: - Initialization
     

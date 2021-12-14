@@ -49,7 +49,7 @@ extension PostListViewController: PostListViewModelDelegate {
     }
     
     func didFetchLatestPopup(model: PopupModel) {
-        let popupVC = KMPopupViewController(popupManager: PopupManager(), popupUid: model.popupUid, mediaUid: model.mediaUid, landingUrl: model.landingUrl)
+        let popupVC = PopupViewController(popupManager: PopupManager(), popupUid: model.popupUid, mediaUid: model.mediaUid, landingUrl: model.landingUrl)
         popupVC.modalPresentationStyle = .overFullScreen
         popupVC.modalTransitionStyle = .crossDissolve
         self.present(popupVC, animated: true)

@@ -11,6 +11,7 @@ import Moya
 
 enum UserAPI {
     case register(model: RegisterRequestDTO)
+    case checkDuplication(type: CheckDuplicationType, infoString: String)
     case login(id: String, password: String)
     case loadUserProfileUsingUid(userUid: String)
     case loadUserProfile
@@ -29,6 +30,8 @@ extension UserAPI: BaseAPI {
         switch self {
         case .register, .loadUserProfile, .unregisterUser, .updateUserInfo:
             return "auth"
+        case .checkDuplication:
+            return "duplicate"
         case .login:
             return "login"
         case let .loadUserProfileUsingUid(uid):
@@ -50,6 +53,14 @@ extension UserAPI: BaseAPI {
         switch self {
         case .register, .uploadStudentIdVerificationInformation:
             return ["Content-Type" : "multipart/form-data"]
+        case let .checkDuplication(type, infoString):
+            switch type {
+            case .id:
+                return [ "id" : infoString ]
+            case .email:
+                return [ "email" : infoString]
+            default: return nil
+            }
         default:
             return ["Content-Type" : "application/json"]
         }
@@ -59,7 +70,7 @@ extension UserAPI: BaseAPI {
         switch self {
         case .register, .login, .uploadStudentIdVerificationInformation, .sendVerificationEmail, .findUserId, .findPassword:
             return .post
-        case .loadUserProfileUsingUid, .loadUserProfile, .sendFeedback:
+        case .checkDuplication, .loadUserProfileUsingUid, .loadUserProfile, .sendFeedback:
             return .get
         case .unregisterUser:
             return .delete
@@ -72,6 +83,14 @@ extension UserAPI: BaseAPI {
         switch self {
         case let .login(id, password):
             return [ "id" : id, "password" : password ]
+        case let .checkDuplication(type, infoString):
+            switch type {
+            case .nickname:
+                return [ "name" : infoString ]
+            case .studentId:
+                return [ "studentid" : infoString]
+            default: return nil
+            }
         case let .sendFeedback(content):
             return [ "content" : content ]
         case let .sendVerificationEmail(email):
@@ -94,7 +113,11 @@ extension UserAPI: BaseAPI {
     }
     
     var parameterEncoding: ParameterEncoding {
-        return JSONEncoding.default
+        switch self {
+        case .checkDuplication:
+            return URLEncoding.queryString
+        default: return JSONEncoding.default
+        }
     }
     
     var task: Task {
@@ -135,14 +158,19 @@ extension UserAPI: BaseAPI {
     }
 }
 
-extension UserAPI {
-    
-    enum UpdateUserInfoType: String {
-        case nickname       = "nickname"
-        case password       = "password"
-        case fcmToken       = "fcmToken"
-        case profileImage   = "image"
-        case id             = "id"
-        case email          = "email"
-    }
+
+enum UpdateUserInfoType: String {
+    case nickname       = "nickname"
+    case password       = "password"
+    case fcmToken       = "fcmToken"
+    case profileImage   = "image"
+    case id             = "id"
+    case email          = "email"
+}
+
+enum CheckDuplicationType: String {
+    case nickname       = "name"
+    case studentId      = "studentId"
+    case id             = "id"
+    case email          = "email"       // 비밀번호 분실 시 임시 비밀번호를 발급 받을 이메일
 }

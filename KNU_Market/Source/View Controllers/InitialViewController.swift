@@ -284,42 +284,6 @@ extension InitialViewController {
         guard id.count > 0, password.count > 0 else { return }
         
         showProgressBar()
-        
-        
-//        let provider = MoyaProvider<UserAPI>()
-//        provider.request(.login(id: id, password: password)) { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(let response):
-//
-//                do {
-//                    let json = try JSON(data: response.data)
-////                    self.saveAccessTokens(from: json)
-//                    User.shared.password = password
-//                    User.shared.isLoggedIn = true
-//                    User.shared.postFilterOption = .showGatheringFirst
-//                    UIApplication.shared.registerForRemoteNotifications()
-//                    print("✅ login success")
-//                    self.goToHomeScreen()
-//
-////                    self.loadUserProfile { _ in }
-////                    completion(.success(true))
-//                } catch {
-////                    completion(.failure(.E000))
-//                    print("❗️ error")
-//                }
-//
-//
-//
-//
-//
-//            case .failure(let error):
-//                self.presentCustomAlert(title: "로그인 실패", message: error.errorDescription!)
-//            }
-//            dismissProgressBar()
-//        }
-//
-        
 
         userManager?.login(id: id, password: password) { [weak self] result in
             guard let self = self else { return }

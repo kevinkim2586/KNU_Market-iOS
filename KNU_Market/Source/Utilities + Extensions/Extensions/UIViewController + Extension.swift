@@ -160,13 +160,12 @@ extension UIViewController {
     }
     
     @objc func refreshTokenHasExpired() {
-        presentCustomAlert(title: "로그인 세션 만료 🤔", message: "세션이 만료되었습니다. 다시 로그인 해주세요.") {
-            self.popToInitialViewController()
-        }
+        presentCustomAlert(title: "로그인 세션 만료 🤔", message: "세션이 만료되었습니다. 다시 로그인 해주세요.") { self.popToInitialViewController() }
     }
     
     @objc func presentUnexpectedError() {
-        presentCustomAlert(title: "예기치 못한 오류가 발생했습니다.🤔", message: "불편을 드려 죄송합니다. 다시 로그인 해주세요.")
+        presentCustomAlert(title: "예기치 못한 오류가 발생했습니다.🤔", message: "불편을 드려 죄송합니다. 다시 로그인 해주세요.") { self.popToInitialViewController() }
+
     }
     
     func presentInitialVerificationAlert() {

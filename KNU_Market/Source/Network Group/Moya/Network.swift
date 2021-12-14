@@ -48,5 +48,4 @@ extension Network {
                 return .success
             }
     }
-
 }

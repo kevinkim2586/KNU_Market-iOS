@@ -17,6 +17,8 @@ struct InquiryListModel: Codable {
     var reportMediaUidFirst : String?
     var reportMediaUidSecond : String?
     var answer : String?
+    
+    
     var isArchived = Bool()
     var date = String()
     var delete_date : String?

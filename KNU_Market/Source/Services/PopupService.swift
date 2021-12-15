@@ -17,7 +17,7 @@ protocol PopupServiceType: AnyObject {
     func fetchLatestPopup() -> Single<NetworkResultWithValue<PopupModel>>
     @discardableResult
     func incrementPopupViewCount(popupUid: Int) -> Single<NetworkResult>
-    func configureToNotSeePopupForOneDay()
+    func configureToNotSeePopupForOneDay() -> Observable<Void>
 }
 
 class PopupService: PopupServiceType {
@@ -57,9 +57,10 @@ class PopupService: PopupServiceType {
         self.network = network
     }
     
-    func configureToNotSeePopupForOneDay() {
+    func configureToNotSeePopupForOneDay() -> Observable<Void> {
         User.shared.didUserBlockPopupForADay = true
         User.shared.userSetPopupBlockTime = Date()
+        return Observable.just(())
     }
     
     func fetchLatestPopup() -> Single<NetworkResultWithValue<PopupModel>> {
@@ -75,6 +76,7 @@ class PopupService: PopupServiceType {
             }
     }
     
+    @discardableResult
     func incrementPopupViewCount(popupUid: Int) -> Single<NetworkResult> {
         
         network.requestWithoutMapping(.incrementPopupViewCount(uid: popupUid))

@@ -74,6 +74,8 @@
 		7C5386E227689C2100BFEA7F /* UploadImageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E127689C2100BFEA7F /* UploadImageResponseModel.swift */; };
 		7C5386E42768C83B00BFEA7F /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E32768C83B00BFEA7F /* ReportService.swift */; };
 		7C5386E62768CA8200BFEA7F /* PopupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E52768CA8200BFEA7F /* PopupService.swift */; };
+		7C5386E82768D10A00BFEA7F /* PopupReactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E72768D10A00BFEA7F /* PopupReactorViewController.swift */; };
+		7C5386EA2768D14500BFEA7F /* PopupReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E92768D14500BFEA7F /* PopupReactor.swift */; };
 		7C55545D266CDFD100C3C5B6 /* UploadPostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545C266CDFD100C3C5B6 /* UploadPostRequestDTO.swift */; };
 		7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */; };
 		7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */; };
@@ -284,6 +286,8 @@
 		7C5386E127689C2100BFEA7F /* UploadImageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageResponseModel.swift; sourceTree = "<group>"; };
 		7C5386E32768C83B00BFEA7F /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		7C5386E52768CA8200BFEA7F /* PopupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupService.swift; sourceTree = "<group>"; };
+		7C5386E72768D10A00BFEA7F /* PopupReactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupReactorViewController.swift; sourceTree = "<group>"; };
+		7C5386E92768D14500BFEA7F /* PopupReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupReactor.swift; sourceTree = "<group>"; };
 		7C55545C266CDFD100C3C5B6 /* UploadPostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostRequestDTO.swift; sourceTree = "<group>"; };
 		7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
 		7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderKeys.swift; sourceTree = "<group>"; };
@@ -971,6 +975,8 @@
 			isa = PBXGroup;
 			children = (
 				7CB2256A272EB23E0045CE94 /* PopupViewController.swift */,
+				7C5386E92768D14500BFEA7F /* PopupReactor.swift */,
+				7C5386E72768D10A00BFEA7F /* PopupReactorViewController.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -1479,6 +1485,8 @@
 				7CF369C62754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift in Sources */,
 				7CF369AB2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift in Sources */,
 				7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */,
+				7C5386EA2768D14500BFEA7F /* PopupReactor.swift in Sources */,
+				7C5386E82768D10A00BFEA7F /* PopupReactorViewController.swift in Sources */,
 				7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */,
 				7CB22568272EB0650045CE94 /* PopupManager.swift in Sources */,
 				7C5386DF27689B5B00BFEA7F /* MediaService.swift in Sources */,

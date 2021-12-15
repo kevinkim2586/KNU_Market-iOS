@@ -23,6 +23,7 @@ final class DetailMessageViewReactor: Reactor {
         case empty
     }
     
+    
     struct State {
         var title: String
         var content: String

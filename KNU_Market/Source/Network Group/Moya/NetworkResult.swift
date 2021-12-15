@@ -11,7 +11,7 @@ enum NetworkResult {
     case success
     case error(NetworkError)
 }
-enum NetworkResultWithValue<T: Codable> {
+enum NetworkResultWithValue<T: ModelType> {
   case success(T)
   case error(NetworkError)
 }

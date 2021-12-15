@@ -18,6 +18,6 @@ enum NetworkResultWithValue<T: ModelType> {
 }
 
 enum NetworkResultWithArray<T: ModelType> {
-  case success([T])
-  case error(NetworkError)
+    case success([T])
+    case error(NetworkError)
 }

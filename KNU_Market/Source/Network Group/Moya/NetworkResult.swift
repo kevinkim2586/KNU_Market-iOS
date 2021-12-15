@@ -11,7 +11,13 @@ enum NetworkResult {
     case success
     case error(NetworkError)
 }
+
 enum NetworkResultWithValue<T: ModelType> {
-  case success(T)
+    case success(T)
+    case error(NetworkError)
+}
+
+enum NetworkResultWithArray<T: ModelType> {
+  case success([T])
   case error(NetworkError)
 }

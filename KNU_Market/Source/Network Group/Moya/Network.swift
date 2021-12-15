@@ -39,7 +39,7 @@ extension Network {
             }
     }
     
-    func requestArray<T: ModelType>(_ target: API, type: T.Type) -> Single<NetworkResultWithValue<[T]>> {
+    func requestArray<T: ModelType>(_ target: API, type: T.Type) -> Single<NetworkResultWithArray<T>> {
         let decoder = type.decoder
         return request(target)
             .map { result in

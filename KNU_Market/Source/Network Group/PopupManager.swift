@@ -12,37 +12,31 @@ class PopupManager {
     
     // 팝업을 띄워야하는지 안 띄워야하는지 판별
     var shouldFetchPopup: Bool {
-        if didUserBlockPopupForADay {
-            return false
-        } else {
-            return didADayPass ? true : false
-        }
-    }
-    
-    // 유저가 팝업 24시간 동안 보지 않기를 설정하였는지 여부
-    private var didUserBlockPopupForADay: Bool {
-        return User.shared.didUserBlockPopupForADay
+        return didADayPass ? true : false
     }
     
     // 24시간이 지났는지 판별
-    private var didADayPass: Bool {
-        let oneDay = 24
-        guard let date = User.shared.userSetPopupBlockTime else {
+    fileprivate var didADayPass: Bool {
+        
+        //사용자가 "24시간 보지않기"를 누른 시간 가져오기 -> nil 이면 팝업 가져오기
+        guard let userSetDate = User.shared.userSetPopupBlockDate else {
             return true
         }
-        if
-            let timeDifference = Calendar.current.dateComponents([.hour], from: date, to: Date()).hour,
-            timeDifference > oneDay {
-            User.shared.didUserBlockPopupForADay = false
+        
+        let oneDay = 86400 // 하루 == 86400초
+        
+        /// "24시간 보지않기"를 누른 Date 받아오기. nil 이면 팝업을 불러와야함
+        if let timeDifference = Calendar.current.dateComponents([.second], from: userSetDate, to: Date()).second, timeDifference > oneDay {
+            User.shared.userSetPopupBlockDate = nil     // 초기화
             return true
+        } else {
+            return false
         }
-        else { return false }
     }
     
     // 24시간 팝업 보지 않기 설정
-    func configureToNotSeePopupForOneDay() {
-        User.shared.didUserBlockPopupForADay = true
-        User.shared.userSetPopupBlockTime = Date()
+    func blockPopupForADay() {
+        User.shared.userSetPopupBlockDate = Date()
     }
     
     // 최신 팝업 가져오기

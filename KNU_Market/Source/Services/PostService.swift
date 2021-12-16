@@ -10,12 +10,12 @@ import RxSwift
 
 protocol PostServiceType: AnyObject {
     
-    func fetchPostList(at index: Int, fetchCurrentUsers: Bool, postFilterOption: PostFilterOptions) -> Single<NetworkResultWithValue<[PostListModel]>>
+    func fetchPostList(at index: Int, fetchCurrentUsers: Bool, postFilterOption: PostFilterOptions) -> Single<NetworkResultWithArray<PostListModel>>
     func uploadNewPost(with model: UploadPostRequestDTO) -> Single<NetworkResult>
     func updatePost(uid: String, with model: UpdatePostRequestDTO) -> Single<NetworkResult>
     func fetchPostDetails(uid: String) -> Single<NetworkResultWithValue<PostDetailModel>>
     func deletePost(uid: String) -> Single<NetworkResult>
-    func fetchSearchResults(at index: Int, keyword: String) -> Single<NetworkResultWithValue<[PostListModel]>>
+    func fetchSearchResults(at index: Int, keyword: String) -> Single<NetworkResultWithArray<PostListModel>>
     func markPostDone(uid: String) -> Single<NetworkResult>
 }
 
@@ -27,8 +27,7 @@ class PostService: PostServiceType {
         self.network = network
     }
     
-    #warning("PostListModel 은 원래 [PostListModel] 형태로 가져와야함")
-    func fetchPostList(at index: Int, fetchCurrentUsers: Bool, postFilterOption: PostFilterOptions) -> Single<NetworkResultWithValue<[PostListModel]>> {
+    func fetchPostList(at index: Int, fetchCurrentUsers: Bool, postFilterOption: PostFilterOptions) -> Single<NetworkResultWithArray<PostListModel>> {
         
         return network.requestObject(.fetchPostList(index: index, fetchCurrentUsers: fetchCurrentUsers, postFilterOption: postFilterOption), type: PostListModel.self)
             .map { result in
@@ -93,8 +92,7 @@ class PostService: PostServiceType {
             }
     }
     
-    #warning("PostListModel 은 원래 [PostListModel] 형태로 가져와야함")
-    func fetchSearchResults(at index: Int, keyword: String) -> Single<NetworkResultWithValue<[PostListModel]>> {
+    func fetchSearchResults(at index: Int, keyword: String) -> Single<NetworkResultWithArray<PostListModel>> {
         
         return network.requestObject(.fetchSearchResults(index: index, keyword: keyword), type: PostListModel.self)
             .map { result in

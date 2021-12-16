@@ -64,6 +64,7 @@ final class PopupReactor: Reactor {
             }
             
             return Observable.concat([
+                
                 self.popupService.incrementPopupViewCount(popupUid: currentState.popupUid)
                     .asObservable()
                     .map { result in
@@ -80,7 +81,7 @@ final class PopupReactor: Reactor {
             
         case .doNotSeePopupForOneDay:
             
-            return Observable.just(self.popupService.configureToNotSeePopupForOneDay())
+            return Observable.just(self.popupService.blockPopupForADay())
                 .flatMap { _ in
                     Observable.just(Mutation.dismiss)
                 }

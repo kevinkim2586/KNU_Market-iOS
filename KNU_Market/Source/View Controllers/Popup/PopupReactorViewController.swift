@@ -124,7 +124,7 @@ class PopupReactorViewController: BaseViewController, View {
     func bind(reactor: Reactor) {
         
         // Input
-        self.rx.viewWillAppear
+        self.rx.viewDidLoad
             .map { _ in Reactor.Action.viewWillAppear }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)

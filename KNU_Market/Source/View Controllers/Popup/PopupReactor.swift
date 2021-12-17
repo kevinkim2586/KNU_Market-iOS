@@ -15,7 +15,7 @@ final class PopupReactor: Reactor {
     let initialState: State
     
     enum Action {
-        case viewWillAppear
+        case viewDidLoad
         case pressedPopupImage
         case doNotSeePopupForOneDay
     }
@@ -50,7 +50,7 @@ final class PopupReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         
         switch action {
-        case .viewWillAppear:
+        case .viewDidLoad:
             guard let url = URL(string: K.MEDIA_REQUEST_URL + currentState.mediaUid) else {
                 return Observable.empty()
             }

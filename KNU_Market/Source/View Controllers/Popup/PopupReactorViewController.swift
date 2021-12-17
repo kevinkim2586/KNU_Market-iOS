@@ -125,7 +125,7 @@ class PopupReactorViewController: BaseViewController, View {
         
         // Input
         self.rx.viewDidLoad
-            .map { _ in Reactor.Action.viewWillAppear }
+            .map { _ in Reactor.Action.viewDidLoad }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         

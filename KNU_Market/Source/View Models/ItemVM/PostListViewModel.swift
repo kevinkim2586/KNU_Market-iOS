@@ -127,6 +127,7 @@ class PostListViewModel {
     
     //MARK: - 팝업 가져오기
     func fetchLatestPopup() {
+    
         guard let popupManager = popupManager else { return }
 
         if !popupManager.shouldFetchPopup { return }

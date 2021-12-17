@@ -147,7 +147,6 @@ class UserManager {
                         self.saveAccessTokens(from: json)
                         User.shared.password = password
                         User.shared.isLoggedIn = true
-                        User.shared.postFilterOption = .showGatheringFirst
                         UIApplication.shared.registerForRemoteNotifications()
                         self.loadUserProfile { _ in }
                         completion(.success(true))

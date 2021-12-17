@@ -37,7 +37,7 @@ class PopupService: PopupServiceType {
         }
         
         let oneDay = 86400 // 하루 == 86400초
-        
+                
         /// "24시간 보지않기"를 누른 Date 받아오기. nil 이면 팝업을 불러와야함
         if let timeDifference = Calendar.current.dateComponents([.second], from: userSetDate, to: Date()).second, timeDifference > oneDay {
             User.shared.userSetPopupBlockDate = nil     // 초기화

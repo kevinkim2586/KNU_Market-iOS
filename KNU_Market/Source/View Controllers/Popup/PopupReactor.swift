@@ -31,7 +31,6 @@ final class PopupReactor: Reactor {
         var mediaUid: String
         var landingUrlString: String?
         
-        var didPressPopupImage: Bool = false
         var dismiss = false
         var landingUrl: URL?
         var mediaUrl: URL?
@@ -64,7 +63,6 @@ final class PopupReactor: Reactor {
             }
             
             return Observable.concat([
-                
                 self.popupService.incrementPopupViewCount(popupUid: currentState.popupUid)
                     .asObservable()
                     .map { result in
@@ -75,7 +73,6 @@ final class PopupReactor: Reactor {
                             print("❗️ increment viewCount failed: \(error)")
                         }
                     }.flatMap { _ in Observable.empty() },
-                
                 Observable.just(Mutation.pressPopupImage(landingUrl))
             ])
             
@@ -96,7 +93,6 @@ final class PopupReactor: Reactor {
             
         case .pressPopupImage(let url):
             state.landingUrl = url
-            state.didPressPopupImage = true
             
         case .dismiss:
             state.dismiss = true

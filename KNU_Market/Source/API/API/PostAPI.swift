@@ -94,10 +94,5 @@ extension PostAPI: BaseAPI {
             }
             return .requestPlain
         }
-    }
-    
-    var validationType: ValidationType {
-        return .successCodes
-    }
-    
+    }    
 }

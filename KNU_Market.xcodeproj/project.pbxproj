@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35377F357F15E07343BA3C24 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4604BEB42F2C974DF6052361 /* Pods_KNU_Market.framework */; };
 		622270B0274A481E00FDC47B /* DetailMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270AF274A481E00FDC47B /* DetailMessageViewController.swift */; };
 		622270B3274A489500FDC47B /* DetailMessageViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270B2274A489500FDC47B /* DetailMessageViewReactor.swift */; };
 		622270B6274A77AB00FDC47B /* ImageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622270B5274A77AB00FDC47B /* ImageSelectionView.swift */; };
@@ -106,7 +107,7 @@
 		7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */; };
 		7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */; };
 		7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8414812705692500FFA56B /* FindIdOptions.swift */; };
-		7C868D69274C97420056B3F3 /* KMCustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C868D67274C97420056B3F3 /* KMCustomAlertViewController.swift */; };
+		7C868D69274C97420056B3F3 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C868D67274C97420056B3F3 /* CustomAlertViewController.swift */; };
 		7C868D6A274C97420056B3F3 /* KMCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C868D68274C97420056B3F3 /* KMCustomAlertView.swift */; };
 		7C8839E62643CD7700F9F78C /* UploadPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8839E52643CD7700F9F78C /* UploadPostViewModel.swift */; };
 		7C89B2E726FC1D9E004109FE /* PostFilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89B2E626FC1D9E004109FE /* PostFilterOptions.swift */; };
@@ -120,6 +121,8 @@
 		7C922A5D27185EB000295A3F /* SendUsMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */; };
 		7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A32706EEDF00579EE6 /* Preview.swift */; };
 		7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */; };
+		7C9A3835276DC6FC00AEE831 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9A3834276DC6FC00AEE831 /* LoginViewController.swift */; };
+		7C9A3837276DC70200AEE831 /* LoginViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9A3836276DC70200AEE831 /* LoginViewReactor.swift */; };
 		7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */; };
 		7C9BBB4126C27BD1001C54E6 /* UITableView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BBB4026C27BD0001C54E6 /* UITableView + Extension.swift */; };
 		7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */; };
@@ -215,10 +218,11 @@
 		7CF369D72754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */; };
 		7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */; };
 		7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */; };
-		F14B60FC707661352D19702F /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B6AF9F944BC90515DCBBCE /* Pods_KNU_Market.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		34EA7F4C47808C4373D9D644 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
+		4604BEB42F2C974DF6052361 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		622270AF274A481E00FDC47B /* DetailMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageViewController.swift; sourceTree = "<group>"; };
 		622270B2274A489500FDC47B /* DetailMessageViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageViewReactor.swift; sourceTree = "<group>"; };
 		622270B5274A77AB00FDC47B /* ImageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionView.swift; sourceTree = "<group>"; };
@@ -319,7 +323,7 @@
 		7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserInfoViewModel.swift; sourceTree = "<group>"; };
 		7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + FindUserInfo.swift"; sourceTree = "<group>"; };
 		7C8414812705692500FFA56B /* FindIdOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdOptions.swift; sourceTree = "<group>"; };
-		7C868D67274C97420056B3F3 /* KMCustomAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMCustomAlertViewController.swift; sourceTree = "<group>"; };
+		7C868D67274C97420056B3F3 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		7C868D68274C97420056B3F3 /* KMCustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMCustomAlertView.swift; sourceTree = "<group>"; };
 		7C8839E52643CD7700F9F78C /* UploadPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostViewModel.swift; sourceTree = "<group>"; };
 		7C89B2E626FC1D9E004109FE /* PostFilterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFilterOptions.swift; sourceTree = "<group>"; };
@@ -333,6 +337,8 @@
 		7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageViewController.swift; sourceTree = "<group>"; };
 		7C98D2A32706EEDF00579EE6 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Preview.swift"; sourceTree = "<group>"; };
+		7C9A3834276DC6FC00AEE831 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7C9A3836276DC70200AEE831 /* LoginViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewReactor.swift; sourceTree = "<group>"; };
 		7C9BBB3E26C162BB001C54E6 /* UpdatePostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostRequestDTO.swift; sourceTree = "<group>"; };
 		7C9BBB4026C27BD0001C54E6 /* UITableView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + Extension.swift"; sourceTree = "<group>"; };
 		7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailForPasswordLossViewController.swift; sourceTree = "<group>"; };
@@ -430,9 +436,7 @@
 		7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+MessageCellDelegate.swift"; sourceTree = "<group>"; };
 		7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
 		7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+InputBarAccessoryViewDelegate.swift"; sourceTree = "<group>"; };
-		90B6AF9F944BC90515DCBBCE /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E046CAC0939111459F5502A6 /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
-		E771CD1BEBE549F890FCDCF6 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
+		9104D1D3927ED71E0FE5C187 /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -440,21 +444,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F14B60FC707661352D19702F /* Pods_KNU_Market.framework in Frameworks */,
+				35377F357F15E07343BA3C24 /* Pods_KNU_Market.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1538089C3F87F880EDAA4857 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				90B6AF9F944BC90515DCBBCE /* Pods_KNU_Market.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		622270B1274A487200FDC47B /* DetailMessage */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,17 +466,6 @@
 				622270B5274A77AB00FDC47B /* ImageSelectionView.swift */,
 			);
 			path = Mypage;
-			sourceTree = "<group>";
-		};
-		625B0E282741D9AB003968BA /* Moya */ = {
-			isa = PBXGroup;
-			children = (
-				625B0E342741EA7B003968BA /* Plugin */,
-				625B0E332741E7BD003968BA /* API */,
-				625B0E292741D9BC003968BA /* Network.swift */,
-				625B0E2D2741DF4D003968BA /* NetworkResult.swift */,
-			);
-			path = Moya;
 			sourceTree = "<group>";
 		};
 		625B0E332741E7BD003968BA /* API */ = {
@@ -527,12 +512,12 @@
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
-		626D66EF274291AE00CB7F4F /* InquiryList */ = {
+		626D66EF274291AE00CB7F4F /* MessageList */ = {
 			isa = PBXGroup;
 			children = (
 				626D66F0274291AE00CB7F4F /* InquiryListViewController.swift */,
 			);
-			path = InquiryList;
+			path = MessageList;
 			sourceTree = "<group>";
 		};
 		626D66F52742920300CB7F4F /* Inquiry Models */ = {
@@ -678,18 +663,6 @@
 			path = "Request Models";
 			sourceTree = "<group>";
 		};
-		7C7480B926FF08CA000E4666 /* UserManager */ = {
-			isa = PBXGroup;
-			children = (
-				7CA6624626413C5A000E0B7A /* UserManager.swift */,
-				7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */,
-				7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */,
-				7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */,
-				7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */,
-			);
-			path = UserManager;
-			sourceTree = "<group>";
-		};
 		7C7480BC26FF0966000E4666 /* User Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -726,7 +699,8 @@
 		7C79E10F26E0C2630004508A /* Custom Alerts */ = {
 			isa = PBXGroup;
 			children = (
-				7C868D66274C97420056B3F3 /* Custom */,
+				7C868D67274C97420056B3F3 /* CustomAlertViewController.swift */,
+				7C868D68274C97420056B3F3 /* KMCustomAlertView.swift */,
 				7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */,
 				7CA78FFB26CE03260019B06F /* KMAlertButton.swift */,
 				7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */,
@@ -738,15 +712,10 @@
 		7C79E11026E0C27B0004508A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C9A382F276C897D00AEE831 /* Common */,
 				622270B4274A779600FDC47B /* Mypage */,
 				7C83EE4D2742267700CF1680 /* Post View */,
 				7CEDBB64270307D50078F5E1 /* Empty View */,
-				7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */,
-				7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */,
-				7CEDBB602702EC970078F5E1 /* KMTextField.swift */,
-				7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */,
-				7CEDBB5C2702E0820078F5E1 /* KMErrorLabel.swift */,
-				626D66E82742705700CB7F4F /* KMButton.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -779,15 +748,6 @@
 			path = FindUserInfoVM;
 			sourceTree = "<group>";
 		};
-		7C868D66274C97420056B3F3 /* Custom */ = {
-			isa = PBXGroup;
-			children = (
-				7C868D67274C97420056B3F3 /* KMCustomAlertViewController.swift */,
-				7C868D68274C97420056B3F3 /* KMCustomAlertView.swift */,
-			);
-			path = Custom;
-			sourceTree = "<group>";
-		};
 		7C89B2E526FC1D60004109FE /* User Related */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,13 +761,13 @@
 		7C922A472717D8BD00295A3F /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				625B0E392741F5BA003968BA /* Services */,
-				7C922A5927182A2400295A3F /* Base */,
 				7C922A4A2717D94A00295A3F /* Application */,
+				7C922A5927182A2400295A3F /* Base */,
 				7CEC1921270182F500C2D671 /* Constants */,
 				7CA6624A26413CEF000E0B7A /* Error Management Group */,
 				7CA6622326413272000E0B7A /* Model */,
-				7CA66228264132DC000E0B7A /* Network Group */,
+				625B0E392741F5BA003968BA /* Services */,
+				7CA66228264132DC000E0B7A /* API */,
 				7CA6622A264132F3000E0B7A /* View Models */,
 				7CA6622226413269000E0B7A /* Views */,
 				7CA66229264132E6000E0B7A /* View Controllers */,
@@ -851,6 +811,37 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		7C9A382F276C897D00AEE831 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */,
+				7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */,
+				7CEDBB602702EC970078F5E1 /* KMTextField.swift */,
+				7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */,
+				7CEDBB5C2702E0820078F5E1 /* KMErrorLabel.swift */,
+				626D66E82742705700CB7F4F /* KMButton.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7C9A3830276C8E9400AEE831 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				7CB8DF37264BB0300001CC6D /* PostManager.swift */,
+				7CB8DF39264BB0360001CC6D /* ChatManager.swift */,
+				7C833685266208210032308D /* Interceptor.swift */,
+				7C555466266D1A8600C3C5B6 /* MediaManager.swift */,
+				7C436B5726820E5200943069 /* ReportManager.swift */,
+				7CB22567272EB0650045CE94 /* PopupManager.swift */,
+				7CA6624626413C5A000E0B7A /* UserManager.swift */,
+				7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */,
+				7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */,
+				7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */,
+				7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
 		7CA52D6A270B113900A69F3B /* Unregister Flow */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,7 +859,7 @@
 				7CA661EF263D4387000E0B7A /* KNU_Market */,
 				7CA661EE263D4387000E0B7A /* Products */,
 				EF6E8F5DA035698264ED872C /* Pods */,
-				1538089C3F87F880EDAA4857 /* Frameworks */,
+				F49DBE7274D1C895AF63622E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -917,25 +908,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		7CA66228264132DC000E0B7A /* Network Group */ = {
+		7CA66228264132DC000E0B7A /* API */ = {
 			isa = PBXGroup;
 			children = (
-				625B0E282741D9AB003968BA /* Moya */,
-				7C7480B926FF08CA000E4666 /* UserManager */,
-				7CB8DF37264BB0300001CC6D /* PostManager.swift */,
-				7CB8DF39264BB0360001CC6D /* ChatManager.swift */,
-				7C833685266208210032308D /* Interceptor.swift */,
-				7C555466266D1A8600C3C5B6 /* MediaManager.swift */,
-				7C436B5726820E5200943069 /* ReportManager.swift */,
-				7CB22567272EB0650045CE94 /* PopupManager.swift */,
+				625B0E292741D9BC003968BA /* Network.swift */,
+				625B0E2D2741DF4D003968BA /* NetworkResult.swift */,
+				625B0E342741EA7B003968BA /* Plugin */,
+				625B0E332741E7BD003968BA /* API */,
+				7C9A3830276C8E9400AEE831 /* Alamofire */,
 			);
-			path = "Network Group";
+			path = API;
 			sourceTree = "<group>";
 		};
 		7CA66229264132E6000E0B7A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				7CA661F4263D4387000E0B7A /* InitialViewController.swift */,
+				7C9A3834276DC6FC00AEE831 /* LoginViewController.swift */,
+				7C9A3836276DC70200AEE831 /* LoginViewReactor.swift */,
 				7C3B4FF526A92C4100E2CA8F /* User Register */,
 				7CEC191E27017C5D00C2D671 /* Find User Info */,
 				7CEC191D27017C0E00C2D671 /* User Verification */,
@@ -943,7 +933,6 @@
 				7CD74E0D2645982600BD2DE4 /* Chat */,
 				7CD74E0F2645986A00BD2DE4 /* MyPage */,
 				7C60DC7126944C16001DEA9A /* Update User Info */,
-				626D66EF274291AE00CB7F4F /* InquiryList */,
 				7CA52D6A270B113900A69F3B /* Unregister Flow */,
 				7C60DC7226944C62001DEA9A /* Report */,
 				7CB22569272EB2190045CE94 /* Popup */,
@@ -1084,6 +1073,7 @@
 				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
 				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
 				62C2E44127363D4C00F037B9 /* SendUsMessage */,
+				626D66EF274291AE00CB7F4F /* MessageList */,
 				622270B1274A487200FDC47B /* DetailMessage */,
 				7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */,
 			);
@@ -1221,10 +1211,18 @@
 		EF6E8F5DA035698264ED872C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E046CAC0939111459F5502A6 /* Pods-KNU_Market.debug.xcconfig */,
-				E771CD1BEBE549F890FCDCF6 /* Pods-KNU_Market.release.xcconfig */,
+				9104D1D3927ED71E0FE5C187 /* Pods-KNU_Market.debug.xcconfig */,
+				34EA7F4C47808C4373D9D644 /* Pods-KNU_Market.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F49DBE7274D1C895AF63622E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4604BEB42F2C974DF6052361 /* Pods_KNU_Market.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1234,11 +1232,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CA66201263D4389000E0B7A /* Build configuration list for PBXNativeTarget "KNU_Market" */;
 			buildPhases = (
-				C46292CF5278D2EF0666A500 /* [CP] Check Pods Manifest.lock */,
+				66BD5751C13A121E325353AA /* [CP] Check Pods Manifest.lock */,
 				7CA661E9263D4387000E0B7A /* Sources */,
 				7CA661EA263D4387000E0B7A /* Frameworks */,
 				7CA661EB263D4387000E0B7A /* Resources */,
-				31C1B85B6463419CD959C9DD /* [CP] Embed Pods Frameworks */,
+				FE17823418075541C28B390B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1299,24 +1297,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		31C1B85B6463419CD959C9DD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C46292CF5278D2EF0666A500 /* [CP] Check Pods Manifest.lock */ = {
+		66BD5751C13A121E325353AA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1336,6 +1317,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE17823418075541C28B390B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1414,11 +1412,12 @@
 				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,
 				7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */,
 				7CF369B62754D65200C9D7A9 /* PostListViewController+TargetMethods.swift in Sources */,
+				7C9A3837276DC70200AEE831 /* LoginViewReactor.swift in Sources */,
 				7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */,
 				7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */,
 				7C83EE4A274121FF00CF1680 /* ChatListTableViewCell.swift in Sources */,
 				7C036AB82696BE4C00F6C29B /* Date + Extension.swift in Sources */,
-				7C868D69274C97420056B3F3 /* KMCustomAlertViewController.swift in Sources */,
+				7C868D69274C97420056B3F3 /* CustomAlertViewController.swift in Sources */,
 				622270B3274A489500FDC47B /* DetailMessageViewReactor.swift in Sources */,
 				625B0E3F2741F75C003968BA /* BaseAPI.swift in Sources */,
 				7C4CA63326F4BF3200F4BCA7 /* IDInputViewController.swift in Sources */,
@@ -1495,6 +1494,7 @@
 				7C5386E62768CA8200BFEA7F /* PopupService.swift in Sources */,
 				7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer + Extension.swift in Sources */,
+				7C9A3835276DC6FC00AEE831 /* LoginViewController.swift in Sources */,
 				7CF369AF2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift in Sources */,
 				7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */,
 				7C5386DB2768912400BFEA7F /* FindPasswordModel.swift in Sources */,
@@ -1600,7 +1600,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				EXCLUDED_ARCHS = "";
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1662,7 +1662,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				EXCLUDED_ARCHS = "";
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1683,7 +1683,7 @@
 		};
 		7CA66202263D4389000E0B7A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E046CAC0939111459F5502A6 /* Pods-KNU_Market.debug.xcconfig */;
+			baseConfigurationReference = 9104D1D3927ED71E0FE5C187 /* Pods-KNU_Market.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1709,7 +1709,7 @@
 		};
 		7CA66203263D4389000E0B7A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E771CD1BEBE549F890FCDCF6 /* Pods-KNU_Market.release.xcconfig */;
+			baseConfigurationReference = 34EA7F4C47808C4373D9D644 /* Pods-KNU_Market.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1725,6 +1725,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.6;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

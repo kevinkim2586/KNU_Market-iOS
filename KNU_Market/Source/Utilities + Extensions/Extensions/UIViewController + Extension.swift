@@ -19,7 +19,7 @@ extension UIViewController {
         actionButtonTitle: String = "확인",
         action: @escaping () -> Void = { }
     ) {
-        let vc = KMCustomAlertViewController(
+        let vc = CustomAlertViewController(
             title: title,
             message: message,
             cancelButtonTitle: cancelButtonTitle,
@@ -31,7 +31,7 @@ extension UIViewController {
     }
     
     // Custom Alert
-    func presentKMAlertOnMainThread(title: String, message: String, buttonTitle: String, attributedMessageString: NSAttributedString? = nil) {
+    func presentKMAlertOnMainThread(title: String, message: String, buttonTitle: String = "확인", attributedMessageString: NSAttributedString? = nil) {
         DispatchQueue.main.async {
             let alertVC = AlertViewController(
                 title: title,

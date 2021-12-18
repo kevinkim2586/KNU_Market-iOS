@@ -19,9 +19,9 @@ protocol PostServiceType: AnyObject {
     func markPostDone(uid: String) -> Single<NetworkResult>
 }
 
-class PostService: PostServiceType {
+final class PostService: PostServiceType {
     
-    let network: Network<PostAPI>
+    fileprivate let network: Network<PostAPI>
     
     init(network: Network<PostAPI>) {
         self.network = network

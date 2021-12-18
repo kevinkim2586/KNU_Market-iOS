@@ -39,9 +39,9 @@ protocol UserServiceType: AnyObject {
     func resetAllUserInfo()
 }
 
-class UserService: UserServiceType {
+final class UserService: UserServiceType {
     
-    let network: Network<UserAPI>
+    fileprivate let network: Network<UserAPI>
     
     init(network: Network<UserAPI>) {
         self.network = network
@@ -71,7 +71,6 @@ class UserService: UserServiceType {
                 switch result {
                 case .success(let loginResponseModel):
                     self?.saveAccessTokens(from: loginResponseModel)
-                    User.shared.password = password
                     User.shared.isLoggedIn = true
                     User.shared.postFilterOption = .showGatheringFirst
                     UIApplication.shared.registerForRemoteNotifications()

@@ -8,7 +8,6 @@
 import Foundation
 import Moya
 
-
 enum UserAPI {
     case register(model: RegisterRequestDTO)
     case checkDuplication(type: CheckDuplicationType, infoString: String)
@@ -151,10 +150,6 @@ extension UserAPI: BaseAPI {
             }
             return .requestPlain
         }
-    }
-    
-    var validationType: ValidationType {
-        return .successCodes
     }
 }
 

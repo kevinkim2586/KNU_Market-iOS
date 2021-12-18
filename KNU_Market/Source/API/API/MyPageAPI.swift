@@ -1,27 +1,25 @@
 //
-//  ReportAPI.swift
+//  MyPageAPI.swift
 //  KNU_Market
 //
-//  Created by Kevin Kim on 2021/12/13.
+//  Created by 김부성 on 2021/11/15.
 //
 
 import Foundation
 import Moya
 
-enum ReportAPI {
-    case reportUser(model: ReportUserRequestDTO)
+enum MyPageAPI {
     case writeReport(String, String, Data?, Data?)
     case viewReport(Int)
 }
 
-extension ReportAPI: BaseAPI {
+extension MyPageAPI: BaseAPI {
     
     var path: String {
         switch self {
-        case let .reportUser(model):
-            return "report/\(model.postUID)"
         case .writeReport:
             return "report"
+            
         case let .viewReport(uid):
             return "reports/\(uid)"
         }
@@ -29,35 +27,33 @@ extension ReportAPI: BaseAPI {
     
     var headers: [String : String]? {
         switch self {
-        default: return ["Content-Type" : "application/json"]
+        default:
+            return [
+                "Content-Type" : "multipart/form-data"
+            ]
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .reportUser, .writeReport:
+        case .writeReport:
             return .post
+            
         case .viewReport:
             return .get
         }
     }
     
     var parameters: [String : Any]? {
-        switch self {
-        case let .reportUser(model):
-            return model.parameters
-        default:
-            return nil
-        }
+        return nil
     }
     
     var parameterEncoding: ParameterEncoding {
-        switch self {
-        default: return JSONEncoding.default
-        }
+        return JSONEncoding.default
     }
     
     var task: Task {
+        
         switch self {
         case let .writeReport(title, content, media1, media2):
             var multipartData: [MultipartFormData] = []
@@ -74,16 +70,15 @@ extension ReportAPI: BaseAPI {
             if let media2 = media2 {
                 multipartData.append(MultipartFormData(provider: .data(media2), name: "medias", fileName: "file.jpeg", mimeType: "image/jpeg"))
             }
+            
+            print(multipartData)
             return .uploadMultipart(multipartData)
+            
         default:
             if let parameters = parameters {
                 return .requestParameters(parameters: parameters, encoding: parameterEncoding)
             }
             return .requestPlain
         }
-    }
-    
-    var validationType: ValidationType {
-        return .successCodes
     }
 }

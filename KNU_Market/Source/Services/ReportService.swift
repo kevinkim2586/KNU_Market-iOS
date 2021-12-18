@@ -15,16 +15,15 @@ protocol ReportServiceType: AnyObject {
     func viewMessage(_ uid: Int) -> Single<NetworkResult>
 }
 
-class ReportService: ReportServiceType {
+final class ReportService: ReportServiceType {
     
-    let network: Network<ReportAPI>
+    fileprivate let network: Network<ReportAPI>
     
     init(network: Network<ReportAPI>) {
         self.network = network
     }
     
     func reportUser(with model: ReportUserRequestDTO) -> Single<NetworkResult> {
-        
         return network.requestWithoutMapping(.reportUser(model: model))
             .map { result in
                 switch result {

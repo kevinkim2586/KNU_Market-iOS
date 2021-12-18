@@ -19,9 +19,9 @@ protocol PopupServiceType: AnyObject {
     func blockPopupForADay() -> Observable<Void>
 }
 
-class PopupService: PopupServiceType {
+final class PopupService: PopupServiceType {
     
-    let network: Network<PopupAPI>
+    fileprivate let network: Network<PopupAPI>
     
     // 팝업을 띄워야하는지 안 띄워야하는지 판별
     var shouldFetchPopup: Bool {
@@ -53,7 +53,7 @@ class PopupService: PopupServiceType {
     
     func blockPopupForADay() -> Observable<Void> {
         User.shared.userSetPopupBlockDate = Date()
-        return Observable.just(())
+        return Observable.empty()
     }
     
     func fetchLatestPopup() -> Single<NetworkResultWithValue<PopupModel>> {

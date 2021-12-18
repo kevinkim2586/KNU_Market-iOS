@@ -1,6 +1,11 @@
 import UIKit
+import RxSwift
+import RxCocoa
 
 class BaseViewController: UIViewController {
+    
+    // MARK: - Rx
+    var disposeBag = DisposeBag.init()
     
     //MARK: - Initialization
     

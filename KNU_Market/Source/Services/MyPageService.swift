@@ -14,7 +14,7 @@ protocol MyPageServiceType: AnyObject {
     func viewMessage(_ uid: Int) -> Single<NetworkResult>
 }
 
-class MyPageService: MyPageServiceType {
+final class MyPageService: MyPageServiceType {
     
     fileprivate let network: Network<MyPageAPI>
     

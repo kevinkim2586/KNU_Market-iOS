@@ -13,8 +13,6 @@ import Atributika
 
 final class DetailMessageViewController: BaseViewController, ReactorKit.View {
     
-    var disposeBag: DisposeBag = DisposeBag()
-    
     typealias Reactor = DetailMessageViewReactor
     
     // MARK: - Constants

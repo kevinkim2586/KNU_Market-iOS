@@ -17,14 +17,10 @@ class PopupReactorViewController: BaseViewController, View {
     
     typealias Reactor = PopupReactor
     
-    //MARK: - Properties
-    
-    var disposeBag = DisposeBag()
-    
     //MARK: - Constants
     
     fileprivate struct Metrics {
-        static let dismissButtonHeight: CGFloat = 50
+        static let dismissButtonHeight = 50.f
     }
     
     fileprivate struct Fonts {
@@ -42,7 +38,7 @@ class PopupReactorViewController: BaseViewController, View {
     
     //MARK: - UI
     
-    lazy var popupImageView = UIImageView().then {
+    let popupImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.isUserInteractionEnabled = true
         $0.clipsToBounds = true
@@ -162,7 +158,6 @@ class PopupReactorViewController: BaseViewController, View {
         
         /// Opening Landing URL
         reactor.state
-            .asObservable()
             .map { $0.landingUrl }
             .filter { $0 != nil }
             .subscribe(onNext: { url in

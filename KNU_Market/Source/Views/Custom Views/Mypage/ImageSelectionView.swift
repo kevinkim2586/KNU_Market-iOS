@@ -37,7 +37,7 @@ final class ImageSelectionView: UIView {
         
         // imageView
         static let image = UIImage(named: "camera")
-        static let mainColor = UIColor.init(named: "AppDefaultColor")
+        static let mainColor = UIColor.init(named: K.Color.appColor)
     }
     
     fileprivate struct Font {

@@ -15,9 +15,9 @@ protocol MediaServiceType: AnyObject {
     func deleteImage(uid: String) -> Single<NetworkResult>
 }
 
-class MediaService: MediaServiceType {
+final class MediaService: MediaServiceType {
     
-    let network: Network<MediaAPI>
+    fileprivate let network: Network<MediaAPI>
     
     init(network: Network<MediaAPI>) {
         self.network = network

@@ -1,15 +1,14 @@
 import UIKit
 import SnapKit
+import Then
 
 class DeveloperInformationViewController: BaseViewController {
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: K.Images.developerInfo)
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
+    let imageView = UIImageView().then {
+        $0.image = UIImage(named: K.Images.developerInfo)
+        $0.contentMode = .scaleAspectFit
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "팀 정보"

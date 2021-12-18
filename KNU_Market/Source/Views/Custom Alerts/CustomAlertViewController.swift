@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import Then
 
-class KMCustomAlertViewController: UIViewController {
+class CustomAlertViewController: UIViewController {
     
     let disposedBag = DisposeBag()
     

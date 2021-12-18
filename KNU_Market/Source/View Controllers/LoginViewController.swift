@@ -19,8 +19,8 @@ class LoginViewController: BaseViewController, View {
     //MARK: - Constants
     
     fileprivate struct Metrics {
-        static let labelSidePadding: CGFloat    = 70
-        static let textFieldHeight: CGFloat     = 50
+        static let labelSidePadding = 70.f
+        static let textFieldHeight  = 50.f
     }
     
     fileprivate struct Texts {
@@ -76,11 +76,6 @@ class LoginViewController: BaseViewController, View {
     
     let infoButton = UIButton(type: .system).then {
         $0.setImage(Images.infoButton, for: .normal)
-//        $0.addTarget(
-//            self,
-//            action: #selector(pressedInfoButton),
-//            for: .touchUpInside
-//        )
     }
     
     lazy var idTextField = UITextField().then {
@@ -115,22 +110,12 @@ class LoginViewController: BaseViewController, View {
         $0.backgroundColor = UIColor(named: K.Color.appColor)
         $0.layer.cornerRadius  = Metrics.textFieldHeight / 2
         $0.addBounceAnimationWithNoFeedback()
-//        button.addTarget(
-//            self,
-//            action: #selector(pressedLoginButton),
-//            for: .touchUpInside
-//
     }
     
     let registerButton = UIButton(type: .system).then {
         $0.setAttributedTitle(Fonts.registerButtonAttributes, for: .normal)
         $0.setTitleColor(.darkGray, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-//        $0.addTarget(
-//            self,
-//            action: #selector(pressedRegisterButton),
-//            for: .touchUpInside
-//        )
         $0.addBounceAnimationWithNoFeedback()
     }
     
@@ -141,11 +126,6 @@ class LoginViewController: BaseViewController, View {
             attributes: Fonts.findButtonAttributes
         ), for: .normal)
         $0.setTitleColor(.darkGray, for: .normal)
-//        button.addTarget(
-//            self,
-//            action: #selector(pressedFindIdButton),
-//            for: .touchUpInside
-//        )
     }
     
     let findPwButton = UIButton(type: .system).then {
@@ -154,11 +134,6 @@ class LoginViewController: BaseViewController, View {
             attributes: Fonts.findButtonAttributes
         ), for: .normal)
         $0.setTitleColor(.darkGray, for: .normal)
-//        button.addTarget(
-//            self,
-//            action: #selector(pressedFindPwButton),
-//            for: .touchUpInside
-//        )
     }
     
     let findInfoStackView = UIStackView().then {

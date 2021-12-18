@@ -7,6 +7,7 @@
 
 import UIKit
 import SPIndicator
+import Moya
 
 extension PostListViewController: PostListViewModelDelegate {
     
@@ -49,12 +50,29 @@ extension PostListViewController: PostListViewModelDelegate {
     }
     
     func didFetchLatestPopup(model: PopupModel) {
-        let popupVC = KMPopupViewController(popupManager: PopupManager(), popupUid: model.popupUid, mediaUid: model.mediaUid, landingUrl: model.landingUrl)
+        
+        let popupVC = PopupReactorViewController(
+            reactor: PopupReactor(
+                popupUid: model.popupUid,
+                mediaUid: model.mediaUid,
+                landingUrlString: model.landingUrl,
+                popupService: PopupService(network: Network<PopupAPI>(plugins: [NetworkLoggerPlugin()])))
+        )
         popupVC.modalPresentationStyle = .overFullScreen
         popupVC.modalTransitionStyle = .crossDissolve
         self.present(popupVC, animated: true)
+        
+        
+        
+        
+            
+            
+//            let popupVC = PopupViewController(popupManager: PopupManager(), popupUid: model.popupUid, mediaUid: model.mediaUid, landingUrl: model.landingUrl)
+//            popupVC.modalPresentationStyle = .overFullScreen
+//            popupVC.modalTransitionStyle = .crossDissolve
+//            self.present(popupVC, animated: true)
+        }
+        func failedFetchingLatestPopup(with error: NetworkError) {
+            showSimpleBottomAlert(with: error.errorDescription)
+        }
     }
-    func failedFetchingLatestPopup(with error: NetworkError) {
-        showSimpleBottomAlert(with: error.errorDescription)
-    }
-}

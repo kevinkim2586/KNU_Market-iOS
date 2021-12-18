@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import RxSwift
 import Moya
 
@@ -39,6 +38,18 @@ extension Network {
             }
     }
     
+    func requestArray<T: ModelType>(_ target: API, type: T.Type) -> Single<NetworkResultWithArray<T>> {
+        let decoder = type.decoder
+        return request(target)
+            .map { result in
+                let response = try? result.map([T].self, using: decoder)
+                guard let response = response else {
+                    return .error(NetworkError.returnError(json: result.data))
+                }
+                return .success(response)
+            }
+    }
+    
     func requestWithoutMapping(_ target: API) -> Single<NetworkResult> {
         return request(target)
             .map { result in
@@ -48,5 +59,4 @@ extension Network {
                 return .success
             }
     }
-
 }

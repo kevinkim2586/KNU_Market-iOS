@@ -1,6 +1,6 @@
 import Foundation
 
-struct LoadProfileResponseModel: Decodable {
+struct LoadProfileResponseModel: ModelType {
     
     let id: String
     let emailForPasswordLoss: String

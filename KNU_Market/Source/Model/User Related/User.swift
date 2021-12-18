@@ -207,7 +207,7 @@ class User {
             UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.userSetPopupBlockDate)
         }
     }
-    
+
     //MARK: - User Settings
     
     var postFilterOption: PostFilterOptions {

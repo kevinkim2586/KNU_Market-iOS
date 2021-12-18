@@ -67,7 +67,6 @@ final class Interceptor: RequestInterceptor {
             completion(.doNotRetry)
         }
     }
-    
 }
 
 extension Interceptor {

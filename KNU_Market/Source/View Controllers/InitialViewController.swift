@@ -1,5 +1,8 @@
 import UIKit
 import SnapKit
+import Moya
+import SwiftyJSON
+
 
 class InitialViewController: BaseViewController {
     
@@ -281,7 +284,7 @@ extension InitialViewController {
         guard id.count > 0, password.count > 0 else { return }
         
         showProgressBar()
-        
+
         userManager?.login(id: id, password: password) { [weak self] result in
             guard let self = self else { return }
             switch result {

@@ -2,7 +2,7 @@ import Foundation
 
 //MARK: - 공구글 리스트 Model
 
-struct PostListModel: Decodable {
+struct PostListModel: ModelType {
     
     let uuid: String
     let title: String
@@ -30,7 +30,7 @@ struct PostListModel: Decodable {
     }
 }
 
-struct Media: Decodable {
+struct Media: ModelType {
     
     let uid: String
     let path: String
@@ -44,7 +44,7 @@ struct Media: Decodable {
     }
 }
 
-struct UserInfo: Decodable {
+struct UserInfo: ModelType {
     
     let userUID: String
     

@@ -81,8 +81,4 @@ extension MyPageAPI: BaseAPI {
             return .requestPlain
         }
     }
-    
-    var validationType: ValidationType {
-        return .none
-    }
 }

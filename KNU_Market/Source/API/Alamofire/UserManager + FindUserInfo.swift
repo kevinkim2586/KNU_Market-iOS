@@ -43,7 +43,6 @@ extension UserManager {
                 
                 switch response.result {
                 case .success(_):
-                    print("✏️ UserManager - findUserId SUCCESS: \(response.response?.statusCode)")
                     do {
                         let json = try JSON(data: response.data ?? Data())
                         let foundId = json["id"].stringValue

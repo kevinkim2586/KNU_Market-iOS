@@ -1,5 +1,6 @@
 
 import UIKit
+import Moya
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -21,8 +22,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if User.shared.isLoggedIn == true {
             window?.rootViewController = UIHelper.createMainTabBarController()
         } else {
-            let initialController = InitialViewController(userManager: UserManager())
-            window?.rootViewController = initialController
+            
+            let loginVC = LoginViewController(
+                reactor: LoginViewReactor(
+                    userService: UserService(network: Network<UserAPI>())
+                )
+            )
+            window?.rootViewController = loginVC
+            
+            
+            
+//            
+//            let initialController = InitialViewController(userManager: UserManager())
+//            window?.rootViewController = initialController
         }
         window?.makeKeyAndVisible()
     }

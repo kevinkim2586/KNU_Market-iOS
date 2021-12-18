@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import SDWebImage
 
-class KMPopupViewController: BaseViewController {
+class PopupViewController: BaseViewController {
     
     //MARK: - Properties
     private var popupManager: PopupManager?
@@ -144,7 +144,7 @@ class KMPopupViewController: BaseViewController {
 
 //MARK: - Target Methods
 
-extension KMPopupViewController {
+extension PopupViewController {
     
     @objc private func pressedPopupImage() {
         if didTouchPopup == true {
@@ -182,7 +182,7 @@ import SwiftUI
 struct KMPopupVC: PreviewProvider {
     
     static var previews: some View {
-        KMPopupViewController(popupManager: PopupManager(), popupUid: 0, mediaUid: "", landingUrl: "").toPreview()
+        PopupViewController(popupManager: PopupManager(), popupUid: 0, mediaUid: "", landingUrl: "").toPreview()
     }
 }
 #endif

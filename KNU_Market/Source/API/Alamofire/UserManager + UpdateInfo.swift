@@ -47,7 +47,7 @@ extension UserManager {
                 }
             }
     }
-    
+
     func updateLocalUserInfo(type: UpdateUserInfoType, infoString: String) {
         
         switch type {

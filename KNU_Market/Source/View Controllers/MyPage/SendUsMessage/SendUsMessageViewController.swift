@@ -13,7 +13,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
     typealias Reactor = SendUsMessageReactor
     
     //MARK: - Properties
-    var disposeBag: DisposeBag = DisposeBag()
+
     
     //MARK: - Constants
     

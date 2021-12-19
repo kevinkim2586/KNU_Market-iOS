@@ -50,8 +50,7 @@ extension PostListViewController: PostListViewModelDelegate {
     }
     
     func didFetchLatestPopup(model: PopupModel) {
-        
-        let popupVC = PopupReactorViewController(
+        let popupVC = PopupViewController(
             reactor: PopupReactor(
                 popupUid: model.popupUid,
                 mediaUid: model.mediaUid,
@@ -61,18 +60,9 @@ extension PostListViewController: PostListViewModelDelegate {
         popupVC.modalPresentationStyle = .overFullScreen
         popupVC.modalTransitionStyle = .crossDissolve
         self.present(popupVC, animated: true)
-        
-        
-        
-        
-            
-            
-//            let popupVC = PopupViewController(popupManager: PopupManager(), popupUid: model.popupUid, mediaUid: model.mediaUid, landingUrl: model.landingUrl)
-//            popupVC.modalPresentationStyle = .overFullScreen
-//            popupVC.modalTransitionStyle = .crossDissolve
-//            self.present(popupVC, animated: true)
-        }
-        func failedFetchingLatestPopup(with error: NetworkError) {
-            showSimpleBottomAlert(with: error.errorDescription)
-        }
     }
+    
+    func failedFetchingLatestPopup(with error: NetworkError) {
+        print("❗️failedFetchingLatestPopup ")
+    }
+}

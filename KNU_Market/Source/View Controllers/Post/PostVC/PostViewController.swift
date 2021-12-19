@@ -6,7 +6,6 @@ import RxSwift
 class PostViewController: BaseViewController {
     
     //MARK: - Properties
-    var disposeBag = DisposeBag()
     var viewModel: PostViewModel!
     var isFromChatVC: Bool = false
     

@@ -1,21 +1,26 @@
+//
+//  PopupViewController.swift
+//  KNU_Market
+//
+//  Created by Kevin Kim on 2021/12/14.
+//
+
 import UIKit
-import SnapKit
+import RxSwift
+import RxCocoa
+import RxGesture
+import ReactorKit
+import Then
 import SDWebImage
 
-class PopupViewController: BaseViewController {
+class PopupViewController: BaseViewController, View {
     
-    //MARK: - Properties
-    private var popupManager: PopupManager?
-    private var popupUid: Int?
-    private var mediaUid: String?
-    private var landingUrl: String?
-    
-    private var didTouchPopup: Bool = false
+    typealias Reactor = PopupReactor
     
     //MARK: - Constants
     
     fileprivate struct Metrics {
-        static let dismissButtonHeight: CGFloat = 50
+        static let dismissButtonHeight = 50.f
     }
     
     fileprivate struct Fonts {
@@ -33,52 +38,36 @@ class PopupViewController: BaseViewController {
     
     //MARK: - UI
     
-    lazy var popupImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.isUserInteractionEnabled = true
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 40
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(pressedPopupImage))
-        imageView.addGestureRecognizer(tapGesture)
-        return imageView
-    }()
+    let popupImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.isUserInteractionEnabled = true
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 40
+    }
     
-    let doNotSeeForOneDayButton: UIButton = {
-        let button = UIButton()
-        button.addBounceAnimationWithNoFeedback()
-        button.setAttributedTitle(NSAttributedString(
+    let doNotSeeForOneDayButton = UIButton(type: .system).then {
+        $0.addBounceAnimationWithNoFeedback()
+        $0.setAttributedTitle(NSAttributedString(
             string: "24시간 보지 않기",
             attributes: Fonts.doNotSeeForOneDayButton
         ), for: .normal)
-        button.addTarget(
-            self,
-            action: #selector(doNotSeePopupForOneDay),
-            for: .touchUpInside
-        )
-        return button
-    }()
+    }
     
-    let dismissButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .darkGray
-        button.setImage(Images.dismissButton, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: Metrics.dismissButtonHeight).isActive = true
-        button.heightAnchor.constraint(equalToConstant: Metrics.dismissButtonHeight).isActive = true
-        button.layer.cornerRadius = Metrics.dismissButtonHeight / 2
-        button.addBounceAnimationWithNoFeedback()
-        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        return button
-    }()
+    let dismissButton = UIButton(type: .system).then {
+        $0.backgroundColor = .darkGray
+        $0.setImage(Images.dismissButton, for: .normal)
+        $0.widthAnchor.constraint(equalToConstant: Metrics.dismissButtonHeight).isActive = true
+        $0.heightAnchor.constraint(equalToConstant: Metrics.dismissButtonHeight).isActive = true
+        $0.layer.cornerRadius = Metrics.dismissButtonHeight / 2
+        $0.addBounceAnimationWithNoFeedback()
+        $0.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+    }
     
     //MARK: - Initialization
     
-    init(popupManager: PopupManager?, popupUid: Int, mediaUid: String, landingUrl: String) {
+    init(reactor: Reactor) {
         super.init()
-        self.popupManager = popupManager
-        self.popupUid = popupUid
-        self.mediaUid = mediaUid
-        self.landingUrl = landingUrl
+        self.reactor = reactor
     }
     
     required init?(coder: NSCoder) {
@@ -89,7 +78,6 @@ class PopupViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
     }
     
     //MARK: - UI Setup
@@ -101,7 +89,7 @@ class PopupViewController: BaseViewController {
         view.addSubview(doNotSeeForOneDayButton)
         view.addSubview(dismissButton)
     }
-    
+
     override func setupConstraints() {
         super.setupConstraints()
         
@@ -126,63 +114,65 @@ class PopupViewController: BaseViewController {
         super.setupStyle()
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
     }
+
+    //MARK: - Binding Reactor
     
-    override func setupActions() {
-        super.setupActions()
-    }
-    
-    private func configure() {
-        guard let mediaUid = mediaUid else { return }
-        popupImageView.sd_setImage(
-            with: URL(string: K.MEDIA_REQUEST_URL + mediaUid),
-            placeholderImage: nil,
-            options: .continueInBackground,
-            completed: nil
-        )
+    func bind(reactor: Reactor) {
+        
+        // Input
+        self.rx.viewDidLoad
+            .map { _ in Reactor.Action.viewDidLoad }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        popupImageView.rx.tapGesture()
+            .when(.recognized)
+            .map { _ in Reactor.Action.pressedPopupImage }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        doNotSeeForOneDayButton.rx.tap
+            .map { Reactor.Action.doNotSeePopupForOneDay }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        dismissButton.rx.tap
+            .subscribe(onNext: { self.dismissVC() })
+            .disposed(by: disposeBag)
+         
+        // Output
+        
+        /// Set Popup Image
+        reactor.state
+            .asObservable()
+            .map { $0.mediaUrl }
+            .subscribe(onNext: { [weak self] url in
+                self?.popupImageView.sd_setImage(
+                    with: url,
+                    placeholderImage: nil,
+                    options: .continueInBackground,
+                    completed: nil
+                )
+            })
+            .disposed(by: disposeBag)
+        
+        /// Opening Landing URL
+        reactor.state
+            .map { $0.landingUrl }
+            .filter { $0 != nil }
+            .subscribe(onNext: { url in
+                UIApplication.shared.open(url!, options: [:])
+            })
+            .disposed(by: disposeBag)
+        
+        /// Dismissing VC after pressing doNotSeeForOneDayButton
+        reactor.state
+            .asObservable()
+            .map { $0.dismiss }
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismissVC()
+            })
+            .disposed(by: disposeBag)
     }
 }
-
-//MARK: - Target Methods
-
-extension PopupViewController {
-    
-    @objc private func pressedPopupImage() {
-        if didTouchPopup == true {
-            openLandingUrl()
-        } else {
-            incrementPopupViewCount()
-            didTouchPopup = true
-            openLandingUrl()
-        }
-    }
-    
-    private func openLandingUrl() {
-        guard let landingUrl = landingUrl else { return }
-        guard let url = URL(string: landingUrl) else { return }
-        UIApplication.shared.open(url, options: [:])
-      
-    }
-    
-    private func incrementPopupViewCount() {
-        guard let popupUid = popupUid else { return }
-        popupManager?.incrementPopupViewCount(popupUid: popupUid)
-    }
-    
-    @objc private func doNotSeePopupForOneDay() {
-        popupManager?.blockPopupForADay()
-        dismiss(animated: true)
-    }
-}
-
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct KMPopupVC: PreviewProvider {
-    
-    static var previews: some View {
-        PopupViewController(popupManager: PopupManager(), popupUid: 0, mediaUid: "", landingUrl: "").toPreview()
-    }
-}
-#endif

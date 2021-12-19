@@ -1,5 +1,5 @@
-import Foundation
 import UIKit
+import RxSwift
 
 protocol PostListViewModelDelegate: AnyObject {
     
@@ -30,7 +30,10 @@ class PostListViewModel {
     private var postManager: PostManager?
     private var chatManager: ChatManager?
     private var userManager: UserManager?
-    private var popupManager: PopupManager?
+    private var popupService: PopupServiceType
+    
+    var disposeBag = DisposeBag()
+   
     
     weak var delegate: PostListViewModelDelegate?
     
@@ -40,11 +43,11 @@ class PostListViewModel {
     var index: Int = 1
     
     //MARK: - Initialization
-    init(postManager: PostManager, chatManager: ChatManager, userManager: UserManager, popupManager: PopupManager) {
+    init(postManager: PostManager, chatManager: ChatManager, userManager: UserManager, popupService: PopupServiceType) {
         self.postManager = postManager
         self.chatManager = chatManager
         self.userManager = userManager
-        self.popupManager = popupManager
+        self.popupService = popupService
     }
     
     //MARK: - 공구글 불러오기
@@ -127,20 +130,24 @@ class PostListViewModel {
     
     //MARK: - 팝업 가져오기
     func fetchLatestPopup() {
-    
-        guard let popupManager = popupManager else { return }
-
-        if !popupManager.shouldFetchPopup { return }
-
-        popupManager.fetchLatestPopup { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let popupModel):
-                self.delegate?.didFetchLatestPopup(model: popupModel)
-            case .failure(let error):
-                self.delegate?.failedFetchingLatestPopup(with: error)
+        
+        if !popupService.shouldFetchPopup { return }
+        
+        popupService.fetchLatestPopup()
+            .subscribe { [weak self] result in
+                switch result {
+                case .success(let networkResult):
+                    switch networkResult {
+                    case .success(let popupModel):
+                        self?.delegate?.didFetchLatestPopup(model: popupModel)
+                    case .error(let error):
+                        self?.delegate?.failedFetchingLatestPopup(with: error)
+                    }
+                case .failure(_):
+                    break
+                }
             }
-        }
+            .disposed(by: disposeBag)
     }
     
     

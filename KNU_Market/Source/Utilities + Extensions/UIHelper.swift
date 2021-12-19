@@ -27,7 +27,7 @@ struct UIHelper {
                 postManager: PostManager(),
                 chatManager: ChatManager(),
                 userManager: UserManager(),
-                popupManager: PopupManager()
+                popupService: PopupService(network: Network<PopupAPI>())
             )
         )
         

@@ -77,7 +77,7 @@
 		7C5386E227689C2100BFEA7F /* UploadImageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E127689C2100BFEA7F /* UploadImageResponseModel.swift */; };
 		7C5386E42768C83B00BFEA7F /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E32768C83B00BFEA7F /* ReportService.swift */; };
 		7C5386E62768CA8200BFEA7F /* PopupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E52768CA8200BFEA7F /* PopupService.swift */; };
-		7C5386E82768D10A00BFEA7F /* PopupReactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E72768D10A00BFEA7F /* PopupReactorViewController.swift */; };
+		7C5386E82768D10A00BFEA7F /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E72768D10A00BFEA7F /* PopupViewController.swift */; };
 		7C5386EA2768D14500BFEA7F /* PopupReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386E92768D14500BFEA7F /* PopupReactor.swift */; };
 		7C55545D266CDFD100C3C5B6 /* UploadPostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545C266CDFD100C3C5B6 /* UploadPostRequestDTO.swift */; };
 		7C55545F266CEADF00C3C5B6 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */; };
@@ -150,8 +150,6 @@
 		7CAE5AFC2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */; };
 		7CAE5AFE2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE5AFD2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift */; };
 		7CAE5B002754B5F100426708 /* PostViewController+PostViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE5AFF2754B5F100426708 /* PostViewController+PostViewModelDelegate.swift */; };
-		7CB22568272EB0650045CE94 /* PopupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB22567272EB0650045CE94 /* PopupManager.swift */; };
-		7CB2256B272EB23E0045CE94 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2256A272EB23E0045CE94 /* PopupViewController.swift */; };
 		7CB8DF36264BAB760001CC6D /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF35264BAB760001CC6D /* UIViewController + Extension.swift */; };
 		7CB8DF38264BB0300001CC6D /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF37264BB0300001CC6D /* PostManager.swift */; };
 		7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF39264BB0360001CC6D /* ChatManager.swift */; };
@@ -293,7 +291,7 @@
 		7C5386E127689C2100BFEA7F /* UploadImageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageResponseModel.swift; sourceTree = "<group>"; };
 		7C5386E32768C83B00BFEA7F /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		7C5386E52768CA8200BFEA7F /* PopupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupService.swift; sourceTree = "<group>"; };
-		7C5386E72768D10A00BFEA7F /* PopupReactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupReactorViewController.swift; sourceTree = "<group>"; };
+		7C5386E72768D10A00BFEA7F /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		7C5386E92768D14500BFEA7F /* PopupReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupReactor.swift; sourceTree = "<group>"; };
 		7C55545C266CDFD100C3C5B6 /* UploadPostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostRequestDTO.swift; sourceTree = "<group>"; };
 		7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
@@ -369,8 +367,6 @@
 		7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostViewController+KMPostButtonViewDelegate.swift"; sourceTree = "<group>"; };
 		7CAE5AFD2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostViewController+KMPostBottomViewDelegate.swift"; sourceTree = "<group>"; };
 		7CAE5AFF2754B5F100426708 /* PostViewController+PostViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostViewController+PostViewModelDelegate.swift"; sourceTree = "<group>"; };
-		7CB22567272EB0650045CE94 /* PopupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupManager.swift; sourceTree = "<group>"; };
-		7CB2256A272EB23E0045CE94 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		7CB8DF35264BAB760001CC6D /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		7CB8DF37264BB0300001CC6D /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		7CB8DF39264BB0360001CC6D /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
@@ -836,7 +832,6 @@
 				7C833685266208210032308D /* Interceptor.swift */,
 				7C555466266D1A8600C3C5B6 /* MediaManager.swift */,
 				7C436B5726820E5200943069 /* ReportManager.swift */,
-				7CB22567272EB0650045CE94 /* PopupManager.swift */,
 				7CA6624626413C5A000E0B7A /* UserManager.swift */,
 				7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */,
 				7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */,
@@ -967,9 +962,8 @@
 		7CB22569272EB2190045CE94 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
-				7CB2256A272EB23E0045CE94 /* PopupViewController.swift */,
+				7C5386E72768D10A00BFEA7F /* PopupViewController.swift */,
 				7C5386E92768D14500BFEA7F /* PopupReactor.swift */,
-				7C5386E72768D10A00BFEA7F /* PopupReactorViewController.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -1394,7 +1388,6 @@
 				7C83EE5127422E3A00CF1680 /* KMPostControlButton.swift in Sources */,
 				7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */,
 				7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */,
-				7CB2256B272EB23E0045CE94 /* PopupViewController.swift in Sources */,
 				7CC33B2F274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift in Sources */,
 				7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
@@ -1489,9 +1482,8 @@
 				7CF369AB2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift in Sources */,
 				7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */,
 				7C5386EA2768D14500BFEA7F /* PopupReactor.swift in Sources */,
-				7C5386E82768D10A00BFEA7F /* PopupReactorViewController.swift in Sources */,
+				7C5386E82768D10A00BFEA7F /* PopupViewController.swift in Sources */,
 				7C3B4FEC26A928A600E2CA8F /* PasswordInputViewController.swift in Sources */,
-				7CB22568272EB0650045CE94 /* PopupManager.swift in Sources */,
 				7C5386DF27689B5B00BFEA7F /* MediaService.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7CC69A7C27670E3B00105FC0 /* PopupAPI.swift in Sources */,

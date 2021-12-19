@@ -25,10 +25,11 @@ extension UIViewController {
             message: message,
             cancelButtonTitle: cancelButtonTitle,
             actionButtonTitle: actionButtonTitle,
-            action: action)
+            action: action
+        )
         vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .crossDissolve
-        self.present(vc, animated: false)
+        self.present(vc, animated: true)
     }
     
     // Custom Alert
@@ -274,15 +275,7 @@ extension UIViewController {
     }
     
     @objc func dismissVC() {
-
         dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func triggerMainTabBarHiddenProperty() {
-        self.tabBarController?.tabBar.isHidden
-        view.layoutIfNeeded()
-        view.updateConstraints()
-        
     }
     
     func setClearNavigationBarBackground() {

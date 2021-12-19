@@ -14,7 +14,6 @@ final class LoginViewReactor: Reactor {
     let initialState: State
     
     enum Action {
-        
         case updateId(String)
         case updatePassword(String)
         case login
@@ -24,20 +23,16 @@ final class LoginViewReactor: Reactor {
         case setId(String)
         case setPassword(String)
         case setLoading(Bool)
-        
         case authorizeUser(Bool)
         case setErrorMessage(String)
     }
     
     struct State {
-        
         var id: String = ""
         var password: String = ""
         var isLoading: Bool = false
-        
         var isAuthorized: Bool = false
-        
-        var errorMessage: String = ""
+        var errorMessage: String?
     }
     
     let userService: UserServiceType
@@ -78,9 +73,11 @@ final class LoginViewReactor: Reactor {
         switch mutation {
         case .setId(let id):
             state.id = id
+            state.errorMessage = nil
             
         case .setPassword(let password):
             state.password = password
+            state.errorMessage = nil
             
         case .setLoading(let isLoading):
             state.isLoading = isLoading

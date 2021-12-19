@@ -50,7 +50,7 @@ enum NetworkError: String, Error {
         case .E001:
             return "방 인원이 모두 찼습니다! 나중에 다시 시도해주세요.🧐"
         case .E101:
-            return "아이디 또는 비밀번호가 일치하지 않습니다."
+            return "아이디 또는 비밀번호가 일치하지 않습니다.🧐"
         case .E102:
             return "이미 존재하는 계정입니다.🧐"
         case .E103:

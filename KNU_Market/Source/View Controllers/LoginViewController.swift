@@ -78,7 +78,7 @@ class LoginViewController: BaseViewController, View {
         $0.setImage(Images.infoButton, for: .normal)
     }
     
-    lazy var idTextField = UITextField().then {
+    let idTextField = UITextField().then {
         $0.borderStyle = .none
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = Metrics.textFieldHeight / 2
@@ -90,7 +90,7 @@ class LoginViewController: BaseViewController, View {
         $0.placeholder = "아이디 입력"
     }
     
-    lazy var passwordTextField = UITextField().then {
+    let passwordTextField = UITextField().then {
         $0.borderStyle = .none
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = Metrics.textFieldHeight / 2
@@ -120,7 +120,6 @@ class LoginViewController: BaseViewController, View {
     }
     
     let findIdButton = UIButton(type: .system).then {
-
         $0.setAttributedTitle(NSAttributedString(
             string: "아이디 찾기",
             attributes: Fonts.findButtonAttributes
@@ -174,9 +173,7 @@ class LoginViewController: BaseViewController, View {
         view.addSubview(infoButton)
         view.addSubview(registerButton)
         
-        [findIdButton, findPwButton].forEach {
-            findInfoStackView.addArrangedSubview($0)
-        }
+        [findIdButton, findPwButton].forEach { findInfoStackView.addArrangedSubview($0) }
         view.addSubview(findInfoStackView)
     }
     
@@ -237,7 +234,6 @@ class LoginViewController: BaseViewController, View {
         }
     }
     
-    
     //MARK: - Binding
     
     func bind(reactor: LoginViewReactor) {
@@ -265,7 +261,6 @@ class LoginViewController: BaseViewController, View {
 
 
         // Output
-        
         reactor.state
             .map { $0.isLoading }
             .asObservable()
@@ -274,7 +269,6 @@ class LoginViewController: BaseViewController, View {
                 $0 ? showProgressBar() : dismissProgressBar()
             })
             .disposed(by: disposeBag)
-        
         
         reactor.state
             .map { $0.isAuthorized }
@@ -289,10 +283,10 @@ class LoginViewController: BaseViewController, View {
         
         reactor.state
             .map { $0.errorMessage }
-            .distinctUntilChanged()
+            .filter { $0 != nil }
             .withUnretained(self)
             .subscribe { (vc, errorMessage) in
-                self.presentKMAlertOnMainThread(title: "로그인 실패", message: errorMessage)
+                self.presentKMAlertOnMainThread(title: "로그인 실패", message: errorMessage!)
             }
             .disposed(by: disposeBag)
         

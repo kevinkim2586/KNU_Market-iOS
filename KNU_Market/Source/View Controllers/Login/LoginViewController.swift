@@ -286,13 +286,12 @@ class LoginViewController: BaseViewController, View {
             .filter { $0 != nil }
             .withUnretained(self)
             .subscribe { (vc, errorMessage) in
-                self.presentKMAlertOnMainThread(title: "로그인 실패", message: errorMessage!)
+                self.presentKMAlertOnMainThread(
+                    title: "로그인 실패",
+                    message: errorMessage!
+                )
             }
             .disposed(by: disposeBag)
-        
-        
-        
-        
         
         registerButton.rx.tap
             .withUnretained(self)
@@ -339,30 +338,6 @@ class LoginViewController: BaseViewController, View {
         let navigationController = UINavigationController(rootViewController: vc)
         present(navigationController, animated: true)
     }
-}
-
-//MARK: - IBActions
-
-extension LoginViewController {
-    
-//    @objc private func pressedLoginButton() {
-//        guard let id = idTextField.text, let password = passwordTextField.text else { return }
-//        guard id.count > 0, password.count > 0 else { return }
-//        
-//        showProgressBar()
-//
-//        userManager?.login(id: id, password: password) { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(_):
-//                self.goToHomeScreen()
-//            case .failure(let error):
-//                self.presentCustomAlert(title: "로그인 실패", message: error.errorDescription)
-//            }
-//            dismissProgressBar()
-//        }
-//    }
-
 }
 
 //MARK: - ChooseVerificationOptionDelegate

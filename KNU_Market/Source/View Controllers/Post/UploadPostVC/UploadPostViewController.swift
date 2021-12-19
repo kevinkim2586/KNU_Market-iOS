@@ -11,7 +11,6 @@ class UploadPostViewController: BaseViewController {
     var viewModel: UploadPostViewModel!
     var editModel: EditPostModel?
     
-    
     //MARK: - Constants
     
     struct Texts {

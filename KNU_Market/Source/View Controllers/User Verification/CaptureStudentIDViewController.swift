@@ -166,7 +166,6 @@ class CaptureStudentIdViewController: BaseViewController {
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .savedPhotosAlbum
-        
         return imagePicker
     }()
     

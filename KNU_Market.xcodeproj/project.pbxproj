@@ -581,6 +581,15 @@
 			path = "Utilities + Extensions";
 			sourceTree = "<group>";
 		};
+		7C23566A276F21920018CAAE /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7C9A3834276DC6FC00AEE831 /* LoginViewController.swift */,
+				7C9A3836276DC70200AEE831 /* LoginViewReactor.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		7C3B4FF526A92C4100E2CA8F /* User Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -920,8 +929,7 @@
 		7CA66229264132E6000E0B7A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7C9A3834276DC6FC00AEE831 /* LoginViewController.swift */,
-				7C9A3836276DC70200AEE831 /* LoginViewReactor.swift */,
+				7C23566A276F21920018CAAE /* Login */,
 				7C3B4FF526A92C4100E2CA8F /* User Register */,
 				7CEC191E27017C5D00C2D671 /* Find User Info */,
 				7CEC191D27017C0E00C2D671 /* User Verification */,

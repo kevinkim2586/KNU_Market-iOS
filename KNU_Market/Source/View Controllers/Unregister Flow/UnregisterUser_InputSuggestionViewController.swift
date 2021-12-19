@@ -203,7 +203,7 @@ extension UnregisterUser_InputSuggestionViewController {
                 dismissProgressBar()
                 guard let self = self else { return }
                 switch result {
-                case .success: self.popToInitialViewController()
+                case .success: self.popToLoginViewController()
                 case .failure(let error):
                     self.presentCustomAlert(title: "회원 탈퇴 실패", message: error.errorDescription)
                 }

@@ -122,11 +122,15 @@ extension UIViewController {
 
 extension UIViewController {
     
-    // Initial VC로 돌아가는 메서드 (로그아웃, 회원 탈퇴, refreshToken 만료 등의 상황에 쓰임)
-    func popToInitialViewController() {
+    // Login VC로 돌아가는 메서드 (로그아웃, 회원 탈퇴, refreshToken 만료 등의 상황에 쓰임)
+    func popToLoginViewController() {
         User.shared.resetAllUserInfo()
-        let initialVC = InitialViewController(userManager: UserManager())
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
+        let loginVC = LoginViewController(
+            reactor: LoginViewReactor(
+                userService: UserService(network: Network<UserAPI>())
+            )
+        )
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
     }
     
     // 로그인 or 회원가입 성공 시 홈화면 전환 시 사용되는 함수
@@ -162,11 +166,11 @@ extension UIViewController {
     }
     
     @objc func refreshTokenHasExpired() {
-        presentCustomAlert(title: "로그인 세션 만료 🤔", message: "세션이 만료되었습니다. 다시 로그인 해주세요.") { self.popToInitialViewController() }
+        presentCustomAlert(title: "로그인 세션 만료 🤔", message: "세션이 만료되었습니다. 다시 로그인 해주세요.") { self.popToLoginViewController() }
     }
     
     @objc func presentUnexpectedError() {
-        presentCustomAlert(title: "예기치 못한 오류가 발생했습니다.🤔", message: "불편을 드려 죄송합니다. 다시 로그인 해주세요.") { self.popToInitialViewController() }
+        presentCustomAlert(title: "예기치 못한 오류가 발생했습니다.🤔", message: "불편을 드려 죄송합니다. 다시 로그인 해주세요.") { self.popToLoginViewController() }
 
     }
     

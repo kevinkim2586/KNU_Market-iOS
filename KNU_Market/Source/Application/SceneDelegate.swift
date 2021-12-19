@@ -22,19 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if User.shared.isLoggedIn == true {
             window?.rootViewController = UIHelper.createMainTabBarController()
         } else {
-            
             let loginVC = LoginViewController(
                 reactor: LoginViewReactor(
                     userService: UserService(network: Network<UserAPI>())
                 )
             )
             window?.rootViewController = loginVC
-            
-            
-            
-//            
-//            let initialController = InitialViewController(userManager: UserManager())
-//            window?.rootViewController = initialController
         }
         window?.makeKeyAndVisible()
     }

@@ -27,7 +27,7 @@ extension PostListViewController: PostListViewModelDelegate {
             message: "사용자 정보 불러오기에 실패하였습니다. 로그아웃 후 다시 이용해 주세요.😥",
             buttonTitle: "로그아웃"
         ) {
-            self.popToInitialViewController()
+            self.popToLoginViewController()
         }
     }
     

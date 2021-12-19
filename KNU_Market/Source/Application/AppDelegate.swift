@@ -186,7 +186,7 @@ extension AppDelegate {
             message: "세션이 만료되었습니다. 다시 로그인해 주세요.",
             buttonTitle: "확인"
         )
-        rootVC.popToInitialViewController()
+        rootVC.popToLoginViewController()
     }
     
     func getNotificationSettings() {

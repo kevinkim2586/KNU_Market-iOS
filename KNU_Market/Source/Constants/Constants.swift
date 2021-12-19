@@ -30,7 +30,6 @@ struct K {
     struct StoryboardID {
         
         // Register  & Login
-        static let initialVC                    = "initialViewController"
         static let initialNavigationController  = "InitialNavigationController"
         static let idInputVC                    = "IDInputViewController"
         static let emailInputVC                 = "EmailInputViewController"

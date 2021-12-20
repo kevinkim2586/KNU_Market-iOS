@@ -32,12 +32,10 @@ class IDInputReactorViewController: BaseViewController, View {
         $0.autocapitalizationType = .none
     }
     
-    let errorLabel: KMErrorLabel = {
-        let label = KMErrorLabel()
-        label.isHidden = true
-        label.numberOfLines = 2
-        return label
-    }()
+    let errorLabel = KMErrorLabel().then {
+        $0.isHidden = true
+        $0.numberOfLines = 2
+    }
     
     let bottomButton = KMBottomButton(buttonTitle: "다음").then {
         $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true

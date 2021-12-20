@@ -2,6 +2,28 @@ import UIKit
 
 extension String {
     
+    var isValidID: ValidationError.OnRegister {
+        guard !self.isEmpty else { return ValidationError.OnRegister.empty }
+        
+        if self.count < 4 || self.count > 50 {
+            return ValidationError.OnRegister.incorrectIdLength
+        }
+        
+        let idRegEx = "^([0-9a-z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:'\",<.>/?]{4,50})$"
+        let idCheck = NSPredicate(format:"SELF MATCHES %@", idRegEx).evaluate(with: self)
+        return idCheck
+        ? ValidationError.OnRegister.correct
+        : ValidationError.OnRegister.incorrectIdFormat
+    }
+    
+    
+    
+    
+    
+}
+
+extension String {
+    
     func convertStringToDate() -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

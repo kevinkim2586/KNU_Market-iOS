@@ -84,6 +84,8 @@
 		7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */; };
 		7C555465266D0A1400C3C5B6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555464266D0A1400C3C5B6 /* Location.swift */; };
 		7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555466266D1A8600C3C5B6 /* MediaManager.swift */; };
+		7C58475B277040E6005D75B2 /* IDInputReactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58475A277040E6005D75B2 /* IDInputReactorViewController.swift */; };
+		7C58475D2770423A005D75B2 /* IDInputReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58475C2770423A005D75B2 /* IDInputReactor.swift */; };
 		7C5A1F2B26D6174F0041885B /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */; };
 		7C5E21292646558700E98FE5 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* PostViewModel.swift */; };
 		7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */; };
@@ -297,6 +299,8 @@
 		7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderKeys.swift; sourceTree = "<group>"; };
 		7C555464266D0A1400C3C5B6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7C555466266D1A8600C3C5B6 /* MediaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
+		7C58475A277040E6005D75B2 /* IDInputReactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDInputReactorViewController.swift; sourceTree = "<group>"; };
+		7C58475C2770423A005D75B2 /* IDInputReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDInputReactor.swift; sourceTree = "<group>"; };
 		7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -594,6 +598,8 @@
 			isa = PBXGroup;
 			children = (
 				7C4CA63226F4BF3200F4BCA7 /* IDInputViewController.swift */,
+				7C58475C2770423A005D75B2 /* IDInputReactor.swift */,
+				7C58475A277040E6005D75B2 /* IDInputReactorViewController.swift */,
 				7C3B4FEB26A928A600E2CA8F /* PasswordInputViewController.swift */,
 				7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */,
 				7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */,
@@ -1424,12 +1430,14 @@
 				7C4CA63326F4BF3200F4BCA7 /* IDInputViewController.swift in Sources */,
 				7CF369B22754D60E00C9D7A9 /* PostListViewController+UITableView.swift in Sources */,
 				7CC1B59C26D4FC110007F99B /* UIView + Extension.swift in Sources */,
+				7C58475D2770423A005D75B2 /* IDInputReactor.swift in Sources */,
 				7CC69A7A27670CF200105FC0 /* ReportAPI.swift in Sources */,
 				7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */,
 				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
 				7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */,
 				7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */,
 				7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */,
+				7C58475B277040E6005D75B2 /* IDInputReactorViewController.swift in Sources */,
 				7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */,
 				6273750E27647DA6008A29B5 /* PostCell.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,

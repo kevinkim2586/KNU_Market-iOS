@@ -7,6 +7,7 @@ enum ValidationError {
     //MARK: - when registering new user
     enum OnRegister: String, Error {
         
+        case correct
         case incorrectIdFormat          = "불가능한 아이디 형식입니다."
         case incorrectIdLength          = "아이디는 4자 이상, 50자 이하로 적어주세요."
         case existingId                 = "이미 사용 중인 아이디입니다.🥲"
@@ -23,6 +24,7 @@ enum ValidationError {
     //MARK: - when finding User Info
     enum OnFindingUserInfo: String, Error {
         
+        case correct
         case nonAuthorizedSchoolEmail   = "인증 이력이 없는 웹메일입니다."
         case incorrectSchoolEmailFormat = "이메일 형식이 올바르지 않습니다."
         case nonAuthorizedStudentId     = "인증 이력이 없습니다.\n학번과 생년월일을 다시 확인해주세요."
@@ -36,6 +38,7 @@ enum ValidationError {
     //MARK: - when verifying as a student
     enum OnVerification: String, Error {
         
+        case correct
         case didNotCheckStudentIdDuplication    = "학번 중복 확인을 먼저해주세요.🤔"
         case duplicateStudentId                 = "인증 내역이 존재하는 학번입니다."
         case emptyStudentId                     = "학번을 입력해주세요."
@@ -49,6 +52,7 @@ enum ValidationError {
     
     enum OnChangingUserInfo: String, Error {
         
+        case correct
         case incorrectIdFormat          = "불가능한 아이디 형식입니다."
         case incorrectIdLength          = "아이디는 4자 이상, 30자 이하로 적어주세요."
         case existingId                 = "이미 사용 중인 아이디입니다.🥲"
@@ -59,12 +63,10 @@ enum ValidationError {
         case empty                      = "빈 칸이 없는지 확인해주세요."
     }
     
-
-    
-    
     //MARK: - when uploading new item/post
     enum OnUploadPost: String, Error {
         
+        case correct
         case titleTooShortOrLong        = "제목은 3글자 이상, 30자 이하로 작성해주세요.🤔"
         case detailTooShortOrLong       = "공구 내용을 3글자 이상, 700자 이하로 작성해주세요.🤔"
         case empty                      = "빈 칸이 없는지 확인해주세요."

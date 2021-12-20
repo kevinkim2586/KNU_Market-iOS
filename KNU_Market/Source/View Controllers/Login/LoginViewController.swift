@@ -296,7 +296,10 @@ class LoginViewController: BaseViewController, View {
         registerButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                let vc = IDInputViewController(userManager: UserManager())
+                
+                let vc = IDInputReactorViewController(reactor: IDInputReactor(userService: UserService(network: Network<UserAPI>()) ))
+                
+//                let vc = IDInputViewController(userManager: UserManager())
                 let navController = UINavigationController(rootViewController: vc)
                 navController.navigationBar.tintColor = UIColor.black
                 navController.modalPresentationStyle = .overFullScreen

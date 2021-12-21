@@ -296,14 +296,7 @@ class LoginViewController: BaseViewController, View {
         registerButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                
-                let vc = IDInputReactorViewController(reactor: IDInputReactor(userService: UserService(network: Network<UserAPI>()) ))
-                
-//                let vc = IDInputViewController(userManager: UserManager())
-                let navController = UINavigationController(rootViewController: vc)
-                navController.navigationBar.tintColor = UIColor.black
-                navController.modalPresentationStyle = .overFullScreen
-                self.present(navController, animated: true)
+                self.presentRegisterVC()
             })
             .disposed(by: disposeBag)
         
@@ -348,11 +341,7 @@ class LoginViewController: BaseViewController, View {
 extension LoginViewController: ChooseVerificationOptionDelegate {
     
     func didSelectToRegister() {
-        let vc = IDInputViewController(userManager: UserManager())
-        let navController = UINavigationController(rootViewController: vc)
-        navController.navigationBar.tintColor = UIColor.black
-        navController.modalPresentationStyle = .overFullScreen
-        present(navController, animated: true)
+        presentRegisterVC()
     }
 }
 

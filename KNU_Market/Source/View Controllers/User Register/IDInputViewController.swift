@@ -1,76 +1,56 @@
 import UIKit
 import TextFieldEffects
 import SnapKit
+import ReactorKit
 
-class IDInputViewController: BaseViewController {
+class IDInputViewController: BaseViewController, View {
+    
+    typealias Reactor = IDInputReactor
     
     //MARK: - Properties
-    
-    private var userManager: UserManager?
-    
-    typealias RegisterError = ValidationError.OnRegister
     
     //MARK: - Constants
     
     fileprivate struct Metrics {
-        static let labelSidePadding: CGFloat = 16
+        static let labelSidePadding = 16.f
     }
     
     //MARK: - UI
     
-    let titleLabel: KMTitleLabel = {
-        let label = KMTitleLabel(textColor: .darkGray)
-        label.numberOfLines = 2
-        label.text = "환영합니다, 학우님!\n로그인에 사용할 아이디를 입력해주세요."
-        label.changeTextAttributeColor(
-            fullText: label.text!,
+    let titleLabel = KMTitleLabel(textColor: .darkGray).then {
+        $0.numberOfLines = 2
+        $0.text = "환영합니다, 학우님!\n로그인에 사용할 아이디를 입력해주세요."
+        $0.changeTextAttributeColor(
+            fullText: $0.text!,
             changeText: "로그인에 사용할 아이디"
         )
-        return label
-    }()
+    }
     
-    lazy var userIdTextField: KMTextField = {
-        let textField = KMTextField(placeHolderText: "아이디 입력")
-        textField.addTarget(
-            self,
-            action: #selector(textFieldDidChange(_:)),
-            for: .editingChanged
-        )
-        textField.autocapitalizationType = .none
-        textField.inputAccessoryView = bottomButton
-        return textField
-    }()
+    let userIdTextField = KMTextField(placeHolderText: "아이디 입력").then {
+        $0.autocapitalizationType = .none
+    }
     
-    let errorLabel: KMErrorLabel = {
-        let label = KMErrorLabel()
-        label.isHidden = true
-        label.numberOfLines = 2
-        return label
-    }()
+    let errorLabel = KMErrorLabel().then {
+        $0.isHidden = true
+        $0.numberOfLines = 2
+    }
     
-    lazy var bottomButton: KMBottomButton = {
-        let button = KMBottomButton(buttonTitle: "다음")
-        button.heightAnchor.constraint(equalToConstant: button.heightConstantForKeyboardAppeared).isActive = true
-        button.addTarget(
-            self,
-            action: #selector(pressedBottomButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
+    let bottomButton = KMBottomButton(buttonTitle: "다음").then {
+        $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true
+    }
     
-    lazy var dismissBarButtonItem = UIBarButtonItem(
+    let dismissBarButtonItem = UIBarButtonItem(
         image: UIImage(systemName: "xmark"),
         style: .plain,
-        target: self,
-        action: #selector(dismissVC)
+        target: nil,
+        action: nil
     )
-       
+
     //MARK: - Initialization
     
-    init(userManager: UserManager) {
+    init(reactor: Reactor) {
         super.init()
-        self.userManager = userManager
+        self.reactor = reactor
     }
     
     required init?(coder: NSCoder) {
@@ -94,6 +74,7 @@ class IDInputViewController: BaseViewController {
         super.setupLayout()
         
         navigationItem.leftBarButtonItem = dismissBarButtonItem
+        userIdTextField.inputAccessoryView = bottomButton
         
         view.addSubview(titleLabel)
         view.addSubview(userIdTextField)
@@ -103,25 +84,24 @@ class IDInputViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        userIdTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(55)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-(Metrics.labelSidePadding + 130))
-            make.height.equalTo(60)
+        userIdTextField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(55)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-(Metrics.labelSidePadding + 130))
+            $0.height.equalTo(60)
         }
         
-        errorLabel.snp.makeConstraints { make in
-            make.top.equalTo(userIdTextField.snp.bottom).offset(Metrics.labelSidePadding)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        errorLabel.snp.makeConstraints {
+            $0.top.equalTo(userIdTextField.snp.bottom).offset(Metrics.labelSidePadding)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
-        
     }
     
     override func setupStyle() {
@@ -129,62 +109,75 @@ class IDInputViewController: BaseViewController {
         view.backgroundColor = .white
         setClearNavigationBarBackground()
     }
-}
-
-//MARK: - Target Methods
-
-extension IDInputViewController {
     
-    @objc private func pressedBottomButton() {
-        userIdTextField.resignFirstResponder()
-        if !checkIfValidId() { return }
-        checkIDDuplication()
-    }
-}
-
-//MARK: - User Input Validation
-
-extension IDInputViewController {
-    
-    func checkIfValidId() -> Bool {
-        guard let id = userIdTextField.text else { return false }
-        
-        if id.count < 4 || id.count > 50 {
-            errorLabel.showErrorMessage(message: RegisterError.incorrectIdLength.rawValue)
-            return false
-        }
-        
-        if !id.isValidId {
-            errorLabel.showErrorMessage(message: RegisterError.incorrectIdFormat.rawValue)
-            return false
-        }
-        return true
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.view.endEditing(true)
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        errorLabel.isHidden = true
-    }
+    //MARK: - Binding
     
-    func checkIDDuplication() {
+    func bind(reactor: IDInputReactor) {
         
-        let id = userIdTextField.text!.trimmingCharacters(in: .whitespaces)
+        // Input
         
-        userManager?.checkDuplication(id: id) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let isDuplicate):
-                if isDuplicate {
-                    self.errorLabel.showErrorMessage(message: RegisterError.existingId.rawValue)
-                } else {
-                    UserRegisterValues.shared.userId = id
-                    self.navigationController?.pushViewController(
-                        PasswordInputViewController(),
-                        animated: true
-                    )
-                }
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
+        dismissBarButtonItem.rx.tap
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dismissVC()
+            })
+            .disposed(by: disposeBag)
+        
+        userIdTextField.rx.text.orEmpty
+            .asObservable()
+            .map { Reactor.Action.updateTextField($0) }
+            .bind(to: reactor.action )
+            .disposed(by: disposeBag)
+        
+        userIdTextField.rx.controlEvent([.editingDidBegin, .editingChanged])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.errorLabel.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
+        bottomButton.rx.tap
+            .asObservable()
+            .map { Reactor.Action.pressedBottomButton }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        self.rx.viewDidDisappear
+            .map { _ in Reactor.Action.viewDidDisappear }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Output
+        
+        reactor.state
+            .map { $0.isAllowedToGoNext }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe { _ in
+                let vc = PasswordInputViewController(reactor: PasswordInputViewReactor())
+                self.navigationController?.pushViewController(
+                    vc,
+                    animated: true
+                )
             }
-        }
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (_, errorMessage) in
+                self.errorLabel.showErrorMessage(message: errorMessage!)
+            }
+            .disposed(by: disposeBag)
     }
 }
+

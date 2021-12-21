@@ -219,11 +219,15 @@ extension UIViewController {
     
     // 회원가입 VC 띄우기
     func presentRegisterVC() {
-        
-        
-        let vc = IDInputViewController(userManager: UserManager())
-        vc.modalPresentationStyle = .overFullScreen
-        present(vc, animated: true)
+        let vc = IDInputViewController(
+            reactor: IDInputReactor(
+                userService: UserService(network: Network<UserAPI>())
+            )
+        )
+        let navController = UINavigationController(rootViewController: vc)
+        navController.navigationBar.tintColor = UIColor.black
+        navController.modalPresentationStyle = .overFullScreen
+        present(navController, animated: true)
     }
 }
 

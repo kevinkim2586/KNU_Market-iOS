@@ -2,6 +2,7 @@ import UIKit
 
 extension String {
     
+    
     var isValidID: ValidationError.OnRegister {
         guard !self.isEmpty else { return ValidationError.OnRegister.empty }
         
@@ -17,9 +18,26 @@ extension String {
     }
     
     
-    
-    
-    
+    // 숫자+문자 포함해서 8~20글자 사이의 text 체크하는 정규표현식
+    func isValidPassword(alongWith password: String) -> ValidationError.OnRegister {
+        guard !self.isEmpty, !password.isEmpty else { return ValidationError.OnRegister.empty }
+
+        guard self.count >= 8, self.count <= 20 else {
+            return ValidationError.OnRegister.incorrectPasswordFormat
+        }
+        
+        guard self == password else {
+            return ValidationError.OnRegister.passwordDoesNotMatch
+        }
+        
+        let passwordREGEX = ("(?=.*[A-Za-z])(?=.*[0-9]).{8,20}")
+        let passwordCheck = NSPredicate(format: "SELF MATCHES %@", passwordREGEX).evaluate(with: self)
+        
+        return passwordCheck
+        ? ValidationError.OnRegister.correct
+        : ValidationError.OnRegister.incorrectPasswordFormat
+    }
+
 }
 
 extension String {

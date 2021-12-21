@@ -89,8 +89,6 @@ final class IDInputReactor: Reactor {
             
         case .allowToGoNext(let isAllowed):
             state.isAllowedToGoNext = isAllowed
-
-            
         }
         return state
     }

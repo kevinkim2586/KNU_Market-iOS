@@ -1,12 +1,12 @@
 import UIKit
-import TextFieldEffects
 import SnapKit
+import ReactorKit
+import RxSwift
+import RxCocoa
 
-class PasswordInputViewController: BaseViewController {
+class PasswordInputViewController: BaseViewController, View {
     
-    //MARK: - Properties
-    
-    typealias RegisterError = ValidationError.OnRegister
+    typealias Reactor = PasswordInputViewReactor
     
     //MARK: - Constants
     
@@ -17,68 +17,49 @@ class PasswordInputViewController: BaseViewController {
     
     //MARK: - UI
     
-    let titleLabelFirstLine: KMTitleLabel = {
-        let label = KMTitleLabel(textColor: .darkGray)
-        label.text = "\(UserRegisterValues.shared.userId)님 만나서 반갑습니다!"
-        label.changeTextAttributeColor(
-            fullText: label.text!,
+    let titleLabelFirstLine = KMTitleLabel(textColor: .darkGray).then {
+        $0.text = "\(UserRegisterValues.shared.userId)님 만나서 반갑습니다!"
+        $0.changeTextAttributeColor(
+            fullText: $0.text!,
             changeText: "\(UserRegisterValues.shared.userId)님"
         )
-        return label
-    }()
+        $0.adjustsFontSizeToFitWidth = true
+        $0.minimumScaleFactor = 0.6
+    }
     
-    let titleLabelSecondLine: KMTitleLabel = {
-        let label = KMTitleLabel(textColor: .darkGray)
-        label.text = "사용하실 비밀번호를 입력해 주세요!"
-        label.changeTextAttributeColor(
-            fullText: label.text!,
+    let titleLabelSecondLine = KMTitleLabel(textColor: .darkGray).then {
+        $0.text = "사용하실 비밀번호를 입력해 주세요!"
+        $0.changeTextAttributeColor(
+            fullText: $0.text!,
             changeText: "비밀번호"
         )
-        return label
-    }()
+    }
     
-    let detailLabel: KMDetailLabel = {
-        let label = KMDetailLabel(numberOfTotalLines: 2)
-        label.text = RegisterError.incorrectPasswordFormat.rawValue
-        return label
-    }()
+    let detailLabel = KMDetailLabel(numberOfTotalLines: 2).then {
+        $0.text = ValidationError.OnRegister.incorrectPasswordFormat.rawValue
+    }
     
-    lazy var passwordTextField: KMTextField = {
-        let textField = KMTextField(placeHolderText: "비밀번호")
-        textField.addTarget(
-            self,
-            action: #selector(textFieldDidChange(_:)),
-            for: .editingChanged
-        )
-        textField.inputAccessoryView = bottomButton
-        textField.isSecureTextEntry = true
-        return textField
-    }()
+    let passwordTextField = KMTextField(placeHolderText: "비밀번호").then {
+        $0.isSecureTextEntry = true
+    }
     
-    lazy var checkPasswordTextField: KMTextField = {
-        let textField = KMTextField(placeHolderText: "비밀번호 확인")
-        textField.addTarget(
-            self,
-            action: #selector(textFieldDidChange(_:)),
-            for: .editingChanged
-        )
-        textField.inputAccessoryView = bottomButton
-        textField.isSecureTextEntry = true
-        return textField
-    }()
+    let checkPasswordTextField = KMTextField(placeHolderText: "비밀번호 확인").then {
+        $0.isSecureTextEntry = true
+    }
   
-    lazy var bottomButton: KMBottomButton = {
-        let button = KMBottomButton(buttonTitle: "다음")
-        button.heightAnchor.constraint(equalToConstant: button.heightConstantForKeyboardAppeared).isActive = true
-        button.addTarget(
-            self,
-            action: #selector(pressedBottomButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
-    
+    let bottomButton = KMBottomButton(buttonTitle: "다음").then {
+        $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true
+    }
+
     //MARK: - Initialization
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - View Life Cycle
     
@@ -96,6 +77,9 @@ class PasswordInputViewController: BaseViewController {
     override func setupLayout() {
         super.setupLayout()
         
+        passwordTextField.inputAccessoryView = bottomButton
+        checkPasswordTextField.inputAccessoryView = bottomButton
+        
         view.addSubview(titleLabelFirstLine)
         view.addSubview(titleLabelSecondLine)
         view.addSubview(detailLabel)
@@ -106,36 +90,36 @@ class PasswordInputViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         
-        titleLabelFirstLine.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        titleLabelFirstLine.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        titleLabelSecondLine.snp.makeConstraints { make in
-            make.top.equalTo(titleLabelFirstLine.snp.bottom).offset(10)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        titleLabelSecondLine.snp.makeConstraints {
+            $0.top.equalTo(titleLabelFirstLine.snp.bottom).offset(10)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        detailLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabelSecondLine.snp.bottom).offset(25)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        detailLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabelSecondLine.snp.bottom).offset(25)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
 
-        passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(detailLabel.snp.bottom).offset(30)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-(Metrics.labelSidePadding + 130))
-            make.height.equalTo(Metrics.textFieldHeight)
+        passwordTextField.snp.makeConstraints {
+            $0.top.equalTo(detailLabel.snp.bottom).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-(Metrics.labelSidePadding + 130))
+            $0.height.equalTo(Metrics.textFieldHeight)
         }
         
-        checkPasswordTextField.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(Metrics.labelSidePadding)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-(Metrics.labelSidePadding + 130))
-            make.height.equalTo(Metrics.textFieldHeight)
+        checkPasswordTextField.snp.makeConstraints {
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(Metrics.labelSidePadding)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-(Metrics.labelSidePadding + 130))
+            $0.height.equalTo(Metrics.textFieldHeight)
         }
     }
     
@@ -143,76 +127,69 @@ class PasswordInputViewController: BaseViewController {
         super.setupStyle()
         view.backgroundColor = .white
     }
+    
+    //MARK: - Binding
+    
+    func bind(reactor: PasswordInputViewReactor) {
+        
+        // Input
+        
+        Observable.combineLatest(
+            passwordTextField.rx.text.orEmpty,
+            checkPasswordTextField.rx.text.orEmpty
+        )
+            .observe(on: MainScheduler.asyncInstance)
+            .map { Reactor.Action.updateTextFields([$0, $1]) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        Observable.combineLatest(
+            passwordTextField.rx.controlEvent([.editingChanged]),
+            checkPasswordTextField.rx.controlEvent([.editingChanged])
+        )
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.detailLabel.text = ValidationError.OnRegister.incorrectPasswordFormat.rawValue
+            })
+            .disposed(by: disposeBag)
+        
+        bottomButton.rx.tap
+            .asObservable()
+            .map { Reactor.Action.pressedBottomButton }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        self.rx.viewDidDisappear
+            .map { _ in Reactor.Action.viewDidDisappear }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Output
+        
+        reactor.state
+            .map { $0.isAllowedToGoNext }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe { _ in
+                let vc = NickNameInputViewController(userManager: UserManager())
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+
+        reactor.state
+            .map { $0.errorMessage }
+            .asObservable()
+            .bind(to: self.detailLabel.rx.text )
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessageColor }
+            .asObservable()
+            .bind(to: self.detailLabel.rx.textColor )
+            .disposed(by: disposeBag)
+    }
+    
 }
-
-//MARK: - Target Methods
-
-extension PasswordInputViewController {
-
-    @objc func pressedBottomButton(_ sender: UIButton) {
-        if  !validPassword() ||
-            !checkPasswordLengthIsValid() ||
-            !checkIfPasswordFieldsAreIdentical() { return }
-        
-        UserRegisterValues.shared.password = passwordTextField.text!
-        let vc = NickNameInputViewController(userManager: UserManager())
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func showErrorMessage(with errorType: ValidationError.OnRegister) {
-        detailLabel.text = errorType.rawValue
-        detailLabel.textColor = UIColor(named: K.Color.appColor)
-    }
-}
-
-//MARK: - User Input Validation
-
-extension PasswordInputViewController {
-    
-    // 숫자+문자 포함해서 8~20글자 사이의 text 체크하는 정규표현식
-    func validPassword() -> Bool {
-        guard let userPW = passwordTextField.text else {
-            showErrorMessage(with: RegisterError.empty)
-            return false
-        }
-        
-        let passwordREGEX = ("(?=.*[A-Za-z])(?=.*[0-9]).{8,20}")
-        let passwordTesting = NSPredicate(format: "SELF MATCHES %@", passwordREGEX)
-        
-        if passwordTesting.evaluate(with: userPW) == true {
-            return true
-        } else {
-            showErrorMessage(with: RegisterError.incorrectPasswordFormat)
-            return false
-        }
-    }
-    
-    func checkPasswordLengthIsValid() -> Bool {
-        guard let password = passwordTextField.text, let _ = checkPasswordTextField.text else {
-            showErrorMessage(with: RegisterError.empty)
-            return false
-        }
-        
-        if password.count >= 8 && password.count <= 20 { return true }
-        else {
-            showErrorMessage(with: RegisterError.incorrectPasswordFormat)
-            return false
-        }
-    }
-    
-    func checkIfPasswordFieldsAreIdentical() -> Bool {
-        if passwordTextField.text == checkPasswordTextField.text { return true }
-        else {
-            showErrorMessage(with: RegisterError.passwordDoesNotMatch)
-            checkPasswordTextField.text?.removeAll()
-            passwordTextField.becomeFirstResponder()
-            return false
-        }
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        detailLabel.text = RegisterError.incorrectPasswordFormat.rawValue
-        detailLabel.textColor = .lightGray
-    }
-}
-

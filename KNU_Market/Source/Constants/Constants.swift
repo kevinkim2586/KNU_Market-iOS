@@ -31,7 +31,6 @@ struct K {
         
         // Register  & Login
         static let initialNavigationController  = "InitialNavigationController"
-        static let idInputVC                    = "IDInputViewController"
         static let emailInputVC                 = "EmailInputViewController"
         static let checkEmailVC                 = "CheckEmailViewController"
         static let emailForLostPWVC             = "EmailForLostPasswordViewController"

@@ -1,15 +1,15 @@
 //
-//  IDInputReactor.swift
+//  NickNameInputViewReactor.swift
 //  KNU_Market
 //
-//  Created by Kevin Kim on 2021/12/20.
+//  Created by Kevin Kim on 2021/12/21.
 //
 
-import UIKit
+import Foundation
 import ReactorKit
-import Moya
+import RxSwift
 
-final class IDInputReactor: Reactor {
+final class NickNameInputViewReactor: Reactor {
     
     let initialState: State
     let userService: UserServiceType
@@ -23,18 +23,18 @@ final class IDInputReactor: Reactor {
     }
     
     enum Mutation {
-        case setUserId(String)
+        case setUserNickname(String)
         case setErrorMessage(String)
         case allowToGoNext(Bool)
     }
     
     struct State {
-        var userId: String = ""
+        var userNickname: String = ""
         var isAllowedToGoNext: Bool = false
-        var idValidation: ValidationError.OnRegister?
+        var nicknameValidation: ValidationError.OnRegister?
         var errorMessage: String?
     }
-
+    
     init(userService: UserServiceType) {
         self.initialState = State()
         self.userService = userService
@@ -43,33 +43,34 @@ final class IDInputReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         
         switch action {
-        case .updateTextField(let text):
-            return Observable.just(Mutation.setUserId(text))
+        case let .updateTextField(text):
+            return Observable.just(Mutation.setUserNickname(text))
             
         case .pressedBottomButton:
             
-            let idValidationResult = currentState.userId.isValidID
-            if idValidationResult != .correct {
-                return Observable.just(Mutation.setErrorMessage(idValidationResult.rawValue))
+            let nicknameValidationResult = currentState.userNickname.isValidNickname
+            if nicknameValidationResult != .correct {
+                return Observable.just(Mutation.setErrorMessage(nicknameValidationResult.rawValue))
             }
             
-            return self.userService.checkDuplication(type: .id, infoString: currentState.userId)
+            return self.userService.checkDuplication(type: .nickname, infoString: currentState.userNickname)
                 .asObservable()
-                .map { result in
+                .map {  result in
                     switch result {
                     case .success(let duplicateCheckModel):
                         
                         if duplicateCheckModel.isDuplicate {
-                            return Mutation.setErrorMessage(RegisterError.existingId.rawValue)
+                            return Mutation.setErrorMessage(RegisterError.existingNickname.rawValue)
                         } else {
-                            UserRegisterValues.shared.userId = self.currentState.userId
+                            UserRegisterValues.shared.nickname = self.currentState.userNickname
                             return Mutation.allowToGoNext(true)
                         }
-                    
+                        
                     case .error(let error):
                         return Mutation.setErrorMessage(error.errorDescription)
                     }
                 }
+            
         case .viewDidDisappear:
             return Observable.just(Mutation.allowToGoNext(false))
         }
@@ -78,19 +79,18 @@ final class IDInputReactor: Reactor {
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         switch mutation {
+        case .setUserNickname(let userNickname):
+            state.userNickname = userNickname
             
-        case .setUserId(let userId):
-            state.userId = userId
-
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
             state.isAllowedToGoNext = false
             
         case .allowToGoNext(let isAllowed):
             state.isAllowedToGoNext = isAllowed
+            state.errorMessage = nil
         }
         return state
     }
-    
     
 }

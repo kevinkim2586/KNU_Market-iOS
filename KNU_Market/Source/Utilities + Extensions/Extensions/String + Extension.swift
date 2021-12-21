@@ -37,6 +37,19 @@ extension String {
         ? ValidationError.OnRegister.correct
         : ValidationError.OnRegister.incorrectPasswordFormat
     }
+    
+    var isValidNickname: ValidationError.OnRegister {
+        guard !self.isEmpty else { return ValidationError.OnRegister.empty }
+        
+        if self.hasEmojis, self.hasSpecialCharacters {
+            return ValidationError.OnRegister.incorrectNicknameFormat
+        }
+        
+        guard self.count >= 2 && self.count <= 10 else {
+            return ValidationError.OnRegister.incorrectNicknameLength
+        }
+        return ValidationError.OnRegister.correct
+    }
 
 }
 

@@ -11,8 +11,8 @@ class PasswordInputViewController: BaseViewController, View {
     //MARK: - Constants
     
     fileprivate struct Metrics {
-        static let labelSidePadding: CGFloat    = 20
-        static let textFieldHeight: CGFloat     = 60
+        static let labelSidePadding = 20.f
+        static let textFieldHeight  = 60.f
     }
     
     //MARK: - UI
@@ -173,12 +173,15 @@ class PasswordInputViewController: BaseViewController, View {
             .filter { $0 == true }
             .withUnretained(self)
             .subscribe { _ in
-                let vc = NickNameInputViewController(userManager: UserManager())
+                let vc = NickNameInputViewController(
+                    reactor: NickNameInputViewReactor(
+                        userService: UserService(network: Network<UserAPI>())
+                    )
+                )
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
         
-
         reactor.state
             .map { $0.errorMessage }
             .asObservable()

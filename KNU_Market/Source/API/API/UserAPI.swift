@@ -127,10 +127,10 @@ extension UserAPI: BaseAPI {
             var multipartData: [MultipartFormData] = []
             
             multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "id"))
-            multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "password"))
-            multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "nickname"))
-            multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "fcmToken"))
-            multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "email"))
+            multipartData.append(MultipartFormData(provider: .data(model.password.data(using: .utf8)!), name: "password"))
+            multipartData.append(MultipartFormData(provider: .data(model.nickname.data(using: .utf8)!), name: "nickname"))
+            multipartData.append(MultipartFormData(provider: .data(model.fcmToken.data(using: .utf8)!), name: "fcmToken"))
+            multipartData.append(MultipartFormData(provider: .data(model.emailForPasswordLoss.data(using: .utf8)!), name: "email"))
         
             return .uploadMultipart(multipartData)
             
@@ -140,7 +140,7 @@ extension UserAPI: BaseAPI {
             
             multipartData.append(MultipartFormData(provider: .data(model.studentId.data(using: .utf8)!), name: "studentId"))
             multipartData.append(MultipartFormData(provider: .data(model.studentBirth.data(using: .utf8)!), name: "studentBirth"))
-            multipartData.append(MultipartFormData(provider: .data(model.studentBirth.data(using: .utf8)!), name: "media", fileName: "studentId.jpeg", mimeType: "image/jpeg"))
+            multipartData.append(MultipartFormData(provider: .data(model.studentIdImageData), name: "media", fileName: "studentId.jpeg", mimeType: "image/jpeg"))
             
             return .uploadMultipart(multipartData)
             

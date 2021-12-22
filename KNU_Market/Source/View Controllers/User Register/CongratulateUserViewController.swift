@@ -199,7 +199,13 @@ extension CongratulateUserViewController {
             dismissProgressBar()
             switch result {
             case .success: self.changeRootViewControllerToMain()
-            case .failure(let error): self.showSimpleBottomAlert(with: error.errorDescription)
+            case .failure(let error):
+                self.showSimpleBottomAlertWithAction(
+                    message: error.errorDescription,
+                    buttonTitle: "돌아가기"
+                ) {
+                    self.popToLoginViewController()
+                }
             }
         }
     }

@@ -39,7 +39,9 @@ class NickNameInputViewController: BaseViewController, View {
         $0.text = "2자 이상, 15자 이하로 적어주세요."
     }
     
-    let nicknameTextField = KMTextField(placeHolderText: "닉네임 입력")
+    let nicknameTextField = KMTextField(placeHolderText: "닉네임 입력").then {
+        $0.autocapitalizationType = .none
+    }
     
     let errorLabel = KMErrorLabel().then {
         $0.isHidden = true
@@ -151,7 +153,7 @@ class NickNameInputViewController: BaseViewController, View {
         
         bottomButton.rx.tap
             .asObservable()
-            .map { Reactor.Action.pressedBottomButton }
+            .map { Reactor.Action.checkDuplication }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
@@ -168,7 +170,11 @@ class NickNameInputViewController: BaseViewController, View {
             .filter { $0 == true }
             .withUnretained(self)
             .subscribe { _ in
-                let vc = EmailForLostPasswordViewController(userManager: UserManager())
+                let vc = EmailForLostPasswordViewController(
+                    reactor: EmailForLostPasswordViewReactor(
+                        userService: UserService(network: Network<UserAPI>())
+                    )
+                )
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)

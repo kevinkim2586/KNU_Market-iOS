@@ -1,7 +1,10 @@
 import UIKit
+import SDWebImage
+
+
+// Validation Related Methods, Computed Properties
 
 extension String {
-    
     
     var isValidID: ValidationError.OnRegister {
         guard !self.isEmpty else { return ValidationError.OnRegister.empty }
@@ -49,6 +52,17 @@ extension String {
             return ValidationError.OnRegister.incorrectNicknameLength
         }
         return ValidationError.OnRegister.correct
+    }
+
+    var isValidEmailFormat: ValidationError.OnRegister {
+        guard !self.isEmpty else { return ValidationError.OnRegister.empty }
+
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailCheck = NSPredicate(format:"SELF MATCHES %@", emailRegEx).evaluate(with: self)
+
+        return emailCheck
+        ? ValidationError.OnRegister.correct
+        : ValidationError.OnRegister.invalidEmailFormat
     }
 
 }

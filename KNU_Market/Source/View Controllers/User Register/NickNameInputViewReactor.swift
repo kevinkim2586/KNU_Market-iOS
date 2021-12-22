@@ -18,7 +18,7 @@ final class NickNameInputViewReactor: Reactor {
     
     enum Action {
         case updateTextField(String)
-        case pressedBottomButton
+        case checkDuplication
         case viewDidDisappear
     }
     
@@ -46,7 +46,7 @@ final class NickNameInputViewReactor: Reactor {
         case let .updateTextField(text):
             return Observable.just(Mutation.setUserNickname(text))
             
-        case .pressedBottomButton:
+        case .checkDuplication:
             
             let nicknameValidationResult = currentState.userNickname.isValidNickname
             if nicknameValidationResult != .correct {

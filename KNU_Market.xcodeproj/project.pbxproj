@@ -87,6 +87,7 @@
 		7C58475F27707E84005D75B2 /* PasswordInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58475E27707E84005D75B2 /* PasswordInputViewController.swift */; };
 		7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58476027707F81005D75B2 /* PasswordInputViewReactor.swift */; };
 		7C5847632771B86B005D75B2 /* NickNameInputViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5847622771B86B005D75B2 /* NickNameInputViewReactor.swift */; };
+		7C5847652771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5847642771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift */; };
 		7C5A1F2B26D6174F0041885B /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */; };
 		7C5E21292646558700E98FE5 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* PostViewModel.swift */; };
 		7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */; };
@@ -303,6 +304,7 @@
 		7C58475E27707E84005D75B2 /* PasswordInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputViewController.swift; sourceTree = "<group>"; };
 		7C58476027707F81005D75B2 /* PasswordInputViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputViewReactor.swift; sourceTree = "<group>"; };
 		7C5847622771B86B005D75B2 /* NickNameInputViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewReactor.swift; sourceTree = "<group>"; };
+		7C5847642771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewReactor.swift; sourceTree = "<group>"; };
 		7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -603,8 +605,9 @@
 				7C58475A277040E6005D75B2 /* IDInputViewController.swift */,
 				7C58475E27707E84005D75B2 /* PasswordInputViewController.swift */,
 				7C58476027707F81005D75B2 /* PasswordInputViewReactor.swift */,
-				7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */,
 				7C5847622771B86B005D75B2 /* NickNameInputViewReactor.swift */,
+				7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */,
+				7C5847642771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift */,
 				7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */,
 				7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */,
 			);
@@ -1410,6 +1413,7 @@
 				7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */,
 				7C22CFB8275E056E0080A816 /* MyPageViewController+TargetMethods.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController + Extension.swift in Sources */,
+				7C5847652771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift in Sources */,
 				7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */,
 				7C036AB62696B64F00F6C29B /* MyPageTableViewCell.swift in Sources */,
 				626D66F1274291AE00CB7F4F /* InquiryListViewController.swift in Sources */,

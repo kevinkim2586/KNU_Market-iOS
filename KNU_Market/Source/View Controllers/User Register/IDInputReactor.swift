@@ -18,7 +18,7 @@ final class IDInputReactor: Reactor {
     
     enum Action {
         case updateTextField(String)
-        case pressedBottomButton
+        case checkDuplication
         case viewDidDisappear
     }
     
@@ -46,7 +46,7 @@ final class IDInputReactor: Reactor {
         case .updateTextField(let text):
             return Observable.just(Mutation.setUserId(text))
             
-        case .pressedBottomButton:
+        case .checkDuplication:
             
             let idValidationResult = currentState.userId.isValidID
             if idValidationResult != .correct {

@@ -1,66 +1,49 @@
 import UIKit
-import TextFieldEffects
 import SnapKit
+import ReactorKit
+import RxSwift
+import RxCocoa
 
-class EmailForLostPasswordViewController: BaseViewController {
+class EmailForLostPasswordViewController: BaseViewController, View {
+    
+    typealias Reactor = EmailForLostPasswordViewReactor
     
     //MARK: - Properties
     
-    private var userManager: UserManager?
-    
-    typealias RegisterError = ValidationError.OnRegister
-    
     //MARK: - Constants
+    
     fileprivate struct Metrics {
-        static let labelSidePadding: CGFloat    = 20
+        static let labelSidePadding = 20.f
     }
     
     //MARK: - UI
     
-    let titleLabel: KMTitleLabel = {
-        let label = KMTitleLabel(textColor: .darkGray)
-        label.text = "비밀번호 분실 시 임시 비밀번호를 받을\n이메일 주소를 입력해주세요!"
-        label.numberOfLines = 2
-        label.changeTextAttributeColor(
-            fullText: label.text!,
+    let titleLabel = KMTitleLabel(textColor: .darkGray).then {
+        $0.text = "비밀번호 분실 시 임시 비밀번호를 받을\n이메일 주소를 입력해주세요!"
+        $0.numberOfLines = 2
+        $0.changeTextAttributeColor(
+            fullText: $0.text!,
             changeText: "이메일 주소"
         )
-        return label
-    }()
+    }
     
-    lazy var emailTextField: KMTextField = {
-        let textField = KMTextField(placeHolderText: "이메일 주소 입력")
-        textField.addTarget(
-            self,
-            action: #selector(textFieldDidChange(_:)),
-            for: .editingChanged
-        )
-        textField.inputAccessoryView = bottomButton
-        return textField
-    }()
+    let emailTextField = KMTextField(placeHolderText: "이메일 주소 입력").then {
+        $0.autocapitalizationType = .none
+    }
 
-    let errorLabel: KMErrorLabel = {
-        let label = KMErrorLabel()
-        label.isHidden = true
-        return label
-    }()
+    let errorLabel = KMErrorLabel().then {
+        $0.isHidden = true
+    }
     
-    lazy var bottomButton: KMBottomButton = {
-        let button = KMBottomButton(buttonTitle: "크누마켓 시작하기")
-        button.heightAnchor.constraint(equalToConstant: button.heightConstantForKeyboardAppeared).isActive = true
-        button.addTarget(
-            self,
-            action: #selector(pressedBottomButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
+    let bottomButton = KMBottomButton(buttonTitle: "크누마켓 시작하기").then {
+        $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true
+    }
     
     //MARK: - Initialization
     
-    init(userManager: UserManager) {
+    init(reactor: Reactor) {
         super.init()
-        self.userManager = userManager
+        self.reactor = reactor
     }
     
     required init?(coder: NSCoder) {
@@ -83,6 +66,8 @@ class EmailForLostPasswordViewController: BaseViewController {
     override func setupLayout() {
         super.setupLayout()
         
+        emailTextField.inputAccessoryView = bottomButton
+        
         view.addSubview(titleLabel)
         view.addSubview(emailTextField)
         view.addSubview(errorLabel)
@@ -91,29 +76,101 @@ class EmailForLostPasswordViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(54)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-(Metrics.labelSidePadding + 130))
-            make.height.equalTo(60)
+        emailTextField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(54)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-(Metrics.labelSidePadding + 130))
+            $0.height.equalTo(60)
         }
         
-        errorLabel.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(Metrics.labelSidePadding)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        errorLabel.snp.makeConstraints {
+            $0.top.equalTo(emailTextField.snp.bottom).offset(Metrics.labelSidePadding)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
-
     }
     
     override func setupStyle() {
         super.setupStyle()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.view.endEditing(true)
+    }
+    
+    //MARK: - Binding
+    
+    func bind(reactor: EmailForLostPasswordViewReactor) {
+     
+        // Input
+        
+        emailTextField.rx.text.orEmpty
+            .asObservable()
+            .map { Reactor.Action.updateTextField($0) }
+            .bind(to: reactor.action )
+            .disposed(by: disposeBag)
+        
+        emailTextField.rx.controlEvent([.editingChanged])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.errorLabel.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
+        bottomButton.rx.tap
+            .asObservable()
+            .map { Reactor.Action.checkDuplication }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        
+
+        // Output
+        
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        
+        
+    
+        
+        
+        
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (_, errorMessage) in
+                self.errorLabel.showErrorMessage(message: errorMessage!)
+            }
+            .disposed(by: disposeBag)
+        
+        
+        reactor.state
+            .map { $0.isRegisteredComplete }
+            .asObservable()
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe { _ in
+                self.showCongratulateRegisterVC()
+            }
+            .disposed(by: disposeBag)
     }
 
 
@@ -123,79 +180,10 @@ class EmailForLostPasswordViewController: BaseViewController {
 
 extension EmailForLostPasswordViewController {
 
-    func registerUser() {
-        showProgressBar()
-
-        let model = RegisterRequestDTO(
-            id: UserRegisterValues.shared.userId,
-            password: UserRegisterValues.shared.password,
-            nickname: UserRegisterValues.shared.nickname,
-            fcmToken: UserRegisterValues.shared.fcmToken,
-            emailForPasswordLoss: UserRegisterValues.shared.emailForPasswordLoss
-        )
-    
-        userManager?.register(with: model) { [weak self] result in
-            guard let self = self else { return }
-            dismissProgressBar()
-            switch result {
-            case .success:
-                DispatchQueue.main.async { self.showCongratulateRegisterVC() }
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
-            }
-        }
-    }
     
     func showCongratulateRegisterVC() {
         let vc = CongratulateUserViewController(userManager: UserManager())
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
-    }
-}
-
-//MARK: - Target Methods
-
-extension EmailForLostPasswordViewController {
-    
-    @objc func pressedBottomButton(_ sender: UIButton) {
-        emailTextField.resignFirstResponder()
-        if !checkIfValidEmail() { return }
-        checkEmailDuplication(email: emailTextField.text!)
-    }
-}
-
-//MARK: - User Input Validation
-
-extension EmailForLostPasswordViewController {
-    
-    func checkIfValidEmail() -> Bool {
-        guard let email = emailTextField.text else { return false }
-        if !email.isValidEmail {
-            errorLabel.showErrorMessage(message: RegisterError.invalidEmailFormat.rawValue)
-            return false
-        }
-        return true
-    }
-    
-    func checkEmailDuplication(email: String) {
-        
-        userManager?.checkDuplication(emailForPasswordLoss: email) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let isDuplicate):
-                if isDuplicate {
-                    self.errorLabel.showErrorMessage(message: RegisterError.existingEmail.rawValue)
-                } else {
-                    UserRegisterValues.shared.emailForPasswordLoss = email
-                    self.registerUser()
-                }
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
-            }
-        }
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        errorLabel.isHidden = true
     }
 }

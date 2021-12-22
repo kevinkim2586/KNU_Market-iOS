@@ -145,7 +145,7 @@ class IDInputViewController: BaseViewController, View {
         
         bottomButton.rx.tap
             .asObservable()
-            .map { Reactor.Action.pressedBottomButton }
+            .map { Reactor.Action.checkDuplication }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         

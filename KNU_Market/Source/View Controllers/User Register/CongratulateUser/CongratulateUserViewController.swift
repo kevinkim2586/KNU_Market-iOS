@@ -132,28 +132,28 @@ class CongratulateUserViewController: BaseViewController, ReactorKit.View {
     override func setupConstraints() {
         super.setupConstraints()
         
-        animationView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(400)
+        animationView.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
+            $0.height.equalTo(400)
         }
         
-        goHomeButton.snp.makeConstraints { make in
-            make.width.equalTo(170)
-            make.height.equalTo(50)
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-40)
+        goHomeButton.snp.makeConstraints {
+            $0.width.equalTo(170)
+            $0.height.equalTo(50)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-40)
         }
         
-        containerStackView.snp.makeConstraints { make in
-            make.bottom.equalTo(goHomeButton.snp.top).offset(-26)
-            make.left.equalTo(view.snp.left).offset(24)
-            make.right.equalTo(view.snp.right).offset(-24)
+        containerStackView.snp.makeConstraints {
+            $0.bottom.equalTo(goHomeButton.snp.top).offset(-26)
+            $0.left.equalTo(view.snp.left).offset(24)
+            $0.right.equalTo(view.snp.right).offset(-24)
         }
         
-        congratulateLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(containerStackView.snp.top).offset(-40)
-            make.left.equalTo(view.snp.left).offset(20)
-            make.right.equalTo(view.snp.right).offset(-20)
+        congratulateLabel.snp.makeConstraints {
+            $0.bottom.equalTo(containerStackView.snp.top).offset(-40)
+            $0.left.equalTo(view.snp.left).offset(20)
+            $0.right.equalTo(view.snp.right).offset(-20)
         }
     }
     

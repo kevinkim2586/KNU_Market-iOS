@@ -46,7 +46,6 @@ final class CongratulateUserViewReactor: Reactor {
                 self.userService.login(id: UserRegisterValues.shared.userId, password: UserRegisterValues.shared.password)
                     .asObservable()
                     .map { result in
-                        
                         switch result {
                         case .success(_):
                             return Mutation.loginUser(true)

@@ -21,7 +21,6 @@ final class EmailForLostPasswordViewReactor: Reactor {
     }
     
     enum Mutation {
-        
         case setEmail(String)
         case setErrorMessage(String)
         case allowToFinishRegistration(Bool)
@@ -30,11 +29,8 @@ final class EmailForLostPasswordViewReactor: Reactor {
     }
     
     struct State {
-        
         var userEmail: String = ""
-        
         var isRegisteredComplete: Bool = false
-        
         var emailValidation: ValidationError.OnRegister?
         var errorMessage: String?
         var isLoading: Bool = false
@@ -45,7 +41,6 @@ final class EmailForLostPasswordViewReactor: Reactor {
         self.userService = userService
     }
     
-    
     func mutate(action: Action) -> Observable<Mutation> {
         
         switch action {
@@ -53,7 +48,6 @@ final class EmailForLostPasswordViewReactor: Reactor {
             return Observable.just(Mutation.setEmail(text))
             
         case .checkDuplication:
-            
             let emailValidationResult = currentState.userEmail.isValidEmailFormat
             if emailValidationResult != .correct {
                 return Observable.just(Mutation.setErrorMessage(emailValidationResult.rawValue))

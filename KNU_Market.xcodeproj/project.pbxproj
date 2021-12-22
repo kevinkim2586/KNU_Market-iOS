@@ -88,6 +88,7 @@
 		7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58476027707F81005D75B2 /* PasswordInputViewReactor.swift */; };
 		7C5847632771B86B005D75B2 /* NickNameInputViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5847622771B86B005D75B2 /* NickNameInputViewReactor.swift */; };
 		7C5847652771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5847642771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift */; };
+		7C58476C2772E6B7005D75B2 /* CongratulateUserViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58476B2772E6B7005D75B2 /* CongratulateUserViewReactor.swift */; };
 		7C5A1F2B26D6174F0041885B /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */; };
 		7C5E21292646558700E98FE5 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* PostViewModel.swift */; };
 		7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */; };
@@ -305,6 +306,7 @@
 		7C58476027707F81005D75B2 /* PasswordInputViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputViewReactor.swift; sourceTree = "<group>"; };
 		7C5847622771B86B005D75B2 /* NickNameInputViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewReactor.swift; sourceTree = "<group>"; };
 		7C5847642771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewReactor.swift; sourceTree = "<group>"; };
+		7C58476B2772E6B7005D75B2 /* CongratulateUserViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulateUserViewReactor.swift; sourceTree = "<group>"; };
 		7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -601,15 +603,11 @@
 		7C3B4FF526A92C4100E2CA8F /* User Register */ = {
 			isa = PBXGroup;
 			children = (
-				7C58475C2770423A005D75B2 /* IDInputReactor.swift */,
-				7C58475A277040E6005D75B2 /* IDInputViewController.swift */,
-				7C58475E27707E84005D75B2 /* PasswordInputViewController.swift */,
-				7C58476027707F81005D75B2 /* PasswordInputViewReactor.swift */,
-				7C5847622771B86B005D75B2 /* NickNameInputViewReactor.swift */,
-				7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */,
-				7C5847642771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift */,
-				7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */,
-				7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */,
+				7C5847662772E66B005D75B2 /* IDInput */,
+				7C5847672772E674005D75B2 /* PasswordInput */,
+				7C5847682772E680005D75B2 /* NickNameInput */,
+				7C5847692772E68E005D75B2 /* EmailInput */,
+				7C58476A2772E69E005D75B2 /* CongratulateUser */,
 			);
 			path = "User Register";
 			sourceTree = "<group>";
@@ -649,6 +647,51 @@
 				7C8E668A26E756C00060F37B /* ChatType.swift */,
 			);
 			path = "Chat Models";
+			sourceTree = "<group>";
+		};
+		7C5847662772E66B005D75B2 /* IDInput */ = {
+			isa = PBXGroup;
+			children = (
+				7C58475C2770423A005D75B2 /* IDInputReactor.swift */,
+				7C58475A277040E6005D75B2 /* IDInputViewController.swift */,
+			);
+			path = IDInput;
+			sourceTree = "<group>";
+		};
+		7C5847672772E674005D75B2 /* PasswordInput */ = {
+			isa = PBXGroup;
+			children = (
+				7C58476027707F81005D75B2 /* PasswordInputViewReactor.swift */,
+				7C58475E27707E84005D75B2 /* PasswordInputViewController.swift */,
+			);
+			path = PasswordInput;
+			sourceTree = "<group>";
+		};
+		7C5847682772E680005D75B2 /* NickNameInput */ = {
+			isa = PBXGroup;
+			children = (
+				7C5847622771B86B005D75B2 /* NickNameInputViewReactor.swift */,
+				7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */,
+			);
+			path = NickNameInput;
+			sourceTree = "<group>";
+		};
+		7C5847692772E68E005D75B2 /* EmailInput */ = {
+			isa = PBXGroup;
+			children = (
+				7C5847642771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift */,
+				7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */,
+			);
+			path = EmailInput;
+			sourceTree = "<group>";
+		};
+		7C58476A2772E69E005D75B2 /* CongratulateUser */ = {
+			isa = PBXGroup;
+			children = (
+				7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */,
+				7C58476B2772E6B7005D75B2 /* CongratulateUserViewReactor.swift */,
+			);
+			path = CongratulateUser;
 			sourceTree = "<group>";
 		};
 		7C60DC7126944C16001DEA9A /* Update User Info */ = {
@@ -1502,6 +1545,7 @@
 				7C5386EA2768D14500BFEA7F /* PopupReactor.swift in Sources */,
 				7C5386E82768D10A00BFEA7F /* PopupViewController.swift in Sources */,
 				7C5386DF27689B5B00BFEA7F /* MediaService.swift in Sources */,
+				7C58476C2772E6B7005D75B2 /* CongratulateUserViewReactor.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7CC69A7C27670E3B00105FC0 /* PopupAPI.swift in Sources */,
 				7C5386E62768CA8200BFEA7F /* PopupService.swift in Sources */,

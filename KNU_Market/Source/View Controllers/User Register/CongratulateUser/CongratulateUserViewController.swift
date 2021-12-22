@@ -1,12 +1,15 @@
 import UIKit
 import Lottie
 import SnapKit
+import RxSwift
+import RxCocoa
+import ReactorKit
 
-class CongratulateUserViewController: BaseViewController {
+class CongratulateUserViewController: BaseViewController, ReactorKit.View {
+
+    typealias Reactor = CongratulateUserViewReactor
     
     //MARK: - Properties
-    
-    private var userManager: UserManager?
     
     //MARK: - Constants
     
@@ -22,50 +25,32 @@ class CongratulateUserViewController: BaseViewController {
     
     let animationView = AnimationView()
     
-    let congratulateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "크누마켓 회원가입을 축하합니다!"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .darkGray
-        label.changeTextAttributeColor(
-            fullText: label.text!,
+    let congratulateLabel = UILabel().then {
+        $0.text = "크누마켓 회원가입을 축하합니다!"
+        $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        $0.textColor = .darkGray
+        $0.changeTextAttributeColor(
+            fullText: $0.text!,
             changeText: "크누마켓"
         )
-        label.textAlignment = .center
-        return label
-    }()
+        $0.textAlignment = .center
+    }
     
-    let firstLabel: UILabel = {
-        let label = UILabel()
-        label.text = "계속 진행함으로써"
-        label.font = Style.labelFont
-        label.textColor = .darkGray
-        return label
-    }()
+    let firstLabel = UILabel().then {
+        $0.text = "계속 진행함으로써"
+        $0.font = Style.labelFont
+        $0.textColor = .darkGray
+    }
     
-    let termsAndConditionButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setAttributedTitle(NSAttributedString(string: "이용약관", attributes: Style.buttonAttributes), for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.addTarget(
-            self,
-            action: #selector(pressedSeeTermsAndConditionsButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
+    let termsAndConditionButton = UIButton(type: .system).then {
+        $0.setAttributedTitle(NSAttributedString(string: "이용약관", attributes: Style.buttonAttributes), for: .normal)
+        $0.setTitleColor(.darkGray, for: .normal)
+    }
     
-    let privacyButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setAttributedTitle(NSAttributedString(string: "개인정보취급방침", attributes: Style.buttonAttributes), for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.addTarget(
-            self,
-            action: #selector(pressedSeePrivacyInfoButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
+    let privacyButton = UIButton(type: .system).then {
+        $0.setAttributedTitle(NSAttributedString(string: "개인정보취급방침", attributes: Style.buttonAttributes), for: .normal)
+        $0.setTitleColor(.darkGray, for: .normal)
+    }
     
     lazy var innerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -98,46 +83,37 @@ class CongratulateUserViewController: BaseViewController {
         return stackView
     }()
     
-    let goHomeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.addBounceAnimationWithNoFeedback()
-        button.setTitle("동의하고 진행하기", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        button.isHidden = true
-        button.isUserInteractionEnabled = false
-        button.layer.cornerRadius = 5
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor(named: K.Color.appColor)
-        button.addTarget(
-            self,
-            action: #selector(pressedGoHomeButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
-    
+    let goHomeButton = UIButton(type: .system).then {
+        $0.addBounceAnimationWithNoFeedback()
+        $0.setTitle("동의하고 진행하기", for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        $0.isHidden = true
+        $0.isUserInteractionEnabled = false
+        $0.layer.cornerRadius = 5
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = UIColor(named: K.Color.appColor)
+    }
 
     //MARK: - Initialization
     
-    init(userManager: UserManager) {
+    init(reactor: Reactor) {
         super.init()
-        self.userManager = userManager
+        self.reactor = reactor
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
+    
     
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         playAnimation()
-        removeAllPreviousObservers()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.goHomeButton.isHidden = false
             self.goHomeButton.isUserInteractionEnabled = true
-            
         }
     }
 
@@ -184,65 +160,81 @@ class CongratulateUserViewController: BaseViewController {
     override func setupStyle() {
         super.setupStyle()
     }
-}
+    
+    //MARK: - Binding
+    
+    func bind(reactor: CongratulateUserViewReactor) {
+        
+        // Input
+        
+        termsAndConditionButton.rx.tap
+            .subscribe(onNext: { _ in
+                let url = URL(string: K.URL.termsAndConditionNotionURL)!
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        privacyButton.rx.tap
+            .subscribe(onNext: { _ in
+                let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        goHomeButton.rx.tap
+            .asObservable()
+            .map { Reactor.Action.goHome }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Output
 
-//MARK: - Target Methods
-extension CongratulateUserViewController {
-
-    @objc private func pressedGoHomeButton() {
-        showProgressBar()
-        userManager?.login(
-            id: UserRegisterValues.shared.userId,
-            password: UserRegisterValues.shared.password
-        ) { [weak self] result in
-            guard let self = self else { return }
-            dismissProgressBar()
-            switch result {
-            case .success: self.changeRootViewControllerToMain()
-            case .failure(let error):
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isLoggedIn }
+            .asObservable()
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.goToHomeScreen()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (_, errorMessage) in
                 self.showSimpleBottomAlertWithAction(
-                    message: error.errorDescription,
+                    message: errorMessage!,
                     buttonTitle: "돌아가기"
                 ) {
                     self.popToLoginViewController()
                 }
             }
-        }
+            .disposed(by: disposeBag)
     }
-    
-    @objc private func pressedSeeTermsAndConditionsButton() {
-        let url = URL(string: K.URL.termsAndConditionNotionURL)!
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
-    @objc private func pressedSeePrivacyInfoButton() {
-        let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
+}
+
+//MARK: - Target Methods
+extension CongratulateUserViewController {
+
     func playAnimation() {
-        
         animationView.animation = Animation.named("congratulate1")
-        
         animationView.backgroundColor = .white
         animationView.frame = view.bounds
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         animationView.play()
-    }
-    
-    func changeRootViewControllerToMain() {
-
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(UIHelper.createMainTabBarController())
-    }
-    
-    func removeAllPreviousObservers() {
-        [NickNameInputViewController.self,
-         PasswordInputViewController.self,
-         EmailInputViewController.self,
-         CheckEmailViewController.self].forEach { vc in
-            NotificationCenter.default.removeObserver(vc)
-        }
     }
 }
 
@@ -252,8 +244,10 @@ import SwiftUI
 @available(iOS 13.0, *)
 struct CongratulateVC: PreviewProvider {
     
-    static var previews: some View {
-        CongratulateUserViewController(userManager: UserManager()).toPreview()
+    static var previews: some SwiftUI.View {
+        CongratulateUserViewController(
+            reactor: CongratulateUserViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))
+        ).toPreview()
     }
 }
 #endif

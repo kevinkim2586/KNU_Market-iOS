@@ -70,7 +70,6 @@ final class EmailForLostPasswordViewReactor: Reactor {
                             return Observable.just(Mutation.setErrorMessage(RegisterError.existingEmail.rawValue))
                         }
                         else {
-                            
                             UserRegisterValues.shared.emailForPasswordLoss = self.currentState.userEmail
                             
                             let model = RegisterRequestDTO(
@@ -82,7 +81,6 @@ final class EmailForLostPasswordViewReactor: Reactor {
                             )
                             
                             return Observable.concat([
-                                
                                 Observable.just(Mutation.setLoading(true)),
                                 self.userService.register(with: model)
                                     .asObservable()
@@ -95,7 +93,6 @@ final class EmailForLostPasswordViewReactor: Reactor {
                                         }
                                     },
                                 Observable.just(Mutation.setLoading(false))
-                                
                             ])
                         }
                         

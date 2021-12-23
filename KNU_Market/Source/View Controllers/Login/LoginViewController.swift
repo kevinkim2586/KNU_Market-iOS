@@ -314,7 +314,9 @@ class LoginViewController: BaseViewController, View {
         findPwButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                let findPwVC = FindPasswordViewController()
+                let findPwVC = FindPasswordViewController(
+                    reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>()))
+                )
                 self.presentVC(findPwVC)
             })
             .disposed(by: disposeBag)

@@ -114,7 +114,6 @@ class FindIdUsingStudentIdViewController: BaseViewController, View {
 
     override func setupStyle() {
         super.setupStyle()
-        view.backgroundColor = .white
     }
 
     //MARK: - Binding

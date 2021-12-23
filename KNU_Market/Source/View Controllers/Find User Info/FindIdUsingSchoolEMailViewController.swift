@@ -4,7 +4,7 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 
-class FindIdUsingWebMailViewController: BaseViewController, View {
+class FindIdUsingSchoolEMailViewController: BaseViewController, View {
     
     typealias Reactor = FindUserInfoViewReactor
     
@@ -88,7 +88,7 @@ class FindIdUsingWebMailViewController: BaseViewController, View {
             $0.right.equalTo(view.snp.right).offset(-(Metrics.padding + 130))
             $0.height.equalTo(60)
         }
-
+        
         errorLabel.snp.makeConstraints {
             $0.top.equalTo(userEmailTextField.snp.bottom).offset(Metrics.padding)
             $0.left.equalTo(view.snp.left).offset(Metrics.padding)
@@ -98,7 +98,6 @@ class FindIdUsingWebMailViewController: BaseViewController, View {
     
     override func setupStyle() {
         super.setupStyle()
-        view.backgroundColor = .white
     }
     
     //MARK: - Binding

@@ -147,7 +147,6 @@ class ChooseVerificationOptionViewController: BaseViewController {
     
     override func setupStyle() {
         super.setupStyle()
-        view.backgroundColor = .white
         setBackBarButtonItemTitle(to: "뒤로")
         setClearNavigationBarBackground()
     }
@@ -176,7 +175,7 @@ class ChooseVerificationOptionViewController: BaseViewController {
         schoolMailButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                let vc = FindIdUsingWebMailViewController(
+                let vc = FindIdUsingSchoolEMailViewController(
                     reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>()))
                 )
                 self.pushVC(vc)

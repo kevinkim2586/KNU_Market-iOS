@@ -28,10 +28,7 @@ protocol UserServiceType: AnyObject {
     
     @discardableResult
     func updateUserInfo(type: UpdateUserInfoType, updatedInfo: String) -> Single<NetworkResult>
-    
-    // 사용자 정보 찾을 때
-    func validateUserInputBeforeFindingRequestInfo(findIdOption: FindUserInfoOption, schoolMail: String, studentId: String, birthDate: String, userId: String) -> ValidationError.OnFindingUserInfo
-    
+        
     func findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?) -> Single<NetworkResultWithValue<FindIdModel>>
     func findPassword(id: String) -> Single<NetworkResultWithValue<FindPasswordModel>>
     
@@ -187,23 +184,6 @@ final class UserService: UserServiceType {
                     return .error(error)
                 }
             }
-    }
-    
-    func validateUserInputBeforeFindingRequestInfo(
-        findIdOption: FindUserInfoOption,
-        schoolMail: String,
-        studentId: String,
-        birthDate: String,
-        userId: String
-    ) -> ValidationError.OnFindingUserInfo {
-        
-        switch findIdOption {
-        case .schoolEmail:
-            return schoolMail.isValidSchoolEmail
-        case .studentId:
-            return studentId.isValidStudentIdFormat(alongWith: birthDate)
-        default: return .empty  // 비밀번호를 찾을 때에는 크누마켓 아이디에 대한 별도 Validation이 없음
-        }
     }
     
     func findUserId(

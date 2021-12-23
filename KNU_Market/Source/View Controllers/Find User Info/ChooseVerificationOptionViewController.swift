@@ -176,7 +176,9 @@ class ChooseVerificationOptionViewController: BaseViewController {
         schoolMailButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                let vc = FindIdUsingWebMailViewController()
+                let vc = FindIdUsingWebMailViewController(
+                    reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>()))
+                )
                 self.pushVC(vc)
             })
             .disposed(by: disposeBag)

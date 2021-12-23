@@ -654,8 +654,8 @@
 		7C5847662772E66B005D75B2 /* IDInput */ = {
 			isa = PBXGroup;
 			children = (
-				7C58475C2770423A005D75B2 /* IDInputReactor.swift */,
 				7C58475A277040E6005D75B2 /* IDInputViewController.swift */,
+				7C58475C2770423A005D75B2 /* IDInputReactor.swift */,
 			);
 			path = IDInput;
 			sourceTree = "<group>";
@@ -663,8 +663,8 @@
 		7C5847672772E674005D75B2 /* PasswordInput */ = {
 			isa = PBXGroup;
 			children = (
-				7C58476027707F81005D75B2 /* PasswordInputViewReactor.swift */,
 				7C58475E27707E84005D75B2 /* PasswordInputViewController.swift */,
+				7C58476027707F81005D75B2 /* PasswordInputViewReactor.swift */,
 			);
 			path = PasswordInput;
 			sourceTree = "<group>";
@@ -672,8 +672,8 @@
 		7C5847682772E680005D75B2 /* NickNameInput */ = {
 			isa = PBXGroup;
 			children = (
-				7C5847622771B86B005D75B2 /* NickNameInputViewReactor.swift */,
 				7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */,
+				7C5847622771B86B005D75B2 /* NickNameInputViewReactor.swift */,
 			);
 			path = NickNameInput;
 			sourceTree = "<group>";
@@ -681,8 +681,8 @@
 		7C5847692772E68E005D75B2 /* EmailInput */ = {
 			isa = PBXGroup;
 			children = (
-				7C5847642771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift */,
 				7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */,
+				7C5847642771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift */,
 			);
 			path = EmailInput;
 			sourceTree = "<group>";
@@ -1156,9 +1156,9 @@
 			children = (
 				7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */,
 				7C015C9927035B3800089ED8 /* FindIdUsingStudentIdViewController.swift */,
-				7C58476D2772F917005D75B2 /* FindUserInfoViewReactor.swift */,
 				7C015C9727035B2100089ED8 /* FindIdUsingWebMailViewController.swift */,
 				7C0F1CB326BA55D60068FF45 /* FindPasswordViewController.swift */,
+				7C58476D2772F917005D75B2 /* FindUserInfoViewReactor.swift */,
 			);
 			path = "Find User Info";
 			sourceTree = "<group>";

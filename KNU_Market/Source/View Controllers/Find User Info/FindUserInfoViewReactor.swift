@@ -71,7 +71,7 @@ final class FindUserInfoViewReactor: Reactor {
             return Observable.just(Mutation.setId(text))
             
         case .findIdUsingStudentId:
-            
+                    
             let studentIdValidationResult = currentState.studentId.isValidStudentIdFormat(alongWith: currentState.studentBirthDate)
             
             if studentIdValidationResult != .correct {

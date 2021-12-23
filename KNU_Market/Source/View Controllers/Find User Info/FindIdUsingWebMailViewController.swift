@@ -1,133 +1,165 @@
 import UIKit
+import SnapKit
+import RxSwift
+import RxCocoa
+import ReactorKit
 
-class FindIdUsingWebMailViewController: UIViewController {
+class FindIdUsingWebMailViewController: BaseViewController, View {
     
-    private let titleLabel          = KMTitleLabel(textColor: .darkGray)
-    private let userEmailTextField  = KMTextField(placeHolderText: "웹메일 아이디 @knu.ac.kr")
-    private let errorLabel          = KMErrorLabel()
-    private let bottomButton        = KMBottomButton(buttonTitle: "아이디 찾기")
+    typealias Reactor = FindUserInfoViewReactor
     
-    private let padding: CGFloat = 20
+    //MARK: - Properties
     
-    private var viewModel = FindUserInfoViewModel(userManager: UserManager())
+    //MARK: - Constants
+    
+    fileprivate struct Metrics {
+        static let padding = 20.f
+    }
+    
+    //MARK: - UI
+    
+    let titleLabel = KMTitleLabel(textColor: .darkGray).then {
+        $0.numberOfLines = 2
+        $0.text = "학생 인증에 사용했던\n웹메일 주소를 입력해주세요."
+        $0.changeTextAttributeColor(
+            fullText: $0.text!,
+            changeText: "웹메일 주소를 입력"
+        )
+    }
+    
+    let userEmailTextField = KMTextField(placeHolderText: "웹메일 아이디 @knu.ac.kr").then {
+        $0.autocapitalizationType = .none
+    }
+    
+    let errorLabel = KMErrorLabel().then {
+        $0.isHidden = true
+    }
+    
+    let bottomButton = KMBottomButton(buttonTitle: "아이디 찾기").then {
+        $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true
+    }
+    
+    //MARK: - Initialization
+    
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
-        view.backgroundColor = .white
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         userEmailTextField.becomeFirstResponder()
     }
-}
-
-//MARK: - FindUserInfoViewModelDelegate
-
-extension FindIdUsingWebMailViewController: FindUserInfoViewModelDelegate {
     
-    func didFindUserId(id: NSAttributedString) {
-        presentKMAlertOnMainThread(
-            title: "아이디 안내",
-            message: "",
-            buttonTitle: "닫기",
-            attributedMessageString: id
-        )
-    }
+    //MARK: - UI Setup
     
-    func didFailFetchingData(errorMessage: String) {
-        errorLabel.showErrorMessage(message: errorMessage)
-    }
-    
-    func didFailValidatingUserInput(errorMessage: String) {
-        errorLabel.showErrorMessage(message: errorMessage)
-    }
-}
-
-//MARK: - Target Methods
-
-extension FindIdUsingWebMailViewController {
-    
-    @objc func pressedBottomButton() {
-        viewModel.validateUserInput(findIdOption: .schoolEmail, mail: userEmailTextField.text)
-    }
-}
-
-//MARK: - TextField Methods
-
-extension FindIdUsingWebMailViewController {
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        errorLabel.isHidden = true
-    }
-}
-
-//MARK: - UI Configuration & Initialization
-
-extension FindIdUsingWebMailViewController {
-    
-    func initialize() {
-        viewModel.delegate = self
-        initializeTitleLabel()
-        initializeTextField()
-        initializeErrorLabel()
-        initializeBottomButton()
-    }
-    
-    func initializeTitleLabel() {
-        view.addSubview(titleLabel)
-        titleLabel.numberOfLines = 2
-        titleLabel.text = "학생 인증에 사용했던\n웹메일 주소를 입력해주세요."
-        titleLabel.changeTextAttributeColor(
-            fullText: titleLabel.text!,
-            changeText: "웹메일 주소를 입력"
-        )
+    override func setupLayout() {
+        super.setupLayout()
         
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-        ])
-    }
-    
-    func initializeTextField() {
-        view.addSubview(userEmailTextField)
-        
-        userEmailTextField.addTarget(
-            self,
-            action: #selector(textFieldDidChange(_:)),
-            for: .editingChanged
-        )
-        
-        NSLayoutConstraint.activate([
-            userEmailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 55),
-            userEmailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            userEmailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
-            userEmailTextField.heightAnchor.constraint(equalToConstant: 60)
-        ])
-        
-    }
-    
-    func initializeErrorLabel() {
-        view.addSubview(errorLabel)
-        errorLabel.isHidden = true
-        
-        NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: userEmailTextField.bottomAnchor, constant: padding),
-            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-        ])
-    }
-    
-    func initializeBottomButton() {
-        bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
         userEmailTextField.inputAccessoryView = bottomButton
+        
+        view.addSubview(titleLabel)
+        view.addSubview(userEmailTextField)
+        view.addSubview(errorLabel)
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+        
+        userEmailTextField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(55)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-(Metrics.padding + 130))
+            $0.height.equalTo(60)
+        }
 
-        bottomButton.addTarget(
-            self,
-            action: #selector(pressedBottomButton),
-            for: .touchUpInside
-        )
+        errorLabel.snp.makeConstraints {
+            $0.top.equalTo(userEmailTextField.snp.bottom).offset(Metrics.padding)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+    }
+    
+    override func setupStyle() {
+        super.setupStyle()
+        view.backgroundColor = .white
+    }
+    
+    //MARK: - Binding
+    
+    func bind(reactor: FindUserInfoViewReactor) {
+        
+        // Input
+        
+        userEmailTextField.rx.text.orEmpty
+            .map { Reactor.Action.updateSchoolEmail($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        userEmailTextField.rx.controlEvent([.editingChanged])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.errorLabel.isHidden = true
+                self.errorLabel.text = nil
+            })
+            .disposed(by: disposeBag)
+        
+        bottomButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .asObservable()
+            .map { Reactor.Action.findIdUsingSchoolEmail }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Output
+        
+        reactor.state
+            .map { $0.foundId }
+            .filter { $0 != nil }
+            .subscribe(onNext: { foundId in
+                self.presentKMAlertOnMainThread(
+                    title: "아이디 안내",
+                    message: "",
+                    buttonTitle: "닫기",
+                    attributedMessageString: foundId
+                )
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, errorMessage) in
+                self.errorLabel.showErrorMessage(message: errorMessage!)
+            })
+            .disposed(by: disposeBag)
+        
     }
 }

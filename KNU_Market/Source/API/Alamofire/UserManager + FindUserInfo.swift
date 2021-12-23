@@ -17,7 +17,7 @@ extension UserManager {
         var parameters: Parameters = [:]
         
         switch option {
-        case .webMail:
+        case .schoolEmail:
             guard let studentEmail = studentEmail else {
                 completion(.failure(.E000))
                 return

@@ -50,7 +50,7 @@ extension FindIdUsingWebMailViewController: FindUserInfoViewModelDelegate {
 extension FindIdUsingWebMailViewController {
     
     @objc func pressedBottomButton() {
-        viewModel.validateUserInput(findIdOption: .webMail, mail: userEmailTextField.text)
+        viewModel.validateUserInput(findIdOption: .schoolEmail, mail: userEmailTextField.text)
     }
 }
 

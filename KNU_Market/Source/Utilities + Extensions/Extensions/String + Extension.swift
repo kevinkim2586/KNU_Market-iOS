@@ -1,70 +1,84 @@
 import UIKit
-import SDWebImage
-
 
 // Validation Related Methods, Computed Properties
 
 extension String {
     
     var isValidID: ValidationError.OnRegister {
-        guard !self.isEmpty else { return ValidationError.OnRegister.empty }
+        guard !self.isEmpty else { return .empty }
         
         if self.count < 4 || self.count > 50 {
-            return ValidationError.OnRegister.incorrectIdLength
+            return .incorrectIdLength
         }
         
         let idRegEx = "^([0-9a-z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:'\",<.>/?]{4,50})$"
         let idCheck = NSPredicate(format:"SELF MATCHES %@", idRegEx).evaluate(with: self)
-        return idCheck
-        ? ValidationError.OnRegister.correct
-        : ValidationError.OnRegister.incorrectIdFormat
+        return idCheck ? .correct : .incorrectIdFormat
     }
     
     
     // 숫자+문자 포함해서 8~20글자 사이의 text 체크하는 정규표현식
     func isValidPassword(alongWith password: String) -> ValidationError.OnRegister {
-        guard !self.isEmpty, !password.isEmpty else { return ValidationError.OnRegister.empty }
+        guard !self.isEmpty, !password.isEmpty else { return .empty }
 
         guard self.count >= 8, self.count <= 20 else {
-            return ValidationError.OnRegister.incorrectPasswordFormat
+            return .incorrectPasswordFormat
         }
         
         guard self == password else {
-            return ValidationError.OnRegister.passwordDoesNotMatch
+            return .passwordDoesNotMatch
         }
         
         let passwordREGEX = ("(?=.*[A-Za-z])(?=.*[0-9]).{8,20}")
         let passwordCheck = NSPredicate(format: "SELF MATCHES %@", passwordREGEX).evaluate(with: self)
         
-        return passwordCheck
-        ? ValidationError.OnRegister.correct
-        : ValidationError.OnRegister.incorrectPasswordFormat
+        return passwordCheck ? .correct : .incorrectPasswordFormat
     }
     
     var isValidNickname: ValidationError.OnRegister {
-        guard !self.isEmpty else { return ValidationError.OnRegister.empty }
+        guard !self.isEmpty else { return .empty }
         
         if self.hasEmojis, self.hasSpecialCharacters {
-            return ValidationError.OnRegister.incorrectNicknameFormat
+            return .incorrectNicknameFormat
         }
         
         guard self.count >= 2 && self.count <= 10 else {
-            return ValidationError.OnRegister.incorrectNicknameLength
+            return .incorrectNicknameLength
         }
-        return ValidationError.OnRegister.correct
+        return .correct
     }
 
     var isValidEmailFormat: ValidationError.OnRegister {
-        guard !self.isEmpty else { return ValidationError.OnRegister.empty }
+        guard !self.isEmpty else { return .empty }
 
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailCheck = NSPredicate(format:"SELF MATCHES %@", emailRegEx).evaluate(with: self)
 
-        return emailCheck
-        ? ValidationError.OnRegister.correct
-        : ValidationError.OnRegister.invalidEmailFormat
+        return emailCheck ? .correct : .invalidEmailFormat
     }
-
+    
+    // 사용자 정보 찾기 시 사용되는 Validation 함수들
+    
+    func isValidStudentIdFormat(alongWith birthDate: String) -> ValidationError.OnFindingUserInfo {
+        guard !self.isEmpty, !birthDate.isEmpty else { return .empty }
+        
+        if self.hasSpecialCharacters {
+            return .incorrectStudentIdFormat
+        }
+        
+        if birthDate.hasSpecialCharacters || birthDate.count != 6 {
+            return .incorrectBirthDateFormat
+        }
+        return .correct
+    }
+    
+    var isValidSchoolEmail: ValidationError.OnFindingUserInfo {
+        guard !self.isEmpty else { return .empty }
+        
+        return self.contains("@knu.ac.kr")
+        ? .correct
+        : .incorrectEmailFormat
+    }
 }
 
 extension String {

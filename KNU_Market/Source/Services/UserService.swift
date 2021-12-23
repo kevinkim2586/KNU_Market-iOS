@@ -28,6 +28,10 @@ protocol UserServiceType: AnyObject {
     
     @discardableResult
     func updateUserInfo(type: UpdateUserInfoType, updatedInfo: String) -> Single<NetworkResult>
+    
+    // 사용자 정보 찾을 때
+    func validateUserInputBeforeFindingRequestInfo(findIdOption: FindUserInfoOption, schoolMail: String, studentId: String, birthDate: String, userId: String) -> ValidationError.OnFindingUserInfo
+    
     func findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?) -> Single<NetworkResultWithValue<FindIdModel>>
     func findPassword(id: String) -> Single<NetworkResultWithValue<FindPasswordModel>>
     
@@ -76,14 +80,14 @@ final class UserService: UserServiceType {
                     UIApplication.shared.registerForRemoteNotifications()
                     self?.loadUserProfile()
                     return .success(loginResponseModel)
-                
+                    
                 case .error(let error):
                     return .error(error)
                     
                 }
             }
     }
-
+    
     func loadUserProfileUsingUid(userUid: String) -> Single<NetworkResultWithValue<LoadUserProfileUidModel>> {
         
         return network.requestObject(.loadUserProfileUsingUid(userUid: userUid), type: LoadUserProfileUidModel.self)
@@ -96,7 +100,7 @@ final class UserService: UserServiceType {
                 }
             }
     }
-
+    
     @discardableResult
     func loadUserProfile() -> Single<NetworkResultWithValue<LoadProfileResponseModel>> {
         
@@ -112,7 +116,7 @@ final class UserService: UserServiceType {
                 }
             }
     }
-
+    
     func sendFeedback(content: String) -> Single<NetworkResult> {
         
         return network.requestWithoutMapping(.sendFeedback(content: content))
@@ -141,7 +145,7 @@ final class UserService: UserServiceType {
                 }
             }
     }
-
+    
     func uploadStudentIdVerificationInformation(model: StudentIdVerificationDTO) -> Single<NetworkResult> {
         
         return network.requestWithoutMapping(.uploadStudentIdVerificationInformation(model: model))
@@ -155,7 +159,7 @@ final class UserService: UserServiceType {
                 }
             }
     }
-
+    
     func sendVerificationEmail(email: String) -> Single<NetworkResult> {
         
         return network.requestWithoutMapping(.sendVerificationEmail(email: email))
@@ -169,7 +173,7 @@ final class UserService: UserServiceType {
                 }
             }
     }
-
+    
     @discardableResult
     func updateUserInfo(type: UpdateUserInfoType, updatedInfo: String) -> Single<NetworkResult> {
         
@@ -184,8 +188,30 @@ final class UserService: UserServiceType {
                 }
             }
     }
-
-    func findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?) -> Single<NetworkResultWithValue<FindIdModel>> {
+    
+    func validateUserInputBeforeFindingRequestInfo(
+        findIdOption: FindUserInfoOption,
+        schoolMail: String,
+        studentId: String,
+        birthDate: String,
+        userId: String
+    ) -> ValidationError.OnFindingUserInfo {
+        
+        switch findIdOption {
+        case .schoolEmail:
+            return schoolMail.isValidSchoolEmail
+        case .studentId:
+            return studentId.isValidStudentIdFormat(alongWith: birthDate)
+        default: return .empty  // 비밀번호를 찾을 때에는 크누마켓 아이디에 대한 별도 Validation이 없음
+        }
+    }
+    
+    func findUserId(
+        option: FindUserInfoOption,
+        studentEmail: String? = nil,
+        studentId: String? = nil,
+        studentBirthDate: String? = nil
+    ) -> Single<NetworkResultWithValue<FindIdModel>> {
         
         return network.requestObject(.findUserId(option: option, studentEmail: studentEmail, studentId: studentId, studentBirthDate: studentBirthDate), type: FindIdModel.self)
             .map { result in
@@ -197,7 +223,7 @@ final class UserService: UserServiceType {
                 }
             }
     }
-
+    
     
     func findPassword(id: String) -> Single<NetworkResultWithValue<FindPasswordModel>> {
         
@@ -211,18 +237,18 @@ final class UserService: UserServiceType {
                 }
             }
     }
-
+    
     
     func saveAccessTokens(from response: LoginResponseModel) {
         User.shared.savedAccessToken = KeychainWrapper.standard.set(response.accessToken, forKey: K.KeyChainKey.accessToken)
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(response.refreshToken, forKey: K.KeyChainKey.refreshToken)
     }
-
+    
     func saveRefreshedAccessToken(from response: JSON) {
         let newAccessToken = response["accessToken"].stringValue
         User.shared.savedAccessToken = KeychainWrapper.standard.set(newAccessToken, forKey: K.KeyChainKey.accessToken)
     }
-
+    
     func saveUserProfileInfo(with model: LoadProfileResponseModel) {
         User.shared.userUID = model.uid
         User.shared.userID = model.id            //email == id
@@ -231,9 +257,9 @@ final class UserService: UserServiceType {
         User.shared.profileImageUID = model.profileImageCode
         User.shared.isVerified = model.isVerified
     }
-
+    
     func updateLocalUserInfo(type: UpdateUserInfoType, infoString: String) {
-
+        
         switch type {
         case .nickname:
             User.shared.nickname = infoString

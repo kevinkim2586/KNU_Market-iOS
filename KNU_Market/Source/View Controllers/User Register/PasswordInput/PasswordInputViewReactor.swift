@@ -18,7 +18,6 @@ final class PasswordInputViewReactor: Reactor {
         case updateTextFields([String])
         case pressedBottomButton
         case viewDidDisappear
-        
     }
     
     enum Mutation {
@@ -32,7 +31,6 @@ final class PasswordInputViewReactor: Reactor {
         var userCheckPassword: String = ""
         
         var isAllowedToGoNext: Bool = false
-        var passwordValidation: ValidationError.OnRegister?
         var errorMessage: String = RegisterError.incorrectPasswordFormat.rawValue
         var errorMessageColor: UIColor = .lightGray
     }

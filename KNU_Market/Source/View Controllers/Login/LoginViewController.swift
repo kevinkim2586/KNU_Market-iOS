@@ -88,6 +88,7 @@ class LoginViewController: BaseViewController, View {
         $0.layer.masksToBounds = true
         $0.font = Fonts.textFieldFont
         $0.placeholder = "아이디 입력"
+        $0.autocapitalizationType = .none
     }
     
     let passwordTextField = UITextField().then {
@@ -101,6 +102,7 @@ class LoginViewController: BaseViewController, View {
         $0.font = Fonts.textFieldFont
         $0.placeholder = "비밀번호 입력"
         $0.isSecureTextEntry = true
+        $0.autocapitalizationType = .none
     }
     
     let loginButton = UIButton(type: .system).then {

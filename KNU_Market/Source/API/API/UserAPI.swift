@@ -98,7 +98,7 @@ extension UserAPI: BaseAPI {
             return [ type.rawValue : updatedInfo ]
         case let .findUserId(option, studentEmail, studentId, studentBirthDate):
             switch option {
-            case .webMail:
+            case .schoolEmail:
                 return [ "studentEmail": studentEmail! ]
             case .studentId:
                 return ["studentId": studentId!, "studentBirth": studentBirthDate!]

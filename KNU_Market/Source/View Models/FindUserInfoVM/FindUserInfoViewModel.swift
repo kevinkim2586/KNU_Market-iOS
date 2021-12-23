@@ -55,8 +55,9 @@ class FindUserInfoViewModel {
                 )
                 self.delegate?.didFindUserId(id: attributedGuideString)
             case .failure(_):
-                let errorMessage = option == .webMail ?
-                InputError.nonAuthorizedSchoolEmail.rawValue : InputError.nonAuthorizedStudentId.rawValue
+                let errorMessage = option == .schoolEmail
+                ? InputError.nonAuthorizedSchoolEmail.rawValue
+                : InputError.nonAuthorizedStudentId.rawValue
                 self.delegate?.didFailFetchingData(errorMessage: errorMessage)
             }
         }
@@ -97,7 +98,7 @@ extension FindUserInfoViewModel {
         userId: String? = nil
     ) {
         switch findIdOption {
-        case .webMail:
+        case .schoolEmail:
             validateWebMail(mail: mail)
         case .studentId:
             validateStudentId(studentId: studentId, birthDate: birthDate)
@@ -113,10 +114,10 @@ extension FindUserInfoViewModel {
         }
 
         if !mail.contains("@knu.ac.kr") || !mail.isValidEmail {
-            delegate?.didFailValidatingUserInput(errorMessage: InputError.incorrectSchoolEmailFormat.rawValue)
+            delegate?.didFailValidatingUserInput(errorMessage: InputError.incorrectEmailFormat.rawValue)
             return
         }
-        findId(using: .webMail, mail: mail)
+        findId(using: .schoolEmail, mail: mail)
     }
     
     private func validateStudentId(studentId: String?, birthDate: String?) {
@@ -177,9 +178,9 @@ extension FindUserInfoViewModel {
             filteredInfoString = userInfoString
         }
         
-        let alertBodyText = findUserInfoOption == .password ?
-        "\(filteredInfoString)\n위의 메일로 임시 비밀번호를 전송했습니다." :
-        "회원님의 아이디는 \(filteredInfoString) 입니다."
+        let alertBodyText = findUserInfoOption == .password
+        ? "\(filteredInfoString)\n위의 메일로 임시 비밀번호를 전송했습니다."
+        : "회원님의 아이디는 \(filteredInfoString) 입니다."
         
         return makeCustomAttributedString(fullText: alertBodyText, textToCustomize: filteredInfoString)
     }

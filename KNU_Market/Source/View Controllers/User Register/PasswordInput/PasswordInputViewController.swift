@@ -175,8 +175,7 @@ class PasswordInputViewController: BaseViewController, View {
             .subscribe { _ in
                 let vc = NickNameInputViewController(
                     reactor: NickNameInputViewReactor(
-                        userService: UserService(network: Network<UserAPI>())
-                    )
+                        userService: UserService(network: Network<UserAPI>()))
                 )
                 self.navigationController?.pushViewController(vc, animated: true)
             }

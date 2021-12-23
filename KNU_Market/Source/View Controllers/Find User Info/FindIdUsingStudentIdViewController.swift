@@ -1,148 +1,186 @@
 import UIKit
+import RxSwift
+import RxCocoa
+import ReactorKit
+import Then
+import SnapKit
 
-class FindIdUsingStudentIdViewController: UIViewController {
+class FindIdUsingStudentIdViewController: BaseViewController, View {
     
-    private let titleLabel              = KMTitleLabel(textColor: .darkGray)
-    private let userStudentIdTextField  = KMTextField(placeHolderText: "학번")
-    private let userBirthDateTextField  = KMTextField(placeHolderText: "생년월일 (6자리)")
-    private let errorLabel              = KMErrorLabel()
-    private let bottomButton            = KMBottomButton(buttonTitle: "아이디 찾기")
+    typealias Reactor = FindUserInfoViewReactor
     
-    private let padding: CGFloat = 20
+    //MARK: - Properties
     
-    private var viewModel = FindUserInfoViewModel(userManager: UserManager())
-
+    //MARK: - Constants
+    
+    fileprivate struct Metrics {
+        static let padding = 20.f
+    }
+    
+    //MARK: - UI
+    
+    let titleLabel = KMTitleLabel(textColor: .darkGray).then {
+        $0.numberOfLines = 1
+        $0.text = "학번과 생년월일을 입력해주세요."
+        $0.changeTextAttributeColor(
+            fullText: $0.text!,
+            changeText: "학번과 생년월일을 입력"
+        )
+    }
+    
+    let userStudentIdTextField = KMTextField(placeHolderText: "학번").then {
+        $0.autocapitalizationType = .none
+    }
+    
+    let userBirthDateTextField = KMTextField(placeHolderText: "생년월일 (6자리)").then {
+        $0.autocapitalizationType = .none
+    }
+    
+    let errorLabel = KMErrorLabel().then {
+        $0.isHidden = true
+        $0.numberOfLines = 2
+    }
+    
+    let bottomButton = KMBottomButton(buttonTitle: "아이디 찾기").then {
+        $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true
+    }
+    
+    //MARK: - Initialization
+    
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
-        view.backgroundColor = .white
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         userStudentIdTextField.becomeFirstResponder()
     }
-}
-
-//MARK: - FindUserInfoViewModelDelegate
-
-extension FindIdUsingStudentIdViewController: FindUserInfoViewModelDelegate {
     
-    func didFindUserId(id: NSAttributedString) {
-        presentKMAlertOnMainThread(
-            title: "아이디 안내",
-            message: "",
-            buttonTitle: "닫기",
-            attributedMessageString: id
-        )
-    }
+    //MARK: - UI Setup
     
-    func didFailFetchingData(errorMessage: String) {
-        errorLabel.showErrorMessage(message: errorMessage)
-    }
-    
-    func didFailValidatingUserInput(errorMessage: String) {
-        errorLabel.showErrorMessage(message: errorMessage)
+    override func setupLayout() {
+        super.setupLayout()
         
-    }
-}
-
-//MARK: - Target Methods
-
-extension FindIdUsingStudentIdViewController {
-    
-    @objc func pressedBottomButton() {
-        viewModel.validateUserInput(
-            findIdOption: .studentId,
-            studentId: userStudentIdTextField.text,
-            birthDate: userBirthDateTextField.text
-        )
-    }
-}
-
-//MARK: - TextField Methods
-
-extension FindIdUsingStudentIdViewController {
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        errorLabel.isHidden = true
-    }
-}
-
-//MARK: - UI Configuration & Initialization
-
-extension FindIdUsingStudentIdViewController {
-    
-    func initialize() {
-        viewModel.delegate = self
-        initializeTitleLabel()
-        initializeTextFields()
-        initializeErrorLabel()
-        initializeBottomButton()
-    }
-    
-    func initializeTitleLabel() {
-        view.addSubview(titleLabel)
-        titleLabel.numberOfLines = 1
-        titleLabel.text = "학번과 생년월일을 입력해주세요."
-        titleLabel.changeTextAttributeColor(
-            fullText: titleLabel.text!,
-            changeText: "학번과 생년월일을 입력"
-        )
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-        ])
-    }
-    
-    func initializeTextFields() {
-        view.addSubview(userStudentIdTextField)
-        view.addSubview(userBirthDateTextField)
-        
-        [userStudentIdTextField, userBirthDateTextField].forEach { textField in
-            textField.addTarget(
-                self,
-                action: #selector(textFieldDidChange(_:)),
-                for: .editingChanged
-            )
-        }
-        
-        NSLayoutConstraint.activate([
-            userStudentIdTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 55),
-            userStudentIdTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            userStudentIdTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
-            userStudentIdTextField.heightAnchor.constraint(equalToConstant: 60),
-            
-            userBirthDateTextField.topAnchor.constraint(equalTo: userStudentIdTextField.bottomAnchor, constant: padding),
-            userBirthDateTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            userBirthDateTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
-            userBirthDateTextField.heightAnchor.constraint(equalToConstant: 60)
-        ])
-    }
-    
-    func initializeErrorLabel() {
-        view.addSubview(errorLabel)
-        errorLabel.isHidden = true
-        errorLabel.numberOfLines = 2
-        
-        NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: userBirthDateTextField.bottomAnchor, constant: padding),
-            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-        ])
-    }
-    
-    func initializeBottomButton() {
-        bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
         userStudentIdTextField.inputAccessoryView = bottomButton
         userBirthDateTextField.inputAccessoryView = bottomButton
         
-        bottomButton.addTarget(
-            self,
-            action: #selector(pressedBottomButton),
-            for: .touchUpInside
+        view.addSubview(titleLabel)
+        view.addSubview(userStudentIdTextField)
+        view.addSubview(userBirthDateTextField)
+        view.addSubview(errorLabel)
+        
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+        
+        userStudentIdTextField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(55)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-(Metrics.padding + 130))
+            $0.height.equalTo(60)
+        }
+
+        userBirthDateTextField.snp.makeConstraints {
+            $0.top.equalTo(userStudentIdTextField.snp.bottom).offset(Metrics.padding)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-(Metrics.padding + 130))
+            $0.height.equalTo(60)
+        }
+    
+        errorLabel.snp.makeConstraints {
+            $0.top.equalTo(userBirthDateTextField.snp.bottom).offset(Metrics.padding)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+    }
+
+    override func setupStyle() {
+        super.setupStyle()
+        view.backgroundColor = .white
+    }
+
+    //MARK: - Binding
+    
+    func bind(reactor: FindUserInfoViewReactor) {
+        
+        // Input
+        
+        Observable.combineLatest(
+            userStudentIdTextField.rx.text.orEmpty,
+            userBirthDateTextField.rx.text.orEmpty
         )
+            .map { Reactor.Action.updateStudentIdAndStudentBirthDate([$0, $1]) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        Observable.combineLatest(
+            userStudentIdTextField.rx.controlEvent([.editingChanged]),
+            userBirthDateTextField.rx.controlEvent([.editingChanged])
+        )
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.errorLabel.isHidden = true
+                self.errorLabel.text = nil
+            })
+            .disposed(by: disposeBag)
+        
+        bottomButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .asObservable()
+            .map { Reactor.Action.findIdUsingStudentId }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Output
+        
+        reactor.state
+            .map { $0.foundId }
+            .filter { $0 != nil }
+            .subscribe(onNext: { foundId in
+                self.presentKMAlertOnMainThread(
+                    title: "아이디 안내",
+                    message: "",
+                    buttonTitle: "닫기",
+                    attributedMessageString: foundId
+                )
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, errorMessage) in
+                self.errorLabel.showErrorMessage(message: errorMessage!)
+            })
+            .disposed(by: disposeBag)
     }
 }

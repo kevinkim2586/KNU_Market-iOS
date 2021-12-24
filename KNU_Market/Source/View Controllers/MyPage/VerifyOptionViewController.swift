@@ -129,10 +129,11 @@ class VerifyOptionViewController: BaseViewController {
     private func configure() {
         title = "학생 인증하기"
         setBackBarButtonItemTitle()
-        if detectIfVerifiedUser() {
-            presentCustomAlert(title: "인증 회원 안내", message: "이미 인증된 회원입니다.\n이제 공동구매를 즐겨보세요!")
-            navigationController?.popViewController(animated: true)
-        }
+        #warning("아래 주석 해제")
+//        if detectIfVerifiedUser() {
+//            presentCustomAlert(title: "인증 회원 안내", message: "이미 인증된 회원입니다.\n이제 공동구매를 즐겨보세요!")
+//            navigationController?.popViewController(animated: true)
+//        }
     }
     
 }
@@ -148,7 +149,10 @@ extension VerifyOptionViewController {
     }
     
     @objc private func pressedVerifyUsingEmailButton() {
-        let vc = EmailInputViewController()
+        let vc = EmailInputViewController(
+            reactor: EmailVerificationViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))
+        )
+       
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }

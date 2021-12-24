@@ -5,7 +5,7 @@ import ReactorKit
 
 class IDInputViewController: BaseViewController, View {
     
-    typealias Reactor = IDInputReactor
+    typealias Reactor = IDInputViewReactor
     
     //MARK: - Properties
     
@@ -117,7 +117,7 @@ class IDInputViewController: BaseViewController, View {
     
     //MARK: - Binding
     
-    func bind(reactor: IDInputReactor) {
+    func bind(reactor: IDInputViewReactor) {
         
         // Input
         

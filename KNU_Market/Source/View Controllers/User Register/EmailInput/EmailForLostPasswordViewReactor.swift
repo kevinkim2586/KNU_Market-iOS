@@ -31,7 +31,6 @@ final class EmailForLostPasswordViewReactor: Reactor {
     struct State {
         var userEmail: String = ""
         var isRegisteredComplete: Bool = false
-        var emailValidation: ValidationError.OnRegister?
         var errorMessage: String?
         var isLoading: Bool = false
     }

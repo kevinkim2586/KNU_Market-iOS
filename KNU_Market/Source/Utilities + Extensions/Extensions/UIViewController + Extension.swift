@@ -103,9 +103,11 @@ extension UIViewController {
     }
     
     // SnackBar 라이브러리의 액션이 추가된 message 띄우기
-    func showSimpleBottomAlertWithAction(message: String,
-                                         buttonTitle: String,
-                                         action: (() -> Void)? = nil) {
+    func showSimpleBottomAlertWithAction(
+        message: String,
+        buttonTitle: String,
+        action: (() -> Void)? = nil
+    ) {
         SnackBar.make(
             in: self.view,
             message: message,
@@ -115,6 +117,38 @@ extension UIViewController {
             action: {
                 action?()
             }).show()
+    }
+}
+
+//MARK: - UIAlertController Rx
+
+enum ActionType {
+    case ok
+    case cancel
+}
+
+extension UIViewController {
+    
+    func presentAlertWithConfirmation(title: String, message: String? = nil) -> Observable<ActionType> {
+        return Observable.create { [weak self] observer in
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+                observer.onNext(.ok)
+                observer.onCompleted()
+            }
+            alertController.addAction(okAction)
+            
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+                observer.onNext(.cancel)
+                observer.onCompleted()
+            }
+            alertController.addAction(cancelAction)
+            
+            self?.present(alertController, animated: true, completion: nil)
+            return Disposables.create {
+                alertController.dismiss(animated: true)
+            }
+        }
     }
 }
 
@@ -220,7 +254,7 @@ extension UIViewController {
     // 회원가입 VC 띄우기
     func presentRegisterVC() {
         let vc = IDInputViewController(
-            reactor: IDInputReactor(
+            reactor: IDInputViewReactor(
                 userService: UserService(network: Network<UserAPI>())
             )
         )
@@ -399,12 +433,16 @@ extension UIViewController {
                 User.shared.hasAllowedForNotification = false
                 
                 DispatchQueue.main.async {
-                    self.presentAlertWithCancelAction(title: "알림 받기를 설정해 주세요.👀",
-                                                 message: "알림 받기를 설정하지 않으면 공구 채팅 알림을 받을 수 없어요. '확인'을 눌러 설정으로 이동 후 알림 켜기를 눌러주세요.😁") { selectedOk in
+                    self.presentAlertWithCancelAction(
+                        title: "알림 받기를 설정해 주세요.👀",
+                        message: "알림 받기를 설정하지 않으면 공구 채팅 알림을 받을 수 없어요. '확인'을 눌러 설정으로 이동 후 알림 켜기를 눌러주세요.😁"
+                    ) { selectedOk in
                         if selectedOk {
-                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
-                                                      options: [:],
-                                                      completionHandler: nil)
+                            UIApplication.shared.open(
+                                URL(string: UIApplication.openSettingsURLString)!,
+                                options: [:],
+                                completionHandler: nil
+                            )
                         }
                     }
                 }

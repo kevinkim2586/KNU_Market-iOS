@@ -9,7 +9,7 @@ import UIKit
 import ReactorKit
 import Moya
 
-final class IDInputReactor: Reactor {
+final class IDInputViewReactor: Reactor {
     
     let initialState: State
     let userService: UserServiceType
@@ -31,7 +31,6 @@ final class IDInputReactor: Reactor {
     struct State {
         var userId: String = ""
         var isAllowedToGoNext: Bool = false
-        var idValidation: ValidationError.OnRegister?
         var errorMessage: String?
     }
 

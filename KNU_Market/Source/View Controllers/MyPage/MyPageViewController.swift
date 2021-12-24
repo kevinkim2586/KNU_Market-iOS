@@ -8,7 +8,6 @@ class MyPageViewController: BaseViewController {
     
     var viewModel: MyPageViewModel!
     
-
     //MARK: - Constants
     
     struct Metrics {

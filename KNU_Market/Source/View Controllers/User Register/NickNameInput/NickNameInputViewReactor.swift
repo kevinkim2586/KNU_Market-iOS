@@ -31,7 +31,6 @@ final class NickNameInputViewReactor: Reactor {
     struct State {
         var userNickname: String = ""
         var isAllowedToGoNext: Bool = false
-        var nicknameValidation: ValidationError.OnRegister?
         var errorMessage: String?
     }
     

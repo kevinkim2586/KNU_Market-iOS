@@ -4,7 +4,7 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 
-class FindIdUsingSchoolEMailViewController: BaseViewController, View {
+class FindIdUsingSchoolEmailViewController: BaseViewController, View {
     
     typealias Reactor = FindUserInfoViewReactor
     
@@ -159,6 +159,5 @@ class FindIdUsingSchoolEMailViewController: BaseViewController, View {
                 self.errorLabel.showErrorMessage(message: errorMessage!)
             })
             .disposed(by: disposeBag)
-        
     }
 }

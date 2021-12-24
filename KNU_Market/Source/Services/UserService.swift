@@ -66,7 +66,7 @@ final class UserService: UserServiceType {
     
     @discardableResult
     func login(id: String, password: String) -> Single<NetworkResultWithValue<LoginResponseModel>> {
-        
+    
         return network.requestObject(.login(id: id, password: password), type: LoginResponseModel.self)
             .map { [weak self] result in
                 switch result {

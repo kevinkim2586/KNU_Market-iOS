@@ -260,40 +260,6 @@ class LoginViewController: BaseViewController, View {
             .map { Reactor.Action.login }
             .bind(to: reactor.action )
             .disposed(by: disposeBag)
-
-
-        // Output
-        reactor.state
-            .map { $0.isLoading }
-            .asObservable()
-            .distinctUntilChanged()
-            .subscribe(onNext: {
-                $0 ? showProgressBar() : dismissProgressBar()
-            })
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.isAuthorized }
-            .asObservable()
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe { (vc, isAuthorized) in
-                self.goToHomeScreen()
-            }
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.errorMessage }
-            .filter { $0 != nil }
-            .withUnretained(self)
-            .subscribe { (vc, errorMessage) in
-                self.presentKMAlertOnMainThread(
-                    title: "로그인 실패",
-                    message: errorMessage!
-                )
-            }
-            .disposed(by: disposeBag)
         
         registerButton.rx.tap
             .withUnretained(self)
@@ -332,6 +298,41 @@ class LoginViewController: BaseViewController, View {
                 )
             })
             .disposed(by: disposeBag)
+
+        // Output
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isAuthorized }
+            .asObservable()
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe { (vc, isAuthorized) in
+                self.goToHomeScreen()
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (vc, errorMessage) in
+                self.presentKMAlertOnMainThread(
+                    title: "로그인 실패",
+                    message: errorMessage!
+                )
+            }
+            .disposed(by: disposeBag)
+        
+
     }
     
     func presentVC(_ vc: UIViewController) {

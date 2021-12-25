@@ -155,19 +155,6 @@ class EmailInputViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
 
-//        bottomButton.rx.tap
-//            .flatMap { reactor.state.map { $0.email }}
-//            .filter { !$0.isEmpty }
-//            .flatMap { [unowned self] in
-//                self.presentAlertWithConfirmation(title: $0, message: "위 이메일이 맞나요? 마지막으로 한 번 더 확인해 주세요.")
-//            }
-//            .map { actionType -> Reactor.Action in
-//                return Reactor.Action.sendVerificationEmail
-//            }
-//            .bind(to: reactor.action)
-//            .disposed(by: disposeBag)
-        
-
         // Output
 
         emailTextField.rx.controlEvent([.editingChanged])

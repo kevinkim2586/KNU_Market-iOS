@@ -4,7 +4,7 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 
-class EmailInputViewController: BaseViewController, View {
+class EmailVerificationViewController: BaseViewController, View {
     
     typealias Reactor = EmailVerificationViewReactor
     
@@ -180,7 +180,7 @@ class EmailInputViewController: BaseViewController, View {
             .distinctUntilChanged { $0.0 }
             .filter { $0.0 == true }
             .subscribe(onNext: {
-                let vc = CheckEmailViewController(email: $0.1)
+                let vc = CheckYourEmailViewController(email: $0.1)
                 self.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)

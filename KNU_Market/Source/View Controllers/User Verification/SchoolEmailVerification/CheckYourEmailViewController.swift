@@ -3,7 +3,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class CheckEmailViewController: BaseViewController {
+class CheckYourEmailViewController: BaseViewController {
     
     //MARK: - Properties
     
@@ -107,7 +107,7 @@ import SwiftUI
 struct VCPreview: PreviewProvider {
     
     static var previews: some View {
-        CheckEmailViewController(email: "kevinkim2586@knu.ac.kr").toPreview()
+        CheckYourEmailViewController(email: "kevinkim2586@knu.ac.kr").toPreview()
     }
 }
 #endif

@@ -149,7 +149,7 @@ extension VerifyOptionViewController {
     }
     
     @objc private func pressedVerifyUsingEmailButton() {
-        let vc = EmailInputViewController(
+        let vc = EmailVerificationViewController(
             reactor: EmailVerificationViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))
         )
        

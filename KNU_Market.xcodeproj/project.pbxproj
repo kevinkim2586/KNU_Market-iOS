@@ -52,8 +52,8 @@
 		7C3758ED265FA97A0081A85D /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* PostListViewModel.swift */; };
 		7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */; };
 		7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */; };
-		7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FEF26A928C700E2CA8F /* EmailInputViewController.swift */; };
-		7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF126A928D300E2CA8F /* CheckEmailViewController.swift */; };
+		7C3B4FF026A928C700E2CA8F /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FEF26A928C700E2CA8F /* EmailVerificationViewController.swift */; };
+		7C3B4FF226A928D300E2CA8F /* CheckYourEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF126A928D300E2CA8F /* CheckYourEmailViewController.swift */; };
 		7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */; };
 		7C3B4FF726A92C6C00E2CA8F /* UserRegisterValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FF626A92C6C00E2CA8F /* UserRegisterValues.swift */; };
 		7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */; };
@@ -272,8 +272,8 @@
 		7C3758EC265FA97A0081A85D /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewController.swift; sourceTree = "<group>"; };
-		7C3B4FEF26A928C700E2CA8F /* EmailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInputViewController.swift; sourceTree = "<group>"; };
-		7C3B4FF126A928D300E2CA8F /* CheckEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailViewController.swift; sourceTree = "<group>"; };
+		7C3B4FEF26A928C700E2CA8F /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
+		7C3B4FF126A928D300E2CA8F /* CheckYourEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckYourEmailViewController.swift; sourceTree = "<group>"; };
 		7C3B4FF326A928DD00E2CA8F /* CongratulateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulateUserViewController.swift; sourceTree = "<group>"; };
 		7C3B4FF626A92C6C00E2CA8F /* UserRegisterValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterValues.swift; sourceTree = "<group>"; };
 		7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_InputPasswordViewController.swift; sourceTree = "<group>"; };
@@ -701,9 +701,9 @@
 		7C58477327745135005D75B2 /* SchoolEmailVerification */ = {
 			isa = PBXGroup;
 			children = (
-				7C3B4FEF26A928C700E2CA8F /* EmailInputViewController.swift */,
+				7C3B4FEF26A928C700E2CA8F /* EmailVerificationViewController.swift */,
 				7C58477127744FD9005D75B2 /* EmailVerificationViewReactor.swift */,
-				7C3B4FF126A928D300E2CA8F /* CheckEmailViewController.swift */,
+				7C3B4FF126A928D300E2CA8F /* CheckYourEmailViewController.swift */,
 			);
 			path = SchoolEmailVerification;
 			sourceTree = "<group>";
@@ -1434,7 +1434,7 @@
 				625B0E2C2741DED7003968BA /* ModelType.swift in Sources */,
 				7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */,
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
-				7C3B4FF026A928C700E2CA8F /* EmailInputViewController.swift in Sources */,
+				7C3B4FF026A928C700E2CA8F /* EmailVerificationViewController.swift in Sources */,
 				7CF369D72754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift in Sources */,
 				7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */,
 				7C89B2E726FC1D9E004109FE /* PostFilterOptions.swift in Sources */,
@@ -1455,7 +1455,7 @@
 				7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */,
 				7CAE5AFA2754B50B00426708 /* PostViewController+UITableView.swift in Sources */,
 				7CF369D52754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift in Sources */,
-				7C3B4FF226A928D300E2CA8F /* CheckEmailViewController.swift in Sources */,
+				7C3B4FF226A928D300E2CA8F /* CheckYourEmailViewController.swift in Sources */,
 				626AC5B52732506900E907E8 /* SnapKit.swift in Sources */,
 				625B0E2A2741D9BC003968BA /* Network.swift in Sources */,
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,

@@ -67,9 +67,9 @@ extension UserAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
-        case .register, .login, .uploadStudentIdVerificationInformation, .sendVerificationEmail, .findUserId, .findPassword:
+        case .register, .login, .uploadStudentIdVerificationInformation, .sendVerificationEmail, .findUserId, .findPassword, .sendFeedback:
             return .post
-        case .checkDuplication, .loadUserProfileUsingUid, .loadUserProfile, .sendFeedback:
+        case .checkDuplication, .loadUserProfileUsingUid, .loadUserProfile:
             return .get
         case .unregisterUser:
             return .delete

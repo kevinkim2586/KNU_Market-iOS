@@ -143,7 +143,6 @@ class ReportUserViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
 
-        
         reactor.state
             .map { $0.isLoading }
             .asObservable()

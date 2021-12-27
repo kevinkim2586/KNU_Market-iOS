@@ -41,6 +41,7 @@
 		7C0F1CBA26BA6B310068FF45 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F1CB926BA6B310068FF45 /* NotificationName.swift */; };
 		7C132BF2265397B200BE5F40 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF1265397B200BE5F40 /* ProgressHUD.swift */; };
 		7C132BF426552B4900BE5F40 /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF326552B4900BE5F40 /* UIButton + Extension.swift */; };
+		7C1471CA2779FD6C006409BD /* UnregisterViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1471C92779FD6C006409BD /* UnregisterViewReactor.swift */; };
 		7C17D75927548EB8001B1A73 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C17D75827548EB8001B1A73 /* NotificationManager.swift */; };
 		7C184B8326B103F1006C0FAD /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C184B8226B103F1006C0FAD /* Room.swift */; };
 		7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */; };
@@ -265,6 +266,7 @@
 		7C0F1CB926BA6B310068FF45 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		7C132BF1265397B200BE5F40 /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		7C132BF326552B4900BE5F40 /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
+		7C1471C92779FD6C006409BD /* UnregisterViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterViewReactor.swift; sourceTree = "<group>"; };
 		7C17D75827548EB8001B1A73 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		7C184B8226B103F1006C0FAD /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
@@ -940,6 +942,7 @@
 		7CA52D6A270B113900A69F3B /* Unregister Flow */ = {
 			isa = PBXGroup;
 			children = (
+				7C1471C92779FD6C006409BD /* UnregisterViewReactor.swift */,
 				7CA52D6B270B126A00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift */,
 				7CA52D6D270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift */,
 				7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */,
@@ -1568,6 +1571,7 @@
 				7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */,
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
 				7CF369CD2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift in Sources */,
+				7C1471CA2779FD6C006409BD /* UnregisterViewReactor.swift in Sources */,
 				7C83EE532742378000CF1680 /* PostViewController.swift in Sources */,
 				7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */,
 				7C015C9827035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift in Sources */,

@@ -391,19 +391,7 @@ extension AccountManagementViewController {
                 animated: true
             )
         } else {
-            navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(), animated: true)
-        }
+            self.navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
     }
 }
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct AccountManagementVC: PreviewProvider {
-    
-    static var previews: some View {
-        AccountManagementViewController().toPreview()
-    }
 }
-#endif

@@ -1,97 +1,99 @@
 import UIKit
+import SnapKit
+import RxSwift
+import RxCocoa
 
-class UnregisterUser_CheckSecondPrecautionsViewController: UIViewController {
+class UnregisterUser_CheckSecondPrecautionsViewController: BaseViewController {
     
-    private let titleLabel      = KMTitleLabel(fontSize: 19, textColor: UIColor(named: K.Color.appColor) ?? .systemPink)
-    private let detailLabel     = KMDetailLabel(fontSize: 16, numberOfTotalLines: 10)
-    private let bottomButton    = KMBottomButton(buttonTitle: "확인했습니다.")
+    //MARK: - Properties
     
-    private let padding: CGFloat = 20
+    //MARK: - Constants
     
-    private let precautionText          = "회원탈퇴를 하실 경우\n\n1. 참가 중인 공구 채팅방 자동으로 나가기\n\n2. 개설한 공구글 자동으로 삭제\n\n위 두 과정이 진행되며,\n\n다시 복구할 수 없음을 알려드립니다."
-    private let precautionTextToChange  = "다시 복구할 수 없음을 알려드립니다."
+    fileprivate struct Metrics {
+        static let padding = 20.f
+    }
+    
+    fileprivate struct Texts {
+        static let precautionText = "회원탈퇴를 하실 경우\n\n1. 참가 중인 공구 채팅방 자동으로 나가기\n\n2. 개설한 공구글 자동으로 삭제\n\n위 두 과정이 진행되며,\n\n다시 복구할 수 없음을 알려드립니다."
+        
+        static let precautionTextToChange = "다시 복구할 수 없음을 알려드립니다."
+    }
+    
+    //MARK: - UI
+    
+    let titleLabel = KMTitleLabel(fontSize: 19, textColor: UIColor(named: K.Color.appColor) ?? .systemPink).then {
+        $0.text = "회원탈퇴 안내"
+    }
+    
+    let detailLabel = KMDetailLabel(fontSize: 16, numberOfTotalLines: 10).then {
+        $0.text = Texts.precautionText
+        $0.textColor = .darkGray
+        $0.changeTextAttributeColor(
+            fullText: Texts.precautionText,
+            changeText: Texts.precautionTextToChange
+        )
+    }
+    
+    let bottomButton = KMBottomButton(buttonTitle: "확인했습니다.").then {
+        $0.updateTitleEdgeInsetsForKeyboardHidden()
+    }
+    
+    //MARK: - Initialization
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
-    }
-}
-
-//MARK: - Target Methods
-
-extension UnregisterUser_CheckSecondPrecautionsViewController {
-    
-    @objc func pressedBottomButton() {
-        navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(), animated: true)
-    }
-}
-
-//MARK: - UI Configuration
-
-extension UnregisterUser_CheckSecondPrecautionsViewController {
-    
-    private func initialize() {
-        view.backgroundColor = .white
-        setBackBarButtonItemTitle()
-        initializeTitleLabel()
-        initializeDetailLabel()
-        initializeBottomButton()
+        bindUI()
     }
     
-    private func initializeTitleLabel() {
+    //MARK: - UI Setup
+    
+    override func setupLayout() {
+        super.setupLayout()
+        
         view.addSubview(titleLabel)
-        titleLabel.text = "회원탈퇴 안내"
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-        ])
-    }
-    
-    private func initializeDetailLabel() {
         view.addSubview(detailLabel)
-        detailLabel.text = precautionText
-        detailLabel.textColor = .darkGray
-        detailLabel.changeTextAttributeColor(
-            fullText: precautionText,
-            changeText: precautionTextToChange
-        )
-    
-        NSLayoutConstraint.activate([
-            detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
-            detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-        ])
-    }
-    
-    private func initializeBottomButton() {
         view.addSubview(bottomButton)
-        bottomButton.addTarget(
-            self,
-            action: #selector(pressedBottomButton),
-            for: .touchUpInside
-        )
-        bottomButton.updateTitleEdgeInsetsForKeyboardAppeared()
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
         
-        NSLayoutConstraint.activate([
-            bottomButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardHidden)
-        ])
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+        
+        detailLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+        
+        bottomButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.snp.bottom)
+            $0.left.equalTo(view.snp.left)
+            $0.right.equalTo(view.snp.right)
+            $0.height.equalTo(bottomButton.heightConstantForKeyboardHidden)
+        }
     }
     
-}
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct UnRegister2: PreviewProvider {
+    override func setupStyle() {
+        super.setupStyle()
+        setBackBarButtonItemTitle()
+    }
     
-    static var previews: some View {
-        UnregisterUser_CheckSecondPrecautionsViewController().toPreview()
+    private func bindUI() {
+        
+        bottomButton.rx.tap
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
+               
+            })
+            .disposed(by: disposeBag)
     }
 }
-#endif

@@ -69,6 +69,7 @@ final class ChangeUserInfoReactor: Reactor {
         case .updateEmailTextField(let text):
             return Observable.just(Mutation.setEmail(text))
             
+        // 아이디, 닉네임, 비번분실이메일은 변경할 때 중복체크 과정을 반드시 거침.
         case .updateUserInfo(let updateUserInfoType, let checkDuplicationType):
             
             let userInputValidation: InputError
@@ -96,7 +97,6 @@ final class ChangeUserInfoReactor: Reactor {
             } else {
                 
                 // 먼저 중복인지 체크한 다음에 유저 정보 업데이트 수행
-                
                 return self.userService.checkDuplication(type: checkDuplicationType, infoString: updatedInfoString)
                     .asObservable()
                     .flatMap { result -> Observable<Mutation> in

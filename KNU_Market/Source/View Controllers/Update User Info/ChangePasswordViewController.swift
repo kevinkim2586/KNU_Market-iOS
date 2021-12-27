@@ -138,7 +138,6 @@ class ChangePasswordViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        
         // Output
         
         reactor.state

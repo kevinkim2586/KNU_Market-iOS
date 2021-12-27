@@ -1,168 +1,158 @@
 import UIKit
+import SnapKit
+import RxSwift
+import RxCocoa
+import ReactorKit
 
-class ChangeEmailForPasswordLossViewController: UIViewController {
+class ChangeEmailForPasswordLossViewController: BaseViewController, View {
     
-    private let titleLabel          = KMTitleLabel(fontSize: 17, textColor: .darkGray)
-    private let emailTextField      = KMTextField(placeHolderText: "변경하실 이메일 입력")
-    private let errorLabel          = KMErrorLabel()
-    private let changeEmailButton   = KMBottomButton(buttonTitle: "변경하기")
+    typealias Reactor = ChangeUserInfoReactor
     
-    private let padding: CGFloat = 20
+    //MARK: - Properties
     
-    typealias InputError = ValidationError.OnRegister
-
+    //MARK: - Constants
+    
+    fileprivate struct Metrics {
+        static let padding = 20.f
+    }
+    
+    //MARK: - UI
+    
+    let titleLabel = KMTitleLabel(fontSize: 17, textColor: .darkGray).then {
+        $0.numberOfLines = 5
+        $0.text = "새로운 이메일 주소를 입력해주세요.\n\n비밀번호 분실 시, 해당 이메일 주소로 임시 비밀번호가 전송되니, 이메일 변경은 신중히 부탁드립니다."
+    }
+    
+    let emailTextField = KMTextField(placeHolderText: "변경하실 이메일 입력")
+    
+    let errorLabel = KMErrorLabel().then {
+        $0.isHidden = true
+    }
+    
+    let changeEmailButton = KMBottomButton(buttonTitle: "변경하기").then {
+        $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true
+    }
+    
+    
+    //MARK: - Initialization
+    
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+        title = "이메일 변경"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         emailTextField.becomeFirstResponder()
     }
-}
-
-//MARK: - Target Methods
-
-extension ChangeEmailForPasswordLossViewController {
     
-    @objc func pressedChangeEmailButton() {
-        emailTextField.resignFirstResponder()
-        if !checkIfValidEmail() { return }
-        checkEmailDuplication()
-    }
+    //MARK: - UI Setup
     
-    private func checkEmailDuplication() {
+    override func setupLayout() {
+        super.setupLayout()
         
-        UserManager.shared.checkDuplication(emailForPasswordLoss: emailTextField.text!) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let isDuplicate):
-                if isDuplicate {
-                    DispatchQueue.main.async {
-                        self.errorLabel.showErrorMessage(message: InputError.existingEmail.rawValue)
-                    }
-                } else {
-                    self.updateEmailForPasswordLoss(with: self.emailTextField.text!)
-                }
-            case .failure(_):
-                self.showSimpleBottomAlert(with: NetworkError.E000.errorDescription)
-            }
-        }
+        emailTextField.inputAccessoryView = changeEmailButton
+        
+        view.addSubview(titleLabel)
+        view.addSubview(emailTextField)
+        view.addSubview(errorLabel)
     }
     
-    private func updateEmailForPasswordLoss(with email: String) {
-        showProgressBar()
-        UserManager.shared.updateUserInfo(
-            type: .email,
-            infoString: email
-        ) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(_):
+    override func setupConstraints() {
+        super.setupConstraints()
+        
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+        
+        emailTextField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(55)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-(Metrics.padding + 130))
+            $0.height.equalTo(60)
+        }
+        
+        errorLabel.snp.makeConstraints {
+            $0.top.equalTo(emailTextField.snp.bottom).offset(Metrics.padding)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(Metrics.padding)
+        }
+        
+    }
+    
+    //MARK: - Binding
+    
+    func bind(reactor: ChangeUserInfoReactor) {
+        
+        // Input
+        
+        emailTextField.rx.text.orEmpty
+            .asObservable()
+            .map { Reactor.Action.updateEmailTextField($0) }
+            .bind(to: reactor.action )
+            .disposed(by: disposeBag)
+        
+        emailTextField.rx.controlEvent([.editingChanged])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.errorLabel.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
+        changeEmailButton.rx.tap
+            .asObservable()
+            .map { Reactor.Action.updateUserInfo(.email, .email) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Output
+        
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (_, errorMessage) in
+                self.errorLabel.showErrorMessage(message: errorMessage!)
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.changeComplete }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.emailTextField.resignFirstResponder()
                 self.showSimpleBottomAlert(with: "이메일이 변경되었어요.🎉")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.navigationController?.popViewController(animated: true)
                 }
-            case .failure(_):
-                self.showSimpleBottomAlert(with: "이메일 변경 실패. 잠시 후 다시 시도해주세요 🥲")
-            }
-        }
-        dismissProgressBar()
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        errorLabel.isHidden = true
+            })
+            .disposed(by: disposeBag)
     }
 }
 
-//MARK: - User Input Validation
-
-extension ChangeEmailForPasswordLossViewController {
-    
-    func checkIfValidEmail() -> Bool {
-        guard let email = emailTextField.text else { return false }
-        if !email.isValidEmail {
-            errorLabel.showErrorMessage(message: InputError.invalidEmailFormat.rawValue)
-            return false
-        }
-        return true
-    }
-}
-
-
-//MARK: - UI Configuration & Initialization
-
-extension ChangeEmailForPasswordLossViewController {
-    
-    func initialize() {
-        title = "이메일 변경"
-        view.backgroundColor = .white
-        initializeTitleLabel()
-        initializeTextField()
-        initializeErrorLabel()
-        initializeChangeEmailButton()
-    }
-    
-    func initializeTitleLabel() {
-        view.addSubview(titleLabel)
-        titleLabel.numberOfLines = 5
-        titleLabel.text = "새로운 이메일 주소를 입력해주세요.\n\n비밀번호 분실 시, 해당 이메일 주소로 임시 비밀번호가 전송되니, 이메일 변경은 신중히 부탁드립니다."
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-        ])
-    }
-    
-    func initializeTextField() {
-        view.addSubview(emailTextField)
-        emailTextField.addTarget(
-            self,
-            action: #selector(textFieldDidChange(_:)),
-            for: .editingChanged
-        )
-        
-        NSLayoutConstraint.activate([
-            emailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
-            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
-            emailTextField.heightAnchor.constraint(equalToConstant: 60)
-        ])
-        
-    }
-    
-    func initializeErrorLabel() {
-        view.addSubview(errorLabel)
-        errorLabel.isHidden = true
-        
-        NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 30),
-            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-        ])
-    }
-    
-    func initializeChangeEmailButton() {
-        changeEmailButton.heightAnchor.constraint(equalToConstant: changeEmailButton.heightConstantForKeyboardAppeared).isActive = true
-        changeEmailButton.addTarget(
-            self,
-            action: #selector(pressedChangeEmailButton),
-            for: .touchUpInside
-        )
-        emailTextField.inputAccessoryView = changeEmailButton
-    }
-}
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct ChangeEmailVC: PreviewProvider {
-    
-    static var previews: some View {
-        ChangeEmailForPasswordLossViewController().toPreview()
-    }
-}
-#endif

@@ -91,6 +91,8 @@
 		7C58476C2772E6B7005D75B2 /* CongratulateUserViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58476B2772E6B7005D75B2 /* CongratulateUserViewReactor.swift */; };
 		7C58476E2772F917005D75B2 /* FindUserInfoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58476D2772F917005D75B2 /* FindUserInfoViewReactor.swift */; };
 		7C58477227744FD9005D75B2 /* EmailVerificationViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477127744FD9005D75B2 /* EmailVerificationViewReactor.swift */; };
+		7C58477627795CA0005D75B2 /* StudentIdVerificationViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477527795CA0005D75B2 /* StudentIdVerificationViewReactor.swift */; };
+		7C58477827796DA6005D75B2 /* UIImagePickerController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477727796DA6005D75B2 /* UIImagePickerController+Extension.swift */; };
 		7C5A1F2B26D6174F0041885B /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */; };
 		7C5E21292646558700E98FE5 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* PostViewModel.swift */; };
 		7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */; };
@@ -177,7 +179,7 @@
 		7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33B2C274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift */; };
 		7CC33B2F274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33B2E274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift */; };
 		7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */; };
-		7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */; };
+		7CC36A8926EDC70C007573DD /* StudentIdVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC36A8826EDC70C007573DD /* StudentIdVerificationViewController.swift */; };
 		7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC69A752767027C00105FC0 /* PostAPI.swift */; };
 		7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC69A7727670A0F00105FC0 /* MediaAPI.swift */; };
 		7CC69A7A27670CF200105FC0 /* ReportAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC69A7927670CF200105FC0 /* ReportAPI.swift */; };
@@ -311,6 +313,8 @@
 		7C58476B2772E6B7005D75B2 /* CongratulateUserViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulateUserViewReactor.swift; sourceTree = "<group>"; };
 		7C58476D2772F917005D75B2 /* FindUserInfoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserInfoViewReactor.swift; sourceTree = "<group>"; };
 		7C58477127744FD9005D75B2 /* EmailVerificationViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewReactor.swift; sourceTree = "<group>"; };
+		7C58477527795CA0005D75B2 /* StudentIdVerificationViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdVerificationViewReactor.swift; sourceTree = "<group>"; };
+		7C58477727796DA6005D75B2 /* UIImagePickerController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImagePickerController+Extension.swift"; sourceTree = "<group>"; };
 		7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -400,7 +404,7 @@
 		7CC33B2C274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CC33B2E274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedPostImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDGuideViewController.swift; sourceTree = "<group>"; };
-		7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureStudentIDViewController.swift; sourceTree = "<group>"; };
+		7CC36A8826EDC70C007573DD /* StudentIdVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdVerificationViewController.swift; sourceTree = "<group>"; };
 		7CC69A752767027C00105FC0 /* PostAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
 		7CC69A7727670A0F00105FC0 /* MediaAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAPI.swift; sourceTree = "<group>"; };
 		7CC69A7927670CF200105FC0 /* ReportAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAPI.swift; sourceTree = "<group>"; };
@@ -706,6 +710,16 @@
 				7C3B4FF126A928D300E2CA8F /* CheckYourEmailViewController.swift */,
 			);
 			path = SchoolEmailVerification;
+			sourceTree = "<group>";
+		};
+		7C58477427795BAC005D75B2 /* StudentIdVerification */ = {
+			isa = PBXGroup;
+			children = (
+				7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */,
+				7CC36A8826EDC70C007573DD /* StudentIdVerificationViewController.swift */,
+				7C58477527795CA0005D75B2 /* StudentIdVerificationViewReactor.swift */,
+			);
+			path = StudentIdVerification;
 			sourceTree = "<group>";
 		};
 		7C60DC7126944C16001DEA9A /* Update User Info */ = {
@@ -1045,6 +1059,7 @@
 		7CB8DF34264BAB390001CC6D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7C58477727796DA6005D75B2 /* UIImagePickerController+Extension.swift */,
 				7CB8DF35264BAB760001CC6D /* UIViewController + Extension.swift */,
 				7C98D2A52706F54B00579EE6 /* UIViewController + Preview.swift */,
 				7C55545E266CEADF00C3C5B6 /* UILabel + Extension.swift */,
@@ -1155,9 +1170,8 @@
 		7CEC191D27017C0E00C2D671 /* User Verification */ = {
 			isa = PBXGroup;
 			children = (
+				7C58477427795BAC005D75B2 /* StudentIdVerification */,
 				7C58477327745135005D75B2 /* SchoolEmailVerification */,
-				7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */,
-				7CC36A8826EDC70C007573DD /* CaptureStudentIDViewController.swift */,
 			);
 			path = "User Verification";
 			sourceTree = "<group>";
@@ -1485,7 +1499,7 @@
 				7CF369B62754D65200C9D7A9 /* PostListViewController+TargetMethods.swift in Sources */,
 				7C9A3837276DC70200AEE831 /* LoginViewReactor.swift in Sources */,
 				7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */,
-				7CC36A8926EDC70C007573DD /* CaptureStudentIDViewController.swift in Sources */,
+				7CC36A8926EDC70C007573DD /* StudentIdVerificationViewController.swift in Sources */,
 				7C83EE4A274121FF00CF1680 /* ChatListTableViewCell.swift in Sources */,
 				7C036AB82696BE4C00F6C29B /* Date + Extension.swift in Sources */,
 				7C868D69274C97420056B3F3 /* CustomAlertViewController.swift in Sources */,
@@ -1534,6 +1548,7 @@
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7C0E2DDF26B7D92800BB37FF /* String + Extension.swift in Sources */,
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
+				7C58477827796DA6005D75B2 /* UIImagePickerController+Extension.swift in Sources */,
 				7C98D2A62706F54B00579EE6 /* UIViewController + Preview.swift in Sources */,
 				622270B6274A77AB00FDC47B /* ImageSelectionView.swift in Sources */,
 				7CAE5AFE2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift in Sources */,
@@ -1562,6 +1577,7 @@
 				7C5386DF27689B5B00BFEA7F /* MediaService.swift in Sources */,
 				7C58476C2772E6B7005D75B2 /* CongratulateUserViewReactor.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
+				7C58477627795CA0005D75B2 /* StudentIdVerificationViewReactor.swift in Sources */,
 				7CC69A7C27670E3B00105FC0 /* PopupAPI.swift in Sources */,
 				7C5386E62768CA8200BFEA7F /* PopupService.swift in Sources */,
 				7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */,

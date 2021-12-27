@@ -155,6 +155,7 @@ class EmailVerificationViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
 
+
         // Output
 
         emailTextField.rx.controlEvent([.editingChanged])

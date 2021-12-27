@@ -150,6 +150,21 @@ extension UIViewController {
             }
         }
     }
+    
+    func presentAlert(title: String, message: String? = nil) -> Observable<ActionType> {
+        return Observable.create { [weak self] observer in
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+                observer.onNext(.ok)
+                observer.onCompleted()
+            }
+            alertController.addAction(okAction)
+            self?.present(alertController, animated: true, completion: nil)
+            return Disposables.create {
+                alertController.dismiss(animated: true)
+            }
+        }
+    }
 }
 
 //MARK: - VC Router

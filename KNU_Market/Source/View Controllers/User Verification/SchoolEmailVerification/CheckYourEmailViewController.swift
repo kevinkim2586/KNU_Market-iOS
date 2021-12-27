@@ -29,7 +29,7 @@ class CheckYourEmailViewController: BaseViewController {
         )
     }
 
-    let bottomButton    = KMBottomButton(buttonTitle: "홈으로 돌아가기")
+    let bottomButton = KMBottomButton(buttonTitle: "홈으로 돌아가기")
     
     //MARK: - Initialization
     

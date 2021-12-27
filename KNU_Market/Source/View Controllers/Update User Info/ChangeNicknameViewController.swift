@@ -140,21 +140,12 @@ class ChangeNicknameViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.alertMessage }
-            .filter { $0 != nil }
-            .withUnretained(self)
-            .subscribe { (_, alertMessage) in
-                self.view.endEditing(true)
-                self.showSimpleBottomAlert(with: alertMessage!)
-            }
-            .disposed(by: disposeBag)
-        
-        reactor.state
             .map { $0.changeComplete }
             .distinctUntilChanged()
             .filter { $0 == true }
             .withUnretained(self)
             .subscribe(onNext: { _ in
+                self.nicknameTextField.resignFirstResponder()
                 self.showSimpleBottomAlert(with: "닉네임이 변경되었어요. 🎉")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.navigationController?.popViewController(animated: true)

@@ -52,6 +52,7 @@ class PasswordInputViewController: BaseViewController, View {
     }
 
     //MARK: - Initialization
+    
     init(reactor: Reactor) {
         super.init()
         self.reactor = reactor

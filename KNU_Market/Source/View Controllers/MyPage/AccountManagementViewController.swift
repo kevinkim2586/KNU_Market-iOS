@@ -348,7 +348,10 @@ extension AccountManagementViewController {
             navigationController?.pushViewController(ChangeNicknameViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
             
             
-        case 2: navigationController?.pushViewController(ChangePasswordViewController(), animated: true)
+        case 2:
+            
+            navigationController?.pushViewController(ChangePasswordViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
+    
         case 3: navigationController?.pushViewController(ChangeEmailForPasswordLossViewController(), animated: true)
         default: break
         }

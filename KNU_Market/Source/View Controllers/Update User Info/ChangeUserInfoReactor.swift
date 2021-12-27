@@ -22,6 +22,7 @@ final class ChangeUserInfoReactor: Reactor {
         case updatePasswordTextFields([String])
         case updateEmailTextField(String)
         case updateUserInfo(UpdateUserInfoType, CheckDuplicationType)
+        case updatePassword                     // 비밀번호는 별도 중복 체크가 필요없으니 바로 변경 API 호출
     }
     
     enum Mutation {
@@ -29,8 +30,7 @@ final class ChangeUserInfoReactor: Reactor {
         case setNickname(String)
         case setPasswords([String])
         case setEmail(String)
-        
-        case setAlertMessage(String)
+
         case setErrorMessage(String)
         case setLoading(Bool)
         case setCompletionStatus(Bool)
@@ -83,10 +83,6 @@ final class ChangeUserInfoReactor: Reactor {
                 userInputValidation = currentState.userNickname.isValidNickname
                 updatedInfoString = currentState.userNickname
                 
-            case .password:
-                userInputValidation = currentState.userPassword.isValidPassword(alongWith: currentState.userCheckPassword)
-                updatedInfoString = currentState.userPassword
-                
             case .email:
                 userInputValidation = currentState.userEmailForPasswordLoss.isValidEmailFormat
                 updatedInfoString = currentState.userEmailForPasswordLoss
@@ -129,6 +125,29 @@ final class ChangeUserInfoReactor: Reactor {
                         }
                     }
             }
+            
+        case .updatePassword:
+            
+            let passwordValidation = currentState.userPassword.isValidPassword(alongWith: currentState.userCheckPassword)
+            
+            if passwordValidation != .correct {
+                return Observable.just(Mutation.setErrorMessage(passwordValidation.rawValue))
+            } else {
+                return Observable.concat([
+                    Observable.just(Mutation.setLoading(true)),
+                    self.userService.updateUserInfo(type: .password, updatedInfo: currentState.userPassword)
+                        .asObservable()
+                        .map { result in
+                            switch result {
+                            case .success:
+                                return Mutation.setCompletionStatus(true)
+                            case .error(_):
+                                return Mutation.setErrorMessage("비밀번호 변경 실패. 잠시 후 다시 시도해주세요. 🥲")
+                            }
+                        },
+                    Observable.just(Mutation.setLoading(false))
+                ])
+            }
         }
     }
     
@@ -150,10 +169,7 @@ final class ChangeUserInfoReactor: Reactor {
             
         case .setEmail(let email):
             state.userEmailForPasswordLoss = email
-            
-        case .setAlertMessage(let alertMessage):
-            state.alertMessage = alertMessage
-            
+        
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
             

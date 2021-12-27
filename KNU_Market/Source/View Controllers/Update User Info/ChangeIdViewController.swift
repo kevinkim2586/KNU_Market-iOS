@@ -140,22 +140,14 @@ class ChangeIdViewController: BaseViewController, View {
                 self.errorLabel.showErrorMessage(message: errorMessage!)
             }
             .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.alertMessage }
-            .filter { $0 != nil }
-            .withUnretained(self)
-            .subscribe { (_, alertMessage) in
-                self.showSimpleBottomAlert(with: alertMessage!)
-            }
-            .disposed(by: disposeBag)
-        
+    
         reactor.state
             .map { $0.changeComplete }
             .distinctUntilChanged()
             .filter { $0 == true }
             .withUnretained(self)
             .subscribe(onNext: { _ in
+                self.idTextField.resignFirstResponder()
                 self.showSimpleBottomAlert(with: "아이디가 성공적으로 변경됐어요.🎉")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.navigationController?.popViewController(animated: true)

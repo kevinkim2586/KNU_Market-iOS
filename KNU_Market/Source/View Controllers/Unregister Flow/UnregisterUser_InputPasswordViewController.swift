@@ -158,7 +158,8 @@ class UnregisterUser_InputPasswordViewController: BaseViewController, View {
             .filter { $0 == true }
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.navigationController?.pushViewController(UnregisterUser_InputSuggestionViewController(userManager: UserManager()), animated: true)
+                self.navigationController?.pushViewController(UnregisterUser_InputSuggestionViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
+
             })
             .disposed(by: disposeBag)
     }

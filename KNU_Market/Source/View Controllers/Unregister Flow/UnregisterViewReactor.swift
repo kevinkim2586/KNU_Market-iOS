@@ -17,21 +17,28 @@ final class UnregisterViewReactor: Reactor {
     enum Action {
         case updatePasswordInput(String)
         case tryLoggingIn
+        case updateFeedBackContext(String)
+        case sendFeedBack
     }
     
     enum Mutation {
         case setPassword(String)
+        case setFeedBackContext(String)
         case setLoading(Bool)
         case setErrorMessage(String)
+        case setAlertMessage(String)
         case setLoginComplete(Bool)
         case setUnregisterComplete(Bool)
+        case empty
     }
     
     struct State {
         var userId: String = User.shared.userID
         var password: String = ""
+        var userFeedback: String = ""
         var isLoading: Bool = false
         var errorMessage: String?
+        var alertMessage: String?
         var loginCompleted: Bool = false
         var unregisterComplete: Bool = false
     }
@@ -65,6 +72,40 @@ final class UnregisterViewReactor: Reactor {
                     },
                 Observable.just(Mutation.setLoading(false))
             ])
+            
+        case .updateFeedBackContext(let feedback):
+            return Observable.just(Mutation.setFeedBackContext(feedback))
+            
+        case .sendFeedBack:
+            
+            let feedback = "회원 탈퇴 사유: \(currentState.userFeedback)"
+            
+            return Observable.concat([
+                Observable.just(Mutation.setLoading(true)),
+                self.userService.sendFeedback(content: feedback)
+                    .asObservable()
+                    .map { result in
+                        switch result {
+                        case .success:
+                            return Mutation.empty
+                        case .error(_):
+                            return Mutation.setErrorMessage("피드백 보내기에 실패하였습니다. 잠시 후 다시 시도해주세요.")
+                        }
+                    },
+                
+                self.userService.unregisterUser()
+                    .asObservable()
+                    .map { result in
+                        switch result {
+                        case .success:
+                            return Mutation.setUnregisterComplete(true)
+                        case .error(let error):
+                            return Mutation.setAlertMessage(error.errorDescription)
+                        }
+                    },
+                Observable.just(Mutation.setLoading(false))
+            ])
+
         }
     }
     
@@ -75,17 +116,25 @@ final class UnregisterViewReactor: Reactor {
         case .setPassword(let password):
             state.password = password
             
+        case .setFeedBackContext(let feedback):
+            state.userFeedback = feedback
+            
         case .setLoading(let isLoading):
             state.isLoading = isLoading
             
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
             
+        case .setAlertMessage(let alertMessage):
+            state.alertMessage = alertMessage
+            
         case .setLoginComplete(let isLoggedIn):
             state.loginCompleted = isLoggedIn
             
         case .setUnregisterComplete(let isUnregistered):
             state.unregisterComplete = isUnregistered
+            
+        default: break
         }
         return state
     }

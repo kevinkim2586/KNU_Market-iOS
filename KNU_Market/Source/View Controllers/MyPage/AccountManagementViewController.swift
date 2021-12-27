@@ -340,7 +340,10 @@ extension AccountManagementViewController {
 
     @objc private func pressedChangedUserInfoButton(_ sender: UIButton) {
         switch sender.tag {
-        case 0: navigationController?.pushViewController(ChangeIdViewController(), animated: true)
+        case 0:
+            
+            navigationController?.pushViewController(ChangeIdViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
+
         case 1:
             navigationController?.pushViewController(ChangeNicknameViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
             

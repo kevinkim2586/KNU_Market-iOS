@@ -1,171 +1,168 @@
 import UIKit
+import SnapKit
+import RxSwift
+import RxCocoa
+import ReactorKit
 
-class ChangeIdViewController: UIViewController {
+class ChangeIdViewController: BaseViewController, View {
     
-    private let titleLabel          = KMTitleLabel(fontSize: 18, textColor: .darkGray)
-    private let idTextField         = KMTextField(placeHolderText: "새 아이디 입력")
-    private let errorLabel          = KMErrorLabel()
-    private let changeIdButton      = KMBottomButton(buttonTitle: "변경하기")
+    typealias Reactor = ChangeUserInfoReactor
     
-    private let padding: CGFloat = 20
+    //MARK: - Properties
     
-    typealias InputError = ValidationError.OnRegister
-
+    //MARK: - Constants
+    
+    fileprivate struct Metrics {
+        static let padding = 20.f
+    }
+    
+    //MARK: - UI
+    
+    let titleLabel = KMTitleLabel(fontSize: 18, textColor: .darkGray).then {
+        $0.text = "새로운 아이디를 입력해주세요."
+    }
+    
+    let idTextField = KMTextField(placeHolderText: "새 아이디 입력").then {
+        $0.autocapitalizationType = .none
+    }
+    
+    let errorLabel = KMErrorLabel().then {
+        $0.isHidden = true
+    }
+    
+    let changeIdButton = KMBottomButton(buttonTitle: "변경하기").then {
+        $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true
+    }
+    
+    //MARK: - Initialization
+    
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+        title = "아이디 변경"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         idTextField.becomeFirstResponder()
     }
-}
-
-//MARK: - Target Methods
-
-extension ChangeIdViewController {
     
-    @objc func pressedChangeIdButton() {
-        idTextField.resignFirstResponder()
-        if !checkIfValidId() { return  }
-        checkIDDuplication()
+    //MARK: - UI Setup
+    
+    override func setupLayout() {
+        super.setupLayout()
+        
+        idTextField.inputAccessoryView = changeIdButton
+        
+        view.addSubview(titleLabel)
+        view.addSubview(idTextField)
+        view.addSubview(errorLabel)
+        
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        errorLabel.isHidden = true
+    override func setupConstraints() {
+        super.setupConstraints()
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+        
+        idTextField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(55)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-(Metrics.padding + 130))
+            $0.height.equalTo(60)
+        }
+        
+        errorLabel.snp.makeConstraints {
+            $0.top.equalTo(idTextField.snp.bottom).offset(Metrics.padding)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(Metrics.padding)
+        }
     }
     
-    func updateUserId(with id: String) {
-        UserManager.shared.updateUserInfo(
-            type: .id,
-            infoString: id
-        ) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(_):
+    //MARK: - Binding
+    
+    func bind(reactor: ChangeUserInfoReactor) {
+        
+        // Input
+        
+        idTextField.rx.text.orEmpty
+            .asObservable()
+            .map { Reactor.Action.updateIdTextField($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        idTextField.rx.controlEvent([.editingChanged])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.errorLabel.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
+        changeIdButton.rx.tap
+            .asObservable()
+            .map { Reactor.Action.updateUserInfo(.id, .id)}
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        
+        // Output
+        
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (_, errorMessage) in
+                self.view.endEditing(true)
+                self.errorLabel.showErrorMessage(message: errorMessage!)
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.alertMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (_, alertMessage) in
+                self.showSimpleBottomAlert(with: alertMessage!)
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.changeComplete }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
                 self.showSimpleBottomAlert(with: "아이디가 성공적으로 변경됐어요.🎉")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.navigationController?.popViewController(animated: true)
                 }
-            case .failure(let error):
-                self.errorLabel.showErrorMessage(message: error.errorDescription)
-            }
-        }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
-//MARK: - User Input Validation
 
-extension ChangeIdViewController {
-    
-    func checkIfValidId() -> Bool {
-        guard let id = idTextField.text else { return false }
-        
-        if id.count < 4 || id.count > 30 {
-            errorLabel.showErrorMessage(message: InputError.incorrectIdLength.rawValue)
-            return false
-        }
-        
-        if !id.isValidEmail, !id.isValidId {
-            errorLabel.showErrorMessage(message: InputError.incorrectIdFormat.rawValue)
-            return false
-        }
-        return true
-    }
-    
-    func checkIDDuplication() {
-        
-        let id = idTextField.text!.trimmingCharacters(in: .whitespaces)
-        
-        UserManager.shared.checkDuplication(id: id) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let isDuplicate):
-                if isDuplicate {
-                    self.errorLabel.showErrorMessage(message: InputError.existingId.rawValue)
-                } else {
-                    self.updateUserId(with: id)
-                }
-            case .failure(let error):
-                self.errorLabel.showErrorMessage(message: error.errorDescription)
-            }
-        }
-    }
-    
-}
-
-//MARK: - UI Configuration & Initialization
-
-extension ChangeIdViewController {
-    
-    func initialize() {
-        title = "아이디 변경"
-        view.backgroundColor = .white
-        initializeTitleLabel()
-        initializeTextField()
-        initializeErrorLabel()
-        initializeChangeEmailButton()
-    }
-    
-    func initializeTitleLabel() {
-        view.addSubview(titleLabel)
-        titleLabel.text = "새로운 아이디를 입력해주세요."
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-        ])
-    }
-    
-    func initializeTextField() {
-        view.addSubview(idTextField)
-        idTextField.addTarget(
-            self,
-            action: #selector(textFieldDidChange(_:)),
-            for: .editingChanged
-        )
-        
-        NSLayoutConstraint.activate([
-            idTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
-            idTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            idTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
-            idTextField.heightAnchor.constraint(equalToConstant: 60)
-        ])
-        
-    }
-    
-    func initializeErrorLabel() {
-        view.addSubview(errorLabel)
-        errorLabel.isHidden = true
-        
-        NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: idTextField.bottomAnchor, constant: 30),
-            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-        ])
-    }
-    
-    func initializeChangeEmailButton() {
-        changeIdButton.heightAnchor.constraint(equalToConstant: changeIdButton.heightConstantForKeyboardAppeared).isActive = true
-        changeIdButton.addTarget(
-            self,
-            action: #selector(pressedChangeIdButton),
-            for: .touchUpInside
-        )
-        idTextField.inputAccessoryView = changeIdButton
-    }
-}
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct ChangeIdVC: PreviewProvider {
-    
-    static var previews: some View {
-        ChangeIdViewController().toPreview()
-    }
-}
-#endif

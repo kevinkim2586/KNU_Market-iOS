@@ -51,14 +51,12 @@ class ChangeNicknameViewController: BaseViewController, View {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "닉네임 변경"
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         nicknameTextField.becomeFirstResponder()
     }
-    
     
     //MARK: - UI Setup
     
@@ -146,6 +144,7 @@ class ChangeNicknameViewController: BaseViewController, View {
             .filter { $0 != nil }
             .withUnretained(self)
             .subscribe { (_, alertMessage) in
+                self.view.endEditing(true)
                 self.showSimpleBottomAlert(with: alertMessage!)
             }
             .disposed(by: disposeBag)

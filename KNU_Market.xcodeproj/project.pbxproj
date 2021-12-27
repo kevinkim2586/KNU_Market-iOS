@@ -93,6 +93,7 @@
 		7C58477227744FD9005D75B2 /* EmailVerificationViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477127744FD9005D75B2 /* EmailVerificationViewReactor.swift */; };
 		7C58477627795CA0005D75B2 /* StudentIdVerificationViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477527795CA0005D75B2 /* StudentIdVerificationViewReactor.swift */; };
 		7C58477827796DA6005D75B2 /* UIImagePickerController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477727796DA6005D75B2 /* UIImagePickerController+Extension.swift */; };
+		7C58477A27799AAC005D75B2 /* ChangeUserInfoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477927799AAC005D75B2 /* ChangeUserInfoReactor.swift */; };
 		7C5A1F2B26D6174F0041885B /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */; };
 		7C5E21292646558700E98FE5 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* PostViewModel.swift */; };
 		7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */; };
@@ -315,6 +316,7 @@
 		7C58477127744FD9005D75B2 /* EmailVerificationViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewReactor.swift; sourceTree = "<group>"; };
 		7C58477527795CA0005D75B2 /* StudentIdVerificationViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdVerificationViewReactor.swift; sourceTree = "<group>"; };
 		7C58477727796DA6005D75B2 /* UIImagePickerController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImagePickerController+Extension.swift"; sourceTree = "<group>"; };
+		7C58477927799AAC005D75B2 /* ChangeUserInfoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserInfoReactor.swift; sourceTree = "<group>"; };
 		7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -725,10 +727,11 @@
 		7C60DC7126944C16001DEA9A /* Update User Info */ = {
 			isa = PBXGroup;
 			children = (
+				7CA52D68270B083F00A69F3B /* ChangeIdViewController.swift */,
 				7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */,
 				7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */,
 				7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */,
-				7CA52D68270B083F00A69F3B /* ChangeIdViewController.swift */,
+				7C58477927799AAC005D75B2 /* ChangeUserInfoReactor.swift */,
 			);
 			path = "Update User Info";
 			sourceTree = "<group>";
@@ -1514,6 +1517,7 @@
 				7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */,
 				7C58476E2772F917005D75B2 /* FindUserInfoViewReactor.swift in Sources */,
 				7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */,
+				7C58477A27799AAC005D75B2 /* ChangeUserInfoReactor.swift in Sources */,
 				7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */,
 				7C58475B277040E6005D75B2 /* IDInputViewController.swift in Sources */,
 				7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */,

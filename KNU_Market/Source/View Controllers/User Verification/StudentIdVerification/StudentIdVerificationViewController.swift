@@ -11,11 +11,7 @@ class StudentIdVerificationViewController: BaseViewController, View {
     typealias Reactor = StudentIdVerificationViewReactor
     
     //MARK: - Properties
-    
-    private var didCheckDuplicate: Bool = false
-    private var studentIdImageData: Data?
-    
-    typealias VerifyError = ValidationError.OnVerification
+
     
     //MARK: - Constants
     
@@ -312,9 +308,15 @@ class StudentIdVerificationViewController: BaseViewController, View {
             .map { $0.isVerified }
             .distinctUntilChanged()
             .filter { $0 == true }
+            .withUnretained(self)
             .subscribe(onNext: { _ in
-                if let vcPopCount = self.navigationController?.viewControllers.count {
-                    self.popVCsFromNavController(count: vcPopCount - 1)
+                self.showSimpleBottomAlertWithAction(
+                    message:  "인증 완료되었습니다😁",
+                    buttonTitle: "홈으로"
+                ) {
+                    if let vcPopCount = self.navigationController?.viewControllers.count {
+                        self.popVCsFromNavController(count: vcPopCount - 1)
+                    }
                 }
             })
             .disposed(by: disposeBag)

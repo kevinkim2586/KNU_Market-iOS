@@ -144,6 +144,7 @@ extension UserAPI: BaseAPI {
             
             return .uploadMultipart(multipartData)
             
+            
         default:
             if let parameters = parameters {
                 return .requestParameters(parameters: parameters, encoding: parameterEncoding)

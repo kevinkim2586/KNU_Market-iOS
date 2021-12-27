@@ -9,7 +9,7 @@ class ChangeIdViewController: UIViewController {
     
     private let padding: CGFloat = 20
     
-    typealias InputError = ValidationError.OnChangingUserInfo
+    typealias InputError = ValidationError.OnRegister
 
     override func viewDidLoad() {
         super.viewDidLoad()

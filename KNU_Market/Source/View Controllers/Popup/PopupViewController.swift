@@ -93,20 +93,20 @@ class PopupViewController: BaseViewController, View {
     override func setupConstraints() {
         super.setupConstraints()
         
-        popupImageView.snp.makeConstraints { make in
-            make.width.equalTo(view.snp.width).multipliedBy(0.8)
-            make.height.equalTo(self.popupImageView.snp.width).multipliedBy(1.3)
-            make.center.equalToSuperview()
+        popupImageView.snp.makeConstraints {
+            $0.width.equalTo(view.snp.width).multipliedBy(0.8)
+            $0.height.equalTo(self.popupImageView.snp.width).multipliedBy(1.3)
+            $0.center.equalToSuperview()
         }
         
-        doNotSeeForOneDayButton.snp.makeConstraints { make in
-            make.top.equalTo(popupImageView.snp.bottom).offset(15.3)
-            make.centerX.equalToSuperview()
+        doNotSeeForOneDayButton.snp.makeConstraints {
+            $0.top.equalTo(popupImageView.snp.bottom).offset(15.3)
+            $0.centerX.equalToSuperview()
         }
         
-        dismissButton.snp.makeConstraints { make in
-            make.top.equalTo(doNotSeeForOneDayButton.snp.bottom).offset(12)
-            make.centerX.equalToSuperview()
+        dismissButton.snp.makeConstraints {
+            $0.top.equalTo(doNotSeeForOneDayButton.snp.bottom).offset(12)
+            $0.centerX.equalToSuperview()
         }
     }
     
@@ -120,6 +120,7 @@ class PopupViewController: BaseViewController, View {
     func bind(reactor: Reactor) {
         
         // Input
+        
         self.rx.viewDidLoad
             .map { _ in Reactor.Action.viewDidLoad }
             .bind(to: reactor.action)

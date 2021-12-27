@@ -94,6 +94,7 @@
 		7C58477627795CA0005D75B2 /* StudentIdVerificationViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477527795CA0005D75B2 /* StudentIdVerificationViewReactor.swift */; };
 		7C58477827796DA6005D75B2 /* UIImagePickerController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477727796DA6005D75B2 /* UIImagePickerController+Extension.swift */; };
 		7C58477A27799AAC005D75B2 /* ChangeUserInfoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477927799AAC005D75B2 /* ChangeUserInfoReactor.swift */; };
+		7C58477C2779CCDC005D75B2 /* ReportUserViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58477B2779CCDB005D75B2 /* ReportUserViewReactor.swift */; };
 		7C5A1F2B26D6174F0041885B /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */; };
 		7C5E21292646558700E98FE5 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21282646558600E98FE5 /* PostViewModel.swift */; };
 		7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */; };
@@ -317,6 +318,7 @@
 		7C58477527795CA0005D75B2 /* StudentIdVerificationViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdVerificationViewReactor.swift; sourceTree = "<group>"; };
 		7C58477727796DA6005D75B2 /* UIImagePickerController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImagePickerController+Extension.swift"; sourceTree = "<group>"; };
 		7C58477927799AAC005D75B2 /* ChangeUserInfoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserInfoReactor.swift; sourceTree = "<group>"; };
+		7C58477B2779CCDB005D75B2 /* ReportUserViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserViewReactor.swift; sourceTree = "<group>"; };
 		7C5A1F2A26D6174F0041885B /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		7C5E21282646558600E98FE5 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 			isa = PBXGroup;
 			children = (
 				7C516C3A267F48300065E30D /* ReportUserViewController.swift */,
+				7C58477B2779CCDB005D75B2 /* ReportUserViewReactor.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -1459,6 +1462,7 @@
 				7C3758ED265FA97A0081A85D /* PostListViewModel.swift in Sources */,
 				7C0F1CBA26BA6B310068FF45 /* NotificationName.swift in Sources */,
 				7CEDBB5D2702E0820078F5E1 /* KMErrorLabel.swift in Sources */,
+				7C58477C2779CCDC005D75B2 /* ReportUserViewReactor.swift in Sources */,
 				7CCB02082674CE5D00D58BC2 /* PostListModel.swift in Sources */,
 				7C22CFB4275E04CD0080A816 /* MyPageViewController+UITableView.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,

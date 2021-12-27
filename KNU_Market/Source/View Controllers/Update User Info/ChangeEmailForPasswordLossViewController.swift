@@ -21,9 +21,12 @@ class ChangeEmailForPasswordLossViewController: BaseViewController, View {
     let titleLabel = KMTitleLabel(fontSize: 17, textColor: .darkGray).then {
         $0.numberOfLines = 5
         $0.text = "새로운 이메일 주소를 입력해주세요.\n\n비밀번호 분실 시, 해당 이메일 주소로 임시 비밀번호가 전송되니, 이메일 변경은 신중히 부탁드립니다."
+        $0.addInterlineSpacing(spacingValue: 5)
     }
     
-    let emailTextField = KMTextField(placeHolderText: "변경하실 이메일 입력")
+    let emailTextField = KMTextField(placeHolderText: "변경하실 이메일 입력").then {
+        $0.autocapitalizationType = .none
+    }
     
     let errorLabel = KMErrorLabel().then {
         $0.isHidden = true
@@ -32,7 +35,6 @@ class ChangeEmailForPasswordLossViewController: BaseViewController, View {
     let changeEmailButton = KMBottomButton(buttonTitle: "변경하기").then {
         $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true
     }
-    
     
     //MARK: - Initialization
     
@@ -72,7 +74,6 @@ class ChangeEmailForPasswordLossViewController: BaseViewController, View {
     override func setupConstraints() {
         super.setupConstraints()
         
-        
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
             $0.left.equalTo(view.snp.left).offset(Metrics.padding)
@@ -91,7 +92,6 @@ class ChangeEmailForPasswordLossViewController: BaseViewController, View {
             $0.left.equalTo(view.snp.left).offset(Metrics.padding)
             $0.right.equalTo(view.snp.right).offset(Metrics.padding)
         }
-        
     }
     
     //MARK: - Binding

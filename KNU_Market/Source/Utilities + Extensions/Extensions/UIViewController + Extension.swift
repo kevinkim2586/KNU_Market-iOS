@@ -190,9 +190,12 @@ extension UIViewController {
     // 유저 신고하기 VC
     func presentReportUserVC(userToReport: String, postUID: String? = nil) {
         let reportVC = ReportUserViewController(
-            reportManager: ReportManager(),
-            userToReport: userToReport,
-            postUid: postUID ?? ""
+            reactor: ReportUserViewReactor(
+                reportService: ReportService(
+                    network: Network<ReportAPI>(plugins: [AuthPlugin()])),
+                userToReport: userToReport,
+                postUid: postUID ?? ""
+            )
         )
         reportVC.modalPresentationStyle = .overFullScreen
         self.present(reportVC, animated: true)

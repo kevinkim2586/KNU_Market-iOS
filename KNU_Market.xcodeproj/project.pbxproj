@@ -118,7 +118,6 @@
 		7C83EE532742378000CF1680 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE522742378000CF1680 /* PostViewController.swift */; };
 		7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE542742407B00CF1680 /* PostHeaderView.swift */; };
 		7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE5627437B6200CF1680 /* KMPostBottomView.swift */; };
-		7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */; };
 		7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */; };
 		7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8414812705692500FFA56B /* FindIdOptions.swift */; };
 		7C868D69274C97420056B3F3 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C868D67274C97420056B3F3 /* CustomAlertViewController.swift */; };
@@ -344,7 +343,6 @@
 		7C83EE522742378000CF1680 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		7C83EE542742407B00CF1680 /* PostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderView.swift; sourceTree = "<group>"; };
 		7C83EE5627437B6200CF1680 /* KMPostBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPostBottomView.swift; sourceTree = "<group>"; };
-		7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserInfoViewModel.swift; sourceTree = "<group>"; };
 		7C84147F2705578600FFA56B /* UserManager + FindUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + FindUserInfo.swift"; sourceTree = "<group>"; };
 		7C8414812705692500FFA56B /* FindIdOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdOptions.swift; sourceTree = "<group>"; };
 		7C868D67274C97420056B3F3 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
@@ -837,14 +835,6 @@
 			path = "Post View";
 			sourceTree = "<group>";
 		};
-		7C84147C270556BC00FFA56B /* FindUserInfoVM */ = {
-			isa = PBXGroup;
-			children = (
-				7C84147D270556D000FFA56B /* FindUserInfoViewModel.swift */,
-			);
-			path = FindUserInfoVM;
-			sourceTree = "<group>";
-		};
 		7C89B2E526FC1D60004109FE /* User Related */ = {
 			isa = PBXGroup;
 			children = (
@@ -942,11 +932,11 @@
 		7CA52D6A270B113900A69F3B /* Unregister Flow */ = {
 			isa = PBXGroup;
 			children = (
-				7C1471C92779FD6C006409BD /* UnregisterViewReactor.swift */,
 				7CA52D6B270B126A00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift */,
 				7CA52D6D270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift */,
 				7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */,
 				7C3B4FFD26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift */,
+				7C1471C92779FD6C006409BD /* UnregisterViewReactor.swift */,
 			);
 			path = "Unregister Flow";
 			sourceTree = "<group>";
@@ -1039,7 +1029,6 @@
 		7CA6622A264132F3000E0B7A /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				7C84147C270556BC00FFA56B /* FindUserInfoVM */,
 				7C4012832656A4B3006B0473 /* MyPageVM */,
 				7CB8DF5D264C208A0001CC6D /* ChatVM */,
 				7CB8DF5C264C207D0001CC6D /* ItemVM */,
@@ -1614,7 +1603,6 @@
 				626D66F3274291EC00CB7F4F /* InquiryTableViewCell.swift in Sources */,
 				7C868D6A274C97420056B3F3 /* KMCustomAlertView.swift in Sources */,
 				7C17D75927548EB8001B1A73 /* NotificationManager.swift in Sources */,
-				7C84147E270556D100FFA56B /* FindUserInfoViewModel.swift in Sources */,
 				7CBFDA7A274005DF000C8C8A /* PostCellViewModel.swift in Sources */,
 				7CC69A7E27670FFE00105FC0 /* UserService.swift in Sources */,
 				7C83EE4C2742121600CF1680 /* SearchPostsViewController.swift in Sources */,

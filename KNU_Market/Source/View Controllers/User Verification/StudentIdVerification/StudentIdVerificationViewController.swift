@@ -300,6 +300,7 @@ class StudentIdVerificationViewController: BaseViewController, View {
             .filter { $0 != nil }
             .withUnretained(self)
             .subscribe { (_, alertMessage) in
+                self.view.endEditing(true)
                 self.showSimpleBottomAlert(with: alertMessage!)
             }
             .disposed(by: disposeBag)
@@ -310,6 +311,7 @@ class StudentIdVerificationViewController: BaseViewController, View {
             .filter { $0 == true }
             .withUnretained(self)
             .subscribe(onNext: { _ in
+                self.view.endEditing(true)
                 self.showSimpleBottomAlertWithAction(
                     message:  "인증 완료되었습니다😁",
                     buttonTitle: "홈으로"

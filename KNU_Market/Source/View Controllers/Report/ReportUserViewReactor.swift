@@ -16,13 +16,11 @@ final class ReportUserViewReactor: Reactor {
     let reportService: ReportServiceType
     
     enum Action {
-        
         case updateReportContent(String)
         case sendReport
     }
     
     enum Mutation {
-        
         case setReportContent(String)
         case setLoading(Bool)
         case setReportComplete(Bool)
@@ -30,12 +28,9 @@ final class ReportUserViewReactor: Reactor {
     }
     
     struct State {
-        
         var userToReport: String
         var postUid: String?
-        
         var reportContent: String = ""
-        
         var isLoading: Bool = false
         var errorMessage: String?
         var reportComplete: Bool = false

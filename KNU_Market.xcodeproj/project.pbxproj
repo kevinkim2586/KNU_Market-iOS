@@ -867,8 +867,8 @@
 			isa = PBXGroup;
 			children = (
 				7C3B4FF826A93CF100E2CA8F /* Animations + Lottie */,
-				7CA661FB263D4389000E0B7A /* LaunchScreen.storyboard */,
 				7C79E11126E0EDFA0004508A /* LaunchScreen Assets */,
+				7CA661FB263D4389000E0B7A /* LaunchScreen.storyboard */,
 				7CA661F9263D4389000E0B7A /* Assets.xcassets */,
 				6252A0DB2765F72E003BAC43 /* Colors.xcassets */,
 			);
@@ -1031,7 +1031,7 @@
 			children = (
 				7C4012832656A4B3006B0473 /* MyPageVM */,
 				7CB8DF5D264C208A0001CC6D /* ChatVM */,
-				7CB8DF5C264C207D0001CC6D /* ItemVM */,
+				7CB8DF5C264C207D0001CC6D /* PostVM */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1076,7 +1076,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		7CB8DF5C264C207D0001CC6D /* ItemVM */ = {
+		7CB8DF5C264C207D0001CC6D /* PostVM */ = {
 			isa = PBXGroup;
 			children = (
 				7C5E21282646558600E98FE5 /* PostViewModel.swift */,
@@ -1084,7 +1084,7 @@
 				7C3758EC265FA97A0081A85D /* PostListViewModel.swift */,
 				7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */,
 			);
-			path = ItemVM;
+			path = PostVM;
 			sourceTree = "<group>";
 		};
 		7CB8DF5D264C208A0001CC6D /* ChatVM */ = {

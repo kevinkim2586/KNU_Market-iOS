@@ -27,20 +27,6 @@ class UploadPostViewController: BaseViewController {
     
     //MARK: - UI
     
-//    lazy var navigationBar: UINavigationBar = {
-//        let doneBarButtonItem =  UIBarButtonItem(
-//            barButtonSystemItem: .done,
-//            target: self,
-//            action: #selector(pressedUploadButton)
-//        )
-//        let navBar = UIHelper.addNavigationBarWithAdditionalAction(
-//            in: self.view,
-//            title: "공구 올리기",
-//            additionalBarButtonItem: doneBarButtonItem)
-//
-//        return navBar
-//    }()
-    
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
     
     private lazy var postScrollView = UIScrollView(frame: .zero).then {
@@ -197,7 +183,6 @@ class UploadPostViewController: BaseViewController {
         $0.textColor = .none
         $0.placeholder = Texts.textViewPlaceholder
         $0.placeholderColor = .lightGray
-        $0.textColor = UIColor.lightGray
         $0.tintColor = UIColor(named: K.Color.appColor)
         $0.font = .systemFont(ofSize: 14)
     }
@@ -233,7 +218,6 @@ class UploadPostViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        
     }
     
     //MARK: - UI Setup
@@ -261,16 +245,7 @@ class UploadPostViewController: BaseViewController {
     
     override func setupConstraints() {
         super.setupConstraints()
-        
-//        navigationBar.snp.makeConstraints {
-//            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-//            $0.left.right.equalToSuperview()
-//        }
-        
-//        postScrollView.snp.makeConstraints {
-//            $0.top.equalTo(navigationBar.snp.bottom)
-//            $0.left.bottom.right.equalToSuperview()
-//        }
+
         
         postScrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()

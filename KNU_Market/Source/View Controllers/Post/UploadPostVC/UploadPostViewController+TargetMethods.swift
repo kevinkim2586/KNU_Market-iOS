@@ -63,6 +63,7 @@ extension UploadPostViewController {
             return false
         }
         viewModel.postTitle = postTitle
+        viewModel.postDetail = postDetailTextView.text
         do {
             try viewModel.validateUserInputs()
             

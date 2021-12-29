@@ -42,7 +42,6 @@
 		7C132BF2265397B200BE5F40 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF1265397B200BE5F40 /* ProgressHUD.swift */; };
 		7C132BF426552B4900BE5F40 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C132BF326552B4900BE5F40 /* UIButton+Extension.swift */; };
 		7C1471CA2779FD6C006409BD /* UnregisterViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1471C92779FD6C006409BD /* UnregisterViewReactor.swift */; };
-		7C17D75927548EB8001B1A73 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C17D75827548EB8001B1A73 /* NotificationManager.swift */; };
 		7C184B8326B103F1006C0FAD /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C184B8226B103F1006C0FAD /* Room.swift */; };
 		7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */; };
 		7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */; };
@@ -143,6 +142,14 @@
 		7C9C59E2277C12E4005E08BC /* UIViewController+UI_Related.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59E1277C12E4005E08BC /* UIViewController+UI_Related.swift */; };
 		7C9C59E4277C12F7005E08BC /* UIViewController+Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59E3277C12F7005E08BC /* UIViewController+Observers.swift */; };
 		7C9C59E6277C1328005E08BC /* UIVIewController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59E5277C1328005E08BC /* UIVIewController+Notifications.swift */; };
+		7C9C59F0277C168D005E08BC /* UserServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59EF277C168D005E08BC /* UserServiceType.swift */; };
+		7C9C59F2277C16A7005E08BC /* ReportServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59F1277C16A7005E08BC /* ReportServiceType.swift */; };
+		7C9C59F4277C16BB005E08BC /* PostServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59F3277C16BB005E08BC /* PostServiceType.swift */; };
+		7C9C59F6277C16CC005E08BC /* MediaServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59F5277C16CC005E08BC /* MediaServiceType.swift */; };
+		7C9C59F8277C16DA005E08BC /* PopupServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59F7277C16DA005E08BC /* PopupServiceType.swift */; };
+		7C9C59FA277C16F8005E08BC /* MyPageServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59F9277C16F8005E08BC /* MyPageServiceType.swift */; };
+		7C9C59FC277C1742005E08BC /* UserDefaultsPersistenceServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59FB277C1742005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */; };
+		7C9C59FE277C1759005E08BC /* UserDefaultsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59FD277C1759005E08BC /* UserDefaultsPersistenceService.swift */; };
 		7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */; };
 		7CA52D69270B083F00A69F3B /* ChangeIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D68270B083F00A69F3B /* ChangeIdViewController.swift */; };
 		7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D6B270B126A00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift */; };
@@ -271,7 +278,6 @@
 		7C132BF1265397B200BE5F40 /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		7C132BF326552B4900BE5F40 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		7C1471C92779FD6C006409BD /* UnregisterViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterViewReactor.swift; sourceTree = "<group>"; };
-		7C17D75827548EB8001B1A73 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		7C184B8226B103F1006C0FAD /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -373,6 +379,14 @@
 		7C9C59E1277C12E4005E08BC /* UIViewController+UI_Related.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+UI_Related.swift"; sourceTree = "<group>"; };
 		7C9C59E3277C12F7005E08BC /* UIViewController+Observers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Observers.swift"; sourceTree = "<group>"; };
 		7C9C59E5277C1328005E08BC /* UIVIewController+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController+Notifications.swift"; sourceTree = "<group>"; };
+		7C9C59EF277C168D005E08BC /* UserServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceType.swift; sourceTree = "<group>"; };
+		7C9C59F1277C16A7005E08BC /* ReportServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportServiceType.swift; sourceTree = "<group>"; };
+		7C9C59F3277C16BB005E08BC /* PostServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceType.swift; sourceTree = "<group>"; };
+		7C9C59F5277C16CC005E08BC /* MediaServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaServiceType.swift; sourceTree = "<group>"; };
+		7C9C59F7277C16DA005E08BC /* PopupServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupServiceType.swift; sourceTree = "<group>"; };
+		7C9C59F9277C16F8005E08BC /* MyPageServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageServiceType.swift; sourceTree = "<group>"; };
+		7C9C59FB277C1742005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistenceServiceProtocol.swift; sourceTree = "<group>"; };
+		7C9C59FD277C1759005E08BC /* UserDefaultsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistenceService.swift; sourceTree = "<group>"; };
 		7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailForPasswordLossViewController.swift; sourceTree = "<group>"; };
 		7CA52D68270B083F00A69F3B /* ChangeIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeIdViewController.swift; sourceTree = "<group>"; };
 		7CA52D6B270B126A00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_CheckFirstPrecautionsViewController.swift; sourceTree = "<group>"; };
@@ -522,12 +536,8 @@
 		625B0E392741F5BA003968BA /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7CC69A7D27670FFE00105FC0 /* UserService.swift */,
-				7C5386E32768C83B00BFEA7F /* ReportService.swift */,
-				7C5386DC276892D300BFEA7F /* PostService.swift */,
-				7C5386DE27689B5B00BFEA7F /* MediaService.swift */,
-				7C5386E52768CA8200BFEA7F /* PopupService.swift */,
-				625B0E3A2741F6A8003968BA /* MyPageService.swift */,
+				7C9C59EE277C1684005E08BC /* Persistence */,
+				7C9C59E7277C163C005E08BC /* Networks */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -608,7 +618,6 @@
 				7C132BF1265397B200BE5F40 /* ProgressHUD.swift */,
 				7C682CE8271EB02500989139 /* UIHelper.swift */,
 				626AC5B127324C1200E907E8 /* CGFloatLiteral.swift */,
-				7C17D75827548EB8001B1A73 /* NotificationManager.swift */,
 			);
 			path = "Utilities + Extensions";
 			sourceTree = "<group>";
@@ -950,6 +959,82 @@
 				7C9C59E5277C1328005E08BC /* UIVIewController+Notifications.swift */,
 			);
 			path = "UIViewController+Extensions";
+			sourceTree = "<group>";
+		};
+		7C9C59E7277C163C005E08BC /* Networks */ = {
+			isa = PBXGroup;
+			children = (
+				7C9C59ED277C166E005E08BC /* MyPageService */,
+				7C9C59EC277C1668005E08BC /* PopupService */,
+				7C9C59EB277C1662005E08BC /* MediaService */,
+				7C9C59EA277C165C005E08BC /* PostService */,
+				7C9C59E9277C1657005E08BC /* ReportService */,
+				7C9C59E8277C1650005E08BC /* UserService */,
+			);
+			path = Networks;
+			sourceTree = "<group>";
+		};
+		7C9C59E8277C1650005E08BC /* UserService */ = {
+			isa = PBXGroup;
+			children = (
+				7C9C59EF277C168D005E08BC /* UserServiceType.swift */,
+				7CC69A7D27670FFE00105FC0 /* UserService.swift */,
+			);
+			path = UserService;
+			sourceTree = "<group>";
+		};
+		7C9C59E9277C1657005E08BC /* ReportService */ = {
+			isa = PBXGroup;
+			children = (
+				7C5386E32768C83B00BFEA7F /* ReportService.swift */,
+				7C9C59F1277C16A7005E08BC /* ReportServiceType.swift */,
+			);
+			path = ReportService;
+			sourceTree = "<group>";
+		};
+		7C9C59EA277C165C005E08BC /* PostService */ = {
+			isa = PBXGroup;
+			children = (
+				7C5386DC276892D300BFEA7F /* PostService.swift */,
+				7C9C59F3277C16BB005E08BC /* PostServiceType.swift */,
+			);
+			path = PostService;
+			sourceTree = "<group>";
+		};
+		7C9C59EB277C1662005E08BC /* MediaService */ = {
+			isa = PBXGroup;
+			children = (
+				7C5386DE27689B5B00BFEA7F /* MediaService.swift */,
+				7C9C59F5277C16CC005E08BC /* MediaServiceType.swift */,
+			);
+			path = MediaService;
+			sourceTree = "<group>";
+		};
+		7C9C59EC277C1668005E08BC /* PopupService */ = {
+			isa = PBXGroup;
+			children = (
+				7C5386E52768CA8200BFEA7F /* PopupService.swift */,
+				7C9C59F7277C16DA005E08BC /* PopupServiceType.swift */,
+			);
+			path = PopupService;
+			sourceTree = "<group>";
+		};
+		7C9C59ED277C166E005E08BC /* MyPageService */ = {
+			isa = PBXGroup;
+			children = (
+				625B0E3A2741F6A8003968BA /* MyPageService.swift */,
+				7C9C59F9277C16F8005E08BC /* MyPageServiceType.swift */,
+			);
+			path = MyPageService;
+			sourceTree = "<group>";
+		};
+		7C9C59EE277C1684005E08BC /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				7C9C59FB277C1742005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */,
+				7C9C59FD277C1759005E08BC /* UserDefaultsPersistenceService.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		7CA52D6A270B113900A69F3B /* Unregister Flow */ = {
@@ -1453,6 +1538,7 @@
 				7CF369C22754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift in Sources */,
 				7CDADA0726BE623100F7F58F /* DateHelper+Extension.swift in Sources */,
 				7C6B50A02652B17F0032328C /* UIImage+Extension.swift in Sources */,
+				7C9C59FE277C1759005E08BC /* UserDefaultsPersistenceService.swift in Sources */,
 				625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */,
 				7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */,
 				7C3D986426AE9F2E005DFAE0 /* LoadUserProfileUidModel.swift in Sources */,
@@ -1551,6 +1637,7 @@
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
 				7CF369CF2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift in Sources */,
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
+				7C9C59F2277C16A7005E08BC /* ReportServiceType.swift in Sources */,
 				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel+Extension.swift in Sources */,
 				7CF369BA2754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift in Sources */,
@@ -1574,8 +1661,10 @@
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7C0E2DDF26B7D92800BB37FF /* String+Extension.swift in Sources */,
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
+				7C9C59F6277C16CC005E08BC /* MediaServiceType.swift in Sources */,
 				7C58477827796DA6005D75B2 /* UIImagePickerController+Extension.swift in Sources */,
 				7C98D2A62706F54B00579EE6 /* UIViewController+Preview.swift in Sources */,
+				7C9C59F8277C16DA005E08BC /* PopupServiceType.swift in Sources */,
 				622270B6274A77AB00FDC47B /* ImageSelectionView.swift in Sources */,
 				7CAE5AFE2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift in Sources */,
 				625B0E3D2741F741003968BA /* MyPageAPI.swift in Sources */,
@@ -1591,6 +1680,7 @@
 				7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */,
 				7C015C9827035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
+				7C9C59FC277C1742005E08BC /* UserDefaultsPersistenceServiceProtocol.swift in Sources */,
 				7C22CFB2275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
 				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
@@ -1623,6 +1713,7 @@
 				7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */,
 				7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */,
 				7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */,
+				7C9C59FA277C16F8005E08BC /* MyPageServiceType.swift in Sources */,
 				7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */,
 				7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */,
 				7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */,
@@ -1630,7 +1721,6 @@
 				7C9C59DE277C12B9005E08BC /* UIViewController+Alert_Extensions.swift in Sources */,
 				626D66F3274291EC00CB7F4F /* InquiryTableViewCell.swift in Sources */,
 				7C868D6A274C97420056B3F3 /* KMCustomAlertView.swift in Sources */,
-				7C17D75927548EB8001B1A73 /* NotificationManager.swift in Sources */,
 				7CBFDA7A274005DF000C8C8A /* PostCellViewModel.swift in Sources */,
 				7CC69A7E27670FFE00105FC0 /* UserService.swift in Sources */,
 				7C83EE4C2742121600CF1680 /* SearchPostsViewController.swift in Sources */,
@@ -1643,6 +1733,7 @@
 				625B0E322741E259003968BA /* ErrorModel.swift in Sources */,
 				7CBDF4B0272F886500E657D9 /* PopupModel.swift in Sources */,
 				7CC69A80276727A200105FC0 /* DuplicateCheckModel.swift in Sources */,
+				7C9C59F4277C16BB005E08BC /* PostServiceType.swift in Sources */,
 				7CF369C02754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift in Sources */,
 				7C5E21292646558700E98FE5 /* PostViewModel.swift in Sources */,
 				7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */,
@@ -1653,6 +1744,7 @@
 				7CC36A8726EDC6C1007573DD /* StudentIDGuideViewController.swift in Sources */,
 				7CF369B42754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift in Sources */,
 				7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */,
+				7C9C59F0277C168D005E08BC /* UserServiceType.swift in Sources */,
 				7C5A1F2B26D6174F0041885B /* UICollectionView+Extension.swift in Sources */,
 				7CBB8E692754729F0003B183 /* PostListViewController.swift in Sources */,
 				7CAE5AFC2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift in Sources */,

@@ -1,38 +1,19 @@
 //
-//  ReportService.swift
+//  MyPageService.swift
 //  KNU_Market
 //
-//  Created by Kevin Kim on 2021/12/14.
+//  Created by 김부성 on 2021/11/15.
 //
 
 import Foundation
 import RxSwift
 
-protocol ReportServiceType: AnyObject {
+final class MyPageService: MyPageServiceType {
     
-    func reportUser(with model: ReportUserRequestDTO) -> Single<NetworkResult>
-    func writeReport(_ title: String, _ content: String, _ media1: Data?, _ media2: Data?) -> Single<NetworkResult>
-    func viewMessage(_ uid: Int) -> Single<NetworkResult>
-}
-
-final class ReportService: ReportServiceType {
+    fileprivate let network: Network<MyPageAPI>
     
-    fileprivate let network: Network<ReportAPI>
-    
-    init(network: Network<ReportAPI>) {
+    init(network: Network<MyPageAPI>) {
         self.network = network
-    }
-    
-    func reportUser(with model: ReportUserRequestDTO) -> Single<NetworkResult> {
-        return network.requestWithoutMapping(.reportUser(model: model))
-            .map { result in
-                switch result {
-                case .success:
-                    return .success
-                case .error(let error):
-                    return .error(error)
-                }
-            }
     }
     
     func writeReport(_ title: String, _ content: String, _ media1: Data?, _ media2: Data?) -> Single<NetworkResult> {
@@ -58,6 +39,5 @@ final class ReportService: ReportServiceType {
                 }
             }
     }
-    
     
 }

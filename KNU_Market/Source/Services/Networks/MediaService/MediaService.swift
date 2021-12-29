@@ -8,13 +8,6 @@
 import Foundation
 import RxSwift
 
-protocol MediaServiceType: AnyObject {
-    
-    func requestMedia(from imageUID: String) -> Single<NetworkResultWithValue<Data?>>
-    func uploadImage(with image: Data) -> Single<NetworkResultWithValue<UploadImageResponseModel>>
-    func deleteImage(uid: String) -> Single<NetworkResult>
-}
-
 final class MediaService: MediaServiceType {
     
     fileprivate let network: Network<MediaAPI>

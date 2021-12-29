@@ -31,10 +31,4 @@ protocol UserServiceType: AnyObject {
     func findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?) -> Single<NetworkResultWithValue<FindIdModel>>
     func findPassword(id: String) -> Single<NetworkResultWithValue<FindPasswordModel>>
     
-    
-    func saveAccessTokens(from response: LoginResponseModel)
-    func saveRefreshedAccessToken(from response: JSON)
-    func saveUserProfileInfo(with model: LoadProfileResponseModel)
-    func updateLocalUserInfo(type: UpdateUserInfoType, infoString: String)
-    func resetAllUserInfo()
 }

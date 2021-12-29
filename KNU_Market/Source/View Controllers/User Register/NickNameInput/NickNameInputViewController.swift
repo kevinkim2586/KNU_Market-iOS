@@ -172,7 +172,7 @@ class NickNameInputViewController: BaseViewController, View {
             .subscribe { _ in
                 let vc = EmailForLostPasswordViewController(
                     reactor: EmailForLostPasswordViewReactor(
-                        userService: UserService(network: Network<UserAPI>())
+                        userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared))
                     )
                 )
                 self.navigationController?.pushViewController(vc, animated: true)

@@ -29,7 +29,7 @@
 		626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F82742920300CB7F4F /* InquiryListmodel.swift */; };
 		6273750E27647DA6008A29B5 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6273750D27647DA6008A29B5 /* PostCell.swift */; };
 		62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */; };
-		6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */; };
+		6C49951C271FAD3D00E8DB4B /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49951B271FAD3D00E8DB4B /* UserDefaultKeys.swift */; };
 		7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */; };
 		7C015C9827035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C9727035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift */; };
 		7C015C9A27035B3800089ED8 /* FindIdUsingStudentIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C9927035B3800089ED8 /* FindIdUsingStudentIdViewController.swift */; };
@@ -148,8 +148,10 @@
 		7C9C59F6277C16CC005E08BC /* MediaServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59F5277C16CC005E08BC /* MediaServiceType.swift */; };
 		7C9C59F8277C16DA005E08BC /* PopupServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59F7277C16DA005E08BC /* PopupServiceType.swift */; };
 		7C9C59FA277C16F8005E08BC /* MyPageServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59F9277C16F8005E08BC /* MyPageServiceType.swift */; };
-		7C9C59FC277C1742005E08BC /* UserDefaultsPersistenceServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59FB277C1742005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */; };
-		7C9C59FE277C1759005E08BC /* UserDefaultsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59FD277C1759005E08BC /* UserDefaultsPersistenceService.swift */; };
+		7C9C59FC277C1742005E08BC /* UserDefaultsGenericServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59FB277C1742005E08BC /* UserDefaultsGenericServiceProtocol.swift */; };
+		7C9C59FE277C1759005E08BC /* UserDefaultsGenericService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59FD277C1759005E08BC /* UserDefaultsGenericService.swift */; };
+		7C9C5A00277C244B005E08BC /* UserDefaultsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C59FF277C244B005E08BC /* UserDefaultsPersistenceService.swift */; };
+		7C9C5A02277C245B005E08BC /* UserDefaultsPersistenceServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9C5A01277C245B005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */; };
 		7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */; };
 		7CA52D69270B083F00A69F3B /* ChangeIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D68270B083F00A69F3B /* ChangeIdViewController.swift */; };
 		7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA52D6B270B126A00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift */; };
@@ -239,6 +241,8 @@
 		7CF369D72754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */; };
 		7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */; };
 		7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */; };
+		7CF8D605277C27520078DD77 /* UserDefaultsRetrievalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D604277C27520078DD77 /* UserDefaultsRetrievalService.swift */; };
+		7CF8D607277C27600078DD77 /* UserDefaultsRetrievalServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D606277C27600078DD77 /* UserDefaultsRetrievalServiceProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -265,7 +269,7 @@
 		626D66F82742920300CB7F4F /* InquiryListmodel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryListmodel.swift; sourceTree = "<group>"; };
 		6273750D27647DA6008A29B5 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageReactor.swift; sourceTree = "<group>"; };
-		6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault Keys.swift"; sourceTree = "<group>"; };
+		6C49951B271FAD3D00E8DB4B /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + UpdateInfo.swift"; sourceTree = "<group>"; };
 		7C015C9727035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdUsingSchoolEmailViewController.swift; sourceTree = "<group>"; };
 		7C015C9927035B3800089ED8 /* FindIdUsingStudentIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdUsingStudentIdViewController.swift; sourceTree = "<group>"; };
@@ -385,8 +389,10 @@
 		7C9C59F5277C16CC005E08BC /* MediaServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaServiceType.swift; sourceTree = "<group>"; };
 		7C9C59F7277C16DA005E08BC /* PopupServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupServiceType.swift; sourceTree = "<group>"; };
 		7C9C59F9277C16F8005E08BC /* MyPageServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageServiceType.swift; sourceTree = "<group>"; };
-		7C9C59FB277C1742005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistenceServiceProtocol.swift; sourceTree = "<group>"; };
-		7C9C59FD277C1759005E08BC /* UserDefaultsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistenceService.swift; sourceTree = "<group>"; };
+		7C9C59FB277C1742005E08BC /* UserDefaultsGenericServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsGenericServiceProtocol.swift; sourceTree = "<group>"; };
+		7C9C59FD277C1759005E08BC /* UserDefaultsGenericService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsGenericService.swift; sourceTree = "<group>"; };
+		7C9C59FF277C244B005E08BC /* UserDefaultsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistenceService.swift; sourceTree = "<group>"; };
+		7C9C5A01277C245B005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistenceServiceProtocol.swift; sourceTree = "<group>"; };
 		7CA52D66270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailForPasswordLossViewController.swift; sourceTree = "<group>"; };
 		7CA52D68270B083F00A69F3B /* ChangeIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeIdViewController.swift; sourceTree = "<group>"; };
 		7CA52D6B270B126A00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterUser_CheckFirstPrecautionsViewController.swift; sourceTree = "<group>"; };
@@ -478,6 +484,8 @@
 		7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+MessageCellDelegate.swift"; sourceTree = "<group>"; };
 		7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
 		7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+InputBarAccessoryViewDelegate.swift"; sourceTree = "<group>"; };
+		7CF8D604277C27520078DD77 /* UserDefaultsRetrievalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRetrievalService.swift; sourceTree = "<group>"; };
+		7CF8D606277C27600078DD77 /* UserDefaultsRetrievalServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRetrievalServiceProtocol.swift; sourceTree = "<group>"; };
 		9104D1D3927ED71E0FE5C187 /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1031,8 +1039,12 @@
 		7C9C59EE277C1684005E08BC /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				7C9C59FB277C1742005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */,
-				7C9C59FD277C1759005E08BC /* UserDefaultsPersistenceService.swift */,
+				7C9C59FB277C1742005E08BC /* UserDefaultsGenericServiceProtocol.swift */,
+				7C9C59FD277C1759005E08BC /* UserDefaultsGenericService.swift */,
+				7C9C59FF277C244B005E08BC /* UserDefaultsPersistenceService.swift */,
+				7C9C5A01277C245B005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */,
+				7CF8D604277C27520078DD77 /* UserDefaultsRetrievalService.swift */,
+				7CF8D606277C27600078DD77 /* UserDefaultsRetrievalServiceProtocol.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1298,7 +1310,7 @@
 			isa = PBXGroup;
 			children = (
 				7CA6624E26413F03000E0B7A /* Constants.swift */,
-				6C49951B271FAD3D00E8DB4B /* UserDefault Keys.swift */,
+				6C49951B271FAD3D00E8DB4B /* UserDefaultKeys.swift */,
 				7C555464266D0A1400C3C5B6 /* Location.swift */,
 				7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */,
 			);
@@ -1538,7 +1550,7 @@
 				7CF369C22754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift in Sources */,
 				7CDADA0726BE623100F7F58F /* DateHelper+Extension.swift in Sources */,
 				7C6B50A02652B17F0032328C /* UIImage+Extension.swift in Sources */,
-				7C9C59FE277C1759005E08BC /* UserDefaultsPersistenceService.swift in Sources */,
+				7C9C59FE277C1759005E08BC /* UserDefaultsGenericService.swift in Sources */,
 				625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */,
 				7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */,
 				7C3D986426AE9F2E005DFAE0 /* LoadUserProfileUidModel.swift in Sources */,
@@ -1604,6 +1616,7 @@
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
 				7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */,
 				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,
+				7C9C5A02277C245B005E08BC /* UserDefaultsPersistenceServiceProtocol.swift in Sources */,
 				7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */,
 				7CF369B62754D65200C9D7A9 /* PostListViewController+TargetMethods.swift in Sources */,
 				7C9A3837276DC70200AEE831 /* LoginViewReactor.swift in Sources */,
@@ -1644,7 +1657,7 @@
 				7C22CFB6275E04E80080A816 /* MyPageViewController+UIImagePicker.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
-				6C49951C271FAD3D00E8DB4B /* UserDefault Keys.swift in Sources */,
+				6C49951C271FAD3D00E8DB4B /* UserDefaultKeys.swift in Sources */,
 				7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadPostViewModel.swift in Sources */,
 				7CF369CB2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift in Sources */,
@@ -1680,7 +1693,7 @@
 				7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */,
 				7C015C9827035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
-				7C9C59FC277C1742005E08BC /* UserDefaultsPersistenceServiceProtocol.swift in Sources */,
+				7C9C59FC277C1742005E08BC /* UserDefaultsGenericServiceProtocol.swift in Sources */,
 				7C22CFB2275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
 				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
@@ -1707,9 +1720,11 @@
 				7C5386DB2768912400BFEA7F /* FindPasswordModel.swift in Sources */,
 				7CAE5B002754B5F100426708 /* PostViewController+PostViewModelDelegate.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* ValidationError.swift in Sources */,
+				7C9C5A00277C244B005E08BC /* UserDefaultsPersistenceService.swift in Sources */,
 				7C58475F27707E84005D75B2 /* PasswordInputViewController.swift in Sources */,
 				7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
+				7CF8D605277C27520078DD77 /* UserDefaultsRetrievalService.swift in Sources */,
 				7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */,
 				7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */,
 				7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */,
@@ -1752,6 +1767,7 @@
 				7CB8DF38264BB0300001CC6D /* PostManager.swift in Sources */,
 				7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */,
 				7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */,
+				7CF8D607277C27600078DD77 /* UserDefaultsRetrievalServiceProtocol.swift in Sources */,
 				7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */,
 				7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */,
 				7CF369B82754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift in Sources */,

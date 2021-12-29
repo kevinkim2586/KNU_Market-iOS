@@ -88,7 +88,7 @@ class StudentIdGuideViewController: BaseViewController {
             .subscribe(onNext: { _ in
                 self.navigationController?.pushViewController(
                     StudentIdVerificationViewController(
-                        reactor: StudentIdVerificationViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))
+                        reactor: StudentIdVerificationViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
                     ),
                     animated: true
                 )

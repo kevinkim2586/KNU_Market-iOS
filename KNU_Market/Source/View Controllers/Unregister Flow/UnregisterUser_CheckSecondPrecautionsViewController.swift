@@ -91,7 +91,7 @@ class UnregisterUser_CheckSecondPrecautionsViewController: BaseViewController {
             .asObservable()
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
+                self.navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
                
             })
             .disposed(by: disposeBag)

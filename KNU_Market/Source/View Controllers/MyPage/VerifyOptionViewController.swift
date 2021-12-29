@@ -150,7 +150,7 @@ extension VerifyOptionViewController {
     
     @objc private func pressedVerifyUsingEmailButton() {
         let vc = EmailVerificationViewController(
-            reactor: EmailVerificationViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))
+            reactor: EmailVerificationViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
         )
        
         vc.hidesBottomBarWhenPushed = true

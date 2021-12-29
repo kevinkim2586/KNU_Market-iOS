@@ -342,19 +342,19 @@ extension AccountManagementViewController {
         switch sender.tag {
         case 0:
             
-            navigationController?.pushViewController(ChangeIdViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
+            navigationController?.pushViewController(ChangeIdViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
 
         case 1:
-            navigationController?.pushViewController(ChangeNicknameViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
+            navigationController?.pushViewController(ChangeNicknameViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
             
             
         case 2:
             
-            navigationController?.pushViewController(ChangePasswordViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
+            navigationController?.pushViewController(ChangePasswordViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
     
         case 3:
             
-            navigationController?.pushViewController(ChangeEmailForPasswordLossViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
+            navigationController?.pushViewController(ChangeEmailForPasswordLossViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
             
         default: break
         }
@@ -391,7 +391,7 @@ extension AccountManagementViewController {
                 animated: true
             )
         } else {
-            self.navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))), animated: true)
+            self.navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
     }
 }
 }

@@ -19,7 +19,10 @@ extension UIViewController {
         User.shared.resetAllUserInfo()
         let loginVC = LoginViewController(
             reactor: LoginViewReactor(
-                userService: UserService(network: Network<UserAPI>())
+                userService: UserService(
+                    network: Network<UserAPI>(),
+                    userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)
+                )
             )
         )
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
@@ -116,7 +119,7 @@ extension UIViewController {
     func presentRegisterVC() {
         let vc = IDInputViewController(
             reactor: IDInputViewReactor(
-                userService: UserService(network: Network<UserAPI>())
+                userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared))
             )
         )
         let navController = UINavigationController(rootViewController: vc)

@@ -66,15 +66,15 @@ class MyPageTableViewCell: UITableViewCell {
     
     func makeConstraints() {
         
-        leftImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(25)
-            make.left.equalTo(self.snp.left).offset(20)
-            make.top.bottom.equalToSuperview()
+        leftImageView.snp.makeConstraints {
+            $0.width.height.equalTo(25)
+            $0.left.equalTo(self.snp.left).offset(20)
+            $0.top.bottom.equalToSuperview()
         }
     
-        settingsTitleLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.snp.centerY)
-            make.left.equalTo(leftImageView.snp.right).offset(12)
+        settingsTitleLabel.snp.makeConstraints {
+            $0.centerY.equalTo(self.snp.centerY)
+            $0.left.equalTo(leftImageView.snp.right).offset(12)
         }
         
         notificationBadgeImageView.snp.makeConstraints {

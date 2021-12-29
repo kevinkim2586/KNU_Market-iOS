@@ -120,28 +120,28 @@ class ChooseVerificationOptionViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        detailLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(26)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        detailLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(26)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        registerButton.snp.makeConstraints { make in
-            make.top.equalTo(detailLabel.snp.bottom).offset(4)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding + 15)
+        registerButton.snp.makeConstraints {
+            $0.top.equalTo(detailLabel.snp.bottom).offset(4)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding + 15)
         }
         
-        buttonStackView.snp.makeConstraints { make in
-            make.centerX.equalTo(view.snp.centerX)
-            make.centerY.equalTo(view.snp.centerY)
-            make.left.equalTo(view.snp.left).offset(20)
-            make.right.equalTo(view.snp.right).offset(-20)
+        buttonStackView.snp.makeConstraints {
+            $0.centerX.equalTo(view.snp.centerX)
+            $0.centerY.equalTo(view.snp.centerY)
+            $0.left.equalTo(view.snp.left).offset(20)
+            $0.right.equalTo(view.snp.right).offset(-20)
         }
     }
     
@@ -165,7 +165,7 @@ class ChooseVerificationOptionViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 let vc = FindIdUsingStudentIdViewController(
-                    reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>()))
+                    reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
                 )
                 self.pushVC(vc)
             })
@@ -175,7 +175,7 @@ class ChooseVerificationOptionViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 let vc = FindIdUsingSchoolEmailViewController(
-                    reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>()))
+                    reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
                 )
                 self.pushVC(vc)
             })

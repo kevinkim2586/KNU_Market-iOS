@@ -281,7 +281,7 @@ class LoginViewController: BaseViewController, View {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 let findPwVC = FindPasswordViewController(
-                    reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>()))
+                    reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
                 )
                 self.presentVC(findPwVC)
             })

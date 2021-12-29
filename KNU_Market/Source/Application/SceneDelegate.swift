@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             let loginVC = LoginViewController(
                 reactor: LoginViewReactor(
-                    userService: UserService(network: Network<UserAPI>())
+                    userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared))
                 )
             )
             window?.rootViewController = loginVC

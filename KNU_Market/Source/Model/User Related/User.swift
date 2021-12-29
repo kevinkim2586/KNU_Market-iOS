@@ -35,20 +35,6 @@ class User {
         }
     }
     
-    var password: String {
-        get {
-            let retrievedPassword: String? = KeychainWrapper.standard.string(forKey: K.KeyChainKey.password)
-            guard let password = retrievedPassword else {
-                return "❗️ Invalid Password"
-            }
-            
-            return password
-        }
-        set {
-            self.savedPassword = KeychainWrapper.standard.set(newValue, forKey: K.KeyChainKey.password)
-        }
-    }
-    
     var fcmToken: String {
         get {
             return UserDefaults.standard.string(forKey: UserDefaults.Keys.fcmToken) ?? "fcmToken 에러"
@@ -133,7 +119,6 @@ class User {
         
     var savedAccessToken: Bool = false
     var savedRefreshToken: Bool = false
-    var savedPassword: Bool = false
     
     //MARK: - User Profile Image Related Properties
     
@@ -258,7 +243,7 @@ extension User {
 
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: K.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: K.KeyChainKey.refreshToken)
-        let _: Bool = KeychainWrapper.standard.removeObject(forKey: K.KeyChainKey.password)
+
         
         UIApplication.shared.applicationIconBadgeNumber = 0
         

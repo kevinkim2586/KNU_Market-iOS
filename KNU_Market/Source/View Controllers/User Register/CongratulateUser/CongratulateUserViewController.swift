@@ -246,7 +246,7 @@ struct CongratulateVC: PreviewProvider {
     
     static var previews: some SwiftUI.View {
         CongratulateUserViewController(
-            reactor: CongratulateUserViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()])))
+            reactor: CongratulateUserViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
         ).toPreview()
     }
 }

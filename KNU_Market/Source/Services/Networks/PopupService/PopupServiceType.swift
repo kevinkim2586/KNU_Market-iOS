@@ -11,7 +11,6 @@ import RxSwift
 protocol PopupServiceType: AnyObject {
     var shouldFetchPopup: Bool { get }
     var didADayPass: Bool { get }
-    
     func fetchLatestPopup() -> Single<NetworkResultWithValue<PopupModel>>
     @discardableResult
     func incrementPopupViewCount(popupUid: Int) -> Single<NetworkResult>

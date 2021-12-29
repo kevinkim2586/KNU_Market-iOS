@@ -1,6 +1,11 @@
 import UIKit
 import Photos
 import SnapKit
+import RxSwift
+import RxCocoa
+import ReactorKit
+import RxDataSources
+import ReusableKit
 
 class MyPageViewController: BaseViewController {
     
@@ -8,7 +13,18 @@ class MyPageViewController: BaseViewController {
     
     var viewModel: MyPageViewModel!
     
+    let dataSource = RxTableViewSectionedReloadDataSource<MyPageSection>(
+      configureCell: { _, tableView, indexPath, reactor in
+        let cell = tableView.dequeue(Reusable.myPageCell, for: indexPath)
+        cell.reactor = reactor
+        return cell
+    }) 
+    
     //MARK: - Constants
+    
+    struct Reusable {
+        static let myPageCell = ReusableCell<MyPageTableViewCell>()
+    }
     
     struct Metrics {
         static let profileImageButtonHeight = 120.f

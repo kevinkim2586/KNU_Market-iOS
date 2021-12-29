@@ -16,7 +16,7 @@ extension PostListViewController: UIScrollViewDelegate {
         if position > (postListsTableView.contentSize.height - 50 - scrollView.frame.size.height) {
         
             if !viewModel.isFetchingData {
-                postListsTableView.tableFooterView = createSpinnerFooterView()
+                postListsTableView.tableFooterView = UIHelper.createSpinnerFooterView(in: self.view)
                 viewModel.fetchPostList()
             }
         }

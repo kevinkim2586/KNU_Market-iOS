@@ -171,7 +171,7 @@ extension MyPostsViewController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
         if position > (postTableView.contentSize.height - 80 - scrollView.frame.size.height) {
             if !viewModel.isFetchingData {
-                postTableView.tableFooterView = createSpinnerFooterView()
+                postTableView.tableFooterView = UIHelper.createSpinnerFooterView(in: self.view)
                 viewModel.fetchPostList(fetchCurrentUsers: true)
             }
         }

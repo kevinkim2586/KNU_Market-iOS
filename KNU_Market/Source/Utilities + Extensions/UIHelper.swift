@@ -181,4 +181,33 @@ struct UIHelper {
             preset: .custom(UIImage(systemName: "face.smiling")?.withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink, renderingMode: .alwaysOriginal) ?? defaultImage)
         )
     }
+    
+    static func createSpinnerFooterView(in view: UIView) -> UIView {
+        
+        let footerView = UIView(frame: CGRect(x: 0,
+                                              y: 0,
+                                              width: view.frame.size.width,
+                                              height: 100))
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
+    
+    static func createSpinnerHeaderView(in view: UIView) -> UIView {
+        
+        let headerView = UIView(frame: CGRect(x: 0,
+                                              y: 0,
+                                              width: view.frame.size.width,
+                                              height: 100))
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.center = headerView.center
+        headerView.addSubview(spinner)
+        spinner.startAnimating()
+        return headerView
+    }
+
 }

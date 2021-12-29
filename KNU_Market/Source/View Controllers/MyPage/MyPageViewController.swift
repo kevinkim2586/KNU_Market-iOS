@@ -11,7 +11,7 @@ class MyPageViewController: BaseViewController {
     //MARK: - Constants
     
     struct Metrics {
-        static let profileImageButtonHeight: CGFloat = 120
+        static let profileImageButtonHeight = 120.f
     }
     
     struct Images {
@@ -130,7 +130,6 @@ class MyPageViewController: BaseViewController {
         super.viewDidLoad()
         configure()
         viewModel.loadUserProfile()
-//        initialize()
     
     }
 
@@ -163,41 +162,40 @@ class MyPageViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         
-        profileImageContainerView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
-            make.left.equalTo(view.snp.left).offset(50)
-            make.right.equalTo(view.snp.right).offset(-50)
-            make.height.equalTo(160)
+        profileImageContainerView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
+            $0.left.equalTo(view.snp.left).offset(50)
+            $0.right.equalTo(view.snp.right).offset(-50)
+            $0.height.equalTo(160)
         }
         
-        profileImageButton.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.centerX.equalToSuperview()
+        profileImageButton.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.centerX.equalToSuperview()
         }
         
-        userNicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileImageButton.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
+        userNicknameLabel.snp.makeConstraints {
+            $0.top.equalTo(profileImageButton.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
         }
         
-        cameraIcon.snp.makeConstraints { make in
-            make.width.height.equalTo(30)
-            make.bottom.equalTo(userNicknameLabel.snp.top).offset(-10)
-            make.right.equalTo(profileImageContainerView.snp.right).offset(-80)
+        cameraIcon.snp.makeConstraints {
+            $0.width.height.equalTo(30)
+            $0.bottom.equalTo(userNicknameLabel.snp.top).offset(-10)
+            $0.right.equalTo(profileImageContainerView.snp.right).offset(-80)
         }
         
-        userVerifiedImage.snp.makeConstraints { make in
-            make.width.height.equalTo(20)
-            make.left.equalTo(userNicknameLabel.snp.right).offset(4)
-            make.bottom.equalTo(profileImageContainerView.snp.bottom).offset(5)
+        userVerifiedImage.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+            $0.left.equalTo(userNicknameLabel.snp.right).offset(4)
+            $0.bottom.equalTo(profileImageContainerView.snp.bottom).offset(5)
         }
         
-        settingsTableView.snp.makeConstraints { make in
-            make.top.equalTo(profileImageContainerView.snp.bottom).offset(6)
-            make.left.equalTo(view.snp.left)
-            make.right.equalTo(view.snp.right)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-    
+        settingsTableView.snp.makeConstraints {
+            $0.top.equalTo(profileImageContainerView.snp.bottom).offset(6)
+            $0.left.equalTo(view.snp.left)
+            $0.right.equalTo(view.snp.right)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
     

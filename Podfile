@@ -53,6 +53,7 @@ target 'KNU_Market' do
   pod 'RxAnimated'
   pod 'RxGesture'
   pod 'RxKeyboard'
+  pod 'RxDataSources', '~> 5.0'
 
   # Network
   pod 'Starscream', '~> 4.0.0'

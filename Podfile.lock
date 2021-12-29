@@ -2,6 +2,7 @@ PODS:
   - Alamofire (5.5.0)
   - Atributika (4.10.1)
   - BSImagePicker (3.3.1)
+  - Differentiator (5.0.0)
   - Firebase/Analytics (8.10.0):
     - Firebase/Core
   - Firebase/Core (8.10.0):
@@ -143,6 +144,10 @@ PODS:
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
+  - RxDataSources (5.0.0):
+    - Differentiator (~> 5.0)
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
   - RxGesture (4.0.2):
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
@@ -196,6 +201,7 @@ DEPENDENCIES:
   - ReactorKit
   - RxAnimated
   - RxCocoa
+  - RxDataSources (~> 5.0)
   - RxGesture
   - RxKeyboard
   - RxSwift
@@ -216,6 +222,7 @@ SPEC REPOS:
     - Alamofire
     - Atributika
     - BSImagePicker
+    - Differentiator
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -244,6 +251,7 @@ SPEC REPOS:
     - ReactorKit
     - RxAnimated
     - RxCocoa
+    - RxDataSources
     - RxGesture
     - RxKeyboard
     - RxRelay
@@ -266,6 +274,7 @@ SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   Atributika: 47e778507cfb3cd2c996278b0285221a62e97d71
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
+  Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   Firebase: 44213362f1dcc52555b935dc925ed35ac55f1b20
   FirebaseAnalytics: 319c9b3b1bdd400d60e2f415dff0c5f6959e6760
   FirebaseCore: 04186597c095da37d90ff9fd3e53bc61a1ff2440
@@ -294,6 +303,7 @@ SPEC CHECKSUMS:
   ReactorKit: a06dd2a5c9339287aedf3dc821cfab6347eca106
   RxAnimated: e53fb66cafc0539faf881b734f7412a624527f0a
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
+  RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxGesture: f059f2aeef966fb17dad56ee440e76410f10e55f
   RxKeyboard: 4f5863f43b4ff0cbb2a20b94688d6b80c8a43c14
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
@@ -312,6 +322,6 @@ SPEC CHECKSUMS:
   ViewAnimator: a9ceed80266e00fd435ec4fb99b2df64d580d0e4
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: ea221f3a491130e62f2d4fc73bab1aa24c055bb1
+PODFILE CHECKSUM: b3a956fa44231b2bffb3641aaf3bf958ce0cae82
 
 COCOAPODS: 1.11.2

@@ -159,8 +159,6 @@ extension MyPostsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         )
     }
-    
-    
 }
 
 //MARK: - UIScrollViewDelegate

@@ -51,7 +51,7 @@ final class LoginViewReactor: Reactor {
             return Observable.just(Mutation.setPassword(password))
             
         case .login:
-            return Observable.merge([
+            return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
                 self.userService.login(id: currentState.id, password: currentState.password)
                     .asObservable()

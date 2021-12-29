@@ -241,6 +241,7 @@ class LoginViewController: BaseViewController, View {
     func bind(reactor: LoginViewReactor) {
         
         // Input
+        
         idTextField.rx.text
             .orEmpty
             .asObservable()
@@ -300,6 +301,7 @@ class LoginViewController: BaseViewController, View {
             .disposed(by: disposeBag)
 
         // Output
+        
         reactor.state
             .map { $0.isLoading }
             .asObservable()
@@ -331,8 +333,6 @@ class LoginViewController: BaseViewController, View {
                 )
             }
             .disposed(by: disposeBag)
-        
-
     }
     
     func presentVC(_ vc: UIViewController) {

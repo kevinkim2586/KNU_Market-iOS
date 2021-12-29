@@ -241,8 +241,6 @@
 		7CF369D72754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */; };
 		7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */; };
 		7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */; };
-		7CF8D605277C27520078DD77 /* UserDefaultsRetrievalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D604277C27520078DD77 /* UserDefaultsRetrievalService.swift */; };
-		7CF8D607277C27600078DD77 /* UserDefaultsRetrievalServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D606277C27600078DD77 /* UserDefaultsRetrievalServiceProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -484,8 +482,6 @@
 		7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+MessageCellDelegate.swift"; sourceTree = "<group>"; };
 		7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
 		7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+InputBarAccessoryViewDelegate.swift"; sourceTree = "<group>"; };
-		7CF8D604277C27520078DD77 /* UserDefaultsRetrievalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRetrievalService.swift; sourceTree = "<group>"; };
-		7CF8D606277C27600078DD77 /* UserDefaultsRetrievalServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRetrievalServiceProtocol.swift; sourceTree = "<group>"; };
 		9104D1D3927ED71E0FE5C187 /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -558,12 +554,12 @@
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
-		626D66EF274291AE00CB7F4F /* MessageList */ = {
+		626D66EF274291AE00CB7F4F /* InquiryList */ = {
 			isa = PBXGroup;
 			children = (
 				626D66F0274291AE00CB7F4F /* InquiryListViewController.swift */,
 			);
-			path = MessageList;
+			path = InquiryList;
 			sourceTree = "<group>";
 		};
 		626D66F52742920300CB7F4F /* Inquiry Models */ = {
@@ -579,6 +575,8 @@
 			children = (
 				7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */,
 				62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */,
+				626D66EF274291AE00CB7F4F /* InquiryList */,
+				622270B1274A487200FDC47B /* DetailMessage */,
 			);
 			path = SendUsMessage;
 			sourceTree = "<group>";
@@ -1039,12 +1037,8 @@
 		7C9C59EE277C1684005E08BC /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				7C9C59FD277C1759005E08BC /* UserDefaultsGenericService.swift */,
-				7C9C59FB277C1742005E08BC /* UserDefaultsGenericServiceProtocol.swift */,
-				7C9C59FF277C244B005E08BC /* UserDefaultsPersistenceService.swift */,
-				7C9C5A01277C245B005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */,
-				7CF8D604277C27520078DD77 /* UserDefaultsRetrievalService.swift */,
-				7CF8D606277C27600078DD77 /* UserDefaultsRetrievalServiceProtocol.swift */,
+				7CF8D609277C34300078DD77 /* UserDefaultsPersistenceService */,
+				7CF8D608277C34270078DD77 /* UserDefaultsGenericService */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1138,10 +1132,14 @@
 				7CD74E0E2645983000BD2DE4 /* Post */,
 				7CD74E0D2645982600BD2DE4 /* Chat */,
 				7CD74E0F2645986A00BD2DE4 /* MyPage */,
+				7CF8D60B277C3B0C0078DD77 /* Account Management */,
+				62C2E44127363D4C00F037B9 /* SendUsMessage */,
+				7CF8D60C277C3B170078DD77 /* MyPosts */,
 				7C60DC7126944C16001DEA9A /* Update User Info */,
 				7CA52D6A270B113900A69F3B /* Unregister Flow */,
 				7C60DC7226944C62001DEA9A /* Report */,
 				7CB22569272EB2190045CE94 /* Popup */,
+				7CF8D60D277C3B510078DD77 /* Others */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1274,13 +1272,6 @@
 				7C22CFB3275E04CD0080A816 /* MyPageViewController+UITableView.swift */,
 				7C22CFB5275E04E80080A816 /* MyPageViewController+UIImagePicker.swift */,
 				7C22CFB7275E056E0080A816 /* MyPageViewController+TargetMethods.swift */,
-				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
-				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
-				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
-				62C2E44127363D4C00F037B9 /* SendUsMessage */,
-				626D66EF274291AE00CB7F4F /* MessageList */,
-				622270B1274A487200FDC47B /* DetailMessage */,
-				7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1288,6 +1279,7 @@
 		7CEC191D27017C0E00C2D671 /* User Verification */ = {
 			isa = PBXGroup;
 			children = (
+				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
 				7C58477427795BAC005D75B2 /* StudentIdVerification */,
 				7C58477327745135005D75B2 /* SchoolEmailVerification */,
 			);
@@ -1409,6 +1401,48 @@
 				7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */,
 			);
 			path = ChatMemberListVC;
+			sourceTree = "<group>";
+		};
+		7CF8D608277C34270078DD77 /* UserDefaultsGenericService */ = {
+			isa = PBXGroup;
+			children = (
+				7C9C59FD277C1759005E08BC /* UserDefaultsGenericService.swift */,
+				7C9C59FB277C1742005E08BC /* UserDefaultsGenericServiceProtocol.swift */,
+			);
+			path = UserDefaultsGenericService;
+			sourceTree = "<group>";
+		};
+		7CF8D609277C34300078DD77 /* UserDefaultsPersistenceService */ = {
+			isa = PBXGroup;
+			children = (
+				7C9C59FF277C244B005E08BC /* UserDefaultsPersistenceService.swift */,
+				7C9C5A01277C245B005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */,
+			);
+			path = UserDefaultsPersistenceService;
+			sourceTree = "<group>";
+		};
+		7CF8D60B277C3B0C0078DD77 /* Account Management */ = {
+			isa = PBXGroup;
+			children = (
+				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
+			);
+			path = "Account Management";
+			sourceTree = "<group>";
+		};
+		7CF8D60C277C3B170078DD77 /* MyPosts */ = {
+			isa = PBXGroup;
+			children = (
+				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
+			);
+			path = MyPosts;
+			sourceTree = "<group>";
+		};
+		7CF8D60D277C3B510078DD77 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 		EF6E8F5DA035698264ED872C /* Pods */ = {
@@ -1724,7 +1758,6 @@
 				7C58475F27707E84005D75B2 /* PasswordInputViewController.swift in Sources */,
 				7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
-				7CF8D605277C27520078DD77 /* UserDefaultsRetrievalService.swift in Sources */,
 				7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */,
 				7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */,
 				7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */,
@@ -1767,7 +1800,6 @@
 				7CB8DF38264BB0300001CC6D /* PostManager.swift in Sources */,
 				7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */,
 				7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */,
-				7CF8D607277C27600078DD77 /* UserDefaultsRetrievalServiceProtocol.swift in Sources */,
 				7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */,
 				7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */,
 				7CF369B82754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift in Sources */,

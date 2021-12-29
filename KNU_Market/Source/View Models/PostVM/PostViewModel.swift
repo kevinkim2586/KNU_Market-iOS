@@ -260,14 +260,14 @@ class PostViewModel {
     //MARK: - 내가 참여하고 있는 Room PID 배열 불러오기
     func fetchEnteredRoomInfo() {
         
-        ChatManager.shared.getResponseModel(function: .getRoom,
-                                            method: .get,
-                                            pid: nil,
-                                            index: nil,
-                                            expectedModel: [Room].self) { [weak self] result in
-            
+        ChatManager.shared.getResponseModel(
+            function: .getRoom,
+            method: .get,
+            pid: nil,
+            index: nil,
+            expectedModel: [Room].self
+        ) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success(let chatRoom):
                 

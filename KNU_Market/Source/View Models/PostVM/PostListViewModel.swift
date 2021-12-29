@@ -75,10 +75,6 @@ class PostListViewModel {
                     if User.shared.bannedPostUploaders.contains(model.userInfo?.userUID ?? "") {
                         continue
                     }
-                    
-                    if fetchCurrentUsers {
-                        User.shared.userUploadedRoomPIDs.append(model.uuid)
-                    }
                     self.postList.append(model)
                 }
           
@@ -176,7 +172,6 @@ class PostListViewModel {
     
     func resetValues() {
         User.shared.joinedChatRoomPIDs.removeAll()
-        User.shared.userUploadedRoomPIDs.removeAll()
         postList.removeAll()
         isFetchingData = false
         index = 1

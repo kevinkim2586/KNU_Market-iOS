@@ -93,7 +93,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             switch indexPath.row {
             case 0: pushViewController(with: MyPostsViewController(viewModel: PostListViewModel(postManager: PostManager(), chatManager: ChatManager(), userManager: UserManager(), popupService: PopupService(network: Network<PopupAPI>()))))
-            case 1: pushViewController(with: AccountManagementViewController())
+            case 1: pushViewController(with: AccountManagementViewController(userDefaultsGenericService: UserDefaultsGenericService.shared))
             case 2: pushViewController(with: VerifyOptionViewController())
             default: break
             }

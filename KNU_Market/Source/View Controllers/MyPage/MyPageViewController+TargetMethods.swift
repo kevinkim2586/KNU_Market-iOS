@@ -13,7 +13,7 @@ import UIKit
 extension MyPageViewController {
     
     @objc func pressedSettingsBarButtonItem() {
-        pushViewController(with: AccountManagementViewController())
+        pushViewController(with: AccountManagementViewController(userDefaultsGenericService: UserDefaultsGenericService.shared))
     }
     
     @objc func pressedProfileImageButton(_ sender: UIButton) {

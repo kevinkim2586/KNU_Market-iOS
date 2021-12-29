@@ -18,6 +18,8 @@ extension UserDefaults {
         static let bannedChatUsers                  = "bannedChatUsers"
         static let isNotFirstAppLaunch              = "isNotFirstAppLaunch"
         static let postFilterOptions                = "postFilterOptions"
+
+        
         static let joinedChatRoomPIDs               = "joinedChatRoomPIDs"
         
         static let userSeenPopupUids                = "userSeenPopupUids"

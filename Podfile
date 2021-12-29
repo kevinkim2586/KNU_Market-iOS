@@ -54,6 +54,8 @@ target 'KNU_Market' do
   pod 'RxGesture'
   pod 'RxKeyboard'
   pod 'RxDataSources', '~> 5.0'
+  pod 'ReusableKit'
+  pod 'ReusableKit/RxSwift'  # with RxSwift extension
 
   # Network
   pod 'Starscream', '~> 4.0.0'

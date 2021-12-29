@@ -1,7 +1,15 @@
 import UIKit
 import SnapKit
+import RxSwift
+import ReactorKit
 
-class MyPageTableViewCell: UITableViewCell {
+class MyPageTableViewCell: UITableViewCell, View {
+    
+    typealias Reactor = MyPageCellReactor
+    
+    //MARK: - Properties
+    
+    var disposeBag = DisposeBag()
     
     //MARK: - Constants
     
@@ -40,12 +48,12 @@ class MyPageTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configure()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configure()
+        setupLayout()
     }
     
     override func prepareForReuse() {
@@ -55,16 +63,15 @@ class MyPageTableViewCell: UITableViewCell {
     
     //MARK: - Configuration
     
-    func configure() {
-        
+    func setupLayout() {
         accessoryType = .disclosureIndicator
         contentView.addSubview(leftImageView)
         contentView.addSubview(settingsTitleLabel)
         contentView.addSubview(notificationBadgeImageView)
-        makeConstraints()
+        setupConstraints()
     }
     
-    func makeConstraints() {
+    func setupConstraints() {
         
         leftImageView.snp.makeConstraints {
             $0.width.height.equalTo(25)
@@ -83,5 +90,13 @@ class MyPageTableViewCell: UITableViewCell {
             $0.left.equalTo(settingsTitleLabel.snp.right).offset(10)
         }
     }
-
+    
+    //MARK: - Binding
+    
+    func bind(reactor: MyPageCellReactor) {
+        
+        self.leftImageView.image = reactor.currentState.leftImage
+        self.settingsTitleLabel.text = reactor.currentState.title
+        self.notificationBadgeImageView.isHidden = reactor.currentState.isNotificationBadgeHidden
+    }
 }

@@ -245,6 +245,8 @@
 		7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D613277C4A590078DD77 /* ChatService.swift */; };
 		7CF8D616277C4A5E0078DD77 /* ChatServiceAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */; };
 		7CF8D618277C4ABB0078DD77 /* ChatServiceWebSocketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D617277C4ABB0078DD77 /* ChatServiceWebSocketType.swift */; };
+		7CF8D61B277C4CD10078DD77 /* MyPageCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D61A277C4CD10078DD77 /* MyPageCellReactor.swift */; };
+		7CF8D61D277C4F210078DD77 /* MyPageTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D61C277C4F210078DD77 /* MyPageTableViewCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -490,6 +492,8 @@
 		7CF8D613277C4A590078DD77 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceAPIType.swift; sourceTree = "<group>"; };
 		7CF8D617277C4ABB0078DD77 /* ChatServiceWebSocketType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceWebSocketType.swift; sourceTree = "<group>"; };
+		7CF8D61A277C4CD10078DD77 /* MyPageCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCellReactor.swift; sourceTree = "<group>"; };
+		7CF8D61C277C4F210078DD77 /* MyPageTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCellModel.swift; sourceTree = "<group>"; };
 		9104D1D3927ED71E0FE5C187 /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1468,7 +1472,9 @@
 		7CF8D619277C4BBE0078DD77 /* MyPageTableView */ = {
 			isa = PBXGroup;
 			children = (
+				7CF8D61C277C4F210078DD77 /* MyPageTableViewCellModel.swift */,
 				7C036AB52696B64F00F6C29B /* MyPageTableViewCell.swift */,
+				7CF8D61A277C4CD10078DD77 /* MyPageCellReactor.swift */,
 			);
 			path = MyPageTableView;
 			sourceTree = "<group>";
@@ -1763,6 +1769,7 @@
 				7C22CFB2275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
 				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
+				7CF8D61D277C4F210078DD77 /* MyPageTableViewCellModel.swift in Sources */,
 				7CF369A92754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift in Sources */,
 				7C5386D92768902000BFEA7F /* FindIdModel.swift in Sources */,
 				7C9C59E4277C12F7005E08BC /* UIViewController+Observers.swift in Sources */,
@@ -1808,6 +1815,7 @@
 				7C833686266208210032308D /* Interceptor.swift in Sources */,
 				7C436B5826820E5200943069 /* ReportManager.swift in Sources */,
 				7C58477227744FD9005D75B2 /* EmailVerificationViewReactor.swift in Sources */,
+				7CF8D61B277C4CD10078DD77 /* MyPageCellReactor.swift in Sources */,
 				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,
 				7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */,
 				625B0E322741E259003968BA /* ErrorModel.swift in Sources */,

@@ -134,6 +134,13 @@ PODS:
   - ReactorKit (3.1.0):
     - RxSwift (~> 6.0)
     - WeakMapTable (~> 1.1)
+  - ReusableKit (2.1.0):
+    - ReusableKit/Core (= 2.1.0)
+  - ReusableKit/Core (2.1.0)
+  - ReusableKit/RxSwift (2.1.0):
+    - ReusableKit/Core
+    - RxCocoa (>= 4.0.0)
+    - RxSwift (>= 4.0.0)
   - RxAnimated (0.9.0):
     - RxAnimated/Core (= 0.9.0)
     - RxCocoa (~> 6.0)
@@ -199,6 +206,8 @@ DEPENDENCIES:
   - PMAlertController
   - ProgressHUD
   - ReactorKit
+  - ReusableKit
+  - ReusableKit/RxSwift
   - RxAnimated
   - RxCocoa
   - RxDataSources (~> 5.0)
@@ -249,6 +258,7 @@ SPEC REPOS:
     - ProgressHUD
     - PromisesObjC
     - ReactorKit
+    - ReusableKit
     - RxAnimated
     - RxCocoa
     - RxDataSources
@@ -301,6 +311,7 @@ SPEC CHECKSUMS:
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   ReactorKit: a06dd2a5c9339287aedf3dc821cfab6347eca106
+  ReusableKit: d0b040de03b293288b0ca27a78602691d3346d9b
   RxAnimated: e53fb66cafc0539faf881b734f7412a624527f0a
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
@@ -322,6 +333,6 @@ SPEC CHECKSUMS:
   ViewAnimator: a9ceed80266e00fd435ec4fb99b2df64d580d0e4
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: b3a956fa44231b2bffb3641aaf3bf958ce0cae82
+PODFILE CHECKSUM: 84c53a3a8ccca8652228fb01a530e8e7d3d3e0a7
 
 COCOAPODS: 1.11.2

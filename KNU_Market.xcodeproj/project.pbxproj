@@ -1039,8 +1039,8 @@
 		7C9C59EE277C1684005E08BC /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				7C9C59FB277C1742005E08BC /* UserDefaultsGenericServiceProtocol.swift */,
 				7C9C59FD277C1759005E08BC /* UserDefaultsGenericService.swift */,
+				7C9C59FB277C1742005E08BC /* UserDefaultsGenericServiceProtocol.swift */,
 				7C9C59FF277C244B005E08BC /* UserDefaultsPersistenceService.swift */,
 				7C9C5A01277C245B005E08BC /* UserDefaultsPersistenceServiceProtocol.swift */,
 				7CF8D604277C27520078DD77 /* UserDefaultsRetrievalService.swift */,

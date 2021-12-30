@@ -10,7 +10,7 @@ import SnackBar_swift
 import RxSwift
 import RxCocoa
 
-//MARK: - Alert Methods
+//MARK: - Alert Methods - Pure Swift
 
 extension UIViewController {
     
@@ -175,4 +175,56 @@ extension UIViewController {
             }
         }
     }
+    
+    // 프로필 이미지 변경 또는 제거를 도와주는 ActionSheet 을 생성
+    func presentChangeProfileImageOptionsActionSheet() -> Observable<ChangeProfileImageType> {
+        return Observable.create { [weak self] observer in
+            let actionSheet = UIAlertController(
+                title: "프로필 사진 변경",
+                message: nil,
+                preferredStyle: .actionSheet
+            )
+            actionSheet.view.tintColor = .black
+            
+            let library = UIAlertAction(
+                title: "앨범에서 선택",
+                style: .default
+            ) { _ in
+                observer.onNext(.selectFromLibrary)
+                observer.onCompleted()
+            }
+            
+            let remove = UIAlertAction(
+                title: "프로필 사진 제거",
+                style: .default
+            ) { _ in
+                observer.onNext(.remove)
+                observer.onCompleted()
+            }
+            
+            let cancelAction = UIAlertAction(
+                title: "취소",
+                style: .cancel
+            ) { _ in
+                observer.onNext(.cancel)
+                observer.onCompleted()
+            }
+        
+            actionSheet.addAction(library)
+            actionSheet.addAction(remove)
+            actionSheet.addAction(cancelAction)
+            self?.present(actionSheet, animated: true, completion: nil)
+    
+            return Disposables.create {
+                actionSheet.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }
+
+enum ChangeProfileImageType {
+    case selectFromLibrary
+    case remove
+    case cancel
+}
+

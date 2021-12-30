@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol UserDefaultsPersistenceServiceProtocol {
+protocol UserDefaultsPersistenceServiceType {
     func configureUserAsLoggedIn()
     func configurePostFilterOption(type: PostFilterOptions)
     func configureUserAsVerifiedUser()

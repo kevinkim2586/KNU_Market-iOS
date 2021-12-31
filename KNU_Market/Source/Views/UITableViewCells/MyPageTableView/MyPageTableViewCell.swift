@@ -94,7 +94,6 @@ class MyPageTableViewCell: UITableViewCell, View {
     //MARK: - Binding
     
     func bind(reactor: MyPageCellReactor) {
-        
         self.leftImageView.image = reactor.currentState.leftImage
         self.settingsTitleLabel.text = reactor.currentState.title
         self.notificationBadgeImageView.isHidden = reactor.currentState.isNotificationBadgeHidden

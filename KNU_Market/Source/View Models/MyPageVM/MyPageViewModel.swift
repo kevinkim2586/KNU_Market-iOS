@@ -61,7 +61,6 @@ class MyPageViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let model):
-                print("✅ isVerified: \(model.isVerified)")
                 self.isReportChecked = !model.isReportChecked
                 self.delegate?.didLoadUserProfileInfo()
                 
@@ -72,11 +71,11 @@ class MyPageViewModel {
                     return
                 }
                 
-                if model.profileImageCode == "default" { return }
+                if model.profileImageUid == "default" { return }
                 
                 // 없다면 DB에서 받아오기
                 OperationQueue().addOperation {
-                    self.fetchProfileImage(with: model.profileImageCode)
+                    self.fetchProfileImage(with: model.profileImageUid)
                 }
             
             case .failure(let error):

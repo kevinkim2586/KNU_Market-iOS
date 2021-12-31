@@ -11,7 +11,7 @@ import RxDataSources
 struct MyPageCellData {
     let leftImageName: String
     let title: String
-    let isNotificationBadgeHidden: Bool = true
+    var isNotificationBadgeHidden: Bool = true
 }
 
 struct MyPageSectionModel {

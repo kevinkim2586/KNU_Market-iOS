@@ -35,7 +35,7 @@ class MyPageTableViewCell: UITableViewCell, View {
         return label
     }()
     
-    let notificationBadgeImageView: UIImageView = {
+    var notificationBadgeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = Metrics.notificationBadgeSize / 2
         imageView.backgroundColor = .systemRed

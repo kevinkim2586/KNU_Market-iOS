@@ -26,6 +26,7 @@ final class MyPageViewReactor: Reactor {
         case updateProfileImage(UIImage)               // User selected image
         case removeProfileImage
         case cellSelected(IndexPath)
+        case empty
     }
     
     enum Mutation {
@@ -58,7 +59,7 @@ final class MyPageViewReactor: Reactor {
             return K.MEDIA_REQUEST_URL + "\(profileImageUid)"
         }
         
-        let myPageSectionModels = [
+        var myPageSectionModels = [
             MyPageSectionModel(header: "사용자 설정", items: [
                 MyPageCellData(leftImageName: "tray.full", title: "내가 올린 글"),
                 MyPageCellData(leftImageName: "gear", title: "설정"),
@@ -131,7 +132,7 @@ final class MyPageViewReactor: Reactor {
                             .map { result in
                                 switch result {
                                 case .success:
-                                    return Mutation.setUserProfile(nil, imageUid)
+                                    return Mutation.updateProfileImageUid(imageUid)
                                 case .error(let error):
                                     return Mutation.setAlertMessage(error.errorDescription)
                                 }
@@ -156,8 +157,10 @@ final class MyPageViewReactor: Reactor {
             
         case .cellSelected(let indexPath):
             return Observable.just(Mutation.setSelectedCellIndexPath(indexPath))
+            
+        case .empty:
+            return Observable.just(Mutation.empty)
         }
-        
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
@@ -170,9 +173,9 @@ final class MyPageViewReactor: Reactor {
             state.profileImageUid = profileImageUid
             if let isReportChecked = isReportChecked {
                 state.isReportChecked = isReportChecked
+                state.myPageSectionModels[1].items[0].isNotificationBadgeHidden = isReportChecked
             }
-            
-            
+
         case .updateProfileImageUid(let profileImageUid):
             state.alertMessage = "프로필 이미지 변경 성공 🎉"
             state.profileImageUid = profileImageUid

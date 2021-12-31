@@ -2,6 +2,7 @@ import UIKit
 import Photos
 import SDWebImage
 import Then
+import BSImagePicker
 import SnapKit
 import RxSwift
 import RxCocoa
@@ -20,10 +21,10 @@ class MyPageViewController: BaseViewController, View {
     let dataSource = RxTableViewSectionedReloadDataSource<MyPageSectionModel>(
         configureCell: { dataSource, tableView, indexPath, item in
             let cell: MyPageTableViewCell = tableView.dequeue(Reusable.myPageCell, for: indexPath)
-            
-            #warning("isReportChecked 도 구현")
+   
             if indexPath.section == 1, indexPath.row == 0 {     // 크누마켓 자체 로고가 들어가야해서 특수 케이스
                 cell.leftImageView.image = UIImage(named: item.leftImageName)
+         
             } else {
                 cell.leftImageView.image = UIImage(systemName: item.leftImageName)
             }
@@ -47,10 +48,12 @@ class MyPageViewController: BaseViewController, View {
     }
     
     struct Images {
-        static let userVerifiedImage = UIImage(systemName: "checkmark.circle.fill")?.withRenderingMode(.alwaysOriginal)
+        static let userVerifiedImage = UIImage(systemName: "checkmark.circle.fill")?
+            .withRenderingMode(.alwaysOriginal)
             .withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink)
         
-        static let userUnVerifiedImage = UIImage(systemName: "xmark.circle.fill")?.withRenderingMode(.alwaysOriginal)
+        static let userUnVerifiedImage = UIImage(systemName: "xmark.circle.fill")?
+            .withRenderingMode(.alwaysOriginal)
             .withTintColor(UIColor.systemGray)
     }
     
@@ -60,7 +63,7 @@ class MyPageViewController: BaseViewController, View {
         $0.backgroundColor = .white
     }
     
-    let profileImageButton = UIButton(type: .system).then {
+    let profileImageButton = UIButton().then {
         $0.setImage(UIImage(named: K.Images.pickProfileImage), for: .normal)
         $0.layer.masksToBounds = false
         $0.isUserInteractionEnabled = true
@@ -115,17 +118,17 @@ class MyPageViewController: BaseViewController, View {
         }
     }
     
-    // UIImagePickerController
-    
-    //아래 삭제 검토
-    lazy var imagePicker: UIImagePickerController = {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .savedPhotosAlbum
-        return imagePicker
-    }()
-    
+    // ImagePickerController
+    let imagePicker = ImagePickerController().then {
+        $0.modalPresentationStyle = .fullScreen
+        $0.settings.selection.max = 1
+        $0.settings.theme.selectionStyle = .numbered
+        $0.settings.fetch.assets.supportedMediaTypes = [.image]
+        $0.settings.theme.selectionFillColor = UIColor(named: K.Color.appColor)!
+        $0.doneButton.tintColor = UIColor(named: K.Color.appColor)!
+        $0.doneButtonTitle = "완료"
+        $0.cancelButton.tintColor = UIColor(named: K.Color.appColor)!
+    }
     
     //MARK: - Initialization
     
@@ -143,7 +146,6 @@ class MyPageViewController: BaseViewController, View {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-    
     }
 
     //MARK: - UI Setup
@@ -232,24 +234,25 @@ class MyPageViewController: BaseViewController, View {
                 self.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
-        
-    
-        
-//        profileImageButton.rx.tap
-//            .flatMap { [unowned self] in
-//                self.presentChangeProfileImageOptionsActionSheet()
-//            }
-//            .map { changeProfileImageType -> Any in
-//
-//                switch changeProfileImageType {
-//                case .selectFromLibrary:
-//                    return 1
-//                case .remove:
-//                    return ""
-//                default: return ""
-//                }
-//            }
-        
+                                                  
+        profileImageButton.rx.tap
+            .flatMap { [unowned self] in
+                self.presentChangeProfileImageOptionsActionSheet()
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, changeProfileImageType) in
+                
+                switch changeProfileImageType {
+                case .selectFromLibrary:
+                    self.presentImagePicker()
+                case .remove:
+                    reactor.action.onNext(Reactor.Action.removeProfileImage)
+                default:
+                    reactor.action.onNext(Reactor.Action.empty)
+                }
+            })
+            .disposed(by: disposeBag)
+
         settingsTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
@@ -280,24 +283,17 @@ class MyPageViewController: BaseViewController, View {
             .distinctUntilChanged { $0.0 }
             .withUnretained(self)
             .subscribe(onNext: { (_, info) in
-  
-                if info.0 == "default" {
-                    self.profileImageButton.sd_setImage(
-                        with: nil,
-                        for: .normal,
-                        placeholderImage: UIImage(named: K.Images.pickProfileImage),
-                        options: .continueInBackground
-                    )
-                } else {
-                    
-                    self.profileImageButton.sd_setImage(
-                        with: URL(string: info.1),
-                        for: .normal,
-                        placeholderImage: UIImage(named: K.Images.pickProfileImage),
-                        options: .continueInBackground
-                    )
-                }
+            
+                self.profileImageButton.sd_setImage(
+                    with: info.0 == "default" ? nil : URL(string: info.1),    // 어차피 "default"면 실행 X
+                    for: .normal,
+                    placeholderImage: UIImage(named: K.Images.pickProfileImage),
+                    options: .continueInBackground
+                )
 
+                if info.0 != "default" {
+                    self.profileImageButton.layer.masksToBounds = true
+                }
             })
             .disposed(by: disposeBag)
         
@@ -305,7 +301,7 @@ class MyPageViewController: BaseViewController, View {
             .map { ($0.userNickname, $0.userId) }
             .withUnretained(self)
             .subscribe(onNext: { (_, userInfo) in
-                self.userNicknameLabel.text =  "\(userInfo.0)\n(\(userInfo.1))"
+                self.userNicknameLabel.text = "\(userInfo.0)\n(\(userInfo.1))"
             })
             .disposed(by: disposeBag)
         
@@ -328,7 +324,6 @@ class MyPageViewController: BaseViewController, View {
     }
     
     private func configure() {
-        
         createObserversForPresentingVerificationAlert()
         createObserversForGettingBadgeValue()
     }
@@ -370,6 +365,24 @@ extension MyPageViewController {
             vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    func presentImagePicker() {
+        
+        presentImagePicker(self.imagePicker, select: {
+            (asset) in
+        }, deselect: {
+            (asset) in
+        }, cancel: {
+            (assets) in
+        }, finish: {
+            [weak self] (assets) in
+            guard let self = self else { return }
+            Observable<[UIImage]>.just(AssetConverter.convertAssetToImage(assets))
+                .map { Reactor.Action.updateProfileImage($0[0])}
+                .bind(to: self.reactor!.action )
+                .disposed(by: self.disposeBag)
+        })
     }
 }
 

@@ -47,13 +47,13 @@ extension MyPageViewController: MyPageViewModelDelegate {
     
     func didRemoveProfileImage() {
         showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
-        initializeProfileImageButton()
+
         User.shared.profileImage = nil
     }
     
     func failedUploadingImageToServerFirst(with error: NetworkError) {
         self.showSimpleBottomAlert(with: error.errorDescription)
-        initializeProfileImageButton()
+ 
     }
     
     // 프로필 사진 실제 DB상 수정

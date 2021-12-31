@@ -15,8 +15,7 @@ class MyPageViewController: BaseViewController, View {
     typealias Reactor = MyPageViewReactor
     
     //MARK: - Properties
-    
-    var viewModel: MyPageViewModel!
+
     
     let dataSource = RxTableViewSectionedReloadDataSource<MyPageSectionModel>(
         configureCell: { dataSource, tableView, indexPath, item in
@@ -290,7 +289,6 @@ class MyPageViewController: BaseViewController, View {
                     placeholderImage: UIImage(named: K.Images.pickProfileImage),
                     options: .continueInBackground
                 )
-
                 if info.0 != "default" {
                     self.profileImageButton.layer.masksToBounds = true
                 }
@@ -387,3 +385,11 @@ extension MyPageViewController {
 }
 
 
+//MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension MyPageViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+}

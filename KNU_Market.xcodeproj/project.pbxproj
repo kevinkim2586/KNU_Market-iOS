@@ -44,8 +44,6 @@
 		7C184B8326B103F1006C0FAD /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C184B8226B103F1006C0FAD /* Room.swift */; };
 		7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */; };
 		7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */; };
-		7C22CFB2275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22CFB1275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift */; };
-		7C22CFB4275E04CD0080A816 /* MyPageViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22CFB3275E04CD0080A816 /* MyPageViewController+UITableView.swift */; };
 		7C3758ED265FA97A0081A85D /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* PostListViewModel.swift */; };
 		7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */; };
 		7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */; };
@@ -59,7 +57,6 @@
 		7C3D541F26CA722B00AE3E55 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D541E26CA722B00AE3E55 /* CALayer+Extension.swift */; };
 		7C3D985E26AE793D005DFAE0 /* RoomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D985D26AE793D005DFAE0 /* RoomInfo.swift */; };
 		7C3D986426AE9F2E005DFAE0 /* LoadUserProfileUidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D986326AE9F2E005DFAE0 /* LoadUserProfileUidModel.swift */; };
-		7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4012842656A4C6006B0473 /* MyPageViewModel.swift */; };
 		7C43355826D89AC200A044CD /* wimLogo_Launchscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */; };
 		7C43355C26D8BD8000A044CD /* appLogo_LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C43355B26D8BD8000A044CD /* appLogo_LaunchScreen.png */; };
 		7C436B5826820E5200943069 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5726820E5200943069 /* ReportManager.swift */; };
@@ -289,8 +286,6 @@
 		7C184B8226B103F1006C0FAD /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
-		7C22CFB1275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyPageViewController+MyPageViewModelDelegate.swift"; sourceTree = "<group>"; };
-		7C22CFB3275E04CD0080A816 /* MyPageViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyPageViewController+UITableView.swift"; sourceTree = "<group>"; };
 		7C3758EC265FA97A0081A85D /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewController.swift; sourceTree = "<group>"; };
@@ -304,7 +299,6 @@
 		7C3D541E26CA722B00AE3E55 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
 		7C3D985D26AE793D005DFAE0 /* RoomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInfo.swift; sourceTree = "<group>"; };
 		7C3D986326AE9F2E005DFAE0 /* LoadUserProfileUidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserProfileUidModel.swift; sourceTree = "<group>"; };
-		7C4012842656A4C6006B0473 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		7C43355726D89AC100A044CD /* wimLogo_Launchscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wimLogo_Launchscreen.png; sourceTree = "<group>"; };
 		7C43355B26D8BD8000A044CD /* appLogo_LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appLogo_LaunchScreen.png; sourceTree = "<group>"; };
 		7C436B5726820E5200943069 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
@@ -679,14 +673,6 @@
 				7C3D541A26C90B4900AE3E55 /* congratulate1.json */,
 			);
 			path = "Animations + Lottie";
-			sourceTree = "<group>";
-		};
-		7C4012832656A4B3006B0473 /* MyPageVM */ = {
-			isa = PBXGroup;
-			children = (
-				7C4012842656A4C6006B0473 /* MyPageViewModel.swift */,
-			);
-			path = MyPageVM;
 			sourceTree = "<group>";
 		};
 		7C5386E027689C1500BFEA7F /* Media Models */ = {
@@ -1171,7 +1157,6 @@
 		7CA6622A264132F3000E0B7A /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				7C4012832656A4B3006B0473 /* MyPageVM */,
 				7CB8DF5D264C208A0001CC6D /* ChatVM */,
 				7CB8DF5C264C207D0001CC6D /* PostVM */,
 			);
@@ -1294,8 +1279,6 @@
 				7CA66236264136BF000E0B7A /* MyPageViewController.swift */,
 				7CF8D61E277C52600078DD77 /* MyPageViewReactor.swift */,
 				7CA2D982277DC7BE00D50737 /* MyPageSectionModel.swift */,
-				7C22CFB1275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift */,
-				7C22CFB3275E04CD0080A816 /* MyPageViewController+UITableView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1651,7 +1634,6 @@
 				7CEDBB5D2702E0820078F5E1 /* KMErrorLabel.swift in Sources */,
 				7C58477C2779CCDC005D75B2 /* ReportUserViewReactor.swift in Sources */,
 				7CCB02082674CE5D00D58BC2 /* PostListModel.swift in Sources */,
-				7C22CFB4275E04CD0080A816 /* MyPageViewController+UITableView.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
 				7C55545D266CDFD100C3C5B6 /* UploadPostRequestDTO.swift in Sources */,
 				7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */,
@@ -1707,7 +1689,6 @@
 				7C58475D2770423A005D75B2 /* IDInputViewReactor.swift in Sources */,
 				7CC69A7A27670CF200105FC0 /* ReportAPI.swift in Sources */,
 				7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */,
-				7C4012852656A4C6006B0473 /* MyPageViewModel.swift in Sources */,
 				7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */,
 				7C58476E2772F917005D75B2 /* FindUserInfoViewReactor.swift in Sources */,
 				7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */,
@@ -1769,7 +1750,6 @@
 				7C015C9827035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C9C59FC277C1742005E08BC /* UserDefaultsGenericServiceType.swift in Sources */,
-				7C22CFB2275E04030080A816 /* MyPageViewController+MyPageViewModelDelegate.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
 				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
 				7CF8D61D277C4F210078DD77 /* MyPageTableViewCellModel.swift in Sources */,

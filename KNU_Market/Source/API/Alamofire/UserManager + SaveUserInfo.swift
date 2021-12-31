@@ -28,7 +28,7 @@ extension UserManager {
         User.shared.userID = model.id            //email == id
         User.shared.emailForPasswordLoss = model.emailForPasswordLoss
         User.shared.nickname = model.nickname
-        User.shared.profileImageUID = model.profileImageCode
+        User.shared.profileImageUID = model.profileImageUid
         User.shared.isVerified = model.isVerified
     }
 }

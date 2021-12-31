@@ -1,5 +1,7 @@
 import UIKit
 import Photos
+import SDWebImage
+import Then
 import SnapKit
 import RxSwift
 import RxCocoa
@@ -7,18 +9,32 @@ import ReactorKit
 import RxDataSources
 import ReusableKit
 
-class MyPageViewController: BaseViewController {
+class MyPageViewController: BaseViewController, View {
+    
+    typealias Reactor = MyPageViewReactor
     
     //MARK: - Properties
     
     var viewModel: MyPageViewModel!
     
-    let dataSource = RxTableViewSectionedReloadDataSource<MyPageSection>(
-      configureCell: { _, tableView, indexPath, reactor in
-        let cell = tableView.dequeue(Reusable.myPageCell, for: indexPath)
-        cell.reactor = reactor
-        return cell
-    }) 
+    let dataSource = RxTableViewSectionedReloadDataSource<MyPageSectionModel>(
+        configureCell: { dataSource, tableView, indexPath, item in
+            let cell: MyPageTableViewCell = tableView.dequeue(Reusable.myPageCell, for: indexPath)
+            
+            #warning("isReportChecked 도 구현")
+            if indexPath.section == 1, indexPath.row == 0 {     // 크누마켓 자체 로고가 들어가야해서 특수 케이스
+                cell.leftImageView.image = UIImage(named: item.leftImageName)
+            } else {
+                cell.leftImageView.image = UIImage(systemName: item.leftImageName)
+            }
+            cell.settingsTitleLabel.text = item.title
+            cell.notificationBadgeImageView.isHidden = item.isNotificationBadgeHidden
+            return cell
+        },
+        titleForHeaderInSection: { dataSource, index in
+            return dataSource.sectionModels[index].header
+        }
+    )
     
     //MARK: - Constants
     
@@ -40,64 +56,48 @@ class MyPageViewController: BaseViewController {
     
     //MARK: - UI
     
-    lazy var profileImageContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
-    }()
+    let profileImageContainerView = UIView().then {
+        $0.backgroundColor = .white
+    }
     
-    let profileImageButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: K.Images.pickProfileImage), for: .normal)
-        button.layer.masksToBounds = false
-        button.isUserInteractionEnabled = true
-        button.contentMode = .scaleAspectFit
-        button.widthAnchor.constraint(equalToConstant: Metrics.profileImageButtonHeight).isActive = true
-        button.heightAnchor.constraint(equalToConstant: Metrics.profileImageButtonHeight).isActive = true
-        button.layer.cornerRadius = Metrics.profileImageButtonHeight / 2
-        button.addTarget(self, action: #selector(pressedProfileImageButton(_:)), for: .touchUpInside)
-        return button
-    }()
+    let profileImageButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: K.Images.pickProfileImage), for: .normal)
+        $0.layer.masksToBounds = false
+        $0.isUserInteractionEnabled = true
+        $0.contentMode = .scaleAspectFit
+        $0.widthAnchor.constraint(equalToConstant: Metrics.profileImageButtonHeight).isActive = true
+        $0.heightAnchor.constraint(equalToConstant: Metrics.profileImageButtonHeight).isActive = true
+        $0.layer.cornerRadius = Metrics.profileImageButtonHeight / 2
+    }
     
-    let cameraIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: K.Images.cameraIcon)
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
+    let cameraIcon = UIImageView().then {
+        $0.image = UIImage(named: K.Images.cameraIcon)
+        $0.contentMode = .scaleAspectFit
+    }
     
-    let userNicknameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "로딩 중.."
-        label.numberOfLines = 2
-        label.minimumScaleFactor = 0.8
-        label.adjustsFontSizeToFitWidth = true
-        label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .black
-        label.textAlignment = .center
-        return label
-    }()
+    let userNicknameLabel = UILabel().then {
+        $0.text = "로딩 중.."
+        $0.numberOfLines = 2
+        $0.minimumScaleFactor = 0.8
+        $0.adjustsFontSizeToFitWidth = true
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
+        $0.textColor = .black
+        $0.textAlignment = .center
+    }
     
-    let userVerifiedImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
+    let userVerifiedImage = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+    }
     
-    lazy var settingsTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(
-            MyPageTableViewCell.self,
-            forCellReuseIdentifier: MyPageTableViewCell.cellId
-        )
-        return tableView
-    }()
+    //수정
+    let settingsTableView = UITableView().then {
+        $0.separatorStyle = .none
+        $0.register(Reusable.myPageCell)
+    }
     
     // UIBarButtonItems
     
+    //수정
     lazy var myPageBarButtonItem: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.title = "마이페이지"
@@ -106,21 +106,18 @@ class MyPageViewController: BaseViewController {
         return button
     }()
     
-    lazy var settingsBarButtonItem: UIBarButtonItem = {
-        let button = UIBarButtonItem()
+    //수정
+    let settingsBarButtonItem = UIBarButtonItem().then {
         if #available(iOS 14.0, *) {
-            button.image = UIImage(systemName: "gearshape")
+            $0.image = UIImage(systemName: "gearshape")
         } else {
-            button.image = UIImage(systemName: "gear")
+            $0.image = UIImage(systemName: "gear")
         }
-        button.style = .plain
-        button.target = self
-        button.action = #selector(pressedSettingsBarButtonItem)
-        return button
-    }()
+    }
     
     // UIImagePickerController
     
+    //아래 삭제 검토
     lazy var imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -131,9 +128,10 @@ class MyPageViewController: BaseViewController {
     
     
     //MARK: - Initialization
-    init(viewModel: MyPageViewModel) {
+    
+    init(reactor: Reactor) {
         super.init()
-        self.viewModel = viewModel
+        self.reactor = reactor
     }
     
     required init?(coder: NSCoder) {
@@ -145,21 +143,11 @@ class MyPageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        viewModel.loadUserProfile()
     
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        viewModel.loadUserProfile()
-    }
-    
-    
     //MARK: - UI Setup
+    
     override func setupLayout() {
         super.setupLayout()
         
@@ -172,7 +160,6 @@ class MyPageViewController: BaseViewController {
         profileImageContainerView.addSubview(userNicknameLabel)
         profileImageContainerView.addSubview(userVerifiedImage)
         view.addSubview(settingsTableView)
-
     }
     
     override func setupConstraints() {
@@ -215,14 +202,175 @@ class MyPageViewController: BaseViewController {
         }
     }
     
+    //MARK: - Binding
+    
+    func bind(reactor: MyPageViewReactor) {
+        
+        // Input
+        
+        self.rx.viewDidLoad
+            .map { _ in Reactor.Action.viewDidLoad }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        self.rx.viewWillAppear
+            .map { _ in Reactor.Action.viewWillAppear }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        self.rx.viewDidAppear
+            .map { _ in Reactor.Action.viewDidAppear }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        settingsBarButtonItem.rx.tap
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                let vc = AccountManagementViewController(userDefaultsGenericService: UserDefaultsGenericService.shared)
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+    
+        
+//        profileImageButton.rx.tap
+//            .flatMap { [unowned self] in
+//                self.presentChangeProfileImageOptionsActionSheet()
+//            }
+//            .map { changeProfileImageType -> Any in
+//
+//                switch changeProfileImageType {
+//                case .selectFromLibrary:
+//                    return 1
+//                case .remove:
+//                    return ""
+//                default: return ""
+//                }
+//            }
+        
+        settingsTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        settingsTableView.rx.itemSelected
+            .map { Reactor.Action.cellSelected($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    
+        // Output
+        
+        reactor.state
+            .map { $0.myPageSectionModels }
+            .bind(to: settingsTableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.selectedCellIndexPath }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, indexPath) in
+                self.pushViewController(indexPath: indexPath!)
+                self.settingsTableView.deselectRow(at: indexPath!, animated: true)
+            })
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { ($0.profileImageUid, $0.profileImageUrlString) }
+            .distinctUntilChanged { $0.0 }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, info) in
+  
+                if info.0 == "default" {
+                    self.profileImageButton.sd_setImage(
+                        with: nil,
+                        for: .normal,
+                        placeholderImage: UIImage(named: K.Images.pickProfileImage),
+                        options: .continueInBackground
+                    )
+                } else {
+                    
+                    self.profileImageButton.sd_setImage(
+                        with: URL(string: info.1),
+                        for: .normal,
+                        placeholderImage: UIImage(named: K.Images.pickProfileImage),
+                        options: .continueInBackground
+                    )
+                }
+
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { ($0.userNickname, $0.userId) }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, userInfo) in
+                self.userNicknameLabel.text =  "\(userInfo.0)\n(\(userInfo.1))"
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isVerified }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, isVerified) in
+                self.userVerifiedImage.image = isVerified ? Images.userVerifiedImage : Images.userUnVerifiedImage
+            })
+            .disposed(by: disposeBag)
+    
+        reactor.state
+            .map { $0.alertMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (_, alertMessage) in
+                self.showSimpleBottomAlert(with: alertMessage!)
+            }
+            .disposed(by: disposeBag)
+    }
+    
     private func configure() {
         
         createObserversForPresentingVerificationAlert()
         createObserversForGettingBadgeValue()
-        
-        viewModel.delegate = self
     }
+}
 
+extension MyPageViewController {
+    
+    func pushViewController(indexPath: IndexPath) {
+        var vc: UIViewController?
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                vc = MyPostsViewController(viewModel: PostListViewModel(postManager: PostManager(), chatManager: ChatManager(), userManager: UserManager(), popupService: PopupService(network: Network<PopupAPI>())))
+            case 1:
+                vc = AccountManagementViewController(userDefaultsGenericService: UserDefaultsGenericService.shared)
+            case 2:
+                vc = VerifyOptionViewController()
+            default: break
+            }
+            
+        case 1:
+            switch indexPath.row {
+            case 0:
+                vc = SendUsMessageViewController(reactor: SendUsMessageReactor())
+            case 1:
+                let url = URL(string: K.URL.termsAndConditionNotionURL)!
+                presentSafariView(with: url)
+            case 2:
+                let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
+                presentSafariView(with: url)
+            case 3:
+                vc = DeveloperInformationViewController()
+            default: break
+            }
+        default: break
+        }
+        if let vc = vc {
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 
 

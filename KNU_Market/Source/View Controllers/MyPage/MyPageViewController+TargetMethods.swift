@@ -12,9 +12,6 @@ import UIKit
 
 extension MyPageViewController {
     
-    @objc func pressedSettingsBarButtonItem() {
-        pushViewController(with: AccountManagementViewController(userDefaultsGenericService: UserDefaultsGenericService.shared))
-    }
     
     @objc func pressedProfileImageButton(_ sender: UIButton) {
         presentActionSheet()
@@ -27,7 +24,6 @@ extension MyPageViewController {
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
     }
-    
     
     func updateProfileImageButton(with image: UIImage) {
         profileImageButton.setImage(image, for: .normal)

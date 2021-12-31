@@ -56,7 +56,16 @@ struct UIHelper {
     // 마이페이지 NavController 생성
     private static func createMyPageNavigationController() -> UINavigationController {
         
-        let myPageVC = MyPageViewController(viewModel: MyPageViewModel(userManager: UserManager(), mediaManager: MediaManager()))
+        let myPageVC = MyPageViewController(
+            reactor: MyPageViewReactor(
+                userService: UserService(
+                    network: Network<UserAPI>(plugins: [AuthPlugin()]),
+                    userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)),
+                mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
+                userDefaultsGenericService: UserDefaultsGenericService.shared
+            )
+        )
+   
         myPageVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 0)
         let MyPageNavigationController = UINavigationController(rootViewController: myPageVC)
         

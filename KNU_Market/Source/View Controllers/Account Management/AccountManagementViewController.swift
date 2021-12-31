@@ -8,7 +8,7 @@ class AccountManagementViewController: BaseViewController {
     
     //MARK: - Properties
     
-    let userDefaultsGenericService: UserDefaultsGenericServiceProtocol
+    let userDefaultsGenericService: UserDefaultsGenericServiceType
     
     //MARK: - Constants
     
@@ -188,7 +188,7 @@ class AccountManagementViewController: BaseViewController {
     
     //MARK: - Init
     
-    init(userDefaultsGenericService: UserDefaultsGenericServiceProtocol) {
+    init(userDefaultsGenericService: UserDefaultsGenericServiceType) {
         self.userDefaultsGenericService = userDefaultsGenericService
         super.init()
     }

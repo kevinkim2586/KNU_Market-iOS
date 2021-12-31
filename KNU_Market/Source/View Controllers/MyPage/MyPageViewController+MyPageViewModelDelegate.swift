@@ -49,7 +49,6 @@ extension MyPageViewController: MyPageViewModelDelegate {
         showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
         initializeProfileImageButton()
         User.shared.profileImage = nil
-        
     }
     
     func failedUploadingImageToServerFirst(with error: NetworkError) {

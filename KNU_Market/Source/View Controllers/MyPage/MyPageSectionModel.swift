@@ -5,4 +5,24 @@
 //  Created by Kevin Kim on 2021/12/30.
 //
 
-import Foundation
+import UIKit
+import RxDataSources
+
+struct MyPageCellData {
+    let leftImageName: String
+    let title: String
+    let isNotificationBadgeHidden: Bool = true
+}
+
+struct MyPageSectionModel {
+    var header: String
+    var items: [MyPageCellData]
+}
+
+extension MyPageSectionModel: SectionModelType {
+    
+    init(original: MyPageSectionModel, items: [MyPageCellData]) {
+        self = original
+        self.items = items
+    }
+}

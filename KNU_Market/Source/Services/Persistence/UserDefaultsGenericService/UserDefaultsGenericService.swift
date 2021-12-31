@@ -8,7 +8,7 @@
 import UIKit
 import SwiftKeychainWrapper
 
-final class UserDefaultsGenericService: UserDefaultsGenericServiceProtocol {
+final class UserDefaultsGenericService: UserDefaultsGenericServiceType {
     
     static let shared: UserDefaultsGenericService = UserDefaultsGenericService()
     

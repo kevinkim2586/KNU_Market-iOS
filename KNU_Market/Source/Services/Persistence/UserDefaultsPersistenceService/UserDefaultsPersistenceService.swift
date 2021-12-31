@@ -8,11 +8,11 @@
 import Foundation
 import SwiftKeychainWrapper
 
-final class UserDefaultsPersistenceService: UserDefaultsPersistenceServiceProtocol {
+final class UserDefaultsPersistenceService: UserDefaultsPersistenceServiceType {
     
-    let userDefaultsGenericService: UserDefaultsGenericServiceProtocol
+    let userDefaultsGenericService: UserDefaultsGenericServiceType
     
-    init(userDefaultsGenericService: UserDefaultsGenericServiceProtocol) {
+    init(userDefaultsGenericService: UserDefaultsGenericServiceType) {
         self.userDefaultsGenericService = userDefaultsGenericService
     }
     
@@ -38,7 +38,7 @@ final class UserDefaultsPersistenceService: UserDefaultsPersistenceServiceProtoc
         userDefaultsGenericService.set(key: UserDefaults.Keys.userID, value: model.id)
         userDefaultsGenericService.set(key: UserDefaults.Keys.emailForPasswordLoss, value: model.emailForPasswordLoss)
         userDefaultsGenericService.set(key: UserDefaults.Keys.nickname, value: model.nickname)
-        userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: model.profileImageCode)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: model.profileImageUid)
         userDefaultsGenericService.set(key: UserDefaults.Keys.hasVerifiedEmail, value: model.isVerified)
     }
     

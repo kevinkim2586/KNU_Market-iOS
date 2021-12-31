@@ -14,9 +14,9 @@ import SwiftKeychainWrapper
 final class UserService: UserServiceType {
     
     fileprivate let network: Network<UserAPI>
-    fileprivate let userDefaultsPersistenceService: UserDefaultsPersistenceServiceProtocol
+    fileprivate let userDefaultsPersistenceService: UserDefaultsPersistenceServiceType
     
-    init(network: Network<UserAPI>, userDefaultsPersistenceService: UserDefaultsPersistenceServiceProtocol) {
+    init(network: Network<UserAPI>, userDefaultsPersistenceService: UserDefaultsPersistenceServiceType) {
         self.network = network
         self.userDefaultsPersistenceService = userDefaultsPersistenceService
     }

@@ -15,7 +15,6 @@ class MyPageViewController: BaseViewController, View {
     typealias Reactor = MyPageViewReactor
     
     //MARK: - Properties
-
     
     let dataSource = RxTableViewSectionedReloadDataSource<MyPageSectionModel>(
         configureCell: { dataSource, tableView, indexPath, item in
@@ -313,7 +312,7 @@ class MyPageViewController: BaseViewController, View {
     
         reactor.state
             .map { $0.alertMessage }
-            .filter { $0 != nil }
+            .compactMap { $0 }      // filter nil
             .withUnretained(self)
             .subscribe { (_, alertMessage) in
                 self.showSimpleBottomAlert(with: alertMessage!)
@@ -383,7 +382,6 @@ extension MyPageViewController {
         })
     }
 }
-
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
 

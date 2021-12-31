@@ -326,12 +326,11 @@ class AccountManagementViewController: BaseViewController {
                     message: ""
                 )
             }
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] actionType in
                 switch actionType {
                 case .ok:
-                    DispatchQueue.main.async {
-                        self?.popToLoginViewController()
-                    }
+                    self?.popToLoginViewController()
                 default: break
                 }
             })

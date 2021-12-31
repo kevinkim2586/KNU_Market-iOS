@@ -214,7 +214,7 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
                    encoding: URLEncoding.default,
                    headers: ["authentication": User.shared.accessToken])
             .validate(statusCode: 200..<300)
-            .responseJSON{res in
+            .responseJSON{ res in
                 do {
                     let model = try JSONDecoder().decode([InquiryListModel].self, from: res.data ?? Data())
                     self.inquiryModel.removeAll()

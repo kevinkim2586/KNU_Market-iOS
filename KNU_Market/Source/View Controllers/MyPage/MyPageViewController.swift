@@ -89,8 +89,7 @@ class MyPageViewController: BaseViewController, View {
     let userVerifiedImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
     }
-    
-    //수정
+
     let settingsTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.register(Reusable.myPageCell)
@@ -98,16 +97,12 @@ class MyPageViewController: BaseViewController, View {
     
     // UIBarButtonItems
     
-    //수정
-    lazy var myPageBarButtonItem: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        button.title = "마이페이지"
-        button.style = .done
-        button.tintColor = .black
-        return button
-    }()
+    let myPageBarButtonItem = UIBarButtonItem().then {
+        $0.title = "마이페이지"
+        $0.style = .done
+        $0.tintColor = .black
+    }
     
-    //수정
     let settingsBarButtonItem = UIBarButtonItem().then {
         if #available(iOS 14.0, *) {
             $0.image = UIImage(systemName: "gearshape")
@@ -224,7 +219,6 @@ class MyPageViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         settingsBarButtonItem.rx.tap
-            .asObservable()
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 let vc = AccountManagementViewController(userDefaultsGenericService: UserDefaultsGenericService.shared)
@@ -283,7 +277,7 @@ class MyPageViewController: BaseViewController, View {
             .subscribe(onNext: { (_, info) in
             
                 self.profileImageButton.sd_setImage(
-                    with: info.0 == "default" ? nil : URL(string: info.1),    // 어차피 "default"면 실행 X
+                    with: info.0 == "default" ? nil : URL(string: info.1),
                     for: .normal,
                     placeholderImage: UIImage(named: K.Images.pickProfileImage),
                     options: .continueInBackground

@@ -12,8 +12,6 @@ class MyPostsViewController: BaseViewController, View {
 
     //MARK: - Properties
     
-    private var viewModel: PostListViewModel!
-    
     //MARK: - Constants
         
     //MARK: - UI
@@ -79,7 +77,6 @@ class MyPostsViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
 
-    
         // Output
         
         reactor.state
@@ -88,7 +85,6 @@ class MyPostsViewController: BaseViewController, View {
                 cellIdentifier: PostTableViewCell.cellId,
                 cellType: PostTableViewCell.self)
             ) { indexPath, postList, cell in
-                self.postTableView.restoreEmptyView()
                 cell.configure(with: postList)
             }
             .disposed(by: disposeBag)

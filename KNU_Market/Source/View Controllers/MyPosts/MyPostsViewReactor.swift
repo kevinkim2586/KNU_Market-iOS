@@ -116,6 +116,7 @@ final class MyPostsViewReactor: Reactor {
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         state.errorMessage = nil
+        state.needsToShowEmptyView = false
         
         switch mutation {
 

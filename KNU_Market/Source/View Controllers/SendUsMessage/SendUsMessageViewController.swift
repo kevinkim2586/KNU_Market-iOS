@@ -330,11 +330,7 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
         reactor.state.map { $0.isLoading }.asObservable()
             .distinctUntilChanged()
             .subscribe(onNext: {
-                if $0 {
-                    showProgressBar()
-                } else {
-                    dismissProgressBar()
-                }
+                $0 ? showProgressBar() : dismissProgressBar()
             })
             .disposed(by: disposeBag)
         

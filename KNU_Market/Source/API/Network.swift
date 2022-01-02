@@ -42,10 +42,7 @@ extension Network {
         let decoder = type.decoder
         return request(target)
             .map { result in
-                print("✅ headers : \(target.headers)")
-                print("✅ result: \(result)")
                 let response = try? result.map([T].self, using: decoder)
-                print("✅ response: \(response)")
                 guard let response = response else {
                     return .error(NetworkError.returnError(json: result.data))
                 }

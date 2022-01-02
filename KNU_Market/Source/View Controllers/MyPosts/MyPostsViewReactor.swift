@@ -21,21 +21,21 @@ final class MyPostsViewReactor: Reactor {
     
     enum Mutation {
         case setPostList([PostListModel])
-        case resetPostList
+        case resetPostList([PostListModel])
         case setFetchingData(Bool)
         case incrementIndex
         case setNeedsToShowEmptyView(Bool)
+        case setNeedsToFetchMoreData(Bool)
         case setErrorMessage(String)
     }
     
     struct State {
-        
         var postList: [PostListModel] = []
-        
         var index: Int = 1
-        
         var isFetchingData: Bool = false
+
         var needsToShowEmptyView: Bool = false
+        var needsToFetchMoreData: Bool = true
         var errorMessage: String?
     }
     
@@ -49,10 +49,14 @@ final class MyPostsViewReactor: Reactor {
         switch action {
         case .fetchMyPosts:
             
-            print("✅ index: \(currentState.index)")
-            
+            guard currentState.needsToFetchMoreData == true, currentState.isFetchingData == false else {
+                return Observable.empty()
+            }
+        
             return Observable.concat([
+                
                 Observable.just(Mutation.setFetchingData(true)),
+                
                 self.postService.fetchPostList(
                     at: currentState.index,
                     fetchCurrentUsers: true,
@@ -62,22 +66,14 @@ final class MyPostsViewReactor: Reactor {
                     .map { result in
                         switch result {
                         case .success(let postListModel):
-                            
-                            print("✅ postListModel: \(postListModel)")
-                            
-                            if postListModel.isEmpty {
-                                return Mutation.setNeedsToShowEmptyView(true)
-                                
-                            }
-                            
-                            return Mutation.setPostList(postListModel)
+                            return postListModel.isEmpty
+                            ? Mutation.setNeedsToFetchMoreData(false)
+                            : Mutation.setPostList(postListModel)
                             
                         case .error(let error):
-                            let errorMessage = error == .E601
-                            ? "아직 작성하신 공구글이 없네요!\n첫 번째 공구글을 올려보세요!"
-                            : "오류가 발생했습니다!\n잠시 후 다시 시도해주세요."
-                            return Mutation.setNeedsToShowEmptyView(true)
-
+                            return error == .E601
+                            ? Mutation.setNeedsToShowEmptyView(true)
+                            : Mutation.setErrorMessage("오류가 발생했습니다!\n잠시 후 다시 시도해주세요.")
                         }
                     },
                 Observable.just(Mutation.incrementIndex),
@@ -85,16 +81,14 @@ final class MyPostsViewReactor: Reactor {
             ])
 
             
-            
         case .refresh:
-            
+        
             return Observable.concat([
-                
-                Observable.just(Mutation.resetPostList),
-                Observable.just(Mutation.setFetchingData(false)),
+            
+                Observable.just(Mutation.setFetchingData(true)),
                 
                 self.postService.fetchPostList(
-                    at: currentState.index,
+                    at: 1,
                     fetchCurrentUsers: true,
                     postFilterOption: .showAll
                 )
@@ -102,7 +96,7 @@ final class MyPostsViewReactor: Reactor {
                     .map { result in
                         switch result {
                         case .success(let postListModel):
-                            return Mutation.setPostList(postListModel)
+                            return Mutation.resetPostList(postListModel)
                             
                         case .error(let error):
                             let errorMessage = error == .E601
@@ -110,11 +104,11 @@ final class MyPostsViewReactor: Reactor {
                             : "오류가 발생했습니다!\n잠시 후 다시 시도해주세요."
                             return Mutation.setErrorMessage(errorMessage)
                         }
-                    }
+                    },
+                
+                Observable.just(Mutation.setFetchingData(false)),
+            
             ])
-            
-            
-            
         }
         
     }
@@ -126,28 +120,34 @@ final class MyPostsViewReactor: Reactor {
         switch mutation {
 
         case .setPostList(let postListModel):
-            print("✅ fetched posts: \(postListModel)")
             state.postList.append(contentsOf: postListModel)
             
-        case .resetPostList:
-            state.index = 0
+        case .resetPostList(let postListModel):
             state.postList.removeAll()
+            state.postList.append(contentsOf: postListModel)
             
         case .setFetchingData(let isFetchingData):
             state.isFetchingData = isFetchingData
-            
+
         case .incrementIndex:
             state.index += 1
             
+        case .setNeedsToFetchMoreData(let needsToFetchMoreData):
+            state.needsToFetchMoreData = needsToFetchMoreData
+            
         case .setNeedsToShowEmptyView(let showEmptyView):
             state.needsToShowEmptyView = showEmptyView
+            state.needsToFetchMoreData = false
+            state.isFetchingData = false
             
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
+            state.isFetchingData = false
+            state.needsToFetchMoreData = false
         }
-        
+            
         return state
     }
-    
-    
 }
+
+

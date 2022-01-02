@@ -22,10 +22,12 @@ extension PostAPI: BaseAPI {
     
     var path: String {
         switch self {
-        case let .fetchPostList(index, fetchCurrentUsers, _):
-            return fetchCurrentUsers == true
-            ? "posts/me?page=\(index)"
-            : "posts?page=\(index)"
+        case .fetchPostList:
+            // parameter query string 이니까 변경
+            return "posts/me"
+//            return fetchCurrentUsers == true
+//            ? "posts/me?page=\(index)"
+//            : "posts?page=\(index)"
         case .uploadNewPost:
             return "posts"
         case let .updatePost(uid, _), let .fetchPostDetails(uid), let .deletePost(uid):
@@ -71,6 +73,8 @@ extension PostAPI: BaseAPI {
                 "keyword" : keyword,
                 "page" : index
             ]
+        case let .fetchPostList(index: index, _, _):
+            return [ "page" : index ]
         default: return nil
         }
     }
@@ -78,7 +82,7 @@ extension PostAPI: BaseAPI {
     
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case .fetchSearchResults:
+        case .fetchSearchResults, .fetchPostList:
             return URLEncoding.queryString
         default:
             return JSONEncoding.default

@@ -17,12 +17,12 @@ final class PostService: PostServiceType {
     }
     
     func fetchPostList(at index: Int, fetchCurrentUsers: Bool, postFilterOption: PostFilterOptions) -> Single<NetworkResultWithArray<PostListModel>> {
-        
-        return network.requestObject(.fetchPostList(index: index, fetchCurrentUsers: fetchCurrentUsers, postFilterOption: postFilterOption), type: PostListModel.self)
+                
+        return network.requestArray(.fetchPostList(index: index, fetchCurrentUsers: fetchCurrentUsers, postFilterOption: postFilterOption), type: PostListModel.self)
             .map { result in
                 switch result {
                 case .success(let postListModel):
-                    return .success([postListModel])
+                    return .success(postListModel)
                 case .error(let error):
                     return .error(error)
                 }

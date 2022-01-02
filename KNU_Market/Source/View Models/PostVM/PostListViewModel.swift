@@ -33,7 +33,6 @@ class PostListViewModel {
     private var popupService: PopupServiceType
     
     var disposeBag = DisposeBag()
-   
     
     weak var delegate: PostListViewModelDelegate?
     

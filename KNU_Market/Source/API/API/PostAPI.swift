@@ -40,9 +40,9 @@ extension PostAPI: BaseAPI {
     var headers: [String : String]? {
         switch self {
         case let .fetchPostList(_, _, postFilterOptions):
-            return postFilterOptions == .showGatheringFirst
-            ? ["withoutcomplete" : "1"]
-            : nil
+            if postFilterOptions == .showGatheringFirst {
+                return ["withoutcomplete" : "1"]
+            } else { fallthrough }
         default: return ["Content-Type" : "application/json"]
         }
     }
@@ -87,7 +87,6 @@ extension PostAPI: BaseAPI {
     
     var task: Task {
         switch self {
-            
         default:
             if let parameters = parameters {
                 return .requestParameters(parameters: parameters, encoding: parameterEncoding)

@@ -306,7 +306,7 @@ class MyPageViewController: BaseViewController, View {
     
         reactor.state
             .map { $0.alertMessage }
-            .compactMap { $0 }      // filter nil
+            .filter { $0 != nil }
             .withUnretained(self)
             .subscribe { (_, alertMessage) in
                 self.showSimpleBottomAlert(with: alertMessage!)
@@ -328,7 +328,7 @@ extension MyPageViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                vc = MyPostsViewController(viewModel: PostListViewModel(postManager: PostManager(), chatManager: ChatManager(), userManager: UserManager(), popupService: PopupService(network: Network<PopupAPI>())))
+                vc = MyPostsViewController(reactor: MyPostsViewReactor(postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()]))))
             case 1:
                 vc = AccountManagementViewController(userDefaultsGenericService: UserDefaultsGenericService.shared)
             case 2:

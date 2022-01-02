@@ -19,7 +19,6 @@ final class MyPageViewReactor: Reactor {
     let userDefaultsGenericService: UserDefaultsGenericServiceType
     
     enum Action {
-        
         case viewDidLoad
         case viewWillAppear
         case viewDidAppear
@@ -30,15 +29,12 @@ final class MyPageViewReactor: Reactor {
     }
     
     enum Mutation {
-        
         case setUserProfile(Bool? = nil, String)       // isReportChecked, profileImageUid
         case updateProfileImageUid(String)             // profileImageUid
         case setProfileImageUidToDefault
         case setSelectedCellIndexPath(IndexPath)
-        
         case setAlertMessage(String)
         case empty
-        
     }
     
     struct State {

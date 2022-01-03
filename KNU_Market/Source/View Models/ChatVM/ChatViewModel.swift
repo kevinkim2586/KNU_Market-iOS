@@ -271,6 +271,8 @@ extension ChatViewModel {
     @objc func getPreviousChats() {
         self.isFetchingData = true
         
+        print("✅ getPreviousChats..")
+        
         ChatManager.shared.getResponseModel(
             function: .getChat,
             method: .get,
@@ -365,7 +367,7 @@ extension ChatViewModel {
     
     //마지막 채팅 이후부터 새로운 채팅 가져오기
     @objc func getChatFromLastIndex() {
-        print("✏️ getChatFromLastIndex...")
+        print("✅ getChatFromLastIndex")
         if messages.count == 0 {
             delegate?.failedFetchingPreviousChats(with: .E000)
             return

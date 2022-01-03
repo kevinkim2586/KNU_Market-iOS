@@ -80,9 +80,7 @@ final class MyPostsViewReactor: Reactor {
             ])
             
         case .refresh:
-            
-            print("✅ refresh")
-        
+                    
             return Observable.concat([
             
                 Observable.just(Mutation.setFetchingData(true)),

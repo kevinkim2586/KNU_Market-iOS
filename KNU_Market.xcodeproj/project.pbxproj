@@ -122,6 +122,7 @@
 		7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668826E756B30060F37B /* FilteredChat.swift */; };
 		7C8E668B26E756C00060F37B /* ChatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668A26E756C00060F37B /* ChatType.swift */; };
 		7C8E668D26E875A00060F37B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668C26E875A00060F37B /* UIImageView+Extension.swift */; };
+		7C8E82D02782D10E002F7CFB /* ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82CF2782D10E002F7CFB /* ChatAPI.swift */; };
 		7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */; };
 		7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */; };
 		7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5A27182A3400295A3F /* BaseViewController.swift */; };
@@ -365,6 +366,7 @@
 		7C8E668826E756B30060F37B /* FilteredChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredChat.swift; sourceTree = "<group>"; };
 		7C8E668A26E756C00060F37B /* ChatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatType.swift; sourceTree = "<group>"; };
 		7C8E668C26E875A00060F37B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		7C8E82CF2782D10E002F7CFB /* ChatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPI.swift; sourceTree = "<group>"; };
 		7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOptionViewController.swift; sourceTree = "<group>"; };
 		7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInformationViewController.swift; sourceTree = "<group>"; };
 		7C922A5A27182A3400295A3F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -534,12 +536,13 @@
 			isa = PBXGroup;
 			children = (
 				625B0E3E2741F75C003968BA /* BaseAPI.swift */,
-				625B0E3C2741F741003968BA /* MyPageAPI.swift */,
 				7CEAC991275F7AFF005AF338 /* UserAPI.swift */,
 				7CC69A752767027C00105FC0 /* PostAPI.swift */,
+				7C8E82CF2782D10E002F7CFB /* ChatAPI.swift */,
 				7CC69A7727670A0F00105FC0 /* MediaAPI.swift */,
 				7CC69A7927670CF200105FC0 /* ReportAPI.swift */,
 				7CC69A7B27670E3B00105FC0 /* PopupAPI.swift */,
+				625B0E3C2741F741003968BA /* MyPageAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1623,6 +1626,7 @@
 				626AC5B227324C1200E907E8 /* CGFloatLiteral.swift in Sources */,
 				625B0E2C2741DED7003968BA /* ModelType.swift in Sources */,
 				7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */,
+				7C8E82D02782D10E002F7CFB /* ChatAPI.swift in Sources */,
 				7C3B4FF426A928DD00E2CA8F /* CongratulateUserViewController.swift in Sources */,
 				7C3B4FF026A928C700E2CA8F /* EmailVerificationViewController.swift in Sources */,
 				7CF369D72754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift in Sources */,

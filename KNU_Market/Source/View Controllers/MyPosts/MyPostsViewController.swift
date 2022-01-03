@@ -132,6 +132,7 @@ class MyPostsViewController: BaseViewController, View {
         
         reactor.state
             .map { $0.isFetchingData }
+            .distinctUntilChanged()
             .filter { $0 == false }
             .withUnretained(self)
             .subscribe(onNext: { _ in

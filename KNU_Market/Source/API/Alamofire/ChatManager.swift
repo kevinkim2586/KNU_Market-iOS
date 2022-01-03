@@ -2,14 +2,6 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-enum ChatFunction {
-    case join
-    case exit
-    case getRoom
-    case getRoomInfo
-    case getChat
-}
-
 class ChatManager {
     
     static let shared: ChatManager = ChatManager()

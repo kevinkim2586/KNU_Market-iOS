@@ -22,12 +22,11 @@ extension PostAPI: BaseAPI {
     
     var path: String {
         switch self {
-        case .fetchPostList:
-            // parameter query string 이니까 변경
-            return "posts/me"
-//            return fetchCurrentUsers == true
-//            ? "posts/me?page=\(index)"
-//            : "posts?page=\(index)"
+     
+        case let .fetchPostList(_, fetchCurrentUsers, _):
+            return fetchCurrentUsers == true
+            ? "posts/me"
+            : "posts"
         case .uploadNewPost:
             return "posts"
         case let .updatePost(uid, _), let .fetchPostDetails(uid), let .deletePost(uid):

@@ -25,7 +25,6 @@ final class MyPageViewReactor: Reactor {
         case updateProfileImage(UIImage)               // User selected image
         case removeProfileImage
         case cellSelected(IndexPath)
-        case empty
     }
     
     enum Mutation {
@@ -34,7 +33,6 @@ final class MyPageViewReactor: Reactor {
         case setProfileImageUidToDefault
         case setSelectedCellIndexPath(IndexPath)
         case setAlertMessage(String)
-        case empty
     }
     
     struct State {
@@ -104,7 +102,7 @@ final class MyPageViewReactor: Reactor {
 
         case .viewWillAppear:
             NotificationCenter.default.post(name: .getBadgeValue, object: nil)
-            return Observable.just(Mutation.empty)
+            return Observable.empty()
             
         case .viewDidAppear:
             return loadUserProfile()
@@ -153,9 +151,6 @@ final class MyPageViewReactor: Reactor {
             
         case .cellSelected(let indexPath):
             return Observable.just(Mutation.setSelectedCellIndexPath(indexPath))
-            
-        case .empty:
-            return Observable.just(Mutation.empty)
         }
     }
     
@@ -185,9 +180,6 @@ final class MyPageViewReactor: Reactor {
             
         case .setAlertMessage(let alertMessage):
             state.alertMessage = alertMessage
-            
-        case .empty:
-            break
         }
         return state
     }

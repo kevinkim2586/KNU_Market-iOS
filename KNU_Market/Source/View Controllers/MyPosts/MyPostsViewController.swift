@@ -115,6 +115,7 @@ class MyPostsViewController: BaseViewController, View {
                 guard self.postTableView.frame.height > 0 else { return false }
                 return offset.y + self.postTableView.frame.height >= self.postTableView.contentSize.height - 100
             }
+            .filter { _ in reactor.currentState.isFetchingData == false }
             .filter { _ in reactor.currentState.needsToFetchMoreData == true }
             .map { _ in Reactor.Action.fetchMyPosts }
             .bind(to: reactor.action)
@@ -131,7 +132,12 @@ class MyPostsViewController: BaseViewController, View {
         
         reactor.state
             .map { $0.isFetchingData }
-            .bind(to: refreshControl.rx.isRefreshing )
+            .filter { $0 == false }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.refreshControl.endRefreshing()
+        
+            })
             .disposed(by: disposeBag)
         
         reactor.state
@@ -150,7 +156,6 @@ class MyPostsViewController: BaseViewController, View {
                 }
             })
             .disposed(by: disposeBag)
-
     }
 }
 

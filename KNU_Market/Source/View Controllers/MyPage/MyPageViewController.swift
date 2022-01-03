@@ -239,8 +239,7 @@ class MyPageViewController: BaseViewController, View {
                     self.presentImagePicker()
                 case .remove:
                     reactor.action.onNext(Reactor.Action.removeProfileImage)
-                default:
-                    reactor.action.onNext(Reactor.Action.empty)
+                default: break
                 }
             })
             .disposed(by: disposeBag)
@@ -282,9 +281,7 @@ class MyPageViewController: BaseViewController, View {
                     placeholderImage: UIImage(named: K.Images.pickProfileImage),
                     options: .continueInBackground
                 )
-                if info.0 != "default" {
-                    self.profileImageButton.layer.masksToBounds = true
-                }
+                self.profileImageButton.layer.masksToBounds = info.0 != "default" ? true : false
             })
             .disposed(by: disposeBag)
         

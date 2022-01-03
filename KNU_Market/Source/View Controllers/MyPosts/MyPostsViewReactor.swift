@@ -49,9 +49,8 @@ final class MyPostsViewReactor: Reactor {
         switch action {
         case .fetchMyPosts:
             
-            guard currentState.needsToFetchMoreData == true, currentState.isFetchingData == false else {
-                return Observable.empty()
-            }
+            guard currentState.needsToFetchMoreData == true else { return Observable.empty() }
+            guard currentState.isFetchingData == false else { return Observable.empty() }
         
             return Observable.concat([
                 
@@ -79,16 +78,17 @@ final class MyPostsViewReactor: Reactor {
                 Observable.just(Mutation.incrementIndex),
                 Observable.just(Mutation.setFetchingData(false))
             ])
-
             
         case .refresh:
+            
+            print("✅ refresh")
         
             return Observable.concat([
             
                 Observable.just(Mutation.setFetchingData(true)),
                 
                 self.postService.fetchPostList(
-                    at: 1,
+                    at: 1,                          // 최초 Index는 1
                     fetchCurrentUsers: true,
                     postFilterOption: .showAll
                 )
@@ -107,10 +107,8 @@ final class MyPostsViewReactor: Reactor {
                     },
                 
                 Observable.just(Mutation.setFetchingData(false)),
-            
             ])
         }
-        
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
@@ -146,7 +144,6 @@ final class MyPostsViewReactor: Reactor {
             state.isFetchingData = false
             state.needsToFetchMoreData = false
         }
-            
         return state
     }
 }

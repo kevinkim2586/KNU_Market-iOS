@@ -9,89 +9,10 @@ struct K {
     static let MEDIA_REQUEST_URL                = "https://knumarket.kro.kr:5051/api/v1/media/"
     
     //MARK: - Identifiers
-    
-    struct SegueID {
-        
-        // UserRegister Segues
-        static let goToRegister                 = "goToRegister"
-        static let goToPasswordInputVC          = "goToPasswordInputVC"
-        static let goToNicknameInputVC          = "goToNicknameInputVC"
-        static let goToEmailForLostPwVC         = "goToEmailForLostPwVC"
-
-        
-        // Chat
-        static let presentChatMemberVC          = "presentChatMemberVC"
-
-        
-        static let goToReportVC                 = "goToReportVC"
-        
-    }
-    
-    struct StoryboardID {
-        
-        // Register  & Login
-        static let initialNavigationController  = "InitialNavigationController"
-        static let emailInputVC                 = "EmailInputViewController"
-        static let checkEmailVC                 = "CheckEmailViewController"
-        static let emailForLostPWVC             = "EmailForLostPasswordViewController"
-        static let registerVC                   = "RegisterViewController"
-        static let congratulateUserVC           = "CongratulateViewController"
-        static let registerNavigationController = "RegisterNavigationController"
-        static let findPasswordVC               = "FindPasswordViewController"
-        static let studentIDGuideVC             = "StudentIDGuideViewController"
-        static let captureStudentIDVC           = "CaptureStudentIDViewController"
-    
-        
-        // Find User Info
-        static let chooseVerificationOptionVC   = "ChooseVerificationOptionVC"
-        static let findIdUsingWebMailVC         = "FindIdUsingWebMailViewController"
-        static let findIdUsingStudentIdVC       = "FindIdUsingStudentIdViewController"
-        
-        // Home & Post Tab
-        static let tabBarController             = "TabBarController"
-        static let searchPostVC                 = "SearchPostViewController"
-        
-        // Chat Tab
-        static let chatVC                       = "ChatViewController"
-        static let chatMemberVC                 = "ChatMemberViewController"
-        static let imageVC                      = "ImageViewController"
-        
-        // My Page Tab
-        static let myPostsVC                    = "MyPostsViewController"
-        static let settingsVC                   = "SettingsViewController"
-        static let verifyOptionVC               = "VerifyOptionViewController"
-        static let unregisterInputPwVC          = "UnregisterUser_InputPWVC"
-        static let unregisterUserInputSuggestVC = "UnregisterUser_InputSuggestionViewController"
-        static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"
-        static let termsAndConditionsVC         = "TermsAndConditionViewController"
-        static let developerInfoVC              = "DeveloperInfoViewController"
-        static let openSourceLicenseVC          = "OpenSourceLicenseViewController"
-        
-        // Others
-        static let reportUserVC                 = "ReportUserViewController"
-        static let verifyEmailVC                = "VerifyEmailViewController"
-        
-        
-        // My Page UITableView ID Array
-        static let myPageSection_1_Options      = [myPostsVC, settingsVC, verifyOptionVC]
-        static let myPageSection_2_Options      = [sendDeveloperMessageVC, termsAndConditionsVC, openSourceLicenseVC, developerInfoVC]
-
-    }
-    
-    struct cellID {
-
-        static let chatTableViewCell            = "chatTableViewCell"
-        static let sendCell                     = "sendCell"
-        static let receiveCell                  = "receiveCell"
-        static let myPageCell                   = "myPageCell"
-        static let chatMemberCell               = "chatMemberCell"
-    }
-    
 
     //MARK: - Keys
     
     struct KeyChainKey {
-        
         static let accessToken                  = "accessToken"
         static let refreshToken                 = "refreshToken"
     }

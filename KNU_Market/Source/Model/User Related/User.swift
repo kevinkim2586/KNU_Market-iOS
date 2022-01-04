@@ -144,12 +144,14 @@ class User {
     
     
     // 내가 참여하고 있는 채팅방 PID 배열
+    // PID == Post ID (각 공구글에 해당하는 고유 Id값)
     var joinedChatRoomPIDs: [String] {
         get {
             return UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.joinedChatRoomPIDs) ?? [String]()
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.joinedChatRoomPIDs)
+            print("✅ joinedChatRoomPid: \(newValue)")
         }
     }
 

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Room: Decodable {
+struct Room: ModelType {
     
     let uuid: String
     let title: String

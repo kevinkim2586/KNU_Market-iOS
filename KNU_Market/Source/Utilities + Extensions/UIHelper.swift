@@ -40,8 +40,15 @@ struct UIHelper {
     
     // 채팅 NavController 생성
     private static func createChatNavigationController() -> UINavigationController {
+//        let chatListVC = ChatListViewController(
+//            viewModel: ChatListViewModel(chatManager: ChatManager(), postManager: PostManager())
+//        )
+        
         let chatListVC = ChatListViewController(
-            viewModel: ChatListViewModel(chatManager: ChatManager(), postManager: PostManager())
+            reactor: ChatListViewReactor(
+                chatListService: ChatListService(network: Network<ChatAPI>(plugins: [AuthPlugin()])),
+                userDefaultsGenericService: UserDefaultsGenericService.shared
+            )
         )
         
         chatListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)

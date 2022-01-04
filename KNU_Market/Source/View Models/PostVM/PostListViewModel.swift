@@ -114,9 +114,7 @@ class PostListViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let chatRoom):
-                chatRoom.forEach { chat in
-                    User.shared.joinedChatRoomPIDs.append(chat.uuid)
-                }
+                User.shared.joinedChatRoomPIDs = chatRoom.map { $0.uuid }
             case .failure(let error):
                 self.delegate?.failedFetchingRoomPIDInfo(with: error)
             }
@@ -170,7 +168,6 @@ class PostListViewModel {
     }
     
     func resetValues() {
-        User.shared.joinedChatRoomPIDs.removeAll()
         postList.removeAll()
         isFetchingData = false
         index = 1

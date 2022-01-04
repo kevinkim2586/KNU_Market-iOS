@@ -1,45 +1,43 @@
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import Then
+import ReactorKit
 
-class ChatListViewController: BaseViewController {
+class ChatListViewController: BaseViewController, View {
     
     //MARK: - Properties
     
     var viewModel: ChatListViewModel!
     
+    typealias Reactor = ChatListViewReactor
+    
     //MARK: - UI
     
-    lazy var chatListTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.separatorColor = .clear
-        tableView.tableFooterView = UIView(frame: .zero)
-        tableView.register(
+    let chatListTableView = UITableView().then {
+        $0.separatorStyle = .none
+        $0.separatorColor = .clear
+        $0.register(
             ChatListTableViewCell.self,
             forCellReuseIdentifier: ChatListTableViewCell.cellId
         )
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(
-            self,
-            action: #selector(refreshTableView),
-            for: .valueChanged
-        )
-        return tableView
-    }()
+    }
     
-    lazy var chatBarButtonItem: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        button.title = "채팅"
-        button.style = .done
-        button.tintColor = .black
-        button.target = self
-        button.action = #selector(pressedChatBarButtonItem)
-        return button
-    }()
+    let chatBarButtonItem = UIBarButtonItem().then {
+        $0.title = "채팅"
+        $0.style = .done
+        $0.tintColor = .black
+    }
+    
+    let refreshControl = UIRefreshControl()
     
     //MARK: - Initialization
+    
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
+    }
     
     init(viewModel: ChatListViewModel) {
         super.init()
@@ -57,39 +55,21 @@ class ChatListViewController: BaseViewController {
         configure()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        UIApplication.shared.applicationIconBadgeNumber = User.shared.chatNotificationList.count
-        let center = UNUserNotificationCenter.current()
-        center.removeAllDeliveredNotifications()
-        
-        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
-        chatListTableView.refreshControl?.beginRefreshing()
-        viewModel.fetchChatList()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        chatListTableView.refreshControl?.endRefreshing()
-    }
     
     //MARK: - UI Setup
     
     override func setupLayout() {
         super.setupLayout()
-        
         navigationItem.leftBarButtonItem = chatBarButtonItem
         view.addSubview(chatListTableView)
     }
     
     override func setupConstraints() {
         super.setupConstraints()
-        
-        chatListTableView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        chatListTableView.snp.makeConstraints {
+            $0.left.right.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
     
@@ -99,9 +79,93 @@ class ChatListViewController: BaseViewController {
     }
     
     private func configure() {
+
         createObserversForGettingBadgeValue()
-        viewModel.delegate = self
+        chatListTableView.refreshControl = refreshControl
+    }
+    
+    //MARK: - Binding
+    
+    func bind(reactor: ChatListViewReactor) {
+        
+        // Input
+        
+        self.rx.viewWillAppear
+            .map { _ in Reactor.Action.getChatList }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        chatListTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        refreshControl.rx.controlEvent(.valueChanged)
+            .map { Reactor.Action.getChatList }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        chatBarButtonItem.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                
+                if reactor.currentState.roomList.count != 0 {
+                    let topRow = IndexPath(row: 0, section: 0)
+                    self.chatListTableView.scrollToRow(at: topRow, at: .top, animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // Output
+        
+        reactor.state
+            .map { $0.roomList }
+            .bind(to: chatListTableView.rx.items(
+                cellIdentifier: ChatListTableViewCell.cellId,
+                cellType: ChatListTableViewCell.self)
+            ) { indexPath, chatList, cell in
+                cell.configure(with: chatList)
+            }
+            .disposed(by: disposeBag)
+        
+        chatListTableView.rx.itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: { (_, indexPath) in
+                
+                self.chatListTableView.deselectRow(at: indexPath, animated: true)
+                
+                let chatVC = ChatViewController()
+                chatVC.roomUID = reactor.currentState.roomList[indexPath.row].uuid
+                chatVC.chatRoomTitle = reactor.currentState.roomList[indexPath.row].title
+                chatVC.postUploaderUID = reactor.currentState.roomList[indexPath.row].userUID
+                self.navigationController?.pushViewController(chatVC, animated: true)
+                
+                if let index = ChatNotifications.list.firstIndex(of: reactor.currentState.roomList[indexPath.row].uuid) {
+                    ChatNotifications.list.remove(at: index)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isFetchingData }
+            .distinctUntilChanged()
+            .bind(to: refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.needsToShowEmptyView }
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .subscribe(onNext: { (_, needsToShowEmptyView) in
+
+                if needsToShowEmptyView {
+                    self.chatListTableView.showEmptyView(
+                        imageName: K.Images.emptyChatList,
+                        text: "아직 활성화된 채팅방이 없네요!\n새로운 공구에 참여해보세요 :)"
+                    )
+                } else {
+                    self.chatListTableView.restoreEmptyView()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
-
 

@@ -37,29 +37,6 @@ extension ChatListViewController: ChatListViewModelDelegate {
         }
     }
     
-    func didExitPost(at indexPath: IndexPath) {
-        chatListTableView.deleteRows(at: [indexPath], with: .fade)
-        NotificationCenter.default.post(
-            name: .updatePostList,
-            object: nil
-        )
-    }
-    
-    func failedExitingPost(with error: NetworkError) {
-        showSimpleBottomAlert(with: "채팅방 나가기에 실패했습니다. 나중에 다시 시도해주세요.😥")
-    }
-    
-    func didDeleteAndExitPost(at indexPath: IndexPath) {
-        chatListTableView.deleteRows(at: [indexPath], with: .fade)
-        NotificationCenter.default.post(
-            name: .updatePostList,
-            object: nil
-        )
-    }
-    
-    func failedDeletingAndExitingPost(with error: NetworkError) {
-        showSimpleBottomAlert(with: "공구 삭제 및 채팅방 나가기에 실패했습니다. 나중에 다시 시도해주세요.😥")
-    }
 
     
 }

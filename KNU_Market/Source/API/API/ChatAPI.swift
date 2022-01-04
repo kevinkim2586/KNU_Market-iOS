@@ -46,7 +46,6 @@ extension ChatAPI: BaseAPI {
     var headers: [String : String]? {
         
         switch self {
-            
         case let .getNewlyReceivedChats(_, _, lastChatDate):
             return [
                 "isover": "1",
@@ -75,23 +74,18 @@ extension ChatAPI: BaseAPI {
     
     var parameters: [String : Any]? {
         switch self {
-            
         default: return nil
         }
     }
     
     var parameterEncoding: ParameterEncoding {
         switch self {
-            
         default: return JSONEncoding.default
-            
         }
     }
     
     var task: Task {
-        
         switch self {
-            
         default:
             if let parameters = parameters {
                 return .requestParameters(parameters: parameters, encoding: parameterEncoding)

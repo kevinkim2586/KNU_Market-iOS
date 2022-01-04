@@ -80,49 +80,7 @@ extension ChatListViewModel {
             }
         }
     }
-    
-    
-    // 공구 나가기
-    func exitPost(at indexPath: IndexPath) {
-        
-        let roomPID = roomList[indexPath.row].uuid
-        
-        chatManager.changeJoinStatus(
-            function: .exit,
-            pid: roomPID
-        ) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success:
-                self.roomList.remove(at: indexPath.row)
-                self.delegate?.didExitPost(at: indexPath)
-                
-            case .failure(let error):
-                self.delegate?.failedExitingPost(with: error)
-            }
-        }
-        
-    }
-    
-    // 공구 삭제 -> 내가 작성한 공구글이면 삭제와 동시에 채팅방도 모두 폭파
-    func deleteMyPostAndExit(at indexPath: IndexPath) {
-        
-        let roomPID = self.roomList[indexPath.row].uuid
-        
-        postManager.deletePost(uid: roomPID) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                self.roomList.remove(at: indexPath.row)
-                self.delegate?.didDeleteAndExitPost(at: indexPath)
-                
-            case .failure(let error):
-                
-                self.delegate?.failedDeletingAndExitingPost(with: error)
-            }
-        }
-    }
+
 }
 
 //MARK: - Utility Methods

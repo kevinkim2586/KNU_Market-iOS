@@ -174,13 +174,7 @@ class ChatListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         
-//        NotificationCenter.default.rx.notification(.updateChatList)
-//            .withUnretained(self)
-//            .subscribe(onNext: { _ in
-//                self.reactor.ac
-//                self.configureChatTabBadgeCount()
-//            })
-//            .disposed(by: disposeBag)
+
     }
 }
 

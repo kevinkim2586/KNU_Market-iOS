@@ -158,7 +158,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         )
         
         NotificationCenter.default.post(
-            name: .getBadgeValue,
+            name: .configureChatTabBadgeCount,
             object: nil
         )
         completionHandler([[.alert, .sound, .badge]])
@@ -195,7 +195,8 @@ extension AppDelegate {
                     key: UserDefaults.Keys.notificationList,
                     value: previouslySavedChatNotifications
                 )
-                NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+                NotificationCenter.default.post(name: .configureChatTabBadgeCount, object: nil)
+                NotificationCenter.default.post(name: .updateChatList, object: nil)
             }
         }
     }

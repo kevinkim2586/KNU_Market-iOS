@@ -32,8 +32,8 @@ extension UIViewController {
     func createObserversForGettingBadgeValue() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(getChatTabBadgeValue),
-            name: .getBadgeValue,
+            selector: #selector(configureChatTabBadgeCount),
+            name: .configureChatTabBadgeCount,
             object: nil
         )
     }

@@ -49,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             object: nil
         )
         NotificationCenter.default.post(
-            name: .getBadgeValue,
+            name: .configureChatTabBadgeCount,
             object: nil
         )
     }
@@ -91,7 +91,8 @@ extension SceneDelegate {
             )
         }
     
-        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+        NotificationCenter.default.post(name: .configureChatTabBadgeCount, object: nil)
+        NotificationCenter.default.post(name: .updateChatList, object: nil)
 
         
     }

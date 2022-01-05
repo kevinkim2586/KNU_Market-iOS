@@ -54,12 +54,11 @@ final class ChatListViewReactor: Reactor {
         switch action {
     
         case .getChatList:
-            NotificationService.getBadgeValue.post(object: nil)
+            NotificationService.configureChatTabBadgeCount.post(object: nil)
 
             guard currentState.isFetchingData == false else { return Observable.empty() }
             
-            guard let chatNotificationList: [String] = userDefaultsGenericService.get(key: UserDefaults.Keys.notificationList)
-            else { return Observable.empty() }
+            let chatNotificationList: [String] = userDefaultsGenericService.get(key: UserDefaults.Keys.notificationList) ?? []
             
             return Observable.concat([
                 
@@ -103,7 +102,7 @@ final class ChatListViewReactor: Reactor {
                     key: UserDefaults.Keys.notificationList,
                     value: currentChatNotificationList
                 )
-                NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+                NotificationCenter.default.post(name: .configureChatTabBadgeCount, object: nil)
             }
             return Observable.empty()
         }

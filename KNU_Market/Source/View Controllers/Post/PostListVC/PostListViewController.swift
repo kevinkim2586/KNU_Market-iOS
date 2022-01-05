@@ -109,7 +109,7 @@ class PostListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.post(
-            name: .getBadgeValue,
+            name: .configureChatTabBadgeCount,
             object: nil
         )
     }

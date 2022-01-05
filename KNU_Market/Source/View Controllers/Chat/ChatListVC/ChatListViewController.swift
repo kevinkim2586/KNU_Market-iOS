@@ -132,8 +132,6 @@ class ChatListViewController: BaseViewController, View {
                 chatVC.chatRoomTitle = reactor.currentState.roomList[indexPath.row].title
                 chatVC.postUploaderUID = reactor.currentState.roomList[indexPath.row].userUID
                 self.navigationController?.pushViewController(chatVC, animated: true)
-                
-
             })
             .disposed(by: disposeBag)
         
@@ -161,14 +159,28 @@ class ChatListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         
-        // Notification Center]
+        // Notification Center
         
-        NotificationCenter.default.rx.notification(.getBadgeValue)
+        NotificationCenter.default.rx.notification(.configureChatTabBadgeCount)
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.getChatTabBadgeValue()
+                self.configureChatTabBadgeCount()
             })
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.updateChatList)
+            .map { _ in Reactor.Action.getChatList }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        
+//        NotificationCenter.default.rx.notification(.updateChatList)
+//            .withUnretained(self)
+//            .subscribe(onNext: { _ in
+//                self.reactor.ac
+//                self.configureChatTabBadgeCount()
+//            })
+//            .disposed(by: disposeBag)
     }
 }
 

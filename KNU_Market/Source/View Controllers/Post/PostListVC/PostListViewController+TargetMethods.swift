@@ -63,6 +63,7 @@ extension PostListViewController {
             name: .updatePostList,
             object: nil
         )
+
         createObserversForGettingBadgeValue()
         createObserversForRefreshTokenExpiration()
         createObserversForUnexpectedErrors()

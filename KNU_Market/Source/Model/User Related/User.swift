@@ -161,6 +161,10 @@ class User {
             let list = UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.notificationList) ?? [String]()
             return list
         }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.notificationList)
+            print("✅ chatNotificationList: \(newValue)")
+        }
     }
     
     var bannedPostUploaders: [String] {

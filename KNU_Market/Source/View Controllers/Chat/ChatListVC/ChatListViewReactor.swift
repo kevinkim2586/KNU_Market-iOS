@@ -18,10 +18,10 @@ final class ChatListViewReactor: Reactor {
     enum Action {
         case getChatList
         case viewDidDisappear
+        case removeChatNotification(IndexPath)
     }
     
     enum Mutation {
-        
         case setChatList([Room])
         case setApplicationIconBadgeNumber(Int)
         case removeAllDeliveredNotifications
@@ -49,14 +49,13 @@ final class ChatListViewReactor: Reactor {
         self.initialState = State()
     }
     
-    
     func mutate(action: Action) -> Observable<Mutation> {
         
         switch action {
+    
         case .getChatList:
-        
-            NotificationCenter.default.post(name: .getBadgeValue, object: nil)
-            
+            NotificationService.getBadgeValue.post(object: nil)
+
             guard currentState.isFetchingData == false else { return Observable.empty() }
             
             guard let chatNotificationList: [String] = userDefaultsGenericService.get(key: UserDefaults.Keys.notificationList)
@@ -73,13 +72,15 @@ final class ChatListViewReactor: Reactor {
                     .map { result in
                         switch result {
                         case .success(let rooms):
-                            
+                        
                             // 참여하고 있는 공구 리스트 값 User Defaults에 저장
                             self.userDefaultsGenericService.set(
                                 key: UserDefaults.Keys.joinedChatRoomPIDs,
                                 value: rooms.map { $0.uuid }
                             )
-                            return Mutation.setChatList(rooms)
+                            return rooms.count == 0
+                            ? Mutation.setNeedsToShowEmptyView(true)
+                            : Mutation.setChatList(rooms)
                             
                         case .error(_):
                             return Mutation.setErrorMessage("채팅 목록을 불러오지 못했습니다.😥")
@@ -91,14 +92,26 @@ final class ChatListViewReactor: Reactor {
             
         case .viewDidDisappear:
             return Observable.just(Mutation.setFetchingData(false))
+            
+        case .removeChatNotification(let indexPath):
+            
+            var currentChatNotificationList: [String] = userDefaultsGenericService.get(key: UserDefaults.Keys.notificationList) ?? []
+            
+            if let index = currentChatNotificationList.firstIndex(of: currentState.roomList[indexPath.row].uuid) {
+                currentChatNotificationList.remove(at: index)
+                userDefaultsGenericService.set(
+                    key: UserDefaults.Keys.notificationList,
+                    value: currentChatNotificationList
+                )
+                NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+            }
+            return Observable.empty()
         }
-        
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         state.errorMessage = nil
-        state.needsToShowEmptyView = false
         
         switch mutation {
             
@@ -121,9 +134,7 @@ final class ChatListViewReactor: Reactor {
             state.isFetchingData = isFetching
         }
         return state
-        
     }
-
 }
 
 extension ChatListViewReactor {

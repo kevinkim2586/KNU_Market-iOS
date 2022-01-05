@@ -9,8 +9,6 @@ class ChatListViewController: BaseViewController, View {
     
     //MARK: - Properties
     
-    var viewModel: ChatListViewModel!
-    
     typealias Reactor = ChatListViewReactor
     
     //MARK: - UI
@@ -24,24 +22,19 @@ class ChatListViewController: BaseViewController, View {
         )
     }
     
+    let refreshControl = UIRefreshControl()
+    
     let chatBarButtonItem = UIBarButtonItem().then {
         $0.title = "채팅"
         $0.style = .done
         $0.tintColor = .black
     }
     
-    let refreshControl = UIRefreshControl()
-    
     //MARK: - Initialization
     
     init(reactor: Reactor) {
         super.init()
         self.reactor = reactor
-    }
-    
-    init(viewModel: ChatListViewModel) {
-        super.init()
-        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -54,7 +47,6 @@ class ChatListViewController: BaseViewController, View {
         super.viewDidLoad()
         configure()
     }
-    
     
     //MARK: - UI Setup
     
@@ -79,8 +71,6 @@ class ChatListViewController: BaseViewController, View {
     }
     
     private func configure() {
-
-        createObserversForGettingBadgeValue()
         chatListTableView.refreshControl = refreshControl
     }
     
@@ -127,6 +117,11 @@ class ChatListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         chatListTableView.rx.itemSelected
+            .map { Reactor.Action.removeChatNotification($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        chatListTableView.rx.itemSelected
             .withUnretained(self)
             .subscribe(onNext: { (_, indexPath) in
                 
@@ -138,9 +133,7 @@ class ChatListViewController: BaseViewController, View {
                 chatVC.postUploaderUID = reactor.currentState.roomList[indexPath.row].userUID
                 self.navigationController?.pushViewController(chatVC, animated: true)
                 
-                if let index = ChatNotifications.list.firstIndex(of: reactor.currentState.roomList[indexPath.row].uuid) {
-                    ChatNotifications.list.remove(at: index)
-                }
+
             })
             .disposed(by: disposeBag)
         
@@ -164,6 +157,16 @@ class ChatListViewController: BaseViewController, View {
                 } else {
                     self.chatListTableView.restoreEmptyView()
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        
+        // Notification Center]
+        
+        NotificationCenter.default.rx.notification(.getBadgeValue)
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.getChatTabBadgeValue()
             })
             .disposed(by: disposeBag)
     }

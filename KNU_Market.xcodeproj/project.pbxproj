@@ -127,6 +127,8 @@
 		7C8E82D22782DBB8002F7CFB /* ChatListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82D12782DBB8002F7CFB /* ChatListService.swift */; };
 		7C8E82D62782DBDF002F7CFB /* ChatListServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82D52782DBDF002F7CFB /* ChatListServiceType.swift */; };
 		7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */; };
+		7C9185E32784435A00902A2A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9185E22784435A00902A2A /* NotificationService.swift */; };
+		7C9185E62784439F00902A2A /* NotificationServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9185E52784439F00902A2A /* NotificationServiceType.swift */; };
 		7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */; };
 		7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5A27182A3400295A3F /* BaseViewController.swift */; };
 		7C922A5D27185EB000295A3F /* SendUsMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */; };
@@ -232,9 +234,7 @@
 		7CF369C22754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */; };
 		7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C32754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift */; };
 		7CF369C62754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C52754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift */; };
-		7CF369CB2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369CA2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift */; };
 		7CF369CD2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369CC2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift */; };
-		7CF369CF2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369CE2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift */; };
 		7CF369D12754DA5200C9D7A9 /* ChatViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D02754DA5200C9D7A9 /* ChatViewController+TargetMethods.swift */; };
 		7CF369D32754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D22754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift */; };
 		7CF369D52754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D42754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift */; };
@@ -374,6 +374,8 @@
 		7C8E82D12782DBB8002F7CFB /* ChatListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListService.swift; sourceTree = "<group>"; };
 		7C8E82D52782DBDF002F7CFB /* ChatListServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListServiceType.swift; sourceTree = "<group>"; };
 		7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOptionViewController.swift; sourceTree = "<group>"; };
+		7C9185E22784435A00902A2A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		7C9185E52784439F00902A2A /* NotificationServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceType.swift; sourceTree = "<group>"; };
 		7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInformationViewController.swift; sourceTree = "<group>"; };
 		7C922A5A27182A3400295A3F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageViewController.swift; sourceTree = "<group>"; };
@@ -481,9 +483,7 @@
 		7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UITableView.swift"; sourceTree = "<group>"; };
 		7CF369C32754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
 		7CF369C52754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+PlaceholderDelegate.swift"; sourceTree = "<group>"; };
-		7CF369CA2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatListViewController+ChatListViewModelDelegate.swift"; sourceTree = "<group>"; };
 		7CF369CC2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatListViewController+UITableView.swift"; sourceTree = "<group>"; };
-		7CF369CE2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatListViewController+TargetMethods.swift"; sourceTree = "<group>"; };
 		7CF369D02754DA5200C9D7A9 /* ChatViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+TargetMethods.swift"; sourceTree = "<group>"; };
 		7CF369D22754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift"; sourceTree = "<group>"; };
 		7CF369D42754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+ChatViewDelegate_APIDelegateMethods.swift"; sourceTree = "<group>"; };
@@ -567,6 +567,7 @@
 			children = (
 				7C9C59EE277C1684005E08BC /* Persistence */,
 				7C9C59E7277C163C005E08BC /* Networks */,
+				7C9185E42784436300902A2A /* Notifications */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -905,6 +906,15 @@
 				7C8E82D52782DBDF002F7CFB /* ChatListServiceType.swift */,
 			);
 			path = ChatListService;
+			sourceTree = "<group>";
+		};
+		7C9185E42784436300902A2A /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				7C9185E52784439F00902A2A /* NotificationServiceType.swift */,
+				7C9185E22784435A00902A2A /* NotificationService.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		7C922A472717D8BD00295A3F /* Source */ = {
@@ -1408,10 +1418,8 @@
 			isa = PBXGroup;
 			children = (
 				7CA66239264136C7000E0B7A /* ChatListViewController.swift */,
-				7C3E7BF52784039400BEBC91 /* ChatListViewReactor.swift */,
-				7CF369CA2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift */,
 				7CF369CC2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift */,
-				7CF369CE2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift */,
+				7C3E7BF52784039400BEBC91 /* ChatListViewReactor.swift */,
 			);
 			path = ChatListVC;
 			sourceTree = "<group>";
@@ -1735,7 +1743,7 @@
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				626D66E92742705700CB7F4F /* KMButton.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
-				7CF369CF2754DA2200C9D7A9 /* ChatListViewController+TargetMethods.swift in Sources */,
+				7C9185E62784439F00902A2A /* NotificationServiceType.swift in Sources */,
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
 				7C9C59F2277C16A7005E08BC /* ReportServiceType.swift in Sources */,
 				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
@@ -1746,7 +1754,6 @@
 				6C49951C271FAD3D00E8DB4B /* UserDefaultKeys.swift in Sources */,
 				7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */,
 				7C8839E62643CD7700F9F78C /* UploadPostViewModel.swift in Sources */,
-				7CF369CB2754D9D500C9D7A9 /* ChatListViewController+ChatListViewModelDelegate.swift in Sources */,
 				7C132BF2265397B200BE5F40 /* ProgressHUD.swift in Sources */,
 				7C8E668B26E756C00060F37B /* ChatType.swift in Sources */,
 				7C9C59E6277C1328005E08BC /* UIVIewController+Notifications.swift in Sources */,
@@ -1813,6 +1820,7 @@
 				7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */,
+				7C9185E32784435A00902A2A /* NotificationService.swift in Sources */,
 				7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */,
 				7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */,
 				7C9C59FA277C16F8005E08BC /* MyPageServiceType.swift in Sources */,

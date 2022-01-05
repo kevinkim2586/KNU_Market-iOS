@@ -132,41 +132,48 @@ extension AppDelegate: MessagingDelegate {
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
     // Receive displayed notifications for iOS 10 devices.
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        guard
+            let isLoggedIn: Bool = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.isLoggedIn),
+            isLoggedIn == true
+        else { return }
         
-        if !User.shared.isLoggedIn { return }
+//        if !User.shared.isLoggedIn { return }
         
         let userInfo = notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
         print("✏️ willPresent userInfo: \(userInfo)")
         
-        if let postUID = userInfo["postUid"] as? String {
-            if !User.shared.chatNotificationList.contains(postUID) {
-                ChatNotifications.list.append(postUID)
-            }
-        }
+        addSingleChatNotificationIfNeeded(with: userInfo)
+
+
+        NotificationCenter.default.post(
+            name: .getPreviousChats,
+            object: nil
+        )
         
-        NotificationCenter.default.post(name: .getPreviousChats, object: nil)
-        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
-        
+        NotificationCenter.default.post(
+            name: .getBadgeValue,
+            object: nil
+        )
         completionHandler([[.alert, .sound, .badge]])
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-    
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        
         let userInfo = response.notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
+        addSingleChatNotificationIfNeeded(with: userInfo)
         
-        if let postUID = userInfo["postUid"] as? String {
-            if !User.shared.chatNotificationList.contains(postUID) {
-                ChatNotifications.list.append(postUID)
-            }
-        }
         completionHandler()
     }
 }
@@ -174,6 +181,24 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 //MARK: - Observers
 
 extension AppDelegate {
+    
+    func addSingleChatNotificationIfNeeded(with userInfo: [AnyHashable : Any]) {
+    
+        var previouslySavedChatNotifications: [String] = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.notificationList) ?? []
+        
+        if let postUID = userInfo["postUid"] as? String {
+            
+            if !previouslySavedChatNotifications.contains(postUID) {
+                previouslySavedChatNotifications.append(postUID)
+                
+                UserDefaultsGenericService.shared.set(
+                    key: UserDefaults.Keys.notificationList,
+                    value: previouslySavedChatNotifications
+                )
+                NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+            }
+        }
+    }
     
     @objc func refreshTokenHasExpired() {
         
@@ -224,6 +249,4 @@ extension AppDelegate {
         navigationBar.standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
-    
-    
 }

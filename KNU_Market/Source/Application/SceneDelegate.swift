@@ -37,6 +37,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
+        
+        saveNewlyReceivedChatNotifications()
+        
         NotificationCenter.default.post(
             name: .reconnectAndFetchFromLastChat,
             object: nil
@@ -49,11 +52,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             name: .getBadgeValue,
             object: nil
         )
-        
-        ChatNotifications.list = UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.notificationList) ?? [String]()
-        
-        getDeliveredNotifications()
-
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -71,22 +69,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate {
     
+    func saveNewlyReceivedChatNotifications() {
+        
+        let previouslySavedChatNotifications: [String] = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.notificationList) ?? []
     
-    func getDeliveredNotifications() {
+        var newChatNotifications: [String] = previouslySavedChatNotifications
         
         let center = UNUserNotificationCenter.current()
-        
         center.getDeliveredNotifications { notificationList in
             for notification in notificationList {
                 let userInfo = notification.request.content.userInfo
-                if let postUID = userInfo["postUid"] as? String {
-                    if !User.shared.chatNotificationList.contains(postUID) {
-                        ChatNotifications.list.append(postUID)
+                if let postUID = userInfo["postUid"] as? String {               // 받은 Notification payload 중에서 "postUid"에 해당하는 값만 받아오기
+                    if !previouslySavedChatNotifications.contains(postUID) {   // 이전에 저장된 알림 목록에 포함이 안 된 것만 새로 append
+                        newChatNotifications.append(postUID)
                     }
                 }
             }
+            UserDefaultsGenericService.shared.set(
+                key: UserDefaults.Keys.notificationList,
+                value: newChatNotifications
+            )
         }
-    }
     
+        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+
+        
+    }
 }
 

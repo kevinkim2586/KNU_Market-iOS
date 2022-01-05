@@ -27,7 +27,7 @@ final class UserDefaultsGenericService: UserDefaultsGenericServiceType {
         UserDefaults.standard.removeObject(forKey: key)
     }
     
-    // 로그아웃, 회원탈퇴 시에 실행
+    //cc 로그아웃, 회원탈퇴 시에 실행
     func resetAllUserInfo() {
         
         // Removes all User Default values

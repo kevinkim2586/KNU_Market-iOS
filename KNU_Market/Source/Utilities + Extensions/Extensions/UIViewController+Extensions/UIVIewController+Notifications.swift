@@ -15,13 +15,16 @@ extension UIViewController {
         
         if let tabItems = tabBarController?.tabBar.items {
             
-            let chatTabBarItem = tabItems[1]
+            let chatTabBarItem = tabItems[1]               //채팅 탭
+            chatTabBarItem.badgeColor = UIColor(named: K.Color.appColor) ?? .systemRed
             
-            if User.shared.chatNotificationList.count == 0 {
-                chatTabBarItem.badgeValue = nil
-            } else {
-                chatTabBarItem.badgeValue = "\(User.shared.chatNotificationList.count)"
+            guard let chatNotificationList: [String] = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.notificationList) else {
+                return
             }
+            
+            chatTabBarItem.badgeValue = chatNotificationList.count == 0
+            ? nil
+            : "\(chatNotificationList.count)"
         }
     }
     
@@ -33,7 +36,10 @@ extension UIViewController {
             
             guard granted else {
                 
-                User.shared.hasAllowedForNotification = false
+                UserDefaultsGenericService.shared.set(
+                    key: UserDefaults.Keys.hasAllowedForNotification,
+                    value: false
+                )
                 
                 DispatchQueue.main.async {
                     self.presentAlertWithCancelAction(

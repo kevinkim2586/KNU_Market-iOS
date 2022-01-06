@@ -44,6 +44,9 @@
 		7C184B8326B103F1006C0FAD /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C184B8226B103F1006C0FAD /* Room.swift */; };
 		7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */; };
 		7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */; };
+		7C2A6B102786B88600C31238 /* AppDelegate+Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B0F2786B88600C31238 /* AppDelegate+Navigator.swift */; };
+		7C2A6B132786B99C00C31238 /* UserNotificationServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B122786B99C00C31238 /* UserNotificationServiceType.swift */; };
+		7C2A6B152786B9A800C31238 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B142786B9A800C31238 /* UserNotificationService.swift */; };
 		7C3758ED265FA97A0081A85D /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* PostListViewModel.swift */; };
 		7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */; };
 		7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */; };
@@ -127,8 +130,8 @@
 		7C8E82D22782DBB8002F7CFB /* ChatListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82D12782DBB8002F7CFB /* ChatListService.swift */; };
 		7C8E82D62782DBDF002F7CFB /* ChatListServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82D52782DBDF002F7CFB /* ChatListServiceType.swift */; };
 		7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */; };
-		7C9185E32784435A00902A2A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9185E22784435A00902A2A /* NotificationService.swift */; };
-		7C9185E62784439F00902A2A /* NotificationServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9185E52784439F00902A2A /* NotificationServiceType.swift */; };
+		7C9185E32784435A00902A2A /* NotificationCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9185E22784435A00902A2A /* NotificationCenterService.swift */; };
+		7C9185E62784439F00902A2A /* NotificationCenterServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9185E52784439F00902A2A /* NotificationCenterServiceType.swift */; };
 		7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */; };
 		7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5A27182A3400295A3F /* BaseViewController.swift */; };
 		7C922A5D27185EB000295A3F /* SendUsMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */; };
@@ -290,6 +293,9 @@
 		7C184B8226B103F1006C0FAD /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		7C2A6B0F2786B88600C31238 /* AppDelegate+Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Navigator.swift"; sourceTree = "<group>"; };
+		7C2A6B122786B99C00C31238 /* UserNotificationServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationServiceType.swift; sourceTree = "<group>"; };
+		7C2A6B142786B9A800C31238 /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		7C3758EC265FA97A0081A85D /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewController.swift; sourceTree = "<group>"; };
@@ -374,8 +380,8 @@
 		7C8E82D12782DBB8002F7CFB /* ChatListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListService.swift; sourceTree = "<group>"; };
 		7C8E82D52782DBDF002F7CFB /* ChatListServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListServiceType.swift; sourceTree = "<group>"; };
 		7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOptionViewController.swift; sourceTree = "<group>"; };
-		7C9185E22784435A00902A2A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		7C9185E52784439F00902A2A /* NotificationServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceType.swift; sourceTree = "<group>"; };
+		7C9185E22784435A00902A2A /* NotificationCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterService.swift; sourceTree = "<group>"; };
+		7C9185E52784439F00902A2A /* NotificationCenterServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterServiceType.swift; sourceTree = "<group>"; };
 		7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInformationViewController.swift; sourceTree = "<group>"; };
 		7C922A5A27182A3400295A3F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageViewController.swift; sourceTree = "<group>"; };
@@ -567,7 +573,8 @@
 			children = (
 				7C9C59EE277C1684005E08BC /* Persistence */,
 				7C9C59E7277C163C005E08BC /* Networks */,
-				7C9185E42784436300902A2A /* Notifications */,
+				7C2A6B112786B97F00C31238 /* UserNotifications */,
+				7C9185E42784436300902A2A /* NotificationCenter */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -662,6 +669,15 @@
 				7C9A3836276DC70200AEE831 /* LoginViewReactor.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		7C2A6B112786B97F00C31238 /* UserNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				7C2A6B122786B99C00C31238 /* UserNotificationServiceType.swift */,
+				7C2A6B142786B9A800C31238 /* UserNotificationService.swift */,
+			);
+			path = UserNotifications;
 			sourceTree = "<group>";
 		};
 		7C3B4FF526A92C4100E2CA8F /* User Register */ = {
@@ -908,13 +924,13 @@
 			path = ChatListService;
 			sourceTree = "<group>";
 		};
-		7C9185E42784436300902A2A /* Notifications */ = {
+		7C9185E42784436300902A2A /* NotificationCenter */ = {
 			isa = PBXGroup;
 			children = (
-				7C9185E52784439F00902A2A /* NotificationServiceType.swift */,
-				7C9185E22784435A00902A2A /* NotificationService.swift */,
+				7C9185E52784439F00902A2A /* NotificationCenterServiceType.swift */,
+				7C9185E22784435A00902A2A /* NotificationCenterService.swift */,
 			);
-			path = Notifications;
+			path = NotificationCenter;
 			sourceTree = "<group>";
 		};
 		7C922A472717D8BD00295A3F /* Source */ = {
@@ -958,6 +974,7 @@
 			isa = PBXGroup;
 			children = (
 				7CA661F0263D4387000E0B7A /* AppDelegate.swift */,
+				7C2A6B0F2786B88600C31238 /* AppDelegate+Navigator.swift */,
 				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
 			);
 			path = Application;
@@ -1236,7 +1253,6 @@
 				7C3D541E26CA722B00AE3E55 /* CALayer+Extension.swift */,
 				7CC1B59B26D4FC110007F99B /* UIView+Extension.swift */,
 				7C5A1F2A26D6174F0041885B /* UICollectionView+Extension.swift */,
-				7C0F1CB926BA6B310068FF45 /* NotificationName.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1347,6 +1363,7 @@
 			isa = PBXGroup;
 			children = (
 				7CA6624E26413F03000E0B7A /* Constants.swift */,
+				7C0F1CB926BA6B310068FF45 /* NotificationName.swift */,
 				6C49951B271FAD3D00E8DB4B /* UserDefaultKeys.swift */,
 				7C555464266D0A1400C3C5B6 /* Location.swift */,
 				7C555461266CFC0500C3C5B6 /* HTTPHeaderKeys.swift */,
@@ -1676,6 +1693,7 @@
 				7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */,
 				7C3B4FF726A92C6C00E2CA8F /* UserRegisterValues.swift in Sources */,
 				7C922A5D27185EB000295A3F /* SendUsMessageViewController.swift in Sources */,
+				7C2A6B152786B9A800C31238 /* UserNotificationService.swift in Sources */,
 				7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */,
 				7C015C9A27035B3800089ED8 /* FindIdUsingStudentIdViewController.swift in Sources */,
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
@@ -1743,7 +1761,7 @@
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				626D66E92742705700CB7F4F /* KMButton.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
-				7C9185E62784439F00902A2A /* NotificationServiceType.swift in Sources */,
+				7C9185E62784439F00902A2A /* NotificationCenterServiceType.swift in Sources */,
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
 				7C9C59F2277C16A7005E08BC /* ReportServiceType.swift in Sources */,
 				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
@@ -1763,6 +1781,7 @@
 				7CA661F1263D4387000E0B7A /* AppDelegate.swift in Sources */,
 				7CF369A32754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift in Sources */,
 				625B0E382741EAAE003968BA /* AuthPlugin.swift in Sources */,
+				7C2A6B132786B99C00C31238 /* UserNotificationServiceType.swift in Sources */,
 				7C83EE4F274226FE00CF1680 /* KMPostButtonView.swift in Sources */,
 				7CA661F3263D4387000E0B7A /* SceneDelegate.swift in Sources */,
 				7C0E2DDF26B7D92800BB37FF /* String+Extension.swift in Sources */,
@@ -1820,7 +1839,7 @@
 				7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */,
-				7C9185E32784435A00902A2A /* NotificationService.swift in Sources */,
+				7C9185E32784435A00902A2A /* NotificationCenterService.swift in Sources */,
 				7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */,
 				7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */,
 				7C9C59FA277C16F8005E08BC /* MyPageServiceType.swift in Sources */,
@@ -1837,6 +1856,7 @@
 				7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */,
 				7C833686266208210032308D /* Interceptor.swift in Sources */,
 				7C436B5826820E5200943069 /* ReportManager.swift in Sources */,
+				7C2A6B102786B88600C31238 /* AppDelegate+Navigator.swift in Sources */,
 				7C58477227744FD9005D75B2 /* EmailVerificationViewReactor.swift in Sources */,
 				7CF8D61B277C4CD10078DD77 /* MyPageCellReactor.swift in Sources */,
 				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,

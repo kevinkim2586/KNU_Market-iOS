@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseDynamicLinks
 
 extension PostViewController: KMPostButtonViewDelegate {
     

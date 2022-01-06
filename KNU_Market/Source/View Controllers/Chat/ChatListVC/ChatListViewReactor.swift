@@ -54,7 +54,7 @@ final class ChatListViewReactor: Reactor {
         switch action {
     
         case .getChatList:
-            NotificationService.configureChatTabBadgeCount.post(object: nil)
+            NotificationCenterService.configureChatTabBadgeCount.post(object: nil)
 
             guard currentState.isFetchingData == false else { return Observable.empty() }
             

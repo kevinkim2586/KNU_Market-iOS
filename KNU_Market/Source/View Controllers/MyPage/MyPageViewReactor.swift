@@ -101,7 +101,7 @@ final class MyPageViewReactor: Reactor {
             return loadUserProfile()
 
         case .viewWillAppear:
-            NotificationCenter.default.post(name: .configureChatTabBadgeCount, object: nil)
+            NotificationCenterService.configureChatTabBadgeCount.post()
             return Observable.empty()
             
         case .viewDidAppear:

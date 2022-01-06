@@ -161,19 +161,17 @@ class ChatListViewController: BaseViewController, View {
         
         // Notification Center
         
-        NotificationCenter.default.rx.notification(.configureChatTabBadgeCount)
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
+        NotificationCenterService.configureChatTabBadgeCount.addObserver()
+            .bind { _ in
                 self.configureChatTabBadgeCount()
-            })
+            }
             .disposed(by: disposeBag)
         
-        NotificationCenter.default.rx.notification(.updateChatList)
+        
+        NotificationCenterService.updateChatList.addObserver()
             .map { _ in Reactor.Action.getChatList }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
-        
-        
 
     }
 }

@@ -114,7 +114,11 @@ class PostListViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let chatRoom):
-                User.shared.joinedChatRoomPIDs = chatRoom.map { $0.uuid }
+                
+                UserDefaultsGenericService.shared.set(
+                    key: UserDefaults.Keys.joinedChatRoomPIDs,
+                    value: chatRoom.map { $0.uuid}
+                )
             case .failure(let error):
                 self.delegate?.failedFetchingRoomPIDInfo(with: error)
             }

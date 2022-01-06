@@ -1,5 +1,5 @@
 //
-//  NotificationService.swift
+//  NotificationCenterService.swift
 //  KNU_Market
 //
 //  Created by Kevin Kim on 2022/01/04.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum NotificationService: NotificationServiceType {
+enum NotificationCenterService: NotificationCenterServiceType {
     
     // Post Related
     case updatePostList

@@ -108,7 +108,7 @@ class UploadPostViewModel {
             
             case .success(_):
                 self.delegate?.didCompleteUpload()
-                NotificationCenter.default.post(name: .updatePostList, object: nil)
+                NotificationCenterService.updatePostList.post()
             case .failure(let error):
                 print("UploadItemViewModel - uploadItem() failed: \(error.errorDescription)")
                 self.delegate?.failedUploading(with: error)
@@ -160,7 +160,7 @@ class UploadPostViewModel {
             switch result {
             case .success(_):
                 self.delegate?.didUpdatePost()
-                NotificationCenter.default.post(name: .didUpdatePost, object: nil)
+                NotificationCenterService.didUpdatePost.post()
             case .failure(let error):
                 self.delegate?.failedUpdatingPost(with: error)
             }

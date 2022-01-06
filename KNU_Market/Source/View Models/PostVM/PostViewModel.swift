@@ -179,10 +179,7 @@ class PostViewModel {
             switch result {
             case .success:
                 self.delegate?.didMarkPostDone()
-                NotificationCenter.default.post(
-                    name: .updatePostList,
-                    object: nil
-                )
+                NotificationCenterService.updatePostList.post()
             case .failure(let error):
                 self.delegate?.failedMarkingPostDone(with: error)
             }
@@ -208,7 +205,7 @@ class PostViewModel {
             case .success:
                 
                 self.delegate?.didCancelMarkPostDone()
-                NotificationCenter.default.post(name: .updatePostList, object: nil)
+                NotificationCenterService.updatePostList.post()
                 
             case .failure(let error):
                 
@@ -244,10 +241,7 @@ class PostViewModel {
                     // 이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
                 case .E108:
                     self.delegate?.didEnterChat(isFirstEntrance: false)
-                    NotificationCenter.default.post(
-                        name: .updatePostList,
-                        object: nil
-                    )
+                    NotificationCenterService.updatePostList.post()
                 default:
                     self.delegate?.failedJoiningChat(with: error)
                 }
@@ -282,10 +276,7 @@ class PostViewModel {
     func blockUser(userUID: String) {
         User.shared.bannedPostUploaders.append(userUID)
         self.delegate?.didBlockUser()
-        NotificationCenter.default.post(
-            name: .updatePostList,
-            object: nil
-        )
+        NotificationCenterService.updatePostList.post()
     }
     
     // 공구글에 url 이 별도 포함되어 있는지 판별

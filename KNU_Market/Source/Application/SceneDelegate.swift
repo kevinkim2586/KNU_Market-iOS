@@ -7,6 +7,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
+    let userNotificationService: UserNotificationService = UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService.shared)
+    
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
         guard let window = self.window else { return }
         window.rootViewController = vc
@@ -39,20 +41,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidBecomeActive(_ scene: UIScene) {
         
-        saveNewlyReceivedChatNotifications()
+        userNotificationService.saveNewlyReceivedChatNotifications()
         
-        NotificationCenter.default.post(
-            name: .reconnectAndFetchFromLastChat,
-            object: nil
-        )
-        NotificationCenter.default.post(
-            name: .getChatList,
-            object: nil
-        )
-        NotificationCenter.default.post(
-            name: .configureChatTabBadgeCount,
-            object: nil
-        )
+        NotificationCenterService.reconnectAndFetchFromLastChat.post()
+        NotificationCenterService.getChatList.post()
+        NotificationCenterService.configureChatTabBadgeCount.post()
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -68,39 +61,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
-extension SceneDelegate {
-    
-    func saveNewlyReceivedChatNotifications() {
-        
-        let previouslySavedChatNotifications: [String] = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.notificationList) ?? []
-    
-        var newChatNotifications: [String] = previouslySavedChatNotifications
-        
-        let center = UNUserNotificationCenter.current()
-        center.getDeliveredNotifications { notificationList in
-            for notification in notificationList {
-                let userInfo = notification.request.content.userInfo
-                if let postUID = userInfo["postUid"] as? String {               // 받은 Notification payload 중에서 "postUid"에 해당하는 값만 받아오기
-                    if !previouslySavedChatNotifications.contains(postUID) {   // 이전에 저장된 알림 목록에 포함이 안 된 것만 새로 append
-                        newChatNotifications.append(postUID)
-                    }
-                }
-            }
-            UserDefaultsGenericService.shared.set(
-                key: UserDefaults.Keys.notificationList,
-                value: newChatNotifications
-            )
-        }
-    
-        NotificationCenter.default.post(name: .configureChatTabBadgeCount, object: nil)
-        NotificationCenter.default.post(name: .updateChatList, object: nil)
-    }
-}
+
+
+//MARK: - Dynamic Link Handling Methods
 
 extension SceneDelegate {
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        print("✅ continue userActivity")
         
         if let incomingURL = userActivity.webpageURL {
             print("✅ incomingURL: \(incomingURL)")
@@ -115,13 +82,6 @@ extension SceneDelegate {
                 if let dynamicLink = dynamicLink {
                     self.handleIncomingDynamicLink(dynamicLink)
                 }
-            }
-            
-            
-            if linkHandled {
-                print("✅ linkHandled")
-            } else {
-                print("❗️ link not handled")
             }
         }
         
@@ -139,7 +99,6 @@ extension SceneDelegate {
         } else {
             print("❗️ Maybe some other url?")
         }
-        
     }
     
     
@@ -151,6 +110,51 @@ extension SceneDelegate {
         }
         
         print("✅ incoming link parameter: \(url.absoluteString)")
+        
+        // Parse the link parameter
+        
+        guard
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+            let queryItems = components.queryItems
+        else { return }
+        
+        if components.path == "/seePost" {
+            
+            if let postIDQueryItem = queryItems.first(where: { $0.name == "postUID"}) {
+                
+                guard let postUID = postIDQueryItem.value else { return }
+                
+                print("✅ postUID: \(postUID)")
+                
+                let postVC = PostViewController(
+                    viewModel: PostViewModel(
+                        pageId: postUID,
+                        postManager: PostManager(),
+                        chatManager: ChatManager()
+                    ),
+                    isFromChatVC: false
+                )
+                
+                guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
+                    return
+                }
+                
+    
+                if let tabBarController = rootVC as? UITabBarController,
+                   let navController = tabBarController.selectedViewController as? UINavigationController {
+                    navController.pushViewController(postVC, animated: true)
+                }
+                
+
+    
+                
+            }
+            
+            
+            
+            
+            
+        }
     }
     
 

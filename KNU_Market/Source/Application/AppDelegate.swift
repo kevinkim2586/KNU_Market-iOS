@@ -11,6 +11,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    let userNotificationService: UserNotificationService = UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService.shared)
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         print("✏️ didFinishLaunchingWithOptions")
@@ -137,33 +139,28 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
+        print("✅ willPresent before")
         guard
             let isLoggedIn: Bool = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.isLoggedIn),
             isLoggedIn == true
         else { return }
-        
-//        if !User.shared.isLoggedIn { return }
-        
+                
         let userInfo = notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
         print("✏️ willPresent userInfo: \(userInfo)")
         
-        addSingleChatNotificationIfNeeded(with: userInfo)
-
-
-        NotificationCenter.default.post(
-            name: .getPreviousChats,
-            object: nil
-        )
+        userNotificationService.handleReceivedSingleNotification(with: userInfo)
         
-        NotificationCenter.default.post(
-            name: .configureChatTabBadgeCount,
-            object: nil
-        )
+        NotificationCenterService.getPreviousChats.post()
+        NotificationCenterService.configureChatTabBadgeCount.post()
+        
+
+
         completionHandler([[.alert, .sound, .badge]])
     }
     
+    // 사용자가 알림을 탭하고 앱에 들어왔을 때 실행
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
@@ -172,7 +169,23 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         let userInfo = response.notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        addSingleChatNotificationIfNeeded(with: userInfo)
+        
+        print("✅ userInfo: \(userInfo)")
+        
+
+        userNotificationService.handleReceivedSingleNotification(with: userInfo)
+        
+        // 채팅 알림인 경우 채팅을 보낸 사람의 정보가 함께 날라오기 때문에 sendName 으로 채팅 알림임을 판별
+        if let chatNotification = userInfo["sendName"] as? String {
+            guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
+                return
+            }
+            
+            if let tabBarController = rootVC as? UITabBarController {
+                tabBarController.selectedIndex = 1
+            }
+        }
+        
         
         completionHandler()
     }
@@ -181,25 +194,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 //MARK: - Observers
 
 extension AppDelegate {
-    
-    func addSingleChatNotificationIfNeeded(with userInfo: [AnyHashable : Any]) {
-    
-        var previouslySavedChatNotifications: [String] = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.notificationList) ?? []
-        
-        if let postUID = userInfo["postUid"] as? String {
-            
-            if !previouslySavedChatNotifications.contains(postUID) {
-                previouslySavedChatNotifications.append(postUID)
-                
-                UserDefaultsGenericService.shared.set(
-                    key: UserDefaults.Keys.notificationList,
-                    value: previouslySavedChatNotifications
-                )
-                NotificationCenter.default.post(name: .configureChatTabBadgeCount, object: nil)
-                NotificationCenter.default.post(name: .updateChatList, object: nil)
-            }
-        }
-    }
+
     
     @objc func refreshTokenHasExpired() {
         
@@ -217,7 +212,6 @@ extension AppDelegate {
     
     func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
-            print("Notification settings: \(settings)")
             DispatchQueue.main.async {
                 UIApplication.shared.registerForRemoteNotifications()
             }
@@ -229,13 +223,15 @@ extension AppDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
-        IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self,
-                                                           NickNameInputViewController.self,
-                                                           PasswordInputViewController.self,
-                                                           EmailVerificationViewController.self,
-                                                           CheckYourEmailViewController.self,
-                                                           IDInputViewController.self,
-                                                           EmailForLostPasswordViewController.self,SendUsMessageViewController.self]
+        IQKeyboardManager.shared.disabledToolbarClasses = [
+            ChatViewController.self,
+            NickNameInputViewController.self,
+            PasswordInputViewController.self,
+            EmailVerificationViewController.self,
+            CheckYourEmailViewController.self,
+            IDInputViewController.self,
+            EmailForLostPasswordViewController.self,SendUsMessageViewController.self
+        ]
         
         IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatViewController.self)
     }

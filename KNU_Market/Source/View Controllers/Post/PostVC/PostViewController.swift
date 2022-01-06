@@ -68,7 +68,6 @@ class PostViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {

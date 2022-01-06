@@ -51,7 +51,6 @@ extension ChatAPI: BaseAPI {
                 "isover": "1",
                 "date":  lastChatDate
             ]
-            
         default: return nil
         }
     }
@@ -62,8 +61,7 @@ extension ChatAPI: BaseAPI {
             switch chatFunction {
             case .join: return .post
             case .exit: return .delete
-            default:
-                return .get
+            default: return .get
             }
         case .getRoom, .getRoomInfo, .getNewlyReceivedChats, .getPreviousChats:
                 return .get

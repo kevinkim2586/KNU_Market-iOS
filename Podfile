@@ -13,6 +13,7 @@ target 'KNU_Market' do
   pod 'Firebase/Core'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
+  pod 'Firebase/DynamicLinks'
   
 
   pod "GMStepper"

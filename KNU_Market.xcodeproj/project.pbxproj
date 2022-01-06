@@ -1031,8 +1031,8 @@
 		7C9C59E8277C1650005E08BC /* UserService */ = {
 			isa = PBXGroup;
 			children = (
-				7C9C59EF277C168D005E08BC /* UserServiceType.swift */,
 				7CC69A7D27670FFE00105FC0 /* UserService.swift */,
+				7C9C59EF277C168D005E08BC /* UserServiceType.swift */,
 			);
 			path = UserService;
 			sourceTree = "<group>";

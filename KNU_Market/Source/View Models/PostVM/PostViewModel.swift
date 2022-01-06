@@ -111,8 +111,6 @@ class PostViewModel {
 
     var postDetailWithUrl: NSMutableAttributedString?
     
-    
-    
     var modelForEdit: EditPostModel {
         let editPostModel = EditPostModel(
             title: model?.title ?? "",

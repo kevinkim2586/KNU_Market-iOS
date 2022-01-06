@@ -1,6 +1,7 @@
 
 import UIKit
 import Moya
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -93,8 +94,64 @@ extension SceneDelegate {
     
         NotificationCenter.default.post(name: .configureChatTabBadgeCount, object: nil)
         NotificationCenter.default.post(name: .updateChatList, object: nil)
-
-        
     }
 }
 
+extension SceneDelegate {
+    
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        print("✅ continue userActivity")
+        
+        if let incomingURL = userActivity.webpageURL {
+            print("✅ incomingURL: \(incomingURL)")
+            
+            let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { dynamicLink, error in
+                
+                guard error == nil else {
+                    print("❗️ DynamicLink Error: \(error!.localizedDescription)")
+                    return
+                }
+                
+                if let dynamicLink = dynamicLink {
+                    self.handleIncomingDynamicLink(dynamicLink)
+                }
+            }
+            
+            
+            if linkHandled {
+                print("✅ linkHandled")
+            } else {
+                print("❗️ link not handled")
+            }
+        }
+        
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        
+        guard let url = URLContexts.first?.url else {
+            print("❗️ SceneDelegate - openURLContexts error obtaining url")
+            return
+        }
+        
+        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+            self.handleIncomingDynamicLink(dynamicLink)
+        } else {
+            print("❗️ Maybe some other url?")
+        }
+        
+    }
+    
+    
+    
+    func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
+        guard let url = dynamicLink.url else {
+            print("❗️ Dynamic link has no url!")
+            return
+        }
+        
+        print("✅ incoming link parameter: \(url.absoluteString)")
+    }
+    
+
+}

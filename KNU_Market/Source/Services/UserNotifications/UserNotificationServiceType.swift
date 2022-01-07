@@ -9,7 +9,7 @@ import Foundation
 import UserNotifications
 
 protocol UserNotificationServiceType: AnyObject {
-    func handleReceivedSingleNotification(with userInfo: [AnyHashable: Any])
+    func saveReceivedNotification(with userInfo: [AnyHashable: Any])
     
     // 채팅 알림이 도착했을 때 해당 알림을 UserDefaults에 저장
     func addChatNotificationToUserDefaultsIfNeeded(with userInfo: [AnyHashable : Any])

@@ -24,7 +24,7 @@ final class UserNotificationService: UserNotificationServiceType {
     }
     
     // 도착하는 모든 알림을 여기서 처리
-    func handleReceivedSingleNotification(with userInfo: [AnyHashable: Any]) {
+    func saveReceivedNotification(with userInfo: [AnyHashable: Any]) {
         
         // 우선 광고성 알림이 아닌 채팅 알림임을 판별. 채팅을 보내면 채팅 발신자의 정보가 함께 날라오기 때문에 sendName 키로 채팅 알림인지 아닌지를 판별
         if let _ = userInfo[NotificationType.chat.rawValue] as? String{

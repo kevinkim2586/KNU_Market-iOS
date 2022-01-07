@@ -89,6 +89,50 @@ final class UserNotificationService: UserNotificationServiceType {
     func notifyChatListNeedsUpdate() {
         NotificationCenterService.updateChatList.post()
     }
+    
+    // 최초 알림 허용 메시지
+    func askForNotificationPermissionAtFirstLaunch() {
+        
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, _ in
+            
+            guard granted else {
+                
+                UserDefaultsGenericService.shared.set(
+                    key: UserDefaults.Keys.hasAllowedForNotification,
+                    value: false
+                )
+                
+                guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
+                    return
+                }
+                
+                if let postListVC = rootVC as? PostListViewController {
+                    
+                    postListVC.presentAlertWithCancelAction(
+                        title: "알림 받기를 설정해 주세요.👀",
+                        message: "알림 받기를 설정하지 않으면 공구 채팅 알림을 받을 수 없어요. '확인'을 눌러 설정으로 이동 후 알림 켜기를 눌러주세요.😁"
+                    ) { selectedOk in
+                        if selectedOk {
+                            UIApplication.shared.open(
+                                URL(string: UIApplication.openSettingsURLString)!,
+                                options: [:],
+                                completionHandler: nil
+                            )
+                        }
+                    }
+                }
+                return
+            }
+            
+            UNUserNotificationCenter.current().getNotificationSettings { settings in
+                DispatchQueue.main.async {
+                    User.shared.hasAllowedForNotification = true
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        }
+    }
 }
 
 

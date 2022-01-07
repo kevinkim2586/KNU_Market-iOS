@@ -263,9 +263,10 @@ class PostViewModel {
             switch result {
             case .success(let chatRoom):
                 
-                chatRoom.forEach { chat in
-                    User.shared.joinedChatRoomPIDs.append(chat.uuid)
-                }
+                UserDefaultsGenericService.shared.set(
+                    key: UserDefaults.Keys.joinedChatRoomPIDs,
+                    value: chatRoom.map { $0.uuid }
+                )
                 
             case .failure(let error):
                 self.delegate?.failedLoadingData(with: error)

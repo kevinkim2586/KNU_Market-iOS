@@ -137,7 +137,6 @@ class MyPostsViewController: BaseViewController, View {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 self.refreshControl.endRefreshing()
-        
             })
             .disposed(by: disposeBag)
         

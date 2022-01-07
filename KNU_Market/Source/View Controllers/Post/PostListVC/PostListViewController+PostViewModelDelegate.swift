@@ -40,9 +40,9 @@ extension PostListViewController: PostListViewModelDelegate {
     func failedFetchingPostList(errorMessage: String, error: NetworkError) {
         postListsTableView.refreshControl?.endRefreshing()
         postListsTableView.tableFooterView = nil
-        if error != .E601 {
-            postListsTableView.showErrorPlaceholder()
-        }
+//        if error != .E601 {
+//            postListsTableView.showErrorPlaceholder()
+//        }
     }
     
     func failedFetchingRoomPIDInfo(with error: NetworkError) {

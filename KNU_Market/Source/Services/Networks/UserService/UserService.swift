@@ -16,11 +16,14 @@ final class UserService: UserServiceType {
     fileprivate let network: Network<UserAPI>
     fileprivate let userDefaultsPersistenceService: UserDefaultsPersistenceServiceType
     
-    init(network: Network<UserAPI>, userDefaultsPersistenceService: UserDefaultsPersistenceServiceType) {
+    init(
+        network: Network<UserAPI>,
+        userDefaultsPersistenceService: UserDefaultsPersistenceServiceType
+    ) {
         self.network = network
         self.userDefaultsPersistenceService = userDefaultsPersistenceService
     }
-
+    
     func register(with model: RegisterRequestDTO) -> Single<NetworkResult> {
         return network.requestWithoutMapping(.register(model: model))
             .map { result in

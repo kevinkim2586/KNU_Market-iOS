@@ -151,7 +151,7 @@ class User {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.joinedChatRoomPIDs)
-            print("✅ joinedChatRoomPid: \(newValue)")
+           
         }
     }
 

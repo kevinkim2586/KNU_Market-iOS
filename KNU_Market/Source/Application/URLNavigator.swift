@@ -7,6 +7,8 @@
 
 import UIKit
 
+//MARK: - 알림을 탭하고 들어왔을 때 적절하게 Navigation을 처리해주는 클래스.
+
 final class URLNavigator {
     
     func handleReceivedNotification(with userInfo: [AnyHashable : Any]) {
@@ -27,6 +29,5 @@ final class URLNavigator {
         if let tabBarController = rootVC as? UITabBarController {
             tabBarController.selectedIndex = 1
         }
-        
     }
 }

@@ -325,9 +325,6 @@ class UploadPostViewController: BaseViewController {
         navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
     
-    override func setupActions() {
-        super.setupActions()
-    }
     
     //MARK: - Configuration
     

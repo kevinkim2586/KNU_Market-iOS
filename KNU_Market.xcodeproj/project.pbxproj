@@ -44,9 +44,10 @@
 		7C184B8326B103F1006C0FAD /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C184B8226B103F1006C0FAD /* Room.swift */; };
 		7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */; };
 		7C1C1D10265E712D00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */; };
-		7C2A6B102786B88600C31238 /* AppDelegate+Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B0F2786B88600C31238 /* AppDelegate+Navigator.swift */; };
 		7C2A6B132786B99C00C31238 /* UserNotificationServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B122786B99C00C31238 /* UserNotificationServiceType.swift */; };
 		7C2A6B152786B9A800C31238 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B142786B9A800C31238 /* UserNotificationService.swift */; };
+		7C2A6B172786C86200C31238 /* URLNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B162786C86200C31238 /* URLNavigator.swift */; };
+		7C2A6B1F2787EC0F00C31238 /* PostListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B1E2787EC0F00C31238 /* PostListViewReactor.swift */; };
 		7C3758ED265FA97A0081A85D /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* PostListViewModel.swift */; };
 		7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */; };
 		7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */; };
@@ -212,7 +213,6 @@
 		7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */; };
 		7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */; };
 		7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */; };
-		7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */; };
 		7CDADA0726BE623100F7F58F /* DateHelper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */; };
 		7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEAC991275F7AFF005AF338 /* UserAPI.swift */; };
 		7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */; };
@@ -230,8 +230,6 @@
 		7CF369B22754D60E00C9D7A9 /* PostListViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */; };
 		7CF369B42754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B32754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift */; };
 		7CF369B62754D65200C9D7A9 /* PostListViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B52754D65200C9D7A9 /* PostListViewController+TargetMethods.swift */; };
-		7CF369B82754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B72754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift */; };
-		7CF369BA2754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B92754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift */; };
 		7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369BD2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift */; };
 		7CF369C02754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369BF2754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift */; };
 		7CF369C22754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */; };
@@ -293,9 +291,10 @@
 		7C184B8226B103F1006C0FAD /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		7C1C1D0D265E711F00C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		7C1C1D0F265E712D00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
-		7C2A6B0F2786B88600C31238 /* AppDelegate+Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Navigator.swift"; sourceTree = "<group>"; };
 		7C2A6B122786B99C00C31238 /* UserNotificationServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationServiceType.swift; sourceTree = "<group>"; };
 		7C2A6B142786B9A800C31238 /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
+		7C2A6B162786C86200C31238 /* URLNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNavigator.swift; sourceTree = "<group>"; };
+		7C2A6B1E2787EC0F00C31238 /* PostListViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewReactor.swift; sourceTree = "<group>"; };
 		7C3758EC265FA97A0081A85D /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewController.swift; sourceTree = "<group>"; };
@@ -464,7 +463,6 @@
 		7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
 		7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
-		7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper+Extension.swift"; sourceTree = "<group>"; };
 		7CEAC991275F7AFF005AF338 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewController.swift; sourceTree = "<group>"; };
@@ -482,8 +480,6 @@
 		7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+UITableView.swift"; sourceTree = "<group>"; };
 		7CF369B32754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+PostViewModelDelegate.swift"; sourceTree = "<group>"; };
 		7CF369B52754D65200C9D7A9 /* PostListViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+TargetMethods.swift"; sourceTree = "<group>"; };
-		7CF369B72754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
-		7CF369B92754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+PlaceholderDelegate.swift"; sourceTree = "<group>"; };
 		7CF369BD2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+SearchPostViewModelDelegate.swift"; sourceTree = "<group>"; };
 		7CF369BF2754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UISearchBarDelegate.swift"; sourceTree = "<group>"; };
 		7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UITableView.swift"; sourceTree = "<group>"; };
@@ -974,8 +970,8 @@
 			isa = PBXGroup;
 			children = (
 				7CA661F0263D4387000E0B7A /* AppDelegate.swift */,
-				7C2A6B0F2786B88600C31238 /* AppDelegate+Navigator.swift */,
 				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
+				7C2A6B162786C86200C31238 /* URLNavigator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1272,7 +1268,6 @@
 			isa = PBXGroup;
 			children = (
 				7C60DC6F2692BCEE001DEA9A /* ChatViewModel.swift */,
-				7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */,
 			);
 			path = ChatVM;
 			sourceTree = "<group>";
@@ -1384,6 +1379,7 @@
 			isa = PBXGroup;
 			children = (
 				7C83EE522742378000CF1680 /* PostViewController.swift */,
+				7C2A6B1E2787EC0F00C31238 /* PostListViewReactor.swift */,
 				7CAE5AF92754B50B00426708 /* PostViewController+UITableView.swift */,
 				7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */,
 				7CAE5AFD2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift */,
@@ -1412,8 +1408,6 @@
 				7CF369B52754D65200C9D7A9 /* PostListViewController+TargetMethods.swift */,
 				7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */,
 				7CF369B32754D63100C9D7A9 /* PostListViewController+PostViewModelDelegate.swift */,
-				7CF369B72754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift */,
-				7CF369B92754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift */,
 			);
 			path = PostListVC;
 			sourceTree = "<group>";
@@ -1667,7 +1661,6 @@
 				7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */,
 				7C9C59E2277C12E4005E08BC /* UIViewController+UI_Related.swift in Sources */,
 				7CF369D32754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift in Sources */,
-				7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */,
 				7C5386DD276892D300BFEA7F /* PostService.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */,
@@ -1756,6 +1749,7 @@
 				6273750E27647DA6008A29B5 /* PostCell.swift in Sources */,
 				7CA2D983277DC7BE00D50737 /* MyPageSectionModel.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
+				7C2A6B1F2787EC0F00C31238 /* PostListViewReactor.swift in Sources */,
 				626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */,
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
@@ -1766,7 +1760,6 @@
 				7C9C59F2277C16A7005E08BC /* ReportServiceType.swift in Sources */,
 				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel+Extension.swift in Sources */,
-				7CF369BA2754D74E00C9D7A9 /* PostListViewController+PlaceholderDelegate.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				6C49951C271FAD3D00E8DB4B /* UserDefaultKeys.swift in Sources */,
@@ -1801,6 +1794,7 @@
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
 				7CF369CD2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift in Sources */,
 				7C1471CA2779FD6C006409BD /* UnregisterViewReactor.swift in Sources */,
+				7C2A6B172786C86200C31238 /* URLNavigator.swift in Sources */,
 				7C83EE532742378000CF1680 /* PostViewController.swift in Sources */,
 				7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */,
 				7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */,
@@ -1856,7 +1850,6 @@
 				7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */,
 				7C833686266208210032308D /* Interceptor.swift in Sources */,
 				7C436B5826820E5200943069 /* ReportManager.swift in Sources */,
-				7C2A6B102786B88600C31238 /* AppDelegate+Navigator.swift in Sources */,
 				7C58477227744FD9005D75B2 /* EmailVerificationViewReactor.swift in Sources */,
 				7CF8D61B277C4CD10078DD77 /* MyPageCellReactor.swift in Sources */,
 				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,
@@ -1886,7 +1879,6 @@
 				7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */,
 				7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */,
 				7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */,
-				7CF369B82754D73300C9D7A9 /* PostListViewController+UIScrollViewDelegate.swift in Sources */,
 				7CA52D69270B083F00A69F3B /* ChangeIdViewController.swift in Sources */,
 				7C3D985E26AE793D005DFAE0 /* RoomInfo.swift in Sources */,
 				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,

@@ -11,9 +11,11 @@ import RxSwift
 final class ChatListService: ChatListServiceType {
 
     fileprivate let network: Network<ChatAPI>
+    fileprivate let userDefaultsGenericService: UserDefaultsGenericServiceType
     
-    init(network: Network<ChatAPI>) {
+    init(network: Network<ChatAPI>, userDefaultsGenericService: UserDefaultsGenericServiceType) {
         self.network = network
+        self.userDefaultsGenericService = userDefaultsGenericService
     }
     
     func fetchJoinedChatList() -> Single<NetworkResultWithArray<Room>> {
@@ -22,6 +24,10 @@ final class ChatListService: ChatListServiceType {
             .map { result in
                 switch result {
                 case .success(let rooms):
+                    self.userDefaultsGenericService.set(
+                        key: UserDefaults.Keys.joinedChatRoomPIDs,
+                        value: rooms.map { $0.uuid}
+                    )
                     return .success(rooms)
                 case .error(let error):
                     return .error(error)

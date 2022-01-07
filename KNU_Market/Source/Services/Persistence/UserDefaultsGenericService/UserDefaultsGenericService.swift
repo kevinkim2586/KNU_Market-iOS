@@ -12,8 +12,6 @@ final class UserDefaultsGenericService: UserDefaultsGenericServiceType {
     
     static let shared: UserDefaultsGenericService = UserDefaultsGenericService()
     
-    private init() {}
-    
     func set(key: String, value: Any?) {
         UserDefaults.standard.set(value, forKey: key)
     }

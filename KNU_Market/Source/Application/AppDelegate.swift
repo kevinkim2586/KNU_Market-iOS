@@ -162,17 +162,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo
         print("✅ userInfo: \(userInfo)")
         
-        
-        
         Messaging.messaging().appDidReceiveMessage(userInfo)
-    
-        
-        
+
         userNotificationService.saveReceivedNotification(with: userInfo)
         urlNavigator.handleReceivedNotification(with: userInfo)
-        
-    
-        
         
         completionHandler()
     }

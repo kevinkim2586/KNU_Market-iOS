@@ -23,13 +23,17 @@ struct UIHelper {
     private static func createPostNavigationController() -> UINavigationController {
         
         let postListVC = PostListViewController(
-            postViewModel: PostListViewModel(
-                postManager: PostManager(),
-                chatManager: ChatManager(),
-                userManager: UserManager(),
-                popupService: PopupService(network: Network<PopupAPI>())
+            reactor: PostListViewReactor(
+                postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+                chatListService: ChatListService(network: Network<ChatAPI>(plugins: [AuthPlugin()]), userDefaultsGenericService: UserDefaultsGenericService()),
+                userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService())),
+                popupService: PopupService(network: Network<PopupAPI>()),
+                userDefaultsGenericService: UserDefaultsGenericService(),
+                userNotificationService: UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService())
             )
         )
+        
+
         
         postListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
         let PostNavigationController = UINavigationController(rootViewController: postListVC)
@@ -46,7 +50,7 @@ struct UIHelper {
         
         let chatListVC = ChatListViewController(
             reactor: ChatListViewReactor(
-                chatListService: ChatListService(network: Network<ChatAPI>(plugins: [AuthPlugin()])),
+                chatListService: ChatListService(network: Network<ChatAPI>(plugins: [AuthPlugin()]), userDefaultsGenericService: UserDefaultsGenericService()),
                 userDefaultsGenericService: UserDefaultsGenericService.shared
             )
         )

@@ -16,4 +16,5 @@ protocol UserNotificationServiceType: AnyObject {
     func saveNewlyReceivedChatNotifications()
     func notifyChatTabBadgeCountNeedsUpdate()
     func notifyChatListNeedsUpdate()
+    func askForNotificationPermissionAtFirstLaunch()
 }

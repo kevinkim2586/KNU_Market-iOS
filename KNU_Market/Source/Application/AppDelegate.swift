@@ -11,7 +11,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    // 사용자 알림 처리 및 저장 클래스
     let userNotificationService: UserNotificationService = UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService.shared)
+    
+    // 알림에 따른 Navigation 처리 클래스
+    let urlNavigator: URLNavigator = URLNavigator()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -27,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             object: nil
         )
         
-
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
           
@@ -66,27 +69,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("APNs device token: \(deviceTokenString)")
         
         Messaging.messaging().apnsToken = deviceToken
-        
-        // Persist it in your backend in case it's new
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("❗️ Failed to register: \(error)")
+        print("❗️didFailToRegisterForRemoteNotificationsWithError: \(error)")
     }
-    
     
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
@@ -126,9 +121,9 @@ extension AppDelegate: MessagingDelegate {
         print("✏️ deviceToken: \(deviceToken)")
         Messaging.messaging().apnsToken = deviceToken
     }
-    
-
 }
+
+//MARK: - UNUserNotificationCenterDelegate
 
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
@@ -139,24 +134,21 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
-        print("✅ willPresent before")
         guard
             let isLoggedIn: Bool = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.isLoggedIn),
             isLoggedIn == true
         else { return }
-                
+              
         let userInfo = notification.request.content.userInfo
-        Messaging.messaging().appDidReceiveMessage(userInfo)
+        Messaging.messaging().appDidReceiveMessage(userInfo)            // 알림을 수신했음을 FireBase 에 알리는 함수
         
         print("✏️ willPresent userInfo: \(userInfo)")
         
-        userNotificationService.handleReceivedSingleNotification(with: userInfo)
+        userNotificationService.saveReceivedNotification(with: userInfo)
         
         NotificationCenterService.getPreviousChats.post()
         NotificationCenterService.configureChatTabBadgeCount.post()
         
-
-
         completionHandler([[.alert, .sound, .badge]])
     }
     
@@ -168,23 +160,18 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     ) {
         
         let userInfo = response.notification.request.content.userInfo
-        Messaging.messaging().appDidReceiveMessage(userInfo)
-        
         print("✅ userInfo: \(userInfo)")
         
-
-        userNotificationService.handleReceivedSingleNotification(with: userInfo)
         
-        // 채팅 알림인 경우 채팅을 보낸 사람의 정보가 함께 날라오기 때문에 sendName 으로 채팅 알림임을 판별
-        if let chatNotification = userInfo["sendName"] as? String {
-            guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
-                return
-            }
-            
-            if let tabBarController = rootVC as? UITabBarController {
-                tabBarController.selectedIndex = 1
-            }
-        }
+        
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+    
+        
+        
+        userNotificationService.saveReceivedNotification(with: userInfo)
+        urlNavigator.handleReceivedNotification(with: userInfo)
+        
+    
         
         
         completionHandler()

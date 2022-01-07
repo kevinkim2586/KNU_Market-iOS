@@ -12,10 +12,6 @@ class PostListViewController: BaseViewController, View {
 
     typealias Reactor = PostListViewReactor
     
-    //MARK: - Properties
-    
-    var viewModel: PostListViewModel!
-    
     //MARK: - Constants
     
     struct Metrics {
@@ -151,8 +147,22 @@ class PostListViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
         
-        #warning("구현")
-//        filterBarButtonItem.rx.tap
+        filterBarButtonItem.rx.tap
+            .flatMap { [unowned self] in
+                self.presentChangePostFilterOptionActionSheet(currentFilterOption: reactor.currentState.filterOption)
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, filterOption) in
+                
+                switch filterOption {
+                case .showByRecentDate:
+                    reactor.action.onNext(Reactor.Action.changeFilterOption(.showByRecentDate))
+                case .showGatheringFirst:
+                    reactor.action.onNext(Reactor.Action.changeFilterOption(.showGatheringFirst))
+                default: break
+                }
+            })
+            .disposed(by: disposeBag)
         
         uploadPostButton.rx.tap
             .map { Reactor.Action.uploadPost }
@@ -161,7 +171,6 @@ class PostListViewController: BaseViewController, View {
         
         postListsTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
-        
 
         // Output
         

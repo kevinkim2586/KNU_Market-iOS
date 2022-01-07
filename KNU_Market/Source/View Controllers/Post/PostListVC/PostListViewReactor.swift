@@ -24,7 +24,7 @@ final class PostListViewReactor: Reactor {
         case viewWillAppear
         case fetchPostList
         case refreshTableView
-        case changeFilterOption
+        case changeFilterOption(PostFilterOptions)
         case uploadPost
     }
     
@@ -103,7 +103,6 @@ final class PostListViewReactor: Reactor {
                 Observable.just(Mutation.setIsFetchingData(false))
             ])
             
-
         case .viewWillAppear:
             NotificationCenterService.configureChatTabBadgeCount.post()
             return Observable.empty()
@@ -132,20 +131,15 @@ final class PostListViewReactor: Reactor {
                 Observable.just(Mutation.setIsFetchingData(false))
             ])
             
-        case .changeFilterOption:
+        case .changeFilterOption(let filterOption):
             
-            let newFilterOption: PostFilterOptions = currentState.filterOption == .showAll
-            ? .showGatheringFirst
-            : .showAll
-
             return Observable.concat([
-                Observable.just(Mutation.setFilterOption(newFilterOption)),
-                refreshPostList()
+                Observable.just(Mutation.setFilterOption(filterOption)),
+                refreshPostList(postFilterOption: filterOption)
             ])
 
         case .uploadPost:
             let userIsVerified: Bool = userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
-            
             return Observable.just(Mutation.setAllowedToUploadPost(userIsVerified))
         }
     }
@@ -184,7 +178,7 @@ final class PostListViewReactor: Reactor {
             
         case .setFilterOption(let postFilterOption):
             state.filterOption = postFilterOption
-        
+            
         case .setAllowedToUploadPost(let isAllowed):
             state.isAllowedToUploadPost = isAllowed
         
@@ -200,8 +194,6 @@ final class PostListViewReactor: Reactor {
 extension PostListViewReactor {
     
     private func fetchPostList(at index: Int) -> Observable<Mutation> {
-
-        print("✅ fetchPost at index: \(index)")
         
         return postService.fetchPostList(
             at: index,
@@ -226,23 +218,18 @@ extension PostListViewReactor {
             }
     }
     
-    private func refreshPostList() -> Observable<Mutation> {
-        
-
-        print("✅ refreshPostList")
-        
+    private func refreshPostList(postFilterOption: PostFilterOptions? = nil) -> Observable<Mutation> {
+    
         return postService.fetchPostList(
             at: 1,
             fetchCurrentUsers: false,
-            postFilterOption: currentState.filterOption
+            postFilterOption: postFilterOption ?? currentState.filterOption
         )
             .asObservable()
             .map { result in
                 switch result {
                 case .success(let postListModel):
-                    
                     let filteredPostListModel = self.filterBannedPostUploaders(from: postListModel)
-                    
                     return Mutation.resetPostList(filteredPostListModel)
                     
                 case .error(_):
@@ -259,6 +246,7 @@ extension PostListViewReactor {
                 switch result {
                 case .success(_):
                     return Mutation.empty
+                    
                 case .error(let error):
                     print("❗️ PostListViewReactor - failed fetching entered room info with error: \(error.errorDescription)")
                     return Mutation.empty

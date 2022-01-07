@@ -149,10 +149,10 @@ class PostListViewModel {
     
     
     func changePostFilterOption() {
-        if User.shared.postFilterOption == .showAll {
+        if User.shared.postFilterOption == .showByRecentDate {
             User.shared.postFilterOption = .showGatheringFirst
         } else {
-            User.shared.postFilterOption = .showAll
+            User.shared.postFilterOption = .showByRecentDate
         }
         refreshTableView()
     }
@@ -182,6 +182,6 @@ class PostListViewModel {
 extension PostListViewModel {
     
     var filterActionTitle: String {
-        return User.shared.postFilterOption == .showAll ? "'모집 중' 먼저보기" : "최신 순으로 보기"
+        return User.shared.postFilterOption == .showByRecentDate ? "'모집 중' 먼저보기" : "최신 순으로 보기"
     }
 }

@@ -59,7 +59,7 @@ final class MyPostsViewReactor: Reactor {
                 self.postService.fetchPostList(
                     at: currentState.index,
                     fetchCurrentUsers: true,
-                    postFilterOption: .showAll
+                    postFilterOption: .showByRecentDate
                 )
                     .asObservable()
                     .map { result in
@@ -88,7 +88,7 @@ final class MyPostsViewReactor: Reactor {
                 self.postService.fetchPostList(
                     at: 1,                          // 최초 Index는 1
                     fetchCurrentUsers: true,
-                    postFilterOption: .showAll
+                    postFilterOption: .showByRecentDate
                 )
                     .asObservable()
                     .map { result in

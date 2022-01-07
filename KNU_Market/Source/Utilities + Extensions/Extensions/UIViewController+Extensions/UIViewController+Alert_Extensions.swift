@@ -137,6 +137,12 @@ enum ActionType {
     case cancel
 }
 
+enum ChangeProfileImageType {
+    case selectFromLibrary
+    case remove
+    case cancel
+}
+
 extension UIViewController {
     
     func presentAlertWithConfirmation(title: String, message: String? = nil) -> Observable<ActionType> {
@@ -220,11 +226,44 @@ extension UIViewController {
             }
         }
     }
-}
+    
+    // PostListVC 에서 공구글 정렬 기준 변경을 위한 ActionSheet
+    func presentChangePostFilterOptionActionSheet(currentFilterOption: PostFilterOptions) -> Observable<PostFilterOptions> {
+        return Observable.create { [weak self] observer in
+        
+            let actionSheet = UIAlertController(
+                title: "글 정렬 기준",
+                message: nil,
+                preferredStyle: .actionSheet
+            )
+            actionSheet.view.tintColor = .black
+            
+            let changePostFilterAction = UIAlertAction(
+                title: currentFilterOption == .showByRecentDate ? "'모집 중' 먼저보기" : "최신 순으로 보기",
+                style: .default
+            ) { _ in
+                currentFilterOption == .showByRecentDate
+                ? observer.onNext(.showGatheringFirst)
+                : observer.onNext(.showByRecentDate)
 
-enum ChangeProfileImageType {
-    case selectFromLibrary
-    case remove
-    case cancel
+                observer.onCompleted()
+            }
+            
+            let cancelAction = UIAlertAction(
+                title: "취소",
+                style: .cancel
+            ) { _ in
+                observer.onNext(.cancel)
+                observer.onCompleted()
+            }
+            
+            actionSheet.addAction(changePostFilterAction)
+            actionSheet.addAction(cancelAction)
+            self?.present(actionSheet, animated: true)
+        
+            return Disposables.create {
+                actionSheet.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }
-

@@ -12,7 +12,7 @@ import ReactorKit
 import Differentiator
 
 final class MyPageViewReactor: Reactor {
-  
+    
     let initialState: State
     let userService: UserServiceType
     let mediaService: MediaServiceType
@@ -40,15 +40,10 @@ final class MyPageViewReactor: Reactor {
         var profileImageUid: String = "default"
         var userNickname: String
         var userId: String
-        
         var isReportChecked: Bool = false
         var isVerified: Bool
-        
         var selectedCellIndexPath: IndexPath?
-        
         var alertMessage: String?
-        
-        
         var profileImageUrlString: String {
             return K.MEDIA_REQUEST_URL + "\(profileImageUid)"
         }
@@ -99,7 +94,7 @@ final class MyPageViewReactor: Reactor {
         switch action {
         case .viewDidLoad:
             return loadUserProfile()
-
+            
         case .viewWillAppear:
             NotificationCenterService.configureChatTabBadgeCount.post()
             return Observable.empty()
@@ -120,7 +115,7 @@ final class MyPageViewReactor: Reactor {
                     case .success(let uploadImageResponseModel):
                         
                         let imageUid = uploadImageResponseModel.uid             // 서버 이미지 업로드 성공 시 날아오는 신규 image uid
-                    
+                        
                         return self.userService.updateUserInfo(type: .profileImage, updatedInfo: imageUid)
                             .asObservable()
                             .map { result in
@@ -166,7 +161,7 @@ final class MyPageViewReactor: Reactor {
                 state.isReportChecked = isReportChecked
                 state.myPageSectionModels[1].items[0].isNotificationBadgeHidden = isReportChecked
             }
-
+            
         case .updateProfileImageUid(let profileImageUid):
             state.alertMessage = "프로필 이미지 변경 성공 🎉"
             state.profileImageUid = profileImageUid
@@ -187,7 +182,7 @@ final class MyPageViewReactor: Reactor {
 
 extension MyPageViewReactor {
     
-
+    
     private func loadUserProfile() -> Observable<Mutation> {
         
         return self.userService.loadUserProfile()
@@ -195,10 +190,13 @@ extension MyPageViewReactor {
             .map { result in
                 switch result {
                 case .success(let loadProfileModel):
+                    
                     let isReportChecked = !loadProfileModel.isReportChecked
+                    
                     let profileImageUid = loadProfileModel.profileImageUid == "default"
                     ? "default"
                     : loadProfileModel.profileImageUid
+                    
                     return Mutation.setUserProfile(isReportChecked, profileImageUid)
                     
                 case .error(let error):

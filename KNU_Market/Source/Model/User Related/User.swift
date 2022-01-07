@@ -202,9 +202,9 @@ class User {
         get {
             guard let filterOption = UserDefaults.standard.object(
                 forKey: UserDefaults.Keys.postFilterOptions
-            ) as? String else { return .showAll }
+            ) as? String else { return .showByRecentDate }
             
-            return PostFilterOptions(rawValue: filterOption) ?? .showAll
+            return PostFilterOptions(rawValue: filterOption) ?? .showByRecentDate
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaults.Keys.postFilterOptions)

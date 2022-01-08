@@ -209,7 +209,6 @@ extension PostListViewReactor {
                     ? Mutation.setNeedsToFetchMoreData(false)
                     : Mutation.setPostList(self.filterBannedPostUploaders(from: postListModel))
                     
-
                 case .error(let error):
                     return error == .E601
                     ? Mutation.setNeedsToFetchMoreData(false)

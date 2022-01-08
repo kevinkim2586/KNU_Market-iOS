@@ -28,8 +28,7 @@ class PostListViewController: BaseViewController, View {
     }
     
     let refreshControl = UIRefreshControl()
-    
-    
+
     let logoBarButtonItem = UIBarButtonItem().then {
         $0.title = "크누마켓"
         $0.style = .done

@@ -228,7 +228,6 @@
 		7CF369AB2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */; };
 		7CF369AF2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */; };
 		7CF369B22754D60E00C9D7A9 /* PostListViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */; };
-		7CF369B62754D65200C9D7A9 /* PostListViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B52754D65200C9D7A9 /* PostListViewController+TargetMethods.swift */; };
 		7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369BD2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift */; };
 		7CF369C02754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369BF2754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift */; };
 		7CF369C22754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */; };
@@ -477,7 +476,6 @@
 		7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+PostImagesCollectionView.swift"; sourceTree = "<group>"; };
 		7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+TargetMethods.swift"; sourceTree = "<group>"; };
 		7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+UITableView.swift"; sourceTree = "<group>"; };
-		7CF369B52754D65200C9D7A9 /* PostListViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+TargetMethods.swift"; sourceTree = "<group>"; };
 		7CF369BD2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+SearchPostViewModelDelegate.swift"; sourceTree = "<group>"; };
 		7CF369BF2754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UISearchBarDelegate.swift"; sourceTree = "<group>"; };
 		7CF369C12754D8CF00C9D7A9 /* SearchPostsViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchPostsViewController+UITableView.swift"; sourceTree = "<group>"; };
@@ -1402,9 +1400,8 @@
 			isa = PBXGroup;
 			children = (
 				7CBB8E682754729E0003B183 /* PostListViewController.swift */,
-				7C2A6B1E2787EC0F00C31238 /* PostListViewReactor.swift */,
-				7CF369B52754D65200C9D7A9 /* PostListViewController+TargetMethods.swift */,
 				7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */,
+				7C2A6B1E2787EC0F00C31238 /* PostListViewReactor.swift */,
 			);
 			path = PostListVC;
 			sourceTree = "<group>";
@@ -1720,7 +1717,6 @@
 				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,
 				7C9C5A02277C245B005E08BC /* UserDefaultsPersistenceServiceType.swift in Sources */,
 				7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */,
-				7CF369B62754D65200C9D7A9 /* PostListViewController+TargetMethods.swift in Sources */,
 				7C8E82D62782DBDF002F7CFB /* ChatListServiceType.swift in Sources */,
 				7C9A3837276DC70200AEE831 /* LoginViewReactor.swift in Sources */,
 				7CA52D6C270B126B00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift in Sources */,

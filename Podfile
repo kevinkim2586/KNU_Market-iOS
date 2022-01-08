@@ -6,22 +6,19 @@ target 'KNU_Market' do
   use_frameworks!
 
   # Pods for KNU_Market
-  pod 'Alamofire', '~> 5.2'
-  pod 'IQKeyboardManagerSwift'
-  pod "BSImagePicker", "~> 3.1"
   
+  # Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   pod 'Firebase/DynamicLinks'
   
-
+  pod 'IQKeyboardManagerSwift'
+  pod "BSImagePicker", "~> 3.1"
   pod "GMStepper"
   pod "MessageKit"
   pod 'InputBarAccessoryView'
   pod 'MessageInputBar'
-
-  
   pod 'ProgressHUD'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftKeychainWrapper'
@@ -60,6 +57,7 @@ target 'KNU_Market' do
   # Network
   pod 'Starscream', '~> 4.0.0'
   pod 'Moya/RxSwift'
+  pod 'Alamofire', '~> 5.2'
 
   # ETC
   pod 'Then'

@@ -28,7 +28,7 @@ final class MyPageViewReactor: Reactor {
     }
     
     enum Mutation {
-        case setUserProfile(Bool? = nil, String)       // isReportChecked, profileImageUid
+        case setUserProfile(LoadProfileResponseModel)
         case updateProfileImageUid(String)             // profileImageUid
         case setProfileImageUidToDefault
         case setSelectedCellIndexPath(IndexPath)
@@ -38,10 +38,10 @@ final class MyPageViewReactor: Reactor {
     struct State {
         
         var profileImageUid: String = "default"
-        var userNickname: String
-        var userId: String
+        var userNickname: String = "-"
+        var userId: String = "-"
         var isReportChecked: Bool = false
-        var isVerified: Bool
+        var isVerified: Bool = false
         var selectedCellIndexPath: IndexPath?
         var alertMessage: String?
         var profileImageUrlString: String {
@@ -63,30 +63,15 @@ final class MyPageViewReactor: Reactor {
         ]
     }
     
-    init(userService: UserServiceType, mediaService: MediaServiceType, userDefaultsGenericService: UserDefaultsGenericServiceType) {
-        
+    init(
+        userService: UserServiceType,
+        mediaService: MediaServiceType,
+        userDefaultsGenericService: UserDefaultsGenericServiceType
+    ) {
         self.userService = userService
         self.mediaService = mediaService
         self.userDefaultsGenericService = userDefaultsGenericService
-        
-        guard
-            let nickname: String    = userDefaultsGenericService.get(key: UserDefaults.Keys.nickname),
-            let userId: String      = userDefaultsGenericService.get(key: UserDefaults.Keys.userID),
-            let isVerified: Bool    = userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail)
-        else {
-            self.initialState = State(
-                userNickname: "-",
-                userId: "-",
-                isVerified: false
-            )
-            return
-        }
-        
-        self.initialState = State(
-            userNickname: nickname,
-            userId: userId,
-            isVerified: isVerified
-        )
+        self.initialState = State()
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -155,12 +140,15 @@ final class MyPageViewReactor: Reactor {
         state.selectedCellIndexPath = nil
         
         switch mutation {
-        case .setUserProfile(let isReportChecked, let profileImageUid):
-            state.profileImageUid = profileImageUid
-            if let isReportChecked = isReportChecked {
-                state.isReportChecked = isReportChecked
-                state.myPageSectionModels[1].items[0].isNotificationBadgeHidden = isReportChecked
-            }
+        case .setUserProfile(let loadProfileUserModel):
+            
+            state.profileImageUid = loadProfileUserModel.profileImageUid
+            state.userNickname = loadProfileUserModel.nickname
+            state.userId = loadProfileUserModel.id
+            state.isVerified = loadProfileUserModel.isVerified
+            state.isReportChecked = !loadProfileUserModel.isReportChecked
+            state.myPageSectionModels[1].items[0].isNotificationBadgeHidden = !loadProfileUserModel.isReportChecked
+            
             
         case .updateProfileImageUid(let profileImageUid):
             state.alertMessage = "프로필 이미지 변경 성공 🎉"
@@ -182,7 +170,6 @@ final class MyPageViewReactor: Reactor {
 
 extension MyPageViewReactor {
     
-    
     private func loadUserProfile() -> Observable<Mutation> {
         
         return self.userService.loadUserProfile()
@@ -190,14 +177,7 @@ extension MyPageViewReactor {
             .map { result in
                 switch result {
                 case .success(let loadProfileModel):
-                    
-                    let isReportChecked = !loadProfileModel.isReportChecked
-                    
-                    let profileImageUid = loadProfileModel.profileImageUid == "default"
-                    ? "default"
-                    : loadProfileModel.profileImageUid
-                    
-                    return Mutation.setUserProfile(isReportChecked, profileImageUid)
+                    return Mutation.setUserProfile(loadProfileModel)
                     
                 case .error(let error):
                     return Mutation.setAlertMessage(error.errorDescription)

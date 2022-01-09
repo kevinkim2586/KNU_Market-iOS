@@ -164,8 +164,30 @@ class PostListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         uploadPostButton.rx.tap
-            .map { Reactor.Action.uploadPost }
-            .bind(to: reactor.action)
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                
+                if reactor.currentState.isUserVerified {
+                    let uploadVC = UploadPostViewController(
+                        viewModel: UploadPostViewModel(
+                            postManager: PostManager(),
+                            mediaManager: MediaManager()
+                        )
+                    )
+                    self.navigationController?.pushViewController(
+                        uploadVC,
+                        animated: true
+                    )
+                    
+                } else {
+                    self.showSimpleBottomAlertWithAction(
+                        message: "학생 인증을 마치셔야 사용이 가능해요.👀",
+                        buttonTitle: "인증하러 가기"
+                    ) {
+                        self.presentVerifyOptionVC()
+                    }
+                }
+            })
             .disposed(by: disposeBag)
         
         postListsTableView.rx.setDelegate(self)
@@ -178,13 +200,7 @@ class PostListViewController: BaseViewController, View {
             .distinctUntilChanged()
             .filter { $0 != nil }
             .subscribe(onNext: { nickname in
-                guard let defaultImage = UIImage(systemName: "checkmark.circle") else { return }
-                
-                SPIndicator.present(
-                    title: "\(nickname!)님",
-                    message: "환영합니다 🎉",
-                    preset: .custom(UIImage(systemName: "face.smiling")?.withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink, renderingMode: .alwaysOriginal) ?? defaultImage)
-                )
+                UIHelper.presentWelcomePopOver(nickname: nickname!)
             })
             .disposed(by: disposeBag)
         

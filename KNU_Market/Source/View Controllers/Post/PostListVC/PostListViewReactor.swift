@@ -25,7 +25,6 @@ final class PostListViewReactor: Reactor {
         case fetchPostList
         case refreshTableView
         case changeFilterOption(PostFilterOptions)
-        case uploadPost
     }
     
     enum Mutation {
@@ -38,7 +37,6 @@ final class PostListViewReactor: Reactor {
         case setNeedsToFetchMoreData(Bool)
         case setIsFetchingData(Bool)
         case setFilterOption(PostFilterOptions)
-        case setAllowedToUploadPost(Bool)
         case empty
     }
     
@@ -53,6 +51,7 @@ final class PostListViewReactor: Reactor {
         var popupModel: PopupModel?
         var filterOption: PostFilterOptions
         var bannedPostUploaders: [String]         // 내가 차단한 유저
+        var isUserVerified: Bool
         var isAllowedToUploadPost: Bool?
     }
     
@@ -71,15 +70,19 @@ final class PostListViewReactor: Reactor {
         self.userDefaultsGenericService = userDefaultsGenericService
         self.userNotificationService = userNotificationService
         
-        
+        // 사용자가 설정한 글 정렬 기준 우선적으로 가져오기
         let postFilterOption: String = userDefaultsGenericService.get(key: UserDefaults.Keys.postFilterOptions) ?? PostFilterOptions.showGatheringFirst.rawValue
         
+        // 사용자가 개인적으로 차단한 유저 정보 불러오기
         let bannedPostUploaders: [String] = userDefaultsGenericService.get(key: UserDefaults.Keys.bannedPostUploaders) ?? []
         
+        // 인증된 유저인지 아닌지 판별
+        let isUserVerified: Bool = userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
         
         self.initialState = State(
             filterOption: PostFilterOptions(rawValue: postFilterOption) ?? .showGatheringFirst,
-            bannedPostUploaders: bannedPostUploaders
+            bannedPostUploaders: bannedPostUploaders,
+            isUserVerified: isUserVerified
         )
     }
     
@@ -126,7 +129,6 @@ final class PostListViewReactor: Reactor {
             return Observable.concat([
                 Observable.just(Mutation.setIsFetchingData(true)),
                 Observable.just(Mutation.setNeedsToFetchMoreData(true)),
-                
                 refreshPostList(),
                 Observable.just(Mutation.setIsFetchingData(false))
             ])
@@ -137,10 +139,6 @@ final class PostListViewReactor: Reactor {
                 Observable.just(Mutation.setFilterOption(filterOption)),
                 refreshPostList(postFilterOption: filterOption)
             ])
-
-        case .uploadPost:
-            let userIsVerified: Bool = userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
-            return Observable.just(Mutation.setAllowedToUploadPost(userIsVerified))
         }
     }
     
@@ -178,9 +176,6 @@ final class PostListViewReactor: Reactor {
             
         case .setFilterOption(let postFilterOption):
             state.filterOption = postFilterOption
-            
-        case .setAllowedToUploadPost(let isAllowed):
-            state.isAllowedToUploadPost = isAllowed
         
         case .empty:
             break

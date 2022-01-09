@@ -40,6 +40,8 @@ final class UserDefaultsPersistenceService: UserDefaultsPersistenceServiceType {
         userDefaultsGenericService.set(key: UserDefaults.Keys.nickname, value: model.nickname)
         userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: model.profileImageUid)
         userDefaultsGenericService.set(key: UserDefaults.Keys.hasVerifiedEmail, value: model.isVerified)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.isReportChecked, value: !model.isReportChecked)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: model.profileImageUid)
     }
     
     func updateLocalUserInfo(type: UpdateUserInfoType, infoString: String) {

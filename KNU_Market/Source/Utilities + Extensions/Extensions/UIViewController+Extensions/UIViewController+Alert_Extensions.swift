@@ -266,4 +266,39 @@ extension UIViewController {
             }
         }
     }
+    
+    func presentPostDeleteActionSheet() -> Observable<ActionType> {
+        return Observable.create { [weak self] observer in
+            let actionSheet = UIAlertController(
+                title: nil,
+                message: nil,
+                preferredStyle: .actionSheet
+            )
+            actionSheet.view.tintColor = .black
+            
+            let deleteAction = UIAlertAction(
+                title: "공구 삭제하기",
+                style: .destructive
+            ) { _ in
+                observer.onNext(.ok)
+                observer.onCompleted()
+            }
+        
+            let cancelAction = UIAlertAction(
+                title: "취소",
+                style: .cancel
+            ) { _ in
+                observer.onNext(.cancel)
+                observer.onCompleted()
+            }
+        
+            actionSheet.addAction(deleteAction)
+            actionSheet.addAction(cancelAction)
+            self?.present(actionSheet, animated: true, completion: nil)
+    
+            return Disposables.create {
+                actionSheet.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }

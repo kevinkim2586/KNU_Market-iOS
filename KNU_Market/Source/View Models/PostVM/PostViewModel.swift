@@ -45,7 +45,6 @@ class PostViewModel {
     
     var imageSources: [InputSource] = [InputSource]()
     
-    let postImages: [UIImage]? = [UIImage]()
     
     var currentlyGatheredPeople: Int {
         guard let model = model else { return 1 }
@@ -262,11 +261,7 @@ class PostViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let chatRoom):
-                
-                UserDefaultsGenericService.shared.set(
-                    key: UserDefaults.Keys.joinedChatRoomPIDs,
-                    value: chatRoom.map { $0.uuid }
-                )
+                break
                 
             case .failure(let error):
                 self.delegate?.failedLoadingData(with: error)

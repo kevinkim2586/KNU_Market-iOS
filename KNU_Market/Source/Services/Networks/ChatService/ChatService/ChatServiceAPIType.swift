@@ -13,6 +13,7 @@ import RxSwift
 protocol ChatServiceAPIType: AnyObject {
     func changeJoinStatus(chatFunction: ChatFunction, pid: String) -> Single<NetworkResult>
     func getRoomInfo(pid: String) -> Single<NetworkResultWithValue<RoomInfo>>
+    func fetchJoinedChatList() -> Single<NetworkResultWithArray<Room>>
     func getPreviousChats(pid: String, index: Int) -> Single<NetworkResultWithArray<ChatResponseModel>>
     func getNewlyReceivedChats(pid: String, index: Int, lastChatDate: String) -> Single<NetworkResultWithArray<ChatResponseModel>>
     func banUser(userUid: String, room: String) -> Single<NetworkResult>

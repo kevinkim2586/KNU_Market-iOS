@@ -167,7 +167,6 @@ class ChatListViewController: BaseViewController, View {
             }
             .disposed(by: disposeBag)
         
-        
         NotificationCenterService.updateChatList.addObserver()
             .map { _ in Reactor.Action.getChatList }
             .bind(to: reactor.action)

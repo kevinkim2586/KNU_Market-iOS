@@ -13,10 +13,10 @@ func dismissViewController(_ viewController: UIViewController, animated: Bool) {
         DispatchQueue.main.async {
             dismissViewController(viewController, animated: animated)
         }
-
+        
         return
     }
-
+    
     if viewController.presentingViewController != nil {
         viewController.dismiss(animated: animated, completion: nil)
     }
@@ -42,58 +42,58 @@ extension Reactive where Base: UIImagePickerController {
                 observer.on(.error(error))
                 return Disposables.create()
             }
-
+            
             guard let parent = parent else {
                 observer.on(.completed)
                 return Disposables.create()
             }
-
+            
             parent.present(imagePicker, animated: animated, completion: nil)
             observer.on(.next(imagePicker))
             
             return Disposables.create(dismissDisposable, Disposables.create {
-                    dismissViewController(imagePicker, animated: animated)
-                })
+                dismissViewController(imagePicker, animated: animated)
+            })
         }
     }
 }
 
 #if os(iOS)
+
+import RxSwift
+import RxCocoa
+import UIKit
+
+extension Reactive where Base: UIImagePickerController {
     
-    import RxSwift
-    import RxCocoa
-    import UIKit
-
-    extension Reactive where Base: UIImagePickerController {
-
-        /**
-         Reactive wrapper for `delegate` message.
-         */
-        public var didFinishPickingMediaWithInfo: Observable<[UIImagePickerController.InfoKey : AnyObject]> {
-            return delegate
-                .methodInvoked(#selector(UIImagePickerControllerDelegate.imagePickerController(_:didFinishPickingMediaWithInfo:)))
-                .map({ (a) in
-                    return try castOrThrow(Dictionary<UIImagePickerController.InfoKey, AnyObject>.self, a[1])
-                })
-        }
-
-        /**
-         Reactive wrapper for `delegate` message.
-         */
-        public var didCancel: Observable<()> {
-            return delegate
-                .methodInvoked(#selector(UIImagePickerControllerDelegate.imagePickerControllerDidCancel(_:)))
-                .map {_ in () }
-        }
-        
+    /**
+     Reactive wrapper for `delegate` message.
+     */
+    public var didFinishPickingMediaWithInfo: Observable<[UIImagePickerController.InfoKey : AnyObject]> {
+        return delegate
+            .methodInvoked(#selector(UIImagePickerControllerDelegate.imagePickerController(_:didFinishPickingMediaWithInfo:)))
+            .map({ (a) in
+                return try castOrThrow(Dictionary<UIImagePickerController.InfoKey, AnyObject>.self, a[1])
+            })
     }
     
+    /**
+     Reactive wrapper for `delegate` message.
+     */
+    public var didCancel: Observable<()> {
+        return delegate
+            .methodInvoked(#selector(UIImagePickerControllerDelegate.imagePickerControllerDidCancel(_:)))
+            .map {_ in () }
+    }
+    
+}
+
 #endif
 
 private func castOrThrow<T>(_ resultType: T.Type, _ object: Any) throws -> T {
     guard let returnValue = object as? T else {
         throw RxCocoaError.castingError(object: object, targetType: resultType)
     }
-
+    
     return returnValue
 }

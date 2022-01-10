@@ -29,6 +29,7 @@ final class PostListViewReactor: Reactor {
     
     enum Mutation {
         case setPostList([PostListModel])
+        case removePostList
         case resetPostList([PostListModel])
         case incrementIndex
         case setUserNickname(String)
@@ -129,7 +130,9 @@ final class PostListViewReactor: Reactor {
             return Observable.concat([
                 Observable.just(Mutation.setIsFetchingData(true)),
                 Observable.just(Mutation.setNeedsToFetchMoreData(true)),
+                Observable.just(Mutation.removePostList),
                 refreshPostList(),
+                Observable.just(Mutation.incrementIndex),
                 Observable.just(Mutation.setIsFetchingData(false))
             ])
             
@@ -150,9 +153,13 @@ final class PostListViewReactor: Reactor {
         case .setPostList(let postListModel):
             state.postList.append(contentsOf: postListModel)
             
-        case .resetPostList(let postListModel):
+            
+        case .removePostList:
             state.postList.removeAll()
-            state.postList.append(contentsOf: postListModel)
+            
+            
+        case .resetPostList(let postListModel):
+            state.postList = postListModel
             state.index = 1
             
         case .incrementIndex:
@@ -189,6 +196,8 @@ final class PostListViewReactor: Reactor {
 extension PostListViewReactor {
     
     private func fetchPostList(at index: Int) -> Observable<Mutation> {
+        
+        print("✅ fetching index: \(index)")
         
         return postService.fetchPostList(
             at: index,

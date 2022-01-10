@@ -8,11 +8,13 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.cellId, for: indexPath) as? PostCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
-        let postDetail = viewModel.model?.postDetail ?? "로딩 중.."
+        let postDetail = reactor?.currentState.postModel?.postDetail ?? "로딩 중.."
         
+//        let postDetail = viewModel.model?.postDetail ?? "로딩 중.."
+//
         cell.title = postDetail
         
         cell.titleLabel.numberOfLines = 0

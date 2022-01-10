@@ -2,8 +2,12 @@ import UIKit
 import SnapKit
 import ImageSlideshow
 import RxSwift
+import RxCocoa
+import ReactorKit
 
-class PostViewController: BaseViewController {
+class PostViewController: BaseViewController, View {
+    
+    typealias Reactor = PostViewReactor
     
     //MARK: - Properties
     var viewModel: PostViewModel!
@@ -14,33 +18,41 @@ class PostViewController: BaseViewController {
     private lazy var headerViewHeight = view.frame.size.height * 0.5
 
     //MARK: - UI
-    lazy var postControlButtonView: KMPostButtonView = {
-        let view = KMPostButtonView()
-        view.delegate = self
-        return view
-    }()
-        
-    lazy var postHeaderView: PostHeaderView = {
-        let headerView = PostHeaderView(
-            frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: headerViewHeight),
-            currentVC: self
-        )
-       return headerView
-    }()
+    
+    let postControlButtonView = KMPostButtonView()
+    
+    lazy var postHeaderView = PostHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: headerViewHeight))
+    
+    
+//    lazy var postControlButtonView: KMPostButtonView = {
+//        let view = KMPostButtonView()
+//        view.delegate = self
+//        return view
+//    }()
+//
+//    lazy var postHeaderView: PostHeaderView = {
+//        let headerView = PostHeaderView(
+//            frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: headerViewHeight),
+//            currentVC: self
+//        )
+//       return headerView
+//    }()
 
-    lazy var postTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorColor = .clear
-        tableView.separatorStyle = .none
-        tableView.allowsSelection = true
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.tintColor = .clear
-        tableView.register(PostCell.self, forCellReuseIdentifier: "PostCell")
-        tableView.refreshControl?.addTarget(self, action: #selector(refreshPage), for: .valueChanged)
-        return tableView
-    }()
+    let postTableView = UITableView().then {
+//        tableView.delegate = self
+//        tableView.dataSource = self
+        $0.separatorColor = .clear
+        $0.separatorStyle = .none
+        $0.allowsSelection = true
+//        tableView.refreshControl = UIRefreshControl()
+//        tableView.refreshControl?.tintColor = .clear
+        $0.register(PostCell.self, forCellReuseIdentifier: PostCell.cellId)
+//        tableView.refreshControl?.addTarget(self, action: #selector(refreshPage), for: .valueChanged)
+    }
+    
+    let refreshControl = UIRefreshControl().then {
+        $0.tintColor = .clear
+    }
     
     lazy var postBottomView: KMPostBottomView = {
         let view = KMPostBottomView()
@@ -57,6 +69,11 @@ class PostViewController: BaseViewController {
         self.viewModel.delegate = self
         self.isFromChatVC = isFromChatVC
         hidesBottomBarWhenPushed = true
+    }
+    
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
     }
 
     required init?(coder: NSCoder) {
@@ -81,11 +98,12 @@ class PostViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
  
-    
     //MARK: - UI Setup
 
     override func setupLayout() {
         super.setupLayout()
+        
+        postTableView.refreshControl = refreshControl
         
         view.addSubview(postTableView)
         view.addSubview(postControlButtonView)
@@ -113,13 +131,111 @@ class PostViewController: BaseViewController {
         }
     }
     
+    
     private func configure() {
         loadInitialMethods()
-        createObservers()
         configureHeaderView()
         bind()
     }
     
+    
+    //MARK: - Binding
+    
+    func bind(reactor: PostViewReactor) {
+        
+        // Input
+        
+        self.rx.viewDidLoad
+            .map { _ in Reactor.Action.viewDidLoad }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        postTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        refreshControl.rx.controlEvent(.valueChanged)
+            .map { Reactor.Action.refreshPage }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        
+        postControlButtonView.backButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+
+        postControlButtonView.trashButton.rx.tap
+            .flatMap { [unowned self] in
+                self.presentPostDeleteActionSheet()
+            }
+            .map { actionType -> Observable<ActionType> in
+                switch actionType {
+                case .ok:
+                    return self.presentAlertWithConfirmation(
+                        title: "정말 삭제하시겠습니까?",
+                        message: nil
+                    )
+                case .cancel:
+                    return .empty()
+                }
+            }
+            .flatMap { $0 }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, actionType) in
+                switch actionType {
+                case .ok:
+                    self.reactor?.action.onNext(.deletePost)
+                case .cancel:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
+        
+
+        
+        
+        // Output
+        
+        reactor.state
+            .map { $0.postModel }
+            .filter { $0 != nil }
+            .subscribe(onNext: { _ in
+                
+                
+                
+                self.reactor?.action.onNext(.updatePostControlButtonView)
+                self.reactor?.action.onNext(.updatePostHeaderView)
+                self.reactor?.action.onNext(.updatePostBottomView)
+                
+            })
+            .disposed(by: disposeBag)
+
+        
+
+        
+        // Notification Center
+        
+        NotificationCenterService.presentVerificationNeededAlert.addObserver()
+            .withUnretained(self)
+            .bind { _ in
+                self.presentUserVerificationNeededAlert()
+            }
+            .disposed(by: disposeBag)
+        
+        NotificationCenterService.didUpdatePost.addObserver()
+            .withUnretained(self)
+            .bind { _ in
+                self.reactor?.action.onNext(.refreshPage)
+            }
+            .disposed(by: disposeBag)
+        
+        
+
+    }
+
     private func bind() {
         linkOnClicked.asObservable()
             .subscribe(onNext: { [weak self] in
@@ -161,17 +277,6 @@ class PostViewController: BaseViewController {
         postHeaderView.frame = headerRect
     }
     
-    func createObservers() {
-        
-        createObserversForPresentingVerificationAlert()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(refreshPage),
-            name: .didUpdatePost,
-            object: nil
-        )
-    }
 
 }
 

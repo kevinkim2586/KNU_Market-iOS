@@ -48,7 +48,6 @@
 		7C2A6B152786B9A800C31238 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B142786B9A800C31238 /* UserNotificationService.swift */; };
 		7C2A6B172786C86200C31238 /* URLNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B162786C86200C31238 /* URLNavigator.swift */; };
 		7C2A6B1F2787EC0F00C31238 /* PostListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B1E2787EC0F00C31238 /* PostListViewReactor.swift */; };
-		7C3758ED265FA97A0081A85D /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3758EC265FA97A0081A85D /* PostListViewModel.swift */; };
 		7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */; };
 		7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */; };
 		7C3B4FF026A928C700E2CA8F /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FEF26A928C700E2CA8F /* EmailVerificationViewController.swift */; };
@@ -136,6 +135,7 @@
 		7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */; };
 		7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5A27182A3400295A3F /* BaseViewController.swift */; };
 		7C922A5D27185EB000295A3F /* SendUsMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */; };
+		7C9566F12789D33E006BFFAD /* PostViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9566F02789D33E006BFFAD /* PostViewReactor.swift */; };
 		7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A32706EEDF00579EE6 /* Preview.swift */; };
 		7C98D2A62706F54B00579EE6 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A52706F54B00579EE6 /* UIViewController+Preview.swift */; };
 		7C9A3835276DC6FC00AEE831 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9A3834276DC6FC00AEE831 /* LoginViewController.swift */; };
@@ -293,7 +293,6 @@
 		7C2A6B142786B9A800C31238 /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		7C2A6B162786C86200C31238 /* URLNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNavigator.swift; sourceTree = "<group>"; };
 		7C2A6B1E2787EC0F00C31238 /* PostListViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewReactor.swift; sourceTree = "<group>"; };
-		7C3758EC265FA97A0081A85D /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewController.swift; sourceTree = "<group>"; };
 		7C3B4FEF26A928C700E2CA8F /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
@@ -382,6 +381,7 @@
 		7C922A57271826FB00295A3F /* DeveloperInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInformationViewController.swift; sourceTree = "<group>"; };
 		7C922A5A27182A3400295A3F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageViewController.swift; sourceTree = "<group>"; };
+		7C9566F02789D33E006BFFAD /* PostViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewReactor.swift; sourceTree = "<group>"; };
 		7C98D2A32706EEDF00579EE6 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7C98D2A52706F54B00579EE6 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		7C9A3834276DC6FC00AEE831 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -1254,7 +1254,6 @@
 			children = (
 				7C5E21282646558600E98FE5 /* PostViewModel.swift */,
 				7C8839E52643CD7700F9F78C /* UploadPostViewModel.swift */,
-				7C3758EC265FA97A0081A85D /* PostListViewModel.swift */,
 				7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */,
 			);
 			path = PostVM;
@@ -1375,6 +1374,7 @@
 			isa = PBXGroup;
 			children = (
 				7C83EE522742378000CF1680 /* PostViewController.swift */,
+				7C9566F02789D33E006BFFAD /* PostViewReactor.swift */,
 				7CAE5AF92754B50B00426708 /* PostViewController+UITableView.swift */,
 				7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */,
 				7CAE5AFD2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift */,
@@ -1670,7 +1670,6 @@
 				7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */,
 				7C89B2E726FC1D9E004109FE /* PostFilterOptions.swift in Sources */,
 				7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */,
-				7C3758ED265FA97A0081A85D /* PostListViewModel.swift in Sources */,
 				7C0F1CBA26BA6B310068FF45 /* NotificationName.swift in Sources */,
 				7CEDBB5D2702E0820078F5E1 /* KMErrorLabel.swift in Sources */,
 				7C58477C2779CCDC005D75B2 /* ReportUserViewReactor.swift in Sources */,
@@ -1804,6 +1803,7 @@
 				7CF369AB2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift in Sources */,
 				7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */,
 				7C5386EA2768D14500BFEA7F /* PopupReactor.swift in Sources */,
+				7C9566F12789D33E006BFFAD /* PostViewReactor.swift in Sources */,
 				7C5386E82768D10A00BFEA7F /* PopupViewController.swift in Sources */,
 				7C5386DF27689B5B00BFEA7F /* MediaService.swift in Sources */,
 				7C58476C2772E6B7005D75B2 /* CongratulateUserViewReactor.swift in Sources */,

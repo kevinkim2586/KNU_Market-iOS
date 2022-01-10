@@ -56,7 +56,6 @@ extension PostViewController: PostViewModelDelegate {
     }
     
     func failedMarkingPostDone(with error: NetworkError) {
-        dismissProgressBar()
         showSimpleBottomAlert(with: error.errorDescription)
     }
     

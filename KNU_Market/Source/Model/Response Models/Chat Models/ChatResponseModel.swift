@@ -2,7 +2,7 @@ import Foundation
 
 //MARK: - 채팅 받아오기 Model
 
-struct ChatResponseModel: Decodable {
+struct ChatResponseModel: ModelType {
     
     let totalPage: String
     let currentPage: String
@@ -16,7 +16,7 @@ struct ChatResponseModel: Decodable {
     }
 }
 
-struct Chat: Decodable {
+struct Chat: ModelType {
     
     let chat_uid: Int
     let chat_userUID: String

@@ -1,12 +1,12 @@
 import Foundation
 
-struct RoomInfo: Decodable {
+struct RoomInfo: ModelType {
     
     let post: Post
     let member: [Member]
 }
 
-struct Post: Decodable {
+struct Post: ModelType {
     
     let uuid: String
     let title: String
@@ -34,11 +34,11 @@ struct Post: Decodable {
     }
 }
 
-struct UploaderInfo: Decodable {
+struct UploaderInfo: ModelType {
     let uid: String
 }
 
-struct Member: Decodable {
+struct Member: ModelType {
     
     let uid: Int
     let userUID: String

@@ -87,17 +87,6 @@ class PostViewController: BaseViewController, View {
         configure()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationController?.interactivePopGestureRecognizer?.delegate = nil
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
- 
     //MARK: - UI Setup
 
     override func setupLayout() {
@@ -150,6 +139,22 @@ class PostViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        self.rx.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationController?.setNavigationBarHidden(true, animated: true)
+                self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+            })
+            .disposed(by: disposeBag)
+        
+        self.rx.viewWillDisappear
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+            })
+            .disposed(by: disposeBag)
+
+        
         postTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
@@ -168,7 +173,8 @@ class PostViewController: BaseViewController, View {
         
 
         postControlButtonView.trashButton.rx.tap
-            .flatMap { [unowned self] in
+            .withUnretained(self)
+            .flatMap {  _ in
                 self.presentPostDeleteActionSheet()
             }
             .map { actionType -> Observable<ActionType> in
@@ -202,14 +208,14 @@ class PostViewController: BaseViewController, View {
         reactor.state
             .map { $0.postModel }
             .filter { $0 != nil }
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { postModel in
                 
                 
                 
-                self.reactor?.action.onNext(.updatePostControlButtonView)
-                self.reactor?.action.onNext(.updatePostHeaderView)
-                self.reactor?.action.onNext(.updatePostBottomView)
-                
+//                self.reactor?.action.onNext(.updatePostControlButtonView)
+//                self.reactor?.action.onNext(.updatePostHeaderView)
+//                self.reactor?.action.onNext(.updatePostBottomView)
+//
             })
             .disposed(by: disposeBag)
 
@@ -235,6 +241,7 @@ class PostViewController: BaseViewController, View {
         
 
     }
+
 
     private func bind() {
         linkOnClicked.asObservable()

@@ -14,6 +14,7 @@ final class PostViewReactor: Reactor {
     let initialState: State
     let postService: PostServiceType
     let chatService: ChatServiceAPIType
+    let userDefaultsService: UserDefaultsGenericServiceType
     
     enum Action {
         
@@ -41,22 +42,37 @@ final class PostViewReactor: Reactor {
         let isFromChatVC: Bool      // ChatVC에서 넘어온거면 PostVC에서 "채팅방 입장" 버튼 눌렀을 때 입장이 아닌 그냥 뒤로가기가 되어야 하기 때문
         
         var postModel: PostDetailModel?
+    
         
-
         var alertMessage: String?
         var popupAlertMessage: String?
         var popVCAfterDelay: Bool = false
         
+        
+        
+        // Computed Properties
+        // nickname, joinedchatroom, bannedpostuploaders
+  
+        
+        
     }
+    
+    
+    
+  
+    
+    //MARK: - Initialization
     
     init(
         pageId: String,
         isFromChatVC: Bool = false,
         postService: PostServiceType,
-        chatService: ChatServiceAPIType
+        chatService: ChatServiceAPIType,
+        userDefaultsService: UserDefaultsGenericServiceType
     ) {
         self.postService = postService
         self.chatService = chatService
+        self.userDefaultsService = userDefaultsService
         self.initialState = State(pageId: pageId, isFromChatVC: isFromChatVC)
     }
     
@@ -98,6 +114,8 @@ final class PostViewReactor: Reactor {
         var state = state
         state.alertMessage = nil
         state.popupAlertMessage = nil
+        
+        
         
         
         

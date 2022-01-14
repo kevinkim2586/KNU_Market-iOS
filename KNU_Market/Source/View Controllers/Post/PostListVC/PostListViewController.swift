@@ -34,16 +34,6 @@ class PostListViewController: BaseViewController, View {
         $0.style = .done
     }
     
-    let searchBarButtonItem = UIBarButtonItem().then {
-        $0.image = UIImage(systemName: "magnifyingglass")
-        $0.style = .plain
-    }
-    
-    let filterBarButtonItem = UIBarButtonItem().then {
-        $0.image = UIImage(named: K.Images.homeMenuIcon) ?? UIImage(systemName: "gear")
-        $0.style = .plain
-    }
-    
     let uploadPostButton = UIButton().then {
         $0.backgroundColor = UIColor(named: K.Color.appColor)
         $0.addBounceAnimation()
@@ -84,7 +74,6 @@ class PostListViewController: BaseViewController, View {
         super.setupLayout()
         
         navigationItem.leftBarButtonItem = logoBarButtonItem
-        navigationItem.rightBarButtonItems = [filterBarButtonItem, searchBarButtonItem]
         
         view.addSubview(postListsTableView)
         view.addSubview(uploadPostButton)
@@ -133,33 +122,6 @@ class PostListViewController: BaseViewController, View {
                     at: .top,
                     animated: true
                 )
-            })
-            .disposed(by: disposeBag)
-        
-        searchBarButtonItem.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                let searchVC = SearchPostsViewController(
-                    viewModel: SearchPostViewModel(postManager: PostManager())
-                )
-                self.navigationController?.pushViewController(searchVC, animated: true)
-            })
-            .disposed(by: disposeBag)
-        
-        filterBarButtonItem.rx.tap
-            .flatMap { [unowned self] in
-                self.presentChangePostFilterOptionActionSheet(currentFilterOption: reactor.currentState.filterOption)
-            }
-            .withUnretained(self)
-            .subscribe(onNext: { (_, filterOption) in
-                
-                switch filterOption {
-                case .showByRecentDate:
-                    reactor.action.onNext(Reactor.Action.changeFilterOption(.showByRecentDate))
-                case .showGatheringFirst:
-                    reactor.action.onNext(Reactor.Action.changeFilterOption(.showGatheringFirst))
-                default: break
-                }
             })
             .disposed(by: disposeBag)
         
@@ -220,14 +182,17 @@ class PostListViewController: BaseViewController, View {
                 self.postListsTableView.deselectRow(at: indexPath, animated: true)
                 
                 let postUUID = reactor.currentState.postList[indexPath.row].uuid
-                
                 let postVC = PostViewController(
-                    viewModel: PostViewModel(
+                    reactor: PostViewReactor(
                         pageId: postUUID,
-                        postManager: PostManager(),
-                        chatManager: ChatManager()
-                    ),
-                    isFromChatVC: false
+                        isFromChatVC: false,
+                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+                        chatService: ChatService(
+                            network: Network<ChatAPI>(plugins: [AuthPlugin()]),
+                            userDefaultsGenericService: UserDefaultsGenericService()
+                        ),
+                        userDefaultsService: UserDefaultsGenericService()
+                    )
                 )
                 self.navigationController?.pushViewController(postVC, animated: true)
             })

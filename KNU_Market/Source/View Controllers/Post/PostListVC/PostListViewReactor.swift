@@ -24,7 +24,6 @@ final class PostListViewReactor: Reactor {
         case viewWillAppear
         case fetchPostList
         case refreshTableView
-        case changeFilterOption(PostFilterOptions)
     }
     
     enum Mutation {
@@ -37,7 +36,6 @@ final class PostListViewReactor: Reactor {
         case setErrorMessage(String)
         case setNeedsToFetchMoreData(Bool)
         case setIsFetchingData(Bool)
-        case setFilterOption(PostFilterOptions)
         case empty
     }
     
@@ -50,7 +48,6 @@ final class PostListViewReactor: Reactor {
         var errorMessage: String? = nil
         var needsToShowPopup: Bool = false
         var popupModel: PopupModel?
-        var filterOption: PostFilterOptions
         var bannedPostUploaders: [String]         // 내가 차단한 유저
         var isUserVerified: Bool
         var isAllowedToUploadPost: Bool?
@@ -81,7 +78,6 @@ final class PostListViewReactor: Reactor {
         let isUserVerified: Bool = userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
         
         self.initialState = State(
-            filterOption: PostFilterOptions(rawValue: postFilterOption) ?? .showGatheringFirst,
             bannedPostUploaders: bannedPostUploaders,
             isUserVerified: isUserVerified
         )
@@ -135,13 +131,6 @@ final class PostListViewReactor: Reactor {
                 Observable.just(Mutation.incrementIndex),
                 Observable.just(Mutation.setIsFetchingData(false))
             ])
-            
-        case .changeFilterOption(let filterOption):
-            
-            return Observable.concat([
-                Observable.just(Mutation.setFilterOption(filterOption)),
-                refreshPostList(postFilterOption: filterOption)
-            ])
         }
     }
     
@@ -180,9 +169,6 @@ final class PostListViewReactor: Reactor {
             
         case .setNeedsToFetchMoreData(let needsToFetchMore):
             state.needsToFetchMoreData = needsToFetchMore
-            
-        case .setFilterOption(let postFilterOption):
-            state.filterOption = postFilterOption
         
         case .empty:
             break
@@ -197,12 +183,11 @@ extension PostListViewReactor {
     
     private func fetchPostList(at index: Int) -> Observable<Mutation> {
         
-        print("✅ fetching index: \(index)")
-        
+
         return postService.fetchPostList(
             at: index,
             fetchCurrentUsers: false,
-            postFilterOption: currentState.filterOption
+            postFilterOption: .showGatheringFirst
         )
             .asObservable()
             .map { result in
@@ -226,7 +211,7 @@ extension PostListViewReactor {
         return postService.fetchPostList(
             at: 1,
             fetchCurrentUsers: false,
-            postFilterOption: postFilterOption ?? currentState.filterOption
+            postFilterOption: .showGatheringFirst
         )
             .asObservable()
             .map { result in

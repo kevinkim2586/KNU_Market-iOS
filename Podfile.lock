@@ -136,6 +136,7 @@ PODS:
   - PMAlertController (4.0.1)
   - ProgressHUD (13.6)
   - PromisesObjC (2.0.0)
+  - PryntTrimmerView (4.0.2)
   - ReactorKit (3.1.0):
     - RxSwift (~> 6.0)
     - WeakMapTable (~> 1.1)
@@ -176,6 +177,7 @@ PODS:
   - SnapKit (5.0.1)
   - SPIndicator (1.6.0)
   - Starscream (4.0.4)
+  - SteviaLayout (4.7.3)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (4.3.0)
   - TextFieldEffects (1.6.0)
@@ -183,6 +185,9 @@ PODS:
   - "UITextView+Placeholder (1.4.0)"
   - ViewAnimator (3.1.0)
   - WeakMapTable (1.2.0)
+  - YPImagePicker (5.2.1):
+    - PryntTrimmerView (= 4.0.2)
+    - SteviaLayout (= 4.7.3)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
@@ -226,6 +231,7 @@ DEPENDENCIES:
   - Then
   - "UITextView+Placeholder"
   - ViewAnimator
+  - YPImagePicker
 
 SPEC REPOS:
   trunk:
@@ -259,6 +265,7 @@ SPEC REPOS:
     - PMAlertController
     - ProgressHUD
     - PromisesObjC
+    - PryntTrimmerView
     - ReactorKit
     - ReusableKit
     - RxAnimated
@@ -274,6 +281,7 @@ SPEC REPOS:
     - SnapKit
     - SPIndicator
     - Starscream
+    - SteviaLayout
     - SwiftKeychainWrapper
     - SwiftyJSON
     - TextFieldEffects
@@ -281,6 +289,7 @@ SPEC REPOS:
     - "UITextView+Placeholder"
     - ViewAnimator
     - WeakMapTable
+    - YPImagePicker
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
@@ -313,6 +322,7 @@ SPEC CHECKSUMS:
   PMAlertController: ab5fcf4d085b7878c9451466d701449c4bf6efb8
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   ReactorKit: a06dd2a5c9339287aedf3dc821cfab6347eca106
   ReusableKit: e5f853ad4652e411f96b6119b2488afa12929be6
   RxAnimated: e53fb66cafc0539faf881b734f7412a624527f0a
@@ -328,6 +338,7 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPIndicator: 915b9f2ffbb4bb254502b614c6f00487eee9ad6d
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
@@ -335,7 +346,8 @@ SPEC CHECKSUMS:
   "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
   ViewAnimator: a9ceed80266e00fd435ec4fb99b2df64d580d0e4
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
+  YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
 
-PODFILE CHECKSUM: 379f044ef5eaf1c58dfea6ed58302a2eefa46615
+PODFILE CHECKSUM: 6cede590d3beba93aaca466cc5095289b163e03e
 
 COCOAPODS: 1.11.2

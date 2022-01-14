@@ -14,6 +14,7 @@ target 'KNU_Market' do
   pod 'Firebase/DynamicLinks'
   
   pod 'IQKeyboardManagerSwift'
+  pod 'YPImagePicker'
   pod "BSImagePicker", "~> 3.1"
   pod "GMStepper"
   pod "MessageKit"

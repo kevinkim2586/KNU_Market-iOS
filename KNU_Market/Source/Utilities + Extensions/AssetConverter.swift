@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SDWebImage
+import ImageSlideshow
 import Photos
 
 struct AssetConverter {
@@ -34,5 +36,22 @@ struct AssetConverter {
             }
         }
         return result
+    }
+    
+    static func convertImageUIDsToInputSources(imageUIDs: [String]) -> [InputSource] {
+        
+        let imageURLs = imageUIDs.compactMap {
+            URL(string: K.MEDIA_REQUEST_URL + $0)
+        }
+        
+        var imageSources: [InputSource] = []
+        
+        imageURLs.forEach { imageURL in
+            imageSources.append(SDWebImageSource(
+                url: imageURL,
+                placeholder: UIImage(named: K.Images.defaultItemImage))
+            )
+        }
+        return imageSources
     }
 }

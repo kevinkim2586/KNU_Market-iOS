@@ -16,8 +16,8 @@ final class PostService: PostServiceType {
         self.network = network
     }
     
-    func fetchPostList(at index: Int, fetchCurrentUsers: Bool, postFilterOption: PostFilterOptions) -> Single<NetworkResultWithArray<PostListModel>> {
-                
+    func fetchPostList(at index: Int, fetchCurrentUsers: Bool, postFilterOption: PostFilterOptions = .showGatheringFirst) -> Single<NetworkResultWithArray<PostListModel>> {
+                        
         return network.requestArray(.fetchPostList(index: index, fetchCurrentUsers: fetchCurrentUsers, postFilterOption: postFilterOption), type: PostListModel.self)
             .map { result in
                 switch result {

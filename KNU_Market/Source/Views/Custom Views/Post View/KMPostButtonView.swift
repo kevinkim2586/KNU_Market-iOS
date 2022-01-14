@@ -5,7 +5,6 @@ import UIKit
 protocol KMPostButtonViewDelegate: AnyObject {
     func didPressBackButton()
     func didPressGatheringStatusButton()
-    func didPresseTrashButton()
     func didPressMenuButton()
 }
 
@@ -14,7 +13,8 @@ class KMPostButtonView: UIView {
     //MARK: - Properties
 
     weak var delegate: KMPostButtonViewDelegate?
-    
+
+
     //MARK: - Constants
     
     //MARK: - UI
@@ -57,26 +57,9 @@ class KMPostButtonView: UIView {
         return button
     }()
     
-    // 공구 삭제 버튼
-    lazy var trashButton: KMPostControlButton = {
-        let button = KMPostControlButton(buttonImageSystemName: "trash")
-        button.addTarget(
-            self,
-            action: #selector(pressedTrashButton),
-            for: .touchUpInside
-        )
-        button.isHidden = true
-        return button
-    }()
-    
     // 더보기 버튼
     lazy var menuButton: KMPostControlButton = {
         let button = KMPostControlButton(buttonImageSystemName: "ellipsis")
-        button.addTarget(
-            self,
-            action: #selector(pressedMenuButton),
-            for: .touchUpInside
-        )
         return button
     }()
     
@@ -98,7 +81,6 @@ class KMPostButtonView: UIView {
 
         if isPostUserUploaded {
             gatheringStatusView.isHidden = false
-            trashButton.isHidden = false
             
             if isCompletelyDone {
                 
@@ -112,7 +94,6 @@ class KMPostButtonView: UIView {
             
         } else {
             gatheringStatusView.isHidden = true
-            trashButton.isHidden = true
         }
     }
     
@@ -121,9 +102,8 @@ class KMPostButtonView: UIView {
     private func setupLayout() {
         
         addSubview(backButton)
-        addSubview(gatheringStatusView)
-        gatheringStatusView.addSubview(gatheringStatusButton)
-        addSubview(trashButton)
+//        addSubview(gatheringStatusView)
+//        gatheringStatusView.addSubview(gatheringStatusButton)
         addSubview(menuButton)
     }
     
@@ -139,21 +119,17 @@ class KMPostButtonView: UIView {
             $0.right.equalToSuperview().offset(-15)
         }
         
-        trashButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
-            $0.right.equalTo(menuButton.snp.left).offset(-20)
-        }
-        
-        gatheringStatusView.snp.makeConstraints {
-            $0.width.equalTo(100)
-            $0.height.equalTo(35)
-            $0.right.equalTo(trashButton.snp.left).offset(-20)
-            $0.top.equalToSuperview().offset(10)
-        }
-        
-        gatheringStatusButton.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
+     
+//        gatheringStatusView.snp.makeConstraints {
+//            $0.width.equalTo(100)
+//            $0.height.equalTo(35)
+//            $0.right.equalTo(trashButton.snp.left).offset(-20)
+//            $0.top.equalToSuperview().offset(10)
+//        }
+//
+//        gatheringStatusButton.snp.makeConstraints {
+//            $0.center.equalToSuperview()
+//        }
     }
 }
 
@@ -169,12 +145,7 @@ extension KMPostButtonView {
         delegate?.didPressGatheringStatusButton()
     }
     
-    @objc private func pressedTrashButton() {
-        delegate?.didPresseTrashButton()
-    }
-    
     @objc private func pressedMenuButton() {
         delegate?.didPressMenuButton()
     }
-    
 }

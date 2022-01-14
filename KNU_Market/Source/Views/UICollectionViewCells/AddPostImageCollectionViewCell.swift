@@ -3,6 +3,7 @@ import BSImagePicker
 import Photos
 import SnapKit
 import Then
+import YPImagePicker
 
 protocol AddPostImageDelegate: AnyObject {
     func didPickImagesToUpload(images: [UIImage])
@@ -81,22 +82,53 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
 
     @objc private func pressedAddButton() {
         
-        /// 기존 선택된 사진 모두 초기화
-        selectedAssets.removeAll()
-        userSelectedImages.removeAll()
         
+        var config = YPImagePickerConfiguration()
+        config.showsCrop = .rectangle(ratio: 1.0)
+        config.screens = [.library]
+        config.library.maxNumberOfItems = 5
+//        config.colors.tintColor = UIColor(named: K.Color.appColor)!
+        
+        let picker = YPImagePicker(configuration: config)
+   
         let vc = self.window?.rootViewController
-        vc?.presentImagePicker(imagePicker, select: { (asset) in
-        }, deselect: { (asset) in
-        }, cancel: { (assets) in
-        }, finish: { (assets) in
-            
-            for i in 0..<assets.count {
-                self.selectedAssets.append(assets[i])
+        vc?.present(picker, animated: true, completion: nil)
+        
+//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: K.Color.appColor)! ]
+//        UINavigationBar.appearance().tintColor =  UIColor(named: K.Color.appColor)
+        
+        picker.didFinishPicking { items, _ in
+            self.userSelectedImages.removeAll()         //기존에 선택된 사진 삭제
+            for item in items {
+                switch item {
+                case .photo(let photo):
+                    self.userSelectedImages.append(photo.image)
+                default: break
+                }
             }
-            self.convertAssetToImages()
             self.delegate?.didPickImagesToUpload(images: self.userSelectedImages)
-        })
+            picker.dismiss(animated: true, completion: nil)
+        }
+        
+        
+        
+        
+        /// 기존 선택된 사진 모두 초기화
+//        selectedAssets.removeAll()
+//        userSelectedImages.removeAll()
+//
+//        let vc = self.window?.rootViewController
+//        vc?.presentImagePicker(imagePicker, select: { (asset) in
+//        }, deselect: { (asset) in
+//        }, cancel: { (assets) in
+//        }, finish: { (assets) in
+//
+//            for i in 0..<assets.count {
+//                self.selectedAssets.append(assets[i])
+//            }
+//            self.convertAssetToImages()
+//            self.delegate?.didPickImagesToUpload(images: self.userSelectedImages)
+//        })
         
     }
     

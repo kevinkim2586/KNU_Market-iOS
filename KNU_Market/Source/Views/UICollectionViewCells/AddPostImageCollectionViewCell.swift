@@ -17,7 +17,6 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
 
     weak var delegate: AddPostImageDelegate!
     
-    var selectedAssets: [PHAsset] = [PHAsset]()
     var userSelectedImages: [UIImage] = [UIImage]()
     
     //MARK: - Constants
@@ -87,16 +86,14 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
         config.showsCrop = .rectangle(ratio: 1.0)
         config.screens = [.library]
         config.library.maxNumberOfItems = 5
+        config.showsPhotoFilters = false
 //        config.colors.tintColor = UIColor(named: K.Color.appColor)!
         
         let picker = YPImagePicker(configuration: config)
    
         let vc = self.window?.rootViewController
         vc?.present(picker, animated: true, completion: nil)
-        
-//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: K.Color.appColor)! ]
-//        UINavigationBar.appearance().tintColor =  UIColor(named: K.Color.appColor)
-        
+    
         picker.didFinishPicking { items, _ in
             self.userSelectedImages.removeAll()         //기존에 선택된 사진 삭제
             for item in items {
@@ -109,57 +106,5 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
             self.delegate?.didPickImagesToUpload(images: self.userSelectedImages)
             picker.dismiss(animated: true, completion: nil)
         }
-        
-        
-        
-        
-        /// 기존 선택된 사진 모두 초기화
-//        selectedAssets.removeAll()
-//        userSelectedImages.removeAll()
-//
-//        let vc = self.window?.rootViewController
-//        vc?.presentImagePicker(imagePicker, select: { (asset) in
-//        }, deselect: { (asset) in
-//        }, cancel: { (assets) in
-//        }, finish: { (assets) in
-//
-//            for i in 0..<assets.count {
-//                self.selectedAssets.append(assets[i])
-//            }
-//            self.convertAssetToImages()
-//            self.delegate?.didPickImagesToUpload(images: self.userSelectedImages)
-//        })
-        
     }
-    
-    func convertAssetToImages() {
-        
-        if selectedAssets.count != 0 {
-            
-            for i in 0..<selectedAssets.count {
-                
-                let imageManager = PHImageManager.default()
-                let option = PHImageRequestOptions()
-                option.isSynchronous = true
-                option.resizeMode = .exact
-                
-                var thumbnail = UIImage()
-                
-                imageManager.requestImage(
-                    for: selectedAssets[i],
-                    targetSize: CGSize(width: 1000, height: 1000),
-                    contentMode: .aspectFit,
-                    options: option
-                ) { (result, _) in
-                    thumbnail = result!
-                }
-                
-                let data = thumbnail.jpegData(compressionQuality: 1)
-                let newImage = UIImage(data: data!)
-                
-                self.userSelectedImages.append(newImage! as UIImage)
-            }
-        }
-    }
-    
 }

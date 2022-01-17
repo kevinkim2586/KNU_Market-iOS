@@ -220,6 +220,10 @@
 		7CDD5B23279526D20082E3FC /* BannerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B22279526D20082E3FC /* BannerHeaderView.swift */; };
 		7CDD5B252795274C0082E3FC /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B242795274C0082E3FC /* BannerCollectionViewCell.swift */; };
 		7CDD5B27279543840082E3FC /* BannerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B26279543840082E3FC /* BannerAPI.swift */; };
+		7CDD5B2A279544710082E3FC /* BannerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B29279544710082E3FC /* BannerService.swift */; };
+		7CDD5B2C279544760082E3FC /* BannerServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B2B279544760082E3FC /* BannerServiceType.swift */; };
+		7CDD5B30279544A90082E3FC /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B2F279544A90082E3FC /* BannerModel.swift */; };
+		7CDD5B32279544E70082E3FC /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B31279544E70082E3FC /* Media.swift */; };
 		7CE0A41627918C400034CC69 /* KMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0A41527918C400034CC69 /* KMTabBarController.swift */; };
 		7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEAC991275F7AFF005AF338 /* UserAPI.swift */; };
 		7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */; };
@@ -475,6 +479,10 @@
 		7CDD5B22279526D20082E3FC /* BannerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerHeaderView.swift; sourceTree = "<group>"; };
 		7CDD5B242795274C0082E3FC /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CDD5B26279543840082E3FC /* BannerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAPI.swift; sourceTree = "<group>"; };
+		7CDD5B29279544710082E3FC /* BannerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerService.swift; sourceTree = "<group>"; };
+		7CDD5B2B279544760082E3FC /* BannerServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerServiceType.swift; sourceTree = "<group>"; };
+		7CDD5B2F279544A90082E3FC /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
+		7CDD5B31279544E70082E3FC /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		7CE0A41527918C400034CC69 /* KMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTabBarController.swift; sourceTree = "<group>"; };
 		7CEAC991275F7AFF005AF338 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewController.swift; sourceTree = "<group>"; };
@@ -624,6 +632,7 @@
 		7C036AB12696A90500F6C29B /* Response Models */ = {
 			isa = PBXGroup;
 			children = (
+				7CDD5B2E2795449E0082E3FC /* Banner Models */,
 				7C5386E027689C1500BFEA7F /* Media Models */,
 				626D66F52742920300CB7F4F /* Inquiry Models */,
 				7CBDF4AE272F884800E657D9 /* Popup */,
@@ -713,6 +722,7 @@
 			isa = PBXGroup;
 			children = (
 				7C5386E127689C2100BFEA7F /* UploadImageResponseModel.swift */,
+				7CDD5B31279544E70082E3FC /* Media.swift */,
 			);
 			path = "Media Models";
 			sourceTree = "<group>";
@@ -1044,6 +1054,7 @@
 		7C9C59E7277C163C005E08BC /* Networks */ = {
 			isa = PBXGroup;
 			children = (
+				7CDD5B28279544570082E3FC /* BannerService */,
 				7CF8D612277C4A440078DD77 /* ChatService */,
 				7C9C59ED277C166E005E08BC /* MyPageService */,
 				7C9C59EC277C1668005E08BC /* PopupService */,
@@ -1362,6 +1373,23 @@
 				7CDD5B22279526D20082E3FC /* BannerHeaderView.swift */,
 			);
 			path = UICollectionViewHeaders;
+			sourceTree = "<group>";
+		};
+		7CDD5B28279544570082E3FC /* BannerService */ = {
+			isa = PBXGroup;
+			children = (
+				7CDD5B29279544710082E3FC /* BannerService.swift */,
+				7CDD5B2B279544760082E3FC /* BannerServiceType.swift */,
+			);
+			path = BannerService;
+			sourceTree = "<group>";
+		};
+		7CDD5B2E2795449E0082E3FC /* Banner Models */ = {
+			isa = PBXGroup;
+			children = (
+				7CDD5B2F279544A90082E3FC /* BannerModel.swift */,
+			);
+			path = "Banner Models";
 			sourceTree = "<group>";
 		};
 		7CE0A41427918C240034CC69 /* UITabBarController */ = {
@@ -1719,6 +1747,7 @@
 				7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */,
 				7C0F1CBA26BA6B310068FF45 /* NotificationName.swift in Sources */,
 				7CEDBB5D2702E0820078F5E1 /* KMErrorLabel.swift in Sources */,
+				7CDD5B2C279544760082E3FC /* BannerServiceType.swift in Sources */,
 				7C58477C2779CCDC005D75B2 /* ReportUserViewReactor.swift in Sources */,
 				7CCB02082674CE5D00D58BC2 /* PostListModel.swift in Sources */,
 				7CB8DF46264BEFEC0001CC6D /* LoadProfileResponseModel.swift in Sources */,
@@ -1749,6 +1778,7 @@
 				7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */,
 				7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */,
 				7C3E7BF62784039400BEBC91 /* ChatListViewReactor.swift in Sources */,
+				7CDD5B32279544E70082E3FC /* Media.swift in Sources */,
 				7CB8DF36264BAB760001CC6D /* UIViewController+Ex.swift in Sources */,
 				7C5847652771C2D0005D75B2 /* EmailForLostPasswordViewReactor.swift in Sources */,
 				7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */,
@@ -1787,6 +1817,7 @@
 				7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */,
 				6273750E27647DA6008A29B5 /* PostCell.swift in Sources */,
 				7CA2D983277DC7BE00D50737 /* MyPageSectionModel.swift in Sources */,
+				7CDD5B30279544A90082E3FC /* BannerModel.swift in Sources */,
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
 				7C2A6B1F2787EC0F00C31238 /* PostListViewReactor.swift in Sources */,
 				626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */,
@@ -1874,6 +1905,7 @@
 				7CAE5B002754B5F100426708 /* PostViewController+PostViewModelDelegate.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* ValidationError.swift in Sources */,
 				7C9C5A00277C244B005E08BC /* UserDefaultsPersistenceService.swift in Sources */,
+				7CDD5B2A279544710082E3FC /* BannerService.swift in Sources */,
 				7C58475F27707E84005D75B2 /* PasswordInputViewController.swift in Sources */,
 				7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,

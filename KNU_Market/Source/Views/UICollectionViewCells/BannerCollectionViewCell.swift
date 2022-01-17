@@ -46,9 +46,9 @@ class BannerCollectionViewCell: UICollectionViewCell {
     private func setupConstraints() {
         bannerImageView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(20)
-            $0.left.equalToSuperview().inset(36)
+            $0.left.equalToSuperview().inset(0)
             $0.bottom.equalToSuperview().inset(20)
-            $0.right.equalToSuperview().offset(0)
+            $0.right.equalToSuperview().inset(5)
         }
     }
 }

@@ -341,13 +341,7 @@ class PostViewController: BaseViewController, View {
                 self.reactor?.action.onNext(.refreshPage)
             }
             .disposed(by: disposeBag)
-        
-    
-
     }
-
-    
-    
 }
 
 //MARK: - UI Update Methods

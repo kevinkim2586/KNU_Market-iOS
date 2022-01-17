@@ -215,6 +215,8 @@
 		7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */; };
 		7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */; };
 		7CDADA0726BE623100F7F58F /* DateHelper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */; };
+		7CDD5B1F2795168F0082E3FC /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */; };
+		7CDD5B202795168F0082E3FC /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */; };
 		7CE0A41627918C400034CC69 /* KMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0A41527918C400034CC69 /* KMTabBarController.swift */; };
 		7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEAC991275F7AFF005AF338 /* UserAPI.swift */; };
 		7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */; };
@@ -465,6 +467,8 @@
 		7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
 		7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper+Extension.swift"; sourceTree = "<group>"; };
+		7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
 		7CE0A41527918C400034CC69 /* KMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTabBarController.swift; sourceTree = "<group>"; };
 		7CEAC991275F7AFF005AF338 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewController.swift; sourceTree = "<group>"; };
@@ -951,6 +955,7 @@
 		7C922A482717D8C400295A3F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				7CDD5B1A279516640082E3FC /* Fonts */,
 				7C3B4FF826A93CF100E2CA8F /* Animations + Lottie */,
 				7C79E11126E0EDFA0004508A /* LaunchScreen Assets */,
 				7CA661FB263D4389000E0B7A /* LaunchScreen.storyboard */,
@@ -1333,6 +1338,15 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
+		7CDD5B1A279516640082E3FC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */,
+				7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		7CE0A41427918C240034CC69 /* UITabBarController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1596,6 +1610,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CDD5B1F2795168F0082E3FC /* NotoSans-Regular.ttf in Resources */,
 				7C43355826D89AC200A044CD /* wimLogo_Launchscreen.png in Resources */,
 				7C3D541D26C90B4900AE3E55 /* congratulate1.json in Resources */,
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
@@ -1603,6 +1618,7 @@
 				7C43355C26D8BD8000A044CD /* appLogo_LaunchScreen.png in Resources */,
 				6252A0DC2765F72E003BAC43 /* Colors.xcassets in Resources */,
 				7CC1B59A26D4CB1E0007F99B /* EmptyView.xib in Resources */,
+				7CDD5B202795168F0082E3FC /* NotoSans-Bold.ttf in Resources */,
 				7C036ABE269AB7CC00F6C29B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

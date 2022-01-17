@@ -10,8 +10,8 @@ struct UIHelper {
 
         let mainTabBarController = KMTabBarController()
         
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.], for: .normal)
+        let tabBarAppearance = UITabBarItem.appearance()
+        tabBarAppearance.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: K.Fonts.notoSansBold, size: 9)], for: .normal)
 
 
         // 탭바 설정

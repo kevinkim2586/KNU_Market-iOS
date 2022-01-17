@@ -22,6 +22,11 @@ struct K {
     
     //MARK: - UI Related Constants
     
+    struct Fonts {
+        static let notoSansRegular              = "NotoSans-Regular"
+        static let notoSansBold                 = "NotoSans-Bold"
+    }
+    
     struct Color {
         
         static let appColor                     = "AppDefaultColor"

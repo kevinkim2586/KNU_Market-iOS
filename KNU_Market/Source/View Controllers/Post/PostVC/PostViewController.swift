@@ -266,7 +266,6 @@ class PostViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
         
-        
         reactor.state
             .map { $0.didFailFetchingPost }
             .distinctUntilChanged()

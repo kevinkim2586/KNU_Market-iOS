@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
 
 class BannerHeaderView: UIView {
     
@@ -14,9 +15,11 @@ class BannerHeaderView: UIView {
     
     var timer: Timer?
     var currentIndex: Int = 0
-    var totalNumberOfBannerImages: Int? {
+    var totalNumberOfBannerImages: Int? 
+    var bannerModel: [BannerModel]? {
         didSet {
             startTimer()
+            bannerCollectionView.reloadData()
         }
     }
     
@@ -68,7 +71,14 @@ class BannerHeaderView: UIView {
         totalNumberOfBannerImages = 5
     }
     
-    //MARK: - Methods
+    //MARK: - Configuration & Method
+    
+    func configure(with model: [BannerModel]) {
+        
+        if self.bannerModel != nil { return }
+        self.totalNumberOfBannerImages = model.count
+        self.bannerModel = model
+    }
     
     private func startTimer() {
         timer = Timer.scheduledTimer(
@@ -86,6 +96,8 @@ class BannerHeaderView: UIView {
             print("❗️ BannerHeaderView Index Error")
             return
         }
+        
+        print("✅ currentIndex: \(currentIndex)")
         
         if currentIndex < totalNumber - 1 {
             currentIndex += 1
@@ -119,7 +131,18 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
             fatalError()
         }
         
-        cell.bannerImageView.image = UIImage(named: "bannerMock")
+        if let model = bannerModel {
+            if let imageUrl = URL(string: model[indexPath.row].media.path) {
+                
+                cell.bannerImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                cell.bannerImageView.sd_setImage(
+                    with: imageUrl,
+                    placeholderImage: UIImage(named: K.Images.defaultItemImage),
+                    options: .continueInBackground,
+                    completed: nil
+                )
+            }
+        }
         cell.backgroundColor = .clear
         return cell
     }

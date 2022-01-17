@@ -289,6 +289,15 @@ class PostListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         reactor.state
+            .map { $0.bannerModel }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, bannerModel) in
+                self.bannerHeaderView.configure(with: bannerModel!)
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
             .map { $0.errorMessage }
             .distinctUntilChanged()
             .filter { $0 != nil }

@@ -24,6 +24,7 @@ struct UIHelper {
                 chatListService: ChatListService(network: Network<ChatAPI>(plugins: [AuthPlugin()]), userDefaultsGenericService: UserDefaultsGenericService()),
                 userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService())),
                 popupService: PopupService(network: Network<PopupAPI>()),
+                bannerService: BannerService(network: Network<BannerAPI>()),
                 userDefaultsGenericService: UserDefaultsGenericService(),
                 userNotificationService: UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService())
             )

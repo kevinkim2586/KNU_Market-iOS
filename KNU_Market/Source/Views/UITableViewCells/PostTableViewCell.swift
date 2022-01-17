@@ -84,14 +84,12 @@ class PostTableViewCell: UITableViewCell {
         $0.textAlignment = .center
     }
     
-    
     let gatheringView = UIView().then {
         $0.layer.cornerRadius = Metrics.isGatheringLabelHeight / 2
         $0.backgroundColor = UIColor(named: K.Color.appColor)
     }
     
-    
-    let locationLabel: UILabel = {
+    let priceLabel: UILabel = {
         let label = UILabel()
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
@@ -115,7 +113,7 @@ class PostTableViewCell: UITableViewCell {
         postImageView.image = nil
         postTitleLabel.text = nil
         gatheringStatusLabel.text = nil
-        locationLabel.text = nil
+        priceLabel.text = nil
         dateLabel.text = nil
         gatheringView.backgroundColor = UIColor(named: K.Color.appColor)
     }
@@ -137,13 +135,7 @@ class PostTableViewCell: UITableViewCell {
         addSubview(gatheringView)
         
         
-        
-        
-        
-//        addSubview(isGatheringLabel)
-//        addSubview(personImageView)
-//        addSubview(currentlyGatheredPeopleLabel)
-        addSubview(locationLabel)
+        addSubview(priceLabel)
     }
     
     private func setupConstraints() {
@@ -180,7 +172,7 @@ class PostTableViewCell: UITableViewCell {
             $0.center.equalToSuperview()
         }
         
-        locationLabel.snp.makeConstraints {
+        priceLabel.snp.makeConstraints {
             $0.height.equalTo(20)
             $0.right.equalToSuperview().offset(-Metrics.rightOffSet)
             $0.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
@@ -223,17 +215,13 @@ class PostTableViewCell: UITableViewCell {
         if viewModel?.isCompletelyDone ?? false {
             gatherDoneLabel.isHidden = false
             gatheringView.backgroundColor = UIColor.lightGray
-            
             gatheringStatusLabel.isHidden = true
             personImageView.isHidden = true
             
         } else {
-            
             gatherDoneLabel.isHidden = true
-            
             gatheringStatusLabel.isHidden = false
             personImageView.isHidden = false
-            
         }
     }
     
@@ -246,7 +234,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func configureLocationLabel() {
-        locationLabel.text = viewModel?.locationName ?? "-"
+        priceLabel.text = "\(viewModel?.price)"
     }
     
     private func configureDateLabel() {

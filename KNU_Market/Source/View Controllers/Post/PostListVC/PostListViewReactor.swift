@@ -16,6 +16,7 @@ final class PostListViewReactor: Reactor {
     let chatListService: ChatListServiceType
     let userService: UserServiceType
     let popupService: PopupServiceType
+    let bannerService: BannerServiceType
     let userDefaultsGenericService: UserDefaultsGenericServiceType
     let userNotificationService: UserNotificationServiceType
     
@@ -30,6 +31,7 @@ final class PostListViewReactor: Reactor {
         case setPostList([PostListModel])
         case resetPostList([PostListModel])
         case incrementIndex
+        case setBannerList([BannerModel])
         case setUserNickname(String)
         case setNeedsToShowPopup(Bool, PopupModel?)
         case setErrorMessage(String)
@@ -52,6 +54,7 @@ final class PostListViewReactor: Reactor {
         var bannedPostUploaders: [String]         // 내가 차단한 유저
         var isUserVerified: Bool
         var isAllowedToUploadPost: Bool?
+        var bannerModel: [BannerModel]?
     }
     
     init(
@@ -59,6 +62,7 @@ final class PostListViewReactor: Reactor {
         chatListService: ChatListServiceType,
         userService: UserServiceType,
         popupService: PopupServiceType,
+        bannerService: BannerServiceType,
         userDefaultsGenericService: UserDefaultsGenericServiceType,
         userNotificationService: UserNotificationServiceType
     ) {
@@ -66,6 +70,7 @@ final class PostListViewReactor: Reactor {
         self.chatListService = chatListService
         self.userService = userService
         self.popupService = popupService
+        self.bannerService = bannerService
         self.userDefaultsGenericService = userDefaultsGenericService
         self.userNotificationService = userNotificationService
         
@@ -95,6 +100,7 @@ final class PostListViewReactor: Reactor {
                 fetchEnteredRoomInfo(),
                 loadUserProfile(),
                 fetchPostList(at: currentState.index),
+                fetchBannerList(),
                 fetchLatestPopup(),
                 
                 Observable.just(Mutation.incrementIndex),
@@ -147,6 +153,9 @@ final class PostListViewReactor: Reactor {
             
         case .incrementIndex:
             state.index += 1
+            
+        case .setBannerList(let bannerModel):
+            state.bannerModel = bannerModel
             
         case .setUserNickname(let nickname):
             state.userNickname = nickname
@@ -268,6 +277,22 @@ extension PostListViewReactor {
                 case .error(_):     //팝업 가져오기 실패 시 따로 유저한테 에러 메시지를 보여줄 필요는 없는 것으로 판단
                     print("❗️ PostListViewReactor failed fetching popup")
                     return Mutation.setNeedsToShowPopup(false, nil)
+                }
+            }
+    }
+    
+    private func fetchBannerList() -> Observable<Mutation> {
+        
+        return bannerService.fetchBannerList()
+            .asObservable()
+            .map { result in
+                switch result {
+                case .success(let bannerModel):
+                    return Mutation.setBannerList(bannerModel)
+                    
+                case .error(_):
+                    print("❗️ PostListViewReactor error in fetchBannerList")
+                    return Mutation.empty
                 }
             }
     }

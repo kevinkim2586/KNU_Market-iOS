@@ -18,17 +18,8 @@ class PostCellViewModel {
     
     var totalGatheringPeople: Int
     
-    var location: Int
-    
-    var locationName: String {
-        
-        let index = location - 1
-        guard index != Location.list.count || index >= Location.list.count else {
-            return Location.listForCell[Location.listForCell.count - 1]
-        }
-        return Location.listForCell[index]
-    }
-    
+    var price: Int
+
     private var formattedDate: String = ""
     var date: String {
         get {
@@ -46,12 +37,11 @@ class PostCellViewModel {
         }
     }
     
- 
     init(model: PostListModel) {
         
         self.uuid = model.uuid
         self.title = model.title
-        self.location = model.location
+        self.price = model.price
         self.totalGatheringPeople = model.totalGatheringPeople
         self.currentlyGatheredPeople = model.currentlyGatheredPeople
         self.isFull = model.isFull
@@ -60,7 +50,7 @@ class PostCellViewModel {
         self.imageUID = model.imageUIDs.isEmpty ? nil : model.imageUIDs[0].uid
        
         if let imageUID = imageUID {
-            imageURL = URL(string: "\(K.API_BASE_URL)media/" + imageUID)
+            imageURL = URL(string: K.MEDIA_REQUEST_URL + imageUID)
         }
     }
     

@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 final class BannerService: BannerServiceType {
-
+    
     fileprivate let network: Network<BannerAPI>
     
     init(network: Network<BannerAPI>) {

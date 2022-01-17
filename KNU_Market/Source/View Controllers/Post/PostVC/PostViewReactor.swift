@@ -303,8 +303,7 @@ final class PostViewReactor: Reactor {
         case .setPostAsGatherComplete(let gatherComplete):
     
             break
-            
-
+        
             
         case .setIsFetchingData(let isFetching):
             state.isFetchingData = isFetching

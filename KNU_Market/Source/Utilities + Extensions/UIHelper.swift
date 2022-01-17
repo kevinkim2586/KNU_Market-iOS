@@ -6,15 +6,7 @@ struct UIHelper {
     
     static func createMainTabBarController() -> UITabBarController {
         
-        // 탭바 생성
-
         let mainTabBarController = KMTabBarController()
-        
-        let tabBarAppearance = UITabBarItem.appearance()
-        tabBarAppearance.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: K.Fonts.notoSansBold, size: 9)], for: .normal)
-
-
-        // 탭바 설정
         mainTabBarController.setViewControllers([
             createPostNavigationController(),
             createChatNavigationController(),
@@ -40,6 +32,8 @@ struct UIHelper {
 
          postListVC.tabBarItem = UITabBarItem(title: "공동구매", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
         let postNavigationController = UINavigationController(rootViewController: postListVC)
+         postNavigationController.tabBarItem.image = UIImage(named: K.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
+         postNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
         postNavigationController.navigationBar.tintColor = .black
         return postNavigationController
     }

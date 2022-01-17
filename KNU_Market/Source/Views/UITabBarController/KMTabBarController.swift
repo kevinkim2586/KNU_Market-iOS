@@ -7,71 +7,47 @@
 
 import UIKit
 
-class KMTabBarController:   UITabBarController,
-                            UITabBarControllerDelegate {
+class KMTabBarController: UITabBarController, UITabBarControllerDelegate {
     
-    let customTabBarView: UIView = {
-        
-        let view = UIView(frame: .zero)
-        
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 20
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        view.clipsToBounds = true
-        
-        view.layer.masksToBounds = false
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: -8.0)
-        view.layer.shadowOpacity = 0.12
-        view.layer.shadowRadius = 10.0
-        return view
-    }()
+    private var shapeLayer: CALayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
-        self.tabBar.tintColor = UIColor(named: K.Color.appColor) ?? .systemPink
-        self.tabBar.barTintColor = .white
-        
-        addCustomTabBarView()
-        hideTabBarBorder()
+        tabBar.tintColor = UIColor(named: K.Color.appColor) ?? .systemPink
+        tabBar.barTintColor = .white
+        tabBar.shadowImage = UIImage() // this removes the top line of the tabBar
+        tabBar.backgroundImage = UIImage()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        customTabBarView.frame = tabBar.frame
+        addShape()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        var newSafeArea = UIEdgeInsets()
-        
-        newSafeArea.bottom += customTabBarView.bounds.size.height
-        self.children.forEach({$0.additionalSafeAreaInsets = newSafeArea})
-    }
-    
-    private func addCustomTabBarView() {
-        customTabBarView.frame = tabBar.frame
-        view.addSubview(customTabBarView)
-        view.bringSubviewToFront(self.tabBar)
-    }
-    
-    func hideTabBarBorder()  {
-        let tabBar = self.tabBar
-        tabBar.backgroundImage = UIImage.from(color: .clear)
-        tabBar.shadowImage = UIImage()
-        tabBar.clipsToBounds = true
+
+    private func addShape() {
+        self.tabBar.isTranslucent = true
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = UIBezierPath(
+            roundedRect: tabBar.bounds,
+            byRoundingCorners: [.topLeft, .topRight],
+            cornerRadii: CGSize(width: 20, height: 0.0)).cgPath
+        shapeLayer.fillColor = UIColor.white.cgColor
+        shapeLayer.shadowPath =  UIBezierPath(roundedRect: tabBar.bounds, cornerRadius: 20).cgPath
+        shapeLayer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
+        shapeLayer.shadowOpacity = 0.5
+        shapeLayer.shadowRadius = 5
+        shapeLayer.shadowOffset = CGSize(width: 0, height: -6)
+
+        // To improve rounded corner and shadow performance tremendously
+        shapeLayer.shouldRasterize = true
+        shapeLayer.rasterizationScale = UIScreen.main.scale
+
+        if let oldShapeLayer = self.shapeLayer {
+            tabBar.layer.replaceSublayer(oldShapeLayer, with: shapeLayer)
+        } else {
+            tabBar.layer.insertSublayer(shapeLayer, at: 0)
+        }
+        self.shapeLayer = shapeLayer
     }
 }
 
-extension UIImage {
-    static func from(color: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-        context!.setFillColor(color.cgColor)
-        context!.fill(rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
-    }
-}

@@ -217,6 +217,8 @@
 		7CDADA0726BE623100F7F58F /* DateHelper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */; };
 		7CDD5B1F2795168F0082E3FC /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */; };
 		7CDD5B202795168F0082E3FC /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */; };
+		7CDD5B23279526D20082E3FC /* BannerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B22279526D20082E3FC /* BannerHeaderView.swift */; };
+		7CDD5B252795274C0082E3FC /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B242795274C0082E3FC /* BannerCollectionViewCell.swift */; };
 		7CE0A41627918C400034CC69 /* KMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0A41527918C400034CC69 /* KMTabBarController.swift */; };
 		7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEAC991275F7AFF005AF338 /* UserAPI.swift */; };
 		7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */; };
@@ -469,6 +471,8 @@
 		7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper+Extension.swift"; sourceTree = "<group>"; };
 		7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
 		7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		7CDD5B22279526D20082E3FC /* BannerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerHeaderView.swift; sourceTree = "<group>"; };
+		7CDD5B242795274C0082E3FC /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CE0A41527918C400034CC69 /* KMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTabBarController.swift; sourceTree = "<group>"; };
 		7CEAC991275F7AFF005AF338 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewController.swift; sourceTree = "<group>"; };
@@ -848,6 +852,7 @@
 			children = (
 				7CC33B2C274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift */,
 				7CC33B2E274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift */,
+				7CDD5B242795274C0082E3FC /* BannerCollectionViewCell.swift */,
 			);
 			path = UICollectionViewCells;
 			sourceTree = "<group>";
@@ -1157,6 +1162,7 @@
 		7CA6622226413269000E0B7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7CDD5B21279526A30082E3FC /* UICollectionViewHeaders */,
 				7CE0A41427918C240034CC69 /* UITabBarController */,
 				7C79E11026E0C27B0004508A /* Custom Views */,
 				7C79E10F26E0C2630004508A /* Custom Alerts */,
@@ -1345,6 +1351,14 @@
 				7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		7CDD5B21279526A30082E3FC /* UICollectionViewHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				7CDD5B22279526D20082E3FC /* BannerHeaderView.swift */,
+			);
+			path = UICollectionViewHeaders;
 			sourceTree = "<group>";
 		};
 		7CE0A41427918C240034CC69 /* UITabBarController */ = {
@@ -1774,6 +1788,7 @@
 				7C2A6B1F2787EC0F00C31238 /* PostListViewReactor.swift in Sources */,
 				626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */,
 				7C3B4FFE26A9776D00E2CA8F /* UnregisterUser_InputSuggestionViewController.swift in Sources */,
+				7CDD5B23279526D20082E3FC /* BannerHeaderView.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				626D66E92742705700CB7F4F /* KMButton.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
@@ -1825,6 +1840,7 @@
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C9C59FC277C1742005E08BC /* UserDefaultsGenericServiceType.swift in Sources */,
 				7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */,
+				7CDD5B252795274C0082E3FC /* BannerCollectionViewCell.swift in Sources */,
 				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
 				7CF8D61D277C4F210078DD77 /* MyPageTableViewCellModel.swift in Sources */,
 				7CF369A92754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift in Sources */,

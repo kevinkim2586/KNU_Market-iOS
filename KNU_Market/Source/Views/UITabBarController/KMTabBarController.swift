@@ -17,6 +17,10 @@ class KMTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBar.barTintColor = .white
         tabBar.shadowImage = UIImage() // this removes the top line of the tabBar
         tabBar.backgroundImage = UIImage()
+        
+        
+        let tabBarAppearance = UITabBarItem.appearance()
+        tabBarAppearance.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: K.Fonts.notoSansBold, size: 9)], for: .normal)
     }
     
     override func viewDidLayoutSubviews() {

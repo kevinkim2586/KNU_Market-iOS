@@ -36,6 +36,7 @@ class PostHeaderView: UIView {
             target: self,
             action: #selector(self.pressedImage)
         )
+        
         slideShow.addGestureRecognizer(recognizer)
         slideShow.contentScaleMode = .scaleAspectFill
         slideShow.slideshowInterval = 3

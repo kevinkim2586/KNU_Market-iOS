@@ -20,6 +20,18 @@ class PostListViewController: BaseViewController, View {
     
     //MARK: - UI
     
+    lazy var bannerHeaderView: BannerHeaderView = {
+        let headerView = BannerHeaderView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: view.frame.size.width - 25,
+                height: 180
+            )
+        )
+        return headerView
+    }()
+    
     let postListsTableView = UITableView().then {
         $0.register(
             PostTableViewCell.self,
@@ -76,6 +88,8 @@ class PostListViewController: BaseViewController, View {
                 
         view.addSubview(postListsTableView)
         view.addSubview(uploadPostButton)
+        
+        postListsTableView.tableHeaderView = bannerHeaderView
     }
     
     override func setupConstraints() {

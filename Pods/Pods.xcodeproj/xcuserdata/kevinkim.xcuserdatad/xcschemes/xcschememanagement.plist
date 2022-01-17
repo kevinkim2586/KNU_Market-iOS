@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BEKCurveTabbar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>BSImagePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -154,6 +159,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PryntTrimmerView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ReactorKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -229,6 +239,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SteviaLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftKeychainWrapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -260,6 +275,11 @@
 			<false/>
 		</dict>
 		<key>WeakMapTable.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>YPImagePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

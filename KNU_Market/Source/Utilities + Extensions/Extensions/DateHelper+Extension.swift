@@ -152,91 +152,92 @@ public extension Date {
         
         switch toRelativeTime() {
         case .nowPast:
-            return strings?[.nowPast] ?? NSLocalizedString("just now", comment: "Date format")
-        case .nowFuture:
-            return strings?[.nowFuture] ?? NSLocalizedString("in a few seconds", comment: "Date format")
-        case .secondsPast:
-            return String(
-                format: strings?[.secondsPast] ?? NSLocalizedString("%.f seconds ago", comment: "Date format"),
-                sec
-            )
-        case .secondsFuture:
-            return String(
-                format: strings?[.secondsFuture] ?? NSLocalizedString("in %.f seconds", comment: "Date format"),
-                sec
-            )
-        case .oneMinutePast:
-            return strings?[.oneMinutePast] ?? NSLocalizedString("1 minute ago", comment: "Date format")
-        case .oneMinuteFuture:
-            return strings?[.oneMinuteFuture] ?? NSLocalizedString("in 1 minute", comment: "Date format")
+            return strings?[.nowPast] ?? NSLocalizedString("1분 전", comment: "Date format")
+//        case .nowFuture:
+//            return strings?[.nowFuture] ?? NSLocalizedString("in a few seconds", comment: "Date format")
+//        case .secondsPast:
+//            return String(
+//                format: strings?[.secondsPast] ?? NSLocalizedString("%.f seconds ago", comment: "Date format"),
+//                sec
+//            )
+//        case .secondsFuture:
+//            return String(
+//                format: strings?[.secondsFuture] ?? NSLocalizedString("in %.f seconds", comment: "Date format"),
+//                sec
+//            )
+//        case .oneMinutePast:
+//            return strings?[.oneMinutePast] ?? NSLocalizedString("1 minute ago", comment: "Date format")
+//        case .oneMinuteFuture:
+//            return strings?[.oneMinuteFuture] ?? NSLocalizedString("in 1 minute", comment: "Date format")
         case .minutesPast:
             return String(
-                format: strings?[.minutesPast] ?? NSLocalizedString("%.f minutes ago", comment: "Date format"),
+                format: strings?[.minutesPast] ?? NSLocalizedString("%.f분 전", comment: "Date format"),
                 min
             )
-        case .minutesFuture:
-            return String(
-                format: strings?[.minutesFuture] ?? NSLocalizedString("in %.f minutes", comment: "Date format"),
-                min
-            )
-        case .oneHourPast:
-            return strings?[.oneHourPast] ?? NSLocalizedString("last hour", comment: "Date format")
-        case .oneHourFuture:
-            return strings?[.oneHourFuture] ?? NSLocalizedString("next hour", comment: "Date format")
+//        case .minutesFuture:
+//            return String(
+//                format: strings?[.minutesFuture] ?? NSLocalizedString("in %.f minutes", comment: "Date format"),
+//                min
+//            )
+//        case .oneHourPast:
+//            return strings?[.oneHourPast] ?? NSLocalizedString("last hour", comment: "Date format")
+//        case .oneHourFuture:
+//            return strings?[.oneHourFuture] ?? NSLocalizedString("next hour", comment: "Date format")
         case .hoursPast:
             return String(
-                format: strings?[.hoursPast] ?? NSLocalizedString("%.f hours ago", comment: "Date format"),
+                format: strings?[.hoursPast] ?? NSLocalizedString("%.f시간 전", comment: "Date format"),
                 hr
             )
-        case .hoursFuture:
-            return String(
-                format: strings?[.hoursFuture] ?? NSLocalizedString("in %.f hours", comment: "Date format"),
-                hr
-            )
-        case .oneDayPast:
-            return strings?[.oneDayPast] ?? NSLocalizedString("yesterday", comment: "Date format")
-        case .oneDayFuture:
-            return strings?[.oneDayFuture] ?? NSLocalizedString("tomorrow", comment: "Date format")
+//        case .hoursFuture:
+//            return String(
+//                format: strings?[.hoursFuture] ?? NSLocalizedString("in %.f hours", comment: "Date format"),
+//                hr
+//            )
+//        case .oneDayPast:
+//            return strings?[.oneDayPast] ?? NSLocalizedString("yesterday", comment: "Date format")
+//        case .oneDayFuture:
+//            return strings?[.oneDayFuture] ?? NSLocalizedString("tomorrow", comment: "Date format")
         case .daysPast:
             return String(
-                format: strings?[.daysPast] ?? NSLocalizedString("%.f days ago", comment: "Date format"),
+                format: strings?[.daysPast] ?? NSLocalizedString("%.f일 전", comment: "Date format"),
                 d
             )
-        case .daysFuture:
-            return String(
-                format: strings?[.daysFuture] ?? NSLocalizedString("in %.f days", comment: "Date format"),
-                d
-            )
-        case .oneWeekPast:
-            return strings?[.oneWeekPast] ?? NSLocalizedString("last week", comment: "Date format")
-        case .oneWeekFuture:
-            return strings?[.oneWeekFuture] ?? NSLocalizedString("next week", comment: "Date format")
-        case .weeksPast:
-            let string = strings?[.weeksPast] ?? NSLocalizedString("%.f weeks ago", comment: "Date format")
-            return String(format: string, Double(abs(since(Date(), in: .week))))
-        case .weeksFuture:
-            let string = strings?[.weeksFuture] ?? NSLocalizedString("in %.f weeks", comment: "Date format")
-            return String(format: string, Double(abs(since(Date(), in: .week))))
+//        case .daysFuture:
+//            return String(
+//                format: strings?[.daysFuture] ?? NSLocalizedString("in %.f days", comment: "Date format"),
+//                d
+//            )
+//        case .oneWeekPast:
+//            return strings?[.oneWeekPast] ?? NSLocalizedString("last week", comment: "Date format")
+//        case .oneWeekFuture:
+//            return strings?[.oneWeekFuture] ?? NSLocalizedString("next week", comment: "Date format")
+//        case .weeksPast:
+//            let string = strings?[.weeksPast] ?? NSLocalizedString("%.f weeks ago", comment: "Date format")
+//            return String(format: string, Double(abs(since(Date(), in: .week))))
+//        case .weeksFuture:
+//            let string = strings?[.weeksFuture] ?? NSLocalizedString("in %.f weeks", comment: "Date format")
+//            return String(format: string, Double(abs(since(Date(), in: .week))))
         case .oneMonthPast:
-            return strings?[.oneMonthPast] ?? NSLocalizedString("last month", comment: "Date format")
-        case .oneMonthFuture:
-            return strings?[.oneMonthFuture] ?? NSLocalizedString("next month", comment: "Date format")
+            return strings?[.oneMonthPast] ?? NSLocalizedString("1달 전", comment: "Date format")
+//        case .oneMonthFuture:
+//            return strings?[.oneMonthFuture] ?? NSLocalizedString("next month", comment: "Date format")
         case .monthsPast:
-            let string = strings?[.monthsPast] ?? NSLocalizedString("%.f months ago", comment: "Date format")
+            let string = strings?[.monthsPast] ?? NSLocalizedString("%.f달 전", comment: "Date format")
             return String(format: string, Double(abs(since(Date(), in: .month))))
-        case .monthsFuture:
-            let string = strings?[.monthsFuture] ?? NSLocalizedString("in %.f months", comment: "Date format")
-            return String(format: string, Double(abs(since(Date(), in: .month))))
-        case .oneYearPast:
-            return strings?[.oneYearPast] ?? NSLocalizedString("last year", comment: "Date format")
-        case .oneYearFuture:
-            return strings?[.oneYearFuture] ?? NSLocalizedString("next year", comment: "Date format")
+//        case .monthsFuture:
+//            let string = strings?[.monthsFuture] ?? NSLocalizedString("in %.f months", comment: "Date format")
+//            return String(format: string, Double(abs(since(Date(), in: .month))))
+//        case .oneYearPast:
+//            return strings?[.oneYearPast] ?? NSLocalizedString("last year", comment: "Date format")
+//        case .oneYearFuture:
+//            return strings?[.oneYearFuture] ?? NSLocalizedString("next year", comment: "Date format")
         case .yearsPast:
-            let string = strings?[.yearsPast] ?? NSLocalizedString("%.f years ago", comment: "Date format")
+            let string = strings?[.yearsPast] ?? NSLocalizedString("%.f년 전", comment: "Date format")
             return String(format: string, Double(abs(since(Date(), in: .year))))
-        case .yearsFuture:
-            let string = strings?[.yearsFuture] ?? NSLocalizedString("in %.f years", comment: "Date format")
-            return String(format: string, Double(abs(since(Date(), in: .year))))
+//        case .yearsFuture:
+//            let string = strings?[.yearsFuture] ?? NSLocalizedString("in %.f years", comment: "Date format")
+//            return String(format: string, Double(abs(since(Date(), in: .year))))
+        default: return "-"
         }
     }
     
@@ -296,7 +297,7 @@ public extension Date {
                 }
             }
         }
-        if d < 7 {
+        if d < 30 {
             if d == 1 {
                 if isPast {
                     return .oneDayPast
@@ -311,21 +312,21 @@ public extension Date {
                 }
             }
         }
-        if d < 28 {
-            if isPast {
-                if compare(.isLastWeek) {
-                    return .oneWeekPast
-                } else {
-                    return .weeksPast
-                }
-            } else {
-                if compare(.isNextWeek) {
-                    return .oneWeekFuture
-                } else {
-                    return .weeksFuture
-                }
-            }
-        }
+//        if d < 28 {
+//            if isPast {
+//                if compare(.isLastWeek) {
+//                    return .oneWeekPast
+//                } else {
+//                    return .weeksPast
+//                }
+//            } else {
+//                if compare(.isNextWeek) {
+//                    return .oneWeekFuture
+//                } else {
+//                    return .weeksFuture
+//                }
+//            }
+//        }
         if compare(.isThisYear) {
             if isPast {
                 if compare(.isLastMonth) {
@@ -341,9 +342,28 @@ public extension Date {
                 }
             }
         }
+        
+        if compare(.isLastYear) {
+            if isPast {
+                if compare(.isLastMonth) {
+                    return .oneMonthPast
+                } else {
+                    return .monthsPast
+                }
+            }
+        }
+        
         if isPast {
             if compare(.isLastYear) {
-                return .oneYearPast
+                
+                if compare(.isLastMonth) {
+                    return .oneMonthPast
+                } else {
+                    return .monthsPast
+                }
+                
+//
+//                return .oneYearPast
             } else {
                 return .yearsPast
             }

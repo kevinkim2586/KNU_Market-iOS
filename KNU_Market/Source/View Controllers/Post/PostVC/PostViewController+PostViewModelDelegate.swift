@@ -12,7 +12,7 @@ extension PostViewController: PostViewModelDelegate {
     func didFetchPostDetails() {
         DispatchQueue.main.async {
             self.postTableView.refreshControl?.endRefreshing()
-            self.updatePostInformation()
+//            self.updatePostInformation()
         }
     }
     
@@ -52,7 +52,7 @@ extension PostViewController: PostViewModelDelegate {
     
     func didMarkPostDone() {
         showSimpleBottomAlert(with: "모집 완료를 축하합니다.🎉")
-        refreshPage()
+//        refreshPage()
     }
     
     func failedMarkingPostDone(with error: NetworkError) {
@@ -60,7 +60,7 @@ extension PostViewController: PostViewModelDelegate {
     }
     
     func didCancelMarkPostDone() {
-        refreshPage()
+//        refreshPage()
     }
     
     func failedCancelMarkPostDone(with error: NetworkError) {

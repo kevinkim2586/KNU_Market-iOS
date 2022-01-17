@@ -13,6 +13,7 @@ target 'KNU_Market' do
   pod 'Firebase/Messaging'
   pod 'Firebase/DynamicLinks'
   
+  pod 'BEKCurveTabbar', :git => 'https://github.com/behrad-kzm/BEKCurveTabbar.git'
   pod 'IQKeyboardManagerSwift'
   pod 'YPImagePicker'
   pod "BSImagePicker", "~> 3.1"

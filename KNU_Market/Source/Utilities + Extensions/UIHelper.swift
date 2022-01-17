@@ -1,15 +1,19 @@
 import UIKit
 import SPIndicator
+import BEKCurveTabbar
 
 struct UIHelper {
     
     static func createMainTabBarController() -> UITabBarController {
         
         // 탭바 생성
-        let mainTabBarController = UITabBarController()
-        mainTabBarController.tabBar.tintColor = UIColor(named: K.Color.appColor) ?? .systemPink
-        mainTabBarController.tabBar.barTintColor = .white
+
+        let mainTabBarController = KMTabBarController()
         
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.], for: .normal)
+
+
         // 탭바 설정
         mainTabBarController.setViewControllers([
             createPostNavigationController(),
@@ -20,7 +24,7 @@ struct UIHelper {
     }
     
     // 공구글 NavController 생성
-    private static func createPostNavigationController() -> UINavigationController {
+     static func createPostNavigationController() -> UINavigationController {
         
         let postListVC = PostListViewController(
             reactor: PostListViewReactor(
@@ -34,19 +38,14 @@ struct UIHelper {
         )
         
 
-        
-        postListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
-        let PostNavigationController = UINavigationController(rootViewController: postListVC)
-        PostNavigationController.navigationBar.tintColor = .black
-        
-        return PostNavigationController
+         postListVC.tabBarItem = UITabBarItem(title: "공동구매", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
+        let postNavigationController = UINavigationController(rootViewController: postListVC)
+        postNavigationController.navigationBar.tintColor = .black
+        return postNavigationController
     }
     
     // 채팅 NavController 생성
-    private static func createChatNavigationController() -> UINavigationController {
-//        let chatListVC = ChatListViewController(
-//            viewModel: ChatListViewModel(chatManager: ChatManager(), postManager: PostManager())
-//        )
+     static func createChatNavigationController() -> UINavigationController {
         
         let chatListVC = ChatListViewController(
             reactor: ChatListViewReactor(
@@ -55,7 +54,7 @@ struct UIHelper {
             )
         )
         
-        chatListVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
+         chatListVC.tabBarItem = UITabBarItem(title: "채팅방", image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
         let ChatNavigationController = UINavigationController(rootViewController: chatListVC)
         ChatNavigationController.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
         ChatNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
@@ -65,7 +64,7 @@ struct UIHelper {
     }
     
     // 마이페이지 NavController 생성
-    private static func createMyPageNavigationController() -> UINavigationController {
+     static func createMyPageNavigationController() -> UINavigationController {
         
         let myPageVC = MyPageViewController(
             reactor: MyPageViewReactor(
@@ -77,7 +76,7 @@ struct UIHelper {
             )
         )
    
-        myPageVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 0)
+         myPageVC.tabBarItem = UITabBarItem(title: "마이페이지", image: UIImage(named: K.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
         let MyPageNavigationController = UINavigationController(rootViewController: myPageVC)
         
         MyPageNavigationController.tabBarItem.image = UIImage(named: K.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)

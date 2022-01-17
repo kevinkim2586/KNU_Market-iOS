@@ -54,8 +54,8 @@ extension PostViewController: KMPostButtonViewDelegate {
     }
     
     func didPressMenuButton() {
-
-        if viewModel.postIsUserUploaded {
+        guard let reactor = reactor else { return }
+        if reactor.currentState.postIsUserUploaded {
                         
             let editAction = UIAlertAction(
                 title: "글 수정하기",

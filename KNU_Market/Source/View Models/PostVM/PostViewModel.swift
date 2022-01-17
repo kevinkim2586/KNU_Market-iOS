@@ -64,9 +64,9 @@ class PostViewModel {
         return Location.listForCell[index - 1]
     }
     
-    var date: String {
-        return getFormattedDateStringToDisplayTodayAndYesterday()
-    }
+//    var date: String {
+//        return getFormattedDateStringToDisplayTodayAndYesterday()
+//    }
     
     var viewCount: String {
         guard let model = model else { return "조회 -" }
@@ -144,7 +144,7 @@ class PostViewModel {
             case .success(let fetchedModel):
                 self.model = fetchedModel
                 self.delegate?.didFetchPostDetails()
-                self.detectURL()
+            
                 
             case .failure(let error):
                 self.delegate?.failedFetchingPostDetails(with: error)
@@ -233,9 +233,6 @@ class PostViewModel {
             case .success:
                 self.delegate?.didEnterChat(isFirstEntrance: true)
             case .failure(let error):
-                
-                print("❗️ ItemViewModel - joinPost error: \(error)")
-                
                 switch error {
                     // 이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
                 case .E108:
@@ -276,48 +273,48 @@ class PostViewModel {
     }
     
     // 공구글에 url 이 별도 포함되어 있는지 판별
-    func detectURL() {
-        
-        var detectedURLString: String?
-        
-        guard let postDetail = model?.postDetail else { return }
-        
-        guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else { return }
-        let matches = detector.matches(
-            in: postDetail,
-            options: [],
-            range: NSRange(location: 0, length: postDetail.utf16.count)
-        )
-
-        for match in matches {
-            guard let range = Range(match.range, in: postDetail) else { continue }
-            let url = postDetail[range]
-            detectedURLString = String(url)
-        }
-        
-        guard
-            let urlString = detectedURLString,
-            let url = URL(string: urlString)
-        else { return }
-    
-        let attributedString = NSMutableAttributedString(string: postDetail)
-        
-        if let range: Range<String.Index> = postDetail.range(of: "http") {
-            let index: Int = postDetail.distance(
-                from: postDetail.startIndex,
-                to: range.lowerBound
-            )
-            
-            attributedString.addAttribute(
-                .link,
-                value: urlString,
-                range: NSRange(location: index, length: urlString.count)
-            )
-        }
-        self.userIncludedURL = url
-        self.postDetailWithUrl = attributedString
-        delegate?.didDetectURL(with: attributedString)
-    }
+//    func detectURL() {
+//
+//        var detectedURLString: String?
+//
+//        guard let postDetail = model?.postDetail else { return }
+//
+//        guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else { return }
+//        let matches = detector.matches(
+//            in: postDetail,
+//            options: [],
+//            range: NSRange(location: 0, length: postDetail.utf16.count)
+//        )
+//
+//        for match in matches {
+//            guard let range = Range(match.range, in: postDetail) else { continue }
+//            let url = postDetail[range]
+//            detectedURLString = String(url)
+//        }
+//
+//        guard
+//            let urlString = detectedURLString,
+//            let url = URL(string: urlString)
+//        else { return }
+//
+//        let attributedString = NSMutableAttributedString(string: postDetail)
+//
+//        if let range: Range<String.Index> = postDetail.range(of: "http") {
+//            let index: Int = postDetail.distance(
+//                from: postDetail.startIndex,
+//                to: range.lowerBound
+//            )
+//
+//            attributedString.addAttribute(
+//                .link,
+//                value: urlString,
+//                range: NSRange(location: index, length: urlString.count)
+//            )
+//        }
+//        self.userIncludedURL = url
+//        self.postDetailWithUrl = attributedString
+//        delegate?.didDetectURL(with: attributedString)
+//    }
 }
 
 //MARK: - Conversion Methods
@@ -341,27 +338,27 @@ extension PostViewModel {
         }
     }
     
-    func getFormattedDateStringToDisplayTodayAndYesterday() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = K.DateFormat.defaultFormat
-        dateFormatter.locale = Locale(identifier:"ko_KR")
-        
-        guard let convertedDate = dateFormatter.date(from: model!.date) else {
-            return "날짜 표시 에러"
-        }
-        
-        let calendar = Calendar.current
-        
-        if calendar.isDateInToday(convertedDate) {
-            dateFormatter.dateFormat = "오늘 HH:mm"
-            return dateFormatter.string(from: convertedDate)
-        } else if calendar.isDateInYesterday(convertedDate) {
-            dateFormatter.dateFormat = "어제 HH:mm"
-            return dateFormatter.string(from: convertedDate)
-        } else {
-            dateFormatter.dateFormat = "MM/dd HH:mm"
-            return dateFormatter.string(from: convertedDate)
-        }
-    }
+//    func getFormattedDateStringToDisplayTodayAndYesterday() -> String {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = K.DateFormat.defaultFormat
+//        dateFormatter.locale = Locale(identifier:"ko_KR")
+//
+//        guard let convertedDate = dateFormatter.date(from: model!.date) else {
+//            return "날짜 표시 에러"
+//        }
+//
+//        let calendar = Calendar.current
+//
+//        if calendar.isDateInToday(convertedDate) {
+//            dateFormatter.dateFormat = "오늘 HH:mm"
+//            return dateFormatter.string(from: convertedDate)
+//        } else if calendar.isDateInYesterday(convertedDate) {
+//            dateFormatter.dateFormat = "어제 HH:mm"
+//            return dateFormatter.string(from: convertedDate)
+//        } else {
+//            dateFormatter.dateFormat = "MM/dd HH:mm"
+//            return dateFormatter.string(from: convertedDate)
+//        }
+//    }
 }
 

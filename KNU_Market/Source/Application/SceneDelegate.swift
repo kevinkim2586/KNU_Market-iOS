@@ -113,6 +113,11 @@ extension SceneDelegate {
         
         // Parse the link parameter
         
+        
+        
+        // 앱 실행이 안 되어있는 상태에서 링크 실행하면 동작 X -> 수정하기
+        
+        
         guard
             let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
             let queryItems = components.queryItems
@@ -127,13 +132,18 @@ extension SceneDelegate {
                 print("✅ postUID: \(postUID)")
                 
                 let postVC = PostViewController(
-                    viewModel: PostViewModel(
+                    reactor: PostViewReactor(
                         pageId: postUID,
-                        postManager: PostManager(),
-                        chatManager: ChatManager()
-                    ),
-                    isFromChatVC: false
+                        isFromChatVC: false,
+                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+                        chatService: ChatService(
+                            network: Network<ChatAPI>(plugins: [AuthPlugin()]),
+                            userDefaultsGenericService: UserDefaultsGenericService()
+                        ),
+                        userDefaultsService: UserDefaultsGenericService()
+                    )
                 )
+            
                 
                 guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
                     return

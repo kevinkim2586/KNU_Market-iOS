@@ -35,17 +35,17 @@ extension SearchPostsViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let postVC = PostViewController(
-            viewModel: PostViewModel(
-                pageId: viewModel.postList[indexPath.row].uuid,
-                postManager: PostManager(),
-                chatManager: ChatManager()
-            ),
-            isFromChatVC: false
-        )
-        
-        navigationController?.pushViewController(postVC, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        
+//        let postVC = PostViewController(
+//            viewModel: PostViewModel(
+//                pageId: viewModel.postList[indexPath.row].uuid,
+//                postManager: PostManager(),
+//                chatManager: ChatManager()
+//            ),
+//            isFromChatVC: false
+//        )
+//        
+//        navigationController?.pushViewController(postVC, animated: true)
     }
 }

@@ -55,12 +55,12 @@ struct K {
         static let homeMenuIcon                 = "menu"
         
         // Tab Bar Icons
-        static let chatUnselected               = "grey chat"
-        static let chatSelected                 = "chat"
-        static let homeUnselected               = "grey house"
-        static let homeSelected                 = "house"
-        static let myPageUnselected             = "grey my"
-        static let myPageSelected               = "my"
+        static let chatUnselected               = "chatTabIcon_Unselected"
+        static let chatSelected                 = "chatTabIcon"
+        static let homeUnselected               = "homeTabIcon_UnSelected"
+        static let homeSelected                 = "homeTabIcon"
+        static let myPageUnselected             = "myPageTabIcon_Unselected"
+        static let myPageSelected               = "myPageTabIcon"
         
         
         // Post View Controller Images

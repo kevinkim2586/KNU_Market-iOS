@@ -97,12 +97,16 @@ class MyPostsViewController: BaseViewController, View {
                 let postUUID = reactor.currentState.postList[indexPath.row].uuid
                 
                 let postVC = PostViewController(
-                    viewModel: PostViewModel(
+                    reactor: PostViewReactor(
                         pageId: postUUID,
-                        postManager: PostManager(),
-                        chatManager: ChatManager()
-                    ),
-                    isFromChatVC: false
+                        isFromChatVC: false,
+                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+                        chatService: ChatService(
+                            network: Network<ChatAPI>(plugins: [AuthPlugin()]),
+                            userDefaultsGenericService: UserDefaultsGenericService()
+                        ),
+                        userDefaultsService: UserDefaultsGenericService()
+                    )
                 )
                 self.navigationController?.pushViewController(postVC, animated: true)
                 

@@ -42,18 +42,7 @@ class PostCellViewModel {
                 formattedDate = "날짜 표시 에러"
                 return
             }
-            let calendar = Calendar.current
-            
-            if calendar.isDateInToday(convertedDate) {
-                dateFormatter.dateFormat = "오늘\nHH:mm"
-                formattedDate = dateFormatter.string(from: convertedDate)
-            } else if calendar.isDateInYesterday(convertedDate) {
-                dateFormatter.dateFormat = "어제\nHH:mm"
-                formattedDate = dateFormatter.string(from: convertedDate)
-            } else {
-                dateFormatter.dateFormat = "MM/dd\nHH:mm"
-                formattedDate = dateFormatter.string(from: convertedDate)
-            }
+            formattedDate = DateConverter.convertDateForPostTVC(convertedDate)
         }
     }
     

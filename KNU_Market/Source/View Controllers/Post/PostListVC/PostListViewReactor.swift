@@ -28,7 +28,6 @@ final class PostListViewReactor: Reactor {
     
     enum Mutation {
         case setPostList([PostListModel])
-        case removePostList
         case resetPostList([PostListModel])
         case incrementIndex
         case setUserNickname(String)
@@ -36,6 +35,7 @@ final class PostListViewReactor: Reactor {
         case setErrorMessage(String)
         case setNeedsToFetchMoreData(Bool)
         case setIsFetchingData(Bool)
+        case setIsRefreshingData(Bool)
         case empty
     }
     
@@ -43,6 +43,7 @@ final class PostListViewReactor: Reactor {
         var postList: [PostListModel] = []
         var index: Int = 1
         var isFetchingData: Bool = false
+        var isRefreshingData: Bool = false
         var needsToFetchMoreData: Bool = true
         var userNickname: String? = nil
         var errorMessage: String? = nil
@@ -67,9 +68,6 @@ final class PostListViewReactor: Reactor {
         self.popupService = popupService
         self.userDefaultsGenericService = userDefaultsGenericService
         self.userNotificationService = userNotificationService
-        
-        // 사용자가 설정한 글 정렬 기준 우선적으로 가져오기
-        let postFilterOption: String = userDefaultsGenericService.get(key: UserDefaults.Keys.postFilterOptions) ?? PostFilterOptions.showGatheringFirst.rawValue
         
         // 사용자가 개인적으로 차단한 유저 정보 불러오기
         let bannedPostUploaders: [String] = userDefaultsGenericService.get(key: UserDefaults.Keys.bannedPostUploaders) ?? []
@@ -111,6 +109,7 @@ final class PostListViewReactor: Reactor {
             
             guard
                 currentState.isFetchingData == false,
+                currentState.isRefreshingData == false,
                 currentState.needsToFetchMoreData == true
             else { return Observable.empty() }
             
@@ -124,12 +123,11 @@ final class PostListViewReactor: Reactor {
         case .refreshTableView:
             
             return Observable.concat([
-                Observable.just(Mutation.setIsFetchingData(true)),
+                Observable.just(Mutation.setIsRefreshingData(true)),
                 Observable.just(Mutation.setNeedsToFetchMoreData(true)),
-                Observable.just(Mutation.removePostList),
                 refreshPostList(),
                 Observable.just(Mutation.incrementIndex),
-                Observable.just(Mutation.setIsFetchingData(false))
+                Observable.just(Mutation.setIsRefreshingData(false))
             ])
         }
     }
@@ -141,13 +139,9 @@ final class PostListViewReactor: Reactor {
         switch mutation {
         case .setPostList(let postListModel):
             state.postList.append(contentsOf: postListModel)
-            
-            
-        case .removePostList:
-            state.postList.removeAll()
-            
-            
+        
         case .resetPostList(let postListModel):
+            state.postList.removeAll()
             state.postList = postListModel
             state.index = 1
             
@@ -167,6 +161,9 @@ final class PostListViewReactor: Reactor {
         case .setIsFetchingData(let isFetchingData):
             state.isFetchingData = isFetchingData
             
+        case .setIsRefreshingData(let isRefreshingData):
+            state.isRefreshingData = isRefreshingData
+            
         case .setNeedsToFetchMoreData(let needsToFetchMore):
             state.needsToFetchMoreData = needsToFetchMore
         
@@ -183,7 +180,6 @@ extension PostListViewReactor {
     
     private func fetchPostList(at index: Int) -> Observable<Mutation> {
         
-
         return postService.fetchPostList(
             at: index,
             fetchCurrentUsers: false,

@@ -12,13 +12,18 @@ extension ChatViewController {
     @objc func pressedTitle() {
         
         let postVC = PostViewController(
-            viewModel: PostViewModel(
+            reactor: PostViewReactor(
                 pageId: roomUID,
-                postManager: PostManager(),
-                chatManager: ChatManager()
-            ),
-            isFromChatVC: true
+                isFromChatVC: true,
+                postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+                chatService: ChatService(
+                    network: Network<ChatAPI>(plugins: [AuthPlugin()]),
+                    userDefaultsGenericService: UserDefaultsGenericService()
+                ),
+                userDefaultsService: UserDefaultsGenericService()
+            )
         )
+
         
         navigationController?.pushViewController(postVC, animated: true)
     }

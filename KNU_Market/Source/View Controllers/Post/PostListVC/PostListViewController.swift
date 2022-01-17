@@ -47,7 +47,6 @@ class PostListViewController: BaseViewController, View {
         $0.setImage(buttonImage, for: .normal)
         $0.layer.cornerRadius = Metrics.addPostButtonSize / 2
         $0.backgroundColor = UIColor(named: K.Color.appColor)
-
     }
     
     //MARK: - Initialization
@@ -74,6 +73,25 @@ class PostListViewController: BaseViewController, View {
         super.setupLayout()
         
         navigationItem.leftBarButtonItem = logoBarButtonItem
+        
+//        if let tabBar = self.tabBarController?.tabBar {
+//            
+//            tabBar.layer.cornerRadius = 30
+//            tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+////            tabBar.layer.masksToBounds = true
+//            tabBar.layer.shadowColor = UIColor.lightGray.cgColor
+//            tabBar.layer.shadowOpacity = 0.5
+//            tabBar.layer.shadowOffset = CGSize.zero
+//            tabBar.layer.shadowRadius = 5
+//            tabBar.layer.borderColor = UIColor.clear.cgColor
+//            tabBar.layer.borderWidth = 0
+//            tabBar.clipsToBounds = false
+//            tabBar.backgroundColor = UIColor.white
+//            UITabBar.appearance().shadowImage = UIImage()
+//            UITabBar.appearance().backgroundImage = UIImage()
+//        }
+        
+
         
         view.addSubview(postListsTableView)
         view.addSubview(uploadPostButton)
@@ -220,7 +238,7 @@ class PostListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.isFetchingData }
+            .map { $0.isRefreshingData }
             .distinctUntilChanged()
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)

@@ -15,8 +15,6 @@ extension UploadPostViewController: AddPostImageDelegate {
         viewModel.userSelectedImages = images
         postImagesCollectionView.reloadData()
     }
-
-    
 }
 
 //MARK: - UserPickedPostImageCellDelegate

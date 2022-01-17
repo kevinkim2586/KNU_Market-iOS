@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.5.0)
   - Atributika (4.10.1)
+  - BEKCurveTabbar (0.2.0)
   - BSImagePicker (3.3.1)
   - Differentiator (5.0.0)
   - Firebase/Analytics (8.10.0):
@@ -192,6 +193,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - Atributika
+  - BEKCurveTabbar (from `https://github.com/behrad-kzm/BEKCurveTabbar.git`)
   - BSImagePicker (~> 3.1)
   - Firebase/Analytics
   - Firebase/Core
@@ -291,9 +293,19 @@ SPEC REPOS:
     - WeakMapTable
     - YPImagePicker
 
+EXTERNAL SOURCES:
+  BEKCurveTabbar:
+    :git: https://github.com/behrad-kzm/BEKCurveTabbar.git
+
+CHECKOUT OPTIONS:
+  BEKCurveTabbar:
+    :commit: 5eff293f67e99bec20a3c5a5c5f04887253babd5
+    :git: https://github.com/behrad-kzm/BEKCurveTabbar.git
+
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   Atributika: 47e778507cfb3cd2c996278b0285221a62e97d71
+  BEKCurveTabbar: 99900bcf7a8d6c9d98cd874d3c5f655d3e28ac3d
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   Firebase: 44213362f1dcc52555b935dc925ed35ac55f1b20
@@ -348,6 +360,6 @@ SPEC CHECKSUMS:
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
   YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
 
-PODFILE CHECKSUM: 6cede590d3beba93aaca466cc5095289b163e03e
+PODFILE CHECKSUM: 993693ec2f83d9f6593467c75799fea66d8cab7a
 
 COCOAPODS: 1.11.2

@@ -118,8 +118,6 @@ class PostHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setupLayout()
-//        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -229,15 +227,12 @@ class PostHeaderView: UIView {
         locationNameLabel.text = locationName
         dateLabel.text = dateString
         viewCountLabel.text = "\(viewCount)"
-        
-      
     }
     
     private func configureImageSlideShow() {
         guard let imageSources = imageSources else {
             return
         }
-        
         imageSources.isEmpty
         ? imageSlideShow.setImageInputs([ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)])
         : imageSlideShow.setImageInputs(imageSources)

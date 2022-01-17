@@ -219,6 +219,7 @@
 		7CDD5B202795168F0082E3FC /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */; };
 		7CDD5B23279526D20082E3FC /* BannerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B22279526D20082E3FC /* BannerHeaderView.swift */; };
 		7CDD5B252795274C0082E3FC /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B242795274C0082E3FC /* BannerCollectionViewCell.swift */; };
+		7CDD5B27279543840082E3FC /* BannerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B26279543840082E3FC /* BannerAPI.swift */; };
 		7CE0A41627918C400034CC69 /* KMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0A41527918C400034CC69 /* KMTabBarController.swift */; };
 		7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEAC991275F7AFF005AF338 /* UserAPI.swift */; };
 		7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */; };
@@ -473,6 +474,7 @@
 		7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
 		7CDD5B22279526D20082E3FC /* BannerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerHeaderView.swift; sourceTree = "<group>"; };
 		7CDD5B242795274C0082E3FC /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
+		7CDD5B26279543840082E3FC /* BannerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAPI.swift; sourceTree = "<group>"; };
 		7CE0A41527918C400034CC69 /* KMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTabBarController.swift; sourceTree = "<group>"; };
 		7CEAC991275F7AFF005AF338 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewController.swift; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 				7CC69A7927670CF200105FC0 /* ReportAPI.swift */,
 				7CC69A7B27670E3B00105FC0 /* PopupAPI.swift */,
 				625B0E3C2741F741003968BA /* MyPageAPI.swift */,
+				7CDD5B26279543840082E3FC /* BannerAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1798,6 +1801,7 @@
 				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel+Extension.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
+				7CDD5B27279543840082E3FC /* BannerAPI.swift in Sources */,
 				7C11C1FA278FE77E00818C19 /* DateFormatter.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				6C49951C271FAD3D00E8DB4B /* UserDefaultKeys.swift in Sources */,

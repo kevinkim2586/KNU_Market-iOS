@@ -14,7 +14,6 @@ class KMPostButtonView: UIView {
 
     weak var delegate: KMPostButtonViewDelegate?
 
-
     //MARK: - Constants
     
     //MARK: - UI
@@ -30,36 +29,15 @@ class KMPostButtonView: UIView {
         return button
     }()
     
-    // gatheringStatusButton 이 들어갈 UIView
-    let gatheringStatusView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.lightGray
-        view.layer.cornerRadius = KMPostControlButton.buttonSize / 2
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 2, height: 2)
-        view.layer.shadowOpacity = 0.2
-        view.layer.shadowRadius = 2
-        view.isHidden = true
-        return view
-    }()
-    
-    // 모집 중, 모집완료 설정 버튼
-    lazy var gatheringStatusButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.addTarget(
-            self,
-            action: #selector(pressedGatheringStatusButton),
-            for: .touchUpInside
-        )
-        button.setTitle("모집 완료 ⌵", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+    lazy var shareButton: KMPostControlButton = {
+        let button = KMPostControlButton(customImage: "shareButton")
         return button
     }()
+
     
     // 더보기 버튼
     lazy var menuButton: KMPostControlButton = {
-        let button = KMPostControlButton(buttonImageSystemName: "ellipsis")
+        let button = KMPostControlButton(customImage: "menuButton")
         return button
     }()
     
@@ -79,22 +57,6 @@ class KMPostButtonView: UIView {
 
     func configure(isPostUserUploaded: Bool, isCompletelyDone: Bool) {
 
-        if isPostUserUploaded {
-            gatheringStatusView.isHidden = false
-            
-            if isCompletelyDone {
-                
-                gatheringStatusView.backgroundColor = .lightGray
-                gatheringStatusButton.setTitleColor(.white, for: .normal)
-                gatheringStatusButton.setTitle("모집 완료  ⌵", for: .normal)
-            } else {
-                gatheringStatusView.backgroundColor = UIColor(named: K.Color.appColor)
-                gatheringStatusButton.setTitle("모집 중  ⌵", for: .normal)
-            }
-            
-        } else {
-            gatheringStatusView.isHidden = true
-        }
     }
     
     //MARK: - UI Setup
@@ -102,9 +64,8 @@ class KMPostButtonView: UIView {
     private func setupLayout() {
         
         addSubview(backButton)
-//        addSubview(gatheringStatusView)
-//        gatheringStatusView.addSubview(gatheringStatusButton)
         addSubview(menuButton)
+        addSubview(shareButton)
     }
     
     private func setupConstraints() {
@@ -119,17 +80,10 @@ class KMPostButtonView: UIView {
             $0.right.equalToSuperview().offset(-15)
         }
         
-     
-//        gatheringStatusView.snp.makeConstraints {
-//            $0.width.equalTo(100)
-//            $0.height.equalTo(35)
-//            $0.right.equalTo(trashButton.snp.left).offset(-20)
-//            $0.top.equalToSuperview().offset(10)
-//        }
-//
-//        gatheringStatusButton.snp.makeConstraints {
-//            $0.center.equalToSuperview()
-//        }
+        shareButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(10)
+            $0.right.equalTo(menuButton.snp.left).offset(-15)
+        }
     }
 }
 

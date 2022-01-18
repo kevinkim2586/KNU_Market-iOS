@@ -4,10 +4,11 @@ import UIKit
 
 class KMPostControlButton: UIButton {
     
-    static let buttonSize: CGFloat      = 35
-    private let buttonFontSize: CGFloat = 15
+    static let buttonSize: CGFloat      = 30
+    private let buttonFontSize: CGFloat = 24
     
     private var buttonImageSystemName: String?
+    private var customImageName: String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,25 +25,33 @@ class KMPostControlButton: UIButton {
         configure()
     }
     
+    init(customImage: String) {
+        super.init(frame: .zero)
+        self.customImageName = customImage
+        configure()
+    }
+    
     private func configure() {
         
         let font = UIFont.systemFont(ofSize: buttonFontSize)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        let buttonImage = UIImage(
-            systemName: self.buttonImageSystemName ?? "",
-            withConfiguration: configuration
-        )
-        setImage(buttonImage, for: .normal)
         
-        layer.cornerRadius = KMPostControlButton.buttonSize / 2
-        backgroundColor = .white
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 2, height: 2)
-        layer.shadowOpacity = 0.2
-        layer.shadowRadius = 2
+        if let buttonImageSystemName = buttonImageSystemName {
+            let buttonImage = UIImage(
+                systemName: buttonImageSystemName,
+                withConfiguration: configuration
+            )
+            setImage(buttonImage, for: .normal)
+        }
+        
+        if let customImageName = customImageName {
+            let buttonImage = UIImage(named: customImageName)
+            setImage(buttonImage, for: .normal)
+        }
+        
+        backgroundColor = .clear
         widthAnchor.constraint(equalToConstant: KMPostControlButton.buttonSize).isActive = true
         heightAnchor.constraint(equalToConstant: KMPostControlButton.buttonSize).isActive = true
-        tintColor = .black
+        tintColor = .white
     }
-
 }

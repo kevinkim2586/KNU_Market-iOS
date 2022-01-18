@@ -35,8 +35,6 @@ class NewPostViewController: BaseViewController {
         static let labelLightGrayColor = UIColor.convertUsingHexString(hexValue: "#9D9D9D")
     }
     
-
-    
     //MARK: - UI
     
     let upperImageView = UIImageView().then {
@@ -159,6 +157,31 @@ class NewPostViewController: BaseViewController {
     
     let enterChatButton = KMShadowButton(buttonTitle: "채팅방 입장하기")
     
+    let urlLinkButton = UIButton(type: .system).then {
+        $0.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOffset = CGSize(width: 1, height: 1)
+        $0.layer.shadowOpacity = 0.4
+        $0.layer.shadowRadius = 5
+        $0.layer.cornerRadius = 10
+        $0.layer.cornerRadius = 20
+        $0.setTitle("링크 보러가기", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.titleLabel?.font = UIFont(name: K.Fonts.notoSansKRMedium, size: 13)
+        let buttonImage = UIImage(
+            systemName: "arrow.up.right",
+            withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 12))
+        )
+        $0.tintColor = .black
+        $0.setImage(buttonImage, for: .normal)
+        $0.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        $0.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        $0.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+    }
+    
+    let postControlButtonView = KMPostButtonView()
+    
+
     //MARK: - Initialization
     
     override init() {
@@ -203,6 +226,8 @@ class NewPostViewController: BaseViewController {
         
         view.addSubview(upperImageView)
         view.addSubview(bottomContainerView)
+        view.addSubview(urlLinkButton)
+        view.addSubview(postControlButtonView)
         
         [profileImageView, userNicknameLabel, bulletPointLabel, dateLabel].forEach {
             userInfoStackView.addArrangedSubview($0)
@@ -218,6 +243,7 @@ class NewPostViewController: BaseViewController {
         bottomContainerView.addSubview(divider)
         bottomContainerView.addSubview(postDetailLabel)
         bottomContainerView.addSubview(enterChatButton)
+    
     }
     
     override func setupConstraints() {
@@ -228,10 +254,22 @@ class NewPostViewController: BaseViewController {
             $0.height.equalTo(view.frame.height / 2)
         }
         
+        postControlButtonView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.height.equalTo(50)
+            $0.left.right.equalToSuperview()
+        }
+        
         bottomContainerView.snp.makeConstraints {
             $0.top.equalTo(upperImageView.snp.bottom).offset(-15)
             $0.bottom.left.right.equalToSuperview()
-//            $0.height.equalTo((view.frame.height/2) + 15)
+        }
+        
+        urlLinkButton.snp.makeConstraints {
+            $0.width.equalTo(124)
+            $0.height.equalTo(39)
+            $0.bottom.equalTo(bottomContainerView.snp.top).offset(-15)
+            $0.centerX.equalToSuperview()
         }
         
         profileImageView.snp.makeConstraints {
@@ -294,8 +332,6 @@ class NewPostViewController: BaseViewController {
             $0.bottom.equalToSuperview().offset(-30)
             $0.left.right.equalToSuperview().inset(Metrics.defaultOffSet)
         }
-          
-        
     }
     
     //MARK: - Binding

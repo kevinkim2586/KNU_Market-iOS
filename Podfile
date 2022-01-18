@@ -13,7 +13,7 @@ target 'KNU_Market' do
   pod 'Firebase/Messaging'
   pod 'Firebase/DynamicLinks'
   
-  pod 'BEKCurveTabbar', :git => 'https://github.com/behrad-kzm/BEKCurveTabbar.git'
+  # UI
   pod 'IQKeyboardManagerSwift'
   pod 'YPImagePicker'
   pod "BSImagePicker", "~> 3.1"
@@ -34,9 +34,7 @@ target 'KNU_Market' do
   pod 'PanModal'
   pod 'TextFieldEffects'
   pod 'PMAlertController'
-  
-
-  # UI
+  pod 'LabelSwitch'
   pod 'lottie-ios'
   pod 'UITextView+Placeholder'
   pod 'Hero'

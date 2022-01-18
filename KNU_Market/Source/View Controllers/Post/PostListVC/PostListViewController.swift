@@ -26,7 +26,7 @@ class PostListViewController: BaseViewController, View {
                 x: 0,
                 y: 0,
                 width: view.frame.size.width - 25,
-                height: 180
+                height: 200
             )
         )
         return headerView

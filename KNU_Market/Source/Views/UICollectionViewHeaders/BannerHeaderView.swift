@@ -28,7 +28,6 @@ class BannerHeaderView: UIView {
     let collectionViewLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        
     }
     
     lazy var bannerCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.collectionViewLayout).then {

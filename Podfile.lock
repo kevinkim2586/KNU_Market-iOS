@@ -1,7 +1,6 @@
 PODS:
   - Alamofire (5.5.0)
   - Atributika (4.10.1)
-  - BEKCurveTabbar (0.2.0)
   - BSImagePicker (3.3.1)
   - Differentiator (5.0.0)
   - Firebase/Analytics (8.10.0):
@@ -116,6 +115,7 @@ PODS:
     - InputBarAccessoryView/Core (= 5.4.0)
   - InputBarAccessoryView/Core (5.4.0)
   - IQKeyboardManagerSwift (6.5.9)
+  - LabelSwitch (0.1.7)
   - lottie-ios (3.3.0)
   - MessageInputBar (0.4.1):
     - MessageInputBar/Core (= 0.4.1)
@@ -193,7 +193,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - Atributika
-  - BEKCurveTabbar (from `https://github.com/behrad-kzm/BEKCurveTabbar.git`)
   - BSImagePicker (~> 3.1)
   - Firebase/Analytics
   - Firebase/Core
@@ -206,6 +205,7 @@ DEPENDENCIES:
   - ImageSlideshow/SDWebImage
   - InputBarAccessoryView
   - IQKeyboardManagerSwift
+  - LabelSwitch
   - lottie-ios
   - MessageInputBar
   - MessageKit
@@ -257,6 +257,7 @@ SPEC REPOS:
     - ImageSlideshow
     - InputBarAccessoryView
     - IQKeyboardManagerSwift
+    - LabelSwitch
     - lottie-ios
     - MessageInputBar
     - MessageKit
@@ -293,19 +294,9 @@ SPEC REPOS:
     - WeakMapTable
     - YPImagePicker
 
-EXTERNAL SOURCES:
-  BEKCurveTabbar:
-    :git: https://github.com/behrad-kzm/BEKCurveTabbar.git
-
-CHECKOUT OPTIONS:
-  BEKCurveTabbar:
-    :commit: 5eff293f67e99bec20a3c5a5c5f04887253babd5
-    :git: https://github.com/behrad-kzm/BEKCurveTabbar.git
-
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   Atributika: 47e778507cfb3cd2c996278b0285221a62e97d71
-  BEKCurveTabbar: 99900bcf7a8d6c9d98cd874d3c5f655d3e28ac3d
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   Firebase: 44213362f1dcc52555b935dc925ed35ac55f1b20
@@ -324,6 +315,7 @@ SPEC CHECKSUMS:
   ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
   InputBarAccessoryView: 74d471ab1fa1736806be50328df79257e52865a9
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  LabelSwitch: 97b19eb5e11b27854559374357375134d40c744f
   lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
   MessageKit: 8e76dd8d65ad44b49e1651c673497146416461e9
@@ -360,6 +352,6 @@ SPEC CHECKSUMS:
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
   YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
 
-PODFILE CHECKSUM: 993693ec2f83d9f6593467c75799fea66d8cab7a
+PODFILE CHECKSUM: 64c8fff3a1eb41151c67fa1b494ee16144a8bf1f
 
 COCOAPODS: 1.11.2

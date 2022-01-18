@@ -224,6 +224,14 @@
 		7CDD5B2C279544760082E3FC /* BannerServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B2B279544760082E3FC /* BannerServiceType.swift */; };
 		7CDD5B30279544A90082E3FC /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B2F279544A90082E3FC /* BannerModel.swift */; };
 		7CDD5B32279544E70082E3FC /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B31279544E70082E3FC /* Media.swift */; };
+		7CDD5B37279592830082E3FC /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B33279592830082E3FC /* Roboto-Medium.ttf */; };
+		7CDD5B38279592830082E3FC /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B34279592830082E3FC /* Roboto-Regular.ttf */; };
+		7CDD5B39279592830082E3FC /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B35279592830082E3FC /* Roboto-Black.ttf */; };
+		7CDD5B3A279592830082E3FC /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B36279592830082E3FC /* Roboto-Bold.ttf */; };
+		7CDD5B3E27967CCB0082E3FC /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B3B27967CCA0082E3FC /* NotoSansKR-Bold.otf */; };
+		7CDD5B3F27967CCB0082E3FC /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B3C27967CCA0082E3FC /* NotoSansKR-Medium.otf */; };
+		7CDD5B4027967CCB0082E3FC /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B3D27967CCB0082E3FC /* NotoSansKR-Regular.otf */; };
+		7CDD5B4227967E470082E3FC /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B4127967E470082E3FC /* Int+Extension.swift */; };
 		7CE0A41627918C400034CC69 /* KMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0A41527918C400034CC69 /* KMTabBarController.swift */; };
 		7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEAC991275F7AFF005AF338 /* UserAPI.swift */; };
 		7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */; };
@@ -483,6 +491,14 @@
 		7CDD5B2B279544760082E3FC /* BannerServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerServiceType.swift; sourceTree = "<group>"; };
 		7CDD5B2F279544A90082E3FC /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		7CDD5B31279544E70082E3FC /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		7CDD5B33279592830082E3FC /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		7CDD5B34279592830082E3FC /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		7CDD5B35279592830082E3FC /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		7CDD5B36279592830082E3FC /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		7CDD5B3B27967CCA0082E3FC /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		7CDD5B3C27967CCA0082E3FC /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		7CDD5B3D27967CCB0082E3FC /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		7CDD5B4127967E470082E3FC /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		7CE0A41527918C400034CC69 /* KMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTabBarController.swift; sourceTree = "<group>"; };
 		7CEAC991275F7AFF005AF338 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewController.swift; sourceTree = "<group>"; };
@@ -1271,6 +1287,7 @@
 				7C132BF326552B4900BE5F40 /* UIButton+Extension.swift */,
 				7C036AB72696BE4C00F6C29B /* Date+Extension.swift */,
 				7C0E2DDE26B7D92800BB37FF /* String+Extension.swift */,
+				7CDD5B4127967E470082E3FC /* Int+Extension.swift */,
 				7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */,
 				7C9BBB4026C27BD0001C54E6 /* UITableView+Extension.swift */,
 				7C3D541E26CA722B00AE3E55 /* CALayer+Extension.swift */,
@@ -1361,8 +1378,15 @@
 		7CDD5B1A279516640082E3FC /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				7CDD5B3B27967CCA0082E3FC /* NotoSansKR-Bold.otf */,
+				7CDD5B3C27967CCA0082E3FC /* NotoSansKR-Medium.otf */,
+				7CDD5B3D27967CCB0082E3FC /* NotoSansKR-Regular.otf */,
 				7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */,
 				7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */,
+				7CDD5B35279592830082E3FC /* Roboto-Black.ttf */,
+				7CDD5B36279592830082E3FC /* Roboto-Bold.ttf */,
+				7CDD5B33279592830082E3FC /* Roboto-Medium.ttf */,
+				7CDD5B34279592830082E3FC /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1655,14 +1679,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CDD5B3A279592830082E3FC /* Roboto-Bold.ttf in Resources */,
 				7CDD5B1F2795168F0082E3FC /* NotoSans-Regular.ttf in Resources */,
 				7C43355826D89AC200A044CD /* wimLogo_Launchscreen.png in Resources */,
 				7C3D541D26C90B4900AE3E55 /* congratulate1.json in Resources */,
+				7CDD5B4027967CCB0082E3FC /* NotoSansKR-Regular.otf in Resources */,
+				7CDD5B3E27967CCB0082E3FC /* NotoSansKR-Bold.otf in Resources */,
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
 				7C43355C26D8BD8000A044CD /* appLogo_LaunchScreen.png in Resources */,
+				7CDD5B38279592830082E3FC /* Roboto-Regular.ttf in Resources */,
 				6252A0DC2765F72E003BAC43 /* Colors.xcassets in Resources */,
 				7CC1B59A26D4CB1E0007F99B /* EmptyView.xib in Resources */,
+				7CDD5B39279592830082E3FC /* Roboto-Black.ttf in Resources */,
+				7CDD5B3F27967CCB0082E3FC /* NotoSansKR-Medium.otf in Resources */,
+				7CDD5B37279592830082E3FC /* Roboto-Medium.ttf in Resources */,
 				7CDD5B202795168F0082E3FC /* NotoSans-Bold.ttf in Resources */,
 				7C036ABE269AB7CC00F6C29B /* GoogleService-Info.plist in Resources */,
 			);
@@ -1920,6 +1951,7 @@
 				7C5386E42768C83B00BFEA7F /* ReportService.swift in Sources */,
 				7C9C59DE277C12B9005E08BC /* UIViewController+Alert_Extensions.swift in Sources */,
 				626D66F3274291EC00CB7F4F /* InquiryTableViewCell.swift in Sources */,
+				7CDD5B4227967E470082E3FC /* Int+Extension.swift in Sources */,
 				7C868D6A274C97420056B3F3 /* KMCustomAlertView.swift in Sources */,
 				7CBFDA7A274005DF000C8C8A /* PostCellViewModel.swift in Sources */,
 				7CC69A7E27670FFE00105FC0 /* UserService.swift in Sources */,

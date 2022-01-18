@@ -19,6 +19,11 @@ class PostCellViewModel {
     var totalGatheringPeople: Int
     
     var price: Int
+    
+    var priceForEachPerson: String {
+        let perPersonPrice = price / totalGatheringPeople
+        return perPersonPrice.withDecimalSeparator
+    }
 
     private var formattedDate: String = ""
     var date: String {

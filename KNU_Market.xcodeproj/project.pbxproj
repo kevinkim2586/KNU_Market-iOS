@@ -49,6 +49,8 @@
 		7C2A6B152786B9A800C31238 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B142786B9A800C31238 /* UserNotificationService.swift */; };
 		7C2A6B172786C86200C31238 /* URLNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B162786C86200C31238 /* URLNavigator.swift */; };
 		7C2A6B1F2787EC0F00C31238 /* PostListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2A6B1E2787EC0F00C31238 /* PostListViewReactor.swift */; };
+		7C2BA40E2796899A00DD01A4 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2BA40D2796899A00DD01A4 /* NewPostViewController.swift */; };
+		7C2BA41027968E8F00DD01A4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2BA40F27968E8F00DD01A4 /* UIColor+Extension.swift */; };
 		7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */; };
 		7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */; };
 		7C3B4FF026A928C700E2CA8F /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FEF26A928C700E2CA8F /* EmailVerificationViewController.swift */; };
@@ -105,6 +107,7 @@
 		7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */; };
 		7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BD26FF0B31000E4666 /* StudentIdVerificationDTO.swift */; };
 		7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */; };
+		7C77A2F9279695930038F358 /* KMGatherStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77A2F8279695930038F358 /* KMGatherStatusView.swift */; };
 		7C833686266208210032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833685266208210032308D /* Interceptor.swift */; };
 		7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */; };
 		7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */; };
@@ -195,6 +198,8 @@
 		7CBFDA78273FE01F000C8C8A /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBFDA77273FE01F000C8C8A /* PostTableViewCell.swift */; };
 		7CBFDA7A274005DF000C8C8A /* PostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */; };
 		7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC05E9926B6D91800BE9288 /* EditPostModel.swift */; };
+		7CC12A002796AC8500C0F581 /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7CC129FF2796AC8500C0F581 /* NotoSansKR-Light.otf */; };
+		7CC12A022796AE1100C0F581 /* KMShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC12A012796AE1100C0F581 /* KMShadowButton.swift */; };
 		7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC1B59726D4C7000007F99B /* EmptyView.swift */; };
 		7CC1B59A26D4CB1E0007F99B /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC1B59926D4CB1E0007F99B /* EmptyView.xib */; };
 		7CC1B59C26D4FC110007F99B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC1B59B26D4FC110007F99B /* UIView+Extension.swift */; };
@@ -313,6 +318,8 @@
 		7C2A6B142786B9A800C31238 /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		7C2A6B162786C86200C31238 /* URLNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNavigator.swift; sourceTree = "<group>"; };
 		7C2A6B1E2787EC0F00C31238 /* PostListViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewReactor.swift; sourceTree = "<group>"; };
+		7C2BA40D2796899A00DD01A4 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		7C2BA40F27968E8F00DD01A4 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewController.swift; sourceTree = "<group>"; };
 		7C3B4FEF26A928C700E2CA8F /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
@@ -369,6 +376,7 @@
 		7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + Verification.swift"; sourceTree = "<group>"; };
 		7C7480BD26FF0B31000E4666 /* StudentIdVerificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdVerificationDTO.swift; sourceTree = "<group>"; };
 		7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + SaveUserInfo.swift"; sourceTree = "<group>"; };
+		7C77A2F8279695930038F358 /* KMGatherStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMGatherStatusView.swift; sourceTree = "<group>"; };
 		7C77E240266BB55600680A27 /* KNU_Market.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNU_Market.entitlements; sourceTree = "<group>"; };
 		7C833685266208210032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
@@ -462,6 +470,8 @@
 		7CBFDA77273FE01F000C8C8A /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellViewModel.swift; sourceTree = "<group>"; };
 		7CC05E9926B6D91800BE9288 /* EditPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostModel.swift; sourceTree = "<group>"; };
+		7CC129FF2796AC8500C0F581 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		7CC12A012796AE1100C0F581 /* KMShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMShadowButton.swift; sourceTree = "<group>"; };
 		7CC1B59726D4C7000007F99B /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		7CC1B59926D4CB1E0007F99B /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
 		7CC1B59B26D4FC110007F99B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -1027,12 +1037,14 @@
 		7C9A382F276C897D00AEE831 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7C77A2F8279695930038F358 /* KMGatherStatusView.swift */,
 				7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */,
 				7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */,
 				7CEDBB602702EC970078F5E1 /* KMTextField.swift */,
 				7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */,
 				7CEDBB5C2702E0820078F5E1 /* KMErrorLabel.swift */,
 				626D66E82742705700CB7F4F /* KMButton.swift */,
+				7CC12A012796AE1100C0F581 /* KMShadowButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1280,6 +1292,7 @@
 			children = (
 				7C9C59DC277C1269005E08BC /* UIViewController+Extensions */,
 				7C58477727796DA6005D75B2 /* UIImagePickerController+Extension.swift */,
+				7C2BA40F27968E8F00DD01A4 /* UIColor+Extension.swift */,
 				7C98D2A52706F54B00579EE6 /* UIViewController+Preview.swift */,
 				7C55545E266CEADF00C3C5B6 /* UILabel+Extension.swift */,
 				7C6B509F2652B17F0032328C /* UIImage+Extension.swift */,
@@ -1380,6 +1393,7 @@
 			children = (
 				7CDD5B3B27967CCA0082E3FC /* NotoSansKR-Bold.otf */,
 				7CDD5B3C27967CCA0082E3FC /* NotoSansKR-Medium.otf */,
+				7CC129FF2796AC8500C0F581 /* NotoSansKR-Light.otf */,
 				7CDD5B3D27967CCB0082E3FC /* NotoSansKR-Regular.otf */,
 				7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */,
 				7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */,
@@ -1476,6 +1490,7 @@
 				7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */,
 				7CAE5AFD2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift */,
 				7CAE5AFF2754B5F100426708 /* PostViewController+PostViewModelDelegate.swift */,
+				7C2BA40D2796899A00DD01A4 /* NewPostViewController.swift */,
 			);
 			path = PostVC;
 			sourceTree = "<group>";
@@ -1685,6 +1700,7 @@
 				7C3D541D26C90B4900AE3E55 /* congratulate1.json in Resources */,
 				7CDD5B4027967CCB0082E3FC /* NotoSansKR-Regular.otf in Resources */,
 				7CDD5B3E27967CCB0082E3FC /* NotoSansKR-Bold.otf in Resources */,
+				7CC12A002796AC8500C0F581 /* NotoSansKR-Light.otf in Resources */,
 				7CA661FD263D4389000E0B7A /* LaunchScreen.storyboard in Resources */,
 				7CA661FA263D4389000E0B7A /* Assets.xcassets in Resources */,
 				7C43355C26D8BD8000A044CD /* appLogo_LaunchScreen.png in Resources */,
@@ -1807,6 +1823,7 @@
 				7CBFDA78273FE01F000C8C8A /* PostTableViewCell.swift in Sources */,
 				7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */,
 				7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */,
+				7CC12A022796AE1100C0F581 /* KMShadowButton.swift in Sources */,
 				7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */,
 				7C3E7BF62784039400BEBC91 /* ChatListViewReactor.swift in Sources */,
 				7CDD5B32279544E70082E3FC /* Media.swift in Sources */,
@@ -1891,6 +1908,7 @@
 				7CAE5AFE2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift in Sources */,
 				625B0E3D2741F741003968BA /* MyPageAPI.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView+Extension.swift in Sources */,
+				7C2BA41027968E8F00DD01A4 /* UIColor+Extension.swift in Sources */,
 				7CC33B2B274B58EB00B0C2C0 /* UploadPostViewController.swift in Sources */,
 				7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */,
 				7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */,
@@ -1930,6 +1948,7 @@
 				7C3D541F26CA722B00AE3E55 /* CALayer+Extension.swift in Sources */,
 				7C9A3835276DC6FC00AEE831 /* LoginViewController.swift in Sources */,
 				7C5847632771B86B005D75B2 /* NickNameInputViewReactor.swift in Sources */,
+				7C77A2F9279695930038F358 /* KMGatherStatusView.swift in Sources */,
 				7CF369AF2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift in Sources */,
 				7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */,
 				7C5386DB2768912400BFEA7F /* FindPasswordModel.swift in Sources */,
@@ -1987,6 +2006,7 @@
 				7C0F1CB426BA55D60068FF45 /* FindPasswordViewController.swift in Sources */,
 				7C9BBB3F26C162BB001C54E6 /* UpdatePostRequestDTO.swift in Sources */,
 				7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */,
+				7C2BA40E2796899A00DD01A4 /* NewPostViewController.swift in Sources */,
 				7CA52D69270B083F00A69F3B /* ChangeIdViewController.swift in Sources */,
 				7C3D985E26AE793D005DFAE0 /* RoomInfo.swift in Sources */,
 				7CA6624F26413F03000E0B7A /* Constants.swift in Sources */,

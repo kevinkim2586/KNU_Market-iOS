@@ -193,7 +193,6 @@ class PostTableViewCell: UITableViewCell {
         perPersonLabel.snp.makeConstraints {
             $0.right.equalTo(priceLabel.snp.left).offset(-2)
             $0.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
-       
         }
     }
     

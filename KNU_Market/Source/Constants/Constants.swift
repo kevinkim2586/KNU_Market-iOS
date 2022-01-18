@@ -33,6 +33,7 @@ struct K {
         static let notoSansKRRegular            = "NotoSansKR-Regular"
         static let notoSansKRMedium             = "NotoSansKR-Medium"
         static let notoSansKRBold               = "NotoSansKR-Bold"
+        static let notoSansKRLight              = "NotoSansKR-Light"
         
         // Roboto
         static let robotoRegular                = "Roboto-Regular"
@@ -57,6 +58,7 @@ struct K {
         static let appLogoWithPhrase            = "appLogoWithPhrase"
         static let developerInfo                = "developer_info"
         
+        static let defaultUserPlaceholder       = "defaultUserImagePlaceholder"
         static let defaultAvatar                = "default avatar"
         static let defaultItemImage             = "default item image"
         static let defaultProfileImage          = "default_profile_image"

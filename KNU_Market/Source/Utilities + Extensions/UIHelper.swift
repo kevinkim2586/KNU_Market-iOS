@@ -1,6 +1,5 @@
 import UIKit
 import SPIndicator
-import BEKCurveTabbar
 
 struct UIHelper {
     

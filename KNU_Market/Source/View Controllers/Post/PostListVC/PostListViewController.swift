@@ -194,20 +194,23 @@ class PostListViewController: BaseViewController, View {
             .subscribe(onNext: { (_, indexPath) in
                 self.postListsTableView.deselectRow(at: indexPath, animated: true)
                 
-                let postUUID = reactor.currentState.postList[indexPath.row].uuid
-                let postVC = PostViewController(
-                    reactor: PostViewReactor(
-                        pageId: postUUID,
-                        isFromChatVC: false,
-                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                        chatService: ChatService(
-                            network: Network<ChatAPI>(plugins: [AuthPlugin()]),
-                            userDefaultsGenericService: UserDefaultsGenericService()
-                        ),
-                        userDefaultsService: UserDefaultsGenericService()
-                    )
-                )
-                self.navigationController?.pushViewController(postVC, animated: true)
+                let newPostVC = NewPostViewController()
+                self.navigationController?.pushViewController(newPostVC, animated: true)
+                
+//                let postUUID = reactor.currentState.postList[indexPath.row].uuid
+//                let postVC = PostViewController(
+//                    reactor: PostViewReactor(
+//                        pageId: postUUID,
+//                        isFromChatVC: false,
+//                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+//                        chatService: ChatService(
+//                            network: Network<ChatAPI>(plugins: [AuthPlugin()]),
+//                            userDefaultsGenericService: UserDefaultsGenericService()
+//                        ),
+//                        userDefaultsService: UserDefaultsGenericService()
+//                    )
+//                )
+//                self.navigationController?.pushViewController(postVC, animated: true)
             })
             .disposed(by: disposeBag)
         

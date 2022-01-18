@@ -10,6 +10,7 @@ import UIKit
 final class KMButton: UIButton {
     
     // MARK: - Constants
+    
     fileprivate struct Style {
         static let titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
     }
@@ -46,7 +47,9 @@ final class KMButton: UIButton {
     override public var isEnabled: Bool {
         didSet {
             UIView.animate(withDuration: 0.3) {
-                self.backgroundColor = self.isEnabled ? UIColor(named: "AppDefaultColor") : UIColor(named: "DisabledColor")
+                self.backgroundColor = self.isEnabled
+                ? UIColor(named: K.Color.appColor)
+                : UIColor(named: "DisabledColor")
             }
         }
     }

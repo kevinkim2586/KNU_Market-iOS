@@ -336,3 +336,20 @@ class UploadPostViewController: BaseViewController {
         if editModel != nil { configurePageWithPriorData() }
     }
 }
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct UploadPostVC: PreviewProvider {
+    
+    static var previews: some SwiftUI.View {
+        UploadPostViewController(
+           viewModel: UploadPostViewModel(
+               postManager: PostManager(),
+               mediaManager: MediaManager()
+           )
+        ).toPreview()
+    }
+}
+#endif

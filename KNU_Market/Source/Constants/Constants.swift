@@ -24,8 +24,22 @@ struct K {
     //MARK: - UI Related Constants
     
     struct Fonts {
+        
+        // NotoSans
         static let notoSansRegular              = "NotoSans-Regular"
         static let notoSansBold                 = "NotoSans-Bold"
+        
+        // NotoSans KR
+        static let notoSansKRRegular            = "NotoSansKR-Regular"
+        static let notoSansKRMedium             = "NotoSansKR-Medium"
+        static let notoSansKRBold               = "NotoSansKR-Bold"
+        
+        // Roboto
+        static let robotoRegular                = "Roboto-Regular"
+        static let robotoBold                   = "Roboto-Bold"
+        static let robotoMedium                 = "Roboto-Medium"
+        static let robotoBlack                  = "Roboto-Black"
+        
     }
     
     struct Color {

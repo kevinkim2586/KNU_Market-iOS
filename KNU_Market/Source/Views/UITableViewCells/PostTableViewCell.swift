@@ -89,12 +89,25 @@ class PostTableViewCell: UITableViewCell {
         $0.backgroundColor = UIColor(named: K.Color.appColor)
     }
     
-    let priceLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .darkGray
-        label.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
-        return label
-    }()
+    let perPersonLabel = UILabel().then {
+        $0.text = "1인당"
+        $0.adjustsFontSizeToFitWidth = true
+        $0.textAlignment = .right
+        $0.textColor = UIColor.lightGray
+        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
+    }
+    
+    let priceLabel = UILabel().then {
+        $0.text = "-"
+        $0.textColor = .black
+        $0.font = UIFont(name: K.Fonts.robotoMedium, size: 18)
+    }
+    
+    let wonLabel = UILabel().then {
+        $0.text = "원"
+        $0.textColor = UIColor.lightGray
+        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
+    }
     
     //MARK: - Initialization
     
@@ -122,20 +135,15 @@ class PostTableViewCell: UITableViewCell {
     
     private func setupLayout() {
 
-        
-        
         addSubview(postImageView)
         addSubview(dateLabel)
         addSubview(postTitleLabel)
-        
-        
-    
         gatheringView.addSubview(gatheringStackView)
         gatheringView.addSubview(gatherDoneLabel)
         addSubview(gatheringView)
-        
-        
+        addSubview(perPersonLabel)
         addSubview(priceLabel)
+        addSubview(wonLabel)
     }
     
     private func setupConstraints() {
@@ -172,10 +180,20 @@ class PostTableViewCell: UITableViewCell {
             $0.center.equalToSuperview()
         }
         
-        priceLabel.snp.makeConstraints {
-            $0.height.equalTo(20)
+        wonLabel.snp.makeConstraints {
             $0.right.equalToSuperview().offset(-Metrics.rightOffSet)
             $0.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
+        }
+        
+        priceLabel.snp.makeConstraints {
+            $0.right.equalTo(wonLabel.snp.left).offset(-2)
+            $0.bottom.equalToSuperview().offset(-13)
+        }
+
+        perPersonLabel.snp.makeConstraints {
+            $0.right.equalTo(priceLabel.snp.left).offset(-2)
+            $0.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
+       
         }
     }
     
@@ -234,7 +252,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func configureLocationLabel() {
-        priceLabel.text = "\(viewModel?.price)"
+        priceLabel.text = viewModel?.priceForEachPerson
     }
     
     private func configureDateLabel() {

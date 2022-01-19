@@ -473,6 +473,10 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                     print("✅ shortened URL: \(url)")
                     
     
+                    //UIActivityVC
+                    let promoText = "\(postDetailModel.title) 같이 사요!"
+                    let activityVC = UIActivityViewController(activityItems: [promoText, url], applicationActivities: nil)
+                    self?.present(activityVC, animated: true)
                     
                 }
                 

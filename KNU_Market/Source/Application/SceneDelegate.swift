@@ -131,7 +131,7 @@ extension SceneDelegate {
                 
                 print("✅ postUID: \(postUID)")
                 
-                let postVC = PostViewController(
+                let postVC = NewPostViewController(
                     reactor: PostViewReactor(
                         pageId: postUID,
                         isFromChatVC: false,

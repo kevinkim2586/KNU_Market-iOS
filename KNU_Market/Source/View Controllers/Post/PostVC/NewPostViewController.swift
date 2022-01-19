@@ -12,10 +12,12 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 import LabelSwitch
+import ImageSlideshow
+import RxGesture
 
-class NewPostViewController: BaseViewController {
-    
-//    typealias Reactor = PostViewReactor
+class NewPostViewController: BaseViewController, ReactorKit.View {
+
+    typealias Reactor = PostViewReactor
     
     //MARK: - Properties
     
@@ -23,6 +25,48 @@ class NewPostViewController: BaseViewController {
     private lazy var upperImageViewMaxHeight = view.frame.height / 2
     private lazy var upperImageViewMinHeight = 100.f
     private lazy var startingUpperImageViewHeight = upperImageViewMaxHeight
+    
+    // KMPostButtonView Menu Item
+    @available(iOS 14.0, *)
+    var menuItems: [UIAction] {
+        guard let reactor = reactor else { return [] }
+        // 사용자가 본인이 올린 글일 경우
+        if reactor.currentState.postIsUserUploaded {
+            return [
+                UIAction(title: "수정하기", image: nil, handler: { [weak self] _ in
+                    self?.reactor?.action.onNext(.editPost)
+                }),
+                UIAction(title: "삭제하기", image: nil, handler: { [weak self] _ in
+                    self?.presentAlertWithConfirmation(title: "정말 삭제하시겠습니까?", message: nil)
+                        .subscribe(onNext: { actionType in
+                            switch actionType {
+                            case .ok:
+                                self?.reactor?.action.onNext(.deletePost)
+                            case .cancel:
+                                break
+                            }
+                        })
+                        .disposed(by: self?.disposeBag ?? DisposeBag.init())
+                })
+            ]
+        } else {
+            return [
+                UIAction(title: "신고하기", image: nil, handler: { [weak self] _ in
+                    guard let nickname = reactor.currentState.postModel?.nickname else { return }
+                    self?.presentReportUserVC(userToReport: nickname, postUID: reactor.currentState.pageId)
+                }),
+                UIAction(title: "이 사용자의 글 보지 않기", image: nil, handler: { [weak self] _ in
+                    self?.reactor?.action.onNext(.blockUser)
+                }),
+            ]
+        }
+    }
+    
+    @available(iOS 14.0, *)
+    var menu: UIMenu {
+        return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
+    }
+    
     
     //MARK: - Constants
     
@@ -37,17 +81,23 @@ class NewPostViewController: BaseViewController {
     
     //MARK: - UI
     
-    let upperImageView = UIImageView().then {
+    let upperImageSlideshow = ImageSlideshow().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
-        $0.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        $0.backgroundColor = UIColor(named: K.Color.appColor)
+        $0.slideshowInterval = 4
+        let pageIndicator = UIPageControl()
+        pageIndicator.currentPageIndicatorTintColor = UIColor.lightGray
+        pageIndicator.pageIndicatorTintColor = UIColor.black
+        $0.pageIndicator = pageIndicator
+        $0.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 40))
     }
     
     let bottomContainerView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 25
         $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        $0.layer.borderWidth = 0.3
+        $0.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     let profileImageView = UIImageView().then {
@@ -64,10 +114,9 @@ class NewPostViewController: BaseViewController {
         $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
     }
     
-    let bulletPointLabel = UILabel().then {
+    let bulletPointLabel_1 = UILabel().then {
         $0.textColor = Colors.labelLightGrayColor
         $0.text = "•"
-        $0.numberOfLines = 1
         $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
     }
     
@@ -78,15 +127,27 @@ class NewPostViewController: BaseViewController {
         $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
     }
     
+    
+    let bulletPointLabel_2 = UILabel().then {
+        $0.textColor = Colors.labelLightGrayColor
+        $0.text = "•"
+        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
+    }
+    
+    let viewCountLabel = UILabel().then {
+        $0.textColor = Colors.labelLightGrayColor
+        $0.numberOfLines = 1
+        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
+    }
+    
     let userInfoStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fill
         $0.alignment = .fill
-        $0.spacing = 7
+        $0.spacing = 5
     }
     
     let postTitleLabel = UILabel().then {
-        $0.text = "Leep 천연 수제비누 5개입"
         $0.textColor = .black
         $0.numberOfLines = 2
         $0.adjustsFontSizeToFitWidth = true
@@ -124,6 +185,11 @@ class NewPostViewController: BaseViewController {
         $0.fullSizeTapEnabled = true
     }
     
+    let questionMarkButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(systemName: "questionmark.circle.fill"), for: .normal)
+        $0.tintColor = UIColor.convertUsingHexString(hexValue: "#CBCBCB")
+    }
+    
     let perPersonLabel = UILabel().then {
         $0.text = "1인당"
         $0.adjustsFontSizeToFitWidth = true
@@ -133,7 +199,7 @@ class NewPostViewController: BaseViewController {
     }
     
     let priceLabel = UILabel().then {
-        $0.text = "10,000"
+        $0.text = "?"
         $0.textColor = .black
         $0.font = UIFont(name: K.Fonts.robotoBold, size: 26)
     }
@@ -147,13 +213,9 @@ class NewPostViewController: BaseViewController {
     let divider = UIView().then {
         $0.backgroundColor = UIColor.convertUsingHexString(hexValue: "#E7E7E7")
     }
+
     
-    let postDetailLabel = UILabel().then {
-        $0.font = UIFont(name: K.Fonts.notoSansKRLight, size: 14)
-        $0.textColor = .black
-        $0.numberOfLines = 0
-        $0.text = "leep에서 판매하는 천연 수제비누입니다. 성분도 좋고 양도 많아서 꾸준히 사용하고 있어요. 이번에 세일해서 구매하려고 하는데 같이 사실 분 구합니다~~~"
-    }
+    let postDetailLabel = PostDetailLabel()
     
     let enterChatButton = KMShadowButton(buttonTitle: "채팅방 입장하기")
     
@@ -163,7 +225,6 @@ class NewPostViewController: BaseViewController {
         $0.layer.shadowOffset = CGSize(width: 1, height: 1)
         $0.layer.shadowOpacity = 0.4
         $0.layer.shadowRadius = 5
-        $0.layer.cornerRadius = 10
         $0.layer.cornerRadius = 20
         $0.setTitle("링크 보러가기", for: .normal)
         $0.setTitleColor(.black, for: .normal)
@@ -184,16 +245,11 @@ class NewPostViewController: BaseViewController {
 
     //MARK: - Initialization
     
-    override init() {
+    init(reactor: Reactor) {
         super.init()
         hidesBottomBarWhenPushed = true
+        self.reactor = reactor
     }
-    
-//    init(reactor: Reactor) {
-//        super.init()
-//        hidesBottomBarWhenPushed = true
-//        self.reactor = reactor
-//    }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -206,30 +262,18 @@ class NewPostViewController: BaseViewController {
         super.viewDidLoad()
         configurePanGestureRecognizer()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
+        
     //MARK: - UI Setup
 
-    
     override func setupLayout() {
         super.setupLayout()
         
-        view.addSubview(upperImageView)
+        view.addSubview(upperImageSlideshow)
         view.addSubview(bottomContainerView)
         view.addSubview(urlLinkButton)
         view.addSubview(postControlButtonView)
         
-        [profileImageView, userNicknameLabel, bulletPointLabel, dateLabel].forEach {
+        [profileImageView, userNicknameLabel, bulletPointLabel_1, dateLabel, bulletPointLabel_2, viewCountLabel].forEach {
             userInfoStackView.addArrangedSubview($0)
         }
         
@@ -239,6 +283,7 @@ class NewPostViewController: BaseViewController {
         bottomContainerView.addSubview(gatherStatusToggleSwitch)
         bottomContainerView.addSubview(wonLabel)
         bottomContainerView.addSubview(priceLabel)
+        bottomContainerView.addSubview(questionMarkButton)
         bottomContainerView.addSubview(perPersonLabel)
         bottomContainerView.addSubview(divider)
         bottomContainerView.addSubview(postDetailLabel)
@@ -249,7 +294,7 @@ class NewPostViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         
-        upperImageView.snp.makeConstraints {
+        upperImageSlideshow.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
             $0.height.equalTo(view.frame.height / 2)
         }
@@ -259,9 +304,9 @@ class NewPostViewController: BaseViewController {
             $0.height.equalTo(50)
             $0.left.right.equalToSuperview()
         }
-        
+
         bottomContainerView.snp.makeConstraints {
-            $0.top.equalTo(upperImageView.snp.bottom).offset(-15)
+            $0.top.equalTo(upperImageSlideshow.snp.bottom).offset(-15)
             $0.bottom.left.right.equalToSuperview()
         }
         
@@ -287,17 +332,17 @@ class NewPostViewController: BaseViewController {
             $0.right.equalToSuperview().offset(-25)
         }
         
-//        gatherStatusView.snp.makeConstraints {
-//            $0.width.equalTo(69)
-//            $0.height.equalTo(30)
-//            $0.top.equalTo(postTitleLabel.snp.bottom).offset(20)
-//            $0.left.equalToSuperview().offset(25)
-//        }
+        gatherStatusView.snp.makeConstraints {
+            $0.width.equalTo(69)
+            $0.height.equalTo(30)
+            $0.top.equalTo(postTitleLabel.snp.bottom).offset(20)
+            $0.left.equalToSuperview().offset(25)
+        }
         
         gatherStatusToggleSwitch.snp.makeConstraints {
             $0.width.equalTo(81)
             $0.height.equalTo(26)
-            $0.top.equalTo(postTitleLabel.snp.bottom).offset(20)
+            $0.top.equalTo(postTitleLabel.snp.bottom).offset(22)
             $0.left.equalToSuperview().offset(25)
         }
         
@@ -316,6 +361,12 @@ class NewPostViewController: BaseViewController {
             $0.top.equalTo(postTitleLabel.snp.bottom).offset(26)
         }
         
+        questionMarkButton.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+            $0.right.equalTo(perPersonLabel.snp.left).offset(-5)
+            $0.top.equalTo(postTitleLabel.snp.bottom).offset(27)
+        }
+        
         divider.snp.makeConstraints {
             $0.height.equalTo(0.5)
             $0.left.right.equalToSuperview()
@@ -332,13 +383,250 @@ class NewPostViewController: BaseViewController {
             $0.bottom.equalToSuperview().offset(-30)
             $0.left.right.equalToSuperview().inset(Metrics.defaultOffSet)
         }
+        
+  
+   
     }
     
     //MARK: - Binding
     
-//    func bind(reactor: PostViewReactor) {
-//
-//    }
+    func bind(reactor: PostViewReactor) {
+
+        // Input
+        
+        self.rx.viewDidLoad
+            .map { _ in Reactor.Action.viewDidLoad }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        self.rx.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationController?.setNavigationBarHidden(true, animated: true)
+                self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+            })
+            .disposed(by: disposeBag)
+        
+        self.rx.viewWillDisappear
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        // 뒤로가기
+        postControlButtonView.backButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        // 메뉴 버튼
+        postControlButtonView.menuButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                guard #available(iOS 14.0, *) else {
+//                    self.didPressMenuButton()
+                    return
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        postDetailLabel.onClick = { [weak self] _, detection in
+            switch detection.type {
+            case .link(let url):
+                self?.presentSafariView(with: url)
+            default: break
+            }
+        }
+        
+        enterChatButton.rx.tap
+            .map { Reactor.Action.joinChat }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+  
+        urlLinkButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                if let url = reactor.currentState.referenceUrl {
+                    self.presentSafariView(with: url)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        upperImageSlideshow.rx.tapGesture()
+            .when(.recognized)
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.upperImageSlideshow.presentFullScreenController(from: self)
+            })
+            .disposed(by: disposeBag)
+
+        // Output
+        
+        reactor.state
+            .map { $0.shouldEnableChatEntrance }
+            .bind(to: enterChatButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        /// 방장 모집 상태 변경 버튼
+        reactor.state
+            .map { $0.postIsUserUploaded }
+            .map { !$0 }
+            .distinctUntilChanged()
+            .bind(to: gatherStatusToggleSwitch.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        /// 일반 유저 모집 상태 확인 View
+        reactor.state
+            .map { $0.postIsUserUploaded }
+            .distinctUntilChanged()
+            .bind(to: gatherStatusView.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        
+        
+        
+        reactor.state
+            .map { $0.postModel }
+            .filter { $0 != nil }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { (_, postModel) in
+        
+                
+                if #available(iOS 14.0, *) {
+                    self.postControlButtonView.menuButton.menu = self.menu
+                    self.postControlButtonView.menuButton.showsMenuAsPrimaryAction = true
+                }
+                
+                
+                reactor.currentState.inputSources.isEmpty
+                ? self.upperImageSlideshow.setImageInputs([ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)])
+                : self.upperImageSlideshow.setImageInputs(reactor.currentState.inputSources)
+                
+                
+                
+                
+                
+                self.profileImageView.sd_setImage(
+                    with: URL(string: K.MEDIA_REQUEST_URL + (reactor.currentState.postModel?.profileImageUID ?? "")),
+                    placeholderImage: UIImage(named: K.Images.defaultUserPlaceholder),
+                    options: .continueInBackground
+                )
+                
+                self.userNicknameLabel.text = reactor.currentState.postUploaderNickname
+//                self.dateLabel
+                
+                
+                
+                
+                self.viewCountLabel.text = reactor.currentState.viewCount
+                
+                self.postTitleLabel.text = reactor.currentState.title
+                self.priceLabel.text = reactor.currentState.priceForEachPerson
+                
+                
+                
+                self.postDetailLabel.text = reactor.currentState.detail
+                
+                
+                if reactor.currentState.referenceUrl == nil {
+                    self.urlLinkButton.isHidden = true
+                }
+                
+                
+    
+
+            })
+            .disposed(by: disposeBag)
+        
+        
+        reactor.state
+            .map { ($0.alertMessage, $0.alertMessageType) }
+            .distinctUntilChanged { $0.0 }
+            .filter { $0.0 != nil }
+            .withUnretained(self)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { (_, alertInfo) in
+                switch alertInfo.1 {
+                case .appleDefault:
+                    self.presentSimpleAlert(title: alertInfo.0!, message: "")
+                    
+                case .custom:
+                    self.presentCustomAlert(title: "채팅방 참여 불가", message: alertInfo.0!)
+                    
+                case .simpleBottom:
+                    self.showSimpleBottomAlert(with: alertInfo.0!)
+           
+                case .none: break
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.didFailFetchingPost }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                self.postControlButtonView.isHidden = true
+                self.upperImageSlideshow.isHidden = true
+                self.bottomContainerView.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.didDeletePost }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: {  _ in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        
+        reactor.state
+            .map { $0.didEnterChat }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                let vc = ChatViewController()
+                vc.roomUID = reactor.currentState.pageId
+                vc.chatRoomTitle = reactor.currentState.title
+                vc.isFirstEntrance = reactor.currentState.isFirstEntranceToChat
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        
+        reactor.state
+            .map { $0.isAttemptingToEnterChat }
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .subscribe(onNext: { (_, isAttempting) in
+                self.enterChatButton.loadingIndicator(isAttempting)
+            })
+            .disposed(by: disposeBag)
+        
+        
+        // Notification Center
+        
+        NotificationCenterService.presentVerificationNeededAlert.addObserver()
+            .withUnretained(self)
+            .bind { _ in
+                self.presentUserVerificationNeededAlert()
+            }
+            .disposed(by: disposeBag)
+        
+    }
 
 }
 
@@ -351,7 +639,7 @@ extension NewPostViewController {
         )
         panGesture.delaysTouchesBegan = false
         panGesture.delaysTouchesEnded = false
-        view.addGestureRecognizer(panGesture)
+        bottomContainerView.addGestureRecognizer(panGesture)
     }
 
     private func nearest(to number: CGFloat, inValues values: [CGFloat]) -> CGFloat {
@@ -360,7 +648,7 @@ extension NewPostViewController {
     }
     
     private func changeTopImageViewHeight(to height: CGFloat, option: UIView.AnimationOptions) {
-        upperImageView.snp.updateConstraints {
+        upperImageSlideshow.snp.updateConstraints {
             $0.height.equalTo(height)
         }
         
@@ -379,7 +667,7 @@ extension NewPostViewController {
         case .changed:
             let modifiedTopClearViewHeight = startingUpperImageViewHeight + translation.y
             if modifiedTopClearViewHeight > upperImageViewMinHeight && modifiedTopClearViewHeight < upperImageViewMaxHeight {
-                upperImageView.snp.updateConstraints {
+                upperImageSlideshow.snp.updateConstraints {
                     $0.height.equalTo(modifiedTopClearViewHeight)
                 }
             }
@@ -398,14 +686,14 @@ extension NewPostViewController {
     }
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct NewPostVC: PreviewProvider {
-    
-    static var previews: some SwiftUI.View {
-        NewPostViewController().toPreview()
-    }
-}
-#endif
+//#if canImport(SwiftUI) && DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct NewPostVC: PreviewProvider {
+//
+//    static var previews: some SwiftUI.View {
+//        NewPostViewController().toPreview()
+//    }
+//}
+//#endif

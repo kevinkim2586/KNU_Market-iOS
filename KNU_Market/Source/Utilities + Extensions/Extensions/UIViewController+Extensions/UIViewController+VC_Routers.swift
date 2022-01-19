@@ -58,9 +58,15 @@ extension UIViewController {
     }
     
     func presentSafariView(with url: URL) {
-        let config = SFSafariViewController.Configuration()
-        let vc = SFSafariViewController(url: url, configuration: config)
-        present(vc, animated: true)
+        
+        if ["http", "https"].contains(url.scheme?.lowercased() ?? "") {
+            let config = SFSafariViewController.Configuration()
+            let vc = SFSafariViewController(url: url, configuration: config)
+            present(vc, animated: true)
+        } else {
+            // Scheme is not supported or no scheme is given, use openURL
+            showSimpleBottomAlert(with: "유효하지 않은 링크입니다.🧐")
+        }
     }
     
     @objc func refreshTokenHasExpired() {

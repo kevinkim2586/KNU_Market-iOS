@@ -26,9 +26,6 @@ final class PostViewReactor: Reactor {
     enum Action {
         
         case viewDidLoad
-
-        
-        case refreshPage
         
         case deletePost
         case editPost
@@ -90,9 +87,24 @@ final class PostViewReactor: Reactor {
         
         // Computed Properties
         
+        var postUploaderNickname: String {
+            return postModel?.nickname ?? "-"
+        }
+        
         var title: String {
             return postModel?.title ?? "로딩 중.."
         }
+        
+        var priceForEachPerson: String {
+            
+            if let postModel = postModel {
+                let perPersonPrice = postModel.price / postModel.totalGatheringPeople
+                return perPersonPrice.withDecimalSeparator
+            } else {
+                return "?"
+            }
+        }
+
         
         var detail: String {
             return postModel?.postDetail ?? ""
@@ -106,14 +118,6 @@ final class PostViewReactor: Reactor {
         
         var totalGatheringPeople: Int {
             return postModel?.totalGatheringPeople ?? 2
-        }
-        
-        var location: String {
-            let index = (postModel?.location ?? Location.listForCell.count - 1)
-            guard index != Location.listForCell.count + 1 else {
-                return Location.listForCell[Location.listForCell.count - 1]
-            }
-            return Location.listForCell[index - 1]
         }
         
         var date: String {
@@ -155,6 +159,14 @@ final class PostViewReactor: Reactor {
             return postIsUserUploaded || isGathering || userAlreadyJoinedPost
         }
         
+        var referenceUrl: URL? {
+            if let postModel = postModel {
+                return URL(string: postModel.referenceUrl)
+            } else {
+                return nil
+            }
+        }
+        
         
         
         
@@ -179,9 +191,6 @@ final class PostViewReactor: Reactor {
         
     }
     
-    
-    
-  
     
     //MARK: - Initialization
     
@@ -212,24 +221,14 @@ final class PostViewReactor: Reactor {
         case .viewDidLoad:
             
             return Observable.concat([
-                
-                Observable.just(Mutation.setIsFetchingData(true)),
                 fetchPostDetails(),
                 fetchEnteredRoomInfo(),
-                Observable.just(Mutation.setIsFetchingData(false))
             ])
             
-        case .refreshPage:
-        
-            return Observable.concat([
-                Observable.just(Mutation.setIsFetchingData(true)),
-                fetchPostDetails(),
-                Observable.just(Mutation.setIsFetchingData(false))
-            ])
+  
             
         case .deletePost:
-            return .empty()
-//            return deletePost()
+            return deletePost()
             
         case .markPostDone:
             
@@ -339,14 +338,13 @@ extension PostViewReactor {
 
     private func deletePost() -> Observable<Mutation> {
         
-        
-
         return postService.deletePost(uid: currentState.pageId)
             .asObservable()
             .map { result in
                 switch result {
                 case .success:
                     NotificationCenterService.updatePostList.post()
+                    print("✅ delete POST SUCCESS")
                     return Mutation.setDidDeletePost(true, "게시글 삭제 완료 🎉")
 
                 case .error(let error):
@@ -374,7 +372,7 @@ extension PostViewReactor {
         
         let model = UpdatePostRequestDTO(
             title: currentState.title,
-            location: currentState.postModel?.location ?? 0,
+            location: 0,
             detail: currentState.detail,
             imageUIDs: currentState.postModel?.imageUIDs ?? [],
             totalGatheringPeople: currentState.totalGatheringPeople,

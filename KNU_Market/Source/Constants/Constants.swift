@@ -9,8 +9,7 @@ struct K {
     static let WEB_SOCKET_URL                   = "wss://knumarket.kro.kr:5052"
     static let MEDIA_REQUEST_URL                = "\(K.API_BASE_URL)media/"
     
-    //MARK: - Identifiers
-
+    
     //MARK: - Keys
     
     struct KeyChainKey {
@@ -149,6 +148,8 @@ struct K {
     }
     
     struct URL {
+        
+        
         
         static let termsAndConditionNotionURL       = "https://linen-twister-e2b.notion.site/b02ec80599d14452aefff7e0dcfcf4ff"
         static let privacyInfoConditionNotionURL    = "https://linen-twister-e2b.notion.site/6554bde75b2c49bfb617b04f526aad6e"

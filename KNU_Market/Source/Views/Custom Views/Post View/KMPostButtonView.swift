@@ -21,11 +21,6 @@ class KMPostButtonView: UIView {
     // 뒤로가기 버튼
     lazy var backButton: KMPostControlButton = {
         let button = KMPostControlButton(buttonImageSystemName: "arrow.left")
-        button.addTarget(
-            self,
-            action: #selector(pressedBackButton),
-            for: .touchUpInside
-        )
         return button
     }()
     
@@ -55,10 +50,6 @@ class KMPostButtonView: UIView {
     }
     
 
-    func configure(isPostUserUploaded: Bool, isCompletelyDone: Bool) {
-
-    }
-    
     //MARK: - UI Setup
     
     private func setupLayout() {
@@ -85,6 +76,24 @@ class KMPostButtonView: UIView {
             $0.right.equalTo(menuButton.snp.left).offset(-15)
         }
     }
+    
+    func addInnerShadow() {
+        let innerShadow = CALayer()
+        innerShadow.frame = bounds
+        // Shadow path (1pt ring around bounds)
+        let path = UIBezierPath(rect: innerShadow.bounds.insetBy(dx: -1, dy: -1))
+        let cutout = UIBezierPath(rect: innerShadow.bounds).reversing()
+        path.append(cutout)
+        innerShadow.shadowPath = path.cgPath
+        innerShadow.masksToBounds = true
+        // Shadow properties
+        innerShadow.shadowColor = UIColor.black.cgColor
+        innerShadow.shadowOffset = CGSize(width: 0, height: 3)
+        innerShadow.shadowOpacity = 0.05
+        innerShadow.shadowRadius = 3
+        innerShadow.cornerRadius = self.frame.size.height/2
+        layer.addSublayer(innerShadow)
+    }
 }
 
 //MARK: - Target Methods
@@ -103,3 +112,4 @@ extension KMPostButtonView {
         delegate?.didPressMenuButton()
     }
 }
+

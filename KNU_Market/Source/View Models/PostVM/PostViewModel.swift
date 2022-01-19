@@ -56,13 +56,13 @@ class PostViewModel {
         return model?.totalGatheringPeople ?? 2
     }
     
-    var location: String {
-        let index = (model?.location ?? Location.listForCell.count - 1)
-        guard index != Location.listForCell.count + 1 else {
-            return Location.listForCell[Location.listForCell.count - 1]
-        }
-        return Location.listForCell[index - 1]
-    }
+//    var location: String {
+//        let index = (model?.location ?? Location.listForCell.count - 1)
+//        guard index != Location.listForCell.count + 1 else {
+//            return Location.listForCell[Location.listForCell.count - 1]
+//        }
+//        return Location.listForCell[index - 1]
+//    }
     
 //    var date: String {
 //        return getFormattedDateStringToDisplayTodayAndYesterday()
@@ -117,7 +117,7 @@ class PostViewModel {
             imageUIDs: model?.imageUIDs,
             totalGatheringPeople: totalGatheringPeople,
             currentlyGatheredPeople: currentlyGatheredPeople,
-            location: model?.location ?? 0,
+            location: 0,
             postDetail: model?.postDetail ?? "",
             pageUID: pageID
         )
@@ -189,7 +189,7 @@ class PostViewModel {
     func cancelMarkPostDone() {
         
         let model = UpdatePostRequestDTO(title: self.model?.title ?? "",
-                                         location: self.model?.location ?? 0,
+                                         location: 0,
                                          detail: self.model?.postDetail ?? "",
                                          imageUIDs: self.model?.imageUIDs ?? [],
                                          totalGatheringPeople: self.totalGatheringPeople,

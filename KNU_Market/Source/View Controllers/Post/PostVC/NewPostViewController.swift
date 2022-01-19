@@ -14,6 +14,7 @@ import ReactorKit
 import LabelSwitch
 import ImageSlideshow
 import RxGesture
+import FirebaseDynamicLinks
 
 class NewPostViewController: BaseViewController, ReactorKit.View {
 
@@ -422,6 +423,67 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
+        // 공유 버튼
+        postControlButtonView.shareButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                
+                guard let postDetailModel = reactor.currentState.postModel else {
+                    return
+                }
+                
+                var components = URLComponents()
+                components.scheme = "https"
+                components.host = "knumarket.page.link"
+                components.path = "/seePost"
+                
+                let postUIDQueryItem = URLQueryItem(name: "postUID", value: postDetailModel.uuid)
+                components.queryItems = [postUIDQueryItem]
+                
+                guard let linkParameter = components.url else { return }
+                print("✅ sharing link: \(linkParameter.absoluteString)")
+                
+                guard let shareLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://knumarket.page.link") else {
+                    print("❗️ shareLink error")
+                    return
+                }
+                
+                
+                if let myBundleId = Bundle.main.bundleIdentifier {
+                    shareLink.iOSParameters = DynamicLinkIOSParameters(bundleID: myBundleId)
+                }
+                
+                shareLink.iOSParameters?.appStoreID = "1580677279"
+                
+                shareLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
+                shareLink.socialMetaTagParameters?.title = "\(postDetailModel.title) 같이 사요!"
+                shareLink.socialMetaTagParameters?.descriptionText = "자세한 내용은 크누마켓에서 확인하세요."
+                if let imageUIDs = postDetailModel.imageUIDs {
+                    shareLink.socialMetaTagParameters?.imageURL = URL(string: K.MEDIA_REQUEST_URL + imageUIDs[0])
+                }
+               
+                shareLink.shorten { [weak self] url, _, error in
+                    
+                    if let error = error {
+                        print("❗️ Shortening URL Error: \(error)")
+                        return
+                    }
+                    
+                    guard let url = url else { return }
+                    print("✅ shortened URL: \(url)")
+                    
+    
+                    
+                }
+                
+                
+                
+                
+                
+                
+            })
+            .disposed(by: disposeBag)
+        
         // 메뉴 버튼
         postControlButtonView.menuButton.rx.tap
             .withUnretained(self)
@@ -432,6 +494,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 }
             })
             .disposed(by: disposeBag)
+        
         
         postDetailLabel.onClick = { [weak self] _, detection in
             switch detection.type {

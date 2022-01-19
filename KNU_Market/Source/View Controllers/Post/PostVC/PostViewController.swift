@@ -170,10 +170,7 @@ class PostViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
         
-        refreshControl.rx.controlEvent(.valueChanged)
-            .map { Reactor.Action.refreshPage }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
+
         
         // 뒤로가기
         postControlButtonView.backButton.rx.tap
@@ -314,17 +311,7 @@ class PostViewController: BaseViewController, View {
                 self.postBottomView.enterChatButton.loadingIndicator(isAttempting)
             })
             .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.didUpdatePostGatheringStatus }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.reactor?.action.onNext(.refreshPage)
-            })
-            .disposed(by: disposeBag)
-        
+
         // Notification Center
         
         NotificationCenterService.presentVerificationNeededAlert.addObserver()
@@ -333,13 +320,7 @@ class PostViewController: BaseViewController, View {
                 self.presentUserVerificationNeededAlert()
             }
             .disposed(by: disposeBag)
-        
-        NotificationCenterService.didUpdatePost.addObserver()
-            .withUnretained(self)
-            .bind { _ in
-                self.reactor?.action.onNext(.refreshPage)
-            }
-            .disposed(by: disposeBag)
+   
     }
 }
 
@@ -376,10 +357,10 @@ extension PostViewController {
     
     private func updatePostControlButtonView() {
         guard let reactor = reactor else { return }
-        postControlButtonView.configure(
-            isPostUserUploaded: reactor.currentState.postIsUserUploaded,
-            isCompletelyDone: reactor.currentState.isCompletelyDone
-        )
+//        postControlButtonView.configure(
+//            isPostUserUploaded: reactor.currentState.postIsUserUploaded,
+//            isCompletelyDone: reactor.currentState.isCompletelyDone
+//        )
     }
     
     private func updatePostHeaderView() {
@@ -389,7 +370,7 @@ extension PostViewController {
             postTitle: reactor.currentState.title,
             profileImageUid: reactor.currentState.postModel?.profileImageUID ?? "",
             userNickname: reactor.currentState.postModel?.nickname ?? "",
-            locationName: reactor.currentState.location,
+            locationName: "",
             dateString: reactor.currentState.date,
             viewCount: reactor.currentState.viewCount
         )

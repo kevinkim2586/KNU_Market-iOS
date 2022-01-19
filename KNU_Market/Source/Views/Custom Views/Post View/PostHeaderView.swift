@@ -2,6 +2,8 @@ import UIKit
 import SnapKit
 import ImageSlideshow
 import SDWebImage
+import RxSwift
+import RxCocoa
 
 class PostHeaderView: UIView {
     
@@ -250,5 +252,3 @@ extension PostHeaderView {
         fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .gray, color: nil)
     }
 }
-
-

@@ -108,6 +108,8 @@
 		7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BD26FF0B31000E4666 /* StudentIdVerificationDTO.swift */; };
 		7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */; };
 		7C77A2F9279695930038F358 /* KMGatherStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77A2F8279695930038F358 /* KMGatherStatusView.swift */; };
+		7C82441A2797A90B006677D0 /* PostDetailLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8244192797A90B006677D0 /* PostDetailLabel.swift */; };
+		7C82441D2797CBD8006677D0 /* BannerHeaderReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82441C2797CBD8006677D0 /* BannerHeaderReactor.swift */; };
 		7C833686266208210032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833685266208210032308D /* Interceptor.swift */; };
 		7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */; };
 		7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */; };
@@ -378,6 +380,8 @@
 		7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + SaveUserInfo.swift"; sourceTree = "<group>"; };
 		7C77A2F8279695930038F358 /* KMGatherStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMGatherStatusView.swift; sourceTree = "<group>"; };
 		7C77E240266BB55600680A27 /* KNU_Market.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNU_Market.entitlements; sourceTree = "<group>"; };
+		7C8244192797A90B006677D0 /* PostDetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailLabel.swift; sourceTree = "<group>"; };
+		7C82441C2797CBD8006677D0 /* BannerHeaderReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerHeaderReactor.swift; sourceTree = "<group>"; };
 		7C833685266208210032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
 		7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembersTableViewCell.swift; sourceTree = "<group>"; };
@@ -929,6 +933,23 @@
 			path = "LaunchScreen Assets";
 			sourceTree = "<group>";
 		};
+		7C8244182797A8F6006677D0 /* UILabel */ = {
+			isa = PBXGroup;
+			children = (
+				7C8244192797A90B006677D0 /* PostDetailLabel.swift */,
+			);
+			path = UILabel;
+			sourceTree = "<group>";
+		};
+		7C82441B2797CBCC006677D0 /* BannerHeader */ = {
+			isa = PBXGroup;
+			children = (
+				7CDD5B22279526D20082E3FC /* BannerHeaderView.swift */,
+				7C82441C2797CBD8006677D0 /* BannerHeaderReactor.swift */,
+			);
+			path = BannerHeader;
+			sourceTree = "<group>";
+		};
 		7C83EE4D2742267700CF1680 /* Post View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1204,7 +1225,8 @@
 		7CA6622226413269000E0B7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7CDD5B21279526A30082E3FC /* UICollectionViewHeaders */,
+				7C8244182797A8F6006677D0 /* UILabel */,
+				7CDD5B21279526A30082E3FC /* UITableViewHeaders */,
 				7CE0A41427918C240034CC69 /* UITabBarController */,
 				7C79E11026E0C27B0004508A /* Custom Views */,
 				7C79E10F26E0C2630004508A /* Custom Alerts */,
@@ -1405,12 +1427,12 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		7CDD5B21279526A30082E3FC /* UICollectionViewHeaders */ = {
+		7CDD5B21279526A30082E3FC /* UITableViewHeaders */ = {
 			isa = PBXGroup;
 			children = (
-				7CDD5B22279526D20082E3FC /* BannerHeaderView.swift */,
+				7C82441B2797CBCC006677D0 /* BannerHeader */,
 			);
-			path = UICollectionViewHeaders;
+			path = UITableViewHeaders;
 			sourceTree = "<group>";
 		};
 		7CDD5B28279544570082E3FC /* BannerService */ = {
@@ -1905,6 +1927,7 @@
 				7C98D2A62706F54B00579EE6 /* UIViewController+Preview.swift in Sources */,
 				7C9C59F8277C16DA005E08BC /* PopupServiceType.swift in Sources */,
 				622270B6274A77AB00FDC47B /* ImageSelectionView.swift in Sources */,
+				7C82441A2797A90B006677D0 /* PostDetailLabel.swift in Sources */,
 				7CAE5AFE2754B5CE00426708 /* PostViewController+KMPostBottomViewDelegate.swift in Sources */,
 				625B0E3D2741F741003968BA /* MyPageAPI.swift in Sources */,
 				7C9BBB4126C27BD1001C54E6 /* UITableView+Extension.swift in Sources */,
@@ -1979,6 +2002,7 @@
 				7C833686266208210032308D /* Interceptor.swift in Sources */,
 				7C436B5826820E5200943069 /* ReportManager.swift in Sources */,
 				7C58477227744FD9005D75B2 /* EmailVerificationViewReactor.swift in Sources */,
+				7C82441D2797CBD8006677D0 /* BannerHeaderReactor.swift in Sources */,
 				7CF8D61B277C4CD10078DD77 /* MyPageCellReactor.swift in Sources */,
 				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,
 				7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */,

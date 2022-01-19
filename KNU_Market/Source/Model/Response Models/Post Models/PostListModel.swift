@@ -9,7 +9,7 @@ struct PostListModel: ModelType {
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
     let price: Int
-    let referenceUrl: String
+    let referenceUrl: String?
     let shippingFee: Int
     let isFull: Bool
     let isCompletelyDone: Bool

@@ -53,6 +53,7 @@ extension Network {
     func requestWithoutMapping(_ target: API) -> Single<NetworkResult> {
         return request(target)
             .map { result in
+                print("✅ result status code: \(result.statusCode)")
                 if (400...500).contains(result.statusCode) {
                     return .error(NetworkError.returnError(json: result.data))
                 }

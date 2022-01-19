@@ -8,11 +8,17 @@
 import UIKit
 import SnapKit
 import SDWebImage
+import RxSwift
+import RxCocoa
+import ReactorKit
 
 class BannerHeaderView: UIView {
     
+//    typealias Reactor = BannerHeaderReactor
+    
     //MARK: - Properties
     
+    weak var currentVC: UIViewController?
     var timer: Timer?
     var currentIndex: Int = 0
     var totalNumberOfBannerImages: Int? 
@@ -47,6 +53,19 @@ class BannerHeaderView: UIView {
     
     //MARK: - Initialization
     
+    //    init(reactor: Reactor) {
+    //        self.reactor = reactor
+    //        setupLayout()
+    //        setupConstraints()
+    //    }
+    
+    init(controlledBy vc: UIViewController, frame: CGRect) {
+        super.init(frame: frame)
+        self.currentVC = vc
+        setupLayout()
+        setupConstraints()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -67,12 +86,24 @@ class BannerHeaderView: UIView {
         bannerCollectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        totalNumberOfBannerImages = 5
+    }
+    
+    //MARK: - Binding
+    
+    func bind(reactor: BannerHeaderReactor) {
+        
+        // Input
+        
+
+        
+        // Output
     }
     
     //MARK: - Configuration & Method
     
     func configure(with model: [BannerModel]) {
+        
+//        reactor?.action.onNext(.setBannerModel(model))
         
         if self.bannerModel != nil { return }
         self.totalNumberOfBannerImages = model.count
@@ -92,12 +123,10 @@ class BannerHeaderView: UIView {
     @objc func moveToNextIndex() {
         
         guard let totalNumber = totalNumberOfBannerImages else {
-            print("❗️ BannerHeaderView Index Error")
             return
         }
         
-        print("✅ currentIndex: \(currentIndex)")
-        
+    
         if currentIndex < totalNumber - 1 {
             currentIndex += 1
             bannerCollectionView.scrollToItem(
@@ -129,7 +158,6 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
         guard let cell = bannerCollectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.cellId, for: indexPath) as? BannerCollectionViewCell else {
             fatalError()
         }
-        
         if let model = bannerModel {
             if let imageUrl = URL(string: model[indexPath.row].media.path) {
                 
@@ -144,6 +172,15 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
         }
         cell.backgroundColor = .clear
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if let model = bannerModel {
+            let referenceUrl = model[indexPath.row].referenceUrl
+            guard let url = URL(string: referenceUrl) else { return }
+            currentVC?.presentSafariView(with: url)
+        }
     }
 }
 

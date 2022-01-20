@@ -95,8 +95,7 @@ class MyPostsViewController: BaseViewController, View {
                 self.postTableView.deselectRow(at: indexPath, animated: true)
                 
                 let postUUID = reactor.currentState.postList[indexPath.row].uuid
-                
-                let postVC = PostViewController(
+                let postVC = NewPostViewController(
                     reactor: PostViewReactor(
                         pageId: postUUID,
                         isFromChatVC: false,
@@ -109,7 +108,6 @@ class MyPostsViewController: BaseViewController, View {
                     )
                 )
                 self.navigationController?.pushViewController(postVC, animated: true)
-                
             })
             .disposed(by: disposeBag)
         

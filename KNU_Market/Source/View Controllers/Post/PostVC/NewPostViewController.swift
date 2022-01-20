@@ -112,10 +112,8 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         $0.clipsToBounds = true
         $0.slideshowInterval = 4
         let pageIndicator = UIPageControl()
-//        pageIndicator.currentPageIndicatorTintColor = UIColor.lightGray
-//        pageIndicator.pageIndicatorTintColor = UIColor.black
         $0.pageIndicator = pageIndicator
-        $0.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 0))
+        $0.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 10))
     }
     
     let bottomContainerView = UIView().then {
@@ -134,7 +132,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     }
     
     let userNicknameLabel = UILabel().then {
-        $0.text = "참치러버"
+        $0.text = "-"
         $0.textColor = Colors.labelLightGrayColor
         $0.numberOfLines = 1
         $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
@@ -147,7 +145,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     }
     
     let dateLabel = UILabel().then {
-        $0.text = "1일 전"
+        $0.text = "-일 전"
         $0.textColor = Colors.labelLightGrayColor
         $0.numberOfLines = 1
         $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
@@ -209,6 +207,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         $0.circleShadow = false
         $0.circleColor = .white
         $0.fullSizeTapEnabled = true
+        $0.delegate = self
     }
     
     let questionMarkButton = UIButton(type: .system).then {
@@ -264,6 +263,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         $0.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         $0.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         $0.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        $0.isHidden = true
     }
     
     let postControlButtonView = KMPostButtonView()
@@ -288,10 +288,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         super.viewDidLoad()
         configurePanGestureRecognizer()
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-//            print("✅ AFTER")
-//            self.gatherStatusToggleSwitch.switchConfigR.text = "hd"
-//        }
+
 
     }
         
@@ -647,11 +644,12 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 self.postDetailLabel.text = reactor.currentState.detail
                 
                 
-                if reactor.currentState.referenceUrl == nil {
-                    self.urlLinkButton.isHidden = true
-                }
                 
+                self.urlLinkButton.isHidden = reactor.currentState.referenceUrl == nil
+                ? true
+                : false
                 
+
     
 
             })
@@ -741,7 +739,26 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
     }
+}
 
+//MARK: - LabelSwitchDelegate
+
+extension NewPostViewController: LabelSwitchDelegate {
+
+    func switchChangeToState(sender: LabelSwitch) {
+        switch sender.curState {
+            case .L:
+            
+            
+            
+            
+            print("left state")
+            
+            
+            case .R:
+            print("right state")
+        }
+    }
 }
 
 extension NewPostViewController {

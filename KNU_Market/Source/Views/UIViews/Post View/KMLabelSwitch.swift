@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public protocol LabelSwitchDelegate : AnyObject {
-    func switchChangToState(sender: LabelSwitch) -> Void
+    func switchChangeToState(sender: LabelSwitch) -> Void
 }
 
 class LabelSwitchPart {
@@ -241,10 +241,12 @@ class LabelSwitchPart {
             self.curState.flip()
         }) { (completed) in
             if completed {
-                self.delegate?.switchChangToState(sender: self)
+                self.delegate?.switchChangeToState(sender: self)
             }
         }
     }
+    
+
     
     ///  Update view's frame by UI state
     private func updateUIState(_ state: LabelSwitchUIState) {

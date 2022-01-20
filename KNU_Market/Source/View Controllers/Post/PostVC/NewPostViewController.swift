@@ -11,7 +11,6 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import ReactorKit
-import LabelSwitch
 import ImageSlideshow
 import RxGesture
 import FirebaseDynamicLinks
@@ -262,6 +261,12 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePanGestureRecognizer()
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+//            print("✅ AFTER")
+//            self.gatherStatusToggleSwitch.switchConfigR.text = "hd"
+//        }
+
     }
         
     //MARK: - UI Setup
@@ -593,6 +598,16 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 self.viewCountLabel.text = reactor.currentState.viewCount
                 
                 self.postTitleLabel.text = reactor.currentState.title
+                
+                // 모집완료,모집 중 toggle
+                self.gatherStatusView.updateGatheringStatusLabel(
+                    currentNum: reactor.currentState.currentlyGatheredPeople,
+                    total: reactor.currentState.totalGatheringPeople,
+                    isCompletelyDone: reactor.currentState.isCompletelyDone
+                )
+                
+                
+                
                 self.priceLabel.text = reactor.currentState.priceForEachPerson
                 
                 

@@ -20,7 +20,7 @@ struct Chat: ModelType {
     
     let chat_uid: Int
     let chat_userUID: String
-    let chat_username: String
+    let chat_username: String?
     let chat_roomUID: String
     let chat_content: String
     let chat_date: String

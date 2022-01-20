@@ -18,23 +18,14 @@ class KMPostButtonView: UIView {
     
     //MARK: - UI
     
-    // 뒤로가기 버튼
-    lazy var backButton: KMPostControlButton = {
-        let button = KMPostControlButton(buttonImageSystemName: "arrow.left")
-        return button
-    }()
+    /// 뒤로가기 버튼
+    lazy var backButton = KMPostControlButton(buttonImageSystemName: "arrow.left")
     
-    lazy var shareButton: KMPostControlButton = {
-        let button = KMPostControlButton(customImage: "shareButton")
-        return button
-    }()
+    /// 공유하기 버튼
+    lazy var shareButton = KMPostControlButton(customImage: "shareButton")
 
-    
-    // 더보기 버튼
-    lazy var menuButton: KMPostControlButton = {
-        let button = KMPostControlButton(customImage: "menuButton")
-        return button
-    }()
+    /// 더보기 버튼
+    let menuButton = KMPostControlButton(customImage: "menuButton")
     
     //MARK: - Initialization
     

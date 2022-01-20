@@ -44,6 +44,7 @@ extension Network {
             .map { result in
                 let response = try? result.map([T].self, using: decoder)
                 guard let response = response else {
+                   
                     return .error(NetworkError.returnError(json: result.data))
                 }
                 return .success(response)

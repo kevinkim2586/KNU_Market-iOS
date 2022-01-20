@@ -47,7 +47,7 @@ class PostViewController: BaseViewController, View {
                     self?.presentReportUserVC(userToReport: nickname, postUID: reactor.currentState.pageId)
                 }),
                 UIAction(title: "이 사용자의 글 보지 않기", image: nil, handler: { [weak self] _ in
-                    self?.reactor?.action.onNext(.blockUser)
+                    self?.reactor?.action.onNext(.blockUser(""))
                 }),
             ]
         }

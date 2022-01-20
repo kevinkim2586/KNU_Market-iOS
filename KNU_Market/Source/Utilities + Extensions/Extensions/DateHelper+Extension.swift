@@ -152,7 +152,7 @@ public extension Date {
         
         switch toRelativeTime() {
         case .nowPast:
-            return strings?[.nowPast] ?? NSLocalizedString("1분 전", comment: "Date format")
+            return strings?[.nowPast] ?? NSLocalizedString("방금 전", comment: "Date format")
 //        case .nowFuture:
 //            return strings?[.nowFuture] ?? NSLocalizedString("in a few seconds", comment: "Date format")
 //        case .secondsPast:
@@ -267,6 +267,37 @@ public extension Date {
                 }
             }
         }
+        
+        // 글이 생성된지 5분 미만 일 때
+        if min < 5 {
+            return .nowPast
+        }
+        
+        // 글이 생성된지 5분 이상 ~ 1시간 미만 일 때
+        if min >= 5 || min < 60 {
+            return .minutesPast
+        }
+        
+        // 글이 생성된지 1시간 이상 ~ 1일 미만 일 때
+        if hr >= 1 || hr < 24 {
+            return .hoursPast
+        }
+        
+        // 글이 생성된지 1일 이상 ~ 1개월 미만
+        if d >= 1 || d < 30 {
+            return .daysPast
+        }
+        
+        // 글이 생성된지 1개월 이상 ~ 1년 이내
+        if d >= 30 || d < 365 {
+            return .monthsPast
+        }
+        
+        // 글이 생성된지 1년 이상
+        if d > 365 {
+            return .yearsPast
+        }
+        
         if min < 60 {
             if min == 1 {
                 if isPast {

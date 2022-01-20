@@ -8,9 +8,9 @@ struct PostListModel: ModelType {
     let title: String
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
-    let price: Int
+    let price: Int?
     let referenceUrl: String?
-    let shippingFee: Int
+    let shippingFee: Int?
     let isFull: Bool
     let isCompletelyDone: Bool
     let date: String
@@ -19,7 +19,7 @@ struct PostListModel: ModelType {
 
     enum CodingKeys: String, CodingKey {
         
-        case uuid = "UUID"
+        case uuid = "UUID" //
         case title
         case totalGatheringPeople = "maxHeadcount"
         case currentlyGatheredPeople = "currentHeadcount"
@@ -29,6 +29,7 @@ struct PostListModel: ModelType {
         case date = "createDate"
         case imageUIDs = "medias"
         case userInfo = "user"
+    
     }
 }
 

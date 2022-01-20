@@ -8,9 +8,9 @@ struct PostDetailModel: ModelType {
     let uuid: String
     let title: String
     let imageUIDs: [String]?
-    let price: Int
-    let referenceUrl: String
-    let shippingFee: Int
+    let price: Int?
+    let referenceUrl: String?
+    let shippingFee: Int?
     let postDetail: String
     let viewCount: Int
     let location: Int?

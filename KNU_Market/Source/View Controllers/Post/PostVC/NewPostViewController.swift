@@ -56,7 +56,19 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                     self?.presentReportUserVC(userToReport: nickname, postUID: reactor.currentState.pageId)
                 }),
                 UIAction(title: "이 사용자의 글 보지 않기", image: nil, handler: { [weak self] _ in
-                    self?.reactor?.action.onNext(.blockUser)
+                    guard let postUploader = self?.reactor?.currentState.postUploaderNickname else { return }
+                    self?.presentAlertWithConfirmation(
+                        title: postUploader + "님의 글 보지 않기",
+                        message: "홈화면에서 위 사용자의 게시글이 더는 보이지 않도록 설정하시겠습니까? 한 번 설정하면 해제할 수 없습니다."
+                    )
+                        .subscribe(onNext: { actionType in
+                            switch actionType {
+                            case .ok:
+                                self?.reactor?.action.onNext(.blockUser(postUploader))
+                            case .cancel: break
+                            }
+                        })
+                        .disposed(by: self?.disposeBag ?? DisposeBag.init())
                 }),
             ]
         }
@@ -81,15 +93,29 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     
     //MARK: - UI
     
+    lazy var shadowView: UIView = {
+        let view = UIView()
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor.darkGray.withAlphaComponent(0.35).cgColor,
+            UIColor.darkGray.withAlphaComponent(0.0).cgColor
+        ]
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 100)
+        gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        return view
+    }()
+    
     let upperImageSlideshow = ImageSlideshow().then {
-        $0.contentMode = .scaleAspectFill
+        $0.contentScaleMode = .scaleAspectFill              /// 특이하게 여기서 contentMode가 아니라 contentScaleMode 다
         $0.clipsToBounds = true
         $0.slideshowInterval = 4
         let pageIndicator = UIPageControl()
-        pageIndicator.currentPageIndicatorTintColor = UIColor.lightGray
-        pageIndicator.pageIndicatorTintColor = UIColor.black
+//        pageIndicator.currentPageIndicatorTintColor = UIColor.lightGray
+//        pageIndicator.pageIndicatorTintColor = UIColor.black
         $0.pageIndicator = pageIndicator
-        $0.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 40))
+        $0.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 0))
     }
     
     let bottomContainerView = UIView().then {
@@ -275,6 +301,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         super.setupLayout()
         
         view.addSubview(upperImageSlideshow)
+        view.addSubview(shadowView)
         view.addSubview(bottomContainerView)
         view.addSubview(urlLinkButton)
         view.addSubview(postControlButtonView)
@@ -303,6 +330,11 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         upperImageSlideshow.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
             $0.height.equalTo(view.frame.height / 2)
+        }
+        
+        shadowView.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
+            $0.height.equalTo(70)
         }
         
         postControlButtonView.snp.makeConstraints {

@@ -110,6 +110,10 @@
 		7C77A2F9279695930038F358 /* KMGatherStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C77A2F8279695930038F358 /* KMGatherStatusView.swift */; };
 		7C82441A2797A90B006677D0 /* PostDetailLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8244192797A90B006677D0 /* PostDetailLabel.swift */; };
 		7C82441D2797CBD8006677D0 /* BannerHeaderReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82441C2797CBD8006677D0 /* BannerHeaderReactor.swift */; };
+		7C82442A27990FB9006677D0 /* KMLabelSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82442927990FB9006677D0 /* KMLabelSwitch.swift */; };
+		7C82442C27990FD1006677D0 /* KMLabelSwitchBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82442B27990FD1006677D0 /* KMLabelSwitchBackView.swift */; };
+		7C82442E27990FE3006677D0 /* KMLabelSwitchConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82442D27990FE3006677D0 /* KMLabelSwitchConfig.swift */; };
+		7C82443027990FF4006677D0 /* KMLabelSwitchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82442F27990FF4006677D0 /* KMLabelSwitchState.swift */; };
 		7C833686266208210032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833685266208210032308D /* Interceptor.swift */; };
 		7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */; };
 		7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */; };
@@ -382,6 +386,10 @@
 		7C77E240266BB55600680A27 /* KNU_Market.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KNU_Market.entitlements; sourceTree = "<group>"; };
 		7C8244192797A90B006677D0 /* PostDetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailLabel.swift; sourceTree = "<group>"; };
 		7C82441C2797CBD8006677D0 /* BannerHeaderReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerHeaderReactor.swift; sourceTree = "<group>"; };
+		7C82442927990FB9006677D0 /* KMLabelSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMLabelSwitch.swift; sourceTree = "<group>"; };
+		7C82442B27990FD1006677D0 /* KMLabelSwitchBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMLabelSwitchBackView.swift; sourceTree = "<group>"; };
+		7C82442D27990FE3006677D0 /* KMLabelSwitchConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMLabelSwitchConfig.swift; sourceTree = "<group>"; };
+		7C82442F27990FF4006677D0 /* KMLabelSwitchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMLabelSwitchState.swift; sourceTree = "<group>"; };
 		7C833685266208210032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
 		7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembersTableViewCell.swift; sourceTree = "<group>"; };
@@ -913,7 +921,7 @@
 			path = "Custom Alerts";
 			sourceTree = "<group>";
 		};
-		7C79E11026E0C27B0004508A /* Custom Views */ = {
+		7C79E11026E0C27B0004508A /* UIViews */ = {
 			isa = PBXGroup;
 			children = (
 				7C9A382F276C897D00AEE831 /* Common */,
@@ -921,7 +929,7 @@
 				7C83EE4D2742267700CF1680 /* Post View */,
 				7CEDBB64270307D50078F5E1 /* Empty View */,
 			);
-			path = "Custom Views";
+			path = UIViews;
 			sourceTree = "<group>";
 		};
 		7C79E11126E0EDFA0004508A /* LaunchScreen Assets */ = {
@@ -957,6 +965,10 @@
 				7C83EE5627437B6200CF1680 /* KMPostBottomView.swift */,
 				7C83EE5027422E3A00CF1680 /* KMPostControlButton.swift */,
 				7C83EE542742407B00CF1680 /* PostHeaderView.swift */,
+				7C82442927990FB9006677D0 /* KMLabelSwitch.swift */,
+				7C82442B27990FD1006677D0 /* KMLabelSwitchBackView.swift */,
+				7C82442D27990FE3006677D0 /* KMLabelSwitchConfig.swift */,
+				7C82442F27990FF4006677D0 /* KMLabelSwitchState.swift */,
 			);
 			path = "Post View";
 			sourceTree = "<group>";
@@ -1228,7 +1240,7 @@
 				7C8244182797A8F6006677D0 /* UILabel */,
 				7CDD5B21279526A30082E3FC /* UITableViewHeaders */,
 				7CE0A41427918C240034CC69 /* UITabBarController */,
-				7C79E11026E0C27B0004508A /* Custom Views */,
+				7C79E11026E0C27B0004508A /* UIViews */,
 				7C79E10F26E0C2630004508A /* Custom Alerts */,
 				7C79E10E26E0C24E0004508A /* UICollectionViewCells */,
 				7C79E10D26E0C20B0004508A /* UITableViewCells */,
@@ -1812,6 +1824,7 @@
 				7C3B4FF026A928C700E2CA8F /* EmailVerificationViewController.swift in Sources */,
 				7CF369D72754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift in Sources */,
 				7CC05E9A26B6D91800BE9288 /* EditPostModel.swift in Sources */,
+				7C82443027990FF4006677D0 /* KMLabelSwitchState.swift in Sources */,
 				7C89B2E726FC1D9E004109FE /* PostFilterOptions.swift in Sources */,
 				7C8EC8CD26F0566200893CCD /* VerifyOptionViewController.swift in Sources */,
 				7C0F1CBA26BA6B310068FF45 /* NotificationName.swift in Sources */,
@@ -1838,12 +1851,14 @@
 				7C83EE5127422E3A00CF1680 /* KMPostControlButton.swift in Sources */,
 				7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */,
 				7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */,
+				7C82442C27990FD1006677D0 /* KMLabelSwitchBackView.swift in Sources */,
 				7CC33B2F274B65D400B0C2C0 /* UserPickedPostImageCollectionViewCell.swift in Sources */,
 				7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
 				7CF8D618277C4ABB0078DD77 /* ChatServiceWebSocketType.swift in Sources */,
 				7CBFDA78273FE01F000C8C8A /* PostTableViewCell.swift in Sources */,
 				7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */,
+				7C82442A27990FB9006677D0 /* KMLabelSwitch.swift in Sources */,
 				7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */,
 				7CC12A022796AE1100C0F581 /* KMShadowButton.swift in Sources */,
 				7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */,
@@ -1924,6 +1939,7 @@
 				7CEDBB612702EC970078F5E1 /* KMTextField.swift in Sources */,
 				7C9C59F6277C16CC005E08BC /* MediaServiceType.swift in Sources */,
 				7C58477827796DA6005D75B2 /* UIImagePickerController+Extension.swift in Sources */,
+				7C82442E27990FE3006677D0 /* KMLabelSwitchConfig.swift in Sources */,
 				7C98D2A62706F54B00579EE6 /* UIViewController+Preview.swift in Sources */,
 				7C9C59F8277C16DA005E08BC /* PopupServiceType.swift in Sources */,
 				622270B6274A77AB00FDC47B /* ImageSelectionView.swift in Sources */,

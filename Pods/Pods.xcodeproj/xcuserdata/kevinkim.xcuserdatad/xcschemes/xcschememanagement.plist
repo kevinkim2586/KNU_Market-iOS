@@ -104,11 +104,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>LabelSwitch.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MHLoadingButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>

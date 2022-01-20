@@ -2,11 +2,12 @@ import UIKit
 
 //MARK: - Struct for managing constants
 struct K {
-    
-    
-    static let API_BASE_URL                     = "http://222.104.199.114:5004/api/v1/"
-//    static let API_BASE_URL                   = "https://knumarket.kro.kr:5051/api/v1/"
+
+//    static let API_BASE_URL                     = "http://192.168.0.104:5004/api/v1/"
+//    static let API_BASE_URL                     = "http://222.104.199.114:5004/api/v1/"
+    static let API_BASE_URL                     = "https://knumarket.kro.kr:5051/api/v1/"
     static let WEB_SOCKET_URL                   = "wss://knumarket.kro.kr:5052"
+//    static let WEB_SOCKET_URL                   = "ws://192.168.0.104:5006"
     static let MEDIA_REQUEST_URL                = "\(K.API_BASE_URL)media/"
     
     

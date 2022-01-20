@@ -20,8 +20,10 @@ class PostCellViewModel {
     
     var price: Int
     
+    var shippingFee: Int
+    
     var priceForEachPerson: String {
-        let perPersonPrice = price / totalGatheringPeople
+        let perPersonPrice = (price + shippingFee) / totalGatheringPeople
         return perPersonPrice.withDecimalSeparator
     }
 
@@ -32,7 +34,8 @@ class PostCellViewModel {
         }
         set {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//            "2022-01-19T02:21:11.000Z"
+            dateFormatter.dateFormat = "yyyy-MM-ddTHH:mm:ss.sssZ"
             dateFormatter.locale = Locale(identifier:"ko_KR")
             guard let convertedDate = dateFormatter.date(from: newValue) else {
                 formattedDate = "날짜 표시 에러"
@@ -43,14 +46,14 @@ class PostCellViewModel {
     }
     
     init(model: PostListModel) {
-        
         self.uuid = model.uuid
         self.title = model.title
-        self.price = model.price
+        self.price = model.price ?? 0
         self.totalGatheringPeople = model.totalGatheringPeople
         self.currentlyGatheredPeople = model.currentlyGatheredPeople
         self.isFull = model.isFull
         self.isCompletelyDone = model.isCompletelyDone
+        self.shippingFee = model.shippingFee ?? 0
         self.date = model.date
         self.imageUID = model.imageUIDs.isEmpty ? nil : model.imageUIDs[0].uid
        
@@ -58,6 +61,4 @@ class PostCellViewModel {
             imageURL = URL(string: K.MEDIA_REQUEST_URL + imageUID)
         }
     }
-    
-    
 }

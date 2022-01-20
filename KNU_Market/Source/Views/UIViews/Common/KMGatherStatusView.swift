@@ -89,6 +89,7 @@ class KMGatherStatusView: UIView {
     }
     
     func toggleAsStillGathering() {
+        self.backgroundColor = UIColor(named: K.Color.appColor)
         gatherDoneLabel.isHidden = true
         gatheringStatusLabel.isHidden = false
         personImageView.isHidden = false
@@ -96,6 +97,11 @@ class KMGatherStatusView: UIView {
     
     func updateGatheringStatusLabel(currentNum: Int, total: Int) {
         gatheringStatusLabel.text = "\(currentNum)/\(total)"
+    }
+    
+    func updateGatheringStatusLabel(currentNum: Int, total: Int, isCompletelyDone: Bool) {
+        gatheringStatusLabel.text = "\(currentNum)/\(total)"
+        isCompletelyDone ? toggleAsDoneGathering() : toggleAsStillGathering()
     }
 }
 

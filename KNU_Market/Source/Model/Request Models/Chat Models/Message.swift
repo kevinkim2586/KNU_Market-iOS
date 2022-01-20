@@ -21,7 +21,7 @@ extension Message {
     }
     
     var usernickname: String {
-        return self.chat.chat_username
+        return self.chat.chat_username ?? "-"
     }
 
     var userUID: String {

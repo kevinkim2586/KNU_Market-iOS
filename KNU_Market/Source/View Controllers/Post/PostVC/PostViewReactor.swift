@@ -33,7 +33,7 @@ final class PostViewReactor: Reactor {
         case updatePostAsRegathering
         case joinChat
         
-        case blockUser
+        case blockUser(String)
 
     }
     
@@ -59,6 +59,8 @@ final class PostViewReactor: Reactor {
         case setIsFetchingData(Bool)
         case setAttemptingToEnterChat(Bool)
         
+        case setDidBlockUser(Bool)
+        
         case empty
     }
     
@@ -83,8 +85,7 @@ final class PostViewReactor: Reactor {
         
         var isFetchingData: Bool = false
         
-        
-        
+
         // Computed Properties
         
         var postUploaderNickname: String {
@@ -97,8 +98,10 @@ final class PostViewReactor: Reactor {
         
         var priceForEachPerson: String {
             
-            if let postModel = postModel {
-                let perPersonPrice = postModel.price / postModel.totalGatheringPeople
+            guard let postModel = postModel else { return "?" }
+            
+            if let price = postModel.price, let shippingFee = postModel.shippingFee {
+                let perPersonPrice = (price + shippingFee) / postModel.totalGatheringPeople
                 return perPersonPrice.withDecimalSeparator
             } else {
                 return "?"
@@ -160,8 +163,8 @@ final class PostViewReactor: Reactor {
         }
         
         var referenceUrl: URL? {
-            if let postModel = postModel {
-                return URL(string: postModel.referenceUrl)
+            if let postModel = postModel, let referenceUrl = postModel.referenceUrl {
+                return URL(string: referenceUrl)
             } else {
                 return nil
             }
@@ -183,7 +186,7 @@ final class PostViewReactor: Reactor {
         var didEnterChat: Bool = false
         var isFirstEntranceToChat: Bool = false
         var isAttemptingToEnterChat: Bool = false
-        
+        var didBlockUser: Bool = false
         
         
         
@@ -302,8 +305,10 @@ final class PostViewReactor: Reactor {
         case .setPostAsGatherComplete(let gatherComplete):
     
             break
-        
             
+        case .setDidBlockUser(let didBlock):
+            state.didBlockUser = didBlock
+        
         case .setIsFetchingData(let isFetching):
             state.isFetchingData = isFetching
             
@@ -431,30 +436,15 @@ extension PostViewReactor {
                 return Mutation.empty
             }
     }
+
+    private func blockPostUploader() -> Observable<Mutation> {
+
+//        self.currentState.userBannedPostUploaders
 //
-//    private func blockPostUploader() -> Observable<Mutation> {
+//        NotificationCenterService.updatePostList.post()
 //
-//    }
+        
+        return .empty()
+    }
 }
 
-//MARK: - Conversion Methods
-//
-//extension PostViewReactor {
-//
-//    private func convertImageUIDsToInputSources(imageUIDs: [String]) -> [InputSource] {
-//
-//        let imageURLs = imageUIDs.compactMap {
-//            URL(string: K.MEDIA_REQUEST_URL + $0)
-//        }
-//
-//        var imageSources: [InputSource] = []
-//
-//        imageURLs.forEach { imageURL in
-//            imageSources.append(SDWebImageSource(
-//                url: imageURL,
-//                placeholder: UIImage(named: K.Images.defaultItemImage))
-//            )
-//        }
-//        return imageSources
-//    }
-//}

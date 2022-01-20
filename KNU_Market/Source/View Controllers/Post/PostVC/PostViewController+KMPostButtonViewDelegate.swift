@@ -100,7 +100,6 @@ extension PostViewController: KMPostButtonViewDelegate {
         }
     }
     
-    
     func askToBlockUser() {
         
         guard let reportNickname = viewModel.model?.nickname,

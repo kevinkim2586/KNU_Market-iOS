@@ -95,7 +95,8 @@ extension ChatViewModel {
     func connect() {
         
         print("✏️ Trying to connect to WebSocket...")
-        
+//        let url = URL(string: K.WEB_SOCKET_URL + "?roomId=\(room)&userId=\(User.shared.userUID)")!
+//        var request = URLRequest(url: url)
         var request = URLRequest(url: URL(string: K.WEB_SOCKET_URL)!)
         request.timeoutInterval = 1000
         
@@ -309,7 +310,7 @@ extension ChatViewModel {
                     if chat.chat_userUID != User.shared.userUID {
                         
                         let others = Sender(senderId: chat.chat_userUID,
-                                            displayName: chat.chat_username)
+                                            displayName: chat.chat_username ?? "-")
                         
                         
                         if filteredChat.chatType == .text {
@@ -414,7 +415,7 @@ extension ChatViewModel {
                     if chat.chat_userUID != User.shared.userUID {
                         
                         let others = Sender(senderId: chat.chat_userUID,
-                                            displayName: chat.chat_username)
+                                            displayName: chat.chat_username ?? "-")
                         
                         
                         if filteredChat.chatType == .text {

@@ -71,7 +71,6 @@ final class ChatListViewReactor: Reactor {
                     .map { result in
                         switch result {
                         case .success(let rooms):
-                        
                             // 참여하고 있는 공구 리스트 값 User Defaults에 저장
                             self.userDefaultsGenericService.set(
                                 key: UserDefaults.Keys.joinedChatRoomPIDs,

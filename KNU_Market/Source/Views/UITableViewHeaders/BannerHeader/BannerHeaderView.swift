@@ -53,12 +53,6 @@ class BannerHeaderView: UIView {
     
     //MARK: - Initialization
     
-    //    init(reactor: Reactor) {
-    //        self.reactor = reactor
-    //        setupLayout()
-    //        setupConstraints()
-    //    }
-    
     init(controlledBy vc: UIViewController, frame: CGRect) {
         super.init(frame: frame)
         self.currentVC = vc
@@ -74,6 +68,12 @@ class BannerHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    deinit {
+        if timer != nil {
+            timer?.invalidate()
+        }
     }
     
     //MARK: - UI Setup

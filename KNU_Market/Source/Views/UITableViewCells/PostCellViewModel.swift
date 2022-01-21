@@ -33,15 +33,7 @@ class PostCellViewModel {
             return formattedDate
         }
         set {
-            let dateFormatter = DateFormatter()
-//            "2022-01-19T02:21:11.000Z"
-            dateFormatter.dateFormat = "yyyy-MM-ddTHH:mm:ss.sssZ"
-            dateFormatter.locale = Locale(identifier:"ko_KR")
-            guard let convertedDate = dateFormatter.date(from: newValue) else {
-                formattedDate = "날짜 표시 에러"
-                return
-            }
-            formattedDate = DateConverter.convertDateForPostTVC(convertedDate)
+            formattedDate = DateConverter.convertDateStringToComplex(newValue)
         }
     }
     

@@ -20,6 +20,17 @@ class PostListViewController: BaseViewController, View {
     
     //MARK: - UI
     
+    lazy var navigationTitleView: KMNavigationTitleView = {
+       let view =  KMNavigationTitleView(
+        frame: CGRect(
+            x: 0,
+            y: 0,
+            width: view.frame.size.width,
+            height: 50)
+       )
+        return view
+    }()
+    
     lazy var bannerHeaderView: BannerHeaderView = {
         let headerView = BannerHeaderView(
             controlledBy: self,
@@ -41,11 +52,6 @@ class PostListViewController: BaseViewController, View {
     }
     
     let refreshControl = UIRefreshControl()
-
-    let logoBarButtonItem = UIBarButtonItem().then {
-        $0.title = "크누마켓"
-        $0.style = .done
-    }
     
     let uploadPostButton = UIButton().then {
         $0.backgroundColor = UIColor(named: K.Color.appColor)
@@ -84,18 +90,21 @@ class PostListViewController: BaseViewController, View {
     
     override func setupLayout() {
         super.setupLayout()
-        
-        navigationItem.leftBarButtonItem = logoBarButtonItem
-                
+    
         view.addSubview(postListsTableView)
         view.addSubview(uploadPostButton)
-        
         postListsTableView.tableHeaderView = bannerHeaderView
+        navigationController?.navigationBar.addSubview(navigationTitleView)
     }
     
     override func setupConstraints() {
         super.setupConstraints()
-                
+        
+        navigationTitleView.snp.makeConstraints {
+            $0.left.equalToSuperview().inset(30)
+            $0.bottom.equalToSuperview()
+        }
+
         postListsTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -126,17 +135,6 @@ class PostListViewController: BaseViewController, View {
         refreshControl.rx.controlEvent(.valueChanged)
             .map { Reactor.Action.refreshTableView }
             .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
-        logoBarButtonItem.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.postListsTableView.scrollToRow(
-                    at: IndexPath(row: 0, section: 0),
-                    at: .top,
-                    animated: true
-                )
-            })
             .disposed(by: disposeBag)
         
         uploadPostButton.rx.tap

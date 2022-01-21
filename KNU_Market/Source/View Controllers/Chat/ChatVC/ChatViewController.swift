@@ -38,6 +38,7 @@ class ChatViewController: MessagesViewController {
     }()
     
     //MARK: - Initialization
+
     
     //MARK: - View Life Cycle
 

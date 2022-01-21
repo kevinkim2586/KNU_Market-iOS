@@ -252,21 +252,21 @@ public extension Date {
         let hr:Double = round(min/60)
         let d:Double = round(hr/24)
         
-        if sec < 60 {
-            if sec < 10 {
-                if isPast {
-                    return .nowPast
-                } else {
-                    return .nowFuture
-                }
-            } else {
-                if isPast {
-                    return .secondsPast
-                } else {
-                    return .secondsFuture
-                }
-            }
-        }
+//        if sec < 60 {
+//            if sec < 10 {
+//                if isPast {
+//                    return .nowPast
+//                } else {
+//                    return .nowFuture
+//                }
+//            } else {
+//                if isPast {
+//                    return .secondsPast
+//                } else {
+//                    return .secondsFuture
+//                }
+//            }
+//        }
         
         // 글이 생성된지 5분 미만 일 때
         if min < 5 {
@@ -274,22 +274,22 @@ public extension Date {
         }
         
         // 글이 생성된지 5분 이상 ~ 1시간 미만 일 때
-        if min >= 5 || min < 60 {
+        if min >= 5 && min < 60 {
             return .minutesPast
         }
         
         // 글이 생성된지 1시간 이상 ~ 1일 미만 일 때
-        if hr >= 1 || hr < 24 {
+        if hr >= 1 && hr < 24 {
             return .hoursPast
         }
         
         // 글이 생성된지 1일 이상 ~ 1개월 미만
-        if d >= 1 || d < 30 {
+        if d >= 1 && d < 30 {
             return .daysPast
         }
         
         // 글이 생성된지 1개월 이상 ~ 1년 이내
-        if d >= 30 || d < 365 {
+        if d >= 30 && d < 365 {
             return .monthsPast
         }
         

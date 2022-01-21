@@ -107,7 +107,27 @@ final class PostViewReactor: Reactor {
                 return "?"
             }
         }
-
+        
+        var priceForEachPersonInInt: Int {
+            guard let postModel = postModel else { return 0 }
+            if let price = postModel.price, let shippingFee = postModel.shippingFee {
+                return (price + shippingFee) / postModel.totalGatheringPeople
+            } else {
+                return 0
+            }
+        }
+        
+        var productPrice: Int {
+            guard let postModel = postModel else { return 0 }
+            return postModel.price ?? 0
+        }
+        
+        var shippingFee: Int {
+            guard let postModel = postModel else { return 0 }
+            return postModel.shippingFee ?? 0
+        }
+        
+    
         
         var detail: String {
             return postModel?.postDetail ?? ""
@@ -124,7 +144,7 @@ final class PostViewReactor: Reactor {
         }
         
         var date: String {
-            return DateConverter.convertDateToIncludeTodayAndYesterday(postModel?.date ?? "")
+            return DateConverter.convertDateStringToSimpleFormat(postModel?.date ?? "")
         }
         
         var viewCount: String {
@@ -375,28 +395,30 @@ extension PostViewReactor {
     
     private func updatePostAsRegathering() -> Observable<Mutation> {
         
-        let model = UpdatePostRequestDTO(
-            title: currentState.title,
-            location: 0,
-            detail: currentState.detail,
-            imageUIDs: currentState.postModel?.imageUIDs ?? [],
-            totalGatheringPeople: currentState.totalGatheringPeople,
-            currentlyGatheredPeople: currentState.currentlyGatheredPeople,
-            isCompletelyDone: false
-        )
-        
-        return postService.updatePost(uid: currentState.pageId, with: model)
-            .asObservable()
-            .map { result in
-                switch result {
-                case .success:
-                    NotificationCenterService.updatePostList.post()
-                    return Mutation.setPostAsGatherComplete(true)
-                    
-                case .error(let error):
-                    return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
-                }
-            }
+        print("✅ updatePostAsRegathering")
+        return .empty()
+//        let model = UpdatePostRequestDTO(
+//            title: currentState.title,
+//            location: 0,
+//            detail: currentState.detail,
+//            imageUIDs: currentState.postModel?.imageUIDs ?? [],
+//            totalGatheringPeople: currentState.totalGatheringPeople,
+//            currentlyGatheredPeople: currentState.currentlyGatheredPeople,
+//            isCompletelyDone: false
+//        )
+//
+//        return postService.updatePost(uid: currentState.pageId, with: model)
+//            .asObservable()
+//            .map { result in
+//                switch result {
+//                case .success:
+//                    NotificationCenterService.updatePostList.post()
+//                    return Mutation.setPostAsGatherComplete(true)
+//
+//                case .error(let error):
+//                    return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
+//                }
+//            }
     }
 
     private func joinChat() -> Observable<Mutation> {

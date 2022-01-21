@@ -7,11 +7,22 @@
 
 import Foundation
 
+
 struct DateConverter {
+    
+    enum DateFormatType {
+        case simple
+
+        var stringFormat: String {
+            switch self {
+            case .simple: return "yyyy-MM-dd HH:mm:ss"
+            }
+        }
+    }
     
     static func convertDateToIncludeTodayAndYesterday(_ date: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = K.DateFormat.defaultFormat
+        dateFormatter.dateFormat = DateFormatType.simple.stringFormat
         dateFormatter.locale = Locale(identifier:"ko_KR")
         
         guard let convertedDate = dateFormatter.date(from: date) else {
@@ -32,22 +43,28 @@ struct DateConverter {
         }
     }
     
-    
-    static func convertDateForPostTVC(_ date: Date) -> String {
+    static func convertDateStringToSimpleFormat(_ dateString: String) -> String {
         
         let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DateFormatType.simple.stringFormat
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        
+        guard let convertedDate = dateFormatter.date(from: dateString) else {
+            return "-"
+        }
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
+        return dateFormatter.string(from: convertedDate)
+    }
+    
+    static func convertDateStringToComplex(_ dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DateFormatType.simple.stringFormat
         dateFormatter.locale = Locale(identifier: "ko_KR")
         
 
-
-        let dateString = date.toStringWithRelativeTime()
-
-  
-        return dateString
+        guard let convertedDate = dateFormatter.date(from: dateString) else {
+            return "-"
+        }
+        return convertedDate.toStringWithRelativeTime()
     }
-    
-    
-    
-    
-    
 }

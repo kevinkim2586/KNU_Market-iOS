@@ -193,7 +193,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     )
     
     lazy var rightSwitchConfig = LabelSwitchConfig(
-        text: "모집중 1/9",
+        text: "모집중 -/-",
         textColor: .white,
         font: UIFont(name: K.Fonts.notoSansKRMedium, size: 10)!,
         backgroundColor: UIColor(named: K.Color.appColor)!
@@ -238,34 +238,13 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     let divider = UIView().then {
         $0.backgroundColor = UIColor.convertUsingHexString(hexValue: "#E7E7E7")
     }
-
     
     let postDetailLabel = PostDetailLabel()
     
     let enterChatButton = KMShadowButton(buttonTitle: "채팅방 입장하기")
     
-    let urlLinkButton = UIButton(type: .system).then {
-        $0.backgroundColor = UIColor.white.withAlphaComponent(0.8)
-        $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOffset = CGSize(width: 1, height: 1)
-        $0.layer.shadowOpacity = 0.4
-        $0.layer.shadowRadius = 5
-        $0.layer.cornerRadius = 20
-        $0.setTitle("링크 보러가기", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.font = UIFont(name: K.Fonts.notoSansKRMedium, size: 13)
-        let buttonImage = UIImage(
-            systemName: "arrow.up.right",
-            withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 12))
-        )
-        $0.tintColor = .black
-        $0.setImage(buttonImage, for: .normal)
-        $0.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        $0.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        $0.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        $0.isHidden = true
-    }
-    
+    let urlLinkButton = KMUrlLinkButton(type: .system)
+
     let postControlButtonView = KMPostButtonView()
     
 
@@ -287,6 +266,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePanGestureRecognizer()
+        configure()
     }
         
     //MARK: - UI Setup
@@ -315,7 +295,6 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         bottomContainerView.addSubview(divider)
         bottomContainerView.addSubview(postDetailLabel)
         bottomContainerView.addSubview(enterChatButton)
-    
     }
     
     override func setupConstraints() {
@@ -561,6 +540,34 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 self.upperImageSlideshow.presentFullScreenController(from: self)
             })
             .disposed(by: disposeBag)
+        
+        questionMarkButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+            
+                let popupVC = PerPersonPriceInfoViewController(
+                    productPrice: reactor.currentState.productPrice,
+                    shippingFee: reactor.currentState.shippingFee,
+                    totalPrice: reactor.currentState.productPrice + reactor.currentState.shippingFee,
+                    totalGatheringPeople: reactor.currentState.totalGatheringPeople,
+                    perPersonPrice: reactor.currentState.priceForEachPersonInInt
+                )
+                
+                popupVC.modalPresentationStyle = .popover
+                popupVC.preferredContentSize = CGSize(
+                    width: (self.view.frame.size.width / 2) + 20,
+                    height: self.view.frame.size.height / 3 - 40
+                )
+                let popOver: UIPopoverPresentationController = popupVC.popoverPresentationController!
+                popOver.delegate = self
+                popOver.sourceView = self.questionMarkButton
+                self.present(popupVC, animated: true)
+                
+                
+        
+                
+            })
+            .disposed(by: disposeBag)
 
         // Output
         
@@ -594,18 +601,11 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .withUnretained(self)
             .subscribe(onNext: { (_, postModel) in
         
-                
-                if #available(iOS 14.0, *) {
-                    self.postControlButtonView.menuButton.menu = self.menu
-                    self.postControlButtonView.menuButton.showsMenuAsPrimaryAction = true
-                }
-                
+
                 
                 reactor.currentState.inputSources.isEmpty
                 ? self.upperImageSlideshow.setImageInputs([ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)])
                 : self.upperImageSlideshow.setImageInputs(reactor.currentState.inputSources)
-                
-                
                 
                 
                 
@@ -616,8 +616,14 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 )
                 
                 self.userNicknameLabel.text = reactor.currentState.postUploaderNickname
-//                self.dateLabel
+                self.dateLabel.text = reactor.currentState.date
                 
+                
+                self.gatherStatusToggleSwitch.configureGatheringStatus(
+                    isCompletelyDone: reactor.currentState.isCompletelyDone,
+                    totalGatheringPeople: reactor.currentState.totalGatheringPeople,
+                    currentlyGatheredPeople: reactor.currentState.currentlyGatheredPeople
+                )
                 
                 
                 
@@ -645,6 +651,8 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 self.urlLinkButton.isHidden = reactor.currentState.referenceUrl == nil
                 ? true
                 : false
+                
+                
                 
 
     
@@ -736,6 +744,14 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
     }
+    
+    private func configure() {
+        if #available(iOS 14.0, *) {
+            self.postControlButtonView.menuButton.menu = self.menu
+            self.postControlButtonView.menuButton.showsMenuAsPrimaryAction = true
+        }
+        
+    }
 }
 
 //MARK: - LabelSwitchDelegate
@@ -744,17 +760,76 @@ extension NewPostViewController: LabelSwitchDelegate {
 
     func switchChangeToState(sender: LabelSwitch) {
         switch sender.curState {
+            
             case .L:
+                print("✅ Left Side")
             
-            
-            
-            
-            print("left state")
+            let vc = CustomAlertViewController_Rx(
+                title: "모집 완료를 해제하시겠습니까?",
+                message: "해제 시 추가 인원이 참여할 수도 있습니다.",
+                cancelButtonTitle: "아니오",
+                actionButtonTitle: "예"
+            )
+            self.present(vc, animated: true)
+            vc.alertObserver
+                .withUnretained(self)
+                .subscribe(onNext: { (_, actionType) in
+                    switch actionType {
+                    case .ok:
+                        self.reactor?.action.onNext(.updatePostAsRegathering)
+                        
+                    case .cancel:
+                        
+                        self.gatherStatusToggleSwitch.flipSwitch()
+                    }
+                })
+                .disposed(by: disposeBag)
+                    
             
             
             case .R:
-            print("right state")
+                print("✅ Right Side")
+            
+            let vc = CustomAlertViewController_Rx(
+                title: "모집 완료하시겠습니까?",
+                message: "모집 완료 시 추가 인원이 참여할 수 없습니다. (모집 완료 해제 또는 글 수정을 통해 해제 가능)",
+                cancelButtonTitle: "아니오",
+                actionButtonTitle: "예"
+            )
+            self.present(vc, animated: true)
+            vc.alertObserver
+                .withUnretained(self)
+                .subscribe(onNext: { (_, actionType) in
+      
+                    
+                    switch actionType {
+                    case .ok:
+                        self.reactor?.action.onNext(.markPostDone)
+                        
+                    case .cancel:
+                        
+                        self.gatherStatusToggleSwitch.flipSwitch()
+                        
+                        
+                    }
+                })
+                .disposed(by: disposeBag)
+            
+            
         }
+    }
+}
+
+//MARK: - UIPopoverPresentationControllerDelegate
+
+extension NewPostViewController: UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return true
     }
 }
 
@@ -813,6 +888,8 @@ extension NewPostViewController {
         }
     }
 }
+
+
 
 //#if canImport(SwiftUI) && DEBUG
 //import SwiftUI

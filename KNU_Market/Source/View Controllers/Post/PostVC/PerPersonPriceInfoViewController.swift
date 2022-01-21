@@ -215,7 +215,7 @@ class PerPersonPriceInfoViewController: BaseViewController {
         super.setupConstraints()
         
         productPriceStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(Metrics.defaultPadding)
+            $0.top.equalToSuperview().inset(Metrics.defaultPadding + 20)
             $0.right.equalToSuperview().inset(Metrics.defaultPadding)
             $0.left.equalToSuperview().inset(Metrics.defaultPadding + 18)
         }

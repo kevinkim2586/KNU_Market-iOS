@@ -68,6 +68,7 @@
 		7C43355C26D8BD8000A044CD /* appLogo_LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C43355B26D8BD8000A044CD /* appLogo_LaunchScreen.png */; };
 		7C436B5826820E5200943069 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5726820E5200943069 /* ReportManager.swift */; };
 		7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */; };
+		7C458AF0279AA6FE00AD452F /* KMNavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C458AEF279AA6FE00AD452F /* KMNavigationTitleView.swift */; };
 		7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C516C3A267F48300065E30D /* ReportUserViewController.swift */; };
 		7C5386D92768902000BFEA7F /* FindIdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386D82768902000BFEA7F /* FindIdModel.swift */; };
 		7C5386DB2768912400BFEA7F /* FindPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5386DA2768912400BFEA7F /* FindPasswordModel.swift */; };
@@ -114,6 +115,9 @@
 		7C82442C27990FD1006677D0 /* KMLabelSwitchBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82442B27990FD1006677D0 /* KMLabelSwitchBackView.swift */; };
 		7C82442E27990FE3006677D0 /* KMLabelSwitchConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82442D27990FE3006677D0 /* KMLabelSwitchConfig.swift */; };
 		7C82443027990FF4006677D0 /* KMLabelSwitchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82442F27990FF4006677D0 /* KMLabelSwitchState.swift */; };
+		7C824432279A50C9006677D0 /* CustomAlertViewController_Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C824431279A50C9006677D0 /* CustomAlertViewController_Rx.swift */; };
+		7C824435279A69CB006677D0 /* KMUrlLinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C824434279A69CB006677D0 /* KMUrlLinkButton.swift */; };
+		7C824437279A714C006677D0 /* PerPersonPriceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C824436279A714C006677D0 /* PerPersonPriceInfoViewController.swift */; };
 		7C833686266208210032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833685266208210032308D /* Interceptor.swift */; };
 		7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */; };
 		7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */; };
@@ -343,6 +347,7 @@
 		7C43355B26D8BD8000A044CD /* appLogo_LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appLogo_LaunchScreen.png; sourceTree = "<group>"; };
 		7C436B5726820E5200943069 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
 		7C436B5A26820F9D00943069 /* ReportUserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserRequestDTO.swift; sourceTree = "<group>"; };
+		7C458AEF279AA6FE00AD452F /* KMNavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMNavigationTitleView.swift; sourceTree = "<group>"; };
 		7C516C3A267F48300065E30D /* ReportUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
 		7C5386D82768902000BFEA7F /* FindIdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdModel.swift; sourceTree = "<group>"; };
 		7C5386DA2768912400BFEA7F /* FindPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordModel.swift; sourceTree = "<group>"; };
@@ -390,6 +395,9 @@
 		7C82442B27990FD1006677D0 /* KMLabelSwitchBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMLabelSwitchBackView.swift; sourceTree = "<group>"; };
 		7C82442D27990FE3006677D0 /* KMLabelSwitchConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMLabelSwitchConfig.swift; sourceTree = "<group>"; };
 		7C82442F27990FF4006677D0 /* KMLabelSwitchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMLabelSwitchState.swift; sourceTree = "<group>"; };
+		7C824431279A50C9006677D0 /* CustomAlertViewController_Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController_Rx.swift; sourceTree = "<group>"; };
+		7C824434279A69CB006677D0 /* KMUrlLinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMUrlLinkButton.swift; sourceTree = "<group>"; };
+		7C824436279A714C006677D0 /* PerPersonPriceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerPersonPriceInfoViewController.swift; sourceTree = "<group>"; };
 		7C833685266208210032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7C83EE432740EA2100CF1680 /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
 		7C83EE452741037600CF1680 /* ChatMembersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembersTableViewCell.swift; sourceTree = "<group>"; };
@@ -912,6 +920,7 @@
 			isa = PBXGroup;
 			children = (
 				7C868D67274C97420056B3F3 /* CustomAlertViewController.swift */,
+				7C824431279A50C9006677D0 /* CustomAlertViewController_Rx.swift */,
 				7C868D68274C97420056B3F3 /* KMCustomAlertView.swift */,
 				7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */,
 				7CA78FFB26CE03260019B06F /* KMAlertButton.swift */,
@@ -956,6 +965,14 @@
 				7C82441C2797CBD8006677D0 /* BannerHeaderReactor.swift */,
 			);
 			path = BannerHeader;
+			sourceTree = "<group>";
+		};
+		7C824433279A69B9006677D0 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				7C824434279A69CB006677D0 /* KMUrlLinkButton.swift */,
+			);
+			path = UIButton;
 			sourceTree = "<group>";
 		};
 		7C83EE4D2742267700CF1680 /* Post View */ = {
@@ -1070,6 +1087,7 @@
 		7C9A382F276C897D00AEE831 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7C458AEF279AA6FE00AD452F /* KMNavigationTitleView.swift */,
 				7C77A2F8279695930038F358 /* KMGatherStatusView.swift */,
 				7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */,
 				7CEDBB5E2702E89F0078F5E1 /* KMTitleLabel.swift */,
@@ -1237,6 +1255,7 @@
 		7CA6622226413269000E0B7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C824433279A69B9006677D0 /* UIButton */,
 				7C8244182797A8F6006677D0 /* UILabel */,
 				7CDD5B21279526A30082E3FC /* UITableViewHeaders */,
 				7CE0A41427918C240034CC69 /* UITabBarController */,
@@ -1519,6 +1538,7 @@
 			isa = PBXGroup;
 			children = (
 				7C83EE522742378000CF1680 /* PostViewController.swift */,
+				7C824436279A714C006677D0 /* PerPersonPriceInfoViewController.swift */,
 				7C9566F02789D33E006BFFAD /* PostViewReactor.swift */,
 				7CAE5AF92754B50B00426708 /* PostViewController+UITableView.swift */,
 				7CAE5AFB2754B59900426708 /* PostViewController+KMPostButtonViewDelegate.swift */,
@@ -1805,6 +1825,7 @@
 				7C9C59FE277C1759005E08BC /* UserDefaultsGenericService.swift in Sources */,
 				625B0E2E2741DF4D003968BA /* NetworkResult.swift in Sources */,
 				7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */,
+				7C824437279A714C006677D0 /* PerPersonPriceInfoViewController.swift in Sources */,
 				7C3D986426AE9F2E005DFAE0 /* LoadUserProfileUidModel.swift in Sources */,
 				7CF8D616277C4A5E0078DD77 /* ChatServiceAPIType.swift in Sources */,
 				7CB8DF42264BEC870001CC6D /* User.swift in Sources */,
@@ -1847,6 +1868,7 @@
 				7C3B4FF226A928D300E2CA8F /* CheckYourEmailViewController.swift in Sources */,
 				626AC5B52732506900E907E8 /* SnapKit.swift in Sources */,
 				625B0E2A2741D9BC003968BA /* Network.swift in Sources */,
+				7C824435279A69CB006677D0 /* KMUrlLinkButton.swift in Sources */,
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,
 				7C83EE5127422E3A00CF1680 /* KMPostControlButton.swift in Sources */,
 				7CC1B59826D4C7000007F99B /* EmptyView.swift in Sources */,
@@ -1858,6 +1880,7 @@
 				7CF8D618277C4ABB0078DD77 /* ChatServiceWebSocketType.swift in Sources */,
 				7CBFDA78273FE01F000C8C8A /* PostTableViewCell.swift in Sources */,
 				7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */,
+				7C824432279A50C9006677D0 /* CustomAlertViewController_Rx.swift in Sources */,
 				7C82442A27990FB9006677D0 /* KMLabelSwitch.swift in Sources */,
 				7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */,
 				7CC12A022796AE1100C0F581 /* KMShadowButton.swift in Sources */,
@@ -1982,6 +2005,7 @@
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7C58477627795CA0005D75B2 /* StudentIdVerificationViewReactor.swift in Sources */,
 				7CC69A7C27670E3B00105FC0 /* PopupAPI.swift in Sources */,
+				7C458AF0279AA6FE00AD452F /* KMNavigationTitleView.swift in Sources */,
 				7C5386E62768CA8200BFEA7F /* PopupService.swift in Sources */,
 				7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer+Extension.swift in Sources */,

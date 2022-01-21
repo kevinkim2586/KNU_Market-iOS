@@ -98,7 +98,6 @@ class CustomAlertViewController_Rx: UIViewController {
         }
         alertView.addSubview(buttonStackView)
         
-    
         alertView.snp.makeConstraints {
             $0.width.equalTo(self.view.frame.size.width - 40)
             $0.height.equalTo(messageLabel.snp.height).multipliedBy(2.0)
@@ -129,7 +128,6 @@ class CustomAlertViewController_Rx: UIViewController {
     }
     
     func bindUI() {
-        
         actionButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in

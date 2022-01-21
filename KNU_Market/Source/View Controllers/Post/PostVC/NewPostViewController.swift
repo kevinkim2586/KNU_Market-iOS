@@ -195,7 +195,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     lazy var rightSwitchConfig = LabelSwitchConfig(
         text: "모집중 -/-",
         textColor: .white,
-        font: UIFont(name: K.Fonts.notoSansKRMedium, size: 10)!,
+        font: UIFont(name: K.Fonts.notoSansKRMedium, size: 11)!,
         backgroundColor: UIColor(named: K.Color.appColor)!
     )
     
@@ -317,7 +317,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         }
 
         bottomContainerView.snp.makeConstraints {
-            $0.top.equalTo(upperImageSlideshow.snp.bottom).offset(-15)
+            $0.top.equalTo(upperImageSlideshow.snp.bottom).offset(-25)
             $0.bottom.left.right.equalToSuperview()
         }
         
@@ -591,8 +591,52 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .bind(to: gatherStatusView.rx.isHidden)
             .disposed(by: disposeBag)
 
+        reactor.state
+            .map { $0.postModel }
+            .filter { $0 != nil }
+            .map { $0!.nickname }
+            .bind(to: userNicknameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.postModel }
+            .filter { $0 != nil }
+            .map { $0!.date }
+            .map { DateConverter.convertDateStringToSimpleFormat($0) }
+            .bind(to: dateLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.postModel }
+            .filter { $0 != nil }
+            .map { $0!.viewCount }
+            .map { "조회 \($0)"}
+            .bind(to: viewCountLabel.rx.text)
+            .disposed(by: disposeBag)
         
         
+        reactor.state
+            .map { $0.postModel }
+            .filter { $0 != nil }
+            .map { $0!.title }
+            .bind(to: postTitleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.postModel }
+            .filter { $0 != nil }
+            .map { $0!.postDetail }
+            .bind(to: postDetailLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.postModel }
+            .filter { $0 != nil }
+            .map { $0!.referenceUrl }
+            .map { $0 == nil }
+            .bind(to: urlLinkButton.rx.isHidden)
+            .disposed(by: disposeBag)
+
         
         reactor.state
             .map { $0.postModel }
@@ -614,22 +658,14 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                     placeholderImage: UIImage(named: K.Images.defaultUserPlaceholder),
                     options: .continueInBackground
                 )
-                
-                self.userNicknameLabel.text = reactor.currentState.postUploaderNickname
-                self.dateLabel.text = reactor.currentState.date
-                
+
                 
                 self.gatherStatusToggleSwitch.configureGatheringStatus(
                     isCompletelyDone: reactor.currentState.isCompletelyDone,
                     totalGatheringPeople: reactor.currentState.totalGatheringPeople,
                     currentlyGatheredPeople: reactor.currentState.currentlyGatheredPeople
                 )
-                
-                
-                
-                self.viewCountLabel.text = reactor.currentState.viewCount
-                
-                self.postTitleLabel.text = reactor.currentState.title
+        
                 
                 // 모집완료,모집 중 toggle
                 self.gatherStatusView.updateGatheringStatusLabel(
@@ -641,20 +677,8 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 
                 
                 self.priceLabel.text = reactor.currentState.priceForEachPerson
+   
                 
-                
-                
-                self.postDetailLabel.text = reactor.currentState.detail
-                
-                
-                
-                self.urlLinkButton.isHidden = reactor.currentState.referenceUrl == nil
-                ? true
-                : false
-                
-                
-                
-
     
 
             })
@@ -733,6 +757,16 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
+        reactor.state
+            .map { $0.didMarkPostDone }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, didMarkPostDone) in
+//                self.gatherStatusToggleSwitch
+            })
+            .disposed(by: disposeBag)
+        
         
         // Notification Center
         
@@ -779,14 +813,12 @@ extension NewPostViewController: LabelSwitchDelegate {
                         self.reactor?.action.onNext(.updatePostAsRegathering)
                         
                     case .cancel:
-                        
                         self.gatherStatusToggleSwitch.flipSwitch()
                     }
                 })
                 .disposed(by: disposeBag)
                     
-            
-            
+        
             case .R:
                 print("✅ Right Side")
             

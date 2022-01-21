@@ -90,11 +90,11 @@ class PostListViewController: BaseViewController, View {
     
     override func setupLayout() {
         super.setupLayout()
-    
+        
+        navigationController?.navigationBar.addSubview(navigationTitleView)
         view.addSubview(postListsTableView)
         view.addSubview(uploadPostButton)
         postListsTableView.tableHeaderView = bannerHeaderView
-        navigationController?.navigationBar.addSubview(navigationTitleView)
     }
     
     override func setupConstraints() {

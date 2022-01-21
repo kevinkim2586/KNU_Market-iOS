@@ -19,7 +19,8 @@ class LabelSwitchPart {
         label.textAlignment = .center
         label.numberOfLines = 1
         label.backgroundColor = .clear
-        label.sizeToFit()
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
         return label
     }()
     

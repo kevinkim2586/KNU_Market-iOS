@@ -113,6 +113,7 @@ class ChatListViewController: BaseViewController, View {
                 cellType: ChatListTableViewCell.self)
             ) { indexPath, chatList, cell in
                 cell.configure(with: chatList)
+                self.chatListTableView.restoreEmptyView()
             }
             .disposed(by: disposeBag)
         

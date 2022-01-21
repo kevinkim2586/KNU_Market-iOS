@@ -21,7 +21,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
     let bannerImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 15
-        $0.layer.masksToBounds = true
+        $0.clipsToBounds = true
     }
     
     //MARK: - Initialization
@@ -45,10 +45,9 @@ class BannerCollectionViewCell: UICollectionViewCell {
     
     private func setupConstraints() {
         bannerImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
-            $0.left.equalToSuperview().inset(0)
-            $0.bottom.equalToSuperview().inset(20)
-            $0.right.equalToSuperview().inset(5)
+            $0.center.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.96)
+            $0.height.equalToSuperview().multipliedBy(0.9)
         }
     }
 }

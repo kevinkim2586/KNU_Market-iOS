@@ -287,9 +287,6 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePanGestureRecognizer()
-        
-
-
     }
         
     //MARK: - UI Setup

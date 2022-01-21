@@ -126,7 +126,6 @@ class BannerHeaderView: UIView {
             return
         }
         
-    
         if currentIndex < totalNumber - 1 {
             currentIndex += 1
             bannerCollectionView.scrollToItem(
@@ -160,7 +159,6 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
         }
         if let model = bannerModel {
             if let imageUrl = URL(string: model[indexPath.row].media.path) {
-                
                 cell.bannerImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 cell.bannerImageView.sd_setImage(
                     with: imageUrl,

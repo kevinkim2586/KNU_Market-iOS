@@ -68,7 +68,7 @@ class PerPersonPriceInfoViewController: BaseViewController {
     
     let shippingFeeStackView = UIStackView().then {
         $0.axis = .horizontal
-        $0.distribution = .fill
+        $0.distribution = .fillProportionally
         $0.alignment = .center
         $0.spacing = 5
     }
@@ -98,7 +98,7 @@ class PerPersonPriceInfoViewController: BaseViewController {
 
     let dividerLabel = UILabel().then {
         $0.font = Fonts.labelFont
-        $0.text = "÷vhj"
+        $0.text = "÷"
     }
     
     
@@ -178,7 +178,6 @@ class PerPersonPriceInfoViewController: BaseViewController {
     override func setupLayout() {
         super.setupLayout()
         
-
         [productPriceInfoLabel, productPriceLabel].forEach {
             productPriceStackView.addArrangedSubview($0)
         }
@@ -217,7 +216,8 @@ class PerPersonPriceInfoViewController: BaseViewController {
         
         productPriceStackView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(Metrics.defaultPadding)
-            $0.left.right.equalToSuperview().inset(Metrics.defaultPadding)
+            $0.right.equalToSuperview().inset(Metrics.defaultPadding)
+            $0.left.equalToSuperview().inset(Metrics.defaultPadding + 18)
         }
         
         shippingFeeStackView.snp.makeConstraints {
@@ -250,7 +250,8 @@ class PerPersonPriceInfoViewController: BaseViewController {
 
         perPersonPriceStackView.snp.makeConstraints {
             $0.top.equalTo(dividerLine_2.snp.bottom).offset(Metrics.defaultTopPadding)
-            $0.left.right.equalToSuperview().inset(Metrics.defaultPadding)
+            $0.right.equalToSuperview().inset(Metrics.defaultPadding)
+            $0.left.equalToSuperview().inset(Metrics.defaultPadding + 20)
         }
     }
     

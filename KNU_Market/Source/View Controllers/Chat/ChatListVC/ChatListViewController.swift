@@ -128,6 +128,7 @@ class ChatListViewController: BaseViewController, View {
                 self.chatListTableView.deselectRow(at: indexPath, animated: true)
                 
                 let chatVC = ChatViewController()
+                chatVC.hidesBottomBarWhenPushed = true
                 chatVC.roomUID = reactor.currentState.roomList[indexPath.row].uuid
                 chatVC.chatRoomTitle = reactor.currentState.roomList[indexPath.row].title
                 chatVC.postUploaderUID = reactor.currentState.roomList[indexPath.row].userUID

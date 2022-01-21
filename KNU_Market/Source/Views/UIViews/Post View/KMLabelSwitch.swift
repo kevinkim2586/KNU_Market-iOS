@@ -19,6 +19,7 @@ class LabelSwitchPart {
         label.textAlignment = .center
         label.numberOfLines = 1
         label.backgroundColor = .clear
+        label.sizeToFit()
         return label
     }()
     
@@ -246,7 +247,18 @@ class LabelSwitchPart {
         }
     }
     
-
+    func flipSwitch() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.curState.flip()
+        })
+    }
+    
+    // PostVC가 초기애 실행될 때 Switch를 설정하는 메서드
+    func configureGatheringStatus(isCompletelyDone: Bool, totalGatheringPeople: Int, currentlyGatheredPeople: Int) {
+        
+        self.curState = isCompletelyDone ? .R : .L
+        self.rightPart.label.text = "모집중 \(currentlyGatheredPeople)/\(totalGatheringPeople)"
+    }
     
     ///  Update view's frame by UI state
     private func updateUIState(_ state: LabelSwitchUIState) {

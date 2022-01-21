@@ -72,7 +72,7 @@ final class PostViewReactor: Reactor {
         var userJoinedChatRoomPIDS: [String] = []
         var userBannedPostUploaders: [String] = []
         
-        var postModel: PostDetailModel?
+        var postModel: PostDetailModel
         
         var inputSources: [InputSource] = []
    
@@ -89,16 +89,14 @@ final class PostViewReactor: Reactor {
         // Computed Properties
         
         var postUploaderNickname: String {
-            return postModel?.nickname ?? "-"
+            return postModel.nickname
         }
         
         var title: String {
-            return postModel?.title ?? "로딩 중.."
+            return postModel.title
         }
         
         var priceForEachPerson: String {
-            
-            guard let postModel = postModel else { return "?" }
             
             if let price = postModel.price, let shippingFee = postModel.shippingFee {
                 let perPersonPrice = (price + shippingFee) / postModel.totalGatheringPeople
@@ -109,7 +107,6 @@ final class PostViewReactor: Reactor {
         }
         
         var priceForEachPersonInInt: Int {
-            guard let postModel = postModel else { return 0 }
             if let price = postModel.price, let shippingFee = postModel.shippingFee {
                 return (price + shippingFee) / postModel.totalGatheringPeople
             } else {
@@ -118,37 +115,33 @@ final class PostViewReactor: Reactor {
         }
         
         var productPrice: Int {
-            guard let postModel = postModel else { return 0 }
             return postModel.price ?? 0
         }
         
         var shippingFee: Int {
-            guard let postModel = postModel else { return 0 }
             return postModel.shippingFee ?? 0
         }
         
     
         
         var detail: String {
-            return postModel?.postDetail ?? ""
+            return postModel.postDetail
         }
 
         var currentlyGatheredPeople: Int {
-            guard let postModel = postModel else { return 1 }
             if postModel.currentlyGatheredPeople < 1 { return 1 }
             return postModel.currentlyGatheredPeople
         }
         
         var totalGatheringPeople: Int {
-            return postModel?.totalGatheringPeople ?? 2
+            return postModel.totalGatheringPeople
         }
         
         var date: String {
-            return DateConverter.convertDateStringToSimpleFormat(postModel?.date ?? "")
+            return DateConverter.convertDateStringToSimpleFormat(postModel.date)
         }
         
         var viewCount: String {
-            guard let postModel = postModel else { return "조회 -" }
             return "조회 \(postModel.viewCount)"
         }
         
@@ -159,17 +152,17 @@ final class PostViewReactor: Reactor {
         
         // 사용자가 올린 공구인지 여부
         var postIsUserUploaded: Bool {
-            return postModel?.nickname == nickname
+            return postModel.nickname == nickname
         }
         
         // 인원이 다 찼는지 여부
         var isFull: Bool {
-            return postModel?.isFull ?? true
+            return postModel.isFull
         }
         
         // 공구 마감 여부
         var isCompletelyDone: Bool {
-            return postModel?.isCompletelyDone ?? true
+            return postModel.isCompletelyDone
         }
         
         // 모집 여부
@@ -183,11 +176,9 @@ final class PostViewReactor: Reactor {
         }
         
         var referenceUrl: URL? {
-            if let postModel = postModel, let referenceUrl = postModel.referenceUrl {
+            if let referenceUrl = postModel.referenceUrl {
                 return URL(string: referenceUrl)
-            } else {
-                return nil
-            }
+            } else { return nil }
         }
         
         
@@ -229,7 +220,8 @@ final class PostViewReactor: Reactor {
         self.userDefaultsService = userDefaultsService
         self.initialState = State(
             pageId: pageId,
-            isFromChatVC: isFromChatVC
+            isFromChatVC: isFromChatVC,
+            postModel: PostDetailModel.getDefaultState()
         )
         
         self.initialState.nickname = userDefaultsService.get(key: UserDefaults.Keys.nickname) ?? ""

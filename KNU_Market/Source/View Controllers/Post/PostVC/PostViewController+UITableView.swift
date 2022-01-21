@@ -14,7 +14,7 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
         ) as? PostCell else { return UITableViewCell() }
         
         cell.selectionStyle = .none
-        let postDetail = reactor?.currentState.postModel?.postDetail ?? "로딩 중.."
+        let postDetail = reactor?.currentState.postModel.postDetail
         cell.title = postDetail
         cell.titleLabel.numberOfLines = 0
         return cell

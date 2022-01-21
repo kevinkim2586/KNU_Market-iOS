@@ -41,5 +41,27 @@ struct PostDetailModel: ModelType {
         case date
         case userUID = "userUid"
     }
+    
+    static func getDefaultState() -> PostDetailModel {
+        return PostDetailModel(
+            uuid: "",
+            title: "",
+            imageUIDs: nil,
+            price: 0,
+            referenceUrl: nil,
+            shippingFee: nil,
+            postDetail: "로딩 중..",
+            viewCount: 0,
+            location: nil,
+            totalGatheringPeople: 2,
+            currentlyGatheredPeople: 1,
+            isFull: false,
+            isCompletelyDone: false,
+            nickname: "",
+            profileImageUID: "default",
+            date: "",
+            userUID: ""
+        )
+    }
 }
 

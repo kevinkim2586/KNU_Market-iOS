@@ -52,8 +52,10 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         } else {
             return [
                 UIAction(title: "신고하기", image: nil, handler: { [weak self] _ in
-                    guard let nickname = reactor.currentState.postModel?.nickname else { return }
-                    self?.presentReportUserVC(userToReport: nickname, postUID: reactor.currentState.pageId)
+                    self?.presentReportUserVC(
+                        userToReport: reactor.currentState.postModel.nickname,
+                        postUID: reactor.currentState.pageId
+                    )
                 }),
                 UIAction(title: "이 사용자의 글 보지 않기", image: nil, handler: { [weak self] _ in
                     guard let postUploader = self?.reactor?.currentState.postUploaderNickname else { return }
@@ -437,17 +439,13 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         postControlButtonView.shareButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                
-                guard let postDetailModel = reactor.currentState.postModel else {
-                    return
-                }
-                
+      
                 var components = URLComponents()
                 components.scheme = "https"
                 components.host = "knumarket.page.link"
                 components.path = "/seePost"
                 
-                let postUIDQueryItem = URLQueryItem(name: "postUID", value: postDetailModel.uuid)
+                let postUIDQueryItem = URLQueryItem(name: "postUID", value: reactor.currentState.postModel.uuid)
                 components.queryItems = [postUIDQueryItem]
                 
                 guard let linkParameter = components.url else { return }
@@ -466,9 +464,9 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 shareLink.iOSParameters?.appStoreID = "1580677279"
                 
                 shareLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
-                shareLink.socialMetaTagParameters?.title = "\(postDetailModel.title) 같이 사요!"
+                shareLink.socialMetaTagParameters?.title = "\(reactor.currentState.postModel.title) 같이 사요!"
                 shareLink.socialMetaTagParameters?.descriptionText = "자세한 내용은 크누마켓에서 확인하세요."
-                if let imageUIDs = postDetailModel.imageUIDs {
+                if let imageUIDs = reactor.currentState.postModel.imageUIDs {
                     shareLink.socialMetaTagParameters?.imageURL = URL(string: K.MEDIA_REQUEST_URL + imageUIDs[0])
                 }
                
@@ -484,7 +482,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                     
     
                     //UIActivityVC
-                    let promoText = "\(postDetailModel.title) 같이 사요!"
+                    let promoText = "\(reactor.currentState.postModel.title) 같이 사요!"
                     let activityVC = UIActivityViewController(activityItems: [promoText, url], applicationActivities: nil)
                     self?.present(activityVC, animated: true)
                     
@@ -593,23 +591,23 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
 
         reactor.state
             .map { $0.postModel }
-            .filter { $0 != nil }
-            .map { $0!.nickname }
+            .map { $0.nickname }
+            .distinctUntilChanged()
             .bind(to: userNicknameLabel.rx.text)
             .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.postModel }
-            .filter { $0 != nil }
-            .map { $0!.date }
+            .map { $0.date }
+            .distinctUntilChanged()
             .map { DateConverter.convertDateStringToSimpleFormat($0) }
             .bind(to: dateLabel.rx.text)
             .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.postModel }
-            .filter { $0 != nil }
-            .map { $0!.viewCount }
+            .map { $0.viewCount }
+            .distinctUntilChanged()
             .map { "조회 \($0)"}
             .bind(to: viewCountLabel.rx.text)
             .disposed(by: disposeBag)
@@ -617,22 +615,22 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         
         reactor.state
             .map { $0.postModel }
-            .filter { $0 != nil }
-            .map { $0!.title }
+            .map { $0.title }
+            .distinctUntilChanged()
             .bind(to: postTitleLabel.rx.text)
             .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.postModel }
-            .filter { $0 != nil }
-            .map { $0!.postDetail }
+            .map { $0.postDetail }
+            .distinctUntilChanged()
             .bind(to: postDetailLabel.rx.text)
             .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.postModel }
-            .filter { $0 != nil }
-            .map { $0!.referenceUrl }
+            .map { $0.referenceUrl }
+            .distinctUntilChanged()
             .map { $0 == nil }
             .bind(to: urlLinkButton.rx.isHidden)
             .disposed(by: disposeBag)
@@ -640,7 +638,6 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         
         reactor.state
             .map { $0.postModel }
-            .filter { $0 != nil }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { (_, postModel) in
@@ -654,7 +651,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 
                 
                 self.profileImageView.sd_setImage(
-                    with: URL(string: K.MEDIA_REQUEST_URL + (reactor.currentState.postModel?.profileImageUID ?? "")),
+                    with: URL(string: K.MEDIA_REQUEST_URL + (reactor.currentState.postModel.profileImageUID)),
                     placeholderImage: UIImage(named: K.Images.defaultUserPlaceholder),
                     options: .continueInBackground
                 )

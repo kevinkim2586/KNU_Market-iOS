@@ -104,7 +104,7 @@
 		7C682CE9271EB02500989139 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682CE8271EB02500989139 /* UIHelper.swift */; };
 		7C6B50A02652B17F0032328C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B509F2652B17F0032328C /* UIImage+Extension.swift */; };
 		7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71996E2679CAEC000BEE64 /* Animations.swift */; };
-		7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C719970267A1678000BEE64 /* ItemDetailModel.swift */; };
+		7C719971267A1678000BEE64 /* PostDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C719970267A1678000BEE64 /* PostDetailModel.swift */; };
 		7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */; };
 		7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BD26FF0B31000E4666 /* StudentIdVerificationDTO.swift */; };
 		7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */; };
@@ -383,7 +383,7 @@
 		7C682CE8271EB02500989139 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		7C6B509F2652B17F0032328C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		7C71996E2679CAEC000BEE64 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
-		7C719970267A1678000BEE64 /* ItemDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailModel.swift; sourceTree = "<group>"; };
+		7C719970267A1678000BEE64 /* PostDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailModel.swift; sourceTree = "<group>"; };
 		7C7480BA26FF08E3000E4666 /* UserManager + Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + Verification.swift"; sourceTree = "<group>"; };
 		7C7480BD26FF0B31000E4666 /* StudentIdVerificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdVerificationDTO.swift; sourceTree = "<group>"; };
 		7C7480BF2700732D000E4666 /* UserManager + SaveUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + SaveUserInfo.swift"; sourceTree = "<group>"; };
@@ -693,7 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				7CCB02072674CE5D00D58BC2 /* PostListModel.swift */,
-				7C719970267A1678000BEE64 /* ItemDetailModel.swift */,
+				7C719970267A1678000BEE64 /* PostDetailModel.swift */,
 			);
 			path = "Post Models";
 			sourceTree = "<group>";
@@ -2038,7 +2038,7 @@
 				7CBFDA7A274005DF000C8C8A /* PostCellViewModel.swift in Sources */,
 				7CC69A7E27670FFE00105FC0 /* UserService.swift in Sources */,
 				7C83EE4C2742121600CF1680 /* SearchPostsViewController.swift in Sources */,
-				7C719971267A1678000BEE64 /* ItemDetailModel.swift in Sources */,
+				7C719971267A1678000BEE64 /* PostDetailModel.swift in Sources */,
 				7C833686266208210032308D /* Interceptor.swift in Sources */,
 				7C436B5826820E5200943069 /* ReportManager.swift in Sources */,
 				7C58477227744FD9005D75B2 /* EmailVerificationViewReactor.swift in Sources */,

@@ -43,7 +43,7 @@ class PostViewController: BaseViewController, View {
         } else {
             return [
                 UIAction(title: "신고하기", image: nil, handler: { [weak self] _ in
-                    guard let nickname = reactor.currentState.postModel?.nickname else { return }
+                    let nickname = reactor.currentState.postModel.nickname 
                     self?.presentReportUserVC(userToReport: nickname, postUID: reactor.currentState.pageId)
                 }),
                 UIAction(title: "이 사용자의 글 보지 않기", image: nil, handler: { [weak self] _ in
@@ -365,15 +365,15 @@ extension PostViewController {
     
     private func updatePostHeaderView() {
         guard let reactor = reactor else { return }
-        postHeaderView.configure(
-            imageSources: reactor.currentState.inputSources,
-            postTitle: reactor.currentState.title,
-            profileImageUid: reactor.currentState.postModel?.profileImageUID ?? "",
-            userNickname: reactor.currentState.postModel?.nickname ?? "",
-            locationName: "",
-            dateString: reactor.currentState.date,
-            viewCount: reactor.currentState.viewCount
-        )
+//        postHeaderView.configure(
+//            imageSources: reactor.currentState.inputSources,
+//            postTitle: reactor.currentState.title,
+//            profileImageUid: reactor.currentState.postModel?.profileImageUID ?? "",
+//            userNickname: reactor.currentState.postModel?.nickname ?? "",
+//            locationName: "",
+//            dateString: reactor.currentState.date,
+//            viewCount: reactor.currentState.viewCount
+//        )
         updateHeaderViewStyle()
 
     }

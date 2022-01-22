@@ -1,7 +1,7 @@
 import UIKit
 import FirebaseDynamicLinks
 
-extension PostViewController: KMPostButtonViewDelegate {
+extension PostViewController {
     
     func didPressBackButton() {
         navigationController?.popViewController(animated: true)

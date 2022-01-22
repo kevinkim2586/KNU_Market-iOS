@@ -54,7 +54,7 @@ extension UIViewController {
     }
     
     // Apple 기본 알림
-    func presentSimpleAlert(title: String, message: String) {
+    func presentSimpleAlert(title: String, message: String = "") {
         
         let alertController = UIAlertController(
             title: title,

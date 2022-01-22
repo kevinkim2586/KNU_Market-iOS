@@ -501,12 +501,13 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 guard #available(iOS 14.0, *) else {
-//                    self.didPressMenuButton()
+                    self.pressedMenuButton()
                     return
                 }
+                // iOS 14 이상이면 UIMenu로 자동 실행 -> postModel에 데이터가 들어가면 그때 button.menu에 속성 자동 추가
             })
             .disposed(by: disposeBag)
-        
+
         
         postDetailLabel.onClick = { [weak self] _, detection in
             switch detection.type {
@@ -542,7 +543,6 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         questionMarkButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-            
                 let popupVC = PerPersonPriceInfoViewController(
                     productPrice: reactor.currentState.productPrice,
                     shippingFee: reactor.currentState.shippingFee,
@@ -560,10 +560,6 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 popOver.delegate = self
                 popOver.sourceView = self.questionMarkButton
                 self.present(popupVC, animated: true)
-                
-                
-        
-                
             })
             .disposed(by: disposeBag)
 
@@ -590,23 +586,20 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
 
         reactor.state
-            .map { $0.postModel }
-            .map { $0.nickname }
+            .map { $0.postModel.nickname }
             .distinctUntilChanged()
             .bind(to: userNicknameLabel.rx.text)
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.postModel }
-            .map { $0.date }
+            .map { $0.postModel.date }
             .distinctUntilChanged()
             .map { DateConverter.convertDateStringToSimpleFormat($0) }
             .bind(to: dateLabel.rx.text)
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.postModel }
-            .map { $0.viewCount }
+            .map { $0.postModel.viewCount }
             .distinctUntilChanged()
             .map { "조회 \($0)"}
             .bind(to: viewCountLabel.rx.text)
@@ -614,22 +607,19 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         
         
         reactor.state
-            .map { $0.postModel }
-            .map { $0.title }
+            .map { $0.postModel.title }
             .distinctUntilChanged()
             .bind(to: postTitleLabel.rx.text)
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.postModel }
-            .map { $0.postDetail }
+            .map { $0.postModel.postDetail }
             .distinctUntilChanged()
             .bind(to: postDetailLabel.rx.text)
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.postModel }
-            .map { $0.referenceUrl }
+            .map { $0.postModel.referenceUrl }
             .distinctUntilChanged()
             .map { $0 == nil }
             .bind(to: urlLinkButton.rx.isHidden)
@@ -644,7 +634,12 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             }
             .distinctUntilChanged()
             .map { $0 == nil }
-            .bind(to: questionMarkButton.rx.isHidden, perPersonLabel.rx.isHidden, priceLabel.rx.isHidden, wonLabel.rx.isHidden)
+            .bind(
+                to: questionMarkButton.rx.isHidden,
+                perPersonLabel.rx.isHidden,
+                priceLabel.rx.isHidden,
+                wonLabel.rx.isHidden
+            )
             .disposed(by: disposeBag)
 
         
@@ -661,8 +656,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.postModel }
-            .map { $0.profileImageUID }
+            .map { $0.postModel.profileImageUID }
             .distinctUntilChanged()
             .map { URL(string: K.MEDIA_REQUEST_URL + $0) }
             .withUnretained(self)
@@ -674,38 +668,41 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 )
             })
             .disposed(by: disposeBag)
-        
-        
-        reactor.state
-            .map { $0.postModel }
-            .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .subscribe(onNext: { (_, postModel) in
-        
 
-                
-                reactor.currentState.inputSources.isEmpty
+        reactor.state
+            .map { $0.inputSources }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, inputSources) in
+                inputSources.isEmpty
                 ? self.upperImageSlideshow.setImageInputs([ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)])
-                : self.upperImageSlideshow.setImageInputs(reactor.currentState.inputSources)
-  
-                
-                self.gatherStatusToggleSwitch.configureGatheringStatus(
-                    isCompletelyDone: reactor.currentState.isCompletelyDone,
-                    totalGatheringPeople: reactor.currentState.totalGatheringPeople,
-                    currentlyGatheredPeople: reactor.currentState.currentlyGatheredPeople
-                )
-        
-                
-                // 모집완료,모집 중 toggle
-                self.gatherStatusView.updateGatheringStatusLabel(
-                    currentNum: reactor.currentState.currentlyGatheredPeople,
-                    total: reactor.currentState.totalGatheringPeople,
-                    isCompletelyDone: reactor.currentState.isCompletelyDone
-                )
-            
-   
+                : self.upperImageSlideshow.setImageInputs(inputSources)
             })
             .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.postModel.title }
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                
+                if reactor.currentState.postIsUserUploaded {
+                    self.gatherStatusToggleSwitch.configureGatheringStatus(
+                        isCompletelyDone: reactor.currentState.isCompletelyDone,
+                        totalGatheringPeople: reactor.currentState.totalGatheringPeople,
+                        currentlyGatheredPeople: reactor.currentState.currentlyGatheredPeople
+                    )
+                    
+                } else {
+                    self.gatherStatusView.updateGatheringStatusLabel(
+                        currentNum: reactor.currentState.currentlyGatheredPeople,
+                        total: reactor.currentState.totalGatheringPeople,
+                        isCompletelyDone: reactor.currentState.isCompletelyDone
+                    )
+                    
+                }
+            })
+            .disposed(by: disposeBag)
+        
         
         
         reactor.state
@@ -717,7 +714,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .subscribe(onNext: { (_, alertInfo) in
                 switch alertInfo.1 {
                 case .appleDefault:
-                    self.presentSimpleAlert(title: alertInfo.0!, message: "")
+                    self.presentSimpleAlert(title: alertInfo.0!)
                     
                 case .custom:
                     self.presentCustomAlert(title: "채팅방 참여 불가", message: alertInfo.0!)
@@ -781,12 +778,15 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.didMarkPostDone }
+            .map { $0.postModel }
+            .map { $0.nickname }
             .distinctUntilChanged()
-            .filter { $0 == true }
             .withUnretained(self)
-            .subscribe(onNext: { (_, didMarkPostDone) in
-//                self.gatherStatusToggleSwitch
+            .subscribe(onNext: { _ in
+                if #available(iOS 14.0, *) {
+                    self.postControlButtonView.menuButton.menu = self.menu
+                    self.postControlButtonView.menuButton.showsMenuAsPrimaryAction = true
+                }
             })
             .disposed(by: disposeBag)
         
@@ -803,10 +803,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     }
     
     private func configure() {
-        if #available(iOS 14.0, *) {
-            self.postControlButtonView.menuButton.menu = self.menu
-            self.postControlButtonView.menuButton.showsMenuAsPrimaryAction = true
-        }
+
         
     }
 }
@@ -875,6 +872,90 @@ extension NewPostViewController: LabelSwitchDelegate {
     }
 }
 
+//MARK: - Alert Actions
+
+extension NewPostViewController {
+    
+    func pressedMenuButton() {
+        guard let reactor = reactor else { return }
+        
+        if reactor.currentState.postIsUserUploaded {
+            
+            let editAction = UIAlertAction(
+                title: "글 수정하기",
+                style: .default
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+
+                    let vc = UploadPostViewController(
+                        viewModel: UploadPostViewModel(
+                            postManager: PostManager(),
+                            mediaManager: MediaManager()
+                        )
+//                        editModel: nil
+                    )
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            
+            let deleteAction = UIAlertAction(
+                title: "삭제하기",
+                style: .destructive
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.presentAlertWithConfirmation(title: "정말 삭제하시겠습니까?", message: nil)
+                    .subscribe(onNext: { actionType in
+                        switch actionType {
+                        case .ok:
+                            self.reactor?.action.onNext(.deletePost)
+                        case .cancel:
+                            break
+                        }
+                    })
+                    .disposed(by: self.disposeBag)
+            }
+            
+            let actionSheet = UIHelper.createActionSheet(with: [editAction, deleteAction], title: nil)
+            self.present(actionSheet, animated: true)
+            
+        } else {
+
+            let reportAction = UIAlertAction(
+                title: "신고하기",
+                style: .default
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.presentReportUserVC(
+                    userToReport: reactor.currentState.postModel.nickname,
+                    postUID: reactor.currentState.pageId
+                )
+            }
+            let blockAction = UIAlertAction(
+                title: "이 사용자의 글 보지 않기",
+                style: .default
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                guard let postUploader = self.reactor?.currentState.postUploaderNickname else { return }
+                self.presentAlertWithConfirmation(
+                    title: postUploader + "님의 글 보지 않기",
+                    message: "홈화면에서 위 사용자의 게시글이 더는 보이지 않도록 설정하시겠습니까? 한 번 설정하면 해제할 수 없습니다."
+                )
+                    .subscribe(onNext: { actionType in
+                        switch actionType {
+                        case .ok:
+                            self.reactor?.action.onNext(.blockUser(postUploader))
+                        case .cancel: break
+                        }
+                    })
+                    .disposed(by: self.disposeBag)
+            }
+            let actionSheet = UIHelper.createActionSheet(with: [reportAction, blockAction], title: nil)
+            self.present(actionSheet, animated: true)
+        }
+    }
+}
+
 //MARK: - UIPopoverPresentationControllerDelegate
 
 extension NewPostViewController: UIPopoverPresentationControllerDelegate {
@@ -887,6 +968,8 @@ extension NewPostViewController: UIPopoverPresentationControllerDelegate {
         return true
     }
 }
+
+//MARK: - PanGestureRecognizer
 
 extension NewPostViewController {
     

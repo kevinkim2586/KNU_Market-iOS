@@ -175,10 +175,7 @@ class UploadPostViewModel {
         guard postTitle.count >= 3, postTitle.count <= 30 else {
             throw ValidationError.OnUploadPost.titleTooShortOrLong
         }
-        
-        print("✅ postDetail: \(postDetail)")
-        print("✅ postDetail count: \(postDetail.count)")
-        
+    
         guard postDetail.count >= 3, postDetail.count < 700 else {
             throw ValidationError.OnUploadPost.detailTooShortOrLong
         }

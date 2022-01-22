@@ -68,7 +68,7 @@ final class PostViewReactor: Reactor {
         
         let pageId: String
         let isFromChatVC: Bool      // ChatVC에서 넘어온거면 PostVC에서 "채팅방 입장" 버튼 눌렀을 때 입장이 아닌 그냥 뒤로가기가 되어야 하기 때문
-        var nickname: String = ""
+        var myNickname: String = ""
         var userJoinedChatRoomPIDS: [String] = []
         var userBannedPostUploaders: [String] = []
         
@@ -152,7 +152,7 @@ final class PostViewReactor: Reactor {
         
         // 사용자가 올린 공구인지 여부
         var postIsUserUploaded: Bool {
-            return postModel.nickname == nickname
+            return postModel.nickname == myNickname
         }
         
         // 인원이 다 찼는지 여부
@@ -224,7 +224,7 @@ final class PostViewReactor: Reactor {
             postModel: PostDetailModel.getDefaultState()
         )
         
-        self.initialState.nickname = userDefaultsService.get(key: UserDefaults.Keys.nickname) ?? ""
+        self.initialState.myNickname = userDefaultsService.get(key: UserDefaults.Keys.nickname) ?? ""
         self.initialState.userJoinedChatRoomPIDS = userDefaultsService.get(key: UserDefaults.Keys.joinedChatRoomPIDs) ?? []
         self.initialState.userBannedPostUploaders = userDefaultsService.get(key: UserDefaults.Keys.bannedPostUploaders) ?? []
     }
@@ -246,7 +246,7 @@ final class PostViewReactor: Reactor {
             return deletePost()
             
         case .markPostDone:
-            
+
             return markPostDone()
             
         case .updatePostAsRegathering:

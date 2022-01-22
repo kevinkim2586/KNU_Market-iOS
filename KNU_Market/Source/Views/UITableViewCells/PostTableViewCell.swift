@@ -127,7 +127,12 @@ class PostTableViewCell: UITableViewCell {
         postTitleLabel.text = nil
         gatheringStatusLabel.text = nil
         priceLabel.text = nil
+        wonLabel.text = nil
+        wonLabel.isHidden = false
+        priceLabel.isHidden = false
+     
         dateLabel.text = nil
+        perPersonLabel.text = "1인당"
         gatheringView.backgroundColor = UIColor(named: K.Color.appColor)
     }
     
@@ -157,11 +162,13 @@ class PostTableViewCell: UITableViewCell {
         dateLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Metrics.topOffSet)
             $0.right.equalToSuperview().offset(-Metrics.rightOffSet)
+            $0.width.greaterThanOrEqualTo(50)
         }
         
         postTitleLabel.snp.makeConstraints {
             $0.left.equalTo(postImageView.snp.right).offset(Metrics.leftOffSet)
             $0.top.equalToSuperview().offset(15)
+            $0.width.greaterThanOrEqualTo(50)
             $0.right.equalTo(dateLabel.snp.left).offset(-15)
         }
         
@@ -206,7 +213,7 @@ class PostTableViewCell: UITableViewCell {
         configurePostImageView()
         configureGatheringLabel()
         configureCurrentlyGatheredPeopleLabel()
-        configureLocationLabel()
+        configurePriceLabel()
         configureDateLabel()
     }
     
@@ -250,8 +257,19 @@ class PostTableViewCell: UITableViewCell {
         gatheringStatusLabel.text = "\(currentNum)/\(total)"
     }
     
-    private func configureLocationLabel() {
-        priceLabel.text = viewModel?.priceForEachPerson
+    private func configurePriceLabel() {
+        /// 하위호환 -> 1.3 이전 유저가 글을 올렸을 때 가격은 자동 0이니까 0을 보여주기 보다는 "글에서 확인"으로 처리
+        if viewModel?.price == 0 {
+            wonLabel.text = "글에서 확인"
+            perPersonLabel.isHidden = true
+            priceLabel.isHidden = true
+        } else {
+      
+            wonLabel.text = "원"
+            priceLabel.isHidden = false
+            priceLabel.text = viewModel?.priceForEachPerson
+            perPersonLabel.isHidden = false
+        }
     }
     
     private func configureDateLabel() {

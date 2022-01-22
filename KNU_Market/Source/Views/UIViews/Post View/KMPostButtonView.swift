@@ -2,18 +2,10 @@ import Foundation
 import SnapKit
 import UIKit
 
-protocol KMPostButtonViewDelegate: AnyObject {
-    func didPressBackButton()
-    func didPressGatheringStatusButton()
-    func didPressMenuButton()
-}
-
 class KMPostButtonView: UIView {
     
     //MARK: - Properties
-
-    weak var delegate: KMPostButtonViewDelegate?
-
+    
     //MARK: - Constants
     
     //MARK: - UI
@@ -40,7 +32,6 @@ class KMPostButtonView: UIView {
         fatalError()
     }
     
-
     //MARK: - UI Setup
     
     private func setupLayout() {
@@ -84,23 +75,6 @@ class KMPostButtonView: UIView {
         innerShadow.shadowRadius = 3
         innerShadow.cornerRadius = self.frame.size.height/2
         layer.addSublayer(innerShadow)
-    }
-}
-
-//MARK: - Target Methods
-
-extension KMPostButtonView {
-    
-    @objc private func pressedBackButton() {
-        delegate?.didPressBackButton()
-    }
-    
-    @objc private func pressedGatheringStatusButton() {
-        delegate?.didPressGatheringStatusButton()
-    }
-    
-    @objc private func pressedMenuButton() {
-        delegate?.didPressMenuButton()
     }
 }
 

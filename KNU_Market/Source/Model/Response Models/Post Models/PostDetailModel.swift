@@ -47,7 +47,7 @@ struct PostDetailModel: ModelType {
             uuid: "",
             title: "",
             imageUIDs: nil,
-            price: 0,
+            price: nil,
             referenceUrl: nil,
             shippingFee: nil,
             postDetail: "로딩 중..",

@@ -96,13 +96,13 @@ final class PostViewReactor: Reactor {
             return postModel.title
         }
         
-        var priceForEachPerson: String {
+        var priceForEachPerson: String? {
             
             if let price = postModel.price, let shippingFee = postModel.shippingFee {
                 let perPersonPrice = (price + shippingFee) / postModel.totalGatheringPeople
                 return perPersonPrice.withDecimalSeparator
             } else {
-                return "?"
+                return nil
             }
         }
         

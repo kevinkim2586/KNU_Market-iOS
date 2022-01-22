@@ -14,19 +14,19 @@ class KMNavigationTitleView: UIView {
     
     let appTitleLabel = UILabel().then {
         $0.text = "크누마켓"
-        $0.font = UIFont(name: K.Fonts.notoSansBold, size: 22)
+        $0.font = UIFont(name: K.Fonts.notoSansBold, size: 21)
         $0.textColor = .black
     }
     
     let appCopyLabel = UILabel().then {
         $0.text = "우리가 함께 사는 곳"
-        $0.font = UIFont(name: K.Fonts.notoSansRegular, size: 12)
+        $0.font = UIFont(name: K.Fonts.notoSansRegular, size: 2)
         $0.textColor = .black
     }
     
     let appTitleLabelStackView = UIStackView().then {
         $0.axis = .horizontal
-        $0.alignment = .bottom
+        $0.alignment = .center
         $0.distribution = .fill
         $0.spacing = 5
     }

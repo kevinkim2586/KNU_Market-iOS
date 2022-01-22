@@ -634,7 +634,47 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .map { $0 == nil }
             .bind(to: urlLinkButton.rx.isHidden)
             .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.postModel }
+            .map { model -> String? in
+                if model.price == nil || model.price == 0 {
+                    return nil
+                } else { return "" }
+            }
+            .distinctUntilChanged()
+            .map { $0 == nil }
+            .bind(to: questionMarkButton.rx.isHidden, perPersonLabel.rx.isHidden, priceLabel.rx.isHidden, wonLabel.rx.isHidden)
+            .disposed(by: disposeBag)
 
+        
+        reactor.state
+            .map { $0.postModel }
+            .map { model -> String in
+                if let price = model.price, let shippingFee = model.shippingFee {
+                    let perPersonPrice = (price + shippingFee) / model.totalGatheringPeople
+                    return perPersonPrice.withDecimalSeparator
+                } else { return "" }
+            }
+            .distinctUntilChanged()
+            .bind(to: priceLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.postModel }
+            .map { $0.profileImageUID }
+            .distinctUntilChanged()
+            .map { URL(string: K.MEDIA_REQUEST_URL + $0) }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, url) in
+                self.profileImageView.sd_setImage(
+                    with: url,
+                    placeholderImage: UIImage(named: K.Images.defaultUserPlaceholder),
+                    options: .continueInBackground
+                )
+            })
+            .disposed(by: disposeBag)
+        
         
         reactor.state
             .map { $0.postModel }
@@ -647,15 +687,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 reactor.currentState.inputSources.isEmpty
                 ? self.upperImageSlideshow.setImageInputs([ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)])
                 : self.upperImageSlideshow.setImageInputs(reactor.currentState.inputSources)
-                
-                
-                
-                self.profileImageView.sd_setImage(
-                    with: URL(string: K.MEDIA_REQUEST_URL + (reactor.currentState.postModel.profileImageUID)),
-                    placeholderImage: UIImage(named: K.Images.defaultUserPlaceholder),
-                    options: .continueInBackground
-                )
-
+  
                 
                 self.gatherStatusToggleSwitch.configureGatheringStatus(
                     isCompletelyDone: reactor.currentState.isCompletelyDone,
@@ -670,14 +702,8 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                     total: reactor.currentState.totalGatheringPeople,
                     isCompletelyDone: reactor.currentState.isCompletelyDone
                 )
-                
-                
-                
-                self.priceLabel.text = reactor.currentState.priceForEachPerson
+            
    
-                
-    
-
             })
             .disposed(by: disposeBag)
         

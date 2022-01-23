@@ -151,11 +151,11 @@ struct K {
     struct URL {
         
         
-        
         static let termsAndConditionNotionURL       = "https://linen-twister-e2b.notion.site/b02ec80599d14452aefff7e0dcfcf4ff"
         static let privacyInfoConditionNotionURL    = "https://linen-twister-e2b.notion.site/6554bde75b2c49bfb617b04f526aad6e"
         
         static let kakaoHelpChannel                 = "https://pf.kakao.com/_PjLHs"
+        static let appStoreLink                     = "https://apps.apple.com/kr/app/%ED%81%AC%EB%88%84%EB%A7%88%EC%BC%93/id1580677279"
     }
 }
 

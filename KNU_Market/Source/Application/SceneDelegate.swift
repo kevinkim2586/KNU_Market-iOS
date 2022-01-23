@@ -72,7 +72,7 @@ extension SceneDelegate {
         if let incomingURL = userActivity.webpageURL {
             print("✅ incomingURL: \(incomingURL)")
             
-            let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { dynamicLink, error in
+            let _ = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { dynamicLink, error in
                 
                 guard error == nil else {
                     print("❗️ DynamicLink Error: \(error!.localizedDescription)")

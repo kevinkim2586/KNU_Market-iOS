@@ -38,6 +38,7 @@ final class PostListViewReactor: Reactor {
         case setNeedsToFetchMoreData(Bool)
         case setIsFetchingData(Bool)
         case setIsRefreshingData(Bool)
+        case setUserNeedsToUpdateAppVersion(Bool)
         case empty
     }
     
@@ -55,6 +56,7 @@ final class PostListViewReactor: Reactor {
         var isUserVerified: Bool
         var isAllowedToUploadPost: Bool?
         var bannerModel: [BannerModel]?
+        var userNeedsToUpdateAppVersion: Bool = false
     }
     
     init(
@@ -102,6 +104,8 @@ final class PostListViewReactor: Reactor {
                 fetchPostList(at: currentState.index),
                 fetchBannerList(),
                 fetchLatestPopup(),
+                askForNotificationPermission(),
+                fetchAppLatestVersion(),
                 
                 Observable.just(Mutation.incrementIndex),
                 Observable.just(Mutation.setIsFetchingData(false))
@@ -145,7 +149,7 @@ final class PostListViewReactor: Reactor {
         switch mutation {
         case .setPostList(let postListModel):
             state.postList.append(contentsOf: postListModel)
-        
+            
         case .resetPostList(let postListModel):
             state.postList.removeAll()
             state.postList = postListModel
@@ -175,7 +179,10 @@ final class PostListViewReactor: Reactor {
             
         case .setNeedsToFetchMoreData(let needsToFetchMore):
             state.needsToFetchMoreData = needsToFetchMore
-        
+            
+        case .setUserNeedsToUpdateAppVersion(let isNeeded):
+            state.userNeedsToUpdateAppVersion = isNeeded
+            
         case .empty:
             break
         }
@@ -212,7 +219,7 @@ extension PostListViewReactor {
     }
     
     private func refreshPostList(postFilterOption: PostFilterOptions? = nil) -> Observable<Mutation> {
-    
+        
         return postService.fetchPostList(
             at: 1,
             fetchCurrentUsers: false,
@@ -274,7 +281,7 @@ extension PostListViewReactor {
                 case .success(let popupModel):
                     return Mutation.setNeedsToShowPopup(true, popupModel)
                     
-                case .error(_):     //팝업 가져오기 실패 시 따로 유저한테 에러 메시지를 보여줄 필요는 없는 것으로 판단
+                case .error(_): //팝업 가져오기 실패 시 따로 유저한테 에러 메시지를 보여줄 필요는 없는 것으로 판단 - 팝업 없어도 에러
                     print("❗️ PostListViewReactor failed fetching popup")
                     return Mutation.setNeedsToShowPopup(false, nil)
                 }
@@ -299,7 +306,24 @@ extension PostListViewReactor {
     
     private func askForNotificationPermission() -> Observable<Mutation> {
         userNotificationService.askForNotificationPermissionAtFirstLaunch()
-        return Observable.empty()
+        return .empty()
+    }
+    
+    private func fetchAppLatestVersion() -> Observable<Mutation> {
+        
+        return userService.checkLatestAppVersion()
+            .asObservable()
+            .map { result in
+                switch result {
+                case .success(let latestVersionModel):
+                    return latestVersionModel.isCriticalUpdateVersion == "true"
+                    ? Mutation.setUserNeedsToUpdateAppVersion(true)
+                    : Mutation.empty
+                    
+                case .error(_):
+                    return Mutation.empty
+                }
+            }
     }
 }
 

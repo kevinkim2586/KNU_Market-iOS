@@ -30,4 +30,6 @@ protocol UserServiceType: AnyObject {
         
     func findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?) -> Single<NetworkResultWithValue<FindIdModel>>
     func findPassword(id: String) -> Single<NetworkResultWithValue<FindPasswordModel>>
+    
+    func checkLatestAppVersion() -> Single<NetworkResultWithValue<LatestVersionModel>>
 }

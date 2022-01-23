@@ -21,6 +21,7 @@ enum UserAPI {
     case updateUserInfo(type: UpdateUserInfoType, updatedInfo: String)
     case findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?)
     case findPassword(id: String)
+    case checkLatestAppVersion
 }
 
 extension UserAPI: BaseAPI {
@@ -45,6 +46,8 @@ extension UserAPI: BaseAPI {
             return "find/id"
         case .findPassword:
             return "find/password"
+        case .checkLatestAppVersion:
+            return "version"
         }
     }
     
@@ -69,7 +72,7 @@ extension UserAPI: BaseAPI {
         switch self {
         case .register, .login, .uploadStudentIdVerificationInformation, .sendVerificationEmail, .findUserId, .findPassword, .sendFeedback:
             return .post
-        case .checkDuplication, .loadUserProfileUsingUid, .loadUserProfile:
+        case .checkDuplication, .loadUserProfileUsingUid, .loadUserProfile, .checkLatestAppVersion:
             return .get
         case .unregisterUser:
             return .delete

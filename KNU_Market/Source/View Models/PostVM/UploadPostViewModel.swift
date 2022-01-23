@@ -143,28 +143,28 @@ class UploadPostViewModel {
     
     func updatePost() {
         
-        let model = UpdatePostRequestDTO(
-            title: postTitle,
-            location: location + 1,
-            detail: postDetail,
-            imageUIDs: imageUIDs,
-            totalGatheringPeople: totalPeopleGathering,
-            currentlyGatheredPeople: currentlyGatheredPeople
-        )
-        
-        postManager?.updatePost(uid: self.editPostModel?.pageUID ?? "",
-                                      with: model) { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(_):
-                self.delegate?.didUpdatePost()
-                NotificationCenterService.didUpdatePost.post()
-            case .failure(let error):
-                self.delegate?.failedUpdatingPost(with: error)
-            }
-        }
+//        let model = UpdatePostRequestDTO(
+//            title: postTitle,
+//            location: location + 1,
+//            detail: postDetail,
+//            imageUIDs: imageUIDs,
+//            totalGatheringPeople: totalPeopleGathering,
+//            currentlyGatheredPeople: currentlyGatheredPeople
+//        )
+//
+//        postManager?.updatePost(uid: self.editPostModel?.pageUID ?? "",
+//                                      with: model) { [weak self] result in
+//
+//            guard let self = self else { return }
+//
+//            switch result {
+//            case .success(_):
+//                self.delegate?.didUpdatePost()
+//                NotificationCenterService.didUpdatePost.post()
+//            case .failure(let error):
+//                self.delegate?.failedUpdatingPost(with: error)
+//            }
+//        }
     }
     
 

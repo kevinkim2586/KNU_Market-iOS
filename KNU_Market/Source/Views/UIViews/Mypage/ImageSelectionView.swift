@@ -20,7 +20,7 @@ final class ImageSelectionView: UIView {
     // MARK: - Constants
     fileprivate struct Metric {
         // Image
-        static let imageHeight = 20.f
+        static let imageHeight = 25.f
         static let imageWidth = 25.f
         static let imageY = 7.f
         
@@ -33,7 +33,7 @@ final class ImageSelectionView: UIView {
         static let borderWidth = 1.f
         static let cornerRadius = 5.f
         static let borderColor = UIColor.lightGray.cgColor
-        static let backgroundColor = UIColor.clear
+        static let backgroundColor = UIColor.convertUsingHexString(hexValue: "#F0F0F0")
         
         // imageView
         static let image = UIImage(named: "camera")
@@ -69,7 +69,7 @@ final class ImageSelectionView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.layer.borderWidth = Style.borderWidth
+//        self.layer.borderWidth = Style.borderWidth
         self.layer.cornerRadius = Style.cornerRadius
         self.layer.borderColor = Style.borderColor
         self.backgroundColor = Style.backgroundColor

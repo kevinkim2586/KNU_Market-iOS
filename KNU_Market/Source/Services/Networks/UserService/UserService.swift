@@ -192,5 +192,18 @@ final class UserService: UserServiceType {
                 }
             }
     }
+    
+    func checkLatestAppVersion() -> Single<NetworkResultWithValue<LatestVersionModel>> {
+        
+        return network.requestObject(.checkLatestAppVersion, type: LatestVersionModel.self)
+            .map { result in
+                switch result {
+                case .success(let latestVersionModel):
+                    return .success(latestVersionModel)
+                case .error(let error):
+                    return .error(error)
+                }
+            }
+    }
 }
 

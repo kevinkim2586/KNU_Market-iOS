@@ -187,30 +187,30 @@ class PostViewModel {
     
     //MARK: - 공구글 완료 표시 해제하기
     func cancelMarkPostDone() {
-        
-        let model = UpdatePostRequestDTO(title: self.model?.title ?? "",
-                                         location: 0,
-                                         detail: self.model?.postDetail ?? "",
-                                         imageUIDs: self.model?.imageUIDs ?? [],
-                                         totalGatheringPeople: self.totalGatheringPeople,
-                                         currentlyGatheredPeople: self.currentlyGatheredPeople,
-                                         isCompletelyDone: false)
-        
-        PostManager.shared.updatePost(uid: self.pageID, with: model) { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-            case .success:
-                
-                self.delegate?.didCancelMarkPostDone()
-                NotificationCenterService.updatePostList.post()
-                
-            case .failure(let error):
-                
-                self.delegate?.failedCancelMarkPostDone(with: error)
-            }
-        }
+//        
+//        let model = UpdatePostRequestDTO(title: self.model?.title ?? "",
+//                                         location: 0,
+//                                         detail: self.model?.postDetail ?? "",
+//                                         imageUIDs: self.model?.imageUIDs ?? [],
+//                                         totalGatheringPeople: self.totalGatheringPeople,
+//                                         currentlyGatheredPeople: self.currentlyGatheredPeople,
+//                                         isCompletelyDone: false)
+//
+//        PostManager.shared.updatePost(uid: self.pageID, with: model) { [weak self] result in
+//
+//            guard let self = self else { return }
+//
+//            switch result {
+//            case .success:
+//
+//                self.delegate?.didCancelMarkPostDone()
+//                NotificationCenterService.updatePostList.post()
+//
+//            case .failure(let error):
+//
+//                self.delegate?.failedCancelMarkPostDone(with: error)
+//            }
+//        }
         
     }
     

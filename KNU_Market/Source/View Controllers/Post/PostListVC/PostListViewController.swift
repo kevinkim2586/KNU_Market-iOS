@@ -132,6 +132,20 @@ class PostListViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        self.rx.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationTitleView.isHidden = false
+            })
+            .disposed(by: disposeBag)
+        
+        self.rx.viewWillDisappear
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationTitleView.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
         refreshControl.rx.controlEvent(.valueChanged)
             .map { Reactor.Action.refreshTableView }
             .bind(to: reactor.action)
@@ -142,10 +156,10 @@ class PostListViewController: BaseViewController, View {
             .subscribe(onNext: { _ in
                 
                 if reactor.currentState.isUserVerified {
-                    let uploadVC = UploadPostViewController(
-                        viewModel: UploadPostViewModel(
-                            postManager: PostManager(),
-                            mediaManager: MediaManager()
+                    let uploadVC = UploadNewPostViewController(
+                        reactor: UploadNewPostReactor(
+                            postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+                            mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
                         )
                     )
                     self.navigationController?.pushViewController(
@@ -303,6 +317,33 @@ class PostListViewController: BaseViewController, View {
             .withUnretained(self)
             .subscribe(onNext: { (_, errorMessage) in
                 self.showSimpleBottomAlert(with: errorMessage!)
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.userNeedsToUpdateAppVersion }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                
+                let vc = CustomAlertViewController_Rx(
+                    title: "❗️필수 업데이트가 있습니다!❗️",
+                    message: "업데이트를 하지 않으면 기능이 정상적으로 작동하지 않아요. 불편하시더라도 앱스토어에서 꼭 업데이트 부탁드릴게요.🙏🏻",
+                    cancelButtonTitle: "취소",
+                    actionButtonTitle: "업데이트 하러 가기"
+                )
+                self.present(vc, animated: true)
+                vc.alertObserver
+                    .withUnretained(self)
+                    .subscribe(onNext: { (_, actionType) in
+                        switch actionType {
+                        case .ok:
+                            UIApplication.shared.open(URL(string: K.URL.appStoreLink)!, options: [:])
+                        default: break
+                        }
+                    })
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
         

@@ -29,8 +29,8 @@ final class PostViewReactor: Reactor {
         
         case deletePost
         case editPost
-        case markPostDone
-        case updatePostAsRegathering
+        case markPostDone               // 방장 - 모집 완료
+        case updatePostAsRegathering    // 방장 - 모집 완료 해제
         case joinChat
         
         case blockUser(String)
@@ -51,6 +51,9 @@ final class PostViewReactor: Reactor {
         case setDidDeletePost(Bool, String)
         case setDidMarkPostDone(Bool, String)
         case setDidEnterChat(Bool, Bool)        // DidEnterChat, isFirstEntranceToChat
+        
+        
+        
         case setPostAsGatherComplete(Bool)
         
  

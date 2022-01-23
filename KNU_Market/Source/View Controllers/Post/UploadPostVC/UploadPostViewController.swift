@@ -52,7 +52,7 @@ class UploadPostViewController: BaseViewController {
     private let dividerLineImageView_1 = UIImageView().then {
         $0.image = UIImage(named: "line divider (gray)")
         $0.clipsToBounds = true
-        $0.contentMode = .scaleToFill
+        $0.contentMode  = .scaleToFill
     }
     
     private let layout = UICollectionViewFlowLayout().then {
@@ -227,7 +227,6 @@ class UploadPostViewController: BaseViewController {
         
         navigationItem.rightBarButtonItem = uploadPostBarButtonItem
 
-//        view.addSubview(navigationBar)
         view.addSubview(postScrollView)
         postScrollView.addSubview(contentView)
         contentView.addSubview(postTitleTextField)
@@ -246,7 +245,6 @@ class UploadPostViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
 
-        
         postScrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

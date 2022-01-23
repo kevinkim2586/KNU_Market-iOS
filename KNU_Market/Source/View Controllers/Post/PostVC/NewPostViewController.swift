@@ -416,7 +416,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 self.navigationController?.setNavigationBarHidden(true, animated: true)
-                self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+                self.navigationController?.interactivePopGestureRecognizer?.delegate = self
             })
             .disposed(by: disposeBag)
         
@@ -456,11 +456,11 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                     return
                 }
                 
+                shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.kyh.knumarket")
                 
                 if let myBundleId = Bundle.main.bundleIdentifier {
                     shareLink.iOSParameters = DynamicLinkIOSParameters(bundleID: myBundleId)
                 }
-                
                 shareLink.iOSParameters?.appStoreID = "1580677279"
                 
                 shareLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
@@ -565,120 +565,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
 
         // Output
         
-        reactor.state
-            .map { $0.shouldEnableChatEntrance }
-            .bind(to: enterChatButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-        
-        /// 방장 모집 상태 변경 버튼
-        reactor.state
-            .map { $0.postIsUserUploaded }
-            .map { !$0 }
-            .distinctUntilChanged()
-            .bind(to: gatherStatusToggleSwitch.rx.isHidden)
-            .disposed(by: disposeBag)
-        
-        /// 일반 유저 모집 상태 확인 View
-        reactor.state
-            .map { $0.postIsUserUploaded }
-            .distinctUntilChanged()
-            .bind(to: gatherStatusView.rx.isHidden)
-            .disposed(by: disposeBag)
-
-        reactor.state
-            .map { $0.postModel.nickname }
-            .distinctUntilChanged()
-            .bind(to: userNicknameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.postModel.date }
-            .distinctUntilChanged()
-            .map { DateConverter.convertDateStringToSimpleFormat($0) }
-            .bind(to: dateLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.postModel.viewCount }
-            .distinctUntilChanged()
-            .map { "조회 \($0)"}
-            .bind(to: viewCountLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        
-        reactor.state
-            .map { $0.postModel.title }
-            .distinctUntilChanged()
-            .bind(to: postTitleLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.postModel.postDetail }
-            .distinctUntilChanged()
-            .bind(to: postDetailLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.postModel.referenceUrl }
-            .distinctUntilChanged()
-            .map { $0 == nil }
-            .bind(to: urlLinkButton.rx.isHidden)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.postModel }
-            .map { model -> String? in
-                if model.price == nil || model.price == 0 {
-                    return nil
-                } else { return "" }
-            }
-            .distinctUntilChanged()
-            .map { $0 == nil }
-            .bind(
-                to: questionMarkButton.rx.isHidden,
-                perPersonLabel.rx.isHidden,
-                priceLabel.rx.isHidden,
-                wonLabel.rx.isHidden
-            )
-            .disposed(by: disposeBag)
-
-        
-        reactor.state
-            .map { $0.postModel }
-            .map { model -> String in
-                if let price = model.price, let shippingFee = model.shippingFee {
-                    let perPersonPrice = (price + shippingFee) / model.totalGatheringPeople
-                    return perPersonPrice.withDecimalSeparator
-                } else { return "" }
-            }
-            .distinctUntilChanged()
-            .bind(to: priceLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.postModel.profileImageUID }
-            .distinctUntilChanged()
-            .map { URL(string: K.MEDIA_REQUEST_URL + $0) }
-            .withUnretained(self)
-            .subscribe(onNext: { (_, url) in
-                self.profileImageView.sd_setImage(
-                    with: url,
-                    placeholderImage: UIImage(named: K.Images.defaultUserPlaceholder),
-                    options: .continueInBackground
-                )
-            })
-            .disposed(by: disposeBag)
-
-        reactor.state
-            .map { $0.inputSources }
-            .withUnretained(self)
-            .subscribe(onNext: { (_, inputSources) in
-                inputSources.isEmpty
-                ? self.upperImageSlideshow.setImageInputs([ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)])
-                : self.upperImageSlideshow.setImageInputs(inputSources)
-            })
-            .disposed(by: disposeBag)
-        
+        /// 최초 Configuration
         reactor.state
             .map { $0.postModel.title }
             .distinctUntilChanged()
@@ -700,11 +587,138 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                     )
                     
                 }
+                
+                if #available(iOS 14.0, *) {
+                    self.postControlButtonView.menuButton.menu = self.menu
+                    self.postControlButtonView.menuButton.showsMenuAsPrimaryAction = true
+                }
             })
             .disposed(by: disposeBag)
         
+        /// 채팅 버튼 활성화 여부
+        reactor.state
+            .map { $0.shouldEnableChatEntrance }
+            .bind(to: enterChatButton.rx.isEnabled)
+            .disposed(by: disposeBag)
         
+        /// 방장 - 모집 상태 변경 버튼 숨김 여부
+        reactor.state
+            .map { $0.postIsUserUploaded }
+            .map { !$0 }
+            .distinctUntilChanged()
+            .bind(to: gatherStatusToggleSwitch.rx.isHidden)
+            .disposed(by: disposeBag)
         
+        /// 일반 유저 - 모집 상태 확인 View 숨김 여부
+        reactor.state
+            .map { $0.postIsUserUploaded }
+            .distinctUntilChanged()
+            .bind(to: gatherStatusView.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        /// 닉네임
+        reactor.state
+            .map { $0.postModel.nickname }
+            .distinctUntilChanged()
+            .bind(to: userNicknameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        /// 날짜
+        reactor.state
+            .map { $0.postModel.date }
+            .distinctUntilChanged()
+            .map { DateConverter.convertDateStringToSimpleFormat($0) }
+            .bind(to: dateLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        /// 조회 수
+        reactor.state
+            .map { $0.postModel.viewCount }
+            .distinctUntilChanged()
+            .map { "조회 \($0)"}
+            .bind(to: viewCountLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        /// 글 제목
+        reactor.state
+            .map { $0.postModel.title }
+            .distinctUntilChanged()
+            .bind(to: postTitleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        /// 글 상세 내용
+        reactor.state
+            .map { $0.postModel.postDetail }
+            .distinctUntilChanged()
+            .bind(to: postDetailLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        /// 별도 첨부 링크 버튼 숨김 여부
+        reactor.state
+            .map { $0.postModel.referenceUrl }
+            .distinctUntilChanged()
+            .map { $0 == nil }
+            .bind(to: urlLinkButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        /// 가격 정보가 없으면 숨김 처리해야하는 UI Component
+        reactor.state
+            .map { $0.postModel }
+            .map { model -> String? in
+                if model.price == nil || model.price == 0 {
+                    return nil
+                } else { return "" }
+            }
+            .distinctUntilChanged()
+            .map { $0 == nil }
+            .bind(
+                to: questionMarkButton.rx.isHidden,
+                perPersonLabel.rx.isHidden,
+                priceLabel.rx.isHidden,
+                wonLabel.rx.isHidden
+            )
+            .disposed(by: disposeBag)
+
+        /// 가격 정보 (1인당 가격)
+        reactor.state
+            .map { $0.postModel }
+            .map { model -> String in
+                if let price = model.price, let shippingFee = model.shippingFee {
+                    let perPersonPrice = (price + shippingFee) / model.totalGatheringPeople
+                    return perPersonPrice.withDecimalSeparator
+                } else { return "" }
+            }
+            .distinctUntilChanged()
+            .bind(to: priceLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        /// 유저 프로필 이미지
+        reactor.state
+            .map { $0.postModel.profileImageUID }
+            .distinctUntilChanged()
+            .map { URL(string: K.MEDIA_REQUEST_URL + $0) }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, url) in
+                self.profileImageView.sd_setImage(
+                    with: url,
+                    placeholderImage: UIImage(named: K.Images.defaultUserPlaceholder),
+                    options: .continueInBackground
+                )
+            })
+            .disposed(by: disposeBag)
+
+        /// 유저가 올린 이미지 모음
+        reactor.state
+            .map { $0.inputSources }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, inputSources) in
+                inputSources.isEmpty
+                ? self.upperImageSlideshow.setImageInputs([ImageSource(image: UIImage(named: K.Images.defaultItemImage)!)])
+                : self.upperImageSlideshow.setImageInputs(inputSources)
+            })
+            .disposed(by: disposeBag)
+
+        /// 알림
         reactor.state
             .map { ($0.alertMessage, $0.alertMessageType) }
             .distinctUntilChanged { $0.0 }
@@ -727,19 +741,19 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
+        /// 글 불러오기에 실패했을 때 숨겨야하는 UI Component 모음
         reactor.state
             .map { $0.didFailFetchingPost }
             .distinctUntilChanged()
             .filter { $0 == true }
-            .withUnretained(self)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                self.postControlButtonView.isHidden = true
-                self.upperImageSlideshow.isHidden = true
-                self.bottomContainerView.isHidden = true
-            })
+            .bind(
+                to: postControlButtonView.rx.isHidden,
+                upperImageSlideshow.rx.isHidden,
+                bottomContainerView.rx.isHidden
+            )
             .disposed(by: disposeBag)
         
+        /// 방장 - 글 삭제 완료 시
         reactor.state
             .map { $0.didDeletePost }
             .distinctUntilChanged()
@@ -752,7 +766,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
-        
+        /// 채팅방 입장 성공 시
         reactor.state
             .map { $0.didEnterChat }
             .distinctUntilChanged()
@@ -767,7 +781,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
-        
+        /// 채팅방에 입장 시도 중
         reactor.state
             .map { $0.isAttemptingToEnterChat }
             .distinctUntilChanged()
@@ -777,19 +791,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
-        reactor.state
-            .map { $0.postModel }
-            .map { $0.nickname }
-            .distinctUntilChanged()
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                if #available(iOS 14.0, *) {
-                    self.postControlButtonView.menuButton.menu = self.menu
-                    self.postControlButtonView.menuButton.showsMenuAsPrimaryAction = true
-                }
-            })
-            .disposed(by: disposeBag)
-        
+
         
         // Notification Center
         
@@ -1027,16 +1029,11 @@ extension NewPostViewController {
     }
 }
 
+//MARK: - UINavigationControllerDelegate
 
-
-//#if canImport(SwiftUI) && DEBUG
-//import SwiftUI
-//
-//@available(iOS 13.0, *)
-//struct NewPostVC: PreviewProvider {
-//
-//    static var previews: some SwiftUI.View {
-//        NewPostViewController().toPreview()
-//    }
-//}
-//#endif
+extension NewPostViewController: UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+            
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}

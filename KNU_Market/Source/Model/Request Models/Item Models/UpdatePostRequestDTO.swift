@@ -5,7 +5,18 @@ struct UpdatePostRequestDTO {
     
     var parameters: Parameters = [:]
     
-    init(title: String, location: Int, detail: String, imageUIDs: [String], totalGatheringPeople: Int, currentlyGatheredPeople: Int, isCompletelyDone: Bool? = nil) {
+    init(
+        title: String,
+        location: Int,
+        detail: String,
+        imageUIDs: [String],
+        totalGatheringPeople: Int,
+        currentlyGatheredPeople: Int,
+        isCompletelyDone: Bool? = nil,
+        referenceUrl: String?,
+        shippingFee: Int?,
+        price: Int
+    ) {
         
         parameters["title"] = title
         parameters["spotCategory"] = location
@@ -13,7 +24,16 @@ struct UpdatePostRequestDTO {
         parameters["maxHeadcount"] = totalGatheringPeople
         parameters["currentHeadcount"] = currentlyGatheredPeople
         parameters["image"] = imageUIDs
+        parameters["price"] = price
         
+        if let referenceUrl = referenceUrl {
+            parameters["referenceUrl"] = referenceUrl
+        }
+        
+        if let shippingFee = shippingFee {
+            parameters["shippingFee"] = shippingFee
+        }
+    
         if isCompletelyDone != nil {
             parameters["isArchived"] = isCompletelyDone
         }

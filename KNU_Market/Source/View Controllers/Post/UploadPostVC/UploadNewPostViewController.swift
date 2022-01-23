@@ -84,6 +84,8 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         $0.backgroundColor = .clear
     }
     
+    let postTitleGuideLabel = UploadPostGuideLabel(indicatorIsRequired: true, labelTitle: "제품명")
+    
     let postTitleTextField = UITextField().then {
         $0.placeholder = "제품명"
         $0.font = Fonts.guideLabel
@@ -221,6 +223,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         view.addSubview(postScrollView)
         postScrollView.addSubview(contentView)
         contentView.addSubview(postImagesCollectionView)
+        contentView.addSubview(postTitleGuideLabel)
         contentView.addSubview(postTitleTextField)
         contentView.addSubview(dividerLine_1)
         
@@ -262,9 +265,15 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             $0.top.equalToSuperview().offset(10)
             $0.left.right.equalToSuperview().inset(Metrics.sideInset - 5)
         }
+        
+        postTitleGuideLabel.snp.makeConstraints {
+            $0.top.equalTo(postImagesCollectionView.snp.bottom).offset(10)
+            $0.left.equalToSuperview().inset(Metrics.sideInset)
+            $0.width.greaterThanOrEqualTo(50)
+        }
 
         postTitleTextField.snp.makeConstraints {
-            $0.top.equalTo(postImagesCollectionView.snp.bottom).offset(10)
+            $0.top.equalTo(postTitleGuideLabel.snp.bottom).offset(10)
             $0.left.right.equalToSuperview().inset(Metrics.sideInset)
         }
 

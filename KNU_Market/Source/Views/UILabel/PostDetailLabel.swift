@@ -9,6 +9,8 @@ import UIKit
 import Atributika
 import RxSwift
 
+//MARK: - PostVC 공구글 내용 상세보기 전용 UILabel
+
 class PostDetailLabel: AttributedLabel {
     
     fileprivate struct Fonts {

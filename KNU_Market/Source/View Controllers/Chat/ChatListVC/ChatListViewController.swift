@@ -22,7 +22,9 @@ class ChatListViewController: BaseViewController, View {
         )
     }
     
-    let refreshControl = UIRefreshControl()
+    let refreshControl = UIRefreshControl().then {
+        $0.tintColor = .clear
+    }
     
     let chatBarButtonItem = UIBarButtonItem().then {
         $0.title = "채팅"

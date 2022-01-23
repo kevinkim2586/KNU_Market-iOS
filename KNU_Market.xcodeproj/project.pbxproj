@@ -52,6 +52,7 @@
 		7C2BA40E2796899A00DD01A4 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2BA40D2796899A00DD01A4 /* NewPostViewController.swift */; };
 		7C2BA41027968E8F00DD01A4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2BA40F27968E8F00DD01A4 /* UIColor+Extension.swift */; };
 		7C353D3C279D396600C52009 /* LatestVersionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C353D3B279D396600C52009 /* LatestVersionModel.swift */; };
+		7C353D3E279D476100C52009 /* UploadPostGuideLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C353D3D279D476100C52009 /* UploadPostGuideLabel.swift */; };
 		7C37DE87271BFC2000B4FBFB /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */; };
 		7C3B4FEA26A9289A00E2CA8F /* NickNameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */; };
 		7C3B4FF026A928C700E2CA8F /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B4FEF26A928C700E2CA8F /* EmailVerificationViewController.swift */; };
@@ -335,6 +336,7 @@
 		7C2BA40D2796899A00DD01A4 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		7C2BA40F27968E8F00DD01A4 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		7C353D3B279D396600C52009 /* LatestVersionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestVersionModel.swift; sourceTree = "<group>"; };
+		7C353D3D279D476100C52009 /* UploadPostGuideLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostGuideLabel.swift; sourceTree = "<group>"; };
 		7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		7C3B4FE926A9289A00E2CA8F /* NickNameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameInputViewController.swift; sourceTree = "<group>"; };
 		7C3B4FEF26A928C700E2CA8F /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
@@ -971,6 +973,7 @@
 			isa = PBXGroup;
 			children = (
 				7C8244192797A90B006677D0 /* PostDetailLabel.swift */,
+				7C353D3D279D476100C52009 /* UploadPostGuideLabel.swift */,
 			);
 			path = UILabel;
 			sourceTree = "<group>";
@@ -2050,6 +2053,7 @@
 				7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */,
 				7C57AC1B279C255F000540A4 /* UploadNewPostReactor.swift in Sources */,
 				7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */,
+				7C353D3E279D476100C52009 /* UploadPostGuideLabel.swift in Sources */,
 				7C9C59FA277C16F8005E08BC /* MyPageServiceType.swift in Sources */,
 				7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */,
 				7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */,

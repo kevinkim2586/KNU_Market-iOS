@@ -33,12 +33,14 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     }
     
     struct Colors {
-        static let dividerLineColor: UIColor = UIColor.convertUsingHexString(hexValue: "#D1D1D1")
+        static let dividerLineColor: UIColor = UIColor.convertUsingHexString(hexValue: "#E9E9E9")
     }
     
     struct Metrics {
-        static let sideInset = 20.f
-        static let topOffset = 20.f
+        static let defaultSideInset     = 20.f
+        static let guideLabelSideInset  = 20.f
+        static let textFieldSideInset   = 25.f
+        static let topOffset            = 20.f
     }
     
     //MARK: - UI
@@ -84,10 +86,12 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         $0.backgroundColor = .clear
     }
     
+    // 제품명
+    
     let postTitleGuideLabel = UploadPostGuideLabel(indicatorIsRequired: true, labelTitle: "제품명")
     
     let postTitleTextField = UITextField().then {
-        $0.placeholder = "제품명"
+        $0.placeholder = "ex. 다우니 섬유유연제 1.05L"
         $0.font = Fonts.guideLabel
         $0.tintColor = UIColor(named: K.Color.appColor)
     }
@@ -96,36 +100,30 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         $0.backgroundColor = Colors.dividerLineColor
     }
     
+    /// 제품 가격
+    
+    let priceGuideLabel = UploadPostGuideLabel(indicatorIsRequired: true, labelTitle: "제품 가격")
+    
     let priceTextField = UITextField().then {
-        $0.placeholder = "￦ 제품 가격"
+        $0.placeholder = "0"
+        $0.textAlignment = .right
         $0.font = Fonts.guideLabel
         $0.tintColor = UIColor(named: K.Color.appColor)
         $0.keyboardType = .numberPad
     }
     
-    let slashLabel = UILabel().then {
-        $0.text = "/"
-        $0.textColor = UIColor(named: K.Color.appColor)
-        $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+
+    
+    let priceWonLabel = UILabel().then {
+        $0.text = "원"
+        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 14)
+        $0.textColor = UIColor.convertUsingHexString(hexValue: "#4A4A4A")
     }
     
-    let gatheringPeopleTextField = UITextField().then {
-        $0.placeholder = "인원(본인포함)"
-        $0.font = Fonts.guideLabel
-        $0.tintColor = UIColor(named: K.Color.appColor)
-        $0.keyboardType = .numberPad
-    }
-    
-    let peopleUnitLabel = UILabel().then {
-        $0.text = "명"
-        $0.textColor = .black
-        $0.font = Fonts.guideLabel
-    }
-    
-    let priceAndGatheringPeopleInfoStackView = UIStackView().then {
+    let priceStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .center
-        $0.distribution = .fillProportionally
+        $0.distribution = .fill
         $0.spacing = 5
     }
     
@@ -133,16 +131,71 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         $0.backgroundColor = Colors.dividerLineColor
     }
     
+    /// 배송비
+    
+    let shippingFeeGuideLabel = UploadPostGuideLabel(indicatorIsRequired: false, labelTitle: "배송비")
+    
     let shippingFeeTextField = UITextField().then {
-        $0.placeholder = "￦ 배송비"
+        $0.placeholder = "0"
         $0.font = Fonts.guideLabel
+        $0.textAlignment = .right
         $0.tintColor = UIColor(named: K.Color.appColor)
         $0.keyboardType = .numberPad
+    }
+    
+    let shippingFeeWonLabel = UILabel().then {
+        $0.text = "원"
+        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 14)
+        $0.textColor = UIColor.convertUsingHexString(hexValue: "#4A4A4A")
+    }
+    
+    let shippingFeeStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .center
+        $0.distribution = .fill
+        $0.spacing = 5
     }
     
     let dividerLine_3 = UIView().then {
         $0.backgroundColor = Colors.dividerLineColor
     }
+    
+    /// 인원
+    
+    let totalGatheringPeopleGuideLabel = UploadPostGuideLabel(indicatorIsRequired: true, labelTitle: "인원")
+    
+    let includingSelfLabel = UILabel().then {
+        $0.text = "(본인포함)"
+        $0.font = UIFont(name: K.Fonts.notoSansKRMedium, size: 11)
+        $0.textColor = .lightGray
+    }
+    
+    let gatheringPeopleTextField = UITextField().then {
+        $0.placeholder = "0"
+        $0.textAlignment = .right
+        $0.font = Fonts.guideLabel
+        $0.tintColor = UIColor(named: K.Color.appColor)
+        $0.keyboardType = .numberPad
+    }
+    
+    let peopleUnitLabel = UILabel().then {
+        $0.text = "명"
+        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 14)
+        $0.textColor = UIColor.convertUsingHexString(hexValue: "#4A4A4A")
+    }
+    
+    let totalGatheringPeopleStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .center
+        $0.distribution = .fillProportionally
+        $0.spacing = 5
+    }
+    
+    let dividerLine_4 = UIView().then {
+        $0.backgroundColor = Colors.dividerLineColor
+    }
+    
+    /// 1인당 가격 Label
     
     let perPersonLabel = UILabel().then {
         $0.text = "1인당"
@@ -159,7 +212,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     let wonLabel = UILabel().then {
         $0.text = "원"
         $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 14)
-        $0.textColor = UIColor.convertUsingHexString(hexValue: "#545454")
+        $0.textColor = UIColor.convertUsingHexString(hexValue: "#4A4A4A")
     }
     
     let perPersonPriceStackView = UIStackView().then {
@@ -169,16 +222,23 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         $0.spacing = 5
     }
     
+    /// 상품 URL
+    
+    let referenceUrlGuideLabel = UploadPostGuideLabel(indicatorIsRequired: false, labelTitle: "상품 URL")
+    
     let referenceUrlTextField = UITextField().then {
-        $0.placeholder = "상품 URL을 입력해주세요."
+        $0.placeholder = "ex. https://www.coupang.com"
         $0.tintColor = UIColor(named: K.Color.appColor)
         $0.font = Fonts.guideLabel
-        $0.addImage(direction: .Left, image: UIImage(systemName: "link")!, colorSeparator: .clear, colorBorder: .clear)
     }
     
-    let dividerLine_4 = UIView().then {
+    let dividerLine_5 = UIView().then {
         $0.backgroundColor = Colors.dividerLineColor
     }
+    
+    /// 공구 상세설명
+    
+    let postDetailGuideLabel = UploadPostGuideLabel(indicatorIsRequired: true, labelTitle: "상세설명")
     
     let horizontalLine = UIView().then {
         $0.backgroundColor = Colors.dividerLineColor
@@ -223,26 +283,50 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         view.addSubview(postScrollView)
         postScrollView.addSubview(contentView)
         contentView.addSubview(postImagesCollectionView)
+        
+        // 제품명
         contentView.addSubview(postTitleGuideLabel)
         contentView.addSubview(postTitleTextField)
         contentView.addSubview(dividerLine_1)
         
-        [priceTextField, slashLabel, gatheringPeopleTextField, peopleUnitLabel].forEach {
-            priceAndGatheringPeopleInfoStackView.addArrangedSubview($0)
+        // 제품가격
+        contentView.addSubview(priceGuideLabel)
+        [priceTextField, priceWonLabel].forEach {
+            priceStackView.addArrangedSubview($0)
         }
-        contentView.addSubview(priceAndGatheringPeopleInfoStackView)
-        
+        contentView.addSubview(priceStackView)
         contentView.addSubview(dividerLine_2)
-        contentView.addSubview(shippingFeeTextField)
+        
+        // 배송비
+        contentView.addSubview(shippingFeeGuideLabel)
+        [shippingFeeTextField, shippingFeeWonLabel].forEach {
+            shippingFeeStackView.addArrangedSubview($0)
+        }
+        contentView.addSubview(shippingFeeStackView)
         contentView.addSubview(dividerLine_3)
-
+        
+        /// 모집 인원
+        contentView.addSubview(totalGatheringPeopleGuideLabel)
+        contentView.addSubview(includingSelfLabel)
+        [gatheringPeopleTextField, peopleUnitLabel].forEach {
+            totalGatheringPeopleStackView.addArrangedSubview($0)
+        }
+        contentView.addSubview(totalGatheringPeopleStackView)
+        contentView.addSubview(dividerLine_4)
+        
+        /// 1인당 가격
         [perPersonLabel, pricePerPersonLabel, wonLabel].forEach {
             perPersonPriceStackView.addArrangedSubview($0)
         }
         contentView.addSubview(perPersonPriceStackView)
-
+        
+        /// 상품 URL
+        contentView.addSubview(referenceUrlGuideLabel)
         contentView.addSubview(referenceUrlTextField)
-        contentView.addSubview(dividerLine_4)
+        contentView.addSubview(dividerLine_5)
+        
+        /// 공구 상세설명
+        contentView.addSubview(postDetailGuideLabel)
         contentView.addSubview(horizontalLine)
         contentView.addSubview(postDetailTextView)
         contentView.addSubview(doneButton)
@@ -260,84 +344,139 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             $0.centerX.top.bottom.equalToSuperview()
         }
         
+        /// Image Collection View
         postImagesCollectionView.snp.makeConstraints {
             $0.height.equalTo(135)
             $0.top.equalToSuperview().offset(10)
-            $0.left.right.equalToSuperview().inset(Metrics.sideInset - 5)
+            $0.left.right.equalToSuperview().inset(Metrics.defaultSideInset - 5)
         }
         
+        /// 제품명
         postTitleGuideLabel.snp.makeConstraints {
             $0.top.equalTo(postImagesCollectionView.snp.bottom).offset(10)
-            $0.left.equalToSuperview().inset(Metrics.sideInset)
+            $0.left.equalToSuperview().inset(Metrics.guideLabelSideInset)
             $0.width.greaterThanOrEqualTo(50)
         }
 
         postTitleTextField.snp.makeConstraints {
             $0.top.equalTo(postTitleGuideLabel.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(Metrics.sideInset)
+            $0.left.right.equalToSuperview().inset(Metrics.textFieldSideInset)
         }
 
         dividerLine_1.snp.makeConstraints {
             $0.height.equalTo(1)
             $0.top.equalTo(postTitleTextField.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(Metrics.sideInset)
+            $0.left.right.equalToSuperview().inset(Metrics.defaultSideInset)
         }
-
-        priceAndGatheringPeopleInfoStackView.snp.makeConstraints {
+        
+        /// 제품 가격
+        priceGuideLabel.snp.makeConstraints {
             $0.top.equalTo(dividerLine_1.snp.bottom).offset(Metrics.topOffset)
-            $0.left.right.equalToSuperview().inset(Metrics.sideInset)
+            $0.left.equalToSuperview().inset(Metrics.guideLabelSideInset)
+            $0.width.greaterThanOrEqualTo(60)
+        }
+        
+        priceStackView.snp.makeConstraints {
+            $0.top.equalTo(dividerLine_1.snp.bottom).offset(Metrics.topOffset)
+            $0.left.equalTo(priceGuideLabel.snp.right).offset(20)
+            $0.width.greaterThanOrEqualTo(135)
         }
         
         dividerLine_2.snp.makeConstraints {
             $0.height.equalTo(1)
-            $0.top.equalTo(priceAndGatheringPeopleInfoStackView.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(Metrics.sideInset)
+            $0.top.equalTo(priceStackView.snp.bottom).offset(10)
+            $0.left.right.equalToSuperview().inset(Metrics.defaultSideInset)
         }
-
-        shippingFeeTextField.snp.makeConstraints {
+        
+        /// 배송비
+        shippingFeeGuideLabel.snp.makeConstraints {
             $0.top.equalTo(dividerLine_2.snp.bottom).offset(Metrics.topOffset)
-            $0.left.right.equalToSuperview().inset(Metrics.sideInset)
+            $0.left.equalToSuperview().inset(Metrics.guideLabelSideInset + 10)
+            $0.width.greaterThanOrEqualTo(60)
+        }
+        
+        shippingFeeStackView.snp.makeConstraints {
+            $0.top.equalTo(dividerLine_2.snp.bottom).offset(Metrics.topOffset)
+            $0.left.equalTo(shippingFeeGuideLabel.snp.right).offset(20)
+            $0.width.greaterThanOrEqualTo(135)
         }
         
         dividerLine_3.snp.makeConstraints {
             $0.height.equalTo(1)
-            $0.top.equalTo(shippingFeeTextField.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(Metrics.sideInset)
+            $0.top.equalTo(shippingFeeStackView.snp.bottom).offset(10)
+            $0.left.right.equalToSuperview().inset(Metrics.defaultSideInset)
         }
-
-        perPersonPriceStackView.snp.makeConstraints {
+        
+        /// 모집 인원
+        totalGatheringPeopleGuideLabel.snp.makeConstraints {
             $0.top.equalTo(dividerLine_3.snp.bottom).offset(Metrics.topOffset)
-            $0.right.equalToSuperview().inset(Metrics.sideInset)
+            $0.left.equalToSuperview().inset(Metrics.guideLabelSideInset)
         }
-
-        referenceUrlTextField.snp.makeConstraints {
-            $0.top.equalTo(perPersonPriceStackView.snp.bottom).offset(Metrics.topOffset)
-            $0.left.right.equalToSuperview().inset(Metrics.sideInset)
+        
+        includingSelfLabel.snp.makeConstraints {
+            $0.top.equalTo(dividerLine_3.snp.bottom).offset(Metrics.topOffset + 5)
+            $0.left.equalTo(totalGatheringPeopleGuideLabel.snp.right).offset(3)
+        }
+        
+        totalGatheringPeopleStackView.snp.makeConstraints {
+            $0.top.equalTo(dividerLine_3.snp.bottom).offset(Metrics.topOffset)
+            $0.left.equalTo(includingSelfLabel.snp.right).offset(74)
+            $0.width.greaterThanOrEqualTo(135)
         }
         
         dividerLine_4.snp.makeConstraints {
             $0.height.equalTo(1)
+            $0.top.equalTo(totalGatheringPeopleStackView.snp.bottom).offset(10)
+            $0.left.right.equalToSuperview().inset(Metrics.defaultSideInset)
+        }
+        
+        /// 1인당 가격
+        perPersonPriceStackView.snp.makeConstraints {
+            $0.top.equalTo(dividerLine_4.snp.bottom).offset(Metrics.topOffset)
+            $0.right.equalToSuperview().inset(Metrics.defaultSideInset)
+        }
+        
+        /// 상품 URL
+        referenceUrlGuideLabel.snp.makeConstraints {
+            $0.top.equalTo(dividerLine_4.snp.bottom).offset(Metrics.topOffset + 36)
+            $0.left.equalToSuperview().inset(Metrics.defaultSideInset + 10)
+        }
+        
+        referenceUrlTextField.snp.makeConstraints {
+            $0.top.equalTo(referenceUrlGuideLabel.snp.bottom).offset(Metrics.topOffset)
+            $0.left.right.equalToSuperview().inset(Metrics.textFieldSideInset + 5)
+        }
+        
+        dividerLine_5.snp.makeConstraints {
+            $0.height.equalTo(1)
             $0.top.equalTo(referenceUrlTextField.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(Metrics.sideInset)
+            $0.left.right.equalToSuperview().inset(Metrics.defaultSideInset)
+        }
+        
+        /// 공구 상세설명
+        postDetailGuideLabel.snp.makeConstraints {
+            $0.top.equalTo(dividerLine_5.snp.bottom).offset(Metrics.topOffset)
+            $0.left.equalToSuperview().inset(Metrics.guideLabelSideInset)
+            $0.width.greaterThanOrEqualTo(50)
         }
         
         horizontalLine.snp.makeConstraints {
             $0.width.equalTo(1)
-            $0.top.equalTo(dividerLine_4.snp.bottom).offset(Metrics.topOffset)
-            $0.height.equalTo(250)
-            $0.left.equalToSuperview().inset(Metrics.sideInset)
+            $0.top.equalTo(postDetailGuideLabel.snp.bottom).offset(Metrics.topOffset)
+            $0.height.equalTo(200)
+            $0.left.equalToSuperview().inset(Metrics.defaultSideInset)
         }
-
+   
         postDetailTextView.snp.makeConstraints {
-            $0.top.equalTo(dividerLine_4.snp.bottom).offset(Metrics.topOffset)
+            $0.top.equalTo(postDetailGuideLabel.snp.bottom).offset(Metrics.topOffset)
             $0.left.equalTo(horizontalLine.snp.right).offset(5)
-            $0.right.equalToSuperview().inset(Metrics.sideInset)
-            $0.height.equalTo(250)
+            $0.right.equalToSuperview().inset(Metrics.defaultSideInset)
+            $0.height.equalTo(200)
         }
         
         doneButton.snp.makeConstraints {
             $0.height.equalTo(50)
-            $0.left.right.equalToSuperview().inset(Metrics.sideInset)
+            $0.left.right.equalToSuperview().inset(Metrics.defaultSideInset)
             $0.top.equalTo(postDetailTextView.snp.bottom).offset(Metrics.topOffset)
             $0.bottom.equalToSuperview().inset(20)
         }

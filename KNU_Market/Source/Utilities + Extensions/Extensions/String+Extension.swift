@@ -94,6 +94,44 @@ extension String {
         return .correct
     }
     
+    
+    
+    var isValidPostPrice: ValidationError.OnUploadPost {
+        guard !self.isEmpty else { return .empty }
+        
+        let priceWithCommasRemoved: String = self.replacingOccurrences(of: ",", with: "")
+        let postPriceInInteger: Int = Int(priceWithCommasRemoved) ?? 0
+        
+        guard postPriceInInteger > 0 else { return .empty }
+        return .correct
+    }
+    
+    var isValidShippingFee: ValidationError.OnUploadPost {
+
+        let shippingFeeWithCommasRemoved: String = self.replacingOccurrences(of: ",", with: "")
+        let shippingFeeInInteger: Int = Int(shippingFeeWithCommasRemoved) ?? 0
+        
+        guard shippingFeeInInteger <= 100000 else { return .incorrectShippingFee }           // 배송비가 10만원 이상인거는 솔직히 말이 안 돼서 일단 이렇게 설정
+        return .correct
+    }
+    
+    var isValidGatheringPeopleNumber: ValidationError.OnUploadPost {
+        
+        guard !self.isEmpty else { return .empty }
+        
+        let gatheringPeopleInInteger: Int = Int(self) ?? 0
+        
+        guard gatheringPeopleInInteger >= 2, gatheringPeopleInInteger <= 10 else {
+            return .peopleTooSmallOrLarge
+        }
+        return .correct
+    }
+    
+    
+    
+    
+    
+    
     // 올바른 공구 상세 설명
     var isValidPostDetail: ValidationError.OnUploadPost {
         guard !self.isEmpty else { return .empty }

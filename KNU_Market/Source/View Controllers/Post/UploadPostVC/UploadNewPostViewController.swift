@@ -179,7 +179,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     }
     
     let gatheringPeopleTextField = UITextField().then {
-        $0.placeholder = "0"
+        $0.placeholder = "2"
         $0.textAlignment = .right
         $0.font = Fonts.guideLabel
         $0.tintColor = Colors.appColor
@@ -545,33 +545,122 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .map { $0.price }
             .filter { $0 != nil }
             .filter { $0!.isEmpty == false }
-            .map { Int($0!) ?? 0 }
-            .map { $0.withDecimalSeparator }
+            .map { price -> Int in
+                guard let price = price else { return 0 }
+                return Int(price) ?? 0
+            }
+            .map { priceInteger -> String in
+                return priceInteger.withDecimalSeparator
+            }
             .bind(to: priceTextField.rx.text)
             .disposed(by: disposeBag)
-      
+        
+        
         /// 배송비
         reactor.state
             .map { $0.shippingFee }
             .filter { $0 != nil }
             .filter { $0!.isEmpty == false }
-            .map { Int($0) ?? 0 }
-            .map { $0.withDecimalSeparator }
+            .map { shippingFee -> Int in
+                guard let shippingFee = shippingFee else { return 0}
+                return Int(shippingFee) ?? 0
+            }
+            .map { shippingInteger -> String in
+                return shippingInteger.withDecimalSeparator
+            }
             .bind(to: shippingFeeTextField.rx.text)
             .disposed(by: disposeBag)
-        
-        // 모집 인원
+
+
+        /// 모집 인원
+
         reactor.state
             .map { $0.totalGatheringPeople }
+            .debounce(.milliseconds(700), scheduler: MainScheduler.instance)
             .filter { $0 != nil }
             .filter { $0!.isEmpty == false }
-            .bind(to: gatheringPeopleTextField.rx.text)
+            .withUnretained(self)
+            .subscribe(onNext: { (_, gatheringPeople) in
+                // 모집 인원이 Valid하지 않으면 그냥 2로 초기화
+                let isValidGatheringPeople = gatheringPeople!.isValidGatheringPeopleNumber
+                
+                self.gatheringPeopleTextField.text = isValidGatheringPeople == .correct
+                ? gatheringPeople
+                : "2"
+            })
             .disposed(by: disposeBag)
         
-//        Observable.combineLatest(
-//
-//        )
-//
+        
+        /// 1인당 가격
+        
+        reactor.state
+            .map { [$0.price, $0.shippingFee, $0.totalGatheringPeople] }
+            .map { infoString -> [String] in
+                let unwrappedArray: [String] = infoString.map { $0 ?? "0" }
+                return unwrappedArray
+            }
+            .map { unwrappedArray -> [Int] in
+                let arrayInIntegers: [Int] = unwrappedArray.map { Int($0) ?? 0 }
+                return arrayInIntegers
+            }
+            .map { infoArray -> Int in
+                let price: Int = infoArray[0]
+                let shippingFee: Int = infoArray[1]
+                let people: Int = infoArray[2] == 0 ? 2 : infoArray[2]
+                let perPersonPrice: Int = (price + shippingFee) / people
+                return perPersonPrice
+            }
+            .map { $0.withDecimalSeparator }
+            .bind(to: pricePerPersonLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        /// 완료 버튼 활성화 여부 파악
+
+        let isValidPostTitle = postTitleTextField.rx.text.orEmpty
+            .asObservable()
+            .map { title -> ValidationError.OnUploadPost in
+                return title.isValidPostTitle
+            }
+        
+        let isValidPostDetail = postDetailTextView.rx.text.orEmpty
+            .asObservable()
+            .map { detail -> ValidationError.OnUploadPost in
+                return detail.isValidPostDetail
+            }
+        
+        let isValidPrice = priceTextField.rx.text.orEmpty
+            .asObservable()
+            .map { price -> ValidationError.OnUploadPost in
+                return price.isValidPostPrice
+            }
+        
+        let isValidGatheringPeople = gatheringPeopleTextField.rx.text.orEmpty
+            .asObservable()
+            .map { gatheringPeople -> ValidationError.OnUploadPost in
+                return gatheringPeople.isValidGatheringPeopleNumber
+            }
+
+        Observable.combineLatest(
+            isValidPostTitle,
+            isValidPostDetail,
+            isValidPrice,
+            isValidGatheringPeople,
+            resultSelector: { (isValidPostTitle, isValidPostDetail, isValidPrice, isValidGatheringPeople) -> Bool in
+                
+                guard
+                    isValidPostTitle == .correct,
+                    isValidPostDetail == .correct,
+                    isValidPrice == .correct,
+                    isValidGatheringPeople == .correct
+                else { return false }
+                return true
+            }
+        )
+            .bind(to: doneButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+
+        
+        
 
         // Notification Center
         

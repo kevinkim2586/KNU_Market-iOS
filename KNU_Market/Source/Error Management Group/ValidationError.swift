@@ -54,9 +54,9 @@ enum ValidationError {
         case correct
         case titleTooShortOrLong        = "제목은 3글자 이상, 30자 이하로 작성해주세요.🤔"
         case detailTooShortOrLong       = "공구 내용을 3글자 이상, 700자 이하로 작성해주세요.🤔"
+        case incorrectFormat            = "제목에 특수문자나 이모티콘은 포함시킬 수 없어요."
+        case peopleTooSmallOrLarge      = "모집 인원은 2명 이상, 10명 이하 이어야 해요."
         case empty                      = "빈 칸이 없는지 확인해주세요."
     }
-    
-    
 }
 

@@ -79,6 +79,31 @@ extension String {
         ? .correct
         : .incorrectEmailFormat
     }
+    
+    // 올바른 공구 제목
+    var isValidPostTitle: ValidationError.OnUploadPost {
+        guard !self.isEmpty else { return .empty }
+        
+        if self.hasEmojis, self.hasSpecialCharacters {
+            return .incorrectFormat
+        }
+        
+        guard self.count >= 3, self.count <= 30 else {
+            return .titleTooShortOrLong
+        }
+        return .correct
+    }
+    
+    // 올바른 공구 상세 설명
+    var isValidPostDetail: ValidationError.OnUploadPost {
+        guard !self.isEmpty else { return .empty }
+        
+        guard self.count >= 3, self.count < 700 else {
+            return .detailTooShortOrLong
+        }
+        return .correct
+    }
+    
 }
 
 extension String {

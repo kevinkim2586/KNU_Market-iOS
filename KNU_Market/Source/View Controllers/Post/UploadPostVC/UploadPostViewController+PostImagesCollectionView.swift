@@ -9,20 +9,20 @@ import UIKit
 
 //MARK: - AddPostImageDelegate
 
-extension UploadPostViewController: AddPostImageDelegate {
-    
-    func didPickImagesToUpload(images: [UIImage]) {
-        viewModel.userSelectedImages = images
-        postImagesCollectionView.reloadData()
-    }
-}
+//extension UploadPostViewController: AddPostImageDelegate {
+//    
+//    func didPickImagesToUpload(images: [UIImage]) {
+//        viewModel.userSelectedImages = images
+//        postImagesCollectionView.reloadData()
+//    }
+//}
 
 //MARK: - UserPickedPostImageCellDelegate
 
-extension UploadPostViewController: UserPickedPostImageCellDelegate {
-    
-    func didPressDeleteImageButton(at index: Int) {
-        viewModel.userSelectedImages.remove(at: index - 1)
-        postImagesCollectionView.reloadData()
-    }
-}
+//extension UploadPostViewController: UserPickedPostImageCellDelegate {
+//    
+//    func didPressDeleteImageButton(at index: Int) {
+//        viewModel.userSelectedImages.remove(at: index - 1)
+//        postImagesCollectionView.reloadData()
+//    }
+//}

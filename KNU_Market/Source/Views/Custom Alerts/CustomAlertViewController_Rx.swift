@@ -43,16 +43,20 @@ class CustomAlertViewController_Rx: UIViewController {
     
     let cancelButton = UIButton(type: .system).then {
         $0.backgroundColor = .white
-        $0.layer.cornerRadius = 0
+        $0.layer.cornerRadius = 5
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 14)
+        $0.addBounceAnimationWithNoFeedback()
     }
     
     let actionButton = UIButton(type: .system).then {
         $0.backgroundColor = UIColor(named: K.Color.appColor)
-        $0.layer.cornerRadius = 0
+        $0.layer.cornerRadius = 5
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 14)
+        $0.addBounceAnimationWithNoFeedback()
     }
     
     let buttonStackView = UIStackView().then {
@@ -118,13 +122,22 @@ class CustomAlertViewController_Rx: UIViewController {
             $0.centerX.equalTo(alertView)
         }
         
+        
+        cancelButton.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(10)
+        }
+        
+        actionButton.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(10)
+        }
+        
         buttonStackView.snp.makeConstraints {
             $0.height.equalTo(45)
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
+            $0.left.right.equalToSuperview().inset(10)
             $0.top.equalTo(messageLabel.snp.bottom).offset(10)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(10)
         }
+
     }
     
     func bindUI() {

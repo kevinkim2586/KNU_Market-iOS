@@ -24,7 +24,7 @@ class UploadPostGuideLabel: UILabel {
     }
     
     let guideLabel = UILabel().then {
-        $0.font = UIFont.init(name: K.Fonts.notoSansKRMedium, size: 15)
+        $0.font = UIFont.init(name: K.Fonts.notoSansKRMedium, size: 16)
         $0.textColor = .darkGray
     }
     

@@ -21,7 +21,6 @@ extension UploadPostViewController: UICollectionViewDelegate, UICollectionViewDa
                 withReuseIdentifier: AddPostImageCollectionViewCell.cellId,
                 for: indexPath
             ) as? AddPostImageCollectionViewCell else { fatalError() }
-            cell.delegate = self
             return cell
         }
         else {
@@ -31,7 +30,7 @@ extension UploadPostViewController: UICollectionViewDelegate, UICollectionViewDa
                 for: indexPath
             ) as? UserPickedPostImageCollectionViewCell else { fatalError() }
             
-            cell.delegate = self
+//            cell.delegate = self
             cell.indexPath = indexPath.item
             
             if viewModel.userSelectedImages.count > 0 {

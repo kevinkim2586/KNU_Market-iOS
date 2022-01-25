@@ -5,7 +5,7 @@
 //  Created by Kevin Kim on 2022/01/22.
 //
 
-import Foundation
+import UIKit
 import ReactorKit
 import RxSwift
 
@@ -17,27 +17,32 @@ final class UploadNewPostReactor: Reactor {
     let mediaService: MediaServiceType
     
     enum Action {
+        case updateImages([UIImage])
+        case deleteImages(Int)
         case updateTitle(String)
         case updatePrice(String)
         case updateShippingFee(String)
         case updateGatheringPeople(String)
-
-//        case updatePerPersonPrice(String, String, String)
         case updateReferenceUrl(String)
-//        case updatePostDetail(String)
-        
+        case updatePostDetail(String)
+        case uploadPost
     }
     
     enum Mutation {
+        case setImages([UIImage])
+        case deleteImages(Int)
         case setTitle(String)
         case setPrice(String)
         case setShippingFee(String)
         case setGatheringPeople(String)
         case setReferenceUrl(String)
+        case setDetail(String)
+        case setIsLoading(Bool)
+        case setErrorMessage(String)
     }
     
     struct State {
-        
+        var images: [UIImage] = []
         var title: String?
         var price: String?
         var shippingFee: String?
@@ -47,17 +52,29 @@ final class UploadNewPostReactor: Reactor {
         
         
         var isLoading: Bool = false
+        var errorMessage: String?
+        
+        var didCompleteUpload: Bool = false
+        var didUpdatePost: Bool = false
+        
         
     }
     
-    init(postService: PostServiceType, mediaService: MediaServiceType) {
+    init(
+        postService: PostServiceType,
+        mediaService: MediaServiceType
+    ) {
         self.postService = postService
         self.mediaService = mediaService
         
         self.initialState = State()
     }
     
-    init(postService: PostServiceType, mediaService: MediaServiceType, editModel: EditPostModel) {
+    init(
+        postService: PostServiceType,
+        mediaService: MediaServiceType,
+        editModel: EditPostModel
+    ) {
         self.postService = postService
         self.mediaService = mediaService
         self.initialState = State()
@@ -66,6 +83,13 @@ final class UploadNewPostReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         
         switch action {
+            
+        case .updateImages(let images):
+            return Observable.just(Mutation.setImages(images))
+            
+        case .deleteImages(let index):
+            return Observable.just(Mutation.deleteImages(index))    //
+            
         case .updateTitle(let title):
             return Observable.just(Mutation.setTitle(title))
             
@@ -81,12 +105,34 @@ final class UploadNewPostReactor: Reactor {
         case .updateReferenceUrl(let referenceUrl):
             return Observable.just(Mutation.setReferenceUrl(referenceUrl))
             
+        case .updatePostDetail(let postDetail):
+            return Observable.just(Mutation.setDetail(postDetail))
+            
+        case .uploadPost:
+            
+            return Observable.concat([
+                Observable.just(Mutation.setIsLoading(true)),
+                
+                Observable.just(Mutation.setIsLoading(false))
+            ])
+            
+ 
         }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
+        state.errorMessage = nil
+        
         switch mutation {
+            
+        case .setImages(let images):
+            state.images = images
+      
+            
+        case .deleteImages(let index):
+            state.images.remove(at: index)
+
         case .setTitle(let title):
             state.title = title
             
@@ -101,8 +147,26 @@ final class UploadNewPostReactor: Reactor {
             
         case .setReferenceUrl(let referenceUrl):
             state.referenceUrl = referenceUrl
+            
+        case .setDetail(let postDetail):
+            state.postDetail = postDetail
+            
+        case .setIsLoading(let isLoading):
+            state.isLoading = isLoading
+            
+        case .setErrorMessage(let errorMessage):
+            state.errorMessage = errorMessage
         }
         return state
     }
     
+}
+
+//MARK: - API Methods
+
+extension UploadNewPostReactor {
+    
+//    private func uploadPost() -> Observable<Mutation> {
+//
+//    }
 }

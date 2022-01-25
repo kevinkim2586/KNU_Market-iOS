@@ -263,7 +263,6 @@
 		7CEDBB632702F2390078F5E1 /* KMDetailLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */; };
 		7CF369A32754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369A22754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift */; };
 		7CF369A52754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369A42754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift */; };
-		7CF369A92754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369A82754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift */; };
 		7CF369AB2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */; };
 		7CF369AF2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */; };
 		7CF369B22754D60E00C9D7A9 /* PostListViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */; };
@@ -550,7 +549,6 @@
 		7CEDBB622702F2390078F5E1 /* KMDetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMDetailLabel.swift; sourceTree = "<group>"; };
 		7CF369A22754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+UploadPostDelegate.swift"; sourceTree = "<group>"; };
 		7CF369A42754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+UICollectionView.swift"; sourceTree = "<group>"; };
-		7CF369A82754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+UIPicker.swift"; sourceTree = "<group>"; };
 		7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+PostImagesCollectionView.swift"; sourceTree = "<group>"; };
 		7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostViewController+TargetMethods.swift"; sourceTree = "<group>"; };
 		7CF369B12754D60E00C9D7A9 /* PostListViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostListViewController+UITableView.swift"; sourceTree = "<group>"; };
@@ -1576,7 +1574,6 @@
 				7CC33B2A274B58EB00B0C2C0 /* UploadPostViewController.swift */,
 				7CF369AE2754D5D100C9D7A9 /* UploadPostViewController+TargetMethods.swift */,
 				7CF369AA2754D59600C9D7A9 /* UploadPostViewController+PostImagesCollectionView.swift */,
-				7CF369A82754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift */,
 				7CF369A22754D4BD00C9D7A9 /* UploadPostViewController+UploadPostDelegate.swift */,
 				7CF369A42754D51B00C9D7A9 /* UploadPostViewController+UICollectionView.swift */,
 				7C57AC18279C2529000540A4 /* UploadNewPostViewController.swift */,
@@ -2015,7 +2012,6 @@
 				7CDD5B252795274C0082E3FC /* BannerCollectionViewCell.swift in Sources */,
 				62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */,
 				7CF8D61D277C4F210078DD77 /* MyPageTableViewCellModel.swift in Sources */,
-				7CF369A92754D56000C9D7A9 /* UploadPostViewController+UIPicker.swift in Sources */,
 				7C5386D92768902000BFEA7F /* FindIdModel.swift in Sources */,
 				7C9C59E4277C12F7005E08BC /* UIViewController+Observers.swift in Sources */,
 				7CF369C62754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift in Sources */,

@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import SnapKit
 import Then
+import YPImagePicker
 import UITextView_Placeholder
 
 class UploadNewPostViewController: BaseViewController, ReactorKit.View {
@@ -19,6 +20,17 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     typealias Reactor = UploadNewPostReactor
     
     //MARK: - Properties
+    
+    private let minimumRequiredPeople: Int = 2
+    let maxNumberOfImagesAllowed: Int = 5
+    lazy var imagePickerConfiguration: YPImagePickerConfiguration = {
+        var config = YPImagePickerConfiguration()
+        config.showsCrop = .rectangle(ratio: 1.0)
+        config.screens = [.library]
+        config.library.maxNumberOfItems = maxNumberOfImagesAllowed
+        config.showsPhotoFilters = false
+        return config
+    }()
     
     //MARK: - Constants
     
@@ -29,6 +41,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     struct Fonts {
         static let priceTextField: UIFont   = UIFont(name: K.Fonts.notoSansKRMedium, size: 16)!
         static let guideLabel: UIFont       = UIFont(name: K.Fonts.notoSansKRBold, size: 16)!
+        static let unitLabel: UIFont        = UIFont(name: K.Fonts.notoSansKRMedium, size: 16)!
         static let urlTextField: UIFont     = UIFont(name: K.Fonts.notoSansKRRegular, size: 14)!
         static let detailTextView: UIFont   = UIFont(name: K.Fonts.notoSansKRMedium, size: 14)!
     }
@@ -120,7 +133,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     
     let priceWonLabel = UILabel().then {
         $0.text = "원"
-        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 14)
+        $0.font = Fonts.unitLabel
         $0.textColor = Colors.unitLabel
     }
     
@@ -151,7 +164,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     
     let shippingFeeWonLabel = UILabel().then {
         $0.text = "원"
-        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 14)
+        $0.font = Fonts.unitLabel
         $0.textColor = Colors.unitLabel
     }
     
@@ -171,7 +184,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     let totalGatheringPeopleGuideLabel = UploadPostGuideLabel(indicatorIsRequired: true, labelTitle: "인원")
     
     let includingSelfLabel = UILabel().then {
-        $0.text = "(본인포함)"
+        $0.text = "(2~10명)"
         $0.font = UIFont(name: K.Fonts.notoSansKRMedium, size: 11)
         $0.textColor = .lightGray
         $0.adjustsFontSizeToFitWidth = true
@@ -190,7 +203,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     
     let peopleUnitLabel = UILabel().then {
         $0.text = "명"
-        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 14)
+        $0.font = Fonts.unitLabel
         $0.textColor = Colors.unitLabel
     }
     
@@ -284,7 +297,6 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         super.viewDidLoad()
         title = "공구글 올리기"
     }
-    
     
     //MARK: - UI Setup
     
@@ -537,8 +549,28 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        postDetailTextView.rx.text.orEmpty
+            .asObservable()
+            .map { Reactor.Action.updatePostDetail($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        doneButton.rx.tap
+            .map { Reactor.Action.uploadPost }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         
         // Output
+        
+        reactor.state
+            .map { $0.images }
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.postImagesCollectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
         
         /// 제품 가격
         reactor.state
@@ -562,7 +594,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .filter { $0 != nil }
             .filter { $0!.isEmpty == false }
             .map { shippingFee -> Int in
-                guard let shippingFee = shippingFee else { return 0}
+                guard let shippingFee = shippingFee else { return 0 }
                 return Int(shippingFee) ?? 0
             }
             .map { shippingInteger -> String in
@@ -595,18 +627,19 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         
         reactor.state
             .map { [$0.price, $0.shippingFee, $0.totalGatheringPeople] }
-            .map { infoString -> [String] in
-                let unwrappedArray: [String] = infoString.map { $0 ?? "0" }
+            .map { infoStringArray -> [String] in
+                let unwrappedArray: [String] = infoStringArray.map { $0 ?? "0" }
                 return unwrappedArray
             }
             .map { unwrappedArray -> [Int] in
                 let arrayInIntegers: [Int] = unwrappedArray.map { Int($0) ?? 0 }
                 return arrayInIntegers
             }
-            .map { infoArray -> Int in
+            .map { [weak self] infoArray -> Int in
+                guard let self = self else { return 0 }
                 let price: Int = infoArray[0]
                 let shippingFee: Int = infoArray[1]
-                let people: Int = infoArray[2] == 0 ? 2 : infoArray[2]
+                let people: Int = infoArray[2] == 0 ? self.minimumRequiredPeople : infoArray[2]
                 let perPersonPrice: Int = (price + shippingFee) / people
                 return perPersonPrice
             }
@@ -658,7 +691,102 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         )
             .bind(to: doneButton.rx.isEnabled)
             .disposed(by: disposeBag)
-
+        
+        /// Divider Line 색상 변경
+        
+        postTitleTextField.rx.controlEvent([.editingDidBegin])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dividerLine_1.backgroundColor = UIColor.black
+            })
+            .disposed(by: disposeBag)
+        
+        postTitleTextField.rx.controlEvent([.editingDidEnd])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dividerLine_1.backgroundColor = Colors.dividerLineColor
+            })
+            .disposed(by: disposeBag)
+        
+        priceTextField.rx.controlEvent([.editingDidBegin])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dividerLine_2.backgroundColor = UIColor.black
+            })
+            .disposed(by: disposeBag)
+        
+        priceTextField.rx.controlEvent([.editingDidEnd])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dividerLine_2.backgroundColor = Colors.dividerLineColor
+            })
+            .disposed(by: disposeBag)
+        
+        shippingFeeTextField.rx.controlEvent([.editingDidBegin])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dividerLine_3.backgroundColor = UIColor.black
+            })
+            .disposed(by: disposeBag)
+        
+        shippingFeeTextField.rx.controlEvent([.editingDidEnd])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dividerLine_3.backgroundColor = Colors.dividerLineColor
+            })
+            .disposed(by: disposeBag)
+        
+        gatheringPeopleTextField.rx.controlEvent([.editingDidBegin])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dividerLine_4.backgroundColor = UIColor.black
+            })
+            .disposed(by: disposeBag)
+        
+        gatheringPeopleTextField.rx.controlEvent([.editingDidEnd])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dividerLine_4.backgroundColor = Colors.dividerLineColor
+            })
+            .disposed(by: disposeBag)
+        
+        referenceUrlTextField.rx.controlEvent([.editingDidBegin])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dividerLine_5.backgroundColor = UIColor.black
+            })
+            .disposed(by: disposeBag)
+        
+        referenceUrlTextField.rx.controlEvent([.editingDidEnd])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dividerLine_5.backgroundColor = Colors.dividerLineColor
+            })
+            .disposed(by: disposeBag)
+        
+        postDetailTextView.rx.didBeginEditing
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.horizontalLine.backgroundColor = UIColor.black
+            })
+            .disposed(by: disposeBag)
+        
+        postDetailTextView.rx.didEndEditing
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.horizontalLine.backgroundColor = Colors.dividerLineColor
+            })
+            .disposed(by: disposeBag)
         
         
 
@@ -670,51 +798,86 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
                 self.presentUserVerificationNeededAlert()
             }
             .disposed(by: disposeBag)
-        
-        
     }
 }
 
 extension UploadNewPostViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+      
+        guard let imageCount = self.reactor?.currentState.images.count else { return 1 }
+        return imageCount + 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 {
-            
+
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: AddPostImageCollectionViewCell.cellId,
                 for: indexPath
             ) as? AddPostImageCollectionViewCell else { fatalError() }
-           
+            
+            cell.addPostImageView.rx.tapGesture()
+                .when(.recognized)
+                .withUnretained(self)
+                .subscribe(onNext: { _ in
+                    self.presentImagePicker()
+                })
+                .disposed(by: disposeBag)
+            
+            reactor?.state
+                .map { $0.images.count }
+                .map { "(\($0)/5)" }
+                .bind(to: cell.addPostImageView.label.rx.text)
+                .disposed(by: disposeBag)
+    
+            
+            
             return cell
         }
+
         else {
-            
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: UserPickedPostImageCollectionViewCell.cellId,
                 for: indexPath
             ) as? UserPickedPostImageCollectionViewCell else { fatalError() }
             
             cell.indexPath = indexPath.item
-            cell.userPickedPostImageView.image = UIImage(named: K.Images.defaultAvatar)
+            cell.delegate = self
+            guard let imageCount = self.reactor?.currentState.images.count else { return cell }
+        
+            if imageCount > 0 {
+                cell.userPickedPostImageView.image = self.reactor?.currentState.images[indexPath.item - 1]
+            }
             return cell
         }
     }
-    
-    
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct UploadNEWPostVC: PreviewProvider {
+extension UploadNewPostViewController: UserPickedPostImageDelegate {
     
-    static var previews: some SwiftUI.View {
-        UploadNewPostViewController(reactor: UploadNewPostReactor(postService: PostService(network: Network<PostAPI>()), mediaService: MediaService(network: Network<MediaAPI>()))).toPreview()
+    func didPressDelete(at index: Int) {
+        self.reactor?.action.onNext(.deleteImages(index - 1))
+    }
+    
+    private func presentImagePicker() {
+
+        let picker = YPImagePicker(configuration: imagePickerConfiguration)
+   
+        self.present(picker, animated: true, completion: nil)
+        
+        picker.didFinishPicking { items, _ in
+            
+            var userSelectedImages: [UIImage] = []
+            for item in items {
+                switch item {
+                case .photo(let photo):
+                    userSelectedImages.append(photo.image)
+                default: break
+                }
+            }
+            self.reactor?.action.onNext(.updateImages(userSelectedImages))
+            picker.dismiss(animated: true, completion: nil)
+        }
     }
 }
-#endif

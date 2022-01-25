@@ -140,11 +140,6 @@ class UploadPostViewController: BaseViewController {
         )
     }
 
-    lazy var locationPickerView = UIPickerView().then {
-        $0.delegate = self
-        $0.dataSource = self
-        $0.backgroundColor = .white
-    }
     
     private let preferredLocationGuideLabel = UILabel().then {
         $0.text = "거래 선호 장소 :"
@@ -157,7 +152,7 @@ class UploadPostViewController: BaseViewController {
         $0.textAlignment = .right
         $0.borderStyle = .none
         $0.tintColor = .clear
-        $0.inputView = locationPickerView
+//        $0.inputView = locationPickerView
     }
     
     lazy var expandTextField = UITextField().then {
@@ -167,7 +162,7 @@ class UploadPostViewController: BaseViewController {
         $0.textAlignment = .center
         $0.borderStyle = .none
         $0.tintColor = .clear
-        $0.inputView = locationPickerView
+//        $0.inputView = locationPickerView
     }
     
     private let postDetailGuideLabel = UILabel().then {

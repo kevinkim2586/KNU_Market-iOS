@@ -91,29 +91,29 @@ class UploadPostViewModel {
     }
     
     func uploadPost() {
-        
-        let model = UploadPostRequestDTO(
-            title: postTitle,
-            location: location + 1,
-            peopleGathering: totalPeopleGathering,
-            imageUIDs: imageUIDs,
-            detail: postDetail
-        )
-        
-        postManager?.uploadNewPost(with: model) { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-            
-            case .success(_):
-                self.delegate?.didCompleteUpload()
-                NotificationCenterService.updatePostList.post()
-            case .failure(let error):
-                print("UploadItemViewModel - uploadItem() failed: \(error.errorDescription)")
-                self.delegate?.failedUploading(with: error)
-            }
-        }
+//        
+//        let model = UploadPostRequestDTO(
+//            title: postTitle,
+//            location: location + 1,
+//            peopleGathering: totalPeopleGathering,
+//            imageUIDs: imageUIDs,
+//            detail: postDetail
+//        )
+//        
+//        postManager?.uploadNewPost(with: model) { [weak self] result in
+//            
+//            guard let self = self else { return }
+//            
+//            switch result {
+//            
+//            case .success(_):
+//                self.delegate?.didCompleteUpload()
+//                NotificationCenterService.updatePostList.post()
+//            case .failure(let error):
+//                print("UploadItemViewModel - uploadItem() failed: \(error.errorDescription)")
+//                self.delegate?.failedUploading(with: error)
+//            }
+//        }
     }
     
     func deletePriorImagesInServerFirst() {

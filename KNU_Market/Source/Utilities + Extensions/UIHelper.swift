@@ -15,7 +15,7 @@ struct UIHelper {
     }
     
     // 공구글 NavController 생성
-     static func createPostNavigationController() -> UINavigationController {
+    static func createPostNavigationController() -> UINavigationController {
         
         let postListVC = PostListViewController(
             reactor: PostListViewReactor(
@@ -29,17 +29,18 @@ struct UIHelper {
             )
         )
         
-
-         postListVC.tabBarItem = UITabBarItem(title: "공동구매", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
+        
+        postListVC.tabBarItem = UITabBarItem(title: "공동구매", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
         let postNavigationController = UINavigationController(rootViewController: postListVC)
-         postNavigationController.tabBarItem.image = UIImage(named: K.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
-         postNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
+        
+        postNavigationController.tabBarItem.image = UIImage(named: K.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
+        postNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
         postNavigationController.navigationBar.tintColor = .black
         return postNavigationController
     }
     
     // 채팅 NavController 생성
-     static func createChatNavigationController() -> UINavigationController {
+    static func createChatNavigationController() -> UINavigationController {
         
         let chatListVC = ChatListViewController(
             reactor: ChatListViewReactor(
@@ -48,7 +49,7 @@ struct UIHelper {
             )
         )
         
-         chatListVC.tabBarItem = UITabBarItem(title: "채팅방", image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
+        chatListVC.tabBarItem = UITabBarItem(title: "채팅방", image: UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
         let ChatNavigationController = UINavigationController(rootViewController: chatListVC)
         ChatNavigationController.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
         ChatNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
@@ -58,7 +59,7 @@ struct UIHelper {
     }
     
     // 마이페이지 NavController 생성
-     static func createMyPageNavigationController() -> UINavigationController {
+    static func createMyPageNavigationController() -> UINavigationController {
         
         let myPageVC = MyPageViewController(
             reactor: MyPageViewReactor(
@@ -69,8 +70,8 @@ struct UIHelper {
                 userDefaultsGenericService: UserDefaultsGenericService.shared
             )
         )
-   
-         myPageVC.tabBarItem = UITabBarItem(title: "마이페이지", image: UIImage(named: K.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
+        
+        myPageVC.tabBarItem = UITabBarItem(title: "마이페이지", image: UIImage(named: K.Images.myPageSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
         let MyPageNavigationController = UINavigationController(rootViewController: myPageVC)
         
         MyPageNavigationController.tabBarItem.image = UIImage(named: K.Images.myPageUnselected)?.withRenderingMode(.alwaysTemplate)
@@ -93,7 +94,7 @@ struct UIHelper {
             height = 75
         }
         
-//        let height: CGFloat = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 44
+        //        let height: CGFloat = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 44
         let width: CGFloat = UIScreen.main.bounds.width
         print("✅ width: \(width), height: \(height)")
         let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: width, height: height))
@@ -111,7 +112,7 @@ struct UIHelper {
         appearance.configureWithTransparentBackground()
         naviBar.standardAppearance = appearance
         naviBar.scrollEdgeAppearance = appearance
-    
+        
         let naviItem = UINavigationItem(title: title)
         
         // X 버튼
@@ -126,7 +127,7 @@ struct UIHelper {
         
         naviItem.leftBarButtonItem = dismissBarButtonItem
         naviItem.rightBarButtonItem = additionalBarButtonItem
-    
+        
         naviBar.items = [naviItem]
         return naviBar
     }
@@ -135,7 +136,7 @@ struct UIHelper {
         
         var statusBarHeight: CGFloat = 0
         statusBarHeight = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
-
+        
         let naviBar = UINavigationBar(frame: .init(
             x: 0,
             y: statusBarHeight,
@@ -147,7 +148,7 @@ struct UIHelper {
         appearance.configureWithTransparentBackground()
         naviBar.standardAppearance = appearance
         naviBar.scrollEdgeAppearance = appearance
-    
+        
         let naviItem = UINavigationItem(title: title)
         
         // X 버튼
@@ -157,7 +158,7 @@ struct UIHelper {
             action: #selector(UIViewController.dismissVC)
         )
         stopBarButtonItem.tintColor = .black
-    
+        
         naviItem.rightBarButtonItem = stopBarButtonItem
         naviBar.items = [naviItem]
         view.addSubview(naviBar)
@@ -222,5 +223,5 @@ struct UIHelper {
         spinner.startAnimating()
         return headerView
     }
-
+    
 }

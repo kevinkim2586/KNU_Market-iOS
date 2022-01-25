@@ -22,7 +22,9 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     //MARK: - Properties
     
     private let minimumRequiredPeople: Int = 2
+    
     let maxNumberOfImagesAllowed: Int = 5
+    
     lazy var imagePickerConfiguration: YPImagePickerConfiguration = {
         var config = YPImagePickerConfiguration()
         config.showsCrop = .rectangle(ratio: 1.0)
@@ -560,6 +562,13 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        doneButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
         
         // Output
         
@@ -637,9 +646,9 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             }
             .map { [weak self] infoArray -> Int in
                 guard let self = self else { return 0 }
-                let price: Int = infoArray[0]
-                let shippingFee: Int = infoArray[1]
-                let people: Int = infoArray[2] == 0 ? self.minimumRequiredPeople : infoArray[2]
+                let price: Int          = infoArray[0]
+                let shippingFee: Int    = infoArray[1]
+                let people: Int         = infoArray[2] == 0 ? self.minimumRequiredPeople : infoArray[2]
                 let perPersonPrice: Int = (price + shippingFee) / people
                 return perPersonPrice
             }
@@ -787,6 +796,36 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
                 self.horizontalLine.backgroundColor = Colors.dividerLineColor
             })
             .disposed(by: disposeBag)
+
+
+        reactor.state
+            .map { $0.isLoading }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, isLoading) in
+                isLoading ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, errorMessage) in
+                self.showSimpleBottomAlert(with: errorMessage!)
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.didCompleteUpload }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                NotificationCenterService.updatePostList.post()
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
         
         
 
@@ -863,11 +902,13 @@ extension UploadNewPostViewController: UserPickedPostImageDelegate {
     private func presentImagePicker() {
 
         let picker = YPImagePicker(configuration: imagePickerConfiguration)
-   
-        self.present(picker, animated: true, completion: nil)
-        
-        picker.didFinishPicking { items, _ in
+
+        picker.didFinishPicking { [unowned picker] items, cancelled in
             
+            if cancelled {
+                picker.dismiss(animated: true)
+            }
+         
             var userSelectedImages: [UIImage] = []
             for item in items {
                 switch item {
@@ -879,5 +920,7 @@ extension UploadNewPostViewController: UserPickedPostImageDelegate {
             self.reactor?.action.onNext(.updateImages(userSelectedImages))
             picker.dismiss(animated: true, completion: nil)
         }
+        
+        self.present(picker, animated: true, completion: nil)
     }
 }

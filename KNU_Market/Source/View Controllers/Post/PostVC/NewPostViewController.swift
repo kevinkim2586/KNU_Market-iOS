@@ -636,7 +636,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         reactor.state
             .map { $0.postModel.date }
             .distinctUntilChanged()
-            .map { DateConverter.convertDateStringToSimpleFormat($0) }
+            .map { DateConverter.convertDateStringToComplex($0) }
             .bind(to: dateLabel.rx.text)
             .disposed(by: disposeBag)
         

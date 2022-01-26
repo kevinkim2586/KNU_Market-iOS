@@ -26,7 +26,7 @@ final class ChatListService: ChatListServiceType {
                 case .success(let rooms):
                     self.userDefaultsGenericService.set(
                         key: UserDefaults.Keys.joinedChatRoomPIDs,
-                        value: rooms.map { $0.uuid}
+                        value: rooms.map { $0.uuid }
                     )
                     return .success(rooms)
                 case .error(let error):

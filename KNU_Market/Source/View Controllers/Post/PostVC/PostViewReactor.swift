@@ -67,7 +67,7 @@ final class PostViewReactor: Reactor {
         let isFromChatVC: Bool      // ChatVC에서 넘어온거면 PostVC에서 "채팅방 입장" 버튼 눌렀을 때 입장이 아닌 그냥 뒤로가기가 되어야 하기 때문
         var myNickname: String = ""
         var userJoinedChatRoomPIDS: [String] = []
-        var userBannedPostUploaders: [String] = []
+      
         
         var postModel: PostDetailModel
         
@@ -181,22 +181,13 @@ final class PostViewReactor: Reactor {
         var editModel: EditPostModel?
         
         // 상태
-        var didDeletePost: Bool = false
-        var didMarkPostDone: Bool = false
-        
-        
-    
-        
-        
-        var didUpdatePostGatheringStatus: Bool = false
-        var didFailFetchingPost: Bool = false
-        var didEnterChat: Bool = false
-        var isFirstEntranceToChat: Bool = false
-        var isAttemptingToEnterChat: Bool = false
-        var didBlockUser: Bool = false
-        
-        
-    
+        var didDeletePost: Bool = false                 // 글 삭제 상태
+        var didMarkPostDone: Bool = false               // 글 모집 완료 상태
+        var didBlockUser: Bool = false                  // 유저 차단 상태
+        var didFailFetchingPost: Bool = false           // 글 불러오기 실패
+        var didEnterChat: Bool = false                  // 채팅방 입장 성공 시
+        var isFirstEntranceToChat: Bool = false         // 채팅방 입장이 처음인지, 아니면 기존에 입장한 채팅방인지에 대한 판별 상태
+        var isAttemptingToEnterChat: Bool = false       // 채팅방 입장 시도 중
     }
     
     
@@ -220,7 +211,6 @@ final class PostViewReactor: Reactor {
         
         self.initialState.myNickname = userDefaultsService.get(key: UserDefaults.Keys.nickname) ?? ""
         self.initialState.userJoinedChatRoomPIDS = userDefaultsService.get(key: UserDefaults.Keys.joinedChatRoomPIDs) ?? []
-        self.initialState.userBannedPostUploaders = userDefaultsService.get(key: UserDefaults.Keys.bannedPostUploaders) ?? []
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -459,13 +449,18 @@ extension PostViewReactor {
     }
 
     private func blockPostUploader() -> Observable<Mutation> {
-
-//        self.currentState.userBannedPostUploaders
-//
-//        NotificationCenterService.updatePostList.post()
-//
         
-        return .empty()
+        let userToBlock = currentState.postModel.userUID
+        var bannedUsers: [String] = userDefaultsService.get(key: UserDefaults.Keys.bannedPostUploaders) ?? []
+        
+        bannedUsers.append(userToBlock)
+        
+        userDefaultsService.set(
+            key: UserDefaults.Keys.bannedPostUploaders,
+            value: bannedUsers
+        )
+        NotificationCenterService.updatePostList.post()
+        return Observable.just(Mutation.setDidBlockUser(true))
     }
 }
 

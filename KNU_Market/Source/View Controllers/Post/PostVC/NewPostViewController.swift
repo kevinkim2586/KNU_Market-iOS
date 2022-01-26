@@ -835,6 +835,19 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 self.navigationController?.pushViewController(uploadVC, animated: true)
             })
             .disposed(by: disposeBag)
+        
+        /// 특정 유저 차단 성공 시
+        reactor.state
+            .map { $0.didBlockUser }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
 
         
         // Notification Center

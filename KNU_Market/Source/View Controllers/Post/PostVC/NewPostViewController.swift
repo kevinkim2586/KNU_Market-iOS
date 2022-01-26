@@ -666,7 +666,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         reactor.state
             .map { $0.postModel.referenceUrl }
             .distinctUntilChanged()
-            .map { $0 == nil }
+            .map { $0 == nil || $0 == "" }
             .bind(to: urlLinkButton.rx.isHidden)
             .disposed(by: disposeBag)
         

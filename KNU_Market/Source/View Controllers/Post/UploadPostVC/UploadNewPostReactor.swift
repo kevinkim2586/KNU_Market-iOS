@@ -34,6 +34,7 @@ final class UploadNewPostReactor: Reactor {
         case updatePostDetail(String)
         case pressedUploadPost
         case uploadPost
+        case configurePageWithEditModel
     }
     
     enum Mutation {
@@ -51,6 +52,7 @@ final class UploadNewPostReactor: Reactor {
         case appendImageUid(String)
         
         case setCompleteUploadingPost(Bool)
+        case setEditPostModel(EditPostModel)
     }
     
     struct State {
@@ -146,6 +148,13 @@ final class UploadNewPostReactor: Reactor {
             
         case .uploadPost:
             return uploadPost()
+            
+        case .configurePageWithEditModel:
+            return Observable.concat([
+                Observable.just(Mutation.setIsLoading(true)),
+                Observable.just(Mutation.setEditPostModel(self.currentState.editPostModel!)),
+                Observable.just(Mutation.setIsLoading(false))
+            ])
         }
     }
     
@@ -195,7 +204,25 @@ final class UploadNewPostReactor: Reactor {
         case .setCompleteUploadingPost(let didComplete):
             state.didCompleteUpload = didComplete
             
+        case .setEditPostModel(let model):
+            
+            state.title = model.title
+            state.price = "\(model.price)"
+            state.shippingFee = "\(model.shippingFee)"
+            state.totalGatheringPeople = "\(model.totalGatheringPeople)"
+            state.referenceUrl = model.referenceUrl
+            state.postDetail = model.postDetail
+
+            if let imageUids = model.imageUIDs {
+                for imageUid in imageUids {
+                    let url = URL(string: K.MEDIA_REQUEST_URL + imageUid)!
+                    if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
+                        state.images.append(image)
+                    }
+                }
+            }
         }
+        
         return state
     }
 }
@@ -267,6 +294,8 @@ extension UploadNewPostReactor {
     }
     
     private func updatePost() -> Observable<Mutation> {
+        
+//        return self.postService.updatePost(uid: <#T##String#>, with: <#T##UpdatePostRequestDTO#>)
         return .never()
     }
 }

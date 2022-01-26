@@ -26,7 +26,7 @@ final class PostViewReactor: Reactor {
     enum Action {
         
         case viewDidLoad
-        
+        case refresh
         case deletePost
         case editPost
         case markPostDone               // 방장 - 모집 완료
@@ -43,24 +43,19 @@ final class PostViewReactor: Reactor {
         
         case setAlertMessage(String, AlertMessageType)
         
-
-        
-        
-        
         case setDidFailFetchingPost(Bool, String)
         case setDidDeletePost(Bool, String)
         case setDidMarkPostDone(Bool, String)
-        case setDidEnterChat(Bool, Bool)        // DidEnterChat, isFirstEntranceToChat
-        
-        
-        
+        case setDidEnterChat(Bool, Bool)            // DidEnterChat, isFirstEntranceToChat
+    
         case setPostAsGatherComplete(Bool)
         
+        case setEditPostModel(EditPostModel)
  
-
-        
         case setIsFetchingData(Bool)
         case setAttemptingToEnterChat(Bool)
+        
+    
         
         case setDidBlockUser(Bool)
         
@@ -184,8 +179,7 @@ final class PostViewReactor: Reactor {
             } else { return nil }
         }
         
-        
-        
+        var editModel: EditPostModel?
         
         // 상태
         var didDeletePost: Bool = false
@@ -203,9 +197,7 @@ final class PostViewReactor: Reactor {
         var didBlockUser: Bool = false
         
         
-        
-
-        
+    
     }
     
     
@@ -237,27 +229,24 @@ final class PostViewReactor: Reactor {
         switch action {
             
         case .viewDidLoad:
-            
             return Observable.concat([
                 fetchPostDetails(),
                 fetchEnteredRoomInfo(),
             ])
             
-  
+        case .refresh:
+            return fetchPostDetails()
             
         case .deletePost:
             return deletePost()
             
         case .markPostDone:
-
             return markPostDone()
             
         case .updatePostAsRegathering:
-            
             return updatePostAsRegathering()
             
         case .joinChat:
-            
             return Observable.concat([
                 Observable.just(Mutation.setAttemptingToEnterChat(true)),
                 joinChat(),
@@ -265,16 +254,14 @@ final class PostViewReactor: Reactor {
             ])
             
         case .blockUser:
-            
-            
-
             return .empty()
 
         case .editPost:
             
-            return .empty()
+            return configureEditPostModel()
+    
+
         }
-        
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
@@ -320,6 +307,9 @@ final class PostViewReactor: Reactor {
         case .setPostAsGatherComplete(let gatherComplete):
     
             break
+            
+        case .setEditPostModel(let editPostModel):
+            state.editModel = editPostModel
             
         case .setDidBlockUser(let didBlock):
             state.didBlockUser = didBlock
@@ -386,6 +376,25 @@ extension PostViewReactor {
                     return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
                 }
             }
+    }
+    
+    private func configureEditPostModel() -> Observable<Mutation> {
+        
+        let editPostModel = EditPostModel(
+            title: currentState.postModel.title,
+            imageURLs: nil,
+            imageUIDs: currentState.postModel.imageUIDs,
+            totalGatheringPeople: currentState.postModel.totalGatheringPeople,
+            currentlyGatheredPeople: currentState.currentlyGatheredPeople,
+            location: Location.list.count,                        /// 당분간 8이 기본
+            postDetail: currentState.postModel.postDetail,
+            pageUID: currentState.postModel.uuid,
+            price: currentState.postModel.price ?? 0,
+            shippingFee: currentState.postModel.shippingFee ?? 0,
+            referenceUrl: currentState.postModel.referenceUrl
+        )
+        
+        return Observable.just(Mutation.setEditPostModel(editPostModel))
     }
     
     private func updatePostAsRegathering() -> Observable<Mutation> {

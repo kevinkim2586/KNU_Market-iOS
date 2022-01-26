@@ -12,7 +12,7 @@ struct UploadPostRequestDTO {
         peopleGathering: Int,
         imageUIDs: [String]?,
         detail: String,
-        location: Int = 8              // v1.3까지는 default 8 == 협의
+        location: Int = Location.list.count              // v1.3까지는 default 8 == 협의
     ) {
     
         parameters["title"] = title

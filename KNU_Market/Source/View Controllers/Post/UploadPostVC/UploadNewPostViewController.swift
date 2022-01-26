@@ -581,6 +581,13 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
+        /// 제품명
+        reactor.state
+            .map { $0.title }
+            .filter { $0 != nil }
+            .bind(to: postTitleTextField.rx.text)
+            .disposed(by: disposeBag)
+        
         /// 제품 가격
         reactor.state
             .map { $0.price }
@@ -656,27 +663,47 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .bind(to: pricePerPersonLabel.rx.text)
             .disposed(by: disposeBag)
         
+        /// 참고 링크
+        
+        reactor.state
+            .map { $0.referenceUrl }
+            .filter { $0 != nil }
+            .bind(to: referenceUrlTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        /// 상세설명
+        
+        reactor.state
+            .map { $0.postDetail }
+            .filter { $0 != nil }
+            .bind(to: postDetailTextView.rx.text)
+            .disposed(by: disposeBag)
+        
         /// 완료 버튼 활성화 여부 파악
-
-        let isValidPostTitle = postTitleTextField.rx.text.orEmpty
+        
+        let isValidPostTitle = reactor.state
+            .map { $0.title ?? "" }
             .asObservable()
             .map { title -> ValidationError.OnUploadPost in
                 return title.isValidPostTitle
             }
         
-        let isValidPostDetail = postDetailTextView.rx.text.orEmpty
+        let isValidPostDetail = reactor.state
+            .map { $0.postDetail ?? "" }
             .asObservable()
             .map { detail -> ValidationError.OnUploadPost in
                 return detail.isValidPostDetail
             }
         
-        let isValidPrice = priceTextField.rx.text.orEmpty
+        let isValidPrice = reactor.state
+            .map { $0.price ?? "" }
             .asObservable()
             .map { price -> ValidationError.OnUploadPost in
                 return price.isValidPostPrice
             }
         
-        let isValidGatheringPeople = gatheringPeopleTextField.rx.text.orEmpty
+        let isValidGatheringPeople = reactor.state
+            .map { $0.totalGatheringPeople ?? "" }
             .asObservable()
             .map { gatheringPeople -> ValidationError.OnUploadPost in
                 return gatheringPeople.isValidGatheringPeopleNumber
@@ -836,7 +863,24 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
-        
+        reactor.state
+            .map { ($0.editPostModel) }
+            .filter { $0 != nil }
+            .take(1)
+            .withUnretained(self)
+            .subscribe(onNext: { (_, model) in
+                
+                print("✅ edit post model is not nil: \(model)")
+                
+                
+                self.reactor?.action.onNext(.configurePageWithEditModel)
+                
+                
+                
+                
+            })
+            .disposed(by: disposeBag)
+            
 
         // Notification Center
         

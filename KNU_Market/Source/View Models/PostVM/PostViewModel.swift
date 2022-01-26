@@ -119,7 +119,10 @@ class PostViewModel {
             currentlyGatheredPeople: currentlyGatheredPeople,
             location: 0,
             postDetail: model?.postDetail ?? "",
-            pageUID: pageID
+            pageUID: pageID,
+            price: 0,
+            shippingFee: 0,
+            referenceUrl: ""
         )
         return editPostModel
     }

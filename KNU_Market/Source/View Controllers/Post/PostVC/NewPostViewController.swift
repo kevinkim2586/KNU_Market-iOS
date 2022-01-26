@@ -409,9 +409,6 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             $0.bottom.equalToSuperview().offset(-30)
             $0.left.right.equalToSuperview().inset(Metrics.defaultOffSet)
         }
-        
-  
-   
     }
     
     //MARK: - Binding
@@ -810,6 +807,35 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
+        
+        /// 차단 성공 시
+        reactor.state
+            .map { $0.didBlockUser }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        /// 공구글 수정 모델
+        reactor.state
+            .map { $0.editModel }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, model) in
+                
+                let uploadVC = UploadNewPostViewController(
+                    reactor: UploadNewPostReactor(
+                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+                        mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
+                        editModel: model!
+                    )
+                )
+                self.navigationController?.pushViewController(uploadVC, animated: true)
+            })
+            .disposed(by: disposeBag)
 
         
         // Notification Center
@@ -818,6 +844,13 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .withUnretained(self)
             .bind { _ in
                 self.presentUserVerificationNeededAlert()
+            }
+            .disposed(by: disposeBag)
+        
+        NotificationCenterService.didUpdatePost.addObserver()
+            .withUnretained(self)
+            .bind { _ in
+                self.reactor?.action.onNext(.refresh)
             }
             .disposed(by: disposeBag)
         
@@ -893,7 +926,7 @@ extension NewPostViewController: LabelSwitchDelegate {
     }
 }
 
-//MARK: - Alert Actions
+//MARK: - Alert Actions - for below iOS 14 devices
 
 extension NewPostViewController {
     

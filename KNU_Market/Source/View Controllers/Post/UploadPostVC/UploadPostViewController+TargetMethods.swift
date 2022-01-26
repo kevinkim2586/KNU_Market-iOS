@@ -117,7 +117,6 @@ extension UploadPostViewController {
         
         postDetailTextView.text = editModel!.postDetail
         postDetailTextView.textColor = UIColor.black
-    
     }
 }
 

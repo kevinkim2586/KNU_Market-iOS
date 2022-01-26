@@ -30,5 +30,4 @@ struct UploadPostRequestDTO {
             parameters["image"] = imageUIDs
         }
     }
-
 }

@@ -64,7 +64,6 @@ final class UploadNewPostReactor: Reactor {
         var referenceUrl: String?
         var postDetail: String?
         
-        
         var isLoading: Bool = false
         var errorMessage: String?
         
@@ -72,21 +71,16 @@ final class UploadNewPostReactor: Reactor {
         var didUpdatePost: Bool = false
         
         var imageUids: [String] = []
-        
         var isCompletedImageUpload: Bool = false
-        
-        
         var editPostModel: EditPostModel?
     }
     
-   
     init(
         postService: PostServiceType,
         mediaService: MediaServiceType
     ) {
         self.postService = postService
         self.mediaService = mediaService
-        
         self.initialState = State()
     }
     
@@ -108,7 +102,7 @@ final class UploadNewPostReactor: Reactor {
             return Observable.just(Mutation.setImages(images))
             
         case .deleteImages(let index):
-            return Observable.just(Mutation.deleteImages(index))    //
+            return Observable.just(Mutation.deleteImages(index))
             
         case .updateTitle(let title):
             return Observable.just(Mutation.setTitle(title))

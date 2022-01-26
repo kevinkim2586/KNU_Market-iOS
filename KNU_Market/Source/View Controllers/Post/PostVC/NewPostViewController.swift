@@ -112,7 +112,6 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     let upperImageSlideshow = ImageSlideshow().then {
         $0.contentScaleMode = .scaleAspectFill              /// 특이하게 여기서 contentMode가 아니라 contentScaleMode 다
         $0.clipsToBounds = true
-        $0.slideshowInterval = 4
         let pageIndicator = UIPageControl()
         $0.pageIndicator = pageIndicator
         $0.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 10))

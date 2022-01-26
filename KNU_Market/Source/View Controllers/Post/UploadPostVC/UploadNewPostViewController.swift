@@ -878,8 +878,6 @@ extension UploadNewPostViewController: UICollectionViewDelegate, UICollectionVie
                 .map { "(\($0)/5)" }
                 .bind(to: cell.addPostImageView.label.rx.text)
                 .disposed(by: disposeBag)
-    
-            
             
             return cell
         }
@@ -901,6 +899,8 @@ extension UploadNewPostViewController: UICollectionViewDelegate, UICollectionVie
         }
     }
 }
+
+//MARK: - UserPickedPostImageDelegate
 
 extension UploadNewPostViewController: UserPickedPostImageDelegate {
     

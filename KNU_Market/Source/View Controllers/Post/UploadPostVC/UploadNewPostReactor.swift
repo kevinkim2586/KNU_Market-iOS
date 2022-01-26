@@ -48,7 +48,6 @@ final class UploadNewPostReactor: Reactor {
         case setIsLoading(Bool)
         case setErrorMessage(String)
         
-        case setImageUids([String])
         case appendImageUid(String)
         
         case setCompleteUploadingPost(Bool)
@@ -138,7 +137,7 @@ final class UploadNewPostReactor: Reactor {
             let uploadFunction: Observable<Mutation> = determineIfImageUploadIsNeeded() == true
             ? uploadImagesFirst()
             : uploadActionType
-
+            
             return Observable.concat([
                 Observable.just(Mutation.setIsLoading(true)),
                 uploadFunction,
@@ -161,7 +160,7 @@ final class UploadNewPostReactor: Reactor {
             
         case .deleteImages(let index):
             state.images.remove(at: index)
-
+            
         case .setTitle(let title):
             state.title = title
             
@@ -186,12 +185,9 @@ final class UploadNewPostReactor: Reactor {
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
             
-        case .setImageUids(let imageUids):
-            state.imageUids = imageUids
-            
         case .appendImageUid(let imageUid):
             state.imageUids.append(imageUid)
-
+            
             if state.images.count == state.imageUids.count {
                 state.isCompletedImageUpload = true
             }
@@ -228,7 +224,6 @@ extension UploadNewPostReactor {
                     .map { result in
                         switch result {
                         case .success(let imageModel):
-                            print("✅ uploaded imageUID: \(imageModel.uid)")
                             return .appendImageUid(imageModel.uid)
                         case .error(_):
                             return .setErrorMessage(self.uploadErrorMessage)

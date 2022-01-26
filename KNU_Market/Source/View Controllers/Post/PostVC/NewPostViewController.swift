@@ -95,7 +95,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     
     //MARK: - UI
     
-    lazy var shadowView: UIView = {
+    lazy var upperShadowView: UIView = {
         let view = UIView()
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
@@ -124,6 +124,11 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         $0.layer.borderWidth = 0.3
         $0.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    let dragIndicatorView = UIView().then {
+        $0.backgroundColor = .lightGray
+        $0.layer.cornerRadius = 3
     }
     
     let profileImageView = UIImageView().then {
@@ -277,7 +282,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         super.setupLayout()
         
         view.addSubview(upperImageSlideshow)
-        view.addSubview(shadowView)
+        view.addSubview(upperShadowView)
         view.addSubview(bottomContainerView)
         view.addSubview(urlLinkButton)
         view.addSubview(postControlButtonView)
@@ -286,6 +291,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             userInfoStackView.addArrangedSubview($0)
         }
         
+        bottomContainerView.addSubview(dragIndicatorView)
         bottomContainerView.addSubview(userInfoStackView)
         bottomContainerView.addSubview(postTitleLabel)
         bottomContainerView.addSubview(gatherStatusView)
@@ -307,7 +313,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             $0.height.equalTo(view.frame.height / 2)
         }
         
-        shadowView.snp.makeConstraints {
+        upperShadowView.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
             $0.height.equalTo(70)
         }
@@ -327,6 +333,13 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             $0.width.equalTo(124)
             $0.height.equalTo(39)
             $0.bottom.equalTo(bottomContainerView.snp.top).offset(-15)
+            $0.centerX.equalToSuperview()
+        }
+        
+        dragIndicatorView.snp.makeConstraints {
+            $0.width.equalTo(50)
+            $0.height.equalTo(6)
+            $0.top.equalTo(bottomContainerView.snp.top).inset(10)
             $0.centerX.equalToSuperview()
         }
         
@@ -773,11 +786,17 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .filter { $0 == true }
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                let vc = ChatViewController()
-                vc.roomUID = reactor.currentState.pageId
-                vc.chatRoomTitle = reactor.currentState.title
-                vc.isFirstEntrance = reactor.currentState.isFirstEntranceToChat
-                self.navigationController?.pushViewController(vc, animated: true)
+                
+                if reactor.currentState.isFromChatVC {
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    
+                    let vc = ChatViewController()
+                    vc.roomUID = reactor.currentState.pageId
+                    vc.chatRoomTitle = reactor.currentState.title
+                    vc.isFirstEntrance = reactor.currentState.isFirstEntranceToChat
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             })
             .disposed(by: disposeBag)
         

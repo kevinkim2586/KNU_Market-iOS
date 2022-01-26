@@ -558,7 +558,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         doneButton.rx.tap
-            .map { Reactor.Action.uploadPost }
+            .map { Reactor.Action.pressedUploadPost }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
@@ -826,6 +826,15 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
+        reactor.state
+            .map { $0.isCompletedImageUpload }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.reactor?.action.onNext(.uploadPost)
+            })
+            .disposed(by: disposeBag)
         
         
 

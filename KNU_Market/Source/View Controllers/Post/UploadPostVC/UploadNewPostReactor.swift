@@ -32,6 +32,7 @@ final class UploadNewPostReactor: Reactor {
         case updateGatheringPeople(String)
         case updateReferenceUrl(String)
         case updatePostDetail(String)
+        case pressedUploadPost
         case uploadPost
     }
     
@@ -48,6 +49,7 @@ final class UploadNewPostReactor: Reactor {
         case setErrorMessage(String)
         
         case setImageUids([String])
+        case appendImageUid(String)
         
         case setCompleteUploadingPost(Bool)
     }
@@ -68,7 +70,9 @@ final class UploadNewPostReactor: Reactor {
         var didCompleteUpload: Bool = false
         var didUpdatePost: Bool = false
         
-        var imageUids: [String]?
+        var imageUids: [String] = []
+        
+        var isCompletedImageUpload: Bool = false
         
         
         var editPostModel: EditPostModel?
@@ -123,20 +127,26 @@ final class UploadNewPostReactor: Reactor {
         case .updatePostDetail(let postDetail):
             return Observable.just(Mutation.setDetail(postDetail))
             
-        case .uploadPost:
-            
-            // 공구글 신규 업로드인지, 기존 글 수정인지 따라 수행할 함수 변경
-            let uploadFunction: Observable<Mutation> = determineUploadAction() == .uploadNewPost
+        case .pressedUploadPost:
+        
+            // 공구글 신규 업로드인지, 기존 글 수정인지에 따라 수행할 함수 변경
+            let uploadActionType: Observable<Mutation> = determineUploadAction() == .uploadNewPost
             ? uploadPost()
             : updatePost()
-            
+
+            // 이미지를 업로드 할 필요가 있으면 업로드
+            let uploadFunction: Observable<Mutation> = determineIfImageUploadIsNeeded() == true
+            ? uploadImagesFirst()
+            : uploadActionType
+
             return Observable.concat([
                 Observable.just(Mutation.setIsLoading(true)),
                 uploadFunction,
                 Observable.just(Mutation.setIsLoading(false))
             ])
             
-           
+        case .uploadPost:
+            return uploadPost()
         }
     }
     
@@ -179,13 +189,19 @@ final class UploadNewPostReactor: Reactor {
         case .setImageUids(let imageUids):
             state.imageUids = imageUids
             
+        case .appendImageUid(let imageUid):
+            state.imageUids.append(imageUid)
+
+            if state.images.count == state.imageUids.count {
+                state.isCompletedImageUpload = true
+            }
+            
         case .setCompleteUploadingPost(let didComplete):
             state.didCompleteUpload = didComplete
             
         }
         return state
     }
-    
 }
 
 //MARK: - API Methods
@@ -196,23 +212,29 @@ extension UploadNewPostReactor {
         return self.currentState.editPostModel != nil ? .updateExistingPost : .uploadNewPost
     }
     
-    private func uploadImagesToServer() -> Observable<Mutation> {
+    private func determineIfImageUploadIsNeeded() -> Bool {
+        return self.currentState.images.isEmpty ? false : true
+    }
+    
+    private func uploadImagesFirst() -> Observable<Mutation> {
         
-        var imageUid: [String] = []
-        for image in self.currentState.images {
-            
-            _ = self.mediaService.uploadImage(with: image.jpegData(compressionQuality: 1.0) ?? Data())
-                .map { result in
-                    switch result {
-                    case .success(let imageResponseModel):
-                        imageUid.append(imageResponseModel.uid)
-                        
-                    case .error(let error):
-                        print("❗️ Error uploading image to server: \(error.errorDescription)")
+        let imageDatas: [Data] = self.currentState.images.map { $0.jpegData(compressionQuality: 1.0) ?? Data() }
+        
+        return Observable.from(imageDatas)
+            .concatMap { imageData -> Observable<Mutation> in
+                
+                return self.mediaService.uploadImage(with: imageData)
+                    .asObservable()
+                    .map { result in
+                        switch result {
+                        case .success(let imageModel):
+                            print("✅ uploaded imageUID: \(imageModel.uid)")
+                            return .appendImageUid(imageModel.uid)
+                        case .error(_):
+                            return .setErrorMessage(self.uploadErrorMessage)
+                        }
                     }
-                }
-        }
-        return Observable.just(Mutation.setImageUids(imageUid))
+            }
     }
     
     private func uploadPost() -> Observable<Mutation> {
@@ -220,13 +242,12 @@ extension UploadNewPostReactor {
         guard
             let title           = currentState.title,
             let price           = Int(currentState.price ?? "0"),
-            let shippingFee     = Int(currentState.shippingFee ?? "0"),
+            let shippingFee     = currentState.shippingFee == "" ? 0 : Int(currentState.shippingFee ?? "0"),
             let peopleGathering = Int(currentState.totalGatheringPeople ?? "2"),
             let detail          = currentState.postDetail
         else {
-            print("❗️ uploadPost error ELSE")
             return .just(Mutation.setErrorMessage(self.uploadErrorMessage))
-            }
+        }
         
         let uploadPostDTO = UploadPostRequestDTO(
             title: title,
@@ -234,7 +255,7 @@ extension UploadNewPostReactor {
             shippingFee: shippingFee,
             referenceUrl: currentState.referenceUrl ?? nil,
             peopleGathering: peopleGathering,
-            imageUIDs: currentState.imageUids ?? nil,
+            imageUIDs: currentState.imageUids,
             detail: detail
         )
         
@@ -253,6 +274,4 @@ extension UploadNewPostReactor {
     private func updatePost() -> Observable<Mutation> {
         return .never()
     }
-    
-
 }

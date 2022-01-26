@@ -98,7 +98,7 @@ final class MyPageViewReactor: Reactor {
                 .flatMap { result -> Observable<Mutation> in
                     switch result {
                     case .success(let uploadImageResponseModel):
-                        
+                     
                         let imageUid = uploadImageResponseModel.uid             // 서버 이미지 업로드 성공 시 날아오는 신규 image uid
                         
                         return self.userService.updateUserInfo(type: .profileImage, updatedInfo: imageUid)

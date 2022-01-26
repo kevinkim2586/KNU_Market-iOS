@@ -44,7 +44,7 @@ final class MediaService: MediaServiceType {
                 }
             }
     }
-    
+  
     func deleteImage(uid: String) -> Single<NetworkResult> {
         
         return network.requestWithoutMapping(.deleteImage(uid: uid))

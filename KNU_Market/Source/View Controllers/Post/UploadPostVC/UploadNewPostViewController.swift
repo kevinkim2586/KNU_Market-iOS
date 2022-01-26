@@ -21,9 +21,9 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     
     //MARK: - Properties
     
-    private let minimumRequiredPeople: Int = 2
-    
+    let minimumRequiredPeople: Int = 2
     let maxNumberOfImagesAllowed: Int = 5
+    let maxTextFieldNumber: Int = 9999999
     
     lazy var imagePickerConfiguration: YPImagePickerConfiguration = {
         var config = YPImagePickerConfiguration()
@@ -37,7 +37,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
     //MARK: - Constants
     
     struct Texts {
-        static let textViewPlaceholder: String = "공구 내용을 작성해주세요. 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다."
+        static let textViewPlaceholder: String = "공구 내용을 작성해주세요. 크누마켓의 취지와 맞지 않는 글은 게시가 제한될 수 있습니다.\n\n게시 가능 글 종류\n•배달음식 공구\n•온라인 쇼핑 공구\n•물물교환 및 나눔"
     }
     
     struct Fonts {
@@ -232,6 +232,8 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         $0.text = "0"
         $0.font = UIFont(name: K.Fonts.robotoBold, size: 26)
         $0.textColor = .black
+        $0.adjustsFontSizeToFitWidth = true
+        $0.minimumScaleFactor = 0/8
     }
     
     let wonLabel = UILabel().then {
@@ -461,6 +463,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         perPersonPriceStackView.snp.makeConstraints {
             $0.top.equalTo(dividerLine_4.snp.bottom).offset(Metrics.topOffset)
             $0.right.equalToSuperview().inset(Metrics.dividerLineInset)
+            $0.width.lessThanOrEqualTo(view.frame.size.width - 100)
         }
         
         /// 상품 URL
@@ -583,6 +586,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         /// 제품명
+        
         reactor.state
             .map { $0.title }
             .filter { $0 != nil }
@@ -590,6 +594,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         /// 제품 가격
+       
         reactor.state
             .map { $0.price }
             .filter { $0 != nil }
@@ -599,13 +604,16 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
                 return Int(price) ?? 0
             }
             .map { priceInteger -> String in
-                return priceInteger.withDecimalSeparator
+                return priceInteger >= self.maxTextFieldNumber
+                ? "0"
+                : priceInteger.withDecimalSeparator
             }
             .bind(to: priceTextField.rx.text)
             .disposed(by: disposeBag)
         
         
         /// 배송비
+        
         reactor.state
             .map { $0.shippingFee }
             .filter { $0 != nil }
@@ -615,17 +623,34 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
                 return Int(shippingFee) ?? 0
             }
             .map { shippingInteger -> String in
-                return shippingInteger.withDecimalSeparator
+                return shippingInteger >= self.maxTextFieldNumber
+                ? "0"
+                : shippingInteger.withDecimalSeparator
             }
             .bind(to: shippingFeeTextField.rx.text)
             .disposed(by: disposeBag)
 
 
         /// 모집 인원
+        
+        reactor.state
+            .map { $0.totalGatheringPeople }
+            .filter { $0 != nil }
+            .map { gatheringPeople -> Int in
+                guard let gatheringPeople = gatheringPeople else { return 2 }
+                return Int(gatheringPeople) ?? 2
+            }
+            .map { gatheringPeopleInteger -> String in
+                return gatheringPeopleInteger >= self.maxTextFieldNumber
+                ? ""
+                : "\(gatheringPeopleInteger)"
+            }
+            .bind(to: gatheringPeopleTextField.rx.text)
+            .disposed(by: disposeBag)
 
         reactor.state
             .map { $0.totalGatheringPeople }
-            .debounce(.milliseconds(700), scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(600), scheduler: MainScheduler.instance)
             .filter { $0 != nil }
             .filter { $0!.isEmpty == false }
             .withUnretained(self)
@@ -638,7 +663,6 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
                 : "2"
             })
             .disposed(by: disposeBag)
-        
         
         /// 1인당 가격
         
@@ -660,7 +684,11 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
                 let perPersonPrice: Int = (price + shippingFee) / people
                 return perPersonPrice
             }
-            .map { $0.withDecimalSeparator }
+            .map { perPersonPrice -> String in
+                return perPersonPrice >= self.maxTextFieldNumber            // 1백만원 넘어가면 협의
+                ? "협의"
+                : perPersonPrice.withDecimalSeparator
+            }
             .bind(to: pricePerPersonLabel.rx.text)
             .disposed(by: disposeBag)
         
@@ -850,7 +878,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .withUnretained(self)
             .subscribe(onNext: { _ in
                 NotificationCenterService.updatePostList.post()
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: true)
             })
             .disposed(by: disposeBag)
         
@@ -870,15 +898,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .take(1)
             .withUnretained(self)
             .subscribe(onNext: { (_, model) in
-                
-                print("✅ edit post model is not nil: \(model)")
-                
-                
                 self.reactor?.action.onNext(.configurePageWithEditModel)
-                
-                
-                
-                
             })
             .disposed(by: disposeBag)
             

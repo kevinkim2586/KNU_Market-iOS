@@ -7,7 +7,7 @@ struct UpdatePostRequestDTO {
     
     init(
         title: String,
-        location: Int,
+        location: Int = Location.list.count,
         detail: String,
         imageUIDs: [String],
         totalGatheringPeople: Int,

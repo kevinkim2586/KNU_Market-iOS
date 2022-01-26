@@ -147,7 +147,12 @@ final class UploadNewPostReactor: Reactor {
             ])
             
         case .uploadPost:
-            return uploadPost()
+            
+            let uploadActionType: Observable<Mutation> = determineUploadAction() == .uploadNewPost
+            ? uploadPost()
+            : updatePost()
+            
+            return uploadActionType
             
         case .configurePageWithEditModel:
             return Observable.concat([
@@ -295,7 +300,40 @@ extension UploadNewPostReactor {
     
     private func updatePost() -> Observable<Mutation> {
         
-//        return self.postService.updatePost(uid: <#T##String#>, with: <#T##UpdatePostRequestDTO#>)
-        return .never()
+        guard
+            let title                   = currentState.title,
+            let detail                  = currentState.postDetail,
+            let totalGatheringPeople    = Int(currentState.totalGatheringPeople ?? "2"),
+            let currentlyGatheredPeople = currentState.editPostModel?.currentlyGatheredPeople,
+            let referenceUrl            = currentState.referenceUrl,
+            let shippingFee             = currentState.shippingFee == "" ? 0 : Int(currentState.shippingFee ?? "0"),
+            let price                   = Int(currentState.price ?? "0"),
+            let pageUid                 = currentState.editPostModel?.pageUID
+        else {
+            return .just(Mutation.setErrorMessage(self.uploadErrorMessage))
+        }
+        
+        let updateModel = UpdatePostRequestDTO(
+            title: title,
+            detail: detail,
+            imageUIDs: currentState.imageUids,
+            totalGatheringPeople: totalGatheringPeople ,
+            currentlyGatheredPeople: currentlyGatheredPeople,
+            referenceUrl: referenceUrl,
+            shippingFee: shippingFee,
+            price: price
+        )
+        
+        return self.postService.updatePost(uid: pageUid, with: updateModel)
+            .asObservable()
+            .map { result in
+                switch result {
+                case .success:
+                    NotificationCenterService.didUpdatePost.post()
+                    return .setCompleteUploadingPost(true)
+                case .error(_):
+                    return .setErrorMessage(self.uploadErrorMessage)
+                }
+            }
     }
 }

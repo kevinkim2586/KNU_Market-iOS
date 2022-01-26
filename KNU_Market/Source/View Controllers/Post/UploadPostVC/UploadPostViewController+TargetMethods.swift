@@ -76,7 +76,6 @@ extension UploadPostViewController {
             
             self.showSimpleBottomAlert(with: ValidationError.OnUploadPost.detailTooShortOrLong.rawValue)
             return false
-            
         }
         catch { return false }
         

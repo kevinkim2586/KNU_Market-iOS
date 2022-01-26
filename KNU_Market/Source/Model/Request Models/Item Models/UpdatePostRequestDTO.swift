@@ -9,13 +9,13 @@ struct UpdatePostRequestDTO {
         title: String,
         location: Int = Location.list.count,
         detail: String,
-        imageUIDs: [String],
+        imageUIDs: [String]?,
         totalGatheringPeople: Int,
         currentlyGatheredPeople: Int,
         isCompletelyDone: Bool? = nil,
         referenceUrl: String?,
         shippingFee: Int?,
-        price: Int
+        price: Int?
     ) {
         
         parameters["title"] = title
@@ -23,17 +23,13 @@ struct UpdatePostRequestDTO {
         parameters["content"] = detail
         parameters["maxHeadcount"] = totalGatheringPeople
         parameters["currentHeadcount"] = currentlyGatheredPeople
-        parameters["image"] = imageUIDs
-        parameters["price"] = price
+        parameters["image"] = imageUIDs ?? []
+        parameters["price"] = price ?? 0
         
-        if let referenceUrl = referenceUrl {
-            parameters["referenceUrl"] = referenceUrl
-        }
-        
-        if let shippingFee = shippingFee {
-            parameters["shippingFee"] = shippingFee
-        }
-    
+        parameters["referenceUrl"] = referenceUrl ?? nil
+        parameters["shippingFee"] = shippingFee ?? 0
+
+   
         if isCompletelyDone != nil {
             parameters["isArchived"] = isCompletelyDone
         }

@@ -884,14 +884,12 @@ extension NewPostViewController: LabelSwitchDelegate {
                     switch actionType {
                     case .ok:
                         self.reactor?.action.onNext(.updatePostAsRegathering)
-                        
                     case .cancel:
                         self.gatherStatusToggleSwitch.flipSwitch()
                     }
                 })
                 .disposed(by: disposeBag)
                     
-        
             case .R:
                 print("✅ Right Side")
             
@@ -905,22 +903,14 @@ extension NewPostViewController: LabelSwitchDelegate {
             vc.alertObserver
                 .withUnretained(self)
                 .subscribe(onNext: { (_, actionType) in
-      
-                    
                     switch actionType {
                     case .ok:
                         self.reactor?.action.onNext(.markPostDone)
-                        
                     case .cancel:
-                        
                         self.gatherStatusToggleSwitch.flipSwitch()
-                        
-                        
                     }
                 })
                 .disposed(by: disposeBag)
-            
-            
         }
     }
 }

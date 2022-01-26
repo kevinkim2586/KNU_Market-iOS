@@ -48,7 +48,6 @@ final class PostViewReactor: Reactor {
         case setDidMarkPostDone(Bool, String)
         case setDidEnterChat(Bool, Bool)            // DidEnterChat, isFirstEntranceToChat
     
-        case setPostAsGatherComplete(Bool)
         
         case setEditPostModel(EditPostModel)
  
@@ -288,10 +287,10 @@ final class PostViewReactor: Reactor {
             state.didDeletePost = didDelete
             state.alertMessage = alertMessage
             
-            
         case .setDidMarkPostDone(let didMarkPostDone, let alertMessage):
             state.didMarkPostDone = didMarkPostDone
             state.alertMessage = alertMessage
+            state.alertMessageType = .simpleBottom
             
         case .setDidEnterChat(let didEnterChat, let isFirstEntranceToChat):
             state.didEnterChat = didEnterChat
@@ -303,10 +302,6 @@ final class PostViewReactor: Reactor {
         case .setAlertMessage(let alertMessage, let alertMessageType):
             state.alertMessage = alertMessage
             state.alertMessageType = alertMessageType
-            
-        case .setPostAsGatherComplete(let gatherComplete):
-    
-            break
             
         case .setEditPostModel(let editPostModel):
             state.editModel = editPostModel
@@ -398,31 +393,31 @@ extension PostViewReactor {
     }
     
     private func updatePostAsRegathering() -> Observable<Mutation> {
+
         
-        print("✅ updatePostAsRegathering")
-        return .empty()
-//        let model = UpdatePostRequestDTO(
-//            title: currentState.title,
-//            location: 0,
-//            detail: currentState.detail,
-//            imageUIDs: currentState.postModel?.imageUIDs ?? [],
-//            totalGatheringPeople: currentState.totalGatheringPeople,
-//            currentlyGatheredPeople: currentState.currentlyGatheredPeople,
-//            isCompletelyDone: false
-//        )
-//
-//        return postService.updatePost(uid: currentState.pageId, with: model)
-//            .asObservable()
-//            .map { result in
-//                switch result {
-//                case .success:
-//                    NotificationCenterService.updatePostList.post()
-//                    return Mutation.setPostAsGatherComplete(true)
-//
-//                case .error(let error):
-//                    return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
-//                }
-//            }
+        let updateModel = UpdatePostRequestDTO(
+            title: currentState.postModel.title,
+            detail: currentState.postModel.postDetail,
+            imageUIDs: currentState.postModel.imageUIDs,
+            totalGatheringPeople: currentState.totalGatheringPeople,
+            currentlyGatheredPeople: currentState.currentlyGatheredPeople,
+            isCompletelyDone: false,                        // 모집 해제이니까 이 파라미터가 들어가야함
+            referenceUrl: currentState.postModel.referenceUrl,
+            shippingFee: currentState.postModel.shippingFee,
+            price: currentState.postModel.price ?? 0
+        )
+        
+        return postService.updatePost(uid: currentState.postModel.uuid, with: updateModel)
+            .asObservable()
+            .map { result in
+                switch result {
+                case .success:
+                    NotificationCenterService.updatePostList.post()
+                    return Mutation.empty
+                case .error(let error):
+                    return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
+                }
+            }
     }
 
     private func joinChat() -> Observable<Mutation> {

@@ -467,6 +467,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
         referenceUrlGuideLabel.snp.makeConstraints {
             $0.top.equalTo(dividerLine_4.snp.bottom).offset(Metrics.topOffset + 36)
             $0.left.equalToSuperview().inset(Metrics.defaultSideInset + 10)
+            $0.width.greaterThanOrEqualTo(50)
         }
         
         referenceUrlTextField.snp.makeConstraints {

@@ -8,6 +8,7 @@
 import UIKit
 import SDWebImage
 import SnapKit
+<<<<<<< HEAD
 import RxSwift
 import RxCocoa
 import ReactorKit
@@ -15,11 +16,17 @@ import ImageSlideshow
 import RxGesture
 
 class PostViewController: BaseViewController, ReactorKit.View {
+=======
+import ImageSlideshow
+import SafariServices
+
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
 
     typealias Reactor = PostViewReactor
     
     //MARK: - Properties
     
+<<<<<<< HEAD
     private lazy var upperImageViewHeight = view.frame.height / 2
     private lazy var upperImageViewMaxHeight = view.frame.height / 2
     private lazy var upperImageViewMinHeight = 100.f
@@ -80,6 +87,10 @@ class PostViewController: BaseViewController, ReactorKit.View {
         return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
     }
     
+=======
+    var viewModel: PostViewModel!
+    var isFromChatVC: Bool = false
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
     
     //MARK: - Constants
     
@@ -111,6 +122,30 @@ class PostViewController: BaseViewController, ReactorKit.View {
         view.layer.insertSublayer(gradientLayer, at: 0)
         return view
     }()
+<<<<<<< HEAD
+=======
+        
+    lazy var postHeaderView: PostHeaderView = {
+        let headerView = PostHeaderView(
+            frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: headerViewHeight),
+            currentVC: self
+        )
+       return headerView
+    }()
+
+    lazy var postTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorColor = .clear
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = true
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.tintColor = .clear
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshPage), for: .valueChanged)
+        return tableView
+    }()
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
     
     let upperImageSlideshow = ImageSlideshow().then {
         $0.contentScaleMode = .scaleAspectFill              /// 특이하게 여기서 contentMode가 아니라 contentScaleMode 다
@@ -351,7 +386,22 @@ class PostViewController: BaseViewController, ReactorKit.View {
             $0.top.equalTo(upperImageSlideshow.snp.bottom).offset(-25)
             $0.bottom.left.right.equalToSuperview()
         }
+<<<<<<< HEAD
         
+=======
+    }
+    
+    private func configure() {
+        loadInitialMethods()
+        createObservers()
+        configureHeaderView()
+    }
+    
+    private func loadInitialMethods() {
+        viewModel.fetchPostDetails()
+        viewModel.fetchEnteredRoomInfo()
+    }
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
 
         urlLinkButton.snp.makeConstraints {
             $0.width.equalTo(124)

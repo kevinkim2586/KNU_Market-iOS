@@ -26,6 +26,7 @@ extension UserDefaults {
         static let joinedChatRoomPIDs               = "joinedChatRoomPIDs"
         
         static let userSeenPopupUids                = "userSeenPopupUids"
-        static let userSetPopupBlockDate            = "userSetPopupBlockDate"
+        static let userSetPopupBlockTime            = "userSetPopupBlockTime"
+        static let didUserBlockPopupForADay         = "didUserBlockPopupForADay"
     }
 }

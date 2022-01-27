@@ -154,6 +154,7 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
     
     let shippingFeeGuideLabel = UploadPostGuideLabel(indicatorIsRequired: false, labelTitle: "배송비")
     
+<<<<<<< HEAD
     let shippingFeeTextField = UITextField().then {
         $0.placeholder = "0"
         $0.font = Fonts.guideLabel
@@ -169,6 +170,30 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
         $0.font = Fonts.unitLabel
         $0.textColor = Colors.unitLabel
     }
+=======
+    lazy var postDetailTextView: UITextView = {
+        let textView = UITextView()
+        textView.delegate = self
+        textView.layer.borderWidth = 0.5
+        textView.layer.cornerRadius = 5.0
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.clipsToBounds = true
+        textView.text = Texts.textViewPlaceholder
+        textView.textColor = UIColor.lightGray
+        textView.tintColor = UIColor(named: K.Color.appColor)
+        textView.font = .systemFont(ofSize: 14)
+        return textView
+    }()
+
+    lazy var uploadPostBarButtonItem = UIBarButtonItem(
+        title: "완료",
+        style: .plain,
+        target: self,
+        action: #selector(pressedUploadButton)
+    )
+
+    //MARK: - Initialization
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
     
     let shippingFeeStackView = UIStackView().then {
         $0.axis = .horizontal
@@ -299,7 +324,11 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+<<<<<<< HEAD
         title = "공구글 올리기"
+=======
+        configure()
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
     }
     
     //MARK: - UI Setup
@@ -307,8 +336,18 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
     override func setupLayout() {
         super.setupLayout()
         
+<<<<<<< HEAD
         view.addSubview(postScrollView)
         postScrollView.addSubview(contentView)
+=======
+        navigationItem.rightBarButtonItem = uploadPostBarButtonItem
+        
+        view.addSubview(postScrollView)
+        postScrollView.addSubview(contentView)
+        
+        contentView.addSubview(postTitleTextField)
+        contentView.addSubview(dividerLineImageView_1)
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
         contentView.addSubview(postImagesCollectionView)
         
         // 제품명
@@ -356,7 +395,11 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
         contentView.addSubview(postDetailGuideLabel)
         contentView.addSubview(horizontalLine)
         contentView.addSubview(postDetailTextView)
+<<<<<<< HEAD
         contentView.addSubview(doneButton)
+=======
+        
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
     }
     
     override func setupConstraints() {

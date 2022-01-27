@@ -95,6 +95,7 @@ struct UIHelper {
     
     
     
+<<<<<<< HEAD
     static func addNavigationBar(to view: UIView) -> UINavigationBar {
         
         let height: CGFloat
@@ -143,6 +144,10 @@ struct UIHelper {
         naviBar.items = [naviItem]
         return naviBar
     }
+=======
+    
+    
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
     
     static func addNavigationBarWithDismissButton(in view: UIView, title: String = "") {
         

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+import Foundation
 import Moya
 
 enum MyPageAPI {

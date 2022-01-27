@@ -187,15 +187,29 @@ class User {
     
     //MARK: - 팝업 관련
     
-    var userSetPopupBlockDate: Date? {
+    var userSetPopupBlockTime: Date? {
         get {
-            return UserDefaults.standard.object(forKey: UserDefaults.Keys.userSetPopupBlockDate) as? Date
+            return UserDefaults.standard.object(forKey: UserDefaults.Keys.userSetPopupBlockTime) as? Date
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.userSetPopupBlockDate)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.userSetPopupBlockTime)
         }
     }
+<<<<<<< HEAD
 
+=======
+    
+    var didUserBlockPopupForADay: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaults.Keys.didUserBlockPopupForADay)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.didUserBlockPopupForADay)
+        }
+    }
+    
+    
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
     //MARK: - User Settings
     
     var postFilterOption: PostFilterOptions {
@@ -239,7 +253,8 @@ extension User {
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.notificationList)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.isNotFirstAppLaunch)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.postFilterOptions)
-        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.userSetPopupBlockDate)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.didUserBlockPopupForADay)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.userSetPopupBlockTime)
     
         
         ChatNotifications.list.removeAll()

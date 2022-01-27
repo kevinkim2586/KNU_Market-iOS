@@ -41,8 +41,8 @@ class PostHeaderView: UIView {
         
         slideShow.addGestureRecognizer(recognizer)
         slideShow.contentScaleMode = .scaleAspectFill
-        slideShow.slideshowInterval = 3
-        slideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: 80))
+        slideShow.slideshowInterval = 5
+        slideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: 75))
         return slideShow
     }()
     

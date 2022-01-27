@@ -26,7 +26,6 @@
 		626D66F1274291AE00CB7F4F /* InquiryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F0274291AE00CB7F4F /* InquiryListViewController.swift */; };
 		626D66F3274291EC00CB7F4F /* InquiryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F2274291EC00CB7F4F /* InquiryTableViewCell.swift */; };
 		626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F82742920300CB7F4F /* InquiryListmodel.swift */; };
-		6273750E27647DA6008A29B5 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6273750D27647DA6008A29B5 /* PostCell.swift */; };
 		62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */; };
 		6C49951C271FAD3D00E8DB4B /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49951B271FAD3D00E8DB4B /* UserDefaultKeys.swift */; };
 		7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */; };
@@ -232,6 +231,7 @@
 		7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */; };
 		7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */; };
 		7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */; };
+<<<<<<< HEAD
 		7CDADA0726BE623100F7F58F /* DateHelper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */; };
 		7CDD5B1F2795168F0082E3FC /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */; };
 		7CDD5B202795168F0082E3FC /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */; };
@@ -252,6 +252,10 @@
 		7CDD5B4227967E470082E3FC /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD5B4127967E470082E3FC /* Int+Extension.swift */; };
 		7CE0A41627918C400034CC69 /* KMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0A41527918C400034CC69 /* KMTabBarController.swift */; };
 		7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEAC991275F7AFF005AF338 /* UserAPI.swift */; };
+=======
+		7CD1522B26AA9DB400F2C466 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */; };
+		7CDADA0726BE623100F7F58F /* DateHelper + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper + Extension.swift */; };
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
 		7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */; };
 		7CEC192027017CB500C2D671 /* ChooseVerificationOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */; };
 		7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */; };
@@ -303,7 +307,6 @@
 		626D66F0274291AE00CB7F4F /* InquiryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryListViewController.swift; sourceTree = "<group>"; };
 		626D66F2274291EC00CB7F4F /* InquiryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryTableViewCell.swift; sourceTree = "<group>"; };
 		626D66F82742920300CB7F4F /* InquiryListmodel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InquiryListmodel.swift; sourceTree = "<group>"; };
-		6273750D27647DA6008A29B5 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageReactor.swift; sourceTree = "<group>"; };
 		6C49951B271FAD3D00E8DB4B /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + UpdateInfo.swift"; sourceTree = "<group>"; };
@@ -512,6 +515,7 @@
 		7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
 		7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper+Extension.swift"; sourceTree = "<group>"; };
 		7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
 		7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -532,6 +536,10 @@
 		7CDD5B4127967E470082E3FC /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		7CE0A41527918C400034CC69 /* KMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMTabBarController.swift; sourceTree = "<group>"; };
 		7CEAC991275F7AFF005AF338 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+=======
+		7CD1522A26AA9DB400F2C466 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
+		7CDADA0626BE623100F7F58F /* DateHelper + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper + Extension.swift"; sourceTree = "<group>"; };
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
 		7CEC191927016A2700C2D671 /* EmailForLostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailForLostPasswordViewController.swift; sourceTree = "<group>"; };
 		7CEC191F27017CB500C2D671 /* ChooseVerificationOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVerificationOptionViewController.swift; sourceTree = "<group>"; };
 		7CEDBB5A2702B1DE0078F5E1 /* KMBottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMBottomButton.swift; sourceTree = "<group>"; };
@@ -604,6 +612,7 @@
 			isa = PBXGroup;
 			children = (
 				625B0E3E2741F75C003968BA /* BaseAPI.swift */,
+<<<<<<< HEAD
 				7CEAC991275F7AFF005AF338 /* UserAPI.swift */,
 				7CC69A752767027C00105FC0 /* PostAPI.swift */,
 				7C8E82CF2782D10E002F7CFB /* ChatAPI.swift */,
@@ -612,6 +621,8 @@
 				7CC69A7B27670E3B00105FC0 /* PopupAPI.swift */,
 				625B0E3C2741F741003968BA /* MyPageAPI.swift */,
 				7CDD5B26279543840082E3FC /* BannerAPI.swift */,
+=======
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -939,7 +950,6 @@
 				7CBFDA79274005DF000C8C8A /* PostCellViewModel.swift */,
 				7CBFDA77273FE01F000C8C8A /* PostTableViewCell.swift */,
 				7C83EE49274121FF00CF1680 /* ChatListTableViewCell.swift */,
-				6273750D27647DA6008A29B5 /* PostCell.swift */,
 			);
 			path = UITableViewCells;
 			sourceTree = "<group>";
@@ -1953,9 +1963,12 @@
 				7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */,
 				7C58475B277040E6005D75B2 /* IDInputViewController.swift in Sources */,
 				7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */,
+<<<<<<< HEAD
 				6273750E27647DA6008A29B5 /* PostCell.swift in Sources */,
 				7CA2D983277DC7BE00D50737 /* MyPageSectionModel.swift in Sources */,
 				7CDD5B30279544A90082E3FC /* BannerModel.swift in Sources */,
+=======
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
 				7C516C3B267F48310065E30D /* ReportUserViewController.swift in Sources */,
 				7C2A6B1F2787EC0F00C31238 /* PostListViewReactor.swift in Sources */,
 				626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */,
@@ -2052,7 +2065,6 @@
 				7C353D3E279D476100C52009 /* UploadPostGuideLabel.swift in Sources */,
 				7C9C59FA277C16F8005E08BC /* MyPageServiceType.swift in Sources */,
 				7C7480BE26FF0B31000E4666 /* StudentIdVerificationDTO.swift in Sources */,
-				7CEAC992275F7AFF005AF338 /* UserAPI.swift in Sources */,
 				7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */,
 				7C5386E42768C83B00BFEA7F /* ReportService.swift in Sources */,
 				7C9C59DE277C12B9005E08BC /* UIViewController+Alert_Extensions.swift in Sources */,
@@ -2243,7 +2255,7 @@
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.7;
+				CURRENT_PROJECT_VERSION = 1.2.6;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -2253,7 +2265,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2271,7 +2283,7 @@
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.7;
+				CURRENT_PROJECT_VERSION = 1.2.6;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -2279,8 +2291,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+<<<<<<< HEAD
 				MARKETING_VERSION = 1.2.7;
 				ONLY_ACTIVE_ARCH = YES;
+=======
+				MARKETING_VERSION = 1.2.6;
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

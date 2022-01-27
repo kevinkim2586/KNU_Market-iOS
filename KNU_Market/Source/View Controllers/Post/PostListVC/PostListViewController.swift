@@ -85,6 +85,18 @@ class PostListViewController: BaseViewController, View {
         super.viewDidLoad()
         configure()
     }
+<<<<<<< HEAD
+=======
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.post(
+            name: .getBadgeValue,
+            object: nil
+        )
+    }
+    
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
 
     //MARK: - UI Setup
     
@@ -100,11 +112,14 @@ class PostListViewController: BaseViewController, View {
     override func setupConstraints() {
         super.setupConstraints()
         
+<<<<<<< HEAD
         navigationTitleView.snp.makeConstraints {
             $0.left.equalToSuperview().inset(30)
             $0.bottom.equalToSuperview()
         }
 
+=======
+>>>>>>> parent of 6df3735... Merge pull request #40 from KNU-Mobile-Team-Project/release-1.2.2
         postListsTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

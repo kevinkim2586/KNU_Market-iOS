@@ -29,13 +29,26 @@ struct UIHelper {
             )
         )
         
-        
         postListVC.tabBarItem = UITabBarItem(title: "공동구매", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
+    
         let postNavigationController = UINavigationController(rootViewController: postListVC)
         
         postNavigationController.tabBarItem.image = UIImage(named: K.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
         postNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate)
+
+        
         postNavigationController.navigationBar.tintColor = .black
+        
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()      // 불투명한 Background
+            appearance.shadowColor = .white
+            UINavigationBar.appearance().standardAppearance = appearance        
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
+        
+        
+        
         return postNavigationController
     }
     
@@ -54,7 +67,6 @@ struct UIHelper {
         ChatNavigationController.tabBarItem.image = UIImage(named: K.Images.chatUnselected)?.withRenderingMode(.alwaysTemplate)
         ChatNavigationController.tabBarItem.selectedImage = UIImage(named: K.Images.chatSelected)?.withRenderingMode(.alwaysTemplate)
         ChatNavigationController.navigationBar.tintColor = UIColor.black
-        
         return ChatNavigationController
     }
     

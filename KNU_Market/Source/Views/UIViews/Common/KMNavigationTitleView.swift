@@ -20,7 +20,7 @@ class KMNavigationTitleView: UIView {
     
     let appCopyLabel = UILabel().then {
         $0.text = "우리가 함께 사는 곳"
-        $0.font = UIFont(name: K.Fonts.notoSansRegular, size: 2)
+        $0.font = UIFont(name: K.Fonts.notoSansRegular, size: 15)
         $0.textColor = .black
     }
     

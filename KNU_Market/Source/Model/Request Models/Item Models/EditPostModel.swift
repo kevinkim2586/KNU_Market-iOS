@@ -10,4 +10,7 @@ struct EditPostModel {
     let location: Int
     let postDetail: String
     let pageUID: String
+    let price: Int
+    let shippingFee: Int
+    let referenceUrl: String?
 }

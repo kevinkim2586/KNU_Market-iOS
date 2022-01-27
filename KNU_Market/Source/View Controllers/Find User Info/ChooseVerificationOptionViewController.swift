@@ -1,5 +1,7 @@
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 protocol ChooseVerificationOptionDelegate: AnyObject {
     func didSelectToRegister()
@@ -14,9 +16,9 @@ class ChooseVerificationOptionViewController: BaseViewController {
     //MARK: - Constants
     
     fileprivate struct Metrics {
-        static let labelSidePadding: CGFloat    = 16
-        static let buttonCornerRadius: CGFloat  = 10
-        static let buttonHeight: CGFloat        = 50
+        static let labelSidePadding     = 16.f
+        static let buttonCornerRadius   = 10.f
+        static let buttonHeight         = 50.f
     }
     
     fileprivate struct Colors {
@@ -30,95 +32,67 @@ class ChooseVerificationOptionViewController: BaseViewController {
     
     fileprivate struct Fonts {
         static let buttonTitleLabel = UIFont.systemFont(ofSize: 15, weight: .bold)
+        static let registerButtonAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 15, weight: .medium),
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
     }
     
     //MARK: - UI
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(
+    let titleLabel = UILabel().then {
+        $0.font = .preferredFont(
             forTextStyle: .title3,
             compatibleWith: .init(legibilityWeight: .bold)
         )
-        label.text = "어떤 방식으로 인증했었나요?"
-        label.textColor = .black
-        return label
-    }()
+        $0.text = "어떤 방식으로 인증했었나요?"
+        $0.textColor = .black
+    }
     
-    let detailLabel: UILabel = {
-        let label = UILabel()
-        label.text = "✻ 인증을 하지 않으신 회원은 아이디 찾기가 불가능합니다."
-        label.changeTextAttributeColor(
-            fullText: label.text!,
+    let detailLabel = UILabel().then {
+        $0.text = "✻ 인증을 하지 않으신 회원은 아이디 찾기가 불가능합니다."
+        $0.changeTextAttributeColor(
+            fullText: $0.text!,
             changeText: "인증을 하지 않으신 회원"
         )
-        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        label.textColor = .darkGray
-        return label
-    }()
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        $0.textColor = .darkGray
+    }
     
-    let registerButton: UIButton = {
-        let button = UIButton()
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 15, weight: .medium),
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-        button.setAttributedTitle(NSAttributedString(string: "회원가입을 다시 시도해주세요.", attributes: attributes), for: .normal)
-        button.setTitleColor(.darkGray, for: .normal)
-        button.addTarget(
-            self,
-            action: #selector(pressedRegisterButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
+    let registerButton = UIButton(type: .system).then {
+        $0.setAttributedTitle(NSAttributedString(string: "회원가입을 다시 시도해주세요.", attributes: Fonts.registerButtonAttributes), for: .normal)
+        $0.setTitleColor(.darkGray, for: .normal)
+    }
     
-    let studentIdButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("학생증", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = Fonts.buttonTitleLabel
-        button.backgroundColor = UIColor(named: K.Color.appColor) ?? .systemPink
-        button.setImage(Images.studentIdImage, for: .normal)
-        button.tintColor = Colors.appColor
-        button.layer.cornerRadius = Metrics.buttonCornerRadius
-        button.heightAnchor.constraint(equalToConstant: Metrics.buttonHeight).isActive = true
-        button.addBounceAnimationWithNoFeedback()
-        button.addTarget(
-            self,
-            action: #selector(pressedVerifiedUsingStudentIdButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
+    let studentIdButton = UIButton(type: .system).then {
+        $0.setTitle("학생증", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = Fonts.buttonTitleLabel
+        $0.backgroundColor = UIColor(named: K.Color.appColor) ?? .systemPink
+        $0.setImage(Images.studentIdImage, for: .normal)
+        $0.tintColor = Colors.appColor
+        $0.layer.cornerRadius = Metrics.buttonCornerRadius
+        $0.heightAnchor.constraint(equalToConstant: Metrics.buttonHeight).isActive = true
+        $0.addBounceAnimationWithNoFeedback()
+    }
     
-    let schoolMailButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("웹메일", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = Fonts.buttonTitleLabel
-        button.backgroundColor = Colors.appColor
-        button.setImage(Images.schoolMail, for: .normal)
-        button.layer.cornerRadius = Metrics.buttonCornerRadius
-        button.tintColor = Colors.appColor
-        button.heightAnchor.constraint(equalToConstant: Metrics.buttonHeight).isActive = true
-        button.addBounceAnimationWithNoFeedback()
-        button.addTarget(
-            self,
-            action: #selector(pressedVerifiedUsingEmailButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
+    let schoolMailButton = UIButton(type: .system).then {
+        $0.setTitle("웹메일", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = Fonts.buttonTitleLabel
+        $0.backgroundColor = Colors.appColor
+        $0.setImage(Images.schoolMail, for: .normal)
+        $0.layer.cornerRadius = Metrics.buttonCornerRadius
+        $0.tintColor = Colors.appColor
+        $0.heightAnchor.constraint(equalToConstant: Metrics.buttonHeight).isActive = true
+        $0.addBounceAnimationWithNoFeedback()
+    }
     
-    lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.spacing = 30
-        [studentIdButton, schoolMailButton].forEach { stackView.addArrangedSubview($0) }
-        return stackView
-    }()
+    let buttonStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.distribution = .fillEqually
+        $0.spacing = 30
+    }
     
     //MARK: - Initialization
     
@@ -126,13 +100,16 @@ class ChooseVerificationOptionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
+        title = "아이디 찾기"
+        bindUI()
     }
     
     //MARK: - UI Setup
     
     override func setupLayout() {
         super.setupLayout()
+        
+        [studentIdButton, schoolMailButton].forEach { buttonStackView.addArrangedSubview($0) }
         
         view.addSubview(titleLabel)
         view.addSubview(detailLabel)
@@ -143,62 +120,66 @@ class ChooseVerificationOptionViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        detailLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(26)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        detailLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(26)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        registerButton.snp.makeConstraints { make in
-            make.top.equalTo(detailLabel.snp.bottom).offset(4)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding + 15)
+        registerButton.snp.makeConstraints {
+            $0.top.equalTo(detailLabel.snp.bottom).offset(4)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding + 15)
         }
         
-        buttonStackView.snp.makeConstraints { make in
-            make.centerX.equalTo(view.snp.centerX)
-            make.centerY.equalTo(view.snp.centerY)
-            make.left.equalTo(view.snp.left).offset(20)
-            make.right.equalTo(view.snp.right).offset(-20)
+        buttonStackView.snp.makeConstraints {
+            $0.centerX.equalTo(view.snp.centerX)
+            $0.centerY.equalTo(view.snp.centerY)
+            $0.left.equalTo(view.snp.left).offset(20)
+            $0.right.equalTo(view.snp.right).offset(-20)
         }
-        
     }
     
     override func setupStyle() {
         super.setupStyle()
-        view.backgroundColor = .white
         setBackBarButtonItemTitle(to: "뒤로")
         setClearNavigationBarBackground()
     }
     
-    private func configure() {
-        title = "아이디 찾기"
-    }
-    
-}
-
-//MARK: - Target Methods
-
-extension ChooseVerificationOptionViewController {
-    
-    @objc private func pressedRegisterButton() {
-        dismiss(animated: true)
-        delegate?.didSelectToRegister()
-    }
-    
-    @objc private func pressedVerifiedUsingStudentIdButton() {
-        let vc = FindIdUsingStudentIdViewController()
-        pushVC(vc)
-    }
-    
-    @objc private func pressedVerifiedUsingEmailButton(_ sender: UIButton) {
-        let vc = FindIdUsingWebMailViewController()
-        pushVC(vc)
+    func bindUI() {
+        
+        registerButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.dismiss(animated: true)
+                self.delegate?.didSelectToRegister()
+            })
+            .disposed(by: disposeBag)
+        
+        studentIdButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                let vc = FindIdUsingStudentIdViewController(
+                    reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
+                )
+                self.pushVC(vc)
+            })
+            .disposed(by: disposeBag)
+        
+        schoolMailButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                let vc = FindIdUsingSchoolEmailViewController(
+                    reactor: FindUserInfoViewReactor(userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
+                )
+                self.pushVC(vc)
+            })
+            .disposed(by: disposeBag)
     }
     
     func pushVC(_ vc: UIViewController) {
@@ -206,16 +187,3 @@ extension ChooseVerificationOptionViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct ChooseVerificationOptionVC: PreviewProvider {
-
-    static var previews: some View {
-        ChooseVerificationOptionViewController().toPreview()
-    }
-}
-#endif

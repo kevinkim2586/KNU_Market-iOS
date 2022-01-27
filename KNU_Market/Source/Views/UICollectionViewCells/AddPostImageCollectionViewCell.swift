@@ -1,22 +1,14 @@
 import UIKit
-import BSImagePicker
 import Photos
 import SnapKit
-
-protocol AddPostImageDelegate: AnyObject {
-    func didPickImagesToUpload(images: [UIImage])
-}
+import Then
+import YPImagePicker
 
 class AddPostImageCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
     static let cellId: String = "AddPostImageCollectionViewCell"
-
-    weak var delegate: AddPostImageDelegate!
-    
-    var selectedAssets: [PHAsset] = [PHAsset]()
-    var userSelectedImages: [UIImage] = [UIImage]()
     
     //MARK: - Constants
     
@@ -26,25 +18,8 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - UI
-    
-    lazy var imagePicker: ImagePickerController = {
-        let imagePicker = ImagePickerController()
-        imagePicker.settings.selection.max = 3
-        imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
-        imagePicker.modalPresentationStyle = .fullScreen
-        return imagePicker
-    }()
-    
-    lazy var addPostImageButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "add button"), for: .normal)
-        button.addTarget(
-            self,
-            action: #selector(pressedAddButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
+        
+    let addPostImageView = ImageSelectionView()
     
     //MARK: - Initialization
     
@@ -65,68 +40,13 @@ class AddPostImageCollectionViewCell: UICollectionViewCell {
     //MARK: - UI Setup
     
     private func setupLayout() {
-        contentView.addSubview(addPostImageButton)
+        contentView.addSubview(addPostImageView)
     }
     
     private func setupConstraints() {
-    
-        addPostImageButton.snp.makeConstraints {
+        addPostImageView.snp.makeConstraints {
             $0.width.height.equalTo(Metrics.addPostImageButtonSize)
             $0.edges.equalToSuperview().inset(Metrics.addPostImageButtonInset)
         }
     }
-    
-    //MARK: - Target Methods
-
-    @objc private func pressedAddButton() {
-        
-        /// 기존 선택된 사진 모두 초기화
-        selectedAssets.removeAll()
-        userSelectedImages.removeAll()
-        
-        let vc = self.window?.rootViewController
-        vc?.presentImagePicker(imagePicker, select: { (asset) in
-        }, deselect: { (asset) in
-        }, cancel: { (assets) in
-        }, finish: { (assets) in
-            
-            for i in 0..<assets.count {
-                self.selectedAssets.append(assets[i])
-            }
-            self.convertAssetToImages()
-            self.delegate?.didPickImagesToUpload(images: self.userSelectedImages)
-        })
-        
-    }
-    
-    func convertAssetToImages() {
-        
-        if selectedAssets.count != 0 {
-            
-            for i in 0..<selectedAssets.count {
-                
-                let imageManager = PHImageManager.default()
-                let option = PHImageRequestOptions()
-                option.isSynchronous = true
-                option.resizeMode = .exact
-                
-                var thumbnail = UIImage()
-                
-                imageManager.requestImage(
-                    for: selectedAssets[i],
-                    targetSize: CGSize(width: 1000, height: 1000),
-                    contentMode: .aspectFit,
-                    options: option
-                ) { (result, _) in
-                    thumbnail = result!
-                }
-                
-                let data = thumbnail.jpegData(compressionQuality: 1)
-                let newImage = UIImage(data: data!)
-                
-                self.userSelectedImages.append(newImage! as UIImage)
-            }
-        }
-    }
-    
 }

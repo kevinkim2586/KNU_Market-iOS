@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import Then
 import SDWebImage
 
 class PostTableViewCell: UITableViewCell {
@@ -19,7 +20,7 @@ class PostTableViewCell: UITableViewCell {
         static let leftOffSet: CGFloat      = 20
         static let rightOffSet: CGFloat     = 20
         
-        static let isGatheringLabelHeight: CGFloat = 20
+        static let isGatheringLabelHeight: CGFloat = 27
     }
     
     //MARK: - UI
@@ -27,7 +28,7 @@ class PostTableViewCell: UITableViewCell {
     let postImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 5
+        imageView.layer.cornerRadius = 10
         imageView.image = UIImage(named: K.Images.defaultItemImage)
         imageView.clipsToBounds = true
         return imageView
@@ -42,38 +43,6 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var isGatheringLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12.0, weight: .semibold)
-        label.textColor = UIColor.white
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = Metrics.isGatheringLabelHeight / 2
-        label.textAlignment = .center
-        return label
-    }()
-    
-    let personImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: K.Images.peopleIcon)
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    let currentlyGatheredPeopleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.darkGray
-        label.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-        return label
-    }()
-    
-    let locationLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .darkGray
-        label.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
-        return label
-    }()
-    
     let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .lightGray
@@ -83,6 +52,62 @@ class PostTableViewCell: UITableViewCell {
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
+    
+    let personImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "singlePersonIcon")
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    let gatheringStatusLabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        $0.textColor = UIColor.white
+        $0.textAlignment = .center
+    }
+    
+    lazy var gatheringStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 7
+        [personImageView, gatheringStatusLabel].forEach { stackView.addArrangedSubview($0) }
+        return stackView
+    }()
+    
+    let gatherDoneLabel = UILabel().then {
+        $0.text = "모집완료"
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        $0.textColor = UIColor.white
+        $0.textAlignment = .center
+    }
+    
+    let gatheringView = UIView().then {
+        $0.layer.cornerRadius = Metrics.isGatheringLabelHeight / 2
+        $0.backgroundColor = UIColor(named: K.Color.appColor)
+    }
+    
+    let perPersonLabel = UILabel().then {
+        $0.text = "1인당"
+        $0.adjustsFontSizeToFitWidth = true
+        $0.textAlignment = .right
+        $0.textColor = UIColor.lightGray
+        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
+    }
+    
+    let priceLabel = UILabel().then {
+        $0.text = "-"
+        $0.textColor = .black
+        $0.font = UIFont(name: K.Fonts.robotoMedium, size: 18)
+    }
+    
+    let wonLabel = UILabel().then {
+        $0.text = "원"
+        $0.textColor = UIColor.lightGray
+        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 12)
+    }
     
     //MARK: - Initialization
     
@@ -100,67 +125,81 @@ class PostTableViewCell: UITableViewCell {
         super.prepareForReuse()
         postImageView.image = nil
         postTitleLabel.text = nil
-        isGatheringLabel.text = nil
-        currentlyGatheredPeopleLabel.text = nil
-        locationLabel.text = nil
+        gatheringStatusLabel.text = nil
+        priceLabel.text = nil
+        wonLabel.text = nil
+        wonLabel.isHidden = false
+        priceLabel.isHidden = false
+     
         dateLabel.text = nil
+        perPersonLabel.text = "1인당"
+        gatheringView.backgroundColor = UIColor(named: K.Color.appColor)
     }
     
     //MARK: - UI Setup
     
     private func setupLayout() {
-        
+
         addSubview(postImageView)
         addSubview(dateLabel)
         addSubview(postTitleLabel)
-        addSubview(isGatheringLabel)
-        addSubview(personImageView)
-        addSubview(currentlyGatheredPeopleLabel)
-        addSubview(locationLabel)
+        gatheringView.addSubview(gatheringStackView)
+        gatheringView.addSubview(gatherDoneLabel)
+        addSubview(gatheringView)
+        addSubview(perPersonLabel)
+        addSubview(priceLabel)
+        addSubview(wonLabel)
     }
     
     private func setupConstraints() {
         
-        postImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(90)
-            make.left.equalToSuperview().offset(Metrics.leftOffSet)
-            make.centerY.equalToSuperview()
+        postImageView.snp.makeConstraints {
+            $0.width.height.equalTo(80)
+            $0.left.equalToSuperview().offset(Metrics.leftOffSet)
+            $0.centerY.equalToSuperview()
         }
         
-        dateLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(Metrics.topOffSet)
-            make.right.equalToSuperview().offset(-Metrics.rightOffSet)
+        dateLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(Metrics.topOffSet)
+            $0.right.equalToSuperview().offset(-Metrics.rightOffSet)
+            $0.width.greaterThanOrEqualTo(50)
         }
         
-        postTitleLabel.snp.makeConstraints { make in
-            make.left.equalTo(postImageView.snp.right).offset(Metrics.leftOffSet)
-            make.top.equalToSuperview().offset(15)
-            make.right.equalTo(dateLabel.snp.left).offset(-15)
+        postTitleLabel.snp.makeConstraints {
+            $0.left.equalTo(postImageView.snp.right).offset(Metrics.leftOffSet)
+            $0.top.equalToSuperview().offset(15)
+            $0.width.greaterThanOrEqualTo(50)
+            $0.right.equalTo(dateLabel.snp.left).offset(-15)
         }
         
-        isGatheringLabel.snp.makeConstraints { make in
-            make.left.equalTo(postImageView.snp.right).offset(Metrics.leftOffSet)
-            make.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
-            make.height.equalTo(Metrics.isGatheringLabelHeight)
-            make.width.equalTo(70)
+        gatheringView.snp.makeConstraints {
+            $0.width.equalTo(67)
+            $0.height.equalTo(27)
+            $0.left.equalTo(postImageView.snp.right).offset(Metrics.leftOffSet)
+            $0.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
         }
         
-        personImageView.snp.makeConstraints { make in
-            make.left.equalTo(isGatheringLabel.snp.right).offset(15)
-            make.width.height.equalTo(20)
-            make.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
+        gatheringStackView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         
-        currentlyGatheredPeopleLabel.snp.makeConstraints { make in
-            make.left.equalTo(personImageView.snp.right).offset(10)
-            make.height.equalTo(20)
-            make.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
+        gatherDoneLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         
-        locationLabel.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.right.equalToSuperview().offset(-Metrics.rightOffSet)
-            make.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
+        wonLabel.snp.makeConstraints {
+            $0.right.equalToSuperview().offset(-Metrics.rightOffSet)
+            $0.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
+        }
+        
+        priceLabel.snp.makeConstraints {
+            $0.right.equalTo(wonLabel.snp.left).offset(-2)
+            $0.bottom.equalToSuperview().offset(-13)
+        }
+
+        perPersonLabel.snp.makeConstraints {
+            $0.right.equalTo(priceLabel.snp.left).offset(-2)
+            $0.bottom.equalToSuperview().offset(-Metrics.bottomOffSet)
         }
     }
     
@@ -174,7 +213,7 @@ class PostTableViewCell: UITableViewCell {
         configurePostImageView()
         configureGatheringLabel()
         configureCurrentlyGatheredPeopleLabel()
-        configureLocationLabel()
+        configurePriceLabel()
         configureDateLabel()
     }
     
@@ -198,14 +237,14 @@ class PostTableViewCell: UITableViewCell {
     private func configureGatheringLabel() {
         
         if viewModel?.isCompletelyDone ?? false {
-            isGatheringLabel.text = "모집 완료"
-            isGatheringLabel.backgroundColor = UIColor.lightGray
-            currentlyGatheredPeopleLabel.isHidden = true
+            gatherDoneLabel.isHidden = false
+            gatheringView.backgroundColor = UIColor.lightGray
+            gatheringStatusLabel.isHidden = true
             personImageView.isHidden = true
+            
         } else {
-            isGatheringLabel.text = "모집 중"
-            isGatheringLabel.backgroundColor = UIColor(named: K.Color.appColor)
-            currentlyGatheredPeopleLabel.isHidden = false
+            gatherDoneLabel.isHidden = true
+            gatheringStatusLabel.isHidden = false
             personImageView.isHidden = false
         }
     }
@@ -214,12 +253,23 @@ class PostTableViewCell: UITableViewCell {
         var currentNum = viewModel?.currentlyGatheredPeople ?? 1
         if viewModel?.currentlyGatheredPeople ?? 0 < 1 { currentNum = 1 }
         let total = viewModel?.totalGatheringPeople ?? 2
-
-        currentlyGatheredPeopleLabel.text = "\(currentNum)" + "/" + "\(total) 명"
+        
+        gatheringStatusLabel.text = "\(currentNum)/\(total)"
     }
     
-    private func configureLocationLabel() {
-        locationLabel.text = viewModel?.locationName ?? "-"
+    private func configurePriceLabel() {
+        /// 하위호환 -> 1.3 이전 유저가 글을 올렸을 때 가격은 자동 0이니까 0을 보여주기 보다는 "글에서 확인"으로 처리
+        if viewModel?.price == 0 {
+            wonLabel.text = "글에서 확인"
+            perPersonLabel.isHidden = true
+            priceLabel.isHidden = true
+        } else {
+      
+            wonLabel.text = "원"
+            priceLabel.isHidden = false
+            priceLabel.text = viewModel?.priceForEachPerson
+            perPersonLabel.isHidden = false
+        }
     }
     
     private func configureDateLabel() {

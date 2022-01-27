@@ -1,8 +1,10 @@
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
-protocol UserPickedPostImageCellDelegate: AnyObject {
-    func didPressDeleteImageButton(at index: Int)
+protocol UserPickedPostImageDelegate: AnyObject {
+    func didPressDelete(at index: Int)
 }
 
 class UserPickedPostImageCollectionViewCell: UICollectionViewCell {
@@ -11,7 +13,12 @@ class UserPickedPostImageCollectionViewCell: UICollectionViewCell {
     
     static let cellId: String = "UserPickedPostImageCollectionViewCell"
     
-    weak var delegate: UserPickedPostImageCellDelegate!
+    let disposeBag = DisposeBag()
+    
+    weak var delegate: UserPickedPostImageDelegate?
+
+    let tapGesture = PublishSubject<Int>()
+    
     var indexPath: Int!
     
     //MARK: - Constants
@@ -34,11 +41,6 @@ class UserPickedPostImageCollectionViewCell: UICollectionViewCell {
     
     lazy var deleteButton: UIButton = {
         let button = UIButton()
-        button.addTarget(
-            self,
-            action: #selector(pressedDeleteButton),
-            for: .touchUpInside
-        )
         button.setImage(UIImage(named: "delete button"), for: .normal)
         return button
     }()
@@ -49,6 +51,7 @@ class UserPickedPostImageCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupLayout()
         setupConstraints()
+        bindUI()
     }
     
     required init?(coder: NSCoder) {
@@ -77,7 +80,12 @@ class UserPickedPostImageCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Target Methods
     
-    @objc private func pressedDeleteButton() {
-        delegate.didPressDeleteImageButton(at: indexPath)
+    private func bindUI() {
+        deleteButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.delegate?.didPressDelete(at: self.indexPath)
+            })
+            .disposed(by: disposeBag)
     }
 }

@@ -6,21 +6,21 @@ target 'KNU_Market' do
   use_frameworks!
 
   # Pods for KNU_Market
-  pod 'Alamofire', '~> 5.2'
-  pod 'IQKeyboardManagerSwift'
-  pod "BSImagePicker", "~> 3.1"
   
+  # Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
+  pod 'Firebase/DynamicLinks'
   
-
+  # UI
+  pod 'IQKeyboardManagerSwift'
+  pod 'YPImagePicker'
+  pod "BSImagePicker", "~> 3.1"
   pod "GMStepper"
   pod "MessageKit"
   pod 'InputBarAccessoryView'
   pod 'MessageInputBar'
-
-  
   pod 'ProgressHUD'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftKeychainWrapper'
@@ -34,9 +34,7 @@ target 'KNU_Market' do
   pod 'PanModal'
   pod 'TextFieldEffects'
   pod 'PMAlertController'
-  
-
-  # UI
+#  pod 'LabelSwitch'
   pod 'lottie-ios'
   pod 'UITextView+Placeholder'
   pod 'Hero'
@@ -53,10 +51,13 @@ target 'KNU_Market' do
   pod 'RxAnimated'
   pod 'RxGesture'
   pod 'RxKeyboard'
+  pod 'RxDataSources'
+  pod 'ReusableKit'
 
   # Network
   pod 'Starscream', '~> 4.0.0'
   pod 'Moya/RxSwift'
+  pod 'Alamofire', '~> 5.2'
 
   # ETC
   pod 'Then'
@@ -65,5 +66,6 @@ post_install do |installer|
       installer.pods_project.build_configurations.each do |config|
         config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
       end
+end
 
 end

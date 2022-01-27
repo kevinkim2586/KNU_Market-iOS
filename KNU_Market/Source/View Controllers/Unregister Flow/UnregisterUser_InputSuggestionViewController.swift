@@ -1,20 +1,21 @@
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import ReactorKit
 
-class UnregisterUser_InputSuggestionViewController: BaseViewController {
+class UnregisterUser_InputSuggestionViewController: BaseViewController, View {
     
-    private var userManager: UserManager?
+    typealias Reactor = UnregisterViewReactor
     
     //MARK: - Properties
     
     //MARK: - Constants
     fileprivate struct Metrics {
-        
-        static let labelSidePadding: CGFloat = 16
+        static let padding = 16.f
     }
     
     fileprivate struct Fonts {
-        
         static let titleLabel       = UIFont.systemFont(ofSize: 20, weight: .semibold)
     }
     
@@ -26,77 +27,59 @@ class UnregisterUser_InputSuggestionViewController: BaseViewController {
     
     //MARK: - UI
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = Texts.titleLabel
-        label.font = Fonts.titleLabel
-        label.textColor = .darkGray
-        label.changeTextAttributeColor(fullText: Texts.titleLabel, changeText: "크누마켓")
-        label.numberOfLines = 2
-        return label
-    }()
+    let titleLabel = UILabel().then {
+        $0.text = Texts.titleLabel
+        $0.font = Fonts.titleLabel
+        $0.textColor = .darkGray
+        $0.changeTextAttributeColor(fullText: Texts.titleLabel, changeText: "크누마켓")
+        $0.numberOfLines = 2
+    }
     
-    let feedbackLabel: UILabel = {
-        let label = UILabel()
-        label.text = "피드백을 반영하여 적극적으로 개선하겠습니다."
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .lightGray
-        return label
-    }()
+    let feedbackLabel = UILabel().then {
+        $0.text = "피드백을 반영하여 적극적으로 개선하겠습니다."
+        $0.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        $0.textColor = .lightGray
+    }
     
-    let mailGuideLabel: UILabel = {
-        let label = UILabel()
-        label.text = Texts.mailGuideLabel
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .darkGray
-        label.changeTextAttributeColor(fullText: Texts.mailGuideLabel, changeText: "웹메일 인증과 관련된 문의")
-        label.numberOfLines = 2
-        return label
-    }()
+    let mailGuideLabel = UILabel().then {
+        $0.text = Texts.mailGuideLabel
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        $0.textColor = .darkGray
+        $0.changeTextAttributeColor(fullText: Texts.mailGuideLabel, changeText: "웹메일 인증과 관련된 문의")
+        $0.numberOfLines = 2
+    }
     
-    let kakaoChannelLinkButton: UIButton = {
-        let button = UIButton()
+    let kakaoChannelLinkButton = UIButton(type: .system).then {
         let attributes: [NSAttributedString.Key : Any] = [
             .font: UIFont.systemFont(ofSize: 16, weight: .medium),
             .underlineStyle: NSUnderlineStyle.single.rawValue,
             .foregroundColor: UIColor.systemBlue
         ]
         let linkString: String = "https://pf.kakao.com/_PjLHs"
-        button.setAttributedTitle(NSAttributedString(string: linkString, attributes: attributes), for: .normal)
-        button.addTarget(
-            self,
-            action: #selector(pressedKakaoChannelLinkButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
+        $0.setAttributedTitle(NSAttributedString(string: linkString, attributes: attributes), for: .normal)
+    }
     
-    let feedbackTextView: UITextView = {
-        let textView = UITextView()
-        textView.layer.borderWidth = 1.0
-        textView.layer.cornerRadius = 10.0
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.clipsToBounds = true
-        textView.font = UIFont.systemFont(ofSize: 15)
-        textView.text = Texts.textViewPlaceholder
-        textView.textColor = UIColor.lightGray
-        return textView
-    }()
+    let feedbackTextView = UITextView().then {
+        $0.layer.borderWidth = 1.0
+        $0.layer.cornerRadius = 10.0
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.clipsToBounds = true
+        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.placeholder = Texts.textViewPlaceholder
+    }
 
-    
-    lazy var sendFeedbackBarButtonItem = UIBarButtonItem(
+    let sendFeedbackBarButtonItem = UIBarButtonItem(
         title: "완료",
         style: .done,
-        target: self,
-        action: #selector(pressedSendBarButtonItem)
+        target: nil,
+        action: nil
     )
-    
     
     //MARK: - Initialization
     
-    init(userManager: UserManager) {
+    init(reactor: Reactor) {
         super.init()
-        self.userManager = userManager
+        self.reactor = reactor
     }
     
     required init?(coder: NSCoder) {
@@ -107,7 +90,6 @@ class UnregisterUser_InputSuggestionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
     }
     //MARK: - UI Setup
     
@@ -126,130 +108,105 @@ class UnregisterUser_InputSuggestionViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
         }
         
-        feedbackLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+        feedbackLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
         }
         
-        mailGuideLabel.snp.makeConstraints { make in
-            make.top.equalTo(feedbackLabel.snp.bottom).offset(30)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+        mailGuideLabel.snp.makeConstraints {
+            $0.top.equalTo(feedbackLabel.snp.bottom).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
         }
         
-        kakaoChannelLinkButton.snp.makeConstraints { make in
-            make.top.equalTo(mailGuideLabel.snp.bottom).offset(15)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+        kakaoChannelLinkButton.snp.makeConstraints {
+            $0.top.equalTo(mailGuideLabel.snp.bottom).offset(15)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
         }
         
-        feedbackTextView.snp.makeConstraints { make in
-            make.top.equalTo(kakaoChannelLinkButton.snp.bottom).offset(25)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
+        feedbackTextView.snp.makeConstraints {
+            $0.top.equalTo(kakaoChannelLinkButton.snp.bottom).offset(25)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
         }
-    }
-    
-    override func setupStyle() {
-        super.setupStyle()
-        view.backgroundColor = .white
-    }
-    
-    private func configure() {
-        feedbackTextView.delegate = self
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
-
-
-}
-
-//MARK: - Target Methods
-
-extension UnregisterUser_InputSuggestionViewController {
     
-    @objc private func pressedSendBarButtonItem() {
-        feedbackTextView.resignFirstResponder()
+    //MARK: - Binding
+    
+    func bind(reactor: UnregisterViewReactor) {
         
-        guard var feedback = feedbackTextView.text else { return }
-        guard feedback != Texts.textViewPlaceholder else {
-            presentCustomAlert(title: "회원 탈퇴 사유 입력", message: "회원 탈퇴 사유를 입력해 주세요. 짧게라도 작성해주시면 감사하겠습니다 :)")
-            return
-        }
+        // Input
         
-        showProgressBar()
-        feedback = "회원 탈퇴 사유: \(feedback)"
+        feedbackTextView.rx.text.orEmpty
+            .asObservable()
+            .map { Reactor.Action.updateFeedBackContext($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
-        let group = DispatchGroup()
-        group.enter()
-        userManager?.sendFeedback(content: feedback) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success: break
-            case .failure: self.showSimpleBottomAlert(with: "피드백 보내기에 실패하였습니다. 잠시 후 다시 시도해주세요.")
+        sendFeedbackBarButtonItem.rx.tap
+            .map { Reactor.Action.sendFeedBack }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        kakaoChannelLinkButton.rx.tap
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                let url = URL(string: K.URL.kakaoHelpChannel)!
+                UIApplication.shared.open(url, options: [:])
+            })
+            .disposed(by: disposeBag)
+        
+        // Output
+        
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (_, errorMessage) in
+                self.view.endEditing(true)
+                self.showSimpleBottomAlert(with: errorMessage!)
             }
-            group.leave()
-        }
+            .disposed(by: disposeBag)
         
-        group.notify(queue: .main) {
-            self.userManager?.unregisterUser { [weak self] result in
-                dismissProgressBar()
-                guard let self = self else { return }
-                switch result {
-                case .success: self.popToInitialViewController()
-                case .failure(let error):
-                    self.presentCustomAlert(title: "회원 탈퇴 실패", message: error.errorDescription)
-                }
-            }
-        }
-    }
-    
-    @objc private func pressedKakaoChannelLinkButton() {
-        let url = URL(string: K.URL.kakaoHelpChannel)!
-        UIApplication.shared.open(url, options: [:])
-    }
-}
-
-
-//MARK: - UITextViewDelegate
-
-extension UnregisterUser_InputSuggestionViewController: UITextViewDelegate {
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
+        reactor.state
+            .map { $0.alertMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, alertMessage) in
+                self.presentCustomAlert(title: "회원 탈퇴 실패", message: alertMessage!)
+            })
+            .disposed(by: disposeBag)
         
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-    
-        if textView.text.isEmpty {
-            textView.text = Texts.textViewPlaceholder
-            textView.textColor = UIColor.lightGray
-            return
-        }
+        reactor.state
+            .map { $0.unregisterComplete }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.popToLoginViewController()
+            })
+            .disposed(by: disposeBag)
     }
 }
 
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct UnRegisterUser_InputSuggestionVC: PreviewProvider {
-    
-    static var previews: some View {
-        UnregisterUser_InputSuggestionViewController(userManager: UserManager()).toPreview()
-    }
-}
-#endif
 

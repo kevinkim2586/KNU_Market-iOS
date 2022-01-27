@@ -1,6 +1,6 @@
 import Foundation
 
-struct LoadUserProfileUidModel: Decodable {
+struct LoadUserProfileUidModel: ModelType {
     
     let uid: String
     let nickname: String

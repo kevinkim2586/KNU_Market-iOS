@@ -1,19 +1,19 @@
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import ReactorKit
 
-class ReportUserViewController: BaseViewController {
+class ReportUserViewController: BaseViewController, View {
+    
+    typealias Reactor = ReportUserViewReactor
     
     //MARK: - Properties
-    
-    private var reportManager: ReportManager?
-    
-    private var userToReport: String?
-    private var postUid: String?
     
     //MARK: - Constants
     
     fileprivate struct Metrics {
-        static let labelSidePadding: CGFloat    = 16
+        static let labelSidePadding = 16.f
     }
     
     fileprivate struct Texts {
@@ -23,60 +23,42 @@ class ReportUserViewController: BaseViewController {
     
     //MARK: - UI
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
-        label.textColor = .darkGray
-        label.text = "\(userToReport ?? "해당 유저")을(를) 신고하시겠습니까?"
-        return label
-    }()
+    let titleLabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 19, weight: .bold)
+        $0.textColor = .darkGray
+    }
     
-    let detailLabel: UILabel = {
-        let label = UILabel()
-        label.text = Texts.detailLabelText
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .black
-        label.numberOfLines = 3
-        label.addInterlineSpacing(spacingValue: 10)
-        return label
-    }()
+    let detailLabel = UILabel().then {
+        $0.text = Texts.detailLabelText
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        $0.textColor = .black
+        $0.numberOfLines = 3
+        $0.addInterlineSpacing(spacingValue: 10)
+    }
     
-    lazy var reportTextView: UITextView = {
-        let textView = UITextView()
-        textView.layer.borderWidth = 1.0
-        textView.layer.cornerRadius = 10.0
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.clipsToBounds = true
-        textView.font = UIFont.systemFont(ofSize: 15)
-        textView.text = Texts.textViewPlaceholder
-        textView.textColor = .lightGray
-        textView.delegate = self
-        return textView
-    }()
+    let reportTextView = UITextView().then {
+        $0.layer.borderWidth = 1.0
+        $0.layer.cornerRadius = 10.0
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.clipsToBounds = true
+        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.placeholder = Texts.textViewPlaceholder
+    }
     
-    let reportButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("신고 접수", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        button.backgroundColor = UIColor(named: K.Color.appColor)
-        button.layer.cornerRadius = 5
-        button.addBounceAnimationWithNoFeedback()
-        button.addTarget(
-            self,
-            action: #selector(pressedReportButton),
-            for: .touchUpInside
-        )
-        return button
-    }()
+    let reportButton = UIButton(type: .system).then {
+        $0.setTitle("신고 접수", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        $0.backgroundColor = UIColor(named: K.Color.appColor)
+        $0.layer.cornerRadius = 5
+        $0.addBounceAnimationWithNoFeedback()
+    }
     
     //MARK: - Initialization
     
-    init(reportManager: ReportManager, userToReport: String, postUid: String) {
+    init(reactor: Reactor) {
         super.init()
-        self.reportManager = reportManager
-        self.userToReport = userToReport
-        self.postUid = postUid
+        self.reactor = reactor
     }
     
     required init?(coder: NSCoder) {
@@ -105,117 +87,93 @@ class ReportUserViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
     
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(80)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(80)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        detailLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(40)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        detailLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(40)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        reportTextView.snp.makeConstraints { make in
-            make.height.equalTo(260)
-            make.top.equalTo(detailLabel.snp.bottom).offset(40)
-            make.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
-            make.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
+        reportTextView.snp.makeConstraints {
+            $0.height.equalTo(260)
+            $0.top.equalTo(detailLabel.snp.bottom).offset(40)
+            $0.left.equalTo(view.snp.left).offset(Metrics.labelSidePadding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.labelSidePadding)
         }
         
-        reportButton.snp.makeConstraints { make in
-            make.top.equalTo(reportTextView.snp.bottom).offset(16)
-            make.centerX.equalTo(view.snp.centerX)
-            make.height.equalTo(40)
-            make.width.equalTo(100)
+        reportButton.snp.makeConstraints {
+            $0.top.equalTo(reportTextView.snp.bottom).offset(16)
+            $0.centerX.equalTo(view.snp.centerX)
+            $0.height.equalTo(40)
+            $0.width.equalTo(100)
         }
     }
     
-    override func setupStyle() {
-        super.setupStyle()
-        view.backgroundColor = .white
-    }
-}
-
-//MARK: - Target Methods
-
-extension ReportUserViewController {
+    //MARK: - Binding
     
-    @objc private func pressedReportButton() {
-        view.endEditing(true)
-        if !validateUserInput() { return }
-        showProgressBar()
-        let model = ReportUserRequestDTO(
-            user: userToReport ?? "",
-            content: reportTextView.text!,
-            postUID: postUid ?? ""
-        )
-        reportManager?.reportUser(with: model) { [weak self] result in
-            guard let self = self else { return }
-            dismissProgressBar()
-            switch result {
-            case .success:
+    func bind(reactor: ReportUserViewReactor) {
+        
+        // Input
+        
+        reportTextView.rx.text
+            .orEmpty
+            .asObservable()
+            .map { Reactor.Action.updateReportContent($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        reportButton.rx.tap
+            .asObservable()
+            .map { Reactor.Action.sendReport }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Output
+        
+        reactor.state
+            .map { $0.userToReport }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, userToReport) in
+                self.titleLabel.text =  "\(userToReport)을(를) 신고하시겠습니까?"
+            })
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (_, errorMessage) in
+                self.view.endEditing(true)
+                self.showSimpleBottomAlert(with: errorMessage!)
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.reportComplete }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.view.endEditing(true)
                 self.showSimpleBottomAlert(with: "신고가 정상적으로 접수되었습니다. 감사합니다.😁")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.dismiss(animated: true)
                 }
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
-            }
-        }
-    }
-
-}
-
-//MARK: - Input Validation
-
-extension ReportUserViewController {
-    
-    func validateUserInput() -> Bool {
-        guard reportTextView.text != Texts.textViewPlaceholder else {
-            self.showSimpleBottomAlert(with: "신고 내용을 3글자 이상 적어주세요 👀")
-            return false
-        }
-        guard let content = reportTextView.text else { return false }
-        
-        if content.count >= 3 { return true }
-        else {
-            self.showSimpleBottomAlert(with: "신고 내용을 3글자 이상 적어주세요 👀")
-            return false
-        }
+            })
+            .disposed(by: disposeBag)
     }
 }
-
-//MARK: - UITextViewDelegate
-
-extension ReportUserViewController: UITextViewDelegate {
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = Texts.textViewPlaceholder
-            textView.textColor = UIColor.lightGray
-            return
-        }
-    }
-}
-
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct ReportUserVC: PreviewProvider {
-    
-    static var previews: some View {
-        ReportUserViewController(reportManager: ReportManager(), userToReport: "연어참치롤", postUid: "").toPreview()
-    }
-}
-#endif

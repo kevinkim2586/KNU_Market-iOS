@@ -1,6 +1,11 @@
 import UIKit
+import RxSwift
+import RxCocoa
 
 class BaseViewController: UIViewController {
+    
+    // MARK: - Rx
+    var disposeBag = DisposeBag.init()
     
     //MARK: - Initialization
     
@@ -19,7 +24,6 @@ class BaseViewController: UIViewController {
         setupLayout()
         setupConstraints()
         setupStyle()
-        setupActions()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -41,11 +45,4 @@ class BaseViewController: UIViewController {
         view.backgroundColor = .white
         setBackBarButtonItemTitle()
     }
-    
-    func setupActions() {
-        
-    }
-    
-    
-
 }

@@ -12,14 +12,13 @@ import UIKit
 extension UIViewController {
 
     @objc func configureChatTabBadgeCount() {
-        print("✅ configureChatTabBadgeCount")
+        
         if let tabItems = tabBarController?.tabBar.items {
             
             let chatTabBarItem = tabItems[1]               //채팅 탭
             chatTabBarItem.badgeColor = UIColor(named: K.Color.appColor) ?? .systemRed
             
             let chatNotificationList: [String] = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.notificationList) ?? []
-            print("✅ chatNotificationsList: \(chatNotificationList)")
             
             chatTabBarItem.badgeValue = chatNotificationList.count == 0
             ? nil

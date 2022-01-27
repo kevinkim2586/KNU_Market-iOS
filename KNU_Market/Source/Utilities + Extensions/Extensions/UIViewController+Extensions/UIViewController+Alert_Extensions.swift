@@ -179,16 +179,7 @@ extension UIViewController {
 
 //MARK: - UIAlertController Rx
 
-enum ActionType {
-    case ok
-    case cancel
-}
 
-enum ChangeProfileImageType {
-    case selectFromLibrary
-    case remove
-    case cancel
-}
 
 extension UIViewController {
     

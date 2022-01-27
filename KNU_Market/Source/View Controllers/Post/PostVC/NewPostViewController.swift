@@ -475,53 +475,16 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         postControlButtonView.shareButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
+                
+                let sharingService = SharingService()
+                
+                sharingService.sharePost(
+                    postUid: reactor.currentState.postModel.uuid,
+                    titleMessage: reactor.currentState.postModel.title,
+                    imageUids: reactor.currentState.postModel.imageUIDs
+                )
       
-                var components = URLComponents()
-                components.scheme = "https"
-                components.host = "knumarket.page.link"
-                components.path = "/seePost"
-                
-                let postUIDQueryItem = URLQueryItem(name: "postUID", value: reactor.currentState.postModel.uuid)
-                components.queryItems = [postUIDQueryItem]
-                
-                guard let linkParameter = components.url else { return }
-                print("✅ sharing link: \(linkParameter.absoluteString)")
-                
-                guard let shareLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://knumarket.page.link") else {
-                    print("❗️ shareLink error")
-                    return
-                }
-                
-                shareLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.kyh.knumarket")
-                
-                if let myBundleId = Bundle.main.bundleIdentifier {
-                    shareLink.iOSParameters = DynamicLinkIOSParameters(bundleID: myBundleId)
-                }
-                shareLink.iOSParameters?.appStoreID = "1580677279"
-                
-                shareLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
-                shareLink.socialMetaTagParameters?.title = "\(reactor.currentState.postModel.title) 같이 사요!"
-                shareLink.socialMetaTagParameters?.descriptionText = "자세한 내용은 크누마켓에서 확인하세요."
-                if let imageUIDs = reactor.currentState.postModel.imageUIDs {
-                    shareLink.socialMetaTagParameters?.imageURL = URL(string: K.MEDIA_REQUEST_URL + imageUIDs[0])
-                }
-               
-                shareLink.shorten { [weak self] url, _, error in
-                    
-                    if let error = error {
-                        print("❗️ Shortening URL Error: \(error)")
-                        return
-                    }
-                    
-                    guard let url = url else { return }
-                    print("✅ shortened URL: \(url)")
-                    
-    
-                    //UIActivityVC
-                    let promoText = "\(reactor.currentState.postModel.title) 같이 사요!"
-                    let activityVC = UIActivityViewController(activityItems: [promoText, url], applicationActivities: nil)
-                    self?.present(activityVC, animated: true)
-                }
+       
             })
             .disposed(by: disposeBag)
         
@@ -561,15 +524,6 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-  
-//        urlLinkButton.rx.tap
-//            .withUnretained(self)
-//            .subscribe(onNext: { _ in
-//                if let url = reactor.currentState.referenceUrl {
-//                    self.presentSafariView(with: url)
-//                }
-//            })
-//            .disposed(by: disposeBag)
         
         upperImageSlideshow.rx.tapGesture()
             .when(.recognized)

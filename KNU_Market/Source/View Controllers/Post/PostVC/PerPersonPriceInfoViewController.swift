@@ -28,7 +28,7 @@ class PerPersonPriceInfoViewController: BaseViewController {
     }
     
     fileprivate struct Fonts {
-        static let labelFont = UIFont(name: K.Fonts.notoSansKRRegular, size: 15)
+        static let labelFont = UIFont(name: K.Fonts.notoSansKRMedium, size: 15)
     }
     
     //MARK: - UI
@@ -80,7 +80,6 @@ class PerPersonPriceInfoViewController: BaseViewController {
     
     let totalPriceInfoLabel = UILabel().then {
         $0.font = Fonts.labelFont
-        $0.textAlignment = .center
         $0.text = "합계(원)"
     }
     
@@ -217,8 +216,8 @@ class PerPersonPriceInfoViewController: BaseViewController {
         
         productPriceStackView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(Metrics.defaultPadding + 20)
-            $0.right.equalToSuperview().inset(Metrics.defaultPadding)
             $0.left.equalToSuperview().inset(Metrics.defaultPadding + 18)
+            $0.right.equalToSuperview().inset(Metrics.defaultPadding)
         }
         
         shippingFeeStackView.snp.makeConstraints {
@@ -231,10 +230,10 @@ class PerPersonPriceInfoViewController: BaseViewController {
             $0.top.equalTo(shippingFeeStackView.snp.bottom).offset(Metrics.defaultTopPadding)
             $0.left.right.equalToSuperview().inset(10)
         }
-
+        
         totalPriceStackView.snp.makeConstraints {
             $0.top.equalTo(dividerLine_1.snp.bottom).offset(Metrics.defaultTopPadding)
-            $0.left.equalToSuperview().inset(Metrics.defaultPadding)
+            $0.left.equalToSuperview().inset(Metrics.defaultPadding + 18)
             $0.right.equalToSuperview().inset(Metrics.defaultPadding)
         }
 

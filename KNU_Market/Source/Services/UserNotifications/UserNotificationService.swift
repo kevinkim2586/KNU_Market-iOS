@@ -8,11 +8,6 @@
 import UIKit
 import UserNotifications
 
-enum NotificationType: String {
-    case chat = "sendName"
-    case post = "postId"
-}
-
 final class UserNotificationService: UserNotificationServiceType {
     
     static let shared = UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService.shared)

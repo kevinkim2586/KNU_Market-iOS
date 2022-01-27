@@ -140,6 +140,7 @@ extension SceneDelegate {
                             network: Network<ChatAPI>(plugins: [AuthPlugin()]),
                             userDefaultsGenericService: UserDefaultsGenericService()
                         ),
+                        sharingService: SharingService(),
                         userDefaultsService: UserDefaultsGenericService()
                     )
                 )

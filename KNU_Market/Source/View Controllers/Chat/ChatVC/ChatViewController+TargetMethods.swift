@@ -19,6 +19,7 @@ extension ChatViewController {
                 network: Network<ChatAPI>(plugins: [AuthPlugin()]),
                 userDefaultsGenericService: UserDefaultsGenericService.shared
             ),
+            sharingService: SharingService(),
             userDefaultsService: UserDefaultsGenericService.shared)
         )
         navigationController?.pushViewController(postVC, animated: true)

@@ -104,6 +104,7 @@ class MyPostsViewController: BaseViewController, View {
                             network: Network<ChatAPI>(plugins: [AuthPlugin()]),
                             userDefaultsGenericService: UserDefaultsGenericService()
                         ),
+                        sharingService: SharingService(),
                         userDefaultsService: UserDefaultsGenericService()
                     )
                 )

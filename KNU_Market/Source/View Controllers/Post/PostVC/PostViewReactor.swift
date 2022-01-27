@@ -21,6 +21,7 @@ final class PostViewReactor: Reactor {
     var initialState: State
     let postService: PostServiceType
     let chatService: ChatServiceAPIType
+    let sharingService: SharingServiceType
     let userDefaultsService: UserDefaultsGenericServiceType
     
     enum Action {
@@ -33,6 +34,7 @@ final class PostViewReactor: Reactor {
         case updatePostAsRegathering    // 방장 - 모집 완료 해제
         case joinChat
         case blockUser(String)
+        case sharePost
     }
     
     enum Mutation {
@@ -52,7 +54,6 @@ final class PostViewReactor: Reactor {
         case setIsFetchingData(Bool)
         case setAttemptingToEnterChat(Bool)
         case setDidBlockUser(Bool)
-        
         case empty
     }
     
@@ -193,10 +194,12 @@ final class PostViewReactor: Reactor {
         isFromChatVC: Bool = false,
         postService: PostServiceType,
         chatService: ChatServiceAPIType,
+        sharingService: SharingServiceType,
         userDefaultsService: UserDefaultsGenericServiceType
     ) {
         self.postService = postService
         self.chatService = chatService
+        self.sharingService = sharingService
         self.userDefaultsService = userDefaultsService
         self.initialState = State(
             pageId: pageId,
@@ -242,6 +245,15 @@ final class PostViewReactor: Reactor {
 
         case .editPost:
             return configureEditPostModel()
+            
+        case .sharePost:
+            
+            self.sharingService.sharePost(
+                postUid: currentState.postModel.uuid,
+                titleMessage: currentState.postModel.title,
+                imageUids: currentState.postModel.imageUIDs
+            )
+            return .empty()
         }
     }
     

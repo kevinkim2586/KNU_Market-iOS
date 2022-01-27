@@ -472,22 +472,12 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         // 공유 버튼
-        postControlButtonView.shareButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                
-                let sharingService = SharingService()
-                
-                sharingService.sharePost(
-                    postUid: reactor.currentState.postModel.uuid,
-                    titleMessage: reactor.currentState.postModel.title,
-                    imageUids: reactor.currentState.postModel.imageUIDs
-                )
-      
-       
-            })
-            .disposed(by: disposeBag)
         
+        postControlButtonView.shareButton.rx.tap
+            .map { Reactor.Action.sharePost }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
         // 메뉴 버튼
         postControlButtonView.menuButton.rx.tap
             .withUnretained(self)

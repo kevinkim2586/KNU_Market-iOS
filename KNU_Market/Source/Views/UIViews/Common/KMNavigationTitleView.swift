@@ -14,13 +14,13 @@ class KMNavigationTitleView: UIView {
     
     let appTitleLabel = UILabel().then {
         $0.text = "크누마켓"
-        $0.font = UIFont(name: K.Fonts.notoSansBold, size: 21)
+        $0.font = UIFont(name: K.Fonts.notoSansKRBold, size: 22)!
         $0.textColor = .black
     }
     
     let appCopyLabel = UILabel().then {
         $0.text = "우리가 함께 사는 곳"
-        $0.font = UIFont(name: K.Fonts.notoSansRegular, size: 15)
+        $0.font = UIFont(name: K.Fonts.notoSansKRRegular, size: 13)!
         $0.textColor = .black
     }
     

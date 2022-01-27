@@ -21,13 +21,13 @@ class PostListViewController: BaseViewController, View {
     //MARK: - UI
     
     lazy var navigationTitleView: KMNavigationTitleView = {
-       let view =  KMNavigationTitleView(
-        frame: CGRect(
-            x: 0,
-            y: 0,
-            width: view.frame.size.width,
-            height: 50)
-       )
+        let view =  KMNavigationTitleView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: view.frame.size.width,
+                height: 50)
+        )
         return view
     }()
     

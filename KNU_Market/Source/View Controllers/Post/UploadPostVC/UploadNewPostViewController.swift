@@ -638,9 +638,13 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             .filter { $0 != nil }
             .map { gatheringPeople -> Int in
                 guard let gatheringPeople = gatheringPeople else { return 2 }
-                return Int(gatheringPeople) ?? 2
+                return Int(gatheringPeople) ?? 0
             }
             .map { gatheringPeopleInteger -> String in
+                
+                if gatheringPeopleInteger == 0 {
+                    return ""
+                }
                 return gatheringPeopleInteger >= self.maxTextFieldNumber
                 ? ""
                 : "\(gatheringPeopleInteger)"
@@ -650,7 +654,7 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
 
         reactor.state
             .map { $0.totalGatheringPeople }
-            .debounce(.milliseconds(600), scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(400), scheduler: MainScheduler.instance)
             .filter { $0 != nil }
             .filter { $0!.isEmpty == false }
             .withUnretained(self)
@@ -732,10 +736,15 @@ class UploadNewPostViewController: BaseViewController, ReactorKit.View {
             }
         
         let isValidGatheringPeople = reactor.state
-            .map { $0.totalGatheringPeople ?? "" }
+            .map { currentState -> String in
+            
+                if let people = currentState.totalGatheringPeople, !people.isEmpty {
+                    return people
+                } else { return "" }
+            }
             .asObservable()
-            .map { gatheringPeople -> ValidationError.OnUploadPost in
-                return gatheringPeople.isValidGatheringPeopleNumber
+            .map { people -> ValidationError.OnUploadPost in
+                return people.isValidGatheringPeopleNumber
             }
 
         Observable.combineLatest(

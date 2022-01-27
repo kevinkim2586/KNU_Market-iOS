@@ -48,9 +48,7 @@ final class UploadNewPostReactor: Reactor {
         case setDetail(String)
         case setIsLoading(Bool)
         case setErrorMessage(String)
-        
         case appendImageUid(String)
-        
         case setCompleteUploadingPost(Bool)
         case setEditPostModel(EditPostModel)
     }
@@ -226,7 +224,7 @@ final class UploadNewPostReactor: Reactor {
     }
 }
 
-//MARK: - API Methods
+//MARK: - Methods
 
 extension UploadNewPostReactor {
     

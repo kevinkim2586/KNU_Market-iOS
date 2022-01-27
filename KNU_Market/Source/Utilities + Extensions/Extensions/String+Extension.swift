@@ -128,10 +128,6 @@ extension String {
     }
     
     
-    
-    
-    
-    
     // 올바른 공구 상세 설명
     var isValidPostDetail: ValidationError.OnUploadPost {
         guard !self.isEmpty else { return .empty }

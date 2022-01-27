@@ -27,7 +27,6 @@ class KMUrlLinkButton: UIButton {
         layer.cornerRadius = 20
         setTitle("링크 보러가기", for: .normal)
         setTitleColor(.black, for: .normal)
-        titleLabel?.font = UIFont(name: K.Fonts.notoSansKRMedium, size: 13)
         let buttonImage = UIImage(
             systemName: "arrow.up.right",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 12))
@@ -38,6 +37,7 @@ class KMUrlLinkButton: UIButton {
         titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         isHidden = true
+        titleLabel?.font = UIFont(name: K.Fonts.notoSansKRMedium, size: 13)
     }
     
 }

@@ -93,6 +93,10 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         static let labelLightGrayColor = UIColor.convertUsingHexString(hexValue: "#9D9D9D")
     }
     
+    fileprivate struct Fonts {
+        static let urlLinkButtonFont = UIFont(name: K.Fonts.notoSansKRMedium, size: 13)!
+    }
+    
     //MARK: - UI
     
     lazy var upperShadowView: UIView = {
@@ -117,12 +121,24 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         $0.pageIndicatorPosition = .init(horizontal: .center, vertical: .customTop(padding: 10))
     }
     
+    lazy var bottomContainerUpperShadowView: UIView = {
+        let view = UIView()
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor.darkGray.withAlphaComponent(0.35).cgColor,
+            UIColor.darkGray.withAlphaComponent(0.0).cgColor
+        ]
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 100)
+        gradientLayer.startPoint = CGPoint(x: 1.0, y: 1.0)      /// 밑에서
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)        /// 위로
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        return view
+    }()
+    
     let bottomContainerView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 25
         $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        $0.layer.borderWidth = 0.3
-        $0.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     let dragIndicatorView = UIView().then {
@@ -249,7 +265,9 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     
     let enterChatButton = KMShadowButton(buttonTitle: "채팅방 입장하기")
     
-    let urlLinkButton = KMUrlLinkButton(type: .system)
+    let urlLinkButton = KMUrlLinkButton(type: .system).then {
+        $0.titleLabel?.font = Fonts.urlLinkButtonFont
+    }
 
     let postControlButtonView = KMPostButtonView()
     
@@ -282,6 +300,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         
         view.addSubview(upperImageSlideshow)
         view.addSubview(upperShadowView)
+        view.addSubview(bottomContainerUpperShadowView)
         view.addSubview(bottomContainerView)
         view.addSubview(urlLinkButton)
         view.addSubview(postControlButtonView)
@@ -322,12 +341,20 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             $0.height.equalTo(50)
             $0.left.right.equalToSuperview()
         }
+        
+        bottomContainerUpperShadowView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.height.equalTo(100)
+            $0.left.right.equalToSuperview()
+        }
+        
 
         bottomContainerView.snp.makeConstraints {
             $0.top.equalTo(upperImageSlideshow.snp.bottom).offset(-25)
             $0.bottom.left.right.equalToSuperview()
         }
         
+
         urlLinkButton.snp.makeConstraints {
             $0.width.equalTo(124)
             $0.height.equalTo(39)
@@ -948,8 +975,9 @@ extension NewPostViewController {
                         viewModel: UploadPostViewModel(
                             postManager: PostManager(),
                             mediaManager: MediaManager()
-                        )
-//                        editModel: nil
+                        ),
+                        editModel: reactor.currentState.editModel!
+
                     )
                     self.navigationController?.pushViewController(vc, animated: true)
                 }

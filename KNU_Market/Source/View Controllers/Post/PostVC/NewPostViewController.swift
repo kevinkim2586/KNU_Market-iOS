@@ -15,6 +15,7 @@ import ImageSlideshow
 import RxGesture
 import FirebaseDynamicLinks
 
+
 class NewPostViewController: BaseViewController, ReactorKit.View {
 
     typealias Reactor = PostViewReactor
@@ -290,7 +291,6 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePanGestureRecognizer()
-        configure()
     }
         
     //MARK: - UI Setup
@@ -521,14 +521,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                     let promoText = "\(reactor.currentState.postModel.title) 같이 사요!"
                     let activityVC = UIActivityViewController(activityItems: [promoText, url], applicationActivities: nil)
                     self?.present(activityVC, animated: true)
-                    
                 }
-                
-                
-                
-                
-                
-                
             })
             .disposed(by: disposeBag)
         
@@ -543,7 +536,17 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 // iOS 14 이상이면 UIMenu로 자동 실행 -> postModel에 데이터가 들어가면 그때 button.menu에 속성 자동 추가
             })
             .disposed(by: disposeBag)
-
+        
+        // URL 링크 버튼 - urlLinkButton
+        
+        urlLinkButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                if let url = reactor.currentState.referenceUrl {
+                    self.askIfUserWantsToOpenUrl(url)
+                }
+            })
+            .disposed(by: disposeBag)
         
         postDetailLabel.onClick = { [weak self] _, detection in
             switch detection.type {
@@ -559,14 +562,14 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
   
-        urlLinkButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                if let url = reactor.currentState.referenceUrl {
-                    self.presentSafariView(with: url)
-                }
-            })
-            .disposed(by: disposeBag)
+//        urlLinkButton.rx.tap
+//            .withUnretained(self)
+//            .subscribe(onNext: { _ in
+//                if let url = reactor.currentState.referenceUrl {
+//                    self.presentSafariView(with: url)
+//                }
+//            })
+//            .disposed(by: disposeBag)
         
         upperImageSlideshow.rx.tapGesture()
             .when(.recognized)
@@ -875,7 +878,6 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 }
             })
             .disposed(by: disposeBag)
-
         
         // Notification Center
         
@@ -895,9 +897,27 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
         
     }
     
-    private func configure() {
-
+    private func askIfUserWantsToOpenUrl(_ url: URL) {
         
+        let vc = CustomAlertViewController_Rx(
+            title: "아래 링크로 이동하시겠어요?",
+            message: url.absoluteString,
+            cancelButtonTitle: "아니오",
+            actionButtonTitle: "예"
+        )
+        self.present(vc, animated: true)
+        vc.alertObserver
+            .withUnretained(vc)
+            .subscribe(onNext: { (vc, actionType) in
+                switch actionType {
+                case .ok:
+                    vc.dismiss(animated: true) {
+                        self.presentSafariView(with: url)
+                    }
+                default: break
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -907,10 +927,8 @@ extension NewPostViewController: LabelSwitchDelegate {
 
     func switchChangeToState(sender: LabelSwitch) {
         switch sender.curState {
-            
             case .L:
-                print("✅ Left Side")
-            
+        
             let vc = CustomAlertViewController_Rx(
                 title: "모집 완료를 해제하시겠습니까?",
                 message: "해제 시 추가 인원이 참여할 수도 있습니다.",
@@ -931,7 +949,6 @@ extension NewPostViewController: LabelSwitchDelegate {
                 .disposed(by: disposeBag)
                     
             case .R:
-                print("✅ Right Side")
             
             let vc = CustomAlertViewController_Rx(
                 title: "모집 완료하시겠습니까?",

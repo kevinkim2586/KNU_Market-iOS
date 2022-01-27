@@ -17,8 +17,7 @@ class CustomAlertViewController: UIViewController {
     
     let alertView = UIView().then {
         $0.backgroundColor = .white
-        $0.layer.cornerRadius = 20
-        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
     }
     
     let titleLabel = UILabel().then {
@@ -40,25 +39,29 @@ class CustomAlertViewController: UIViewController {
     
     let cancelButton = UIButton(type: .system).then {
         $0.backgroundColor = .white
-        $0.layer.cornerRadius = 0
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.layer.cornerRadius = 5
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        $0.addBounceAnimationWithNoFeedback()
     }
     
     let actionButton = UIButton(type: .system).then {
         $0.backgroundColor = UIColor(named: K.Color.appColor)
-        $0.layer.cornerRadius = 0
+        $0.layer.cornerRadius = 5
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        $0.addBounceAnimationWithNoFeedback()
     }
     
     let buttonStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
-        $0.alignment = .fill
-        $0.spacing = 0
+        $0.alignment = .center
+        $0.spacing = 5
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
@@ -83,7 +86,7 @@ class CustomAlertViewController: UIViewController {
                 action()
                 self.dismiss(animated: false)
             }.disposed(by: disposedBag)
-
+        
     }
     
     required init?(coder: NSCoder) {
@@ -91,18 +94,16 @@ class CustomAlertViewController: UIViewController {
     }
     
     private func setUpSubViews() {
-        view.addSubview(alertView)
-        alertView.addSubview(titleLabel)
-        alertView.addSubview(messageLabel)
-     
+        self.view.addSubview(alertView)
+        [titleLabel, messageLabel].forEach { self.alertView.addSubview($0) }
+        
         [cancelButton, actionButton].forEach {
             buttonStackView.addArrangedSubview($0)
         }
-        alertView.addSubview(buttonStackView)
+        self.alertView.addSubview(buttonStackView)
         
-    
         alertView.snp.makeConstraints {
-            $0.width.equalTo(self.view.frame.size.width - 40)
+            $0.width.equalTo(view.frame.size.width - 40)
             $0.height.equalTo(messageLabel.snp.height).multipliedBy(2.0)
             $0.centerX.centerY.equalToSuperview()
         }
@@ -122,11 +123,18 @@ class CustomAlertViewController: UIViewController {
         }
         
         buttonStackView.snp.makeConstraints {
-            $0.height.equalTo(45)
-            $0.left.equalToSuperview().offset(0)
-            $0.right.equalToSuperview().offset(0)
-            $0.top.equalTo(messageLabel.snp.bottom).offset(10)
-            $0.bottom.equalToSuperview().offset(0)
+            $0.top.equalTo(messageLabel.snp.bottom).inset(5)
+            $0.left.right.equalToSuperview().inset(10)
+            $0.height.greaterThanOrEqualTo(60)
+            $0.bottom.equalToSuperview()
+        }
+        
+        cancelButton.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(10)
+        }
+        
+        actionButton.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(10)
         }
     }
     

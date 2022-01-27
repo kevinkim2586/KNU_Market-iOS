@@ -14,6 +14,53 @@ import RxCocoa
 
 extension UIViewController {
     
+//    func presentCustomAlert_Rx(
+//        title: String,
+//        message: String,
+//        cancelButtonTitle: String = "취소",
+//        actionButtonTitle: String = "확인",
+//        action: @escaping () -> Void = { }
+//    ) -> ActionType {
+//        
+//        let vc = CustomAlertViewController_Rx(
+//            title: title,
+//            message: message,
+//            cancelButtonTitle: cancelButtonTitle,
+//            actionButtonTitle: actionButtonTitle
+//        )
+//        
+//        
+//        
+//        
+//        
+//        
+//        return Observable.create { [weak self] observer in
+//            
+//            let vc = CustomAlertViewController_Rx(
+//                title: title,
+//                message: message,
+//                cancelButtonTitle: cancelButtonTitle,
+//                actionButtonTitle: actionButtonTitle
+//            )
+////
+////            vc.actionButton.rx.tap
+////                .subscribe(onNext: { sd in
+////                    observer.onNext(.ok)
+////                })
+//            
+//            vc.alertObserver
+//                .subscribe(onNext: { actionType in
+//                    observer.onNext(actionType)
+//                    observer.onCompleted()
+//                })
+//                .disposed(by: DisposeBag.init())
+//            self?.present(vc, animated: true)
+//            return Disposables.create {
+//                vc.dismiss(animated: true)
+//            }
+//        }
+//    }
+    
     func presentCustomAlert(
         title: String,
         message: String,

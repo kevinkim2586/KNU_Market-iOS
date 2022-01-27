@@ -32,9 +32,7 @@ final class PostViewReactor: Reactor {
         case markPostDone               // 방장 - 모집 완료
         case updatePostAsRegathering    // 방장 - 모집 완료 해제
         case joinChat
-        
         case blockUser(String)
-
     }
     
     enum Mutation {
@@ -53,9 +51,6 @@ final class PostViewReactor: Reactor {
  
         case setIsFetchingData(Bool)
         case setAttemptingToEnterChat(Bool)
-        
-    
-        
         case setDidBlockUser(Bool)
         
         case empty
@@ -246,10 +241,7 @@ final class PostViewReactor: Reactor {
             return .empty()
 
         case .editPost:
-            
             return configureEditPostModel()
-    
-
         }
     }
     
@@ -301,7 +293,7 @@ final class PostViewReactor: Reactor {
         
         case .setIsFetchingData(let isFetching):
             state.isFetchingData = isFetching
-            
+        
         case .empty:
             break
         }

@@ -23,16 +23,16 @@ class CustomAlertViewController_Rx: UIViewController {
     }
     
     let titleLabel = UILabel().then {
-        $0.font = .boldSystemFont(ofSize: 20)
+        $0.font = UIFont(name: K.Fonts.notoSansKRMedium, size: 16)
         $0.textColor = .black
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.numberOfLines = 2
     }
     
     let messageLabel = UILabel().then {
-        $0.font = UIFont.preferredFont(forTextStyle: .body)
+        $0.font = UIFont(name: K.Fonts.notoSansRegular, size: 15)
         $0.textColor = .black
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.numberOfLines = 7
         $0.adjustsFontSizeToFitWidth = true
         $0.minimumScaleFactor = 0.75

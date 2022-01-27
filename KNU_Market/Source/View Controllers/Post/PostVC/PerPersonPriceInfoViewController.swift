@@ -13,6 +13,7 @@ import RxSwift
 class PerPersonPriceInfoViewController: BaseViewController {
 
     //MARK: - Properties
+    
     let productPrice: Int
     let shippingFee: Int
     let totalPrice: Int
@@ -22,8 +23,8 @@ class PerPersonPriceInfoViewController: BaseViewController {
     //MARK: - Constants
     
     fileprivate struct Metrics {
-        static let defaultPadding = 20.f
-        static let defaultTopPadding = 10.f
+        static let defaultPadding       = 20.f
+        static let defaultTopPadding    = 10.f
     }
     
     fileprivate struct Fonts {

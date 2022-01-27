@@ -39,12 +39,16 @@ final class UserNotificationService: UserNotificationServiceType {
     func addChatNotificationToUserDefaultsIfNeeded(with userInfo: [AnyHashable : Any]) {
         
         var previouslySavedChatNotifications: [String] = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.notificationList) ?? []
+        print("✅ previouslySavedChatNotifications: \(previouslySavedChatNotifications)")
         
-        if let postUID = userInfo[NotificationType.post.rawValue] as? String {
+        if let postUID = userInfo[NotificationType.chat.rawValue] as? String {
+            
+            print("✅ postUID: \(postUID)")
             
             if !previouslySavedChatNotifications.contains(postUID) {
                 previouslySavedChatNotifications.append(postUID)
                 
+                print("✅ after appending: \(previouslySavedChatNotifications)")
                 userDefaultsGenericService.set(
                     key: UserDefaults.Keys.notificationList,
                     value: previouslySavedChatNotifications
@@ -52,6 +56,7 @@ final class UserNotificationService: UserNotificationServiceType {
                 notifyChatTabBadgeCountNeedsUpdate()
                 notifyChatListNeedsUpdate()
             }
+         
         }
     }
 

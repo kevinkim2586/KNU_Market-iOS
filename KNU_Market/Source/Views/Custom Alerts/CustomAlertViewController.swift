@@ -21,16 +21,16 @@ class CustomAlertViewController: UIViewController {
     }
     
     let titleLabel = UILabel().then {
-        $0.font = .boldSystemFont(ofSize: 20)
+        $0.font = UIFont(name: K.Fonts.notoSansKRMedium, size: 16)
         $0.textColor = .black
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.numberOfLines = 2
     }
     
     let messageLabel = UILabel().then {
-        $0.font = UIFont.preferredFont(forTextStyle: .body)
+        $0.font = UIFont(name: K.Fonts.notoSansRegular, size: 15)
         $0.textColor = .black
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.numberOfLines = 7
         $0.adjustsFontSizeToFitWidth = true
         $0.minimumScaleFactor = 0.75
@@ -116,7 +116,7 @@ class CustomAlertViewController: UIViewController {
         }
         
         messageLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(5)
             $0.leading.equalTo(20)
             $0.trailing.equalTo(-20)
             $0.centerX.equalTo(alertView)

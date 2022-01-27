@@ -592,7 +592,7 @@ class NewPostViewController: BaseViewController, ReactorKit.View {
                 
                 popupVC.modalPresentationStyle = .popover
                 popupVC.preferredContentSize = CGSize(
-                    width: (self.view.frame.size.width / 2) + 20,
+                    width: self.view.frame.size.width ,
                     height: self.view.frame.size.height / 3 - 40
                 )
                 let popOver: UIPopoverPresentationController = popupVC.popoverPresentationController!

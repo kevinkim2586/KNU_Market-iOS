@@ -393,7 +393,6 @@ extension PostViewController {
 
 extension PostViewController {
     
-    
     func presentActionSheet(with actions: [UIAlertAction], title: String?) {
         let actionSheet = UIHelper.createActionSheet(with: actions, title: title)
         present(actionSheet, animated: true)

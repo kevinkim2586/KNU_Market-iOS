@@ -1,128 +1,167 @@
 import UIKit
+import SnapKit
+import RxSwift
+import RxCocoa
+import ReactorKit
 
-class UnregisterUser_InputPasswordViewController: UIViewController {
+class UnregisterUser_InputPasswordViewController: BaseViewController, View {
     
-    private let titleLabel          = KMTitleLabel(textColor: .darkGray)
-    private let passwordTextField   = KMTextField(placeHolderText: "비밀번호")
-    private let errorLabel          = KMErrorLabel()
-    private let bottomButton        = KMBottomButton(buttonTitle: "다음")
+    typealias Reactor = UnregisterViewReactor
     
-    private let padding: CGFloat = 20
+    //MARK: - Properties
     
-    private let titleLabelText          = "회원탈퇴라니요..\n한 번만 더 생각해 주세요.😥"
-    private let errorLabelText          = "회원 탈퇴를 위해 비밀번호를 입력해 주세요."
-    private let incorrectPasswordText   = "비밀번호가 일치하지 않습니다. 다시 시도해 주세요."
+    //MARK: - Constants
+    
+    fileprivate struct Metrics {
+        static let padding = 20.f
+    }
+    
+    fileprivate struct Texts {
+        static let titleLabelText          = "회원탈퇴라니요..\n한 번만 더 생각해 주세요.😥"
+        static let errorLabelText          = "회원 탈퇴를 위해 비밀번호를 입력해 주세요."
+    }
+    
+    //MARK: - UI
+    
+    let titleLabel = KMTitleLabel(textColor: .darkGray).then {
+        $0.numberOfLines = 2
+        $0.text = Texts.titleLabelText
+    }
+    
+    let passwordTextField = KMTextField(placeHolderText: "비밀번호").then {
+        $0.isSecureTextEntry = true
+    }
+    
+    let errorLabel = KMErrorLabel().then {
+        $0.text = Texts.errorLabelText
+        $0.numberOfLines = 2
+        $0.isHidden = false
+        $0.textColor = .lightGray
+    }
+    
+    let bottomButton = KMBottomButton(buttonTitle: "다음").then {
+        $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true
+    }
+    
+    //MARK: - Initialization
+    
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         passwordTextField.becomeFirstResponder()
     }
-}
-
-//MARK: - Target Methods
-
-extension UnregisterUser_InputPasswordViewController {
     
-    @objc func pressedBottomButton() {
-        guard let password = passwordTextField.text else {
-            errorLabel.showErrorMessage(message: incorrectPasswordText)
-            return
-        }
+    //MARK: - UI Setup
+    
+    override func setupLayout() {
+        super.setupLayout()
         
-        UserManager.shared.login(
-            id: User.shared.userID,
-            password: password
-        ) { [weak self] result in
-
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(UnregisterUser_InputSuggestionViewController(userManager: UserManager()), animated: true)
-                }
-            case .failure(_):
-                self.errorLabel.showErrorMessage(message: self.incorrectPasswordText)
-            }
-        }
-    }
-
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        errorLabel.text = errorLabelText
-        errorLabel.textColor = .lightGray
-    }
-}
-
-//MARK: - UI Configuration & Initialization
-
-extension UnregisterUser_InputPasswordViewController {
-    
-    private func initialize() {
-        view.backgroundColor = .white
-        setBackBarButtonItemTitle(to: "")
-        initializeTitleLabel()
-        initializeTextField()
-        initializeErrorLabel()
-        initializeBottomButton()
-    }
-    
-    private func initializeTitleLabel() {
-        view.addSubview(titleLabel)
-        titleLabel.numberOfLines = 2
-        titleLabel.text = titleLabelText
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-        ])
-    }
-    
-    private func initializeTextField() {
-        view.addSubview(passwordTextField)
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.addTarget(
-            self,
-            action: #selector(textFieldDidChange(_:)),
-            for: .editingChanged
-        )
-        
-        NSLayoutConstraint.activate([
-            passwordTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
-            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 60)
-        ])
-    }
-    
-    private func initializeErrorLabel() {
-        view.addSubview(errorLabel)
-        errorLabel.text = errorLabelText
-        errorLabel.numberOfLines = 2
-        errorLabel.isHidden = false
-        errorLabel.textColor = .lightGray
-        
-        NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 25),
-            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-            
-        ])
-    }
-    
-    private func initializeBottomButton() {
-        bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
         passwordTextField.inputAccessoryView = bottomButton
-
-        bottomButton.addTarget(
-            self,
-            action: #selector(pressedBottomButton),
-            for: .touchUpInside
-        )
+        
+        view.addSubview(titleLabel)
+        view.addSubview(passwordTextField)
+        view.addSubview(errorLabel)
     }
     
+    override func setupConstraints() {
+        super.setupConstraints()
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+        
+        passwordTextField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(25)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+            $0.height.equalTo(60)
+        }
+        
+        errorLabel.snp.makeConstraints {
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(25)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+    }
+    
+    override func setupStyle() {
+        super.setupStyle()
+        setBackBarButtonItemTitle()
+    }
+    
+    //MARK: - Binding
+    
+    func bind(reactor: UnregisterViewReactor) {
+        
+        // Input
+        
+        passwordTextField.rx.text.orEmpty
+            .asObservable()
+            .map { Reactor.Action.updatePasswordInput($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        passwordTextField.rx.controlEvent([.editingChanged])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.errorLabel.text = Texts.errorLabelText
+                self.errorLabel.textColor = .lightGray
+            })
+            .disposed(by: disposeBag)
+        
+        bottomButton.rx.tap
+            .asObservable()
+            .map { Reactor.Action.tryLoggingIn }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Output
+        
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe { (_, errorMessage) in
+                self.errorLabel.showErrorMessage(message: errorMessage!)
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.loginCompleted }
+            .distinctUntilChanged()
+            .filter { $0 == true }
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.navigationController?.pushViewController(UnregisterUser_InputSuggestionViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
+
+            })
+            .disposed(by: disposeBag)
+    }
 }
+

@@ -42,6 +42,7 @@ class PostManager {
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 
+                
                 switch statusCode {
                     
                 case 200:

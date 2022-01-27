@@ -25,23 +25,23 @@ class MediaManager {
                    interceptor: interceptor)
             .validate()
             .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 200:
                     
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    case 200:
-                        
-                        if let fetchedData = response.data {
-                            completion(.success(fetchedData))
-                        } else {
-                            completion(.success(nil))
-                        }
-                    default:
-                        print("❗️ MediaManager -requestMedia FAILED ")
-                        let error = NetworkError.returnError(json: response.data ?? Data())
-                        completion(.failure(error))
+                    if let fetchedData = response.data {
+                        completion(.success(fetchedData))
+                    } else {
+                        completion(.success(nil))
                     }
-                   }
+                default:
+                    print("❗️ MediaManager -requestMedia FAILED ")
+                    let error = NetworkError.returnError(json: response.data ?? Data())
+                    completion(.failure(error))
+                }
+            }
     }
     
     //MARK: - 이미지 업로드
@@ -56,38 +56,38 @@ class MediaManager {
                                      mimeType: "image/jpeg")
             
         }, to: uploadImageURL,
-        interceptor: interceptor)
-        .validate()
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            case 201:
-                do {
+                  interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 201:
+                    do {
+                        
+                        let json = try JSON(data: response.data ?? Data())
+                        let imageID = json["uid"].stringValue
+                        print("MediaManager: newly uploaded image UID: \(imageID)")
+                        completion(.success(imageID))
+                        
+                    } catch {
+                        print("MediaManager - uploadImage() catch error \(error)")
+                        let error = NetworkError.returnError(json: response.data ?? Data())
+                        completion(.failure(error))
+                    }
+                    // 너무 큰 용량의 사진
+                case 413:
+                    let error = NetworkError.E413
+                    completion(.failure(error))
                     
-                    let json = try JSON(data: response.data ?? Data())
-                    let imageID = json["uid"].stringValue
-                    print("MediaManager: newly uploaded image UID: \(imageID)")
-                    completion(.success(imageID))
-                    
-                } catch {
-                    print("MediaManager - uploadImage() catch error \(error)")
+                default:
                     let error = NetworkError.returnError(json: response.data ?? Data())
+                    print("❗️ MediaManager - uploadImage failed with statusCode: \(statusCode) and reason: \(error.errorDescription)")
+                    
                     completion(.failure(error))
                 }
-            // 너무 큰 용량의 사진
-            case 413:
-                let error = NetworkError.E413
-                completion(.failure(error))
-                
-            default:
-                let error = NetworkError.returnError(json: response.data ?? Data())
-                print("❗️ MediaManager - uploadImage failed with statusCode: \(statusCode) and reason: \(error.errorDescription)")
-                
-                completion(.failure(error))
             }
-        }
     }
     
     //MARK: - 이미지 삭제
@@ -105,7 +105,7 @@ class MediaManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 201:
                     print("✏️ MediaManager - deleteImage SUCCESS for uid: \(uid)")
                     completion(.success(true))

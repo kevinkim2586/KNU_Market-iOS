@@ -1,149 +1,178 @@
 import UIKit
+import SnapKit
+import RxSwift
+import RxCocoa
+import ReactorKit
 
-class FindPasswordViewController: UIViewController {
+class FindPasswordViewController: BaseViewController, View {
     
-    private let titleLabel      = KMTitleLabel(textColor: .darkGray)
-    private let detailLabel     = KMDetailLabel(numberOfTotalLines: 2)
-    private let userIdTextField = KMTextField(placeHolderText: "크누마켓 아이디")
-    private let errorLabel      = KMErrorLabel()
-    private let bottomButton    = KMBottomButton(buttonTitle: "임시 비밀번호 받기")
+    typealias Reactor = FindUserInfoViewReactor
     
-    private let padding: CGFloat = 20
+    //MARK: - Properties
     
-    private var viewModel = FindUserInfoViewModel(userManager: UserManager())
+    //MARK: - Constants
     
+    fileprivate struct Metrics {
+        static let padding = 20.f
+    }
+    
+    //MARK: - UI
+    
+    let titleLabel = KMTitleLabel(textColor: .darkGray).then {
+        $0.numberOfLines = 1
+        $0.text = "크누마켓 아이디를 입력해주세요."
+        $0.changeTextAttributeColor(
+            fullText: $0.text!,
+            changeText: "크누마켓 아이디"
+        )
+    }
+    
+    let detailLabel = KMDetailLabel(numberOfTotalLines: 2).then {
+        $0.numberOfLines = 2
+        $0.text = "회원가입 시 입력했던 이메일로\n임시 비밀번호가 전송됩니다."
+    }
+    
+    let userIdTextField = KMTextField(placeHolderText: "크누마켓 아이디").then {
+        $0.autocapitalizationType = .none
+    }
+    
+    let errorLabel = KMErrorLabel().then {
+        $0.isHidden = true
+    }
+    
+    let bottomButton = KMBottomButton(buttonTitle: "임시 비밀번호 받기").then {
+        $0.heightAnchor.constraint(equalToConstant: $0.heightConstantForKeyboardAppeared).isActive = true
+    }
+    
+    
+    //MARK: - Initialization
+    
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - View Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
-        view.backgroundColor = .white
+        title = "비밀번호 찾기"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         userIdTextField.becomeFirstResponder()
     }
-}
-
-//MARK: - FindUserInfoViewModelDelegate
-
-extension FindPasswordViewController: FindUserInfoViewModelDelegate {
     
-    func didFindUserPassword(emailPasswordSent: NSAttributedString) {
-        presentKMAlertOnMainThread(
-            title: "비밀번호 안내",
-            message: "",
-            buttonTitle: "닫기",
-            attributedMessageString: emailPasswordSent
-        )
-    }
+    //MARK: - UI Setup
     
-    func didFailFetchingData(errorMessage: String) {
-        errorLabel.showErrorMessage(message: errorMessage)
-    }
-    
-    func didFailValidatingUserInput(errorMessage: String) {
-        errorLabel.showErrorMessage(message: errorMessage)
-    }
-}
-
-//MARK: - Target Methods
-
-extension FindPasswordViewController {
-    
-    @objc func pressedBottomButton() {
-        viewModel.validateUserInput(findIdOption: .password, userId: userIdTextField.text)
-    }
-}
-
-//MARK: - TextField Methods
-
-extension FindPasswordViewController {
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        errorLabel.isHidden = true
-    }
-}
-
-//MARK: - UI Configuration & Initialization
-
-extension FindPasswordViewController {
-    
-    func initialize() {
-        title = "비밀번호 찾기"
-        viewModel.delegate = self
-        setClearNavigationBarBackground()
-        initializeTitleLabel()
-        initializeDetailLabel()
-        initializeTextField()
-        initializeErrorLabel()
-        initializeBottomButton()
-    }
-    
-    func initializeTitleLabel() {
-        view.addSubview(titleLabel)
-        titleLabel.numberOfLines = 1
-        titleLabel.text = "크누마켓 아이디를 입력해주세요."
-        titleLabel.changeTextAttributeColor(
-            fullText: titleLabel.text!,
-            changeText: "크누마켓 아이디"
-        )
+    override func setupLayout() {
+        super.setupLayout()
         
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-        ])
-    }
-    
-    func initializeDetailLabel() {
-        view.addSubview(detailLabel)
-        detailLabel.numberOfLines = 2
-        detailLabel.text = "회원가입 시 입력했던 이메일로\n임시 비밀번호가 전송됩니다."
-        
-        NSLayoutConstraint.activate([
-            detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
-            detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: padding)
-        ])
-    
-    }
-    
-    func initializeTextField() {
-        view.addSubview(userIdTextField)
-        
-        userIdTextField.addTarget(
-            self,
-            action: #selector(textFieldDidChange(_:)),
-            for: .editingChanged
-        )
-        
-        NSLayoutConstraint.activate([
-            userIdTextField.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 55),
-            userIdTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            userIdTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(padding + 130)),
-            userIdTextField.heightAnchor.constraint(equalToConstant: 60)
-        ])
-    }
-    
-    func initializeErrorLabel() {
-        view.addSubview(errorLabel)
-        errorLabel.isHidden = true
-        
-        NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: userIdTextField.bottomAnchor, constant: padding),
-            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
-        ])
-    }
-    
-    func initializeBottomButton() {
-        bottomButton.heightAnchor.constraint(equalToConstant: bottomButton.heightConstantForKeyboardAppeared).isActive = true
         userIdTextField.inputAccessoryView = bottomButton
+        
+        view.addSubview(titleLabel)
+        view.addSubview(detailLabel)
+        view.addSubview(userIdTextField)
+        view.addSubview(errorLabel)
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+        
+        detailLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(30)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(Metrics.padding)
+        }
 
-        bottomButton.addTarget(
-            self,
-            action: #selector(pressedBottomButton),
-            for: .touchUpInside
-        )
+        userIdTextField.snp.makeConstraints {
+            $0.top.equalTo(detailLabel.snp.bottom).offset(55)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-(Metrics.padding + 130))
+            $0.height.equalTo(60)
+        }
+        
+        errorLabel.snp.makeConstraints {
+            $0.top.equalTo(userIdTextField.snp.bottom).offset(Metrics.padding)
+            $0.left.equalTo(view.snp.left).offset(Metrics.padding)
+            $0.right.equalTo(view.snp.right).offset(-Metrics.padding)
+        }
+    }
+    
+    override func setupStyle() {
+        super.setupStyle()
+        setClearNavigationBarBackground()
+    }
+    
+    //MARK: - Binding
+    
+    func bind(reactor: FindUserInfoViewReactor) {
+        
+        // Input
+        
+        userIdTextField.rx.text.orEmpty
+            .map { Reactor.Action.updateId($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        userIdTextField.rx.controlEvent([.editingChanged])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.errorLabel.isHidden = true
+                self.errorLabel.text = nil
+            })
+            .disposed(by: disposeBag)
+        
+        bottomButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .asObservable()
+            .map { Reactor.Action.findPassword }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Output
+        
+        reactor.state
+            .map { $0.emailNewPasswordSent }
+            .filter { $0 != nil }
+            .subscribe(onNext: { foundId in
+                self.presentKMAlertOnMainThread(
+                    title: "비밀번호 안내",
+                    message: "",
+                    buttonTitle: "닫기",
+                    attributedMessageString: foundId
+                )
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isLoading }
+            .asObservable()
+            .distinctUntilChanged()
+            .subscribe(onNext: {
+                $0 ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.errorMessage }
+            .filter { $0 != nil }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, errorMessage) in
+                self.errorLabel.showErrorMessage(message: errorMessage!)
+            })
+            .disposed(by: disposeBag)
     }
 }

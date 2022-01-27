@@ -21,16 +21,16 @@ class CustomAlertViewController: UIViewController {
     }
     
     let titleLabel = UILabel().then {
-        $0.font = .boldSystemFont(ofSize: 20)
+        $0.font = UIFont(name: K.Fonts.notoSansKRMedium, size: 16)
         $0.textColor = .black
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.numberOfLines = 2
     }
     
     let messageLabel = UILabel().then {
-        $0.font = UIFont.preferredFont(forTextStyle: .body)
+        $0.font = UIFont(name: K.Fonts.notoSansRegular, size: 15)
         $0.textColor = .black
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.numberOfLines = 7
         $0.adjustsFontSizeToFitWidth = true
         $0.minimumScaleFactor = 0.75
@@ -38,9 +38,11 @@ class CustomAlertViewController: UIViewController {
     }
     
     let cancelButton = UIButton(type: .system).then {
-        $0.backgroundColor = .systemGray3
+        $0.backgroundColor = .white
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.layer.cornerRadius = 5
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = .boldSystemFont(ofSize: 15)
         $0.addBounceAnimationWithNoFeedback()
     }
@@ -52,15 +54,28 @@ class CustomAlertViewController: UIViewController {
         $0.titleLabel?.font = .boldSystemFont(ofSize: 15)
         $0.addBounceAnimationWithNoFeedback()
     }
-
+    
+    let buttonStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.alignment = .center
+        $0.spacing = 5
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         setUpSubViews()
-        cancelButtonTapped()
+        bindUI()
     }
     
-    init(title: String, message: String, cancelButtonTitle: String, actionButtonTitle: String, action: @escaping () -> Void = { }) {
+    init(
+        title: String,
+        message: String,
+        cancelButtonTitle: String,
+        actionButtonTitle: String,
+        action: @escaping () -> Void = {}
+    ) {
         super.init(nibName: nil, bundle: nil)
         titleLabel.text = title
         messageLabel.text = message
@@ -71,7 +86,7 @@ class CustomAlertViewController: UIViewController {
                 action()
                 self.dismiss(animated: false)
             }.disposed(by: disposedBag)
-
+        
     }
     
     required init?(coder: NSCoder) {
@@ -80,10 +95,15 @@ class CustomAlertViewController: UIViewController {
     
     private func setUpSubViews() {
         self.view.addSubview(alertView)
-        [titleLabel, messageLabel, cancelButton, actionButton].forEach({ self.alertView.addSubview($0) })
+        [titleLabel, messageLabel].forEach { self.alertView.addSubview($0) }
+        
+        [cancelButton, actionButton].forEach {
+            buttonStackView.addArrangedSubview($0)
+        }
+        self.alertView.addSubview(buttonStackView)
         
         alertView.snp.makeConstraints {
-            $0.width.equalTo(280)
+            $0.width.equalTo(view.frame.size.width - 40)
             $0.height.equalTo(messageLabel.snp.height).multipliedBy(2.0)
             $0.centerX.centerY.equalToSuperview()
         }
@@ -96,31 +116,29 @@ class CustomAlertViewController: UIViewController {
         }
         
         messageLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(5)
             $0.leading.equalTo(20)
             $0.trailing.equalTo(-20)
             $0.centerX.equalTo(alertView)
         }
         
+        buttonStackView.snp.makeConstraints {
+            $0.top.equalTo(messageLabel.snp.bottom).inset(5)
+            $0.left.right.equalToSuperview().inset(10)
+            $0.height.greaterThanOrEqualTo(60)
+            $0.bottom.equalToSuperview()
+        }
+        
         cancelButton.snp.makeConstraints {
-            $0.width.equalTo(125)
-            $0.height.equalTo(44)
-            $0.leading.equalTo(alertView).offset(10)
-            $0.bottom.equalTo(alertView).offset(-10)
-            $0.top.equalTo(messageLabel.snp.bottom).offset(10)
+            $0.top.bottom.equalToSuperview().inset(10)
         }
         
         actionButton.snp.makeConstraints {
-            $0.width.equalTo(125)
-            $0.height.equalTo(44)
-            $0.leading.equalTo(cancelButton.snp.trailing).offset(10)
-            $0.trailing.equalTo(alertView).offset(-10)
-            $0.bottom.equalTo(alertView).offset(-10)
-            $0.top.equalTo(messageLabel.snp.bottom).offset(10)
+            $0.top.bottom.equalToSuperview().inset(10)
         }
     }
     
-    func cancelButtonTapped() {
+    func bindUI() {
         cancelButton.rx.tap
             .bind(onNext: {
                 self.dismiss(animated: false)

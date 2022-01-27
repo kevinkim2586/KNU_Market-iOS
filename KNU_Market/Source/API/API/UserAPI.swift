@@ -21,6 +21,7 @@ enum UserAPI {
     case updateUserInfo(type: UpdateUserInfoType, updatedInfo: String)
     case findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?)
     case findPassword(id: String)
+    case checkLatestAppVersion
 }
 
 extension UserAPI: BaseAPI {
@@ -45,6 +46,8 @@ extension UserAPI: BaseAPI {
             return "find/id"
         case .findPassword:
             return "find/password"
+        case .checkLatestAppVersion:
+            return "version"
         }
     }
     
@@ -67,9 +70,9 @@ extension UserAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
-        case .register, .login, .uploadStudentIdVerificationInformation, .sendVerificationEmail, .findUserId, .findPassword:
+        case .register, .login, .uploadStudentIdVerificationInformation, .sendVerificationEmail, .findUserId, .findPassword, .sendFeedback:
             return .post
-        case .checkDuplication, .loadUserProfileUsingUid, .loadUserProfile, .sendFeedback:
+        case .checkDuplication, .loadUserProfileUsingUid, .loadUserProfile, .checkLatestAppVersion:
             return .get
         case .unregisterUser:
             return .delete
@@ -98,7 +101,7 @@ extension UserAPI: BaseAPI {
             return [ type.rawValue : updatedInfo ]
         case let .findUserId(option, studentEmail, studentId, studentBirthDate):
             switch option {
-            case .webMail:
+            case .schoolEmail:
                 return [ "studentEmail": studentEmail! ]
             case .studentId:
                 return ["studentId": studentId!, "studentBirth": studentBirthDate!]
@@ -127,10 +130,10 @@ extension UserAPI: BaseAPI {
             var multipartData: [MultipartFormData] = []
             
             multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "id"))
-            multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "password"))
-            multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "nickname"))
-            multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "fcmToken"))
-            multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "email"))
+            multipartData.append(MultipartFormData(provider: .data(model.password.data(using: .utf8)!), name: "password"))
+            multipartData.append(MultipartFormData(provider: .data(model.nickname.data(using: .utf8)!), name: "nickname"))
+            multipartData.append(MultipartFormData(provider: .data(model.fcmToken.data(using: .utf8)!), name: "fcmToken"))
+            multipartData.append(MultipartFormData(provider: .data(model.emailForPasswordLoss.data(using: .utf8)!), name: "email"))
         
             return .uploadMultipart(multipartData)
             
@@ -140,9 +143,10 @@ extension UserAPI: BaseAPI {
             
             multipartData.append(MultipartFormData(provider: .data(model.studentId.data(using: .utf8)!), name: "studentId"))
             multipartData.append(MultipartFormData(provider: .data(model.studentBirth.data(using: .utf8)!), name: "studentBirth"))
-            multipartData.append(MultipartFormData(provider: .data(model.studentBirth.data(using: .utf8)!), name: "media", fileName: "studentId.jpeg", mimeType: "image/jpeg"))
+            multipartData.append(MultipartFormData(provider: .data(model.studentIdImageData), name: "media", fileName: "studentId.jpeg", mimeType: "image/jpeg"))
             
             return .uploadMultipart(multipartData)
+            
             
         default:
             if let parameters = parameters {

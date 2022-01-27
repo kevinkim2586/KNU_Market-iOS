@@ -145,7 +145,6 @@ class UserManager {
                     do {
                         let json = try JSON(data: response.data ?? Data())
                         self.saveAccessTokens(from: json)
-                        User.shared.password = password
                         User.shared.isLoggedIn = true
                         UIApplication.shared.registerForRemoteNotifications()
                         self.loadUserProfile { _ in }

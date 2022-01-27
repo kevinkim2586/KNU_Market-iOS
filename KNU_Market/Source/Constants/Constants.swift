@@ -2,107 +2,49 @@ import UIKit
 
 //MARK: - Struct for managing constants
 struct K {
-    
-    static let API_BASE_URL                     = "https://knumarket.kro.kr:5051/api/v1/"
-//    static let API_BASE_URL                     = "https://test.knumarket.kro.kr:5051/api/v1/"
-    static let WEB_SOCKET_URL                   = "wss://knumarket.kro.kr:5052"
-    static let MEDIA_REQUEST_URL                = "https://knumarket.kro.kr:5051/api/v1/media/"
-    
-    //MARK: - Identifiers
-    
-    struct SegueID {
-        
-        // UserRegister Segues
-        static let goToRegister                 = "goToRegister"
-        static let goToPasswordInputVC          = "goToPasswordInputVC"
-        static let goToNicknameInputVC          = "goToNicknameInputVC"
-        static let goToEmailForLostPwVC         = "goToEmailForLostPwVC"
 
-        
-        // Chat
-        static let presentChatMemberVC          = "presentChatMemberVC"
-
-        
-        static let goToReportVC                 = "goToReportVC"
-        
-    }
+    static let API_BASE_URL                     = "http://222.104.199.114:5004/api/v1/"
+    static let WEB_SOCKET_URL                   = "ws://222.104.199.114:5005"
     
-    struct StoryboardID {
-        
-        // Register  & Login
-        static let initialVC                    = "initialViewController"
-        static let initialNavigationController  = "InitialNavigationController"
-        static let idInputVC                    = "IDInputViewController"
-        static let emailInputVC                 = "EmailInputViewController"
-        static let checkEmailVC                 = "CheckEmailViewController"
-        static let emailForLostPWVC             = "EmailForLostPasswordViewController"
-        static let registerVC                   = "RegisterViewController"
-        static let congratulateUserVC           = "CongratulateViewController"
-        static let registerNavigationController = "RegisterNavigationController"
-        static let findPasswordVC               = "FindPasswordViewController"
-        static let studentIDGuideVC             = "StudentIDGuideViewController"
-        static let captureStudentIDVC           = "CaptureStudentIDViewController"
     
-        
-        // Find User Info
-        static let chooseVerificationOptionVC   = "ChooseVerificationOptionVC"
-        static let findIdUsingWebMailVC         = "FindIdUsingWebMailViewController"
-        static let findIdUsingStudentIdVC       = "FindIdUsingStudentIdViewController"
-        
-        // Home & Post Tab
-        static let tabBarController             = "TabBarController"
-        static let searchPostVC                 = "SearchPostViewController"
-        
-        // Chat Tab
-        static let chatVC                       = "ChatViewController"
-        static let chatMemberVC                 = "ChatMemberViewController"
-        static let imageVC                      = "ImageViewController"
-        
-        // My Page Tab
-        static let myPostsVC                    = "MyPostsViewController"
-        static let settingsVC                   = "SettingsViewController"
-        static let verifyOptionVC               = "VerifyOptionViewController"
-        static let unregisterInputPwVC          = "UnregisterUser_InputPWVC"
-        static let unregisterUserInputSuggestVC = "UnregisterUser_InputSuggestionViewController"
-        static let sendDeveloperMessageVC       = "SendDeveloperMessageViewController"
-        static let termsAndConditionsVC         = "TermsAndConditionViewController"
-        static let developerInfoVC              = "DeveloperInfoViewController"
-        static let openSourceLicenseVC          = "OpenSourceLicenseViewController"
-        
-        // Others
-        static let reportUserVC                 = "ReportUserViewController"
-        static let verifyEmailVC                = "VerifyEmailViewController"
-        
-        
-        // My Page UITableView ID Array
-        static let myPageSection_1_Options      = [myPostsVC, settingsVC, verifyOptionVC]
-        static let myPageSection_2_Options      = [sendDeveloperMessageVC, termsAndConditionsVC, openSourceLicenseVC, developerInfoVC]
-
-    }
     
-    struct cellID {
+//    static let API_BASE_URL                     = "https://knumarket.kro.kr:5051/api/v1/"           // 실 배포 서버
+//    static let WEB_SOCKET_URL                   = "wss://knumarket.kro.kr:5052"                     // 실 배포 서버
 
-        static let chatTableViewCell            = "chatTableViewCell"
-        static let sendCell                     = "sendCell"
-        static let receiveCell                  = "receiveCell"
-        static let myPageCell                   = "myPageCell"
-        static let chatMemberCell               = "chatMemberCell"
-    }
+    static let MEDIA_REQUEST_URL                = "\(K.API_BASE_URL)media/"
     
-
+    
     //MARK: - Keys
     
     struct KeyChainKey {
-        
         static let accessToken                  = "accessToken"
         static let refreshToken                 = "refreshToken"
-        static let password                     = "password"
     }
     
 
     static let entireChatRoomUID                = "__entireRoomPid"
     
     //MARK: - UI Related Constants
+    
+    struct Fonts {
+        
+        // NotoSans
+        static let notoSansRegular              = "NotoSans-Regular"
+        static let notoSansBold                 = "NotoSans-Bold"
+        
+        // NotoSans KR
+        static let notoSansKRRegular            = "NotoSansKR-Regular"
+        static let notoSansKRMedium             = "NotoSansKR-Medium"
+        static let notoSansKRBold               = "NotoSansKR-Bold"
+        static let notoSansKRLight              = "NotoSansKR-Light"
+        
+        // Roboto
+        static let robotoRegular                = "Roboto-Regular"
+        static let robotoBold                   = "Roboto-Bold"
+        static let robotoMedium                 = "Roboto-Medium"
+        static let robotoBlack                  = "Roboto-Black"
+        
+    }
     
     struct Color {
         
@@ -119,6 +61,7 @@ struct K {
         static let appLogoWithPhrase            = "appLogoWithPhrase"
         static let developerInfo                = "developer_info"
         
+        static let defaultUserPlaceholder       = "defaultUserImagePlaceholder"
         static let defaultAvatar                = "default avatar"
         static let defaultItemImage             = "default item image"
         static let defaultProfileImage          = "default_profile_image"
@@ -137,12 +80,12 @@ struct K {
         static let homeMenuIcon                 = "menu"
         
         // Tab Bar Icons
-        static let chatUnselected               = "grey chat"
-        static let chatSelected                 = "chat"
-        static let homeUnselected               = "grey house"
-        static let homeSelected                 = "house"
-        static let myPageUnselected             = "grey my"
-        static let myPageSelected               = "my"
+        static let chatUnselected               = "chatTabIcon_Unselected"
+        static let chatSelected                 = "chatTabIcon"
+        static let homeUnselected               = "homeTabIcon_UnSelected"
+        static let homeSelected                 = "homeTabIcon"
+        static let myPageUnselected             = "myPageTabIcon_Unselected"
+        static let myPageSelected               = "myPageTabIcon"
         
         
         // Post View Controller Images
@@ -210,10 +153,12 @@ struct K {
     
     struct URL {
         
+        
         static let termsAndConditionNotionURL       = "https://linen-twister-e2b.notion.site/b02ec80599d14452aefff7e0dcfcf4ff"
         static let privacyInfoConditionNotionURL    = "https://linen-twister-e2b.notion.site/6554bde75b2c49bfb617b04f526aad6e"
         
         static let kakaoHelpChannel                 = "https://pf.kakao.com/_PjLHs"
+        static let appStoreLink                     = "https://apps.apple.com/kr/app/%ED%81%AC%EB%88%84%EB%A7%88%EC%BC%93/id1580677279"
     }
 }
 

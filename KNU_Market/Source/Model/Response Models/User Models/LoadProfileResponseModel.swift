@@ -6,7 +6,7 @@ struct LoadProfileResponseModel: ModelType {
     let emailForPasswordLoss: String
     let uid: String
     let nickname: String
-    let profileImageCode: String
+    let profileImageUid: String
     let isVerified: Bool
     let fcmToken: String
     let isReportChecked: Bool
@@ -17,7 +17,7 @@ struct LoadProfileResponseModel: ModelType {
         case emailForPasswordLoss = "email"
         case uid
         case nickname
-        case profileImageCode = "profileImage"
+        case profileImageUid = "profileImage"
         case isVerified
         case fcmToken = "fcm"
         case isReportChecked

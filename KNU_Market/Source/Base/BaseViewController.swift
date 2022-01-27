@@ -24,7 +24,6 @@ class BaseViewController: UIViewController {
         setupLayout()
         setupConstraints()
         setupStyle()
-        setupActions()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -46,11 +45,4 @@ class BaseViewController: UIViewController {
         view.backgroundColor = .white
         setBackBarButtonItemTitle()
     }
-    
-    func setupActions() {
-        
-    }
-    
-    
-
 }

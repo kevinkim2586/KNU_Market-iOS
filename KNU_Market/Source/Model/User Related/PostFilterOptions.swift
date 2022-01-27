@@ -4,6 +4,7 @@ import Foundation
 
 enum PostFilterOptions: String {
     
-    case showAll                = "showAll"
+    case showByRecentDate                = "showAll"
     case showGatheringFirst     = "showGatheringFirst"
+    case cancel                 
 }

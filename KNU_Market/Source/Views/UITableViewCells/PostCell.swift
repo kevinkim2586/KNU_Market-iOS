@@ -11,10 +11,15 @@ import RxSwift
 import RxRelay
 
 let linkOnClicked = PublishSubject<URL>()
-class PostCell: UITableViewCell {
 
+class PostCell: UITableViewCell {
+    
     // MARK: - Constants
+    
+    static let cellId: String = "PostCell"
+    
     fileprivate struct Fonts {
+        
         private static let paragraphStyle = NSMutableParagraphStyle().then {
             $0.lineSpacing = 5
         }

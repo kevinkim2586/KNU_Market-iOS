@@ -53,8 +53,6 @@ extension UserManager {
         switch type {
         case .nickname:
             User.shared.nickname = infoString
-        case .password:
-            User.shared.password = infoString
         case .fcmToken:
             if infoString != UserRegisterValues.shared.fcmToken {
                 print("❗️ TOKEN DOES NOT MATCH, Re-updating token")
@@ -66,6 +64,7 @@ extension UserManager {
             User.shared.userID = infoString
         case .email:
             User.shared.emailForPasswordLoss = infoString
+        default: break
         }
         
     }

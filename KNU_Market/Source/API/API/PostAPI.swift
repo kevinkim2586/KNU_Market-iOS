@@ -22,10 +22,11 @@ extension PostAPI: BaseAPI {
     
     var path: String {
         switch self {
-        case let .fetchPostList(index, fetchCurrentUsers, _):
+     
+        case let .fetchPostList(_, fetchCurrentUsers, _):
             return fetchCurrentUsers == true
-            ? "posts/me?page=\(index)"
-            : "posts?page=\(index)"
+            ? "posts/me"
+            : "posts"
         case .uploadNewPost:
             return "posts"
         case let .updatePost(uid, _), let .fetchPostDetails(uid), let .deletePost(uid):
@@ -40,9 +41,9 @@ extension PostAPI: BaseAPI {
     var headers: [String : String]? {
         switch self {
         case let .fetchPostList(_, _, postFilterOptions):
-            return postFilterOptions == .showGatheringFirst
-            ? ["withoutcomplete" : "1"]
-            : nil
+            if postFilterOptions == .showGatheringFirst {
+                return ["withoutcomplete" : "1"]
+            } else { fallthrough }
         default: return ["Content-Type" : "application/json"]
         }
     }
@@ -71,6 +72,8 @@ extension PostAPI: BaseAPI {
                 "keyword" : keyword,
                 "page" : index
             ]
+        case let .fetchPostList(index: index, _, _):
+            return [ "page" : index ]
         default: return nil
         }
     }
@@ -78,7 +81,7 @@ extension PostAPI: BaseAPI {
     
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case .fetchSearchResults:
+        case .fetchSearchResults, .fetchPostList:
             return URLEncoding.queryString
         default:
             return JSONEncoding.default
@@ -87,7 +90,6 @@ extension PostAPI: BaseAPI {
     
     var task: Task {
         switch self {
-            
         default:
             if let parameters = parameters {
                 return .requestParameters(parameters: parameters, encoding: parameterEncoding)

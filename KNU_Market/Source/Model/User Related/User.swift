@@ -35,20 +35,6 @@ class User {
         }
     }
     
-    var password: String {
-        get {
-            let retrievedPassword: String? = KeychainWrapper.standard.string(forKey: K.KeyChainKey.password)
-            guard let password = retrievedPassword else {
-                return "❗️ Invalid Password"
-            }
-            
-            return password
-        }
-        set {
-            self.savedPassword = KeychainWrapper.standard.set(newValue, forKey: K.KeyChainKey.password)
-        }
-    }
-    
     var fcmToken: String {
         get {
             return UserDefaults.standard.string(forKey: UserDefaults.Keys.fcmToken) ?? "fcmToken 에러"
@@ -133,7 +119,6 @@ class User {
         
     var savedAccessToken: Bool = false
     var savedRefreshToken: Bool = false
-    var savedPassword: Bool = false
     
     //MARK: - User Profile Image Related Properties
     
@@ -158,24 +143,27 @@ class User {
     }
     
     
-    // 내가 직접 올린 공구글 PID 배열
-    var userUploadedRoomPIDs: [String] {
+    // 내가 참여하고 있는 채팅방 PID 배열
+    // PID == Post ID (각 공구글에 해당하는 고유 Id값)
+    var joinedChatRoomPIDs: [String] {
         get {
             return UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.joinedChatRoomPIDs) ?? [String]()
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.joinedChatRoomPIDs)
+           
         }
     }
-    
-    // 내가 참여하고 있는 채팅방 PID 배열
-    var joinedChatRoomPIDs: [String] = []
 
     
     var chatNotificationList: [String] {
         get {
             let list = UserDefaults.standard.stringArray(forKey: UserDefaults.Keys.notificationList) ?? [String]()
             return list
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.notificationList)
+            print("✅ chatNotificationList: \(newValue)")
         }
     }
     
@@ -214,9 +202,9 @@ class User {
         get {
             guard let filterOption = UserDefaults.standard.object(
                 forKey: UserDefaults.Keys.postFilterOptions
-            ) as? String else { return .showAll }
+            ) as? String else { return .showByRecentDate }
             
-            return PostFilterOptions(rawValue: filterOption) ?? .showAll
+            return PostFilterOptions(rawValue: filterOption) ?? .showByRecentDate
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaults.Keys.postFilterOptions)
@@ -258,7 +246,7 @@ extension User {
 
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: K.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: K.KeyChainKey.refreshToken)
-        let _: Bool = KeychainWrapper.standard.removeObject(forKey: K.KeyChainKey.password)
+
         
         UIApplication.shared.applicationIconBadgeNumber = 0
         

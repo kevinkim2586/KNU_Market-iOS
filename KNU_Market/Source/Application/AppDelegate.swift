@@ -11,6 +11,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    // 사용자 알림 처리 및 저장 클래스
+    let userNotificationService: UserNotificationService = UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService.shared)
+    
+    // 알림에 따른 Navigation 처리 클래스
+    let urlNavigator: URLNavigator = URLNavigator()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         print("✏️ didFinishLaunchingWithOptions")
@@ -25,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             object: nil
         )
         
-
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
           
@@ -64,27 +69,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("APNs device token: \(deviceTokenString)")
         
         Messaging.messaging().apnsToken = deviceToken
-        
-        // Persist it in your backend in case it's new
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("❗️ Failed to register: \(error)")
+        print("❗️didFailToRegisterForRemoteNotificationsWithError: \(error)")
     }
-    
     
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
@@ -124,49 +121,52 @@ extension AppDelegate: MessagingDelegate {
         print("✏️ deviceToken: \(deviceToken)")
         Messaging.messaging().apnsToken = deviceToken
     }
-    
-
 }
+
+//MARK: - UNUserNotificationCenterDelegate
 
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
     // Receive displayed notifications for iOS 10 devices.
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        if !User.shared.isLoggedIn { return }
-        
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        guard
+            let isLoggedIn: Bool = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.isLoggedIn),
+            isLoggedIn == true
+        else { return }
+              
         let userInfo = notification.request.content.userInfo
-        Messaging.messaging().appDidReceiveMessage(userInfo)
+        Messaging.messaging().appDidReceiveMessage(userInfo)            // 알림을 수신했음을 FireBase 에 알리는 함수
         
         print("✏️ willPresent userInfo: \(userInfo)")
         
-        if let postUID = userInfo["postUid"] as? String {
-            if !User.shared.chatNotificationList.contains(postUID) {
-                ChatNotifications.list.append(postUID)
-            }
-        }
+        userNotificationService.saveReceivedNotification(with: userInfo)
         
-        NotificationCenter.default.post(name: .getPreviousChats, object: nil)
-        NotificationCenter.default.post(name: .getBadgeValue, object: nil)
+        NotificationCenterService.getPreviousChats.post()
+        NotificationCenterService.configureChatTabBadgeCount.post()
         
         completionHandler([[.alert, .sound, .badge]])
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-    
-        let userInfo = response.notification.request.content.userInfo
-        Messaging.messaging().appDidReceiveMessage(userInfo)
+    // 사용자가 알림을 탭하고 앱에 들어왔을 때 실행
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
         
-        if let postUID = userInfo["postUid"] as? String {
-            if !User.shared.chatNotificationList.contains(postUID) {
-                ChatNotifications.list.append(postUID)
-            }
-        }
+        let userInfo = response.notification.request.content.userInfo
+        print("✅ userInfo: \(userInfo)")
+        
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+
+        userNotificationService.saveReceivedNotification(with: userInfo)
+        urlNavigator.handleReceivedNotification(with: userInfo)
+        
         completionHandler()
     }
 }
@@ -174,6 +174,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 //MARK: - Observers
 
 extension AppDelegate {
+
     
     @objc func refreshTokenHasExpired() {
         
@@ -186,12 +187,11 @@ extension AppDelegate {
             message: "세션이 만료되었습니다. 다시 로그인해 주세요.",
             buttonTitle: "확인"
         )
-        rootVC.popToInitialViewController()
+        rootVC.popToLoginViewController()
     }
     
     func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
-            print("Notification settings: \(settings)")
             DispatchQueue.main.async {
                 UIApplication.shared.registerForRemoteNotifications()
             }
@@ -203,13 +203,15 @@ extension AppDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
-        IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self,
-                                                           NickNameInputViewController.self,
-                                                           PasswordInputViewController.self,
-                                                           EmailInputViewController.self,
-                                                           CheckEmailViewController.self,
-                                                           IDInputViewController.self,
-                                                           EmailForLostPasswordViewController.self,SendUsMessageViewController.self]
+        IQKeyboardManager.shared.disabledToolbarClasses = [
+            ChatViewController.self,
+            NickNameInputViewController.self,
+            PasswordInputViewController.self,
+            EmailVerificationViewController.self,
+            CheckYourEmailViewController.self,
+            IDInputViewController.self,
+            EmailForLostPasswordViewController.self,SendUsMessageViewController.self
+        ]
         
         IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatViewController.self)
     }
@@ -224,6 +226,4 @@ extension AppDelegate {
         navigationBar.standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
-    
-    
 }

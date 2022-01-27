@@ -11,7 +11,7 @@ extension ChatViewController {
     
     @objc func pressedTitle() {
         
-        let postVC = NewPostViewController(reactor: PostViewReactor(
+        let postVC = PostViewController(reactor: PostViewReactor(
             pageId: roomUID,
             isFromChatVC: true,
             postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),

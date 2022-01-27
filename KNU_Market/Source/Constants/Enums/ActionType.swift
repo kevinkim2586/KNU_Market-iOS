@@ -7,6 +7,8 @@
 
 import Foundation
 
+//MARK: - UIAlertController, CustomAlertController 등의 2개 버튼의 Action 정의
+
 enum ActionType {
     case ok
     case cancel

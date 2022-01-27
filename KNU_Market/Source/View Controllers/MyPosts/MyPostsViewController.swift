@@ -95,7 +95,7 @@ class MyPostsViewController: BaseViewController, View {
                 self.postTableView.deselectRow(at: indexPath, animated: true)
                 
                 let postUUID = reactor.currentState.postList[indexPath.row].uuid
-                let postVC = NewPostViewController(
+                let postVC = PostViewController(
                     reactor: PostViewReactor(
                         pageId: postUUID,
                         isFromChatVC: false,

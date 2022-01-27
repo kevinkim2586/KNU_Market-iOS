@@ -156,7 +156,7 @@ class PostListViewController: BaseViewController, View {
             .subscribe(onNext: { _ in
                 
                 if reactor.currentState.isUserVerified {
-                    let uploadVC = UploadNewPostViewController(
+                    let uploadVC = UploadPostViewController(
                         reactor: UploadNewPostReactor(
                             postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
                             mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
@@ -208,7 +208,7 @@ class PostListViewController: BaseViewController, View {
                 self.postListsTableView.deselectRow(at: indexPath, animated: true)
                 
                 let postUUID = reactor.currentState.postList[indexPath.row].uuid
-                let postVC = NewPostViewController(
+                let postVC = PostViewController(
                     reactor: PostViewReactor(
                         pageId: postUUID,
                         isFromChatVC: false,
@@ -261,9 +261,9 @@ class PostListViewController: BaseViewController, View {
                 
                 if isAllowed! {
                     let uploadVC = UploadPostViewController(
-                        viewModel: UploadPostViewModel(
-                            postManager: PostManager(),
-                            mediaManager: MediaManager()
+                        reactor: UploadNewPostReactor(
+                            postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+                            mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
                         )
                     )
                     self.navigationController?.pushViewController(uploadVC, animated: true)

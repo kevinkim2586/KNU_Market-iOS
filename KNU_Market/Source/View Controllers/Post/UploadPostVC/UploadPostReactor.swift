@@ -16,7 +16,9 @@ final class UploadPostReactor: Reactor {
     let postService: PostServiceType
     let mediaService: MediaServiceType
     
-    let uploadErrorMessage: String = "글 업로드에 문제가 발생했어요! 다시 시도해 주세요."
+    fileprivate struct ErrorMessage {
+        static let uploadErrorMessage: String = "글 업로드에 문제가 발생했어요! 다시 시도해 주세요."
+    }
     
     enum UploadActionType {
         case uploadNewPost
@@ -250,7 +252,7 @@ extension UploadPostReactor {
                         case .success(let imageModel):
                             return .appendImageUid(imageModel.uid)
                         case .error(_):
-                            return .setErrorMessage(self.uploadErrorMessage)
+                            return .setErrorMessage(ErrorMessage.uploadErrorMessage)
                         }
                     }
             }
@@ -265,7 +267,7 @@ extension UploadPostReactor {
             let peopleGathering = Int(currentState.totalGatheringPeople ?? "2"),
             let detail          = currentState.postDetail
         else {
-            return .just(Mutation.setErrorMessage(self.uploadErrorMessage))
+            return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
         }
         
         let uploadPostDTO = UploadPostRequestDTO(
@@ -285,7 +287,7 @@ extension UploadPostReactor {
                 case .success:
                     return .setCompleteUploadingPost(true)
                 case .error(_):
-                    return .setErrorMessage(self.uploadErrorMessage)
+                    return .setErrorMessage(ErrorMessage.uploadErrorMessage)
                 }
             }
     }
@@ -302,7 +304,7 @@ extension UploadPostReactor {
             let price                   = Int(currentState.price ?? "0"),
             let pageUid                 = currentState.editPostModel?.pageUID
         else {
-            return .just(Mutation.setErrorMessage(self.uploadErrorMessage))
+            return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
         }
         
         let updateModel = UpdatePostRequestDTO(
@@ -324,7 +326,7 @@ extension UploadPostReactor {
                     NotificationCenterService.didUpdatePost.post()
                     return .setCompleteUploadingPost(true)
                 case .error(_):
-                    return .setErrorMessage(self.uploadErrorMessage)
+                    return .setErrorMessage(ErrorMessage.uploadErrorMessage)
                 }
             }
     }

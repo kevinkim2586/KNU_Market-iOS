@@ -592,7 +592,16 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
         reactor.state
             .map { $0.title }
             .filter { $0 != nil }
-            .bind(to: postTitleTextField.rx.text)
+            .filter { $0!.isEmpty == false }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, title) in
+                
+                let isValidPostTitle = title!.isValidPostTitle
+                
+                self.postTitleTextField.text = isValidPostTitle == .correct
+                ? title
+                : String(title!.prefix(ValidationError.Constraints.maxPostTitleLength))
+            })
             .disposed(by: disposeBag)
         
         /// 제품 가격

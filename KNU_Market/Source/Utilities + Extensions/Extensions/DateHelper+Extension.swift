@@ -289,12 +289,12 @@ public extension Date {
         }
         
         // 글이 생성된지 1개월 이상 ~ 1년 이내
-        if d >= 30 && d < 365 {
+        if d >= 30 && d <= 334 {             // 334 ~ 365일 이 사이는 12달 전으로 표시되기 때문에 334로 바꾼 것임 -> "1년 전"으로 표시되게끔
             return .monthsPast
         }
         
         // 글이 생성된지 1년 이상
-        if d > 365 {
+        if d > 334 {
             return .yearsPast
         }
         

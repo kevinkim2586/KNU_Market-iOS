@@ -684,22 +684,6 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             }
             .bind(to: gatheringPeopleTextField.rx.text)
             .disposed(by: disposeBag)
-
-//        reactor.state
-//            .map { $0.totalGatheringPeople }
-//            .debounce(.milliseconds(400), scheduler: MainScheduler.instance)
-//            .filter { $0 != nil }
-//            .filter { $0!.isEmpty == false }
-//            .withUnretained(self)
-//            .subscribe(onNext: { (_, gatheringPeople) in
-//                // 모집 인원이 Valid하지 않으면 그냥 2로 초기화
-//                let isValidGatheringPeople = gatheringPeople!.isValidGatheringPeopleNumber
-//
-//                self.gatheringPeopleTextField.text = isValidGatheringPeople == .correct
-//                ? gatheringPeople
-//                : "2"
-//            })
-//            .disposed(by: disposeBag)
         
         /// 1인당 가격
         

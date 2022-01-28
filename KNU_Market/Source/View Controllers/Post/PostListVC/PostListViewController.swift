@@ -157,7 +157,7 @@ class PostListViewController: BaseViewController, View {
                 
                 if reactor.currentState.isUserVerified {
                     let uploadVC = UploadPostViewController(
-                        reactor: UploadNewPostReactor(
+                        reactor: UploadPostReactor(
                             postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
                             mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
                         )
@@ -261,7 +261,7 @@ class PostListViewController: BaseViewController, View {
                 
                 if isAllowed! {
                     let uploadVC = UploadPostViewController(
-                        reactor: UploadNewPostReactor(
+                        reactor: UploadPostReactor(
                             postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
                             mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
                         )

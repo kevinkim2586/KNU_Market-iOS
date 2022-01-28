@@ -10,7 +10,7 @@ import ReactorKit
 import RxSwift
 
 
-final class UploadNewPostReactor: Reactor {
+final class UploadPostReactor: Reactor {
     
     let initialState: State
     let postService: PostServiceType
@@ -226,7 +226,7 @@ final class UploadNewPostReactor: Reactor {
 
 //MARK: - Methods
 
-extension UploadNewPostReactor {
+extension UploadPostReactor {
     
     private func determineUploadAction() -> UploadActionType {
         return self.currentState.editPostModel != nil ? .updateExistingPost : .uploadNewPost

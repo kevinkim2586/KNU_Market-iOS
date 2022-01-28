@@ -493,7 +493,9 @@ class PostViewController: BaseViewController, ReactorKit.View {
         urlLinkButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
+                print("✅ referenceURL: \(reactor.currentState.referenceUrl)")
                 if let url = reactor.currentState.referenceUrl {
+                    print("✅ url: \(url)")
                     self.askIfUserWantsToOpenUrl(url)
                 }
             })
@@ -798,7 +800,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
             .subscribe(onNext: { (_, model) in
                 
                 let uploadVC = UploadPostViewController(
-                    reactor: UploadNewPostReactor(
+                    reactor: UploadPostReactor(
                         postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
                         mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
                         editModel: model!
@@ -931,7 +933,7 @@ extension PostViewController {
                 DispatchQueue.main.async {
 
                     let uploadVC = UploadPostViewController(
-                        reactor: UploadNewPostReactor(
+                        reactor: UploadPostReactor(
                             postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
                             mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
                             editModel: reactor.currentState.editModel!

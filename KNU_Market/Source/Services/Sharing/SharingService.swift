@@ -64,7 +64,6 @@ final class SharingService: SharingServiceType {
             shareLink.socialMetaTagParameters?.imageURL = URL(string: K.MEDIA_REQUEST_URL + imageUids[0])
         }
         
-        
         shareLink.shorten { url, _, error in
             
             if let error = error {

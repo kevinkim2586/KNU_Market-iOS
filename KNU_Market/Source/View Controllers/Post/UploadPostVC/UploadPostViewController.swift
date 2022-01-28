@@ -17,7 +17,7 @@ import UITextView_Placeholder
 class UploadPostViewController: BaseViewController, ReactorKit.View {
 
     
-    typealias Reactor = UploadNewPostReactor
+    typealias Reactor = UploadPostReactor
     
     //MARK: - Properties
     
@@ -27,10 +27,12 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
     
     lazy var imagePickerConfiguration: YPImagePickerConfiguration = {
         var config = YPImagePickerConfiguration()
+
         config.showsCrop = .rectangle(ratio: 1.0)
         config.screens = [.library]
         config.library.maxNumberOfItems = maxNumberOfImagesAllowed
         config.showsPhotoFilters = false
+        config.shouldSaveNewPicturesToAlbum = false
         return config
     }()
     
@@ -521,7 +523,7 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
     
     //MARK: - Binding
     
-    func bind(reactor: UploadNewPostReactor) {
+    func bind(reactor: UploadPostReactor) {
         
         // Input
         

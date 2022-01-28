@@ -91,7 +91,7 @@
 		7C555465266D0A1400C3C5B6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555464266D0A1400C3C5B6 /* Location.swift */; };
 		7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555466266D1A8600C3C5B6 /* MediaManager.swift */; };
 		7C57AC19279C2529000540A4 /* UploadPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57AC18279C2529000540A4 /* UploadPostViewController.swift */; };
-		7C57AC1B279C255F000540A4 /* UploadNewPostReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57AC1A279C255F000540A4 /* UploadNewPostReactor.swift */; };
+		7C57AC1B279C255F000540A4 /* UploadPostReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57AC1A279C255F000540A4 /* UploadPostReactor.swift */; };
 		7C57AC1D279C3803000540A4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57AC1C279C3803000540A4 /* UITextField+Extension.swift */; };
 		7C58475B277040E6005D75B2 /* IDInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58475A277040E6005D75B2 /* IDInputViewController.swift */; };
 		7C58475D2770423A005D75B2 /* IDInputViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58475C2770423A005D75B2 /* IDInputViewReactor.swift */; };
@@ -368,7 +368,7 @@
 		7C555464266D0A1400C3C5B6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7C555466266D1A8600C3C5B6 /* MediaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
 		7C57AC18279C2529000540A4 /* UploadPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostViewController.swift; sourceTree = "<group>"; };
-		7C57AC1A279C255F000540A4 /* UploadNewPostReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadNewPostReactor.swift; sourceTree = "<group>"; };
+		7C57AC1A279C255F000540A4 /* UploadPostReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostReactor.swift; sourceTree = "<group>"; };
 		7C57AC1C279C3803000540A4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		7C58475A277040E6005D75B2 /* IDInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDInputViewController.swift; sourceTree = "<group>"; };
 		7C58475C2770423A005D75B2 /* IDInputViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDInputViewReactor.swift; sourceTree = "<group>"; };
@@ -1583,7 +1583,7 @@
 			isa = PBXGroup;
 			children = (
 				7C57AC18279C2529000540A4 /* UploadPostViewController.swift */,
-				7C57AC1A279C255F000540A4 /* UploadNewPostReactor.swift */,
+				7C57AC1A279C255F000540A4 /* UploadPostReactor.swift */,
 			);
 			path = UploadPostVC;
 			sourceTree = "<group>";
@@ -2047,7 +2047,7 @@
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */,
 				7C9185E32784435A00902A2A /* NotificationCenterService.swift in Sources */,
-				7C57AC1B279C255F000540A4 /* UploadNewPostReactor.swift in Sources */,
+				7C57AC1B279C255F000540A4 /* UploadPostReactor.swift in Sources */,
 				7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */,
 				7C353D3E279D476100C52009 /* UploadPostGuideLabel.swift in Sources */,
 				7C9C59FA277C16F8005E08BC /* MyPageServiceType.swift in Sources */,

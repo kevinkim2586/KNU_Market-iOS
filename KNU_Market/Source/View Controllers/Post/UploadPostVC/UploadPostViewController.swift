@@ -600,7 +600,7 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
                 
                 self.postTitleTextField.text = isValidPostTitle == .correct
                 ? title
-                : String(title!.prefix(ValidationError.Constraints.maxPostTitleLength))
+                : String(title!.prefix(ValidationError.Restrictions.maximumPostTitleLength))
             })
             .disposed(by: disposeBag)
         
@@ -662,22 +662,44 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             }
             .bind(to: gatheringPeopleTextField.rx.text)
             .disposed(by: disposeBag)
-
+        
         reactor.state
             .map { $0.totalGatheringPeople }
             .debounce(.milliseconds(400), scheduler: MainScheduler.instance)
             .filter { $0 != nil }
             .filter { $0!.isEmpty == false }
-            .withUnretained(self)
-            .subscribe(onNext: { (_, gatheringPeople) in
-                // 모집 인원이 Valid하지 않으면 그냥 2로 초기화
-                let isValidGatheringPeople = gatheringPeople!.isValidGatheringPeopleNumber
+            .map { $0! }
+            .map { gatheringPeople -> String in
                 
-                self.gatheringPeopleTextField.text = isValidGatheringPeople == .correct
-                ? gatheringPeople
-                : "2"
-            })
+                let isValidGatheringPeople = gatheringPeople.isValidGatheringPeopleNumber
+                
+                if isValidGatheringPeople == .correct { return gatheringPeople }            // 올바른 형식이면 그냥 바로 리턴
+                else {
+                    // 10보다 크면 10 리턴, 아니면 2 리턴 (모집 최대 인원 or 모집 최소 인원)
+                    let gatheringPeopleInInteger: Int = Int(gatheringPeople) ?? ValidationError.Restrictions.minimumGatheringPeople
+                    return gatheringPeopleInInteger > ValidationError.Restrictions.maximumGatheringPeople
+                    ? String(ValidationError.Restrictions.maximumGatheringPeople)
+                    : String(ValidationError.Restrictions.minimumGatheringPeople)
+                }
+            }
+            .bind(to: gatheringPeopleTextField.rx.text)
             .disposed(by: disposeBag)
+
+//        reactor.state
+//            .map { $0.totalGatheringPeople }
+//            .debounce(.milliseconds(400), scheduler: MainScheduler.instance)
+//            .filter { $0 != nil }
+//            .filter { $0!.isEmpty == false }
+//            .withUnretained(self)
+//            .subscribe(onNext: { (_, gatheringPeople) in
+//                // 모집 인원이 Valid하지 않으면 그냥 2로 초기화
+//                let isValidGatheringPeople = gatheringPeople!.isValidGatheringPeopleNumber
+//
+//                self.gatheringPeopleTextField.text = isValidGatheringPeople == .correct
+//                ? gatheringPeople
+//                : "2"
+//            })
+//            .disposed(by: disposeBag)
         
         /// 1인당 가격
         

@@ -4,8 +4,11 @@ import Foundation
 
 enum ValidationError {
     
-    struct Constraints {
-        static let maxPostTitleLength: Int = 30
+    struct Restrictions {
+        static let maximumPostTitleLength: Int = 30
+        
+        static let minimumGatheringPeople: Int = 2
+        static let maximumGatheringPeople: Int = 10
     }
     
     //MARK: - when registering new user

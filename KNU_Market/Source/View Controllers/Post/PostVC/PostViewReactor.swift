@@ -169,8 +169,8 @@ final class PostViewReactor: Reactor {
         }
         
         var referenceUrl: URL? {
-            if let referenceUrl = postModel.referenceUrl {
-                return URL(string: referenceUrl)
+            if let referenceUrl = postModel.referenceUrl, let encodedString = referenceUrl.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
+                return URL(string: encodedString)
             } else { return nil }
         }
         
@@ -185,7 +185,6 @@ final class PostViewReactor: Reactor {
         var isFirstEntranceToChat: Bool = false         // 채팅방 입장이 처음인지, 아니면 기존에 입장한 채팅방인지에 대한 판별 상태
         var isAttemptingToEnterChat: Bool = false       // 채팅방 입장 시도 중
     }
-    
     
     //MARK: - Initialization
     
@@ -258,14 +257,13 @@ final class PostViewReactor: Reactor {
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
+        
         var state = state
         state.alertMessage = nil
         state.alertMessageType = nil
         state.didEnterChat = false
-
         
         switch mutation {
-            
         case .setPostDetails(let postDetailModel):
             state.postModel = postDetailModel
             if let postImageUIDs = postDetailModel.imageUIDs {
@@ -309,7 +307,6 @@ final class PostViewReactor: Reactor {
         case .empty:
             break
         }
-
         return state
     }
 }

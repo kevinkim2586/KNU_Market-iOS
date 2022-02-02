@@ -16,11 +16,11 @@ final class UploadPostReactor: Reactor {
     let postService: PostServiceType
     let mediaService: MediaServiceType
     
-    fileprivate struct ErrorMessage {
+    private struct ErrorMessage {
         static let uploadErrorMessage: String = "글 업로드에 문제가 발생했어요! 다시 시도해 주세요."
     }
     
-    enum UploadActionType {
+    private enum UploadActionType {
         case uploadNewPost
         case updateExistingPost
     }
@@ -260,25 +260,17 @@ extension UploadPostReactor {
     
     private func uploadPost() -> Observable<Mutation> {
         
-        guard
-            let title           = currentState.title,
-            let price           = Int(currentState.price ?? "0"),
-            let shippingFee     = currentState.shippingFee == "" ? 0 : Int(currentState.shippingFee ?? "0"),
-            let peopleGathering = Int(currentState.totalGatheringPeople ?? "2"),
-            let detail          = currentState.postDetail
-        else {
+        guard let uploadPostDTO = UploadPostRequestDTO.configureDTO(
+            title: currentState.title,
+            price: currentState.price,
+            shippingFee: currentState.shippingFee,
+            totalGatheringPeople: currentState.totalGatheringPeople,
+            detail: currentState.postDetail,
+            referenceUrl: currentState.referenceUrl,
+            imageUIDs: currentState.imageUids
+        ) else {
             return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
         }
-        
-        let uploadPostDTO = UploadPostRequestDTO(
-            title: title,
-            price: price,
-            shippingFee: shippingFee,
-            referenceUrl: currentState.referenceUrl ?? nil,
-            peopleGathering: peopleGathering,
-            imageUIDs: currentState.imageUids,
-            detail: detail
-        )
         
         return self.postService.uploadNewPost(with: uploadPostDTO)
             .asObservable()
@@ -294,31 +286,24 @@ extension UploadPostReactor {
     
     private func updatePost() -> Observable<Mutation> {
         
-        guard
-            let title                   = currentState.title,
-            let detail                  = currentState.postDetail,
-            let totalGatheringPeople    = Int(currentState.totalGatheringPeople ?? "2"),
-            let currentlyGatheredPeople = currentState.editPostModel?.currentlyGatheredPeople,
-            let referenceUrl            = currentState.referenceUrl,
-            let shippingFee             = currentState.shippingFee == "" ? 0 : Int(currentState.shippingFee ?? "0"),
-            let price                   = Int(currentState.price ?? "0"),
-            let pageUid                 = currentState.editPostModel?.pageUID
-        else {
+        guard let updatePostDTO = UpdatePostRequestDTO.configureDTO(
+            title: currentState.title,
+            detail: currentState.postDetail,
+            imageUids: currentState.imageUids,
+            totalGatheringPeople: currentState.totalGatheringPeople,
+            currentlyGatheredPeople: currentState.editPostModel?.currentlyGatheredPeople,
+            referenceUrl: currentState.referenceUrl,
+            shippingFee: currentState.shippingFee,
+            price: currentState.price
+        ) else {
             return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
         }
         
-        let updateModel = UpdatePostRequestDTO(
-            title: title,
-            detail: detail,
-            imageUIDs: currentState.imageUids,
-            totalGatheringPeople: totalGatheringPeople ,
-            currentlyGatheredPeople: currentlyGatheredPeople,
-            referenceUrl: referenceUrl,
-            shippingFee: shippingFee,
-            price: price
-        )
+        guard let pageUid = currentState.editPostModel?.pageUID else {
+            return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
+        }
         
-        return self.postService.updatePost(uid: pageUid, with: updateModel)
+        return self.postService.updatePost(uid: pageUid, with: updatePostDTO)
             .asObservable()
             .map { result in
                 switch result {

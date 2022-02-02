@@ -15,15 +15,15 @@ final class SharingService: SharingServiceType {
     private let host: String    = "knumarket.page.link"
     private let domainURIPrefix = "https://knumarket.page.link"
     
-    enum ComponentPath: String {
+    private enum ComponentPath: String {
         case post = "/seePost"
     }
     
-    enum QueryItem: String {
+    private enum QueryItem: String {
         case post = "postUID"
     }
     
-    enum OSParameters: String {
+    private enum OSParameters: String {
         case androidPackageName = "com.kyh.knumarket"
         case iOSAppStoreId      = "1580677279"
     }
@@ -86,9 +86,7 @@ final class SharingService: SharingServiceType {
             }
             
             rootVC.present(activityVC, animated: true)
-            
         }
     }
-    
 }
 

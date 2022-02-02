@@ -16,7 +16,7 @@ struct PostListModel: ModelType {
     let date: String
     let imageUIDs: [Media]
     let userInfo: UserInfo?
-
+    
     enum CodingKeys: String, CodingKey {
         
         case uuid = "UUID" //
@@ -29,7 +29,7 @@ struct PostListModel: ModelType {
         case date = "createDate"
         case imageUIDs = "medias"
         case userInfo = "user"
-    
+        
     }
 }
 

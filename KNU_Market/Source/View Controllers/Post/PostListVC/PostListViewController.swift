@@ -180,6 +180,8 @@ class PostListViewController: BaseViewController, View {
         
         postListsTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
+        
+        
 
         // Output
         

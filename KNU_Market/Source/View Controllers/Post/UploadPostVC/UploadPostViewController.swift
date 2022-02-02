@@ -783,6 +783,7 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             .bind(to: doneButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
+        
         /// Divider Line 색상 변경
         
         postTitleTextField.rx.controlEvent([.editingDidBegin])
@@ -878,13 +879,32 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
                 self.horizontalLine.backgroundColor = Colors.dividerLineColor
             })
             .disposed(by: disposeBag)
-
+        
+        /// 인원 TextField 누르자마자 2가 입력되게
+        
+        gatheringPeopleTextField.rx.controlEvent([.editingDidBegin])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.reactor?.action.onNext(.updateGatheringPeople("2"))
+            })
+            .disposed(by: disposeBag)
 
         reactor.state
             .map { $0.isLoading }
             .withUnretained(self)
             .subscribe(onNext: { (_, isLoading) in
                 isLoading ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isLoading }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, isLoading) in
+                if isLoading {
+                    self.doneButton.isEnabled = false
+                }
             })
             .disposed(by: disposeBag)
         

@@ -15,13 +15,6 @@ final class SharingService: SharingServiceType {
     private let host: String    = "knumarket.page.link"
     private let domainURIPrefix = "https://knumarket.page.link"
     
-    private enum ComponentPath: String {
-        case post = "/seePost"
-    }
-    
-    private enum QueryItem: String {
-        case post = "postUID"
-    }
     
     private enum OSParameters: String {
         case androidPackageName = "com.kyh.knumarket"

@@ -35,7 +35,8 @@ struct UpdatePostRequestDTO {
         }
     }
     
-    static func configureDTO(
+
+    static func configureStandardDTO(
         title: String?,
         detail: String?,
         imageUids: [String],
@@ -75,6 +76,30 @@ struct UpdatePostRequestDTO {
             referenceUrl: referenceUrl,
             shippingFee: shippingFee,
             price: price
+        )
+    }
+    
+    // 모집 완료되어 있는 글을 다시 모집 중으로 전환할 때를 위한 DTO 구성
+    static func configureDTOForMarkingPostAsRegathering(
+        title: String,
+        detail: String,
+        imageUIDs: [String]?,
+        totalGatheringPeople: Int,
+        currentlyGatheredPeople: Int,
+        referenceUrl: String?,
+        shippingFee: Int?,
+        price: Int?
+    ) -> UpdatePostRequestDTO {
+        
+        return UpdatePostRequestDTO(
+            title: title,
+            detail: detail,
+            imageUIDs: imageUIDs,
+            totalGatheringPeople: totalGatheringPeople,
+            currentlyGatheredPeople: currentlyGatheredPeople,
+            isCompletelyDone: false,                    // 모집 해제이니까 이 파라미터가 들어가야함
+            referenceUrl: referenceUrl,
+            shippingFee: shippingFee, price: price ?? 0
         )
     }
 }

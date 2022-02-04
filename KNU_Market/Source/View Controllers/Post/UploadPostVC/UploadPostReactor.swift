@@ -37,6 +37,7 @@ final class UploadPostReactor: Reactor {
         case pressedUploadPost
         case uploadPost
         case configurePageWithEditModel
+        case downloadPreviousImageData         // 글 수정할 때만 실행 -> 이미지 비동기적으로 다운
     }
     
     enum Mutation {
@@ -53,6 +54,7 @@ final class UploadPostReactor: Reactor {
         case appendImageUid(String)
         case setCompleteUploadingPost(Bool)
         case setEditPostModel(EditPostModel)
+        case setPreviousImages([UIImage])
     }
     
     struct State {
@@ -149,11 +151,28 @@ final class UploadPostReactor: Reactor {
             return uploadActionType
             
         case .configurePageWithEditModel:
-            return Observable.concat([
-                Observable.just(Mutation.setIsLoading(true)),
-                Observable.just(Mutation.setEditPostModel(self.currentState.editPostModel!)),
-                Observable.just(Mutation.setIsLoading(false))
-            ])
+            
+            return Observable.just(Mutation.setEditPostModel(self.currentState.editPostModel!))
+            
+        case .downloadPreviousImageData:
+            
+            return Observable<Mutation>.create { observer in
+                
+                var images: [UIImage] = []
+                
+                if let imageUids = self.currentState.editPostModel?.imageUIDs {
+                    for imageUid in imageUids {
+                        let url = URL(string: K.MEDIA_REQUEST_URL + imageUid)!
+                        if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
+                            images.append(image)
+                           
+                        }
+                    }
+                    observer.onNext(Mutation.setPreviousImages(images))
+                    observer.onCompleted()
+                }
+                return Disposables.create()
+            }
         }
     }
     
@@ -211,15 +230,9 @@ final class UploadPostReactor: Reactor {
             state.totalGatheringPeople = "\(model.totalGatheringPeople)"
             state.referenceUrl = model.referenceUrl
             state.postDetail = model.postDetail
-
-            if let imageUids = model.imageUIDs {
-                for imageUid in imageUids {
-                    let url = URL(string: K.MEDIA_REQUEST_URL + imageUid)!
-                    if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
-                        state.images.append(image)
-                    }
-                }
-            }
+            
+        case .setPreviousImages(let images):
+            state.images = images
         }
         
         return state
@@ -286,7 +299,7 @@ extension UploadPostReactor {
     
     private func updatePost() -> Observable<Mutation> {
         
-        guard let updatePostDTO = UpdatePostRequestDTO.configureDTO(
+        guard let updatePostDTO = UpdatePostRequestDTO.configureStandardDTO(
             title: currentState.title,
             detail: currentState.postDetail,
             imageUids: currentState.imageUids,

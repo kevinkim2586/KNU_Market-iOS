@@ -20,10 +20,10 @@ class PostViewController: BaseViewController, ReactorKit.View {
     
     //MARK: - Properties
     
-    private lazy var upperImageViewHeight = view.frame.height / 2
-    private lazy var upperImageViewMaxHeight = view.frame.height / 2
-    private lazy var upperImageViewMinHeight = 100.f
-    private lazy var startingUpperImageViewHeight = upperImageViewMaxHeight
+    private lazy var upperImageViewHeight           = view.frame.height / 2
+    private lazy var upperImageViewMaxHeight        = view.frame.height / 2
+    private lazy var upperImageViewMinHeight        = 100.f
+    private lazy var startingUpperImageViewHeight   = upperImageViewMaxHeight
     
     // KMPostButtonView Menu Item
     @available(iOS 14.0, *)
@@ -712,6 +712,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
                 switch alertInfo.1 {
                 case .appleDefault:
                     self.presentSimpleAlert(title: alertInfo.0!)
+                    self.navigationController?.popViewController(animated: true)
                     
                 case .custom:
                     self.presentCustomAlert(title: "채팅방 참여 불가", message: alertInfo.0!)
@@ -798,7 +799,6 @@ class PostViewController: BaseViewController, ReactorKit.View {
             .filter { $0 != nil }
             .withUnretained(self)
             .subscribe(onNext: { (_, model) in
-                
                 let uploadVC = UploadPostViewController(
                     reactor: UploadPostReactor(
                         postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
@@ -820,6 +820,14 @@ class PostViewController: BaseViewController, ReactorKit.View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.navigationController?.popViewController(animated: true)
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isLoading }
+            .distinctUntilChanged()
+            .subscribe(onNext: { isLoading in
+                isLoading ? showProgressBar() : dismissProgressBar()
             })
             .disposed(by: disposeBag)
         

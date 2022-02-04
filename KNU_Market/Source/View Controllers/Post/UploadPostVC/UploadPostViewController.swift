@@ -939,12 +939,13 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { ($0.editPostModel) }
+            .map { $0.editPostModel }
             .filter { $0 != nil }
             .take(1)
             .withUnretained(self)
             .subscribe(onNext: { (_, model) in
                 self.reactor?.action.onNext(.configurePageWithEditModel)
+                self.reactor?.action.onNext(.downloadPreviousImageData)
             })
             .disposed(by: disposeBag)
             

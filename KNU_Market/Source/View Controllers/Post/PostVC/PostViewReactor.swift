@@ -47,13 +47,14 @@ final class PostViewReactor: Reactor {
         case setDidDeletePost(Bool, String)
         case setDidMarkPostDone(Bool, String)
         case setDidEnterChat(Bool, Bool)            // DidEnterChat, isFirstEntranceToChat
-    
+        
         
         case setEditPostModel(EditPostModel)
- 
+        
         case setIsFetchingData(Bool)
         case setAttemptingToEnterChat(Bool)
         case setDidBlockUser(Bool)
+        case setIsLoading(Bool)
         case empty
     }
     
@@ -63,22 +64,22 @@ final class PostViewReactor: Reactor {
         let isFromChatVC: Bool      // ChatVC에서 넘어온거면 PostVC에서 "채팅방 입장" 버튼 눌렀을 때 입장이 아닌 그냥 뒤로가기가 되어야 하기 때문
         var myNickname: String = ""
         var userJoinedChatRoomPIDS: [String] = []
-      
+        
         
         var postModel: PostDetailModel
         
         var inputSources: [InputSource] = []
-   
-    
-
+        
+        
+        
         var alertMessage: String?
         var alertMessageType: AlertMessageType?
         
-
+        
         
         var isFetchingData: Bool = false
         
-
+        
         // Computed Properties
         
         var postUploaderNickname: String {
@@ -115,12 +116,12 @@ final class PostViewReactor: Reactor {
             return postModel.shippingFee ?? 0
         }
         
-    
+        
         
         var detail: String {
             return postModel.postDetail
         }
-
+        
         var currentlyGatheredPeople: Int {
             if postModel.currentlyGatheredPeople < 1 { return 1 }
             return postModel.currentlyGatheredPeople
@@ -184,6 +185,7 @@ final class PostViewReactor: Reactor {
         var didEnterChat: Bool = false                  // 채팅방 입장 성공 시
         var isFirstEntranceToChat: Bool = false         // 채팅방 입장이 처음인지, 아니면 기존에 입장한 채팅방인지에 대한 판별 상태
         var isAttemptingToEnterChat: Bool = false       // 채팅방 입장 시도 중
+        var isLoading: Bool = false
     }
     
     //MARK: - Initialization
@@ -241,7 +243,7 @@ final class PostViewReactor: Reactor {
             
         case .blockUser:
             return .empty()
-
+            
         case .editPost:
             return configureEditPostModel()
             
@@ -300,10 +302,13 @@ final class PostViewReactor: Reactor {
             
         case .setDidBlockUser(let didBlock):
             state.didBlockUser = didBlock
-        
+            
         case .setIsFetchingData(let isFetching):
             state.isFetchingData = isFetching
-        
+            
+        case .setIsLoading(let isLoading):
+            state.isLoading = isLoading
+            
         case .empty:
             break
         }
@@ -318,7 +323,7 @@ extension PostViewReactor {
     private func fetchPostDetails() -> Observable<Mutation> {
         
         guard currentState.isFetchingData == false else { return .empty() }
-
+        
         return postService.fetchPostDetails(uid: currentState.pageId)
             .asObservable()
             .map { result in
@@ -327,11 +332,11 @@ extension PostViewReactor {
                     return Mutation.setPostDetails(postDetailModel)
                     
                 case .error(_):
-                    return Mutation.setAlertMessage("존재하지 않는 글입니다 🧐", .appleDefault)
+                    return Mutation.setAlertMessage("존재하지 않는 글입니다.🧐", .appleDefault)
                 }
             }
     }
-
+    
     private func deletePost() -> Observable<Mutation> {
         
         return postService.deletePost(uid: currentState.pageId)
@@ -340,15 +345,14 @@ extension PostViewReactor {
                 switch result {
                 case .success:
                     NotificationCenterService.updatePostList.post()
-                    print("✅ delete POST SUCCESS")
                     return Mutation.setDidDeletePost(true, "게시글 삭제 완료 🎉")
-
+                    
                 case .error(let error):
                     return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
                 }
             }
     }
-
+    
     private func markPostDone() -> Observable<Mutation> {
         
         return postService.markPostDone(uid: currentState.pageId)
@@ -365,7 +369,7 @@ extension PostViewReactor {
     }
     
     private func configureEditPostModel() -> Observable<Mutation> {
-        
+        print("✅ configureEditPostModel")
         let editPostModel = EditPostModel(
             title: currentState.postModel.title,
             imageURLs: nil,
@@ -384,18 +388,16 @@ extension PostViewReactor {
     }
     
     private func updatePostAsRegathering() -> Observable<Mutation> {
-
         
-        let updateModel = UpdatePostRequestDTO(
+        let updateModel = UpdatePostRequestDTO.configureDTOForMarkingPostAsRegathering(
             title: currentState.postModel.title,
             detail: currentState.postModel.postDetail,
             imageUIDs: currentState.postModel.imageUIDs,
             totalGatheringPeople: currentState.totalGatheringPeople,
             currentlyGatheredPeople: currentState.currentlyGatheredPeople,
-            isCompletelyDone: false,                        // 모집 해제이니까 이 파라미터가 들어가야함
             referenceUrl: currentState.postModel.referenceUrl,
             shippingFee: currentState.postModel.shippingFee,
-            price: currentState.postModel.price ?? 0
+            price: currentState.postModel.price
         )
         
         return postService.updatePost(uid: currentState.postModel.uuid, with: updateModel)
@@ -410,9 +412,9 @@ extension PostViewReactor {
                 }
             }
     }
-
+    
     private func joinChat() -> Observable<Mutation> {
-
+        
         if currentState.currentlyGatheredPeople ==
             currentState.totalGatheringPeople
             && !currentState.postIsUserUploaded
@@ -439,7 +441,7 @@ extension PostViewReactor {
                 }
             }
     }
-
+    
     private func fetchEnteredRoomInfo() -> Observable<Mutation> {
         
         return chatService.fetchJoinedChatList()
@@ -448,7 +450,7 @@ extension PostViewReactor {
                 return Mutation.empty
             }
     }
-
+    
     private func blockPostUploader() -> Observable<Mutation> {
         
         let userToBlock = currentState.postModel.userUID

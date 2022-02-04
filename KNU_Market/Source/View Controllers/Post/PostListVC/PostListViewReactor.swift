@@ -39,6 +39,7 @@ final class PostListViewReactor: Reactor {
         case setIsFetchingData(Bool)
         case setIsRefreshingData(Bool)
         case setUserNeedsToUpdateAppVersion(Bool)
+        case setUserVerificationStatus
         case empty
     }
     
@@ -81,6 +82,7 @@ final class PostListViewReactor: Reactor {
         
         // 인증된 유저인지 아닌지 판별
         let isUserVerified: Bool = userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
+
         
         self.initialState = State(
             bannedPostUploaders: bannedPostUploaders,
@@ -113,7 +115,7 @@ final class PostListViewReactor: Reactor {
             
         case .viewWillAppear:
             NotificationCenterService.configureChatTabBadgeCount.post()
-            return Observable.empty()
+            return Observable.just(Mutation.setUserVerificationStatus)
             
         case .fetchPostList:
             
@@ -182,6 +184,9 @@ final class PostListViewReactor: Reactor {
             
         case .setUserNeedsToUpdateAppVersion(let isNeeded):
             state.userNeedsToUpdateAppVersion = isNeeded
+            
+        case .setUserVerificationStatus:
+            state.isUserVerified = userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
             
         case .empty:
             break

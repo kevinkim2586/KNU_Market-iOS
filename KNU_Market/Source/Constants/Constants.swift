@@ -1,6 +1,7 @@
 import UIKit
 
 //MARK: - Struct for managing constants
+
 struct K {
 
     static let API_BASE_URL                     = "http://222.104.199.114:5004/api/v1/"

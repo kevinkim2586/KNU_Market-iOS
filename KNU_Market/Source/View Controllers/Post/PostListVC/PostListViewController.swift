@@ -131,18 +131,20 @@ class PostListViewController: BaseViewController, View {
             .map { _ in Reactor.Action.viewWillAppear }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
+
         
-        self.rx.viewWillAppear
+        self.rx.viewDidAppear
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.navigationTitleView.isHidden = false
+                self.navigationTitleView.setIsHidden(false, animated: true)
             })
             .disposed(by: disposeBag)
         
+
         self.rx.viewWillDisappear
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.navigationTitleView.isHidden = true
+                self.navigationTitleView.setIsHidden(true, animated: true)
             })
             .disposed(by: disposeBag)
         

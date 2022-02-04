@@ -174,18 +174,6 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
                 completed: nil
             )
         }
-        
-//        if let model = bannerModel {
-//            if let imageUrl = URL(string: model[indexPath.row].media?.path) {
-//                cell.bannerImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//                cell.bannerImageView.sd_setImage(
-//                    with: imageUrl,
-//                    placeholderImage: UIImage(named: K.Images.defaultItemImage),
-//                    options: .continueInBackground,
-//                    completed: nil
-//                )
-//            }
-//        }
         cell.backgroundColor = .clear
         return cell
     }
@@ -230,6 +218,5 @@ extension BannerHeaderView: UIScrollViewDelegate {
         offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: scrollView.contentInset.top)
         
         targetContentOffset.pointee = offset
-        
     }
 }

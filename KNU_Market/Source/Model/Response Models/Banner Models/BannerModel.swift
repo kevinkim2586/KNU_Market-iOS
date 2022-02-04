@@ -12,7 +12,7 @@ struct BannerModel: ModelType {
     let bannerId: Int
     let title: String
     let referenceUrl: String
-    let media: MediaType
+    let media: MediaType?
     
     enum CodingKeys: String, CodingKey {
         case bannerId, title, referenceUrl, media

@@ -119,7 +119,6 @@ class KMGatherStatusView: UIView {
         if total < ValidationError.Restrictions.minimumGatheringPeople { total = ValidationError.Restrictions.minimumGatheringPeople }
         if total > ValidationError.Restrictions.maximumGatheringPeople { total = ValidationError.Restrictions.maximumGatheringPeople }
         
-        
         return (currentNum, total)
     }
 }

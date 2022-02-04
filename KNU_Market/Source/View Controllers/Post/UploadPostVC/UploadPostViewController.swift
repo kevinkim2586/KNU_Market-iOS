@@ -945,7 +945,7 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             .withUnretained(self)
             .subscribe(onNext: { (_, model) in
                 self.reactor?.action.onNext(.configurePageWithEditModel)
-                self.reactor?.action.onNext(.downloadPreviousImageData)
+                self.reactor?.action.onNext(.downloadPreviousImageData)     // 기존 공구글의 이미지 다운은 별도로 처리
             })
             .disposed(by: disposeBag)
             
@@ -960,6 +960,8 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
     }
 }
+
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 
 extension UploadPostViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 

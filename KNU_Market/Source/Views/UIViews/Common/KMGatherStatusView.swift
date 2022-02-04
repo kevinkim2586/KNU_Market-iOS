@@ -96,12 +96,31 @@ class KMGatherStatusView: UIView {
     }
     
     func updateGatheringStatusLabel(currentNum: Int, total: Int) {
-        gatheringStatusLabel.text = "\(currentNum)/\(total)"
+        let filteredNumbers = filterInvalidGatheringPeopleNumbers(currentNum, total)
+        gatheringStatusLabel.text = "\(filteredNumbers.0)/\(filteredNumbers.1)"
     }
     
     func updateGatheringStatusLabel(currentNum: Int, total: Int, isCompletelyDone: Bool) {
-        gatheringStatusLabel.text = "\(currentNum)/\(total)"
+        let filteredNumbers = filterInvalidGatheringPeopleNumbers(currentNum, total)
+        gatheringStatusLabel.text = "\(filteredNumbers.0)/\(filteredNumbers.1)"
         isCompletelyDone ? toggleAsDoneGathering() : toggleAsStillGathering()
+    }
+    
+    private func filterInvalidGatheringPeopleNumbers(_ currentNum: Int, _ total: Int) -> (Int, Int) {
+        
+        var currentNum = currentNum
+        var total = total
+        
+        /// 현재 모집인원 숫자가 1미만이거나 최대 모집 가능 인원 숫자보다 클 상황에 대비
+        if currentNum < 1 { currentNum = 1 }
+        if currentNum > ValidationError.Restrictions.maximumGatheringPeople { currentNum = ValidationError.Restrictions.maximumGatheringPeople }
+        
+        /// 모집 가능 인원 숫자가 최소 모집 인원 (2) 보다 작거나 최대 모집 인원 (10) 보다 클 상황에 대비
+        if total < ValidationError.Restrictions.minimumGatheringPeople { total = ValidationError.Restrictions.minimumGatheringPeople }
+        if total > ValidationError.Restrictions.maximumGatheringPeople { total = ValidationError.Restrictions.maximumGatheringPeople }
+        
+        
+        return (currentNum, total)
     }
 }
 

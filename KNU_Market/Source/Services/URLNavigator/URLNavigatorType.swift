@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import FirebaseDynamicLinks
 
 protocol URLNavigatorType {
+    func handleIncomingDynamicLink(_ dynamicLink: DynamicLink)
     func handleReceivedNotification(with userInfo: [AnyHashable : Any])
     func navigateToChatListVC()
 }

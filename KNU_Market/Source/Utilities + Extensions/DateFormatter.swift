@@ -61,7 +61,6 @@ struct DateConverter {
         dateFormatter.dateFormat = DateFormatType.simple.stringFormat
         dateFormatter.locale = Locale(identifier: "ko_KR")
         
-
         guard let convertedDate = dateFormatter.date(from: dateString) else {
             return "-"
         }

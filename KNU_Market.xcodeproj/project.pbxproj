@@ -90,7 +90,7 @@
 		7C555465266D0A1400C3C5B6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555464266D0A1400C3C5B6 /* Location.swift */; };
 		7C555467266D1A8700C3C5B6 /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555466266D1A8600C3C5B6 /* MediaManager.swift */; };
 		7C57AC19279C2529000540A4 /* UploadPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57AC18279C2529000540A4 /* UploadPostViewController.swift */; };
-		7C57AC1B279C255F000540A4 /* UploadNewPostReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57AC1A279C255F000540A4 /* UploadNewPostReactor.swift */; };
+		7C57AC1B279C255F000540A4 /* UploadPostReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57AC1A279C255F000540A4 /* UploadPostReactor.swift */; };
 		7C57AC1D279C3803000540A4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57AC1C279C3803000540A4 /* UITextField+Extension.swift */; };
 		7C58475B277040E6005D75B2 /* IDInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58475A277040E6005D75B2 /* IDInputViewController.swift */; };
 		7C58475D2770423A005D75B2 /* IDInputViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C58475C2770423A005D75B2 /* IDInputViewReactor.swift */; };
@@ -157,6 +157,8 @@
 		7C9566F12789D33E006BFFAD /* PostViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9566F02789D33E006BFFAD /* PostViewReactor.swift */; };
 		7C956A8A27A276CA00588DED /* ActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C956A8927A276CA00588DED /* ActionType.swift */; };
 		7C956A8C27A276D400588DED /* ChangeProfileImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C956A8B27A276D400588DED /* ChangeProfileImageType.swift */; };
+		7C95DB7F27AA536E00C24AE8 /* ComponentPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C95DB7E27AA536E00C24AE8 /* ComponentPath.swift */; };
+		7C95DB8127AA537D00C24AE8 /* QueryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C95DB8027AA537D00C24AE8 /* QueryItem.swift */; };
 		7C98D2A42706EEDF00579EE6 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A32706EEDF00579EE6 /* Preview.swift */; };
 		7C98D2A62706F54B00579EE6 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98D2A52706F54B00579EE6 /* UIViewController+Preview.swift */; };
 		7C9A3835276DC6FC00AEE831 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9A3834276DC6FC00AEE831 /* LoginViewController.swift */; };
@@ -371,7 +373,7 @@
 		7C555464266D0A1400C3C5B6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7C555466266D1A8600C3C5B6 /* MediaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
 		7C57AC18279C2529000540A4 /* UploadPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostViewController.swift; sourceTree = "<group>"; };
-		7C57AC1A279C255F000540A4 /* UploadNewPostReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadNewPostReactor.swift; sourceTree = "<group>"; };
+		7C57AC1A279C255F000540A4 /* UploadPostReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostReactor.swift; sourceTree = "<group>"; };
 		7C57AC1C279C3803000540A4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		7C58475A277040E6005D75B2 /* IDInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDInputViewController.swift; sourceTree = "<group>"; };
 		7C58475C2770423A005D75B2 /* IDInputViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDInputViewReactor.swift; sourceTree = "<group>"; };
@@ -439,6 +441,8 @@
 		7C9566F02789D33E006BFFAD /* PostViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewReactor.swift; sourceTree = "<group>"; };
 		7C956A8927A276CA00588DED /* ActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionType.swift; sourceTree = "<group>"; };
 		7C956A8B27A276D400588DED /* ChangeProfileImageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileImageType.swift; sourceTree = "<group>"; };
+		7C95DB7E27AA536E00C24AE8 /* ComponentPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentPath.swift; sourceTree = "<group>"; };
+		7C95DB8027AA537D00C24AE8 /* QueryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryItem.swift; sourceTree = "<group>"; };
 		7C98D2A32706EEDF00579EE6 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7C98D2A52706F54B00579EE6 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		7C9A3834276DC6FC00AEE831 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -639,12 +643,12 @@
 		625B0E392741F5BA003968BA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7C33D23927A263C000D6F6FE /* Sharing */,
 				7C33D23627A2632700D6F6FE /* URLNavigator */,
 				7C9C59EE277C1684005E08BC /* Persistence */,
 				7C9C59E7277C163C005E08BC /* Networks */,
 				7C2A6B112786B97F00C31238 /* UserNotifications */,
 				7C9185E42784436300902A2A /* NotificationCenter */,
-				7C33D23927A263C000D6F6FE /* Sharing */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -756,6 +760,7 @@
 		7C33D23327A262C500D6F6FE /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				7C95DB8227AA539600C24AE8 /* DynamicLink */,
 				7C8E668A26E756C00060F37B /* ChatType.swift */,
 				7C956A8927A276CA00588DED /* ActionType.swift */,
 				7C956A8B27A276D400588DED /* ChangeProfileImageType.swift */,
@@ -1130,6 +1135,15 @@
 				7C922A5A27182A3400295A3F /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		7C95DB8227AA539600C24AE8 /* DynamicLink */ = {
+			isa = PBXGroup;
+			children = (
+				7C95DB7E27AA536E00C24AE8 /* ComponentPath.swift */,
+				7C95DB8027AA537D00C24AE8 /* QueryItem.swift */,
+			);
+			path = DynamicLink;
 			sourceTree = "<group>";
 		};
 		7C9A382F276C897D00AEE831 /* Common */ = {
@@ -1593,7 +1607,7 @@
 			isa = PBXGroup;
 			children = (
 				7C57AC18279C2529000540A4 /* UploadPostViewController.swift */,
-				7C57AC1A279C255F000540A4 /* UploadNewPostReactor.swift */,
+				7C57AC1A279C255F000540A4 /* UploadPostReactor.swift */,
 			);
 			path = UploadPostVC;
 			sourceTree = "<group>";
@@ -1869,6 +1883,7 @@
 				7C922A5B27182A3400295A3F /* BaseViewController.swift in Sources */,
 				7C9C59E2277C12E4005E08BC /* UIViewController+UI_Related.swift in Sources */,
 				7CF369D32754DA7700C9D7A9 /* ChatViewController+ChatViewDelegate_SocketDelegateMethods.swift in Sources */,
+				7C95DB8127AA537D00C24AE8 /* QueryItem.swift in Sources */,
 				7C5386DD276892D300BFEA7F /* PostService.swift in Sources */,
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */,
@@ -1901,6 +1916,7 @@
 				7C015C9A27035B3800089ED8 /* FindIdUsingStudentIdViewController.swift in Sources */,
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
 				7C33D23B27A263D500D6F6FE /* SharingService.swift in Sources */,
+				7C95DB7F27AA536E00C24AE8 /* ComponentPath.swift in Sources */,
 				7CA52D67270AF93F00A69F3B /* ChangeEmailForPasswordLossViewController.swift in Sources */,
 				7CF369D52754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift in Sources */,
 				7C3B4FF226A928D300E2CA8F /* CheckYourEmailViewController.swift in Sources */,
@@ -2060,7 +2076,7 @@
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */,
 				7C9185E32784435A00902A2A /* NotificationCenterService.swift in Sources */,
-				7C57AC1B279C255F000540A4 /* UploadNewPostReactor.swift in Sources */,
+				7C57AC1B279C255F000540A4 /* UploadPostReactor.swift in Sources */,
 				7CC69A762767027C00105FC0 /* PostAPI.swift in Sources */,
 				7C353D3E279D476100C52009 /* UploadPostGuideLabel.swift in Sources */,
 				7C9C59FA277C16F8005E08BC /* MyPageServiceType.swift in Sources */,
@@ -2255,7 +2271,7 @@
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.6;
+				CURRENT_PROJECT_VERSION = 1.3.1;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -2265,7 +2281,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "WIM.KNU-Market";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2283,7 +2299,7 @@
 				CODE_SIGN_ENTITLEMENTS = KNU_Market/KNU_Market.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.6;
+				CURRENT_PROJECT_VERSION = 1.3.1;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Market/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -2291,8 +2307,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.3.1;
 				ONLY_ACTIVE_ARCH = YES;
 =======
 				MARKETING_VERSION = 1.2.6;

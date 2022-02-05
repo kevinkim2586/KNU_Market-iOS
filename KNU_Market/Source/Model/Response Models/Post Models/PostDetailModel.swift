@@ -2,7 +2,6 @@ import Foundation
 
 //MARK: - 공구글 Model
 
-
 struct PostDetailModel: ModelType {
     
     let uuid: String

@@ -17,7 +17,7 @@ import UITextView_Placeholder
 class UploadPostViewController: BaseViewController, ReactorKit.View {
 
     
-    typealias Reactor = UploadNewPostReactor
+    typealias Reactor = UploadPostReactor
     
     //MARK: - Properties
     
@@ -27,10 +27,12 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
     
     lazy var imagePickerConfiguration: YPImagePickerConfiguration = {
         var config = YPImagePickerConfiguration()
+
         config.showsCrop = .rectangle(ratio: 1.0)
         config.screens = [.library]
         config.library.maxNumberOfItems = maxNumberOfImagesAllowed
         config.showsPhotoFilters = false
+        config.shouldSaveNewPicturesToAlbum = false
         return config
     }()
     
@@ -564,7 +566,7 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
     
     //MARK: - Binding
     
-    func bind(reactor: UploadNewPostReactor) {
+    func bind(reactor: UploadPostReactor) {
         
         // Input
         
@@ -633,7 +635,16 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
         reactor.state
             .map { $0.title }
             .filter { $0 != nil }
-            .bind(to: postTitleTextField.rx.text)
+            .filter { $0!.isEmpty == false }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, title) in
+                
+                let isValidPostTitle = title!.isValidPostTitle
+                
+                self.postTitleTextField.text = isValidPostTitle == .correct
+                ? title
+                : String(title!.prefix(ValidationError.Restrictions.maximumPostTitleLength))
+            })
             .disposed(by: disposeBag)
         
         /// 제품 가격
@@ -694,21 +705,27 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             }
             .bind(to: gatheringPeopleTextField.rx.text)
             .disposed(by: disposeBag)
-
+        
         reactor.state
             .map { $0.totalGatheringPeople }
             .debounce(.milliseconds(400), scheduler: MainScheduler.instance)
             .filter { $0 != nil }
             .filter { $0!.isEmpty == false }
-            .withUnretained(self)
-            .subscribe(onNext: { (_, gatheringPeople) in
-                // 모집 인원이 Valid하지 않으면 그냥 2로 초기화
-                let isValidGatheringPeople = gatheringPeople!.isValidGatheringPeopleNumber
+            .map { $0! }
+            .map { gatheringPeople -> String in
                 
-                self.gatheringPeopleTextField.text = isValidGatheringPeople == .correct
-                ? gatheringPeople
-                : "2"
-            })
+                let isValidGatheringPeople = gatheringPeople.isValidGatheringPeopleNumber
+                
+                if isValidGatheringPeople == .correct { return gatheringPeople }            // 올바른 형식이면 그냥 바로 리턴
+                else {
+                    // 10보다 크면 10 리턴, 아니면 2 리턴 (모집 최대 인원 or 모집 최소 인원)
+                    let gatheringPeopleInInteger: Int = Int(gatheringPeople) ?? ValidationError.Restrictions.minimumGatheringPeople
+                    return gatheringPeopleInInteger > ValidationError.Restrictions.maximumGatheringPeople
+                    ? String(ValidationError.Restrictions.maximumGatheringPeople)
+                    : String(ValidationError.Restrictions.minimumGatheringPeople)
+                }
+            }
+            .bind(to: gatheringPeopleTextField.rx.text)
             .disposed(by: disposeBag)
         
         /// 1인당 가격
@@ -809,6 +826,7 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             .bind(to: doneButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
+        
         /// Divider Line 색상 변경
         
         postTitleTextField.rx.controlEvent([.editingDidBegin])
@@ -904,13 +922,32 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
                 self.horizontalLine.backgroundColor = Colors.dividerLineColor
             })
             .disposed(by: disposeBag)
-
+        
+        /// 인원 TextField 누르자마자 2가 입력되게
+        
+        gatheringPeopleTextField.rx.controlEvent([.editingDidBegin])
+            .asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.reactor?.action.onNext(.updateGatheringPeople("2"))
+            })
+            .disposed(by: disposeBag)
 
         reactor.state
             .map { $0.isLoading }
             .withUnretained(self)
             .subscribe(onNext: { (_, isLoading) in
                 isLoading ? showProgressBar() : dismissProgressBar()
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isLoading }
+            .withUnretained(self)
+            .subscribe(onNext: { (_, isLoading) in
+                if isLoading {
+                    self.doneButton.isEnabled = false
+                }
             })
             .disposed(by: disposeBag)
         
@@ -945,12 +982,13 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { ($0.editPostModel) }
+            .map { $0.editPostModel }
             .filter { $0 != nil }
             .take(1)
             .withUnretained(self)
             .subscribe(onNext: { (_, model) in
                 self.reactor?.action.onNext(.configurePageWithEditModel)
+                self.reactor?.action.onNext(.downloadPreviousImageData)     // 기존 공구글의 이미지 다운은 별도로 처리
             })
             .disposed(by: disposeBag)
             
@@ -965,6 +1003,8 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
     }
 }
+
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 
 extension UploadPostViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 

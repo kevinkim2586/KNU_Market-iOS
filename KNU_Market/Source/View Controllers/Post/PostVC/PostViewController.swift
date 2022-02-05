@@ -26,11 +26,10 @@ import SafariServices
     
     //MARK: - Properties
     
-<<<<<<< HEAD
-    private lazy var upperImageViewHeight = view.frame.height / 2
-    private lazy var upperImageViewMaxHeight = view.frame.height / 2
-    private lazy var upperImageViewMinHeight = 100.f
-    private lazy var startingUpperImageViewHeight = upperImageViewMaxHeight
+    private lazy var upperImageViewHeight           = view.frame.height / 2
+    private lazy var upperImageViewMaxHeight        = view.frame.height / 2
+    private lazy var upperImageViewMinHeight        = 100.f
+    private lazy var startingUpperImageViewHeight   = upperImageViewMaxHeight
     
     // KMPostButtonView Menu Item
     @available(iOS 14.0, *)
@@ -543,7 +542,9 @@ import SafariServices
         urlLinkButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
+                print("✅ referenceURL: \(reactor.currentState.referenceUrl)")
                 if let url = reactor.currentState.referenceUrl {
+                    print("✅ url: \(url)")
                     self.askIfUserWantsToOpenUrl(url)
                 }
             })
@@ -760,6 +761,7 @@ import SafariServices
                 switch alertInfo.1 {
                 case .appleDefault:
                     self.presentSimpleAlert(title: alertInfo.0!)
+                    self.navigationController?.popViewController(animated: true)
                     
                 case .custom:
                     self.presentCustomAlert(title: "채팅방 참여 불가", message: alertInfo.0!)
@@ -846,9 +848,8 @@ import SafariServices
             .filter { $0 != nil }
             .withUnretained(self)
             .subscribe(onNext: { (_, model) in
-                
                 let uploadVC = UploadPostViewController(
-                    reactor: UploadNewPostReactor(
+                    reactor: UploadPostReactor(
                         postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
                         mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
                         editModel: model!
@@ -868,6 +869,14 @@ import SafariServices
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.navigationController?.popViewController(animated: true)
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isLoading }
+            .distinctUntilChanged()
+            .subscribe(onNext: { isLoading in
+                isLoading ? showProgressBar() : dismissProgressBar()
             })
             .disposed(by: disposeBag)
         
@@ -981,7 +990,7 @@ extension PostViewController {
                 DispatchQueue.main.async {
 
                     let uploadVC = UploadPostViewController(
-                        reactor: UploadNewPostReactor(
+                        reactor: UploadPostReactor(
                             postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
                             mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
                             editModel: reactor.currentState.editModel!

@@ -102,12 +102,18 @@ class BannerHeaderView: UIView {
     //MARK: - Configuration & Method
     
     func configure(with model: [BannerModel]) {
-        
-//        reactor?.action.onNext(.setBannerModel(model))
-        
+                
         if self.bannerModel != nil { return }
-        self.totalNumberOfBannerImages = model.count
-        self.bannerModel = model
+        
+        var filteredBannerModels: [BannerModel] = []        // path가 null인 model은 거르기
+        
+        for model in model {
+            if let _ = model.media?.path {
+                filteredBannerModels.append(model)
+            }
+        }
+        self.bannerModel = filteredBannerModels
+        self.totalNumberOfBannerImages = filteredBannerModels.count
     }
     
     private func startTimer() {
@@ -153,20 +159,20 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+       
+        guard let cell = bannerCollectionView.dequeueReusableCell(
+            withReuseIdentifier: BannerCollectionViewCell.cellId,
+            for: indexPath
+        ) as? BannerCollectionViewCell else { fatalError() }
         
-        guard let cell = bannerCollectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.cellId, for: indexPath) as? BannerCollectionViewCell else {
-            fatalError()
-        }
-        if let model = bannerModel {
-            if let imageUrl = URL(string: model[indexPath.row].media.path) {
-                cell.bannerImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                cell.bannerImageView.sd_setImage(
-                    with: imageUrl,
-                    placeholderImage: UIImage(named: K.Images.defaultItemImage),
-                    options: .continueInBackground,
-                    completed: nil
-                )
-            }
+        if let model = bannerModel, let bannerPath = model[indexPath.row].media?.path, let imageUrl = URL(string: bannerPath) {
+            cell.bannerImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            cell.bannerImageView.sd_setImage(
+                with: imageUrl,
+                placeholderImage: UIImage(named: K.Images.defaultItemImage),
+                options: .continueInBackground,
+                completed: nil
+            )
         }
         cell.backgroundColor = .clear
         return cell
@@ -212,6 +218,5 @@ extension BannerHeaderView: UIScrollViewDelegate {
         offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: scrollView.contentInset.top)
         
         targetContentOffset.pointee = offset
-        
     }
 }

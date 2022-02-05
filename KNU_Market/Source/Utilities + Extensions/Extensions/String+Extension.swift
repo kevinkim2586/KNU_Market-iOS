@@ -87,15 +87,13 @@ extension String {
         if self.hasEmojis, self.hasSpecialCharacters {
             return .incorrectFormat
         }
-        
-        guard self.count >= 3, self.count <= 30 else {
+
+        guard self.count >= 2, self.count <= 30 else {
             return .titleTooShortOrLong
         }
         return .correct
     }
-    
-    
-    
+        
     var isValidPostPrice: ValidationError.OnUploadPost {
         guard !self.isEmpty else { return .empty }
         

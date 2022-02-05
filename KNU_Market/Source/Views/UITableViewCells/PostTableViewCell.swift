@@ -252,8 +252,17 @@ class PostTableViewCell: UITableViewCell {
     private func configureCurrentlyGatheredPeopleLabel() {
         var currentNum = viewModel?.currentlyGatheredPeople ?? 1
         if viewModel?.currentlyGatheredPeople ?? 0 < 1 { currentNum = 1 }
-        let total = viewModel?.totalGatheringPeople ?? 2
+        var total = viewModel?.totalGatheringPeople ?? 2
         
+        /// 현재 모집인원 숫자가 1미만이거나 최대 모집 가능 인원 숫자보다 클 상황에 대비
+        if currentNum < 1 { currentNum = 1 }
+        if currentNum > ValidationError.Restrictions.maximumGatheringPeople { currentNum = ValidationError.Restrictions.maximumGatheringPeople }
+        
+        /// 모집 가능 인원 숫자가 최소 모집 인원 (2) 보다 작거나 최대 모집 인원 (10) 보다 클 상황에 대비
+        if total < ValidationError.Restrictions.minimumGatheringPeople { total = ValidationError.Restrictions.minimumGatheringPeople }
+        if total > ValidationError.Restrictions.maximumGatheringPeople { total = ValidationError.Restrictions.maximumGatheringPeople }
+        
+
         gatheringStatusLabel.text = "\(currentNum)/\(total)"
     }
     

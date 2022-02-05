@@ -15,15 +15,8 @@ final class SharingService: SharingServiceType {
     private let host: String    = "knumarket.page.link"
     private let domainURIPrefix = "https://knumarket.page.link"
     
-    enum ComponentPath: String {
-        case post = "/seePost"
-    }
     
-    enum QueryItem: String {
-        case post = "postUID"
-    }
-    
-    enum OSParameters: String {
+    private enum OSParameters: String {
         case androidPackageName = "com.kyh.knumarket"
         case iOSAppStoreId      = "1580677279"
     }
@@ -64,7 +57,6 @@ final class SharingService: SharingServiceType {
             shareLink.socialMetaTagParameters?.imageURL = URL(string: K.MEDIA_REQUEST_URL + imageUids[0])
         }
         
-        
         shareLink.shorten { url, _, error in
             
             if let error = error {
@@ -87,9 +79,7 @@ final class SharingService: SharingServiceType {
             }
             
             rootVC.present(activityVC, animated: true)
-            
         }
     }
-    
 }
 

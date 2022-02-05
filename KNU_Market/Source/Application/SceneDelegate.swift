@@ -8,6 +8,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     let userNotificationService: UserNotificationService = UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService.shared)
+    let urlNavigator: URLNavigator = URLNavigator()
     
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
         guard let window = self.window else { return }
@@ -80,11 +81,10 @@ extension SceneDelegate {
                 }
                 
                 if let dynamicLink = dynamicLink {
-                    self.handleIncomingDynamicLink(dynamicLink)
+                    self.urlNavigator.handleIncomingDynamicLink(dynamicLink)
                 }
             }
         }
-        
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -95,78 +95,9 @@ extension SceneDelegate {
         }
         
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
-            self.handleIncomingDynamicLink(dynamicLink)
+            urlNavigator.handleIncomingDynamicLink(dynamicLink)
         } else {
             print("❗️ Maybe some other url?")
         }
     }
-    
-    
-    
-    func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
-        guard let url = dynamicLink.url else {
-            print("❗️ Dynamic link has no url!")
-            return
-        }
-        
-        print("✅ incoming link parameter: \(url.absoluteString)")
-        
-        // Parse the link parameter
-        
-        
-        
-        // 앱 실행이 안 되어있는 상태에서 링크 실행하면 동작 X -> 수정하기
-        
-        
-        guard
-            let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-            let queryItems = components.queryItems
-        else { return }
-        
-        if components.path == "/seePost" {
-            
-            if let postIDQueryItem = queryItems.first(where: { $0.name == "postUID"}) {
-                
-                guard let postUID = postIDQueryItem.value else { return }
-                
-                print("✅ postUID: \(postUID)")
-                
-                let postVC = PostViewController(
-                    reactor: PostViewReactor(
-                        pageId: postUID,
-                        isFromChatVC: false,
-                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                        chatService: ChatService(
-                            network: Network<ChatAPI>(plugins: [AuthPlugin()]),
-                            userDefaultsGenericService: UserDefaultsGenericService()
-                        ),
-                        sharingService: SharingService(),
-                        userDefaultsService: UserDefaultsGenericService()
-                    )
-                )
-            
-                
-                guard let rootVC = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
-                    return
-                }
-                
-    
-                if let tabBarController = rootVC as? UITabBarController,
-                   let navController = tabBarController.selectedViewController as? UINavigationController {
-                    navController.pushViewController(postVC, animated: true)
-                }
-                
-
-    
-                
-            }
-            
-            
-            
-            
-            
-        }
-    }
-    
-
 }

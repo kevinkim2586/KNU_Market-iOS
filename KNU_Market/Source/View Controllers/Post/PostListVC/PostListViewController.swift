@@ -146,18 +146,20 @@ class PostListViewController: BaseViewController, View {
             .map { _ in Reactor.Action.viewWillAppear }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
+
         
-        self.rx.viewWillAppear
+        self.rx.viewDidAppear
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.navigationTitleView.isHidden = false
+                self.navigationTitleView.setIsHidden(false, animated: true)
             })
             .disposed(by: disposeBag)
         
+
         self.rx.viewWillDisappear
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.navigationTitleView.isHidden = true
+                self.navigationTitleView.setIsHidden(true, animated: true)
             })
             .disposed(by: disposeBag)
         
@@ -172,7 +174,7 @@ class PostListViewController: BaseViewController, View {
                 
                 if reactor.currentState.isUserVerified {
                     let uploadVC = UploadPostViewController(
-                        reactor: UploadNewPostReactor(
+                        reactor: UploadPostReactor(
                             postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
                             mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
                         )
@@ -195,6 +197,8 @@ class PostListViewController: BaseViewController, View {
         
         postListsTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
+        
+        
 
         // Output
         
@@ -276,7 +280,7 @@ class PostListViewController: BaseViewController, View {
                 
                 if isAllowed! {
                     let uploadVC = UploadPostViewController(
-                        reactor: UploadNewPostReactor(
+                        reactor: UploadPostReactor(
                             postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
                             mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
                         )

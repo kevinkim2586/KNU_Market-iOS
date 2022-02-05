@@ -4,6 +4,13 @@ import Foundation
 
 enum ValidationError {
     
+    struct Restrictions {
+        static let maximumPostTitleLength: Int = 30
+        
+        static let minimumGatheringPeople: Int = 2
+        static let maximumGatheringPeople: Int = 10
+    }
+    
     //MARK: - when registering new user
     enum OnRegister: String, Error {
         
@@ -49,6 +56,7 @@ enum ValidationError {
     }
     
     //MARK: - when uploading new item/post
+    
     enum OnUploadPost: String, Error {
         
         case correct

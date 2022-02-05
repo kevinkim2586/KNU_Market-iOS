@@ -10,15 +10,17 @@ import ReactorKit
 import RxSwift
 
 
-final class UploadNewPostReactor: Reactor {
+final class UploadPostReactor: Reactor {
     
     let initialState: State
     let postService: PostServiceType
     let mediaService: MediaServiceType
     
-    let uploadErrorMessage: String = "글 업로드에 문제가 발생했어요! 다시 시도해 주세요."
+    private struct ErrorMessage {
+        static let uploadErrorMessage: String = "글 업로드에 문제가 발생했어요! 다시 시도해 주세요."
+    }
     
-    enum UploadActionType {
+    private enum UploadActionType {
         case uploadNewPost
         case updateExistingPost
     }
@@ -35,6 +37,7 @@ final class UploadNewPostReactor: Reactor {
         case pressedUploadPost
         case uploadPost
         case configurePageWithEditModel
+        case downloadPreviousImageData         // 글 수정할 때만 실행 -> 이미지 비동기적으로 다운
     }
     
     enum Mutation {
@@ -51,6 +54,7 @@ final class UploadNewPostReactor: Reactor {
         case appendImageUid(String)
         case setCompleteUploadingPost(Bool)
         case setEditPostModel(EditPostModel)
+        case setPreviousImages([UIImage])
     }
     
     struct State {
@@ -147,11 +151,28 @@ final class UploadNewPostReactor: Reactor {
             return uploadActionType
             
         case .configurePageWithEditModel:
-            return Observable.concat([
-                Observable.just(Mutation.setIsLoading(true)),
-                Observable.just(Mutation.setEditPostModel(self.currentState.editPostModel!)),
-                Observable.just(Mutation.setIsLoading(false))
-            ])
+            
+            return Observable.just(Mutation.setEditPostModel(self.currentState.editPostModel!))
+            
+        case .downloadPreviousImageData:
+            
+            return Observable<Mutation>.create { observer in
+                
+                var images: [UIImage] = []
+                
+                if let imageUids = self.currentState.editPostModel?.imageUIDs {
+                    for imageUid in imageUids {
+                        let url = URL(string: K.MEDIA_REQUEST_URL + imageUid)!
+                        if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
+                            images.append(image)
+                           
+                        }
+                    }
+                    observer.onNext(Mutation.setPreviousImages(images))
+                    observer.onCompleted()
+                }
+                return Disposables.create()
+            }
         }
     }
     
@@ -209,15 +230,9 @@ final class UploadNewPostReactor: Reactor {
             state.totalGatheringPeople = "\(model.totalGatheringPeople)"
             state.referenceUrl = model.referenceUrl
             state.postDetail = model.postDetail
-
-            if let imageUids = model.imageUIDs {
-                for imageUid in imageUids {
-                    let url = URL(string: K.MEDIA_REQUEST_URL + imageUid)!
-                    if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
-                        state.images.append(image)
-                    }
-                }
-            }
+            
+        case .setPreviousImages(let images):
+            state.images = images
         }
         
         return state
@@ -226,7 +241,7 @@ final class UploadNewPostReactor: Reactor {
 
 //MARK: - Methods
 
-extension UploadNewPostReactor {
+extension UploadPostReactor {
     
     private func determineUploadAction() -> UploadActionType {
         return self.currentState.editPostModel != nil ? .updateExistingPost : .uploadNewPost
@@ -250,7 +265,7 @@ extension UploadNewPostReactor {
                         case .success(let imageModel):
                             return .appendImageUid(imageModel.uid)
                         case .error(_):
-                            return .setErrorMessage(self.uploadErrorMessage)
+                            return .setErrorMessage(ErrorMessage.uploadErrorMessage)
                         }
                     }
             }
@@ -258,25 +273,17 @@ extension UploadNewPostReactor {
     
     private func uploadPost() -> Observable<Mutation> {
         
-        guard
-            let title           = currentState.title,
-            let price           = Int(currentState.price ?? "0"),
-            let shippingFee     = currentState.shippingFee == "" ? 0 : Int(currentState.shippingFee ?? "0"),
-            let peopleGathering = Int(currentState.totalGatheringPeople ?? "2"),
-            let detail          = currentState.postDetail
-        else {
-            return .just(Mutation.setErrorMessage(self.uploadErrorMessage))
+        guard let uploadPostDTO = UploadPostRequestDTO.configureDTO(
+            title: currentState.title,
+            price: currentState.price,
+            shippingFee: currentState.shippingFee,
+            totalGatheringPeople: currentState.totalGatheringPeople,
+            detail: currentState.postDetail,
+            referenceUrl: currentState.referenceUrl,
+            imageUIDs: currentState.imageUids
+        ) else {
+            return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
         }
-        
-        let uploadPostDTO = UploadPostRequestDTO(
-            title: title,
-            price: price,
-            shippingFee: shippingFee,
-            referenceUrl: currentState.referenceUrl ?? nil,
-            peopleGathering: peopleGathering,
-            imageUIDs: currentState.imageUids,
-            detail: detail
-        )
         
         return self.postService.uploadNewPost(with: uploadPostDTO)
             .asObservable()
@@ -285,38 +292,31 @@ extension UploadNewPostReactor {
                 case .success:
                     return .setCompleteUploadingPost(true)
                 case .error(_):
-                    return .setErrorMessage(self.uploadErrorMessage)
+                    return .setErrorMessage(ErrorMessage.uploadErrorMessage)
                 }
             }
     }
     
     private func updatePost() -> Observable<Mutation> {
         
-        guard
-            let title                   = currentState.title,
-            let detail                  = currentState.postDetail,
-            let totalGatheringPeople    = Int(currentState.totalGatheringPeople ?? "2"),
-            let currentlyGatheredPeople = currentState.editPostModel?.currentlyGatheredPeople,
-            let referenceUrl            = currentState.referenceUrl,
-            let shippingFee             = currentState.shippingFee == "" ? 0 : Int(currentState.shippingFee ?? "0"),
-            let price                   = Int(currentState.price ?? "0"),
-            let pageUid                 = currentState.editPostModel?.pageUID
-        else {
-            return .just(Mutation.setErrorMessage(self.uploadErrorMessage))
+        guard let updatePostDTO = UpdatePostRequestDTO.configureStandardDTO(
+            title: currentState.title,
+            detail: currentState.postDetail,
+            imageUids: currentState.imageUids,
+            totalGatheringPeople: currentState.totalGatheringPeople,
+            currentlyGatheredPeople: currentState.editPostModel?.currentlyGatheredPeople,
+            referenceUrl: currentState.referenceUrl,
+            shippingFee: currentState.shippingFee,
+            price: currentState.price
+        ) else {
+            return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
         }
         
-        let updateModel = UpdatePostRequestDTO(
-            title: title,
-            detail: detail,
-            imageUIDs: currentState.imageUids,
-            totalGatheringPeople: totalGatheringPeople ,
-            currentlyGatheredPeople: currentlyGatheredPeople,
-            referenceUrl: referenceUrl,
-            shippingFee: shippingFee,
-            price: price
-        )
+        guard let pageUid = currentState.editPostModel?.pageUID else {
+            return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
+        }
         
-        return self.postService.updatePost(uid: pageUid, with: updateModel)
+        return self.postService.updatePost(uid: pageUid, with: updatePostDTO)
             .asObservable()
             .map { result in
                 switch result {
@@ -324,7 +324,7 @@ extension UploadNewPostReactor {
                     NotificationCenterService.didUpdatePost.post()
                     return .setCompleteUploadingPost(true)
                 case .error(_):
-                    return .setErrorMessage(self.uploadErrorMessage)
+                    return .setErrorMessage(ErrorMessage.uploadErrorMessage)
                 }
             }
     }

@@ -31,14 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             object: nil
         )
         
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-          
-        } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
+        UNUserNotificationCenter.current().delegate = self
         
         Messaging.messaging().delegate = self
         Messaging.messaging().token { token, error in
@@ -166,7 +159,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
         userNotificationService.saveReceivedNotification(with: userInfo)
         urlNavigator.handleReceivedNotification(with: userInfo)
-        
         completionHandler()
     }
 }
@@ -174,8 +166,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 //MARK: - Observers
 
 extension AppDelegate {
-
-    
     @objc func refreshTokenHasExpired() {
         
         guard let keywindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),

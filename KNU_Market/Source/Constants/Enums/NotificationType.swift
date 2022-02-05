@@ -9,5 +9,5 @@ import Foundation
 
 enum NotificationType: String {
     case chat = "sendName"
-    case post = "postId"
+    case post = "postUid"
 }

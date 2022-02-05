@@ -159,7 +159,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
         userNotificationService.saveReceivedNotification(with: userInfo)
         urlNavigator.handleReceivedNotification(with: userInfo)
-        
         completionHandler()
     }
 }

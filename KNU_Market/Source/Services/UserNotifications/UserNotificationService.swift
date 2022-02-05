@@ -32,9 +32,9 @@ final class UserNotificationService: UserNotificationServiceType {
     
     // 사용자가 도착한 채팅 알림을 탭하고 앱에 들어왔을 때 해당하는 postUID 를 UserDefaults에 저장
     func addChatNotificationToUserDefaultsIfNeeded(with userInfo: [AnyHashable : Any]) {
-        
+    
         var previouslySavedChatNotifications: [String] = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.notificationList) ?? []
-        
+    
         if let postUID = userInfo[NotificationType.post.rawValue] as? String {
             
             if !previouslySavedChatNotifications.contains(postUID) {
@@ -44,6 +44,7 @@ final class UserNotificationService: UserNotificationServiceType {
                     key: UserDefaults.Keys.notificationList,
                     value: previouslySavedChatNotifications
                 )
+                
                 notifyChatTabBadgeCountNeedsUpdate()
                 notifyChatListNeedsUpdate()
             }

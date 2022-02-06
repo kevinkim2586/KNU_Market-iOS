@@ -3,9 +3,7 @@
 //  KNU_Market
 //
 //  Created by Kevin Kim on 2022/02/06.
-//
 
-import Foundation
 import Then
 import RxFlow
 import UIKit
@@ -54,7 +52,7 @@ class PostFlow: Flow {
         case .postListIsRequired:
             return navigateToPostList()
             
-        case .postIsRequired(let postUid, let isFromChatVC):
+        case .postIsPicked(let postUid, let isFromChatVC):
             return navigateToPostDetail(postUid: postUid, isFromChatVC: isFromChatVC)
             
         case .uploadPostIsRequired:
@@ -62,6 +60,18 @@ class PostFlow: Flow {
             
         case .welcomeIndicatorRequired(let nickname):
             return presentWelcomeIndicator(with: nickname)
+            
+        case let .perPersonPricePopupIsRequired(model, preferredContentSize, sourceView, delegateController):
+            return presentPerPersonPricePopupVC(
+                model: model,
+                preferredContentSize: preferredContentSize,
+                sourceView: sourceView,
+                delegateController: delegateController
+            )
+            
+        case .popViewController:
+            self.rootViewController.popViewController(animated: true)
+            return .none
             
         case .unauthorized:
             return presentUnauthorizedAlert()
@@ -126,6 +136,32 @@ extension PostFlow {
         return .one(flowContributor: .contribute(withNextPresentable: uploadVC, withNextStepper: reactor))
     }
 
+    private func presentPerPersonPricePopupVC(
+        model: PerPersonPriceModel,
+        preferredContentSize: CGSize,
+        sourceView: UIView,
+        delegateController: PostViewController
+    ) -> FlowContributors {
+        
+        let vc = PerPersonPriceInfoViewController(
+            productPrice: model.productPrice,
+            shippingFee: model.shippingFee,
+            totalPrice: model.totalPrice,
+            totalGatheringPeople: model.totalGatheringPeople,
+            perPersonPrice: model.perPersonPrice
+        )
+        
+        vc.modalPresentationStyle = .popover
+        vc.preferredContentSize = preferredContentSize
+        
+        let popOver: UIPopoverPresentationController = vc.popoverPresentationController!
+        popOver.delegate = delegateController
+        popOver.sourceView = sourceView
+        
+        self.rootViewController.present(vc, animated: true)
+        
+        return .none
+    }
 }
 
 //MARK: - Alert Methods
@@ -142,7 +178,6 @@ extension PostFlow {
                 ?? UIImage(systemName: "checkmark.circle")!
             )
         )
-        
         return .none
     }
     
@@ -166,7 +201,6 @@ extension PostFlow {
         ) {
             self.popToLoginScreen()
         }
-        
         return .none
     }
     

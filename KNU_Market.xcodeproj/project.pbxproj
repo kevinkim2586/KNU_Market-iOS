@@ -146,6 +146,7 @@
 		7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668826E756B30060F37B /* FilteredChat.swift */; };
 		7C8E668B26E756C00060F37B /* ChatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668A26E756C00060F37B /* ChatType.swift */; };
 		7C8E668D26E875A00060F37B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668C26E875A00060F37B /* UIImageView+Extension.swift */; };
+		7C8E829627B019E50085F682 /* PerPersonPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E829527B019E50085F682 /* PerPersonPriceModel.swift */; };
 		7C8E82D02782D10E002F7CFB /* ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82CF2782D10E002F7CFB /* ChatAPI.swift */; };
 		7C8E82D22782DBB8002F7CFB /* ChatListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82D12782DBB8002F7CFB /* ChatListService.swift */; };
 		7C8E82D62782DBDF002F7CFB /* ChatListServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82D52782DBDF002F7CFB /* ChatListServiceType.swift */; };
@@ -437,6 +438,7 @@
 		7C8E668826E756B30060F37B /* FilteredChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredChat.swift; sourceTree = "<group>"; };
 		7C8E668A26E756C00060F37B /* ChatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatType.swift; sourceTree = "<group>"; };
 		7C8E668C26E875A00060F37B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		7C8E829527B019E50085F682 /* PerPersonPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerPersonPriceModel.swift; sourceTree = "<group>"; };
 		7C8E82CF2782D10E002F7CFB /* ChatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPI.swift; sourceTree = "<group>"; };
 		7C8E82D12782DBB8002F7CFB /* ChatListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListService.swift; sourceTree = "<group>"; };
 		7C8E82D52782DBDF002F7CFB /* ChatListServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListServiceType.swift; sourceTree = "<group>"; };
@@ -1062,6 +1064,14 @@
 			path = "User Related";
 			sourceTree = "<group>";
 		};
+		7C8E829427B019CA0085F682 /* In-App Models */ = {
+			isa = PBXGroup;
+			children = (
+				7C8E829527B019E50085F682 /* PerPersonPriceModel.swift */,
+			);
+			path = "In-App Models";
+			sourceTree = "<group>";
+		};
 		7C8E82D32782DBC5002F7CFB /* ChatService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1347,6 +1357,7 @@
 				7C6D253C269037750030F9A1 /* Request Models */,
 				7C036AB12696A90500F6C29B /* Response Models */,
 				7C89B2E526FC1D60004109FE /* User Related */,
+				7C8E829427B019CA0085F682 /* In-App Models */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2065,6 +2076,7 @@
 				7C2A6B172786C86200C31238 /* URLNavigator.swift in Sources */,
 				7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */,
 				7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */,
+				7C8E829627B019E50085F682 /* PerPersonPriceModel.swift in Sources */,
 				7C015C9827035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C9C59FC277C1742005E08BC /* UserDefaultsGenericServiceType.swift in Sources */,

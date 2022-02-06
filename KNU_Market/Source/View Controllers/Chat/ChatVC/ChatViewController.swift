@@ -38,7 +38,15 @@ class ChatViewController: MessagesViewController {
     }()
     
     //MARK: - Initialization
-
+    
+    init(viewModel: ChatViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - View Life Cycle
 
@@ -49,10 +57,10 @@ class ChatViewController: MessagesViewController {
         
         IQKeyboardManager.shared.enable = false
         
-        viewModel = ChatViewModel(
-            room: roomUID,
-            isFirstEntrance: isFirstEntrance
-        )
+//        viewModel = ChatViewModel(
+//            room: roomUID,
+//            isFirstEntrance: isFirstEntrance
+//        )
         
         initialize()
         setupLayout()

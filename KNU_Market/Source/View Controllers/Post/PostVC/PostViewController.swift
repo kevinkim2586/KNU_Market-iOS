@@ -345,13 +345,11 @@ class PostViewController: BaseViewController, ReactorKit.View {
             $0.height.equalTo(100)
             $0.left.right.equalToSuperview()
         }
-        
-
+    
         bottomContainerView.snp.makeConstraints {
             $0.top.equalTo(upperImageSlideshow.snp.bottom).offset(-25)
             $0.bottom.left.right.equalToSuperview()
         }
-        
 
         urlLinkButton.snp.makeConstraints {
             $0.width.equalTo(124)
@@ -463,10 +461,8 @@ class PostViewController: BaseViewController, ReactorKit.View {
         
         // 뒤로가기
         postControlButtonView.backButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.navigationController?.popViewController(animated: true)
-            })
+            .map { Reactor.Action.popVC }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         // 공유 버튼
@@ -493,9 +489,8 @@ class PostViewController: BaseViewController, ReactorKit.View {
         urlLinkButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                print("✅ referenceURL: \(reactor.currentState.referenceUrl)")
+            
                 if let url = reactor.currentState.referenceUrl {
-                    print("✅ url: \(url)")
                     self.askIfUserWantsToOpenUrl(url)
                 }
             })
@@ -514,7 +509,6 @@ class PostViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        
         upperImageSlideshow.rx.tapGesture()
             .when(.recognized)
             .withUnretained(self)
@@ -524,27 +518,17 @@ class PostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         questionMarkButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                let popupVC = PerPersonPriceInfoViewController(
-                    productPrice: reactor.currentState.productPrice,
-                    shippingFee: reactor.currentState.shippingFee,
-                    totalPrice: reactor.currentState.productPrice + reactor.currentState.shippingFee,
-                    totalGatheringPeople: reactor.currentState.totalGatheringPeople,
-                    perPersonPrice: reactor.currentState.priceForEachPersonInInt
-                )
-                
-                popupVC.modalPresentationStyle = .popover
-                popupVC.preferredContentSize = CGSize(
+            .map { Reactor.Action.showPerPersonPrice(
+                preferredContentSize: CGSize(
                     width: self.view.frame.size.width - 100,
                     height: self.view.frame.size.height / 3
-                )
-                let popOver: UIPopoverPresentationController = popupVC.popoverPresentationController!
-                popOver.delegate = self
-                popOver.sourceView = self.questionMarkButton
-                self.present(popupVC, animated: true)
-            })
+                ),
+                sourceView: self.questionMarkButton,
+                delegateController: self)
+            }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
+        
 
         // Output
         
@@ -568,7 +552,6 @@ class PostViewController: BaseViewController, ReactorKit.View {
                         total: reactor.currentState.totalGatheringPeople,
                         isCompletelyDone: reactor.currentState.isCompletelyDone
                     )
-                    
                 }
                 
                 if #available(iOS 14.0, *) {
@@ -736,19 +719,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
                 bottomContainerView.rx.isHidden
             )
             .disposed(by: disposeBag)
-        
-        /// 방장 - 글 삭제 완료 시
-        reactor.state
-            .map { $0.didDeletePost }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: {  _ in
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            })
-            .disposed(by: disposeBag)
+
         
         /// 채팅방 입장 성공 시
         reactor.state
@@ -762,7 +733,9 @@ class PostViewController: BaseViewController, ReactorKit.View {
                     self.navigationController?.popViewController(animated: true)
                 } else {
                     
-                    let vc = ChatViewController()
+                    let chatViewModel = ChatViewModel(room: reactor.currentState.pageId, isFirstEntrance: reactor.currentState.isFirstEntranceToChat)
+
+                    let vc = ChatViewController(viewModel: chatViewModel)
                     vc.roomUID = reactor.currentState.pageId
                     vc.chatRoomTitle = reactor.currentState.title
                     vc.isFirstEntrance = reactor.currentState.isFirstEntranceToChat

@@ -5,7 +5,7 @@
 //  Created by Kevin Kim on 2022/01/08.
 //
 
-import Foundation
+import UIKit
 import ImageSlideshow
 import RxSwift
 import ReactorKit
@@ -31,6 +31,7 @@ final class PostViewReactor: Reactor, Stepper {
     enum Action {
         
         case viewDidLoad
+        case popVC
         case refresh
         case deletePost
         case editPost
@@ -39,6 +40,7 @@ final class PostViewReactor: Reactor, Stepper {
         case joinChat
         case blockUser(String)
         case sharePost
+        case showPerPersonPrice(preferredContentSize: CGSize, sourceView: UIView, delegateController: PostViewController)
     }
     
     enum Mutation {
@@ -48,7 +50,6 @@ final class PostViewReactor: Reactor, Stepper {
         case setAlertMessage(String, AlertMessageType)
         
         case setDidFailFetchingPost(Bool, String)
-        case setDidDeletePost(Bool, String)
         case setDidMarkPostDone(Bool, String)
         case setDidEnterChat(Bool, Bool)            // DidEnterChat, isFirstEntranceToChat
         
@@ -226,6 +227,10 @@ final class PostViewReactor: Reactor, Stepper {
                 fetchEnteredRoomInfo(),
             ])
             
+        case .popVC:
+            self.steps.accept(AppStep.popViewController)
+            return .empty()
+            
         case .refresh:
             return fetchPostDetails()
             
@@ -259,6 +264,25 @@ final class PostViewReactor: Reactor, Stepper {
                 imageUids: currentState.postModel.imageUIDs
             )
             return .empty()
+            
+        case let .showPerPersonPrice(preferredContentSize, sourceView, delegateController):
+            
+            let perPersonPriceModel = PerPersonPriceModel(
+                productPrice: currentState.productPrice,
+                shippingFee: currentState.shippingFee,
+                totalPrice: currentState.productPrice + currentState.shippingFee,
+                totalGatheringPeople: currentState.totalGatheringPeople,
+                perPersonPrice: currentState.priceForEachPersonInInt
+            )
+            
+            self.steps.accept(AppStep.perPersonPricePopupIsRequired(
+                model: perPersonPriceModel,
+                preferredContentSize: preferredContentSize,
+                sourceView: sourceView,
+                delegateController: delegateController)
+            )
+            
+            return .empty()
         }
     }
     
@@ -278,11 +302,6 @@ final class PostViewReactor: Reactor, Stepper {
             
         case .setDidFailFetchingPost(let didFail, let alertMessage):
             state.didFailFetchingPost = didFail
-            state.alertMessage = alertMessage
-            
-            
-        case .setDidDeletePost(let didDelete, let alertMessage):
-            state.didDeletePost = didDelete
             state.alertMessage = alertMessage
             
         case .setDidMarkPostDone(let didMarkPostDone, let alertMessage):
@@ -349,7 +368,9 @@ extension PostViewReactor {
                 switch result {
                 case .success:
                     NotificationCenterService.updatePostList.post()
-                    return Mutation.setDidDeletePost(true, "게시글 삭제 완료 🎉")
+                    self.steps.accept(AppStep.popViewController)
+                    return .empty
+
                     
                 case .error(let error):
                     return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)

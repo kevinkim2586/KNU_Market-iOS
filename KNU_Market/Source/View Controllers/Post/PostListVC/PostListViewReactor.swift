@@ -150,7 +150,7 @@ final class PostListViewReactor: Reactor, Stepper {
             ])
             
         case .seePostDetail(let indexPath):
-            self.steps.accept(AppStep.postIsRequired(
+            self.steps.accept(AppStep.postIsPicked(
                 postUid: currentState.postList[indexPath.row].uuid,
                 isFromChatVC: false)
             )

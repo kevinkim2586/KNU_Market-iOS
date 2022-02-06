@@ -23,6 +23,7 @@ final class ChatListViewReactor: Reactor, Stepper {
         case getChatList
         case viewDidDisappear
         case removeChatNotification(IndexPath)
+        case chatSelected(IndexPath)
     }
     
     enum Mutation {
@@ -107,6 +108,14 @@ final class ChatListViewReactor: Reactor, Stepper {
                 )
                 NotificationCenter.default.post(name: .configureChatTabBadgeCount, object: nil)
             }
+            return Observable.empty()
+            
+        case .chatSelected(let indexPath):
+            self.steps.accept(AppStep.chatIsPicked(
+                roomUid: currentState.roomList[indexPath.row].uuid,
+                chatRoomTitle: currentState.roomList[indexPath.row].title,
+                postUploaderUid: currentState.roomList[indexPath.row].userUID)
+            )
             return Observable.empty()
         }
     }

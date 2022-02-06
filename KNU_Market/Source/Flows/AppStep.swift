@@ -6,6 +6,7 @@
 //
 
 import RxFlow
+import UIKit
 
 enum AppStep: Step {
     
@@ -39,15 +40,20 @@ enum AppStep: Step {
     
     //MARK: - Post
     
-    case postListIsRequired
-    case uploadPostIsRequired
-    case postIsRequired(postUid: String, isFromChatVC: Bool)
     case welcomeIndicatorRequired(nickname: String)
+    case postListIsRequired
+    case postIsPicked(postUid: String, isFromChatVC: Bool)
+    case uploadPostIsRequired
+    case perPersonPricePopupIsRequired(model: PerPersonPriceModel, preferredContentSize: CGSize, sourceView: UIView, delegateController: PostViewController)
+    
+
+
     
     
     //MARK: - Chat
     
     case chatListIsRequired
+    case chatIsPicked(roomUid: String, chatRoomTitle: String, postUploaderUid: String)
     
     
     //MARK: - My Page

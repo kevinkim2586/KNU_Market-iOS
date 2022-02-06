@@ -23,16 +23,15 @@ class AppFlow: Flow {
         self.services = services
     }
     
-    deinit {
-        print("\(type(of: self)): \(#function)")
-    }
-    
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
         
         switch step {
         case .mainIsRequired:
             return navigateToMainHomeScreen()
+            
+        case .loginIsRequired:
+            return navigateToLoginScreen()
             
         default:
             return .none
@@ -54,6 +53,21 @@ extension AppFlow {
         return .one(flowContributor: .contribute(
             withNextPresentable: homeFlow,
             withNextStepper: OneStepper(withSingleStep: AppStep.mainIsRequired))
+        )
+    }
+    
+    private func navigateToLoginScreen() -> FlowContributors {
+        
+        let loginFlow = LoginFlow(services: services)
+        
+        Flows.use(loginFlow, when: .created) { [unowned self] root in
+            self.window.rootViewController = root
+            self.window.makeKeyAndVisible()
+        }
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: loginFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.loginIsRequired))
         )
     }
 }

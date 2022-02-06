@@ -15,6 +15,13 @@ enum AppStep: Step {
     case popViewController
     case popToRootViewController
     
+    //MARK: - Global - Authorization Related
+    
+    case unauthorized
+    
+    
+    
+    
     case mainIsRequired
     
     

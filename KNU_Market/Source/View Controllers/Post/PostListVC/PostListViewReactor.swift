@@ -30,6 +30,7 @@ final class PostListViewReactor: Reactor, Stepper {
         case fetchPostList
         case refreshTableView
         case seePostDetail(IndexPath)
+        case uploadPost
     }
     
     enum Mutation {
@@ -152,6 +153,10 @@ final class PostListViewReactor: Reactor, Stepper {
                 postUid: currentState.postList[indexPath.row].uuid,
                 isFromChatVC: false)
             )
+            return .empty()
+            
+        case .uploadPost:
+            self.steps.accept(AppStep.uploadPostIsRequired)
             return .empty()
         }
     }

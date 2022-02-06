@@ -8,9 +8,12 @@
 import UIKit
 import ReactorKit
 import RxSwift
+import RxRelay
+import RxFlow
 
-
-final class UploadPostReactor: Reactor {
+final class UploadPostReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let postService: PostServiceType

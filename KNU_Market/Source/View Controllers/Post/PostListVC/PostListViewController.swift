@@ -154,31 +154,36 @@ class PostListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         uploadPostButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                
-                if reactor.currentState.isUserVerified {
-                    let uploadVC = UploadPostViewController(
-                        reactor: UploadPostReactor(
-                            postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                            mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
-                        )
-                    )
-                    self.navigationController?.pushViewController(
-                        uploadVC,
-                        animated: true
-                    )
-                    
-                } else {
-                    self.showSimpleBottomAlertWithAction(
-                        message: "학생 인증을 마치셔야 사용이 가능해요.👀",
-                        buttonTitle: "인증하러 가기"
-                    ) {
-                        self.presentVerifyOptionVC()
-                    }
-                }
-            })
+            .map { Reactor.Action.uploadPost }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
+        
+//        uploadPostButton.rx.tap
+//            .withUnretained(self)
+//            .subscribe(onNext: { _ in
+//                
+//                if reactor.currentState.isUserVerified {
+//                    let uploadVC = UploadPostViewController(
+//                        reactor: UploadPostReactor(
+//                            postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+//                            mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
+//                        )
+//                    )
+//                    self.navigationController?.pushViewController(
+//                        uploadVC,
+//                        animated: true
+//                    )
+//                    
+//                } else {
+//                    self.showSimpleBottomAlertWithAction(
+//                        message: "학생 인증을 마치셔야 사용이 가능해요.👀",
+//                        buttonTitle: "인증하러 가기"
+//                    ) {
+//                        self.presentVerifyOptionVC()
+//                    }
+//                }
+//            })
+//            .disposed(by: disposeBag)
         
         postListsTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
@@ -238,32 +243,7 @@ class PostListViewController: BaseViewController, View {
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
         
-        reactor.state
-            .map { $0.isAllowedToUploadPost }
-            .distinctUntilChanged()
-            .filter { $0 != nil }
-            .withUnretained(self)
-            .subscribe(onNext: { (_, isAllowed) in
-                
-                if isAllowed! {
-                    let uploadVC = UploadPostViewController(
-                        reactor: UploadPostReactor(
-                            postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                            mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
-                        )
-                    )
-                    self.navigationController?.pushViewController(uploadVC, animated: true)
-                    
-                } else {
-                    self.showSimpleBottomAlertWithAction(
-                        message: "학생 인증을 마치셔야 사용이 가능해요.👀",
-                        buttonTitle: "인증하러 가기"
-                    ) {
-                        self.presentVerifyOptionVC()
-                    }
-                }
-            })
-            .disposed(by: disposeBag)
+
         
         reactor.state
             .map { $0.needsToShowPopup }

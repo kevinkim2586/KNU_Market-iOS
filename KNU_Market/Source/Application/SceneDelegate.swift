@@ -9,22 +9,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    let userNotificationService: UserNotificationService = UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService.shared)
-    let urlNavigator: URLNavigator = URLNavigator()
-    
-    
+    let userNotificationService: UserNotificationServiceType = UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService.shared)
+    let urlNavigator: URLNavigatorType = URLNavigator()
+    let userDefaultsGenericService: UserDefaultsGenericServiceType = UserDefaultsGenericService()
     
     var coordinator = FlowCoordinator()
-    
     lazy var appServices = AppServices()
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
@@ -42,29 +32,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window.windowScene = windowScene
         
-        
         let appFlow = AppFlow(window: window, services: appServices)
-        let appStepper = OneStepper(withSingleStep: AppStep.mainIsRequired)
         
-        self.coordinator.coordinate(flow: appFlow, with: appStepper)
+        let isLoggedIn: Bool = userDefaultsGenericService.get(key: UserDefaults.Keys.isLoggedIn) ?? false
+        
+        if isLoggedIn == true {
 
-        
-            
-        #warning("수정 필요!!!!!!")
-        
-        
-//
-//        if User.shared.isLoggedIn == true {
-//            window?.rootViewController = UIHelper.createMainTabBarController()
-//        } else {
-//            let loginVC = LoginViewController(
-//                reactor: LoginViewReactor(
-//                    userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared))
-//                )
-//            )
-//            window?.rootViewController = loginVC
-//        }
-//        window?.makeKeyAndVisible()
+            let appStepper = OneStepper(withSingleStep: AppStep.mainIsRequired)
+            self.coordinator.coordinate(flow: appFlow, with: appStepper)
+
+        } else {
+
+            let appStepper = OneStepper(withSingleStep: AppStep.loginIsRequired)
+            self.coordinator.coordinate(flow: appFlow, with: appStepper)
+        }
     }
     
 
@@ -81,19 +62,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        print("✏️ sceneWillResignActive")
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        print("✏️ sceneWillEnterForeground")
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        print("✏️ sceneDidEnterBackground")
     }
 }
-
-
 
 //MARK: - Dynamic Link Handling Methods
 
@@ -102,15 +78,8 @@ extension SceneDelegate {
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         
         if let incomingURL = userActivity.webpageURL {
-            print("✅ incomingURL: \(incomingURL)")
-            
             let _ = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { dynamicLink, error in
-                
-                guard error == nil else {
-                    print("❗️ DynamicLink Error: \(error!.localizedDescription)")
-                    return
-                }
-                
+                guard error == nil else { return }
                 if let dynamicLink = dynamicLink {
                     self.urlNavigator.handleIncomingDynamicLink(dynamicLink)
                 }
@@ -121,14 +90,11 @@ extension SceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         
         guard let url = URLContexts.first?.url else {
-            print("❗️ SceneDelegate - openURLContexts error obtaining url")
             return
         }
         
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
             urlNavigator.handleIncomingDynamicLink(dynamicLink)
-        } else {
-            print("❗️ Maybe some other url?")
         }
     }
 }

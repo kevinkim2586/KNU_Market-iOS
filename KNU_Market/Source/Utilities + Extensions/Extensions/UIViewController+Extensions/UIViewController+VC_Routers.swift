@@ -88,43 +88,7 @@ extension UIViewController {
 
     }
     
-//    func presentInitialVerificationAlert() {
-//        let alertVC = PMAlertController(
-//            title: "경북대생 인증하기",
-//            description: "경북대 웹메일 인증 외에도\n학생증 인증이 추가되었어요!\n인증 가능한 방법\n- 경북대 웹메일 인증\n- 모바일 학생증 인증",
-////            textsToChangeColor: ["학생증 인증이 추가","인증 가능한 방법"],
-//            image: nil,
-//            style: .alert
-//        )
-//
-//        alertVC.addAction(PMAlertAction(title: "지금 인증하기", style: .default, action: { () in
-//            self.presentVerifyOptionVC()
-//        }))
-//        alertVC.addAction(PMAlertAction(title: "나중에 할래요", style: .cancel, action: {
-//            self.presentServiceLimitationNoticeAlert()
-//        }))
-//
-//
-//        present(alertVC, animated: true)
-//        User.shared.isNotFirstAppLaunch = true
-//    }
-//
-//    func presentServiceLimitationNoticeAlert() {
-//
-//        let message = "미인증 유저는 서비스 이용에 아래와 같은 제한이 있습니다."
-//
-//        let alertVC = PMAlertController(
-//            title: nil,
-//            description: message + "\n1. 공구모집 글 개설 불가\n2. 공구 채팅방에 참가 불가",
-////            textsToChangeColor: [message],
-//            image: nil,
-//            style: .alert
-//        )
-//
-//        alertVC.addAction(PMAlertAction(title: "확인했어요.", style: .cancel))
-//        present(alertVC, animated: true)
-//    }
-    
+
     // 인증 수단 고르기 화면 띄우기
     func presentVerifyOptionVC() {
         let vc = VerifyOptionViewController()

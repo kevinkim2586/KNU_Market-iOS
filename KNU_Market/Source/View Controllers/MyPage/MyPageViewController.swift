@@ -138,7 +138,6 @@ class MyPageViewController: BaseViewController, View {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
     }
 
     //MARK: - UI Setup
@@ -309,12 +308,22 @@ class MyPageViewController: BaseViewController, View {
                 self.showSimpleBottomAlert(with: alertMessage!)
             }
             .disposed(by: disposeBag)
+        
+        // Notification Center
+
+        NotificationCenterService.presentVerificationNeededAlert.addObserver()
+            .bind { _ in
+                self.presentUserVerificationNeededAlert()
+            }
+            .disposed(by: disposeBag)
+        
+        NotificationCenterService.configureChatTabBadgeCount.addObserver()
+            .bind { _ in
+                self.configureChatTabBadgeCount()
+            }
+            .disposed(by: disposeBag)
     }
     
-    private func configure() {
-        createObserversForPresentingVerificationAlert()
-        createObserversForGettingBadgeValue()
-    }
 }
 
 extension MyPageViewController {

@@ -34,7 +34,6 @@ target 'KNU_Market' do
   pod 'PanModal'
   pod 'TextFieldEffects'
   pod 'PMAlertController'
-#  pod 'LabelSwitch'
   pod 'lottie-ios'
   pod 'UITextView+Placeholder'
   pod 'Hero'

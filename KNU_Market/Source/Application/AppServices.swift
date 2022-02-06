@@ -26,7 +26,6 @@ struct AppServices {
     let userDefaultsGenericService: UserDefaultsGenericServiceType
     let userNotificationService: UserNotificationServiceType
     
-    
     init() {
         
         self.sharingService = SharingService()

@@ -15,6 +15,7 @@ enum AppStep: Step {
     case popViewController
     case popToRootViewController
     
+    
     //MARK: - Global - Authorization Related
     
     case unauthorized
@@ -41,6 +42,7 @@ enum AppStep: Step {
     case postListIsRequired
     case uploadPostIsRequired
     case postIsRequired(postUid: String, isFromChatVC: Bool)
+    case welcomeIndicatorRequired(nickname: String)
     
     
     //MARK: - Chat
@@ -78,6 +80,7 @@ enum AppStep: Step {
     //MARK: - Inquiry (크누마켓팀과 대화하기)
     
 
+    
     
     
 }

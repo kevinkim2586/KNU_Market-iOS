@@ -24,6 +24,8 @@ final class PostListViewReactor: Reactor, Stepper {
     let userDefaultsGenericService: UserDefaultsGenericServiceType
     let userNotificationService: UserNotificationServiceType
     
+    private let INITIAL_PAGE: Int = 1
+    
     enum Action {
         case loadInitialMethods
         case viewWillAppear
@@ -51,7 +53,7 @@ final class PostListViewReactor: Reactor, Stepper {
     
     struct State {
         var postList: [PostListModel] = []
-        var index: Int = 1
+        var index: Int
         var isFetchingData: Bool = false
         var isRefreshingData: Bool = false
         var needsToFetchMoreData: Bool = true
@@ -89,6 +91,7 @@ final class PostListViewReactor: Reactor, Stepper {
 
         
         self.initialState = State(
+            index: INITIAL_PAGE,
             bannedPostUploaders: bannedPostUploaders,
             isUserVerified: isUserVerified
         )
@@ -174,10 +177,10 @@ final class PostListViewReactor: Reactor, Stepper {
         case .resetPostList(let postListModel):
             state.postList.removeAll()
             state.postList = postListModel
-            state.index = 1
+            state.index = INITIAL_PAGE
             
         case .incrementIndex:
-            state.index += 1
+            state.index += INITIAL_PAGE
             
         case .setBannerList(let bannerModel):
             state.bannerModel = bannerModel
@@ -241,7 +244,7 @@ extension PostListViewReactor {
     private func refreshPostList(postFilterOption: PostFilterOptions? = nil) -> Observable<Mutation> {
         
         return postService.fetchPostList(
-            at: 1,
+            at: INITIAL_PAGE,
             fetchCurrentUsers: false,
             postFilterOption: .showGatheringFirst
         )
@@ -282,6 +285,7 @@ extension PostListViewReactor {
                 switch result {
                 case .success:
                     let userNickname: String = self.userDefaultsGenericService.get(key: UserDefaults.Keys.nickname) ?? "-"
+                    self.steps.accept(AppStep.welcomeIndicatorRequired(nickname: userNickname))
                     return Mutation.setUserNickname(userNickname)
                     
                 case .error(let error):

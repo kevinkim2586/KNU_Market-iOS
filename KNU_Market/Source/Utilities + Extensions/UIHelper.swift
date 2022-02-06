@@ -198,16 +198,6 @@ struct UIHelper {
         return actionSheet
     }
     
-    static func presentWelcomePopOver(nickname: String) {
-        guard let defaultImage = UIImage(systemName: "checkmark.circle") else { return }
-        
-        SPIndicator.present(
-            title: "\(nickname)님",
-            message: "환영합니다 🎉",
-            preset: .custom(UIImage(systemName: "face.smiling")?.withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink, renderingMode: .alwaysOriginal) ?? defaultImage)
-        )
-    }
-    
     static func createSpinnerFooterView(in view: UIView) -> UIView {
         
         let footerView = UIView(frame: CGRect(x: 0,

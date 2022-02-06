@@ -162,17 +162,7 @@ class PostListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         
-
         // Output
-        
-        reactor.state
-            .map { $0.userNickname }
-            .distinctUntilChanged()
-            .filter { $0 != nil }
-            .subscribe(onNext: { nickname in
-                UIHelper.presentWelcomePopOver(nickname: nickname!)
-            })
-            .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.postList }

@@ -10,6 +10,7 @@ import Then
 import RxFlow
 import UIKit
 import RxSwift
+import SPIndicator
 
 class PostFlow: Flow {
 
@@ -58,6 +59,9 @@ class PostFlow: Flow {
             
         case .uploadPostIsRequired:
             return navigateToUploadPostVC()
+            
+        case .welcomeIndicatorRequired(let nickname):
+            return presentWelcomeIndicator(with: nickname)
             
         case .unauthorized:
             return presentUnauthorizedAlert()
@@ -127,6 +131,20 @@ extension PostFlow {
 //MARK: - Alert Methods
 
 extension PostFlow {
+    
+    private func presentWelcomeIndicator(with nickname: String) -> FlowContributors {
+        
+        SPIndicator.present(
+            title: "\(nickname)님",
+            message: "환영합니다 🎉",
+            preset: .custom(
+                UIImage(systemName: "face.smiling")?.withTintColor(UIColor(named: K.Color.appColor)!, renderingMode: .alwaysOriginal)
+                ?? UIImage(systemName: "checkmark.circle")!
+            )
+        )
+        
+        return .none
+    }
     
     private func presentUnauthorizedAlert() -> FlowContributors {
         

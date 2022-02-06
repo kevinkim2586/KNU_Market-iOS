@@ -18,16 +18,20 @@ enum AppStep: Step {
     //MARK: - Global - Authorization Related
     
     case unauthorized
+    case unexpectedError
     
     
     
+    
+    //MARK: - Initial
     
     case mainIsRequired
+    case loginIsRequired
     
     
     //MARK: - Login
     
-    case loginIsRequired
+
     
     //MARK: - Register
     
@@ -63,12 +67,17 @@ enum AppStep: Step {
     case logOutIsRequired
     case unRegisterIsRequired
     
+    //MARK: - Popup
+    
+    case popUpIsRequired(model: PopupModel)
+    
     //MARK: - Unregister
     
     
     
     //MARK: - Inquiry (크누마켓팀과 대화하기)
     
+
     
     
 }

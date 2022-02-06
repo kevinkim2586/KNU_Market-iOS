@@ -19,7 +19,15 @@ class PostFlow: Flow {
         return self.rootViewController
     }
     
-    private let rootViewController = UINavigationController()
+    private let rootViewController = UINavigationController().then { _ in
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()      // 불투명한 Background
+            appearance.shadowColor = .white
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
+    }
     
     init(services: AppServices) {
         self.services = services
@@ -30,9 +38,7 @@ class PostFlow: Flow {
         
         switch step {
         case .uploadPostIsRequired:
-            
-            let isUserVerified: Bool = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
-   
+            let isUserVerified: Bool = self.services.userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
             return isUserVerified ? .just(step) : .just(AppStep.unauthorized)
             
         default:
@@ -54,8 +60,10 @@ class PostFlow: Flow {
             return navigateToUploadPostVC()
             
         case .unauthorized:
-            return showUnauthorizedAlert()
+            return presentUnauthorizedAlert()
             
+        case .unexpectedError:
+            return presentUnexpectedError()
             
         default:
             return .none
@@ -120,13 +128,42 @@ extension PostFlow {
 
 extension PostFlow {
     
-    private func showUnauthorizedAlert() -> FlowContributors {
-
-        self.rootViewController.showSimpleBottomAlertWithAction(message: "학생 인증을 마치셔야 사용이 가능해요.👀", buttonTitle: "인증하러 가기") {
+    private func presentUnauthorizedAlert() -> FlowContributors {
+        
+        self.rootViewController.showSimpleBottomAlertWithAction(
+            message: "학생 인증을 마치셔야 사용이 가능해요.👀",
+            buttonTitle: "인증하러 가기"
+        ) {
             let vc = VerifyOptionViewController()
             vc.hidesBottomBarWhenPushed = true
             self.rootViewController.pushViewController(vc, animated: true)
         }
         return .none
+    }
+    
+    private func presentUnexpectedError() -> FlowContributors {
+        self.rootViewController.presentCustomAlert(
+            title: "예기치 못한 오류가 발생했습니다.🤔",
+            message: "불편을 드려 죄송합니다. 다시 로그인 해주세요."
+        ) {
+            self.popToLoginScreen()
+        }
+        
+        return .none
+    }
+    
+    @discardableResult
+    private func popToLoginScreen() -> FlowContributors {
+        
+        self.services.userDefaultsGenericService.resetAllUserInfo()
+        
+        let loginViewReactor = LoginViewReactor(userService: services.userService)
+        let loginVC = LoginViewController(reactor: loginViewReactor)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: loginVC,
+            withNextStepper: loginViewReactor
+        ))
     }
 }

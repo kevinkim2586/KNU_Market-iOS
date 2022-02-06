@@ -136,6 +136,7 @@ class CustomAlertViewController_Rx: UIViewController {
     }
     
     func bindUI() {
+        
         actionButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in

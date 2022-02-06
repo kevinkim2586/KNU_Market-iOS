@@ -31,6 +31,7 @@ final class PostListViewReactor: Reactor, Stepper {
         case refreshTableView
         case seePostDetail(IndexPath)
         case uploadPost
+        case unexpectedError
     }
     
     enum Mutation {
@@ -39,7 +40,6 @@ final class PostListViewReactor: Reactor, Stepper {
         case incrementIndex
         case setBannerList([BannerModel])
         case setUserNickname(String)
-        case setNeedsToShowPopup(Bool, PopupModel?)
         case setErrorMessage(String)
         case setNeedsToFetchMoreData(Bool)
         case setIsFetchingData(Bool)
@@ -57,8 +57,6 @@ final class PostListViewReactor: Reactor, Stepper {
         var needsToFetchMoreData: Bool = true
         var userNickname: String? = nil
         var errorMessage: String? = nil
-        var needsToShowPopup: Bool = false
-        var popupModel: PopupModel?
         var bannedPostUploaders: [String]         // 내가 차단한 유저
         var isUserVerified: Bool
         var isAllowedToUploadPost: Bool?
@@ -158,6 +156,10 @@ final class PostListViewReactor: Reactor, Stepper {
         case .uploadPost:
             self.steps.accept(AppStep.uploadPostIsRequired)
             return .empty()
+            
+        case .unexpectedError:
+            self.steps.accept(AppStep.unexpectedError)
+            return .empty()
         }
     }
     
@@ -182,10 +184,6 @@ final class PostListViewReactor: Reactor, Stepper {
             
         case .setUserNickname(let nickname):
             state.userNickname = nickname
-            
-        case .setNeedsToShowPopup(let needsToShow, let popupModel):
-            state.needsToShowPopup = needsToShow
-            state.popupModel = popupModel
             
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
@@ -294,18 +292,20 @@ extension PostListViewReactor {
     
     private func fetchLatestPopup() -> Observable<Mutation> {
         
-        if !popupService.shouldFetchPopup { return Observable.empty() }
+        if !popupService.shouldFetchPopup { return .empty() }
         
         return popupService.fetchLatestPopup()
             .asObservable()
             .map { result in
                 switch result {
                 case .success(let popupModel):
-                    return Mutation.setNeedsToShowPopup(true, popupModel)
+                    
+                    self.steps.accept(AppStep.popUpIsRequired(model: popupModel))
+                    return .empty
                     
                 case .error(_): //팝업 가져오기 실패 시 따로 유저한테 에러 메시지를 보여줄 필요는 없는 것으로 판단 - 팝업 없어도 에러
                     print("❗️ PostListViewReactor failed fetching popup")
-                    return Mutation.setNeedsToShowPopup(false, nil)
+                    return .empty
                 }
             }
     }

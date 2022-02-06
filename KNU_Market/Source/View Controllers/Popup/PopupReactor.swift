@@ -8,8 +8,12 @@
 import ReactorKit
 import UIKit
 import Moya
+import RxRelay
+import RxFlow
 
-final class PopupReactor: Reactor {
+final class PopupReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     

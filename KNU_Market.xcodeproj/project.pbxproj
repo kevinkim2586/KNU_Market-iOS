@@ -242,6 +242,7 @@
 		7CD3016127AFB885003FB8E3 /* MyPageFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */; };
 		7CD3016327AFBB21003FB8E3 /* HomeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3016227AFBB21003FB8E3 /* HomeFlow.swift */; };
 		7CD3016527AFC96E003FB8E3 /* LoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3016427AFC96E003FB8E3 /* LoginFlow.swift */; };
+		7CD3016927AFE04D003FB8E3 /* PopupFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */; };
 		7CDADA0726BE623100F7F58F /* DateHelper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */; };
 		7CDD5B1F2795168F0082E3FC /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */; };
 		7CDD5B202795168F0082E3FC /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */; };
@@ -534,6 +535,7 @@
 		7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlow.swift; sourceTree = "<group>"; };
 		7CD3016227AFBB21003FB8E3 /* HomeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFlow.swift; sourceTree = "<group>"; };
 		7CD3016427AFC96E003FB8E3 /* LoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlow.swift; sourceTree = "<group>"; };
+		7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupFlow.swift; sourceTree = "<group>"; };
 		7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper+Extension.swift"; sourceTree = "<group>"; };
 		7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
 		7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -1488,6 +1490,7 @@
 				7CD3015E27AFB87F003FB8E3 /* ChatFlow.swift */,
 				7CD3016427AFC96E003FB8E3 /* LoginFlow.swift */,
 				7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */,
+				7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -1955,6 +1958,7 @@
 				7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
 				7CF8D618277C4ABB0078DD77 /* ChatServiceWebSocketType.swift in Sources */,
+				7CD3016927AFE04D003FB8E3 /* PopupFlow.swift in Sources */,
 				7CBFDA78273FE01F000C8C8A /* PostTableViewCell.swift in Sources */,
 				7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */,
 				7C824432279A50C9006677D0 /* CustomAlertViewController_Rx.swift in Sources */,

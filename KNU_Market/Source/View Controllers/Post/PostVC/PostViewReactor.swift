@@ -9,6 +9,8 @@ import Foundation
 import ImageSlideshow
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
 enum AlertMessageType {
     case appleDefault
@@ -16,7 +18,9 @@ enum AlertMessageType {
     case custom
 }
 
-final class PostViewReactor: Reactor {
+final class PostViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     var initialState: State
     let postService: PostServiceType

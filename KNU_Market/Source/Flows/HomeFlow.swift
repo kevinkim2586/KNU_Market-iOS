@@ -10,12 +10,12 @@ import RxFlow
 
 class HomeFlow: Flow {
     
+    private let rootViewController = KMTabBarController()
+    private let services: AppServices
+    
     var root: Presentable {
         return self.rootViewController
     }
-    
-    let rootViewController = KMTabBarController()
-    private let services: AppServices
     
     init(services: AppServices) {
         self.services = services

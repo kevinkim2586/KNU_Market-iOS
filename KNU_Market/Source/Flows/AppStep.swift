@@ -20,12 +20,17 @@ enum AppStep: Step {
     
     //MARK: - Login
     
+    case loginIsRequired
+    
     //MARK: - Register
     
     
     //MARK: - Post
     
     case postListIsRequired
+    case uploadPostIsRequired
+    case postIsRequired(postUid: String, isFromChatVC: Bool)
+    
     
     //MARK: - Chat
     

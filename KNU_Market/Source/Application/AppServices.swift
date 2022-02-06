@@ -14,6 +14,7 @@ struct AppServices {
     
     let bannerService: BannerServiceType
     let chatListService: ChatListServiceType
+    let chatService: ChatServiceAPIType
 
     let myPageService: MyPageServiceType
     let popupService: PopupServiceType
@@ -33,6 +34,12 @@ struct AppServices {
         
         self.bannerService = BannerService(network: Network<BannerAPI>())
         self.chatListService = ChatListService(
+            network: Network<ChatAPI>(plugins: [
+                AuthPlugin()
+            ]),
+            userDefaultsGenericService: UserDefaultsGenericService()
+        )
+        self.chatService = ChatService(
             network: Network<ChatAPI>(plugins: [
                 AuthPlugin()
             ]),

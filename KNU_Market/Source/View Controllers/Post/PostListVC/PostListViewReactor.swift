@@ -29,6 +29,7 @@ final class PostListViewReactor: Reactor, Stepper {
         case viewWillAppear
         case fetchPostList
         case refreshTableView
+        case seePostDetail(IndexPath)
     }
     
     enum Mutation {
@@ -145,6 +146,13 @@ final class PostListViewReactor: Reactor, Stepper {
                 Observable.just(Mutation.incrementIndex),
                 Observable.just(Mutation.setIsRefreshingData(false))
             ])
+            
+        case .seePostDetail(let indexPath):
+            self.steps.accept(AppStep.postIsRequired(
+                postUid: currentState.postList[indexPath.row].uuid,
+                isFromChatVC: false)
+            )
+            return .empty()
         }
     }
     

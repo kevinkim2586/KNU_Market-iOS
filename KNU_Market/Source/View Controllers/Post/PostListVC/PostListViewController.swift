@@ -207,28 +207,10 @@ class PostListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         postListsTableView.rx.itemSelected
-            .withUnretained(self)
-            .subscribe(onNext: { (_, indexPath) in
-                self.postListsTableView.deselectRow(at: indexPath, animated: true)
-                
-                let postUUID = reactor.currentState.postList[indexPath.row].uuid
-                let postVC = PostViewController(
-                    reactor: PostViewReactor(
-                        pageId: postUUID,
-                        isFromChatVC: false,
-                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                        chatService: ChatService(
-                            network: Network<ChatAPI>(plugins: [AuthPlugin()]),
-                            userDefaultsGenericService: UserDefaultsGenericService()
-                        ),
-                        sharingService: SharingService(),
-                        userDefaultsService: UserDefaultsGenericService()
-                    )
-                )
-                self.navigationController?.pushViewController(postVC, animated: true)
-            })
+            .map { Reactor.Action.seePostDetail($0) }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
-        
+
         postListsTableView.rx.contentOffset
             .filter { [weak self] offset in
                 guard let self = self else { return false }

@@ -30,6 +30,8 @@ class PostFlow: Flow {
         switch step {
         case .postListIsRequired:
             return navigateToPostList()
+        case .postIsRequired(let postUid, let isFromChatVC):
+            return navigateToPostDetail(postUid: postUid, isFromChatVC: isFromChatVC)
             
         default:
             return .none
@@ -58,5 +60,21 @@ extension PostFlow {
             withNextPresentable: postListVC,
             withNextStepper: postListReactor)
         )
+    }
+    
+    private func navigateToPostDetail(postUid: String, isFromChatVC: Bool) -> FlowContributors {
+        
+        let reactor = PostViewReactor(
+            pageId: postUid,
+            isFromChatVC: isFromChatVC,
+            postService: services.postService,
+            chatService: services.chatService,
+            sharingService: services.sharingService,
+            userDefaultsService: services.userDefaultsGenericService
+        )
+        
+        let postVC = PostViewController(reactor: reactor)
+        self.rootViewController.pushViewController(postVC, animated: true)
+        return .one(flowContributor: .contribute(withNextPresentable: postVC, withNextStepper: reactor))
     }
 }

@@ -8,8 +8,12 @@
 import ReactorKit
 import UIKit
 import Moya
+import RxRelay
+import RxFlow
 
-final class LoginViewReactor: Reactor {
+final class LoginViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     

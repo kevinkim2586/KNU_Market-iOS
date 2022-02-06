@@ -180,8 +180,7 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let model = bannerModel {
-            let referenceUrl = model[indexPath.row].referenceUrl
+        if let model = bannerModel, let referenceUrl = model[indexPath.row].referenceUrl {
             guard let url = URL(string: referenceUrl) else { return }
             currentVC?.presentSafariView(with: url)
         }

@@ -234,6 +234,13 @@
 		7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */; };
 		7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */; };
 		7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */; };
+		7CD3015727AFAD8D003FB8E3 /* AppStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3015627AFAD8D003FB8E3 /* AppStep.swift */; };
+		7CD3015927AFB1C8003FB8E3 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3015827AFB1C8003FB8E3 /* AppFlow.swift */; };
+		7CD3015B27AFB1ED003FB8E3 /* AppServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3015A27AFB1ED003FB8E3 /* AppServices.swift */; };
+		7CD3015D27AFB87B003FB8E3 /* PostFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3015C27AFB87B003FB8E3 /* PostFlow.swift */; };
+		7CD3015F27AFB87F003FB8E3 /* ChatFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3015E27AFB87F003FB8E3 /* ChatFlow.swift */; };
+		7CD3016127AFB885003FB8E3 /* MyPageFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */; };
+		7CD3016327AFBB21003FB8E3 /* HomeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3016227AFBB21003FB8E3 /* HomeFlow.swift */; };
 		7CDADA0726BE623100F7F58F /* DateHelper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */; };
 		7CDD5B1F2795168F0082E3FC /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */; };
 		7CDD5B202795168F0082E3FC /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */; };
@@ -518,6 +525,13 @@
 		7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
 		7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
+		7CD3015627AFAD8D003FB8E3 /* AppStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStep.swift; sourceTree = "<group>"; };
+		7CD3015827AFB1C8003FB8E3 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
+		7CD3015A27AFB1ED003FB8E3 /* AppServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServices.swift; sourceTree = "<group>"; };
+		7CD3015C27AFB87B003FB8E3 /* PostFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFlow.swift; sourceTree = "<group>"; };
+		7CD3015E27AFB87F003FB8E3 /* ChatFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFlow.swift; sourceTree = "<group>"; };
+		7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlow.swift; sourceTree = "<group>"; };
+		7CD3016227AFBB21003FB8E3 /* HomeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFlow.swift; sourceTree = "<group>"; };
 		7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper+Extension.swift"; sourceTree = "<group>"; };
 		7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
 		7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -1082,6 +1096,7 @@
 				7CA6622326413272000E0B7A /* Model */,
 				625B0E392741F5BA003968BA /* Services */,
 				7CA66228264132DC000E0B7A /* API */,
+				7CD3015527AFAD82003FB8E3 /* Flows */,
 				7CA6622A264132F3000E0B7A /* View Models */,
 				7CA6622226413269000E0B7A /* Views */,
 				7CA66229264132E6000E0B7A /* View Controllers */,
@@ -1115,6 +1130,7 @@
 			children = (
 				7CA661F0263D4387000E0B7A /* AppDelegate.swift */,
 				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
+				7CD3015A27AFB1ED003FB8E3 /* AppServices.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1458,6 +1474,19 @@
 				7C184B8226B103F1006C0FAD /* Room.swift */,
 			);
 			path = "Chat Models";
+			sourceTree = "<group>";
+		};
+		7CD3015527AFAD82003FB8E3 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				7CD3015627AFAD8D003FB8E3 /* AppStep.swift */,
+				7CD3015827AFB1C8003FB8E3 /* AppFlow.swift */,
+				7CD3016227AFBB21003FB8E3 /* HomeFlow.swift */,
+				7CD3015C27AFB87B003FB8E3 /* PostFlow.swift */,
+				7CD3015E27AFB87F003FB8E3 /* ChatFlow.swift */,
+				7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */,
+			);
+			path = Flows;
 			sourceTree = "<group>";
 		};
 		7CD74E0D2645982600BD2DE4 /* Chat */ = {
@@ -1878,6 +1907,7 @@
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */,
 				7C8E668D26E875A00060F37B /* UIImageView+Extension.swift in Sources */,
+				7CD3016327AFBB21003FB8E3 /* HomeFlow.swift in Sources */,
 				7C57AC19279C2529000540A4 /* UploadPostViewController.swift in Sources */,
 				622270B0274A481E00FDC47B /* DetailMessageViewController.swift in Sources */,
 				626AC5B227324C1200E907E8 /* CGFloatLiteral.swift in Sources */,
@@ -1943,6 +1973,7 @@
 				7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
 				7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */,
+				7CD3015927AFB1C8003FB8E3 /* AppFlow.swift in Sources */,
 				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,
 				7C9C5A02277C245B005E08BC /* UserDefaultsPersistenceServiceType.swift in Sources */,
 				7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */,
@@ -1993,6 +2024,7 @@
 				6C49951C271FAD3D00E8DB4B /* UserDefaultKeys.swift in Sources */,
 				7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */,
 				7C132BF2265397B200BE5F40 /* ProgressHUD.swift in Sources */,
+				7CD3016127AFB885003FB8E3 /* MyPageFlow.swift in Sources */,
 				7C8E668B26E756C00060F37B /* ChatType.swift in Sources */,
 				7C9C59E6277C1328005E08BC /* UIVIewController+Notifications.swift in Sources */,
 				7C184B8326B103F1006C0FAD /* Room.swift in Sources */,
@@ -2022,6 +2054,7 @@
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
 				7CF369CD2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift in Sources */,
 				7C1471CA2779FD6C006409BD /* UnregisterViewReactor.swift in Sources */,
+				7CD3015F27AFB87F003FB8E3 /* ChatFlow.swift in Sources */,
 				7C2A6B172786C86200C31238 /* URLNavigator.swift in Sources */,
 				7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */,
 				7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */,
@@ -2048,6 +2081,7 @@
 				7CC69A7C27670E3B00105FC0 /* PopupAPI.swift in Sources */,
 				7C458AF0279AA6FE00AD452F /* KMNavigationTitleView.swift in Sources */,
 				7C5386E62768CA8200BFEA7F /* PopupService.swift in Sources */,
+				7CD3015B27AFB1ED003FB8E3 /* AppServices.swift in Sources */,
 				7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer+Extension.swift in Sources */,
 				7C9A3835276DC6FC00AEE831 /* LoginViewController.swift in Sources */,
@@ -2083,6 +2117,7 @@
 				7C436B5826820E5200943069 /* ReportManager.swift in Sources */,
 				7C58477227744FD9005D75B2 /* EmailVerificationViewReactor.swift in Sources */,
 				7C82441D2797CBD8006677D0 /* BannerHeaderReactor.swift in Sources */,
+				7CD3015D27AFB87B003FB8E3 /* PostFlow.swift in Sources */,
 				7CF8D61B277C4CD10078DD77 /* MyPageCellReactor.swift in Sources */,
 				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,
 				7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */,
@@ -2090,6 +2125,7 @@
 				625B0E322741E259003968BA /* ErrorModel.swift in Sources */,
 				7CBDF4B0272F886500E657D9 /* PopupModel.swift in Sources */,
 				7CC69A80276727A200105FC0 /* DuplicateCheckModel.swift in Sources */,
+				7CD3015727AFAD8D003FB8E3 /* AppStep.swift in Sources */,
 				7C9C59F4277C16BB005E08BC /* PostServiceType.swift in Sources */,
 				7CF369C02754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift in Sources */,
 				7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */,

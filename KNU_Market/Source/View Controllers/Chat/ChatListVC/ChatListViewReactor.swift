@@ -7,9 +7,13 @@
 
 import Foundation
 import RxSwift
+import RxFlow
+import RxRelay
 import ReactorKit
 
-final class ChatListViewReactor: Reactor {
+final class ChatListViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let chatListService: ChatListServiceType

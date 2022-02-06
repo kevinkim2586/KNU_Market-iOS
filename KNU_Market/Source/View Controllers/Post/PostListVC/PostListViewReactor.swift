@@ -7,9 +7,13 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 import ReactorKit
+import RxFlow
 
-final class PostListViewReactor: Reactor {
+final class PostListViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let postService: PostServiceType

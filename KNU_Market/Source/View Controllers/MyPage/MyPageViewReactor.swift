@@ -8,10 +8,14 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxRelay
+import RxFlow
 import ReactorKit
 import Differentiator
 
-final class MyPageViewReactor: Reactor {
+final class MyPageViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType

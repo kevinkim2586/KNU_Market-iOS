@@ -2,6 +2,8 @@
 import UIKit
 import Moya
 import Firebase
+import RxFlow
+import RxSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -9,6 +11,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     let userNotificationService: UserNotificationService = UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService.shared)
     let urlNavigator: URLNavigator = URLNavigator()
+    
+    
+    
+    var coordinator = FlowCoordinator()
+    
+    lazy var appServices = AppServices()
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
         guard let window = self.window else { return }
@@ -21,19 +38,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
+        guard let window = window else { return }
+
+        window.windowScene = windowScene
         
-        if User.shared.isLoggedIn == true {
-            window?.rootViewController = UIHelper.createMainTabBarController()
-        } else {
-            let loginVC = LoginViewController(
-                reactor: LoginViewReactor(
-                    userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared))
-                )
-            )
-            window?.rootViewController = loginVC
-        }
-        window?.makeKeyAndVisible()
+        
+        let appFlow = AppFlow(window: window, services: appServices)
+        let appStepper = OneStepper(withSingleStep: AppStep.mainIsRequired)
+        
+        self.coordinator.coordinate(flow: appFlow, with: appStepper)
+
+        
+            
+        #warning("수정 필요!!!!!!")
+        
+        
+//
+//        if User.shared.isLoggedIn == true {
+//            window?.rootViewController = UIHelper.createMainTabBarController()
+//        } else {
+//            let loginVC = LoginViewController(
+//                reactor: LoginViewReactor(
+//                    userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared))
+//                )
+//            )
+//            window?.rootViewController = loginVC
+//        }
+//        window?.makeKeyAndVisible()
     }
     
 

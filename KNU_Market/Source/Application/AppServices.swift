@@ -22,6 +22,10 @@ struct AppServices {
     let reportService: ReportServiceType
     let userService: UserServiceType
     
+    let userDefaultsGenericService: UserDefaultsGenericServiceType
+    let userNotificationService: UserNotificationServiceType
+    
+    
     init() {
         
         self.sharingService = SharingService()
@@ -60,5 +64,8 @@ struct AppServices {
                 userDefaultsGenericService: UserDefaultsGenericService()
             )
         )
+        
+        self.userDefaultsGenericService = UserDefaultsGenericService()
+        self.userNotificationService = UserNotificationService(userDefaultsGenericService: UserDefaultsGenericService())
     }
 }

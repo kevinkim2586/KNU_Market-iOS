@@ -85,7 +85,6 @@ extension ChatFlow {
         chatVC.isFirstEntrance = isFirstEntrance
         chatVC.hidesBottomBarWhenPushed = true
         
-        print("✅ navigateToChat")
         self.rootViewController.pushViewController(chatVC, animated: true)
         
         return .one(flowContributor: .contribute(

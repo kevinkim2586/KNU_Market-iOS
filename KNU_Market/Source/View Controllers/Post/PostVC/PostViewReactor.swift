@@ -38,7 +38,7 @@ final class PostViewReactor: Reactor, Stepper {
         case markPostDone               // 방장 - 모집 완료
         case updatePostAsRegathering    // 방장 - 모집 완료 해제
         case joinChat
-        case blockUser(String)
+        case blockUser
         case sharePost
         case showPerPersonPrice(preferredContentSize: CGSize, sourceView: UIView, delegateController: PostViewController)
     }
@@ -50,7 +50,7 @@ final class PostViewReactor: Reactor, Stepper {
         case setAlertMessage(String, AlertMessageType)
         
         case setDidFailFetchingPost(Bool, String)
-        case setDidMarkPostDone(Bool, String)
+        case setDidMarkPostDone(alertMessage: String)
         
         case setIsFetchingData(Bool)
         case setAttemptingToEnterChat(Bool)
@@ -178,7 +178,6 @@ final class PostViewReactor: Reactor, Stepper {
         var editModel: EditPostModel?
         
         // 상태
-        var didMarkPostDone: Bool = false               // 글 모집 완료 상태
         var didFailFetchingPost: Bool = false           // 글 불러오기 실패
 
         var isAttemptingToEnterChat: Bool = false       // 채팅방 입장 시도 중
@@ -297,8 +296,7 @@ final class PostViewReactor: Reactor, Stepper {
             state.didFailFetchingPost = didFail
             state.alertMessage = alertMessage
             
-        case .setDidMarkPostDone(let didMarkPostDone, let alertMessage):
-            state.didMarkPostDone = didMarkPostDone
+        case .setDidMarkPostDone(let alertMessage):
             state.alertMessage = alertMessage
             state.alertMessageType = .simpleBottom
             
@@ -370,7 +368,7 @@ extension PostViewReactor {
                 switch result {
                 case .success:
                     NotificationCenterService.updatePostList.post()
-                    return Mutation.setDidMarkPostDone(true, "모집 완료를 축하합니다.🎉")
+                    return Mutation.setDidMarkPostDone(alertMessage: "모집 완료를 축하합니다.🎉")
                 case .error(let error):
                     return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
                 }

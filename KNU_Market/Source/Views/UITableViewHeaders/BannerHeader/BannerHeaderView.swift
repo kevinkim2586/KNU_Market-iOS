@@ -26,6 +26,14 @@ class BannerHeaderView: UIView {
         didSet {
             startTimer()
             bannerCollectionView.reloadData()
+            /// When you call reloadData(), it reloads itself on the main thread so you cannot scroll the tableview while it is reloading. You call it on the main thread so it is queued to begin right after the reloadData is done.
+            DispatchQueue.main.async {
+                self.bannerCollectionView.scrollToItem(
+                    at: IndexPath(item: 0, section: 0),
+                    at: .centeredHorizontally,
+                    animated: true
+                )
+            }
         }
     }
     
@@ -131,7 +139,8 @@ class BannerHeaderView: UIView {
         guard let totalNumber = totalNumberOfBannerImages else {
             return
         }
-        
+        print("✅ totalNumber: \(totalNumber)")
+        print("✅ currentIndex: \(currentIndex)")
         if currentIndex < totalNumber - 1 {
             currentIndex += 1
             bannerCollectionView.scrollToItem(
@@ -192,15 +201,18 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
 extension BannerHeaderView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 350, height: 180)
+     
+        let width = (currentVC?.view.frame.size.width ?? 10) - 20
+        let height = 180.f
+        
+        return CGSize(width: width, height: height)
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return -5
     }
 }
-
+ 
 //MARK: - UIScrollViewDelegate
 
 extension BannerHeaderView: UIScrollViewDelegate {

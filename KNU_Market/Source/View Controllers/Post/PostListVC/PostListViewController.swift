@@ -37,7 +37,7 @@ class PostListViewController: BaseViewController, View {
             frame: CGRect(
                 x: 0,
                 y: 0,
-                width: view.frame.size.width - 25,
+                width: view.frame.size.width,
                 height: 200
             )
         )
@@ -131,7 +131,6 @@ class PostListViewController: BaseViewController, View {
             .map { _ in Reactor.Action.viewWillAppear }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
-
         
         self.rx.viewDidAppear
             .withUnretained(self)
@@ -139,7 +138,6 @@ class PostListViewController: BaseViewController, View {
                 self.navigationTitleView.setIsHidden(false, animated: true)
             })
             .disposed(by: disposeBag)
-        
 
         self.rx.viewWillDisappear
             .withUnretained(self)
@@ -160,7 +158,6 @@ class PostListViewController: BaseViewController, View {
         
         postListsTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
-        
         
         // Output
         

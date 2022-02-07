@@ -65,7 +65,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
                         .subscribe(onNext: { actionType in
                             switch actionType {
                             case .ok:
-                                self?.reactor?.action.onNext(.blockUser(postUploader))
+                                self?.reactor?.action.onNext(.blockUser)
                             case .cancel: break
                             }
                         })
@@ -702,7 +702,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
                     
                 case .simpleBottom:
                     self.showSimpleBottomAlert(with: alertInfo.0!)
-           
+                    
                 case .none: break
                 }
             })
@@ -905,7 +905,7 @@ extension PostViewController {
                     .subscribe(onNext: { actionType in
                         switch actionType {
                         case .ok:
-                            self.reactor?.action.onNext(.blockUser(postUploader))
+                            self.reactor?.action.onNext(.blockUser)
                         case .cancel: break
                         }
                     })

@@ -87,7 +87,6 @@ class PostFlow: Flow {
                 )
             }
             
-            
         case .popViewController:
             self.rootViewController.popViewController(animated: true)
             return .none

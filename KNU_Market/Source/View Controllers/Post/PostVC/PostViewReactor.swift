@@ -53,12 +53,8 @@ final class PostViewReactor: Reactor, Stepper {
         case setDidMarkPostDone(Bool, String)
         case setDidEnterChat(Bool, Bool)            // DidEnterChat, isFirstEntranceToChat
         
-        
-        case setEditPostModel(EditPostModel)
-        
         case setIsFetchingData(Bool)
         case setAttemptingToEnterChat(Bool)
-        case setDidBlockUser(Bool)
         case setIsLoading(Bool)
         case empty
     }
@@ -183,9 +179,7 @@ final class PostViewReactor: Reactor, Stepper {
         var editModel: EditPostModel?
         
         // 상태
-        var didDeletePost: Bool = false                 // 글 삭제 상태
         var didMarkPostDone: Bool = false               // 글 모집 완료 상태
-        var didBlockUser: Bool = false                  // 유저 차단 상태
         var didFailFetchingPost: Bool = false           // 글 불러오기 실패
         var didEnterChat: Bool = false                  // 채팅방 입장 성공 시
         var isFirstEntranceToChat: Bool = false         // 채팅방 입장이 처음인지, 아니면 기존에 입장한 채팅방인지에 대한 판별 상태
@@ -251,6 +245,8 @@ final class PostViewReactor: Reactor, Stepper {
             ])
             
         case .blockUser:
+            blockPostUploader()
+            self.steps.accept(AppStep.popViewController)
             return .empty()
             
         case .editPost:
@@ -320,11 +316,7 @@ final class PostViewReactor: Reactor, Stepper {
             state.alertMessage = alertMessage
             state.alertMessageType = alertMessageType
             
-        case .setEditPostModel(let editPostModel):
-            state.editModel = editPostModel
-            
-        case .setDidBlockUser(let didBlock):
-            state.didBlockUser = didBlock
+
             
         case .setIsFetchingData(let isFetching):
             state.isFetchingData = isFetching
@@ -371,7 +363,6 @@ extension PostViewReactor {
                     self.steps.accept(AppStep.popViewController)
                     return .empty
 
-                    
                 case .error(let error):
                     return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
                 }
@@ -394,7 +385,7 @@ extension PostViewReactor {
     }
     
     private func configureEditPostModel() -> Observable<Mutation> {
-        print("✅ configureEditPostModel")
+
         let editPostModel = EditPostModel(
             title: currentState.postModel.title,
             imageURLs: nil,
@@ -408,8 +399,9 @@ extension PostViewReactor {
             shippingFee: currentState.postModel.shippingFee ?? 0,
             referenceUrl: currentState.postModel.referenceUrl
         )
-        
-        return Observable.just(Mutation.setEditPostModel(editPostModel))
+
+        self.steps.accept(AppStep.editPostIsRequired(editModel: editPostModel))
+        return .empty()
     }
     
     private func updatePostAsRegathering() -> Observable<Mutation> {
@@ -476,7 +468,7 @@ extension PostViewReactor {
             }
     }
     
-    private func blockPostUploader() -> Observable<Mutation> {
+    private func blockPostUploader() {
         
         let userToBlock = currentState.postModel.userUID
         var bannedUsers: [String] = userDefaultsService.get(key: UserDefaults.Keys.bannedPostUploaders) ?? []
@@ -488,7 +480,6 @@ extension PostViewReactor {
             value: bannedUsers
         )
         NotificationCenterService.updatePostList.post()
-        return Observable.just(Mutation.setDidBlockUser(true))
     }
 }
 

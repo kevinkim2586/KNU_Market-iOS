@@ -69,6 +69,25 @@ class PostFlow: Flow {
                 delegateController: delegateController
             )
             
+        case let .editPostIsRequired(editModel):
+            return navigateToEditPostVC(with: editModel)
+            
+            
+        case let .chatIsPicked(roomUid, chatRoomTitle, postUploaderUid, isFirstEntrance, isFromChatVC):
+            
+            if isFromChatVC {
+                self.rootViewController.popViewController(animated: true)
+                return .none
+            } else {
+                return navigateToChat(
+                    roomUid: roomUid,
+                    roomTitle: chatRoomTitle,
+                    postUploaderUid: postUploaderUid,
+                    isFirstEntrance: isFirstEntrance
+                )
+            }
+            
+            
         case .popViewController:
             self.rootViewController.popViewController(animated: true)
             return .none
@@ -142,7 +161,7 @@ extension PostFlow {
         sourceView: UIView,
         delegateController: PostViewController
     ) -> FlowContributors {
-        
+       
         let vc = PerPersonPriceInfoViewController(
             productPrice: model.productPrice,
             shippingFee: model.shippingFee,
@@ -161,6 +180,43 @@ extension PostFlow {
         self.rootViewController.present(vc, animated: true)
         
         return .none
+    }
+    
+    private func navigateToEditPostVC(with model: EditPostModel) -> FlowContributors {
+        
+        let reactor = UploadPostReactor(
+            postService: services.postService,
+            mediaService: services.mediaService,
+            editModel: model
+        )
+        let uploadVC = UploadPostViewController(reactor: reactor)
+        
+        self.rootViewController.pushViewController(uploadVC, animated: true)
+        return .one(flowContributor: .contribute(withNextPresentable: uploadVC, withNextStepper: reactor))
+    }
+    
+    private func navigateToChat(
+        roomUid: String,
+        roomTitle: String,
+        postUploaderUid: String,
+        isFirstEntrance: Bool
+    ) -> FlowContributors {
+        
+        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: isFirstEntrance)
+        
+        let chatVC = ChatViewController(viewModel: chatVM)
+        chatVC.roomUID = roomUid
+        chatVC.chatRoomTitle = roomTitle
+        chatVC.postUploaderUID = postUploaderUid
+        chatVC.isFirstEntrance = isFirstEntrance
+        chatVC.hidesBottomBarWhenPushed = true
+        
+        self.rootViewController.pushViewController(chatVC, animated: true)
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: chatVC,
+            withNextStepper: chatVM)
+        )
     }
 }
 

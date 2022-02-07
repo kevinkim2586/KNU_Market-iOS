@@ -51,7 +51,6 @@ final class PostViewReactor: Reactor, Stepper {
         
         case setDidFailFetchingPost(Bool, String)
         case setDidMarkPostDone(Bool, String)
-        case setDidEnterChat(Bool, Bool)            // DidEnterChat, isFirstEntranceToChat
         
         case setIsFetchingData(Bool)
         case setAttemptingToEnterChat(Bool)
@@ -181,8 +180,7 @@ final class PostViewReactor: Reactor, Stepper {
         // 상태
         var didMarkPostDone: Bool = false               // 글 모집 완료 상태
         var didFailFetchingPost: Bool = false           // 글 불러오기 실패
-        var didEnterChat: Bool = false                  // 채팅방 입장 성공 시
-        var isFirstEntranceToChat: Bool = false         // 채팅방 입장이 처음인지, 아니면 기존에 입장한 채팅방인지에 대한 판별 상태
+
         var isAttemptingToEnterChat: Bool = false       // 채팅방 입장 시도 중
         var isLoading: Bool = false
     }
@@ -287,7 +285,6 @@ final class PostViewReactor: Reactor, Stepper {
         var state = state
         state.alertMessage = nil
         state.alertMessageType = nil
-        state.didEnterChat = false
         
         switch mutation {
         case .setPostDetails(let postDetailModel):
@@ -304,10 +301,6 @@ final class PostViewReactor: Reactor, Stepper {
             state.didMarkPostDone = didMarkPostDone
             state.alertMessage = alertMessage
             state.alertMessageType = .simpleBottom
-            
-        case .setDidEnterChat(let didEnterChat, let isFirstEntranceToChat):
-            state.didEnterChat = didEnterChat
-            state.isFirstEntranceToChat = isFirstEntranceToChat
             
         case .setAttemptingToEnterChat(let isAttempting):
             state.isAttemptingToEnterChat = isAttempting
@@ -445,13 +438,28 @@ extension PostViewReactor {
                 switch result {
                 case .success:
                     NotificationCenterService.updatePostList.post()
-                    return Mutation.setDidEnterChat(true, true)
+                    
+                    self.steps.accept(AppStep.chatIsPicked(
+                        roomUid: self.currentState.pageId,
+                        chatRoomTitle: self.currentState.title,
+                        postUploaderUid: self.currentState.postModel.userUID,
+                        isFirstEntrance: true)
+                    )
+                    return .empty
                     
                 case .error(let error):
                     NotificationCenterService.updatePostList.post()
                     switch error {
                     case .E108:     ///이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
-                        return Mutation.setDidEnterChat(true, false)
+                     
+                        self.steps.accept(AppStep.chatIsPicked(
+                            roomUid: self.currentState.pageId,
+                            chatRoomTitle: self.currentState.title,
+                            postUploaderUid: self.currentState.postModel.userUID,
+                            isFirstEntrance: false)
+                        )
+                        return .empty
+                        
                     default:
                         return Mutation.setAlertMessage(error.errorDescription, .custom)
                     }

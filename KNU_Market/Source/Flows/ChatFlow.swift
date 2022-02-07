@@ -31,8 +31,19 @@ class ChatFlow: Flow {
         case .chatListIsRequired:
             return navigateToChatList()
             
-        case let .chatIsPicked(roomUid, chatRoomTitle, postUploaderUid):
-            return navigateToChat(roomUid: roomUid, roomTitle: chatRoomTitle, postUploaderUid: postUploaderUid)
+        case let .chatIsPicked(roomUid, chatRoomTitle, postUploaderUid, isFirstEntrance, isFromChatVC):
+            
+            if isFromChatVC {
+                self.rootViewController.popViewController(animated: true)
+                return .none
+            } else {
+                return navigateToChat(
+                    roomUid: roomUid,
+                    roomTitle: chatRoomTitle,
+                    postUploaderUid: postUploaderUid,
+                    isFirstEntrance: isFirstEntrance
+                )
+            }
             
         default:
             return .none
@@ -58,16 +69,23 @@ extension ChatFlow {
         )
     }
     
-    private func navigateToChat(roomUid: String, roomTitle: String, postUploaderUid: String) -> FlowContributors {
+    private func navigateToChat(
+        roomUid: String,
+        roomTitle: String,
+        postUploaderUid: String,
+        isFirstEntrance: Bool
+    ) -> FlowContributors {
         
-        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: false)
+        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: isFirstEntrance)
         
         let chatVC = ChatViewController(viewModel: chatVM)
         chatVC.roomUID = roomUid
         chatVC.chatRoomTitle = roomTitle
         chatVC.postUploaderUID = postUploaderUid
+        chatVC.isFirstEntrance = isFirstEntrance
         chatVC.hidesBottomBarWhenPushed = true
         
+        print("✅ navigateToChat")
         self.rootViewController.pushViewController(chatVC, animated: true)
         
         return .one(flowContributor: .contribute(

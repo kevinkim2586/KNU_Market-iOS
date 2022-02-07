@@ -45,15 +45,13 @@ enum AppStep: Step {
     case postIsPicked(postUid: String, isFromChatVC: Bool)
     case uploadPostIsRequired
     case perPersonPricePopupIsRequired(model: PerPersonPriceModel, preferredContentSize: CGSize, sourceView: UIView, delegateController: PostViewController)
-    
+    case editPostIsRequired(editModel: EditPostModel)
 
-
-    
     
     //MARK: - Chat
     
     case chatListIsRequired
-    case chatIsPicked(roomUid: String, chatRoomTitle: String, postUploaderUid: String)
+    case chatIsPicked(roomUid: String, chatRoomTitle: String, postUploaderUid: String, isFirstEntrance: Bool, isFromChatVC: Bool = false)
     
     
     //MARK: - My Page

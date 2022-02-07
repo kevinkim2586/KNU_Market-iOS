@@ -265,7 +265,6 @@ class PostListViewController: BaseViewController, View {
             }
             .disposed(by: disposeBag)
         
-        
         NotificationCenterService.unexpectedError.addObserver()
             .map { _ in Reactor.Action.unexpectedError }
             .bind(to: reactor.action)

@@ -695,7 +695,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
                 switch alertInfo.1 {
                 case .appleDefault:
                     self.presentSimpleAlert(title: alertInfo.0!)
-                    self.navigationController?.popViewController(animated: true)
+                    self.reactor?.action.onNext(.popVC)
                     
                 case .custom:
                     self.presentCustomAlert(title: "채팅방 참여 불가", message: alertInfo.0!)
@@ -719,29 +719,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
                 bottomContainerView.rx.isHidden
             )
             .disposed(by: disposeBag)
-        
-        /// 채팅방 입장 성공 시
-        reactor.state
-            .map { $0.didEnterChat }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                
-                if reactor.currentState.isFromChatVC {
-                    self.navigationController?.popViewController(animated: true)
-                } else {
-                    
-                    let chatViewModel = ChatViewModel(room: reactor.currentState.pageId, isFirstEntrance: reactor.currentState.isFirstEntranceToChat)
-
-                    let vc = ChatViewController(viewModel: chatViewModel)
-                    vc.roomUID = reactor.currentState.pageId
-                    vc.chatRoomTitle = reactor.currentState.title
-                    vc.isFirstEntrance = reactor.currentState.isFirstEntranceToChat
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            })
-            .disposed(by: disposeBag)
+    
         
         /// 채팅방에 입장 시도 중
         reactor.state
@@ -752,26 +730,8 @@ class PostViewController: BaseViewController, ReactorKit.View {
                 self.enterChatButton.loadingIndicator(isAttempting)
             })
             .disposed(by: disposeBag)
-        
     
-        /// 공구글 수정 모델
-//        reactor.state
-//            .map { $0.editModel }
-//            .filter { $0 != nil }
-//            .withUnretained(self)
-//            .subscribe(onNext: { (_, model) in
-//                let uploadVC = UploadPostViewController(
-//                    reactor: UploadPostReactor(
-//                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-//                        mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
-//                        editModel: model!
-//                    )
-//                )
-//                self.navigationController?.pushViewController(uploadVC, animated: true)
-//            })
-//            .disposed(by: disposeBag)
-    
-        
+
         reactor.state
             .map { $0.isLoading }
             .distinctUntilChanged()

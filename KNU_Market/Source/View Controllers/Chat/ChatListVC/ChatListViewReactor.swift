@@ -114,7 +114,8 @@ final class ChatListViewReactor: Reactor, Stepper {
             self.steps.accept(AppStep.chatIsPicked(
                 roomUid: currentState.roomList[indexPath.row].uuid,
                 chatRoomTitle: currentState.roomList[indexPath.row].title,
-                postUploaderUid: currentState.roomList[indexPath.row].userUID)
+                postUploaderUid: currentState.roomList[indexPath.row].userUID,
+                isFirstEntrance: false)
             )
             return Observable.empty()
         }

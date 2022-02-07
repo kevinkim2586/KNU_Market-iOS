@@ -719,7 +719,6 @@ class PostViewController: BaseViewController, ReactorKit.View {
                 bottomContainerView.rx.isHidden
             )
             .disposed(by: disposeBag)
-
         
         /// 채팅방 입장 성공 시
         reactor.state
@@ -754,47 +753,24 @@ class PostViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
         
-        
-        /// 차단 성공 시
-        reactor.state
-            .map { $0.didBlockUser }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.navigationController?.popViewController(animated: true)
-            })
-            .disposed(by: disposeBag)
-        
+    
         /// 공구글 수정 모델
-        reactor.state
-            .map { $0.editModel }
-            .filter { $0 != nil }
-            .withUnretained(self)
-            .subscribe(onNext: { (_, model) in
-                let uploadVC = UploadPostViewController(
-                    reactor: UploadPostReactor(
-                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                        mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
-                        editModel: model!
-                    )
-                )
-                self.navigationController?.pushViewController(uploadVC, animated: true)
-            })
-            .disposed(by: disposeBag)
-        
-        /// 특정 유저 차단 성공 시
-        reactor.state
-            .map { $0.didBlockUser }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            })
-            .disposed(by: disposeBag)
+//        reactor.state
+//            .map { $0.editModel }
+//            .filter { $0 != nil }
+//            .withUnretained(self)
+//            .subscribe(onNext: { (_, model) in
+//                let uploadVC = UploadPostViewController(
+//                    reactor: UploadPostReactor(
+//                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
+//                        mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
+//                        editModel: model!
+//                    )
+//                )
+//                self.navigationController?.pushViewController(uploadVC, animated: true)
+//            })
+//            .disposed(by: disposeBag)
+    
         
         reactor.state
             .map { $0.isLoading }

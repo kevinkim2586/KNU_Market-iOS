@@ -37,7 +37,7 @@ class MyPageFlow: Flow {
         case .accountManagementIsRequired:
             return navigateToAccountManagement()
             
-        case .verificationIsRequired:
+        case .verificationOptionIsRequired:
             return navigateToUserVerification()
             
         case .inquiryIsRequired:
@@ -97,6 +97,7 @@ extension MyPageFlow {
         let accountManagementFlow = AccountManagementFlow(services: services)
         
         Flows.use(accountManagementFlow, when: .created) { [unowned self] root in
+            root.hidesBottomBarWhenPushed = true
             self.rootViewController.pushViewController(root, animated: true)
         }
         
@@ -111,12 +112,13 @@ extension MyPageFlow {
         let verificationFlow = VerificationFlow(services: services)
         
         Flows.use(verificationFlow, when: .created) { [unowned self] root in
+            root.hidesBottomBarWhenPushed = true
             self.rootViewController.pushViewController(root, animated: true)
         }
         
         return .one(flowContributor: .contribute(
             withNextPresentable: verificationFlow,
-            withNextStepper: OneStepper(withSingleStep: AppStep.verificationIsRequired))
+            withNextStepper: OneStepper(withSingleStep: AppStep.verificationOptionIsRequired))
         )
     }
     
@@ -141,6 +143,7 @@ extension MyPageFlow {
     
     private func navigateToDeveloperInformation() -> FlowContributors {
         let vc = DeveloperInformationViewController()
+        vc.hidesBottomBarWhenPushed = true
         self.rootViewController.pushViewController(vc, animated: true)
         
         return .none

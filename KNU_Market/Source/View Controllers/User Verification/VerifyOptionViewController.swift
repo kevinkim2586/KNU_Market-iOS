@@ -135,38 +135,12 @@ class VerifyOptionViewController: BaseViewController, View {
             .map { Reactor.Action.verifyUsingSchoolEmail }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
-        
     }
 
     private func configure() {
         title = "학생 인증하기"
         setBackBarButtonItemTitle()
-//        if detectIfVerifiedUser() {
-//            presentCustomAlert(title: "인증 회원 안내", message: "이미 인증된 회원입니다.\n이제 공동구매를 즐겨보세요!")
-//            navigationController?.popViewController(animated: true)
-//        }
+
     }
     
 }
-
-//MARK: - Target Actions
-
-extension VerifyOptionViewController {
-    
-    @objc private func pressedVerifyUsingStudentIdButton() {
-        let vc = StudentIdGuideViewController()
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc private func pressedVerifyUsingEmailButton() {
-        let vc = EmailVerificationViewController(
-            reactor: EmailVerificationViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
-        )
-       
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-}
-

@@ -8,8 +8,12 @@
 import UIKit
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
-final class StudentIdVerificationViewReactor: Reactor {
+final class StudentIdVerificationViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType
@@ -43,7 +47,6 @@ final class StudentIdVerificationViewReactor: Reactor {
         var studentIdImageData: Data?
         var studentIdImage: UIImage = UIImage(named: K.Images.chatBubbleIcon)!
         var didCheckDuplicate: Bool = false
-        var isVerified: Bool = false
         var alertMessage: String?
         var isLoading: Bool = false
     }
@@ -105,6 +108,7 @@ final class StudentIdVerificationViewReactor: Reactor {
                         .map { result in
                             switch result {
                             case .success:
+                                self.steps.accept(AppStep.userVerificationIsCompleted)
                                 return Mutation.completeVerification(true)
                             case .error(let error):
                                 return Mutation.setAlertMessage(error.errorDescription)
@@ -144,8 +148,8 @@ final class StudentIdVerificationViewReactor: Reactor {
             : nil
             
         case .completeVerification(let completeVerification):
-            state.isVerified = completeVerification
-            state.alertMessage = "인증 완료되었습니다😁"
+        
+            state.alertMessage = "인증 완료되었습니다 😁"
             
         case .setAlertMessage(let errorMessage):
             state.alertMessage = errorMessage

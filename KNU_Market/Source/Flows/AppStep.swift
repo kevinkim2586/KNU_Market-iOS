@@ -59,7 +59,7 @@ enum AppStep: Step {
     case myPageIsRequired
     case myPostsIsRequired
     case accountManagementIsRequired
-    case verificationIsRequired
+    case verificationOptionIsRequired
     case inquiryIsRequired
     case termsAndConditionIsRequired
     case privacyTermsIsRequired
@@ -80,7 +80,8 @@ enum AppStep: Step {
     case studentIdGuideIsRequired
     case studentIdVerificationIsRequired
     case emailVerificationIsRequired
-    case checkUserEmailGuideIsRequired
+    case checkUserEmailGuideIsRequired(email: String)
+    case userVerificationIsCompleted
     
     //MARK: - Popup
     

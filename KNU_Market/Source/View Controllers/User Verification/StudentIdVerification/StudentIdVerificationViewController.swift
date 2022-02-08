@@ -306,24 +306,6 @@ class StudentIdVerificationViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.isVerified }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.view.endEditing(true)
-                self.showSimpleBottomAlertWithAction(
-                    message:  "인증 완료되었습니다😁",
-                    buttonTitle: "홈으로"
-                ) {
-                    if let vcPopCount = self.navigationController?.viewControllers.count {
-                        self.popVCsFromNavController(count: vcPopCount - 1)
-                    }
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        reactor.state
             .map { $0.isLoading }
             .distinctUntilChanged()
             .subscribe(onNext: {
@@ -334,33 +316,7 @@ class StudentIdVerificationViewController: BaseViewController, View {
 }
 
 extension StudentIdVerificationViewController {
-    
-    func convertAssetToImage(_ assets: [PHAsset]) -> [UIImage] {
-        var result: [UIImage] = []
-        if assets.count != 0 {
-            for i in 0 ..< assets.count {
-                let imageManager = PHImageManager.default()
-                let option = PHImageRequestOptions()
-                option.isSynchronous = true
-                var thumbnail = UIImage()
-                imageManager.requestImage(
-                    for: assets[i],
-                       targetSize: CGSize(width: 1000, height: 1000),
-                       contentMode: .aspectFill,
-                       options: option
-                ) {
-                    (result, _) in
-                    thumbnail = result!
-                }
-                
-                let data = thumbnail.jpegData(compressionQuality: 1)
-                let newImage = UIImage(data: data!)
-                result.append(newImage! as UIImage)
-            }
-        }
-        return result
-    }
-    
+
     func presentImagePicker() {
         
         presentImagePicker(self.imagePicker, select: {
@@ -372,7 +328,7 @@ extension StudentIdVerificationViewController {
         }, finish: {
             [weak self] (assets) in
             guard let self = self else { return }
-            Observable<[UIImage]>.just(self.convertAssetToImage(assets))
+            Observable<[UIImage]>.just(AssetConverter.convertAssetToImage(assets))
                 .map { Reactor.Action.updateStudentIdImage($0[0]) }
                 .bind(to: self.reactor!.action )
                 .disposed(by: self.disposeBag)

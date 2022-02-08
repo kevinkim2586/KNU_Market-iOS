@@ -8,8 +8,12 @@
 import UIKit
 import RxSwift
 import ReactorKit
+import RxFlow
+import RxRelay
 
-final class EmailVerificationViewReactor: Reactor {
+final class EmailVerificationViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType

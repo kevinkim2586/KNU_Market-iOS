@@ -38,11 +38,11 @@ final class VerifyOptionViewReactor: Reactor, Stepper {
         
         switch action {
         case .verifyUsingStudentId:
-
+            self.steps.accept(AppStep.studentIdGuideIsRequired)
             return .empty()
             
         case .verifyUsingSchoolEmail:
-            
+            self.steps.accept(AppStep.emailVerificationIsRequired)
             return .empty()
         }
     }

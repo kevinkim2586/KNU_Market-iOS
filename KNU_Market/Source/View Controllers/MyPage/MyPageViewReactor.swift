@@ -144,10 +144,13 @@ final class MyPageViewReactor: Reactor, Stepper {
                 switch indexPath.row {
                 case 0:
                     self.steps.accept(AppStep.myPostsIsRequired)
+                    return .empty()
                 case 1:
                     self.steps.accept(AppStep.accountManagementIsRequired)
+                    return .empty()
                 case 2:
-                    self.steps.accept(AppStep.verificationIsRequired)
+                    self.steps.accept(AppStep.verificationOptionIsRequired)
+                    return .empty()
                 default: return .empty()
                 }
                 
@@ -155,12 +158,16 @@ final class MyPageViewReactor: Reactor, Stepper {
                 switch indexPath.row {
                 case 0:
                     self.steps.accept(AppStep.inquiryIsRequired)
+                    return .empty()
                 case 1:
                     self.steps.accept(AppStep.termsAndConditionIsRequired)
+                    return .empty()
                 case 2:
                     self.steps.accept(AppStep.privacyTermsIsRequired)
+                    return .empty()
                 case 3:
                     self.steps.accept(AppStep.developerInfoIsRequired)
+                    return .empty()
                     
                 default: return .empty()
                 }

@@ -220,7 +220,10 @@ class MyPageViewController: BaseViewController, View {
         settingsBarButtonItem.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                let vc = AccountManagementViewController(userDefaultsGenericService: UserDefaultsGenericService.shared)
+                
+                let reactor = AccountManagementViewReactor(userDefaultsGenericService: UserDefaultsGenericService())
+                
+                let vc = AccountManagementViewController(reactor: reactor)
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
             })
@@ -336,7 +339,9 @@ extension MyPageViewController {
             case 0:
                 vc = MyPostsViewController(reactor: MyPostsViewReactor(postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()]))))
             case 1:
-                vc = AccountManagementViewController(userDefaultsGenericService: UserDefaultsGenericService.shared)
+                let reactor = AccountManagementViewReactor(userDefaultsGenericService: UserDefaultsGenericService())
+                
+                vc = AccountManagementViewController(reactor: reactor)
             case 2:
                 vc = VerifyOptionViewController()
             default: break

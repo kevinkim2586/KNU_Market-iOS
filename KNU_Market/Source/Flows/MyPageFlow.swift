@@ -55,4 +55,18 @@ extension MyPageFlow {
             withNextStepper: myPageReactor)
         )
     }
+    
+    private func navigateToAccountManagement() -> FlowContributors {
+       
+        let accountManagementFlow = AccountManagementFlow(services: services)
+        
+        Flows.use(accountManagementFlow, when: .created) { [unowned self] root in
+            self.rootViewController.pushViewController(root, animated: true)
+        }
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: accountManagementFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.accountManagementIsRequired))
+        )
+    }
 }

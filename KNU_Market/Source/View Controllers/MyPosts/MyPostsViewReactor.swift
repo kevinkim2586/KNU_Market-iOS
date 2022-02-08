@@ -8,8 +8,12 @@
 import Foundation
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
-final class MyPostsViewReactor: Reactor {
+final class MyPostsViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let postService: PostService

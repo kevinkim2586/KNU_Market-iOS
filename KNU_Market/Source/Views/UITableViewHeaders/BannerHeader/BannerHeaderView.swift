@@ -139,8 +139,6 @@ class BannerHeaderView: UIView {
         guard let totalNumber = totalNumberOfBannerImages else {
             return
         }
-        print("✅ totalNumber: \(totalNumber)")
-        print("✅ currentIndex: \(currentIndex)")
         if currentIndex < totalNumber - 1 {
             currentIndex += 1
             bannerCollectionView.scrollToItem(

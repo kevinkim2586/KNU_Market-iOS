@@ -58,11 +58,12 @@ enum AppStep: Step {
     
     case myPageIsRequired
     case myPostsIsRequired
-    case settingsIsRequired
+    case accountManagementIsRequired
     case verificationIsRequired
     case inquiryIsRequired
     case termsAndConditionIsRequired
     case privacyTermsIsRequired
+    case developerInfoIsRequired
     
     //MARK: - Settings
     
@@ -72,6 +73,7 @@ enum AppStep: Step {
     case changeEmailIsRequired
     case logOutIsRequired
     case unRegisterIsRequired
+    case readingsPrecautionsIsRequired
     
     //MARK: - Popup
     

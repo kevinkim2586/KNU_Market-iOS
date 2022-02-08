@@ -3,12 +3,13 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
+import ReactorKit
 
-class AccountManagementViewController: BaseViewController {
+class AccountManagementViewController: BaseViewController, View {
+    
+    typealias Reactor = AccountManagementViewReactor
     
     //MARK: - Properties
-    
-    let userDefaultsGenericService: UserDefaultsGenericServiceType
     
     //MARK: - Constants
     
@@ -188,9 +189,9 @@ class AccountManagementViewController: BaseViewController {
     
     //MARK: - Init
     
-    init(userDefaultsGenericService: UserDefaultsGenericServiceType) {
-        self.userDefaultsGenericService = userDefaultsGenericService
+    init(reactor: Reactor) {
         super.init()
+        self.reactor = reactor
     }
     
     required init?(coder: NSCoder) {
@@ -202,7 +203,6 @@ class AccountManagementViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "설정"
-        bindUI()
     }
     
     //MARK: - UI Setup
@@ -269,55 +269,30 @@ class AccountManagementViewController: BaseViewController {
     
     //MARK: - Binding
     
-    private func bindUI() {
+    func bind(reactor: AccountManagementViewReactor) {
+        
+        // Input
         
         changeIdButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.navigationController?.pushViewController(ChangeIdViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
-            })
+            .map { Reactor.Action.changeId }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         changeNicknameButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.navigationController?.pushViewController(ChangeNicknameViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
-            })
+            .map { Reactor.Action.changeNickname }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         changePasswordButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.navigationController?.pushViewController(ChangePasswordViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
-            })
+            .map { Reactor.Action.changePassword }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         changeEmailButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.navigationController?.pushViewController(ChangeEmailForPasswordLossViewController(reactor: ChangeUserInfoReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
-            })
+            .map { Reactor.Action.changeEmailForPasswordLoss }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        notificationSettingsButton.rx.tap
-            .flatMap { [unowned self] in
-                self.presentAlertWithConfirmation(
-                    title: "알림이 오지 않나요?",
-                    message: "설정으로 이동 후 알림 받기가 꺼져있지는 않은지 확인해 주세요. 그래도 안 되면 어플 재설치를 부탁드립니다."
-                )
-            }
-            .subscribe(onNext: { actionType in
-                switch actionType {
-                case .ok:
-                    UIApplication.shared.open(
-                        URL(string: UIApplication.openSettingsURLString)!,
-                        options: [:],
-                        completionHandler: nil
-                    )
-                default: break
-                }
-            })
-            .disposed(by: disposeBag)
         
         logOutButton.rx.tap
             .flatMap { [unowned self] in
@@ -326,39 +301,40 @@ class AccountManagementViewController: BaseViewController {
                     message: ""
                 )
             }
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] actionType in
                 switch actionType {
                 case .ok:
-                    self?.popToLoginViewController()
+                    self?.reactor?.action.onNext(.logout)
                 default: break
                 }
             })
             .disposed(by: disposeBag)
         
-        unregisterButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                
-                self.determineIfJoinedChatRoomsExist()
-                ? self.navigationController?.pushViewController(
-                    UnregisterUser_CheckFirstPrecautionsViewController(),
-                    animated: true
-                )
-                : self.navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
-                
-            })
-            .disposed(by: disposeBag)
-    }
-}
-
-extension AccountManagementViewController {
-    
-    private func determineIfJoinedChatRoomsExist() -> Bool {
+           notificationSettingsButton.rx.tap
+               .flatMap { [unowned self] in
+                   self.presentAlertWithConfirmation(
+                       title: "알림이 오지 않나요?",
+                       message: "설정으로 이동 후 알림 받기가 꺼져있지는 않은지 확인해 주세요. 그래도 안 되면 어플 재설치를 부탁드립니다."
+                   )
+               }
+               .subscribe(onNext: { actionType in
+                   switch actionType {
+                   case .ok:
+                       UIApplication.shared.open(
+                           URL(string: UIApplication.openSettingsURLString)!,
+                           options: [:],
+                           completionHandler: nil
+                       )
+                   default: break
+                   }
+               })
+               .disposed(by: disposeBag)
         
-        guard let joinedChatRoomPids: [String] = self.userDefaultsGenericService.get(key: UserDefaults.Keys.joinedChatRoomPIDs) else {
-            return false
-        }
-        return joinedChatRoomPids.count == 0 ? false : true
+        unregisterButton.rx.tap
+            .map { Reactor.Action.unregister }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Output
     }
 }

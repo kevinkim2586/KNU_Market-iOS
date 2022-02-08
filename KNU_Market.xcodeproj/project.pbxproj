@@ -284,6 +284,8 @@
 		7CF369D72754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */; };
 		7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */; };
 		7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */; };
+		7CF6B21627B1F3B80012B10D /* AccountManagementFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */; };
+		7CF6B21827B1F55D0012B10D /* AccountManagementViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21727B1F55D0012B10D /* AccountManagementViewReactor.swift */; };
 		7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */; };
 		7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D613277C4A590078DD77 /* ChatService.swift */; };
 		7CF8D616277C4A5E0078DD77 /* ChatServiceAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */; };
@@ -578,6 +580,8 @@
 		7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+MessageCellDelegate.swift"; sourceTree = "<group>"; };
 		7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
 		7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+InputBarAccessoryViewDelegate.swift"; sourceTree = "<group>"; };
+		7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementFlow.swift; sourceTree = "<group>"; };
+		7CF6B21727B1F55D0012B10D /* AccountManagementViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewReactor.swift; sourceTree = "<group>"; };
 		7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewReactor.swift; sourceTree = "<group>"; };
 		7CF8D613277C4A590078DD77 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceAPIType.swift; sourceTree = "<group>"; };
@@ -1502,6 +1506,7 @@
 				7CD3016427AFC96E003FB8E3 /* LoginFlow.swift */,
 				7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */,
 				7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */,
+				7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -1726,6 +1731,7 @@
 			isa = PBXGroup;
 			children = (
 				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
+				7CF6B21727B1F55D0012B10D /* AccountManagementViewReactor.swift */,
 			);
 			path = "Account Management";
 			sourceTree = "<group>";
@@ -1990,6 +1996,7 @@
 				7C132BF426552B4900BE5F40 /* UIButton+Extension.swift in Sources */,
 				7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
+				7CF6B21827B1F55D0012B10D /* AccountManagementViewReactor.swift in Sources */,
 				7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */,
 				7CD3015927AFB1C8003FB8E3 /* AppFlow.swift in Sources */,
 				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,
@@ -2113,6 +2120,7 @@
 				7C9C5A00277C244B005E08BC /* UserDefaultsPersistenceService.swift in Sources */,
 				7CDD5B2A279544710082E3FC /* BannerService.swift in Sources */,
 				7C58475F27707E84005D75B2 /* PasswordInputViewController.swift in Sources */,
+				7CF6B21627B1F3B80012B10D /* AccountManagementFlow.swift in Sources */,
 				7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */,

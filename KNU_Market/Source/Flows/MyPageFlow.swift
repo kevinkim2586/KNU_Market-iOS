@@ -31,6 +31,27 @@ class MyPageFlow: Flow {
         case .myPageIsRequired:
             return navigateToMyPage()
             
+        case .myPostsIsRequired:
+            return navigateToMyPostsLists()
+            
+        case .accountManagementIsRequired:
+            return navigateToAccountManagement()
+            
+        case .verificationIsRequired:
+            return navigateToUserVerification()
+            
+        case .inquiryIsRequired:
+            return navigateToInquiry()
+            
+        case .termsAndConditionIsRequired:
+            return presentTermsAndConditionsView()
+            
+        case .privacyTermsIsRequired:
+            return presentPrivacyTermsView()
+            
+        case .developerInfoIsRequired:
+            return navigateToDeveloperInformation()
+            
         default:
             return .none
         }
@@ -46,6 +67,7 @@ extension MyPageFlow {
             mediaService: services.mediaService,
             userDefaultsGenericService: services.userDefaultsGenericService
         )
+        
         let myPageVC = MyPageViewController(reactor: myPageReactor)
         
         self.rootViewController.pushViewController(myPageVC, animated: true)
@@ -53,6 +75,20 @@ extension MyPageFlow {
         return .one(flowContributor: .contribute(
             withNextPresentable: myPageVC,
             withNextStepper: myPageReactor)
+        )
+    }
+    
+    private func navigateToMyPostsLists() -> FlowContributors {
+        let reactor = MyPostsViewReactor(postService: services.postService)
+        
+        let myPostsVC = MyPostsViewController(reactor: reactor)
+        myPostsVC.hidesBottomBarWhenPushed = true
+        
+        self.rootViewController.pushViewController(myPostsVC, animated: true)
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: myPostsVC,
+            withNextStepper: reactor)
         )
     }
     
@@ -68,5 +104,45 @@ extension MyPageFlow {
             withNextPresentable: accountManagementFlow,
             withNextStepper: OneStepper(withSingleStep: AppStep.accountManagementIsRequired))
         )
+    }
+    
+    private func navigateToUserVerification() -> FlowContributors {
+        
+        let verificationFlow = VerificationFlow(services: services)
+        
+        Flows.use(verificationFlow, when: .created) { [unowned self] root in
+            self.rootViewController.pushViewController(root, animated: true)
+        }
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: verificationFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.verificationIsRequired))
+        )
+    }
+    
+    private func navigateToInquiry() -> FlowContributors {
+        //수정
+        return .none
+    }
+    
+    private func presentTermsAndConditionsView() -> FlowContributors {
+        let url = URL(string: K.URL.termsAndConditionNotionURL)!
+        self.rootViewController.presentSafariView(with: url)
+        
+        return .none
+    }
+    
+    private func presentPrivacyTermsView() -> FlowContributors {
+        let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
+        self.rootViewController.presentSafariView(with: url)
+        
+        return .none
+    }
+    
+    private func navigateToDeveloperInformation() -> FlowContributors {
+        let vc = DeveloperInformationViewController()
+        self.rootViewController.pushViewController(vc, animated: true)
+        
+        return .none
     }
 }

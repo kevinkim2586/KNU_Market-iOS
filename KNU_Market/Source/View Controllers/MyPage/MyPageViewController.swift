@@ -218,15 +218,8 @@ class MyPageViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         settingsBarButtonItem.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                
-                let reactor = AccountManagementViewReactor(userDefaultsGenericService: UserDefaultsGenericService())
-                
-                let vc = AccountManagementViewController(reactor: reactor)
-                vc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
-            })
+            .map { Reactor.Action.settingsSelected }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
                                                   
         profileImageButton.rx.tap
@@ -259,16 +252,6 @@ class MyPageViewController: BaseViewController, View {
         reactor.state
             .map { $0.myPageSectionModels }
             .bind(to: settingsTableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.selectedCellIndexPath }
-            .filter { $0 != nil }
-            .withUnretained(self)
-            .subscribe(onNext: { (_, indexPath) in
-                self.pushViewController(indexPath: indexPath!)
-                self.settingsTableView.deselectRow(at: indexPath!, animated: true)
-            })
             .disposed(by: disposeBag)
 
         reactor.state
@@ -326,48 +309,9 @@ class MyPageViewController: BaseViewController, View {
             }
             .disposed(by: disposeBag)
     }
-    
 }
 
 extension MyPageViewController {
-    
-    func pushViewController(indexPath: IndexPath) {
-        var vc: UIViewController?
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 0:
-                vc = MyPostsViewController(reactor: MyPostsViewReactor(postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()]))))
-            case 1:
-                let reactor = AccountManagementViewReactor(userDefaultsGenericService: UserDefaultsGenericService())
-                
-                vc = AccountManagementViewController(reactor: reactor)
-            case 2:
-                vc = VerifyOptionViewController()
-            default: break
-            }
-            
-        case 1:
-            switch indexPath.row {
-            case 0:
-                vc = SendUsMessageViewController(reactor: SendUsMessageReactor())
-            case 1:
-                let url = URL(string: K.URL.termsAndConditionNotionURL)!
-                presentSafariView(with: url)
-            case 2:
-                let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
-                presentSafariView(with: url)
-            case 3:
-                vc = DeveloperInformationViewController()
-            default: break
-            }
-        default: break
-        }
-        if let vc = vc {
-            vc.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(vc, animated: true)
-        }
-    }
     
     func presentImagePicker() {
         

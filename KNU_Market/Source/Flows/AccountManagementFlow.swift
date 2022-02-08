@@ -17,10 +17,15 @@ class AccountManagementFlow: Flow {
         return self.rootViewController
     }
     
-    private let rootViewController = UINavigationController()
+    private let rootViewController: AccountManagementViewController
     
     init(services: AppServices) {
         self.services = services
+        
+        let reactor = AccountManagementViewReactor(userDefaultsGenericService: services.userDefaultsGenericService)
+        let accountVC = AccountManagementViewController(reactor: reactor)
+        self.rootViewController = accountVC
+        
     }
     
     func adapt(step: Step) -> Single<Step> {
@@ -76,44 +81,38 @@ class AccountManagementFlow: Flow {
 extension AccountManagementFlow {
     
     private func navigateToAccountManagementVC() -> FlowContributors {
-        
-        let reactor = AccountManagementViewReactor(userDefaultsGenericService: services.userDefaultsGenericService)
-        
-        let accountVC = AccountManagementViewController(reactor: reactor)
-        
-        self.rootViewController.pushViewController(accountVC, animated: true)
-        
+        rootViewController.hidesBottomBarWhenPushed = true
         return .one(flowContributor: .contribute(
-            withNextPresentable: accountVC,
-            withNextStepper: reactor)
+            withNextPresentable: rootViewController,
+            withNextStepper: rootViewController.reactor!)
         )
     }
     
     private func navigateToChangeId() -> FlowContributors {
         let reactor = ChangeUserInfoReactor(userService: services.userService)
         let changeIdVC = ChangeIdViewController(reactor: reactor)
-        self.rootViewController.pushViewController(changeIdVC, animated: true)
+        self.rootViewController.navigationController?.pushViewController(changeIdVC, animated: true)
         return .one(flowContributor: .contribute(withNextPresentable: changeIdVC, withNextStepper: reactor))
     }
     
     private func navigateToChangeNickname() -> FlowContributors {
         let reactor = ChangeUserInfoReactor(userService: services.userService)
         let changeNicknameVC = ChangeNicknameViewController(reactor: reactor)
-        self.rootViewController.pushViewController(changeNicknameVC, animated: true)
+        self.rootViewController.navigationController?.pushViewController(changeNicknameVC, animated: true)
         return .one(flowContributor: .contribute(withNextPresentable: changeNicknameVC, withNextStepper: reactor))
     }
     
     private func navigateToChangePassword() -> FlowContributors {
         let reactor = ChangeUserInfoReactor(userService: services.userService)
         let changePasswordVC = ChangePasswordViewController(reactor: reactor)
-        self.rootViewController.pushViewController(changePasswordVC, animated: true)
+        self.rootViewController.navigationController?.pushViewController(changePasswordVC, animated: true)
         return .one(flowContributor: .contribute(withNextPresentable: changePasswordVC, withNextStepper: reactor))
     }
     
     private func navigateToChangeEmailForPasswordLoss() -> FlowContributors {
         let reactor = ChangeUserInfoReactor(userService: services.userService)
         let changeEmailVC = ChangeEmailForPasswordLossViewController(reactor: reactor)
-        self.rootViewController.pushViewController(changeEmailVC, animated: true)
+        self.rootViewController.navigationController?.pushViewController(changeEmailVC, animated: true)
         return .one(flowContributor: .contribute(withNextPresentable: changeEmailVC, withNextStepper: reactor))
     }
     
@@ -133,7 +132,7 @@ extension AccountManagementFlow {
     
     private func navigateToReadPrecautionsFirst() -> FlowContributors {
         let firstPrecautionVC = UnregisterUser_CheckFirstPrecautionsViewController()
-        self.rootViewController.pushViewController(firstPrecautionVC, animated: true)
+        self.rootViewController.navigationController?.pushViewController(firstPrecautionVC, animated: true)
         return .none
     }
     
@@ -141,7 +140,7 @@ extension AccountManagementFlow {
         #warning("회원 탈퇴도 하나의 Flow 이니까 추후에 수정")
         let reactor = UnregisterViewReactor(userService: self.services.userService)
         let inputPasswordVC = UnregisterUser_InputPasswordViewController(reactor: reactor)
-        self.rootViewController.pushViewController(inputPasswordVC, animated: true)
+        self.rootViewController.navigationController?.pushViewController(inputPasswordVC, animated: true)
         return .none
     }
 }

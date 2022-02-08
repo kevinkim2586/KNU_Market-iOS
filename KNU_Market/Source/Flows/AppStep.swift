@@ -75,6 +75,13 @@ enum AppStep: Step {
     case unRegisterIsRequired
     case readingsPrecautionsIsRequired
     
+    //MARK: - Verification
+    
+    case studentIdGuideIsRequired
+    case studentIdVerificationIsRequired
+    case emailVerificationIsRequired
+    case checkUserEmailGuideIsRequired
+    
     //MARK: - Popup
     
     case popUpIsRequired(model: PopupModel)

@@ -286,6 +286,9 @@
 		7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */; };
 		7CF6B21627B1F3B80012B10D /* AccountManagementFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */; };
 		7CF6B21827B1F55D0012B10D /* AccountManagementViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21727B1F55D0012B10D /* AccountManagementViewReactor.swift */; };
+		7CF6B21A27B29B1B0012B10D /* VerifyOptionViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21927B29B1B0012B10D /* VerifyOptionViewReactor.swift */; };
+		7CF6B21C27B29D9A0012B10D /* VerificationFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */; };
+		7CF6B21E27B2B1F90012B10D /* StudentIdGuideReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */; };
 		7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */; };
 		7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D613277C4A590078DD77 /* ChatService.swift */; };
 		7CF8D616277C4A5E0078DD77 /* ChatServiceAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */; };
@@ -582,6 +585,9 @@
 		7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+InputBarAccessoryViewDelegate.swift"; sourceTree = "<group>"; };
 		7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementFlow.swift; sourceTree = "<group>"; };
 		7CF6B21727B1F55D0012B10D /* AccountManagementViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewReactor.swift; sourceTree = "<group>"; };
+		7CF6B21927B29B1B0012B10D /* VerifyOptionViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOptionViewReactor.swift; sourceTree = "<group>"; };
+		7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationFlow.swift; sourceTree = "<group>"; };
+		7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdGuideReactor.swift; sourceTree = "<group>"; };
 		7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewReactor.swift; sourceTree = "<group>"; };
 		7CF8D613277C4A590078DD77 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceAPIType.swift; sourceTree = "<group>"; };
@@ -911,6 +917,7 @@
 			isa = PBXGroup;
 			children = (
 				7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */,
+				7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */,
 				7CC36A8826EDC70C007573DD /* StudentIdVerificationViewController.swift */,
 				7C58477527795CA0005D75B2 /* StudentIdVerificationViewReactor.swift */,
 			);
@@ -1507,6 +1514,7 @@
 				7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */,
 				7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */,
 				7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */,
+				7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -1596,6 +1604,7 @@
 			isa = PBXGroup;
 			children = (
 				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
+				7CF6B21927B29B1B0012B10D /* VerifyOptionViewReactor.swift */,
 				7C58477427795BAC005D75B2 /* StudentIdVerification */,
 				7C58477327745135005D75B2 /* SchoolEmailVerification */,
 			);
@@ -1955,6 +1964,7 @@
 				7C3B4FF726A92C6C00E2CA8F /* UserRegisterValues.swift in Sources */,
 				7C922A5D27185EB000295A3F /* SendUsMessageViewController.swift in Sources */,
 				7C2A6B152786B9A800C31238 /* UserNotificationService.swift in Sources */,
+				7CF6B21E27B2B1F90012B10D /* StudentIdGuideReactor.swift in Sources */,
 				7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */,
 				7C015C9A27035B3800089ED8 /* FindIdUsingStudentIdViewController.swift in Sources */,
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
@@ -2023,6 +2033,7 @@
 				7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */,
 				7C58477A27799AAC005D75B2 /* ChangeUserInfoReactor.swift in Sources */,
 				7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */,
+				7CF6B21A27B29B1B0012B10D /* VerifyOptionViewReactor.swift in Sources */,
 				7C58475B277040E6005D75B2 /* IDInputViewController.swift in Sources */,
 				7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */,
 				6273750E27647DA6008A29B5 /* PostCell.swift in Sources */,
@@ -2095,6 +2106,7 @@
 				7C9C59E4277C12F7005E08BC /* UIViewController+Observers.swift in Sources */,
 				7CF369C62754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift in Sources */,
 				7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */,
+				7CF6B21C27B29D9A0012B10D /* VerificationFlow.swift in Sources */,
 				7C5386EA2768D14500BFEA7F /* PopupReactor.swift in Sources */,
 				7C9566F12789D33E006BFFAD /* PostViewReactor.swift in Sources */,
 				7C5386E82768D10A00BFEA7F /* PopupViewController.swift in Sources */,

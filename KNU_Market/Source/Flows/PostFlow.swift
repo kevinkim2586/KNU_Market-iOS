@@ -242,7 +242,8 @@ extension PostFlow {
             message: "학생 인증을 마치셔야 사용이 가능해요.👀",
             buttonTitle: "인증하러 가기"
         ) {
-            let vc = VerifyOptionViewController()
+            let reactor = VerifyOptionViewReactor()
+            let vc = VerifyOptionViewController(reactor: reactor)
             vc.hidesBottomBarWhenPushed = true
             self.rootViewController.pushViewController(vc, animated: true)
         }

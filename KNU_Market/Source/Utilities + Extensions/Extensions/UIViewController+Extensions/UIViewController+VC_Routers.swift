@@ -91,7 +91,7 @@ extension UIViewController {
 
     // 인증 수단 고르기 화면 띄우기
     func presentVerifyOptionVC() {
-        let vc = VerifyOptionViewController()
+        let vc = VerifyOptionViewController(reactor: VerifyOptionViewReactor())
         navigationController?.pushViewController(vc, animated: true)
     }
     

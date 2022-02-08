@@ -16,7 +16,7 @@ final class MyPostsViewReactor: Reactor, Stepper {
     var steps = PublishRelay<Step>()
     
     let initialState: State
-    let postService: PostService
+    let postService: PostServiceType
     
     enum Action {
         case fetchMyPosts
@@ -43,7 +43,7 @@ final class MyPostsViewReactor: Reactor, Stepper {
         var errorMessage: String?
     }
     
-    init(postService: PostService) {
+    init(postService: PostServiceType) {
         self.postService = postService
         self.initialState = State()
     }

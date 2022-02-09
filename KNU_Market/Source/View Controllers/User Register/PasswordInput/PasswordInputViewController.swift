@@ -175,5 +175,5 @@ class PasswordInputViewController: BaseViewController, View {
             .bind(to: self.detailLabel.rx.textColor )
             .disposed(by: disposeBag)
     }
-    
+
 }

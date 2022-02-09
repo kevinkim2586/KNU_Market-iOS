@@ -21,6 +21,7 @@ final class LoginViewReactor: Reactor, Stepper {
         case updateId(String)
         case updatePassword(String)
         case login
+        case register
     }
     
     enum Mutation {
@@ -29,6 +30,10 @@ final class LoginViewReactor: Reactor, Stepper {
         case setLoading(Bool)
         case setErrorMessage(String)
         case empty
+        
+      
+        
+        
     }
     
     struct State {
@@ -69,6 +74,10 @@ final class LoginViewReactor: Reactor, Stepper {
                     },
                 Observable.just(Mutation.setLoading(false))
             ])
+            
+        case .register:
+            self.steps.accept(AppStep.registerIsRequired)
+            return .empty()
         }
     }
     

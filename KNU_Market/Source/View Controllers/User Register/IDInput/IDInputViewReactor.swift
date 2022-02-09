@@ -77,6 +77,8 @@ final class IDInputViewReactor: Reactor, Stepper {
     
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
+        state.errorMessage = nil
+        
         switch mutation {
             
         case .setUserId(let userId):

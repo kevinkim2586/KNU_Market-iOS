@@ -11,10 +11,8 @@ import Then
 
 class RegisterFlow: Flow {
     
-    private let rootViewController = UINavigationController().then {
-        $0.modalPresentationStyle = .overFullScreen
-        $0.navigationBar.tintColor = UIColor.black
-    }
+    let rootViewController: UINavigationController
+
     private let services: AppServices
     
     var root: Presentable {
@@ -23,6 +21,16 @@ class RegisterFlow: Flow {
     
     init(services: AppServices) {
         self.services = services
+        
+        // Present 하자마자 바로 보여줘야 하기 때문에 미리 NavController의 rootVC 정의
+        
+        let reactor = IDInputViewReactor(userService: services.userService)
+        let idInputVC = IDInputViewController(reactor: reactor)
+        let navigationController = UINavigationController(rootViewController: idInputVC)
+        navigationController.modalPresentationStyle = .overFullScreen
+        navigationController.navigationBar.tintColor = .black
+        
+        self.rootViewController = navigationController
     }
      
     func navigate(to step: Step) -> FlowContributors {
@@ -61,7 +69,6 @@ class RegisterFlow: Flow {
             return .none
         }
     }
-    
 }
 
 extension RegisterFlow {
@@ -70,8 +77,6 @@ extension RegisterFlow {
         
         let reactor = IDInputViewReactor(userService: services.userService)
         let vc = IDInputViewController(reactor: reactor)
-        
-        self.rootViewController.pushViewController(vc, animated: true)
         
         return .one(flowContributor: .contribute(
             withNextPresentable: vc,

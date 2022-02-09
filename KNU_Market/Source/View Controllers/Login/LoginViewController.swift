@@ -263,10 +263,8 @@ class LoginViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         registerButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.presentRegisterVC()
-            })
+            .map { Reactor.Action.register }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         findIdButton.rx.tap

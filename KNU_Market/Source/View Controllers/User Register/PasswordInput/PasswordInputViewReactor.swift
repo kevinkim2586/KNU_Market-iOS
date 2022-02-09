@@ -56,8 +56,6 @@ final class PasswordInputViewReactor: Reactor, Stepper {
                 self.steps.accept(AppStep.passwordInputIsCompleted)
                 return Observable.just(Mutation.empty)
             }
-            
- 
         }
     }
     

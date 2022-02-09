@@ -72,8 +72,10 @@ extension LoginFlow {
         
         let registerFlow = RegisterFlow(services: services)
         
-        Flows.use(registerFlow, when: .created) { [unowned self] rootVC in
-            self.rootViewController.present(rootVC, animated: true)
+        Flows.use(registerFlow, when: .created) { [unowned self] root in
+            
+
+            self.rootViewController.present(root, animated: true)
         }
         
         return .one(flowContributor: .contribute(

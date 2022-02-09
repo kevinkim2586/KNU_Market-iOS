@@ -2,10 +2,14 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxFlow
+import RxRelay
 
-class CheckYourEmailViewController: BaseViewController {
+class CheckYourEmailViewController: BaseViewController, Stepper {
     
     //MARK: - Properties
+    
+    var steps = PublishRelay<Step>()
     
     var email: String!
     
@@ -94,20 +98,8 @@ class CheckYourEmailViewController: BaseViewController {
         bottomButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.popVCsFromNavController(count: 3)
+                self.steps.accept(AppStep.userVerificationIsCompleted)
             })
             .disposed(by: disposeBag)
     }
 }
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct VCPreview: PreviewProvider {
-    
-    static var previews: some View {
-        CheckYourEmailViewController(email: "kevinkim2586@knu.ac.kr").toPreview()
-    }
-}
-#endif

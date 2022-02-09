@@ -237,17 +237,3 @@ extension CongratulateUserViewController {
         animationView.play()
     }
 }
-
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-@available(iOS 13.0, *)
-struct CongratulateVC: PreviewProvider {
-    
-    static var previews: some SwiftUI.View {
-        CongratulateUserViewController(
-            reactor: CongratulateUserViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
-        ).toPreview()
-    }
-}
-#endif

@@ -51,10 +51,15 @@ class PostViewController: BaseViewController, ReactorKit.View {
         } else {
             return [
                 UIAction(title: "신고하기", image: nil, handler: { [weak self] _ in
-                    self?.presentReportUserVC(
-                        userToReport: reactor.currentState.postModel.nickname,
-                        postUID: reactor.currentState.pageId
-                    )
+                    
+                    
+                    self?.reactor?.action.onNext(.reportPostUploader)
+                    
+                    
+//                    self?.presentReportUserVC(
+//                        userToReport: reactor.currentState.postModel.nickname,
+//                        postUID: reactor.currentState.pageId
+//                    )
                 }),
                 UIAction(title: "이 사용자의 글 보지 않기", image: nil, handler: { [weak self] _ in
                     guard let postUploader = self?.reactor?.currentState.postUploaderNickname else { return }

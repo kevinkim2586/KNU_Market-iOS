@@ -170,9 +170,6 @@ class ReportUserViewController: BaseViewController, View {
             .subscribe(onNext: { _ in
                 self.view.endEditing(true)
                 self.showSimpleBottomAlert(with: "신고가 정상적으로 접수되었습니다. 감사합니다.😁")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.dismiss(animated: true)
-                }
             })
             .disposed(by: disposeBag)
     }

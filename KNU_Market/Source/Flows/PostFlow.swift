@@ -87,6 +87,9 @@ class PostFlow: Flow {
                 )
             }
             
+        case let .reportIsRequired(userToReport, postUid):
+            return presentReportUserView(userToReport: userToReport, postUid: postUid)
+            
         case .popViewController:
             self.rootViewController.popViewController(animated: true)
             return .none
@@ -215,6 +218,24 @@ extension PostFlow {
         return .one(flowContributor: .contribute(
             withNextPresentable: chatVC,
             withNextStepper: chatVM)
+        )
+    }
+    
+    private func presentReportUserView(userToReport: String, postUid: String?) -> FlowContributors {
+        
+        let reportFlow = ReportFlow(
+            reportService: self.services.reportService,
+            userToReport: userToReport,
+            postUid: postUid
+        )
+        
+        Flows.use(reportFlow, when: .created) { [unowned self] rootVC in
+            self.rootViewController.present(rootVC, animated: true)
+        }
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: reportFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.reportIsRequired(userToReport: userToReport, postUid: postUid)))
         )
     }
 }

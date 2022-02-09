@@ -360,32 +360,6 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
 //MARK: - Method
 private extension SendUsMessageViewController {
     
-    func convertAssetToImage(_ assets: [PHAsset]) -> [UIImage] {
-        var result: [UIImage] = []
-        if assets.count != 0 {
-            for i in 0 ..< assets.count {
-                let imageManager = PHImageManager.default()
-                let option = PHImageRequestOptions()
-                option.isSynchronous = true
-                var thumbnail = UIImage()
-                imageManager.requestImage(
-                    for: assets[i],
-                       targetSize: CGSize(width: 1000, height: 1000),
-                       contentMode: .aspectFill,
-                       options: option
-                ) {
-                    (result, _) in
-                    thumbnail = result!
-                }
-                
-                let data = thumbnail.jpegData(compressionQuality: 1)
-                let newImage = UIImage(data: data!)
-                result.append(newImage! as UIImage)
-            }
-        }
-        return result
-    }
-    
     func pickImage(currentImage: Int) {
         if currentImage == 2 {
             return
@@ -414,22 +388,10 @@ private extension SendUsMessageViewController {
             [weak self] (assets) in
                 // Done 버튼 누르면 실행되는 내용
             guard let self = self else { return }
-            Observable<[UIImage]>.just(self.convertAssetToImage(assets))
+            Observable<[UIImage]>.just(AssetConverter.convertAssetToImage(assets))
                 .map { Reactor.Action.setImage($0) }
                 .bind(to: self.reactor!.action )
                 .disposed(by: self.disposeBag)
         })
     }
 }
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct SendUsMessageVC: PreviewProvider {
-    
-    static var previews: some SwiftUI.View {
-        SendUsMessageViewController(reactor: SendUsMessageReactor()).toPreview()
-    }
-}
-#endif

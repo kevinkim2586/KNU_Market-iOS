@@ -9,8 +9,12 @@
 import UIKit
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
-final class ReportUserViewReactor: Reactor {
+final class ReportUserViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let reportService: ReportServiceType
@@ -66,6 +70,7 @@ final class ReportUserViewReactor: Reactor {
                         .map { result in
                             switch result {
                             case .success:
+                                self.steps.accept(AppStep.reportIsCompleted)
                                 return Mutation.setReportComplete(true)
                             case .error(let error):
                                 return Mutation.setErrorMessage(error.errorDescription)

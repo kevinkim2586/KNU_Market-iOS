@@ -51,6 +51,9 @@ class AccountManagementFlow: Flow {
         
         switch step {
             
+        case .accountManagementIsRequired:
+            return navigateToAccountManagementVC()
+            
         case .changeIdIsRequired:
             return navigateToChangeId()
             

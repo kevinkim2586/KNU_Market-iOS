@@ -96,5 +96,8 @@ enum AppStep: Step {
 
     
     
+    //MARK: - Report
     
+    case reportIsRequired(userToReport: String, postUid: String?)
+    case reportIsCompleted
 }

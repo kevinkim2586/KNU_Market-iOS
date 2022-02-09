@@ -289,6 +289,7 @@
 		7CF6B21A27B29B1B0012B10D /* VerifyOptionViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21927B29B1B0012B10D /* VerifyOptionViewReactor.swift */; };
 		7CF6B21C27B29D9A0012B10D /* VerificationFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */; };
 		7CF6B21E27B2B1F90012B10D /* StudentIdGuideReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */; };
+		7CF6B22027B36F150012B10D /* ReportFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21F27B36F150012B10D /* ReportFlow.swift */; };
 		7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */; };
 		7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D613277C4A590078DD77 /* ChatService.swift */; };
 		7CF8D616277C4A5E0078DD77 /* ChatServiceAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */; };
@@ -588,6 +589,7 @@
 		7CF6B21927B29B1B0012B10D /* VerifyOptionViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOptionViewReactor.swift; sourceTree = "<group>"; };
 		7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationFlow.swift; sourceTree = "<group>"; };
 		7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdGuideReactor.swift; sourceTree = "<group>"; };
+		7CF6B21F27B36F150012B10D /* ReportFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFlow.swift; sourceTree = "<group>"; };
 		7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewReactor.swift; sourceTree = "<group>"; };
 		7CF8D613277C4A590078DD77 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceAPIType.swift; sourceTree = "<group>"; };
@@ -688,7 +690,7 @@
 			path = "Inquiry Models";
 			sourceTree = "<group>";
 		};
-		62C2E44127363D4C00F037B9 /* SendUsMessage */ = {
+		62C2E44127363D4C00F037B9 /* Inquiry */ = {
 			isa = PBXGroup;
 			children = (
 				7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */,
@@ -696,7 +698,7 @@
 				626D66EF274291AE00CB7F4F /* InquiryList */,
 				622270B1274A487200FDC47B /* DetailMessage */,
 			);
-			path = SendUsMessage;
+			path = Inquiry;
 			sourceTree = "<group>";
 		};
 		687344BD474A438BFB252D9D /* Frameworks */ = {
@@ -1396,7 +1398,7 @@
 				7CD74E0D2645982600BD2DE4 /* Chat */,
 				7CD74E0F2645986A00BD2DE4 /* MyPage */,
 				7CF8D60B277C3B0C0078DD77 /* Account Management */,
-				62C2E44127363D4C00F037B9 /* SendUsMessage */,
+				62C2E44127363D4C00F037B9 /* Inquiry */,
 				7CF8D60C277C3B170078DD77 /* MyPosts */,
 				7C60DC7126944C16001DEA9A /* Change User Info */,
 				7CA52D6A270B113900A69F3B /* Unregister Flow */,
@@ -1515,6 +1517,7 @@
 				7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */,
 				7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */,
 				7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */,
+				7CF6B21F27B36F150012B10D /* ReportFlow.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -2046,6 +2049,7 @@
 				7CDD5B23279526D20082E3FC /* BannerHeaderView.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				626D66E92742705700CB7F4F /* KMButton.swift in Sources */,
+				7CF6B22027B36F150012B10D /* ReportFlow.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
 				7C9185E62784439F00902A2A /* NotificationCenterServiceType.swift in Sources */,
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,

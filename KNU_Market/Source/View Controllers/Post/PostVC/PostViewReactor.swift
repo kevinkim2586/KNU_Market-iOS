@@ -41,6 +41,8 @@ final class PostViewReactor: Reactor, Stepper {
         case blockUser
         case sharePost
         case showPerPersonPrice(preferredContentSize: CGSize, sourceView: UIView, delegateController: PostViewController)
+        
+        case reportPostUploader
     }
     
     enum Mutation {
@@ -275,6 +277,14 @@ final class PostViewReactor: Reactor, Stepper {
                 delegateController: delegateController)
             )
             
+            return .empty()
+            
+        case .reportPostUploader:
+            
+            self.steps.accept(AppStep.reportIsRequired(
+                userToReport: currentState.postModel.nickname,
+                postUid: currentState.pageId)
+            )
             return .empty()
         }
     }

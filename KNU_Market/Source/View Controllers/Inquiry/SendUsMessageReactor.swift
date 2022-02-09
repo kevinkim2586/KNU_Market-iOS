@@ -5,14 +5,14 @@
 //  Created by 김부성 on 2021/11/06.
 //
 
-import Foundation
-
+import UIKit
 import ReactorKit
 import RxRelay
-import UIKit
-import Moya
+import RxFlow
 
-final class SendUsMessageReactor: Reactor {
+final class SendUsMessageReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     
@@ -43,10 +43,10 @@ final class SendUsMessageReactor: Reactor {
     }
     
     fileprivate let myPageService: MyPageServiceType
-    init() {
+    
+    init(myPageService: MyPageServiceType) {
         self.initialState = State()
-        
-        self.myPageService = MyPageService(network: Network<MyPageAPI>(plugins: [NetworkLoggerPlugin(), AuthPlugin()]))
+        self.myPageService = myPageService
     }
     
     func mutate(action: Action) -> Observable<Mutation> {

@@ -123,8 +123,18 @@ extension MyPageFlow {
     }
     
     private func navigateToInquiry() -> FlowContributors {
-        //수정
-        return .none
+        
+        let reactor = SendUsMessageReactor(myPageService: self.services.myPageService)
+        
+        let vc = SendUsMessageViewController(reactor: reactor)
+        vc.hidesBottomBarWhenPushed = true
+        
+        self.rootViewController.pushViewController(vc, animated: true)
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: vc,
+            withNextStepper: reactor)
+        )
     }
     
     private func presentTermsAndConditionsView() -> FlowContributors {

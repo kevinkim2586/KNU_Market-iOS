@@ -142,9 +142,5 @@ extension VerificationFlow {
             withNextPresentable: vc,
             withNextStepper: OneStepper(withSingleStep: AppStep.checkUserEmailGuideIsRequired(email: email)))
         )
-        
-        
     }
-    
-   
 }

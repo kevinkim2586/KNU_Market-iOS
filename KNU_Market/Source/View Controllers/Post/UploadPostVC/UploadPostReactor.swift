@@ -55,9 +55,9 @@ final class UploadPostReactor: Reactor, Stepper {
         case setIsLoading(Bool)
         case setErrorMessage(String)
         case appendImageUid(String)
-        case setCompleteUploadingPost(Bool)
         case setEditPostModel(EditPostModel)
         case setPreviousImages([UIImage])
+        case empty
     }
     
     struct State {
@@ -222,9 +222,6 @@ final class UploadPostReactor: Reactor, Stepper {
                 state.isCompletedImageUpload = true
             }
             
-        case .setCompleteUploadingPost(let didComplete):
-            state.didCompleteUpload = didComplete
-            
         case .setEditPostModel(let model):
             
             state.title = model.title
@@ -236,8 +233,9 @@ final class UploadPostReactor: Reactor, Stepper {
             
         case .setPreviousImages(let images):
             state.images = images
+            
+        case .empty: break
         }
-        
         return state
     }
 }
@@ -293,7 +291,10 @@ extension UploadPostReactor {
             .map { result in
                 switch result {
                 case .success:
-                    return .setCompleteUploadingPost(true)
+                    NotificationCenterService.didUpdatePost.post()
+                    self.steps.accept(AppStep.uploadPostIsCompleted)
+                    return .empty
+        
                 case .error(_):
                     return .setErrorMessage(ErrorMessage.uploadErrorMessage)
                 }
@@ -325,7 +326,8 @@ extension UploadPostReactor {
                 switch result {
                 case .success:
                     NotificationCenterService.didUpdatePost.post()
-                    return .setCompleteUploadingPost(true)
+                    self.steps.accept(AppStep.uploadPostIsCompleted)
+                    return .empty
                 case .error(_):
                     return .setErrorMessage(ErrorMessage.uploadErrorMessage)
                 }

@@ -29,6 +29,7 @@ final class LoginViewReactor: Reactor, Stepper {
         case setLoading(Bool)
         case authorizeUser(Bool)
         case setErrorMessage(String)
+        case empty
     }
     
     struct State {
@@ -62,7 +63,8 @@ final class LoginViewReactor: Reactor, Stepper {
                     .map { result in
                         switch result {
                         case .success(_):
-                            return Mutation.authorizeUser(true)
+                            self.steps.accept(AppStep.mainIsRequired)
+                            return Mutation.empty
                         case .error(let error):
                             return Mutation.setErrorMessage(error.errorDescription)
                         }
@@ -91,6 +93,9 @@ final class LoginViewReactor: Reactor, Stepper {
             
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
+            
+        case .empty:
+            break
         }
         return state
     }

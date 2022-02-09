@@ -24,10 +24,14 @@ class LoginFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        
+        print("✅ accepting step: \(step)")
         switch step {
         case .loginIsRequired:
             return navigateToLoginScreen()
+            
+        case .mainIsRequired:
+            return navigateToMainHomeScreen()
+            
         default:
             return .none
         }
@@ -46,5 +50,19 @@ extension LoginFlow {
             withNextPresentable: loginVC,
             withNextStepper: loginViewReactor
         ))
+    }
+    
+    private func navigateToMainHomeScreen() -> FlowContributors {
+        
+        let homeFlow = HomeFlow(services: services)
+        
+        Flows.use(homeFlow, when: .created) { rootVC in
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(rootVC)
+        }
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: homeFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.mainIsRequired))
+        )
     }
 }

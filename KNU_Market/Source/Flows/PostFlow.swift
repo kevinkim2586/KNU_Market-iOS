@@ -58,6 +58,10 @@ class PostFlow: Flow {
         case .uploadPostIsRequired:
             return navigateToUploadPostVC()
             
+        case .uploadPostIsCompleted:
+            self.rootViewController.popToRootViewController(animated: true)
+            return .none
+            
         case .welcomeIndicatorRequired(let nickname):
             return presentWelcomeIndicator(with: nickname)
             

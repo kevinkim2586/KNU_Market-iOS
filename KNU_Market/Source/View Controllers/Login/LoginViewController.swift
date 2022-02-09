@@ -312,17 +312,6 @@ class LoginViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.isAuthorized }
-            .asObservable()
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe { (vc, isAuthorized) in
-                self.goToHomeScreen()
-            }
-            .disposed(by: disposeBag)
-        
-        reactor.state
             .map { $0.errorMessage }
             .filter { $0 != nil }
             .withUnretained(self)

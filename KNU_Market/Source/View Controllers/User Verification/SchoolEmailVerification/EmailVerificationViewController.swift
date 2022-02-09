@@ -125,10 +125,6 @@ class EmailVerificationViewController: BaseViewController, View {
         }
     }
     
-    override func setupStyle() {
-        super.setupStyle()
-    }
-    
     //MARK: - Binding
     
     func bind(reactor: EmailVerificationViewReactor) {

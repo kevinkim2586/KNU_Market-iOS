@@ -23,9 +23,7 @@ enum AppStep: Step {
     case unexpectedError
     
     
-    
-    
-    //MARK: - Initial
+    //MARK: - Initial (Needed When App is Launched)
     
     case mainIsRequired
     case loginIsRequired
@@ -44,14 +42,18 @@ enum AppStep: Step {
     case postListIsRequired
     case postIsPicked(postUid: String, isFromChatVC: Bool)
     case uploadPostIsRequired
+    case uploadPostIsCompleted
     case perPersonPricePopupIsRequired(model: PerPersonPriceModel, preferredContentSize: CGSize, sourceView: UIView, delegateController: PostViewController)
     case editPostIsRequired(editModel: EditPostModel)
+    
+
 
     
     //MARK: - Chat
     
     case chatListIsRequired
     case chatIsPicked(roomUid: String, chatRoomTitle: String, postUploaderUid: String, isFirstEntrance: Bool, isFromChatVC: Bool = false)
+    case chatMemberListIsRequired
     
     
     //MARK: - My Page

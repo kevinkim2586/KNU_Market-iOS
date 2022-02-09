@@ -23,7 +23,6 @@ class ChatFlow: Flow {
         self.services = services
     }
     
-    
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
         
@@ -44,6 +43,14 @@ class ChatFlow: Flow {
                     isFirstEntrance: isFirstEntrance
                 )
             }
+            
+            
+        case .chatMemberListIsRequired:
+            #warning("추후 수정")
+            return .none
+            
+        case .postIsPicked(let postUid, let isFromChatVC):
+            return navigateToPost(postUid: postUid, isFromChatVC: isFromChatVC)
             
         default:
             return .none
@@ -91,5 +98,29 @@ extension ChatFlow {
             withNextPresentable: chatVC,
             withNextStepper: chatVM)
         )
+    }
+    
+    private func presentChatMemberList() -> FlowContributors {
+        
+        return .none
+        
+        
+    }
+    
+    private func navigateToPost(postUid: String, isFromChatVC: Bool) -> FlowContributors {
+        
+        let reactor = PostViewReactor(
+            pageId: postUid,
+            isFromChatVC: isFromChatVC,
+            postService: services.postService,
+            chatService: services.chatService,
+            sharingService: services.sharingService,
+            userDefaultsService: services.userDefaultsGenericService
+        )
+        
+        let postVC = PostViewController(reactor: reactor)
+        self.rootViewController.pushViewController(postVC, animated: true)
+        
+        return .one(flowContributor: .contribute(withNextPresentable: postVC, withNextStepper: reactor))
     }
 }

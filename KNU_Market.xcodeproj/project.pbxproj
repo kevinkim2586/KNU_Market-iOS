@@ -290,6 +290,7 @@
 		7CF6B21C27B29D9A0012B10D /* VerificationFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */; };
 		7CF6B21E27B2B1F90012B10D /* StudentIdGuideReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */; };
 		7CF6B22027B36F150012B10D /* ReportFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21F27B36F150012B10D /* ReportFlow.swift */; };
+		7CF6B22227B3A3060012B10D /* ChatMemberListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22127B3A3060012B10D /* ChatMemberListReactor.swift */; };
 		7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */; };
 		7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D613277C4A590078DD77 /* ChatService.swift */; };
 		7CF8D616277C4A5E0078DD77 /* ChatServiceAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */; };
@@ -590,6 +591,7 @@
 		7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationFlow.swift; sourceTree = "<group>"; };
 		7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdGuideReactor.swift; sourceTree = "<group>"; };
 		7CF6B21F27B36F150012B10D /* ReportFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFlow.swift; sourceTree = "<group>"; };
+		7CF6B22127B3A3060012B10D /* ChatMemberListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberListReactor.swift; sourceTree = "<group>"; };
 		7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewReactor.swift; sourceTree = "<group>"; };
 		7CF8D613277C4A590078DD77 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceAPIType.swift; sourceTree = "<group>"; };
@@ -1717,6 +1719,7 @@
 			isa = PBXGroup;
 			children = (
 				7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */,
+				7CF6B22127B3A3060012B10D /* ChatMemberListReactor.swift */,
 			);
 			path = ChatMemberListVC;
 			sourceTree = "<group>";
@@ -2117,6 +2120,7 @@
 				7C5386DF27689B5B00BFEA7F /* MediaService.swift in Sources */,
 				7C58476C2772E6B7005D75B2 /* CongratulateUserViewReactor.swift in Sources */,
 				7C8C951D277EA200009245D6 /* AssetConverter.swift in Sources */,
+				7CF6B22227B3A3060012B10D /* ChatMemberListReactor.swift in Sources */,
 				7CE0A41627918C400034CC69 /* KMTabBarController.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7C58477627795CA0005D75B2 /* StudentIdVerificationViewReactor.swift in Sources */,

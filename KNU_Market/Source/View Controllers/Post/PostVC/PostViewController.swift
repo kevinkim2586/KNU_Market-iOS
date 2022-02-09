@@ -51,15 +51,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
         } else {
             return [
                 UIAction(title: "신고하기", image: nil, handler: { [weak self] _ in
-                    
-                    
                     self?.reactor?.action.onNext(.reportPostUploader)
-                    
-                    
-//                    self?.presentReportUserVC(
-//                        userToReport: reactor.currentState.postModel.nickname,
-//                        postUID: reactor.currentState.pageId
-//                    )
                 }),
                 UIAction(title: "이 사용자의 글 보지 않기", image: nil, handler: { [weak self] _ in
                     guard let postUploader = self?.reactor?.currentState.postUploaderNickname else { return }
@@ -275,7 +267,6 @@ class PostViewController: BaseViewController, ReactorKit.View {
 
     let postControlButtonView = KMPostButtonView()
     
-
     //MARK: - Initialization
     
     init(reactor: Reactor) {
@@ -534,7 +525,6 @@ class PostViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-
         // Output
         
         /// 최초 Configuration
@@ -851,18 +841,7 @@ extension PostViewController {
                 title: "글 수정하기",
                 style: .default
             ) { [weak self] _ in
-                guard let self = self else { return }
-                DispatchQueue.main.async {
-
-                    let uploadVC = UploadPostViewController(
-                        reactor: UploadPostReactor(
-                            postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                            mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
-                            editModel: reactor.currentState.editModel!
-                        )
-                    )
-                    self.navigationController?.pushViewController(uploadVC, animated: true)
-                }
+                self?.reactor?.action.onNext(.editPost)
             }
             
             let deleteAction = UIAlertAction(
@@ -891,11 +870,7 @@ extension PostViewController {
                 title: "신고하기",
                 style: .default
             ) { [weak self] _ in
-                guard let self = self else { return }
-                self.presentReportUserVC(
-                    userToReport: reactor.currentState.postModel.nickname,
-                    postUID: reactor.currentState.pageId
-                )
+                self?.reactor?.action.onNext(.reportPostUploader)
             }
             let blockAction = UIAlertAction(
                 title: "이 사용자의 글 보지 않기",

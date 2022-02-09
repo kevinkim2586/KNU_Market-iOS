@@ -288,6 +288,7 @@ extension PostFlow {
         
         let loginViewReactor = LoginViewReactor(userService: services.userService)
         let loginVC = LoginViewController(reactor: loginViewReactor)
+        
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
         
         return .one(flowContributor: .contribute(

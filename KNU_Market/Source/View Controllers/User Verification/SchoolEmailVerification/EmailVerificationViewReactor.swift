@@ -27,14 +27,12 @@ final class EmailVerificationViewReactor: Reactor, Stepper {
     enum Mutation {
         case setEmail(String)
         case setErrorMessage(String)
-        case allowToGoNext(Bool)
         case setLoading(Bool)
         case dismiss
     }
     
     struct State {
         var email: String = ""
-        var isAllowedToGoNext: Bool = false
         var errorMessage: String?
         var isLoading: Bool = false
     }
@@ -63,7 +61,9 @@ final class EmailVerificationViewReactor: Reactor, Stepper {
                         .map { result in
                             switch result {
                             case .success:
-                                return Mutation.allowToGoNext(true)
+                                self.steps.accept(AppStep.checkUserEmailGuideIsRequired(email: self.currentState.email))
+                                return .dismiss
+                            
                             case .error(let error):
                                 let errorMessage = error == .E102
                                 ? "인증에 사용된 적이 있는 이메일입니다.\n혹시 스팸 메일함도 확인해보셨나요?"
@@ -83,7 +83,6 @@ final class EmailVerificationViewReactor: Reactor, Stepper {
         var state = state
         
         state.errorMessage = nil
-        state.isAllowedToGoNext = false
         
         switch mutation {
         case .setEmail(let email):
@@ -91,10 +90,7 @@ final class EmailVerificationViewReactor: Reactor, Stepper {
 
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
-            
-        case .allowToGoNext(let isAllowed):
-            state.isAllowedToGoNext = isAllowed
-            
+                        
         case .setLoading(let isLoading):
             state.isLoading = isLoading
             

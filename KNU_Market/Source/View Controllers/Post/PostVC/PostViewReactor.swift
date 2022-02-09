@@ -29,7 +29,6 @@ final class PostViewReactor: Reactor, Stepper {
     let userDefaultsService: UserDefaultsGenericServiceType
     
     enum Action {
-        
         case viewDidLoad
         case popVC
         case refresh
@@ -41,19 +40,14 @@ final class PostViewReactor: Reactor, Stepper {
         case blockUser
         case sharePost
         case showPerPersonPrice(preferredContentSize: CGSize, sourceView: UIView, delegateController: PostViewController)
-        
         case reportPostUploader
     }
     
     enum Mutation {
-        
         case setPostDetails(PostDetailModel)
-        
         case setAlertMessage(String, AlertMessageType)
-        
         case setDidFailFetchingPost(Bool, String)
         case setDidMarkPostDone(alertMessage: String)
-        
         case setIsFetchingData(Bool)
         case setAttemptingToEnterChat(Bool)
         case setIsLoading(Bool)
@@ -67,20 +61,11 @@ final class PostViewReactor: Reactor, Stepper {
         var myNickname: String = ""
         var userJoinedChatRoomPIDS: [String] = []
         
-        
         var postModel: PostDetailModel
-        
         var inputSources: [InputSource] = []
-        
-        
-        
         var alertMessage: String?
         var alertMessageType: AlertMessageType?
-        
-        
-        
         var isFetchingData: Bool = false
-        
         
         // Computed Properties
         
@@ -316,8 +301,6 @@ final class PostViewReactor: Reactor, Stepper {
         case .setAlertMessage(let alertMessage, let alertMessageType):
             state.alertMessage = alertMessage
             state.alertMessageType = alertMessageType
-            
-
             
         case .setIsFetchingData(let isFetching):
             state.isFetchingData = isFetching

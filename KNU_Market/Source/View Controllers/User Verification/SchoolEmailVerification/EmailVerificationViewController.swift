@@ -177,16 +177,6 @@ class EmailVerificationViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { ($0.isAllowedToGoNext, $0.email) }
-            .distinctUntilChanged { $0.0 }
-            .filter { $0.0 == true }
-            .subscribe(onNext: {
-                let vc = CheckYourEmailViewController(email: $0.1)
-                self.navigationController?.pushViewController(vc, animated: true)
-            })
-            .disposed(by: disposeBag)
-     
-        reactor.state
             .map { $0.errorMessage }
             .filter { $0 != nil }
             .withUnretained(self)

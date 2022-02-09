@@ -7,8 +7,12 @@
 
 import UIKit
 import ReactorKit
+import RxRelay
+import RxFlow
 
-final class EmailForLostPasswordViewReactor: Reactor {
+final class EmailForLostPasswordViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType
@@ -23,14 +27,12 @@ final class EmailForLostPasswordViewReactor: Reactor {
     enum Mutation {
         case setEmail(String)
         case setErrorMessage(String)
-        case allowToFinishRegistration(Bool)
         case setLoading(Bool)
         case empty
     }
     
     struct State {
         var userEmail: String = ""
-        var isRegisteredComplete: Bool = false
         var errorMessage: String?
         var isLoading: Bool = false
     }
@@ -80,7 +82,8 @@ final class EmailForLostPasswordViewReactor: Reactor {
                                     .map { result in
                                         switch result {
                                         case .success:
-                                            return Mutation.allowToFinishRegistration(true)
+                                            self.steps.accept(AppStep.emailInputIsCompleted)
+                                            return Mutation.empty
                                         case .error(let error):
                                             return Mutation.setErrorMessage(error.errorDescription)
                                         }
@@ -106,10 +109,6 @@ final class EmailForLostPasswordViewReactor: Reactor {
             
         case let .setErrorMessage(errorMessage):
             state.errorMessage = errorMessage
-            state.isRegisteredComplete = false
-            
-        case let .allowToFinishRegistration(isAllowed):
-            state.isRegisteredComplete = isAllowed
             
         case let .setLoading(isLoading):
             state.isLoading = isLoading

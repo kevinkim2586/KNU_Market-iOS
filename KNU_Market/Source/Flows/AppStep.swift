@@ -35,6 +35,18 @@ enum AppStep: Step {
     
     //MARK: - Register
     
+    case registerIsRequired
+    
+    case idInputIsCompleted
+    
+    case passwordInputIsCompleted
+
+    case nicknameInputIsCompleted
+    
+    case emailInputIsCompleted
+    
+
+
     
     //MARK: - Post
     

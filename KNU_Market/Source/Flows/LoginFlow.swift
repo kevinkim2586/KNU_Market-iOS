@@ -5,13 +5,12 @@
 //  Created by Kevin Kim on 2022/02/06.
 //
 
-import Foundation
 import RxFlow
 import UIKit
 
 class LoginFlow: Flow {
     
-    private let rootViewController = UINavigationController()
+    private let rootViewController: LoginViewController
     private let services: AppServices
     
     var root: Presentable {
@@ -20,17 +19,24 @@ class LoginFlow: Flow {
     
     init(services: AppServices) {
         self.services = services
+        
+        let reactor = LoginViewReactor(userService: services.userService)
+        let vc = LoginViewController(reactor: reactor)
+        
+        self.rootViewController = vc
     }
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        print("✅ accepting step: \(step)")
         switch step {
         case .loginIsRequired:
             return navigateToLoginScreen()
             
         case .mainIsRequired:
             return navigateToMainHomeScreen()
+            
+        case .registerIsRequired:
+            return navigateToRegisterFlow()
             
         default:
             return .none
@@ -42,14 +48,10 @@ extension LoginFlow {
     
     private func navigateToLoginScreen() -> FlowContributors {
         
-        let loginViewReactor = LoginViewReactor(userService: services.userService)
-        let loginVC = LoginViewController(reactor: loginViewReactor)
-        self.rootViewController.pushViewController(loginVC, animated: true)
-        
         return .one(flowContributor: .contribute(
-            withNextPresentable: loginVC,
-            withNextStepper: loginViewReactor
-        ))
+            withNextPresentable: rootViewController,
+            withNextStepper: rootViewController.reactor!)
+        )
     }
     
     private func navigateToMainHomeScreen() -> FlowContributors {
@@ -63,6 +65,20 @@ extension LoginFlow {
         return .one(flowContributor: .contribute(
             withNextPresentable: homeFlow,
             withNextStepper: OneStepper(withSingleStep: AppStep.mainIsRequired))
+        )
+    }
+    
+    private func navigateToRegisterFlow() -> FlowContributors {
+        
+        let registerFlow = RegisterFlow(services: services)
+        
+        Flows.use(registerFlow, when: .created) { [unowned self] rootVC in
+            self.rootViewController.present(rootVC, animated: true)
+        }
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: registerFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.registerIsRequired))
         )
     }
 }

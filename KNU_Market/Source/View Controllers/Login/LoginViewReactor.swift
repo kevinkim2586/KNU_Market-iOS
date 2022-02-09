@@ -27,7 +27,6 @@ final class LoginViewReactor: Reactor, Stepper {
         case setId(String)
         case setPassword(String)
         case setLoading(Bool)
-        case authorizeUser(Bool)
         case setErrorMessage(String)
         case empty
     }
@@ -36,7 +35,6 @@ final class LoginViewReactor: Reactor, Stepper {
         var id: String = ""
         var password: String = ""
         var isLoading: Bool = false
-        var isAuthorized: Bool = false
         var errorMessage: String?
     }
     
@@ -87,10 +85,7 @@ final class LoginViewReactor: Reactor, Stepper {
             
         case .setLoading(let isLoading):
             state.isLoading = isLoading
-            
-        case .authorizeUser(let isAuthorized):
-            state.isAuthorized = isAuthorized
-            
+        
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
             

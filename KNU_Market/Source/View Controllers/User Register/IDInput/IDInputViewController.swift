@@ -149,26 +149,7 @@ class IDInputViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        self.rx.viewDidDisappear
-            .map { _ in Reactor.Action.viewDidDisappear }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
         // Output
-        
-        reactor.state
-            .map { $0.isAllowedToGoNext }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe { _ in
-                let vc = PasswordInputViewController(reactor: PasswordInputViewReactor())
-                self.navigationController?.pushViewController(
-                    vc,
-                    animated: true
-                )
-            }
-            .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.errorMessage }

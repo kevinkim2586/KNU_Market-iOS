@@ -7,8 +7,12 @@
 
 import UIKit
 import ReactorKit
+import RxFlow
+import RxRelay
 
-final class PasswordInputViewReactor: Reactor {
+final class PasswordInputViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     
@@ -17,20 +21,17 @@ final class PasswordInputViewReactor: Reactor {
     enum Action {
         case updateTextFields([String])
         case pressedBottomButton
-        case viewDidDisappear
     }
     
     enum Mutation {
         case setUserPassword([String])
         case setErrorMessage(String)
-        case allowToGoNext(Bool)
+        case empty
     }
     
     struct State {
         var userPassword: String = ""
         var userCheckPassword: String = ""
-        
-        var isAllowedToGoNext: Bool = false
         var errorMessage: String = RegisterError.incorrectPasswordFormat.rawValue
         var errorMessageColor: UIColor = .lightGray
     }
@@ -52,11 +53,11 @@ final class PasswordInputViewReactor: Reactor {
                 return Observable.just(Mutation.setErrorMessage(passwordValidationResult.rawValue))
             } else {
                 UserRegisterValues.shared.password = currentState.userPassword
-                return Observable.just(Mutation.allowToGoNext(true))
+                self.steps.accept(AppStep.passwordInputIsCompleted)
+                return Observable.just(Mutation.empty)
             }
             
-        case .viewDidDisappear:
-            return Observable.just(Mutation.allowToGoNext(false))
+ 
         }
     }
     
@@ -71,11 +72,9 @@ final class PasswordInputViewReactor: Reactor {
         case let .setErrorMessage(errorMessage):
             state.errorMessage = errorMessage
             state.errorMessageColor = UIColor(named: K.Color.appColor) ?? .systemRed
-            state.isAllowedToGoNext = false
             
-        case let .allowToGoNext(isAllowed):
-            state.isAllowedToGoNext = isAllowed
-            
+        case .empty:
+            break
         }
         return state
     }

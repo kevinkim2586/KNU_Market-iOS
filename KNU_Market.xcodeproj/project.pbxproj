@@ -291,6 +291,7 @@
 		7CF6B21E27B2B1F90012B10D /* StudentIdGuideReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */; };
 		7CF6B22027B36F150012B10D /* ReportFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21F27B36F150012B10D /* ReportFlow.swift */; };
 		7CF6B22227B3A3060012B10D /* ChatMemberListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22127B3A3060012B10D /* ChatMemberListReactor.swift */; };
+		7CF6B22427B3AC3B0012B10D /* RegisterFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22327B3AC3B0012B10D /* RegisterFlow.swift */; };
 		7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */; };
 		7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D613277C4A590078DD77 /* ChatService.swift */; };
 		7CF8D616277C4A5E0078DD77 /* ChatServiceAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */; };
@@ -592,6 +593,7 @@
 		7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdGuideReactor.swift; sourceTree = "<group>"; };
 		7CF6B21F27B36F150012B10D /* ReportFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFlow.swift; sourceTree = "<group>"; };
 		7CF6B22127B3A3060012B10D /* ChatMemberListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberListReactor.swift; sourceTree = "<group>"; };
+		7CF6B22327B3AC3B0012B10D /* RegisterFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFlow.swift; sourceTree = "<group>"; };
 		7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewReactor.swift; sourceTree = "<group>"; };
 		7CF8D613277C4A590078DD77 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceAPIType.swift; sourceTree = "<group>"; };
@@ -1519,6 +1521,7 @@
 				7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */,
 				7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */,
 				7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */,
+				7CF6B22327B3AC3B0012B10D /* RegisterFlow.swift */,
 				7CF6B21F27B36F150012B10D /* ReportFlow.swift */,
 			);
 			path = Flows;
@@ -2031,6 +2034,7 @@
 				7C57AC1D279C3803000540A4 /* UITextField+Extension.swift in Sources */,
 				7CF369B22754D60E00C9D7A9 /* PostListViewController+UITableView.swift in Sources */,
 				7CC1B59C26D4FC110007F99B /* UIView+Extension.swift in Sources */,
+				7CF6B22427B3AC3B0012B10D /* RegisterFlow.swift in Sources */,
 				7C58475D2770423A005D75B2 /* IDInputViewReactor.swift in Sources */,
 				7CC69A7A27670CF200105FC0 /* ReportAPI.swift in Sources */,
 				7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */,

@@ -45,7 +45,7 @@ class VerificationFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        
+        print("✅ VerificationFlow step: \(step)")
         switch step {
         case .verificationOptionIsRequired:
             return navigateToVerificationOptions()
@@ -65,7 +65,7 @@ class VerificationFlow: Flow {
         case .userVerificationIsCompleted:
         
             self.rootViewController.navigationController?.popToRootViewController(animated: true)
-            return .none
+            return .end(forwardToParentFlowWithStep: AppStep.myPageIsRequired)
             
         case .popViewController:
             

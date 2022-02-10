@@ -123,13 +123,15 @@ extension AccountManagementFlow {
         
         self.services.userDefaultsGenericService.resetAllUserInfo()
         
-        let loginViewReactor = LoginViewReactor(userService: services.userService)
-        let loginVC = LoginViewController(reactor: loginViewReactor)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginVC)
+        let loginFlow = LoginFlow(services: services)
+        
+        Flows.use(loginFlow, when: .created) { root in
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(root)
+        }
         
         return .one(flowContributor: .contribute(
-            withNextPresentable: loginVC,
-            withNextStepper: loginViewReactor
+            withNextPresentable: loginFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.loginIsRequired)
         ))
     }
     

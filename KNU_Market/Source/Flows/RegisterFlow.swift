@@ -12,6 +12,7 @@ import Then
 class RegisterFlow: Flow {
     
     let rootViewController: UINavigationController
+    let initialViewController: IDInputViewController
 
     private let services: AppServices
     
@@ -26,16 +27,18 @@ class RegisterFlow: Flow {
         
         let reactor = IDInputViewReactor(userService: services.userService)
         let idInputVC = IDInputViewController(reactor: reactor)
-        let navigationController = UINavigationController(rootViewController: idInputVC)
-        navigationController.modalPresentationStyle = .overFullScreen
-        navigationController.navigationBar.tintColor = .black
         
-        self.rootViewController = navigationController
+        
+        self.initialViewController = idInputVC
+        
+        self.rootViewController = UINavigationController(rootViewController: self.initialViewController)
+        self.rootViewController.modalPresentationStyle = .overFullScreen
+        self.rootViewController.navigationBar.tintColor = .black
     }
      
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        
+        print("✅ RegisterFlow step: \(step)")
         switch step {
             
         case .registerIsRequired:
@@ -54,7 +57,7 @@ class RegisterFlow: Flow {
             return presentCongratulateUserView()
             
         case .mainIsRequired:
-            return navigateToMainHomeScreen()
+            return .end(forwardToParentFlowWithStep: AppStep.mainIsRequired)
             
         case .termsAndConditionIsRequired:
             return presentTermsAndConditionsView()
@@ -74,13 +77,10 @@ class RegisterFlow: Flow {
 extension RegisterFlow {
     
     private func navigateToIdInputView() -> FlowContributors {
-        
-        let reactor = IDInputViewReactor(userService: services.userService)
-        let vc = IDInputViewController(reactor: reactor)
-        
+    
         return .one(flowContributor: .contribute(
-            withNextPresentable: vc,
-            withNextStepper: reactor)
+            withNextPresentable: self.initialViewController,
+            withNextStepper: self.initialViewController.reactor!)
         )
     }
     
@@ -138,10 +138,10 @@ extension RegisterFlow {
     }
     
     private func navigateToMainHomeScreen() -> FlowContributors {
-        
+
         let homeFlow = HomeFlow(services: services)
         
-        Flows.use(homeFlow, when: .created) { rootVC in
+        Flows.use(homeFlow, when: .ready) { rootVC in
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(rootVC)
         }
         

@@ -25,7 +25,7 @@ class AppFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        
+        print("✅ AppFlow step: \(step)")
         switch step {
         case .mainIsRequired:
             return navigateToMainHomeScreen()
@@ -48,6 +48,8 @@ extension AppFlow {
         Flows.use(homeFlow, when: .created) { [unowned self] root in
             self.window.rootViewController = root
             self.window.makeKeyAndVisible()
+            
+            UIView.transition(with: self.window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
         }
         
         return .one(flowContributor: .contribute(
@@ -63,6 +65,8 @@ extension AppFlow {
         Flows.use(loginFlow, when: .created) { [unowned self] root in
             self.window.rootViewController = root
             self.window.makeKeyAndVisible()
+            
+            UIView.transition(with: self.window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
         }
         
         return .one(flowContributor: .contribute(

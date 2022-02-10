@@ -59,7 +59,7 @@ final class IDInputViewReactor: Reactor, Stepper {
                 .map { result in
                     switch result {
                     case .success(let duplicateCheckModel):
-                        
+                    
                         if duplicateCheckModel.isDuplicate {
                             return Mutation.setErrorMessage(RegisterError.existingId.rawValue)
                         } else {

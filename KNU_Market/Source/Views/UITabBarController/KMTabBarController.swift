@@ -34,7 +34,8 @@ class KMTabBarController: UITabBarController, UITabBarControllerDelegate {
         shapeLayer.path = UIBezierPath(
             roundedRect: tabBar.bounds,
             byRoundingCorners: [.topLeft, .topRight],
-            cornerRadii: CGSize(width: 20, height: 0.0)).cgPath
+            cornerRadii: CGSize(width: 20, height: 0.0)
+        ).cgPath
         shapeLayer.fillColor = UIColor.white.cgColor
         shapeLayer.shadowPath =  UIBezierPath(roundedRect: tabBar.bounds, cornerRadius: 20).cgPath
         shapeLayer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor

@@ -54,7 +54,7 @@ final class PasswordInputViewReactor: Reactor, Stepper {
             } else {
                 UserRegisterValues.shared.password = currentState.userPassword
                 self.steps.accept(AppStep.passwordInputIsCompleted)
-                return Observable.just(Mutation.empty)
+                return .empty()
             }
         }
     }

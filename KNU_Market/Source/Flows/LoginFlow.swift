@@ -28,6 +28,7 @@ class LoginFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
+        print("✅ LoginFlow step: \(step)")
         switch step {
         case .loginIsRequired:
             return navigateToLoginScreen()
@@ -73,8 +74,6 @@ extension LoginFlow {
         let registerFlow = RegisterFlow(services: services)
         
         Flows.use(registerFlow, when: .created) { [unowned self] root in
-            
-
             self.rootViewController.present(root, animated: true)
         }
         

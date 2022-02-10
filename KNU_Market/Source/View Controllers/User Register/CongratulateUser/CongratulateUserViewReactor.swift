@@ -47,21 +47,24 @@ final class CongratulateUserViewReactor: Reactor, Stepper {
         
         switch action {
         case .goHome:
-            return Observable.concat([
-                Observable.just(Mutation.setLoading(true)),
-                self.userService.login(id: UserRegisterValues.shared.userId, password: UserRegisterValues.shared.password)
-                    .asObservable()
-                    .map { result in
-                        switch result {
-                        case .success(_):
-                            self.steps.accept(AppStep.mainIsRequired)
-                            return Mutation.empty
-                        case .error(let error):
-                            return Mutation.setErrorMessage(error.errorDescription)
-                        }
-                    },
-                Observable.just(Mutation.setLoading(false))
-            ])
+            #warning("수정")
+            self.steps.accept(AppStep.mainIsRequired)
+            return .empty()
+//            return Observable.concat([
+//                Observable.just(Mutation.setLoading(true)),
+//                self.userService.login(id: UserRegisterValues.shared.userId, password: UserRegisterValues.shared.password)
+//                    .asObservable()
+//                    .map { result in
+//                        switch result {
+//                        case .success(_):
+//                            self.steps.accept(AppStep.mainIsRequired)
+//                            return Mutation.empty
+//                        case .error(let error):
+//                            return Mutation.setErrorMessage(error.errorDescription)
+//                        }
+//                    },
+//                Observable.just(Mutation.setLoading(false))
+//            ])
             
         case .goBackToLoginView:
             self.steps.accept(AppStep.loginIsRequired)
@@ -79,6 +82,8 @@ final class CongratulateUserViewReactor: Reactor, Stepper {
     
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
+        state.errorMessage = nil
+        
         switch mutation {
         case .setLoading(let isLoading):
             state.isLoading = isLoading

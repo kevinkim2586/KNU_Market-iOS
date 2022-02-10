@@ -66,7 +66,7 @@ class RegisterFlow: Flow {
             return presentPrivacyTermsView()
             
         case .loginIsRequired:
-            return navigateBackToLoginFlow()
+            return .end(forwardToParentFlowWithStep: AppStep.loginIsRequired)
             
         default:
             return .none
@@ -136,36 +136,7 @@ extension RegisterFlow {
             withNextStepper: reactor)
         )
     }
-    
-    private func navigateToMainHomeScreen() -> FlowContributors {
 
-        let homeFlow = HomeFlow(services: services)
-        
-        Flows.use(homeFlow, when: .ready) { rootVC in
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(rootVC)
-        }
-        
-        return .one(flowContributor: .contribute(
-            withNextPresentable: homeFlow,
-            withNextStepper: OneStepper(withSingleStep: AppStep.mainIsRequired))
-        )
-    }
-    
-    // CongratulateVC에서 최종적으로 로그인을 하는 도중에 에러 발생 시 로그인 화면으로 전환을 위함
-    private func navigateBackToLoginFlow() -> FlowContributors {
-        
-        let loginFlow = LoginFlow(services: services)
-        
-        Flows.use(loginFlow, when: .created) { rootVC in
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(rootVC)
-        }
-        
-        return .one(flowContributor: .contribute(
-            withNextPresentable: loginFlow,
-            withNextStepper: OneStepper(withSingleStep: AppStep.loginIsRequired))
-        )
-    }
-    
     private func presentTermsAndConditionsView() -> FlowContributors {
         let url = URL(string: K.URL.termsAndConditionNotionURL)!
         self.rootViewController.presentSafariView(with: url)

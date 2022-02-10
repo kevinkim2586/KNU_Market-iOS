@@ -35,7 +35,7 @@ final class StudentIdVerificationViewReactor: Reactor, Stepper {
         case setStudentBirthDate(String)
         case setStudentIdImage(UIImage?)
         case setDidCheckDuplicate(Bool)
-        case completeVerification(Bool)
+        case completeVerification
         case setAlertMessage(String)
         case setLoading(Bool)
         case dismiss
@@ -109,7 +109,7 @@ final class StudentIdVerificationViewReactor: Reactor, Stepper {
                             switch result {
                             case .success:
                                 self.steps.accept(AppStep.userVerificationIsCompleted)
-                                return Mutation.completeVerification(true)
+                                return Mutation.completeVerification
                             case .error(let error):
                                 return Mutation.setAlertMessage(error.errorDescription)
                             }
@@ -147,8 +147,7 @@ final class StudentIdVerificationViewReactor: Reactor, Stepper {
             ? "사용하셔도 좋습니다 🎉"
             : nil
             
-        case .completeVerification(let completeVerification):
-        
+        case .completeVerification:
             state.alertMessage = "인증 완료되었습니다 😁"
             
         case .setAlertMessage(let errorMessage):

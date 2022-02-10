@@ -48,9 +48,8 @@ class AccountManagementFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        
+        print("✅ AccountManagementFlow step: \(step)")
         switch step {
-            
         case .accountManagementIsRequired:
             return navigateToAccountManagementVC()
             

@@ -44,8 +44,10 @@ class VerificationFlow: Flow {
     }
     
     func navigate(to step: Step) -> FlowContributors {
+
         guard let step = step as? AppStep else { return .none }
-        print("✅ VerificationFlow step: \(step)")
+//        print("✅ VerificationFlow step: \(step)")
+        
         switch step {
         case .verificationOptionIsRequired:
             return navigateToVerificationOptions()
@@ -86,7 +88,6 @@ class VerificationFlow: Flow {
 extension VerificationFlow {
     
     private func navigateToVerificationOptions() -> FlowContributors {
-        rootViewController.hidesBottomBarWhenPushed = true
         return .one(flowContributor: .contribute(
             withNextPresentable: rootViewController,
             withNextStepper: rootViewController.reactor!)
@@ -94,7 +95,7 @@ extension VerificationFlow {
     }
     
     private func navigateToStudentIdGuide() -> FlowContributors {
-        
+   
         let reactor = StudentIdGuideReactor()
         let vc = StudentIdGuideViewController(reactor: reactor)
         

@@ -20,6 +20,7 @@ final class MyPostsViewReactor: Reactor, Stepper {
     
     enum Action {
         case fetchMyPosts
+        case seePostDetail(IndexPath)
         case refresh
     }
     
@@ -82,6 +83,14 @@ final class MyPostsViewReactor: Reactor, Stepper {
                 Observable.just(Mutation.incrementIndex),
                 Observable.just(Mutation.setFetchingData(false))
             ])
+            
+        case .seePostDetail(let indexPath):
+            
+            self.steps.accept(AppStep.postIsPicked(
+                postUid: currentState.postList[indexPath.row].uuid,
+                isFromChatVC: false)
+            )
+            return .empty()
             
         case .refresh:
                     

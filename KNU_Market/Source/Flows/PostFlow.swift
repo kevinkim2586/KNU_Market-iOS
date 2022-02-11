@@ -76,7 +76,6 @@ class PostFlow: Flow {
         case let .editPostIsRequired(editModel):
             return navigateToEditPostVC(with: editModel)
             
-            
         case let .chatIsPicked(roomUid, chatRoomTitle, postUploaderUid, isFirstEntrance, isFromChatVC):
             
             if isFromChatVC {

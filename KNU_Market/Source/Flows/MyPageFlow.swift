@@ -79,16 +79,17 @@ extension MyPageFlow {
     }
     
     private func navigateToMyPostsLists() -> FlowContributors {
-        let reactor = MyPostsViewReactor(postService: services.postService)
         
-        let myPostsVC = MyPostsViewController(reactor: reactor)
-        myPostsVC.hidesBottomBarWhenPushed = true
+        let myPostsFlow = MyPostsFlow(services: services)
         
-        self.rootViewController.pushViewController(myPostsVC, animated: true)
+        Flows.use(myPostsFlow, when: .created) { [unowned self] root in
+            root.hidesBottomBarWhenPushed = true
+            self.rootViewController.pushViewController(root, animated: true)
+        }
         
         return .one(flowContributor: .contribute(
-            withNextPresentable: myPostsVC,
-            withNextStepper: reactor)
+            withNextPresentable: myPostsFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.myPostsIsRequired))
         )
     }
     

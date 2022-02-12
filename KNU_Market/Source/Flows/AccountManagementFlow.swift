@@ -39,7 +39,7 @@ class AccountManagementFlow: Flow {
             /// 유저가 참여하고 있는 공구가 있는지 판별  -> 있으면 주의사항 먼저 읽게 해야함
             return joinedChatRoomPids.count == 0
             ? .just(step)
-            : .just(AppStep.readingsPrecautionsIsRequired)
+            : .just(AppStep.readingFirstPrecautionsIsRequired)
             
         default:
             return .just(step)
@@ -71,7 +71,7 @@ class AccountManagementFlow: Flow {
         case .unRegisterIsRequired:
             return navigateToUnregisterFlow()
             
-        case .readingsPrecautionsIsRequired:
+        case .readingFirstPrecautionsIsRequired:
             return navigateToReadPrecautionsFirst()
             
         default:
@@ -134,17 +134,36 @@ extension AccountManagementFlow {
         ))
     }
     
-    private func navigateToReadPrecautionsFirst() -> FlowContributors {
-        let firstPrecautionVC = UnregisterUser_CheckFirstPrecautionsViewController()
-        self.rootViewController.navigationController?.pushViewController(firstPrecautionVC, animated: true)
-        return .none
-    }
-    
     private func navigateToUnregisterFlow() -> FlowContributors {
-        #warning("회원 탈퇴도 하나의 Flow 이니까 추후에 수정")
+        
         let reactor = UnregisterViewReactor(userService: self.services.userService)
         let inputPasswordVC = UnregisterUser_InputPasswordViewController(reactor: reactor)
-        self.rootViewController.navigationController?.pushViewController(inputPasswordVC, animated: true)
-        return .none
+
+        let unregisterFlow = UnregisterFlow(services: services, viewController: inputPasswordVC)
+        
+        Flows.use(unregisterFlow, when: .created) { [unowned self] root in
+            self.rootViewController.navigationController?.pushViewController(root, animated: true)
+        }
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: unregisterFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.passwordForUnregisterIsRequired))
+        )
+    }
+    
+    private func navigateToReadPrecautionsFirst() -> FlowContributors {
+        
+        let firstPrecautionVC = UnregisterUser_CheckFirstPrecautionsViewController()
+        
+        let unregisterFlow = UnregisterFlow(services: services, viewController: firstPrecautionVC)
+        
+        Flows.use(unregisterFlow, when: .created) { [unowned self] root in
+            self.rootViewController.navigationController?.pushViewController(root, animated: true)
+        }
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: unregisterFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.readingFirstPrecautionsIsRequired))
+        )
     }
 }

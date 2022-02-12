@@ -93,6 +93,13 @@ class MyPostsViewController: BaseViewController, View {
             .map { Reactor.Action.seePostDetail($0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
+        
+        postTableView.rx.itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: { (_, indexPath) in
+                self.postTableView.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: disposeBag)
 
         postTableView.rx.contentOffset
             .filter { [weak self] offset in

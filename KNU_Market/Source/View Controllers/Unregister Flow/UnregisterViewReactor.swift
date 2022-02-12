@@ -8,8 +8,12 @@
 import UIKit
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
-final class UnregisterViewReactor: Reactor {
+final class UnregisterViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType
@@ -19,6 +23,7 @@ final class UnregisterViewReactor: Reactor {
         case tryLoggingIn
         case updateFeedBackContext(String)
         case sendFeedBack
+        case openKakaoHelpChannelLink
     }
     
     enum Mutation {
@@ -27,8 +32,6 @@ final class UnregisterViewReactor: Reactor {
         case setLoading(Bool)
         case setErrorMessage(String)
         case setAlertMessage(String)
-        case setLoginComplete(Bool)
-        case setUnregisterComplete(Bool)
         case empty
     }
     
@@ -39,8 +42,6 @@ final class UnregisterViewReactor: Reactor {
         var isLoading: Bool = false
         var errorMessage: String?
         var alertMessage: String?
-        var loginCompleted: Bool = false
-        var unregisterComplete: Bool = false
     }
     
     init(userService: UserServiceType) {
@@ -62,7 +63,9 @@ final class UnregisterViewReactor: Reactor {
                     .map { result in
                         switch result {
                         case .success(_):
-                            return Mutation.setLoginComplete(true)
+                            self.steps.accept(AppStep.inputSuggestionForUnregisterIsRequired)
+                            return .empty
+                        
                         case .error(let error):
                             let errorMessage = error == .E101
                             ? "비밀번호가 일치하지 않습니다. 다시 시도해 주세요."
@@ -98,7 +101,9 @@ final class UnregisterViewReactor: Reactor {
                     .map { result in
                         switch result {
                         case .success:
-                            return Mutation.setUnregisterComplete(true)
+                            self.steps.accept(AppStep.unregisterIsCompleted)
+                            return Mutation.empty
+                    
                         case .error(let error):
                             return Mutation.setAlertMessage(error.errorDescription)
                         }
@@ -106,6 +111,9 @@ final class UnregisterViewReactor: Reactor {
                 Observable.just(Mutation.setLoading(false))
             ])
 
+        case .openKakaoHelpChannelLink:
+            self.steps.accept(AppStep.kakaoHelpChannelLinkIsRequired)
+            return .empty()
         }
     }
     
@@ -127,13 +135,7 @@ final class UnregisterViewReactor: Reactor {
             
         case .setAlertMessage(let alertMessage):
             state.alertMessage = alertMessage
-            
-        case .setLoginComplete(let isLoggedIn):
-            state.loginCompleted = isLoggedIn
-            
-        case .setUnregisterComplete(let isUnregistered):
-            state.unregisterComplete = isUnregistered
-            
+
         default: break
         }
         return state

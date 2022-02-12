@@ -79,7 +79,6 @@ enum AppStep: Step {
     case changeEmailIsRequired
     case logOutIsRequired
     case unRegisterIsRequired
-    case readingsPrecautionsIsRequired
     
     //MARK: - Verification
     
@@ -95,7 +94,12 @@ enum AppStep: Step {
     
     //MARK: - Unregister
     
-    
+    case readingFirstPrecautionsIsRequired
+    case readingSecondPrecautionsIsRequired
+    case passwordForUnregisterIsRequired
+    case inputSuggestionForUnregisterIsRequired
+    case kakaoHelpChannelLinkIsRequired
+    case unregisterIsCompleted
     
     //MARK: - Inquiry (크누마켓팀과 대화하기)
     

@@ -74,6 +74,14 @@ class AccountManagementFlow: Flow {
         case .readingFirstPrecautionsIsRequired:
             return navigateToReadPrecautionsFirst()
             
+        case .openSystemSettingsIsRequired:
+            UIApplication.shared.open(
+                URL(string: UIApplication.openSettingsURLString)!,
+                options: [:],
+                completionHandler: nil
+            )
+            return .none
+            
         default:
             return .none
         }

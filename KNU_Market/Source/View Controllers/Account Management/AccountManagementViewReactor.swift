@@ -19,6 +19,9 @@ final class AccountManagementViewReactor: Reactor, Stepper {
     let userDefaultsGenericService: UserDefaultsGenericServiceType
     
     enum Action {
+        case viewDidLoad
+        case viewDidAppear
+        case openSystemSettingsApp
         case changeId
         case changeNickname
         case changePassword
@@ -28,11 +31,13 @@ final class AccountManagementViewReactor: Reactor, Stepper {
     }
     
     enum Mutation {
-        
+        case setUserInfo(userId: String, userNickname: String, userEmail: String)
     }
     
     struct State {
-        
+        var userId: String = ""
+        var userNickname: String = ""
+        var userEmailForPasswordLoss: String = ""
     }
     
     init(userDefaultsGenericService: UserDefaultsGenericServiceType) {
@@ -43,35 +48,52 @@ final class AccountManagementViewReactor: Reactor, Stepper {
     func mutate(action: Action) -> Observable<Mutation> {
         
         switch action {
+            
+        case .viewDidLoad, .viewDidAppear:
+            
+            let userId: String = userDefaultsGenericService.get(key: UserDefaults.Keys.userID) ?? ""
+            let userNickname: String = userDefaultsGenericService.get(key: UserDefaults.Keys.nickname) ?? ""
+            let userEmailForPasswordLoss: String = userDefaultsGenericService.get(key: UserDefaults.Keys.emailForPasswordLoss) ?? ""
+            
+            return Observable.just(Mutation.setUserInfo(
+                userId: userId,
+                userNickname: userNickname,
+                userEmail: userEmailForPasswordLoss)
+            )
         case .changeId:
             self.steps.accept(AppStep.changeIdIsRequired)
-            return .empty()
             
         case .changeNickname:
             self.steps.accept(AppStep.changeNicknameIsRequired)
-            return .empty()
             
         case .changePassword:
             self.steps.accept(AppStep.changePasswordIsRequired)
-            return .empty()
             
         case .changeEmailForPasswordLoss:
             self.steps.accept(AppStep.changeEmailIsRequired)
-            return .empty()
             
         case .logout:
             self.steps.accept(AppStep.logOutIsRequired)
-            return .empty()
             
         case .unregister:
             self.steps.accept(AppStep.unRegisterIsRequired)
-            return .empty()
             
+        case .openSystemSettingsApp:
+            self.steps.accept(AppStep.openSystemSettingsIsRequired)
         }
+        return .empty()
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         
+        var state = state
+        switch mutation {
+            
+        case let .setUserInfo(userId, userNickname, userEmail):
+            state.userId = userId
+            state.userNickname = userNickname
+            state.userEmailForPasswordLoss = userEmail
+        }
+        return state
     }
-    
 }

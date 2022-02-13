@@ -71,7 +71,7 @@ enum AppStep: Step {
     case privacyTermsIsRequired
     case developerInfoIsRequired
     
-    //MARK: - Settings
+    //MARK: - Account Management
     
     case changeIdIsRequired
     case changeNicknameIsRequired
@@ -79,6 +79,7 @@ enum AppStep: Step {
     case changeEmailIsRequired
     case logOutIsRequired
     case unRegisterIsRequired
+    case openSystemSettingsIsRequired
     
     //MARK: - Verification
     

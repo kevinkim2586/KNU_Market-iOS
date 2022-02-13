@@ -36,7 +36,7 @@ final class UnregisterViewReactor: Reactor, Stepper {
     }
     
     struct State {
-        var userId: String = User.shared.userID
+        var userId: String
         var password: String = ""
         var userFeedback: String = ""
         var isLoading: Bool = false
@@ -46,7 +46,9 @@ final class UnregisterViewReactor: Reactor, Stepper {
     
     init(userService: UserServiceType) {
         self.userService = userService
-        self.initialState = State()
+        
+        let userId: String = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.userID) ?? ""
+        self.initialState = State(userId: userId)
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -73,7 +75,7 @@ final class UnregisterViewReactor: Reactor, Stepper {
                 unregister(),
                 Observable.just(Mutation.setLoading(false))
             ])
-
+            
         case .openKakaoHelpChannelLink:
             self.steps.accept(AppStep.kakaoHelpChannelLinkIsRequired)
             return .empty()
@@ -98,7 +100,7 @@ final class UnregisterViewReactor: Reactor, Stepper {
             
         case .setAlertMessage(let alertMessage):
             state.alertMessage = alertMessage
-
+            
         default: break
         }
         return state
@@ -119,7 +121,7 @@ extension UnregisterViewReactor {
                 case .success(_):
                     self.steps.accept(AppStep.inputSuggestionForUnregisterIsRequired)
                     return .empty
-                
+                    
                 case .error(let error):
                     let errorMessage = error == .E101
                     ? "비밀번호가 일치하지 않습니다. 다시 시도해 주세요."
@@ -154,7 +156,7 @@ extension UnregisterViewReactor {
                 case .success:
                     self.steps.accept(AppStep.unregisterIsCompleted)
                     return Mutation.empty
-            
+                    
                 case .error(let error):
                     return Mutation.setAlertMessage(error.errorDescription)
                 }

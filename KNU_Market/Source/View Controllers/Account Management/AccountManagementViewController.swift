@@ -150,7 +150,6 @@ class AccountManagementViewController: BaseViewController, View {
         stackView.distribution = .equalCentering
         stackView.spacing = Metrics.stackViewSpacing
         [idGuideLabel, userIdLabel, changeIdButton].forEach { stackView.addArrangedSubview($0) }
-        userIdLabel.text = User.shared.userID
         return stackView
     }()
     
@@ -161,7 +160,6 @@ class AccountManagementViewController: BaseViewController, View {
         stackView.distribution = .equalCentering
         stackView.spacing = Metrics.stackViewSpacing
         [nicknameGuideLabel, userNicknameLabel, changeNicknameButton].forEach { stackView.addArrangedSubview($0) }
-        userNicknameLabel.text = User.shared.nickname
         return stackView
     }()
     
@@ -183,7 +181,6 @@ class AccountManagementViewController: BaseViewController, View {
         stackView.distribution = .equalCentering
         stackView.spacing = Metrics.stackViewSpacing
         [emailGuideLabel, userEmailLabel, changeEmailButton].forEach { stackView.addArrangedSubview($0) }
-        userEmailLabel.text = User.shared.emailForPasswordLoss
         return stackView
     }()
     
@@ -273,6 +270,18 @@ class AccountManagementViewController: BaseViewController, View {
         
         // Input
         
+        self.rx.viewDidLoad
+            .asObservable()
+            .map { _ in Reactor.Action.viewDidLoad }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        self.rx.viewDidAppear
+            .asObservable()
+            .map { _ in Reactor.Action.viewDidAppear }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         changeIdButton.rx.tap
             .map { Reactor.Action.changeId }
             .bind(to: reactor.action)
@@ -320,11 +329,7 @@ class AccountManagementViewController: BaseViewController, View {
                .subscribe(onNext: { actionType in
                    switch actionType {
                    case .ok:
-                       UIApplication.shared.open(
-                           URL(string: UIApplication.openSettingsURLString)!,
-                           options: [:],
-                           completionHandler: nil
-                       )
+                       self.reactor?.action.onNext(.openSystemSettingsApp)
                    default: break
                    }
                })
@@ -336,5 +341,22 @@ class AccountManagementViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         // Output
+        
+        reactor.state
+            .map { $0.userId }
+            .bind(to: userIdLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.userNickname }
+            .bind(to: userNicknameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.userEmailForPasswordLoss }
+            .bind(to: userEmailLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        
     }
 }

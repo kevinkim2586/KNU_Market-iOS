@@ -58,21 +58,7 @@ final class UnregisterViewReactor: Reactor, Stepper {
         case .tryLoggingIn:
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
-                self.userService.login(id: currentState.userId, password: currentState.password)
-                    .asObservable()
-                    .map { result in
-                        switch result {
-                        case .success(_):
-                            self.steps.accept(AppStep.inputSuggestionForUnregisterIsRequired)
-                            return .empty
-                        
-                        case .error(let error):
-                            let errorMessage = error == .E101
-                            ? "비밀번호가 일치하지 않습니다. 다시 시도해 주세요."
-                            : error.errorDescription
-                            return Mutation.setErrorMessage(errorMessage)
-                        }
-                    },
+                login(),
                 Observable.just(Mutation.setLoading(false))
             ])
             
@@ -81,33 +67,10 @@ final class UnregisterViewReactor: Reactor, Stepper {
             
         case .sendFeedBack:
             
-            let feedback = "회원 탈퇴 사유: \(currentState.userFeedback)"
-            
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
-                self.userService.sendFeedback(content: feedback)
-                    .asObservable()
-                    .map { result in
-                        switch result {
-                        case .success:
-                            return Mutation.empty
-                        case .error(_):
-                            return Mutation.setErrorMessage("피드백 보내기에 실패하였습니다. 잠시 후 다시 시도해주세요.")
-                        }
-                    },
-                
-                self.userService.unregisterUser()
-                    .asObservable()
-                    .map { result in
-                        switch result {
-                        case .success:
-                            self.steps.accept(AppStep.unregisterIsCompleted)
-                            return Mutation.empty
-                    
-                        case .error(let error):
-                            return Mutation.setAlertMessage(error.errorDescription)
-                        }
-                    },
+                sendFeedback(),
+                unregister(),
                 Observable.just(Mutation.setLoading(false))
             ])
 
@@ -140,5 +103,61 @@ final class UnregisterViewReactor: Reactor, Stepper {
         }
         return state
     }
+}
+
+
+//MARK: - API Methods
+
+extension UnregisterViewReactor {
     
+    private func login() -> Observable<Mutation> {
+        
+        return self.userService.login(id: currentState.userId, password: currentState.password)
+            .asObservable()
+            .map { result in
+                switch result {
+                case .success(_):
+                    self.steps.accept(AppStep.inputSuggestionForUnregisterIsRequired)
+                    return .empty
+                
+                case .error(let error):
+                    let errorMessage = error == .E101
+                    ? "비밀번호가 일치하지 않습니다. 다시 시도해 주세요."
+                    : error.errorDescription
+                    return Mutation.setErrorMessage(errorMessage)
+                }
+            }
+    }
+    
+    private func sendFeedback() -> Observable<Mutation> {
+        
+        let feedback = "회원 탈퇴 사유: \(currentState.userFeedback)"
+        
+        return self.userService.sendFeedback(content: feedback)
+            .asObservable()
+            .map { result in
+                switch result {
+                case .success:
+                    return Mutation.empty
+                case .error(_):
+                    return Mutation.setErrorMessage("피드백 보내기에 실패하였습니다. 잠시 후 다시 시도해주세요.")
+                }
+            }
+    }
+    
+    private func unregister() -> Observable<Mutation> {
+        
+        return self.userService.unregisterUser()
+            .asObservable()
+            .map { result in
+                switch result {
+                case .success:
+                    self.steps.accept(AppStep.unregisterIsCompleted)
+                    return Mutation.empty
+            
+                case .error(let error):
+                    return Mutation.setAlertMessage(error.errorDescription)
+                }
+            }
+    }
 }

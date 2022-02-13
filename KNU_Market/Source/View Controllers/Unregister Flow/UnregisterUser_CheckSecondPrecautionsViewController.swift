@@ -95,7 +95,7 @@ class UnregisterUser_CheckSecondPrecautionsViewController: BaseViewController, S
             .asObservable()
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.steps.accept(AppStep.passwordForUnregisterIsRequired)
+                self.steps.accept(AppStep.passwordForUnregisterIsRequired(previousVCType: .readPrecautionsFirst))
             })
             .disposed(by: disposeBag)
     }

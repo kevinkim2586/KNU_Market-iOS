@@ -7,7 +7,7 @@ import RxFlow
 
 class UnregisterUser_CheckFirstPrecautionsViewController: BaseViewController, UnregisterViewType, Stepper {
     
-    var unregisterStep: UnregisterStep = .readPrecautionsFirst
+    var unregisterStep: UnregisterStepType = .readPrecautionsFirst
     
     var steps = PublishRelay<Step>()
     
@@ -97,7 +97,6 @@ class UnregisterUser_CheckFirstPrecautionsViewController: BaseViewController, Un
             .asObservable()
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                print("✅ Step Type: \(self.steps.flo)")
                 self.steps.accept(AppStep.readingSecondPrecautionsIsRequired)
             })
             .disposed(by: disposeBag)

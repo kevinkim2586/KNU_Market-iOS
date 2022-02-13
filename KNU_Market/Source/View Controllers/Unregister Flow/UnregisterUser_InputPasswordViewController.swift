@@ -5,18 +5,18 @@ import RxCocoa
 import ReactorKit
 import RxFlow
 
-enum UnregisterStep {
+enum UnregisterStepType {
     case readPrecautionsFirst
     case inputPassword
 }
 
 protocol UnregisterViewType: AnyObject {
-    var unregisterStep: UnregisterStep { get }
+    var unregisterStep: UnregisterStepType { get }
 }
 
 class UnregisterUser_InputPasswordViewController: BaseViewController, View, UnregisterViewType {
     
-    var unregisterStep: UnregisterStep = .inputPassword
+    var unregisterStep: UnregisterStepType = .inputPassword
     
     typealias Reactor = UnregisterViewReactor
     

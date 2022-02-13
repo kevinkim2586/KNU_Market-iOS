@@ -134,6 +134,7 @@ extension AccountManagementFlow {
         ))
     }
     
+    // 곧바로 비밀번호 확인 화면으로 이동
     private func navigateToUnregisterFlow() -> FlowContributors {
         
         let reactor = UnregisterViewReactor(userService: self.services.userService)
@@ -147,12 +148,14 @@ extension AccountManagementFlow {
         
         return .one(flowContributor: .contribute(
             withNextPresentable: unregisterFlow,
-            withNextStepper: OneStepper(withSingleStep: AppStep.passwordForUnregisterIsRequired))
+            withNextStepper: OneStepper(withSingleStep: AppStep.passwordForUnregisterIsRequired(previousVCType: .inputPassword)))
         )
     }
     
+    // 공구가 존재할 때 -> 미리 주의사항 읽을 수 있는 화면으로 이동
     private func navigateToReadPrecautionsFirst() -> FlowContributors {
         
+        /// 너무 간단한 화면이라 별도 Reactor를 두지 않고 VC가 Stepper 역할 수행
         let firstPrecautionVC = UnregisterUser_CheckFirstPrecautionsViewController()
         
         let unregisterFlow = UnregisterFlow(services: services, viewController: firstPrecautionVC)
@@ -163,7 +166,7 @@ extension AccountManagementFlow {
         
         return .one(flowContributor: .contribute(
             withNextPresentable: unregisterFlow,
-            withNextStepper: OneStepper(withSingleStep: AppStep.readingFirstPrecautionsIsRequired))
+            withNextStepper: firstPrecautionVC)
         )
     }
 }

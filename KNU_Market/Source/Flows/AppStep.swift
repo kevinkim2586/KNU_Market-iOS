@@ -96,7 +96,7 @@ enum AppStep: Step {
     
     case readingFirstPrecautionsIsRequired
     case readingSecondPrecautionsIsRequired
-    case passwordForUnregisterIsRequired
+    case passwordForUnregisterIsRequired(previousVCType: UnregisterStepType)
     case inputSuggestionForUnregisterIsRequired
     case kakaoHelpChannelLinkIsRequired
     case unregisterIsCompleted

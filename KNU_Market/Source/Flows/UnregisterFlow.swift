@@ -37,7 +37,7 @@ class UnregisterFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        print("✅ UnregisterFlow step: \(step)")
+        print("✅ Unregister Flow step: \(step)")
         switch step {
             
         case .readingFirstPrecautionsIsRequired:
@@ -46,8 +46,8 @@ class UnregisterFlow: Flow {
         case .readingSecondPrecautionsIsRequired:
             return navigateToCheckSecondPrecautionsView()
             
-        case .passwordForUnregisterIsRequired:
-            return navigateToInputPasswordViewForUnregister()
+        case .passwordForUnregisterIsRequired(let previousVCType):
+            return navigateToInputPasswordViewForUnregister(previousVCType: previousVCType)
             
         case .inputSuggestionForUnregisterIsRequired:
             return navigateToInputSuggestionViewForUnregister()
@@ -72,7 +72,7 @@ extension UnregisterFlow {
         
         return .one(flowContributor: .contribute(
             withNextPresentable: vc,
-            withNextStepper: OneStepper(withSingleStep: AppStep.readingFirstPrecautionsIsRequired))
+            withNextStepper: vc)
         )
     }
         
@@ -80,20 +80,43 @@ extension UnregisterFlow {
         
         let vc = UnregisterUser_CheckSecondPrecautionsViewController()
         
+        guard let rootVC = self.rootViewController as? UnregisterUser_CheckFirstPrecautionsViewController else { return .none }
+        
+        rootVC.navigationController?.pushViewController(vc, animated: true)
+        
         return .one(flowContributor: .contribute(
             withNextPresentable: vc,
-            withNextStepper: OneStepper(withSingleStep: AppStep.readingSecondPrecautionsIsRequired))
+            withNextStepper: vc)
         )
     }
     
-    private func navigateToInputPasswordViewForUnregister() -> FlowContributors {
+    private func navigateToInputPasswordViewForUnregister(previousVCType: UnregisterStepType) -> FlowContributors {
         
-        guard let rootVC = self.rootViewController as? UnregisterUser_InputPasswordViewController else { return .none }
-
-        return .one(flowContributor: .contribute(
-            withNextPresentable: rootVC,
-            withNextStepper: rootVC.reactor!)
-        )
+        switch previousVCType {
+            
+        case .readPrecautionsFirst:
+            
+            guard let rootVC = self.rootViewController as? UnregisterUser_CheckFirstPrecautionsViewController else { return .none }
+            
+            let reactor = UnregisterViewReactor(userService: services.userService)
+            let nextVC = UnregisterUser_InputPasswordViewController(reactor: reactor)
+            
+            rootVC.navigationController?.pushViewController(nextVC, animated: true)
+            
+            return .one(flowContributor: .contribute(
+                withNextPresentable: nextVC,
+                withNextStepper: reactor)
+            )
+            
+        case .inputPassword:
+            
+            guard let rootVC = self.rootViewController as? UnregisterUser_InputPasswordViewController else { return .none }
+            
+            return .one(flowContributor: .contribute(
+                withNextPresentable: rootVC,
+                withNextStepper: rootVC.reactor!)
+            )
+        }
     }
     
     private func navigateToInputSuggestionViewForUnregister() -> FlowContributors {

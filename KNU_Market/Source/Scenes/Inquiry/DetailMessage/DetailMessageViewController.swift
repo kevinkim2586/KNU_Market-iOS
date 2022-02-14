@@ -227,12 +227,12 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
     
     // MARK: - Configuring
     func bind(reactor: Reactor) {
+        
         self.resendButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
-                self?.navigationController?.popViewController(animated: true)
-            })
+            .map { Reactor.Action.goBackToInquiryView }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
+        
         
         self.rx.viewDidAppear.asObservable()
             .map { _ in Reactor.Action.appear }
@@ -263,15 +263,3 @@ final class DetailMessageViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
     }
 }
-
-//#if canImport(SwiftUI) && DEBUG
-//import SwiftUI
-//
-//@available(iOS 13.0, *)
-//struct DetailMessageVC: PreviewProvider {
-//
-//    static var previews: some SwiftUI.View {
-//        DetailMessageViewController(reactor: DetailMessageViewReactor(title: "test", content: "test", answer: "")).toPreview()
-//    }
-//}
-//#endif

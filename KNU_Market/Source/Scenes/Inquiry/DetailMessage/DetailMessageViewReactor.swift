@@ -7,22 +7,24 @@
 
 
 import Foundation
-
 import ReactorKit
 import RxRelay
+import RxFlow
 
-final class DetailMessageViewReactor: Reactor {
+final class DetailMessageViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     
     enum Action {
         case appear
+        case goBackToInquiryView
     }
     
     enum Mutation {
         case empty
     }
-    
     
     struct State {
         var title: String
@@ -32,7 +34,13 @@ final class DetailMessageViewReactor: Reactor {
     }
     
     fileprivate let myPageService: MyPageServiceType
-    init(title: String, content: String, answer: String?, uid: Int, myPageService: MyPageServiceType) {
+    init(
+        title: String,
+        content: String,
+        answer: String?,
+        uid: Int,
+        myPageService: MyPageServiceType
+    ) {
         self.initialState = State(title: title, content: content, answer: answer ?? "", uid: uid)
         
         self.myPageService = myPageService
@@ -49,9 +57,12 @@ final class DetailMessageViewReactor: Reactor {
                 case let .error(error):
                     print(error)
                 }
-                
                 return .empty
             }
+            
+        case .goBackToInquiryView:
+            self.steps.accept(AppStep.inquiryIsRequiredAgain)
+            return .empty()
         }
     }
     
@@ -62,7 +73,6 @@ final class DetailMessageViewReactor: Reactor {
         case .empty:
             break
         }
-        
         return state
     }
 }

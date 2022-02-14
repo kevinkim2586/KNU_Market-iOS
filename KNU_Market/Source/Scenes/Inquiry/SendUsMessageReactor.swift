@@ -22,6 +22,7 @@ final class SendUsMessageReactor: Reactor, Stepper {
         case updateTitle(String)
         case updateContent(String)
         case deleteImage(Int)
+        case pressedInquiryList
     }
     
     enum Mutation {
@@ -78,6 +79,7 @@ final class SendUsMessageReactor: Reactor, Stepper {
                     .map { result in
                         switch result {
                         case .success:
+                            self.steps.accept(AppStep.popViewControllerWithDelay(seconds: 1.2))
                             return Mutation.dismiss
                         case let .error(error):
                             print(error)
@@ -87,6 +89,10 @@ final class SendUsMessageReactor: Reactor, Stepper {
 
                 Observable.just(Mutation.setLoading(false))
             ])
+            
+        case .pressedInquiryList:
+            self.steps.accept(AppStep.inquiryListIsRequired)
+            return .empty()
         }
     }
     

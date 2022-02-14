@@ -125,16 +125,16 @@ extension MyPageFlow {
     
     private func navigateToInquiry() -> FlowContributors {
         
-        let reactor = SendUsMessageReactor(myPageService: self.services.myPageService)
+        let inquiryFlow = InquiryFlow(services: services)
         
-        let vc = SendUsMessageViewController(reactor: reactor)
-        vc.hidesBottomBarWhenPushed = true
-        
-        self.rootViewController.pushViewController(vc, animated: true)
+        Flows.use(inquiryFlow, when: .created) { [unowned self] root in
+            root.hidesBottomBarWhenPushed = true
+            self.rootViewController.pushViewController(root, animated: true)
+        }
         
         return .one(flowContributor: .contribute(
-            withNextPresentable: vc,
-            withNextStepper: reactor)
+            withNextPresentable: inquiryFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.inquiryIsRequired))
         )
     }
     

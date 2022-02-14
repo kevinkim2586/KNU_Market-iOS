@@ -35,9 +35,6 @@ enum AppStep: Step {
     case loginIsRequired
     
     
-    //MARK: - Login
-
-    
     //MARK: - Register
     
     case registerIsRequired
@@ -116,9 +113,11 @@ enum AppStep: Step {
     
     //MARK: - Inquiry (크누마켓팀과 대화하기)
     
+    case inquiryListIsRequired
+    case detailMessageIsRequired(title: String, content: String, answer: String?, uid: Int)
+    case inquiryIsRequiredAgain     /// 다시 문의하기
+    
 
-    
-    
     //MARK: - Report
     
     case reportIsRequired(userToReport: String, postUid: String?)

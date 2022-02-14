@@ -296,9 +296,8 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         self.barButton.rx.tap.asObservable()
-            .subscribe(onNext: { [weak self] in
-                self?.navigationController?.pushViewController(InquiryListViewController(), animated: true)
-            })
+            .map { Reactor.Action.pressedInquiryList }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         self.titleTextField.rx.text.orEmpty.map { !$0.isEmpty }.asObservable()
@@ -338,10 +337,6 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] _ in
                 self?.showSimpleBottomAlert(with: "문의사항이 전송 완료되었어요 🎉")
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                    self?.navigationController?.popViewController(animated: true)
-                }
             })
             .disposed(by: disposeBag)
         
@@ -353,8 +348,6 @@ class SendUsMessageViewController: BaseViewController, ReactorKit.View {
             .bind(to: self.titleTextField.rx.text)
             .disposed(by: disposeBag)
     }
-    
-    
 }
 
 //MARK: - Method

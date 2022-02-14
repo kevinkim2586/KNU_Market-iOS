@@ -296,6 +296,7 @@
 		7CF6B22627B61A140012B10D /* MyPostsFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22527B61A140012B10D /* MyPostsFlow.swift */; };
 		7CF6B22827B629B10012B10D /* UnregisterFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22727B629B10012B10D /* UnregisterFlow.swift */; };
 		7CF6B22B27BA1B5B0012B10D /* ChatListFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22A27BA1B5B0012B10D /* ChatListFlow.swift */; };
+		7CF6B22D27BA2BE60012B10D /* InquiryFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22C27BA2BE60012B10D /* InquiryFlow.swift */; };
 		7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */; };
 		7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D613277C4A590078DD77 /* ChatService.swift */; };
 		7CF8D616277C4A5E0078DD77 /* ChatServiceAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */; };
@@ -599,6 +600,7 @@
 		7CF6B22527B61A140012B10D /* MyPostsFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsFlow.swift; sourceTree = "<group>"; };
 		7CF6B22727B629B10012B10D /* UnregisterFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterFlow.swift; sourceTree = "<group>"; };
 		7CF6B22A27BA1B5B0012B10D /* ChatListFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListFlow.swift; sourceTree = "<group>"; };
+		7CF6B22C27BA2BE60012B10D /* InquiryFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryFlow.swift; sourceTree = "<group>"; };
 		7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewReactor.swift; sourceTree = "<group>"; };
 		7CF8D613277C4A590078DD77 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceAPIType.swift; sourceTree = "<group>"; };
@@ -765,6 +767,7 @@
 		7C23566A276F21920018CAAE /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				7CD3016427AFC96E003FB8E3 /* LoginFlow.swift */,
 				7C9A3834276DC6FC00AEE831 /* LoginViewController.swift */,
 				7C9A3836276DC70200AEE831 /* LoginViewReactor.swift */,
 			);
@@ -824,6 +827,7 @@
 		7C3B4FF526A92C4100E2CA8F /* User Register */ = {
 			isa = PBXGroup;
 			children = (
+				7CF6B22327B3AC3B0012B10D /* RegisterFlow.swift */,
 				7C5847662772E66B005D75B2 /* IDInput */,
 				7C5847672772E674005D75B2 /* PasswordInput */,
 				7C5847682772E680005D75B2 /* NickNameInput */,
@@ -943,6 +947,7 @@
 		7C60DC7226944C62001DEA9A /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				7CF6B21F27B36F150012B10D /* ReportFlow.swift */,
 				7C516C3A267F48300065E30D /* ReportUserViewController.swift */,
 				7C58477B2779CCDB005D75B2 /* ReportUserViewReactor.swift */,
 			);
@@ -1125,10 +1130,10 @@
 				7CA6622326413272000E0B7A /* Model */,
 				625B0E392741F5BA003968BA /* Services */,
 				7CA66228264132DC000E0B7A /* API */,
-				7CD3015527AFAD82003FB8E3 /* Flows */,
 				7CA6622A264132F3000E0B7A /* View Models */,
 				7CA6622226413269000E0B7A /* Views */,
-				7CA66229264132E6000E0B7A /* View Controllers */,
+				7CD3015527AFAD82003FB8E3 /* Flows */,
+				7CA66229264132E6000E0B7A /* Scenes */,
 				7C132BF02653979B00BE5F40 /* Utilities + Extensions */,
 			);
 			path = Source;
@@ -1308,6 +1313,7 @@
 		7CA52D6A270B113900A69F3B /* Unregister Flow */ = {
 			isa = PBXGroup;
 			children = (
+				7CF6B22727B629B10012B10D /* UnregisterFlow.swift */,
 				7CA52D6B270B126A00A69F3B /* UnregisterUser_CheckFirstPrecautionsViewController.swift */,
 				7CA52D6D270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift */,
 				7C3B4FFB26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift */,
@@ -1389,7 +1395,7 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		7CA66229264132E6000E0B7A /* View Controllers */ = {
+		7CA66229264132E6000E0B7A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				7C23566A276F21920018CAAE /* Login */,
@@ -1408,7 +1414,7 @@
 				7CB22569272EB2190045CE94 /* Popup */,
 				7CF8D60D277C3B510078DD77 /* Others */,
 			);
-			path = "View Controllers";
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		7CA6622A264132F3000E0B7A /* View Models */ = {
@@ -1431,6 +1437,7 @@
 		7CB22569272EB2190045CE94 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
+				7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */,
 				7C5386E72768D10A00BFEA7F /* PopupViewController.swift */,
 				7C5386E92768D14500BFEA7F /* PopupReactor.swift */,
 			);
@@ -1512,18 +1519,7 @@
 				7CD3015627AFAD8D003FB8E3 /* AppStep.swift */,
 				7CD3015827AFB1C8003FB8E3 /* AppFlow.swift */,
 				7CD3016227AFBB21003FB8E3 /* HomeFlow.swift */,
-				7CD3016427AFC96E003FB8E3 /* LoginFlow.swift */,
-				7CD3015C27AFB87B003FB8E3 /* PostFlow.swift */,
-				7CD3015E27AFB87F003FB8E3 /* ChatFlow.swift */,
-				7CF6B22A27BA1B5B0012B10D /* ChatListFlow.swift */,
-				7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */,
-				7CF6B22527B61A140012B10D /* MyPostsFlow.swift */,
-				7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */,
-				7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */,
-				7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */,
-				7CF6B22327B3AC3B0012B10D /* RegisterFlow.swift */,
-				7CF6B22727B629B10012B10D /* UnregisterFlow.swift */,
-				7CF6B21F27B36F150012B10D /* ReportFlow.swift */,
+				7CF6B22C27BA2BE60012B10D /* InquiryFlow.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -1541,6 +1537,7 @@
 		7CD74E0E2645983000BD2DE4 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				7CD3015C27AFB87B003FB8E3 /* PostFlow.swift */,
 				7CF369B02754D5F700C9D7A9 /* PostListVC */,
 				7CF369A62754D53300C9D7A9 /* PostVC */,
 				7CF369A72754D54100C9D7A9 /* UploadPostVC */,
@@ -1552,6 +1549,7 @@
 		7CD74E0F2645986A00BD2DE4 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */,
 				7CA66236264136BF000E0B7A /* MyPageViewController.swift */,
 				7CF8D61E277C52600078DD77 /* MyPageViewReactor.swift */,
 				7CA2D982277DC7BE00D50737 /* MyPageSectionModel.swift */,
@@ -1612,6 +1610,7 @@
 		7CEC191D27017C0E00C2D671 /* User Verification */ = {
 			isa = PBXGroup;
 			children = (
+				7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */,
 				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
 				7CF6B21927B29B1B0012B10D /* VerifyOptionViewReactor.swift */,
 				7C58477427795BAC005D75B2 /* StudentIdVerification */,
@@ -1697,6 +1696,7 @@
 		7CF369C72754D98E00C9D7A9 /* ChatListVC */ = {
 			isa = PBXGroup;
 			children = (
+				7CF6B22A27BA1B5B0012B10D /* ChatListFlow.swift */,
 				7CA66239264136C7000E0B7A /* ChatListViewController.swift */,
 				7CF369CC2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift */,
 				7C3E7BF52784039400BEBC91 /* ChatListViewReactor.swift */,
@@ -1707,6 +1707,7 @@
 		7CF369C82754D99300C9D7A9 /* ChatVC */ = {
 			isa = PBXGroup;
 			children = (
+				7CD3015E27AFB87F003FB8E3 /* ChatFlow.swift */,
 				7CB8DF5E264CE5E80001CC6D /* ChatViewController.swift */,
 				7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */,
 				7CF369D02754DA5200C9D7A9 /* ChatViewController+TargetMethods.swift */,
@@ -1749,6 +1750,7 @@
 		7CF8D60B277C3B0C0078DD77 /* Account Management */ = {
 			isa = PBXGroup;
 			children = (
+				7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */,
 				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
 				7CF6B21727B1F55D0012B10D /* AccountManagementViewReactor.swift */,
 			);
@@ -1758,6 +1760,7 @@
 		7CF8D60C277C3B170078DD77 /* MyPosts */ = {
 			isa = PBXGroup;
 			children = (
+				7CF6B22527B61A140012B10D /* MyPostsFlow.swift */,
 				7C60DC7726944C99001DEA9A /* MyPostsViewController.swift */,
 				7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */,
 			);
@@ -2138,6 +2141,7 @@
 				7CF6B22227B3A3060012B10D /* ChatMemberListReactor.swift in Sources */,
 				7CE0A41627918C400034CC69 /* KMTabBarController.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
+				7CF6B22D27BA2BE60012B10D /* InquiryFlow.swift in Sources */,
 				7C58477627795CA0005D75B2 /* StudentIdVerificationViewReactor.swift in Sources */,
 				7CC69A7C27670E3B00105FC0 /* PopupAPI.swift in Sources */,
 				7C458AF0279AA6FE00AD452F /* KMNavigationTitleView.swift in Sources */,

@@ -10,8 +10,12 @@ import SnapKit
 import Alamofire
 import SDWebImage
 import Moya
+import RxRelay
+import RxFlow
 
-class InquiryListViewController: UIViewController {
+class InquiryListViewController: UIViewController, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     var inquiryModel = [InquiryListModel]()
     
@@ -181,19 +185,13 @@ extension InquiryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = DetailMessageViewController(
-            reactor: DetailMessageViewReactor(
-                title: inquiryModel[indexPath.row].title ?? " ",
-                content: inquiryModel[indexPath.row].content ?? " ",
-                answer: inquiryModel[indexPath.row].answer,
-                uid: inquiryModel[indexPath.row].uid,
-                myPageService: MyPageService(network: Network<MyPageAPI>(plugins: [
-                    AuthPlugin(),
-                    NetworkLoggerPlugin()
-                ]))
-            )
+        
+        self.steps.accept(AppStep.detailMessageIsRequired(
+            title: inquiryModel[indexPath.row].title ?? " ",
+            content: inquiryModel[indexPath.row].content ?? " ",
+            answer: inquiryModel[indexPath.row].answer,
+            uid: inquiryModel[indexPath.row].uid)
         )
-        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     private func isHaveData() {

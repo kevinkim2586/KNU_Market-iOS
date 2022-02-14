@@ -70,9 +70,7 @@ enum AppStep: Step {
     
     
     
-    
-    
-    
+
     
     //MARK: - My Page
     

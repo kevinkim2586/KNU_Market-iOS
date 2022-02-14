@@ -112,20 +112,7 @@ extension ChatFlow {
         postUploaderUid: String,
         isFirstEntrance: Bool
     ) -> FlowContributors {
-        
-//        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: isFirstEntrance)
-//
-//        let chatVC = ChatViewController(viewModel: chatVM)
-//        chatVC.roomUID = roomUid
-//        chatVC.chatRoomTitle = roomTitle
-//        chatVC.postUploaderUID = postUploaderUid
-//        chatVC.isFirstEntrance = isFirstEntrance
-//        chatVC.hidesBottomBarWhenPushed = true
-//
-//        self.rootViewController.navigationController?.pushViewController(chatVC, animated: true)
-//
-//
-        
+                
         return .one(flowContributor: .contribute(
             withNextPresentable: self.rootViewController,
             withNextStepper: self.rootViewController)

@@ -43,7 +43,6 @@ class MyPostsFlow: Flow {
             
         case let .chatIsPicked(roomUid, chatRoomTitle, postUploaderUid, isFirstEntrance, isFromChatVC):
             
-            
             if isFromChatVC {
                 self.rootViewController.navigationController?.popViewController(animated: true)
             
@@ -56,8 +55,6 @@ class MyPostsFlow: Flow {
                     isFirstEntrance: isFirstEntrance
                 )
             }
-            
-            
             
         case let .perPersonPricePopupIsRequired(model, preferredContentSize, sourceView, delegateController):
             return presentPerPersonPricePopupVC(

@@ -224,22 +224,6 @@ extension PostFlow {
             withNextPresentable: chatFlow,
             withNextStepper: OneStepper(withSingleStep: AppStep.chatIsPicked(roomUid: roomUid, chatRoomTitle: roomTitle, postUploaderUid: postUploaderUid, isFirstEntrance: isFirstEntrance)))
         )
-        
-//        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: isFirstEntrance)
-//
-//        let chatVC = ChatViewController(viewModel: chatVM)
-//        chatVC.roomUID = roomUid
-//        chatVC.chatRoomTitle = roomTitle
-//        chatVC.postUploaderUID = postUploaderUid
-//        chatVC.isFirstEntrance = isFirstEntrance
-//        chatVC.hidesBottomBarWhenPushed = true
-//
-//        self.rootViewController.pushViewController(chatVC, animated: true)
-//
-//        return .one(flowContributor: .contribute(
-//            withNextPresentable: chatVC,
-//            withNextStepper: chatVM)
-//        )
     }
     
     private func presentReportUserView(userToReport: String, postUid: String?) -> FlowContributors {

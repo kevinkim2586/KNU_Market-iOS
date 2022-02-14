@@ -8,6 +8,7 @@
 import UIKit
 import RxFlow
 import Then
+import SafariServices
 
 class RegisterFlow: Flow {
     
@@ -138,15 +139,21 @@ extension RegisterFlow {
 
     private func presentTermsAndConditionsView() -> FlowContributors {
         let url = URL(string: K.URL.termsAndConditionNotionURL)!
-        self.rootViewController.presentSafariView(with: url)
-        
+        UIApplication.shared.open(
+            url,
+            options: [:],
+            completionHandler: nil
+        )
         return .none
     }
     
     private func presentPrivacyTermsView() -> FlowContributors {
         let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
-        self.rootViewController.presentSafariView(with: url)
-        
+        UIApplication.shared.open(
+            url,
+            options: [:],
+            completionHandler: nil
+        )
         return .none
     }
 }

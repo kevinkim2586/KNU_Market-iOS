@@ -141,7 +141,7 @@ extension VerificationFlow {
         
         return .one(flowContributor: .contribute(
             withNextPresentable: vc,
-            withNextStepper: OneStepper(withSingleStep: AppStep.checkUserEmailGuideIsRequired(email: email)))
+            withNextStepper: vc)
         )
     }
 }

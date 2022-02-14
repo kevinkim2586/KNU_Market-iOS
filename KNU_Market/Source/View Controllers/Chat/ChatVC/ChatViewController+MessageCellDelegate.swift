@@ -26,7 +26,9 @@ extension ChatViewController: MessageCellDelegate {
             title: "\(nickname)을 신고하시겠습니까?",
             message: ""
         ) { selectedOk in
-            if selectedOk { self.presentReportUserVC(userToReport: nickname) }
+            if selectedOk {
+                self.steps.accept(AppStep.reportIsRequired(userToReport: nickname, postUid: nil))
+            }
         }
     }
 
@@ -50,7 +52,7 @@ extension ChatViewController: MessageCellDelegate {
     }
     
     func didSelectURL(_ url: URL) {
-        presentSafariView(with: url)
+        self.steps.accept(AppStep.safariViewIsRequired(url: url))
     }
     
     func didTapImage(in cell: MessageCollectionViewCell) {
@@ -62,7 +64,8 @@ extension ChatViewController: MessageCellDelegate {
         switch message.kind {
         case .photo(let photoItem):
             if let url = photoItem.url {
-                presentImageVC(url: url, heroID: heroID)
+                self.steps.accept(AppStep.imageViewIsRequired(url: url, heroID: heroID))
+            
             } else {
                 self.presentKMAlertOnMainThread(
                     title: "오류 발생",
@@ -74,11 +77,5 @@ extension ChatViewController: MessageCellDelegate {
         }
     }
     
-    func presentImageVC(url: URL, heroID: String) {
-        
-        let chatImageVC = ChatImageViewController(imageUrl: url, heroId: heroID)
-        chatImageVC.modalPresentationStyle = .overFullScreen
-        present(chatImageVC, animated: true)
 
-    }
 }

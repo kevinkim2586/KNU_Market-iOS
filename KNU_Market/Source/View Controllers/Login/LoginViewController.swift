@@ -263,10 +263,8 @@ class LoginViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         registerButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.presentRegisterVC()
-            })
+            .map { Reactor.Action.register }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         findIdButton.rx.tap
@@ -309,17 +307,6 @@ class LoginViewController: BaseViewController, View {
             .subscribe(onNext: {
                 $0 ? showProgressBar() : dismissProgressBar()
             })
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.isAuthorized }
-            .asObservable()
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe { (vc, isAuthorized) in
-                self.goToHomeScreen()
-            }
             .disposed(by: disposeBag)
         
         reactor.state

@@ -1,7 +1,11 @@
 import UIKit
 import SnapKit
+import RxSwift
+import ReactorKit
 
-class VerifyOptionViewController: BaseViewController {
+class VerifyOptionViewController: BaseViewController, View {
+    
+    typealias Reactor = VerifyOptionViewReactor
     
     //MARK: - Properties
     
@@ -49,11 +53,6 @@ class VerifyOptionViewController: BaseViewController {
         button.layer.cornerRadius = Metrics.buttonCornerRadius
         button.heightAnchor.constraint(equalToConstant: Metrics.buttonHeight).isActive = true
         button.addBounceAnimationWithNoFeedback()
-        button.addTarget(
-            self,
-            action: #selector(pressedVerifyUsingStudentIdButton),
-            for: .touchUpInside
-        )
         return button
     }()
     
@@ -68,11 +67,6 @@ class VerifyOptionViewController: BaseViewController {
         button.tintColor = Colors.appColor
         button.heightAnchor.constraint(equalToConstant: Metrics.buttonHeight).isActive = true
         button.addBounceAnimationWithNoFeedback()
-        button.addTarget(
-            self,
-            action: #selector(pressedVerifyUsingEmailButton),
-            for: .touchUpInside
-        )
         return button
     }()
     
@@ -85,8 +79,16 @@ class VerifyOptionViewController: BaseViewController {
         return stackView
     }()
     
-    
     //MARK: - Initialization
+    
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - View Life Cycle
     
@@ -118,55 +120,25 @@ class VerifyOptionViewController: BaseViewController {
             make.left.equalTo(view.snp.left).offset(20)
             make.right.equalTo(view.snp.right).offset(-20)
         }
+    }
+    
+    func bind(reactor: VerifyOptionViewReactor) {
         
+        // Input
+        
+        studentIdButton.rx.tap
+            .map { Reactor.Action.verifyUsingStudentId }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        schoolMailButton.rx.tap
+            .map { Reactor.Action.verifyUsingSchoolEmail }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
     }
-    
-    override func setupStyle() {
-        super.setupStyle()
-        view.backgroundColor = .white
-    }
-    
+
     private func configure() {
         title = "학생 인증하기"
         setBackBarButtonItemTitle()
-//        #warning("아래 주석 해제")
-        if detectIfVerifiedUser() {
-            presentCustomAlert(title: "인증 회원 안내", message: "이미 인증된 회원입니다.\n이제 공동구매를 즐겨보세요!")
-            navigationController?.popViewController(animated: true)
-        }
-    }
-    
-}
-
-//MARK: - Target Actions
-
-extension VerifyOptionViewController {
-    
-    @objc private func pressedVerifyUsingStudentIdButton() {
-        let vc = StudentIdGuideViewController()
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc private func pressedVerifyUsingEmailButton() {
-        let vc = EmailVerificationViewController(
-            reactor: EmailVerificationViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
-        )
-       
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-}
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct VerifyOptionVC: PreviewProvider {
-
-    static var previews: some View {
-        VerifyOptionViewController().toPreview()
     }
 }
-#endif

@@ -8,8 +8,12 @@
 import UIKit
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
-final class CongratulateUserViewReactor: Reactor {
+final class CongratulateUserViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType
@@ -18,17 +22,19 @@ final class CongratulateUserViewReactor: Reactor {
     
     enum Action {
         case goHome
+        case goBackToLoginView
+        case presentTermsAndConditions
+        case presentPrivacyTerms
     }
     
     enum Mutation {
         case setLoading(Bool)
-        case loginUser(Bool)
         case setErrorMessage(String)
+        case empty
     }
     
     struct State {
         var isLoading: Bool = false
-        var isLoggedIn: Bool = false
         var errorMessage: String?
     }
     
@@ -48,28 +54,42 @@ final class CongratulateUserViewReactor: Reactor {
                     .map { result in
                         switch result {
                         case .success(_):
-                            return Mutation.loginUser(true)
+                            self.steps.accept(AppStep.mainIsRequired)
+                            return Mutation.empty
                         case .error(let error):
                             return Mutation.setErrorMessage(error.errorDescription)
                         }
                     },
                 Observable.just(Mutation.setLoading(false))
             ])
+            
+        case .goBackToLoginView:
+            self.steps.accept(AppStep.loginIsRequired)
+            return .empty()
+            
+        case .presentTermsAndConditions:
+            self.steps.accept(AppStep.termsAndConditionIsRequired)
+            return .empty()
+            
+        case .presentPrivacyTerms:
+            self.steps.accept(AppStep.privacyTermsIsRequired)
+            return .empty()
         }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
+        state.errorMessage = nil
+        
         switch mutation {
         case .setLoading(let isLoading):
             state.isLoading = isLoading
-            
-        case .loginUser(let isAllowed):
-            state.isLoggedIn = isAllowed
-            
+        
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
-            state.isLoggedIn = false
+            
+        default:
+            break
         }
         return state
     }

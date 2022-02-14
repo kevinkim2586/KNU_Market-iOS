@@ -5,10 +5,12 @@
 //  Created by Kevin Kim on 2022/01/08.
 //
 
-import Foundation
+import UIKit
 import ImageSlideshow
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
 enum AlertMessageType {
     case appleDefault
@@ -16,7 +18,9 @@ enum AlertMessageType {
     case custom
 }
 
-final class PostViewReactor: Reactor {
+final class PostViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     var initialState: State
     let postService: PostServiceType
@@ -25,35 +29,27 @@ final class PostViewReactor: Reactor {
     let userDefaultsService: UserDefaultsGenericServiceType
     
     enum Action {
-        
         case viewDidLoad
+        case popVC
         case refresh
         case deletePost
         case editPost
         case markPostDone               // 방장 - 모집 완료
         case updatePostAsRegathering    // 방장 - 모집 완료 해제
         case joinChat
-        case blockUser(String)
+        case blockUser
         case sharePost
+        case showPerPersonPrice(preferredContentSize: CGSize, sourceView: UIView, delegateController: PostViewController)
+        case reportPostUploader
     }
     
     enum Mutation {
-        
         case setPostDetails(PostDetailModel)
-        
         case setAlertMessage(String, AlertMessageType)
-        
         case setDidFailFetchingPost(Bool, String)
-        case setDidDeletePost(Bool, String)
-        case setDidMarkPostDone(Bool, String)
-        case setDidEnterChat(Bool, Bool)            // DidEnterChat, isFirstEntranceToChat
-        
-        
-        case setEditPostModel(EditPostModel)
-        
+        case setDidMarkPostDone(alertMessage: String)
         case setIsFetchingData(Bool)
         case setAttemptingToEnterChat(Bool)
-        case setDidBlockUser(Bool)
         case setIsLoading(Bool)
         case empty
     }
@@ -65,20 +61,11 @@ final class PostViewReactor: Reactor {
         var myNickname: String = ""
         var userJoinedChatRoomPIDS: [String] = []
         
-        
         var postModel: PostDetailModel
-        
         var inputSources: [InputSource] = []
-        
-        
-        
         var alertMessage: String?
         var alertMessageType: AlertMessageType?
-        
-        
-        
         var isFetchingData: Bool = false
-        
         
         // Computed Properties
         
@@ -178,12 +165,8 @@ final class PostViewReactor: Reactor {
         var editModel: EditPostModel?
         
         // 상태
-        var didDeletePost: Bool = false                 // 글 삭제 상태
-        var didMarkPostDone: Bool = false               // 글 모집 완료 상태
-        var didBlockUser: Bool = false                  // 유저 차단 상태
         var didFailFetchingPost: Bool = false           // 글 불러오기 실패
-        var didEnterChat: Bool = false                  // 채팅방 입장 성공 시
-        var isFirstEntranceToChat: Bool = false         // 채팅방 입장이 처음인지, 아니면 기존에 입장한 채팅방인지에 대한 판별 상태
+
         var isAttemptingToEnterChat: Bool = false       // 채팅방 입장 시도 중
         var isLoading: Bool = false
     }
@@ -222,6 +205,10 @@ final class PostViewReactor: Reactor {
                 fetchEnteredRoomInfo(),
             ])
             
+        case .popVC:
+            self.steps.accept(AppStep.popViewController)
+            return .empty()
+            
         case .refresh:
             return fetchPostDetails()
             
@@ -242,6 +229,8 @@ final class PostViewReactor: Reactor {
             ])
             
         case .blockUser:
+            blockPostUploader()
+            self.steps.accept(AppStep.popViewController)
             return .empty()
             
         case .editPost:
@@ -255,6 +244,33 @@ final class PostViewReactor: Reactor {
                 imageUids: currentState.postModel.imageUIDs
             )
             return .empty()
+            
+        case let .showPerPersonPrice(preferredContentSize, sourceView, delegateController):
+            
+            let perPersonPriceModel = PerPersonPriceModel(
+                productPrice: currentState.productPrice,
+                shippingFee: currentState.shippingFee,
+                totalPrice: currentState.productPrice + currentState.shippingFee,
+                totalGatheringPeople: currentState.totalGatheringPeople,
+                perPersonPrice: currentState.priceForEachPersonInInt
+            )
+            
+            self.steps.accept(AppStep.perPersonPricePopupIsRequired(
+                model: perPersonPriceModel,
+                preferredContentSize: preferredContentSize,
+                sourceView: sourceView,
+                delegateController: delegateController)
+            )
+            
+            return .empty()
+            
+        case .reportPostUploader:
+            
+            self.steps.accept(AppStep.reportIsRequired(
+                userToReport: currentState.postModel.nickname,
+                postUid: currentState.pageId)
+            )
+            return .empty()
         }
     }
     
@@ -263,7 +279,6 @@ final class PostViewReactor: Reactor {
         var state = state
         state.alertMessage = nil
         state.alertMessageType = nil
-        state.didEnterChat = false
         
         switch mutation {
         case .setPostDetails(let postDetailModel):
@@ -276,19 +291,9 @@ final class PostViewReactor: Reactor {
             state.didFailFetchingPost = didFail
             state.alertMessage = alertMessage
             
-            
-        case .setDidDeletePost(let didDelete, let alertMessage):
-            state.didDeletePost = didDelete
-            state.alertMessage = alertMessage
-            
-        case .setDidMarkPostDone(let didMarkPostDone, let alertMessage):
-            state.didMarkPostDone = didMarkPostDone
+        case .setDidMarkPostDone(let alertMessage):
             state.alertMessage = alertMessage
             state.alertMessageType = .simpleBottom
-            
-        case .setDidEnterChat(let didEnterChat, let isFirstEntranceToChat):
-            state.didEnterChat = didEnterChat
-            state.isFirstEntranceToChat = isFirstEntranceToChat
             
         case .setAttemptingToEnterChat(let isAttempting):
             state.isAttemptingToEnterChat = isAttempting
@@ -296,12 +301,6 @@ final class PostViewReactor: Reactor {
         case .setAlertMessage(let alertMessage, let alertMessageType):
             state.alertMessage = alertMessage
             state.alertMessageType = alertMessageType
-            
-        case .setEditPostModel(let editPostModel):
-            state.editModel = editPostModel
-            
-        case .setDidBlockUser(let didBlock):
-            state.didBlockUser = didBlock
             
         case .setIsFetchingData(let isFetching):
             state.isFetchingData = isFetching
@@ -345,8 +344,9 @@ extension PostViewReactor {
                 switch result {
                 case .success:
                     NotificationCenterService.updatePostList.post()
-                    return Mutation.setDidDeletePost(true, "게시글 삭제 완료 🎉")
-                    
+                    self.steps.accept(AppStep.popViewController)
+                    return .empty
+
                 case .error(let error):
                     return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
                 }
@@ -361,7 +361,7 @@ extension PostViewReactor {
                 switch result {
                 case .success:
                     NotificationCenterService.updatePostList.post()
-                    return Mutation.setDidMarkPostDone(true, "모집 완료를 축하합니다.🎉")
+                    return Mutation.setDidMarkPostDone(alertMessage: "모집 완료를 축하합니다.🎉")
                 case .error(let error):
                     return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
                 }
@@ -369,7 +369,7 @@ extension PostViewReactor {
     }
     
     private func configureEditPostModel() -> Observable<Mutation> {
-        print("✅ configureEditPostModel")
+
         let editPostModel = EditPostModel(
             title: currentState.postModel.title,
             imageURLs: nil,
@@ -383,8 +383,9 @@ extension PostViewReactor {
             shippingFee: currentState.postModel.shippingFee ?? 0,
             referenceUrl: currentState.postModel.referenceUrl
         )
-        
-        return Observable.just(Mutation.setEditPostModel(editPostModel))
+
+        self.steps.accept(AppStep.editPostIsRequired(editModel: editPostModel))
+        return .empty()
     }
     
     private func updatePostAsRegathering() -> Observable<Mutation> {
@@ -428,13 +429,28 @@ extension PostViewReactor {
                 switch result {
                 case .success:
                     NotificationCenterService.updatePostList.post()
-                    return Mutation.setDidEnterChat(true, true)
+                    
+                    self.steps.accept(AppStep.chatIsPicked(
+                        roomUid: self.currentState.pageId,
+                        chatRoomTitle: self.currentState.title,
+                        postUploaderUid: self.currentState.postModel.userUID,
+                        isFirstEntrance: true)
+                    )
+                    return .empty
                     
                 case .error(let error):
                     NotificationCenterService.updatePostList.post()
                     switch error {
                     case .E108:     ///이미 참여하고 있는 채팅방이면 성공은 성공임. 그러나 기존의 메시지를 불러와야함
-                        return Mutation.setDidEnterChat(true, false)
+                     
+                        self.steps.accept(AppStep.chatIsPicked(
+                            roomUid: self.currentState.pageId,
+                            chatRoomTitle: self.currentState.title,
+                            postUploaderUid: self.currentState.postModel.userUID,
+                            isFirstEntrance: false)
+                        )
+                        return .empty
+                        
                     default:
                         return Mutation.setAlertMessage(error.errorDescription, .custom)
                     }
@@ -451,7 +467,7 @@ extension PostViewReactor {
             }
     }
     
-    private func blockPostUploader() -> Observable<Mutation> {
+    private func blockPostUploader() {
         
         let userToBlock = currentState.postModel.userUID
         var bannedUsers: [String] = userDefaultsService.get(key: UserDefaults.Keys.bannedPostUploaders) ?? []
@@ -463,7 +479,6 @@ extension PostViewReactor {
             value: bannedUsers
         )
         NotificationCenterService.updatePostList.post()
-        return Observable.just(Mutation.setDidBlockUser(true))
     }
 }
 

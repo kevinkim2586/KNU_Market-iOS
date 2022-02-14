@@ -8,8 +8,12 @@
 import UIKit
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
-final class StudentIdVerificationViewReactor: Reactor {
+final class StudentIdVerificationViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType
@@ -31,7 +35,7 @@ final class StudentIdVerificationViewReactor: Reactor {
         case setStudentBirthDate(String)
         case setStudentIdImage(UIImage?)
         case setDidCheckDuplicate(Bool)
-        case completeVerification(Bool)
+        case completeVerification
         case setAlertMessage(String)
         case setLoading(Bool)
         case dismiss
@@ -43,7 +47,6 @@ final class StudentIdVerificationViewReactor: Reactor {
         var studentIdImageData: Data?
         var studentIdImage: UIImage = UIImage(named: K.Images.chatBubbleIcon)!
         var didCheckDuplicate: Bool = false
-        var isVerified: Bool = false
         var alertMessage: String?
         var isLoading: Bool = false
     }
@@ -105,7 +108,8 @@ final class StudentIdVerificationViewReactor: Reactor {
                         .map { result in
                             switch result {
                             case .success:
-                                return Mutation.completeVerification(true)
+                                self.steps.accept(AppStep.userVerificationIsCompleted)
+                                return Mutation.completeVerification
                             case .error(let error):
                                 return Mutation.setAlertMessage(error.errorDescription)
                             }
@@ -143,9 +147,8 @@ final class StudentIdVerificationViewReactor: Reactor {
             ? "사용하셔도 좋습니다 🎉"
             : nil
             
-        case .completeVerification(let completeVerification):
-            state.isVerified = completeVerification
-            state.alertMessage = "인증 완료되었습니다😁"
+        case .completeVerification:
+            state.alertMessage = "인증 완료되었습니다 😁"
             
         case .setAlertMessage(let errorMessage):
             state.alertMessage = errorMessage

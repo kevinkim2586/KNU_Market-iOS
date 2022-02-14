@@ -28,6 +28,7 @@
 		626D66FB2742920300CB7F4F /* InquiryListmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626D66F82742920300CB7F4F /* InquiryListmodel.swift */; };
 		6273750E27647DA6008A29B5 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6273750D27647DA6008A29B5 /* PostCell.swift */; };
 		62C2E4402736391D00F037B9 /* SendUsMessageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */; };
+		635044F345CDC6999ED72390 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882F1F2B3111463CA98F8153 /* Pods_KNU_Market.framework */; };
 		6C49951C271FAD3D00E8DB4B /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C49951B271FAD3D00E8DB4B /* UserDefaultKeys.swift */; };
 		7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */; };
 		7C015C9827035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C015C9727035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift */; };
@@ -146,6 +147,7 @@
 		7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668826E756B30060F37B /* FilteredChat.swift */; };
 		7C8E668B26E756C00060F37B /* ChatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668A26E756C00060F37B /* ChatType.swift */; };
 		7C8E668D26E875A00060F37B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668C26E875A00060F37B /* UIImageView+Extension.swift */; };
+		7C8E829627B019E50085F682 /* PerPersonPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E829527B019E50085F682 /* PerPersonPriceModel.swift */; };
 		7C8E82D02782D10E002F7CFB /* ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82CF2782D10E002F7CFB /* ChatAPI.swift */; };
 		7C8E82D22782DBB8002F7CFB /* ChatListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82D12782DBB8002F7CFB /* ChatListService.swift */; };
 		7C8E82D62782DBDF002F7CFB /* ChatListServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E82D52782DBDF002F7CFB /* ChatListServiceType.swift */; };
@@ -234,6 +236,15 @@
 		7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */; };
 		7CD1522726AA99EB00F2C466 /* ChatResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */; };
 		7CD1522926AA9D4B00F2C466 /* ChatRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */; };
+		7CD3015727AFAD8D003FB8E3 /* AppStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3015627AFAD8D003FB8E3 /* AppStep.swift */; };
+		7CD3015927AFB1C8003FB8E3 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3015827AFB1C8003FB8E3 /* AppFlow.swift */; };
+		7CD3015B27AFB1ED003FB8E3 /* AppServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3015A27AFB1ED003FB8E3 /* AppServices.swift */; };
+		7CD3015D27AFB87B003FB8E3 /* PostFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3015C27AFB87B003FB8E3 /* PostFlow.swift */; };
+		7CD3015F27AFB87F003FB8E3 /* ChatFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3015E27AFB87F003FB8E3 /* ChatFlow.swift */; };
+		7CD3016127AFB885003FB8E3 /* MyPageFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */; };
+		7CD3016327AFBB21003FB8E3 /* HomeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3016227AFBB21003FB8E3 /* HomeFlow.swift */; };
+		7CD3016527AFC96E003FB8E3 /* LoginFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3016427AFC96E003FB8E3 /* LoginFlow.swift */; };
+		7CD3016927AFE04D003FB8E3 /* PopupFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */; };
 		7CDADA0726BE623100F7F58F /* DateHelper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */; };
 		7CDD5B1F2795168F0082E3FC /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */; };
 		7CDD5B202795168F0082E3FC /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */; };
@@ -274,6 +285,17 @@
 		7CF369D72754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */; };
 		7CF369D92754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */; };
 		7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */; };
+		7CF6B21627B1F3B80012B10D /* AccountManagementFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */; };
+		7CF6B21827B1F55D0012B10D /* AccountManagementViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21727B1F55D0012B10D /* AccountManagementViewReactor.swift */; };
+		7CF6B21A27B29B1B0012B10D /* VerifyOptionViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21927B29B1B0012B10D /* VerifyOptionViewReactor.swift */; };
+		7CF6B21C27B29D9A0012B10D /* VerificationFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */; };
+		7CF6B21E27B2B1F90012B10D /* StudentIdGuideReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */; };
+		7CF6B22027B36F150012B10D /* ReportFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B21F27B36F150012B10D /* ReportFlow.swift */; };
+		7CF6B22227B3A3060012B10D /* ChatMemberListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22127B3A3060012B10D /* ChatMemberListReactor.swift */; };
+		7CF6B22427B3AC3B0012B10D /* RegisterFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22327B3AC3B0012B10D /* RegisterFlow.swift */; };
+		7CF6B22627B61A140012B10D /* MyPostsFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22527B61A140012B10D /* MyPostsFlow.swift */; };
+		7CF6B22827B629B10012B10D /* UnregisterFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22727B629B10012B10D /* UnregisterFlow.swift */; };
+		7CF6B22B27BA1B5B0012B10D /* ChatListFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6B22A27BA1B5B0012B10D /* ChatListFlow.swift */; };
 		7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */; };
 		7CF8D614277C4A590078DD77 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D613277C4A590078DD77 /* ChatService.swift */; };
 		7CF8D616277C4A5E0078DD77 /* ChatServiceAPIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */; };
@@ -281,13 +303,10 @@
 		7CF8D61B277C4CD10078DD77 /* MyPageCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D61A277C4CD10078DD77 /* MyPageCellReactor.swift */; };
 		7CF8D61D277C4F210078DD77 /* MyPageTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D61C277C4F210078DD77 /* MyPageTableViewCellModel.swift */; };
 		7CF8D61F277C52600078DD77 /* MyPageViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D61E277C52600078DD77 /* MyPageViewReactor.swift */; };
-		FE38A7FCD605A21C975BF0B1 /* Pods_KNU_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A10A52EADED0413597A79E /* Pods_KNU_Market.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		02A10A52EADED0413597A79E /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3664CF84D323CFBA4796A37E /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
-		3A2109F7A86926BB9CEE7B22 /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
+		2EB2DFE2FD842999F3164E48 /* Pods-KNU_Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.debug.xcconfig"; sourceTree = "<group>"; };
 		622270AF274A481E00FDC47B /* DetailMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageViewController.swift; sourceTree = "<group>"; };
 		622270B2274A489500FDC47B /* DetailMessageViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMessageViewReactor.swift; sourceTree = "<group>"; };
 		622270B5274A77AB00FDC47B /* ImageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionView.swift; sourceTree = "<group>"; };
@@ -310,6 +329,7 @@
 		6273750D27647DA6008A29B5 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		62C2E43F2736391D00F037B9 /* SendUsMessageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUsMessageReactor.swift; sourceTree = "<group>"; };
 		6C49951B271FAD3D00E8DB4B /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
+		7400A4DABBDF128B2BCBC3F9 /* Pods-KNU_Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Market.release.xcconfig"; path = "Target Support Files/Pods-KNU_Market/Pods-KNU_Market.release.xcconfig"; sourceTree = "<group>"; };
 		7C015C95270309F800089ED8 /* UserManager + UpdateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager + UpdateInfo.swift"; sourceTree = "<group>"; };
 		7C015C9727035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdUsingSchoolEmailViewController.swift; sourceTree = "<group>"; };
 		7C015C9927035B3800089ED8 /* FindIdUsingStudentIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdUsingStudentIdViewController.swift; sourceTree = "<group>"; };
@@ -428,6 +448,7 @@
 		7C8E668826E756B30060F37B /* FilteredChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredChat.swift; sourceTree = "<group>"; };
 		7C8E668A26E756C00060F37B /* ChatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatType.swift; sourceTree = "<group>"; };
 		7C8E668C26E875A00060F37B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		7C8E829527B019E50085F682 /* PerPersonPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerPersonPriceModel.swift; sourceTree = "<group>"; };
 		7C8E82CF2782D10E002F7CFB /* ChatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPI.swift; sourceTree = "<group>"; };
 		7C8E82D12782DBB8002F7CFB /* ChatListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListService.swift; sourceTree = "<group>"; };
 		7C8E82D52782DBDF002F7CFB /* ChatListServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListServiceType.swift; sourceTree = "<group>"; };
@@ -518,6 +539,15 @@
 		7CCDB1F126A2C1500092F28D /* SearchPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
 		7CD1522626AA99EB00F2C466 /* ChatResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseModel.swift; sourceTree = "<group>"; };
 		7CD1522826AA9D4B00F2C466 /* ChatRooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRooms.swift; sourceTree = "<group>"; };
+		7CD3015627AFAD8D003FB8E3 /* AppStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStep.swift; sourceTree = "<group>"; };
+		7CD3015827AFB1C8003FB8E3 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
+		7CD3015A27AFB1ED003FB8E3 /* AppServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServices.swift; sourceTree = "<group>"; };
+		7CD3015C27AFB87B003FB8E3 /* PostFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFlow.swift; sourceTree = "<group>"; };
+		7CD3015E27AFB87F003FB8E3 /* ChatFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFlow.swift; sourceTree = "<group>"; };
+		7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFlow.swift; sourceTree = "<group>"; };
+		7CD3016227AFBB21003FB8E3 /* HomeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFlow.swift; sourceTree = "<group>"; };
+		7CD3016427AFC96E003FB8E3 /* LoginFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlow.swift; sourceTree = "<group>"; };
+		7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupFlow.swift; sourceTree = "<group>"; };
 		7CDADA0626BE623100F7F58F /* DateHelper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateHelper+Extension.swift"; sourceTree = "<group>"; };
 		7CDD5B1D2795168F0082E3FC /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
 		7CDD5B1E2795168F0082E3FC /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -558,6 +588,17 @@
 		7CF369D62754DB5100C9D7A9 /* ChatViewController+MessageCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+MessageCellDelegate.swift"; sourceTree = "<group>"; };
 		7CF369D82754DB9700C9D7A9 /* ChatViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
 		7CF369DA2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+InputBarAccessoryViewDelegate.swift"; sourceTree = "<group>"; };
+		7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementFlow.swift; sourceTree = "<group>"; };
+		7CF6B21727B1F55D0012B10D /* AccountManagementViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewReactor.swift; sourceTree = "<group>"; };
+		7CF6B21927B29B1B0012B10D /* VerifyOptionViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOptionViewReactor.swift; sourceTree = "<group>"; };
+		7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationFlow.swift; sourceTree = "<group>"; };
+		7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdGuideReactor.swift; sourceTree = "<group>"; };
+		7CF6B21F27B36F150012B10D /* ReportFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFlow.swift; sourceTree = "<group>"; };
+		7CF6B22127B3A3060012B10D /* ChatMemberListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMemberListReactor.swift; sourceTree = "<group>"; };
+		7CF6B22327B3AC3B0012B10D /* RegisterFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFlow.swift; sourceTree = "<group>"; };
+		7CF6B22527B61A140012B10D /* MyPostsFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsFlow.swift; sourceTree = "<group>"; };
+		7CF6B22727B629B10012B10D /* UnregisterFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisterFlow.swift; sourceTree = "<group>"; };
+		7CF6B22A27BA1B5B0012B10D /* ChatListFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListFlow.swift; sourceTree = "<group>"; };
 		7CF8D610277C46700078DD77 /* MyPostsViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewReactor.swift; sourceTree = "<group>"; };
 		7CF8D613277C4A590078DD77 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		7CF8D615277C4A5E0078DD77 /* ChatServiceAPIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceAPIType.swift; sourceTree = "<group>"; };
@@ -565,6 +606,7 @@
 		7CF8D61A277C4CD10078DD77 /* MyPageCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCellReactor.swift; sourceTree = "<group>"; };
 		7CF8D61C277C4F210078DD77 /* MyPageTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCellModel.swift; sourceTree = "<group>"; };
 		7CF8D61E277C52600078DD77 /* MyPageViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewReactor.swift; sourceTree = "<group>"; };
+		882F1F2B3111463CA98F8153 /* Pods_KNU_Market.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Market.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -572,7 +614,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE38A7FCD605A21C975BF0B1 /* Pods_KNU_Market.framework in Frameworks */,
+				635044F345CDC6999ED72390 /* Pods_KNU_Market.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,7 +700,7 @@
 			path = "Inquiry Models";
 			sourceTree = "<group>";
 		};
-		62C2E44127363D4C00F037B9 /* SendUsMessage */ = {
+		62C2E44127363D4C00F037B9 /* Inquiry */ = {
 			isa = PBXGroup;
 			children = (
 				7C922A5C27185EB000295A3F /* SendUsMessageViewController.swift */,
@@ -666,15 +708,7 @@
 				626D66EF274291AE00CB7F4F /* InquiryList */,
 				622270B1274A487200FDC47B /* DetailMessage */,
 			);
-			path = SendUsMessage;
-			sourceTree = "<group>";
-		};
-		687344BD474A438BFB252D9D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				02A10A52EADED0413597A79E /* Pods_KNU_Market.framework */,
-			);
-			name = Frameworks;
+			path = Inquiry;
 			sourceTree = "<group>";
 		};
 		7C036AB12696A90500F6C29B /* Response Models */ = {
@@ -887,6 +921,7 @@
 			isa = PBXGroup;
 			children = (
 				7CC36A8626EDC6C1007573DD /* StudentIDGuideViewController.swift */,
+				7CF6B21D27B2B1F90012B10D /* StudentIdGuideReactor.swift */,
 				7CC36A8826EDC70C007573DD /* StudentIdVerificationViewController.swift */,
 				7C58477527795CA0005D75B2 /* StudentIdVerificationViewReactor.swift */,
 			);
@@ -1044,6 +1079,14 @@
 			path = "User Related";
 			sourceTree = "<group>";
 		};
+		7C8E829427B019CA0085F682 /* In-App Models */ = {
+			isa = PBXGroup;
+			children = (
+				7C8E829527B019E50085F682 /* PerPersonPriceModel.swift */,
+			);
+			path = "In-App Models";
+			sourceTree = "<group>";
+		};
 		7C8E82D32782DBC5002F7CFB /* ChatService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1082,6 +1125,7 @@
 				7CA6622326413272000E0B7A /* Model */,
 				625B0E392741F5BA003968BA /* Services */,
 				7CA66228264132DC000E0B7A /* API */,
+				7CD3015527AFAD82003FB8E3 /* Flows */,
 				7CA6622A264132F3000E0B7A /* View Models */,
 				7CA6622226413269000E0B7A /* Views */,
 				7CA66229264132E6000E0B7A /* View Controllers */,
@@ -1115,6 +1159,7 @@
 			children = (
 				7CA661F0263D4387000E0B7A /* AppDelegate.swift */,
 				7CA661F2263D4387000E0B7A /* SceneDelegate.swift */,
+				7CD3015A27AFB1ED003FB8E3 /* AppServices.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1278,7 +1323,7 @@
 				7CA661EF263D4387000E0B7A /* KNU_Market */,
 				7CA661EE263D4387000E0B7A /* Products */,
 				EF6E8F5DA035698264ED872C /* Pods */,
-				687344BD474A438BFB252D9D /* Frameworks */,
+				A4C5A6AA06A2AFC361273B3B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1327,6 +1372,7 @@
 				7C6D253C269037750030F9A1 /* Request Models */,
 				7C036AB12696A90500F6C29B /* Response Models */,
 				7C89B2E526FC1D60004109FE /* User Related */,
+				7C8E829427B019CA0085F682 /* In-App Models */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1354,7 +1400,7 @@
 				7CD74E0D2645982600BD2DE4 /* Chat */,
 				7CD74E0F2645986A00BD2DE4 /* MyPage */,
 				7CF8D60B277C3B0C0078DD77 /* Account Management */,
-				62C2E44127363D4C00F037B9 /* SendUsMessage */,
+				62C2E44127363D4C00F037B9 /* Inquiry */,
 				7CF8D60C277C3B170078DD77 /* MyPosts */,
 				7C60DC7126944C16001DEA9A /* Change User Info */,
 				7CA52D6A270B113900A69F3B /* Unregister Flow */,
@@ -1460,6 +1506,28 @@
 			path = "Chat Models";
 			sourceTree = "<group>";
 		};
+		7CD3015527AFAD82003FB8E3 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				7CD3015627AFAD8D003FB8E3 /* AppStep.swift */,
+				7CD3015827AFB1C8003FB8E3 /* AppFlow.swift */,
+				7CD3016227AFBB21003FB8E3 /* HomeFlow.swift */,
+				7CD3016427AFC96E003FB8E3 /* LoginFlow.swift */,
+				7CD3015C27AFB87B003FB8E3 /* PostFlow.swift */,
+				7CD3015E27AFB87F003FB8E3 /* ChatFlow.swift */,
+				7CF6B22A27BA1B5B0012B10D /* ChatListFlow.swift */,
+				7CD3016027AFB885003FB8E3 /* MyPageFlow.swift */,
+				7CF6B22527B61A140012B10D /* MyPostsFlow.swift */,
+				7CD3016827AFE04D003FB8E3 /* PopupFlow.swift */,
+				7CF6B21527B1F3B80012B10D /* AccountManagementFlow.swift */,
+				7CF6B21B27B29D9A0012B10D /* VerificationFlow.swift */,
+				7CF6B22327B3AC3B0012B10D /* RegisterFlow.swift */,
+				7CF6B22727B629B10012B10D /* UnregisterFlow.swift */,
+				7CF6B21F27B36F150012B10D /* ReportFlow.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
 		7CD74E0D2645982600BD2DE4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -1545,6 +1613,7 @@
 			isa = PBXGroup;
 			children = (
 				7C8EC8CC26F0566200893CCD /* VerifyOptionViewController.swift */,
+				7CF6B21927B29B1B0012B10D /* VerifyOptionViewReactor.swift */,
 				7C58477427795BAC005D75B2 /* StudentIdVerification */,
 				7C58477327745135005D75B2 /* SchoolEmailVerification */,
 			);
@@ -1654,6 +1723,7 @@
 			isa = PBXGroup;
 			children = (
 				7C83EE472741147B00CF1680 /* ChatMemberListViewController.swift */,
+				7CF6B22127B3A3060012B10D /* ChatMemberListReactor.swift */,
 			);
 			path = ChatMemberListVC;
 			sourceTree = "<group>";
@@ -1680,6 +1750,7 @@
 			isa = PBXGroup;
 			children = (
 				7C37DE86271BFC2000B4FBFB /* AccountManagementViewController.swift */,
+				7CF6B21727B1F55D0012B10D /* AccountManagementViewReactor.swift */,
 			);
 			path = "Account Management";
 			sourceTree = "<group>";
@@ -1720,11 +1791,19 @@
 			path = MyPageTableView;
 			sourceTree = "<group>";
 		};
+		A4C5A6AA06A2AFC361273B3B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				882F1F2B3111463CA98F8153 /* Pods_KNU_Market.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EF6E8F5DA035698264ED872C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3A2109F7A86926BB9CEE7B22 /* Pods-KNU_Market.debug.xcconfig */,
-				3664CF84D323CFBA4796A37E /* Pods-KNU_Market.release.xcconfig */,
+				2EB2DFE2FD842999F3164E48 /* Pods-KNU_Market.debug.xcconfig */,
+				7400A4DABBDF128B2BCBC3F9 /* Pods-KNU_Market.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1736,11 +1815,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CA66201263D4389000E0B7A /* Build configuration list for PBXNativeTarget "KNU_Market" */;
 			buildPhases = (
-				2D49B99782DF6B4D9D3E09E9 /* [CP] Check Pods Manifest.lock */,
+				D13D0F96669F75EAA435A4BF /* [CP] Check Pods Manifest.lock */,
 				7CA661E9263D4387000E0B7A /* Sources */,
 				7CA661EA263D4387000E0B7A /* Frameworks */,
 				7CA661EB263D4387000E0B7A /* Resources */,
-				0C8DF8F3B137068B60C1A6E3 /* [CP] Embed Pods Frameworks */,
+				6D91AF3659AE8934BFBDE62A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1812,7 +1891,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0C8DF8F3B137068B60C1A6E3 /* [CP] Embed Pods Frameworks */ = {
+		6D91AF3659AE8934BFBDE62A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1829,7 +1908,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNU_Market/Pods-KNU_Market-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2D49B99782DF6B4D9D3E09E9 /* [CP] Check Pods Manifest.lock */ = {
+		D13D0F96669F75EAA435A4BF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1878,6 +1957,7 @@
 				7CA6624326413C47000E0B7A /* NetworkError.swift in Sources */,
 				7CA52D6E270B12C800A69F3B /* UnregisterUser_CheckSecondPrecautionsViewController.swift in Sources */,
 				7C8E668D26E875A00060F37B /* UIImageView+Extension.swift in Sources */,
+				7CD3016327AFBB21003FB8E3 /* HomeFlow.swift in Sources */,
 				7C57AC19279C2529000540A4 /* UploadPostViewController.swift in Sources */,
 				622270B0274A481E00FDC47B /* DetailMessageViewController.swift in Sources */,
 				626AC5B227324C1200E907E8 /* CGFloatLiteral.swift in Sources */,
@@ -1902,6 +1982,7 @@
 				7C3B4FF726A92C6C00E2CA8F /* UserRegisterValues.swift in Sources */,
 				7C922A5D27185EB000295A3F /* SendUsMessageViewController.swift in Sources */,
 				7C2A6B152786B9A800C31238 /* UserNotificationService.swift in Sources */,
+				7CF6B21E27B2B1F90012B10D /* StudentIdGuideReactor.swift in Sources */,
 				7C60DC702692BCEE001DEA9A /* ChatViewModel.swift in Sources */,
 				7C015C9A27035B3800089ED8 /* FindIdUsingStudentIdViewController.swift in Sources */,
 				7C555465266D0A1400C3C5B6 /* Location.swift in Sources */,
@@ -1911,6 +1992,7 @@
 				7CF369D52754DAAF00C9D7A9 /* ChatViewController+ChatViewDelegate_APIDelegateMethods.swift in Sources */,
 				7C3B4FF226A928D300E2CA8F /* CheckYourEmailViewController.swift in Sources */,
 				626AC5B52732506900E907E8 /* SnapKit.swift in Sources */,
+				7CF6B22827B629B10012B10D /* UnregisterFlow.swift in Sources */,
 				625B0E2A2741D9BC003968BA /* Network.swift in Sources */,
 				7C824435279A69CB006677D0 /* KMUrlLinkButton.swift in Sources */,
 				7C436B5B26820F9D00943069 /* ReportUserRequestDTO.swift in Sources */,
@@ -1922,6 +2004,7 @@
 				7C7480C02700732D000E4666 /* UserManager + SaveUserInfo.swift in Sources */,
 				7C71996F2679CAEC000BEE64 /* Animations.swift in Sources */,
 				7CF8D618277C4ABB0078DD77 /* ChatServiceWebSocketType.swift in Sources */,
+				7CD3016927AFE04D003FB8E3 /* PopupFlow.swift in Sources */,
 				7CBFDA78273FE01F000C8C8A /* PostTableViewCell.swift in Sources */,
 				7C7480BB26FF08E3000E4666 /* UserManager + Verification.swift in Sources */,
 				7C824432279A50C9006677D0 /* CustomAlertViewController_Rx.swift in Sources */,
@@ -1942,7 +2025,9 @@
 				7C132BF426552B4900BE5F40 /* UIButton+Extension.swift in Sources */,
 				7C3B4FFC26A974F100E2CA8F /* UnregisterUser_InputPasswordViewController.swift in Sources */,
 				7CA6623A264136C7000E0B7A /* ChatListViewController.swift in Sources */,
+				7CF6B21827B1F55D0012B10D /* AccountManagementViewReactor.swift in Sources */,
 				7CF369DB2754DC1E00C9D7A9 /* ChatViewController+InputBarAccessoryViewDelegate.swift in Sources */,
+				7CD3015927AFB1C8003FB8E3 /* AppFlow.swift in Sources */,
 				7C8414802705578600FFA56B /* UserManager + FindUserInfo.swift in Sources */,
 				7C9C5A02277C245B005E08BC /* UserDefaultsPersistenceServiceType.swift in Sources */,
 				7C83EE442740EA2100CF1680 /* ChatImageViewController.swift in Sources */,
@@ -1959,6 +2044,7 @@
 				7C57AC1D279C3803000540A4 /* UITextField+Extension.swift in Sources */,
 				7CF369B22754D60E00C9D7A9 /* PostListViewController+UITableView.swift in Sources */,
 				7CC1B59C26D4FC110007F99B /* UIView+Extension.swift in Sources */,
+				7CF6B22427B3AC3B0012B10D /* RegisterFlow.swift in Sources */,
 				7C58475D2770423A005D75B2 /* IDInputViewReactor.swift in Sources */,
 				7CC69A7A27670CF200105FC0 /* ReportAPI.swift in Sources */,
 				7C8414822705692500FFA56B /* FindIdOptions.swift in Sources */,
@@ -1967,6 +2053,7 @@
 				7CF369BE2754D88700C9D7A9 /* SearchPostsViewController+SearchPostViewModelDelegate.swift in Sources */,
 				7C58477A27799AAC005D75B2 /* ChangeUserInfoReactor.swift in Sources */,
 				7C83EE5727437B6300CF1680 /* KMPostBottomView.swift in Sources */,
+				7CF6B21A27B29B1B0012B10D /* VerifyOptionViewReactor.swift in Sources */,
 				7C58475B277040E6005D75B2 /* IDInputViewController.swift in Sources */,
 				7CC33B2D274B617E00B0C2C0 /* AddPostImageCollectionViewCell.swift in Sources */,
 				6273750E27647DA6008A29B5 /* PostCell.swift in Sources */,
@@ -1979,6 +2066,7 @@
 				7CDD5B23279526D20082E3FC /* BannerHeaderView.swift in Sources */,
 				7CA66237264136BF000E0B7A /* MyPageViewController.swift in Sources */,
 				626D66E92742705700CB7F4F /* KMButton.swift in Sources */,
+				7CF6B22027B36F150012B10D /* ReportFlow.swift in Sources */,
 				7CB8DF63264D02AF0001CC6D /* Sender.swift in Sources */,
 				7C9185E62784439F00902A2A /* NotificationCenterServiceType.swift in Sources */,
 				7C8E668926E756B30060F37B /* FilteredChat.swift in Sources */,
@@ -1986,6 +2074,7 @@
 				625B0E362741EA90003968BA /* RequestLoggingPlugin.swift in Sources */,
 				7C55545F266CEADF00C3C5B6 /* UILabel+Extension.swift in Sources */,
 				7C682CE9271EB02500989139 /* UIHelper.swift in Sources */,
+				7CF6B22627B61A140012B10D /* MyPostsFlow.swift in Sources */,
 				7CDD5B27279543840082E3FC /* BannerAPI.swift in Sources */,
 				7C11C1FA278FE77E00818C19 /* DateFormatter.swift in Sources */,
 				7C1C1D0E265E712000C08C66 /* ChangeNicknameViewController.swift in Sources */,
@@ -1993,6 +2082,7 @@
 				6C49951C271FAD3D00E8DB4B /* UserDefaultKeys.swift in Sources */,
 				7CEDBB5B2702B1DE0078F5E1 /* KMBottomButton.swift in Sources */,
 				7C132BF2265397B200BE5F40 /* ProgressHUD.swift in Sources */,
+				7CD3016127AFB885003FB8E3 /* MyPageFlow.swift in Sources */,
 				7C8E668B26E756C00060F37B /* ChatType.swift in Sources */,
 				7C9C59E6277C1328005E08BC /* UIVIewController+Notifications.swift in Sources */,
 				7C184B8326B103F1006C0FAD /* Room.swift in Sources */,
@@ -2022,9 +2112,11 @@
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
 				7CF369CD2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift in Sources */,
 				7C1471CA2779FD6C006409BD /* UnregisterViewReactor.swift in Sources */,
+				7CD3015F27AFB87F003FB8E3 /* ChatFlow.swift in Sources */,
 				7C2A6B172786C86200C31238 /* URLNavigator.swift in Sources */,
 				7CF8D611277C46700078DD77 /* MyPostsViewReactor.swift in Sources */,
 				7CC69A7827670A0F00105FC0 /* MediaAPI.swift in Sources */,
+				7C8E829627B019E50085F682 /* PerPersonPriceModel.swift in Sources */,
 				7C015C9827035B2100089ED8 /* FindIdUsingSchoolEmailViewController.swift in Sources */,
 				7CB8DF61264D02690001CC6D /* Message.swift in Sources */,
 				7C9C59FC277C1742005E08BC /* UserDefaultsGenericServiceType.swift in Sources */,
@@ -2036,18 +2128,21 @@
 				7C9C59E4277C12F7005E08BC /* UIViewController+Observers.swift in Sources */,
 				7CF369C62754D8FB00C9D7A9 /* SearchPostsViewController+PlaceholderDelegate.swift in Sources */,
 				7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */,
+				7CF6B21C27B29D9A0012B10D /* VerificationFlow.swift in Sources */,
 				7C5386EA2768D14500BFEA7F /* PopupReactor.swift in Sources */,
 				7C9566F12789D33E006BFFAD /* PostViewReactor.swift in Sources */,
 				7C5386E82768D10A00BFEA7F /* PopupViewController.swift in Sources */,
 				7C5386DF27689B5B00BFEA7F /* MediaService.swift in Sources */,
 				7C58476C2772E6B7005D75B2 /* CongratulateUserViewReactor.swift in Sources */,
 				7C8C951D277EA200009245D6 /* AssetConverter.swift in Sources */,
+				7CF6B22227B3A3060012B10D /* ChatMemberListReactor.swift in Sources */,
 				7CE0A41627918C400034CC69 /* KMTabBarController.swift in Sources */,
 				7CA6624726413C5A000E0B7A /* UserManager.swift in Sources */,
 				7C58477627795CA0005D75B2 /* StudentIdVerificationViewReactor.swift in Sources */,
 				7CC69A7C27670E3B00105FC0 /* PopupAPI.swift in Sources */,
 				7C458AF0279AA6FE00AD452F /* KMNavigationTitleView.swift in Sources */,
 				7C5386E62768CA8200BFEA7F /* PopupService.swift in Sources */,
+				7CD3015B27AFB1ED003FB8E3 /* AppServices.swift in Sources */,
 				7CF369C42754D8E700C9D7A9 /* SearchPostsViewController+UIScrollViewDelegate.swift in Sources */,
 				7C3D541F26CA722B00AE3E55 /* CALayer+Extension.swift in Sources */,
 				7C9A3835276DC6FC00AEE831 /* LoginViewController.swift in Sources */,
@@ -2056,9 +2151,11 @@
 				7C015C96270309F800089ED8 /* UserManager + UpdateInfo.swift in Sources */,
 				7C5386DB2768912400BFEA7F /* FindPasswordModel.swift in Sources */,
 				7CA6624C26413D05000E0B7A /* ValidationError.swift in Sources */,
+				7CD3016527AFC96E003FB8E3 /* LoginFlow.swift in Sources */,
 				7C9C5A00277C244B005E08BC /* UserDefaultsPersistenceService.swift in Sources */,
 				7CDD5B2A279544710082E3FC /* BannerService.swift in Sources */,
 				7C58475F27707E84005D75B2 /* PasswordInputViewController.swift in Sources */,
+				7CF6B21627B1F3B80012B10D /* AccountManagementFlow.swift in Sources */,
 				7C83EE552742407B00CF1680 /* PostHeaderView.swift in Sources */,
 				7C8E668726E746DD0060F37B /* ImageItem.swift in Sources */,
 				7C58476127707F81005D75B2 /* PasswordInputViewReactor.swift in Sources */,
@@ -2083,6 +2180,7 @@
 				7C436B5826820E5200943069 /* ReportManager.swift in Sources */,
 				7C58477227744FD9005D75B2 /* EmailVerificationViewReactor.swift in Sources */,
 				7C82441D2797CBD8006677D0 /* BannerHeaderReactor.swift in Sources */,
+				7CD3015D27AFB87B003FB8E3 /* PostFlow.swift in Sources */,
 				7CF8D61B277C4CD10078DD77 /* MyPageCellReactor.swift in Sources */,
 				7CB8DF3A264BB0360001CC6D /* ChatManager.swift in Sources */,
 				7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */,
@@ -2090,6 +2188,7 @@
 				625B0E322741E259003968BA /* ErrorModel.swift in Sources */,
 				7CBDF4B0272F886500E657D9 /* PopupModel.swift in Sources */,
 				7CC69A80276727A200105FC0 /* DuplicateCheckModel.swift in Sources */,
+				7CD3015727AFAD8D003FB8E3 /* AppStep.swift in Sources */,
 				7C9C59F4277C16BB005E08BC /* PostServiceType.swift in Sources */,
 				7CF369C02754D8A200C9D7A9 /* SearchPostsViewController+UISearchBarDelegate.swift in Sources */,
 				7C922A58271826FB00295A3F /* DeveloperInformationViewController.swift in Sources */,
@@ -2104,6 +2203,7 @@
 				7C5A1F2B26D6174F0041885B /* UICollectionView+Extension.swift in Sources */,
 				7CBB8E692754729F0003B183 /* PostListViewController.swift in Sources */,
 				7CCDB1F226A2C1500092F28D /* SearchPostViewModel.swift in Sources */,
+				7CF6B22B27BA1B5B0012B10D /* ChatListFlow.swift in Sources */,
 				7CB8DF38264BB0300001CC6D /* PostManager.swift in Sources */,
 				7C83EE482741147B00CF1680 /* ChatMemberListViewController.swift in Sources */,
 				7C956A8A27A276CA00588DED /* ActionType.swift in Sources */,
@@ -2252,7 +2352,7 @@
 		};
 		7CA66202263D4389000E0B7A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A2109F7A86926BB9CEE7B22 /* Pods-KNU_Market.debug.xcconfig */;
+			baseConfigurationReference = 2EB2DFE2FD842999F3164E48 /* Pods-KNU_Market.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2280,7 +2380,7 @@
 		};
 		7CA66203263D4389000E0B7A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3664CF84D323CFBA4796A37E /* Pods-KNU_Market.release.xcconfig */;
+			baseConfigurationReference = 7400A4DABBDF128B2BCBC3F9 /* Pods-KNU_Market.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

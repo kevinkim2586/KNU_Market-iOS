@@ -159,12 +159,8 @@ class UnregisterUser_InputSuggestionViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         kakaoChannelLinkButton.rx.tap
-            .asObservable()
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                let url = URL(string: K.URL.kakaoHelpChannel)!
-                UIApplication.shared.open(url, options: [:])
-            })
+            .map { Reactor.Action.openKakaoHelpChannelLink }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         // Output
@@ -194,16 +190,6 @@ class UnregisterUser_InputSuggestionViewController: BaseViewController, View {
             .withUnretained(self)
             .subscribe(onNext: { (_, alertMessage) in
                 self.presentCustomAlert(title: "회원 탈퇴 실패", message: alertMessage!)
-            })
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.unregisterComplete }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.popToLoginViewController()
             })
             .disposed(by: disposeBag)
     }

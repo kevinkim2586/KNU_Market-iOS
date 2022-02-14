@@ -8,8 +8,12 @@
 import UIKit
 import ReactorKit
 import Moya
+import RxRelay
+import RxFlow
 
-final class IDInputViewReactor: Reactor {
+final class IDInputViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType
@@ -19,21 +23,19 @@ final class IDInputViewReactor: Reactor {
     enum Action {
         case updateTextField(String)
         case checkDuplication
-        case viewDidDisappear
     }
     
     enum Mutation {
         case setUserId(String)
         case setErrorMessage(String)
-        case allowToGoNext(Bool)
+        case empty
     }
     
     struct State {
         var userId: String = ""
-        var isAllowedToGoNext: Bool = false
         var errorMessage: String?
     }
-
+    
     init(userService: UserServiceType) {
         self.initialState = State()
         self.userService = userService
@@ -57,36 +59,36 @@ final class IDInputViewReactor: Reactor {
                 .map { result in
                     switch result {
                     case .success(let duplicateCheckModel):
-                        
+                    
                         if duplicateCheckModel.isDuplicate {
                             return Mutation.setErrorMessage(RegisterError.existingId.rawValue)
                         } else {
                             UserRegisterValues.shared.userId = self.currentState.userId
-                            return Mutation.allowToGoNext(true)
+                            self.steps.accept(AppStep.idInputIsCompleted)
+                            return Mutation.empty
                         }
-                    
+                        
                     case .error(let error):
                         return Mutation.setErrorMessage(error.errorDescription)
                     }
                 }
-        case .viewDidDisappear:
-            return Observable.just(Mutation.allowToGoNext(false))
         }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
+        state.errorMessage = nil
+        
         switch mutation {
             
         case .setUserId(let userId):
             state.userId = userId
-
+            
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
-            state.isAllowedToGoNext = false
             
-        case .allowToGoNext(let isAllowed):
-            state.isAllowedToGoNext = isAllowed
+        case .empty:
+            break
         }
         return state
     }

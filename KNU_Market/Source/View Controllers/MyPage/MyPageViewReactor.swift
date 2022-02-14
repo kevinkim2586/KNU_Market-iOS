@@ -3,15 +3,18 @@
 //  KNU_Market
 //
 //  Created by Kevin Kim on 2021/12/29.
-//
 
 import UIKit
 import RxSwift
 import RxCocoa
+import RxRelay
+import RxFlow
 import ReactorKit
 import Differentiator
 
-final class MyPageViewReactor: Reactor {
+final class MyPageViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType
@@ -24,14 +27,18 @@ final class MyPageViewReactor: Reactor {
         case viewDidAppear
         case updateProfileImage(UIImage)               // User selected image
         case removeProfileImage
+     
+        
+        // Navigation
         case cellSelected(IndexPath)
+        case settingsSelected
+  
     }
     
     enum Mutation {
         case setUserProfile(LoadProfileResponseModel)
         case updateProfileImageUid(String)             // profileImageUid
         case setProfileImageUidToDefault
-        case setSelectedCellIndexPath(IndexPath)
         case setAlertMessage(String)
     }
     
@@ -42,7 +49,7 @@ final class MyPageViewReactor: Reactor {
         var userId: String = "-"
         var isReportChecked: Bool = false
         var isVerified: Bool = false
-        var selectedCellIndexPath: IndexPath?
+
         var alertMessage: String?
         var profileImageUrlString: String {
             return K.MEDIA_REQUEST_URL + "\(profileImageUid)"
@@ -130,15 +137,53 @@ final class MyPageViewReactor: Reactor {
                 }
             
         case .cellSelected(let indexPath):
-            return Observable.just(Mutation.setSelectedCellIndexPath(indexPath))
+            
+            switch indexPath.section {
+                
+            case 0:
+                switch indexPath.row {
+                case 0:
+                    self.steps.accept(AppStep.myPostsIsRequired)
+                    return .empty()
+                case 1:
+                    self.steps.accept(AppStep.accountManagementIsRequired)
+                    return .empty()
+                case 2:
+                    self.steps.accept(AppStep.verificationOptionIsRequired)
+                    return .empty()
+                default: return .empty()
+                }
+                
+            case 1:
+                switch indexPath.row {
+                case 0:
+                    self.steps.accept(AppStep.inquiryIsRequired)
+                    return .empty()
+                case 1:
+                    self.steps.accept(AppStep.termsAndConditionIsRequired)
+                    return .empty()
+                case 2:
+                    self.steps.accept(AppStep.privacyTermsIsRequired)
+                    return .empty()
+                case 3:
+                    self.steps.accept(AppStep.developerInfoIsRequired)
+                    return .empty()
+                    
+                default: return .empty()
+                }
+            default: return .empty()
+            }
+            
+        case .settingsSelected:
+            self.steps.accept(AppStep.accountManagementIsRequired)
+            return .empty()
         }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         state.alertMessage = nil
-        state.selectedCellIndexPath = nil
-        
+
         switch mutation {
         case .setUserProfile(let loadProfileUserModel):
             
@@ -149,7 +194,6 @@ final class MyPageViewReactor: Reactor {
             state.isReportChecked = !loadProfileUserModel.isReportChecked
             state.myPageSectionModels[1].items[0].isNotificationBadgeHidden = !loadProfileUserModel.isReportChecked
             
-            
         case .updateProfileImageUid(let profileImageUid):
             state.alertMessage = "프로필 이미지 변경 성공 🎉"
             state.profileImageUid = profileImageUid
@@ -157,9 +201,6 @@ final class MyPageViewReactor: Reactor {
         case .setProfileImageUidToDefault:
             state.alertMessage = "프로필 사진 제거 성공 🎉"
             state.profileImageUid = "default"
-            
-        case .setSelectedCellIndexPath(let indexPath):
-            state.selectedCellIndexPath = indexPath
             
         case .setAlertMessage(let alertMessage):
             state.alertMessage = alertMessage

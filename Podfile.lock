@@ -157,6 +157,9 @@ PODS:
     - Differentiator (~> 5.0)
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
+  - RxFlow (2.12.4):
+    - RxCocoa (>= 6.0.0)
+    - RxSwift (>= 6.0.0)
   - RxGesture (4.0.2):
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
@@ -217,6 +220,7 @@ DEPENDENCIES:
   - RxAnimated
   - RxCocoa
   - RxDataSources
+  - RxFlow
   - RxGesture
   - RxKeyboard
   - RxSwift
@@ -271,6 +275,7 @@ SPEC REPOS:
     - RxAnimated
     - RxCocoa
     - RxDataSources
+    - RxFlow
     - RxGesture
     - RxKeyboard
     - RxRelay
@@ -328,6 +333,7 @@ SPEC CHECKSUMS:
   RxAnimated: e53fb66cafc0539faf881b734f7412a624527f0a
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
+  RxFlow: 03a73c83fb8f183107074b40ab2544c668583f73
   RxGesture: f059f2aeef966fb17dad56ee440e76410f10e55f
   RxKeyboard: 4f5863f43b4ff0cbb2a20b94688d6b80c8a43c14
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
@@ -348,6 +354,6 @@ SPEC CHECKSUMS:
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
   YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
 
-PODFILE CHECKSUM: 56951d520461e8d9375f06f4f9bf1d5ab24ad35a
+PODFILE CHECKSUM: 4ccc80e781a69b43745eccc4528531fd535d74b3
 
 COCOAPODS: 1.11.2

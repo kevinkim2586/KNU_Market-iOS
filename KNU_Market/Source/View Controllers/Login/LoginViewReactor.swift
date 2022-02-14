@@ -8,8 +8,12 @@
 import ReactorKit
 import UIKit
 import Moya
+import RxRelay
+import RxFlow
 
-final class LoginViewReactor: Reactor {
+final class LoginViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     
@@ -17,21 +21,25 @@ final class LoginViewReactor: Reactor {
         case updateId(String)
         case updatePassword(String)
         case login
+        case register
     }
     
     enum Mutation {
         case setId(String)
         case setPassword(String)
         case setLoading(Bool)
-        case authorizeUser(Bool)
         case setErrorMessage(String)
+        case empty
+        
+      
+        
+        
     }
     
     struct State {
         var id: String = ""
         var password: String = ""
         var isLoading: Bool = false
-        var isAuthorized: Bool = false
         var errorMessage: String?
     }
     
@@ -58,13 +66,18 @@ final class LoginViewReactor: Reactor {
                     .map { result in
                         switch result {
                         case .success(_):
-                            return Mutation.authorizeUser(true)
+                            self.steps.accept(AppStep.mainIsRequired)
+                            return Mutation.empty
                         case .error(let error):
                             return Mutation.setErrorMessage(error.errorDescription)
                         }
                     },
                 Observable.just(Mutation.setLoading(false))
             ])
+            
+        case .register:
+            self.steps.accept(AppStep.registerIsRequired)
+            return .empty()
         }
     }
     
@@ -81,12 +94,12 @@ final class LoginViewReactor: Reactor {
             
         case .setLoading(let isLoading):
             state.isLoading = isLoading
-            
-        case .authorizeUser(let isAuthorized):
-            state.isAuthorized = isAuthorized
-            
+        
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
+            
+        case .empty:
+            break
         }
         return state
     }

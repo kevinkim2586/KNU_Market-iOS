@@ -1,8 +1,11 @@
 import UIKit
 import PanModal
 import SnapKit
+import ReactorKit
 
-class ChatMemberListViewController: BaseViewController {
+class ChatMemberListViewController: BaseViewController, View {
+    
+    typealias Reactor = ChatMemberListReactor
     
     //MARK: - Properties
     
@@ -79,6 +82,11 @@ class ChatMemberListViewController: BaseViewController {
     
     //MARK: - Initialization
     
+    init(reactor: ChatMemberListReactor) {
+        super.init()
+        self.reactor = reactor
+    }
+    
     init(chatManager: ChatManager, roomInfo: RoomInfo?, postUploaderUid: String) {
         super.init()
         self.chatManager = chatManager
@@ -148,8 +156,16 @@ class ChatMemberListViewController: BaseViewController {
         }
     }
     
-    override func setupStyle() {
-        super.setupStyle()
+ 
+    //MARK: - Binding
+    
+    func bind(reactor: ChatMemberListReactor) {
+        
+        // Input
+        
+        
+        
+        // Output
     }
     
     private func configure() {

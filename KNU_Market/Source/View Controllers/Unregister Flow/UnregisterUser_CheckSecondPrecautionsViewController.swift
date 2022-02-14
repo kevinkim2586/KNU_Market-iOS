@@ -2,8 +2,12 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxRelay
+import RxFlow
 
-class UnregisterUser_CheckSecondPrecautionsViewController: BaseViewController {
+class UnregisterUser_CheckSecondPrecautionsViewController: BaseViewController, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     //MARK: - Properties
     
@@ -91,8 +95,7 @@ class UnregisterUser_CheckSecondPrecautionsViewController: BaseViewController {
             .asObservable()
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.navigationController?.pushViewController(UnregisterUser_InputPasswordViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
-               
+                self.steps.accept(AppStep.passwordForUnregisterIsRequired(previousVCType: .readPrecautionsFirst))
             })
             .disposed(by: disposeBag)
     }

@@ -2,8 +2,11 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import ReactorKit
 
-class StudentIdGuideViewController: BaseViewController {
+class StudentIdGuideViewController: BaseViewController, View {
+    
+    typealias Reactor = StudentIdGuideReactor
     
     //MARK: - Properties
     
@@ -38,13 +41,21 @@ class StudentIdGuideViewController: BaseViewController {
     
     //MARK: - Initialization
     
+    init(reactor: Reactor) {
+        super.init()
+        self.reactor = reactor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackBarButtonItemTitle()
         title = "캡쳐 안내"
-        bindUI()
     }
     
     //MARK: - UI Setup
@@ -81,34 +92,13 @@ class StudentIdGuideViewController: BaseViewController {
         }
     }
     
-    private func bindUI() {
+    func bind(reactor: StudentIdGuideReactor) {
+        
+        // Input
         
         bottomButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.navigationController?.pushViewController(
-                    StudentIdVerificationViewController(
-                        reactor: StudentIdVerificationViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
-                    ),
-                    animated: true
-                )
-               
-            })
+            .map { Reactor.Action.finishedReadingGuide }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
-        
     }
 }
-
-
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct StudentIdGuideVC: PreviewProvider {
-    
-    static var previews: some View {
-        StudentIdGuideViewController().toPreview()
-    }
-}
-#endif

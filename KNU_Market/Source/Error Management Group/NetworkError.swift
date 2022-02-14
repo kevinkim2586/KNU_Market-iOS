@@ -107,7 +107,7 @@ enum NetworkError: String, Error {
             let errorCode = json["errorCode"].stringValue
             let _ = json["errorDescription"].stringValue
  
-            if errorCode == "E109" {
+            if errorCode == NetworkError.E109.rawValue {
                 NotificationCenterService.presentVerificationNeededAlert.post()
             }
             return NetworkError(rawValue: errorCode) ?? .E000

@@ -100,7 +100,7 @@ extension String {
         let priceWithCommasRemoved: String = self.replacingOccurrences(of: ",", with: "")
         let postPriceInInteger: Int = Int(priceWithCommasRemoved) ?? 0
         
-        guard postPriceInInteger > 0 else { return .empty }
+        guard postPriceInInteger >= 0 else { return .empty }
         return .correct
     }
     

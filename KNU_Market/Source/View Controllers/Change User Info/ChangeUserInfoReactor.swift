@@ -8,8 +8,12 @@
 import UIKit
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
-final class ChangeUserInfoReactor: Reactor {
+final class ChangeUserInfoReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType

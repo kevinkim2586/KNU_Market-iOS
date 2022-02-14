@@ -37,7 +37,7 @@ class PostListViewController: BaseViewController, View {
             frame: CGRect(
                 x: 0,
                 y: 0,
-                width: view.frame.size.width - 25,
+                width: view.frame.size.width,
                 height: 200
             )
         )
@@ -131,7 +131,6 @@ class PostListViewController: BaseViewController, View {
             .map { _ in Reactor.Action.viewWillAppear }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
-
         
         self.rx.viewDidAppear
             .withUnretained(self)
@@ -139,7 +138,6 @@ class PostListViewController: BaseViewController, View {
                 self.navigationTitleView.setIsHidden(false, animated: true)
             })
             .disposed(by: disposeBag)
-        
 
         self.rx.viewWillDisappear
             .withUnretained(self)
@@ -154,47 +152,14 @@ class PostListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         uploadPostButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                
-                if reactor.currentState.isUserVerified {
-                    let uploadVC = UploadPostViewController(
-                        reactor: UploadPostReactor(
-                            postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                            mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
-                        )
-                    )
-                    self.navigationController?.pushViewController(
-                        uploadVC,
-                        animated: true
-                    )
-                    
-                } else {
-                    self.showSimpleBottomAlertWithAction(
-                        message: "학생 인증을 마치셔야 사용이 가능해요.👀",
-                        buttonTitle: "인증하러 가기"
-                    ) {
-                        self.presentVerifyOptionVC()
-                    }
-                }
-            })
+            .map { Reactor.Action.uploadPost }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         postListsTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        
-
         // Output
-        
-        reactor.state
-            .map { $0.userNickname }
-            .distinctUntilChanged()
-            .filter { $0 != nil }
-            .subscribe(onNext: { nickname in
-                UIHelper.presentWelcomePopOver(nickname: nickname!)
-            })
-            .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.postList }
@@ -207,28 +172,10 @@ class PostListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         postListsTableView.rx.itemSelected
-            .withUnretained(self)
-            .subscribe(onNext: { (_, indexPath) in
-                self.postListsTableView.deselectRow(at: indexPath, animated: true)
-                
-                let postUUID = reactor.currentState.postList[indexPath.row].uuid
-                let postVC = PostViewController(
-                    reactor: PostViewReactor(
-                        pageId: postUUID,
-                        isFromChatVC: false,
-                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                        chatService: ChatService(
-                            network: Network<ChatAPI>(plugins: [AuthPlugin()]),
-                            userDefaultsGenericService: UserDefaultsGenericService()
-                        ),
-                        sharingService: SharingService(),
-                        userDefaultsService: UserDefaultsGenericService()
-                    )
-                )
-                self.navigationController?.pushViewController(postVC, animated: true)
-            })
+            .map { Reactor.Action.seePostDetail($0) }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
-        
+
         postListsTableView.rx.contentOffset
             .filter { [weak self] offset in
                 guard let self = self else { return false }
@@ -254,56 +201,6 @@ class PostListViewController: BaseViewController, View {
             .map { $0.isRefreshingData }
             .distinctUntilChanged()
             .bind(to: refreshControl.rx.isRefreshing)
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.isAllowedToUploadPost }
-            .distinctUntilChanged()
-            .filter { $0 != nil }
-            .withUnretained(self)
-            .subscribe(onNext: { (_, isAllowed) in
-                
-                if isAllowed! {
-                    let uploadVC = UploadPostViewController(
-                        reactor: UploadPostReactor(
-                            postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                            mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()]))
-                        )
-                    )
-                    self.navigationController?.pushViewController(uploadVC, animated: true)
-                    
-                } else {
-                    self.showSimpleBottomAlertWithAction(
-                        message: "학생 인증을 마치셔야 사용이 가능해요.👀",
-                        buttonTitle: "인증하러 가기"
-                    ) {
-                        self.presentVerifyOptionVC()
-                    }
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.needsToShowPopup }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                
-                if let model = reactor.currentState.popupModel {
-                    let popupVC = PopupViewController(
-                        reactor: PopupReactor(
-                            popupUid: model.popupUid,
-                            mediaUid: model.mediaUid,
-                            landingUrlString: model.landingUrl,
-                            popupService: PopupService(network: Network<PopupAPI>())
-                        )
-                    )
-                    popupVC.modalPresentationStyle = .overFullScreen
-                    popupVC.modalTransitionStyle = .crossDissolve
-                    self.present(popupVC, animated: true)
-                }
-            })
             .disposed(by: disposeBag)
         
         reactor.state
@@ -366,9 +263,8 @@ class PostListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
         
         NotificationCenterService.unexpectedError.addObserver()
-            .bind { _ in
-                self.presentUnexpectedError()
-            }
+            .map { _ in Reactor.Action.unexpectedError }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
     }
     

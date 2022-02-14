@@ -918,17 +918,6 @@ class UploadPostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.didCompleteUpload }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                NotificationCenterService.updatePostList.post()
-                self.navigationController?.popToRootViewController(animated: true)
-            })
-            .disposed(by: disposeBag)
-        
-        reactor.state
             .map { $0.isCompletedImageUpload }
             .distinctUntilChanged()
             .filter { $0 == true }

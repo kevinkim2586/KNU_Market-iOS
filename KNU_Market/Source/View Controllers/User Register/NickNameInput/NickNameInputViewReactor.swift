@@ -8,8 +8,12 @@
 import Foundation
 import ReactorKit
 import RxSwift
+import RxRelay
+import RxFlow
 
-final class NickNameInputViewReactor: Reactor {
+final class NickNameInputViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let userService: UserServiceType
@@ -19,18 +23,16 @@ final class NickNameInputViewReactor: Reactor {
     enum Action {
         case updateTextField(String)
         case checkDuplication
-        case viewDidDisappear
     }
     
     enum Mutation {
         case setUserNickname(String)
         case setErrorMessage(String)
-        case allowToGoNext(Bool)
+        case empty
     }
     
     struct State {
         var userNickname: String = ""
-        var isAllowedToGoNext: Bool = false
         var errorMessage: String?
     }
     
@@ -62,7 +64,8 @@ final class NickNameInputViewReactor: Reactor {
                             return Mutation.setErrorMessage(RegisterError.existingNickname.rawValue)
                         } else {
                             UserRegisterValues.shared.nickname = self.currentState.userNickname
-                            return Mutation.allowToGoNext(true)
+                            self.steps.accept(AppStep.nicknameInputIsCompleted)
+                            return Mutation.empty
                         }
                         
                     case .error(let error):
@@ -70,8 +73,7 @@ final class NickNameInputViewReactor: Reactor {
                     }
                 }
             
-        case .viewDidDisappear:
-            return Observable.just(Mutation.allowToGoNext(false))
+    
         }
     }
     
@@ -83,11 +85,9 @@ final class NickNameInputViewReactor: Reactor {
             
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
-            state.isAllowedToGoNext = false
-            
-        case .allowToGoNext(let isAllowed):
-            state.isAllowedToGoNext = isAllowed
-            state.errorMessage = nil
+        
+        case .empty:
+            break
         }
         return state
     }

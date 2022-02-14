@@ -131,8 +131,6 @@ class EmailForLostPasswordViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        
-
         // Output
         
         reactor.state
@@ -152,30 +150,5 @@ class EmailForLostPasswordViewController: BaseViewController, View {
                 self.errorLabel.showErrorMessage(message: errorMessage!)
             }
             .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.isRegisteredComplete }
-            .asObservable()
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe { _ in
-                self.showCongratulateRegisterVC()
-            }
-            .disposed(by: disposeBag)
-    }
-}
-
-//MARK: - Registration Method
-
-extension EmailForLostPasswordViewController {
-
-    func showCongratulateRegisterVC() {
-        
-        let vc = CongratulateUserViewController(
-            reactor: CongratulateUserViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
-        )
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
     }
 }

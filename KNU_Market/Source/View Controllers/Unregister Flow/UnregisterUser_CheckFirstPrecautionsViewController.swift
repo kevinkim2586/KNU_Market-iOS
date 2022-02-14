@@ -2,8 +2,14 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxRelay
+import RxFlow
 
-class UnregisterUser_CheckFirstPrecautionsViewController: BaseViewController {
+class UnregisterUser_CheckFirstPrecautionsViewController: BaseViewController, UnregisterViewType, Stepper {
+    
+    var unregisterStep: UnregisterStepType = .readPrecautionsFirst
+    
+    var steps = PublishRelay<Step>()
     
     //MARK: - Properties
     
@@ -91,7 +97,7 @@ class UnregisterUser_CheckFirstPrecautionsViewController: BaseViewController {
             .asObservable()
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                self.navigationController?.pushViewController(UnregisterUser_CheckSecondPrecautionsViewController(), animated: true)
+                self.steps.accept(AppStep.readingSecondPrecautionsIsRequired)
             })
             .disposed(by: disposeBag)
     }

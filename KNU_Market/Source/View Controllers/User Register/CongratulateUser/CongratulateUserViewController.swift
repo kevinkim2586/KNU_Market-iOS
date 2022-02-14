@@ -168,19 +168,15 @@ class CongratulateUserViewController: BaseViewController, ReactorKit.View {
         // Input
         
         termsAndConditionButton.rx.tap
-            .subscribe(onNext: { _ in
-                let url = URL(string: K.URL.termsAndConditionNotionURL)!
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            })
+            .map { Reactor.Action.presentTermsAndConditions }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         privacyButton.rx.tap
-            .subscribe(onNext: { _ in
-                let url = URL(string: K.URL.privacyInfoConditionNotionURL)!
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            })
+            .map { Reactor.Action.presentPrivacyTerms }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
-        
+   
         goHomeButton.rx.tap
             .asObservable()
             .map { Reactor.Action.goHome }
@@ -199,17 +195,6 @@ class CongratulateUserViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { $0.isLoggedIn }
-            .asObservable()
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.goToHomeScreen()
-            })
-            .disposed(by: disposeBag)
-        
-        reactor.state
             .map { $0.errorMessage }
             .filter { $0 != nil }
             .withUnretained(self)
@@ -217,8 +202,8 @@ class CongratulateUserViewController: BaseViewController, ReactorKit.View {
                 self.showSimpleBottomAlertWithAction(
                     message: errorMessage!,
                     buttonTitle: "돌아가기"
-                ) {
-                    self.popToLoginViewController()
+                ) { [weak self] in
+                    self?.reactor?.action.onNext(.goBackToLoginView)
                 }
             }
             .disposed(by: disposeBag)
@@ -237,17 +222,3 @@ extension CongratulateUserViewController {
         animationView.play()
     }
 }
-
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-@available(iOS 13.0, *)
-struct CongratulateVC: PreviewProvider {
-    
-    static var previews: some SwiftUI.View {
-        CongratulateUserViewController(
-            reactor: CongratulateUserViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))
-        ).toPreview()
-    }
-}
-#endif

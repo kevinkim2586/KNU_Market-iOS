@@ -8,14 +8,19 @@
 import Foundation
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
-final class MyPostsViewReactor: Reactor {
+final class MyPostsViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
-    let postService: PostService
+    let postService: PostServiceType
     
     enum Action {
         case fetchMyPosts
+        case seePostDetail(IndexPath)
         case refresh
     }
     
@@ -39,7 +44,7 @@ final class MyPostsViewReactor: Reactor {
         var errorMessage: String?
     }
     
-    init(postService: PostService) {
+    init(postService: PostServiceType) {
         self.postService = postService
         self.initialState = State()
     }
@@ -78,6 +83,14 @@ final class MyPostsViewReactor: Reactor {
                 Observable.just(Mutation.incrementIndex),
                 Observable.just(Mutation.setFetchingData(false))
             ])
+            
+        case .seePostDetail(let indexPath):
+            
+            self.steps.accept(AppStep.postIsPicked(
+                postUid: currentState.postList[indexPath.row].uuid,
+                isFromChatVC: false)
+            )
+            return .empty()
             
         case .refresh:
                     

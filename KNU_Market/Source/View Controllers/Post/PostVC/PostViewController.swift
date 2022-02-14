@@ -51,10 +51,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
         } else {
             return [
                 UIAction(title: "신고하기", image: nil, handler: { [weak self] _ in
-                    self?.presentReportUserVC(
-                        userToReport: reactor.currentState.postModel.nickname,
-                        postUID: reactor.currentState.pageId
-                    )
+                    self?.reactor?.action.onNext(.reportPostUploader)
                 }),
                 UIAction(title: "이 사용자의 글 보지 않기", image: nil, handler: { [weak self] _ in
                     guard let postUploader = self?.reactor?.currentState.postUploaderNickname else { return }
@@ -65,7 +62,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
                         .subscribe(onNext: { actionType in
                             switch actionType {
                             case .ok:
-                                self?.reactor?.action.onNext(.blockUser(postUploader))
+                                self?.reactor?.action.onNext(.blockUser)
                             case .cancel: break
                             }
                         })
@@ -270,7 +267,6 @@ class PostViewController: BaseViewController, ReactorKit.View {
 
     let postControlButtonView = KMPostButtonView()
     
-
     //MARK: - Initialization
     
     init(reactor: Reactor) {
@@ -345,13 +341,11 @@ class PostViewController: BaseViewController, ReactorKit.View {
             $0.height.equalTo(100)
             $0.left.right.equalToSuperview()
         }
-        
-
+    
         bottomContainerView.snp.makeConstraints {
             $0.top.equalTo(upperImageSlideshow.snp.bottom).offset(-25)
             $0.bottom.left.right.equalToSuperview()
         }
-        
 
         urlLinkButton.snp.makeConstraints {
             $0.width.equalTo(124)
@@ -463,10 +457,8 @@ class PostViewController: BaseViewController, ReactorKit.View {
         
         // 뒤로가기
         postControlButtonView.backButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.navigationController?.popViewController(animated: true)
-            })
+            .map { Reactor.Action.popVC }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         // 공유 버튼
@@ -493,9 +485,8 @@ class PostViewController: BaseViewController, ReactorKit.View {
         urlLinkButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { _ in
-                print("✅ referenceURL: \(reactor.currentState.referenceUrl)")
+            
                 if let url = reactor.currentState.referenceUrl {
-                    print("✅ url: \(url)")
                     self.askIfUserWantsToOpenUrl(url)
                 }
             })
@@ -514,7 +505,6 @@ class PostViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        
         upperImageSlideshow.rx.tapGesture()
             .when(.recognized)
             .withUnretained(self)
@@ -524,28 +514,17 @@ class PostViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
         
         questionMarkButton.rx.tap
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                let popupVC = PerPersonPriceInfoViewController(
-                    productPrice: reactor.currentState.productPrice,
-                    shippingFee: reactor.currentState.shippingFee,
-                    totalPrice: reactor.currentState.productPrice + reactor.currentState.shippingFee,
-                    totalGatheringPeople: reactor.currentState.totalGatheringPeople,
-                    perPersonPrice: reactor.currentState.priceForEachPersonInInt
-                )
-                
-                popupVC.modalPresentationStyle = .popover
-                popupVC.preferredContentSize = CGSize(
+            .map { Reactor.Action.showPerPersonPrice(
+                preferredContentSize: CGSize(
                     width: self.view.frame.size.width - 100,
                     height: self.view.frame.size.height / 3
-                )
-                let popOver: UIPopoverPresentationController = popupVC.popoverPresentationController!
-                popOver.delegate = self
-                popOver.sourceView = self.questionMarkButton
-                self.present(popupVC, animated: true)
-            })
+                ),
+                sourceView: self.questionMarkButton,
+                delegateController: self)
+            }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
-
+        
         // Output
         
         /// 최초 Configuration
@@ -568,7 +547,6 @@ class PostViewController: BaseViewController, ReactorKit.View {
                         total: reactor.currentState.totalGatheringPeople,
                         isCompletelyDone: reactor.currentState.isCompletelyDone
                     )
-                    
                 }
                 
                 if #available(iOS 14.0, *) {
@@ -712,14 +690,14 @@ class PostViewController: BaseViewController, ReactorKit.View {
                 switch alertInfo.1 {
                 case .appleDefault:
                     self.presentSimpleAlert(title: alertInfo.0!)
-                    self.navigationController?.popViewController(animated: true)
+                    self.reactor?.action.onNext(.popVC)
                     
                 case .custom:
                     self.presentCustomAlert(title: "채팅방 참여 불가", message: alertInfo.0!)
                     
                 case .simpleBottom:
                     self.showSimpleBottomAlert(with: alertInfo.0!)
-           
+                    
                 case .none: break
                 }
             })
@@ -736,40 +714,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
                 bottomContainerView.rx.isHidden
             )
             .disposed(by: disposeBag)
-        
-        /// 방장 - 글 삭제 완료 시
-        reactor.state
-            .map { $0.didDeletePost }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: {  _ in
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2) {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        /// 채팅방 입장 성공 시
-        reactor.state
-            .map { $0.didEnterChat }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                
-                if reactor.currentState.isFromChatVC {
-                    self.navigationController?.popViewController(animated: true)
-                } else {
-                    
-                    let vc = ChatViewController()
-                    vc.roomUID = reactor.currentState.pageId
-                    vc.chatRoomTitle = reactor.currentState.title
-                    vc.isFirstEntrance = reactor.currentState.isFirstEntranceToChat
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            })
-            .disposed(by: disposeBag)
+    
         
         /// 채팅방에 입장 시도 중
         reactor.state
@@ -780,49 +725,8 @@ class PostViewController: BaseViewController, ReactorKit.View {
                 self.enterChatButton.loadingIndicator(isAttempting)
             })
             .disposed(by: disposeBag)
-        
-        
-        /// 차단 성공 시
-        reactor.state
-            .map { $0.didBlockUser }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.navigationController?.popViewController(animated: true)
-            })
-            .disposed(by: disposeBag)
-        
-        /// 공구글 수정 모델
-        reactor.state
-            .map { $0.editModel }
-            .filter { $0 != nil }
-            .withUnretained(self)
-            .subscribe(onNext: { (_, model) in
-                let uploadVC = UploadPostViewController(
-                    reactor: UploadPostReactor(
-                        postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                        mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
-                        editModel: model!
-                    )
-                )
-                self.navigationController?.pushViewController(uploadVC, animated: true)
-            })
-            .disposed(by: disposeBag)
-        
-        /// 특정 유저 차단 성공 시
-        reactor.state
-            .map { $0.didBlockUser }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            })
-            .disposed(by: disposeBag)
-        
+    
+
         reactor.state
             .map { $0.isLoading }
             .distinctUntilChanged()
@@ -937,18 +841,7 @@ extension PostViewController {
                 title: "글 수정하기",
                 style: .default
             ) { [weak self] _ in
-                guard let self = self else { return }
-                DispatchQueue.main.async {
-
-                    let uploadVC = UploadPostViewController(
-                        reactor: UploadPostReactor(
-                            postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-                            mediaService: MediaService(network: Network<MediaAPI>(plugins: [AuthPlugin()])),
-                            editModel: reactor.currentState.editModel!
-                        )
-                    )
-                    self.navigationController?.pushViewController(uploadVC, animated: true)
-                }
+                self?.reactor?.action.onNext(.editPost)
             }
             
             let deleteAction = UIAlertAction(
@@ -977,11 +870,7 @@ extension PostViewController {
                 title: "신고하기",
                 style: .default
             ) { [weak self] _ in
-                guard let self = self else { return }
-                self.presentReportUserVC(
-                    userToReport: reactor.currentState.postModel.nickname,
-                    postUID: reactor.currentState.pageId
-                )
+                self?.reactor?.action.onNext(.reportPostUploader)
             }
             let blockAction = UIAlertAction(
                 title: "이 사용자의 글 보지 않기",
@@ -996,7 +885,7 @@ extension PostViewController {
                     .subscribe(onNext: { actionType in
                         switch actionType {
                         case .ok:
-                            self.reactor?.action.onNext(.blockUser(postUploader))
+                            self.reactor?.action.onNext(.blockUser)
                         case .cancel: break
                         }
                     })

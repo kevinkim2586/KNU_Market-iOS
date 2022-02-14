@@ -7,9 +7,13 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 import ReactorKit
+import RxFlow
 
-final class PostListViewReactor: Reactor {
+final class PostListViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let postService: PostServiceType
@@ -20,11 +24,16 @@ final class PostListViewReactor: Reactor {
     let userDefaultsGenericService: UserDefaultsGenericServiceType
     let userNotificationService: UserNotificationServiceType
     
+    private let INITIAL_PAGE: Int = 1
+    
     enum Action {
         case loadInitialMethods
         case viewWillAppear
         case fetchPostList
         case refreshTableView
+        case seePostDetail(IndexPath)
+        case uploadPost
+        case unexpectedError
     }
     
     enum Mutation {
@@ -33,7 +42,6 @@ final class PostListViewReactor: Reactor {
         case incrementIndex
         case setBannerList([BannerModel])
         case setUserNickname(String)
-        case setNeedsToShowPopup(Bool, PopupModel?)
         case setErrorMessage(String)
         case setNeedsToFetchMoreData(Bool)
         case setIsFetchingData(Bool)
@@ -45,14 +53,12 @@ final class PostListViewReactor: Reactor {
     
     struct State {
         var postList: [PostListModel] = []
-        var index: Int = 1
+        var index: Int
         var isFetchingData: Bool = false
         var isRefreshingData: Bool = false
         var needsToFetchMoreData: Bool = true
         var userNickname: String? = nil
         var errorMessage: String? = nil
-        var needsToShowPopup: Bool = false
-        var popupModel: PopupModel?
         var bannedPostUploaders: [String]         // 내가 차단한 유저
         var isUserVerified: Bool
         var isAllowedToUploadPost: Bool?
@@ -85,6 +91,7 @@ final class PostListViewReactor: Reactor {
 
         
         self.initialState = State(
+            index: INITIAL_PAGE,
             bannedPostUploaders: bannedPostUploaders,
             isUserVerified: isUserVerified
         )
@@ -141,6 +148,21 @@ final class PostListViewReactor: Reactor {
                 Observable.just(Mutation.incrementIndex),
                 Observable.just(Mutation.setIsRefreshingData(false))
             ])
+            
+        case .seePostDetail(let indexPath):
+            self.steps.accept(AppStep.postIsPicked(
+                postUid: currentState.postList[indexPath.row].uuid,
+                isFromChatVC: false)
+            )
+            return .empty()
+            
+        case .uploadPost:
+            self.steps.accept(AppStep.uploadPostIsRequired)
+            return .empty()
+            
+        case .unexpectedError:
+            self.steps.accept(AppStep.unexpectedError)
+            return .empty()
         }
     }
     
@@ -155,20 +177,16 @@ final class PostListViewReactor: Reactor {
         case .resetPostList(let postListModel):
             state.postList.removeAll()
             state.postList = postListModel
-            state.index = 1
+            state.index = INITIAL_PAGE
             
         case .incrementIndex:
-            state.index += 1
+            state.index += INITIAL_PAGE
             
         case .setBannerList(let bannerModel):
             state.bannerModel = bannerModel
             
         case .setUserNickname(let nickname):
             state.userNickname = nickname
-            
-        case .setNeedsToShowPopup(let needsToShow, let popupModel):
-            state.needsToShowPopup = needsToShow
-            state.popupModel = popupModel
             
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
@@ -226,7 +244,7 @@ extension PostListViewReactor {
     private func refreshPostList(postFilterOption: PostFilterOptions? = nil) -> Observable<Mutation> {
         
         return postService.fetchPostList(
-            at: 1,
+            at: INITIAL_PAGE,
             fetchCurrentUsers: false,
             postFilterOption: .showGatheringFirst
         )
@@ -267,6 +285,7 @@ extension PostListViewReactor {
                 switch result {
                 case .success:
                     let userNickname: String = self.userDefaultsGenericService.get(key: UserDefaults.Keys.nickname) ?? "-"
+                    self.steps.accept(AppStep.welcomeIndicatorRequired(nickname: userNickname))
                     return Mutation.setUserNickname(userNickname)
                     
                 case .error(let error):
@@ -277,18 +296,20 @@ extension PostListViewReactor {
     
     private func fetchLatestPopup() -> Observable<Mutation> {
         
-        if !popupService.shouldFetchPopup { return Observable.empty() }
+        if !popupService.shouldFetchPopup { return .empty() }
         
         return popupService.fetchLatestPopup()
             .asObservable()
             .map { result in
                 switch result {
                 case .success(let popupModel):
-                    return Mutation.setNeedsToShowPopup(true, popupModel)
+                    
+                    self.steps.accept(AppStep.popUpIsRequired(model: popupModel))
+                    return .empty
                     
                 case .error(_): //팝업 가져오기 실패 시 따로 유저한테 에러 메시지를 보여줄 필요는 없는 것으로 판단 - 팝업 없어도 에러
                     print("❗️ PostListViewReactor failed fetching popup")
-                    return Mutation.setNeedsToShowPopup(false, nil)
+                    return .empty
                 }
             }
     }

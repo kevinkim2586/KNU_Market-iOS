@@ -7,9 +7,13 @@
 
 import Foundation
 import RxSwift
+import RxFlow
+import RxRelay
 import ReactorKit
 
-final class ChatListViewReactor: Reactor {
+final class ChatListViewReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     let initialState: State
     let chatListService: ChatListServiceType
@@ -19,6 +23,7 @@ final class ChatListViewReactor: Reactor {
         case getChatList
         case viewDidDisappear
         case removeChatNotification(IndexPath)
+        case chatSelected(IndexPath)
     }
     
     enum Mutation {
@@ -103,6 +108,15 @@ final class ChatListViewReactor: Reactor {
                 )
                 NotificationCenter.default.post(name: .configureChatTabBadgeCount, object: nil)
             }
+            return Observable.empty()
+            
+        case .chatSelected(let indexPath):
+            self.steps.accept(AppStep.chatIsPicked(
+                roomUid: currentState.roomList[indexPath.row].uuid,
+                chatRoomTitle: currentState.roomList[indexPath.row].title,
+                postUploaderUid: currentState.roomList[indexPath.row].userUID,
+                isFirstEntrance: false)
+            )
             return Observable.empty()
         }
     }

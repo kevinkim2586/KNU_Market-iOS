@@ -157,27 +157,7 @@ class NickNameInputViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        self.rx.viewDidDisappear
-            .map { _ in Reactor.Action.viewDidDisappear }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
         // Output
-        
-        reactor.state
-            .map { $0.isAllowedToGoNext }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe { _ in
-                let vc = EmailForLostPasswordViewController(
-                    reactor: EmailForLostPasswordViewReactor(
-                        userService: UserService(network: Network<UserAPI>(), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared))
-                    )
-                )
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.errorMessage }

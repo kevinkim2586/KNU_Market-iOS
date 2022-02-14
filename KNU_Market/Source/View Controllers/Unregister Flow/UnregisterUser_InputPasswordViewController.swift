@@ -3,8 +3,20 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import ReactorKit
+import RxFlow
 
-class UnregisterUser_InputPasswordViewController: BaseViewController, View {
+enum UnregisterStepType {
+    case readPrecautionsFirst
+    case inputPassword
+}
+
+protocol UnregisterViewType: AnyObject {
+    var unregisterStep: UnregisterStepType { get }
+}
+
+class UnregisterUser_InputPasswordViewController: BaseViewController, View, UnregisterViewType {
+    
+    var unregisterStep: UnregisterStepType = .inputPassword
     
     typealias Reactor = UnregisterViewReactor
     
@@ -150,17 +162,6 @@ class UnregisterUser_InputPasswordViewController: BaseViewController, View {
             .subscribe { (_, errorMessage) in
                 self.errorLabel.showErrorMessage(message: errorMessage!)
             }
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.loginCompleted }
-            .distinctUntilChanged()
-            .filter { $0 == true }
-            .withUnretained(self)
-            .subscribe(onNext: { _ in
-                self.navigationController?.pushViewController(UnregisterUser_InputSuggestionViewController(reactor: UnregisterViewReactor(userService: UserService(network: Network<UserAPI>(plugins: [AuthPlugin()]), userDefaultsPersistenceService: UserDefaultsPersistenceService(userDefaultsGenericService: UserDefaultsGenericService.shared)))), animated: true)
-
-            })
             .disposed(by: disposeBag)
     }
 }

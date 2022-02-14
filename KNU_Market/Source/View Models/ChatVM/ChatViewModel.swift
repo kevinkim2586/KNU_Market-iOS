@@ -4,6 +4,8 @@ import MessageKit
 import SDWebImage
 import SwiftyJSON
 import Alamofire
+import RxRelay
+import RxFlow
 
 protocol ChatViewDelegate: AnyObject {
     
@@ -28,7 +30,9 @@ protocol ChatViewDelegate: AnyObject {
     func failedUploadingImageToServer()
 }
 
-class ChatViewModel: WebSocketDelegate {
+class ChatViewModel: WebSocketDelegate, Stepper {
+    
+    var steps = PublishRelay<Step>()
     
     // Properties
     private var room: String = ""

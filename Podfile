@@ -46,6 +46,7 @@ target 'KNU_Market' do
   # Rx
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxFlow'
   pod 'RxViewController'
   pod 'RxAnimated'
   pod 'RxGesture'

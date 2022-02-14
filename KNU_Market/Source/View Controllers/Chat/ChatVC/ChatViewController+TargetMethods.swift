@@ -10,30 +10,13 @@ import UIKit
 extension ChatViewController {
     
     @objc func pressedTitle() {
-        
-        let postVC = PostViewController(reactor: PostViewReactor(
-            pageId: roomUID,
-            isFromChatVC: true,
-            postService: PostService(network: Network<PostAPI>(plugins: [AuthPlugin()])),
-            chatService: ChatService(
-                network: Network<ChatAPI>(plugins: [AuthPlugin()]),
-                userDefaultsGenericService: UserDefaultsGenericService.shared
-            ),
-            sharingService: SharingService(),
-            userDefaultsService: UserDefaultsGenericService.shared)
-        )
-        navigationController?.pushViewController(postVC, animated: true)
+//        self.steps.accept(AppStep.postIsPicked(postUid: roomUID, isFromChatVC: true))
     }
 
     @objc func pressedMoreBarButtonItem() {
         viewModel.getRoomInfo()
         
-        let chatMemberListVC = ChatMemberListViewController(
-            chatManager: ChatManager(),
-            roomInfo: viewModel.roomInfo,
-            postUploaderUid: viewModel.postUploaderUID
-        )
-        presentPanModal(chatMemberListVC)
+        self.steps.accept(AppStep.chatMemberListIsRequired(roomInfo: viewModel.roomInfo, postUploaderUid: viewModel.postUploaderUID))
     }
     
     @objc func pressedRefreshButton() {

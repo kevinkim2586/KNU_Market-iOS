@@ -10,12 +10,12 @@ import UIKit
 extension ChatViewController {
 
     func didExitPost() {
-        navigationController?.popViewController(animated: true)
+        self.steps.accept(AppStep.popViewController)
     }
 
     func didDeletePost() {
-        navigationController?.popViewController(animated: true)
-        NotificationCenter.default.post(name: .updatePostList, object: nil)
+        self.steps.accept(AppStep.popViewController)
+        NotificationCenterService.updatePostList.post()
     }
 
     func didFetchPreviousChats() {

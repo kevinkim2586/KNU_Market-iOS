@@ -28,7 +28,6 @@ class RegisterFlow: Flow {
         let reactor = IDInputViewReactor(userService: services.userService)
         let idInputVC = IDInputViewController(reactor: reactor)
         
-        
         self.initialViewController = idInputVC
         
         self.rootViewController = UINavigationController(rootViewController: self.initialViewController)

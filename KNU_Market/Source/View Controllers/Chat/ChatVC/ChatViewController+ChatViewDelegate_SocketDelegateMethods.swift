@@ -27,7 +27,7 @@ extension ChatViewController: ChatViewDelegate {
 
     func didDisconnect() {
         dismissProgressBar()
-        navigationController?.popViewController(animated: true)
+        self.steps.accept(AppStep.popViewController)
     }
 
     func didReceiveChat() {
@@ -71,9 +71,7 @@ extension ChatViewController: ChatViewDelegate {
             message: "방장에 의해 강퇴되었습니다. 더 이상 채팅에 참여가 불가능합니다.🤔",
             buttonTitle: "확인"
         )
+        self.steps.accept(AppStep.popViewControllerWithDelay(seconds: 1))
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.navigationController?.popViewController(animated: true)
-        }
     }
 }

@@ -34,8 +34,8 @@ class MyPostsFlow: Flow {
         case .myPostsIsRequired:
             return navigateToMyPostsView()
             
-        case .postIsPicked(let postUId, let isFromChatVC):
-            return navigateToPostDetail(postUid: postUId, isFromChatVC: isFromChatVC)
+        case .postIsPicked(let postUid, let isFromChatVC):
+            return navigateToPostDetail(postUid: postUid, isFromChatVC: isFromChatVC)
             
         case .editPostIsRequired(let editModel):
             return navigateToEditPostVC(with: editModel)
@@ -61,6 +61,12 @@ class MyPostsFlow: Flow {
                 sourceView: sourceView,
                 delegateController: delegateController
             )
+            
+        case .uploadPostIsCompleted:
+            
+            self.rootViewController.navigationController?.popViewController(animated: true)
+            
+            return .none
             
         default:
             return .none

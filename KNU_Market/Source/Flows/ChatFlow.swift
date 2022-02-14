@@ -8,6 +8,7 @@
 import Foundation
 import RxFlow
 import UIKit
+import PanModal
 
 class ChatFlow: Flow {
     
@@ -25,7 +26,7 @@ class ChatFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        
+        print("✅ ChatFlow step: \(step)")
         switch step {
         case .chatListIsRequired:
             return navigateToChatList()
@@ -44,13 +45,44 @@ class ChatFlow: Flow {
                 )
             }
             
+        case let .chatMemberListIsRequired(roomInfo, postUploaderUid):
             
-        case .chatMemberListIsRequired:
-            #warning("추후 수정")
-            return .none
+            return presentChatMemberList(roomInfo: roomInfo, postUploaderUid: postUploaderUid)
+
             
         case .postIsPicked(let postUid, let isFromChatVC):
             return navigateToPost(postUid: postUid, isFromChatVC: isFromChatVC)
+            
+        case .sendImageOptionsIsRequired:
+            return presentSendImageOptionActionSheet()
+            
+        case let .imageViewIsRequired(url, heroId):
+            return presentImageViewController(url: url, heroId: heroId)
+            
+        case let .alertIsRequired(type, title, message):
+            
+            return .none
+            
+            
+        case .popViewController:
+            self.rootViewController.popViewController(animated: true)
+            return .none
+            
+        case .popViewControllerWithDelay(let seconds):
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+                self.rootViewController.popViewController(animated: true)
+            }
+            return .none
+            
+        case let .reportIsRequired(userToReport, postUid):
+            return presentReportUserView(userToReport: userToReport, postUid: postUid)
+            
+        case let .safariViewIsRequired(url):
+            self.rootViewController.presentSafariView(with: url)
+            return .none
+            
+  
             
         default:
             return .none
@@ -96,15 +128,20 @@ extension ChatFlow {
         
         return .one(flowContributor: .contribute(
             withNextPresentable: chatVC,
-            withNextStepper: chatVM)
+            withNextStepper: chatVC)
         )
     }
     
-    private func presentChatMemberList() -> FlowContributors {
+    private func presentChatMemberList(roomInfo: RoomInfo?, postUploaderUid: String) -> FlowContributors {
         
+        let chatMemberListVC = ChatMemberListViewController(
+            chatManager: ChatManager(),
+            roomInfo: roomInfo,
+            postUploaderUid: postUploaderUid
+        )
+        
+        self.rootViewController.presentPanModal(chatMemberListVC)
         return .none
-        
-        
     }
     
     private func navigateToPost(postUid: String, isFromChatVC: Bool) -> FlowContributors {
@@ -122,5 +159,71 @@ extension ChatFlow {
         self.rootViewController.pushViewController(postVC, animated: true)
         
         return .one(flowContributor: .contribute(withNextPresentable: postVC, withNextStepper: reactor))
+    }
+    
+    private func presentSendImageOptionActionSheet() -> FlowContributors {
+        
+        
+        guard let delegateVC = self.rootViewController.visibleViewController
+                as? ChatViewController else {
+                    return .none
+                }
+        
+        let cameraAction = UIAlertAction(
+            title: "사진 찍기",
+            style: .default
+        ) { [weak self] _ in
+            let picker = UIImagePickerController()
+            picker.sourceType = .camera
+            picker.delegate = delegateVC
+            picker.allowsEditing = true
+            self?.rootViewController.present(picker, animated: true)
+        }
+        let albumAction = UIAlertAction(
+            title: "사진 앨범",
+            style: .default
+        ) { [weak self] _ in
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = delegateVC
+            picker.allowsEditing = true
+            self?.rootViewController.present(picker, animated: true)
+        }
+     
+        let actionSheet = UIHelper.createActionSheet(
+            with: [cameraAction, albumAction],
+            title: nil
+        )
+        
+        self.rootViewController.present(actionSheet, animated: true)
+        
+        return .none
+    }
+    
+    private func presentReportUserView(userToReport: String, postUid: String?) -> FlowContributors {
+        
+        let reportFlow = ReportFlow(
+            reportService: self.services.reportService,
+            userToReport: userToReport,
+            postUid: postUid
+        )
+        
+        Flows.use(reportFlow, when: .created) { [unowned self] rootVC in
+            self.rootViewController.present(rootVC, animated: true)
+        }
+        
+        return .one(flowContributor: .contribute(
+            withNextPresentable: reportFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.reportIsRequired(userToReport: userToReport, postUid: postUid)))
+        )
+    }
+    
+    private func presentImageViewController(url: URL, heroId: String) -> FlowContributors {
+        
+        let chatImageVC = ChatImageViewController(imageUrl: url, heroId: heroId)
+        chatImageVC.modalPresentationStyle = .overFullScreen
+        self.rootViewController.present(chatImageVC, animated: true)
+        
+        return .none
     }
 }

@@ -46,7 +46,7 @@ class VerificationFlow: Flow {
     func navigate(to step: Step) -> FlowContributors {
 
         guard let step = step as? AppStep else { return .none }
-//        print("✅ VerificationFlow step: \(step)")
+        print("✅ VerificationFlow: \(step)")
         
         switch step {
         case .verificationOptionIsRequired:

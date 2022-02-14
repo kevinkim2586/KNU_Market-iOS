@@ -14,13 +14,19 @@ enum AppStep: Step {
     
     case dismiss
     case popViewController
+    case popViewControllerWithDelay(seconds: Double)
     case popToRootViewController
+    case safariViewIsRequired(url: URL)
     
     
     //MARK: - Global - Authorization Related
     
     case unauthorized
     case unexpectedError
+    
+    //MARK: - Global - Alert Methods
+    
+    case alertIsRequired(type: AlertMessageType, title: String = "", message: String = "")
     
     
     //MARK: - Initial (Needed When App is Launched)
@@ -49,15 +55,19 @@ enum AppStep: Step {
     case uploadPostIsCompleted
     case perPersonPricePopupIsRequired(model: PerPersonPriceModel, preferredContentSize: CGSize, sourceView: UIView, delegateController: PostViewController)
     case editPostIsRequired(editModel: EditPostModel)
-    
 
-
-    
     //MARK: - Chat
     
     case chatListIsRequired
     case chatIsPicked(roomUid: String, chatRoomTitle: String, postUploaderUid: String, isFirstEntrance: Bool, isFromChatVC: Bool = false)
-    case chatMemberListIsRequired
+    case chatMemberListIsRequired(roomInfo: RoomInfo?, postUploaderUid: String)       // PanModal 사용
+    case sendImageOptionsIsRequired     // 채팅방 내 "앨범" 또는 "카메라"에서 사진 선택
+    case imageViewIsRequired(url: URL, heroID: String)            // 채팅방 내 사진 탭 했을 때 확대s
+    
+    
+    
+    
+    
     
     
     //MARK: - My Page

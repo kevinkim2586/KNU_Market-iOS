@@ -7,8 +7,15 @@ import IQKeyboardManagerSwift
 import ImageSlideshow
 import Hero
 import SnapKit
+import RxRelay
+import RxFlow
+import RxSwift
 
-class ChatViewController: MessagesViewController {
+class ChatViewController: MessagesViewController, Stepper {
+    
+    var disposeBag = DisposeBag()
+    
+    var steps = PublishRelay<Step>()
     
     //MARK: - Properties
 
@@ -57,11 +64,6 @@ class ChatViewController: MessagesViewController {
         
         IQKeyboardManager.shared.enable = false
         
-//        viewModel = ChatViewModel(
-//            room: roomUID,
-//            isFirstEntrance: isFirstEntrance
-//        )
-        
         initialize()
         setupLayout()
         setupConstraints()
@@ -83,7 +85,6 @@ class ChatViewController: MessagesViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
         dismissProgressBar()
     }
 
@@ -313,43 +314,18 @@ extension ChatViewController {
         button.setImage(UIImage(systemName: "plus"),
                         for: .normal)
         button.tintColor = .darkGray
-        button.onTouchUpInside { [weak self] _ in
-            self?.presentInputActionSheet()
-        }
+        button.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.steps.accept(AppStep.sendImageOptionsIsRequired)
+            })
+            .disposed(by: disposeBag)
 
         messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
         messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
     }
 
-    func presentInputActionSheet() {
-        
-        let cameraAction = UIAlertAction(
-            title: "사진 찍기",
-            style: .default
-        ) { [weak self] _ in
-            let picker = UIImagePickerController()
-            picker.sourceType = .camera
-            picker.delegate = self
-            picker.allowsEditing = true
-            self?.present(picker, animated: true)
-        }
-        let albumAction = UIAlertAction(
-            title: "사진 앨범",
-            style: .default
-        ) { [weak self] _ in
-            let picker = UIImagePickerController()
-            picker.sourceType = .photoLibrary
-            picker.delegate = self
-            picker.allowsEditing = true
-            self?.present(picker, animated: true)
-        }
-     
-        let actionSheet = UIHelper.createActionSheet(
-            with: [cameraAction, albumAction],
-            title: nil
-        )
-        present(actionSheet, animated: true)
-    }
+
     
     @objc func didBlockUser() {
         presentKMAlertOnMainThread(
@@ -367,5 +343,4 @@ extension ChatViewController {
             object: nil
         )
     }
-
 }

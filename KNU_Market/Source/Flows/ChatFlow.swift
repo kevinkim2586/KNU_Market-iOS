@@ -13,28 +13,44 @@ import PanModal
 class ChatFlow: Flow {
     
     private let services: AppServices
-    
+
     var root: Presentable {
         return self.rootViewController
     }
     
-    private let rootViewController = UINavigationController()
+    private let rootViewController: ChatViewController
     
-    init(services: AppServices) {
+    init(services: AppServices,
+         roomUid: String,
+         isFirstEntrance: Bool,
+         roomTitle: String,
+         postUploaderUid: String
+    ) {
         self.services = services
+        
+        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: isFirstEntrance)
+        
+        let chatVC = ChatViewController(viewModel: chatVM)
+        chatVC.roomUID = roomUid
+        chatVC.chatRoomTitle = roomTitle
+        chatVC.postUploaderUID = postUploaderUid
+        chatVC.isFirstEntrance = isFirstEntrance
+        chatVC.hidesBottomBarWhenPushed = true
+        
+        self.rootViewController = chatVC
+        
+        
     }
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
         print("✅ ChatFlow step: \(step)")
         switch step {
-        case .chatListIsRequired:
-            return navigateToChatList()
-            
+
         case let .chatIsPicked(roomUid, chatRoomTitle, postUploaderUid, isFirstEntrance, isFromChatVC):
             
             if isFromChatVC {
-                self.rootViewController.popViewController(animated: true)
+                self.rootViewController.navigationController?.popViewController(animated: true)
                 return .none
             } else {
                 return navigateToChat(
@@ -63,15 +79,14 @@ class ChatFlow: Flow {
             
             return .none
             
-            
         case .popViewController:
-            self.rootViewController.popViewController(animated: true)
+            self.rootViewController.navigationController?.popViewController(animated: true)
             return .none
             
         case .popViewControllerWithDelay(let seconds):
             
             DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-                self.rootViewController.popViewController(animated: true)
+                self.rootViewController.navigationController?.popViewController(animated: true)
             }
             return .none
             
@@ -82,8 +97,6 @@ class ChatFlow: Flow {
             self.rootViewController.presentSafariView(with: url)
             return .none
             
-  
-            
         default:
             return .none
         }
@@ -91,22 +104,7 @@ class ChatFlow: Flow {
 }
 
 extension ChatFlow {
-    
-    private func navigateToChatList() -> FlowContributors {
-        
-        let chatListReactor = ChatListViewReactor(
-            chatListService: services.chatListService,
-            userDefaultsGenericService: services.userDefaultsGenericService
-        )
-        let chatListVC = ChatListViewController(reactor: chatListReactor)
-        
-        self.rootViewController.pushViewController(chatListVC, animated: true)
-        
-        return .one(flowContributor: .contribute(
-            withNextPresentable: chatListVC,
-            withNextStepper: chatListReactor)
-        )
-    }
+ 
     
     private func navigateToChat(
         roomUid: String,
@@ -115,20 +113,22 @@ extension ChatFlow {
         isFirstEntrance: Bool
     ) -> FlowContributors {
         
-        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: isFirstEntrance)
-        
-        let chatVC = ChatViewController(viewModel: chatVM)
-        chatVC.roomUID = roomUid
-        chatVC.chatRoomTitle = roomTitle
-        chatVC.postUploaderUID = postUploaderUid
-        chatVC.isFirstEntrance = isFirstEntrance
-        chatVC.hidesBottomBarWhenPushed = true
-        
-        self.rootViewController.pushViewController(chatVC, animated: true)
+//        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: isFirstEntrance)
+//
+//        let chatVC = ChatViewController(viewModel: chatVM)
+//        chatVC.roomUID = roomUid
+//        chatVC.chatRoomTitle = roomTitle
+//        chatVC.postUploaderUID = postUploaderUid
+//        chatVC.isFirstEntrance = isFirstEntrance
+//        chatVC.hidesBottomBarWhenPushed = true
+//
+//        self.rootViewController.navigationController?.pushViewController(chatVC, animated: true)
+//
+//
         
         return .one(flowContributor: .contribute(
-            withNextPresentable: chatVC,
-            withNextStepper: chatVC)
+            withNextPresentable: self.rootViewController,
+            withNextStepper: self.rootViewController)
         )
     }
     
@@ -156,7 +156,7 @@ extension ChatFlow {
         )
         
         let postVC = PostViewController(reactor: reactor)
-        self.rootViewController.pushViewController(postVC, animated: true)
+        self.rootViewController.navigationController?.pushViewController(postVC, animated: true)
         
         return .one(flowContributor: .contribute(withNextPresentable: postVC, withNextStepper: reactor))
     }
@@ -164,7 +164,7 @@ extension ChatFlow {
     private func presentSendImageOptionActionSheet() -> FlowContributors {
         
         
-        guard let delegateVC = self.rootViewController.visibleViewController
+        guard let delegateVC = self.rootViewController.navigationController?.visibleViewController
                 as? ChatViewController else {
                     return .none
                 }

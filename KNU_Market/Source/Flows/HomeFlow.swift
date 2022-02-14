@@ -41,11 +41,11 @@ extension HomeFlow {
     
     private func navigateToMainHomeScreen() -> FlowContributors {
         
-        let postFlow    = PostFlow(services: services)
-        let chatFlow    = ChatFlow(services: services)
-        let myPageFlow  = MyPageFlow(services: services)
+        let postFlow        = PostFlow(services: services)
+        let chatListFlow    = ChatListFlow(services: services)
+        let myPageFlow      = MyPageFlow(services: services)
         
-        Flows.use(postFlow, chatFlow, myPageFlow, when: .created) { [unowned self] (postTab: UINavigationController, chatTab: UINavigationController, myPageTab: UINavigationController) in
+        Flows.use(postFlow, chatListFlow, myPageFlow, when: .created) { [unowned self] (postTab: UINavigationController, chatTab: UINavigationController, myPageTab: UINavigationController) in
             
             postTab.tabBarItem = UITabBarItem(title: "공동구매", image: UIImage(named: K.Images.homeSelected)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor(named: K.Color.appColor) ?? .systemPink), tag: 0)
             postTab.tabBarItem.image = UIImage(named: K.Images.homeUnselected)?.withRenderingMode(.alwaysTemplate)
@@ -97,7 +97,7 @@ extension HomeFlow {
                 )
             ),
             .contribute(
-                withNextPresentable: chatFlow,
+                withNextPresentable: chatListFlow,
                 withNextStepper: CompositeStepper(
                     steppers: [OneStepper(withSingleStep: AppStep.chatListIsRequired), chatListReactor]
                 )

@@ -82,7 +82,7 @@ class PostFlow: Flow {
                 self.rootViewController.popViewController(animated: true)
                 return .none
             } else {
-                return navigateToChat(
+                return navigateToChatFlow(
                     roomUid: roomUid,
                     roomTitle: chatRoomTitle,
                     postUploaderUid: postUploaderUid,
@@ -200,28 +200,46 @@ extension PostFlow {
         return .one(flowContributor: .contribute(withNextPresentable: uploadVC, withNextStepper: reactor))
     }
     
-    private func navigateToChat(
+    private func navigateToChatFlow(
         roomUid: String,
         roomTitle: String,
         postUploaderUid: String,
         isFirstEntrance: Bool
     ) -> FlowContributors {
         
-        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: isFirstEntrance)
-        
-        let chatVC = ChatViewController(viewModel: chatVM)
-        chatVC.roomUID = roomUid
-        chatVC.chatRoomTitle = roomTitle
-        chatVC.postUploaderUID = postUploaderUid
-        chatVC.isFirstEntrance = isFirstEntrance
-        chatVC.hidesBottomBarWhenPushed = true
-        
-        self.rootViewController.pushViewController(chatVC, animated: true)
+        let chatFlow = ChatFlow(
+            services: services,
+            roomUid: roomUid,
+            isFirstEntrance: isFirstEntrance,
+            roomTitle: roomTitle,
+            postUploaderUid: postUploaderUid
+        )
+            
+        Flows.use(chatFlow, when: .created) { [unowned self] root in
+            root.hidesBottomBarWhenPushed = true
+            self.rootViewController.pushViewController(root, animated: true)
+        }
         
         return .one(flowContributor: .contribute(
-            withNextPresentable: chatVC,
-            withNextStepper: chatVM)
+            withNextPresentable: chatFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.chatIsPicked(roomUid: roomUid, chatRoomTitle: roomTitle, postUploaderUid: postUploaderUid, isFirstEntrance: isFirstEntrance)))
         )
+        
+//        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: isFirstEntrance)
+//
+//        let chatVC = ChatViewController(viewModel: chatVM)
+//        chatVC.roomUID = roomUid
+//        chatVC.chatRoomTitle = roomTitle
+//        chatVC.postUploaderUID = postUploaderUid
+//        chatVC.isFirstEntrance = isFirstEntrance
+//        chatVC.hidesBottomBarWhenPushed = true
+//
+//        self.rootViewController.pushViewController(chatVC, animated: true)
+//
+//        return .one(flowContributor: .contribute(
+//            withNextPresentable: chatVC,
+//            withNextStepper: chatVM)
+//        )
     }
     
     private func presentReportUserView(userToReport: String, postUid: String?) -> FlowContributors {

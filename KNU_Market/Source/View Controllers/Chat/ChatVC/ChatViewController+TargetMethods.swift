@@ -10,7 +10,7 @@ import UIKit
 extension ChatViewController {
     
     @objc func pressedTitle() {
-        self.steps.accept(AppStep.postIsPicked(postUid: roomUID, isFromChatVC: true))
+//        self.steps.accept(AppStep.postIsPicked(postUid: roomUID, isFromChatVC: true))
     }
 
     @objc func pressedMoreBarButtonItem() {

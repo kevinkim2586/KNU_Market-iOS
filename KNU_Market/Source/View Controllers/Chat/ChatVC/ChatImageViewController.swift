@@ -82,19 +82,19 @@ class ChatImageViewController: BaseViewController {
     override func setupConstraints() {
         super.setupConstraints()
         
-        imageScrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        imageScrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     
-        dismissButton.snp.makeConstraints { make in
-            make.width.height.equalTo(30)
-            make.top.equalToSuperview().offset(60)
-            make.right.equalToSuperview().offset(-15)
+        dismissButton.snp.makeConstraints {
+            $0.width.height.equalTo(30)
+            $0.top.equalToSuperview().offset(60)
+            $0.right.equalToSuperview().offset(-15)
         }
         
-        chatImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.center.equalToSuperview()
+        chatImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.center.equalToSuperview()
         }
     }
     

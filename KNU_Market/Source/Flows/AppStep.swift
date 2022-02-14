@@ -55,10 +55,14 @@ enum AppStep: Step {
     case uploadPostIsCompleted
     case perPersonPricePopupIsRequired(model: PerPersonPriceModel, preferredContentSize: CGSize, sourceView: UIView, delegateController: PostViewController)
     case editPostIsRequired(editModel: EditPostModel)
+    
+    //MARK: - Chat List
+    
+    case chatListIsRequired
 
     //MARK: - Chat
     
-    case chatListIsRequired
+
     case chatIsPicked(roomUid: String, chatRoomTitle: String, postUploaderUid: String, isFirstEntrance: Bool, isFromChatVC: Bool = false)
     case chatMemberListIsRequired(roomInfo: RoomInfo?, postUploaderUid: String)       // PanModal 사용
     case sendImageOptionsIsRequired     // 채팅방 내 "앨범" 또는 "카메라"에서 사진 선택

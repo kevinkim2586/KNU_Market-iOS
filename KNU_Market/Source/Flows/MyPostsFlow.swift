@@ -35,6 +35,7 @@ class MyPostsFlow: Flow {
             return navigateToMyPostsView()
             
         case .postIsPicked(let postUid, let isFromChatVC):
+            
             return navigateToPostDetail(postUid: postUid, isFromChatVC: isFromChatVC)
             
         case .editPostIsRequired(let editModel):
@@ -42,17 +43,21 @@ class MyPostsFlow: Flow {
             
         case let .chatIsPicked(roomUid, chatRoomTitle, postUploaderUid, isFirstEntrance, isFromChatVC):
             
+            
             if isFromChatVC {
                 self.rootViewController.navigationController?.popViewController(animated: true)
+            
                 return .none
             } else {
-                return navigateToChat(
+                return navigateToChatFlow(
                     roomUid: roomUid,
                     roomTitle: chatRoomTitle,
                     postUploaderUid: postUploaderUid,
                     isFirstEntrance: isFirstEntrance
                 )
             }
+            
+            
             
         case let .perPersonPricePopupIsRequired(model, preferredContentSize, sourceView, delegateController):
             return presentPerPersonPricePopupVC(
@@ -139,27 +144,29 @@ extension MyPostsFlow {
         return .one(flowContributor: .contribute(withNextPresentable: uploadVC, withNextStepper: reactor))
     }
     
-    private func navigateToChat(
+    private func navigateToChatFlow(
         roomUid: String,
         roomTitle: String,
         postUploaderUid: String,
         isFirstEntrance: Bool
     ) -> FlowContributors {
         
-        let chatVM = ChatViewModel(room: roomUid, isFirstEntrance: isFirstEntrance)
-        
-        let chatVC = ChatViewController(viewModel: chatVM)
-        chatVC.roomUID = roomUid
-        chatVC.chatRoomTitle = roomTitle
-        chatVC.postUploaderUID = postUploaderUid
-        chatVC.isFirstEntrance = isFirstEntrance
-        chatVC.hidesBottomBarWhenPushed = true
-        
-        self.rootViewController.navigationController?.pushViewController(chatVC, animated: true)
+        let chatFlow = ChatFlow(
+            services: services,
+            roomUid: roomUid,
+            isFirstEntrance: isFirstEntrance,
+            roomTitle: roomTitle,
+            postUploaderUid: postUploaderUid
+        )
+            
+        Flows.use(chatFlow, when: .created) { [unowned self] root in
+            root.hidesBottomBarWhenPushed = true
+            self.rootViewController.navigationController?.pushViewController(root, animated: true)
+        }
         
         return .one(flowContributor: .contribute(
-            withNextPresentable: chatVC,
-            withNextStepper: chatVM)
+            withNextPresentable: chatFlow,
+            withNextStepper: OneStepper(withSingleStep: AppStep.chatIsPicked(roomUid: roomUid, chatRoomTitle: roomTitle, postUploaderUid: postUploaderUid, isFirstEntrance: isFirstEntrance)))
         )
     }
 }

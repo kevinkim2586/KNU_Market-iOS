@@ -18,10 +18,10 @@ class PasswordInputViewController: BaseViewController, View {
     //MARK: - UI
     
     let titleLabelFirstLine = KMTitleLabel(textColor: .darkGray).then {
-        $0.text = "\(UserRegisterValues.shared.userId)님 만나서 반갑습니다!"
+        $0.text = "\(UserRegisterValues.shared.username)님 만나서 반갑습니다!"
         $0.changeTextAttributeColor(
             fullText: $0.text!,
-            changeText: "\(UserRegisterValues.shared.userId)님"
+            changeText: "\(UserRegisterValues.shared.username)님"
         )
         $0.adjustsFontSizeToFitWidth = true
         $0.minimumScaleFactor = 0.6

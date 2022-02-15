@@ -129,9 +129,9 @@ extension UserAPI: BaseAPI {
             
             var multipartData: [MultipartFormData] = []
             
-            multipartData.append(MultipartFormData(provider: .data(model.id.data(using: .utf8)!), name: "id"))
+            multipartData.append(MultipartFormData(provider: .data(model.username.data(using: .utf8)!), name: "username"))
+            multipartData.append(MultipartFormData(provider: .data(model.displayName.data(using: .utf8)!), name: "displayname"))
             multipartData.append(MultipartFormData(provider: .data(model.password.data(using: .utf8)!), name: "password"))
-            multipartData.append(MultipartFormData(provider: .data(model.nickname.data(using: .utf8)!), name: "nickname"))
             multipartData.append(MultipartFormData(provider: .data(model.fcmToken.data(using: .utf8)!), name: "fcmToken"))
             multipartData.append(MultipartFormData(provider: .data(model.emailForPasswordLoss.data(using: .utf8)!), name: "email"))
         

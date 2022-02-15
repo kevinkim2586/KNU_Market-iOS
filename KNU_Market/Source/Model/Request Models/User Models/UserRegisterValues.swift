@@ -6,9 +6,9 @@ class UserRegisterValues {
     
     private init() {}
     
-    var userId: String = ""
+    var username: String = ""
     var password: String = ""
-    var nickname: String = ""
+    var displayName: String = ""
     var emailForPasswordLoss: String = ""
 
     var email: String = ""

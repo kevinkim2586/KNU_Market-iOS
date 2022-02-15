@@ -68,9 +68,9 @@ final class EmailForLostPasswordViewReactor: Reactor, Stepper {
                             UserRegisterValues.shared.emailForPasswordLoss = self.currentState.userEmail
 
                             let model = RegisterRequestDTO(
-                                id: UserRegisterValues.shared.userId,
+                                username: UserRegisterValues.shared.username,
                                 password: UserRegisterValues.shared.password,
-                                nickname: UserRegisterValues.shared.nickname,
+                                displayName: UserRegisterValues.shared.displayName,
                                 fcmToken: UserRegisterValues.shared.fcmToken,
                                 emailForPasswordLoss: UserRegisterValues.shared.emailForPasswordLoss
                             )

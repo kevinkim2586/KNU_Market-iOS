@@ -63,7 +63,7 @@ final class IDInputViewReactor: Reactor, Stepper {
                         if duplicateCheckModel.isDuplicate {
                             return Mutation.setErrorMessage(RegisterError.existingId.rawValue)
                         } else {
-                            UserRegisterValues.shared.userId = self.currentState.userId
+                            UserRegisterValues.shared.username = self.currentState.userId
                             self.steps.accept(AppStep.idInputIsCompleted)
                             return Mutation.empty
                         }

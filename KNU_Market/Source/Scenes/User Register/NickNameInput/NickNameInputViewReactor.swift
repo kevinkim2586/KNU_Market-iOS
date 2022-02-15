@@ -63,7 +63,7 @@ final class NickNameInputViewReactor: Reactor, Stepper {
                         if duplicateCheckModel.isDuplicate {
                             return Mutation.setErrorMessage(RegisterError.existingNickname.rawValue)
                         } else {
-                            UserRegisterValues.shared.nickname = self.currentState.userNickname
+                            UserRegisterValues.shared.displayName = self.currentState.userNickname
                             self.steps.accept(AppStep.nicknameInputIsCompleted)
                             return Mutation.empty
                         }

@@ -49,7 +49,7 @@ final class CongratulateUserViewReactor: Reactor, Stepper {
         case .goHome:
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
-                self.userService.login(id: UserRegisterValues.shared.username, password: UserRegisterValues.shared.password)
+                self.userService.login(username: UserRegisterValues.shared.username, password: UserRegisterValues.shared.password)
                     .asObservable()
                     .map { result in
                         switch result {

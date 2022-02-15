@@ -115,7 +115,7 @@ class ChangeNicknameViewController: BaseViewController, View {
         
         changeNicknameButton.rx.tap
             .asObservable()
-            .map { Reactor.Action.updateUserInfo(.nickname, .nickname) }
+            .map { Reactor.Action.updateUserInfo(.displayName, .displayName) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         

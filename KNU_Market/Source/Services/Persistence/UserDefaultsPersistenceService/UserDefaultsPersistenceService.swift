@@ -34,26 +34,24 @@ final class UserDefaultsPersistenceService: UserDefaultsPersistenceServiceType {
     }
     
     func saveUserProfileInfo(from model: LoadProfileResponseModel) {
-        userDefaultsGenericService.set(key: UserDefaults.Keys.userUID, value: model.uid)
-        userDefaultsGenericService.set(key: UserDefaults.Keys.userID, value: model.id)
-        userDefaultsGenericService.set(key: UserDefaults.Keys.emailForPasswordLoss, value: model.emailForPasswordLoss)
-        userDefaultsGenericService.set(key: UserDefaults.Keys.nickname, value: model.nickname)
-        userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: model.profileImageUid)
-        userDefaultsGenericService.set(key: UserDefaults.Keys.hasVerifiedEmail, value: model.isVerified)
-        userDefaultsGenericService.set(key: UserDefaults.Keys.isReportChecked, value: !model.isReportChecked)
-        userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: model.profileImageUid)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.userUID, value: model.userUid)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.username, value: model.username)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.emailForPasswordLoss, value: model.email)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.displayName, value: model.displayName)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.bannedTo, value: model.bannedTo)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: model.userProfileImage)
     }
     
     func updateLocalUserInfo(type: UpdateUserInfoType, infoString: String) {
         switch type {
-        case .nickname:
-            userDefaultsGenericService.set(key: UserDefaults.Keys.nickname, value: infoString)
+        case .displayName:
+            userDefaultsGenericService.set(key: UserDefaults.Keys.displayName, value: infoString)
         case .fcmToken:
             userDefaultsGenericService.set(key: UserDefaults.Keys.fcmToken, value: infoString)
         case .profileImage:
             userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: infoString)
         case .id:
-            userDefaultsGenericService.set(key: UserDefaults.Keys.userID, value: infoString)
+            userDefaultsGenericService.set(key: UserDefaults.Keys.username, value: infoString)
         case .email:
             userDefaultsGenericService.set(key: UserDefaults.Keys.emailForPasswordLoss, value: infoString)
         default: break

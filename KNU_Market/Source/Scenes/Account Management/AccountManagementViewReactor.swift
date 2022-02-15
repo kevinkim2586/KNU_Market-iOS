@@ -51,8 +51,8 @@ final class AccountManagementViewReactor: Reactor, Stepper {
             
         case .viewDidLoad, .viewDidAppear:
             
-            let userId: String = userDefaultsGenericService.get(key: UserDefaults.Keys.userID) ?? ""
-            let userNickname: String = userDefaultsGenericService.get(key: UserDefaults.Keys.nickname) ?? ""
+            let userId: String = userDefaultsGenericService.get(key: UserDefaults.Keys.username) ?? ""
+            let userNickname: String = userDefaultsGenericService.get(key: UserDefaults.Keys.displayName) ?? ""
             let userEmailForPasswordLoss: String = userDefaultsGenericService.get(key: UserDefaults.Keys.emailForPasswordLoss) ?? ""
             
             return Observable.just(Mutation.setUserInfo(

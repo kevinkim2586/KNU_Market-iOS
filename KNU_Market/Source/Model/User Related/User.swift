@@ -19,19 +19,19 @@ class User {
     
     var userID: String {
         get {
-            return UserDefaults.standard.string(forKey: UserDefaults.Keys.userID) ?? "아이디 에러"
+            return UserDefaults.standard.string(forKey: UserDefaults.Keys.username) ?? "아이디 에러"
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.userID)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.username)
         }
     }
     
     var nickname: String {
         get {
-            return UserDefaults.standard.string(forKey: UserDefaults.Keys.nickname) ?? "닉네임 표시 에러"
+            return UserDefaults.standard.string(forKey: UserDefaults.Keys.displayName) ?? "닉네임 표시 에러"
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.nickname)
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.displayName)
         }
     }
     
@@ -226,7 +226,9 @@ extension User {
         profileImageData = nil
         profileImageUID = ""
         
-        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.nickname)
+        
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.username)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.displayName)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.profileImageUID)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.isLoggedIn)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.userUID)

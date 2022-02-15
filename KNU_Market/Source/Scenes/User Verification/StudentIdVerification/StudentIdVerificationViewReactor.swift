@@ -79,7 +79,7 @@ final class StudentIdVerificationViewReactor: Reactor, Stepper {
                 .map { result in
                     switch result {
                     case .success(let duplicateCheckModel):
-                        return duplicateCheckModel.isDuplicate
+                        return duplicateCheckModel.isDuplicated
                         ? Mutation.setAlertMessage(VerifyError.duplicateStudentId.rawValue)
                         : Mutation.setDidCheckDuplicate(true)
                     case .error(let error):

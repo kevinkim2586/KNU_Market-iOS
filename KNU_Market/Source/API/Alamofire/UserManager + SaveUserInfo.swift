@@ -23,12 +23,12 @@ extension UserManager {
     }
     
     //MARK: - 사용자 프로필 조회 후 기본적인 정보 저장
-    func saveUserProfileInfo(with model: LoadProfileResponseModel) {
-        User.shared.userUID = model.uid
-        User.shared.userID = model.id            //email == id
-        User.shared.emailForPasswordLoss = model.emailForPasswordLoss
-        User.shared.nickname = model.nickname
-        User.shared.profileImageUID = model.profileImageUid
-        User.shared.isVerified = model.isVerified
-    }
+//    func saveUserProfileInfo(with model: LoadProfileResponseModel) {
+//        User.shared.userUID = model.uid
+//        User.shared.userID = model.id            //email == id
+//        User.shared.emailForPasswordLoss = model.emailForPasswordLoss
+//        User.shared.nickname = model.nickname
+//        User.shared.profileImageUID = model.profileImageUid
+//        User.shared.isVerified = model.isVerified
+//    }
 }

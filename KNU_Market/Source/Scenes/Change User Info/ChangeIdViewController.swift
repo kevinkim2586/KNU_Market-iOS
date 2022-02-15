@@ -115,7 +115,7 @@ class ChangeIdViewController: BaseViewController, View {
         
         changeIdButton.rx.tap
             .asObservable()
-            .map { Reactor.Action.updateUserInfo(.id, .id)}
+            .map { Reactor.Action.updateUserInfo(.id, .username)}
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         

@@ -44,9 +44,9 @@ final class MyPageViewReactor: Reactor, Stepper {
     
     struct State {
         
-        var profileImageUid: String = "default"
-        var userNickname: String = "-"
-        var userId: String = "-"
+        var profileImageUid: String?
+        var displayName: String = "-"
+        var username: String = "-"
         var isReportChecked: Bool = false
         var isVerified: Bool = false
 
@@ -187,12 +187,14 @@ final class MyPageViewReactor: Reactor, Stepper {
         switch mutation {
         case .setUserProfile(let loadProfileUserModel):
             
-            state.profileImageUid = loadProfileUserModel.profileImageUid
-            state.userNickname = loadProfileUserModel.nickname
-            state.userId = loadProfileUserModel.id
-            state.isVerified = loadProfileUserModel.isVerified
-            state.isReportChecked = !loadProfileUserModel.isReportChecked
-            state.myPageSectionModels[1].items[0].isNotificationBadgeHidden = !loadProfileUserModel.isReportChecked
+            state.username = loadProfileUserModel.displayName
+            state.username = loadProfileUserModel.username
+            
+            state.profileImageUid = loadProfileUserModel.userProfileImage
+         
+//            state.isVerified = loadProfileUserModel.isVerified
+//            state.isReportChecked = !loadProfileUserModel.isReportChecked
+//            state.myPageSectionModels[1].items[0].isNotificationBadgeHidden = !loadProfileUserModel.isReportChecked
             
         case .updateProfileImageUid(let profileImageUid):
             state.alertMessage = "프로필 이미지 변경 성공 🎉"

@@ -261,17 +261,17 @@ class MyPageViewController: BaseViewController, View {
             .subscribe(onNext: { (_, info) in
             
                 self.profileImageButton.sd_setImage(
-                    with: info.0 == "default" ? nil : URL(string: info.1),
+                    with: info.0 == nil ? nil : URL(string: info.1),
                     for: .normal,
                     placeholderImage: UIImage(named: K.Images.pickProfileImage),
                     options: .continueInBackground
                 )
-                self.profileImageButton.layer.masksToBounds = info.0 != "default" ? true : false
+                self.profileImageButton.layer.masksToBounds = info.0 != nil ? true : false
             })
             .disposed(by: disposeBag)
         
         reactor.state
-            .map { ($0.userNickname, $0.userId) }
+            .map { ($0.displayName, $0.username) }
             .withUnretained(self)
             .subscribe(onNext: { (_, userInfo) in
                 self.userNicknameLabel.text = "\(userInfo.0)\n(\(userInfo.1))"

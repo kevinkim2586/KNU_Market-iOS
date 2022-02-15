@@ -10,9 +10,7 @@ struct RegisterRequestDTO {
     let password: String
     let fcmToken: String
     let emailForPasswordLoss: String
-    
-    let headers: HTTPHeaders = [HTTPHeaderKeys.contentType.rawValue: HTTPHeaderValues.multipartFormData.rawValue]
-    
+        
     init(username: String, password: String, displayName: String, fcmToken: String, emailForPasswordLoss: String) {
         self.username = username
         self.displayName = displayName

@@ -47,7 +47,7 @@ final class UnregisterViewReactor: Reactor, Stepper {
     init(userService: UserServiceType) {
         self.userService = userService
         
-        let userId: String = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.userID) ?? ""
+        let userId: String = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.username) ?? ""
         self.initialState = State(userId: userId)
     }
     
@@ -114,7 +114,7 @@ extension UnregisterViewReactor {
     
     private func login() -> Observable<Mutation> {
         
-        return self.userService.login(id: currentState.userId, password: currentState.password)
+        return self.userService.login(username: currentState.userId, password: currentState.password)
             .asObservable()
             .map { result in
                 switch result {

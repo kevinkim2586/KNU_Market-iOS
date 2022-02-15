@@ -191,7 +191,7 @@ final class PostViewReactor: Reactor, Stepper {
             postModel: PostDetailModel.getDefaultState()
         )
         
-        self.initialState.myNickname = userDefaultsService.get(key: UserDefaults.Keys.nickname) ?? ""
+        self.initialState.myNickname = userDefaultsService.get(key: UserDefaults.Keys.displayName) ?? ""
         self.initialState.userJoinedChatRoomPIDS = userDefaultsService.get(key: UserDefaults.Keys.joinedChatRoomPIDs) ?? []
     }
     

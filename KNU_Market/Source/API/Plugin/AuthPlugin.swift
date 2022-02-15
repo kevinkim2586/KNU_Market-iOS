@@ -14,7 +14,7 @@ struct AuthPlugin: PluginType {
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
         var request = request
         let token = User.shared.accessToken
-        request.addValue(token, forHTTPHeaderField: "authentication")
+        request.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")
         return request
     }
 }

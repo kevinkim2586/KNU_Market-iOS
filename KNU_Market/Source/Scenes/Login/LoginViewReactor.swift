@@ -30,10 +30,6 @@ final class LoginViewReactor: Reactor, Stepper {
         case setLoading(Bool)
         case setErrorMessage(String)
         case empty
-        
-      
-        
-        
     }
     
     struct State {
@@ -61,7 +57,7 @@ final class LoginViewReactor: Reactor, Stepper {
         case .login:
             return Observable.concat([
                 Observable.just(Mutation.setLoading(true)),
-                self.userService.login(id: currentState.id, password: currentState.password)
+                self.userService.login(username: currentState.id, password: currentState.password)
                     .asObservable()
                     .map { result in
                         switch result {

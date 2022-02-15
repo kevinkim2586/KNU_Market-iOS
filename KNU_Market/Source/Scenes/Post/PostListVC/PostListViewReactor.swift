@@ -284,7 +284,7 @@ extension PostListViewReactor {
             .map { result in
                 switch result {
                 case .success:
-                    let userNickname: String = self.userDefaultsGenericService.get(key: UserDefaults.Keys.nickname) ?? "-"
+                    let userNickname: String = self.userDefaultsGenericService.get(key: UserDefaults.Keys.displayName) ?? "-"
                     self.steps.accept(AppStep.welcomeIndicatorRequired(nickname: userNickname))
                     return Mutation.setUserNickname(userNickname)
                     

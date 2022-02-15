@@ -15,7 +15,7 @@ protocol UserServiceType: AnyObject {
     func checkDuplication(type: CheckDuplicationType, infoString: String) -> Single<NetworkResultWithValue<DuplicateCheckModel>>
     
     @discardableResult
-    func login(id: String, password: String) -> Single<NetworkResultWithValue<LoginResponseModel>>
+    func login(username: String, password: String) -> Single<NetworkResultWithValue<LoginResponseModel>>
     func loadUserProfileUsingUid(userUid: String) -> Single<NetworkResultWithValue<LoadUserProfileUidModel>>
     
     @discardableResult

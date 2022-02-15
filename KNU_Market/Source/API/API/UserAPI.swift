@@ -11,7 +11,7 @@ import Moya
 enum UserAPI {
     case register(model: RegisterRequestDTO)
     case checkDuplication(type: CheckDuplicationType, infoString: String)
-    case login(id: String, password: String)
+    case login(username: String, password: String)
     case loadUserProfileUsingUid(userUid: String)
     case loadUserProfile
     case sendFeedback(content: String)
@@ -28,12 +28,15 @@ extension UserAPI: BaseAPI {
     
     var path: String {
         switch self {
-        case .register, .loadUserProfile, .unregisterUser, .updateUserInfo:
-            return "auth"
-        case .checkDuplication:
-            return "duplicate"
+        case .register:
+            return "signup"
         case .login:
             return "login"
+        case .loadUserProfile, .unregisterUser, .updateUserInfo:
+            return "auth"
+        case .checkDuplication(let type, let infoString):
+            return "users/\(type.rawValue)/\(infoString)"
+    
         case let .loadUserProfileUsingUid(uid):
             return "auth/\(uid)"
         case .sendFeedback:
@@ -53,18 +56,10 @@ extension UserAPI: BaseAPI {
     
     var headers: [String : String]? {
         switch self {
-        case .register, .uploadStudentIdVerificationInformation:
+        case .uploadStudentIdVerificationInformation:
             return ["Content-Type" : "multipart/form-data"]
-        case let .checkDuplication(type, infoString):
-            switch type {
-            case .id:
-                return [ "id" : infoString ]
-            case .email:
-                return [ "email" : infoString]
-            default: return nil
-            }
         default:
-            return ["Content-Type" : "application/json"]
+            return ["Content-Type":"application/x-www-form-urlencoded"]
         }
     }
     
@@ -83,16 +78,10 @@ extension UserAPI: BaseAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case let .login(id, password):
-            return [ "id" : id, "password" : password ]
-        case let .checkDuplication(type, infoString):
-            switch type {
-            case .nickname:
-                return [ "name" : infoString ]
-            case .studentId:
-                return [ "studentid" : infoString]
-            default: return nil
-            }
+        case let .register(model):
+            return [ "username" : model.username, "displayname" : model.displayName, "password" : model.password, "fcmToken" : model.fcmToken, "email" : model.emailForPasswordLoss ]
+        case let .login(username, password):
+            return [ "username" : username, "password" : password ]
         case let .sendFeedback(content):
             return [ "content" : content ]
         case let .sendVerificationEmail(email):
@@ -111,11 +100,12 @@ extension UserAPI: BaseAPI {
             return [ "id" : id ]
         default: return nil
         }
-     
     }
     
     var parameterEncoding: ParameterEncoding {
         switch self {
+        case .register, .login:
+            return URLEncoding.httpBody
         case .checkDuplication:
             return URLEncoding.queryString
         default: return JSONEncoding.default
@@ -125,18 +115,6 @@ extension UserAPI: BaseAPI {
     var task: Task {
         
         switch self {
-        case let .register(model: model):
-            
-            var multipartData: [MultipartFormData] = []
-            
-            multipartData.append(MultipartFormData(provider: .data(model.username.data(using: .utf8)!), name: "username"))
-            multipartData.append(MultipartFormData(provider: .data(model.displayName.data(using: .utf8)!), name: "displayname"))
-            multipartData.append(MultipartFormData(provider: .data(model.password.data(using: .utf8)!), name: "password"))
-            multipartData.append(MultipartFormData(provider: .data(model.fcmToken.data(using: .utf8)!), name: "fcmToken"))
-            multipartData.append(MultipartFormData(provider: .data(model.emailForPasswordLoss.data(using: .utf8)!), name: "email"))
-        
-            return .uploadMultipart(multipartData)
-            
         case let .uploadStudentIdVerificationInformation(model: model):
             
             var multipartData: [MultipartFormData] = []
@@ -146,7 +124,6 @@ extension UserAPI: BaseAPI {
             multipartData.append(MultipartFormData(provider: .data(model.studentIdImageData), name: "media", fileName: "studentId.jpeg", mimeType: "image/jpeg"))
             
             return .uploadMultipart(multipartData)
-            
             
         default:
             if let parameters = parameters {
@@ -159,7 +136,7 @@ extension UserAPI: BaseAPI {
 
 
 enum UpdateUserInfoType: String {
-    case nickname       = "nickname"
+    case displayName    = "displayname"
     case password       = "password"
     case fcmToken       = "fcmToken"
     case profileImage   = "image"
@@ -168,8 +145,8 @@ enum UpdateUserInfoType: String {
 }
 
 enum CheckDuplicationType: String {
-    case nickname       = "name"
+    case username       = "username"
+    case displayName    = "displayname"
     case studentId      = "studentId"
-    case id             = "id"
     case email          = "email"       // 비밀번호 분실 시 임시 비밀번호를 발급 받을 이메일
 }

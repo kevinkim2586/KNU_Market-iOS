@@ -84,7 +84,7 @@ final class ChangeUserInfoReactor: Reactor, Stepper {
                 userInputValidation = currentState.userId.isValidID
                 updatedInfoString = currentState.userId
                 
-            case .nickname:
+            case .displayName:
                 userInputValidation = currentState.userNickname.isValidNickname
                 updatedInfoString = currentState.userNickname
                 
@@ -106,7 +106,7 @@ final class ChangeUserInfoReactor: Reactor, Stepper {
                     .flatMap { result -> Observable<Mutation> in
                         switch result {
                         case .success(let duplicateCheckModel):
-                            if duplicateCheckModel.isDuplicate {
+                            if duplicateCheckModel.isDuplicated {
                                 return Observable.just(Mutation.setErrorMessage(self.getDuplicateErrorMessage(updateUserInfoType: updateUserInfoType)))
                             } else {
                                 return Observable.concat([
@@ -192,7 +192,7 @@ extension ChangeUserInfoReactor {
     private func getDuplicateErrorMessage(updateUserInfoType: UpdateUserInfoType) -> String {
         let errorMessage: String
         switch updateUserInfoType {
-        case .nickname:
+        case .displayName:
             errorMessage = InputError.existingNickname.rawValue
         case .id:
             errorMessage = InputError.existingId.rawValue

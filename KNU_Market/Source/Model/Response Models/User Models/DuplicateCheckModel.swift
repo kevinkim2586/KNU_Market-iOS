@@ -8,5 +8,5 @@
 import Foundation
 
 struct DuplicateCheckModel: ModelType {
-    let isDuplicate: Bool
+    let isDuplicated: Bool
 }

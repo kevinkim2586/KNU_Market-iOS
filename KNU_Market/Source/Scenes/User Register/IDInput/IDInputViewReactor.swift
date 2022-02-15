@@ -54,30 +54,24 @@ final class IDInputViewReactor: Reactor, Stepper {
                 return Observable.just(Mutation.setErrorMessage(idValidationResult.rawValue))
             }
             
-            #warning("추후 수정")
-            UserRegisterValues.shared.username = self.currentState.userId
-            self.steps.accept(AppStep.idInputIsCompleted)
-            return .empty()
+            return self.userService.checkDuplication(type: .username, infoString: currentState.userId)
+                .asObservable()
+                .map { result in
+                    switch result {
+                    case .success(let duplicateCheckModel):
 
-            
-//            return self.userService.checkDuplication(type: .id, infoString: currentState.userId)
-//                .asObservable()
-//                .map { result in
-//                    switch result {
-//                    case .success(let duplicateCheckModel):
-//
-//                        if duplicateCheckModel.isDuplicate {
-//                            return Mutation.setErrorMessage(RegisterError.existingId.rawValue)
-//                        } else {
-//                            UserRegisterValues.shared.username = self.currentState.userId
-//                            self.steps.accept(AppStep.idInputIsCompleted)
-//                            return Mutation.empty
-//                        }
-//
-//                    case .error(let error):
-//                        return Mutation.setErrorMessage(error.errorDescription)
-//                    }
-//                }
+                        if duplicateCheckModel.isDuplicated {
+                            return Mutation.setErrorMessage(RegisterError.existingId.rawValue)
+                        } else {
+                            UserRegisterValues.shared.username = self.currentState.userId
+                            self.steps.accept(AppStep.idInputIsCompleted)
+                            return Mutation.empty
+                        }
+
+                    case .error(let error):
+                        return Mutation.setErrorMessage(error.errorDescription)
+                    }
+                }
         }
     }
     

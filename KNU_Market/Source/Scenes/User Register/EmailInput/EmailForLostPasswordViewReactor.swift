@@ -54,78 +54,48 @@ final class EmailForLostPasswordViewReactor: Reactor, Stepper {
                 return Observable.just(Mutation.setErrorMessage(emailValidationResult.rawValue))
             }
             
-            #warning("추후 수정")
-            
-            UserRegisterValues.shared.emailForPasswordLoss = self.currentState.userEmail
+            return self.userService.checkDuplication(type: .email, infoString: currentState.userEmail)
+                .asObservable()
+                .flatMap { result -> Observable<Mutation> in
 
-            let model = RegisterRequestDTO(
-                username: UserRegisterValues.shared.username,
-                password: UserRegisterValues.shared.password,
-                displayName: UserRegisterValues.shared.displayName,
-                fcmToken: UserRegisterValues.shared.fcmToken,
-                emailForPasswordLoss: UserRegisterValues.shared.emailForPasswordLoss
-            )
+                    switch result {
+                    case .success(let duplicateCheckModel):
 
-            print("✅ model: \(model)")
-            return Observable.concat([
-                Observable.just(Mutation.setLoading(true)),
-                self.userService.register(with: model)
-                    .asObservable()
-                    .map { result in
-                        switch result {
-                        case .success:
-                            self.steps.accept(AppStep.emailInputIsCompleted)
-                            return Mutation.empty
-                        case .error(let error):
-                            return Mutation.setErrorMessage(error.errorDescription)
+                        if duplicateCheckModel.isDuplicated {
+                            return Observable.just(Mutation.setErrorMessage(RegisterError.existingEmail.rawValue))
                         }
-                    },
-                Observable.just(Mutation.setLoading(false))
-            ])
-            
-            
-//            return self.userService.checkDuplication(type: .email, infoString: currentState.userEmail)
-//                .asObservable()
-//                .flatMap { result -> Observable<Mutation> in
-//
-//                    switch result {
-//                    case .success(let duplicateCheckModel):
-//
-//                        if duplicateCheckModel.isDuplicate {
-//                            return Observable.just(Mutation.setErrorMessage(RegisterError.existingEmail.rawValue))
-//                        }
-//                        else {
-//                            UserRegisterValues.shared.emailForPasswordLoss = self.currentState.userEmail
-//
-//                            let model = RegisterRequestDTO(
-//                                username: UserRegisterValues.shared.username,
-//                                password: UserRegisterValues.shared.password,
-//                                displayName: UserRegisterValues.shared.displayName,
-//                                fcmToken: UserRegisterValues.shared.fcmToken,
-//                                emailForPasswordLoss: UserRegisterValues.shared.emailForPasswordLoss
-//                            )
-//
-//                            return Observable.concat([
-//                                Observable.just(Mutation.setLoading(true)),
-//                                self.userService.register(with: model)
-//                                    .asObservable()
-//                                    .map { result in
-//                                        switch result {
-//                                        case .success:
-//                                            self.steps.accept(AppStep.emailInputIsCompleted)
-//                                            return Mutation.empty
-//                                        case .error(let error):
-//                                            return Mutation.setErrorMessage(error.errorDescription)
-//                                        }
-//                                    },
-//                                Observable.just(Mutation.setLoading(false))
-//                            ])
-//                        }
-//
-//                    case .error(let error):
-//                        return Observable.just(Mutation.setErrorMessage(error.errorDescription))
-//                    }
-//                }
+                        else {
+                            UserRegisterValues.shared.emailForPasswordLoss = self.currentState.userEmail
+
+                            let model = RegisterRequestDTO(
+                                username: UserRegisterValues.shared.username,
+                                password: UserRegisterValues.shared.password,
+                                displayName: UserRegisterValues.shared.displayName,
+                                fcmToken: UserRegisterValues.shared.fcmToken,
+                                emailForPasswordLoss: UserRegisterValues.shared.emailForPasswordLoss
+                            )
+
+                            return Observable.concat([
+                                Observable.just(Mutation.setLoading(true)),
+                                self.userService.register(with: model)
+                                    .asObservable()
+                                    .map { result in
+                                        switch result {
+                                        case .success:
+                                            self.steps.accept(AppStep.emailInputIsCompleted)
+                                            return Mutation.empty
+                                        case .error(let error):
+                                            return Mutation.setErrorMessage(error.errorDescription)
+                                        }
+                                    },
+                                Observable.just(Mutation.setLoading(false))
+                            ])
+                        }
+
+                    case .error(let error):
+                        return Observable.just(Mutation.setErrorMessage(error.errorDescription))
+                    }
+                }
         }
     }
     

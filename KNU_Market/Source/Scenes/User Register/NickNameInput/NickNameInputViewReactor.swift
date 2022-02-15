@@ -54,32 +54,24 @@ final class NickNameInputViewReactor: Reactor, Stepper {
                 return Observable.just(Mutation.setErrorMessage(nicknameValidationResult.rawValue))
             }
             
-            #warning("추후 수정")
-            
-            UserRegisterValues.shared.displayName = self.currentState.userNickname
-            self.steps.accept(AppStep.nicknameInputIsCompleted)
-            return .empty()
-            
-//            return self.userService.checkDuplication(type: .nickname, infoString: currentState.userNickname)
-//                .asObservable()
-//                .map {  result in
-//                    switch result {
-//                    case .success(let duplicateCheckModel):
-//
-//                        if duplicateCheckModel.isDuplicate {
-//                            return Mutation.setErrorMessage(RegisterError.existingNickname.rawValue)
-//                        } else {
-//                            UserRegisterValues.shared.displayName = self.currentState.userNickname
-//                            self.steps.accept(AppStep.nicknameInputIsCompleted)
-//                            return Mutation.empty
-//                        }
-//
-//                    case .error(let error):
-//                        return Mutation.setErrorMessage(error.errorDescription)
-//                    }
-//                }
-            
-    
+            return self.userService.checkDuplication(type: .displayName, infoString: currentState.userNickname)
+                .asObservable()
+                .map {  result in
+                    switch result {
+                    case .success(let duplicateCheckModel):
+                        
+                        if duplicateCheckModel.isDuplicated {
+                            return Mutation.setErrorMessage(RegisterError.existingNickname.rawValue)
+                        } else {
+                            UserRegisterValues.shared.displayName = self.currentState.userNickname
+                            self.steps.accept(AppStep.nicknameInputIsCompleted)
+                            return Mutation.empty
+                        }
+                        
+                    case .error(let error):
+                        return Mutation.setErrorMessage(error.errorDescription)
+                    }
+                }
         }
     }
     
@@ -91,7 +83,7 @@ final class NickNameInputViewReactor: Reactor, Stepper {
             
         case .setErrorMessage(let errorMessage):
             state.errorMessage = errorMessage
-        
+            
         case .empty:
             break
         }

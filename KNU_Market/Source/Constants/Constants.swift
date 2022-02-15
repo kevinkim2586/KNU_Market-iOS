@@ -4,7 +4,7 @@ import UIKit
 
 struct K {
 
-//    static let API_BASE_URL                     = "http://222.104.199.114:5004/api/v1/"
+//    static let API_BASE_URL                     = "http://222.104.199.114:5100/api/v1/"
 //    static let WEB_SOCKET_URL                   = "ws://222.104.199.114:5005"
     
     

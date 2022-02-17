@@ -18,7 +18,7 @@ enum UserAPI {
     case unregisterUser
     case uploadStudentIdVerificationInformation(model: StudentIdVerificationDTO)
     case sendVerificationEmail(email: String)
-    case updateUserInfo(type: UpdateUserInfoType, updatedInfo: String)
+    case updateUserInfo(type: UpdateUserInfoType, updatedInfo: String?, profileImageData: Data?)
     case findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?)
     case findPassword(id: String)
     case checkLatestAppVersion
@@ -32,8 +32,10 @@ extension UserAPI: BaseAPI {
             return "signup"
         case .login:
             return "login"
-        case .loadUserProfile, .unregisterUser, .updateUserInfo:
-            return "auth"
+        case .loadUserProfile:
+            return "users/profile"
+        case .unregisterUser, .updateUserInfo:
+            return "users"
         case .checkDuplication(let type, let infoString):
             return "users/\(type.rawValue)/\(infoString)"
         case let .loadUserProfileUsingUid(uid):
@@ -55,7 +57,7 @@ extension UserAPI: BaseAPI {
     
     var headers: [String : String]? {
         switch self {
-        case .uploadStudentIdVerificationInformation:
+        case .uploadStudentIdVerificationInformation, .updateUserInfo:
             return ["Content-Type" : "multipart/form-data"]
         default:
             return ["Content-Type":"application/x-www-form-urlencoded"]
@@ -71,7 +73,7 @@ extension UserAPI: BaseAPI {
         case .unregisterUser:
             return .delete
         case .updateUserInfo:
-            return .put
+            return .patch
         }
     }
     
@@ -85,8 +87,6 @@ extension UserAPI: BaseAPI {
             return [ "content" : content ]
         case let .sendVerificationEmail(email):
             return [ "studentEmail": email ]
-        case let .updateUserInfo(type, updatedInfo):
-            return [ type.rawValue : updatedInfo ]
         case let .findUserId(option, studentEmail, studentId, studentBirthDate):
             switch option {
             case .schoolEmail:
@@ -121,6 +121,25 @@ extension UserAPI: BaseAPI {
             multipartData.append(MultipartFormData(provider: .data(model.studentBirth.data(using: .utf8)!), name: "studentBirth"))
             multipartData.append(MultipartFormData(provider: .data(model.studentIdImageData), name: "media", fileName: "studentId.jpeg", mimeType: "image/jpeg"))
             
+            return .uploadMultipart(multipartData)
+            
+        case let .updateUserInfo(type, updatedInfo, profileImageData):
+
+            var multipartData: [MultipartFormData] = []
+            
+            switch type {
+            case .displayName:
+                multipartData.append(MultipartFormData(provider: .data(updatedInfo!.data(using: .utf8)!), name: "displayname"))
+            case .password:
+                multipartData.append(MultipartFormData(provider: .data(updatedInfo!.data(using: .utf8)!), name: "password"))
+            case .fcmToken:
+                multipartData.append(MultipartFormData(provider: .data(updatedInfo!.data(using: .utf8)!), name: "fcmToken"))
+            case .email:
+                multipartData.append(MultipartFormData(provider: .data(updatedInfo!.data(using: .utf8)!), name: "email"))
+            case .profileImage:
+                multipartData.append(MultipartFormData(provider: .data(profileImageData!), name: "userProfile", fileName: "userProfileImage_\(UUID().uuidString).jpeg", mimeType: "image/jpeg"))
+            }
+
             return .uploadMultipart(multipartData)
             
         default:

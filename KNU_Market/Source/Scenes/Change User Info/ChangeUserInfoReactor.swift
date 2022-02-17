@@ -107,7 +107,7 @@ final class ChangeUserInfoReactor: Reactor, Stepper {
                             } else {
                                 return Observable.concat([
                                     Observable.just(Mutation.setLoading(true)),
-                                    self.userService.updateUserInfo(type: updateUserInfoType, updatedInfo: updatedInfoString)
+                                    self.userService.updateUserInfo(type: updateUserInfoType, updatedInfo: updatedInfoString, profileImageData: nil)
                                         .asObservable()
                                         .map { result in
                                             switch result {
@@ -135,7 +135,7 @@ final class ChangeUserInfoReactor: Reactor, Stepper {
             } else {
                 return Observable.concat([
                     Observable.just(Mutation.setLoading(true)),
-                    self.userService.updateUserInfo(type: .password, updatedInfo: currentState.userPassword)
+                    self.userService.updateUserInfo(type: .password, updatedInfo: currentState.userPassword, profileImageData: nil)
                         .asObservable()
                         .map { result in
                             switch result {

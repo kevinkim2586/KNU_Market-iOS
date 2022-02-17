@@ -20,10 +20,6 @@ final class UserDefaultsPersistenceService: UserDefaultsPersistenceServiceType {
         userDefaultsGenericService.set(key: UserDefaults.Keys.isLoggedIn, value: true)
     }
     
-    func configurePostFilterOption(type: PostFilterOptions) {
-        userDefaultsGenericService.set(key: UserDefaults.Keys.postFilterOptions, value: type.rawValue)
-    }
-    
     func configureUserAsVerifiedUser() {
         userDefaultsGenericService.set(key: UserDefaults.Keys.hasVerifiedEmail, value: true)
     }
@@ -47,14 +43,15 @@ final class UserDefaultsPersistenceService: UserDefaultsPersistenceServiceType {
         userDefaultsGenericService.set(key: UserDefaults.Keys.userRoleGroup, value: model.userRoleGroup.userRoleCode)
     }
     
-    func updateLocalUserInfo(type: UpdateUserInfoType, infoString: String) {
+    func updateLocalUserInfo(type: UpdateUserInfoType, infoString: String?) {
+        guard let infoString = infoString else { return }
         switch type {
         case .displayName:
             userDefaultsGenericService.set(key: UserDefaults.Keys.displayName, value: infoString)
         case .fcmToken:
             userDefaultsGenericService.set(key: UserDefaults.Keys.fcmToken, value: infoString)
         case .profileImage:
-            userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: infoString)
+            userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUrl, value: infoString)
         case .email:
             userDefaultsGenericService.set(key: UserDefaults.Keys.emailForPasswordLoss, value: infoString)
         default: break

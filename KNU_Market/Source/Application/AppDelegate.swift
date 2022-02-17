@@ -3,9 +3,12 @@ import IQKeyboardManagerSwift
 import Firebase
 import FirebaseMessaging
 import UserNotificationsUI
+import RxSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var disposeBag = DisposeBag()
 
     let gcmMessageIDKey = "gcm.message_id2"
     
@@ -17,6 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // 알림에 따른 Navigation 처리 클래스
     let urlNavigator: URLNavigator = URLNavigator()
     
+    let userService = UserService(
+        network: Network<UserAPI>(plugins: [
+            AuthPlugin()
+        ]), userDefaultsPersistenceService: UserDefaultsPersistenceService(
+            userDefaultsGenericService: UserDefaultsGenericService()
+        )
+    )
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         print("✏️ didFinishLaunchingWithOptions")
@@ -24,12 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         
         // Observer for refresh token expiration
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(refreshTokenHasExpired),
-            name: .refreshTokenExpired,
-            object: nil
-        )
+        NotificationCenterService.refreshTokenExpired.addObserver()
+            .bind { _ in
+                self.refreshTokenHasExpired()
+            }
+            .disposed(by: disposeBag)
         
         UNUserNotificationCenter.current().delegate = self
         
@@ -38,11 +48,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error {
                 print("❗️ Error fetching FCM registration token: \(error)")
             } else if let token = token {
+                
                 print("✏️ FCM Registration Token: \(token)")
                 UserRegisterValues.shared.fcmToken = token
                 User.shared.fcmToken = token
-                if User.shared.isLoggedIn {
-                    UserManager.shared.updateUserInfo(type: .fcmToken, infoString: token) { _ in }
+                
+                
+                let isLoggedIn: Bool = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.isLoggedIn) ?? false
+                
+                if isLoggedIn {
+                    self.userService.updateUserInfo(type: .fcmToken, updatedInfo: token, profileImageData: nil)
+                        .asObservable()
+                        .subscribe(onNext: { _ in } )
+                        .disposed(by: self.disposeBag)
                 }
             }
         }

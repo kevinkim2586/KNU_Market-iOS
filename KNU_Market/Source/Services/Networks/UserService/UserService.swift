@@ -49,7 +49,6 @@ final class UserService: UserServiceType {
                 case .success(let loginResponseModel):
                     self?.userDefaultsPersistenceService.saveAccessTokens(from: loginResponseModel)
                     self?.userDefaultsPersistenceService.configureUserAsLoggedIn()
-                    self?.userDefaultsPersistenceService.configurePostFilterOption(type: .showGatheringFirst)
                     self?.loadUserProfile()
                     UIApplication.shared.registerForRemoteNotifications()
                     return .success(loginResponseModel)
@@ -81,7 +80,7 @@ final class UserService: UserServiceType {
                 switch result {
                 case .success(let userModel):
                     self?.userDefaultsPersistenceService.saveUserProfileInfo(from: userModel)
-                    self?.updateUserInfo(type: .fcmToken, updatedInfo: UserRegisterValues.shared.fcmToken)
+                    self?.updateUserInfo(type: .fcmToken, updatedInfo: UserRegisterValues.shared.fcmToken, profileImageData: nil)
                     return .success(userModel)
                 case .error(let error):
                     return .error(error)
@@ -147,14 +146,15 @@ final class UserService: UserServiceType {
     }
     
     @discardableResult
-    func updateUserInfo(type: UpdateUserInfoType, updatedInfo: String) -> Single<NetworkResult> {
+    func updateUserInfo(type: UpdateUserInfoType, updatedInfo: String?, profileImageData: Data?) -> Single<NetworkResultWithValue<LoadProfileResponseModel>> {
         
-        return network.requestWithoutMapping(.updateUserInfo(type: type, updatedInfo: updatedInfo))
+        return network.requestObject(.updateUserInfo(type: type, updatedInfo: updatedInfo, profileImageData: profileImageData), type: LoadProfileResponseModel.self)
             .map { [weak self] result in
                 switch result {
-                case .success:
+                case .success(let model):
+                    print("✅ Successfully Updated User Info type: \(type)")
                     self?.userDefaultsPersistenceService.updateLocalUserInfo(type: type, infoString: updatedInfo)
-                    return .success
+                    return .success(model)
                 case .error(let error):
                     return .error(error)
                 }

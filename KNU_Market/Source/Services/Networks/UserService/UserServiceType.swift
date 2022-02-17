@@ -26,7 +26,7 @@ protocol UserServiceType: AnyObject {
     func sendVerificationEmail(email: String) -> Single<NetworkResult>
     
     @discardableResult
-    func updateUserInfo(type: UpdateUserInfoType, updatedInfo: String) -> Single<NetworkResult>
+    func updateUserInfo(type: UpdateUserInfoType, updatedInfo: String?, profileImageData: Data?) -> Single<NetworkResultWithValue<LoadProfileResponseModel>>
         
     func findUserId(option: FindUserInfoOption, studentEmail: String?, studentId: String?, studentBirthDate: String?) -> Single<NetworkResultWithValue<FindIdModel>>
     func findPassword(id: String) -> Single<NetworkResultWithValue<FindPasswordModel>>

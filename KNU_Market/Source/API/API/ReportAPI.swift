@@ -9,7 +9,8 @@ import Foundation
 import Moya
 
 enum ReportAPI {
-    case reportUser(model: ReportUserRequestDTO)
+    case report(model: ReportRequestDTO)
+    case reportUser(model: ReportRequestDTO)
     case writeReport(String, String, Data?, Data?)
     case viewReport(Int)
 }
@@ -18,8 +19,11 @@ extension ReportAPI: BaseAPI {
     
     var path: String {
         switch self {
+        case .report:
+            return "reports"
+            
         case let .reportUser(model):
-            return "report/\(model.postUID)"
+            return "report/\(model.reportTo)"
         case .writeReport:
             return "report"
         case let .viewReport(uid):
@@ -29,13 +33,16 @@ extension ReportAPI: BaseAPI {
     
     var headers: [String : String]? {
         switch self {
-        default: return ["Content-Type" : "application/json"]
+        case .report:
+            return ["Content-Type" : "multipart/form-data"]
+        default:
+            return ["Content-Type" : "application/json"]
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .reportUser, .writeReport:
+        case .report, .reportUser, .writeReport:
             return .post
         case .viewReport:
             return .get
@@ -44,8 +51,6 @@ extension ReportAPI: BaseAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case let .reportUser(model):
-            return model.parameters
         default:
             return nil
         }
@@ -59,6 +64,24 @@ extension ReportAPI: BaseAPI {
     
     var task: Task {
         switch self {
+            
+        case let .report(model):
+            
+            var multipartData: [MultipartFormData] = []
+            
+            multipartData.append(MultipartFormData(provider: .data(model.title.data(using: .utf8)!), name: "title"))
+            multipartData.append(MultipartFormData(provider: .data(model.content.data(using: .utf8)!), name: "content"))
+            multipartData.append(MultipartFormData(provider: .data(model.type.rawValue.data(using: .utf8)!), name: "reportType"))
+            multipartData.append(MultipartFormData(provider: .data(model.reportTo.data(using: .utf8)!), name: "reportTo"))
+            
+            if let reportFiles = model.reportFiles {
+                for reportFile in reportFiles {
+                    multipartData.append(MultipartFormData(provider: .data(reportFile), name: "reportFile", fileName: "reportFile_\(UUID().uuidString).jpeg", mimeType: "image/jpeg"))
+                }
+            }
+  
+            return .uploadMultipart(multipartData)
+            
         case let .writeReport(title, content, media1, media2):
             var multipartData: [MultipartFormData] = []
             

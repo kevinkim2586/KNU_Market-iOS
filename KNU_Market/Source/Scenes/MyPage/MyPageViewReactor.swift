@@ -171,11 +171,10 @@ final class MyPageViewReactor: Reactor, Stepper {
 
         switch mutation {
         case .setUserProfile(let loadProfileUserModel):
+       
             state.displayName = loadProfileUserModel.displayName
             state.username = loadProfileUserModel.username
-            
             state.profileImageUrl = loadProfileUserModel.profileUrl
-               
             state.isVerified = loadProfileUserModel.userRoleGroup.userRoleCode == UserRoleGroupType.common.rawValue ? true : false
          
 //            state.isReportChecked = !loadProfileUserModel.isReportChecked

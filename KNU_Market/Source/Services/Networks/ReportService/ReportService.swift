@@ -16,7 +16,19 @@ final class ReportService: ReportServiceType {
         self.network = network
     }
     
-    func reportUser(with model: ReportUserRequestDTO) -> Single<NetworkResult> {
+    func report(with model: ReportRequestDTO) -> Single<NetworkResult> {
+        return network.requestWithoutMapping(.report(model: model))
+            .map { result in
+                switch result {
+                case .success:
+                    return .success
+                case .error(let error):
+                    return .error(error)
+                }
+            }
+    }
+    
+    func reportUser(with model: ReportRequestDTO) -> Single<NetworkResult> {
         return network.requestWithoutMapping(.reportUser(model: model))
             .map { result in
                 switch result {

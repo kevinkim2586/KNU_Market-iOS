@@ -57,15 +57,17 @@ final class ReportUserViewReactor: Reactor, Stepper {
                 return Observable.just(Mutation.setErrorMessage("신고 내용을 3글자 이상 적어주세요 👀"))
             } else {
                 
-                let model = ReportUserRequestDTO(
-                    user: currentState.userToReport,
+                let model = ReportRequestDTO(
+                    type: .chat,
+                    title: "\(currentState.userToReport) 유저에 대한 신고입니다.",
                     content: currentState.reportContent,
-                    postUID: currentState.postUid ?? ""
+                    reportTo: "",
+                    reportFiles: nil
                 )
-                
+            
                 return Observable.concat([
                     Observable.just(Mutation.setLoading(true)),
-                    self.reportService.reportUser(with: model)
+                    self.reportService.report(with: model)
                         .asObservable()
                         .map { result in
                             switch result {

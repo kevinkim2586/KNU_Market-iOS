@@ -25,7 +25,7 @@ class AppFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        print("✅ AppFlow step: \(step)")
+//        print("✅ AppFlow step: \(step)")
         switch step {
         case .mainIsRequired:
             return navigateToMainHomeScreen()

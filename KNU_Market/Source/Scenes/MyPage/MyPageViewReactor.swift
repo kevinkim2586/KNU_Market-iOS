@@ -44,17 +44,13 @@ final class MyPageViewReactor: Reactor, Stepper {
     
     struct State {
         
-        var profileImageUid: String?
+        var profileImageUrl: String?
         var displayName: String = "-"
         var username: String = "-"
         var isReportChecked: Bool = false
         var isVerified: Bool = false
-
         var alertMessage: String?
-        var profileImageUrlString: String {
-            return K.MEDIA_REQUEST_URL + "\(profileImageUid)"
-        }
-        
+
         var myPageSectionModels = [
             MyPageSectionModel(header: "사용자 설정", items: [
                 MyPageCellData(leftImageName: "tray.full", title: "내가 올린 글"),
@@ -190,19 +186,20 @@ final class MyPageViewReactor: Reactor, Stepper {
             state.username = loadProfileUserModel.displayName
             state.username = loadProfileUserModel.username
             
-            state.profileImageUid = loadProfileUserModel.userProfileImage
+            state.profileImageUrl = loadProfileUserModel.profileUrl
+               
+            state.isVerified = loadProfileUserModel.userRoleGroup.userRoleCode == UserRoleGroupType.common.rawValue ? true : false
          
-//            state.isVerified = loadProfileUserModel.isVerified
 //            state.isReportChecked = !loadProfileUserModel.isReportChecked
 //            state.myPageSectionModels[1].items[0].isNotificationBadgeHidden = !loadProfileUserModel.isReportChecked
             
         case .updateProfileImageUid(let profileImageUid):
             state.alertMessage = "프로필 이미지 변경 성공 🎉"
-            state.profileImageUid = profileImageUid
+//            state.profileImageUid = profileImageUid
             
         case .setProfileImageUidToDefault:
             state.alertMessage = "프로필 사진 제거 성공 🎉"
-            state.profileImageUid = "default"
+//            state.profileImageUid = "default"
             
         case .setAlertMessage(let alertMessage):
             state.alertMessage = alertMessage

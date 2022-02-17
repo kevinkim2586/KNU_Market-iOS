@@ -37,8 +37,8 @@ final class PostListViewReactor: Reactor, Stepper {
     }
     
     enum Mutation {
-        case setPostList([PostListModel])
-        case resetPostList([PostListModel])
+        case setPostList([PostModel])
+        case resetPostList([PostModel])
         case incrementIndex
         case setBannerList([BannerModel])
         case setUserNickname(String)
@@ -52,7 +52,12 @@ final class PostListViewReactor: Reactor, Stepper {
     }
     
     struct State {
-        var postList: [PostListModel] = []
+        
+        
+        var totalNumberOfPosts: Int = 0
+        var postList: [PostModel] = []
+        
+        
         var index: Int
         var isFetchingData: Bool = false
         var isRefreshingData: Bool = false
@@ -89,7 +94,6 @@ final class PostListViewReactor: Reactor, Stepper {
         // 인증된 유저인지 아닌지 판별
         let isUserVerified: Bool = userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
 
-        
         self.initialState = State(
             index: INITIAL_PAGE,
             bannedPostUploaders: bannedPostUploaders,
@@ -108,13 +112,13 @@ final class PostListViewReactor: Reactor, Stepper {
                 
                 Observable.just(Mutation.setIsFetchingData(true)),
                 
-                fetchEnteredRoomInfo(),
-                loadUserProfile(),
+//                fetchEnteredRoomInfo(),
+//                loadUserProfile(),
                 fetchPostList(at: currentState.index),
-                fetchBannerList(),
-                fetchLatestPopup(),
+//                fetchBannerList(),
+//                fetchLatestPopup(),
                 askForNotificationPermission(),
-                fetchAppLatestVersion(),
+//                fetchAppLatestVersion(),
                 
                 Observable.just(Mutation.incrementIndex),
                 Observable.just(Mutation.setIsFetchingData(false))
@@ -151,7 +155,7 @@ final class PostListViewReactor: Reactor, Stepper {
             
         case .seePostDetail(let indexPath):
             self.steps.accept(AppStep.postIsPicked(
-                postUid: currentState.postList[indexPath.row].uuid,
+                postUid: currentState.postList[indexPath.row].postID,
                 isFromChatVC: false)
             )
             return .empty()
@@ -171,8 +175,9 @@ final class PostListViewReactor: Reactor, Stepper {
         state.errorMessage = nil
         
         switch mutation {
-        case .setPostList(let postListModel):
-            state.postList.append(contentsOf: postListModel)
+        case .setPostList(let postModel):
+            state.postList.append(contentsOf: postModel)
+            state.postList.append(contentsOf: postModel)
             
         case .resetPostList(let postListModel):
             state.postList.removeAll()
@@ -220,18 +225,16 @@ extension PostListViewReactor {
     private func fetchPostList(at index: Int) -> Observable<Mutation> {
         
         return postService.fetchPostList(
-            at: index,
-            fetchCurrentUsers: false,
-            postFilterOption: .showGatheringFirst
+            fetchCurrentUsers: false
         )
             .asObservable()
             .map { result in
                 switch result {
                 case .success(let postListModel):
-                    
-                    return postListModel.isEmpty
+                    print("✅ postListModel: \(postListModel)")
+                    return postListModel[0].posts.isEmpty
                     ? Mutation.setNeedsToFetchMoreData(false)
-                    : Mutation.setPostList(self.filterBannedPostUploaders(from: postListModel))
+                    : Mutation.setPostList(postListModel[0].posts)
                     
                 case .error(let error):
                     return error == .E601
@@ -244,16 +247,13 @@ extension PostListViewReactor {
     private func refreshPostList(postFilterOption: PostFilterOptions? = nil) -> Observable<Mutation> {
         
         return postService.fetchPostList(
-            at: INITIAL_PAGE,
-            fetchCurrentUsers: false,
-            postFilterOption: .showGatheringFirst
+            fetchCurrentUsers: false
         )
             .asObservable()
             .map { result in
                 switch result {
                 case .success(let postListModel):
-                    let filteredPostListModel = self.filterBannedPostUploaders(from: postListModel)
-                    return Mutation.resetPostList(filteredPostListModel)
+                    return Mutation.resetPostList(postListModel[0].posts)
                     
                 case .error(_):
                     return Mutation.setErrorMessage(NetworkError.E000.rawValue)
@@ -352,22 +352,3 @@ extension PostListViewReactor {
             }
     }
 }
-
-//MARK: - Utility Methods
-
-extension PostListViewReactor {
-    
-    private func filterBannedPostUploaders(from model: [PostListModel]) -> [PostListModel] {
-        
-        var filteredPostListModel: [PostListModel] = []
-        
-        model.forEach { model in
-            // 차단한 유저가 포함 "안 되어"있으면 append
-            if !currentState.bannedPostUploaders.contains(model.userInfo?.userUID ?? "") {
-                filteredPostListModel.append(model)
-            }
-        }
-        return filteredPostListModel
-    }
-}
-

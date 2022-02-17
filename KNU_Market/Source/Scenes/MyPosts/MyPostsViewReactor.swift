@@ -25,8 +25,8 @@ final class MyPostsViewReactor: Reactor, Stepper {
     }
     
     enum Mutation {
-        case setPostList([PostListModel])
-        case resetPostList([PostListModel])
+        case setPostList([PostModel])
+        case resetPostList([PostModel])
         case setFetchingData(Bool)
         case incrementIndex
         case setNeedsToShowEmptyView(Bool)
@@ -35,7 +35,7 @@ final class MyPostsViewReactor: Reactor, Stepper {
     }
     
     struct State {
-        var postList: [PostListModel] = []
+        var postList: [PostModel] = []
         var index: Int = 1
         var isFetchingData: Bool = false
 
@@ -62,17 +62,15 @@ final class MyPostsViewReactor: Reactor, Stepper {
                 Observable.just(Mutation.setFetchingData(true)),
                 
                 self.postService.fetchPostList(
-                    at: currentState.index,
-                    fetchCurrentUsers: true,
-                    postFilterOption: .showByRecentDate
+                    fetchCurrentUsers: true
                 )
                     .asObservable()
                     .map { result in
                         switch result {
                         case .success(let postListModel):
-                            return postListModel.isEmpty
+                            return postListModel[0].posts.isEmpty
                             ? Mutation.setNeedsToFetchMoreData(false)
-                            : Mutation.setPostList(postListModel)
+                            : Mutation.setPostList(postListModel[0].posts)
                             
                         case .error(let error):
                             return error == .E601
@@ -87,7 +85,7 @@ final class MyPostsViewReactor: Reactor, Stepper {
         case .seePostDetail(let indexPath):
             
             self.steps.accept(AppStep.postIsPicked(
-                postUid: currentState.postList[indexPath.row].uuid,
+                postUid: currentState.postList[indexPath.row].postID,
                 isFromChatVC: false)
             )
             return .empty()
@@ -98,16 +96,14 @@ final class MyPostsViewReactor: Reactor, Stepper {
             
                 Observable.just(Mutation.setFetchingData(true)),
                 
-                self.postService.fetchPostList(
-                    at: 1,                          // 최초 Index는 1
-                    fetchCurrentUsers: true,
-                    postFilterOption: .showByRecentDate
+                self.postService.fetchPostList(      
+                    fetchCurrentUsers: true
                 )
                     .asObservable()
                     .map { result in
                         switch result {
                         case .success(let postListModel):
-                            return Mutation.resetPostList(postListModel)
+                            return Mutation.resetPostList(postListModel[0].posts)
                             
                         case .error(let error):
                             let errorMessage = error == .E601

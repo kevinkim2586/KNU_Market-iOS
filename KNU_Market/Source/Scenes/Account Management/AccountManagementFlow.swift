@@ -52,10 +52,7 @@ class AccountManagementFlow: Flow {
         switch step {
         case .accountManagementIsRequired:
             return navigateToAccountManagementVC()
-            
-        case .changeIdIsRequired:
-            return navigateToChangeId()
-            
+
         case .changeNicknameIsRequired:
             return navigateToChangeNickname()
             
@@ -96,13 +93,6 @@ extension AccountManagementFlow {
             withNextPresentable: rootViewController,
             withNextStepper: rootViewController.reactor!)
         )
-    }
-    
-    private func navigateToChangeId() -> FlowContributors {
-        let reactor = ChangeUserInfoReactor(userService: services.userService)
-        let changeIdVC = ChangeIdViewController(reactor: reactor)
-        self.rootViewController.navigationController?.pushViewController(changeIdVC, animated: true)
-        return .one(flowContributor: .contribute(withNextPresentable: changeIdVC, withNextStepper: reactor))
     }
     
     private func navigateToChangeNickname() -> FlowContributors {

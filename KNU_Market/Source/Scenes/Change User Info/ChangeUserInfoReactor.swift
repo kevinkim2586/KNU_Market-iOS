@@ -80,10 +80,6 @@ final class ChangeUserInfoReactor: Reactor, Stepper {
             let updatedInfoString: String
             
             switch updateUserInfoType {
-            case .id:
-                userInputValidation = currentState.userId.isValidID
-                updatedInfoString = currentState.userId
-                
             case .displayName:
                 userInputValidation = currentState.userNickname.isValidNickname
                 updatedInfoString = currentState.userNickname
@@ -194,8 +190,6 @@ extension ChangeUserInfoReactor {
         switch updateUserInfoType {
         case .displayName:
             errorMessage = InputError.existingNickname.rawValue
-        case .id:
-            errorMessage = InputError.existingId.rawValue
         case .email:
             errorMessage = InputError.existingEmail.rawValue
         default: errorMessage = ""

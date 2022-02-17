@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum PostAPI {
-    case fetchPostList(index: Int, fetchCurrentUsers: Bool = false, postFilterOption: PostFilterOptions)
+    case fetchPostList(fetchCurrentUsers: Bool = false)
     case uploadNewPost(model: UploadPostRequestDTO)
     case updatePost(uid: String, model: UpdatePostRequestDTO)
     case fetchPostDetails(uid: String)
@@ -23,9 +23,9 @@ extension PostAPI: BaseAPI {
     var path: String {
         switch self {
      
-        case let .fetchPostList(_, fetchCurrentUsers, _):
+        case let .fetchPostList(fetchCurrentUsers):
             return fetchCurrentUsers == true
-            ? "posts/me"
+            ? "posts/users/"
             : "posts"
         case .uploadNewPost:
             return "posts"
@@ -40,10 +40,10 @@ extension PostAPI: BaseAPI {
     
     var headers: [String : String]? {
         switch self {
-        case let .fetchPostList(_, _, postFilterOptions):
-            if postFilterOptions == .showGatheringFirst {
-                return ["withoutcomplete" : "1"]
-            } else { fallthrough }
+//        case let .fetchPostList(_, _, postFilterOptions):
+//            if postFilterOptions == .showGatheringFirst {
+//                return ["withoutcomplete" : "1"]
+//            } else { fallthrough }
         default: return ["Content-Type" : "application/json"]
         }
     }
@@ -72,8 +72,9 @@ extension PostAPI: BaseAPI {
                 "keyword" : keyword,
                 "page" : index
             ]
-        case let .fetchPostList(index: index, _, _):
-            return [ "page" : index ]
+        case let .fetchPostList:
+//            return [ "page" : index ]
+            return nil
         default: return nil
         }
     }

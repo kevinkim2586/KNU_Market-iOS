@@ -16,7 +16,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var coordinator = FlowCoordinator()
     lazy var appServices = AppServices()
     
-    
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
         guard let window = self.window else { return }
         window.rootViewController = vc

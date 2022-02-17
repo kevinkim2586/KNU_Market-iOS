@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import RxSwift
 import Moya
 
 struct AuthPlugin: PluginType {

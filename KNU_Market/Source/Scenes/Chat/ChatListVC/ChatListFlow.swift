@@ -24,7 +24,7 @@ class ChatListFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        print("✅ ChatListFlow step: \(step)")
+//        print("✅ ChatListFlow step: \(step)")
         switch step {
         case .chatListIsRequired:
             return navigateToChatList()

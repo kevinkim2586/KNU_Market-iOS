@@ -29,7 +29,7 @@ extension SearchPostsViewController: UITableViewDelegate, UITableViewDataSource 
             withIdentifier: cellIdentifier,
             for: indexPath
         ) as? PostTableViewCell else { return UITableViewCell() }
-        cell.configure(with: viewModel.postList[indexPath.row])
+//        cell.configure(with: viewModel.postList[indexPath.row])
         return cell
     }
 

@@ -29,17 +29,22 @@ final class UserDefaultsPersistenceService: UserDefaultsPersistenceServiceType {
     }
     
     func saveAccessTokens(from response: LoginResponseModel) {
-        _ = KeychainWrapper.standard.set(response.accessToken, forKey: K.KeyChainKey.accessToken)
-        _ = KeychainWrapper.standard.set(response.refreshToken, forKey: K.KeyChainKey.refreshToken)
+        
+        userDefaultsGenericService.set(key: UserDefaults.Keys.accessToken, value: response.accessToken)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.refreshToken, value: response.refreshToken)
+        
+//        _ = KeychainWrapper.standard.set(response.accessToken, forKey: K.KeyChainKey.accessToken)
+//        _ = KeychainWrapper.standard.set(response.refreshToken, forKey: K.KeyChainKey.refreshToken)
     }
     
     func saveUserProfileInfo(from model: LoadProfileResponseModel) {
         userDefaultsGenericService.set(key: UserDefaults.Keys.userUID, value: model.userUid)
         userDefaultsGenericService.set(key: UserDefaults.Keys.username, value: model.username)
-        userDefaultsGenericService.set(key: UserDefaults.Keys.emailForPasswordLoss, value: model.email)
         userDefaultsGenericService.set(key: UserDefaults.Keys.displayName, value: model.displayName)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.emailForPasswordLoss, value: model.email)
         userDefaultsGenericService.set(key: UserDefaults.Keys.bannedTo, value: model.bannedTo)
-        userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: model.userProfileImage)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUrl, value: model.profileUrl)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.userRoleGroup, value: model.userRoleGroup.userRoleCode)
     }
     
     func updateLocalUserInfo(type: UpdateUserInfoType, infoString: String) {
@@ -50,8 +55,6 @@ final class UserDefaultsPersistenceService: UserDefaultsPersistenceServiceType {
             userDefaultsGenericService.set(key: UserDefaults.Keys.fcmToken, value: infoString)
         case .profileImage:
             userDefaultsGenericService.set(key: UserDefaults.Keys.profileImageUID, value: infoString)
-        case .id:
-            userDefaultsGenericService.set(key: UserDefaults.Keys.username, value: infoString)
         case .email:
             userDefaultsGenericService.set(key: UserDefaults.Keys.emailForPasswordLoss, value: infoString)
         default: break

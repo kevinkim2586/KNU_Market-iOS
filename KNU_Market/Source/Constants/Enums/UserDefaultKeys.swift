@@ -4,11 +4,17 @@ extension UserDefaults {
     
     enum Keys {
         
+        static let accessToken                      = "accessToken"
+        static let refreshToken                     = "refreshToken"
+        
+        static let userRoleGroup                    = "userRoleGroup"
+        
         static let userUID                          = "userUID"
         static let username                         = "username" //로그인할 때 쓰는 아이디
         static let displayName                      = "displayName"
         static let emailForPasswordLoss             = "emailForPasswordLoss"
         static let profileImageUID                  = "profileImageUID"
+        static let profileImageUrl                  = "profileImageUrl"
         static let bannedTo                         = "bannedTo"
         
         

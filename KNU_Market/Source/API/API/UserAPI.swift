@@ -36,7 +36,6 @@ extension UserAPI: BaseAPI {
             return "auth"
         case .checkDuplication(let type, let infoString):
             return "users/\(type.rawValue)/\(infoString)"
-    
         case let .loadUserProfileUsingUid(uid):
             return "auth/\(uid)"
         case .sendFeedback:
@@ -113,7 +112,6 @@ extension UserAPI: BaseAPI {
     }
     
     var task: Task {
-        
         switch self {
         case let .uploadStudentIdVerificationInformation(model: model):
             
@@ -140,7 +138,6 @@ enum UpdateUserInfoType: String {
     case password       = "password"
     case fcmToken       = "fcmToken"
     case profileImage   = "image"
-    case id             = "id"
     case email          = "email"
 }
 

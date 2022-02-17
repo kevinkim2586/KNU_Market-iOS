@@ -98,22 +98,21 @@ class User {
     var accessToken: String {
         
         get {
-            let retrievedAccessToken: String? = KeychainWrapper.standard.string(forKey: K.KeyChainKey.accessToken)
-            guard let accessToken = retrievedAccessToken else {
-                return "❗️ Invalid AccessToken"
-            }
-            return accessToken
+            return UserDefaults.standard.string(forKey: UserDefaults.Keys.accessToken) ?? ""
         }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.accessToken)
+        }
+        
+
     }
     
     var refreshToken: String {
-        
         get {
-            let retrievedRefreshToken: String? = KeychainWrapper.standard.string(forKey: K.KeyChainKey.refreshToken)
-            guard let refreshToken = retrievedRefreshToken else {
-                return "❗️ Invalid RefreshToken"
-            }
-            return refreshToken
+            return UserDefaults.standard.string(forKey: UserDefaults.Keys.refreshToken) ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.refreshToken)
         }
     }
         

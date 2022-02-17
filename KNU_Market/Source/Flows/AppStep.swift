@@ -81,8 +81,7 @@ enum AppStep: Step {
     case developerInfoIsRequired
     
     //MARK: - Account Management
-    
-    case changeIdIsRequired
+
     case changeNicknameIsRequired
     case changePasswordIsRequired
     case changeEmailIsRequired

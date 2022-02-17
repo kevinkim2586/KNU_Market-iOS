@@ -98,11 +98,6 @@ class AccountManagementViewController: BaseViewController, View {
     }
     
     // Buttons
-    let changeIdButton = UIButton(type: .system).then {
-        $0.setTitle(Texts.buttonChangeTitle, for: .normal)
-        $0.setTitleColor(Colors.button, for: .normal)
-        $0.titleLabel?.font = Fonts.button
-    }
     
     let changeNicknameButton = UIButton(type: .system).then {
         $0.setTitle(Texts.buttonChangeTitle, for: .normal)
@@ -149,7 +144,7 @@ class AccountManagementViewController: BaseViewController, View {
         stackView.axis = .horizontal
         stackView.distribution = .equalCentering
         stackView.spacing = Metrics.stackViewSpacing
-        [idGuideLabel, userIdLabel, changeIdButton].forEach { stackView.addArrangedSubview($0) }
+        [idGuideLabel, userIdLabel].forEach { stackView.addArrangedSubview($0) }
         return stackView
     }()
     
@@ -282,11 +277,7 @@ class AccountManagementViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        changeIdButton.rx.tap
-            .map { Reactor.Action.changeId }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
+
         changeNicknameButton.rx.tap
             .map { Reactor.Action.changeNickname }
             .bind(to: reactor.action)

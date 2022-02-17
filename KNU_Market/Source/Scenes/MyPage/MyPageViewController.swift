@@ -253,20 +253,20 @@ class MyPageViewController: BaseViewController, View {
             .map { $0.myPageSectionModels }
             .bind(to: settingsTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-
+        
         reactor.state
-            .map { ($0.profileImageUid, $0.profileImageUrlString) }
-            .distinctUntilChanged { $0.0 }
+            .map { $0.profileImageUrl }
+            .distinctUntilChanged()
             .withUnretained(self)
-            .subscribe(onNext: { (_, info) in
-            
+            .subscribe(onNext: { (_, urlString) in
+                
                 self.profileImageButton.sd_setImage(
-                    with: info.0 == nil ? nil : URL(string: info.1),
+                    with: URL(string: urlString ?? ""),
                     for: .normal,
                     placeholderImage: UIImage(named: K.Images.pickProfileImage),
                     options: .continueInBackground
                 )
-                self.profileImageButton.layer.masksToBounds = info.0 != nil ? true : false
+                self.profileImageButton.layer.masksToBounds = urlString != nil ? true : false
             })
             .disposed(by: disposeBag)
         

@@ -44,7 +44,7 @@ class ChatFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        print("✅ ChatFlow step: \(step)")
+//        print("✅ ChatFlow step: \(step)")
         switch step {
 
         case let .chatIsPicked(roomUid, chatRoomTitle, postUploaderUid, isFirstEntrance, isFromChatVC):

@@ -22,7 +22,6 @@ final class AccountManagementViewReactor: Reactor, Stepper {
         case viewDidLoad
         case viewDidAppear
         case openSystemSettingsApp
-        case changeId
         case changeNickname
         case changePassword
         case changeEmailForPasswordLoss
@@ -60,9 +59,7 @@ final class AccountManagementViewReactor: Reactor, Stepper {
                 userNickname: userNickname,
                 userEmail: userEmailForPasswordLoss)
             )
-        case .changeId:
-            self.steps.accept(AppStep.changeIdIsRequired)
-            
+
         case .changeNickname:
             self.steps.accept(AppStep.changeNicknameIsRequired)
             

@@ -1,7 +1,6 @@
 import Foundation
 
 struct RoomInfo: ModelType {
-    
     let post: Post
     let member: [Member]
 }
@@ -18,7 +17,7 @@ struct Post: ModelType {
     let isCompletelyDone: Bool
     let date: String
     
-    let medias: [Media]
+//    let medias: [Media]
     let user: UploaderInfo
     
     enum CodingKeys: String, CodingKey {
@@ -30,7 +29,8 @@ struct Post: ModelType {
         case isFull = "isHeadcountArchived"
         case isCompletelyDone = "isArchived"
         case date = "createDate"
-        case medias, user
+        case user
+//        case medias
     }
 }
 

@@ -26,7 +26,7 @@ class MyPageFlow: Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? AppStep else { return .none }
-        print("✅ MyPageFlow step: \(step)")
+//        print("✅ MyPageFlow step: \(step)")
         switch step {
         case .myPageIsRequired:
             return navigateToMyPage()

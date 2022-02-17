@@ -16,10 +16,11 @@ final class PostService: PostServiceType {
         self.network = network
     }
     
-    func fetchPostList(at index: Int, fetchCurrentUsers: Bool, postFilterOption: PostFilterOptions = .showGatheringFirst) -> Single<NetworkResultWithArray<PostListModel>> {
+    func fetchPostList(fetchCurrentUsers: Bool) -> Single<NetworkResultWithArray<PostListModel>> {
                         
-        return network.requestArray(.fetchPostList(index: index, fetchCurrentUsers: fetchCurrentUsers, postFilterOption: postFilterOption), type: PostListModel.self)
+        return network.requestArray(.fetchPostList(fetchCurrentUsers: fetchCurrentUsers), type: PostListModel.self)
             .map { result in
+                print("✅ fetchPostList result: \(result)")
                 switch result {
                 case .success(let postListModel):
                     return .success(postListModel)
@@ -81,18 +82,18 @@ final class PostService: PostServiceType {
             }
     }
     
-    func fetchSearchResults(at index: Int, keyword: String) -> Single<NetworkResultWithArray<PostListModel>> {
-        
-        return network.requestObject(.fetchSearchResults(index: index, keyword: keyword), type: PostListModel.self)
-            .map { result in
-                switch result {
-                case .success(let postListModel):
-                    return .success([postListModel])
-                case .error(let error):
-                    return .error(error)
-                }
-            }
-    }
+//    func fetchSearchResults(at index: Int, keyword: String) -> Single<NetworkResultWithArray<PostListModel>> {
+//
+//        return network.requestObject(.fetchSearchResults(index: index, keyword: keyword), type: PostListModel.self)
+//            .map { result in
+//                switch result {
+//                case .success(let postListModel):
+//                    return .success([postListModel])
+//                case .error(let error):
+//                    return .error(error)
+//                }
+//            }
+//    }
     
     func markPostDone(uid: String) -> Single<NetworkResult> {
         

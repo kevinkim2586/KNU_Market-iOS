@@ -9,6 +9,10 @@ import Foundation
 import RxSwift
 import Moya
 
+enum TokenError: Error {
+    case tokenExpired
+}
+
 class Network<API: TargetType>: MoyaProvider<API> {
     
     init(plugins: [PluginType] = []) {
@@ -21,15 +25,40 @@ class Network<API: TargetType>: MoyaProvider<API> {
     
     func request(_ api: API) -> Single<Response> {
         return self.rx.request(api)
+//            .flatMap { response in
+//                print("✅ Network flatMap: \(response)")
+//                if response.statusCode == 401 {             // 401 == Unauthorized Error 전용 -> 토큰 만료
+//                    throw TokenError.tokenExpired
+//                } else {
+//                    return Single.just(response)
+//                }
+//            }
+//            .retry(when: { (error: Observable<TokenError>) in
+//                error.flatMap { error -> Single<NetworkResultWithValue<LoginResponseModel>> in
+//                    print("❗️ Retrying...")
+//                     return AuthService.shared.refreshToken(with: User.shared.refreshToken)
+//
+//                }
+//            })
+//            .handleResponse()
             .filter(statusCodes: 200...500)
+//            .retry(2)
     }
+    
+//    func request(_ api: API) -> Single<Response> {
+//        return self.rx.request(api)
+//            .filter(statusCodes: 200...500)
+//    }
 }
 
 extension Network {
+    
     func requestObject<T: ModelType>(_ target: API, type: T.Type) -> Single<NetworkResultWithValue<T>> {
         let decoder = type.decoder
         return request(target)
             .map { result in
+                print("✅ result status code: \(result.statusCode), for target: \(target)")
+
                 let response = try? result.map(T.self, using: decoder)
                 guard let response = response else {
                     return .error(NetworkError.returnError(json: result.data))
@@ -42,9 +71,9 @@ extension Network {
         let decoder = type.decoder
         return request(target)
             .map { result in
+                print("✅ result status code: \(result.statusCode), for target: \(target)")
                 let response = try? result.map([T].self, using: decoder)
                 guard let response = response else {
-                   
                     return .error(NetworkError.returnError(json: result.data))
                 }
                 return .success(response)
@@ -54,7 +83,7 @@ extension Network {
     func requestWithoutMapping(_ target: API) -> Single<NetworkResult> {
         return request(target)
             .map { result in
-                print("✅ result status code: \(result.statusCode)")
+                print("✅ result status code: \(result.statusCode), for target: \(target)")
                 if (400...500).contains(result.statusCode) {
                     return .error(NetworkError.returnError(json: result.data))
                 }

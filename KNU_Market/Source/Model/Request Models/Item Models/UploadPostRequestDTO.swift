@@ -2,36 +2,34 @@ import Foundation
 import Alamofire
 
 struct UploadPostRequestDTO {
-    
-    var parameters: Parameters = [:]
+
+    let title: String
+    let content: String
+    let location: Int = Location.list.count      // v1.3까지는 default 8 == 협의
+    let headCount: Int
+    let price: Int
+    let shippingFee: Int
+    let referenceUrl: String?
+    let images: [Data]?
     
     init(
         title: String,
+        content: String,
+        headCount: Int,
         price: Int,
         shippingFee: Int,
         referenceUrl: String?,
-        peopleGathering: Int,
-        imageUIDs: [String]?,
-        detail: String,
-        location: Int = Location.list.count              // v1.3까지는 default 8 == 협의
+        images: [Data]?
     ) {
-    
-        parameters["title"] = title
-        parameters["price"] = price
-        parameters["shippingFee"] = shippingFee
-        parameters["recruitment"] = peopleGathering
-        parameters["spotCategory"] = location
-        parameters["content"] = detail
-        
-        if let referenceUrl = referenceUrl {
-            parameters["referenceUrl"] = referenceUrl
-        }
-        
-        if let imageUIDs = imageUIDs {
-            parameters["image"] = imageUIDs
-        }
+        self.title = title
+        self.content = content
+        self.headCount = headCount
+        self.price = price
+        self.shippingFee = shippingFee
+        self.referenceUrl = referenceUrl ?? nil
+        self.images = images ?? nil
     }
-    
+
     static func configureDTO(
         title: String?,
         price: String?,
@@ -39,7 +37,8 @@ struct UploadPostRequestDTO {
         totalGatheringPeople: String?,
         detail: String?,
         referenceUrl: String?,
-        imageUIDs: [String]?) -> UploadPostRequestDTO? {
+        imageDatas: [Data]?
+    ) -> UploadPostRequestDTO? {
             
             guard
                 let title = title,
@@ -58,15 +57,15 @@ struct UploadPostRequestDTO {
             if peopleGathering < ValidationError.Restrictions.minimumGatheringPeople {
                 peopleGathering = ValidationError.Restrictions.minimumGatheringPeople
             }
-            
+        
             return UploadPostRequestDTO(
                 title: title,
+                content: detail,
+                headCount: peopleGathering,
                 price: price,
                 shippingFee: shippingFee,
-                referenceUrl: referenceUrl ?? nil,
-                peopleGathering: peopleGathering,
-                imageUIDs: imageUIDs,
-                detail: detail
+                referenceUrl: referenceUrl,
+                images: imageDatas
             )
         }
 }

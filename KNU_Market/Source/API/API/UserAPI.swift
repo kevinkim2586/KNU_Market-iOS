@@ -43,9 +43,9 @@ extension UserAPI: BaseAPI {
         case .sendFeedback:
             return "report"
         case .uploadStudentIdVerificationInformation:
-            return "verification/card"
+            return "student-card"
         case .sendVerificationEmail:
-            return "verification/mail"
+            return "student-email"
         case .findUserId:
             return "find/id"
         case .findPassword:
@@ -103,7 +103,7 @@ extension UserAPI: BaseAPI {
     
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case .register, .login:
+        case .register, .login, .sendVerificationEmail:
             return URLEncoding.httpBody
         case .checkDuplication:
             return URLEncoding.queryString
@@ -119,7 +119,7 @@ extension UserAPI: BaseAPI {
             
             multipartData.append(MultipartFormData(provider: .data(model.studentId.data(using: .utf8)!), name: "studentId"))
             multipartData.append(MultipartFormData(provider: .data(model.studentBirth.data(using: .utf8)!), name: "studentBirth"))
-            multipartData.append(MultipartFormData(provider: .data(model.studentIdImageData), name: "media", fileName: "studentId.jpeg", mimeType: "image/jpeg"))
+            multipartData.append(MultipartFormData(provider: .data(model.studentIdImageData), name: "studentCard", fileName: "studentId.jpeg", mimeType: "image/jpeg"))
             
             return .uploadMultipart(multipartData)
             

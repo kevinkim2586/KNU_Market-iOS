@@ -16,14 +16,13 @@ final class PostService: PostServiceType {
         self.network = network
     }
     
-    func fetchPostList(fetchCurrentUsers: Bool) -> Single<NetworkResultWithArray<PostListModel>> {
-                        
-        return network.requestArray(.fetchPostList(fetchCurrentUsers: fetchCurrentUsers), type: PostListModel.self)
+    func fetchPostList(fetchCurrentUsers: Bool) -> Single<NetworkResultWithArray<PostModel>> {
+        
+        return network.requestRawJsonWithArray(.fetchPostList(fetchCurrentUsers: fetchCurrentUsers), type: PostModel.self)
             .map { result in
-                print("✅ fetchPostList result: \(result)")
                 switch result {
-                case .success(let postListModel):
-                    return .success(postListModel)
+                case .success(let postModel):
+                    return .success(postModel)
                 case .error(let error):
                     return .error(error)
                 }

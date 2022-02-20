@@ -37,8 +37,8 @@ class PostFlow: Flow {
         
         switch step {
         case .uploadPostIsRequired:
-            let isUserVerified: Bool = self.services.userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
-            return isUserVerified ? .just(step) : .just(AppStep.unauthorized)
+            let userRoleGroup = AuthService.shared.determineUserRoleGroup()
+            return userRoleGroup == .common ? .just(step) : .just(AppStep.unauthorized)
             
         default:
             return .just(step)

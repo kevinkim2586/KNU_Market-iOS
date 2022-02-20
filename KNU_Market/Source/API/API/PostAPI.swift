@@ -14,7 +14,6 @@ enum PostAPI {
     case updatePost(uid: String, model: UpdatePostRequestDTO)
     case fetchPostDetails(uid: String)
     case deletePost(uid: String)
-    case fetchSearchResults(index: Int, keyword: String)
     case markPostDone(uid: String)
 }
 
@@ -31,8 +30,6 @@ extension PostAPI: BaseAPI {
             return "posts"
         case let .updatePost(uid, _), let .fetchPostDetails(uid), let .deletePost(uid):
             return "posts/\(uid)"
-        case .fetchSearchResults:
-            return "search"
         case let .markPostDone(uid):
             return "posts/complete/\(uid)"
         }
@@ -40,17 +37,16 @@ extension PostAPI: BaseAPI {
     
     var headers: [String : String]? {
         switch self {
-//        case let .fetchPostList(_, _, postFilterOptions):
-//            if postFilterOptions == .showGatheringFirst {
-//                return ["withoutcomplete" : "1"]
-//            } else { fallthrough }
-        default: return ["Content-Type" : "application/json"]
+        case .uploadNewPost:
+            return ["Content-Type" : "multipart/form-data"]
+        default:
+            return ["Content-Type" : "application/json"]
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchPostList, .fetchPostDetails, .fetchSearchResults:
+        case .fetchPostList, .fetchPostDetails:
             return .get
         case .uploadNewPost:
             return .post
@@ -63,15 +59,8 @@ extension PostAPI: BaseAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case let .uploadNewPost(model: model):
-            return model.parameters
         case let .updatePost(_, model: model):
             return model.parameters
-        case let .fetchSearchResults(index, keyword):
-            return [
-                "keyword" : keyword,
-                "page" : index
-            ]
         case let .fetchPostList:
 //            return [ "page" : index ]
             return nil
@@ -82,7 +71,7 @@ extension PostAPI: BaseAPI {
     
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case .fetchSearchResults, .fetchPostList:
+        case .fetchPostList:
             return URLEncoding.queryString
         default:
             return JSONEncoding.default
@@ -91,6 +80,30 @@ extension PostAPI: BaseAPI {
     
     var task: Task {
         switch self {
+            
+        case let .uploadNewPost(model):
+            
+            var multipartData: [MultipartFormData] = []
+            
+            multipartData.append(MultipartFormData(provider: .data(model.title.data(using: .utf8)!), name: "title"))
+            multipartData.append(MultipartFormData(provider: .data(model.content.data(using: .utf8)!), name: "content"))
+            multipartData.append(MultipartFormData(provider: .data(String(model.location).data(using: .utf8)!), name: "location"))
+            multipartData.append(MultipartFormData(provider:.data(String(model.headCount).data(using: .utf8)!), name: "headCount"))
+            multipartData.append(MultipartFormData(provider: .data(String(model.price).data(using: .utf8)!), name: "price"))
+            multipartData.append(MultipartFormData(provider: .data(String(model.shippingFee).data(using: .utf8)!), name: "shippingFee"))
+            
+            if let referenceUrl = model.referenceUrl {
+                multipartData.append(MultipartFormData(provider: .data(referenceUrl.data(using: .utf8)!), name: "referenceUrl"))
+            }
+            
+            if let images = model.images {
+                for image in images {
+                    multipartData.append(MultipartFormData(provider: .data(image), name: "postFile", fileName: "postImage_\(UUID().uuidString).jpeg", mimeType: "image/jpeg"))
+                }
+            }
+            
+            return .uploadMultipart(multipartData)
+            
         default:
             if let parameters = parameters {
                 return .requestParameters(parameters: parameters, encoding: parameterEncoding)

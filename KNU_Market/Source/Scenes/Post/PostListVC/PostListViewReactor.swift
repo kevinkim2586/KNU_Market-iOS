@@ -47,7 +47,7 @@ final class PostListViewReactor: Reactor, Stepper {
         case setIsFetchingData(Bool)
         case setIsRefreshingData(Bool)
         case setUserNeedsToUpdateAppVersion(Bool)
-        case setUserVerificationStatus
+        case setUserVerificationStatus(Bool)
         case empty
     }
     
@@ -92,7 +92,7 @@ final class PostListViewReactor: Reactor, Stepper {
         let bannedPostUploaders: [String] = userDefaultsGenericService.get(key: UserDefaults.Keys.bannedPostUploaders) ?? []
         
         // 인증된 유저인지 아닌지 판별
-        let isUserVerified: Bool = userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
+        let isUserVerified: Bool = AuthService.shared.determineUserVerificationStatus()
 
         self.initialState = State(
             index: INITIAL_PAGE,
@@ -113,9 +113,9 @@ final class PostListViewReactor: Reactor, Stepper {
                 Observable.just(Mutation.setIsFetchingData(true)),
                 
 //                fetchEnteredRoomInfo(),
-//                loadUserProfile(),
+                loadUserProfile(),
                 fetchPostList(at: currentState.index),
-//                fetchBannerList(),
+                fetchBannerList(),
 //                fetchLatestPopup(),
                 askForNotificationPermission(),
 //                fetchAppLatestVersion(),
@@ -126,7 +126,8 @@ final class PostListViewReactor: Reactor, Stepper {
             
         case .viewWillAppear:
             NotificationCenterService.configureChatTabBadgeCount.post()
-            return Observable.just(Mutation.setUserVerificationStatus)
+            let isUserVerified: Bool = AuthService.shared.determineUserVerificationStatus()
+            return Observable.just(Mutation.setUserVerificationStatus(isUserVerified))
             
         case .fetchPostList:
             
@@ -208,8 +209,8 @@ final class PostListViewReactor: Reactor, Stepper {
         case .setUserNeedsToUpdateAppVersion(let isNeeded):
             state.userNeedsToUpdateAppVersion = isNeeded
             
-        case .setUserVerificationStatus:
-            state.isUserVerified = userDefaultsGenericService.get(key: UserDefaults.Keys.hasVerifiedEmail) ?? false
+        case .setUserVerificationStatus(let isVerified):
+            state.isUserVerified = isVerified
             
         case .empty:
             break
@@ -230,11 +231,10 @@ extension PostListViewReactor {
             .asObservable()
             .map { result in
                 switch result {
-                case .success(let postListModel):
-                    print("✅ postListModel: \(postListModel)")
-                    return postListModel[0].posts.isEmpty
+                case .success(let postModel):
+                    return postModel.isEmpty
                     ? Mutation.setNeedsToFetchMoreData(false)
-                    : Mutation.setPostList(postListModel[0].posts)
+                    : Mutation.setPostList(postModel)
                     
                 case .error(let error):
                     return error == .E601
@@ -252,8 +252,8 @@ extension PostListViewReactor {
             .asObservable()
             .map { result in
                 switch result {
-                case .success(let postListModel):
-                    return Mutation.resetPostList(postListModel[0].posts)
+                case .success(let postModel):
+                    return Mutation.resetPostList(postModel)
                     
                 case .error(_):
                     return Mutation.setErrorMessage(NetworkError.E000.rawValue)

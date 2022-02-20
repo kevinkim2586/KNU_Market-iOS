@@ -67,10 +67,10 @@ final class MyPostsViewReactor: Reactor, Stepper {
                     .asObservable()
                     .map { result in
                         switch result {
-                        case .success(let postListModel):
-                            return postListModel[0].posts.isEmpty
+                        case .success(let postModel):
+                            return postModel.isEmpty
                             ? Mutation.setNeedsToFetchMoreData(false)
-                            : Mutation.setPostList(postListModel[0].posts)
+                            : Mutation.setPostList(postModel)
                             
                         case .error(let error):
                             return error == .E601
@@ -102,8 +102,8 @@ final class MyPostsViewReactor: Reactor, Stepper {
                     .asObservable()
                     .map { result in
                         switch result {
-                        case .success(let postListModel):
-                            return Mutation.resetPostList(postListModel[0].posts)
+                        case .success(let postModel):
+                            return Mutation.resetPostList(postModel)
                             
                         case .error(let error):
                             let errorMessage = error == .E601

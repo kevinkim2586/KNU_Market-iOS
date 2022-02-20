@@ -280,6 +280,7 @@ class MyPageViewController: BaseViewController, View {
         
         reactor.state
             .map { $0.isVerified }
+            .distinctUntilChanged()
             .withUnretained(self)
             .subscribe(onNext: { (_, isVerified) in
                 self.userVerifiedImage.image = isVerified ? Images.userVerifiedImage : Images.userUnVerifiedImage

@@ -10,7 +10,7 @@ import RxSwift
 
 protocol PostServiceType: AnyObject {
     
-    func fetchPostList(fetchCurrentUsers: Bool) -> Single<NetworkResultWithArray<PostListModel>>
+    func fetchPostList(fetchCurrentUsers: Bool) -> Single<NetworkResultWithArray<PostModel>>
     func uploadNewPost(with model: UploadPostRequestDTO) -> Single<NetworkResult>
     func updatePost(uid: String, with model: UpdatePostRequestDTO) -> Single<NetworkResult>
     func fetchPostDetails(uid: String) -> Single<NetworkResultWithValue<PostDetailModel>>

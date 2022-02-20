@@ -134,14 +134,10 @@ final class UploadPostReactor: Reactor, Stepper {
             ? uploadPost()
             : updatePost()
 
-            // 이미지를 업로드 할 필요가 있으면 업로드
-            let uploadFunction: Observable<Mutation> = determineIfImageUploadIsNeeded() == true
-            ? uploadImagesFirst()
-            : uploadActionType
-            
+
             return Observable.concat([
                 Observable.just(Mutation.setIsLoading(true)),
-                uploadFunction,
+                uploadActionType,
                 Observable.just(Mutation.setIsLoading(false))
             ])
             
@@ -248,31 +244,9 @@ extension UploadPostReactor {
         return self.currentState.editPostModel != nil ? .updateExistingPost : .uploadNewPost
     }
     
-    private func determineIfImageUploadIsNeeded() -> Bool {
-        return self.currentState.images.isEmpty ? false : true
-    }
-    
-    private func uploadImagesFirst() -> Observable<Mutation> {
-        
-        let imageDatas: [Data] = self.currentState.images.map { $0.jpegData(compressionQuality: 1.0) ?? Data() }
-        
-        return Observable.from(imageDatas)
-            .concatMap { imageData -> Observable<Mutation> in
-                
-                return self.mediaService.uploadImage(with: imageData)
-                    .asObservable()
-                    .map { result in
-                        switch result {
-                        case .success(let imageModel):
-                            return .appendImageUid(imageModel.uid)
-                        case .error(_):
-                            return .setErrorMessage(ErrorMessage.uploadErrorMessage)
-                        }
-                    }
-            }
-    }
-    
     private func uploadPost() -> Observable<Mutation> {
+        
+        let images: [Data] = AssetConverter.convertUIImagesToDataType(images: currentState.images)
         
         guard let uploadPostDTO = UploadPostRequestDTO.configureDTO(
             title: currentState.title,
@@ -281,7 +255,8 @@ extension UploadPostReactor {
             totalGatheringPeople: currentState.totalGatheringPeople,
             detail: currentState.postDetail,
             referenceUrl: currentState.referenceUrl,
-            imageUIDs: currentState.imageUids
+            imageDatas: images
+     
         ) else {
             return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
         }

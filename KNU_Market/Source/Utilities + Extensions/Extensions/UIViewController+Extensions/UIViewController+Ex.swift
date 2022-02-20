@@ -46,12 +46,3 @@ extension UIViewController {
     }
 }
 
-
-//MARK: - Utilities
-
-extension UIViewController {
-    
-    func detectIfVerifiedUser() -> Bool {
-        return User.shared.isVerified ? true : false
-    }
-}

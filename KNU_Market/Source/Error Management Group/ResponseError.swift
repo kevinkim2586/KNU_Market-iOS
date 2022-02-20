@@ -12,3 +12,4 @@ struct ResponseError: Decodable, Error {
     var message: String
     var error: String?
 }
+

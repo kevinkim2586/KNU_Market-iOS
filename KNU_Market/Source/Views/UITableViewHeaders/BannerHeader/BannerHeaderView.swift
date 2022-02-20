@@ -12,9 +12,11 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 
-class BannerHeaderView: UIView {
+class BannerHeaderView: UIView, View {
     
-//    typealias Reactor = BannerHeaderReactor
+    var disposeBag = DisposeBag()
+    
+    typealias Reactor = BannerHeaderReactor
     
     //MARK: - Properties
     
@@ -61,9 +63,10 @@ class BannerHeaderView: UIView {
     
     //MARK: - Initialization
     
-    init(controlledBy vc: UIViewController, frame: CGRect) {
+    init(controlledBy vc: UIViewController, frame: CGRect, reactor: BannerHeaderReactor) {
         super.init(frame: frame)
         self.currentVC = vc
+        self.reactor = reactor
         setupLayout()
         setupConstraints()
     }
@@ -116,7 +119,7 @@ class BannerHeaderView: UIView {
         var filteredBannerModels: [BannerModel] = []        // path가 null인 model은 거르기
         
         for model in model {
-            if let _ = model.media?.path {
+            if let _ = model.bannerFile?.files[0].location {
                 filteredBannerModels.append(model)
             }
         }
@@ -172,7 +175,7 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
             for: indexPath
         ) as? BannerCollectionViewCell else { fatalError() }
         
-        if let model = bannerModel, let bannerPath = model[indexPath.row].media?.path, let imageUrl = URL(string: bannerPath) {
+        if let model = bannerModel, let bannerPath = model[indexPath.row].bannerFile?.files[0].location, let imageUrl = URL(string: bannerPath) {
             cell.bannerImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.bannerImageView.sd_setImage(
                 with: imageUrl,
@@ -180,6 +183,7 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
                 options: .continueInBackground,
                 completed: nil
             )
+
         }
         cell.backgroundColor = .clear
         return cell
@@ -189,6 +193,7 @@ extension BannerHeaderView: UICollectionViewDataSource, UICollectionViewDelegate
         
         if let model = bannerModel, let referenceUrl = model[indexPath.row].referenceUrl {
             guard let url = URL(string: referenceUrl) else { return }
+            self.reactor?.action.onNext(.incrementBannerViewCount(bannerId: model[indexPath.row].bannerId))
             currentVC?.presentSafariView(with: url)
         }
     }

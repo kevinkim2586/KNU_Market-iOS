@@ -21,7 +21,6 @@ extension UserDefaults {
         static let isReportChecked                  = "isReportChecked"
         
         static let isLoggedIn                       = "isLoggedIn"
-        static let hasVerifiedEmail                 = "hasVerifiedEmail"
         static let fcmToken                         = "fcmToken"
         static let notificationList                 = "notificationList"
         static let hasAllowedForNotification        = "hasAllowedForNotification"

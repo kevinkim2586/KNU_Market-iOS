@@ -39,7 +39,8 @@ class PostListViewController: BaseViewController, View {
                 y: 0,
                 width: view.frame.size.width,
                 height: 200
-            )
+            ),
+            reactor: BannerHeaderReactor()
         )
         return headerView
     }()
@@ -167,6 +168,7 @@ class PostListViewController: BaseViewController, View {
                 cellIdentifier: PostTableViewCell.cellId,
                 cellType: PostTableViewCell.self)
             ) { indexPath, postList, cell in
+                print("✅ configure with: \(postList)")
                 cell.configure(with: postList)
             }
             .disposed(by: disposeBag)

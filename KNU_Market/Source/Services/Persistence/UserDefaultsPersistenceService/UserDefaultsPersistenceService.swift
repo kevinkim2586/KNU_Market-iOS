@@ -21,7 +21,7 @@ final class UserDefaultsPersistenceService: UserDefaultsPersistenceServiceType {
     }
     
     func configureUserAsVerifiedUser() {
-        userDefaultsGenericService.set(key: UserDefaults.Keys.hasVerifiedEmail, value: true)
+        userDefaultsGenericService.set(key: UserDefaults.Keys.userRoleGroup, value: UserRoleGroupType.common.rawValue)
     }
     
     func saveAccessTokens(from response: LoginResponseModel) {

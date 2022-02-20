@@ -19,6 +19,23 @@ final class AuthService {
         self.network = Network<AuthAPI>()
     }
     
+    func determineUserVerificationStatus() -> Bool {
+        
+        let rawValue: String = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.userRoleGroup) ?? UserRoleGroupType.temporary.rawValue
+        
+        guard let currentUserRoleGroup = UserRoleGroupType(rawValue: rawValue) else { return false }
+        
+        return currentUserRoleGroup == .common ? true : false
+    }
+    
+    func determineUserRoleGroup() -> UserRoleGroupType {
+        
+        let rawValue: String = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.userRoleGroup) ?? ""
+        
+        guard let currentUserRoleGroup = UserRoleGroupType(rawValue: rawValue) else { return .temporary }
+        return currentUserRoleGroup
+    }
+    
     func refreshToken(with refreshToken: String) -> Single<NetworkResultWithValue<LoginResponseModel>> {
         return network.requestObject(.refreshToken(refreshToken), type: LoginResponseModel.self)
             .map { result in
@@ -36,15 +53,6 @@ final class AuthService {
             }
         
     }
-    
-    //    func refreshToken(with refreshToken: String) -> Single<Response> {
-    //        print("✅ refreshToken: \(refreshToken)")
-    //        return network.request(.refreshToken(refreshToken))
-    //            .map { result -> Response in
-    //                print("✅ refresh TOKEN result: \(result)")
-    //                return result
-    //            }
-    //    }
 }
 
 /// 서버에서 보내주는 오류 문구 파싱용

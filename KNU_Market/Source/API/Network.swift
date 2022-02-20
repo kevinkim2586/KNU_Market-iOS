@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import Moya
+import SwiftyJSON
 
 enum TokenError: Error {
     case tokenExpired
@@ -88,6 +89,26 @@ extension Network {
                     return .error(NetworkError.returnError(json: result.data))
                 }
                 return .success
+            }
+    }
+    
+    func requestRawJsonWithArray<T: ModelType>(_ target: API, type: T.Type) -> Single<NetworkResultWithArray<T>> {
+        let decoder = type.decoder
+        return request(target)
+            .map { result in
+                print("✅ result status code: \(result.statusCode), for target: \(target)")
+                do {
+                    let entireJSON = try JSON(data: result.data)
+                    let requiredJSONData = try entireJSON[0].rawData()
+                    
+                    let model = try decoder.decode([T].self, from: requiredJSONData)
+                    
+                    return .success(model)
+                    
+                } catch {
+                    print("❗️ Error in requestRawJsonWithArray: \(error)")
+                    return .error(.E000)
+                }
             }
     }
 }

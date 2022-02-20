@@ -104,12 +104,20 @@ enum NetworkError: String, Error {
         do {
             let json = try JSON(data: json)
             print("❗️ NetworkError - error JSON: \(json)")
-            let errorCode = json["errorCode"].stringValue
-            let _ = json["errorDescription"].stringValue
- 
-            if errorCode == NetworkError.E109.rawValue {
+            
+            let statusCode = json["statusCode"].intValue
+            let message = json["message"].stringValue
+            let error = json["error"].stringValue
+            
+            if statusCode == 403 {      // 인증된 토큰이지만 특정 API를 때릴 권한이 없을 때 발생
                 NotificationCenterService.presentVerificationNeededAlert.post()
             }
+            
+            
+            let errorCode = json["errorCode"].stringValue
+
+ 
+   
             return NetworkError(rawValue: errorCode) ?? .E000
         } catch {
             print("❗️ NetworkError - catch has been ACTIVATED")

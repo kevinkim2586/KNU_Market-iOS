@@ -54,4 +54,12 @@ struct AssetConverter {
         }
         return imageSources
     }
+    
+    static func convertUIImagesToDataType(images: [UIImage]) -> [Data] {
+        guard !images.isEmpty else { return [] }
+        let imageData: [Data] = images.map { image in
+            return image.jpegData(compressionQuality: 1.0) ?? Data()
+        }
+        return imageData
+    }
 }

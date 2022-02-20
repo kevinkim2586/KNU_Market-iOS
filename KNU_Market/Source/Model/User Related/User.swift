@@ -74,24 +74,6 @@ class User {
         
     }
     
-    // 이메일 인증 완료 판별
-    var isVerified: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: UserDefaults.Keys.hasVerifiedEmail)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.hasVerifiedEmail)
-        }
-    }
-    
-    var isNotFirstAppLaunch: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: UserDefaults.Keys.isNotFirstAppLaunch)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaults.Keys.isNotFirstAppLaunch)
-        }
-    }
     
     //MARK: - Access Token Related Properties
     
@@ -234,7 +216,6 @@ extension User {
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.emailForPasswordLoss)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.fcmToken)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.hasAllowedForNotification)
-        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.hasVerifiedEmail)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.bannedPostUploaders)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.bannedChatUsers)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.notificationList)

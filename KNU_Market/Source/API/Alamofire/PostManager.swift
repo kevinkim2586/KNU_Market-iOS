@@ -64,35 +64,35 @@ class PostManager {
             }
     }
     
-    //MARK: - 공구글 업로드
-    func uploadNewPost(
-        with model: UploadPostRequestDTO,
-        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
-    ) {
-        
-        AF.request(baseURL,
-                   method: .post,
-                   parameters: model.parameters,
-                   encoding: JSONEncoding.default,
-                   interceptor: interceptor)
-            .validate()
-            .responseJSON { response in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                    
-                case 201:
-                    print("postManager - uploadNewItem success")
-                    completion(.success(true))
-                    
-                default:
-                    let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("❗️ postManager - uploadNewItem failed with error: \(error.errorDescription)")
-                    completion(.failure(error))
-                }
-            }
-    }
+//    //MARK: - 공구글 업로드
+//    func uploadNewPost(
+//        with model: UploadPostRequestDTO,
+//        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+//    ) {
+//        
+//        AF.request(baseURL,
+//                   method: .post,
+//                   parameters: model.parameters,
+//                   encoding: JSONEncoding.default,
+//                   interceptor: interceptor)
+//            .validate()
+//            .responseJSON { response in
+//                
+//                guard let statusCode = response.response?.statusCode else { return }
+//                
+//                switch statusCode {
+//                    
+//                case 201:
+//                    print("postManager - uploadNewItem success")
+//                    completion(.success(true))
+//                    
+//                default:
+//                    let error = NetworkError.returnError(json: response.data ?? Data())
+//                    print("❗️ postManager - uploadNewItem failed with error: \(error.errorDescription)")
+//                    completion(.failure(error))
+//                }
+//            }
+//    }
     
     //MARK: - 공구글 수정
     func updatePost(

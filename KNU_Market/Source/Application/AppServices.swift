@@ -31,7 +31,7 @@ struct AppServices {
         self.sharingService = SharingService()
         self.urlNavigator = URLNavigator()
         
-        self.bannerService = BannerService(network: Network<BannerAPI>())
+        self.bannerService = BannerService(network: Network<BannerAPI>(plugins: [AuthPlugin()]))
         self.chatListService = ChatListService(
             network: Network<ChatAPI>(plugins: [
                 AuthPlugin()

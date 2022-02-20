@@ -8,43 +8,61 @@
 import Foundation
 import RxSwift
 import ReactorKit
+import RxRelay
+import RxFlow
 
-final class BannerHeaderReactor: Reactor {
+final class BannerHeaderReactor: Reactor, Stepper {
+    
+    var steps = PublishRelay<Step>()
 
     let bannerService: BannerServiceType
     let initialState: State
 
-    
     enum Action {
-        
-        case setBannerModel([BannerModel])
+        case incrementBannerViewCount(bannerId: Int)
     }
     
     enum Mutation {
-        
+        case empty
     }
     
     struct State {
-        
-        var bannerModel: [BannerModel] = []
     }
     
-    init(bannerService: BannerServiceType) {
-        self.bannerService = bannerService
+    init() {
+        self.bannerService = BannerService(network: Network<BannerAPI>(plugins: [AuthPlugin()]))
         self.initialState = State()
     }
-//    
-//    func mutate(action: Action) -> Observable<Mutation> {
-//        
-//    }
-//    
-//    func reduce(state: State, mutation: Mutation) -> State {
-//        var state = state
-//        switch mutation {
-//
-//        }
-//        return state
-//    }
-//    
+    
+    func mutate(action: Action) -> Observable<Mutation> {
+        
+        switch action {
+        case .incrementBannerViewCount(let bannerId):
+            
+            return self.bannerService.incrementBannerViewCount(bannerId: bannerId)
+                .asObservable()
+                .map { result in
+                    switch result {
+                    case .success:
+                        return .empty
+                        
+                    case .error(let error):
+                        print("❗️ BannerHeaderReactor incrementBannerViewCount error: \(error)")
+                        return .empty
+                    }
+                }
+        }
+    }
+    
+    func reduce(state: State, mutation: Mutation) -> State {
+        var state = state
+        switch mutation {
+
+        case .empty:
+            break
+        }
+        return state
+    }
+    
     
 }

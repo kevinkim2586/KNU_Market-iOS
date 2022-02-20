@@ -29,13 +29,17 @@ class BannerHeaderView: UIView, View {
             startTimer()
             bannerCollectionView.reloadData()
             /// When you call reloadData(), it reloads itself on the main thread so you cannot scroll the tableview while it is reloading. You call it on the main thread so it is queued to begin right after the reloadData is done.
-            DispatchQueue.main.async {
-                self.bannerCollectionView.scrollToItem(
-                    at: IndexPath(item: 0, section: 0),
-                    at: .centeredHorizontally,
-                    animated: true
-                )
+            
+            if bannerModel?.count != 0 {
+                DispatchQueue.main.async {
+                    self.bannerCollectionView.scrollToItem(
+                        at: IndexPath(item: 0, section: 0),
+                        at: .centeredHorizontally,
+                        animated: true
+                    )
+                }
             }
+
         }
     }
     
@@ -142,6 +146,8 @@ class BannerHeaderView: UIView, View {
         guard let totalNumber = totalNumberOfBannerImages else {
             return
         }
+        if totalNumber == 1 { return }
+        
         if currentIndex < totalNumber - 1 {
             currentIndex += 1
             bannerCollectionView.scrollToItem(

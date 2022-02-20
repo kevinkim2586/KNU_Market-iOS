@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let userService = UserService(
         network: Network<UserAPI>(plugins: [
             AuthPlugin()
-        ]), userDefaultsPersistenceService: UserDefaultsPersistenceService(
+        ]),
+        userDefaultsPersistenceService: UserDefaultsPersistenceService(
             userDefaultsGenericService: UserDefaultsGenericService()
         )
     )

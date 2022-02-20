@@ -100,11 +100,8 @@ extension Network {
                 do {
                     let entireJSON = try JSON(data: result.data)
                     let requiredJSONData = try entireJSON[0].rawData()
-                    
                     let model = try decoder.decode([T].self, from: requiredJSONData)
-                    
                     return .success(model)
-                    
                 } catch {
                     print("❗️ Error in requestRawJsonWithArray: \(error)")
                     return .error(.E000)

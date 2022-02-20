@@ -118,7 +118,7 @@ final class PostListViewReactor: Reactor, Stepper {
                 fetchBannerList(),
 //                fetchLatestPopup(),
                 askForNotificationPermission(),
-//                fetchAppLatestVersion(),
+                fetchAppLatestVersion(),
                 
                 Observable.just(Mutation.incrementIndex),
                 Observable.just(Mutation.setIsFetchingData(false))

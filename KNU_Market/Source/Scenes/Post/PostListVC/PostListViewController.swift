@@ -168,7 +168,6 @@ class PostListViewController: BaseViewController, View {
                 cellIdentifier: PostTableViewCell.cellId,
                 cellType: PostTableViewCell.self)
             ) { indexPath, postList, cell in
-                print("✅ configure with: \(postList)")
                 cell.configure(with: postList)
             }
             .disposed(by: disposeBag)

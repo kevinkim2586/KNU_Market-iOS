@@ -3,20 +3,7 @@ import Foundation
 //MARK: - 공구글 리스트 Model
 
 struct PostListModel: Decodable, ModelType {
-
-//    let totalNumberOfPosts: Int
     let posts: [PostModel]
-    
-//    init(from decoder: Decoder) throws {
-//        var container = try decoder.unkeyedContainer()
-//        self.totalNumberOfPosts = try container.decode(Int.self)
-//        self.posts = try container.decode([PostModel].self)
-//    }
-
-//    enum CodingKeys: String, CodingKey {
-////        case totalNumberOfPosts = ""
-//        case posts
-//    }
 }
 
 struct PostModel: Decodable, ModelType {

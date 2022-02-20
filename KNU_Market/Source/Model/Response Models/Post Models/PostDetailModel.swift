@@ -5,62 +5,64 @@ import Foundation
 struct PostDetailModel: ModelType {
     
     let uuid: String
+    let channelId: String
     let title: String
-    let imageUIDs: [String]?
-    let price: Int?
-    let referenceUrl: String?
-    let shippingFee: Int?
     let postDetail: String
-    let viewCount: Int
     let location: Int?
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
-    let isFull: Bool
-    let isCompletelyDone: Bool
-    let nickname: String
-    let profileImageUID: String
+    let viewCount: Int
     let date: String
-    let userUID: String
+    let recruitedAt: String?
+    let price: Int?
+    let shippingFee: Int?
+    let createdBy: CreatedBy
     
+//    let referenceUrl: String?
+
     enum CodingKeys: String, CodingKey {
         
-        case uuid = "UUID"
+        case uuid = "postId"
+        case channelId
         case title
-        case imageUIDs = "images"
-        case price, referenceUrl, shippingFee
-        case location
         case postDetail = "content"
+        case location
+        case totalGatheringPeople = "headCount"
+        case currentlyGatheredPeople = "currentHeadCount"
         case viewCount  = "viewCount"
-        case totalGatheringPeople = "maxHeadcount"
-        case currentlyGatheredPeople = "currentHeadcount"
-        case isFull = "isHeadcountArchived"
-        case isCompletelyDone = "isArchived"
-        case nickname
-        case profileImageUID = "profileImage"
         case date
-        case userUID = "userUid"
+        case recruitedAt
+        case price
+        case shippingFee
+        case createdBy
     }
     
     static func getDefaultState() -> PostDetailModel {
         return PostDetailModel(
             uuid: "",
+            channelId: "",
             title: "",
-            imageUIDs: nil,
-            price: nil,
-            referenceUrl: nil,
-            shippingFee: nil,
             postDetail: "로딩 중..",
-            viewCount: 0,
             location: nil,
             totalGatheringPeople: 2,
             currentlyGatheredPeople: 1,
-            isFull: false,
-            isCompletelyDone: false,
-            nickname: "",
-            profileImageUID: "default",
+            viewCount: 0,
             date: "",
-            userUID: ""
+            recruitedAt: nil,
+            price: nil,
+            shippingFee: nil,
+            createdBy: CreatedBy(userId: "", displayName: "-")
         )
     }
 }
 
+
+struct CreatedBy: ModelType {
+    let userId: String
+    let displayName: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userId
+        case displayName = "displayname"
+    }
+}

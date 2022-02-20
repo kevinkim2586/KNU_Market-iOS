@@ -8,5 +8,5 @@
 import Foundation
 
 protocol SharingServiceType {
-    func sharePost(postUid: String, titleMessage: String, imageUids: [String]?)
+    func sharePost(postUid: String, titleMessage: String, imageFilePaths: [File]?)
 }

@@ -22,7 +22,7 @@ final class SharingService: SharingServiceType {
     }
     
     // 공구글 공유
-    func sharePost(postUid: String, titleMessage: String, imageUids: [String]?) {
+    func sharePost(postUid: String, titleMessage: String, imageFilePaths: [File]?) {
 
         var components = URLComponents()
         components.scheme = scheme
@@ -53,8 +53,8 @@ final class SharingService: SharingServiceType {
         shareLink.socialMetaTagParameters?.title = titleMessage + " 같이 사요!"
         shareLink.socialMetaTagParameters?.descriptionText = "자세한 내용은 크누마켓에서 확인하세요."
         
-        if let imageUids = imageUids {
-            shareLink.socialMetaTagParameters?.imageURL = URL(string: K.MEDIA_REQUEST_URL + imageUids[0])
+        if let imageFilePaths = imageFilePaths {
+            shareLink.socialMetaTagParameters?.imageURL = URL(string: imageFilePaths[0].location)
         }
         
         shareLink.shorten { url, _, error in

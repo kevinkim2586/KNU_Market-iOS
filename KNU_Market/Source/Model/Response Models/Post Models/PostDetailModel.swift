@@ -14,11 +14,12 @@ struct PostDetailModel: ModelType {
     let viewCount: Int
     let date: String
     let recruitedAt: String?
+    let isRecruited: Int
     let price: Int?
     let shippingFee: Int?
+    let referenceUrl: String?
     let createdBy: CreatedBy
-    
-//    let referenceUrl: String?
+    let postFile: FileInfo?
 
     enum CodingKeys: String, CodingKey {
         
@@ -32,9 +33,12 @@ struct PostDetailModel: ModelType {
         case viewCount  = "viewCount"
         case date
         case recruitedAt
+        case isRecruited
         case price
         case shippingFee
+        case referenceUrl
         case createdBy
+        case postFile
     }
     
     static func getDefaultState() -> PostDetailModel {
@@ -49,20 +53,26 @@ struct PostDetailModel: ModelType {
             viewCount: 0,
             date: "",
             recruitedAt: nil,
+            isRecruited: 0,
             price: nil,
             shippingFee: nil,
-            createdBy: CreatedBy(userId: "", displayName: "-")
+            referenceUrl: nil,
+            createdBy: CreatedBy(userId: "", displayName: "-", profileUrl: nil),
+            postFile: nil
         )
     }
 }
 
 
 struct CreatedBy: ModelType {
+    
     let userId: String
     let displayName: String
+    let profileUrl: String?
     
     enum CodingKeys: String, CodingKey {
         case userId
         case displayName = "displayname"
+        case profileUrl
     }
 }

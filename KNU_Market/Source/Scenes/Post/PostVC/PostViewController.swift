@@ -579,7 +579,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
 
         /// 닉네임
         reactor.state
-            .map { $0.postModel.nickname }
+            .map { $0.postModel.createdBy.displayName }
             .distinctUntilChanged()
             .bind(to: userNicknameLabel.rx.text)
             .disposed(by: disposeBag)

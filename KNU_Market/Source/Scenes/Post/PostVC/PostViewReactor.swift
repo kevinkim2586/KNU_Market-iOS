@@ -70,7 +70,7 @@ final class PostViewReactor: Reactor, Stepper {
         // Computed Properties
         
         var postUploaderNickname: String {
-            return postModel.nickname
+            return postModel.createdBy.displayName
         }
         
         var title: String {
@@ -103,8 +103,6 @@ final class PostViewReactor: Reactor, Stepper {
             return postModel.shippingFee ?? 0
         }
         
-        
-        
         var detail: String {
             return postModel.postDetail
         }
@@ -133,17 +131,17 @@ final class PostViewReactor: Reactor, Stepper {
         
         // 사용자가 올린 공구인지 여부
         var postIsUserUploaded: Bool {
-            return postModel.nickname == myNickname
+            return postModel.createdBy.displayName == myNickname
         }
         
-        // 인원이 다 찼는지 여부
-        var isFull: Bool {
-            return postModel.isFull
-        }
+//        // 인원이 다 찼는지 여부 -> recruitedAt날짜가 있으면 모집 완료 API를 때린 적이 있다는 것
+//        var isFull: Bool {
+//            return postModel.recruitedAt == nil ? false : true
+//        }
         
         // 공구 마감 여부
         var isCompletelyDone: Bool {
-            return postModel.isCompletelyDone
+            return postModel.isRecruited == 0 ? false : true
         }
         
         // 모집 여부
@@ -267,7 +265,7 @@ final class PostViewReactor: Reactor, Stepper {
         case .reportPostUploader:
             
             self.steps.accept(AppStep.reportIsRequired(
-                userToReport: currentState.postModel.nickname,
+                userToReport: currentState.postModel.createdBy.displayName,
                 postUid: currentState.pageId)
             )
             return .empty()
@@ -469,7 +467,7 @@ extension PostViewReactor {
     
     private func blockPostUploader() {
         
-        let userToBlock = currentState.postModel.userUID
+        let userToBlock = currentState.postModel.createdBy.userId
         var bannedUsers: [String] = userDefaultsService.get(key: UserDefaults.Keys.bannedPostUploaders) ?? []
         
         bannedUsers.append(userToBlock)

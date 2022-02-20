@@ -38,6 +38,23 @@ struct AssetConverter {
         return result
     }
     
+    static func convertImagePathsToInputSources(imagePaths: [File]) -> [InputSource] {
+        
+        let imageURLs = imagePaths.compactMap {
+            URL(string: $0.location)
+        }
+        
+        var imageSources: [InputSource] = []
+        
+        imageURLs.forEach { imageURL in
+            imageSources.append(SDWebImageSource(
+                url: imageURL,
+                placeholder: UIImage(named: K.Images.defaultItemImage))
+            )
+        }
+        return imageSources
+    }
+    
     static func convertImageUIDsToInputSources(imageUIDs: [String]) -> [InputSource] {
         
         let imageURLs = imageUIDs.compactMap {

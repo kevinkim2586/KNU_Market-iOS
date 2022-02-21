@@ -18,7 +18,7 @@ final class PostService: PostServiceType {
     
     func fetchPostList(fetchCurrentUsers: Bool) -> Single<NetworkResultWithArray<PostModel>> {
         
-        return network.requestRawJsonWithArray(.fetchPostList(fetchCurrentUsers: fetchCurrentUsers), type: PostModel.self)
+        return network.requestArrayExcludingSingleValueContainer(.fetchPostList(fetchCurrentUsers: fetchCurrentUsers), type: PostModel.self)
             .map { result in
                 switch result {
                 case .success(let postModel):
@@ -42,7 +42,7 @@ final class PostService: PostServiceType {
             }
     }
     
-    func updatePost(uid: String, with model: UpdatePostRequestDTO) -> Single<NetworkResult> {
+    func updatePost(uid: String, with model: UploadPostRequestDTO) -> Single<NetworkResult> {
         
         return network.requestWithoutMapping(.updatePost(uid: uid, model: model))
             .map { result in

@@ -11,7 +11,7 @@ import Moya
 enum PostAPI {
     case fetchPostList(fetchCurrentUsers: Bool = false)
     case uploadNewPost(model: UploadPostRequestDTO)
-    case updatePost(uid: String, model: UpdatePostRequestDTO)
+    case updatePost(uid: String, model: UploadPostRequestDTO)
     case fetchPostDetails(uid: String)
     case deletePost(uid: String)
     case markPostDone(uid: String)
@@ -37,7 +37,7 @@ extension PostAPI: BaseAPI {
     
     var headers: [String : String]? {
         switch self {
-        case .uploadNewPost:
+        case .uploadNewPost, .updatePost:
             return ["Content-Type" : "multipart/form-data"]
         default:
             return ["Content-Type" : "application/json"]
@@ -50,7 +50,9 @@ extension PostAPI: BaseAPI {
             return .get
         case .uploadNewPost:
             return .post
-        case .updatePost, .markPostDone:
+        case .updatePost:
+            return .patch
+        case .markPostDone:
             return .put
         case .deletePost:
             return .delete
@@ -59,15 +61,12 @@ extension PostAPI: BaseAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case let .updatePost(_, model: model):
-            return model.parameters
         case let .fetchPostList:
 //            return [ "page" : index ]
             return nil
         default: return nil
         }
     }
-    
     
     var parameterEncoding: ParameterEncoding {
         switch self {
@@ -81,7 +80,7 @@ extension PostAPI: BaseAPI {
     var task: Task {
         switch self {
             
-        case let .uploadNewPost(model):
+        case let .uploadNewPost(model), let .updatePost(_, model):
             
             var multipartData: [MultipartFormData] = []
             

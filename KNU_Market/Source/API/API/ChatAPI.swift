@@ -33,7 +33,7 @@ extension ChatAPI: BaseAPI {
             return "room/\(pid)"
 
         case .getRoom:
-            return "room/"
+            return "channels"
             
         case let .getPreviousChats(pid, index), let .getNewlyReceivedChats(pid, index, _):
             return "room/\(pid)/\(index)"

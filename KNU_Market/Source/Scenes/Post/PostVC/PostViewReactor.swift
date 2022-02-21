@@ -117,7 +117,7 @@ final class PostViewReactor: Reactor, Stepper {
         }
         
         var date: String {
-            return DateConverter.convertDateStringToSimpleFormat(postModel.date)
+            return DateConverter.convertDateStringToSimpleFormat(postModel.createdAt)
         }
         
         var viewCount: String {
@@ -235,11 +235,10 @@ final class PostViewReactor: Reactor, Stepper {
             return configureEditPostModel()
             
         case .sharePost:
-            
             self.sharingService.sharePost(
                 postUid: currentState.postModel.uuid,
                 titleMessage: currentState.postModel.title,
-                imageUids: currentState.postModel.imageUIDs
+                imageFilePaths: currentState.postModel.postFile?.files
             )
             return .empty()
             
@@ -281,8 +280,9 @@ final class PostViewReactor: Reactor, Stepper {
         switch mutation {
         case .setPostDetails(let postDetailModel):
             state.postModel = postDetailModel
-            if let postImageUIDs = postDetailModel.imageUIDs {
-                state.inputSources = AssetConverter.convertImageUIDsToInputSources(imageUIDs: postImageUIDs)
+            
+            if let imagePaths = postDetailModel.postFile?.files {
+                state.inputSources = AssetConverter.convertImagePathsToInputSources(imagePaths: imagePaths)
             }
             
         case .setDidFailFetchingPost(let didFail, let alertMessage):
@@ -367,49 +367,49 @@ extension PostViewReactor {
     }
     
     private func configureEditPostModel() -> Observable<Mutation> {
-
+        
         let editPostModel = EditPostModel(
-            title: currentState.postModel.title,
-            imageURLs: nil,
-            imageUIDs: currentState.postModel.imageUIDs,
-            totalGatheringPeople: currentState.postModel.totalGatheringPeople,
-            currentlyGatheredPeople: currentState.currentlyGatheredPeople,
-            location: Location.list.count,                        /// 당분간 8이 기본
-            postDetail: currentState.postModel.postDetail,
             pageUID: currentState.postModel.uuid,
+            title: currentState.postModel.title,
+            content: currentState.postModel.postDetail,
+            headCount: currentState.postModel.totalGatheringPeople,
+            currentlyGatheredPeople: currentState.postModel.currentlyGatheredPeople,
             price: currentState.postModel.price ?? 0,
             shippingFee: currentState.postModel.shippingFee ?? 0,
-            referenceUrl: currentState.postModel.referenceUrl
+            referenceUrl: currentState.postModel.referenceUrl,
+            imageFiles: currentState.postModel.postFile?.files
         )
+        
 
         self.steps.accept(AppStep.editPostIsRequired(editModel: editPostModel))
         return .empty()
     }
     
     private func updatePostAsRegathering() -> Observable<Mutation> {
-        
-        let updateModel = UpdatePostRequestDTO.configureDTOForMarkingPostAsRegathering(
-            title: currentState.postModel.title,
-            detail: currentState.postModel.postDetail,
-            imageUIDs: currentState.postModel.imageUIDs,
-            totalGatheringPeople: currentState.totalGatheringPeople,
-            currentlyGatheredPeople: currentState.currentlyGatheredPeople,
-            referenceUrl: currentState.postModel.referenceUrl,
-            shippingFee: currentState.postModel.shippingFee,
-            price: currentState.postModel.price
-        )
-        
-        return postService.updatePost(uid: currentState.postModel.uuid, with: updateModel)
-            .asObservable()
-            .map { result in
-                switch result {
-                case .success:
-                    NotificationCenterService.updatePostList.post()
-                    return Mutation.empty
-                case .error(let error):
-                    return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
-                }
-            }
+      
+//        let updateModel = UpdatePostRequestDTO.configureDTOForMarkingPostAsRegathering(
+//            title: currentState.postModel.title,
+//            detail: currentState.postModel.postDetail,
+//            imageUIDs: currentState.postModel.imageUIDs,
+//            totalGatheringPeople: currentState.totalGatheringPeople,
+//            currentlyGatheredPeople: currentState.currentlyGatheredPeople,
+//            referenceUrl: currentState.postModel.referenceUrl,
+//            shippingFee: currentState.postModel.shippingFee,
+//            price: currentState.postModel.price
+//        )
+//
+//        return postService.updatePost(uid: currentState.postModel.uuid, with: updateModel)
+//            .asObservable()
+//            .map { result in
+//                switch result {
+//                case .success:
+//                    NotificationCenterService.updatePostList.post()
+//                    return Mutation.empty
+//                case .error(let error):
+//                    return Mutation.setAlertMessage(error.errorDescription, .simpleBottom)
+//                }
+//            }
+        return .empty()
     }
     
     private func joinChat() -> Observable<Mutation> {
@@ -431,7 +431,7 @@ extension PostViewReactor {
                     self.steps.accept(AppStep.chatIsPicked(
                         roomUid: self.currentState.pageId,
                         chatRoomTitle: self.currentState.title,
-                        postUploaderUid: self.currentState.postModel.userUID,
+                        postUploaderUid: self.currentState.postModel.createdBy.userId,
                         isFirstEntrance: true)
                     )
                     return .empty
@@ -444,7 +444,7 @@ extension PostViewReactor {
                         self.steps.accept(AppStep.chatIsPicked(
                             roomUid: self.currentState.pageId,
                             chatRoomTitle: self.currentState.title,
-                            postUploaderUid: self.currentState.postModel.userUID,
+                            postUploaderUid: self.currentState.postModel.createdBy.userId,
                             isFirstEntrance: false)
                         )
                         return .empty

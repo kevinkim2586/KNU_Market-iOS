@@ -12,7 +12,7 @@ struct PostDetailModel: ModelType {
     let totalGatheringPeople: Int
     let currentlyGatheredPeople: Int
     let viewCount: Int
-    let date: String
+    let createdAt: String
     let recruitedAt: String?
     let isRecruited: Int
     let price: Int?
@@ -31,7 +31,7 @@ struct PostDetailModel: ModelType {
         case totalGatheringPeople = "headCount"
         case currentlyGatheredPeople = "currentHeadCount"
         case viewCount  = "viewCount"
-        case date
+        case createdAt
         case recruitedAt
         case isRecruited
         case price
@@ -51,7 +51,7 @@ struct PostDetailModel: ModelType {
             totalGatheringPeople: 2,
             currentlyGatheredPeople: 1,
             viewCount: 0,
-            date: "",
+            createdAt: "",
             recruitedAt: nil,
             isRecruited: 0,
             price: nil,

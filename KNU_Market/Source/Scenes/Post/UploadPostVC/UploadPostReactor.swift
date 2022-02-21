@@ -159,12 +159,12 @@ final class UploadPostReactor: Reactor, Stepper {
                 
                 var images: [UIImage] = []
                 
-                if let imageUids = self.currentState.editPostModel?.imageUIDs {
-                    for imageUid in imageUids {
-                        let url = URL(string: K.MEDIA_REQUEST_URL + imageUid)!
-                        if let imageData = try? Data(contentsOf: url), let image = UIImage(data: imageData) {
+                if let imageFiles = self.currentState.editPostModel?.imageFiles {
+                    
+                    for file in imageFiles {
+                        let imageUrl = URL(string: file.location ?? "")!
+                        if let imageData = try? Data(contentsOf: imageUrl), let image = UIImage(data: imageData) {
                             images.append(image)
-                           
                         }
                     }
                     observer.onNext(Mutation.setPreviousImages(images))
@@ -223,9 +223,9 @@ final class UploadPostReactor: Reactor, Stepper {
             state.title = model.title
             state.price = "\(model.price)"
             state.shippingFee = "\(model.shippingFee)"
-            state.totalGatheringPeople = "\(model.totalGatheringPeople)"
+            state.totalGatheringPeople = "\(model.headCount)"
             state.referenceUrl = model.referenceUrl
-            state.postDetail = model.postDetail
+            state.postDetail = model.content
             
         case .setPreviousImages(let images):
             state.images = images
@@ -278,24 +278,27 @@ extension UploadPostReactor {
     
     private func updatePost() -> Observable<Mutation> {
         
-        guard let updatePostDTO = UpdatePostRequestDTO.configureStandardDTO(
+        let images: [Data] = AssetConverter.convertUIImagesToDataType(images: currentState.images)
+        
+        guard let uploadPostDTO = UploadPostRequestDTO.configureDTO(
             title: currentState.title,
-            detail: currentState.postDetail,
-            imageUids: currentState.imageUids,
-            totalGatheringPeople: currentState.totalGatheringPeople,
-            currentlyGatheredPeople: currentState.editPostModel?.currentlyGatheredPeople,
-            referenceUrl: currentState.referenceUrl,
+            price: currentState.price,
             shippingFee: currentState.shippingFee,
-            price: currentState.price
+            totalGatheringPeople: currentState.totalGatheringPeople,
+            detail: currentState.postDetail,
+            referenceUrl: currentState.referenceUrl,
+            imageDatas: images
+     
         ) else {
             return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
         }
+
         
         guard let pageUid = currentState.editPostModel?.pageUID else {
             return .just(Mutation.setErrorMessage(ErrorMessage.uploadErrorMessage))
         }
         
-        return self.postService.updatePost(uid: pageUid, with: updatePostDTO)
+        return self.postService.updatePost(uid: pageUid, with: uploadPostDTO)
             .asObservable()
             .map { result in
                 switch result {

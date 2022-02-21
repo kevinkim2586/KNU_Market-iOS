@@ -92,7 +92,7 @@ extension Network {
             }
     }
     
-    func requestRawJsonWithArray<T: ModelType>(_ target: API, type: T.Type) -> Single<NetworkResultWithArray<T>> {
+    func requestArrayExcludingSingleValueContainer<T: ModelType>(_ target: API, type: T.Type) -> Single<NetworkResultWithArray<T>> {
         let decoder = type.decoder
         return request(target)
             .map { result in

@@ -279,7 +279,6 @@ class PostViewController: BaseViewController, ReactorKit.View {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -586,7 +585,7 @@ class PostViewController: BaseViewController, ReactorKit.View {
         
         /// 날짜
         reactor.state
-            .map { $0.postModel.date }
+            .map { $0.postModel.createdAt }
             .distinctUntilChanged()
             .map { DateConverter.convertDateStringToComplex($0) }
             .bind(to: dateLabel.rx.text)
@@ -655,9 +654,8 @@ class PostViewController: BaseViewController, ReactorKit.View {
         
         /// 유저 프로필 이미지
         reactor.state
-            .map { $0.postModel.profileImageUID }
-            .distinctUntilChanged()
-            .map { URL(string: K.MEDIA_REQUEST_URL + $0) }
+            .map { $0.postModel.createdBy.profileUrl ?? "" }
+            .map { URL(string: $0) }
             .withUnretained(self)
             .subscribe(onNext: { (_, url) in
                 self.profileImageView.sd_setImage(

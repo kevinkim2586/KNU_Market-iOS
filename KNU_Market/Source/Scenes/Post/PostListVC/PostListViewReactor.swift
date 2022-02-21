@@ -112,7 +112,7 @@ final class PostListViewReactor: Reactor, Stepper {
                 
                 Observable.just(Mutation.setIsFetchingData(true)),
                 
-//                fetchEnteredRoomInfo(),
+                fetchEnteredRoomInfo(),
                 loadUserProfile(),
                 fetchPostList(at: currentState.index),
                 fetchBannerList(),

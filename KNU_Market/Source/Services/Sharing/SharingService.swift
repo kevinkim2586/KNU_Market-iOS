@@ -53,8 +53,8 @@ final class SharingService: SharingServiceType {
         shareLink.socialMetaTagParameters?.title = titleMessage + " 같이 사요!"
         shareLink.socialMetaTagParameters?.descriptionText = "자세한 내용은 크누마켓에서 확인하세요."
         
-        if let imageFilePaths = imageFilePaths {
-            shareLink.socialMetaTagParameters?.imageURL = URL(string: imageFilePaths[0].location)
+        if let imageFilePaths = imageFilePaths, let location = imageFilePaths[0].location {
+            shareLink.socialMetaTagParameters?.imageURL = URL(string: location)
         }
         
         shareLink.shorten { url, _, error in

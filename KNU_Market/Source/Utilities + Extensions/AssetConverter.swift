@@ -41,7 +41,7 @@ struct AssetConverter {
     static func convertImagePathsToInputSources(imagePaths: [File]) -> [InputSource] {
         
         let imageURLs = imagePaths.compactMap {
-            URL(string: $0.location)
+            URL(string: $0.location ?? "")
         }
         
         var imageSources: [InputSource] = []

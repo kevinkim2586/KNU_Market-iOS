@@ -2,26 +2,29 @@ import Foundation
 
 struct Room: ModelType {
     
-    let uuid: String
+    let channelId: String
     let title: String
-    let content: String
-    let location: Int
-    let totalGatheringPeople: Int
-    let currentlyGatheredPeople: Int
-    let isCompletelyDone: Int
-    let date: String
-    let imageCodes: [String]
-    let userUID: String
+    let headCount: Int
+    let createdAt: String
+    let postInfo: PostInfo
+    let createdBy: CreatedBy
+    let channelMembersCount: Int
     
     enum CodingKeys: String, CodingKey {
         
-        case uuid = "UUID"
-        case title, content, location
-        case totalGatheringPeople = "maxHeadcount"
-        case currentlyGatheredPeople = "currentHeadcount"
-        case isCompletelyDone = "isArchived"
-        case date
-        case imageCodes = "images"
-        case userUID = "userUid"
+        case channelId
+        case title = "name"
+        case headCount
+        case createdAt
+        case postInfo = "post"
+        case createdBy
+        case channelMembersCount
     }
 }
+
+struct PostInfo: ModelType {
+    
+    let postId: String
+    let postFile: FileInfo?
+}
+

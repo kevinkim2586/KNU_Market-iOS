@@ -12,9 +12,12 @@ struct DateConverter {
     
     enum DateFormatType {
         case simple
+        case isoDateTimeMilliSec
 
         var stringFormat: String {
             switch self {
+            case .isoDateTimeMilliSec:
+                return "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
             case .simple: return "yyyy-MM-dd HH:mm:ss"
             }
         }
@@ -46,7 +49,7 @@ struct DateConverter {
     static func convertDateStringToSimpleFormat(_ dateString: String) -> String {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormatType.simple.stringFormat
+        dateFormatter.dateFormat = DateFormatType.isoDateTimeMilliSec.stringFormat
         dateFormatter.locale = Locale(identifier: "ko_KR")
         
         guard let convertedDate = dateFormatter.date(from: dateString) else {
@@ -58,7 +61,7 @@ struct DateConverter {
     
     static func convertDateStringToComplex(_ dateString: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormatType.simple.stringFormat
+        dateFormatter.dateFormat = DateFormatType.isoDateTimeMilliSec.stringFormat
         dateFormatter.locale = Locale(identifier: "ko_KR")
         
         guard let convertedDate = dateFormatter.date(from: dateString) else {

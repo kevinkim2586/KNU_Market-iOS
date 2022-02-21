@@ -2,15 +2,14 @@ import UIKit
 
 struct EditPostModel {
     
-    let title: String
-    let imageURLs: [URL]?
-    let imageUIDs: [String]?
-    let totalGatheringPeople: Int
-    let currentlyGatheredPeople: Int
-    let location: Int
-    let postDetail: String
     let pageUID: String
+    let title: String
+    let content: String
+    let location: Int = Location.list.count
+    let headCount: Int
+    let currentlyGatheredPeople: Int
     let price: Int
     let shippingFee: Int
     let referenceUrl: String?
+    let imageFiles: [File]?
 }

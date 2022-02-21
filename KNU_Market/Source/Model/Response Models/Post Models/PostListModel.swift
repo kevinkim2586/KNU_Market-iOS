@@ -25,7 +25,7 @@ struct PostModel: Decodable, ModelType {
 
 // MARK: - PostFile
 struct FileInfo: Decodable, ModelType {
-    let fileFolderID: String
+    let fileFolderID: String?
     let files: [File]
 
     enum CodingKeys: String, CodingKey {
@@ -36,5 +36,5 @@ struct FileInfo: Decodable, ModelType {
 
 // MARK: - File
 struct File: Decodable, ModelType {
-    let location: String
+    let location: String?
 }

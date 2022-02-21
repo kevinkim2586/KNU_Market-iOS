@@ -37,8 +37,8 @@ class PostCellViewModel {
         self.shippingFee = model.shippingFee ?? 0
         self.date = model.createdAt
         
-        if let postFile = model.postFile {
-            self.imageURL = URL(string: postFile.files[0].location)
+        if let postFile = model.postFile, let location = postFile.files[0].location {
+            self.imageURL = URL(string: location)
         }
     }
 }

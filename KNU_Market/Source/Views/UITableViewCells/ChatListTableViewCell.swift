@@ -132,17 +132,16 @@ class ChatListTableViewCell: UITableViewCell {
     
     func configure(with model: Room) {
         
-        if !model.imageCodes.isEmpty {
+        if let imagePath = model.postInfo.postFile?.files[0].location {
             
-            let imageURL = URL(string: "\(K.MEDIA_REQUEST_URL)\(model.imageCodes[0])")
-
+            let imageURL = URL(string: imagePath)
+            
             chatRoomImageView.sd_setImage(
                 with: imageURL,
                 placeholderImage: UIImage(named: K.Images.chatBubbleIcon),
                 options: .continueInBackground,
                 completed: nil
             )
-
             chatRoomImageView.contentMode = .scaleAspectFill
         } else {
             chatRoomImageView.image = UIImage(named: K.Images.chatBubbleIcon)
@@ -150,9 +149,12 @@ class ChatListTableViewCell: UITableViewCell {
         }
         
         chatRoomTitleLabel.text = model.title
-        currentlyParticipatingCountLabel.text = "\(model.currentlyGatheredPeople)" + "/\(model.totalGatheringPeople) 명"
+        currentlyParticipatingCountLabel.text = "\(model.channelMembersCount)" + "/\(model.headCount) 명"
         
-        if User.shared.chatNotificationList.contains(model.uuid) {
+        
+        let currentChatNotificationList: [String] = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.notificationList) ?? []
+        
+        if currentChatNotificationList.contains(model.channelId) {
             configureUIWithNotification()
         }
     }

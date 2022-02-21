@@ -20,13 +20,13 @@ final class ChatListService: ChatListServiceType {
     
     func fetchJoinedChatList() -> Single<NetworkResultWithArray<Room>> {
         
-        return network.requestArray(.getRoom, type: Room.self)
+        return network.requestArrayExcludingSingleValueContainer(.getRoom, type: Room.self)
             .map { result in
                 switch result {
                 case .success(let rooms):
                     self.userDefaultsGenericService.set(
                         key: UserDefaults.Keys.joinedChatRoomPIDs,
-                        value: rooms.map { $0.uuid }
+                        value: rooms.map { $0.channelId }
                     )
                     return .success(rooms)
                 case .error(let error):

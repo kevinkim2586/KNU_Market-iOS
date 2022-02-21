@@ -79,7 +79,7 @@ final class ChatListViewReactor: Reactor, Stepper {
                             // 참여하고 있는 공구 리스트 값 User Defaults에 저장
                             self.userDefaultsGenericService.set(
                                 key: UserDefaults.Keys.joinedChatRoomPIDs,
-                                value: rooms.map { $0.uuid }
+                                value: rooms.map { $0.channelId }
                             )
                             return rooms.count == 0
                             ? Mutation.setNeedsToShowEmptyView(true)
@@ -100,7 +100,7 @@ final class ChatListViewReactor: Reactor, Stepper {
             
             var currentChatNotificationList: [String] = userDefaultsGenericService.get(key: UserDefaults.Keys.notificationList) ?? []
             
-            if let index = currentChatNotificationList.firstIndex(of: currentState.roomList[indexPath.row].uuid) {
+            if let index = currentChatNotificationList.firstIndex(of: currentState.roomList[indexPath.row].channelId) {
                 currentChatNotificationList.remove(at: index)
                 userDefaultsGenericService.set(
                     key: UserDefaults.Keys.notificationList,
@@ -112,9 +112,9 @@ final class ChatListViewReactor: Reactor, Stepper {
             
         case .chatSelected(let indexPath):
             self.steps.accept(AppStep.chatIsPicked(
-                roomUid: currentState.roomList[indexPath.row].uuid,
+                roomUid: currentState.roomList[indexPath.row].channelId,
                 chatRoomTitle: currentState.roomList[indexPath.row].title,
-                postUploaderUid: currentState.roomList[indexPath.row].userUID,
+                postUploaderUid: currentState.roomList[indexPath.row].createdBy.userId,
                 isFirstEntrance: false)
             )
             return Observable.empty()
@@ -158,7 +158,7 @@ extension ChatListViewReactor {
         let chatNotificationList: [String] = userDefaultsGenericService.get(key: UserDefaults.Keys.notificationList) ?? []
         
         rooms.forEach { room in
-            chatNotificationList.contains(room.uuid)
+            chatNotificationList.contains(room.channelId)
             ? sortedChatList.insert(room, at: 0)
             : sortedChatList.append(room)
         }

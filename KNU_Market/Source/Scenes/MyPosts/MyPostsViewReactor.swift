@@ -25,18 +25,24 @@ final class MyPostsViewReactor: Reactor, Stepper {
     }
     
     enum Mutation {
-        case setPostList([PostModel])
-        case resetPostList([PostModel])
+        case setPostList([MyPostModel])
+        case resetPostList([MyPostModel])
         case setFetchingData(Bool)
-        case incrementIndex
+        case setIndex
         case setNeedsToShowEmptyView(Bool)
         case setNeedsToFetchMoreData(Bool)
         case setErrorMessage(String)
     }
     
     struct State {
-        var postList: [PostModel] = []
-        var index: Int = 1
+        
+        var CREATED_AT_INDEX: Int? = nil
+        var RECRUITED_AT_INDEX: Int? = nil
+        
+        var userId: String
+        
+        var postList: [MyPostModel] = []
+        
         var isFetchingData: Bool = false
 
         var needsToShowEmptyView: Bool = false
@@ -46,7 +52,8 @@ final class MyPostsViewReactor: Reactor, Stepper {
     
     init(postService: PostServiceType) {
         self.postService = postService
-        self.initialState = State()
+        let userId: String = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.userUID) ?? ""
+        self.initialState = State(userId: userId)
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
@@ -61,8 +68,10 @@ final class MyPostsViewReactor: Reactor, Stepper {
                 
                 Observable.just(Mutation.setFetchingData(true)),
                 
-                self.postService.fetchPostList(
-                    fetchCurrentUsers: true
+                self.postService.fetchMyPostList(
+                    userId: currentState.userId,
+                    createdAt: currentState.CREATED_AT_INDEX,
+                    recruitedAt: currentState.RECRUITED_AT_INDEX
                 )
                     .asObservable()
                     .map { result in
@@ -78,14 +87,14 @@ final class MyPostsViewReactor: Reactor, Stepper {
                             : Mutation.setErrorMessage("오류가 발생했습니다!\n잠시 후 다시 시도해주세요.")
                         }
                     },
-                Observable.just(Mutation.incrementIndex),
+                Observable.just(Mutation.setIndex),
                 Observable.just(Mutation.setFetchingData(false))
             ])
             
         case .seePostDetail(let indexPath):
             
             self.steps.accept(AppStep.postIsPicked(
-                postUid: currentState.postList[indexPath.row].postID,
+                postUid: currentState.postList[indexPath.row].postId,
                 isFromChatVC: false)
             )
             return .empty()
@@ -96,8 +105,10 @@ final class MyPostsViewReactor: Reactor, Stepper {
             
                 Observable.just(Mutation.setFetchingData(true)),
                 
-                self.postService.fetchPostList(      
-                    fetchCurrentUsers: true
+                self.postService.fetchMyPostList(
+                    userId: currentState.userId,
+                    createdAt: nil,
+                    recruitedAt: nil
                 )
                     .asObservable()
                     .map { result in
@@ -135,9 +146,21 @@ final class MyPostsViewReactor: Reactor, Stepper {
         case .setFetchingData(let isFetchingData):
             state.isFetchingData = isFetchingData
 
-        case .incrementIndex:
-            state.index += 1
+        case .setIndex:
             
+            if let lastPostModel = state.postList.last {
+                
+                let timeStampArray: [Int?] = DateConverter.convertDatesToTimeStamps(
+                    dates: [
+                        lastPostModel.createdAt,
+                        lastPostModel.recruitedAt
+                    ]
+                )
+                
+                state.CREATED_AT_INDEX = timeStampArray[0]
+                state.RECRUITED_AT_INDEX = timeStampArray[1]
+            }
+    
         case .setNeedsToFetchMoreData(let needsToFetchMoreData):
             state.needsToFetchMoreData = needsToFetchMoreData
             

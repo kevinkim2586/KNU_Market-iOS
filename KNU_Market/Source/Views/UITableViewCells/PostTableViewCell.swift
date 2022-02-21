@@ -206,9 +206,16 @@ class PostTableViewCell: UITableViewCell {
     //MARK: - Data Configuration
 
     func configure(with model: PostModel) {
-        
         self.viewModel = PostCellViewModel(model: model)
-        
+        configureUI()
+    }
+    
+    func configure(with model: MyPostModel) {
+        self.viewModel = PostCellViewModel(model: model)
+        configureUI()
+    }
+    
+    private func configureUI() {
         configurePostTitleLabel()
         configurePostImageView()
         configureGatheringLabel()

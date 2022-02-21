@@ -201,6 +201,7 @@
 		7CA78FF826CE02D10019B06F /* KMAlertBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */; };
 		7CA78FFA26CE02EC0019B06F /* KMAlertTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */; };
 		7CA78FFC26CE03260019B06F /* KMAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FFB26CE03260019B06F /* KMAlertButton.swift */; };
+		7CA96EF027C3D020001ED506 /* MyPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA96EEF27C3D020001ED506 /* MyPostModel.swift */; };
 		7CB0D90327BE056A0065E52E /* UpdateUserInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0D90227BE056A0065E52E /* UpdateUserInfoType.swift */; };
 		7CB0D90527BE05720065E52E /* CheckDuplicationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0D90427BE05720065E52E /* CheckDuplicationType.swift */; };
 		7CB0D90727BE057D0065E52E /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0D90627BE057D0065E52E /* ReportType.swift */; };
@@ -511,6 +512,7 @@
 		7CA78FF726CE02D10019B06F /* KMAlertBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertBodyLabel.swift; sourceTree = "<group>"; };
 		7CA78FF926CE02EC0019B06F /* KMAlertTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertTitleLabel.swift; sourceTree = "<group>"; };
 		7CA78FFB26CE03260019B06F /* KMAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMAlertButton.swift; sourceTree = "<group>"; };
+		7CA96EEF27C3D020001ED506 /* MyPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostModel.swift; sourceTree = "<group>"; };
 		7CB0D90227BE056A0065E52E /* UpdateUserInfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoType.swift; sourceTree = "<group>"; };
 		7CB0D90427BE05720065E52E /* CheckDuplicationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicationType.swift; sourceTree = "<group>"; };
 		7CB0D90627BE057D0065E52E /* ReportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportType.swift; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 			children = (
 				7CCB02072674CE5D00D58BC2 /* PostListModel.swift */,
 				7C719970267A1678000BEE64 /* PostDetailModel.swift */,
+				7CA96EEF27C3D020001ED506 /* MyPostModel.swift */,
 			);
 			path = "Post Models";
 			sourceTree = "<group>";
@@ -2141,6 +2144,7 @@
 				7C2BA41027968E8F00DD01A4 /* UIColor+Extension.swift in Sources */,
 				7C555462266CFC0500C3C5B6 /* HTTPHeaderKeys.swift in Sources */,
 				7CEC191A27016A2700C2D671 /* EmailForLostPasswordViewController.swift in Sources */,
+				7CA96EF027C3D020001ED506 /* MyPostModel.swift in Sources */,
 				7C83EE462741037600CF1680 /* ChatMembersTableViewCell.swift in Sources */,
 				7C60DC7826944C99001DEA9A /* MyPostsViewController.swift in Sources */,
 				7CF369CD2754D9EE00C9D7A9 /* ChatListViewController+UITableView.swift in Sources */,

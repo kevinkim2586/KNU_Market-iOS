@@ -67,7 +67,7 @@ struct PostDetailModel: ModelType {
 struct CreatedBy: ModelType {
     
     let userId: String
-    let displayName: String
+    let displayName: String?
     let profileUrl: String?
     
     enum CodingKeys: String, CodingKey {

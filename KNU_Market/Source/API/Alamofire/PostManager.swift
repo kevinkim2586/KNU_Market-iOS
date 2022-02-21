@@ -95,36 +95,36 @@ class PostManager {
 //    }
     
     //MARK: - 공구글 수정
-    func updatePost(
-        uid: String,
-        with model: UpdatePostRequestDTO,
-        completion: @escaping (Result<Bool, NetworkError>) -> Void
-    ) {
-        
-        let url = baseURL + "/\(uid)"
-        
-        AF.request(url,
-                   method: .put,
-                   parameters: model.parameters,
-                   encoding: JSONEncoding.default,
-                   interceptor: interceptor)
-            .validate()
-            .responseJSON { response in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                    
-                case 201:
-                    print("✏️ postManager - editPost SUCCESS")
-                    completion(.success(true))
-                default:
-                    let error = NetworkError.returnError(json: response.data ?? Data())
-                    print("❗️ postManager - editPost FAILED with statusCode: \(statusCode) and reason: \(error.errorDescription)")
-                    completion(.failure(error))
-                }
-            }
-    }
+//    func updatePost(
+//        uid: String,
+//        with model: UpdatePostRequestDTO,
+//        completion: @escaping (Result<Bool, NetworkError>) -> Void
+//    ) {
+//        
+//        let url = baseURL + "/\(uid)"
+//        
+//        AF.request(url,
+//                   method: .put,
+//                   parameters: model.parameters,
+//                   encoding: JSONEncoding.default,
+//                   interceptor: interceptor)
+//            .validate()
+//            .responseJSON { response in
+//                
+//                guard let statusCode = response.response?.statusCode else { return }
+//                
+//                switch statusCode {
+//                    
+//                case 201:
+//                    print("✏️ postManager - editPost SUCCESS")
+//                    completion(.success(true))
+//                default:
+//                    let error = NetworkError.returnError(json: response.data ?? Data())
+//                    print("❗️ postManager - editPost FAILED with statusCode: \(statusCode) and reason: \(error.errorDescription)")
+//                    completion(.failure(error))
+//                }
+//            }
+//    }
     
     //MARK: - 특정 공구글 불러오기
     func fetchPostDetails(

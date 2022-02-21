@@ -9,7 +9,8 @@ import Foundation
 import Moya
 
 enum PostAPI {
-    case fetchPostList(fetchCurrentUsers: Bool = false)
+    case fetchPostList(createdAt: Int?, recruitedAt: Int?)
+    case fetchMyPostList(userId: String, createdAt: Int?, recruitedAt: Int?)
     case uploadNewPost(model: UploadPostRequestDTO)
     case updatePost(uid: String, model: UploadPostRequestDTO)
     case fetchPostDetails(uid: String)
@@ -22,10 +23,12 @@ extension PostAPI: BaseAPI {
     var path: String {
         switch self {
      
-        case let .fetchPostList(fetchCurrentUsers):
-            return fetchCurrentUsers == true
-            ? "posts/users/"
-            : "posts"
+        case .fetchPostList:
+            return "posts"
+            
+        case let .fetchMyPostList(userId, _, _):
+            return "posts/users/\(userId)"
+            
         case .uploadNewPost:
             return "posts"
         case let .updatePost(uid, _), let .fetchPostDetails(uid), let .deletePost(uid):
@@ -46,7 +49,7 @@ extension PostAPI: BaseAPI {
     
     var method: Moya.Method {
         switch self {
-        case .fetchPostList, .fetchPostDetails:
+        case .fetchPostList, .fetchMyPostList, .fetchPostDetails:
             return .get
         case .uploadNewPost:
             return .post
@@ -61,16 +64,25 @@ extension PostAPI: BaseAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case let .fetchPostList:
-//            return [ "page" : index ]
-            return nil
+        case let .fetchPostList(createdAt, recruitedAt), let .fetchMyPostList(_, createdAt, recruitedAt):
+            
+            var params: [String : Any] = [:]
+            
+            if let createdAt = createdAt {
+                params["createdAt"] = createdAt
+            }
+            
+            if let recruitedAt = recruitedAt {
+                params["recruitedAt"] = recruitedAt
+            }
+            return params
         default: return nil
         }
     }
     
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case .fetchPostList:
+        case .fetchPostList, .fetchMyPostList:
             return URLEncoding.queryString
         default:
             return JSONEncoding.default

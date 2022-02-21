@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct DateConverter {
     
     enum DateFormatType {
@@ -68,5 +67,28 @@ struct DateConverter {
             return "-"
         }
         return convertedDate.toStringWithRelativeTime()
+    }
+    
+    // recruitedAt이 nil일 수 있어 내부가 String Optional로 설정
+    static func convertDatesToTimeStamps(dates: [String?]) -> [Int?] {
+        
+        var timeStampArray: [Int?] = []
+        
+        for date in dates {
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = self.DateFormatType.isoDateTimeMilliSec.stringFormat
+            
+            
+            guard let convertedDate = dateFormatter.date(from: date ?? "") else {
+                timeStampArray.append(nil)
+                continue
+            }
+            
+            let timeStamp: TimeInterval = convertedDate.timeIntervalSince1970
+            let dateInInteger: Int = Int(timeStamp)
+            timeStampArray.append(dateInInteger)
+        }
+        return timeStampArray
     }
 }

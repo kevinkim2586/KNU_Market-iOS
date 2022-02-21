@@ -24,8 +24,6 @@ final class PostListViewReactor: Reactor, Stepper {
     let userDefaultsGenericService: UserDefaultsGenericServiceType
     let userNotificationService: UserNotificationServiceType
     
-    private let INITIAL_PAGE: Int = 1
-    
     enum Action {
         case loadInitialMethods
         case viewWillAppear
@@ -39,7 +37,7 @@ final class PostListViewReactor: Reactor, Stepper {
     enum Mutation {
         case setPostList([PostModel])
         case resetPostList([PostModel])
-        case incrementIndex
+        case setIndex
         case setBannerList([BannerModel])
         case setUserNickname(String)
         case setErrorMessage(String)
@@ -54,11 +52,15 @@ final class PostListViewReactor: Reactor, Stepper {
     struct State {
         
         
+        var CREATED_AT_INDEX: Int? = nil
+        var RECRUITED_AT_INDEX: Int? = nil
+        
+        
         var totalNumberOfPosts: Int = 0
         var postList: [PostModel] = []
+     
         
         
-        var index: Int
         var isFetchingData: Bool = false
         var isRefreshingData: Bool = false
         var needsToFetchMoreData: Bool = true
@@ -95,7 +97,6 @@ final class PostListViewReactor: Reactor, Stepper {
         let isUserVerified: Bool = AuthService.shared.determineUserVerificationStatus()
 
         self.initialState = State(
-            index: INITIAL_PAGE,
             bannedPostUploaders: bannedPostUploaders,
             isUserVerified: isUserVerified
         )
@@ -114,13 +115,13 @@ final class PostListViewReactor: Reactor, Stepper {
                 
                 fetchEnteredRoomInfo(),
                 loadUserProfile(),
-                fetchPostList(at: currentState.index),
+                fetchPostList(createdAt: currentState.CREATED_AT_INDEX, recruitedAt: currentState.RECRUITED_AT_INDEX),
                 fetchBannerList(),
 //                fetchLatestPopup(),
                 askForNotificationPermission(),
                 fetchAppLatestVersion(),
                 
-                Observable.just(Mutation.incrementIndex),
+                Observable.just(Mutation.setIndex),
                 Observable.just(Mutation.setIsFetchingData(false))
             ])
             
@@ -139,8 +140,8 @@ final class PostListViewReactor: Reactor, Stepper {
             
             return Observable.concat([
                 Observable.just(Mutation.setIsFetchingData(true)),
-                fetchPostList(at: currentState.index),
-                Observable.just(Mutation.incrementIndex),
+                fetchPostList(createdAt: currentState.CREATED_AT_INDEX, recruitedAt: currentState.RECRUITED_AT_INDEX),
+                Observable.just(Mutation.setIndex),
                 Observable.just(Mutation.setIsFetchingData(false))
             ])
             
@@ -150,7 +151,7 @@ final class PostListViewReactor: Reactor, Stepper {
                 Observable.just(Mutation.setIsRefreshingData(true)),
                 Observable.just(Mutation.setNeedsToFetchMoreData(true)),
                 refreshPostList(),
-                Observable.just(Mutation.incrementIndex),
+                Observable.just(Mutation.setIndex),
                 Observable.just(Mutation.setIsRefreshingData(false))
             ])
             
@@ -183,13 +184,25 @@ final class PostListViewReactor: Reactor, Stepper {
         case .resetPostList(let postListModel):
             state.postList.removeAll()
             state.postList = postListModel
-            state.index = INITIAL_PAGE
             
-        case .incrementIndex:
-            state.index += INITIAL_PAGE
+        case .setIndex:
+            
+            if let lastPostModel = state.postList.last {
+                
+                let timeStampArray: [Int?] = DateConverter.convertDatesToTimeStamps(
+                    dates: [
+                        lastPostModel.createdAt,
+                        lastPostModel.recruitedAt
+                    ]
+                )
+                
+                state.CREATED_AT_INDEX = timeStampArray[0]
+                state.RECRUITED_AT_INDEX = timeStampArray[1]
+            }
             
         case .setBannerList(let bannerModel):
             state.bannerModel = bannerModel
+        
             
         case .setUserNickname(let nickname):
             state.userNickname = nickname
@@ -223,11 +236,9 @@ final class PostListViewReactor: Reactor, Stepper {
 
 extension PostListViewReactor {
     
-    private func fetchPostList(at index: Int) -> Observable<Mutation> {
+    private func fetchPostList(createdAt: Int?, recruitedAt: Int?) -> Observable<Mutation> {
         
-        return postService.fetchPostList(
-            fetchCurrentUsers: false
-        )
+        return postService.fetchPostList(createdAt: createdAt, recruitedAt: recruitedAt)
             .asObservable()
             .map { result in
                 switch result {
@@ -244,11 +255,9 @@ extension PostListViewReactor {
             }
     }
     
-    private func refreshPostList(postFilterOption: PostFilterOptions? = nil) -> Observable<Mutation> {
+    private func refreshPostList() -> Observable<Mutation> {
         
-        return postService.fetchPostList(
-            fetchCurrentUsers: false
-        )
+        return postService.fetchPostList(createdAt: nil, recruitedAt: nil)
             .asObservable()
             .map { result in
                 switch result {
@@ -342,11 +351,17 @@ extension PostListViewReactor {
             .map { result in
                 switch result {
                 case .success(let latestVersionModel):
-                    return latestVersionModel.isCriticalUpdateVersion == "true"
-                    ? Mutation.setUserNeedsToUpdateAppVersion(true)
-                    : Mutation.empty
                     
-                case .error(_):
+                    let userAppVersion: String = self.userDefaultsGenericService.get(key: UserDefaults.Keys.appVersion) ?? ""
+                    
+                    if userAppVersion == latestVersionModel.latestVersion {
+                        return .empty
+                    } else {
+                        return latestVersionModel.isCriticalUpdateVersion == "true"
+                        ? Mutation.setUserNeedsToUpdateAppVersion(true)
+                        : Mutation.empty
+                    }
+                case .error:
                     return Mutation.empty
                 }
             }

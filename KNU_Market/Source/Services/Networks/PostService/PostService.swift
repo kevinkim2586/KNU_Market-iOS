@@ -16,9 +16,22 @@ final class PostService: PostServiceType {
         self.network = network
     }
     
-    func fetchPostList(fetchCurrentUsers: Bool) -> Single<NetworkResultWithArray<PostModel>> {
+    func fetchPostList(createdAt: Int?, recruitedAt: Int?) -> Single<NetworkResultWithArray<PostModel>> {
         
-        return network.requestArrayExcludingSingleValueContainer(.fetchPostList(fetchCurrentUsers: fetchCurrentUsers), type: PostModel.self)
+        return network.requestArrayExcludingSingleValueContainer(.fetchPostList(createdAt: createdAt, recruitedAt: recruitedAt), type: PostModel.self)
+            .map { result in
+                switch result {
+                case .success(let postModel):
+                    return .success(postModel)
+                case .error(let error):
+                    return .error(error)
+                }
+            }
+    }
+    
+    func fetchMyPostList(userId: String, createdAt: Int?, recruitedAt: Int?) -> Single<NetworkResultWithArray<MyPostModel>> {
+        
+        return network.requestArrayExcludingSingleValueContainer(.fetchMyPostList(userId: userId, createdAt: createdAt, recruitedAt: recruitedAt), type: MyPostModel.self)
             .map { result in
                 switch result {
                 case .success(let postModel):

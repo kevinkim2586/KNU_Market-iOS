@@ -41,4 +41,20 @@ class PostCellViewModel {
             self.imageURL = URL(string: location)
         }
     }
+    
+    init(model: MyPostModel) {
+        self.uuid = model.postId
+        self.title = model.title
+        self.price = model.price ?? 0
+        self.totalGatheringPeople = model.headCount
+        self.currentlyGatheredPeople = model.currentHeadCount
+        
+        self.isCompletelyDone = model.isRecruited == 1 ? true : false
+        self.shippingFee = model.shippingFee ?? 0
+        self.date = model.createdAt
+        
+        if let postFile = model.postFile, let location = postFile.files[0].location {
+            self.imageURL = URL(string: location)
+        }
+    }
 }

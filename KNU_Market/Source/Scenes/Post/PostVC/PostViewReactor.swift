@@ -70,7 +70,7 @@ final class PostViewReactor: Reactor, Stepper {
         // Computed Properties
         
         var postUploaderNickname: String {
-            return postModel.createdBy.displayName
+            return postModel.createdBy.displayName ?? ""
         }
         
         var title: String {
@@ -264,7 +264,7 @@ final class PostViewReactor: Reactor, Stepper {
         case .reportPostUploader:
             
             self.steps.accept(AppStep.reportIsRequired(
-                userToReport: currentState.postModel.createdBy.displayName,
+                userToReport: currentState.postModel.createdBy.displayName ?? "",
                 postUid: currentState.pageId)
             )
             return .empty()

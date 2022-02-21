@@ -8,6 +8,8 @@ import RxSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    private let APP_VERSION: String = "2.0"
+    
     var disposeBag = DisposeBag()
 
     let gcmMessageIDKey = "gcm.message_id2"
@@ -32,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         print("✏️ didFinishLaunchingWithOptions")
+        setCurrentAppVersion(to: APP_VERSION)
         FirebaseApp.configure()
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         
@@ -52,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 print("✏️ FCM Registration Token: \(token)")
                 UserRegisterValues.shared.fcmToken = token
-                User.shared.fcmToken = token
+                UserDefaultsGenericService.shared.set(key: UserDefaults.Keys.fcmToken, value: token)
                 
                 
                 let isLoggedIn: Bool = UserDefaultsGenericService.shared.get(key: UserDefaults.Keys.isLoggedIn) ?? false
@@ -234,5 +237,9 @@ extension AppDelegate {
         appearance.backgroundColor = .white
         navigationBar.standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
+    
+    private func setCurrentAppVersion(to version: String) {
+        UserDefaultsGenericService.shared.set(key: UserDefaults.Keys.appVersion, value: version)
     }
 }

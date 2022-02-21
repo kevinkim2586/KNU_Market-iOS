@@ -8,7 +8,6 @@
 import Foundation
 
 struct LatestVersionModel: ModelType {
-    
     let latestVersion: String
     let isCriticalUpdateVersion: String
 }

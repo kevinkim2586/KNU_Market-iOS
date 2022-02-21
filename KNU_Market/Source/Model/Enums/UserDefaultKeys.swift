@@ -35,5 +35,7 @@ extension UserDefaults {
         
         static let userSeenPopupUids                = "userSeenPopupUids"
         static let userSetPopupBlockDate            = "userSetPopupBlockDate"
+        
+        static let appVersion                       = "appVersion"
     }
 }

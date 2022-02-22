@@ -14,6 +14,8 @@
 - 앱스토어 소셜 네트워킹 카테고리 **110위 달성**! (2021.09.15일 기준)
 - iOS, Android, 백엔드, 기획자, 마케터로 진로를 희망하는 경북대 학생들이 모여 애매한 강의 프로젝트말고 **제대로된 프로젝트**를 하나 해보자 하고 탄생한 앱![appstore](https://user-images.githubusercontent.com/44637101/155120461-d9e9767c-1c32-4581-95b1-db30eb58a088.jpg)
 
+<img src="https://camo.githubusercontent.com/..." data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" />
+
 
 ## ❓ 왜 만들었어?
 
@@ -109,11 +111,14 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 
 ## 🛠 v 1.0 출시 이후 코드 개선사항 (Refactoring)
 
+
 ✅  **스토리보드 → 100% Code-based layout으로 전환**
 
 - 협업 시 발생하는 conflict 최소화, 빌드 타임 단축과 code based UI에 대한 감각을 익히기 위해 존재하던 ***40개 이상의 Storyboard*** VC와 XIB를 전부 SnapKit, Then, BaseViewController를 이용하여 전환
 
 <img width="776" alt="Screen Shot 2022-01-10 at 2 13 29 PM" src="https://user-images.githubusercontent.com/44637101/155121468-5542cea0-f666-434a-ad36-8e83b1cd8bbe.png">
+
+
 
 ✅  **Git Flow를 이용한 버전 관리 및 협업 연습**
 
@@ -124,11 +129,15 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 ![Screen Shot 2022-01-10 at 2 14 22 PM](https://user-images.githubusercontent.com/44637101/155121535-9062361e-8a60-435b-9df5-d982e19672fd.png)
 
 
+
+
 ✅  **팀원과의 코드 리뷰 실시** 
 
 - 서로 오류를 봐주고 더 효율적인 방법은 없는지 체크하여 전체적인 코드 품질을 올릴 수 있었습니다.
 
 ![Screen Shot 2022-01-10 at 2 40 37 PM](https://user-images.githubusercontent.com/44637101/155121616-0d6b26bf-6566-4e1c-b611-75debb0dac40.png)
+
+
 
 
 ✅  **Shared Instance 사용 지양 및 Dependency Injection 적용**
@@ -140,6 +149,8 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 <img width="791" alt="Screen Shot 2022-01-10 at 2 22 48 PM" src="https://user-images.githubusercontent.com/44637101/155121675-7a259fdc-eec9-4358-b1dd-aed0d4ec7ce3.png">
 <img width="711" alt="Screen Shot 2022-01-10 at 2 47 58 PM" src="https://user-images.githubusercontent.com/44637101/155121688-8f0e26da-4a1b-4191-8cb3-176fa6cbce7e.png">
 
+
+
 ✅  **ReactorKit 전환**
 
 - 기존에는 View Controller와 ViewModel의 통신을 위해서 **Delegate Pattern**을 이용
@@ -150,6 +161,8 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 
 <img width="457" alt="Screen Shot 2022-01-10 at 2 28 29 PM" src="https://user-images.githubusercontent.com/44637101/155121719-64b1d454-dcd1-4039-b9b0-0f64f015e937.png">
 <img width="681" alt="Screen Shot 2022-01-10 at 2 30 14 PM" src="https://user-images.githubusercontent.com/44637101/155121727-b0e7f73e-2eb4-48c3-b306-e26054711f3e.png">
+
+
 
 ✅  **Alamofire → Moya 전환**
 
@@ -165,7 +178,7 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 
 - **Coordinator Pattern 적용**
     - 기존 MVVM 구조에서 Coordinator 패턴을 적용시킨 **MVVM-C 구조**를 적용해 Navigation Logic을 ViewController와 분리 가능
-        - [x]  RxFlow 적용 예정
+        - [x]  RxFlow 적용 완료
     
 - **채팅 Local Caching**
     - 채팅 목록 불러오기가 현재는 API 호출을 통해서만 이루어지는데, Local Caching을 이용하여 불필요한 API 호출 횟수를 줄이고 로딩 시간을 줄여 더 나은 사용자 경험 구현이 가능해 보인다.
@@ -235,13 +248,7 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 ![IMG_2016](https://user-images.githubusercontent.com/44637101/155122034-47e51884-0dc1-4690-a18b-52ef93150888.PNG)
 
 
-**✅  학교 축제 부스 홍보**
 
-- 3일간 학교 축제 부스 홍보를 통한 홍보 및 신규 인원 유입
-
-
-![IMG_1435](https://user-images.githubusercontent.com/44637101/155122102-5cb986ef-0afe-47ff-9e54-207c9b761889.PNG)
-![IMG_1437](https://user-images.githubusercontent.com/44637101/155122132-dac5a237-969f-4ec6-be72-3652bbc78b2c.PNG)
 ✅  **경북대 신문 인터뷰**
 
 - [https://www.knun.net/news/article.html?no=20543](https://www.knun.net/news/article.html?no=20543)

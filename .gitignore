@@ -13,6 +13,7 @@ Pods/
 # Constants
 KNU_Market/Source/Constants/Constants.swift
 Constants.swift
+/Users/kevinkim/Desktop/KNU_Market/KNU_Market/Source/Constants/Constants.swift
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint

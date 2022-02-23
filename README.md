@@ -14,8 +14,6 @@
 - 앱스토어 소셜 네트워킹 카테고리 **110위 달성**! (2021.09.15일 기준)
 - iOS, Android, 백엔드, 기획자, 마케터로 진로를 희망하는 경북대 학생들이 모여 애매한 강의 프로젝트말고 **제대로된 프로젝트**를 하나 해보자 하고 탄생한 앱![appstore](https://user-images.githubusercontent.com/44637101/155120461-d9e9767c-1c32-4581-95b1-db30eb58a088.jpg)
 
-<img src="https://camo.githubusercontent.com/..." data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="200" height="400" />
-
 
 ## ❓ 왜 만들었어?
 

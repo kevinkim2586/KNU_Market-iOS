@@ -261,5 +261,6 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 ⚠️ ”**크누마켓**” 앱을 직접 다운 받아서 사용하시려면 ***경북대학교 학생 인증***을 거쳐야지만 정상적으로 사용이 가능합니다. 
 
 → 따라서 별도로 사용하고 싶으시다면 kevinkim2586@gmail.com 으로 성함과 사유를 알려주시면 사용해 보실 수 있도록 테스트 계정을 임시로 보내드리도록 하겠습니다. 감사합니다 :)
+-> 현재 보고 계시는 Repository는 Fork가 된 버전입니다. 실제 Repo는 private organization에 저장되어 있으며 지속 유지보수 중입니다. 따라서 커밋 기록과 코드는 실제와 다를 수 있음을 알려드립니다.
 
 

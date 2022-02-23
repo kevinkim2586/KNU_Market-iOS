@@ -12,9 +12,9 @@
 - 안드로이드 전용 앱과 합하면 총 **다운로드 수 1200 이상**!
 - 총 회원가입자 수 1000 이상 달성!
 - 앱스토어 소셜 네트워킹 카테고리 **110위 달성**! (2021.09.15일 기준)
-- iOS, Android, 백엔드, 기획자, 마케터로 진로를 희망하는 경북대 학생들이 모여 애매한 강의 프로젝트말고 **제대로된 프로젝트**를 하나 해보자 하고 탄생한 앱![appstore](https://user-images.githubusercontent.com/44637101/155120461-d9e9767c-1c32-4581-95b1-db30eb58a088.jpg)
+- iOS, Android, 백엔드, 기획자, 마케터로 진로를 희망하는 경북대 학생들이 모여 애매한 강의 프로젝트말고 **제대로된 프로젝트**를 하나 해보자 하고 탄생한 앱
 
-
+<img src = "https://user-images.githubusercontent.com/44637101/155120461-d9e9767c-1c32-4581-95b1-db30eb58a088.jpg" width="40%" height="40%">
 ## ❓ 왜 만들었어?
 
 - 대학생들의 지갑은 가볍습니다. 옷, 생활용품, 배달음식,
@@ -56,12 +56,11 @@
     
 
 ## 🌄 스크린샷 및 데모 영상
-![IMG_3333](https://user-images.githubusercontent.com/44637101/155120778-a61213d6-17aa-4671-ae04-c05bc6881d18.PNG)
-![IMG_3337](https://user-images.githubusercontent.com/44637101/155120807-40b1b7e1-419d-4f20-87b5-102ce14f1d17.PNG)
-![IMG_3338](https://user-images.githubusercontent.com/44637101/155120837-f5e19f9e-9186-457d-942c-e490c01e0abd.PNG)
-![IMG_3334](https://user-images.githubusercontent.com/44637101/155120882-107d0cad-b908-4d50-8f53-40acf7e9710d.PNG)
-![IMG_3335](https://user-images.githubusercontent.com/44637101/155120903-da1dc0b2-79f2-4d35-aef3-f8e9211d5a66.PNG)
-![IMG_3336](https://user-images.githubusercontent.com/44637101/155120922-04a21b2c-42df-41c4-beb0-df602f18c6ec.PNG)
+
+<img src = "https://user-images.githubusercontent.com/44637101/155120778-a61213d6-17aa-4671-ae04-c05bc6881d18.PNG" width="40%" height="40%">          <img src = "https://user-images.githubusercontent.com/44637101/155120807-40b1b7e1-419d-4f20-87b5-102ce14f1d17.PNG" width="40%" height="40%">
+<img src = "https://user-images.githubusercontent.com/44637101/155120837-f5e19f9e-9186-457d-942c-e490c01e0abd.PNG" width="40%" height="40%">          <img src = "https://user-images.githubusercontent.com/44637101/155120882-107d0cad-b908-4d50-8f53-40acf7e9710d.PNG" width="40%" height="40%">
+<img src = "https://user-images.githubusercontent.com/44637101/155120903-da1dc0b2-79f2-4d35-aef3-f8e9211d5a66.PNG" width="40%" height="40%">          <img src = "https://user-images.githubusercontent.com/44637101/155120922-04a21b2c-42df-41c4-beb0-df602f18c6ec.PNG" width="40%" height="40%">
+
 
 
 데모 영상 링크 :
@@ -93,9 +92,7 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 - 실제 유저의 피드백을 지속적으로 받고 싶어 “***개발자에게 건의사항 보내기***”라는 기능을 추가했었습니다.
 - 건의사항이 접수되면 팀이 쓰는 협업툴과 즉시 연동이 되어 아래와 같이 어떤 불편함을 느끼는지 확인할 수 있었습니다.
 
-
-![Screen Shot 2022-01-10 at 11 52 06 AM](https://user-images.githubusercontent.com/44637101/155121410-b0915e6f-a2d7-4348-a7d9-ee632edaa556.png)
-
+<img src = "https://user-images.githubusercontent.com/44637101/155121410-b0915e6f-a2d7-4348-a7d9-ee632edaa556.png" width="60%" height="60%">
 
 
 [  **피드백 받고 개선 및 추가한 주요 기능**  ]
@@ -114,7 +111,7 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 
 - 협업 시 발생하는 conflict 최소화, 빌드 타임 단축과 code based UI에 대한 감각을 익히기 위해 존재하던 ***40개 이상의 Storyboard*** VC와 XIB를 전부 SnapKit, Then, BaseViewController를 이용하여 전환
 
-<img width="776" alt="Screen Shot 2022-01-10 at 2 13 29 PM" src="https://user-images.githubusercontent.com/44637101/155121468-5542cea0-f666-434a-ad36-8e83b1cd8bbe.png">
+<img width="776" alt="Screen Shot 2022-01-10 at 2 13 29 PM" src="https://user-images.githubusercontent.com/44637101/155121468-5542cea0-f666-434a-ad36-8e83b1cd8bbe.png" width="60%" height="60%">
 
 
 
@@ -144,8 +141,7 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 - 한 클래스가 다른 객체를 직접 생성하는 부담을 줄여주고, 해당 클래스가 정확히 어떤 다른 객체에 의존하는지 명확히 보여주기 위해 **Dependency Injection** 적용
 
 
-<img width="791" alt="Screen Shot 2022-01-10 at 2 22 48 PM" src="https://user-images.githubusercontent.com/44637101/155121675-7a259fdc-eec9-4358-b1dd-aed0d4ec7ce3.png">
-<img width="711" alt="Screen Shot 2022-01-10 at 2 47 58 PM" src="https://user-images.githubusercontent.com/44637101/155121688-8f0e26da-4a1b-4191-8cb3-176fa6cbce7e.png">
+<img width="791" alt="Screen Shot 2022-01-10 at 2 22 48 PM" src="https://user-images.githubusercontent.com/44637101/155121675-7a259fdc-eec9-4358-b1dd-aed0d4ec7ce3.png">  <img width="711" alt="Screen Shot 2022-01-10 at 2 47 58 PM" src="https://user-images.githubusercontent.com/44637101/155121688-8f0e26da-4a1b-4191-8cb3-176fa6cbce7e.png">
 
 
 
@@ -157,8 +153,7 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
     - **코드의 가독성이 눈에 띄게 좋아졌고**, 어떤 함수가 실행되는지 파악하기 위해 **이리저리 파일을 찾는 횟수가 현저히 감소**
 
 
-<img width="457" alt="Screen Shot 2022-01-10 at 2 28 29 PM" src="https://user-images.githubusercontent.com/44637101/155121719-64b1d454-dcd1-4039-b9b0-0f64f015e937.png">
-<img width="681" alt="Screen Shot 2022-01-10 at 2 30 14 PM" src="https://user-images.githubusercontent.com/44637101/155121727-b0e7f73e-2eb4-48c3-b306-e26054711f3e.png">
+<img width="457" alt="Screen Shot 2022-01-10 at 2 28 29 PM" src="https://user-images.githubusercontent.com/44637101/155121719-64b1d454-dcd1-4039-b9b0-0f64f015e937.png">  <img width="681" alt="Screen Shot 2022-01-10 at 2 30 14 PM" src="https://user-images.githubusercontent.com/44637101/155121727-b0e7f73e-2eb4-48c3-b306-e26054711f3e.png">
 
 
 
@@ -168,8 +163,7 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 - 좌측 사진: Moya 사용 ***전***
 - 우측 사진: Moya 사용 ***후***
 
-<img width="1348" alt="Screen Shot 2022-01-10 at 3 04 47 PM" src="https://user-images.githubusercontent.com/44637101/155121760-aba6c2a1-5e71-4ccf-aeff-99a0e3d2b977.png">
-<img width="364" alt="Screen Shot 2022-01-10 at 3 04 07 PM" src="https://user-images.githubusercontent.com/44637101/155121772-f30326ea-a300-4b4c-8cfe-e16148da56d9.png">
+<img width="1348" alt="Screen Shot 2022-01-10 at 3 04 47 PM" src="https://user-images.githubusercontent.com/44637101/155121760-aba6c2a1-5e71-4ccf-aeff-99a0e3d2b977.png">  <img width="364" alt="Screen Shot 2022-01-10 at 3 04 07 PM" src="https://user-images.githubusercontent.com/44637101/155121772-f30326ea-a300-4b4c-8cfe-e16148da56d9.png">
 
 
 ## 🎢 더 개선할 수 있는 부분
@@ -237,13 +231,16 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 - [https://instagram.com/knumarket?utm_medium=copy_link](https://instagram.com/knumarket?utm_medium=copy_link)
 
 
-![IMG_2013](https://user-images.githubusercontent.com/44637101/155121966-f69af7b8-f738-4595-b5a4-11809cd498bb.PNG)
 
-![IMG_2014](https://user-images.githubusercontent.com/44637101/155121993-0f7d68a9-8368-47cd-b740-96474f09d1e9.PNG)
+<img src = "https://user-images.githubusercontent.com/44637101/155121966-f69af7b8-f738-4595-b5a4-11809cd498bb.PNG" width="40%" height="40%">  <img src = "https://user-images.githubusercontent.com/44637101/155121993-0f7d68a9-8368-47cd-b740-96474f09d1e9.PNG" width="40%" height="40%">
+
+
 
 **✅  인터뷰 영상 촬영**
+
 - [https://www.instagram.com/tv/CUHyLQejuW2/?utm_medium=copy_link](https://www.instagram.com/tv/CUHyLQejuW2/?utm_medium=copy_link)
-![IMG_2016](https://user-images.githubusercontent.com/44637101/155122034-47e51884-0dc1-4690-a18b-52ef93150888.PNG)
+- <img src = "https://user-images.githubusercontent.com/44637101/155122034-47e51884-0dc1-4690-a18b-52ef93150888.PNG" width="40%" height="40%">
+
 
 
 

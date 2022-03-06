@@ -150,7 +150,7 @@ https://drive.google.com/file/d/1AWt3Opp9z7dmQ26cTil_KCyJ1GYzKdyv/view?usp=shari
 
 - 기존에는 View Controller와 ViewModel의 통신을 위해서 **Delegate Pattern**을 이용
 - 하지만 Delegate protocol이 커질수록 상태 관리가 어렵고 코드 가독성이 매우 떨어져 RxSwift를 이용한 바인딩이 절실해 보였음
-    - 부분적으로 적용해 나가기 쉽고 상태 관리가 용이한 ReactorKit을 사용하기로 선택 후 **지금까지 70% 이상 전환 완료**
+    - 부분적으로 적용해 나가기 쉽고 상태 관리가 용이한 ReactorKit을 사용하기로 선택 후 **지금까지 80% 이상 전환 완료**
     - **코드의 가독성이 눈에 띄게 좋아졌고**, 어떤 함수가 실행되는지 파악하기 위해 **이리저리 파일을 찾는 횟수가 현저히 감소**
 
 
